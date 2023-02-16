@@ -1,0 +1,174 @@
+{
+  "cloudDBZoneName": "shopping",
+  "encryptMode": "UnEncrypt",
+  "objects": [{
+    "volume": null,
+    "update_time": null,
+    "create_time": null,
+    "price": null,
+    "name": null,
+    "weight": null,
+    "sku_id": "1",
+    "spu_id": "1",
+    "pic_url": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/luckydraw-w8igu/spu_pic%2Fmate50%2Fdetail1.png?token=11902c8e-62db-486d-8924-28dc1069b40d",
+    "status": 0,
+    "attrs": {
+      "attr_ids": [1, 3]
+    }
+  }, {
+    "volume": null,
+    "update_time": null,
+    "create_time": null,
+    "price": null,
+    "name": null,
+    "weight": null,
+    "sku_id": "2",
+    "spu_id": "2",
+    "pic_url": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/luckydraw-w8igu/spu_pic%2Fmatexs2%2Fdetail1.png?token=18251efa-c8cf-4dd4-8e89-d35ec8c926ac",
+    "status": 0,
+    "attrs": {
+      "attr_ids": [1, 3]
+    }
+  }, {
+    "volume": null,
+    "update_time": null,
+    "create_time": null,
+    "price": null,
+    "name": null,
+    "weight": null,
+    "sku_id": "3",
+    "spu_id": "3",
+    "pic_url": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/luckydraw-w8igu/spu_pic%2Fnova9%2Fdetail1.png?token=e24db55b-93c5-401b-bc77-50d42c4e2992",
+    "status": 1,
+    "attrs": {
+      "attr_ids": [1, 3]
+    }
+  }, {
+    "volume": null,
+    "update_time": null,
+    "create_time": null,
+    "price": null,
+    "name": null,
+    "weight": null,
+    "sku_id": "4",
+    "spu_id": "4",
+    "pic_url": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/luckydraw-w8igu/spu_pic%2Fnova10pro%2Fdetail1.png?token=93941285-e75a-4018-9f77-0bcbe868aab7",
+    "status": null,
+    "attrs": {
+      "attr_ids": [1, 3]
+    }
+  }, {
+    "volume": null,
+    "update_time": null,
+    "create_time": null,
+    "price": null,
+    "name": null,
+    "weight": null,
+    "sku_id": "5",
+    "spu_id": "5",
+    "pic_url": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/luckydraw-w8igu/spu_pic%2Fpocket%2Fdetail.png?token=28593bce-8509-466f-b183-cdfcdbc074a0",
+    "status": null,
+    "attrs": {
+      "attr_ids": [1, 3]
+    }
+  }, {
+    "volume": null,
+    "update_time": null,
+    "create_time": null,
+    "price": null,
+    "name": null,
+    "weight": null,
+    "sku_id": "6",
+    "spu_id": "6",
+    "pic_url": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/luckydraw-w8igu/spu_pic%2F%E7%95%85%E4%BA%AB50pro%2Fdetail1.png?token=dcbd6446-8fdc-4d40-8b9d-a1b8a2b5eea3",
+    "status": 1,
+    "attrs": {
+      "attr_ids": [1, 3]
+    }
+  }],
+  "objectTypeName": "t_mall_sku",
+  "objectType": {
+    "indexes": [],
+    "permissions": [{
+      "role": "World",
+      "rights": ["Read"]
+    }, {
+      "role": "Authenticated",
+      "rights": ["Read"]
+    }, {
+      "role": "Creator",
+      "rights": ["Read", "Upsert", "Delete"]
+    }, {
+      "role": "Administrator",
+      "rights": ["Read", "Upsert", "Delete"]
+    }],
+    "objectTypeName": "t_mall_sku",
+    "fields": [{
+      "isNeedEncrypt": false,
+      "fieldName": "sku_id",
+      "notNull": true,
+      "belongPrimaryKey": true,
+      "fieldType": "Long"
+    }, {
+      "isNeedEncrypt": false,
+      "fieldName": "spu_id",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Long"
+    }, {
+      "isNeedEncrypt": false,
+      "fieldName": "name",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "String"
+    }, {
+      "isNeedEncrypt": false,
+      "fieldName": "pic_url",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "String"
+    }, {
+      "isNeedEncrypt": false,
+      "fieldName": "status",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Integer"
+    }, {
+      "isNeedEncrypt": false,
+      "fieldName": "price",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Float"
+    }, {
+      "isNeedEncrypt": false,
+      "fieldName": "weight",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Float"
+    }, {
+      "isNeedEncrypt": false,
+      "fieldName": "volume",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Float"
+    }, {
+      "isNeedEncrypt": false,
+      "fieldName": "attrs",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "String"
+    }, {
+      "isNeedEncrypt": false,
+      "fieldName": "create_time",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Date"
+    }, {
+      "isNeedEncrypt": false,
+      "fieldName": "update_time",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Date"
+    }]
+  }
+}

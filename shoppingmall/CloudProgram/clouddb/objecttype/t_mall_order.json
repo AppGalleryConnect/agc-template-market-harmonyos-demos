@@ -1,0 +1,113 @@
+{
+  "indexes": [],
+  "permissions": [
+    {
+      "role": "World",
+      "rights": [
+        "Read"
+      ]
+    },
+    {
+      "role": "Authenticated",
+      "rights": [
+        "Read"
+      ]
+    },
+    {
+      "role": "Creator",
+      "rights": [
+        "Read",
+        "Upsert",
+        "Delete"
+      ]
+    },
+    {
+      "role": "Administrator",
+      "rights": [
+        "Read",
+        "Upsert",
+        "Delete"
+      ]
+    }
+  ],
+  "objectTypeName": "t_mall_order",
+  "fields": [
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "order_id",
+      "notNull": true,
+      "belongPrimaryKey": true,
+      "fieldType": "Long"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "uid",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Long"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "spu_id",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Long"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "spu_num",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Integer"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "status",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Integer"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "order_time",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Date"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "pay_time",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Date"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "amount",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Float"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "create_time",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Date"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "update_time",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Date"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "spu_attrs",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "String"
+    }
+  ]
+}

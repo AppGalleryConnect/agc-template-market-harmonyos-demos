@@ -1,0 +1,113 @@
+{
+  "indexes": [],
+  "permissions": [
+    {
+      "role": "World",
+      "rights": [
+        "Read"
+      ]
+    },
+    {
+      "role": "Authenticated",
+      "rights": [
+        "Read"
+      ]
+    },
+    {
+      "role": "Creator",
+      "rights": [
+        "Read",
+        "Upsert",
+        "Delete"
+      ]
+    },
+    {
+      "role": "Administrator",
+      "rights": [
+        "Read",
+        "Upsert",
+        "Delete"
+      ]
+    }
+  ],
+  "objectTypeName": "t_mall_sku",
+  "fields": [
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "sku_id",
+      "notNull": true,
+      "belongPrimaryKey": true,
+      "fieldType": "Long"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "spu_id",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Long"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "name",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "String"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "pic_url",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "String"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "status",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Integer"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "price",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Float"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "weight",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Float"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "volume",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Float"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "attrs",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "String"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "create_time",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Date"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "update_time",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Date"
+    }
+  ]
+}

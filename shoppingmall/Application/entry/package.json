@@ -1,0 +1,20 @@
+{
+  "license": "ISC",
+  "devDependencies": {},
+  "name": "entry",
+  "ohos": {
+    "org": "huawei",
+    "directoryLevel": "module",
+    "buildTool": "hvigor"
+  },
+  "description": "example description",
+  "repository": {},
+  "version": "1.0.0",
+  "dependencies": {
+    "@hw-agconnect/database-ohos": "^1.0.3-B103",
+    "@hw-agconnect/function-ohos": "^1.0.6",
+    "@hw-agconnect/auth-ohos": "^1.0.6",
+    "@hw-agconnect/cloudstorage-ohos": "^1.0.6",
+    "@ohos/agconnect-auth-component": "^1.0.0"
+  }
+}

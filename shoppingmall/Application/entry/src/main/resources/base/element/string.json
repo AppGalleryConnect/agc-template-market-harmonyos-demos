@@ -1,0 +1,340 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "Mini Mall"
+    },
+    {
+      "name": "BuySuccess_desc",
+      "value": "purchased successfully"
+    },
+    {
+      "name": "order_confirm_desc",
+      "value": "Receipt confirmed successfully"
+    },
+    {
+      "name": "shopCart_empty_desc",
+      "value": "No offering in the shopping cart"
+    },
+    {
+      "name": "shopCart_not_selected",
+      "value": "You haven't chosen a baby yet!"
+    },
+    {
+      "name": "personal_invalid_address",
+      "value": "Please enter the correct receiving address."
+    },
+    {
+      "name": "personal_about_app",
+      "value": "About Applications"
+    },
+    {
+      "name": "personal_app_update",
+      "value": "Version update"
+    },
+    {
+      "name": "personal_newest_app",
+      "value": "The current version is the latest version."
+    },
+    {
+      "name": "personal_address",
+      "value": "Receipt Address"
+    },
+    {
+      "name": "personal_address_add",
+      "value": "Add a receiving address"
+    },
+    {
+      "name": "personal_address_default",
+      "value": "Default"
+    },
+    {
+      "name": "scan_draw",
+      "value": "Scanning the lottery"
+    },
+    {
+      "name": "order_buy_success",
+      "value": "Purchasing succeeded."
+    },
+    {
+      "name": "order_buy_failure",
+      "value": "Purchasing failed."
+    },
+    {
+      "name": "order_confirm",
+      "value": "Confirm order"
+    },
+    {
+      "name": "order_list",
+      "value": "Commodity list"
+    },
+    {
+      "name": "order_payment",
+      "value": "Payment Mode"
+    },
+    {
+      "name": "order_huawei_wallet",
+      "value": "Huawei Pay"
+    },
+    {
+      "name": "order_submit",
+      "value": "Submit Order"
+    },
+    {
+      "name": "personal_address_receiver",
+      "value": "Consignee"
+    },
+    {
+      "name": "personal_address_phone",
+      "value": "Mobile number"
+    },
+    {
+      "name": "personal_address_area",
+      "value": "Region"
+    },
+    {
+      "name": "personal_address_detail",
+      "value": "Detailed Address"
+    },
+    {
+      "name": "personal_address_setDefault",
+      "value": "Specified as the default receiving address"
+    },
+    {
+      "name": "personal_address_save",
+      "value": "Save"
+    },
+    {
+      "name": "shopCart_add_success",
+      "value": "Adding to shopping cart succeeded."
+    },
+    {
+      "name": "shopCart_select_firstly",
+      "value": "Select specifications first."
+    },
+    {
+      "name": "shopCart_add_number",
+      "value": "purchase quantity"
+    },
+    {
+      "name": "shopCart_addIntoShopCart",
+      "value": "Add to cart"
+    },
+    {
+      "name": "shopCart_buyInstant",
+      "value": "Buy Now"
+    },
+    {
+      "name": "shopCart_select",
+      "value": "Select"
+    },
+    {
+      "name": "shopCart_detail",
+      "value": "Commodity details"
+    },
+    {
+      "name": "home",
+      "value": "Homepage"
+    },
+    {
+      "name": "shopCart",
+      "value": "Cart"
+    },
+    {
+      "name": "home_search",
+      "value": "Search"
+    },
+    {
+      "name": "login",
+      "value": "Login"
+    },
+    {
+      "name": "personal_toPay",
+      "value": "Pending Payment"
+    },
+    {
+      "name": "personal_toDelivery",
+      "value": "To be shipped"
+    },
+    {
+      "name": "personal_inTransfer",
+      "value": "Pending Payment"
+    },
+    {
+      "name": "personal_toComment",
+      "value": "To be evaluated"
+    },
+    {
+      "name": "order_buyer_toPay",
+      "value": "Pending Buyer Payment"
+    },
+    {
+      "name": "order_seller_toShip",
+      "value": "Seller Shipped"
+    },
+    {
+      "name": "order_number",
+      "value": "Order ID:"
+    },
+    {
+      "name": "order_createTime",
+      "value": "Creating time"
+    },
+    {
+      "name": "order_commodityPrice",
+      "value": "Commodity Amount:"
+    },
+    {
+      "name": "order_freight",
+      "value": "Freight:"
+    },
+    {
+      "name": "order_actualPay",
+      "value": "Payment:"
+    },
+    {
+      "name": "order_myOrder",
+      "value": "My Order"
+    },
+    {
+      "name": "order_confirm_pay",
+      "value": "Confirm payment"
+    },
+    {
+      "name": "order_confirm_receipt",
+      "value": "Confirm receipt"
+    },
+    {
+      "name": "personal_anonymous_user",
+      "value": "Anonymous user"
+    },
+    {
+      "name": "personal_about",
+      "value": "About"
+    },
+    {
+      "name": "personal_signOut",
+      "value": "Logout"
+    },
+    {
+      "name": "shopCart_manage",
+      "value": "Management"
+    },
+    {
+      "name": "shopCart_exitManage",
+      "value": "Exit management"
+    },
+    {
+      "name": "shopCart_selectAll",
+      "value": "Select all"
+    },
+    {
+      "name": "shopCart_total",
+      "value": "Total:"
+    },
+    {
+      "name": "result_empty",
+      "value": "empty as empty"
+    },
+    {
+      "name": "shopCart_loading",
+      "value": "Loading"
+    },
+    {
+      "name": "personal_myOrder",
+      "value": "My Orders"
+    },
+    {
+      "name": "personal_allOrder",
+      "value": "All Orders>"
+    },
+    {
+      "name": "personal_payInstant",
+      "value": "Pay Now"
+    },
+    {
+      "name": "order_default_notify",
+      "value": "Please go to'My - Ship To Address' to add at least one default address"
+    },
+    {
+      "name": "order_add_default",
+      "value": "Add Default Ship-To Address"
+    },
+    {
+      "name": "personal_save_success",
+      "value": "Saved successfully"
+    },
+    {
+      "name": "personal_about_appName",
+      "value": "Mini Mall"
+    },
+    {
+      "name": "Main",
+      "value": "MainPage"
+    },
+    {
+      "name": "Personal",
+      "value": "PersonalPage"
+    },
+    {
+      "name": "Auth",
+      "value": "AuthPage"
+    },
+    {
+      "name": "Function",
+      "value": "FunctionPage"
+    },
+    {
+      "name": "GoodList",
+      "value": "GoodListPage"
+    },
+    {
+      "name": "ConfirmOrder",
+      "value": "ConfirmOrderPage"
+    },
+    {
+      "name": "EditAddress",
+      "value": "EditAddressPage"
+    },
+    {
+      "name": "GoodDetail",
+      "value": "GoodDetailPage"
+    },
+    {
+      "name": "Home",
+      "value": "HomePage"
+    },
+    {
+      "name": "Message",
+      "value": "MessagePage"
+    },
+    {
+      "name": "OrderDetail",
+      "value": "OrderDetailPage"
+    },
+    {
+      "name": "ShopCart",
+      "value": "ShopCartPage"
+    },
+    {
+      "name": "OrderRecords",
+      "value": "OrderDetailPage"
+    },
+    {
+      "name": "personal_version",
+      "value": "Version 1.0.0"
+    },
+    {
+      "name": "personal_address_remind",
+      "value": "Please enter the default receiving address."
+    }
+  ]
+}

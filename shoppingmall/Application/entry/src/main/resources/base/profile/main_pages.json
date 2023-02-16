@@ -1,0 +1,13 @@
+{
+  "src": [
+    "pages/Login",
+    "pages/Main",
+    "pages/OrderRecords",
+    "pages/GoodDetail",
+    "pages/OrderDetail",
+    "pages/ConfirmOrder",
+    "pages/Address",
+    "pages/EditAddress",
+    "pages/About"
+  ]
+}

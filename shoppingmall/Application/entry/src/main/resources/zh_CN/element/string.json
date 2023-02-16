@@ -1,0 +1,340 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "模块描述"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "Mini商城"
+    },
+    {
+      "name": "BuySuccess_desc",
+      "value": "购买成功"
+    },
+    {
+      "name": "order_confirm_desc",
+      "value": "确认收货成功"
+    },
+    {
+      "name": "shopCart_empty_desc",
+      "value": "购物车暂无商品"
+    },
+    {
+      "name": "shopCart_not_selected",
+      "value": "您还没有选择宝贝哦！"
+    },
+    {
+      "name": "personal_invalid_address",
+      "value": "请正确填写收货地址"
+    },
+    {
+      "name": "personal_about_app",
+      "value": "关于应用"
+    },
+    {
+      "name": "personal_app_update",
+      "value": "版本更新"
+    },
+    {
+      "name": "personal_newest_app",
+      "value": "当前为最新版"
+    },
+    {
+      "name": "personal_address",
+      "value": "收货地址"
+    },
+    {
+      "name": "personal_address_add",
+      "value": "新增收货地址"
+    },
+    {
+      "name": "personal_address_default",
+      "value": "默认"
+    },
+    {
+      "name": "scan_draw",
+      "value": "扫码抽奖"
+    },
+    {
+      "name": "order_buy_success",
+      "value": "购买成功"
+    },
+    {
+      "name": "order_buy_failure",
+      "value": "购买失败"
+    },
+    {
+      "name": "order_confirm",
+      "value": "确认订单"
+    },
+    {
+      "name": "order_list",
+      "value": "商品列表"
+    },
+    {
+      "name": "order_payment",
+      "value": "支付方式"
+    },
+    {
+      "name": "order_huawei_wallet",
+      "value": "华为钱包"
+    },
+    {
+      "name": "order_submit",
+      "value": "提交订单"
+    },
+    {
+      "name": "personal_address_receiver",
+      "value": "收货人"
+    },
+    {
+      "name": "personal_address_phone",
+      "value": "手机号码"
+    },
+    {
+      "name": "personal_address_area",
+      "value": "所在地区"
+    },
+    {
+      "name": "personal_address_detail",
+      "value": "详细地址"
+    },
+    {
+      "name": "personal_address_setDefault",
+      "value": "设为默认收货地址"
+    },
+    {
+      "name": "personal_address_save",
+      "value": "保存"
+    },
+    {
+      "name": "shopCart_add_success",
+      "value": "加入购物车成功"
+    },
+    {
+      "name": "shopCart_select_firstly",
+      "value": "请先选择规格"
+    },
+    {
+      "name": "shopCart_add_number",
+      "value": "购买数量"
+    },
+    {
+      "name": "shopCart_addIntoShopCart",
+      "value": "加入购物车"
+    },
+    {
+      "name": "shopCart_buyInstant",
+      "value": "立即购买"
+    },
+    {
+      "name": "shopCart_select",
+      "value": "选择"
+    },
+    {
+      "name": "shopCart_detail",
+      "value": "商品详情"
+    },
+    {
+      "name": "home",
+      "value": "首页"
+    },
+    {
+      "name": "shopCart",
+      "value": "购物车"
+    },
+    {
+      "name": "home_search",
+      "value": "搜索"
+    },
+    {
+      "name": "login",
+      "value": "登录"
+    },
+    {
+      "name": "personal_toPay",
+      "value": "待付款"
+    },
+    {
+      "name": "personal_toDelivery",
+      "value": "待发货"
+    },
+    {
+      "name": "personal_inTransfer",
+      "value": "待付款"
+    },
+    {
+      "name": "personal_toComment",
+      "value": "待评价"
+    },
+    {
+      "name": "order_buyer_toPay",
+      "value": "待买家付款"
+    },
+    {
+      "name": "order_seller_toShip",
+      "value": "卖家已发货"
+    },
+    {
+      "name": "order_number",
+      "value": "订单编号："
+    },
+    {
+      "name": "order_createTime",
+      "value": "创建时间"
+    },
+    {
+      "name": "order_commodityPrice",
+      "value": "商品金额："
+    },
+    {
+      "name": "order_freight",
+      "value": "运费："
+    },
+    {
+      "name": "order_actualPay",
+      "value": "实付款："
+    },
+    {
+      "name": "order_myOrder",
+      "value": "我的订单"
+    },
+    {
+      "name": "order_confirm_pay",
+      "value": "确认支付"
+    },
+    {
+      "name": "order_confirm_receipt",
+      "value": "确认收货"
+    },
+    {
+      "name": "personal_anonymous_user",
+      "value": "匿名用户"
+    },
+    {
+      "name": "personal_about",
+      "value": "关于"
+    },
+    {
+      "name": "personal_signOut",
+      "value": "退出登录"
+    },
+    {
+      "name": "shopCart_manage",
+      "value": "管理"
+    },
+    {
+      "name": "shopCart_exitManage",
+      "value": "退出管理"
+    },
+    {
+      "name": "shopCart_selectAll",
+      "value": "全选"
+    },
+    {
+      "name": "shopCart_total",
+      "value": "合计:"
+    },
+    {
+      "name": "result_empty",
+      "value": "空空如也"
+    },
+    {
+      "name": "shopCart_loading",
+      "value": "加载中"
+    },
+    {
+      "name": "personal_myOrder",
+      "value": "我的订单"
+    },
+    {
+      "name": "personal_allOrder",
+      "value": "全部订单 >"
+    },
+    {
+      "name": "personal_payInstant",
+      "value": "立即支付"
+    },
+    {
+      "name": "order_default_notify",
+      "value": "请先前往'我的-收货地址'中添加至少一个默认地址"
+    },
+    {
+      "name": "order_add_default",
+      "value": "新增默认收货地址"
+    },
+    {
+      "name": "personal_save_success",
+      "value": "保存成功"
+    },
+    {
+      "name": "personal_about_appName",
+      "value": "Mini商城"
+    },
+    {
+      "name": "Main",
+      "value": "MainPage"
+    },
+    {
+      "name": "Personal",
+      "value": "PersonalPage"
+    },
+    {
+      "name": "Auth",
+      "value": "AuthPage"
+    },
+    {
+      "name": "Function",
+      "value": "FunctionPage"
+    },
+    {
+      "name": "GoodList",
+      "value": "GoodListPage"
+    },
+    {
+      "name": "ConfirmOrder",
+      "value": "ConfirmOrderPage"
+    },
+    {
+      "name": "EditAddress",
+      "value": "EditAddressPage"
+    },
+    {
+      "name": "GoodDetail",
+      "value": "GoodDetailPage"
+    },
+    {
+      "name": "Home",
+      "value": "HomePage"
+    },
+    {
+      "name": "Message",
+      "value": "MessagePage"
+    },
+    {
+      "name": "OrderDetail",
+      "value": "OrderDetailPage"
+    },
+    {
+      "name": "ShopCart",
+      "value": "ShopCartPage"
+    },
+    {
+      "name": "OrderRecords",
+      "value": "OrderDetailPage"
+    },
+    {
+      "name": "personal_version",
+      "value": "Version 1.0.0"
+    },
+    {
+      "name": "personal_address_remind",
+      "value": "请填写默认收货地址"
+    }
+  ]
+}

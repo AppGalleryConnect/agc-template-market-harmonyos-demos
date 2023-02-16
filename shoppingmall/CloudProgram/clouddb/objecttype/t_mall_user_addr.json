@@ -1,0 +1,120 @@
+{
+  "indexes": [],
+  "permissions": [
+    {
+      "role": "World",
+      "rights": [
+        "Read"
+      ]
+    },
+    {
+      "role": "Authenticated",
+      "rights": [
+        "Read"
+      ]
+    },
+    {
+      "role": "Creator",
+      "rights": [
+        "Read",
+        "Upsert",
+        "Delete"
+      ]
+    },
+    {
+      "role": "Administrator",
+      "rights": [
+        "Read",
+        "Upsert",
+        "Delete"
+      ]
+    }
+  ],
+  "objectTypeName": "t_mall_user_addr",
+  "fields": [
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "addr_id",
+      "notNull": true,
+      "belongPrimaryKey": true,
+      "fieldType": "Long"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "uid",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Long"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "name",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "String"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "phone",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "String"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "post_code",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "String"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "province",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "String"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "city",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "String"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "region",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "String"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "detail_addr",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "String"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "create_time",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Date"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "update_time",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Date"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "isdefault",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Integer"
+    }
+  ]
+}

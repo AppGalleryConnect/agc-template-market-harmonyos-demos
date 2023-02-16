@@ -1,0 +1,17 @@
+{
+  "name": "get-serverless-shoppingmall-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@agconnect/common-server": "^1.1.0",
+    "@agconnect/database": "^1.1.1",
+    "@agconnect/database-server": "^1.0.5",
+    "@agconnect/auth-server": "^1.1.0"
+  }
+}

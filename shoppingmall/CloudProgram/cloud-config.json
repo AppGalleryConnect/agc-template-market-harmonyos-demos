@@ -1,0 +1,18 @@
+{
+  "appSelected": {
+    "appId": "1065762503532751744",
+    "appName": "appshop01",
+    "deviceTypes": [
+      {
+        "deviceType": 4
+      }
+    ],
+    "enableSites": "CN",
+    "installationFree": 0,
+    "packageType": 7,
+    "projectId": "99536292102880252",
+    "projectName": "shop0110",
+    "siteId": "CN"
+  },
+  "teamId": "10086000000000293"
+}

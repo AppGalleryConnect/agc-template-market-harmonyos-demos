@@ -1,0 +1,15 @@
+{
+  "handler": "Handler.myHandler",
+  "triggers": [
+    {
+      "type": "http",
+      "properties": {
+        "enableUriDecode": true,
+        "authFlag": "true",
+        "authAlgor": "HDA-SYSTEM",
+        "authType": "apigw-client",
+        "mode": "NO_PATH"
+      }
+    }
+  ]
+}

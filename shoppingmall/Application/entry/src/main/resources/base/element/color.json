@@ -1,0 +1,28 @@
+{
+  "color": [
+    {
+      "name": "white",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "page_background",
+      "value": "#ececec"
+    },
+    {
+      "name": "tab_font",
+      "value": "#999999"
+    },
+    {
+      "name": "tab_selectFont",
+      "value": "#FF4500"
+    },
+    {
+      "name": "good_grid",
+      "value": "#70808080"
+    },
+    {
+      "name": "good_loading",
+      "value": "#f4f4f4"
+    }
+  ]
+}

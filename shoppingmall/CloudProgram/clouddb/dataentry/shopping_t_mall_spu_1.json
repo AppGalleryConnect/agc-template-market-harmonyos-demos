@@ -1,0 +1,162 @@
+{
+  "cloudDBZoneName": "shopping",
+  "encryptMode": "UnEncrypt",
+  "objects": [{
+    "update_time": 1659954630222,
+    "category_id": "1",
+    "create_time": 1659954630222,
+    "price": "6399.0",
+    "name": "Mate50",
+    "remark": "华为手机",
+    "spu_id": "1",
+    "pic_url": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/luckydraw-w8igu/spu_pic%2Fmate50%2Fmate50.png?token=887f623a-4b06-4e88-95bc-f250956fa3b1",
+    "desc": "Mate50 5G手机",
+    "status": 0,
+    "brand_id": "1"
+  }, {
+    "update_time": 1659517288156,
+    "category_id": "1",
+    "create_time": 1659517288156,
+    "price": "9999.0",
+    "name": "Mate Xs2",
+    "remark": "MateBook 13",
+    "spu_id": "2",
+    "pic_url": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/luckydraw-w8igu/spu_pic%2Fmatexs2%2Fxs2.png?token=1a60a0fa-18de-40f3-863e-edfb4ec918b4",
+    "desc": "华为全新一代折叠屏手机",
+    "status": 0,
+    "brand_id": "1"
+  }, {
+    "update_time": 1659955101111,
+    "category_id": "3",
+    "create_time": 1659955101111,
+    "price": "2099.0",
+    "name": "Nova9",
+    "remark": "华为手机",
+    "spu_id": "3",
+    "pic_url": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/luckydraw-w8igu/spu_pic%2Fnova9%2Fnova9.png?token=17c04c05-3629-410c-9328-e7e0dd7f50c0",
+    "desc": "华为Nova9手机 支持HarmonyOS",
+    "status": 1,
+    "brand_id": "3"
+  }, {
+    "update_time": null,
+    "category_id": null,
+    "create_time": null,
+    "price": "3999.0",
+    "name": "Nova 10 Pro",
+    "remark": "华为手机",
+    "spu_id": "4",
+    "pic_url": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/luckydraw-w8igu/spu_pic%2Fnova10pro%2Fnova10pro.png?token=bfc528e5-a43a-4910-b6bb-d7aa1407e240",
+    "desc": "华为Nova10 Pro 100W快充 支持HarmonyOS系统",
+    "status": null,
+    "brand_id": null
+  }, {
+    "update_time": null,
+    "category_id": null,
+    "create_time": null,
+    "price": "8988.0",
+    "name": "P50 Pocket",
+    "remark": "华为手机",
+    "spu_id": "5",
+    "pic_url": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/luckydraw-w8igu/spu_pic%2Fpocket%2Fpocket.png?token=6770de36-b576-4e51-8a3a-d03fd981ac72",
+    "desc": "华为 宝盒形态折叠设计",
+    "status": null,
+    "brand_id": null
+  }, {
+    "update_time": null,
+    "category_id": null,
+    "create_time": null,
+    "price": "1699.0",
+    "name": "畅享50 Pro",
+    "remark": "华为手机",
+    "spu_id": "6",
+    "pic_url": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/luckydraw-w8igu/spu_pic%2F%E7%95%85%E4%BA%AB50pro%2F50pro.png?token=bd4d03c9-6dc2-4578-b1f6-5fcb26232226",
+    "desc": "5000W像素AI三摄",
+    "status": null,
+    "brand_id": null
+  }],
+  "objectTypeName": "t_mall_spu",
+  "objectType": {
+    "indexes": [],
+    "permissions": [{
+      "role": "World",
+      "rights": ["Read"]
+    }, {
+      "role": "Authenticated",
+      "rights": ["Read"]
+    }, {
+      "role": "Creator",
+      "rights": ["Read", "Upsert", "Delete"]
+    }, {
+      "role": "Administrator",
+      "rights": ["Read", "Upsert", "Delete"]
+    }],
+    "objectTypeName": "t_mall_spu",
+    "fields": [{
+      "isNeedEncrypt": false,
+      "fieldName": "spu_id",
+      "notNull": true,
+      "belongPrimaryKey": true,
+      "fieldType": "Long"
+    }, {
+      "isNeedEncrypt": false,
+      "fieldName": "name",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "String"
+    }, {
+      "isNeedEncrypt": false,
+      "fieldName": "desc",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "String"
+    }, {
+      "isNeedEncrypt": false,
+      "fieldName": "price",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Float"
+    }, {
+      "isNeedEncrypt": false,
+      "fieldName": "pic_url",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "String"
+    }, {
+      "isNeedEncrypt": false,
+      "fieldName": "remark",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "String"
+    }, {
+      "isNeedEncrypt": false,
+      "fieldName": "status",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Integer"
+    }, {
+      "isNeedEncrypt": false,
+      "fieldName": "category_id",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Long"
+    }, {
+      "isNeedEncrypt": false,
+      "fieldName": "brand_id",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Long"
+    }, {
+      "isNeedEncrypt": false,
+      "fieldName": "update_time",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Date"
+    }, {
+      "isNeedEncrypt": false,
+      "fieldName": "create_time",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Date"
+    }]
+  }
+}

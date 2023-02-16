@@ -1,0 +1,99 @@
+{
+  "indexes": [],
+  "permissions": [
+    {
+      "role": "World",
+      "rights": [
+        "Read"
+      ]
+    },
+    {
+      "role": "Authenticated",
+      "rights": [
+        "Read"
+      ]
+    },
+    {
+      "role": "Creator",
+      "rights": [
+        "Read",
+        "Upsert",
+        "Delete"
+      ]
+    },
+    {
+      "role": "Administrator",
+      "rights": [
+        "Read",
+        "Upsert",
+        "Delete"
+      ]
+    }
+  ],
+  "objectTypeName": "t_mall_shopcart",
+  "fields": [
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "sc_id",
+      "notNull": true,
+      "belongPrimaryKey": true,
+      "fieldType": "Long"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "spu_attrs",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "String"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "uid",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Long"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "spu_id",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Long"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "quantity",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Integer"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "price",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Float"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "selected",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Integer"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "create_time",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Date"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "update_time",
+      "notNull": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Date"
+    }
+  ]
+}
