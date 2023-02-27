@@ -1,4 +1,4 @@
-# cloudev
+# clouddev
 [![license](https://img.shields.io/badge/license-Apache--2.0-green)](./LICENCE)
 
 This repo contains the source code for agc-HarmonyOS-demos, which are developed by the AppGallery Connect team.
@@ -9,11 +9,11 @@ about demos, and how to use them, see
 
 
 ## Introduction
-### 1。Download this code and import to Deveco Studio.
-### 2. Login AGConnect. 
-### 3. Replace  [agconnect-services.json](entry%2Fsrc%2Fmain%2Fresources%2Frawfile%2Fagconnect-services.json)
-### 4. Deploy API9 cloud program
-### 5. Run your app
+    1. Download this code and import to Deveco Studio.
+    2. Login AGConnect. 
+    3. Replace  [agconnect-services.json](entry%2Fsrc%2Fmain%2Fresources%2Frawfile%2Fagconnect-services.json)
+    4. Deploy API9 cloud program
+    5. Run your app
 ## Precautions
 The agc-HarmonyOS-demos project contains few independent projects. After downloading the code, you can load different nested projects to the IDE as required. And you can run each project independently.
 

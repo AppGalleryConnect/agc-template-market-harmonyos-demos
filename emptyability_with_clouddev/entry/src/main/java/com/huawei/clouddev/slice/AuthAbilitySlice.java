@@ -1,3 +1,19 @@
+/*
+ * Copyright 2020. Huawei Technologies Co., Ltd. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.huawei.clouddev.slice;
 
 import com.huawei.agconnect.auth.*;
@@ -17,7 +33,6 @@ import ohos.hiviewdfx.HiLog;
 import ohos.hiviewdfx.HiLogLabel;
 
 import java.util.Locale;
-
 public class AuthAbilitySlice extends AbilitySlice {
     private static final HiLogLabel LABEL = new HiLogLabel(HiLog.LOG_APP, 0, "AUTH");
     private Text titleText;
@@ -78,7 +93,7 @@ public class AuthAbilitySlice extends AbilitySlice {
         task.addOnSuccessListener(TaskExecutors.uiThread(), new OnSuccessListener<VerifyCodeResult>() {
             @Override
             public void onSuccess(VerifyCodeResult verifyCodeResult) {
-                //验证码申请成功
+                // 验证码申请成功
                 HiLog.error(LABEL, "Get verify code success!");
 
             }
@@ -97,7 +112,7 @@ public class AuthAbilitySlice extends AbilitySlice {
                 .addOnSuccessListener(new OnSuccessListener<SignInResult>() {
                     @Override
                     public void onSuccess(SignInResult signInResult) {
-                        //获取登录信息
+                        // 获取登录信息
                         HiLog.error(LABEL, "Login success!");
                         present(new UserInfoSlice(), intent);
                     }
