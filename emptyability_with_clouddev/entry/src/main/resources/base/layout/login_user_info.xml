@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DependentLayout
+    xmlns:ohos="http://schemas.huawei.com/res/ohos"
+    ohos:height="match_parent"
+    ohos:width="match_parent"
+    ohos:top_margin="20vp"
+    ohos:padding="10vp">
+
+    <Image
+        ohos:id="$+id:user_image"
+        ohos:height="100vp"
+        ohos:width="100vp"
+        ohos:top_margin="20vp"
+        ohos:top_padding="20px"
+        ohos:padding="10vp"
+        ohos:horizontal_center="true"
+        ohos:bottom_margin="20vp"
+        ohos:image_src="$media:user_dark"
+        ohos:scale_mode="stretch">
+    </Image>
+
+    <Text
+        ohos:id="$+id:auth_result_mobile_number"
+        ohos:height="40vp"
+        ohos:width="120vp"
+        ohos:left_margin="20vp"
+        ohos:bottom_margin="10vp"
+        ohos:below="$id:user_image"
+        ohos:hint="$string:auth_result_mobile_number"
+        ohos:text_size="15vp"
+        ohos:text_alignment="left">
+    </Text>
+
+    <Text
+        ohos:id="$+id:phone_number"
+        ohos:height="40vp"
+        ohos:width="match_parent"
+        ohos:left_margin="20vp"
+        ohos:right_margin="20vp"
+        ohos:align_top="$id:auth_result_mobile_number"
+        ohos:right_of="$id:auth_result_mobile_number"
+        ohos:bottom_margin="10vp"
+        ohos:hint="$string:auth_dialog_number_placeholder"
+        ohos:text_alignment="right"
+        ohos:text_size="15vp"
+        />
+
+    <Text
+        ohos:id="$+id:auth_result_registered"
+        ohos:height="40vp"
+        ohos:width="120vp"
+        ohos:left_margin="20vp"
+        ohos:bottom_margin="10vp"
+        ohos:below="$id:auth_result_mobile_number"
+        ohos:hint="$string:auth_result_registered"
+        ohos:text_alignment="left"
+        ohos:text_size="15vp"
+        />
+
+    <Text
+        ohos:id="$+id:register_time"
+        ohos:height="40vp"
+        ohos:width="match_parent"
+        ohos:left_margin="20vp"
+        ohos:right_margin="20vp"
+        ohos:bottom_margin="10vp"
+        ohos:hint="2000/01/01 00:00"
+        ohos:text_alignment="right"
+        ohos:text_size="15vp"
+        ohos:align_top="$id:auth_result_registered"
+        ohos:right_of="$id:auth_result_registered"
+        />
+
+    <Text
+        ohos:id="$+id:last_login"
+        ohos:height="40vp"
+        ohos:width="120vp"
+        ohos:left_margin="20vp"
+        ohos:bottom_margin="10vp"
+        ohos:below="$id:register_time"
+        ohos:hint="$string:auth_result_last_login"
+        ohos:text_alignment="left"
+        ohos:text_size="15vp"
+        />
+
+    <Text
+        ohos:id="$+id:last_login_time"
+        ohos:height="40vp"
+        ohos:width="match_parent"
+        ohos:left_margin="20vp"
+        ohos:right_margin="20vp"
+        ohos:bottom_margin="10vp"
+        ohos:hint="2000/01/01 00:00"
+        ohos:text_alignment="right"
+        ohos:text_size="15vp"
+        ohos:align_top="$id:last_login"
+        ohos:right_of="$id:last_login"
+        />
+
+    <Button
+        ohos:id="$+id:delete_user"
+        ohos:height="40vp"
+        ohos:width="match_parent"
+        ohos:top_margin="250vp"
+        ohos:left_margin="20vp"
+        ohos:right_margin="20vp"
+        ohos:background_element="$graphic:black_button_element"
+        ohos:hint="$string:auth_service_delete_user_button_text"
+        ohos:text_alignment="center"
+        ohos:text_size="15vp"
+        ohos:below="$id:last_login_time"
+        ohos:bottom_margin="10vp"
+        ohos:hint_color="$color:black"
+        ohos:enabled="false"
+        />
+
+    <Button
+        ohos:id="$+id:log_out"
+        ohos:height="40vp"
+        ohos:width="match_parent"
+        ohos:left_margin="20vp"
+        ohos:right_margin="20vp"
+        ohos:background_element="$graphic:black_button_element"
+        ohos:hint="$string:auth_service_logout_button_text"
+        ohos:text_alignment="center"
+        ohos:text_size="15vp"
+        ohos:below="$id:delete_user"
+        ohos:bottom_margin="10vp"
+        ohos:hint_color="$color:black"
+        />
+</DependentLayout>

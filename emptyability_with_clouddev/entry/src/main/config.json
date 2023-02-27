@@ -1,0 +1,67 @@
+{
+  "app": {
+    "bundleName": "com.huawei.clouddev",
+    "vendor": "example",
+    "version": {
+      "code": 1000000,
+      "name": "1.0.0"
+    }
+  },
+  "deviceConfig": {
+  },
+  "module": {
+    "package": "com.huawei.clouddev",
+    "name": ".MyApplication",
+    "mainAbility": "com.huawei.clouddev.MainAbility",
+    "deviceType": [
+      "phone"
+    ],
+    "distro": {
+      "deliveryWithInstall": true,
+      "moduleName": "entry",
+      "moduleType": "entry",
+      "installationFree": false
+    },
+    "reqPermissions": [
+      {
+        "name": "ohos.permission.INTERNET",
+        "usedScene": {
+          "ability": [
+            "com.huawei.cloudev.MainAbility"
+          ],
+          "when": "always"
+        }
+      }
+    ],
+    "abilities": [
+      {
+        "skills": [
+          {
+            "entities": [
+              "entity.system.home"
+            ],
+            "actions": [
+              "action.system.home"
+            ]
+          }
+        ],
+        "name": "com.huawei.clouddev.MainAbility",
+        "description": "$string:mainability_title",
+        "icon": "$media:icon",
+        "label": "$string:mainability_title",
+        "launchType": "standard",
+        "orientation": "unspecified",
+        "visible": true,
+        "type": "page"
+      },
+      {
+        "permissions": [
+          "com.huawei.agconnect.core.DataAbilityShellProvider.PROVIDER"
+        ],
+        "name": "com.huawei.agconnect.core.provider.AGConnectInitializeAbility",
+        "type": "data",
+        "uri": "dataability://com.huawei.clouddev.AGConnectInitializeAbility"
+      }
+    ]
+  }
+}

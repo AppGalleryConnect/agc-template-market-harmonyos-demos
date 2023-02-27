@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DirectionalLayout
+    xmlns:ohos="http://schemas.huawei.com/res/ohos"
+    ohos:height="match_parent"
+    ohos:width="match_parent"
+    ohos:alignment="center"
+    ohos:orientation="vertical">
+
+    <Text
+        ohos:id="$+id:text_cloud_dev"
+        ohos:height="match_content"
+        ohos:width="match_content"
+        ohos:background_element="$graphic:background_ability_main"
+        ohos:layout_alignment="horizontal_center"
+        ohos:text="$string:mainability_title"
+        ohos:text_size="25vp"
+        />
+
+    <Button
+        ohos:id="$+id:botton_auth_service"
+        ohos:height="match_content"
+        ohos:width="match_parent"
+        ohos:top_margin="20vp"
+        ohos:start_margin="20vp"
+        ohos:end_margin="20vp"
+        ohos:top_padding="20px"
+        ohos:text_size="20vp"
+        ohos:padding="10vp"
+        ohos:background_element="$graphic:black_button_element"
+        ohos:component_description="$string:auth_service_description"
+        ohos:layout_alignment="horizontal_center"
+        ohos:text="$string:auth_service_title"
+        />
+
+    <Button
+        ohos:id="$+id:botton_cloud_function"
+        ohos:height="match_content"
+        ohos:width="match_parent"
+        ohos:top_margin="20vp"
+        ohos:start_margin="20vp"
+        ohos:end_margin="20vp"
+        ohos:top_padding="20px"
+        ohos:text_size="20vp"
+        ohos:padding="10vp"
+        ohos:background_element="$graphic:black_button_element"
+        ohos:component_description="$string:cloud_function_description_main"
+        ohos:layout_alignment="horizontal_center"
+        ohos:text="$string:cloud_function_title"
+        />
+
+</DirectionalLayout>

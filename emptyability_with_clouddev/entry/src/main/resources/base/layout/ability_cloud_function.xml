@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DirectionalLayout
+    xmlns:ohos="http://schemas.huawei.com/res/ohos"
+    ohos:height="match_parent"
+    ohos:width="match_parent"
+    ohos:orientation="vertical">
+
+    <Text
+        ohos:text="$string:cloud_function_description"
+        ohos:id="$+id:text_cloud_function"
+        ohos:height="match_content"
+        ohos:width="match_parent"
+        ohos:background_element="$graphic:background_ability_main"
+        ohos:text_alignment="center"
+        ohos:text_size="14vp"
+        ohos:top_margin="100vp"
+        ohos:multiple_lines="true"
+        ohos:bottom_margin="20vp"
+        />
+    <Button
+        ohos:id="$+id:generate_id"
+        ohos:height="match_content"
+        ohos:width="match_parent"
+        ohos:text_alignment="center"
+        ohos:start_margin="20vp"
+        ohos:padding="10vp"
+        ohos:end_margin="20vp"
+        ohos:text_size="15vp"
+        ohos:background_element="$graphic:blue_button_element"
+        ohos:text="$string:cloud_function_button_text"
+        ohos:text_color="$color:black"
+
+        />
+    <Text
+        ohos:id="$+id:uuid"
+        ohos:height="60vp"
+        ohos:width="match_parent"
+        ohos:top_margin="20vp"
+        ohos:start_margin="20vp"
+        ohos:end_margin="20vp"
+        ohos:top_padding="20px"
+        ohos:text_size="14vp"
+        ohos:padding="10vp"
+        ohos:text_alignment="center"
+        ohos:background_element="$graphic:diable_black_button_element"
+        />
+</DirectionalLayout>
