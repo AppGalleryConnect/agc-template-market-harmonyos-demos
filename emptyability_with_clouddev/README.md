@@ -9,11 +9,21 @@ about demos, and how to use them, see
 
 
 ## Introduction
-    1. Download this code and import to Deveco Studio.
-    2. Login AGConnect. 
-    3. Replace  [agconnect-services.json](entry%2Fsrc%2Fmain%2Fresources%2Frawfile%2Fagconnect-services.json)
-    4. Deploy API9 cloud program
-    5. Run your app
+    1. Use Deveco Studio create Empty Ability With Clouddev project.
+    ![image](https://user-images.githubusercontent.com/1013629/223935818-3bdf5f0f-5ed0-4ad3-b5bb-e1d803c3a535.png)
+    2. Deploy function "idgenerator".
+    ![image](https://user-images.githubusercontent.com/1013629/223936105-3178fdb8-bdb0-4294-abcd-4bb7df0f20c8.png)
+    3. Download this project code.
+    ![image](https://user-images.githubusercontent.com/1013629/223936258-4f994f58-040d-433a-9fea-6cfaa709b4ff.png)
+    4. Use Deveco Studio open this project "emptyability_with_clouddev"
+    5. Refactor package name "com.huawei.clouddev"
+    ![image](https://user-images.githubusercontent.com/1013629/223936948-55bf5de9-48fb-4c09-86c4-938748a33f14.png)
+    ![image](https://user-images.githubusercontent.com/1013629/223937208-6cdecefd-6bac-4326-adca-ab8c85adcaf3.png)
+    6. Login AppGallery Connect and download agconnect-services.json, then put it into entry/src/main/resource/rawfile directory.
+    7. In Deveco Studio click File->Project Structure -> Projects -> Signing Configs and select "Automatically generate signature".
+    ![image](https://user-images.githubusercontent.com/1013629/223938411-1944537f-5451-4b35-8966-fccdccbeb5c4.png)
+    8. Connect to your phone and run.
+
 ## Precautions
 The agc-HarmonyOS-demos project contains few independent projects. After downloading the code, you can load different nested projects to the IDE as required. And you can run each project independently.
 
