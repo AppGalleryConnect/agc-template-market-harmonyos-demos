@@ -18,6 +18,7 @@ about demos, and how to use them, see
     3. Download this project code.
 ![image](https://user-images.githubusercontent.com/1013629/223936258-4f994f58-040d-433a-9fea-6cfaa709b4ff.png)
 
+
     4. Use Deveco Studio open this project "emptyability_with_clouddev"
     
     5. Refactor package name "com.huawei.clouddev"
@@ -31,7 +32,7 @@ about demos, and how to use them, see
 ![image](https://user-images.githubusercontent.com/1013629/223938411-1944537f-5451-4b35-8966-fccdccbeb5c4.png)
 
     8. Connect to your phone and run.
-
+	
 ## Precautions
 The agc-HarmonyOS-demos project contains few independent projects. After downloading the code, you can load different nested projects to the IDE as required. And you can run each project independently.
 
