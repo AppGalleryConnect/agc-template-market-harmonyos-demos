@@ -398,9 +398,3 @@
 ## 开源许可协议
 
 该代码经过[Apache 2.0 授权许可](http://www.apache.org/licenses/LICENSE-2.0)。
-
-<style type="text/css" rel="stylesheet">
-td > img {
-  width: 200px
-}
-</style>
