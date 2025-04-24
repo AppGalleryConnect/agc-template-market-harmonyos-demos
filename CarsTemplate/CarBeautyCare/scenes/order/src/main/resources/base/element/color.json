@@ -1,0 +1,32 @@
+{
+  "color": [
+    {
+      "name": "lightGrey",
+      "value": "#eee"
+    },
+    {
+      "name": "lightRed",
+      "value": "#EE3B55"
+    },
+    {
+      "name": "middleGrey",
+      "value": "#ddd"
+    },
+    {
+      "name": "littleGrey",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "littleRed",
+      "value": "#FF5500"
+    },
+    {
+      "name": "deepDark",
+      "value": "#333333"
+    },
+    {
+      "name": "lightDark",
+      "value": "#666666"
+    }
+  ]
+}

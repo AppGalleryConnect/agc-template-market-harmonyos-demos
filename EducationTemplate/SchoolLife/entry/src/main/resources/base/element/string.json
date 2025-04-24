@@ -1,0 +1,36 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "SchoolLife"
+    },
+    {
+      "name": "permission_reason_location",
+      "value": "获取位置信息的原因"
+    },
+    {
+      "name": "EntryFormAbility_desc",
+      "value": "form_description"
+    },
+    {
+      "name": "EntryFormAbility_label",
+      "value": "form_label"
+    },
+    {
+      "name": "school_lift_widget_desc",
+      "value": "课程助手服务卡片"
+    },
+    {
+      "name": "school_lift_widget_display_name",
+      "value": "课程助手服务卡片"
+    }
+  ]
+}

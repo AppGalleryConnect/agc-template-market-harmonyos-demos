@@ -1,0 +1,16 @@
+{
+  "name": "guide",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "packageType": "InterfaceHar",
+  "dependencies": {
+    "types": "file:../../../commons/types",
+    "common": "file:../../../commons/common",
+    "audio": "file:../../../commons/kits/audio",
+    "network": "file:../../../commons/network",
+    "components": "file:../../../commons/components"
+  }
+}

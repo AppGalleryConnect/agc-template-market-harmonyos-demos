@@ -1,0 +1,24 @@
+{
+  "string": [
+    {
+      "name": "add_your_car",
+      "value": "Add_your_car"
+    },
+    {
+      "name": "location_permission",
+      "value": "Location_permission"
+    },
+    {
+      "name": "approximately_location_permission",
+      "value": "Approximately_location_permission"
+    },
+    {
+      "name": "shop_position",
+      "value": "Shop_position"
+    },
+    {
+      "name": "add_car",
+      "value": "Add_car"
+    }
+  ]
+}

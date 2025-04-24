@@ -1,0 +1,20 @@
+{
+  "routerMap": [
+    {
+      "name": "EditPersonalInfo",
+      "pageSourceFile": "src/main/ets/pages/EditPersonalInfo.ets",
+      "buildFunction": "EditPersonalInfoBuilder",
+      "data": {
+        "description": "this is Attractions"
+      }
+    },
+    {
+      "name": "Hotlines",
+      "pageSourceFile": "src/main/ets/pages/Hotlines.ets",
+      "buildFunction": "HotlinesBuilder",
+      "data": {
+        "description": "this is Attractions"
+      }
+    }
+  ]
+}

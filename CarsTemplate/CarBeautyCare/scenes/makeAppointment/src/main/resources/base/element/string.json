@@ -1,0 +1,96 @@
+{
+  "string": [
+    {
+      "name": "reserve_project",
+      "value": "Reserve_project"
+    },
+    {
+      "name": "shop_service",
+      "value": "Shop_service"
+    },
+    {
+      "name": "pay_done",
+      "value": "Pay_done"
+    },
+    {
+      "name": "reserve_immediately",
+      "value": "Reserve_immediately"
+    },
+    {
+      "name": "time_choose",
+      "value": "Time_choose"
+    },
+    {
+      "name": "reserve_free",
+      "value": "Reserve_free"
+    },
+    {
+      "name": "reserve_already",
+      "value": "Reserve_already"
+    },
+    {
+      "name": "reserve_success",
+      "value": "Reserve_success"
+    },
+    {
+      "name": "arrive_early",
+      "value": "Arrive_early"
+    },
+    {
+      "name": "reserve_shop",
+      "value": "Reserve_shop"
+    },
+    {
+      "name": "reserve",
+      "value": "Reserve"
+    },
+    {
+      "name": "reserve_none",
+      "value": "Reserve_none"
+    },
+    {
+      "name": "myReserve",
+      "value": "MyReserve"
+    },
+    {
+      "name": "font_regular",
+      "value": "Font_regular"
+    },
+    {
+      "name": "cancel_reserve_success",
+      "value": "Cancel_reserve_success"
+    },
+    {
+      "name": "cancel_reserve_failure",
+      "value": "Cancel_reserve_failure"
+    },
+    {
+      "name": "license_number",
+      "value": "License_number"
+    },
+    {
+      "name": "maintain_reserve",
+      "value": "Maintain_reserve"
+    },
+    {
+      "name": "detail",
+      "value": "Detail"
+    },
+    {
+      "name": "reserve_cancel",
+      "value": "Reserve_cancel"
+    },
+    {
+      "name": "cancel_confirm",
+      "value": "Cancel_confirm"
+    },
+    {
+      "name": "confirm",
+      "value": "Confirm"
+    },
+    {
+      "name": "cancel",
+      "value": "Cancel"
+    }
+  ]
+}

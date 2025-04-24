@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "stores",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

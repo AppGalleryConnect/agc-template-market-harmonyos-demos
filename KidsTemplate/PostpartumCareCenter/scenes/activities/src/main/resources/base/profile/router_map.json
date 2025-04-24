@@ -1,0 +1,28 @@
+{
+  "routerMap": [
+    {
+      "name": "ActivityDetail",
+      "pageSourceFile": "src/main/ets/view/ActivityDetail.ets",
+      "buildFunction": "ActivityDetailBuilder",
+      "data": {
+        "description": "this is activity detail"
+      }
+    },
+    {
+      "name": "ActivityBooking",
+      "pageSourceFile": "src/main/ets/view/ActivityBooking.ets",
+      "buildFunction": "ActivityBookingBuilder",
+      "data": {
+        "description": "this is activity booking page"
+      }
+    },
+    {
+      "name": "ActivityBookingSuccess",
+      "pageSourceFile": "src/main/ets/view/ActivityBookingSuccess.ets",
+      "buildFunction": "ActivityBookingSuccessBuilder",
+      "data": {
+        "description": "this is activity booking success page"
+      }
+    }
+  ]
+}

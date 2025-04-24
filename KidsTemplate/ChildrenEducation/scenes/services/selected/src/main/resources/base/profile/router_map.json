@@ -1,0 +1,29 @@
+{
+  "routerMap": [
+    {
+      "name": "PremiumInteractiveVideoListView",
+      "pageSourceFile": "src/main/ets/views/more/PremiumInteractiveVideoListView.ets",
+      "buildFunction": "PremiumInteractiveVideoListBuilder"
+    },
+    {
+      "name": "HotAnimationListView",
+      "pageSourceFile": "src/main/ets/views/more/HotAnimationListView.ets",
+      "buildFunction": "HotAnimationBuilder"
+    },
+    {
+      "name": "AudioSectionListView",
+      "pageSourceFile": "src/main/ets/views/more/AudioSectionListView.ets",
+      "buildFunction": "AudioSectionListBuilder"
+    },
+    {
+      "name": "VideoDetailListView",
+      "pageSourceFile": "src/main/ets/views/detail/VideoDetail.ets",
+      "buildFunction": "VideoDetailBuilder"
+    },
+    {
+      "name": "AudioDetailListView",
+      "pageSourceFile": "src/main/ets/views/detail/AudioDetail.ets",
+      "buildFunction": "AudioDetailBuilder"
+    }
+  ]
+}

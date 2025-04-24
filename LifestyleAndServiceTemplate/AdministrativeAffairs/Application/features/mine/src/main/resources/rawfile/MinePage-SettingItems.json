@@ -1,0 +1,20 @@
+[
+  {
+    "id": "personal",
+    "icon": "app.media.personal_information",
+    "name": "个人信息",
+    "moreIcon": "app.media.personal_more"
+  },
+  {
+    "id": "contact",
+    "icon": "app.media.call",
+    "name": "联系客服",
+    "moreIcon": "app.media.personal_more"
+  },
+  {
+    "id": "setting",
+    "icon": "app.media.setting",
+    "name": "关于我们",
+    "moreIcon": "app.media.personal_more"
+  }
+]

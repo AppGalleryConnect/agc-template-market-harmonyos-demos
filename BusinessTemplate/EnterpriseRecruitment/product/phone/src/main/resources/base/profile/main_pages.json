@@ -1,0 +1,17 @@
+{
+  "src": [
+    "pages/Index",
+    "pages/Information",
+    "pages/Job",
+    "pages/Mine",
+    "pages/jobRoute/JobDetail",
+    "pages/jobRoute/JobDelivery",
+    "pages/mine/MyFavorite",
+    "pages/mine/MyDelivery",
+    "pages/mine/ResumeManagement",
+    "pages/mine/QuickLoginPage",
+    "pages/mine/PersonalInformation",
+    "pages/mine/AvatarUpload",
+    "pages/mine/RenamePage"
+  ]
+}

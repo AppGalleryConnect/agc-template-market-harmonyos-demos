@@ -1,0 +1,44 @@
+{
+  "string": [
+    {
+      "name": "week_weekday",
+      "value": "周日"
+    },
+    {
+      "name": "week_monday",
+      "value": "周一"
+    },
+    {
+      "name": "week_tuesday",
+      "value": "周二"
+    },
+    {
+      "name": "week_wednesday",
+      "value": "周三"
+    },
+    {
+      "name": "week_thursday",
+      "value": "周四"
+    },
+    {
+      "name": "week_friday",
+      "value": "周五"
+    },
+    {
+      "name": "week_saturday",
+      "value": "周六"
+    },
+    {
+      "name": "week_today",
+      "value": "今天"
+    },
+    {
+      "name": "week_tomorrow",
+      "value": "明天"
+    },
+    {
+      "name": "week_tomorrow_after_tomorrow",
+      "value": "后天"
+    }
+  ]
+}

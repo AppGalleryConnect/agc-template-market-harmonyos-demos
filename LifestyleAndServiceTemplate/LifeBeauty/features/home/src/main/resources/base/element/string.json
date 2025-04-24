@@ -1,0 +1,220 @@
+{
+  "string": [
+    {
+      "name": "tag_service",
+      "value": "服务保障"
+    },
+    {
+      "name": "tag_zero_pay",
+      "value": "0元预约，到店付款"
+    },
+    {
+      "name": "tag_chain_store",
+      "value": "连锁门店"
+    },
+    {
+      "name": "week_weekday",
+      "value": "周日"
+    },
+    {
+      "name": "week_monday",
+      "value": "周一"
+    },
+    {
+      "name": "week_tuesday",
+      "value": "周二"
+    },
+    {
+      "name": "week_wednesday",
+      "value": "周三"
+    },
+    {
+      "name": "week_thursday",
+      "value": "周四"
+    },
+    {
+      "name": "week_friday",
+      "value": "周五"
+    },
+    {
+      "name": "week_saturday",
+      "value": "周六"
+    },
+    {
+      "name": "week_today",
+      "value": "今天"
+    },
+    {
+      "name": "week_tomorrow",
+      "value": "明天"
+    },
+    {
+      "name": "dialog_book_success_title",
+      "value": "预约成功"
+    },
+    {
+      "name": "dialog_book_success_content",
+      "value": "请在预约时间准时到达门店，期待您更美的样子呢~"
+    },
+    {
+      "name": "call_phone_error",
+      "value": "此设备不支持打电话"
+    },
+    {
+      "name": "good_card_appoint_btn",
+      "value": "预约"
+    },
+    {
+      "name": "book_good_toast_time",
+      "value": "请选择预约时间"
+    },
+    {
+      "name": "book_good_toast_name",
+      "value": "请填写联系人姓名"
+    },
+    {
+      "name": "book_good_toast_phone",
+      "value": "请填写手机号"
+    },
+    {
+      "name": "book_good_toast_phone_correct",
+      "value": "请填写正确的手机号"
+    },
+    {
+      "name": "book_good_times_empty",
+      "value": "当前日期暂无可预约时间"
+    },
+    {
+      "name": "book_good_appoint_time",
+      "value": "预约时间"
+    },
+    {
+      "name": "book_good_appoint_info",
+      "value": "预约信息"
+    },
+    {
+      "name": "book_good_appoint_project",
+      "value": "预约项目"
+    },
+    {
+      "name": "book_good_appoint_contact_name",
+      "value": "联系人"
+    },
+    {
+      "name": "book_good_appoint_phone",
+      "value": "手机号"
+    },
+    {
+      "name": "book_good_appoint_nums",
+      "value": "人数"
+    },
+    {
+      "name": "book_good_appoint_remark",
+      "value": "备注"
+    },
+    {
+      "name": "common_required",
+      "value": "*"
+    },
+    {
+      "name": "common_minus",
+      "value": "-"
+    },
+    {
+      "name": "common_plus",
+      "value": "+"
+    },
+    {
+      "name": "book_contact_name_place",
+      "value": "请输入称呼"
+    },
+    {
+      "name": "book_phone_place",
+      "value": "请输入号码"
+    },
+    {
+      "name": "book_remark_place",
+      "value": "选填"
+    },
+    {
+      "name": "book_good_tip",
+      "value": "温馨提示：预约无需支付费用，请您到店享受服务后再支付费用"
+    },
+    {
+      "name": "book_good_btn",
+      "value": "立即预约"
+    },
+    {
+      "name": "book_good_title",
+      "value": "预约"
+    },
+    {
+      "name": "good_detail_member_price",
+      "value": "会员到手价￥"
+    },
+    {
+      "name": "good_detail_more_title",
+      "value": "—— 图文详情 ——"
+    },
+    {
+      "name": "good_detail_more_empty",
+      "value": "暂无图文详情"
+    },
+    {
+      "name": "appoint_record_btn",
+      "value": "预约记录"
+    },
+    {
+      "name": "home_tag_no_other_price",
+      "value": "无隐形消费"
+    },
+    {
+      "name": "home_tag_refund",
+      "value": "极速退款"
+    },
+    {
+      "name": "home_tag_security",
+      "value": "安全保障"
+    },
+    {
+      "name": "home_tag_auth",
+      "value": "认证信息"
+    },
+    {
+      "name": "home_label_navi",
+      "value": "导航"
+    },
+    {
+      "name": "home_label_call",
+      "value": "电话"
+    },
+    {
+      "name": "business_in",
+      "value": "营业中"
+    },
+    {
+      "name": "business_out",
+      "value": "已打烊"
+    },
+    {
+      "name": "book_error_tip",
+      "value": "出错啦，请稍后再试~"
+    },
+    {
+      "name": "empty_location",
+      "value": "暂无"
+    },
+    {
+      "name": "good_card_member",
+      "value": "会员"
+    },
+    {
+      "name": "good_card_vip_price",
+      "value": "到手价"
+    },
+    {
+      "name": "good_card_money_symbol",
+      "value": "￥%s"
+    }
+  ]
+}

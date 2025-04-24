@@ -1,0 +1,12 @@
+{
+  "routerMap": [
+    {
+      "name": "cityselect",
+      "pageSourceFile": "src/main/ets/components/CitySelectView.ets",
+      "buildFunction": "CitySelectViewBuilder",
+      "data": {
+        "description" : "this is CitySelectView"
+      }
+    }
+  ]
+}

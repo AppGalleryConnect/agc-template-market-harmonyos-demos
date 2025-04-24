@@ -1,0 +1,17 @@
+{
+  "color": [
+    {
+      "name": "color_1",
+      "value": "#ff0000"
+    },
+    {
+      "name": "lightRed",
+      "value": "#EE3B55"
+    },
+    {
+      "name": "lightGrey",
+      "value": "#F1F3F5"
+    }
+
+  ]
+}

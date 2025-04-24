@@ -1,0 +1,64 @@
+{
+  "float": [
+    {
+      "name": "trip_icon_margin",
+      "value": "0.5"
+    },
+    {
+      "name": "trip_schedule_icon_radius",
+      "value": "2.5"
+    },
+    {
+      "name": "trip_schedule_icon_width",
+      "value": "1.5"
+    },
+    {
+      "name": "trip_icon_width",
+      "value": "51"
+    },
+    {
+      "name": "width_or_margin",
+      "value": "12"
+    },
+    {
+      "name": "trip_icon_height",
+      "value": "57"
+    },
+    {
+      "name": "line_height_common",
+      "value": "21"
+    },
+    {
+      "name": "trip_item_location_margin",
+      "value": "5"
+    },
+    {
+      "name": "common_margin_width",
+      "value": "2"
+    },
+    {
+      "name": "day_button_radius",
+      "value": "10"
+    },
+    {
+      "name": "common_line_height",
+      "value": "19"
+    },
+    {
+      "name": "font_size_common",
+      "value": "12"
+    },
+    {
+      "name": "height_or_line_height",
+      "value": "16"
+    },
+    {
+      "name": "schedule_border_radius",
+      "value": "23"
+    },
+    {
+      "name": "trip_content_font",
+      "value": "12"
+    }
+  ]
+}

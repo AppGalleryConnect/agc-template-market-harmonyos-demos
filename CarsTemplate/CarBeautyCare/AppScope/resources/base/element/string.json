@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "carServiceTemplate"
+    },
+    {
+      "name": "agcit_huawei_car_beauty_care",
+      "value": "2.0.0"
+    },
+    {
+      "name": "agcittype_huawei_car_beauty_care",
+      "value": "industryTemplate"
+    }
+  ]
+}

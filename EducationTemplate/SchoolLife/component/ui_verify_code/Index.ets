@@ -1,0 +1,1 @@
+export { UIVerifyCodeInput, VerifyCodeType, VerifyEventType } from './src/main/ets/components/UIVerifyCodeInput';

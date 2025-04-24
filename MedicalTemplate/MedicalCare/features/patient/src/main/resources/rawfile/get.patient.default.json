@@ -1,0 +1,15 @@
+{
+  "cardId": "1001202310010001",
+  "patientName": "李明轩",
+  "nickName": "轩轩",
+  "phone": "16688888888",
+  "idCardType": "身份证",
+  "idCard": "010101199001011234",
+  "sex": "男",
+  "birthday": "1990-01-01",
+  "country": "中国",
+  "city": "北京",
+  "address": "北京市朝阳区建国路",
+  "insuranceType": "城镇职工医保",
+  "picUrl": "http://example.com"
+}

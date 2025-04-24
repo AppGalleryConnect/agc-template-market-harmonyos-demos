@@ -1,0 +1,1 @@
+export { CartoonPage } from './src/main/ets/views/CartoonPage'

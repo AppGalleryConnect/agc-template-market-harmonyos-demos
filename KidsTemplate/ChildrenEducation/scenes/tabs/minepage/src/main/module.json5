@@ -1,0 +1,22 @@
+{
+  "module": {
+    "name": "minepage",
+    "type": "shared",
+    "routerMap": "$profile:router_map",
+    "description": "$string:shared_desc",
+    "deviceTypes": [
+      "phone"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": true,
+    "requestPermissions": [
+      {
+        "name" : "ohos.permission.GET_NETWORK_INFO",
+        "usedScene": {
+          "when": "inuse"
+        }
+      }
+    ]
+  },
+
+}

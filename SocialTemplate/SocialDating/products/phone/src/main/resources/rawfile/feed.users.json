@@ -1,0 +1,46 @@
+{
+  "ret": {
+    "retCode": 0,
+    "retMsg": "SUCCESS"
+  },
+  "users": [
+    {
+      "userInfo": {
+        "hwUnionId": "uid100801",
+        "userNo": "100801",
+        "uid": 100801,
+        "nickName": "要减肥的冥王星",
+        "realNameAuthFlag": 1,
+        "gender": 0,
+        "marriageStatus": 0,
+        "birth": "2000-01-01",
+        "selfIntroduction": "我的生活态度是：珍惜当下，努力拼搏，追求卓越",
+        "education": 3,
+        "currentResidence": "北京",
+        "originFrom": "北京",
+        "job": "公务员",
+        "monthlyIncome": 3,
+        "height": 170
+      }
+    },
+    {
+      "userInfo": {
+        "hwUnionId": "uid100802",
+        "userNo": "100802",
+        "uid": 100802,
+        "nickName": "会撒娇的栗子",
+        "realNameAuthFlag": 0,
+        "gender": 0,
+        "marriageStatus": 0,
+        "birth": "1997-01-01",
+        "selfIntroduction": "兴趣爱好广泛，喜欢阅读、旅行、运动和摄影；积极向上，开朗幽默",
+        "education": 3,
+        "currentResidence": "江苏南京",
+        "originFrom": "江苏镇江",
+        "job": "商业/服务业",
+        "monthlyIncome": 4,
+        "height": 171
+      }
+    }
+  ]
+}

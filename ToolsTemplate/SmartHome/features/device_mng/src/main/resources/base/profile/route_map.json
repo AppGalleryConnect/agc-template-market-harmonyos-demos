@@ -1,0 +1,39 @@
+{
+  "routerMap": [
+    {
+      "name": "NotifyPage",
+      "pageSourceFile": "src/main/ets/pages/DevicesNotifyPage.ets",
+      "buildFunction": "NotifyPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "DeviceDetailPage",
+      "pageSourceFile": "src/main/ets/pages/DeviceDetailPage.ets",
+      "buildFunction": "DeviceDetailPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "BaseSettingPage",
+      "pageSourceFile": "src/main/ets/pages/BaseSettingPage.ets",
+      "buildFunction": "BaseSettingPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "MessageListPage",
+      "pageSourceFile": "src/main/ets/pages/DeviceNotifyListPage.ets",
+      "buildFunction": "MessageListPageBuilder",
+      "data": {
+        "description": ""
+      }
+    }
+
+
+
+  ]
+}

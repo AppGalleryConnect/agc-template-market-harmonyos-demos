@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>灯的开关状态</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: #FFFFFF;
+            position: relative; /* 设置相对定位 */
+        }
+
+        .light-status {
+            font-size: 16px;
+            color: gray;
+            position: absolute;
+            right: 0px;
+            bottom: 10px;
+        }
+        .light-on {
+            color: #64BB5C;
+        }
+        .light-off {
+            color: gray;
+        }
+        .light {
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        span {
+          font-size: 11px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="light" id="light">
+        <div class="light-status light-off">关</div>
+    </div>
+<script src="lightBriefScript.js">
+</script>
+</body>
+</html>

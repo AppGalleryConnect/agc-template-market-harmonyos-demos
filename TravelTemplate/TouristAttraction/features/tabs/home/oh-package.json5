@@ -1,0 +1,17 @@
+{
+  "name": "home",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "packageType": "InterfaceHar",
+  "dependencies": {
+    "types": "file:../../../commons/types",
+    "components": "file:../../../commons/components",
+    "common": "file:../../../commons/common",
+    "audio": "file:../../../commons/kits/audio",
+    "ticket": "file:../ticket",
+    "network": "file:../../../commons/network",
+  }
+}

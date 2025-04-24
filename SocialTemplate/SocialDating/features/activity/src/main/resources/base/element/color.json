@@ -1,0 +1,16 @@
+{
+  "color": [
+    {
+      "name": "start_window_background",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "activity_status_normal",
+      "value": "#1AFE4F35"
+    },
+    {
+      "name": "activity_status_canceled",
+      "value": "#1A000000"
+    }
+  ]
+}

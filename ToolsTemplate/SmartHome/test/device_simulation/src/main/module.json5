@@ -1,0 +1,48 @@
+{
+  "module": {
+    "name": "device_simulation",
+    "type": "feature",
+    "description": "$string:module_desc",
+    "mainElement": "Device_simulationAbility",
+    "deviceTypes": [
+      "phone"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": true,
+    "pages": "$profile:main_pages",
+    "abilities": [
+      {
+        "name": "Device_simulationAbility",
+        "srcEntry": "./ets/device_simulationability/Device_simulationAbility.ets",
+        "description": "$string:Device_simulationAbility_desc",
+        "icon": "$media:icon",
+        "label": "$string:Device_simulationAbility_label",
+        "startWindowIcon": "$media:startIcon",
+        "startWindowBackground": "$color:start_window_background",
+        "exported": true
+      }
+    ],
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.ACCESS_BLUETOOTH",
+        "reason": "$string:DeviceAbility_desc",
+        "usedScene": {
+          "abilities": [
+            "EntryAbility"
+          ],
+          "when": "inuse"
+        }
+      },
+      {
+        "name": "ohos.permission.INTERNET",
+        "reason": "$string:DeviceAbility_desc",
+        "usedScene": {
+          "abilities": [
+            "EntryAbility"
+          ],
+          "when": "inuse"
+        }
+      }
+    ]
+  }
+}

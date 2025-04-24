@@ -1,0 +1,12 @@
+{
+  "routerMap": [
+    {
+      "name": "PublicNotice",
+      "pageSourceFile": "src/main/ets/pages/PublicNoticePage.ets",
+      "buildFunction": "publicNoticePageBuilder",
+      "data": {
+        "description": ""
+      }
+    }
+  ]
+}

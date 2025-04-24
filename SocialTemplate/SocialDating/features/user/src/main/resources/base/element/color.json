@@ -1,0 +1,40 @@
+{
+  "color": [
+    {
+      "name": "start_window_background",
+      "value": "#00E50F0F"
+    },
+    {
+      "name": "user_label_background",
+      "value": "#1AFE4F35"
+    },
+    {
+      "name": "user_mate_condition_bg",
+      "value": "#FFEAEDF3"
+    },
+    {
+      "name": "user_empty_content",
+      "value": "#FFEBEFEF"
+    },
+    {
+      "name": "scroll_bar_color",
+      "value": "#FFF8F6F6"
+    },
+    {
+      "name": "tip_info_font_color",
+      "value": "#E6999999"
+    },
+    {
+      "name": "light_blue",
+      "value": "#90CEF2FD"
+    },
+    {
+      "name": "light_grey",
+      "value": "#FFC8C8C8"
+    },
+    {
+      "name": "user_detail_item_name",
+      "value": "#99000000"
+    }
+  ]
+}

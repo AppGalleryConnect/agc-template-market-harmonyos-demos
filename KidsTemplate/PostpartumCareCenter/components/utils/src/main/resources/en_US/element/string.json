@@ -1,0 +1,80 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "location_permission",
+      "value": "Allow the app to obtain location information when running in the foreground during location scenarios"
+    },
+    {
+      "name": "fuzzy_location_permission",
+      "value": "Allow the app to obtain fuzzy device location information during location scenarios"
+    },
+    {
+      "name": "current_geocoded_location",
+      "value": "Current location inverse geocoding results: "
+    },
+    {
+      "name": "cache_geocoded_location",
+      "value": "Cached location inverse geocoding results: "
+    },
+    {
+      "name": "geocoded_location",
+      "value": "geocoded_location"
+    },
+    {
+      "name": "get_cache_location",
+      "value": "Obtain Cached Location"
+    },
+    {
+      "name": "get_current_location",
+      "value": "Obtain Current Location"
+    },
+    {
+      "name": "continuous_positioning",
+      "value": "Continuous Location"
+    },
+    {
+      "name": "background_positioning",
+      "value": "Background Location"
+    },
+    {
+      "name": "language",
+      "value": "en"
+    },
+    {
+      "name": "location_background",
+      "value": "Allow the app to get location information in the background"
+    },
+    {
+      "name": "running_background",
+      "value": "Allows the app to perform long-running tasks in the background to get location information"
+    },
+    {
+      "name": "get_network_info",
+      "value": "Allows the app to get network connection information of the device"
+    },
+    {
+      "name": "location_switch",
+      "value": "The location switch is off, please check the location settings"
+    },
+    {
+      "name": "internet_switch",
+      "value": "The network is disconnected, please check the network settings"
+    },
+    {
+      "name": "wifi_bluetooth_switch",
+      "value": "WiFi or Bluetooth is off, please check the settings"
+    },
+    {
+      "name": "agcit_huawei_postpartum_care_center_utils",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_postpartum_care_center_utils",
+      "value": "serviceComponent"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "string": [
+    {
+      "name": "shared_desc",
+      "value": "description"
+    },
+    {
+      "name": "permission_reason_location",
+      "value": "用于获取当前定位"
+    }
+  ]
+}

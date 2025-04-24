@@ -1,0 +1,23 @@
+{
+  "name": "entry",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "",
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "@ohos_agcit/car_beauty_care_commonlib": "file:../../commons/commonLib",
+    "@ohos_agcit/car_beauty_care_componentlib": "file:../../commons/componentLib",
+    "@ohos_agcit/car_beauty_care_shop": "file:../../scenes/shop",
+    "@ohos_agcit/car_beauty_care_package": "file:../../scenes/package",
+    "@ohos_agcit/car_beauty_care_coupon": "file:../../scenes/coupon",
+    "@ohos_agcit/car_beauty_care_makeappointment": "file:../../scenes/makeAppointment",
+    "@ohos_agcit/car_beauty_care_cityselect": "file:../../scenes/citySelect",
+    "@ohos_agcit/car_beauty_care_garage": "file:../../scenes/garage",
+    "@ohos_agcit/car_beauty_care_contact": "file:../../scenes/contact",
+    "@ohos_agcit/car_beauty_care_order": "file:../../scenes/order",
+    "@ohos_agcit/car_beauty_care_product": "file:../../scenes/product"
+
+  }
+}
+

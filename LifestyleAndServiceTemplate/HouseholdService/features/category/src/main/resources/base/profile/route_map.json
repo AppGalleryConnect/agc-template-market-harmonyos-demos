@@ -1,0 +1,9 @@
+{
+  "routerMap": [
+    {
+      "name": "AllCategory",
+      "pageSourceFile": "src/main/ets/pages/AllCategory.ets",
+      "buildFunction": "AllCategoryBuilder"
+    }
+  ]
+}

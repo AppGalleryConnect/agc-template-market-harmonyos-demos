@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "activities",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ],
+    "routerMap": "$profile:router_map",
+  }
+}

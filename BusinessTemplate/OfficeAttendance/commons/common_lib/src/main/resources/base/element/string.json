@@ -1,0 +1,52 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "unfinished_task",
+      "value": "unfinished_task"
+    },
+    {
+      "name": "finished_task",
+      "value": "finished_task"
+    },
+    {
+      "name": "monday",
+      "value": "monday"
+    },
+    {
+      "name": "tuesday",
+      "value": "tuesday"
+    },
+    {
+      "name": "wednesday",
+      "value": "wednesday"
+    },
+    {
+      "name": "thursday",
+      "value": "friday"
+    },
+    {
+      "name": "friday",
+      "value": "friday"
+    },
+    {
+      "name": "saturday",
+      "value": "saturday"
+    },
+    {
+      "name": "sunday",
+      "value": "sunday"
+    },
+    {
+      "name": "location_permission",
+      "value": "location_permission"
+    },
+    {
+      "name": "approximately_location_permission",
+      "value": "approximately_location_permission"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "float": [
+    {
+      "name": "service_line_width",
+      "value": "2vp"
+    },
+    {
+      "name": "service_line_height",
+      "value": "20vp"
+    },
+    {
+      "name": "service_header_margin_top",
+      "value": "12vp"
+    },
+    {
+      "name": "service_header_margin_bottom",
+      "value": "20vp"
+    },
+    {
+      "name": "service_header_padding_left",
+      "value": "16vp"
+    },
+    {
+      "name": "service_header_padding_right",
+      "value": "16vp"
+    },
+    {
+      "name": "service_padding",
+      "value": "10vp"
+    },
+    {
+      "name": "service_margin",
+      "value": "10vp"
+    },
+    {
+      "name": "service_card_padding_bottom",
+      "value": "15vp"
+    },
+    {
+      "name": "service_card_icon_width",
+      "value": "48vp"
+    },
+    {
+      "name": "service_card_icon_height",
+      "value": "48vp"
+    },
+    {
+      "name": "service_size",
+      "value": "12vp"
+    }
+  ]
+}

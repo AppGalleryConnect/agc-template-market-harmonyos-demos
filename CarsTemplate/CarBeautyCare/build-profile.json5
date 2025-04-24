@@ -1,0 +1,93 @@
+{
+  "app": {
+    "signingConfigs": [],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "compatibleSdkVersion": "5.0.0(12)",
+        "runtimeOS": "HarmonyOS",
+        "buildOption": {
+          "strictMode": {
+            "caseSensitiveCheck": true,
+            "useNormalizedOHMUrl": true
+          }
+        }
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug",
+      },
+      {
+        "name": "release"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./products/entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "commonLib",
+      "srcPath": "./commons/commonLib"
+    },
+    {
+      "name": "componentLib",
+      "srcPath": "./commons/componentLib"
+    },
+    {
+      "name": "network",
+      "srcPath": "./commons/network"
+    },
+    {
+      "name": "shop",
+      "srcPath": "./scenes/shop"
+    },
+    {
+      "name": "package",
+      "srcPath": "./scenes/package"
+    },
+    {
+      "name": "coupon",
+      "srcPath": "./scenes/coupon"
+    },
+    {
+      "name": "citySelect",
+      "srcPath": "./scenes/citySelect"
+    },
+    {
+      "name": "garage",
+      "srcPath": "./scenes/garage"
+    },
+    {
+      "name": "makeAppointment",
+      "srcPath": "./scenes/makeAppointment"
+    },
+    {
+      "name": "order",
+      "srcPath": "./scenes/order"
+    },
+    {
+      "name": "contact",
+      "srcPath": "./scenes/contact"
+    },
+    {
+      "name": "product",
+      "srcPath": "./scenes/product"
+    },
+    {
+      "name": "carKeyboard",
+      "srcPath": "./scenes/carKeyboard",
+    }
+  ]
+}

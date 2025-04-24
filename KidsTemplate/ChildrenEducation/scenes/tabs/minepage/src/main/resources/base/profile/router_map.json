@@ -1,0 +1,39 @@
+{
+  "routerMap": [
+    {
+      "name": "ViewHistory",
+      "pageSourceFile": "src/main/ets/views/history/ViewHistory.ets",
+      "buildFunction": "ViewHistoryBuilder"
+    },
+    {
+      "name": "SettingsPage",
+      "pageSourceFile": "src/main/ets/views/settings/SettingsPage.ets",
+      "buildFunction": "SettingsPageBuilder"
+    },
+    {
+      "name": "PrivacyAgreement",
+      "pageSourceFile": "src/main/ets/views/settings/PrivacyAgreement.ets",
+      "buildFunction": "PrivacyAgreementBuilder"
+    },
+    {
+      "name": "TimeCtrl",
+      "pageSourceFile": "src/main/ets/views/settings/TimeCtrl.ets",
+      "buildFunction": "TimeCtrlBuilder"
+    },
+    {
+      "name": "ContactUs",
+      "pageSourceFile": "src/main/ets/views/contactus/ContactUs.ets",
+      "buildFunction": "ContactUsBuilder"
+    },
+    {
+      "name": "QuickLoginPage",
+      "pageSourceFile": "src/main/ets/views/login/QuickLoginPage.ets",
+      "buildFunction": "QuickLoginPageBuilder"
+    },
+    {
+      "name": "PersonalInformation",
+      "pageSourceFile": "src/main/ets/views/login/PersonalInformation.ets",
+      "buildFunction": "PersonalInformationBuilder"
+    }
+  ]
+}

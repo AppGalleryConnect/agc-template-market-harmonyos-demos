@@ -1,0 +1,36 @@
+{
+  "color": [
+    {
+      "name": "mine_drive_color",
+      "value": "#ffe9f0f0"
+    },
+    {
+      "name": "mine_link_font_color",
+      "value": "#007DFF"
+    },
+    {
+      "name": "mine_link_login_bg",
+      "value": "#182200"
+    },
+    {
+      "name": "mine_link_un_login_bg",
+      "value": "#E0E3E8"
+    },
+    {
+      "name": "mine_call_bg",
+      "value": "#F2E5DD"
+    },
+    {
+      "name": "mine_bg",
+      "value": "#F5F5F5"
+    },
+    {
+      "name": "font_primary",
+      "value": "#E5000000"
+    },
+    {
+      "name": "font_secondary",
+      "value": "#99000000"
+    }
+  ]
+}

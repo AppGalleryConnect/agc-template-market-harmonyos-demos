@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "ui_schedule_flow",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ]
+  }
+}

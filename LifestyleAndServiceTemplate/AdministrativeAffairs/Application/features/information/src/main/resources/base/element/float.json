@@ -1,0 +1,140 @@
+{
+  "float": [
+    {
+      "name": "information_custom_margin_top",
+      "value": "10vp"
+    },
+    {
+      "name": "information_custom_margin_bottom",
+      "value": "10vp"
+    },
+    {
+      "name": "information_custom_border_width",
+      "value": "2vp"
+    },
+    {
+      "name": "information_custom_padding_left",
+      "value": "10vp"
+    },
+    {
+      "name": "information_custom_padding_right",
+      "value": "10vp"
+    },
+    {
+      "name": "information_custom_height",
+      "value": "40vp"
+    },
+    {
+      "name": "information_image_size_width",
+      "value": "20vp"
+    },
+    {
+      "name": "information_image_size_height",
+      "value": "20vp"
+    },
+    {
+      "name": "information_refresh_done_height",
+      "value": "30vp"
+    },
+    {
+      "name": "information_progress_height",
+      "value": "32vp"
+    },
+    {
+      "name": "information_progress_width",
+      "value": "48vp"
+    },
+    {
+      "name": "information_service_margin_top",
+      "value": "20vp"
+    },
+    {
+      "name": "information_service_margin_bottom",
+      "value": "20vp"
+    },
+    {
+      "name": "news_card_width",
+      "value": "65vp"
+    },
+    {
+      "name": "news_card_height",
+      "value": "35vp"
+    },
+    {
+      "name": "news_card_hot_height",
+      "value": "15vp"
+    },
+    {
+      "name": "news_card_hot_width",
+      "value": "12vp"
+    },
+    {
+      "name": "news_card_content_width",
+      "value": "225vp"
+    },
+    {
+      "name": "news_card_content_height",
+      "value": "50vp"
+    },
+    {
+      "name": "news_card_content_padding_top",
+      "value": "20vp"
+    },
+    {
+      "name": "news_card_content_padding_left",
+      "value": "20vp"
+    },
+    {
+      "name": "news_card_content_padding_bottom",
+      "value": "20vp"
+    },
+    {
+      "name": "news_card_title_width",
+      "value": "180vp"
+    },
+    {
+      "name": "news_card_title_margin",
+      "value": "28vp"
+    },
+    {
+      "name": "news_card_cover_width",
+      "value": "120vp"
+    },
+    {
+      "name": "news_card_cover_height",
+      "value": "80vp"
+    },
+    {
+      "name": "news_card_cover_padding_top",
+      "value": "12vp"
+    },
+    {
+      "name": "news_card_cover_padding_bottom",
+      "value": "12vp"
+    },
+    {
+      "name": "news_card_cover_padding_left",
+      "value": "16vp"
+    },
+    {
+      "name": "news_card_cover_padding_right",
+      "value": "16vp"
+    },
+    {
+      "name": "information_list_margin_top",
+      "value": "12vp"
+    },
+    {
+      "name": "information_title_size",
+      "value": "32vp"
+    },
+    {
+      "name": "information_title_divider_width",
+      "value": "30vp"
+    },
+    {
+      "name": "information_title_divider_height",
+      "value": "2vp"
+    }
+  ]
+}

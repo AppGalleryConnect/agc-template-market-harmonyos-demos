@@ -1,0 +1,28 @@
+{
+  "color": [
+    {
+      "name": "start_window_background",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "account_binding_button",
+      "value": "#3093FA"
+    },
+    {
+      "name": "light_gray",
+      "value": "#8a8a8a"
+    },
+    {
+      "name": "mine_background",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "button_text_color",
+      "value": "#3093FA"
+    },
+    {
+      "name": "about_background",
+      "value": "#F1F3F5"
+    }
+  ]
+}

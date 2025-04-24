@@ -1,0 +1,21 @@
+<svg width="12.000000" height="12.000000" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs>
+		<clipPath id="clip14_1688">
+			<rect id="ic_public_success" width="12.000000" height="12.000000" fill="white" fill-opacity="0"/>
+		</clipPath>
+	</defs>
+	<g opacity="0.660000">
+		<g clip-path="url(#clip14_1688)">
+			<path id="path1" d="M0 5.99C0 5.05 -0.01 4.12 0 3.18C-0.01 2.72 0.05 2.27 0.16 1.83C0.41 0.9 1.01 0.35 1.94 0.14C2.41 0.04 2.89 -0.01 3.36 3.05e-5C5.16 3.05e-5 6.95 3.05e-5 8.76 3.05e-5C9.21 -0.01 9.66 0.04 10.1 0.15C11.06 0.38 11.64 0.99 11.85 1.95C11.95 2.4 12 2.86 11.99 3.32C11.99 5.14 11.99 6.95 11.99 8.77C12 9.22 11.95 9.67 11.84 10.1C11.61 11.06 11 11.63 10.04 11.85C9.58 11.95 9.1 12 8.62 11.99C6.83 11.99 5.04 11.99 3.25 11.99C2.8 12 2.34 11.95 1.89 11.84C0.93 11.61 0.36 11 0.14 10.04C0.03 9.55 0 9.06 0 8.57C0 7.71 0 6.85 0 5.99Z" fill="#FFFFFF" fill-opacity="0" fill-rule="evenodd"/>
+			<circle id="path2" cx="6.000000" cy="6.000000" r="6.000000" fill="#FFFFFF" fill-opacity="0"/>
+			<circle id="path4" cx="6.000000" cy="6.000000" r="5.500000" fill="#FFFFFF" fill-opacity="0"/>
+			<circle id="path4" cx="6.000000" cy="6.000000" r="5.500000" fill="#000000" fill-opacity="0"/>
+			<circle id="path4" cx="6.000000" cy="6.000000" r="5.500000" stroke="#191919" stroke-opacity="1.000000" stroke-width="1.000000" stroke-linejoin="round"/>
+			<path id="path6" d="M2.79 6.09L2.76 6.09C2.56 5.89 2.57 5.58 2.77 5.38C2.98 5.19 3.29 5.2 3.48 5.4L3.48 5.43L2.79 6.09ZM8.71 3.68L8.71 3.65C8.9 3.45 9.21 3.44 9.41 3.63C9.62 3.83 9.63 4.14 9.43 4.34L9.4 4.34L8.71 3.68Z" fill="#000000" fill-opacity="0" fill-rule="nonzero"/>
+			<path id="path6" d="M3.12 5.75L5.27 8L9.07 4" stroke="#191919" stroke-opacity="1.000000" stroke-width="1.000000" stroke-linejoin="round" stroke-linecap="round"/>
+		</g>
+	</g>
+</svg>

@@ -1,0 +1,24 @@
+{
+  "color": [
+    {
+      "name": "crimson",
+      "value": "#E84026"
+    },
+    {
+      "name": "white",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "black_1",
+      "value": "#00000066"
+    },
+    {
+      "name": "date_picker_disappear",
+      "value": "#A0A0A0"
+    },
+    {
+      "name": "date_picker_text",
+      "value": "#888888"
+    }
+  ]
+}

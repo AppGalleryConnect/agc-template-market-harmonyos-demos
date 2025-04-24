@@ -1,0 +1,56 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "医保模板"
+    },
+    {
+      "name": "EntryFormAbility_desc",
+      "value": "form_description"
+    },
+    {
+      "name": "EntryFormAbility_label",
+      "value": "form_label"
+    },
+    {
+      "name": "widget_desc",
+      "value": "这是一个医保模板的卡片"
+    },
+    {
+      "name": "widget_display_name",
+      "value": "医保模板卡片"
+    },
+    {
+      "name": "card_title",
+      "value": "Title"
+    },
+    {
+      "name": "introduction",
+      "value": "Introduction"
+    },
+    {
+      "name": "medical_insurance",
+      "value": "医保"
+    },
+    {
+      "name": "medical_more",
+      "value": "更多"
+    },
+    {
+      "name": "location_reason",
+      "value": "应用需要获取用户的地理位置，以便提供与位置相关的服务，例如地图导航、获取当前地理位置等"
+    },
+    {
+      "name": "calendar_reason",
+      "value": "应用可能需要向用户的日历中添加、修改或删除日程事件，以便帮助用户更好地管理时间"
+    }
+  ]
+}

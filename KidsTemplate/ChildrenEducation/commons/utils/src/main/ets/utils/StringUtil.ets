@@ -1,0 +1,287 @@
+import { buffer, util } from '@kit.ArkTS';
+
+export class StringUtil {
+  /**
+   * 判断字符串是否为空(undefined、null)
+   * @param str 被检测的字符串
+   * @returns 是否为空
+   */
+  static isNull(str: string | undefined | null): boolean {
+    return str === undefined || str === null;
+  }
+
+  /**
+   * 判断字符串是否为非空。true为非空空，否则false
+   * @param str
+   * @returns
+   */
+  static isNotNull(str: string | undefined | null): boolean {
+    return false === StringUtil.isNull(str);
+  }
+
+
+  /**
+   * 判断字符串是否为空(undefined、null、字符串长度为0)
+   * @param str 被检测的字符串
+   * @return 是否为空
+   */
+  static isEmpty(str: string | undefined | null): boolean {
+    return str === undefined || str === null || str.length === 0;
+  }
+
+  /**
+   * 判断字符串是否为非空。true为非空空，否则false
+   * @param str
+   * @returns
+   */
+  static isNotEmpty(str: string | undefined | null): boolean {
+    return false === StringUtil.isEmpty(str);
+  }
+
+  /**
+   * 格式化字符串
+   * @param source
+   * @param defaultValue
+   * @returns
+   */
+  static toStr(source: string | null | undefined, defaultValue = ''): string {
+    if (source === null || source === undefined) {
+      return defaultValue;
+    }
+    return String(source);
+  }
+
+
+  /**
+   * 替换字符串中匹配的正则为给定的字符串
+   * @param str   待替换的字符串
+   * @param pattern  要匹配的内容正则或字符串
+   * @param replaceValue 替换的内容
+   * @returns
+   */
+  static replace(str: string, pattern: RegExp | string, replaceValue: string = ''): string {
+    return str.replace(pattern, replaceValue);
+  }
+
+  /**
+   * 替换字符串中所有匹配的正则为给定的字符串
+   * @param str  待替换的字符串
+   * @param pattern  要匹配的内容正则或字符串
+   * @param replaceValue 替换的内容
+   * @returns 返回替换后的字符串
+   */
+  static replaceAll(str: string, pattern: RegExp | string, replaceValue: string = ''): string {
+    return str.replaceAll(pattern, replaceValue);
+  }
+
+  /**
+   * 判断字符串是否以给定的字符串开头
+   * @param string 要检索的字符串
+   * @param target 要检索字符
+   * @param position 检索的位置
+   * @returns
+   */
+  static startsWith(string: string = '', target: string, position: number = 0): boolean {
+    return string.startsWith(target, position);
+  }
+
+
+  /**
+   * 判断字符串是否以给定的字符串结尾
+   * @param str 要检索的字符串
+   * @param target 要检索字符
+   * @param position 检索的位置
+   * @returns
+   */
+  static endsWith(str: string = '', target: string, position: number = str.length): boolean {
+    return str.endsWith(target, position);
+  }
+
+
+  /**
+   * 将字符串重复指定次数
+   * @param str  要重复的字符串
+   * @param n  重复的次数
+   * @returns
+   */
+  static repeat(str: string = '', n: number = 1): string {
+    return str.repeat(n);
+  }
+
+
+  /**
+   * 将整个字符串转换为小写
+   * @param str 要转换的字符串
+   * @returns 返回小写的字符串
+   */
+  static toLower(str: string = ''): string {
+    return str.toLowerCase();
+  }
+
+
+  /**
+   * 将整个字符串转换为大写
+   * @param str 要转换的字符串
+   * @returns 返回小写的字符串
+   */
+  static toUpper(str: string = ''): string {
+    return str.toUpperCase();
+  }
+
+
+  /**
+   * 将字符串首字母转换为大写，剩下为小写
+   * @param str 待转换的字符串
+   * @returns 转换后的
+   */
+  static capitalize(str: string = ''): string {
+    if (StringUtil.isNotEmpty(str)) {
+      const firstChar = str.charAt(0).toUpperCase();
+      const restChars = str.slice(1).toLowerCase();
+      return firstChar + restChars;
+    }
+    return '';
+  }
+
+
+  /**
+   * 判断两个传入的数值或者是字符串是否相等
+   * @param source
+   * @param target
+   * @returns
+   */
+  static equal(source: string | number, target: string | number): boolean {
+    return source === target;
+  }
+
+  /**
+   * 判断两个传入的数值或者是字符串是否不相等
+   * @param source
+   * @param target
+   * @returns
+   */
+  static notEqual(source: string | number, target: string | number): boolean {
+    return false === StringUtil.equal(source, target);
+  }
+
+
+  /**
+   * 字符串转Uint8Array
+   * @param src 字符串
+   * @returns Uint8Array
+   */
+  public static strToUint8Array(src: string, encoding: buffer.BufferEncoding = 'utf-8'): Uint8Array {
+    const textEncoder = new util.TextEncoder(encoding);
+    const result = textEncoder.encodeInto(src);
+    return result;
+  }
+
+  /**
+   * Uint8Array转字符串
+   * @param src Uint8Array
+   * @returns 字符串
+   */
+  static unit8ArrayToStr(src: Uint8Array, encoding: buffer.BufferEncoding = 'utf-8'): string {
+    const textDecoder = util.TextDecoder.create(encoding, { ignoreBOM: true });
+    const result = textDecoder.decodeToString(src, { stream: true });
+    return result;
+  }
+
+
+  /**
+   * 16进制字符串转换unit8Array
+   * @param hexStr
+   * @returns
+   */
+  static strToHex(hexStr: string): Uint8Array {
+    return new Uint8Array(buffer.from(hexStr, 'hex').buffer);
+  }
+
+  /**
+   * 16进制unit8Array转字符串
+   * @param arr
+   * @returns
+   */
+  static hexToStr(arr: Uint8Array): string {
+    return buffer.from(arr).toString('hex');
+  }
+
+
+  /**
+   * Bytes转字符串
+   * @param bytes
+   * @returns
+   */
+  public static bytesToStr(bytes: Uint8Array): string {
+    let str = '';
+    for (let i = 0; i < bytes.length; i++) {
+      str += String.fromCharCode(bytes[i]);
+
+    }
+    return str;
+  }
+
+  /**
+   * 字符串转Bytes
+   * @param str
+   * @returns
+   */
+  public static strToBytes(str: string): Uint8Array {
+    let byteArray: Array<number> = [];
+    for (let i = 0; i < str.length; i++) {
+      byteArray.push(str.charCodeAt(i));
+    }
+    return new Uint8Array(byteArray);
+  }
+
+  /**
+   * 字符串转ArrayBuffer
+   * @param str
+   * @returns
+   */
+  static strToBuffer(src: string, encoding: buffer.BufferEncoding = 'utf-8'): ArrayBuffer {
+    const buf = buffer.from(src, encoding);
+    return buf.buffer;
+  }
+
+  /**
+   * ArrayBuffer转字符串
+   * @param str
+   * @returns
+   */
+  static bufferToStr(src: ArrayBuffer, encoding: buffer.BufferEncoding = 'utf-8'): string {
+    const buf = buffer.from(src);
+    const result = buf.toString(encoding);
+    return result;
+  }
+
+
+  /**
+   * ArrayBuffer转Uint8Array
+   * @param str
+   * @returns
+   */
+  static bufferToUint8Array(src: ArrayBuffer): Uint8Array {
+    return new Uint8Array(src);
+  }
+
+  /**
+   * Uint8Array转ArrayBuffer
+   * @param str
+   * @returns
+   */
+  static unit8ArrayToBuffer(src: Uint8Array): ArrayBuffer {
+    // return buffer.from(src).buffer;
+    return src.buffer as ArrayBuffer;
+  }
+
+
+  /**
+   * 获取系统错误码对应的详细信息
+   * @param errno 错误码
+   * @returns
+   */
+  static getErrnoToString(errno: number): string {
+    return util.errnoToString(errno);
+  }
+}

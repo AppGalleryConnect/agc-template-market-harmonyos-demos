@@ -1,0 +1,36 @@
+{
+  "routerMap": [
+    {
+      "name": "OrderView",
+      "pageSourceFile": "src/main/ets/pages/OrderView.ets",
+      "buildFunction": "OrderBuilder",
+      "data": {
+        "description": "this is OrderView"
+      }
+    },
+    {
+      "name": "TicketOrderDetail",
+      "pageSourceFile": "src/main/ets/pages/TicketOrderDetail.ets",
+      "buildFunction": "TicketOrderDetailBuilder",
+      "data": {
+        "description": "this is TicketOrderDetail"
+      }
+    },
+    {
+      "name": "CommodityOrderDetail",
+      "pageSourceFile": "src/main/ets/pages/CommodityOrderDetail.ets",
+      "buildFunction": "CommodityOrderDetailBuilder",
+      "data": {
+        "description": "this is CommodityOrderDetail"
+      }
+    },
+    {
+      "name": "PaySuccess",
+      "pageSourceFile": "src/main/ets/pages/PaySuccess.ets",
+      "buildFunction": "PaySuccessBuilder",
+      "data": {
+        "description": "this is CommodityOrderDetail"
+      }
+    }
+  ]
+}

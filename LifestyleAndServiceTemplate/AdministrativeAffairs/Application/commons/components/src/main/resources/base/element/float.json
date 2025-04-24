@@ -1,0 +1,468 @@
+{
+  "float": [
+    {
+      "name": "empty_width",
+      "value": "48vp"
+    },
+    {
+      "name": "empty_height",
+      "value": "48vp"
+    },
+    {
+      "name": "convenience_line_width",
+      "value": "2vp"
+    },
+    {
+      "name": "convenience_line_height",
+      "value": "20vp"
+    },
+    {
+      "name": "convenience_older_image_width",
+      "value": "48vp"
+    },
+    {
+      "name": "convenience_older_image_height",
+      "value": "48vp"
+    },
+    {
+      "name": "convenience_image_width",
+      "value": "32vp"
+    },
+    {
+      "name": "convenience_image_height",
+      "value": "32vp"
+    },
+    {
+      "name": "convenience_service_older_padding",
+      "value": "20vp"
+    },
+    {
+      "name": "convenience_service_padding",
+      "value": "12vp"
+    },
+    {
+      "name": "convenience_service_padding_top",
+      "value": "16vp"
+    },
+    {
+      "name": "convenience_service_margin",
+      "value": "12vp"
+    },
+    {
+      "name": "convenience_content_margin_bottom",
+      "value": "15vp"
+    },
+    {
+      "name": "convenience_content_margin_top",
+      "value": "20vp"
+    },
+    {
+      "name": "drug_inquiry_content_padding",
+      "value": "12vp"
+    },
+    {
+      "name": "drug_inquiry_padding",
+      "value": "12vp"
+    },
+    {
+      "name": "drug_inquiry_list_margin",
+      "value": "10vp"
+    },
+    {
+      "name": "hot_service_width",
+      "value": "39vp"
+    },
+    {
+      "name": "hot_service_height",
+      "value": "48vp"
+    },
+    {
+      "name": "hot_service_content_right",
+      "value": "12vp"
+    },
+    {
+      "name": "hot_service_content_left",
+      "value": "16vp"
+    },
+    {
+      "name": "hot_service_icon_width",
+      "value": "48vp"
+    },
+    {
+      "name": "hot_service_icon_height",
+      "value": "48vp"
+    },
+    {
+      "name": "hot_service_older_width",
+      "value": "150vp"
+    },
+    {
+      "name": "hot_service_older_height",
+      "value": "150vp"
+    },
+    {
+      "name": "hot_service_normal_height",
+      "value": "80vp"
+    },
+    {
+      "name": "institutions_hospital_width",
+      "value": "32vp"
+    },
+    {
+      "name": "institutions_hospital_height",
+      "value": "32vp"
+    },
+    {
+      "name": "institutions_navigation_height",
+      "value": "24vp"
+    },
+    {
+      "name": "institutions_navigation_width",
+      "value": "24vp"
+    },
+    {
+      "name": "institutions_navigation_icon_width",
+      "value": "15vp"
+    },
+    {
+      "name": "institutions_navigation_icon_height",
+      "value": "15vp"
+    },
+    {
+      "name": "institutions_call_icon_width",
+      "value": "12vp"
+    },
+    {
+      "name": "institutions_call_icon_height",
+      "value": "12vp"
+    },
+    {
+      "name": "institutions_location_icon_width",
+      "value": "12vp"
+    },
+    {
+      "name": "institutions_location_icon_height",
+      "value": "12vp"
+    },
+    {
+      "name": "institutions_appointment_width",
+      "value": "12vp"
+    },
+    {
+      "name": "institutions_appointment_height",
+      "value": "12vp"
+    },
+    {
+      "name": "institutions_service_padding_lr",
+      "value": "12vp"
+    },
+    {
+      "name": "institutions_service_padding_bt",
+      "value": "15vp"
+    },
+    {
+      "name": "institutions_service_sheet_width",
+      "value": "200vp"
+    },
+    {
+      "name": "pull_down_width",
+      "value": "15vp"
+    },
+    {
+      "name": "institutions_search_margin_lf",
+      "value": "16vp"
+    },
+    {
+      "name": "institutions_search_padding_bt",
+      "value": "8vp"
+    },
+    {
+      "name": "institutions_search_padding_lf",
+      "value": "8vp"
+    },
+    {
+      "name": "institutions_sheet_bottom",
+      "value": "20vp"
+    },
+    {
+      "name": "institutions_list_bottom",
+      "value": "12vp"
+    },
+    {
+      "name": "code_page_padding",
+      "value": "20vp"
+    },
+    {
+      "name": "code_qr_width",
+      "value": "200vp"
+    },
+    {
+      "name": "code_qr_height",
+      "value": "200vp"
+    },
+    {
+      "name": "code_logo_width",
+      "value": "24vp"
+    },
+    {
+      "name": "code_logo_height",
+      "value": "24vp"
+    },
+    {
+      "name": "code_margin_top",
+      "value": "20vp"
+    },
+    {
+      "name": "code_padding",
+      "value": "16vp"
+    },
+    {
+      "name": "medical_card_size",
+      "value": "44vp"
+    },
+    {
+      "name": "medical_link_size",
+      "value": "12vp"
+    },
+    {
+      "name": "medical_link_padding",
+      "value": "10vp"
+    },
+    {
+      "name": "medical_card_height",
+      "value": "116vp"
+    },
+    {
+      "name": "medical_card_padding",
+      "value": "12vp"
+    },
+    {
+      "name": "medical_balance_size",
+      "value": "16vp"
+    },
+    {
+      "name": "medical_content_height",
+      "value": "156vp"
+    },
+    {
+      "name": "medical_older_content_height",
+      "value": "200vp"
+    },
+    {
+      "name": "medical_content_padding",
+      "value": "12vp"
+    },
+    {
+      "name": "medical_record_icon_size",
+      "value": "40vp"
+    },
+    {
+      "name": "medical_record_size",
+      "value": "60vp"
+    },
+    {
+      "name": "person_card_padding",
+      "value": "12vp"
+    },
+    {
+      "name": "person_avatar_size",
+      "value": "40vp"
+    },
+    {
+      "name": "record_padding",
+      "value": "20vp"
+    },
+    {
+      "name": "record_margin",
+      "value": "10vp"
+    },
+    {
+      "name": "institutionsItem_name_margin",
+      "value": "20vp"
+    },
+    {
+      "name": "mine_avatar_margin_right",
+      "value": "12vp"
+    },
+    {
+      "name": "institutionsItem_name_padding",
+      "value": "10vp"
+    },
+    {
+      "name": "institutionsItem_name_border_size",
+      "value": "1vp"
+    },
+    {
+      "name": "record_sheet_margin",
+      "value": "20vp"
+    },
+    {
+      "name": "record_sheet_padding",
+      "value": "40vp"
+    },
+    {
+      "name": "record_tag_padding",
+      "value": "5vp"
+    },
+    {
+      "name": "record_tag_margin",
+      "value": "10vp"
+    },
+    {
+      "name": "service_title_safe_margin",
+      "value": "20vp"
+    },
+    {
+      "name": "older_model_size",
+      "value": "10vp"
+    },
+    {
+      "name": "none_size",
+      "value": "0vp"
+    },
+    {
+      "name": "call_icon_size",
+      "value": "26vp"
+    },
+    {
+      "name": "call_icon_padding",
+      "value": "10vp"
+    },
+    {
+      "name": "call_icon_margin_top",
+      "value": "24vp"
+    },
+    {
+      "name": "call_icon_margin_bottom",
+      "value": "16vp"
+    },
+    {
+      "name": "no_data_size",
+      "value": "48vp"
+    },
+    {
+      "name": "about_us_size",
+      "value": "96vp"
+    },
+    {
+      "name": "about_more_width",
+      "value": "14vp"
+    },
+    {
+      "name": "about_more_height",
+      "value": "7vp"
+    },
+    {
+      "name": "about_padding",
+      "value": "12vp"
+    },
+    {
+      "name": "about_margin",
+      "value": "68vp"
+    },
+    {
+      "name": "suggestion_textArea_width",
+      "value": "112vp"
+    },
+    {
+      "name": "suggestion_upload_size",
+      "value": "80vp"
+    },
+    {
+      "name": "suggestion_plus_size",
+      "value": "24vp"
+    },
+    {
+      "name": "suggestion_textInput_size",
+      "value": "40vp"
+    },
+    {
+      "name": "title_size",
+      "value": "24vp"
+    },
+    {
+      "name": "service_title_size",
+      "value": "24vp"
+    },
+    {
+      "name": "service_more",
+      "value": "14vp"
+    },
+    {
+      "name": "service_height",
+      "value": "40vp"
+    },
+    {
+      "name": "service_hot_image_size_older",
+      "value": "150vp"
+    },
+    {
+      "name": "service_hot_image_height_older",
+      "value": "78vp"
+    },
+    {
+      "name": "service_hot_image_height",
+      "value": "56vp"
+    },
+    {
+      "name": "service_hot_image_size",
+      "value": "80vp"
+    },
+    {
+      "name": "service_hot_arrow_size",
+      "value": "24vp"
+    },
+    {
+      "name": "person_card_width",
+      "value": "174vp"
+    },
+    {
+      "name": "person_card_height",
+      "value": "48vp"
+    },
+    {
+      "name": "person_card_logo_older",
+      "value": "48vp"
+    },
+    {
+      "name": "medical_security_title_margin",
+      "value": "24vp"
+    },
+    {
+      "name": "medical_security_version",
+      "value": "5vp"
+    },
+    {
+      "name": "convenient_service_margin_bottom",
+      "value": "36vp"
+    },
+    {
+      "name": "hot_service_icon_padding",
+      "value": "34vp"
+    },
+    {
+      "name": "institution_margin_top",
+      "value": "5vp"
+    },
+    {
+      "name": "module_filter_width",
+      "value": "235vp"
+    },
+    {
+      "name": "module_filter_height",
+      "value": "40vp"
+    },
+    {
+      "name": "mine_page_width",
+      "value": "328vp"
+    },
+    {
+      "name": "mine_page_height",
+      "value": "189vp"
+    },
+    {
+      "name": "mine_sheet_height",
+      "value": "253vp"
+    }
+  ]
+}

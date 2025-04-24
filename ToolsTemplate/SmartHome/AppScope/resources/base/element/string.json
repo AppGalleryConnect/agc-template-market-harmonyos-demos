@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "smart_home"
+    },
+    {
+      "name": "agcit_huawei_smart_home",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_smart_home",
+      "value": "industryTemplate"
+    }
+  ]
+}

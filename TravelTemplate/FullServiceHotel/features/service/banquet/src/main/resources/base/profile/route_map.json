@@ -1,0 +1,19 @@
+{
+  "routerMap": [
+    {
+      "name": "BanquetHotelListPage",
+      "pageSourceFile": "src/main/ets/pages/BanquetHotelListPage.ets",
+      "buildFunction": "banquetHotelListPageBuilder"
+    },
+    {
+      "name": "BanquetListPage",
+      "pageSourceFile": "src/main/ets/pages/BanquetListPage.ets",
+      "buildFunction": "banquetListPageBuilder"
+    },
+    {
+      "name": "BanquetInfoPage",
+      "pageSourceFile": "src/main/ets/pages/BanquetInfoPage.ets",
+      "buildFunction": "banquetInfoPageBuilder"
+    }
+  ]
+}

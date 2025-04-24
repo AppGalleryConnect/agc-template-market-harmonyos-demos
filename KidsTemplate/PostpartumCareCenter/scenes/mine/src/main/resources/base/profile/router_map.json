@@ -1,0 +1,102 @@
+{
+  "routerMap": [
+    {
+      "name": "StoreBookingRecordsPage",
+      "pageSourceFile": "src/main/ets/pages/StoreBookingRecordsPage.ets",
+      "buildFunction": "StoreBookingRecordsPageBuilder",
+      "data": {
+        "description": "this is store booking records rage"
+      }
+    },
+    {
+      "name": "ActivityBookingListPage",
+      "pageSourceFile": "src/main/ets/pages/ActivityBookingListPage.ets",
+      "buildFunction": "ActivityBookingListPageBuilder",
+      "data": {
+        "description": "this is activity booking records list page"
+      }
+    },
+    {
+      "name": "ActivityBookingDetailPage",
+      "pageSourceFile": "src/main/ets/pages/ActivityBookingDetailPage.ets",
+      "buildFunction": "ActivityBookingDetailPageBuilder",
+      "data": {
+        "description": "this is activity booking records detail page"
+      }
+    },
+    {
+      "name": "FeedbackPage",
+      "pageSourceFile": "src/main/ets/pages/FeedbackPage.ets",
+      "buildFunction": "FeedbackPageBuilder",
+      "data": {
+        "description": "this is feedback page"
+      }
+    },
+    {
+      "name": "PrivacyListPage",
+      "pageSourceFile": "src/main/ets/pages/privacy/PrivacyListPage.ets",
+      "buildFunction": "PrivacyListPageBuilder",
+      "data": {
+        "description": "this is privacy information list page"
+      }
+    },
+
+    {
+      "name": "PrivacyPolicyPage",
+      "pageSourceFile": "src/main/ets/pages/privacy/PrivacyPolicyPage.ets",
+      "buildFunction": "PrivacyPolicyPageBuilder",
+      "data": {
+        "description": "this is privacy policy page"
+      }
+    },
+
+    {
+      "name": "InfoSharingListPage",
+      "pageSourceFile": "src/main/ets/pages/privacy/InfoSharingListPage.ets",
+      "buildFunction": "InfoSharingListPageBuilder",
+      "data": {
+        "description": "this is information sharing list page"
+      }
+    },
+
+    {
+      "name": "PersonalInfoCollectListPage",
+      "pageSourceFile": "src/main/ets/pages/privacy/PersonalInfoCollectListPage.ets",
+      "buildFunction": "PersonalInfoCollectListPageBuilder",
+      "data": {
+        "description": "this is personal information collecting list page"
+      }
+    },
+    {
+      "name": "StoreBookingDetail",
+      "pageSourceFile": "src/main/ets/pages/StoreBookingDetail.ets",
+      "buildFunction": "StoreBookingDetailBuilder",
+      "data": {
+        "description": "this is store booking records detail page"
+      }
+    },
+    {
+      "name": "SubmitSuccessPage",
+      "pageSourceFile": "src/main/ets/pages/SubmitSuccessPage.ets",
+      "buildFunction": "SubmitSuccessPageBuilder",
+      "data": {
+        "description": "this is SubmitSuccess page"
+      }
+    },
+    {
+      "name": "QuickLoginPage",
+      "pageSourceFile": "src/main/ets/pages/QuickLoginPage.ets",
+      "buildFunction": "QuickLoginPageBuilder"
+    },
+    {
+      "name": "PersonalInformation",
+      "pageSourceFile": "src/main/ets/pages/PersonalInformation.ets",
+      "buildFunction": "PersonalInformationBuilder"
+    },
+    {
+      "name": "PrivacyAgreement",
+      "pageSourceFile": "src/main/ets/pages/privacy/PrivacyAgreement.ets",
+      "buildFunction": "PrivacyAgreementBuilder"
+    }
+  ]
+}

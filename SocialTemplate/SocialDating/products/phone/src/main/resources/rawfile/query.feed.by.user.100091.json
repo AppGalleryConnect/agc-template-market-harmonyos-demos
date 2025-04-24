@@ -1,0 +1,26 @@
+{
+  "ret": {
+    "retCode": 0,
+    "retMsg": "SUCCESS"
+  },
+  "page": {
+    "totalCount": 1,
+    "totalPages": 1,
+    "curPage": 1,
+    "pageSize": 10
+  },
+  "list": [
+    {
+      "feedId": 200012,
+      "uid": 100091,
+      "userNo": "100091",
+      "nickName": "奔跑的蜗牛",
+      "profilePictureUrl": "app.media.head_image_2",
+      "feedMsg": "灯塔",
+      "resourceUrl": [
+        "app.media.feed2_thumbnail"
+      ],
+      "creationDate": 1737600529000
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "shared_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "label"
+    },
+    {
+      "name": "permission_reason_location",
+      "value": "permission_reason_location"
+    },
+    {
+      "name": "permission_reason_vibrate",
+      "value": "permission_reason_vibrate"
+    },
+    {
+      "name": "agency_task",
+      "value": "agency"
+    },
+    {
+      "name": "attendance",
+      "value": "attendance"
+    },
+    {
+      "name": "schedule",
+      "value": "schedule"
+    },
+    {
+      "name": "mine",
+      "value": "mine"
+    },
+    {
+      "name": "PhoneFormAbility_desc",
+      "value": "form_description"
+    },
+    {
+      "name": "PhoneFormAbility_label",
+      "value": "form_label"
+    },
+    {
+      "name": "attendence_desc",
+      "value": "attendence_desc"
+    },
+    {
+      "name": "attendence_display_name",
+      "value": "attendence_display_name"
+    },
+    {
+      "name": "card_list_title",
+      "value": "card_list_title"
+    },
+    {
+      "name": "card_list_content",
+      "value": "Introduction"
+    },
+    {
+      "name": "servicecard_button_tip",
+      "value": "servicecard_button_tip"
+    },
+    {
+      "name": "servicecard_button_ongoing_tip",
+      "value": "servicecard_button_ongoing_tip"
+    },
+    {
+      "name": "servicecard_button_finished_tip",
+      "value": "servicecard_button_finished_tip"
+    },
+    {
+      "name": "permission_reason_keep_running",
+      "value": "permission_reason_keep_running"
+    },
+    {
+      "name": "firstTime",
+      "value": "firstTime"
+    },
+    {
+      "name": "lastTime",
+      "value": "lastTime"
+    }
+  ]
+}

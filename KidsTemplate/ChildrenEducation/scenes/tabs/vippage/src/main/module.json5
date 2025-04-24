@@ -1,0 +1,13 @@
+{
+  "module": {
+    "name": "vippage",
+    "type": "shared",
+    "routerMap": "$profile:router_map",
+    "description": "$string:shared_desc",
+    "deviceTypes": [
+      "phone"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": true
+  }
+}

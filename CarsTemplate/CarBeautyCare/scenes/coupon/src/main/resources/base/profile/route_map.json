@@ -1,0 +1,20 @@
+{
+  "routerMap": [
+    {
+      "name": "couponDetail",
+      "pageSourceFile": "src/main/ets/components/CouponDetail.ets",
+      "buildFunction": "CouponDetailPageBuilder",
+      "data": {
+        "description" : "this is CouponDetail"
+      }
+    },
+    {
+      "name": "myCouponList",
+      "pageSourceFile": "src/main/ets/components/MyCouponList.ets",
+      "buildFunction": "MyCouponListBuilder",
+      "data": {
+        "description" : "this is MyCouponList"
+      }
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "routerMap": [
+    {
+      "name": "appointmentView",
+      "pageSourceFile": "src/main/ets/components/AppointmentView.ets",
+      "buildFunction": "AppointmentViewBuilder",
+      "data": {
+        "description" : "this is AppointmentView"
+      }
+    },
+    {
+      "name": "myAppointment",
+      "pageSourceFile": "src/main/ets/components/MyAppointment.ets",
+      "buildFunction": "MyAppointmentBuilder",
+      "data": {
+        "description" : "this is MyAppointment"
+      }
+    },
+    {
+      "name": "appointSuccess",
+      "pageSourceFile": "src/main/ets/components/AppointSuccess.ets",
+      "buildFunction": "AppointSuccessBuilder",
+      "data": {
+        "description" : "this is AppointSuccess"
+      }
+    },
+    {
+      "name": "reservedCardList",
+      "pageSourceFile": "src/main/ets/components/ReservedCardList.ets",
+      "buildFunction": "ReservedCardListBuilder",
+      "data": {
+        "description" : "this is ReservedCardList"
+      }
+    }
+  ]
+}

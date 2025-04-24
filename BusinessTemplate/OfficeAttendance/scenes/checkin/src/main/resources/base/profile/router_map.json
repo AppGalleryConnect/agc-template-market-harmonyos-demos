@@ -1,0 +1,20 @@
+{
+  "routerMap": [
+    {
+      "name": "checkinHistoryDialog",
+      "pageSourceFile": "src/main/ets/checkin/components/CheckInHistory.ets",
+      "buildFunction": "checkinHistoryBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "checkinSettingsDialog",
+      "pageSourceFile": "src/main/ets/checkin/components/CheckInSettings.ets",
+      "buildFunction": "checkinSettingBuilder",
+      "data": {
+        "description": ""
+      }
+    }
+  ]
+}

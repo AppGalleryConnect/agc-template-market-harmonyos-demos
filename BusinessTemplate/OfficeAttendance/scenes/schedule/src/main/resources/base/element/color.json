@@ -1,0 +1,48 @@
+{
+  "color": [
+    {
+      "name": "start_window_background",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "button_background",
+      "value": "#007DFF"
+    },
+    {
+      "name": "window_background",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "orange",
+      "value": "#F76045"
+    },
+    {
+      "name": "font_color_gray",
+      "value": "#66000000"
+    },
+    {
+      "name": "black",
+      "value": "#000000"
+    },
+    {
+      "name": "purple",
+      "value": "#7A6FEB"
+    },
+    {
+      "name": "gray",
+      "value": "#808080"
+    },
+    {
+      "name": "date_picker_disappear",
+      "value": "#A0A0A0"
+    },
+    {
+      "name": "date_picker_text",
+      "value": "#888888"
+    },
+    {
+      "name": "sys_default_blue",
+      "value": "#3093FA"
+    }
+  ]
+}

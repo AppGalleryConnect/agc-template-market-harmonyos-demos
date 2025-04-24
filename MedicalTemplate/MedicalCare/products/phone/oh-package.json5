@@ -1,0 +1,18 @@
+{
+  "name": "phone",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "",
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "common": "file:../../common/common",
+    "patient": "file:../../features/patient",
+    "appointment": "file:../../features/appointment",
+    "notification": "file:../../features/notification",
+    "report": "file:../../features/report",
+    "personal": "file:../../features/personal"
+  },
+  "devDependencies": {},
+  "dynamicDependencies": {}
+}

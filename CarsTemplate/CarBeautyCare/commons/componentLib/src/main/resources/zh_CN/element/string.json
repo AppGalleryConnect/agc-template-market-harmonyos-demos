@@ -1,0 +1,24 @@
+{
+  "string": [
+    {
+      "name": "add_your_car",
+      "value": "添加您的爱车"
+    },
+    {
+      "name": "location_permission",
+      "value": "获取位置信息"
+    },
+    {
+      "name": "approximately_location_permission",
+      "value": "获取模糊位置信息"
+    },
+    {
+      "name": "shop_position",
+      "value": "店铺位置"
+    },
+    {
+      "name": "add_car",
+      "value": "添加爱车"
+    }
+  ]
+}

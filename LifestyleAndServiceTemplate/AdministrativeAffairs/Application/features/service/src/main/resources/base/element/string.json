@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "enter_service",
+      "value": "请输入服务事项"
+    },
+    {
+      "name": "no_service",
+      "value": "暂无此服务！"
+    },
+    {
+      "name": "service_title",
+      "value": "服务"
+    }
+  ]
+}

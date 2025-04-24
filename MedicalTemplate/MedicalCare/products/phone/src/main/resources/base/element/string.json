@@ -1,0 +1,32 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "医疗模板"
+    },
+    {
+      "name": "AppointmentStatusWidgetAbility_desc",
+      "value": "form_description"
+    },
+    {
+      "name": "AppointmentStatusWidgetAbility_label",
+      "value": "form_label"
+    },
+    {
+      "name": "AppointmentStatusWidget_desc",
+      "value": "展示最新的挂号信息"
+    },
+    {
+      "name": "AppointmentStatusWidget_display_name",
+      "value": "挂号信息"
+    }
+  ]
+}

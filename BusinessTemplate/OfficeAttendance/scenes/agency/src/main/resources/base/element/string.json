@@ -1,0 +1,128 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "label"
+    },
+    {
+      "name": "permission_reason_location",
+      "value": "permission_reason_location"
+    },
+    {
+      "name": "agency_task",
+      "value": "agency"
+    },
+    {
+      "name": "deadTime",
+      "value": "deadTime："
+    },
+    {
+      "name": "btn_confirm",
+      "value": "confirm"
+    },
+    {
+      "name": "new_agency_task_succ_tip",
+      "value": "success"
+    },
+    {
+      "name": "new_agency_title_tip",
+      "value": "title"
+    },
+    {
+      "name": "new_agency_desc_tip",
+      "value": "desc"
+    },
+    {
+      "name": "new_agency_time_tip",
+      "value": "select"
+    },
+    {
+      "name": "select_plan_time",
+      "value": "plan time"
+    },
+    {
+      "name": "setting_plan_time",
+      "value": "plan time"
+    },
+    {
+      "name": "attach",
+      "value": "attach"
+    },
+    {
+      "name": "select_add_attach",
+      "value": "add"
+    },
+    {
+      "name": "edit_agency_task",
+      "value": "edit agency"
+    },
+    {
+      "name": "agency_parent_tip",
+      "value": "parent："
+    },
+    {
+      "name": "agency_new_subtask",
+      "value": "subtask"
+    },
+    {
+      "name": "today",
+      "value": "today"
+    },
+    {
+      "name": "aagcit_huawei_office_attendance_agency",
+      "value": "1.0.0"
+    },
+    {
+      "name": "aagcittype_huawei_office_attendance_agency",
+      "value": "sceneTemplate"
+    },
+    {
+      "name": "new_success",
+      "value": "success"
+    },
+    {
+      "name": "edit_success",
+      "value": "success"
+    },
+    {
+      "name": "search_tip",
+      "value": "search"
+    },
+    {
+      "name": "agency_title_empty_tip",
+      "value": "please input"
+    },
+    {
+      "name": "delete_agency_title",
+      "value": "delete"
+    },
+    {
+      "name": "delete_agency_content",
+      "value": "delete"
+    },
+    {
+      "name": "no_agency",
+      "value": "no agency"
+    },
+    {
+      "name": "agcit_huawei_office_attendance_agency",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_office_attendance_agency",
+      "value": "sceneTemplate"
+    },
+    {
+      "name": "btn_save",
+      "value": "btn_save"
+    }
+  ]
+}

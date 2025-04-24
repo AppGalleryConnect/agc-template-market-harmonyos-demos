@@ -1,0 +1,48 @@
+{
+  "color": [
+    {
+      "name": "color_1",
+      "value": "#ff0000"
+    },
+    {
+      "name": "color_middleGrey",
+      "value": "#666666"
+    },
+    {
+      "name": "color_littleGrey",
+      "value": "#999999"
+    },
+    {
+      "name": "middleWhite",
+      "value": "#E0E0E0"
+    },
+    {
+      "name": "red",
+      "value": "#EE3B55"
+    },
+    {
+      "name": "white",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "orange",
+      "value": "#FF6600"
+    },
+    {
+      "name": "middle_yellow",
+      "value": "#FFF2DE"
+    },
+    {
+      "name": "little_grey",
+      "value": "#eee"
+    },
+    {
+      "name": "linerOne",
+      "value": "#D2E2F5"
+    },
+    {
+      "name": "linerTwo",
+      "value": "#F1F3F5"
+    }
+  ]
+}

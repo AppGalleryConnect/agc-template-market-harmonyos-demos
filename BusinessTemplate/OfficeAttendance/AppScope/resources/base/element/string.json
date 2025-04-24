@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "Office Attendance"
+    },
+    {
+      "name": "agcit_huawei_office_attendance",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_office_attendance",
+      "value": "industryTemplate"
+    },
+    {
+      "name": "agcitkid_huawei_office_attendance",
+      "value": "agcit_huawei_office_attendance_agency/1.0.0,agcit_huawei_office_attendance_schedule/1.0.0,agcit_huawei_office_attendance_checkin/1.0.0,agcit_huawei_office_attendance_account/1.0.0"
+    }
+  ]
+}

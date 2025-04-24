@@ -1,0 +1,28 @@
+{
+  "string": [
+    {
+      "name": "shared_desc",
+      "value": "description"
+    },
+    {
+      "name": "selected",
+      "value": "精选"
+    },
+    {
+      "name": "cartoon",
+      "value": "看动画"
+    },
+    {
+      "name": "english_zone",
+      "value": "英语乐园"
+    },
+    {
+      "name": "sing",
+      "value": "儿歌"
+    },
+    {
+      "name": "chinese",
+      "value": "学汉语"
+    }
+  ]
+}

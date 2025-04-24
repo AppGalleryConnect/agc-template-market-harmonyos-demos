@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "医疗模板"
+    },
+    {
+      "name": "agcit_huawei_medical_care",
+      "value": "2.0.0"
+    },
+    {
+      "name": "agcittype_huawei_medical_care",
+      "value": "industryTemplate"
+    }
+  ]
+}

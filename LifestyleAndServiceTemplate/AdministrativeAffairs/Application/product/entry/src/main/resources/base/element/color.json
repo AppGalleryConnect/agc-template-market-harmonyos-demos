@@ -1,0 +1,32 @@
+{
+  "color": [
+    {
+      "name": "start_window_background",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "tab_icon_active",
+      "value": "#007DFF"
+    },
+    {
+      "name": "tab_icon_grey",
+      "value": "#333333"
+    },
+    {
+      "name": "information_title_font",
+      "value": "#E6000000"
+    },
+    {
+      "name": "title_font",
+      "value": "#E5FFFFFF"
+    },
+    {
+      "name": "item_text_font",
+      "value": "#99000000"
+    },
+    {
+      "name": "image_info_background",
+      "value": "#FFFFFF"
+    }
+  ]
+}

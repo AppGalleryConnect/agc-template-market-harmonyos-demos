@@ -1,0 +1,36 @@
+{
+  "module": {
+    "name": "commonlib",
+    "type": "har",
+    "installationFree": true,
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ],
+    "requestPermissions": [
+      {
+        "name": 'ohos.permission.INTERNET'
+      },
+      {
+        "name": 'ohos.permission.APPROXIMATELY_LOCATION',
+        "reason": '$string:permission_reason_location',
+        "usedScene": {
+          "abilities": [
+            "EntryAbility"
+          ],
+          "when": "inuse"
+        }
+      },
+      {
+        "name": 'ohos.permission.LOCATION',
+        "reason": '$string:permission_reason_location',
+        "usedScene": {
+          "abilities": [
+            "EntryAbility"
+          ],
+          "when": "inuse"
+        }
+      }
+    ]
+  }
+}

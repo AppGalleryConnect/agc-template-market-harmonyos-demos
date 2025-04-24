@@ -1,0 +1,25 @@
+{
+  "color": [
+    {
+      "name": "RedConfirm",
+      "value": "#ff0000"
+    },
+    {
+      "name": "lightRed",
+      "value": "#EE3B55"
+    },
+    {
+      "name": "lightGrey",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "darkGrey",
+      "value": "#666"
+    },
+    {
+      "name": "lightWhite",
+      "value": "#eee"
+    }
+
+  ]
+}

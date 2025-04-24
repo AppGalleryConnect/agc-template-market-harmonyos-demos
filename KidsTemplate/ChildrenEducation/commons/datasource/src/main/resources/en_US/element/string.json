@@ -1,0 +1,24 @@
+{
+  "string": [
+    {
+      "name": "shared_desc",
+      "value": "description"
+    },
+    {
+      "name": "cloud_datastore",
+      "value": "https://agc-storage-drcn.platform.dbankcloud.cn/"
+    },
+    {
+      "name": "videoUrlOne",
+      "value": "https://consumer.huawei.com/content/dam/huawei-cbg-site/cn/mkt/pdp/phones/ah-ultra/video/kv-intro-pop.mp4"
+    },
+    {
+      "name": "videoUrlTwo",
+      "value": "https://consumer.huawei.com/content/dam/huawei-cbg-site/cn/mkt/pdp/phones/ah-ultra/video/design-intro-pop.mp4"
+    },
+    {
+      "name": "audioUrl",
+      "value": "https://sis-sample-audio.obs.cn-north-1.myhuaweicloud.com/16k16bit.mp3"
+    }
+  ]
+}

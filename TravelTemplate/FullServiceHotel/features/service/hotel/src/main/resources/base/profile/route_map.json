@@ -1,0 +1,24 @@
+{
+  "routerMap": [
+    {
+      "name": "HotelListPage",
+      "pageSourceFile": "src/main/ets/pages/HotelListPage.ets",
+      "buildFunction": "hotelListPageBuilder"
+    },
+    {
+      "name": "RoomListPage",
+      "pageSourceFile": "src/main/ets/pages/RoomListPage.ets",
+      "buildFunction": "roomListPageBuilder"
+    },
+    {
+      "name": "RoomInfoPage",
+      "pageSourceFile": "src/main/ets/pages/RoomInfoPage.ets",
+      "buildFunction": "roomInfoPageBuilder"
+    },
+    {
+      "name": "HotelOrderPage",
+      "pageSourceFile": "src/main/ets/pages/HotelOrderPage.ets",
+      "buildFunction": "hotelOrderPageBuilder"
+    }
+  ]
+}

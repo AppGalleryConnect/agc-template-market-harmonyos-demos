@@ -1,0 +1,60 @@
+{
+  "routerMap": [
+    {
+      "name": "AdviceFeedbackPage",
+      "pageSourceFile": "src/main/ets/pages/AdviceFeedbackPage.ets",
+      "buildFunction": "AdviceFeedbackPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "HelpCenterPage",
+      "pageSourceFile": "src/main/ets/pages/HelpCenterPage.ets",
+      "buildFunction": "HelpCenterPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "PersonalCenterPage",
+      "pageSourceFile": "src/main/ets/pages/PersonalCenterPage.ets",
+      "buildFunction": "PersonalCenterPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "AboutUsPage",
+      "pageSourceFile": "src/main/ets/pages/AboutUsPage.ets",
+      "buildFunction": "AboutUsPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "PrivacyPolicyPage",
+      "pageSourceFile": "src/main/ets/pages/PrivacyPolicyPage.ets",
+      "buildFunction": "PrivacyPolicyPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "TermsOfServicePage",
+      "pageSourceFile": "src/main/ets/pages/TermsOfServicePage.ets",
+      "buildFunction": "TermsOfServicePageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "QuickLoginPage",
+      "pageSourceFile": "src/main/ets/pages/QuickLoginPage.ets",
+      "buildFunction": "QuickLoginPageBuilder",
+      "data": {
+        "description": ""
+      }
+    }
+  ]
+}

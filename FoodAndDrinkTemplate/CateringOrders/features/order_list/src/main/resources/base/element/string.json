@@ -1,0 +1,164 @@
+{
+  "string": [
+    {
+      "name": "shared_desc",
+      "value": "description"
+    },
+    {
+      "name": "Header_height",
+      "value": "100vp"
+    },
+    {
+      "name": "title_font_size",
+      "value": "18vp"
+    },
+    {
+      "name": "one_more_order",
+      "value": "再来一单"
+    },
+    {
+      "name": "pay",
+      "value": "付款"
+    },
+    {
+      "name": "pay_type",
+      "value": "支付方式"
+    },
+    {
+      "name": "real_pay",
+      "value": "实付"
+    },
+    {
+      "name": "order_time",
+      "value": "下单时间"
+    },
+    {
+      "name": "order_id",
+      "value": "订单号"
+    },
+    {
+      "name": "table_info",
+      "value": "座位信息"
+    },
+    {
+      "name": "order_type",
+      "value": "就餐方式"
+    },
+    {
+      "name": "total_num",
+      "value": "共%s件"
+    },
+    {
+      "name": "order_id_label",
+      "value": "订单号：%s"
+    },
+    {
+      "name": "pick_good_id",
+      "value": "取餐号: "
+    },
+    {
+      "name": "order_not_exist",
+      "value": "订单不存在。"
+    },
+    {
+      "name": "cancel_failed",
+      "value": "取消失败"
+    },
+    {
+      "name": "cancel_success",
+      "value": "取消成功"
+    },
+    {
+      "name": "to_be_paid",
+      "value": "待支付"
+    },
+    {
+      "name": "please",
+      "value": "请在"
+    },
+    {
+      "name": "minute_params",
+      "value": "%s分"
+    },
+    {
+      "name": "second_params",
+      "value": "%s秒"
+    },
+    {
+      "name": "timeout_cancel",
+      "value": "内支付，超时订单将取消"
+    },
+    {
+      "name": "completed",
+      "value": "已完成"
+    },
+    {
+      "name": "seat_info",
+      "value": "座位信息: "
+    },
+    {
+      "name": "order_id_prefix",
+      "value": "订单号："
+    },
+    {
+      "name": "canceled",
+      "value": "已取消"
+    },
+    {
+      "name": "use_close_order",
+      "value": "用户已关闭订单"
+    },
+    {
+      "name": "copy",
+      "value": "复制"
+    },
+    {
+      "name": "order_list",
+      "value": "订单列表"
+    },
+    {
+      "name": "not_complete",
+      "value": "未完成"
+    },
+    {
+      "name": "other",
+      "value": "其他"
+    },
+    {
+      "name": "paid",
+      "value": "已付款"
+    },
+    {
+      "name": "refund",
+      "value": "退款"
+    },
+    {
+      "name": "contact_store",
+      "value": "联系商家"
+    },
+    {
+      "name": "delete_order",
+      "value": "删除订单"
+    },
+    {
+      "name": "delete_confirm",
+      "value": "确认删除吗？"
+    },
+    {
+      "name": "order_canceled",
+      "value": "订单已取消"
+    },
+    {
+      "name": "order_detail",
+      "value": "订单详情"
+    },
+    {
+      "name": "order_statue_error",
+      "value": "订单状态已刷新，请重新操作"
+    },
+    {
+      "name": "order_completed",
+      "value": "订单已完成"
+    }
+  ]
+}

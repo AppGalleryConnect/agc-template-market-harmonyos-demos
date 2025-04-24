@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "social_dating"
+    },
+    {
+      "name": "agcit_huawei_social_dating",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_social_dating",
+      "value": "industryTemplate"
+    }
+  ]
+}

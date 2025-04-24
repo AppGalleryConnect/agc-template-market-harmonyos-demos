@@ -1,0 +1,21 @@
+{
+  "routerMap": [
+    {
+      "name": "ActivityDetail",
+      "pageSourceFile": "src/main/ets/pages/ActivityDetailPage.ets",
+      "buildFunction": "ActivityDetailPageBuilder",
+      "data": {
+        "description": "this is ActivityDetailPageBuilder"
+      }
+    },
+    {
+      "name": "MyActivitiesPage",
+      "pageSourceFile": "src/main/ets/pages/MyActivitiesPage.ets",
+      "buildFunction": "MyActivitiesPageBuilder",
+      "data": {
+        "description": "this is MyActivitiesPageBuilder"
+      }
+    },
+
+  ]
+}

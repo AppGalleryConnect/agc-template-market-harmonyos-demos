@@ -1,0 +1,32 @@
+{
+  "color": [
+    {
+      "name": "dialog_color",
+      "value": "#0a59f7"
+    },
+    {
+      "name": "dialog_sheet_color",
+      "value": "#1296db"
+    },
+    {
+      "name": "color_grey",
+      "value": "#f1f2f3"
+    },
+    {
+      "name": "cancel_color",
+      "value": "#0a59f7"
+    },
+    {
+      "name": "font_secondary",
+      "value": "#99000000"
+    },
+    {
+      "name": "font_on_secondary",
+      "value": "#99FFFFFF"
+    },
+    {
+      "name": "mine_drive_color",
+      "value": "#ffe9f0f0"
+    }
+  ]
+}

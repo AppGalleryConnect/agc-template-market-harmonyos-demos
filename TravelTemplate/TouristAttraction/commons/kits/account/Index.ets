@@ -1,0 +1,1 @@
+export { AccountUtil } from './src/main/ets/utils/AccountUtil'

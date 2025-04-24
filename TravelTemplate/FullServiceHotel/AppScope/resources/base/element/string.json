@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "星级酒店模板"
+    },
+    {
+      "name": "agcit_huawei_full_service_hotel",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_full_service_hotel",
+      "value": "industryTemplate"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "module": {
+    "name": "network_test",
+    "type": "feature",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": true
+  }
+}

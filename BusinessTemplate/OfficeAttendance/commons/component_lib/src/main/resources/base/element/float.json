@@ -1,0 +1,44 @@
+{
+  "float": [
+    {
+      "name": "calendar_title_font_size",
+      "value": "12"
+    },
+    {
+      "name": "calendar_title_font_opacity",
+      "value": "0.6"
+    },
+    {
+      "name": "calendar_content_font_opacity",
+      "value": "0.9"
+    },
+    {
+      "name": "calendar_before_date_font_opacity",
+      "value": "0.4"
+    },
+    {
+      "name": "calendar_today_font_opacity",
+      "value": "1"
+    },
+    {
+      "name": "calendar_weekend_font_opacity",
+      "value": "0.4"
+    },
+    {
+      "name": "content_size",
+      "value": "36"
+    },
+    {
+      "name": "height_or_line_height",
+      "value": "16"
+    },
+    {
+      "name": "day_button_radius",
+      "value": "10"
+    },
+    {
+      "name": "schedule_border_radius",
+      "value": "23"
+    }
+  ]
+}

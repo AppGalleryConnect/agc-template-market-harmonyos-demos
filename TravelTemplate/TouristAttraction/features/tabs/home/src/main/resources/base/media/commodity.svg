@@ -1,0 +1,32 @@
+<svg width="48.000000" height="49.997559" viewBox="0 0 48 49.9976" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs>
+		<filter id="filter_7_11549_dd" x="1.000854" y="0.000000" width="46.000000" height="45.988770" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+			<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+			<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+			<feOffset dx="0" dy="4"/>
+			<feGaussianBlur stdDeviation="3"/>
+			<feComposite in2="hardAlpha" operator="out" k2="-1" k3="1"/>
+			<feColorMatrix type="matrix" values="0 0 0 0 0.39216 0 0 0 0 0.73333 0 0 0 0 0.36078 0 0 0 0.5 0"/>
+			<feBlend mode="normal" in2="BackgroundImageFix" result="effect_dropShadow_1"/>
+			<feBlend mode="normal" in="SourceGraphic" in2="effect_dropShadow_1" result="shape"/>
+		</filter>
+		<linearGradient x1="24.000000" y1="1.997559" x2="24.000000" y2="49.997559" id="paint_linear_7_11404_0" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#64BB5C" stop-opacity="0.000000"/>
+			<stop offset="1.000000" stop-color="#64BB5C" stop-opacity="0.200000"/>
+		</linearGradient>
+	</defs>
+	<circle id="椭圆 22" cx="24.000000" cy="25.997559" r="24.000000" fill="url(#paint_linear_7_11404_0)" fill-opacity="1.000000"/>
+	<g filter="url(#filter_7_11549_dd)">
+		<path id="path" d="M37.99 14.79L37.99 28.78C37.99 31.1 36.11 32.98 33.79 32.98L14.2 32.98C11.88 32.98 10 31.1 10 28.78L10 14.79L37.99 14.79ZM32.66 24.97L28.18 24.97C27.41 24.97 26.78 25.6 26.78 26.37C26.78 27.15 27.41 27.77 28.18 27.77L32.66 27.77C33.43 27.77 34.06 27.15 34.06 26.37C34.06 25.6 33.43 24.97 32.66 24.97Z" fill="#64BB5C" fill-opacity="1.000000" fill-rule="evenodd"/>
+		<path id="path" d="M37.99 28.78C37.99 31.1 36.11 32.98 33.79 32.98L14.2 32.98C11.88 32.98 10 31.1 10 28.78L10 14.79L37.99 14.79L37.99 28.78ZM28.18 24.97C27.41 24.97 26.78 25.6 26.78 26.37C26.78 27.15 27.41 27.77 28.18 27.77L32.66 27.77C33.43 27.77 34.06 27.15 34.06 26.37C34.06 25.6 33.43 24.97 32.66 24.97L28.18 24.97Z" stroke="#000000" stroke-opacity="0" stroke-width="2.036474"/>
+		<g opacity="0.400000">
+			<path id="path" d="M31.54 5C33.16 5 34.65 5.88 35.42 7.3L37.63 11.36C37.84 11.74 37.96 12.16 37.98 12.58L10.02 12.58C10.07 12.19 10.2 11.81 10.4 11.47L12.88 7.19C13.67 5.83 15.13 5 16.7 5L31.54 5Z" fill="#64BB5C" fill-opacity="1.000000" fill-rule="evenodd"/>
+			<path id="path" d="M35.42 7.3L37.63 11.36C37.84 11.74 37.96 12.16 37.98 12.58L10.02 12.58C10.07 12.19 10.2 11.81 10.4 11.47L12.88 7.19C13.67 5.83 15.13 5 16.7 5L31.54 5C33.16 5 34.65 5.88 35.42 7.3Z" stroke="#000000" stroke-opacity="0" stroke-width="2.036474"/>
+		</g>
+		<path id="path" d="M38 12.85L38 15.48L10 15.48L10 13.08C10 12.82 10.03 12.56 10.1 12.31L37.95 12.31C37.98 12.49 38 12.67 38 12.85Z" fill="#64BB5C" fill-opacity="1.000000" fill-rule="evenodd"/>
+		<path id="path" d="M38 15.48L10 15.48L10 13.08C10 12.82 10.03 12.56 10.1 12.31L37.95 12.31C37.98 12.49 38 12.67 38 12.85L38 15.48Z" stroke="#000000" stroke-opacity="0" stroke-width="2.036474"/>
+	</g>
+</svg>

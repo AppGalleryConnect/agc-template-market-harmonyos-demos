@@ -1,0 +1,68 @@
+{
+  "string": [
+    {
+      "name": "margin_s",
+      "value": "4vp"
+    },
+    {
+      "name": "margin_xs",
+      "value": "8vp"
+    },
+    {
+      "name": "margin_m",
+      "value": "12vp"
+    },
+    {
+      "name": "margin_xm",
+      "value": "16vp"
+    },
+    {
+      "name": "margin_l",
+      "value": "24vp"
+    },
+    {
+      "name": "margin_xl",
+      "value": "38vp"
+    },
+    {
+      "name": "margin_xxl",
+      "value": "44vp"
+    },
+    {
+      "name": "padding_s",
+      "value": "4vp"
+    },
+    {
+      "name": "padding_xs",
+      "value": "8vp"
+    },
+    {
+      "name": "padding_m",
+      "value": "12vp"
+    },
+    {
+      "name": "padding_xm",
+      "value": "16vp"
+    },
+    {
+      "name": "padding_l",
+      "value": "24vp"
+    },
+    {
+      "name": "padding_xl",
+      "value": "44vp"
+    },
+    {
+      "name": "shadow_xs",
+      "value": "8vp"
+    },
+    {
+      "name": "shadow_s",
+      "value": "16vp"
+    },
+    {
+      "name": "shadow_m",
+      "value": "24vp"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "string": [
+    {
+      "name": "shared_desc",
+      "value": "description"
+    },
+    {
+      "name": "purchase",
+      "value": "立即购买"
+    },
+    {
+      "name": "upgrade_vip",
+      "value": "升级VIP"
+    },
+    {
+      "name": "learning_vip",
+      "value": "了解大会员"
+    },
+    {
+      "name": "vip_agreement",
+      "value": "《会员服务协议》"
+    },
+    {
+      "name": "read_before_purchase",
+      "value": "购买前请阅读并同意"
+    }
+  ]
+}

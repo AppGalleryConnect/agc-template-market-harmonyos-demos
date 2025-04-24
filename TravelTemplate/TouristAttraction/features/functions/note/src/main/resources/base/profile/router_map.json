@@ -1,0 +1,20 @@
+{
+  "routerMap": [
+    {
+      "name": "Notes",
+      "pageSourceFile": "src/main/ets/pages/Notes.ets",
+      "buildFunction": "NotesBuilder",
+      "data": {
+        "description": "this is HomeView"
+      }
+    },
+    {
+      "name": "NoteDetail",
+      "pageSourceFile": "src/main/ets/pages/NoteDetail.ets",
+      "buildFunction": "NoteDetailBuilder",
+      "data": {
+        "description": "this is HomeView"
+      }
+    }
+  ]
+}

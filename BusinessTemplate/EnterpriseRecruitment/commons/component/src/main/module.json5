@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "component",
+    "type": "har",
+    "description": "$string:shared_desc",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

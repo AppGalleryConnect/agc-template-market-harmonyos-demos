@@ -1,0 +1,1 @@
+export { ScheduleView } from './src/main/ets/schedule/ScheduleView';

@@ -1,0 +1,24 @@
+{
+  "float": [
+    {
+      "name": "font_size",
+      "value": "14fp"
+    },
+    {
+      "name": "title_immersive_font_size",
+      "value": "14fp"
+    },
+    {
+      "name": "detail_immersive_font_size",
+      "value": "12fp"
+    },
+    {
+      "name": "column_padding",
+      "value": "12vp"
+    },
+    {
+      "name": "item_margin_top",
+      "value": "2vp"
+    }
+  ]
+}

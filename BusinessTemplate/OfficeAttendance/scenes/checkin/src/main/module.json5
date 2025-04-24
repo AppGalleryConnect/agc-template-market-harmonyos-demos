@@ -1,0 +1,13 @@
+{
+  "module": {
+    "name": "checkin",
+    "type": "har",
+    "description": "$string:shared_desc",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ],
+    "installationFree": true,
+    "routerMap": "$profile:router_map"
+  }
+}

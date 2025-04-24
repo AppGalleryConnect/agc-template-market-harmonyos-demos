@@ -1,0 +1,17 @@
+{
+  "name": "entry",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "",
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "@hw-agconnect/ui-base": "1.0.1",
+    "commonlib": "file:../commons/commonlib",
+    "home": "file:../features/tab/home",
+    "mine": "file:../features/tab/mine",
+    "vip": "file:../features/tab/vip",
+    "network": "file:../commons/network"
+  }
+}
+

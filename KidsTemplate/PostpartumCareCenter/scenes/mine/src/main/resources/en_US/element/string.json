@@ -1,0 +1,152 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "booking_store_title",
+      "value": "booking_store_title"
+    },
+    {
+      "name": "booking_success",
+      "value": "booking_success"
+    },
+    {
+      "name": "booking_cancel",
+      "value": "booking_cancel"
+    },
+    {
+      "name": "booking_info",
+      "value": "booking_info"
+    },
+    {
+      "name": "booking_info_store",
+      "value": "booking_info_store"
+    },
+    {
+      "name": "booking_info_username",
+      "value": "booking_info_username"
+    },
+    {
+      "name": "booking_info_telephone",
+      "value": "booking_info_telephone"
+    },
+    {
+      "name": "booking_info_store_project",
+      "value": "booking_info_store_project"
+    },
+    {
+      "name": "booking_info_date",
+      "value": "booking_info_date"
+    },
+    {
+      "name": "booking_info_address",
+      "value": "booking_info_address"
+    },
+    {
+      "name": "booking_cancel_button",
+      "value": "booking_cancel_button"
+    },
+    {
+      "name": "back",
+      "value": "back"
+    },
+    {
+      "name": "for_more_detail",
+      "value": "for_more_detail"
+    },
+    {
+      "name": "disassociate",
+      "value": "disassociate"
+    },
+    {
+      "name": "activity_info",
+      "value": "activity_info"
+    },
+    {
+      "name": "activity_name",
+      "value": "activity_name"
+    },
+    {
+      "name": "activity_booking_phone",
+      "value": "activity_booking_phone"
+    },
+    {
+      "name": "activity_address",
+      "value": "activity_address"
+    },
+    {
+      "name": "title_mine",
+      "value": "title_mine"
+    },
+    {
+      "name": "agcit_huawei_postpartum_care_center_mine",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_postpartum_care_center_mine",
+      "value": "sceneTemplate"
+    },
+    {
+      "name": "agcitkid_huawei_postpartum_care_center_mine",
+      "value": "agcit_huawei_postpartum_care_center_components/1.0.0,agcit_huawei_postpartum_care_center_utils/1.0.0"
+    },
+    {
+      "name": "app_user_agreement",
+      "value": "app_user_agreement"
+    },
+    {
+      "name": "app_privacy_policy",
+      "value": "app_privacy_policy"
+    },
+    {
+      "name": "huaweiId_user_authentication_protocol",
+      "value": "huaweiId_user_authentication_protocol"
+    },
+    {
+      "name": "and",
+      "value": "and"
+    },
+    {
+      "name": "end",
+      "value": "end"
+    },
+    {
+      "name": "read_and_agree",
+      "value": "read_and_agree"
+    },
+    {
+      "name": "hwid_no_internet_connect",
+      "value": "hwid_no_internet_connect"
+    },
+    {
+      "name": "bind_huaweiId_number",
+      "value": "bind_huaweiId_number"
+    },
+    {
+      "name": "read_and_agree_protocol",
+      "value": "read_and_agree_protocol"
+    },
+    {
+      "name": "get_mobile_number_error",
+      "value": "get_mobile_number_error"
+    },
+    {
+      "name": "avatar",
+      "value": "avatar"
+    },
+    {
+      "name": "nickName",
+      "value": "nickName"
+    },
+    {
+      "name": "log_out",
+      "value": "log_out"
+    },
+    {
+      "name": "privacyAgreementPath",
+      "value": "https://privacy.consumer.huawei.com/legal/id/authentication-terms.htm?code=CN&language=zh-CN"
+    }
+  ]
+}

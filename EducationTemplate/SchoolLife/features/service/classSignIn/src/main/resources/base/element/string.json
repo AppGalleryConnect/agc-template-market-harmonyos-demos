@@ -1,0 +1,48 @@
+{
+  "string": [
+    {
+      "name": "shared_desc",
+      "value": "description"
+    },
+    {
+      "name": "class_sign_in",
+      "value": "课堂签到"
+    },
+    {
+      "name": "input_sign_code",
+      "value": "点击输入四位数签到码"
+    },
+    {
+      "name": "notes",
+      "value": "说明："
+    },
+    {
+      "name": "sign_in_tip_1",
+      "value": "1、正确输入任课老师公布的四位数签到码"
+    },
+    {
+      "name": "sign_in_tip_2",
+      "value": "2、未签到成功的同学，请找老师补签"
+    },
+    {
+      "name": "confirm_sign_in",
+      "value": "确定"
+    },
+    {
+      "name": "permission_reason_location",
+      "value": "获取位置信息"
+    },
+    {
+      "name": "verify_code_error_tips",
+      "value": "请输入正确的签到码"
+    },
+    {
+      "name": "sign_in_success",
+      "value": "签到成功"
+    },
+    {
+      "name": "signing",
+      "value": "正在签到..."
+    }
+  ]
+}

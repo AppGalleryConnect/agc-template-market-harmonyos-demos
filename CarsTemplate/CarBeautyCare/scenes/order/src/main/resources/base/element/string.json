@@ -1,0 +1,80 @@
+{
+  "string": [
+    {
+      "name": "phone_example",
+      "value": "18000000000"
+    },
+    {
+      "name": "car_example",
+      "value": "Car_example"
+    },
+    {
+      "name": "beauty_service",
+      "value": "Beauty_service"
+    },
+    {
+      "name": "order_price",
+      "value": "Order_price"
+    },
+    {
+      "name": "payment_required",
+      "value": "Payment_required"
+    },
+    {
+      "name": "renminbi",
+      "value": "Renminbi"
+    },
+    {
+      "name": "fiveHundred",
+      "value": "FiveHundred"
+    },
+    {
+      "name": "totalDiscount",
+      "value": "TotalDiscount"
+    },
+    {
+      "name": "orderSubmit",
+      "value": "OrderSubmit"
+    },
+    {
+      "name": "zero",
+      "value": "Zero"
+    },
+    {
+      "name": "order_confirm",
+      "value": "Order_confirm"
+    },
+    {
+      "name": "total",
+      "value": "Total"
+    },
+    {
+      "name": "pending_pay",
+      "value": "Pending_pay"
+    },
+    {
+      "name": "canceled",
+      "value": "Canceled"
+    },
+    {
+      "name": "zunjie_maintain",
+      "value": "Zunjie_maintain"
+    },
+    {
+      "name": "closed",
+      "value": "Closed"
+    },
+    {
+      "name": "twoService",
+      "value": "TwoService"
+    },
+    {
+      "name": "good_deal",
+      "value": "Good_deal"
+    },
+    {
+      "name": "noorder",
+      "value": "Noorder"
+    }
+  ]
+}

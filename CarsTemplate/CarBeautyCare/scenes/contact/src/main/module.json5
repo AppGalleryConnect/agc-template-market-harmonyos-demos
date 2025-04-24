@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "contact",
+    "type": "har",
+    "deviceTypes": [
+      "default"
+    ],
+    "routerMap": "$profile:route_map"
+  }
+}

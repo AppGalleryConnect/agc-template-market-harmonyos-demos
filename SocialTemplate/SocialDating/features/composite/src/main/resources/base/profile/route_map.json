@@ -1,0 +1,19 @@
+{
+  "routerMap": [
+    {
+      "name": "Personal",
+      "pageSourceFile": "src/main/ets/pages/Personal.ets",
+      "buildFunction": "PersonalPageBuilder"
+    },
+    {
+      "name": "ActionSummaryPage",
+      "pageSourceFile": "src/main/ets/pages/ActionSummaryPage.ets",
+      "buildFunction": "ActionSummaryPageBuilder"
+    },
+    {
+      "name": "Home",
+      "pageSourceFile": "src/main/ets/pages/Home.ets",
+      "buildFunction": "HomePageBuilder"
+    }
+  ]
+}

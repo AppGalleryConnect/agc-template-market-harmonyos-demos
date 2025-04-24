@@ -1,0 +1,14 @@
+{
+  "name": "service-list",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A simple example of a cloud function with an http trigger, returns a random UUID.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.9"
+  }
+}

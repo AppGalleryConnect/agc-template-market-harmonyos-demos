@@ -1,0 +1,44 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module_desc"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "EntryAbility_desc"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "EntryAbility_label"
+    },
+    {
+      "name": "EntryFormAbility_desc",
+      "value": "EntryFormAbility_desc"
+    },
+    {
+      "name": "EntryFormAbility_label",
+      "value": "EntryFormAbility_label"
+    },
+    {
+      "name": "permission_reason_location",
+      "value": "permission_reason_location"
+    },
+    {
+      "name": "permission_reason_read_calendar",
+      "value": "permission_reason_read_calendar"
+    },
+    {
+      "name": "permission_reason_write_calendar",
+      "value": "permission_reason_write_calendar"
+    },
+    {
+      "name": "PhoneFormAbility_desc",
+      "value": "PhoneFormAbility_desc"
+    },
+    {
+      "name": "PhoneFormAbility_label",
+      "value": "PhoneFormAbility_label"
+    }
+  ]
+}

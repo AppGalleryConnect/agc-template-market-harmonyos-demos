@@ -1,0 +1,60 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "title_home",
+      "value": "首页"
+    },
+    {
+      "name": "title_sub_service",
+      "value": "品质服务"
+    },
+    {
+      "name": "title_sub_booking",
+      "value": "预约参观"
+    },
+    {
+      "name": "title_sub_all_store",
+      "value": "所有门店"
+    },
+    {
+      "name": "service_maincare",
+      "value": "专业护理"
+    },
+    {
+      "name": "service_food",
+      "value": "月子膳食"
+    },
+    {
+      "name": "service_guide",
+      "value": "孕期指南"
+    },
+    {
+      "name": "service_mumcare",
+      "value": "产后恢复"
+    },
+    {
+      "name": "service_kids",
+      "value": "育婴黑科技"
+    },
+    {
+      "name": "service_env",
+      "value": "环境安全"
+    },
+    {
+      "name": "agcit_huawei_postpartum_care_center_home",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_postpartum_care_center_home",
+      "value": "sceneTemplate"
+    },
+    {
+      "name": "agcitkid_huawei_postpartum_care_center_home",
+      "value": "agcit_huawei_postpartum_care_center_components/1.0.0,agcit_huawei_postpartum_care_center_utils/1.0.0"
+    }
+  ]
+}

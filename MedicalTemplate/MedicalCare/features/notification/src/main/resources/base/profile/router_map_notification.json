@@ -1,0 +1,12 @@
+{
+  "routerMap": [
+    {
+      "name": "MyNotificationPage",
+      "pageSourceFile": "src/main/ets/components/MyNotificationPage.ets",
+      "buildFunction": "MyNotificationPageBuilder",
+      "data": {
+        "description": "MyNotificationPage"
+      }
+    }
+  ]
+}

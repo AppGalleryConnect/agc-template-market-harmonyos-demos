@@ -1,0 +1,52 @@
+{
+  "ret": {
+    "retCode": 0,
+    "retMsg": "SUCCESS"
+  },
+  "users": [
+    {
+      "userInfo": {
+        "hwUnionId": "uid100001",
+        "uid": 100001,
+        "userNo": "100001",
+        "nickName": "朵朵",
+        "realNameAuthFlag": 1,
+        "gender": 1,
+        "height": 165,
+        "marriageStatus":0,
+        "birth": "2000-01-01",
+        "selfIntroduction": "我是一个生活简单的女生，每天两点一线，偶尔会出去旅行，喜欢音乐，喜欢阅读，喜欢美食。",
+        "profilePictureUrl": "app.media.head_image_1",
+        "album": [
+          "app.media.img_user_album_1"
+        ],
+        "education": 3,
+        "currentResidence": "北京",
+        "originFrom": "北京",
+        "job": "医疗/护理",
+        "monthlyIncome": 4
+      }
+    },
+    {
+      "userInfo": {
+        "hwUnionId": "uid100204",
+        "uid": 100204,
+        "userNo": "100204",
+        "nickName": "又来了",
+        "realNameAuthFlag": 1,
+        "marriageStatus":0,
+        "gender": 1,
+        "birth": "1998-01-01",
+        "selfIntroduction": "哈哈哈哈哈哈",
+        "profilePictureUrl": "app.media.head_image_3",
+        "album": [],
+        "education": 3,
+        "height": 170,
+        "currentResidence": "北京",
+        "originFrom": "北京",
+        "job": "律师/法务",
+        "monthlyIncome": 3
+      }
+    }
+  ]
+}

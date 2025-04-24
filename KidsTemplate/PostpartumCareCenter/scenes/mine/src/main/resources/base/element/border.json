@@ -1,0 +1,32 @@
+{
+  "string": [
+    {
+      "name": "border_radius_2",
+      "value": "2"
+    },
+    {
+      "name": "border_radius_4",
+      "value": "4"
+    },
+    {
+      "name": "border_radius_8",
+      "value": "8"
+    },
+    {
+      "name": "border_radius_14",
+      "value": "14"
+    },
+    {
+      "name": "border_radius_16",
+      "value": "16"
+    },
+    {
+      "name": "border_radius_20",
+      "value": "20"
+    },
+    {
+      "name": "border_radius_32",
+      "value": "32"
+    }
+  ]
+}

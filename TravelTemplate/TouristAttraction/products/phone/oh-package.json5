@@ -1,0 +1,25 @@
+{
+  "name": "phone",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "",
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "guide": "file:../../features/tabs/guide",
+    "home": "file:../../features/tabs/home",
+    "mall": "file:../../features/functions/mall",
+    "mine": "file:../../features/tabs/mine",
+    "common": "file:../../commons/common",
+    "order": "file:../../features/tabs/order",
+    "note": "file:../../features/functions/note",
+    "catering": "file:../../features/functions/catering",
+    "route": "file:../../features/functions/route",
+    "account": "file:../../commons/kits/account",
+    "ticket": "file:../../features/tabs/ticket",
+    "types": "file:../../commons/types",
+    "audio": "file:../../commons/kits/audio",
+    "@hw-agconnect/ui-base": "^1.0.0",
+    "network": "file:../../commons/network"
+  }
+}

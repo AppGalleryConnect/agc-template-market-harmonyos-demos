@@ -1,0 +1,152 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "booking_store_title",
+      "value": "门店预约"
+    },
+    {
+      "name": "booking_success",
+      "value": "预约成功"
+    },
+    {
+      "name": "booking_cancel",
+      "value": "已取消"
+    },
+    {
+      "name": "booking_info",
+      "value": "预约信息"
+    },
+    {
+      "name": "booking_info_store",
+      "value": "预约门店"
+    },
+    {
+      "name": "booking_info_username",
+      "value": "预约姓名"
+    },
+    {
+      "name": "booking_info_telephone",
+      "value": "预约号码"
+    },
+    {
+      "name": "booking_info_store_project",
+      "value": "预约项目"
+    },
+    {
+      "name": "booking_info_date",
+      "value": "预约日期"
+    },
+    {
+      "name": "booking_info_address",
+      "value": "门店地址"
+    },
+    {
+      "name": "booking_cancel_button",
+      "value": "取消预约"
+    },
+    {
+      "name": "back",
+      "value": "返回"
+    },
+    {
+      "name": "for_more_detail",
+      "value": "查看详情"
+    },
+    {
+      "name": "disassociate",
+      "value": "解除关联"
+    },
+    {
+      "name": "activity_info",
+      "value": "活动信息"
+    },
+    {
+      "name": "activity_name",
+      "value": "活动主题"
+    },
+    {
+      "name": "activity_booking_phone",
+      "value": "预约号码"
+    },
+    {
+      "name": "activity_address",
+      "value": "活动地址"
+    },
+    {
+      "name": "title_mine",
+      "value": "我的"
+    },
+    {
+      "name": "agcit_huawei_postpartum_care_center_mine",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_postpartum_care_center_mine",
+      "value": "sceneTemplate"
+    },
+    {
+      "name": "agcitkid_huawei_postpartum_care_center_mine",
+      "value": "agcit_huawei_postpartum_care_center_components/1.0.0,agcit_huawei_postpartum_care_center_utils/1.0.0"
+    },
+    {
+      "name": "app_user_agreement",
+      "value": "《用户协议》"
+    },
+    {
+      "name": "app_privacy_policy",
+      "value": "《隐私政策》"
+    },
+    {
+      "name": "huaweiId_user_authentication_protocol",
+      "value": "《华为账号用户认证协议》"
+    },
+    {
+      "name": "and",
+      "value": "和"
+    },
+    {
+      "name": "end",
+      "value": "。"
+    },
+    {
+      "name": "read_and_agree",
+      "value": "已阅读并同意"
+    },
+    {
+      "name": "hwid_no_internet_connect",
+      "value": "网络未连接，请检查网络设置"
+    },
+    {
+      "name": "bind_huaweiId_number",
+      "value": "华为账号绑定号码"
+    },
+    {
+      "name": "read_and_agree_protocol",
+      "value": "请先阅读并同意协议"
+    },
+    {
+      "name": "get_mobile_number_error",
+      "value": "获取匿名手机号失败"
+    },
+    {
+      "name": "avatar",
+      "value": "头像"
+    },
+    {
+      "name": "nickName",
+      "value": "昵称"
+    },
+    {
+      "name": "log_out",
+      "value": "退出登录"
+    },
+    {
+      "name": "privacyAgreementPath",
+      "value": "https://privacy.consumer.huawei.com/legal/id/authentication-terms.htm?code=CN&language=zh-CN"
+    }
+  ]
+}

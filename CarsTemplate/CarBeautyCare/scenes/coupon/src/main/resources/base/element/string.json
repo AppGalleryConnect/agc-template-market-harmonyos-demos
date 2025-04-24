@@ -1,0 +1,56 @@
+{
+  "string": [
+    {
+      "name": "renminbi",
+      "value": "Renminbi"
+    },
+    {
+      "name": "font_regular",
+      "value": "Font_regular"
+    },
+    {
+      "name": "recShop",
+      "value": "RecShop"
+    },
+    {
+      "name": "coupon_detail",
+      "value": "Coupon_detail"
+    },
+    {
+      "name": "coupon",
+      "value": "Coupon"
+    },
+    {
+      "name": "ntNine",
+      "value": "NtNine"
+    },
+    {
+      "name": "tntNine",
+      "value": "TntNine"
+    },
+    {
+      "name": "littleCoupon",
+      "value": "LittleCoupon"
+    },
+    {
+      "name": "channel",
+      "value": "Channel"
+    },
+    {
+      "name": "dueTime",
+      "value": "DueTime"
+    },
+    {
+      "name": "robbery",
+      "value": "Robbery"
+    },
+    {
+      "name": "my_Coupon",
+      "value": "My_Coupon"
+    },
+    {
+      "name": "instruction",
+      "value": "Instruction"
+    }
+  ]
+}

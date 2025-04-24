@@ -1,0 +1,11 @@
+{
+  "modelVersion": "5.0.0",
+  "description": "Please describe the basic information.",
+  "dependencies": {
+    "@hw-agconnect/ui-base": "1.0.1",
+    "@hw-agconnect/ui-calendar-picker": "1.0.2"
+  },
+  "devDependencies": {
+    "@ohos/hypium": "1.0.19"
+  }
+}

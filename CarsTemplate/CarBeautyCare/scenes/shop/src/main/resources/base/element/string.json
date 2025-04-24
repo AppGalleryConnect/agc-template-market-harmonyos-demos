@@ -1,0 +1,24 @@
+{
+  "string": [
+    {
+      "name": "phone_call",
+      "value": "Phone_call"
+    },
+    {
+      "name": "phone_cancel",
+      "value": "Phone_cancel"
+    },
+    {
+      "name": "shop_list",
+      "value": "Shop_list"
+    },
+    {
+      "name": "phone_number",
+      "value": "Phone_number"
+    },
+    {
+      "name": "phone_number_input",
+      "value": "Phone_number_input"
+    }
+  ]
+}

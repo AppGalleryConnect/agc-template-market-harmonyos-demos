@@ -1,0 +1,15 @@
+{
+  "name": "entry",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "",
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "common": "file:../../commons/common",
+    "order": "file:../../features/order",
+    "order_list": "file:../../features/order_list",
+    "personal_center": "file:../../features/personal_center"
+  }
+}
+

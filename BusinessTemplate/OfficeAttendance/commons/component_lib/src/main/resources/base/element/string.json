@@ -1,0 +1,44 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "today",
+      "value": "today"
+    },
+    {
+      "name": "whole_day",
+      "value": "whole day"
+    },
+    {
+      "name": "btn_confirm",
+      "value": "confirm"
+    },
+    {
+      "name": "new_agency_task",
+      "value": "new agency"
+    },
+    {
+      "name": "setting_plan_time",
+      "value": "plan time"
+    },
+    {
+      "name": "select_attach",
+      "value": "attach"
+    },
+    {
+      "name": "btn_cancel",
+      "value": "cancel"
+    },
+    {
+      "name": "btn_delete",
+      "value": "delete"
+    },
+    {
+      "name": "schedule_detail_title",
+      "value": "schedule title"
+    }
+  ]
+}

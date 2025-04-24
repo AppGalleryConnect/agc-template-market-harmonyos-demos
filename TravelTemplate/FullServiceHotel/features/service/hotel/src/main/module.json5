@@ -1,0 +1,17 @@
+{
+  "module": {
+    "name": "hotel",
+    "type": "shared",
+    "description": "$string:shared_desc",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": true,
+    "requestPermissions": [
+
+    ],
+    "routerMap": "$profile:route_map"
+  }
+}

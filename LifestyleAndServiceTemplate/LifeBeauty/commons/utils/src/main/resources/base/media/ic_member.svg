@@ -1,0 +1,21 @@
+<svg width="32.000000" height="32.000000" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+    <desc>
+        Created with Pixso.
+    </desc>
+    <defs>
+        <clipPath id="clip14_1575">
+            <rect id="184会员.svg" width="32.000000" height="32.000000" fill="white" fill-opacity="0"/>
+        </clipPath>
+        <linearGradient x1="5.999877" y1="3.687500" x2="24.999874" y2="28.312502" id="paint_linear_14_1584_0"
+                        gradientUnits="userSpaceOnUse">
+            <stop stop-color="#FAEAB8"/>
+            <stop offset="1.000000" stop-color="#D5B274"/>
+        </linearGradient>
+    </defs>
+    <g clip-path="url(#clip14_1575)">
+        <path id="path"
+              d="M29.37 11.66L23.88 4.83C23.34 4.13 22.44 3.68 21.54 3.68L10.47 3.68C9.58 3.68 8.73 4.08 8.13 4.83L2.65 11.66C1.7 12.8 1.8 14.5 2.8 15.6L13.91 27.36L14.06 27.51C14.61 28.01 15.36 28.31 16.11 28.31L16.21 28.31C17 28.26 17.75 27.96 18.3 27.36L29.17 15.65C30.21 14.5 30.26 12.8 29.37 11.66ZM22.75 14.35L17.56 19.98C16.77 20.78 15.52 20.83 14.72 20.08L14.62 19.98L9.24 14.3C8.89 13.9 8.89 13.25 9.29 12.9C9.74 12.5 10.34 12.55 10.74 12.95L16.07 18.59L21.26 13.05C21.66 12.65 22.25 12.6 22.7 12.95C23.1 13.3 23.1 13.95 22.75 14.35Z"
+              fill="url(#paint_linear_14_1584_0)" fill-opacity="1.000000" fill-rule="nonzero"/>
+    </g>
+</svg>

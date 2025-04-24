@@ -1,0 +1,172 @@
+{
+  "string": [
+    {
+      "name": "shared_desc",
+      "value": "description"
+    },
+    {
+      "name": "checkin_tip",
+      "value": "checkin_tip"
+    },
+    {
+      "name": "checkin_first_time",
+      "value": "checkin_first_time"
+    },
+    {
+      "name": "checkin_last_time",
+      "value": "checkin_last_time"
+    },
+    {
+      "name": "checkin_history",
+      "value": "checkin_history"
+    },
+    {
+      "name": "first_checkin_prefix",
+      "value": "first_checkin_prefix："
+    },
+    {
+      "name": "last_checkin_prefix",
+      "value": "last_checkin_prefix："
+    },
+    {
+      "name": "checkin_is_on_going",
+      "value": "checkin_is_on_going"
+    },
+    {
+      "name": "checkin_is_finished",
+      "value": "checkin_is_finished"
+    },
+    {
+      "name": "checkin_is_failed",
+      "value": "checkin_is_failed"
+    },
+    {
+      "name": "today",
+      "value": "today"
+    },
+    {
+      "name": "day_of_week_0",
+      "value": "day_of_week_0"
+    },
+    {
+      "name": "day_of_week_1",
+      "value": "day_of_week_1"
+    },
+    {
+      "name": "day_of_week_2",
+      "value": "day_of_week_2"
+    },
+    {
+      "name": "day_of_week_3",
+      "value": "day_of_week_3"
+    },
+    {
+      "name": "day_of_week_4",
+      "value": "day_of_week_4"
+    },
+    {
+      "name": "day_of_week_5",
+      "value": "day_of_week_5"
+    },
+    {
+      "name": "day_of_week_6",
+      "value": "day_of_week_6"
+    },
+    {
+      "name": "month_desc_01",
+      "value": "month_desc_01"
+    },
+    {
+      "name": "month_desc_02",
+      "value": "month_desc_02"
+    },
+    {
+      "name": "month_desc_03",
+      "value": "month_desc_03"
+    },
+    {
+      "name": "month_desc_04",
+      "value": "month_desc_04"
+    },
+    {
+      "name": "month_desc_05",
+      "value": "month_desc_05"
+    },
+    {
+      "name": "month_desc_06",
+      "value": "month_desc_06"
+    },
+    {
+      "name": "month_desc_07",
+      "value": "month_desc_07"
+    },
+    {
+      "name": "month_desc_08",
+      "value": "month_desc_08"
+    },
+    {
+      "name": "month_desc_09",
+      "value": "month_desc_09"
+    },
+    {
+      "name": "month_desc_10",
+      "value": "month_desc_10"
+    },
+    {
+      "name": "month_desc_11",
+      "value": "month_desc_11"
+    },
+    {
+      "name": "month_desc_12",
+      "value": "month_desc_12"
+    },
+    {
+      "name": "black_90",
+      "value": "rgba(0,0,0,0.9)"
+    },
+    {
+      "name": "black_60",
+      "value": "rgba(0,0,0,0.6)"
+    },
+    {
+      "name": "black_40",
+      "value": "rgba(0,0,0,0.4)"
+    },
+    {
+      "name": "black_20",
+      "value": "rgba(0,0,0,0.2)"
+    },
+    {
+      "name": "white_90",
+      "value": "rgba(255,255,255,0.9)"
+    },
+    {
+      "name": "white_60",
+      "value": "rgba(255,255,255,0.6)"
+    },
+    {
+      "name": "settings",
+      "value": "settings"
+    },
+    {
+      "name": "quick_checkin",
+      "value": "quick_checkin"
+    },
+    {
+      "name": "quick_checkin_desc",
+      "value": "quick_checkin_desc"
+    },
+    {
+      "name": "only_for_demo",
+      "value": "only_for_demo"
+    },
+    {
+      "name": "agcit_huawei_office_attendance_checkin",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_office_attendance_checkin",
+      "value": "sceneTemplate"
+    }
+  ]
+}

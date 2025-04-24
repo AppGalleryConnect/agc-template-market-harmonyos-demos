@@ -1,0 +1,48 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "link_checking",
+      "value": "Verifying..."
+    },
+    {
+      "name": "reason",
+      "value": "Used to initiate network data requests."
+    },
+    {
+      "name": "vip",
+      "value": "VIP"
+    },
+    {
+      "name": "huawei_user",
+      "value": "华为用户"
+    },
+    {
+      "name": "start_vip",
+      "value": "开通会员"
+    },
+    {
+      "name": "is_vip",
+      "value": "已开通"
+    },
+    {
+      "name": "not_vip",
+      "value": "未开通"
+    },
+    {
+      "name": "reach_bottom",
+      "value": "已经到底了 ~"
+    },
+    {
+      "name": "twenty_record",
+      "value": "最多显示20条记录 ~"
+    },
+    {
+      "name": "get_mobile_number_error",
+      "value": "获取匿名手机号失败"
+    }
+  ]
+}

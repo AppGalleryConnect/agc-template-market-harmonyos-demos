@@ -1,0 +1,104 @@
+{
+  "string": [
+    {
+      "name": "margin_3",
+      "value": "3vp"
+    },
+    {
+      "name": "margin_xxs",
+      "value": "4vp"
+    },
+    {
+      "name": "margin_xs",
+      "value": "8vp"
+    },
+    {
+      "name": "margin_s",
+      "value": "12vp"
+    },
+    {
+      "name": "margin_14",
+      "value": "14vp"
+    },
+    {
+      "name": "margin_ms",
+      "value": "16vp"
+    },
+    {
+      "name": "margin_m",
+      "value": "20vp"
+    },
+    {
+      "name": "margin_l",
+      "value": "24vp"
+    },
+    {
+      "name": "margin_34",
+      "value": "34vp"
+    },
+    {
+      "name": "margin_40",
+      "value": "40vp"
+    },
+    {
+      "name": "margin_xl",
+      "value": "44vp"
+    },
+    {
+      "name": "padding_1",
+      "value": "1vp"
+    },
+    {
+      "name": "padding_4",
+      "value": "4vp"
+    },
+    {
+      "name": "padding_5",
+      "value": "5vp"
+    },
+    {
+      "name": "padding_6",
+      "value": "6vp"
+    },
+    {
+      "name": "padding_8",
+      "value": "8vp"
+    },
+    {
+      "name": "padding_10",
+      "value": "10vp"
+    },
+    {
+      "name": "padding_12",
+      "value": "12vp"
+    },
+    {
+      "name": "padding_16",
+      "value": "16vp"
+    },
+    {
+      "name": "padding_20",
+      "value": "20vp"
+    },
+    {
+      "name": "padding_24",
+      "value": "24vp"
+    },
+    {
+      "name": "padding_26",
+      "value": "26vp"
+    },
+    {
+      "name": "padding_29",
+      "value": "29vp"
+    },
+    {
+      "name": "padding_36",
+      "value": "36vp"
+    },
+    {
+      "name": "padding_44",
+      "value": "44vp"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "module": {
+    "name": "ui_verify_code_test",
+    "type": "feature",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": true
+  }
+}

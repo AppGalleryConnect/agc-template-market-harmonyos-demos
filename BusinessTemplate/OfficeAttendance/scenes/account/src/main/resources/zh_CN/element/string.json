@@ -1,0 +1,156 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "AccountbindingAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "AccountbindingAbility_label",
+      "value": "label"
+    },
+    {
+      "name": "account_binding_tip",
+      "value": "绑定企业账号 畅享快捷办公"
+    },
+    {
+      "name": "bound_by_phone_tip",
+      "value": "手机号码快速绑定"
+    },
+    {
+      "name": "bound_by_account_verification_tip",
+      "value": "账号密码验证绑定"
+    },
+    {
+      "name": "account_verification_tip",
+      "value": "账号密码验证"
+    },
+    {
+      "name": "account_verification_notice",
+      "value": "账号密码验证通过后，您的企业账号将会和您的华为账号将会进行绑定。"
+    },
+    {
+      "name": "login_tip_account",
+      "value": "账号"
+    },
+    {
+      "name": "login_tip_password",
+      "value": "密码"
+    },
+    {
+      "name": "account_verification_placeholder_account",
+      "value": "请填写企业账号"
+    },
+    {
+      "name": "account_verification_placeholder_password",
+      "value": "请填写密码"
+    },
+    {
+      "name": "login",
+      "value": "登录"
+    },
+    {
+      "name": "account_can_not_empty",
+      "value": "账号不能为空"
+    },
+    {
+      "name": "password_can_not_empty",
+      "value": "密码不能为空"
+    },
+    {
+      "name": "about_us",
+      "value": "关于我们"
+    },
+    {
+      "name": "account_name",
+      "value": "华为用户"
+    },
+    {
+      "name": "unbind_account",
+      "value": "解除关联"
+    },
+    {
+      "name": "unbind_dialog_title",
+      "value": "退出登录"
+    },
+    {
+      "name": "unbind_dialog_message",
+      "value": "确定要退出登录吗？"
+    },
+    {
+      "name": "cancel",
+      "value": "取消"
+    },
+    {
+      "name": "confirm",
+      "value": "确认"
+    },
+    {
+      "name": "black_90",
+      "value": "rgba(0,0,0,0.9)"
+    },
+    {
+      "name": "black_60",
+      "value": "rgba(0,0,0,0.6)"
+    },
+    {
+      "name": "black_40",
+      "value": "rgba(0,0,0,0.4)"
+    },
+    {
+      "name": "black_20",
+      "value": "rgba(0,0,0,0.2)"
+    },
+    {
+      "name": "white_90",
+      "value": "rgba(255,255,255,0.9)"
+    },
+    {
+      "name": "about",
+      "value": "关于"
+    },
+    {
+      "name": "office_attendance",
+      "value": "商务办公"
+    },
+    {
+      "name": "ICP",
+      "value": "苏ICP备17040376号-181A"
+    },
+    {
+      "name": "customer_service_telephone",
+      "value": "客服电话：950800"
+    },
+    {
+      "name": "copy_right",
+      "value": "华为开发者联盟 版权所有©2018-2025"
+    },
+    {
+      "name": "agcit_huawei_office_attendance_account",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_office_attendance_account",
+      "value": "sceneTemplate"
+    },
+    {
+      "name": "user_info",
+      "value": "个人信息"
+    },
+    {
+      "name": "avatar",
+      "value": "头像"
+    },
+    {
+      "name": "nickName",
+      "value": "昵称"
+    },
+    {
+      "name": "log_out",
+      "value": "退出登录"
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "string": [
+    {
+      "name": "shared_desc",
+      "value": "description"
+    },
+    {
+      "name": "course_center",
+      "value": "课程中心"
+    },
+    {
+      "name": "month",
+      "value": "月"
+    },
+    {
+      "name": "week_1",
+      "value": "周一"
+    },
+    {
+      "name": "week_2",
+      "value": "周二"
+    },
+    {
+      "name": "week_3",
+      "value": "周三"
+    },
+    {
+      "name": "week_4",
+      "value": "周四"
+    },
+    {
+      "name": "week_5",
+      "value": "周五"
+    },
+    {
+      "name": "week_6",
+      "value": "周六"
+    },
+    {
+      "name": "week_7",
+      "value": "周日"
+    },
+    {
+      "name": "course_detail",
+      "value": "课程详情"
+    },
+    {
+      "name": "course_no_sign",
+      "value": "待签到"
+    },
+    {
+      "name": "odd_week",
+      "value": "（单周）"
+    },
+    {
+      "name": "even_week",
+      "value": "（双周）"
+    },
+    {
+      "name": "course_teacher",
+      "value": "授课教师"
+    },
+    {
+      "name": "go_to_sign",
+      "value": "我要签到"
+    }
+  ]
+}

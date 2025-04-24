@@ -1,0 +1,24 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "title_store",
+      "value": "门店"
+    },
+    {
+      "name": "agcit_huawei_postpartum_care_center_stores",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_postpartum_care_center_stores",
+      "value": "sceneTemplate"
+    },
+    {
+      "name": "agcitkid_huawei_postpartum_care_center_stores",
+      "value": "agcit_huawei_postpartum_care_center_components/1.0.0,agcit_huawei_postpartum_care_center_utils/1.0.0"
+    }
+  ]
+}

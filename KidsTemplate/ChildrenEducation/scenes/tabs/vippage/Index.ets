@@ -1,0 +1,1 @@
+export { VipPage } from './src/main/ets/views/VipPage'

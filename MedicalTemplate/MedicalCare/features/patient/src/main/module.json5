@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "patient",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ],
+    "routerMap": "$profile:router_map_patient"
+  }
+}

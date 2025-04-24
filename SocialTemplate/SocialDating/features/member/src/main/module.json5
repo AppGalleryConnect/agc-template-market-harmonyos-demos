@@ -1,0 +1,13 @@
+{
+  "module": {
+    "name": "member",
+    "type": "har",
+    "description": "$string:module_desc",
+    "mainElement": "MemberAbility",
+    "deviceTypes": [
+      "phone"
+    ],
+    "installationFree": true,
+    "routerMap": "$profile:route_map",
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "routerMap": [
+    {
+      "name": "garagePage",
+      "pageSourceFile": "src/main/ets/components/GaragePage.ets",
+      "buildFunction": "GaragePageBuilder",
+      "data": {
+        "description" : "this is PageOne"
+      }
+    },
+    {
+      "name": "carSelect",
+      "pageSourceFile": "src/main/ets/components/CarSelect.ets",
+      "buildFunction": "CarSelectViewBuilder",
+      "data": {
+        "description" : "this is CarSelect"
+      }
+    }
+  ]
+}

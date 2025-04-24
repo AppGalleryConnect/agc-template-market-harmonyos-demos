@@ -1,0 +1,13 @@
+{
+  "name": "@ohos_agcit/car_beauty_care_coupon",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@ohos_agcit/car_beauty_care_commonlib": "file:../../commons/commonLib",
+    '@ohos_agcit/car_beauty_care_shop': 'file:../shop',
+    "@ohos_agcit/car_beauty_care_componentlib": "file:../../commons/componentLib"
+  }
+}

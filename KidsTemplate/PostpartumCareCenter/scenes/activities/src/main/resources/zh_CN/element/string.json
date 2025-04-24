@@ -1,0 +1,36 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "desc_activity_booking_submit",
+      "value": "立即报名"
+    },
+    {
+      "name": "activity_desc_title",
+      "value": "活动介绍"
+    },
+    {
+      "name": "activity_desc_content",
+      "value": "期待每一个小生命的诞生\n让孕育的美好和珍贵留存"
+    },
+    {
+      "name": "title_activity",
+      "value": "活动"
+    },
+    {
+      "name": "agcit_huawei_postpartum_care_center_activities",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_postpartum_care_center_activities",
+      "value": "sceneTemplate"
+    },
+    {
+      "name": "agcitkid_huawei_postpartum_care_center_activities",
+      "value": "agcit_huawei_postpartum_care_center_components/1.0.0,agcit_huawei_postpartum_care_center_utils/1.0.0"
+    }
+  ]
+}

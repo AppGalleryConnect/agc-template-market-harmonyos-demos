@@ -1,0 +1,40 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "label"
+    },
+    {
+      "name": "me",
+      "value": "Me"
+    },
+    {
+      "name": "hwUser",
+      "value": "Huawei User"
+    },
+    {
+      "name": "mobile_number",
+      "value": "Mobile number"
+    },
+    {
+      "name": "get",
+      "value": "Get"
+    },
+    {
+      "name": "internet_permission_reason",
+      "value": "Used for silent login, mobile number authorization and quick verification."
+    }
+  ]
+}

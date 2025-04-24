@@ -1,0 +1,28 @@
+{
+  "color": [
+    {
+      "name": "tab_icon_active",
+      "value": "#007DFF"
+    },
+    {
+      "name": "tab_icon_grey",
+      "value": "#333333"
+    },
+    {
+      "name": "news_card_bg",
+      "value": "#F40000"
+    },
+    {
+      "name": "news_card_content",
+      "value": "#191919"
+    },
+    {
+      "name": "information_list_bg",
+      "value": "#f1f2f3"
+    },
+    {
+      "name": "information_title_color",
+      "value": "#0A59F7"
+    }
+  ]
+}

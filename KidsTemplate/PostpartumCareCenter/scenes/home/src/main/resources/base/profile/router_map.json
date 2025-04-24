@@ -1,0 +1,12 @@
+{
+  "routerMap": [
+    {
+      "name": "ServiceDetail",
+      "pageSourceFile": "src/main/ets/pages/ServiceDetail.ets",
+      "buildFunction": "ServiceDetailBuilder",
+      "data": {
+        "description": "this is service detail"
+      }
+    }
+  ]
+}

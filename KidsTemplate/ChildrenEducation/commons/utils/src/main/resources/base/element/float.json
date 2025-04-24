@@ -1,0 +1,68 @@
+{
+  "float": [
+    {
+      "name": "page_text_font_size",
+      "value": "50fp"
+    },
+    {
+      "name": "10fp",
+      "value": "10fp"
+    },
+    {
+      "name": "2vp",
+      "value": "2vp"
+    },
+    {
+      "name": "4vp",
+      "value": "4vp"
+    },
+    {
+      "name": "3px",
+      "value": "3px"
+    },
+    {
+      "name": "4px",
+      "value": "4px"
+    },
+    {
+      "name": "5px",
+      "value": "5px"
+    },
+    {
+      "name": "8vp",
+      "value": "8vp"
+    },
+    {
+      "name": "11fp",
+      "value": "11fp"
+    },
+    {
+      "name": "12fp",
+      "value": "12fp"
+    },
+    {
+      "name": "15fp",
+      "value": "15fp"
+    },
+    {
+      "name": "6vp",
+      "value": "6vp"
+    },
+    {
+      "name": "12vp",
+      "value": "12vp"
+    },
+    {
+      "name": "24vp",
+      "value": "24vp"
+    },
+    {
+      "name": "26vp",
+      "value": "26vp"
+    },
+    {
+      "name": "14fp",
+      "value": "14fp"
+    }
+  ]
+}

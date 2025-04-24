@@ -1,0 +1,36 @@
+{
+  "routerMap": [
+    {
+      "name": "newAgencyTaskDialog",
+      "pageSourceFile": "src/main/ets/agency/AddAgencyTask.ets",
+      "buildFunction": "addAgencyTaskBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "editAgencyTaskDialog",
+      "pageSourceFile": "src/main/ets/agency/EditAgencyTask.ets",
+      "buildFunction": "editAgencyTaskBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "agencyTaskCalender",
+      "pageSourceFile": "src/main/ets/agency/components/AgencyTaskCalender.ets",
+      "buildFunction": "AgencyTaskCalenderBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "timeSelector",
+      "pageSourceFile": "src/main/ets/agency/components/TimeSelector.ets",
+      "buildFunction": "TimeSelectorBuilder",
+      "data": {
+        "description": ""
+      }
+    }
+  ]
+}

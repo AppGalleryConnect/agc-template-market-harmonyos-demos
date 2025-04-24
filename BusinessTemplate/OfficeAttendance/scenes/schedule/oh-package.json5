@@ -1,0 +1,13 @@
+{
+  "name": "@ohos_agcit/office_attendance_schedule",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@ohos_agcit/office_attendance_common_lib": "file:../../commons/common_lib",
+    "@ohos_agcit/office_attendance_component_lib": "file:../../commons/component_lib",
+    "@ohos_agcit/office_attendance_network": "file:../../commons/network"
+  }
+}

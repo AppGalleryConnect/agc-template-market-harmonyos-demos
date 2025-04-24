@@ -1,0 +1,45 @@
+{
+  "routerMap": [
+    {
+      "name": "UserListPage",
+      "pageSourceFile": "src/main/ets/pages/UserListPage.ets",
+      "buildFunction": "UserListPageBuilder"
+    },
+    {
+      "name": "UserSearchPage",
+      "pageSourceFile": "src/main/ets/pages/UserSearchPage.ets",
+      "buildFunction": "UserSearchPageBuilder"
+    },
+    {
+      "name": "UserRegister",
+      "pageSourceFile": "src/main/ets/pages/UserRegister.ets",
+      "buildFunction": "UserRegisterPageBuilder"
+    },
+    {
+      "name": "MyDetailPage",
+      "pageSourceFile": "src/main/ets/pages/UserDetail.ets",
+      "buildFunction": "MyDetailPageBuilder"
+    },
+    {
+      "name": "ConfigPage",
+      "pageSourceFile": "src/main/ets/pages/ConfigPage.ets",
+      "buildFunction": "ConfigPageBuilder"
+    },
+    {
+      "name": "RealNameAuthPage",
+      "pageSourceFile": "src/main/ets/pages/RealNameAuthPage.ets",
+      "buildFunction": "RealNameAuthPageBuilder"
+    },
+    {
+      "name": "EditFieldPage",
+      "pageSourceFile": "src/main/ets/pages/EditFieldPage.ets",
+      "buildFunction": "EditFieldPageBuilder"
+    },
+    {
+      "name": "MateCriteriaPage",
+      "pageSourceFile": "src/main/ets/pages/MateCriteriaPage.ets",
+      "buildFunction": "MateCriteriaPageBuilder"
+    },
+
+  ]
+}

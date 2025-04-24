@@ -1,0 +1,28 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "phone_call",
+      "value": "呼叫"
+    },
+    {
+      "name": "phone_cancel",
+      "value": "取消"
+    },
+    {
+      "name": "shop_list",
+      "value": "门店列表"
+    },
+    {
+      "name": "phone_number",
+      "value": "18000000000"
+    },
+    {
+      "name": "phone_number_input",
+      "value": "请输入手机号"
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "ret": {
+    "retCode": 0,
+    "retMsg": "SUCCESS"
+  },
+  "users": [
+    {
+      "userInfo": {
+        "hwUnionId": "uid100003",
+        "userNo": "100003",
+        "uid": 100003,
+        "nickName": "阿迅",
+        "realNameAuthFlag": 1,
+        "gender": 0,
+        "marriageStatus": 0,
+        "birth": "1998-01-01",
+        "selfIntroduction": "我是一个比较开朗的人，有幽默感的同时还会拿捏分寸，希望可以认识一下～",
+        "profilePictureUrl": "app.media.head_image_100003",
+        "education": 3,
+        "currentResidence": "北京",
+        "originFrom": "北京",
+        "job": "公务员",
+        "monthlyIncome": 3,
+        "height": 175,
+        "album": [
+          "app.media.img_user_album_2"
+        ]
+      },
+      "mateSelectionCriteria": {
+        "ageStart": 22,
+        "ageEnd": 30,
+        "gender": 1,
+        "heightStart": 165,
+        "currentResidence": "北京",
+        "monthlyIncome": "3",
+        "education": "3",
+        "originFrom": "北京",
+        "hasChildren": "0",
+        "expectationOfChildren": "1",
+        "smoking": "0",
+        "drinking": "0",
+        "marriageStatus": "0,1"
+      },
+      "userActionSummary": {
+        "followUserCount": 0,
+        "likedCount": 0,
+        "commentCount": 0
+      },
+      "recentFeedImages": [
+        "app.media.feed2_thumbnail"
+      ]
+    },
+    {
+      "userInfo": {
+        "hwUnionId": "uid100091",
+        "uid": 100091,
+        "userNo": "100091",
+        "nickName": "奔跑的蜗牛",
+        "realNameAuthFlag": 0,
+        "marriageStatus": 0,
+        "gender": 0,
+        "birth": "2000-01-01",
+        "selfIntroduction": "宁缺毋滥，不将就",
+        "profilePictureUrl": "app.media.head_image_2",
+        "album": [
+          "app.media.img_user_album_4"
+        ],
+        "education": 3,
+        "currentResidence": "北京",
+        "originFrom": "北京",
+        "job": "医疗/护理",
+        "monthlyIncome": 4,
+        "isVip": 0,
+        "height": 179
+      },
+      "mateSelectionCriteria": {
+        "ageStart": 22,
+        "ageEnd": 27,
+        "gender": 1,
+        "education": "3",
+        "heightStart": 160,
+        "currentResidence": "北京",
+        "monthlyIncome": "3",
+        "originFrom": "北京",
+        "hasChildren": "0",
+        "expectationOfChildren": "1",
+        "marriageStatus": "0,1"
+      },
+      "userActionSummary": {
+        "followUserCount": 0,
+        "likedCount": 0,
+        "commentCount": 0
+      },
+      "recentFeedImages": [
+        "app.media.feed2_thumbnail"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "routerMap": [
+    {
+      "name": "about",
+      "pageSourceFile": "src/main/ets/account/About.ets",
+      "buildFunction": "aboutBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "userInfo",
+      "pageSourceFile": "src/main/ets/account/UserInfo.ets",
+      "buildFunction": "UserInfoBuilder",
+      "data": {
+        "description": ""
+      }
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+<svg width="64.568542" height="64.568604" viewBox="0 0 64.5685 64.5686" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+		Created with Pixso.
+	</desc>
+	<defs>
+		<filter id="filter_93_462_dd" x="0.000000" y="0.000000" width="64.568542" height="64.568604" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+			<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+			<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+			<feOffset dx="0" dy="0"/>
+			<feGaussianBlur stdDeviation="1.33333"/>
+			<feComposite in2="hardAlpha" operator="out" k2="-1" k3="1"/>
+			<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0"/>
+			<feBlend mode="normal" in2="BackgroundImageFix" result="effect_dropShadow_1"/>
+			<feBlend mode="normal" in="SourceGraphic" in2="effect_dropShadow_1" result="shape"/>
+		</filter>
+		<clipPath id="clip93_464">
+			<rect width="24.000000" height="24.000000" transform="translate(15.313721 32.284302) rotate(-45.000000)" fill="white" fill-opacity="0"/>
+		</clipPath>
+		<linearGradient x1="27.840683" y1="-3.272074" x2="-3.272041" y2="27.840660" id="paint_linear_93_463_0" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#FE4F35"/>
+			<stop offset="1.000000" stop-color="#FE4F35" stop-opacity="0.400000"/>
+		</linearGradient>
+	</defs>
+	<g filter="url(#filter_93_462_dd)">
+		<circle r="20.000000" transform="matrix(0.707107 -0.707107 0.707107 0.707107 32.2843 32.2843)" fill="url(#paint_linear_93_463_0)" fill-opacity="1.000000"/>
+<!--		<g clip-path="url(#clip93_464)">-->
+<!--			<g opacity="0.000000">-->
+<!--				<rect x="15.313721" y="32.284302" width="24.000000" height="24.000000" transform="rotate(-45 15.313721 32.284302)" fill="#D8D8D8" fill-opacity="1.000000"/>-->
+<!--				<rect x="15.313721" y="32.284302" width="24.000000" height="24.000000" transform="rotate(-45 15.313721 32.284302)" stroke="#000000" stroke-opacity="0" stroke-width="1.000000"/>-->
+<!--			</g>-->
+			<path d="M22.38 31.28L31.28 31.28L31.28 22.38C31.28 21.83 31.73 21.38 32.28 21.38C32.83 21.38 33.28 21.83 33.28 22.38L33.28 31.28L42.18 31.28C42.73 31.28 43.18 31.73 43.18 32.28C43.18 32.56 43.07 32.81 42.89 32.99C42.7 33.17 42.45 33.28 42.18 33.28L33.28 33.28L33.28 42.18C33.28 42.45 33.17 42.7 32.99 42.89C32.81 43.07 32.56 43.18 32.28 43.18C31.73 43.18 31.28 42.73 31.28 42.18L31.28 33.28L22.38 33.28C21.83 33.28 21.38 32.83 21.38 32.28C21.38 31.73 21.83 31.28 22.38 31.28Z" stroke-width="0.000000" stroke="#FFFFFF" fill="#FFFFFF" fill-opacity="1.00000"/>
+<!--			<path d="M31.28 31.28L31.28 22.38C31.28 21.83 31.73 21.38 32.28 21.38C32.83 21.38 33.28 21.83 33.28 22.38L33.28 31.28L42.18 31.28C42.73 31.28 43.18 31.73 43.18 32.28C43.18 32.56 43.07 32.81 42.89 32.99C42.7 33.17 42.45 33.28 42.18 33.28L33.28 33.28L33.28 42.18C33.28 42.45 33.17 42.7 32.99 42.89C32.81 43.07 32.56 43.18 32.28 43.18C31.73 43.18 31.28 42.73 31.28 42.18L31.28 33.28L22.38 33.28C21.83 33.28 21.38 32.83 21.38 32.28C21.38 31.73 21.83 31.28 22.38 31.28L31.28 31.28Z" stroke="#000000" stroke-opacity="0" stroke-width="1.000000"/>-->
+<!--		</g>-->
+	</g>
+</svg>

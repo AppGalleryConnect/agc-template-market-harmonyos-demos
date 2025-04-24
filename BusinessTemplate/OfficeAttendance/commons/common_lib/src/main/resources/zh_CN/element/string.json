@@ -1,0 +1,52 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "unfinished_task",
+      "value": "待处理"
+    },
+    {
+      "name": "finished_task",
+      "value": "已处理"
+    },
+    {
+      "name": "monday",
+      "value": "一"
+    },
+    {
+      "name": "tuesday",
+      "value": "二"
+    },
+    {
+      "name": "wednesday",
+      "value": "三"
+    },
+    {
+      "name": "thursday",
+      "value": "四"
+    },
+    {
+      "name": "friday",
+      "value": "五"
+    },
+    {
+      "name": "saturday",
+      "value": "六"
+    },
+    {
+      "name": "sunday",
+      "value": "日"
+    },
+    {
+      "name": "location_permission",
+      "value": "允许应用在前台运行时获取位置信息"
+    },
+    {
+      "name": "approximately_location_permission",
+      "value": "允许应用获取设备模糊位置信息"
+    }
+  ]
+}

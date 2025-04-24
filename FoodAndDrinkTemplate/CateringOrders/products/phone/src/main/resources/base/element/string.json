@@ -1,0 +1,68 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "label"
+    },
+    {
+      "name": "INTERNET_REASON",
+      "value": "获取访问互联网权限"
+    },
+    {
+      "name": "location_permission",
+      "value": "查看商家位置功能需要允许应用运行时获取位置信息"
+    },
+    {
+      "name": "EntryFormAbility_desc",
+      "value": "form_description"
+    },
+    {
+      "name": "EntryFormAbility_label",
+      "value": "form_label"
+    },
+    {
+      "name": "widget_desc",
+      "value": "点餐卡片"
+    },
+    {
+      "name": "widget_display_name",
+      "value": "点餐卡片"
+    },
+    {
+      "name": "card_title",
+      "value": "Title"
+    },
+    {
+      "name": "introduction",
+      "value": "Introduction"
+    },
+    {
+      "name": "order",
+      "value": "点餐"
+    },
+    {
+      "name": "storeName",
+      "value": "点餐"
+    },
+    {
+      "name": "goOrderDetail",
+      "value": "立即查看"
+    },
+    {
+      "name": "order_pick_num",
+      "value": "取餐码"
+    },
+    {
+      "name": "login_account",
+      "value": "请先登录华为账号"
+    }
+  ]
+}

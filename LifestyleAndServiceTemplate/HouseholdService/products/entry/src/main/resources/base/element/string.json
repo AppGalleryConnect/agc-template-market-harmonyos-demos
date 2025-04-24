@@ -1,0 +1,52 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "家政模板"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "家政模板"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "家政模板"
+    },
+    {
+      "name": "apply_location_reason",
+      "value": "需要知道您所在的城市位置，以便提供相应服务。"
+    },
+    {
+      "name": "tab_home",
+      "value": "首页"
+    },
+    {
+      "name": "tab_all_category",
+      "value": "全部服务"
+    },
+    {
+      "name": "tab_mine",
+      "value": "我的"
+    },
+    {
+      "name": "EntryFormAbility_desc",
+      "value": "家政模板"
+    },
+    {
+      "name": "EntryFormAbility_label",
+      "value": "家政模板"
+    },
+    {
+      "name": "widget_desc",
+      "value": "家政模板"
+    },
+    {
+      "name": "widget_display_name",
+      "value": "家政模板"
+    },
+    {
+      "name": "title_immersive",
+      "value": "家政模板"
+    }
+  ]
+}

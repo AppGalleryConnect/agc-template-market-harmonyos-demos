@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "city_select_test",
+    "type": "feature",
+    "deviceTypes": [
+      "phone",
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": true
+  }
+}

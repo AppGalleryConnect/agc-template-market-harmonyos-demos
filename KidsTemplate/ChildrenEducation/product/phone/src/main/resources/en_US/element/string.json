@@ -1,0 +1,28 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "children education template"
+    },
+    {
+      "name": "home_page",
+      "value": "homepage"
+    },
+    {
+      "name": "mine_page",
+      "value": "mine"
+    },
+    {
+      "name": "Used_Duration",
+      "value": "The usage time for today has reached the set time"
+    }
+  ]
+}

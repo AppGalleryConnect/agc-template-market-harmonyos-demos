@@ -1,0 +1,9 @@
+{
+  "routerMap": [
+    {
+      "name": "Member",
+      "pageSourceFile": "src/main/ets/pages/Member.ets",
+      "buildFunction": "MemberPageBuilder"
+    }
+  ]
+}

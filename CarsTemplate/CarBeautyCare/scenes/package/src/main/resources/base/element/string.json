@@ -1,0 +1,60 @@
+{
+  "string": [
+    {
+      "name": "sold",
+      "value": "Sold"
+    },
+    {
+      "name": "quantity",
+      "value": "Quantity"
+    },
+    {
+      "name": "applicable_stores",
+      "value": "Applicable_stores"
+    },
+    {
+      "name": "package_content",
+      "value": "Package_content"
+    },
+    {
+      "name": "service_charge",
+      "value": "Service_charge"
+    },
+    {
+      "name": "unit_price",
+      "value": "Unit_price"
+    },
+    {
+      "name": "service_quantity",
+      "value": "Service_quantity"
+    },
+    {
+      "name": "package_detail",
+      "value": "Package_detail"
+    },
+    {
+      "name": "buy_now",
+      "value": "Buy_now"
+    },
+    {
+      "name": "buy_peoples",
+      "value": "Buy_peoples"
+    },
+    {
+      "name": "buying_instructions",
+      "value": "Buying_instructions"
+    },
+    {
+      "name": "buy_description",
+      "value": "Buy_description"
+    },
+    {
+      "name": "package_list",
+      "value": "Package_list"
+    },
+    {
+      "name": "detail",
+      "value": "Detail"
+    }
+  ]
+}

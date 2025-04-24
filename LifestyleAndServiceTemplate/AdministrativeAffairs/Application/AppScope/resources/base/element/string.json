@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "医保模板"
+    },
+    {
+      "name": "agcit_huawei_medical_insurance",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_medical_insurance",
+      "value": "industryTemplate"
+    }
+  ]
+}

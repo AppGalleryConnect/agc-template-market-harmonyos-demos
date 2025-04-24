@@ -1,0 +1,13 @@
+{
+  "module": {
+    "name": "account",
+    "type": "har",
+    "description": "$string:module_desc",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ],
+    "installationFree": true,
+    "routerMap": "$profile:router_map"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "routerMap": [
+    {
+      "name": "BindPhoneDialog",
+      "pageSourceFile": "src/main/ets/dialog/BindPhoneDialog.ets",
+      "buildFunction": "bindPhoneDialogBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "shopMap",
+      "pageSourceFile": "src/main/ets/components/ShopMap.ets",
+      "buildFunction": "ShopMapBuilder",
+      "data": {
+        "description": ""
+      }
+    }
+  ]
+}

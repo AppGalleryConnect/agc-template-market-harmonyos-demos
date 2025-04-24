@@ -1,0 +1,12 @@
+{
+  "module": {
+    "name": "ui_schedule_flow_test",
+    "type": "feature",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": true
+  }
+}

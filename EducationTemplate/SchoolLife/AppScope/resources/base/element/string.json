@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "课程助手"
+    },
+    {
+      "name": "agcit_huawei_school_life",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_school_life",
+      "value": "industryTemplate"
+    }
+  ]
+}

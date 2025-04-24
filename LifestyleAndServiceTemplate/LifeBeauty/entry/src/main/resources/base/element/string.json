@@ -1,0 +1,56 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "美业模板"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "美业模板"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "美业模板"
+    },
+    {
+      "name": "apply_location_reason",
+      "value": "需要计算距离店铺的距离"
+    },
+    {
+      "name": "apply_read_calendar_reason",
+      "value": "申请读取日程权限"
+    },
+    {
+      "name": "apply_write_calendar_reason",
+      "value": "申请写入日程权限"
+    },
+    {
+      "name": "tab_home",
+      "value": "首页"
+    },
+    {
+      "name": "tab_mine",
+      "value": "我的"
+    },
+    {
+      "name": "EntryFormAbility_desc",
+      "value": "美业模板"
+    },
+    {
+      "name": "EntryFormAbility_label",
+      "value": "美业模板"
+    },
+    {
+      "name": "SimpleWidget_desc",
+      "value": "美业模板"
+    },
+    {
+      "name": "SimpleWidget_display_name",
+      "value": "美业模板"
+    },
+    {
+      "name": "title_immersive",
+      "value": "美业模板"
+    }
+  ]
+}

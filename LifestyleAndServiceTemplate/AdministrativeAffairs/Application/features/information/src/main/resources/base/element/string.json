@@ -1,0 +1,36 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "information_loading",
+      "value": "加载中"
+    },
+    {
+      "name": "information_release_refresh",
+      "value": "松开刷新"
+    },
+    {
+      "name": "information_refresh_success",
+      "value": "刷新成功"
+    },
+    {
+      "name": "information_news_hot",
+      "value": "热门"
+    },
+    {
+      "name": "information_visit_number",
+      "value": "访问次数："
+    },
+    {
+      "name": "information_no_data",
+      "value": "没有更多数据了"
+    },
+    {
+      "name": "information_title",
+      "value": "资讯"
+    }
+  ]
+}

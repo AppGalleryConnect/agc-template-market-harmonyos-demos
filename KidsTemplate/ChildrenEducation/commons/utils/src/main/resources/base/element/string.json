@@ -1,0 +1,48 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "link_checking",
+      "value": "Verifying..."
+    },
+    {
+      "name": "reason",
+      "value": "Used to initiate network data requests."
+    },
+    {
+      "name": "vip",
+      "value": "vip"
+    },
+    {
+      "name": "huawei_user",
+      "value": "huawei_user"
+    },
+    {
+      "name": "start_vip",
+      "value": "start_vip"
+    },
+    {
+      "name": "is_vip",
+      "value": "is_vip"
+    },
+    {
+      "name": "not_vip",
+      "value": "not_vip"
+    },
+    {
+      "name": "reach_bottom",
+      "value": "reach_bottom ~"
+    },
+    {
+      "name": "twenty_record",
+      "value": "twenty_record ~"
+    },
+    {
+      "name": "get_mobile_number_error",
+      "value": "Failed to obtain the anonymous mobile number."
+    }
+  ]
+}

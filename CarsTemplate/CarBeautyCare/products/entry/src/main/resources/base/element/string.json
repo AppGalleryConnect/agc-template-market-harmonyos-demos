@@ -1,0 +1,220 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "Module_description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "Description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "Label"
+    },
+    {
+      "name": "permission_reason_location",
+      "value": "Permission_reason_location"
+    },
+    {
+      "name": "near_good_shop",
+      "value": "Near_good_shop"
+    },
+    {
+      "name": "recommended_packages",
+      "value": "Recommended_packages"
+    },
+    {
+      "name": "home_page",
+      "value": "Home_page"
+    },
+    {
+      "name": "car_service",
+      "value": "Car_service"
+    },
+    {
+      "name": "mine",
+      "value": "Mine"
+    },
+    {
+      "name": "car_maintenance",
+      "value": "Car_maintenance"
+    },
+    {
+      "name": "car_beauty",
+      "value": "Car_beauty"
+    },
+    {
+      "name": "car_wash",
+      "value": "Car_wash"
+    },
+    {
+      "name": "car_tires",
+      "value": "Car_tires"
+    },
+    {
+      "name": "car_battery",
+      "value": "Car_battery"
+    },
+    {
+      "name": "transmission_oil",
+      "value": "Transmission_oil"
+    },
+    {
+      "name": "decarbonization",
+      "value": "Decarbonization"
+    },
+    {
+      "name": "appointment",
+      "value": "Appointment"
+    },
+    {
+      "name": "pick_up_coupon",
+      "value": "Pick_up_coupon"
+    },
+    {
+      "name": "shopping_list",
+      "value": "Shopping_list"
+    },
+    {
+      "name": "total_offer",
+      "value": "Total_offer"
+    },
+    {
+      "name": "exclusive_to_newcomers",
+      "value": "Exclusive_to_newcomers"
+    },
+    {
+      "name": "buy_now",
+      "value": "Buy_now"
+    },
+    {
+      "name": "service_detail",
+      "value": "Service_detail"
+    },
+    {
+      "name": "join_list",
+      "value": "Join_list"
+    },
+    {
+      "name": "sold",
+      "value": "Sold"
+    },
+    {
+      "name": "contacts_message",
+      "value": "Contacts_message"
+    },
+    {
+      "name": "my_car",
+      "value": "My_car"
+    },
+    {
+      "name": "my_coupon",
+      "value": "My_coupon"
+    },
+    {
+      "name": "my_appointment",
+      "value": "My_appointment"
+    },
+    {
+      "name": "my_order",
+      "value": "My_order"
+    },
+    {
+      "name": "common_services",
+      "value": "Common_services"
+    },
+    {
+      "name": "user_name",
+      "value": "User_name"
+    },
+    {
+      "name": "huawei_user",
+      "value": "Huawei user"
+    },
+    {
+      "name": "get_mobile_number_error",
+      "value": "Failed to obtain the anonymous mobile number."
+    },
+    {
+      "name": "account_link",
+      "value": "account_link"
+    },
+    {
+      "name": "common_service",
+      "value": "common_service"
+    },
+    {
+      "name": "view_history",
+      "value": "view_history"
+    },
+    {
+      "name": "setting",
+      "value": "setting"
+    },
+    {
+      "name": "account_unlink",
+      "value": "account_unlink"
+    },
+    {
+      "name": "contact_us",
+      "value": "contact_us"
+    },
+    {
+      "name": "app_user_agreement",
+      "value": "User Service Agreement, "
+    },
+    {
+      "name": "app_privacy_policy",
+      "value": "Privacy Policy,"
+    },
+    {
+      "name": "huaweiId_user_authentication_protocol",
+      "value": "HUAWEI ID User Authentication Agreement"
+    },
+    {
+      "name":"and",
+      "value":" and "
+    },
+    {
+      "name":"end",
+      "value":"."
+    },
+    {
+      "name":"read_and_agree",
+      "value":"read_and_agree"
+    },
+    {
+      "name": "hwid_no_internet_connect",
+      "value": "hwid_no_internet_connect"
+    },
+    {
+      "name": "bind_huaweiId_number",
+      "value": "bind_huaweiId_number"
+    },
+    {
+      "name": "read_and_agree_protocol",
+      "value": "read_and_agree_protocol"
+    },
+    {
+      "name": "avatar",
+      "value": "avatar"
+    },
+    {
+      "name": "nickName",
+      "value": "nickName"
+    },
+    {
+      "name": "save",
+      "value": "save"
+    },
+    {
+      "name": "personalInformation",
+      "value": "personalInformation"
+    },
+    {
+      "name": "log_out",
+      "value": "log_out"
+    }
+  ]
+}

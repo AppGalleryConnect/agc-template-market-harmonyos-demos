@@ -1,0 +1,172 @@
+{
+  "string": [
+    {
+      "name": "shared_desc",
+      "value": "description"
+    },
+    {
+      "name": "checkin_tip",
+      "value": "点击打卡"
+    },
+    {
+      "name": "checkin_first_time",
+      "value": "首次打卡"
+    },
+    {
+      "name": "checkin_last_time",
+      "value": "末次打卡"
+    },
+    {
+      "name": "checkin_history",
+      "value": "打卡记录"
+    },
+    {
+      "name": "first_checkin_prefix",
+      "value": "首次："
+    },
+    {
+      "name": "last_checkin_prefix",
+      "value": "末次："
+    },
+    {
+      "name": "checkin_is_on_going",
+      "value": "正在打卡中"
+    },
+    {
+      "name": "checkin_is_finished",
+      "value": "打卡成功"
+    },
+    {
+      "name": "checkin_is_failed",
+      "value": "打卡失败"
+    },
+    {
+      "name": "today",
+      "value": "今天"
+    },
+    {
+      "name": "day_of_week_0",
+      "value": "周日"
+    },
+    {
+      "name": "day_of_week_1",
+      "value": "周一"
+    },
+    {
+      "name": "day_of_week_2",
+      "value": "周二"
+    },
+    {
+      "name": "day_of_week_3",
+      "value": "周三"
+    },
+    {
+      "name": "day_of_week_4",
+      "value": "周四"
+    },
+    {
+      "name": "day_of_week_5",
+      "value": "周五"
+    },
+    {
+      "name": "day_of_week_6",
+      "value": "周六"
+    },
+    {
+      "name": "month_desc_01",
+      "value": "一月"
+    },
+    {
+      "name": "month_desc_02",
+      "value": "二月"
+    },
+    {
+      "name": "month_desc_03",
+      "value": "三月"
+    },
+    {
+      "name": "month_desc_04",
+      "value": "四月"
+    },
+    {
+      "name": "month_desc_05",
+      "value": "五月"
+    },
+    {
+      "name": "month_desc_06",
+      "value": "六月"
+    },
+    {
+      "name": "month_desc_07",
+      "value": "七月"
+    },
+    {
+      "name": "month_desc_08",
+      "value": "八月"
+    },
+    {
+      "name": "month_desc_09",
+      "value": "九月"
+    },
+    {
+      "name": "month_desc_10",
+      "value": "十月"
+    },
+    {
+      "name": "month_desc_11",
+      "value": "十一月"
+    },
+    {
+      "name": "month_desc_12",
+      "value": "十二月"
+    },
+    {
+      "name": "black_90",
+      "value": "rgba(0,0,0,0.9)"
+    },
+    {
+      "name": "black_60",
+      "value": "rgba(0,0,0,0.6)"
+    },
+    {
+      "name": "black_40",
+      "value": "rgba(0,0,0,0.4)"
+    },
+    {
+      "name": "black_20",
+      "value": "rgba(0,0,0,0.2)"
+    },
+    {
+      "name": "white_90",
+      "value": "rgba(255,255,255,0.9)"
+    },
+    {
+      "name": "white_60",
+      "value": "rgba(255,255,255,0.6)"
+    },
+    {
+      "name": "settings",
+      "value": "设置"
+    },
+    {
+      "name": "quick_checkin",
+      "value": "快捷打卡"
+    },
+    {
+      "name": "quick_checkin_desc",
+      "value": "进入手机打卡界面时会自动打卡1次"
+    },
+    {
+      "name": "only_for_demo",
+      "value": "仅做示例，无实际功能"
+    },
+    {
+      "name": "agcit_huawei_office_attendance_checkin",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_office_attendance_checkin",
+      "value": "sceneTemplate"
+    }
+  ]
+}

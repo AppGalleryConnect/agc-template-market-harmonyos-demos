@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "UserAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "UserAbility_label",
+      "value": "label"
+    },
+    {
+      "name": "invalid_age_tip",
+      "value": "输入的年龄值不支持，请输入18-99的数字"
+    }
+  ]
+}

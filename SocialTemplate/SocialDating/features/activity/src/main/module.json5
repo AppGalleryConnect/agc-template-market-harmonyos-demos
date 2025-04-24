@@ -1,0 +1,13 @@
+{
+  "module": {
+    "name": "activity",
+    "type": "har",
+    "description": "$string:module_desc",
+    "mainElement": "ActivityAbility",
+    "deviceTypes": [
+      "phone"
+    ],
+    "installationFree": true,
+    "routerMap": "$profile:route_map",
+  }
+}

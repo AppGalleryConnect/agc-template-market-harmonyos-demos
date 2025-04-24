@@ -1,0 +1,74 @@
+{
+  "ret": {
+    "retCode": 0,
+    "retMsg": "SUCCESS"
+  },
+  "list": [
+    {
+      "activityId": 1,
+      "name": "高尔夫交友",
+      "subTitle": "破圈交友 向上社交",
+      "desc": "请带好所需物品，保管好个人财物",
+      "city": "南京",
+      "address": "南京市玄武区环陵路9号钟山高尔夫俱乐部",
+      "fee": 189,
+      "activityStartTime": 1743901200000,
+      "activityEndTime":  1743933600000,
+      "activityUserNumber": 14,
+      "activityEnrolledCount": 0,
+      "resource0Url": "app.media.activity_1",
+      "resource1Url": "app.media.activity_1_detail1",
+      "resource2Url": "app.media.activity_1",
+      "descTitle": "美丽钟山，绿茵相伴",
+      "descDetail": "钟山高尔夫球场坐落在六朝古都南京美丽的钟山风景区，那里山清水秀，空气怡人。"
+    },
+    {
+      "activityId": 2,
+      "name": "野营交友",
+      "subTitle": "户外交友 玩乐社交",
+      "city": "南京",
+      "address": "紫金山",
+      "fee": 189,
+      "activityStartTime": 1745107200000,
+      "activityEndTime": 1745143200000,
+      "activityUserNumber": 8,
+      "activityEnrolledCount": 8,
+      "resource0Url": "app.media.activity_2",
+      "resource1Url": "app.media.activity_1_detail1",
+      "descTitle": "在自然的怀抱中结交朋友",
+      "descDetail": "这里地理位置独特，露营区域宽敞，基础设施完备，活动项目丰富。"
+    },
+    {
+      "activityId": 3,
+      "name": "桌游交友",
+      "subTitle": "室内交友 愉快社交",
+      "city": "南京",
+      "address": "xx路xx号",
+      "fee": 189,
+      "activityStartTime": 1738375200000,
+      "activityEndTime": 1738382400000,
+      "activityUserNumber": 8,
+      "activityEnrolledCount": 8,
+      "resource0Url": "app.media.activity_3",
+      "resource1Url": "app.media.activity_1_detail1",
+      "descTitle": "专为桌游爱好者设计",
+      "descDetail": "这里有多样化的游戏区域，有丰富的游戏资源，有舒适的休息区，有便捷的饮品吧台。"
+    },
+    {
+      "activityId": 4,
+      "name": "读书交友",
+      "subTitle": "室内交友 愉快社交",
+      "city": "南京",
+      "address": "xx路xx号",
+      "fee": 69,
+      "activityStartTime": 1738375200000,
+      "activityEndTime": 1738382400000,
+      "activityUserNumber": 8,
+      "activityEnrolledCount": 8,
+      "resource0Url": "app.media.activity_4",
+      "resource1Url": "app.media.activity_1_detail1",
+      "descTitle": "读书交友，共享智慧人生",
+      "descDetail": "活动包含主题读书会、名家讲座、互动游戏等丰富多样的环节，让您在轻松愉快的氛围中结识新朋友"
+    }
+  ]
+}

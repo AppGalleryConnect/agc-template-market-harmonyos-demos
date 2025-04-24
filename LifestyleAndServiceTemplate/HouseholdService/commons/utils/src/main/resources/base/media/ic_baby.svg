@@ -1,0 +1,22 @@
+<!--
+  - Copyright (c) 2025 Huawei Device Co., Ltd.
+  - Licensed under the Apache License, Version 2.0 (the "License");
+  - you may not use this file except in compliance with the License.
+  - You may obtain a copy of the License at
+  -
+  -     http://www.apache.org/licenses/LICENSE-2.0
+  -
+  - Unless required by applicable law or agreed to in writing, software
+  - distributed under the License is distributed on an "AS IS" BASIS,
+  - WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  - See the License for the specific language governing permissions and
+  - limitations under the License.
+  -->
+
+<svg width="47.899902" height="48.000000" viewBox="0 0 47.8999 48" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs/>
+	<path id="path" d="M24 48C20.8 48 17.6 47.39 14.7 46.1C11.8 44.89 9.3 43.1 7.1 41C4.89 38.79 3.19 36.2 2 33.39C0.6 30.39 0 27.2 0 24C0 20.79 0.6 17.6 1.89 14.7C3.1 11.79 4.8 9.2 7 7C9.19 4.79 11.8 3.1 14.6 1.89C17.6 0.6 20.8 0 24 0C27.2 0 30.39 0.6 33.3 1.89C36.2 3.1 38.7 4.89 40.89 7C43.1 9.2 44.8 11.79 46 14.6C47.3 17.6 47.89 20.7 47.89 23.89C47.89 27.1 47.3 30.29 46 33.2C44.8 36.1 43 38.6 40.89 40.79C38.7 43 36.1 44.7 33.3 45.89C30.39 47.39 27.2 48 24 48ZM16 24.29C15.1 25.6 14.7 27.1 14.7 28.7L14.7 32C14.7 36.39 18.29 39.89 22.6 39.89L26.5 39.89C28.6 39.89 30.5 39.1 32 37.7C31.89 37.6 31.7 37.6 31.6 37.5L18 25.7L16 24.29ZM33.1 24.2L25.7 29.39C25.6 29.5 25.39 29.6 25.3 29.7L32.7 36.1L33 36.39C33.89 35.1 34.39 33.5 34.39 31.89L34.39 28.6C34.5 27.1 34 25.5 33.1 24.2ZM16.2 20C16.6 21.89 17.7 23.5 19.2 24.7C20.7 25.89 22.6 26.6 24.6 26.6C26.6 26.6 28.5 25.89 30 24.7C31.5 23.5 32.6 21.79 33 20L33.2 20C34.3 20 35.2 19.1 35.2 18C35.2 16.89 34.3 16 33.2 16L33 16C32.6 14.1 31.5 12.5 30 11.29C28.5 10.1 26.6 9.39 24.7 9.39C24.7 8.7 24.6 7.89 24.2 7.89C24.1 7.89 24 7.89 24 8C23.7 8.39 23.6 8.89 23.8 9.39C20.2 9.79 17.2 12.39 16.29 16L16.1 16C15 16 14.1 16.89 14.1 18C14.1 19.1 15 20 16.1 20L16.2 20ZM24.2 22.7C22.6 22.79 21.3 21.6 21.2 20L27.2 20C27.1 21.6 25.8 22.79 24.2 22.7ZM26.89 18C26.39 18 25.89 17.6 25.89 17C25.89 16.5 26.3 16 26.89 16C27.39 16 27.89 16.39 27.89 17C27.89 17.6 27.39 18 26.89 18ZM21.6 18C21.1 18 20.6 17.6 20.6 17C20.6 16.5 21 16 21.6 16C22.1 16 22.6 16.39 22.6 17C22.6 17.6 22.2 18 21.6 18Z" fill="#FE6E6A" fill-opacity="1.000000" fill-rule="nonzero"/>
+</svg>

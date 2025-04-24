@@ -1,0 +1,100 @@
+{
+  "float": [
+    {
+      "name": "loading_progress_size",
+      "value": "40vp"
+    },
+    {
+      "name": "dialog_padding_tb",
+      "value": "20vp"
+    },
+    {
+      "name": "dialog_padding_lr",
+      "value": "25vp"
+    },
+    {
+      "name": "dialog_warn_size",
+      "value": "18vp"
+    },
+    {
+      "name": "dialog_line_width",
+      "value": "2vp"
+    },
+    {
+      "name": "dialog_line_height",
+      "value": "25vp"
+    },
+    {
+      "name": "dialog_content_size",
+      "value": "60vp"
+    },
+    {
+      "name": "dialog_content_padding",
+      "value": "20vp"
+    },
+    {
+      "name": "dialog_content_margin",
+      "value": "20vp"
+    },
+    {
+      "name": "dialog_content_height",
+      "value": "40vp"
+    },
+    {
+      "name": "dialog_content_padding_top",
+      "value": "10vp"
+    },
+    {
+      "name": "dialog_content_padding_bottom",
+      "value": "20vp"
+    },
+    {
+      "name": "dialog_padding_bottom",
+      "value": "40vp"
+    },
+    {
+      "name": "common_margin_sixty",
+      "value": "16vp"
+    },
+    {
+      "name": "common_margin_nineteen",
+      "value": "19vp"
+    },
+    {
+      "name": "common_margin_twelve",
+      "value": "12vp"
+    },
+    {
+      "name": "common_margin_eight",
+      "value": "8vp"
+    },
+    {
+      "name": "common_margin_thirty_eight",
+      "value": "28vp"
+    },
+    {
+      "name": "common_margin_ten",
+      "value": "10vp"
+    },
+    {
+      "name": "common_padding_ten",
+      "value": "10vp"
+    },
+    {
+      "name": "common_padding_twelve",
+      "value": "12vp"
+    },
+    {
+      "name": "common_padding_sixty",
+      "value": "16vp"
+    },
+    {
+      "name": "common_padding_twenty_four",
+      "value": "24vp"
+    },
+    {
+      "name": "common_padding_thirty_one",
+      "value": "31vp"
+    }
+  ]
+}

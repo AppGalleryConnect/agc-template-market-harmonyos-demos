@@ -1,0 +1,148 @@
+[
+  {
+    "period": "一周内",
+    "detail": [
+      {
+        "type": "心电图",
+        "departmentName": "心内科",
+        "time": "2024-12-29",
+        "url": "https://developer.huawei.com"
+      },
+      {
+        "type": "血常规",
+        "departmentName": "检验科",
+        "time": "2024-12-28",
+        "url": "https://developer.huawei.com"
+      },
+      {
+        "type": "B超",
+        "departmentName": "超声科",
+        "time": "2024-12-27",
+        "url": "https://developer.huawei.com"
+      },
+      {
+        "type": "胸透",
+        "departmentName": "放射科",
+        "time": "2024-12-26",
+        "url": "https://developer.huawei.com"
+      },
+      {
+        "type": "尿常规",
+        "departmentName": "检验科",
+        "time": "2024-12-24",
+        "url": "https://developer.huawei.com"
+      },
+      {
+        "type": "CT",
+        "departmentName": "放射科",
+        "time": "2024-12-22",
+        "url": "https://developer.huawei.com"
+      },
+      {
+        "type": "核磁共振",
+        "departmentName": "放射科",
+        "time": "2024-12-20",
+        "url": "https://developer.huawei.com"
+      },
+      {
+        "type": "胃镜",
+        "departmentName": "消化内科",
+        "time": "2024-12-18",
+        "url": "https://developer.huawei.com"
+      },
+      {
+        "type": "肠镜",
+        "departmentName": "消化内科",
+        "time": "2024-12-15",
+        "url": "https://developer.huawei.com"
+      },
+      {
+        "type": "血糖检测",
+        "departmentName": "内分泌科",
+        "time": "2024-12-12",
+        "url": "https://developer.huawei.com"
+      },
+      {
+        "type": "甲状腺功能",
+        "departmentName": "内分泌科",
+        "time": "2024-12-09",
+        "url": "https://developer.huawei.com"
+      },
+      {
+        "type": "骨密度",
+        "departmentName": "骨科",
+        "time": "2024-12-05",
+        "url": "https://developer.huawei.com"
+      }
+    ]
+  },
+  {
+    "period": "三个月内",
+    "detail": [
+      {
+        "type": "B超",
+        "departmentName": "超声科",
+        "time": "2024-12-01",
+        "url": "https://developer.huawei.com"
+      },
+      {
+        "type": "X光",
+        "departmentName": "放射科",
+        "time": "2024-11-15",
+        "url": "https://developer.huawei.com"
+      },
+      {
+        "type": "血常规",
+        "departmentName": "检验科",
+        "time": "2024-10-10",
+        "url": "https://developer.huawei.com"
+      }
+    ]
+  },
+  {
+    "period": "半年内",
+    "detail": [
+      {
+        "type": "头部CT",
+        "departmentName": "放射科",
+        "time": "2024-07-01",
+        "url": "https://developer.huawei.com"
+      },
+      {
+        "type": "腹部B超",
+        "departmentName": "超声科",
+        "time": "2024-06-20",
+        "url": "https://developer.huawei.com"
+      },
+      {
+        "type": "心电图",
+        "departmentName": "心内科",
+        "time": "2024-05-15",
+        "url": "https://developer.huawei.com"
+      }
+    ]
+  },
+  {
+    "period": "一年内",
+    "detail": [
+      {
+        "type": "肺功能",
+        "departmentName": "呼吸内科",
+        "time": "2024-05-15",
+        "url": "https://developer.huawei.com"
+      },
+      {
+        "type": "胃镜",
+        "departmentName": "消化科",
+        "time": "2024-04-10",
+        "url": "https://developer.huawei.com"
+      },
+      {
+        "type": "血糖",
+        "departmentName": "内分泌科",
+        "time": "2024-03-05",
+        "url": "https://developer.huawei.com"
+      }
+    ]
+  }
+]

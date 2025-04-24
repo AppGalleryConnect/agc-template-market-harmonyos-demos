@@ -1,0 +1,32 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "associated_account",
+      "value": "关联账号！"
+    },
+    {
+      "name": "dialog_loading",
+      "value": "加载中"
+    },
+    {
+      "name": "dialog_cancel",
+      "value": "取消"
+    },
+    {
+      "name": "dialog_confirm",
+      "value": "确认"
+    },
+    {
+      "name": "convenience_service",
+      "value": "便民服务"
+    },
+    {
+      "name": "enter_service",
+      "value": "请输入服务事项"
+    }
+  ]
+}

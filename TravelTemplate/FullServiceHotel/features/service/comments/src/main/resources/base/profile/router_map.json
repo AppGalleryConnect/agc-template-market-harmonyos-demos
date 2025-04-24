@@ -1,0 +1,20 @@
+{
+  "routerMap": [
+    {
+      "name": "Comments",
+      "pageSourceFile": "src/main/ets/pages/CommentListPage.ets",
+      "buildFunction": "commentListPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "SubmitComment",
+      "pageSourceFile": "src/main/ets/pages/SubmitCommentPage.ets",
+      "buildFunction": "submitCommentPageBuilder",
+      "data": {
+        "description": ""
+      }
+    }
+  ]
+}

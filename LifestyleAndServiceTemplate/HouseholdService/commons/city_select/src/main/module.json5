@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "city_select",
+    "type": "har",
+    "deviceTypes": [
+      "phone",
+    ]
+  }
+}

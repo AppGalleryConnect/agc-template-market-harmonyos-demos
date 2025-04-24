@@ -1,0 +1,76 @@
+{
+  "string": [
+    {
+      "name": "information",
+      "value": "首页"
+    },
+    {
+      "name": "job",
+      "value": "职位"
+    },
+    {
+      "name": "mine",
+      "value": "我的"
+    },
+    {
+      "name": "mine_login",
+      "value": "点击登录"
+    },
+    {
+      "name": "mine_bind_phone",
+      "value": "关联手机号"
+    },
+    {
+      "name": "mine_unbind_phone",
+      "value": "取消关联"
+    },
+    {
+      "name": "mine_unbind_phone_successfully",
+      "value": "取消关联成功"
+    },
+    {
+      "name": "mine_my_favorite",
+      "value": "我的收藏"
+    },
+    {
+      "name": "mine_delivery_info",
+      "value": "投递记录"
+    },
+    {
+      "name": "mine_resume_management",
+      "value": "简历管理"
+    },
+    {
+      "name": "mine_resume_upload",
+      "value": "附件上传"
+    },
+    {
+      "name": "mine_resume_view",
+      "value": "附件查看"
+    },
+    {
+      "name": "resume_management_notify",
+      "value": "最多支持上传3份简历"
+    },
+    {
+      "name": "upload_attachment",
+      "value": "上传附件"
+    },
+    {
+      "name": "upload_from_local",
+      "value": "从本地上传"
+    },
+    {
+      "name": "upload_from_management",
+      "value": "从附件管理中选择"
+    },
+    {
+      "name": "hwid_no_internet_connect",
+      "value": "No Internet connection. Check your network settings. "
+    },
+    {
+      "name": "hwid_text_button_known",
+      "value": "OK"
+    }
+  ]
+}

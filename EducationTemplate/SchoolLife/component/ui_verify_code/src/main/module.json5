@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "ui_verify_code",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ]
+  }
+}

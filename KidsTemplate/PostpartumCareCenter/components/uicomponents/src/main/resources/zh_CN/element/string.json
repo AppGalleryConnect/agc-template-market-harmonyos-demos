@@ -1,0 +1,168 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "obtain_location_permission",
+      "value": "点击获取位置权限"
+    },
+    {
+      "name": "package_price_list",
+      "value": "套餐价目表"
+    },
+    {
+      "name": "visit_Consulting",
+      "value": "立即咨询"
+    },
+    {
+      "name": "visit_booking",
+      "value": "预约参观"
+    },
+    {
+      "name": "booking_personal_info",
+      "value": "请填写个人信息"
+    },
+    {
+      "name": "booking_must",
+      "value": "*"
+    },
+    {
+      "name": "booking_name",
+      "value": "姓名"
+    },
+    {
+      "name": "booking_name_input",
+      "value": "请输入姓名"
+    },
+    {
+      "name": "booking_telephone",
+      "value": "手机号码"
+    },
+    {
+      "name": "booking_telephone_input",
+      "value": "关联手机号"
+    },
+    {
+      "name": "booking_store",
+      "value": "参观门店"
+    },
+    {
+      "name": "booking_date",
+      "value": "选择到店参观日期"
+    },
+    {
+      "name": "booking_date_input",
+      "value": "请点击选择日期"
+    },
+    {
+      "name": "booking_project",
+      "value": "服务项目"
+    },
+    {
+      "name": "booking_project_description",
+      "value": "体验介绍"
+    },
+    {
+      "name": "booking_tips",
+      "value": "温馨提示：预约成功后，销售顾问将尽快与您联系确认接待时间，请您按接待时间安排出行，避免不必要的等候。"
+    },
+    {
+      "name": "booking_comfort_experience",
+      "value": "超感式体验（90min）"
+    },
+    {
+      "name": "booking_sightseeing_experience",
+      "value": "观光式体验（30min）"
+    },
+    {
+      "name": "booking_price",
+      "value": "￥99"
+    },
+    {
+      "name": "booking_free",
+      "value": "免费"
+    },
+    {
+      "name": "booking_button",
+      "value": "立即预约"
+    },
+    {
+      "name": "store_type_description",
+      "value": "房型介绍"
+    },
+    {
+      "name": "store_type_description_en",
+      "value": "Room type"
+    },
+    {
+      "name": "activity_booking_success",
+      "value": "报名成功"
+    },
+    {
+      "name": "booking_success_message",
+      "value": "预约成功"
+    },
+    {
+      "name": "booking_add_calendar",
+      "value": "添加到日历"
+    },
+    {
+      "name": "booking_calendar_add_success",
+      "value": "已添加到日历"
+    },
+    {
+      "name": "feedback_title",
+      "value": "意见反馈"
+    },
+    {
+      "name": "feedback_content_desc",
+      "value": "反馈内容"
+    },
+    {
+      "name": "feedback_content_guide",
+      "value": "请输入详细内容，以便我们更好的理解您的诉求"
+    },
+    {
+      "name": "submit_immediately",
+      "value": "立即提交"
+    },
+    {
+      "name": "activity_info",
+      "value": "活动信息"
+    },
+    {
+      "name": "activity_name",
+      "value": "活动主题"
+    },
+    {
+      "name": "booking_phone",
+      "value": "预约号码"
+    },
+    {
+      "name": "activity_address",
+      "value": "活动地址"
+    },
+    {
+      "name": "unbind_account",
+      "value": "解除关联"
+    },
+    {
+      "name": "bind_account",
+      "value": "关联账号"
+    },
+    {
+      "name": "unbind_dialog_message",
+      "value": "请确认是否解除账号关联？"
+    },
+    {
+      "name": "cancel",
+      "value": "取消"
+    },
+    {
+      "name": "confirm",
+      "value": "确认"
+    }
+  ]
+}

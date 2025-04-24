@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "月子中心"
+    },
+    {
+      "name": "agcit_huawei_postpartum_care_center",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_postpartum_care_center",
+      "value": "industryTemplate"
+    }
+  ]
+}

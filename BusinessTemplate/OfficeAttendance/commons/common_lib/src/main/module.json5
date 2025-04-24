@@ -1,0 +1,36 @@
+{
+  "module": {
+    "name": "common_lib",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ],
+    "requestPermissions":[
+      {
+        // 允许应用在前台运行时获取位置信息
+        "name" : "ohos.permission.LOCATION",
+        // reason需要在/resources/base/element/string.json中新建
+        "reason": "$string:location_permission",
+        "usedScene": {
+          "abilities": [
+            "EntryAbility"
+          ],
+          "when":"inuse"
+        }
+      },
+      {
+        // 允许应用获取设备模糊位置信息
+        "name" : "ohos.permission.APPROXIMATELY_LOCATION",
+        // reason需要在/resources/base/element/string.json中新建
+        "reason": "$string:approximately_location_permission",
+        "usedScene": {
+          "abilities": [
+            "EntryAbility"
+          ],
+          "when":"inuse"
+        }
+      }
+    ]
+  }
+}

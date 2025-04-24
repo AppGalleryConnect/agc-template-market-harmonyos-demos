@@ -1,0 +1,216 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "汽车保养"
+    },
+    {
+      "name": "permission_reason_location",
+      "value": "获取位置信息的原因"
+    },
+    {
+      "name": "near_good_shop",
+      "value": "附近好店"
+    },
+    {
+      "name": "recommended_packages",
+      "value": "推荐套餐"
+    },
+    {
+      "name": "home_page",
+      "value": "首页"
+    },
+    {
+      "name": "car_service",
+      "value": "汽车服务"
+    },
+    {
+      "name": "mine",
+      "value": "我的"
+    },
+    {
+      "name": "car_maintenance",
+      "value": "保养"
+    },
+    {
+      "name": "car_beauty",
+      "value": "美容"
+    },
+    {
+      "name": "car_wash",
+      "value": "洗车"
+    },
+    {
+      "name": "car_tires",
+      "value": "轮胎"
+    },
+    {
+      "name": "car_battery",
+      "value": "电瓶"
+    },
+    {
+      "name": "transmission_oil",
+      "value": "变速箱油"
+    },
+    {
+      "name": "decarbonization",
+      "value": "除积碳"
+    },
+    {
+      "name": "appointment",
+      "value": "预约"
+    },
+    {
+      "name": "pick_up_coupon",
+      "value": "领券"
+    },
+    {
+      "name": "shopping_list",
+      "value": "清单"
+    },
+    {
+      "name": "total_offer",
+      "value": "共计优惠"
+    },
+    {
+      "name": "exclusive_to_newcomers",
+      "value": "小保养券（新人专项）"
+    },
+    {
+      "name": "buy_now",
+      "value": "立即购买"
+    },
+    {
+      "name": "service_detail",
+      "value": "服务详情"
+    },
+    {
+      "name": "join_list",
+      "value": "加入清单"
+    },
+    {
+      "name": "sold",
+      "value": "已售"
+    },
+    {
+      "name": "contacts_message",
+      "value": "联系人"
+    },
+    {
+      "name": "my_car",
+      "value": "我的车辆"
+    },
+    {
+      "name": "my_coupon",
+      "value": "我的优惠券"
+    },
+    {
+      "name": "my_appointment",
+      "value": "我的预约"
+    },
+    {
+      "name": "my_order",
+      "value": "我的订单"
+    },
+    {
+      "name": "common_services",
+      "value": "常用服务"
+    },
+    {
+      "name": "user_name",
+      "value": "点击登录"
+    },
+    {
+      "name": "huawei_user",
+      "value": "华为用户"
+    },
+    {
+      "name": "account_link",
+      "value": "关联账号"
+    },
+    {
+      "name": "common_service",
+      "value": "常用服务"
+    },
+    {
+      "name": "view_history",
+      "value": "观看历史"
+    },
+    {
+      "name": "setting",
+      "value": "设置"
+    },
+    {
+      "name": "account_unlink",
+      "value": "解除关联"
+    },
+    {
+      "name": "contact_us",
+      "value": "联系我们"
+    },
+    {
+      "name": "app_user_agreement",
+      "value": "《用户协议》"
+    },
+    {
+      "name": "app_privacy_policy",
+      "value": "《隐私政策》"
+    },
+    {
+      "name": "huaweiId_user_authentication_protocol",
+      "value": "《华为账号用户认证协议》"
+    },
+    {
+      "name":"and",
+      "value":"和"
+    },
+    {
+      "name":"end",
+      "value":"。"
+    },
+    {
+      "name":"read_and_agree",
+      "value":"已阅读并同意"
+    },
+    {
+      "name": "hwid_no_internet_connect",
+      "value": "网络未连接，请检查网络设置"
+    },
+    {
+      "name": "bind_huaweiId_number",
+      "value": "华为账号绑定号码"
+    },
+    {
+      "name": "read_and_agree_protocol",
+      "value": "请先阅读并同意协议"
+    },
+    {
+      "name": "avatar",
+      "value": "头像"
+    },
+    {
+      "name": "nickName",
+      "value": "昵称"
+    },
+    {
+      "name": "save",
+      "value": "保存"
+    },
+    {
+      "name": "personalInformation",
+      "value": "个人信息"
+    },
+    {
+      "name": "log_out",
+      "value": "退出登录"
+    }
+  ]
+}

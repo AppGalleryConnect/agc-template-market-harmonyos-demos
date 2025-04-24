@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "datasource",
+    "type": "har",
+    "description": "$string:shared_desc",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "app": {
+    "bundleName": "com.atomicservice.XXX",
+    "vendor": "example",
+    "versionCode": 1000000,
+    "versionName": "1.0.0",
+    "icon": "$media:app_icon",
+    "label": "$string:agcit_huawei_car_beauty_care"
+  }
+}

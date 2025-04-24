@@ -1,0 +1,36 @@
+{
+  "color": [
+    {
+      "name": "white",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "green",
+      "value": "#00C19C"
+    },
+    {
+      "name": "shallow_green",
+      "value": "#00BD9D"
+    },
+    {
+      "name": "black",
+      "value": "#000000"
+    },
+    {
+      "name": "black_0D",
+      "value": "#0D000000"
+    },
+    {
+      "name": "blue",
+      "value": "#0A59F7"
+    },
+    {
+      "name": "white_e6",
+      "value": "#E6FFFFFF"
+    },
+    {
+      "name": "black_e6",
+      "value": "#E6000000"
+    }
+  ]
+}

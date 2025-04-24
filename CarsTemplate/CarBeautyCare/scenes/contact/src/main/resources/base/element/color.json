@@ -1,0 +1,28 @@
+{
+  "color": [
+    {
+      "name": "color_1",
+      "value": "#ff0000"
+    },
+    {
+      "name": "color_middle_gray",
+      "value": "#E0E0E0"
+    },
+    {
+      "name": "color_red",
+      "value": "#EE3B55"
+    },
+    {
+      "name": "color_grey",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "middleRed",
+      "value": "#EE3B55"
+    },
+    {
+      "name": "middleWhite",
+      "value": "#F1F3F5"
+    }
+  ]
+}

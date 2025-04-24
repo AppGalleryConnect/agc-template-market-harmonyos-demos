@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "garage",
+    "type": "har",
+    "deviceTypes": [
+      "default"
+    ],
+    "routerMap": "$profile:route_map"
+  }
+}

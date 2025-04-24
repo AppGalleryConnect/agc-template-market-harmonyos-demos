@@ -1,0 +1,24 @@
+{
+  "routerMap": [
+    {
+      "name": "RestaurantListPage",
+      "pageSourceFile": "src/main/ets/pages/RestaurantListPage.ets",
+      "buildFunction": "restaurantListPageBuilder"
+    },
+    {
+      "name": "RestaurantPage",
+      "pageSourceFile": "src/main/ets/pages/RestaurantPage.ets",
+      "buildFunction": "restaurantPageBuilder"
+    },
+    {
+      "name": "FoodInfoPage",
+      "pageSourceFile": "src/main/ets/pages/FoodInfoPage.ets",
+      "buildFunction": "foodInfoPageBuilder"
+    },
+    {
+      "name": "FoodOrderSubmitPage",
+      "pageSourceFile": "src/main/ets/pages/FoodOrderSubmitPage.ets",
+      "buildFunction": "foodOrderSubmitPageBuilder"
+    }
+  ]
+}

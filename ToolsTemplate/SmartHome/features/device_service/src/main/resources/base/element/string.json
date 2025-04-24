@@ -1,0 +1,200 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "HuaweiIDSample"
+    },
+    {
+      "name": "login",
+      "value": "Sign in/Sign up"
+    },
+    {
+      "name": "personalInfo",
+      "value": "Personal info"
+    },
+    {
+      "name": "avatar",
+      "value": "Profile picture"
+    },
+    {
+      "name": "nickname",
+      "value": "Nickname"
+    },
+    {
+      "name": "inputNickname",
+      "value": "Set"
+    },
+    {
+      "name": "inputPhone",
+      "value": "Authorize"
+    },
+    {
+      "name": "phone",
+      "value": "Mobile number"
+    },
+    {
+      "name": "authPhone",
+      "value": "Authorize"
+    },
+    {
+      "name": "dearUser",
+      "value": "Dear user"
+    },
+    {
+      "name": "hwid_no_internet_connect",
+      "value": "No Internet connection. Check your network settings. "
+    },
+    {
+      "name":"hwid_text_button_known",
+      "value":"OK"
+    },
+    {
+      "name":"agree",
+      "value":"已同意并阅读 "
+    },
+    {
+      "name":"privacy",
+      "value":"Privacy Policy for Basic Shopping Functions"
+    },
+    {
+      "name":"and",
+      "value":" 和 "
+    },
+    {
+      "name":"protocols",
+      "value":"Shopping Service Terms & Conditions"
+    },
+    {
+      "name":"end",
+      "value":". "
+    },
+    {
+      "name":"appName",
+      "value":"Shopping"
+    },
+    {
+      "name":"appDesc",
+      "value":"New items are added daily, so don't miss out! "
+    },
+    {
+      "name":"shippingAddress",
+      "value":"Shipping address"
+    },
+    {
+      "name":"addAddress",
+      "value":"Add from Huawei ID"
+    },
+    {
+      "name":"openMinorProtection",
+      "value":"Minors protection Mode is on"
+    },
+    {
+      "name":"closeMinorProtection",
+      "value":"Minors protection Mode is off"
+    },
+    {
+      "name":"invoiceTitle",
+      "value":"Invoice header"
+    },
+    {
+      "name":"addInvoiceTitle",
+      "value":"Add from Huawei ID"
+    },
+    {
+      "name":"minorProtection",
+      "value":"Minors protection"
+    },
+    {
+      "name":"availableTime",
+      "value":"Available duration"
+    },
+    {
+      "name": "closeMinorsTitle",
+      "value": "Juvenile mode has been enabled on your device. To disable it, go to Health Use your phone. Are you sure you want to continue?"
+    },
+    {
+      "name": "cancel",
+      "value": "取消"
+    },
+    {
+      "name": "close",
+      "value": "Close"
+    },
+    {
+      "name": "other_login_models",
+      "value": "other login models"
+    },
+    {
+      "name": "login_for_enjoy_service",
+      "value": "log in to enjoy more services"
+    },
+    {
+      "name": "dear_user_good_morning",
+      "value": "Dear user, good morning"
+    },
+    {
+      "name": "next_step",
+      "value": "Next Step"
+    },
+    {
+      "name": "pwd_login",
+      "value": "Password Login"
+    },
+    {
+      "name": "shopping_user_agreement",
+      "value": "《用户协议》"
+    },
+    {
+      "name": "shopping_privacy_policy",
+      "value": "《隐私政策》"
+    },
+    {
+      "name": "huaweiId_user_authentication_protocol",
+      "value": "《华为账号用户认证协议》"
+    },
+    {
+      "name": "user_agreemenet_and_privacy_policy",
+      "value": "用户协议和隐私政策"
+    },
+    {
+      "name": "signing_in",
+      "value": "Signing in..."
+    },
+    {
+      "name": "bind_huaweiId_number",
+      "value": "Binding a Huawei ID to a Number"
+    },
+    {
+      "name": "service_error",
+      "value": "Service or network error. Please try again later."
+    },
+    {
+      "name": "agree_and_sign_in",
+      "value": "同意"
+    },
+    {
+      "name": "need_self_adapt",
+      "value": "The page logic needs to be adapted by the application."
+    },
+    {
+      "name": "not_login_in",
+      "value": "You have not logged in with your Huawei ID. Please try again."
+    },
+    {
+      "name": "scope_not_supported",
+      "value": "The scopes or permissions are not supported."
+    },
+    {
+      "name": "app_not_required_scopes_or_permissions",
+      "value": "The app does not have the required scopes or permissions."
+    }
+  ]
+}

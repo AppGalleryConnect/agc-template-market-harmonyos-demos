@@ -1,0 +1,64 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "sold",
+      "value": "已售"
+    },
+    {
+      "name": "quantity",
+      "value": "份"
+    },
+    {
+      "name": "applicable_stores",
+      "value": "适用门店"
+    },
+    {
+      "name": "package_content",
+      "value": "套餐内容"
+    },
+    {
+      "name": "service_charge",
+      "value": "服务（工时费）"
+    },
+    {
+      "name": "unit_price",
+      "value": "单价"
+    },
+    {
+      "name": "service_quantity",
+      "value": "数量"
+    },
+    {
+      "name": "package_detail",
+      "value": "套餐详情"
+    },
+    {
+      "name": "buy_now",
+      "value": "立即抢购"
+    },
+    {
+      "name": "buy_peoples",
+      "value": "人购买"
+    },
+    {
+      "name": "buying_instructions",
+      "value": "购买须知"
+    },
+    {
+      "name": "buy_description",
+      "value": "*套餐卡所展示原价以门店实际定价为准"
+    },
+    {
+      "name": "package_list",
+      "value": "套餐列表"
+    },
+    {
+      "name": "detail",
+      "value": "查看详情"
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "label"
+    },
+    {
+      "name": "permission_reason_location",
+      "value": "获取位置信息的原因"
+    },
+    {
+      "name": "agency_task",
+      "value": "待办"
+    },
+    {
+      "name": "deadTime",
+      "value": "截止日期："
+    },
+    {
+      "name": "btn_confirm",
+      "value": "确定"
+    },
+    {
+      "name": "new_agency_task_succ_tip",
+      "value": "新建成功"
+    },
+    {
+      "name": "new_agency_title_tip",
+      "value": "标题"
+    },
+    {
+      "name": "new_agency_desc_tip",
+      "value": "添加描述"
+    },
+    {
+      "name": "new_agency_time_tip",
+      "value": "请选择"
+    },
+    {
+      "name": "select_plan_time",
+      "value": "截止时间"
+    },
+    {
+      "name": "setting_plan_time",
+      "value": "设置截止时间"
+    },
+    {
+      "name": "attach",
+      "value": "附件"
+    },
+    {
+      "name": "select_add_attach",
+      "value": "添加"
+    },
+    {
+      "name": "edit_agency_task",
+      "value": "待办详情"
+    },
+    {
+      "name": "agency_parent_tip",
+      "value": "父待办："
+    },
+    {
+      "name": "agency_new_subtask",
+      "value": "子待办"
+    },
+    {
+      "name": "today",
+      "value": "今天"
+    },
+    {
+      "name": "aagcit_huawei_office_attendance_agency",
+      "value": "1.0.0"
+    },
+    {
+      "name": "aagcittype_huawei_office_attendance_agency",
+      "value": "sceneTemplate"
+    },
+    {
+      "name": "new_success",
+      "value": "新建成功"
+    },
+    {
+      "name": "edit_success",
+      "value": "修改成功"
+    },
+    {
+      "name": "search_tip",
+      "value": "搜索"
+    },
+    {
+      "name": "agency_title_empty_tip",
+      "value": "请输入标题"
+    },
+    {
+      "name": "delete_agency_title",
+      "value": "删除待办"
+    },
+    {
+      "name": "no_agency",
+      "value": "暂无待办"
+    },
+    {
+      "name": "delete_agency_content",
+      "value": "被删除的待办无法恢复"
+    },
+    {
+      "name": "agcit_huawei_office_attendance_agency",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_office_attendance_agency",
+      "value": "sceneTemplate"
+    },
+    {
+      "name": "btn_save",
+      "value": "保存"
+    }
+  ]
+}

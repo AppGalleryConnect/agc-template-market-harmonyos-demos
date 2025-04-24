@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "FeedAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "FeedAbility_label",
+      "value": "label"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "phone",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "",
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "device_add": "file:../../features/device_add",
+    "device_mng": "file:../../features/device_mng",
+    "device_service": "file:../../features/device_service",
+    "utils": "file:../../commons/utils",
+    "uicomponents": "file:../../commons/uicomponents",
+    "external_interactions": "file:../../commons/external_interactions"
+  }
+}
+

@@ -1,0 +1,7 @@
+export { OrderPage } from './src/main/ets/pages/OrderPage'
+export { MerchantDetailPage } from './src/main/ets/pages/MerchantDetailPage'
+export { ConfirmOrderPage } from './src/main/ets/pages/ConfirmOrderPage'
+export { GoodDetailPage } from './src/main/ets/pages/GoodDetailPage'
+export { SelectCouponPage } from './src/main/ets/pages/SelectCouponPage'
+export { RemarksPage } from './src/main/ets/pages/RemarksPage'
+export { PreviewImagePage } from './src/main/ets/pages/PreviewImagePage'

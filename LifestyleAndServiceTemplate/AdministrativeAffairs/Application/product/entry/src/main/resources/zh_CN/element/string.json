@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "模块描述"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "医保行业模板"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "医保模板"
+    }
+  ]
+}

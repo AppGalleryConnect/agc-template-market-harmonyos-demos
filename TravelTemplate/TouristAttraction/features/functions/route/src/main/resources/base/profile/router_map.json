@@ -1,0 +1,20 @@
+{
+  "routerMap": [
+    {
+      "name": "Route",
+      "pageSourceFile": "src/main/ets/pages/Route.ets",
+      "buildFunction": "RouteBuilder",
+      "data": {
+        "description": "this is HomeView"
+      }
+    },
+    {
+      "name": "RouteDetail",
+      "pageSourceFile": "src/main/ets/pages/RouteDetail.ets",
+      "buildFunction": "RouteDetailBuilder",
+      "data": {
+        "description": "this is RouteDetail"
+      }
+    }
+  ]
+}

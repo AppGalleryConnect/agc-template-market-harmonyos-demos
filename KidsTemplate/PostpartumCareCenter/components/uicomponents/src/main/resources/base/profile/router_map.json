@@ -1,0 +1,36 @@
+{
+  "routerMap": [
+    {
+      "name": "Booking",
+      "pageSourceFile": "src/main/ets/components/Booking.ets",
+      "buildFunction": "BookingBuilder",
+      "data": {
+        "description": "this is Booking"
+      }
+    },
+    {
+      "name": "StoreDetail",
+      "pageSourceFile": "src/main/ets/components/StoreDetail.ets",
+      "buildFunction": "StoreDetailBuilder",
+      "data": {
+        "description": "this is store detail"
+      }
+    },
+    {
+      "name": "BookingSuccess",
+      "pageSourceFile": "src/main/ets/components/BookingSuccess.ets",
+      "buildFunction": "BookingSuccessBuilder",
+      "data": {
+        "description": "this is booking success page"
+      }
+    },
+    {
+      "name": "BindPhoneDialog",
+      "pageSourceFile": "src/main/ets/components/BindPhoneDialog.ets",
+      "buildFunction": "bindPhoneDialogBuilder",
+      "data": {
+        "description": ""
+      }
+    }
+  ]
+}

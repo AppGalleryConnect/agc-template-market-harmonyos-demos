@@ -1,0 +1,20 @@
+{
+  "routerMap": [
+    {
+      "name": "package",
+      "pageSourceFile": "src/main/ets/components/PackageView.ets",
+      "buildFunction": "PackageViewBuilder",
+      "data": {
+        "description" : "this is PackageView"
+      }
+    },
+    {
+      "name": "packageDetail",
+      "pageSourceFile": "src/main/ets/components/PackageDetailView.ets",
+      "buildFunction": "PackageDetailViewBuilder",
+      "data": {
+        "description" : "this is PackageDetailView"
+      }
+    }
+  ]
+}

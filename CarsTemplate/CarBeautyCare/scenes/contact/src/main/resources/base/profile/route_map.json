@@ -1,0 +1,20 @@
+{
+  "routerMap": [
+    {
+      "name": "addContact",
+      "pageSourceFile": "src/main/ets/components/AddContact.ets",
+      "buildFunction": "AddContactPageBuilder",
+      "data": {
+        "description" : "this is AddContact"
+      }
+    },
+    {
+      "name": "contact",
+      "pageSourceFile": "src/main/ets/components/ContactPage.ets",
+      "buildFunction": "ContactPageBuilder",
+      "data": {
+        "description" : "this is ContactPage"
+      }
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "color": [
+    {
+      "name": "white_bgc",
+      "value": "#FFFFFFFF"
+    },
+    {
+      "name": "black_font",
+      "value": "#000000"
+    },
+    {
+      "name": "main_bgc",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "card_gray_font",
+      "value": "#FF4141"
+    },
+    {
+      "name": "tab_default_color",
+      "value": "#66000000"
+    },
+    {
+      "name": "tab_active_color",
+      "value": "#FFED6F21"
+    },
+    {
+      "name": "main_bgc_color",
+      "value": "#FFEFEC"
+    }
+  ]
+}

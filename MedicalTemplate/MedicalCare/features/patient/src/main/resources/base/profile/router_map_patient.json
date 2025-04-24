@@ -1,0 +1,20 @@
+{
+  "routerMap": [
+    {
+      "name": "PatientListPage",
+      "pageSourceFile": "src/main/ets/components/PatientListPage.ets",
+      "buildFunction": "PatientListPageBuilder",
+      "data": {
+        "description": "PatientListPage"
+      }
+    },
+    {
+      "name": "PatientDetailPage",
+      "pageSourceFile": "src/main/ets/components/PatientDetailPage.ets",
+      "buildFunction": "PatientDetailPageBuilder",
+      "data": {
+        "description": "PatientDetailPage"
+      }
+    }
+  ]
+}

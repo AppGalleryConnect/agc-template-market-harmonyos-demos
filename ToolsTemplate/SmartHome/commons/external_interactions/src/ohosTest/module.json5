@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "external_interactions_test",
+    "type": "feature",
+    "deviceTypes": [
+      "default"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "routerMap": [
+    {
+      "name": "NewFeed",
+      "pageSourceFile": "src/main/ets/pages/NewFeedPage.ets",
+      "buildFunction": "NewFeedPageBuilder"
+    },
+    {
+      "name": "FeedList",
+      "pageSourceFile": "src/main/ets/pages/FeedListPage.ets",
+      "buildFunction": "FeedListPageBuilder"
+    },
+    {
+      "name": "FeedDetail",
+      "pageSourceFile": "src/main/ets/pages/FeedDetailPage.ets",
+      "buildFunction": "FeedDetailPageBuilder"
+    }
+  ]
+}

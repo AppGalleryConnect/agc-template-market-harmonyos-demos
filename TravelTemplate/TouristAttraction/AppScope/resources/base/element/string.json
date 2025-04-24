@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "TouristAttractionTemplate"
+    },
+    {
+      "name": "agcit_40717667622022212647",
+      "value": "@ohos-agcit/tourist-attraction/1.0.0"
+    },
+    {
+      "name": "agcit_huawei_tourist_attraction",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_tourist_attraction",
+      "value": "industryTemplate"
+    }
+  ]
+}

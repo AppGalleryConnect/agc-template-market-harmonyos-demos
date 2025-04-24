@@ -1,0 +1,48 @@
+{
+  "ret": {
+    "retCode": 0,
+    "retMsg": "SUCCESS"
+  },
+  "users": [
+    {
+      "userInfo": {
+        "hwUnionId": "uid100012",
+        "userNo": "100012",
+        "uid": 100012,
+        "nickName": "要减肥的冥王星",
+        "realNameAuthFlag": 1,
+        "gender": 0,
+        "marriageStatus": 0,
+        "birth": "2000-01-01",
+        "selfIntroduction": "我是一个比较开朗的人，有幽默感的同时还会拿捏分寸，希望可以认识一下～",
+        "profilePictureUrl": "app.media.head_image_100012",
+        "education": 3,
+        "currentResidence": "北京",
+        "originFrom": "北京",
+        "job": "公务员/事业单位",
+        "monthlyIncome": 3,
+        "height": 175
+      }
+    },
+    {
+      "userInfo": {
+        "hwUnionId": "uid100003",
+        "userNo": "100003",
+        "uid": 100003,
+        "nickName": "火星",
+        "realNameAuthFlag": 0,
+        "gender": 0,
+        "marriageStatus": 0,
+        "birth": "1997-01-01",
+        "selfIntroduction": "希望找一个有幽默感的人, 一起笑对人生呀~~",
+        "profilePictureUrl": "app.media.head_image_100003",
+        "education": 3,
+        "currentResidence": "江苏南京",
+        "originFrom": "江苏镇江",
+        "job": "商业/服务业/个体经营",
+        "monthlyIncome": 4,
+        "height": 170
+      }
+    }
+  ]
+}

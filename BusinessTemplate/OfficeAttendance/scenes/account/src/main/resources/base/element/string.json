@@ -1,0 +1,156 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "AccountbindingAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "AccountbindingAbility_label",
+      "value": "label"
+    },
+    {
+      "name": "account_binding_tip",
+      "value": "account_binding_tip"
+    },
+    {
+      "name": "bound_by_phone_tip",
+      "value": "bound_by_phone_tip"
+    },
+    {
+      "name": "bound_by_account_verification_tip",
+      "value": "bound_by_account_verification_tip"
+    },
+    {
+      "name": "account_verification_tip",
+      "value": "account_verification_tip"
+    },
+    {
+      "name": "account_verification_notice",
+      "value": "account_verification_notice"
+    },
+    {
+      "name": "login_tip_account",
+      "value": "account_verification_tip_account"
+    },
+    {
+      "name": "login_tip_password",
+      "value": "account_verification_tip_password"
+    },
+    {
+      "name": "account_verification_placeholder_account",
+      "value": "account_verification_placeholder_account"
+    },
+    {
+      "name": "account_verification_placeholder_password",
+      "value": "account_verification_placeholder_password"
+    },
+    {
+      "name": "login",
+      "value": "login"
+    },
+    {
+      "name": "account_can_not_empty",
+      "value": "account_can_not_empty"
+    },
+    {
+      "name": "password_can_not_empty",
+      "value": "password_can_not_empty"
+    },
+    {
+      "name": "about_us",
+      "value": "about_us"
+    },
+    {
+      "name": "account_name",
+      "value": "about_us"
+    },
+    {
+      "name": "unbind_account",
+      "value": "unbind_account"
+    },
+    {
+      "name": "unbind_dialog_title",
+      "value": "unbind_dialog_title"
+    },
+    {
+      "name": "unbind_dialog_message",
+      "value": "unbind_dialog_message"
+    },
+    {
+      "name": "cancel",
+      "value": "cancel"
+    },
+    {
+      "name": "confirm",
+      "value": "confirm"
+    },
+    {
+      "name": "black_90",
+      "value": "rgba(0,0,0,0.9)"
+    },
+    {
+      "name": "black_60",
+      "value": "rgba(0,0,0,0.6)"
+    },
+    {
+      "name": "black_40",
+      "value": "rgba(0,0,0,0.4)"
+    },
+    {
+      "name": "black_20",
+      "value": "rgba(0,0,0,0.2)"
+    },
+    {
+      "name": "white_90",
+      "value": "rgba(255,255,255,0.9)"
+    },
+    {
+      "name": "about",
+      "value": "about"
+    },
+    {
+      "name": "office_attendance",
+      "value": "office_attendance"
+    },
+    {
+      "name": "ICP",
+      "value": "ICP"
+    },
+    {
+      "name": "customer_service_telephone",
+      "value": "customer_service_telephone"
+    },
+    {
+      "name": "copy_right",
+      "value": "copy_right"
+    },
+    {
+      "name": "agcit_huawei_office_attendance_account",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_office_attendance_account",
+      "value": "sceneTemplate"
+    },
+    {
+      "name": "user_info",
+      "value": "user_info"
+    },
+    {
+      "name": "avatar",
+      "value": "avatar"
+    },
+    {
+      "name": "nickName",
+      "value": "nickName"
+    },
+    {
+      "name": "log_out",
+      "value": "log_out"
+    }
+  ]
+}

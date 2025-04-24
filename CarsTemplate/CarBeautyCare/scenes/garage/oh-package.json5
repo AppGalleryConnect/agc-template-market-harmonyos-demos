@@ -1,0 +1,12 @@
+{
+  "name": "@ohos_agcit/car_beauty_care_garage",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@ohos_agcit/car_beauty_care_commonlib": "file:../../commons/commonLib",
+    "@ohos_agcit/car_beauty_care_keyboard": "file:../carKeyboard"
+  }
+}

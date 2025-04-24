@@ -1,0 +1,136 @@
+{
+  "files": [
+    "**/*.ets"
+  ],
+  "ignore": [
+    "**/src/ohosTest/**/*",
+    "**/src/test/**/*",
+    "**/src/mock/**/*",
+    "**/node_modules/**/*",
+    "**/oh_modules/**/*",
+    "**/build/**/*",
+    "**/BuildProfile.ets",
+    "**/.preview/**/*"
+  ],
+  "ruleSet": [
+    "plugin:@performance/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@hw-stylistic/recommended"
+  ],
+  "rules": {
+    // 不允许对不是“Thenable”对象的值使用await关键字
+    "@typescript-eslint/await-thenable": "error",
+    // 定义数组类型时，使用相同的样式 T[]
+    "@typescript-eslint/array-type": [
+      "error",
+      {
+        "default": "array"
+      }
+    ],
+    // 不允许使用某些类型，如String，Boolean等
+    "@typescript-eslint/ban-types": "error",
+    // 使用一致的括号样式
+    "@typescript-eslint/brace-style": "error",
+    // 多行时必须使用尾随逗号
+    "@typescript-eslint/comma-dangle": [
+      "error",
+      "always-multiline",
+    ],
+    // 逗号前后风格一致，默认逗号前无空格，逗号后至少一个空格
+    "@typescript-eslint/comma-spacing": "error",
+    // 使用Record<K, T>，而不是{ [key: K]: T }
+    "@typescript-eslint/consistent-indexed-object-style": "error",
+    // 使用interface进行类型声明
+    "@typescript-eslint/consistent-type-definitions": "error",
+    // 强制默认参数位于参数列表的最后一个
+    "@typescript-eslint/default-param-last": "error",
+    // 在类属性和方法上显式定义访问修饰符
+    "@typescript-eslint/explicit-member-accessibility": [
+      "error",
+      {
+        accessibility: 'explicit',
+        overrides: {
+          accessors: 'explicit',
+          constructors: 'no-public',
+          methods: 'explicit',
+          properties: 'off',
+          parameterProperties: 'explicit'
+        }
+      }
+    ],
+    // 禁止函数名与函数名后面的括号之间加空格
+    "@typescript-eslint/func-call-spacing": "error",
+    // 要求在变量声明中进行初始化
+    "@typescript-eslint/init-declarations": "error",
+    // 关键字前至少需要一个空格，关键字后至少需要一个空格
+    "@typescript-eslint/keyword-spacing": "error",
+    // 默认接口/类型别名定义为多行的场景下，每个成员应以分号 (;) 分隔。 最后一个成员必须有一个分隔符。
+    // 默认接口/类型别名定义为单行的场景下，每个成员应以分号 (;) 分隔。最后一个成员不能有分隔符。
+    // 接口/类型别名中的任何换行符都会使其成为多行。
+    "@typescript-eslint/member-delimiter-style": "error",
+    // 强制标识符使用一致的命名风格
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        // 默认采用小驼峰
+        "selector": "default",
+        "format": [
+          "camelCase",
+          "UPPER_CASE"
+        ]
+      },
+      {
+        // 私有成员以下划线为前缀
+        "selector": "memberLike",
+        "modifiers": [
+          "private"
+        ],
+        "format": [
+          "camelCase",
+          "UPPER_CASE"
+        ],
+        "leadingUnderscore": "require"
+      },
+      {
+        // 类型采用大驼峰
+        "selector": "typeLike",
+        "format": [
+          "PascalCase"
+        ]
+      }
+    ],
+    // 不允许使用“Array”构造函数
+    "@typescript-eslint/no-array-constructor": "error",
+    // 禁止重复的模块导入
+    "@typescript-eslint/no-duplicate-imports": "error",
+    // 不允许使用空函数
+    "@typescript-eslint/no-empty-function": "error",
+    // 不允许声明空接口
+    "@typescript-eslint/no-empty-interface": "error",
+    // 禁止使用不必要的括号
+    "@typescript-eslint/no-extra-parens": "error",
+    // 禁止使用不必要的分号
+    "@typescript-eslint/no-extra-semi": "error",
+    // 代码中禁止包含未使用的表达式
+    "@typescript-eslint/no-unused-expressions": "error",
+    // 禁止定义未使用的变量
+    "@typescript-eslint/no-unused-vars": "error",
+    // 禁止不必要的构造函数
+    "@typescript-eslint/no-useless-constructor": "error",
+    // 尽可能的使用单引号
+    "@typescript-eslint/quotes": [
+      "error",
+      "single"
+    ],
+    // 要求使用句尾分号
+    "@typescript-eslint/semi": "error",
+    // 要求运算符前后有空格
+    "@typescript-eslint/space-infix-ops": "error",
+    // 类型注释前后需要一致的空格风格
+    "@typescript-eslint/type-annotation-spacing": "error",
+    // 要求使用===和!==
+    "eqeqeq": "error",
+    // 不使用的代码段建议直接删除
+    "@security/no-commented-code": "warn"
+  }
+}

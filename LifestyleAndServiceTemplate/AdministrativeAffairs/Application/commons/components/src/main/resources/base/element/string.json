@@ -1,0 +1,240 @@
+{
+  "string": [
+    {
+      "name": "no_data",
+      "value": "暂无数据"
+    },
+    {
+      "name": "convenience_service",
+      "value": "便民服务"
+    },
+    {
+      "name": "drug_code",
+      "value": "药品编码"
+    },
+    {
+      "name": "manufacturer",
+      "value": "生产厂家"
+    },
+    {
+      "name": "specification",
+      "value": "规格"
+    },
+    {
+      "name": "dosage_form",
+      "value": "剂型"
+    },
+    {
+      "name": "searching",
+      "value": "搜索"
+    },
+    {
+      "name": "about_leave",
+      "value": "即将离开，并进行导航"
+    },
+    {
+      "name": "organization_code",
+      "value": "机构编码："
+    },
+    {
+      "name": "organization_type",
+      "value": "机构类型："
+    },
+    {
+      "name": "institutions_all",
+      "value": "全部"
+    },
+    {
+      "name": "institutions_level_1",
+      "value": "一级"
+    },
+    {
+      "name": "institutions_level_2",
+      "value": "二级"
+    },
+    {
+      "name": "medical_insurance_code",
+      "value": "医保码"
+    },
+    {
+      "name": "mobile_payment",
+      "value": "移动支付"
+    },
+    {
+      "name": "e_prescription",
+      "value": "电子处方"
+    },
+    {
+      "name": "e_bill",
+      "value": "电子票据"
+    },
+    {
+      "name": "medicare_wallet",
+      "value": "医保钱包"
+    },
+    {
+      "name": "failed_location",
+      "value": "定位权限未开启，如需开启请前往系统设置！"
+    },
+    {
+      "name": "search_key",
+      "value": "搜索"
+    },
+    {
+      "name": "search",
+      "value": "搜索"
+    },
+    {
+      "name": "hospital_grade",
+      "value": "医院等级"
+    },
+    {
+      "name": "more_filter",
+      "value": "更多筛选"
+    },
+    {
+      "name": "code_name",
+      "value": "张**"
+    },
+    {
+      "name": "card_id",
+      "value": "342********************"
+    },
+    {
+      "name": "insured_place",
+      "value": "参保地 南京市"
+    },
+    {
+      "name": "code_description",
+      "value": "本二维码可用于身份凭证、医保支付"
+    },
+    {
+      "name": "medical_security",
+      "value": "国家医疗保障局监制"
+    },
+    {
+      "name": "medical_insurance_voucher",
+      "value": "（医保电子凭证）"
+    },
+    {
+      "name": "associated_account",
+      "value": "关联账号"
+    },
+    {
+      "name": "account_balance",
+      "value": "职工医保个人账号余额（元）"
+    },
+    {
+      "name": "reservation_record",
+      "value": "预约记录"
+    },
+    {
+      "name": "avatar",
+      "value": "头像"
+    },
+    {
+      "name": "name",
+      "value": "昵称"
+    },
+    {
+      "name": "card_type",
+      "value": "证件类型"
+    },
+    {
+      "name": "Id_card",
+      "value": "身份证"
+    },
+    {
+      "name": "Id_card_number",
+      "value": "身份证号码"
+    },
+    {
+      "name": "phone_number",
+      "value": "电话"
+    },
+    {
+      "name": "reservation_location",
+      "value": "预约地点："
+    },
+    {
+      "name": "reservation_time",
+      "value": "预约时间："
+    },
+    {
+      "name": "record_success",
+      "value": "预约成功！"
+    },
+    {
+      "name": "record_failed",
+      "value": "预约失败！"
+    },
+    {
+      "name": "common_cancel",
+      "value": "取消"
+    },
+    {
+      "name": "common_submit",
+      "value": "提交"
+    },
+    {
+      "name": "not_passed",
+      "value": "未传入插槽"
+    },
+    {
+      "name": "call_service",
+      "value": "呼叫客服"
+    },
+    {
+      "name": "medical_security_title",
+      "value": "中国医疗保障"
+    },
+    {
+      "name": "medical_version",
+      "value": "版本："
+    },
+    {
+      "name": "opinions_suggestions",
+      "value": "意见建议"
+    },
+    {
+      "name": "suggestions_description",
+      "value": "问题描述"
+    },
+    {
+      "name": "suggestions_description_placeholder",
+      "value": "请输入问题描述"
+    },
+    {
+      "name": "suggestions_image_upload",
+      "value": "问题截图（选填）"
+    },
+    {
+      "name": "suggestions_contact",
+      "value": "联系方式（选填）"
+    },
+    {
+      "name": "suggestions_contact_placeholder",
+      "value": "请填写联系手机"
+    },
+    {
+      "name": "suggestions_submit",
+      "value": "提交"
+    },
+    {
+      "name": "suggestions_problem_description",
+      "value": "请输入问题描述"
+    },
+    {
+      "name": "suggestions_problem_phone",
+      "value": "请输入正确的手机号"
+    },
+    {
+      "name": "suggestions_submit_success",
+      "value": "意见提交成功"
+    },
+    {
+      "name": "reservation_tips",
+      "value": "左滑可删除"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+<svg width="60.000000" height="60.000000" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs>
+		<filter id="filter_18_1246_dd" x="0.000000" y="0.000000" width="60.000000" height="60.000000" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+			<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+			<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+			<feMorphology radius="2" in="" result="BackgroundImageFix"/>
+			<feOffset dx="0" dy="2"/>
+			<feGaussianBlur stdDeviation="2.66667"/>
+			<feComposite in2="hardAlpha" operator="out" k2="-1" k3="1"/>
+			<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.078 0"/>
+			<feBlend mode="normal" in2="BackgroundImageFix" result="effect_dropShadow_1"/>
+			<feBlend mode="normal" in="SourceGraphic" in2="effect_dropShadow_1" result="shape"/>
+		</filter>
+		<clipPath id="clip18_1246">
+			<rect rx="20.000000" width="40.000000" height="40.000000" transform="translate(10.000000 8.000000)" fill="white" fill-opacity="0"/>
+		</clipPath>
+	</defs>
+	<g filter="url(#filter_18_1246_dd)">
+		<rect rx="20.000000" width="40.000000" height="40.000000" transform="translate(10.000000 8.000000)" fill="#3093FA" fill-opacity="1.000000"/>
+		<g clip-path="url(#clip18_1246)">
+			<g opacity="0.000000">
+				<rect x="20.000000" y="18.000000" width="20.000000" height="20.000000" fill="#000000" fill-opacity="1.000000"/>
+			</g>
+			<path d="M37.39 27.39C37.56 27.39 37.7 27.44 37.82 27.56C37.94 27.68 38 27.83 38 28C38 28.16 37.94 28.31 37.82 28.43C37.7 28.55 37.56 28.6 37.39 28.6L30.6 28.6L30.6 35.39C30.6 35.56 30.55 35.7 30.43 35.82C30.31 35.94 30.16 36 30 36C29.83 36 29.68 35.94 29.56 35.82C29.44 35.7 29.39 35.56 29.39 35.39L29.39 28.6L22.6 28.6C22.43 28.6 22.29 28.55 22.17 28.43C22.05 28.31 22 28.16 22 28C22 27.83 22.05 27.68 22.17 27.56C22.29 27.44 22.43 27.39 22.6 27.39L29.39 27.39L29.39 20.6C29.39 20.43 29.44 20.29 29.56 20.17C29.68 20.05 29.83 20 30 20C30.16 20 30.31 20.05 30.43 20.17C30.55 20.29 30.6 20.43 30.6 20.6L30.6 27.39L37.39 27.39Z" fill="#FFFFFF" fill-opacity="1.000000" fill-rule="nonzero"/>
+		</g>
+	</g>
+</svg>

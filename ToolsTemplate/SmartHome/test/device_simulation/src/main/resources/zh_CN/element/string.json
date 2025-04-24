@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "模块描述"
+    },
+    {
+      "name": "Device_simulationAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "Device_simulationAbility_label",
+      "value": "label"
+    }
+  ]
+}

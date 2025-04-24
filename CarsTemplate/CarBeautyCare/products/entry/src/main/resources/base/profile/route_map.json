@@ -1,0 +1,36 @@
+{
+  "routerMap": [
+    {
+      "name": "atomicWeb",
+      "pageSourceFile": "src/main/ets/components/AtomicWeb.ets",
+      "buildFunction": "AtomicWebBuilder",
+      "data": {
+        "description" : "this is PageOne"
+      }
+    },
+    {
+      "name": "productDetail",
+      "pageSourceFile": "src/main/ets/components/ProductDetail.ets",
+      "buildFunction": "ProductDetailBuilder",
+      "data": {
+        "description" : "this is ProductDetail"
+      }
+    },
+    {
+      "name": "QuickLoginPage",
+      "pageSourceFile": "src/main/ets/pages/mine/QuickLoginPage.ets",
+      "buildFunction": "QuickLoginPageBuilder",
+      "data": {
+        "description" : "this is QuickLoginPage"
+      }
+    },
+    {
+      "name": "userInfoPage",
+      "pageSourceFile": "src/main/ets/pages/mine/UserInfoPage.ets",
+      "buildFunction": "UserInfoBuilder",
+      "data": {
+        "description" : "this is UserInfoPage"
+      }
+    }
+  ]
+}

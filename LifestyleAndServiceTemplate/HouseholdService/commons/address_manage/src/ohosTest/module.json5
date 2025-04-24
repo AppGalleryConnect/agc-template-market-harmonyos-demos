@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "address_manage_test",
+    "type": "feature",
+    "deviceTypes": [
+      "phone",
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": true
+  }
+}

@@ -1,0 +1,26 @@
+<svg width="48.000000" height="48.000000" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs>
+		<filter id="filter_138_704_dd" x="0.000000" y="0.000000" width="48.000000" height="48.000000" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+			<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+			<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+			<feOffset dx="0" dy="0"/>
+			<feGaussianBlur stdDeviation="1.33333"/>
+			<feComposite in2="hardAlpha" operator="out" k2="-1" k3="1"/>
+			<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.15 0"/>
+			<feBlend mode="normal" in2="BackgroundImageFix" result="effect_dropShadow_1"/>
+			<feBlend mode="normal" in="SourceGraphic" in2="effect_dropShadow_1" result="shape"/>
+		</filter>
+		<linearGradient x1="13.999990" y1="13.999998" x2="34.000000" y2="39.107224" id="paint_linear_37_121_0" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#FE4F35"/>
+			<stop offset="1.000000" stop-color="#FE4F35" stop-opacity="0.262745"/>
+		</linearGradient>
+	</defs>
+	<g filter="url(#filter_138_704_dd)">
+		<circle cx="24.000000" cy="24.000000" r="20.000000" fill="#FFFFFF" fill-opacity="1.000000"/>
+		<g opacity="0.000000"/>
+		<path d="M29.4 34C28.41 34 27.31 33.8 26.21 33.5C23.51 32.59 20.72 30.8 18.62 28.4C15.33 24.7 13.73 21 14.03 17.79C14.13 17 14.33 16 15.53 15.2C16.43 14.5 17.42 14 18.32 14C19.22 14 19.42 14.3 20.32 15.6C21.72 17.5 21.72 18.4 21.72 19C21.62 19.9 21.12 20.29 20.72 20.6C20.62 20.7 20.52 20.8 20.42 20.8C19.92 21.5 19.32 22.5 22.02 25.4C24.41 27.7 25.61 28 26.21 27.9C26.61 27.9 26.81 27.6 26.81 27.6C27.71 26.3 28.01 26 28.81 25.9C29.6 25.8 30 26 31.8 27.1C33.4 28.1 34.1 28.8 33.9 29.8C33.8 31 33 32.5 32 33.2C31.4 33.7 30.5 34 29.4 34ZM26.41 16C25.81 17.5 26.91 18.6 27.51 19.5C27.81 20 28.01 20.5 28.21 21.2C28.31 21.5 28.51 21.6 28.81 21.6L28.91 21.6C29.5 21.1 30 20.9 30.5 20.8C31.6 20.5 33.2 20.6 33.8 19.1C34.3 17.79 33.8 16.6 32.9 16.2C32.2 15.9 31.4 15.7 30.6 16.5C30.4 15.3 29.9 14.9 29.21 14.6C28.21 14.2 26.91 14.7 26.41 16Z" fill="url(#paint_linear_37_121_0)" fill-opacity="1.000000" fill-rule="nonzero"/>
+	</g>
+</svg>

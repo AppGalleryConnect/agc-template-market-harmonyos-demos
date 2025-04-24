@@ -1,0 +1,15 @@
+{
+  "name": "hotel",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "packageType": "InterfaceHar",
+  "dependencies": {
+    "@hw-agconnect/ui-calendar-picker": "^1.0.2",
+    "commonlib": "file:../../../commons/commonlib",
+    "network": "file:../../../commons/network",
+    "componentlib": "file:../../../commons/componentlib"
+  }
+}

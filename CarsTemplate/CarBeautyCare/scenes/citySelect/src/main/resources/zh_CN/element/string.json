@@ -1,0 +1,24 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "default_location_name",
+      "value": "北京"
+    },
+    {
+      "name": "current_city",
+      "value": "当前城市"
+    },
+    {
+      "name": "hot_city",
+      "value": "热门城市"
+    },
+    {
+      "name": "city_select",
+      "value": "城市选择"
+    }
+  ]
+}

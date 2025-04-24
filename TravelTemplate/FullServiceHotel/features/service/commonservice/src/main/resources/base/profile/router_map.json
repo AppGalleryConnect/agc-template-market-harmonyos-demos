@@ -1,0 +1,41 @@
+{
+  "routerMap": [
+    {
+      "name": "Location",
+      "pageSourceFile": "src/main/ets/Location/LocationPage.ets",
+      "buildFunction": "locationPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "Introduction",
+      "pageSourceFile": "src/main/ets/Introduction/IntroductionPage.ets",
+      "buildFunction": "introductionPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "MyOrders",
+      "pageSourceFile": "src/main/ets/MyOrders/pages/MyOrdersPage.ets",
+      "buildFunction": "myOrdersPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "OrderDetail",
+      "pageSourceFile": "src/main/ets/MyOrders/pages/OrderDetailPage.ets",
+      "buildFunction": "orderDetailPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "PrivacyPolicyPage",
+      "pageSourceFile": "src/main/ets/PrivacyPolicy/PrivacyPolicyPage.ets",
+      "buildFunction": "privacyPolicyPageBuilder"
+    }
+  ]
+}

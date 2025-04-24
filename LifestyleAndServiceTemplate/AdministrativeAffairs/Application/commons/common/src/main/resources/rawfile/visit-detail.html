@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh - CN">
+
+<head>
+    <meta charset="UTF - 8">
+    <meta name="viewport"
+        content="width=device-width, initial - scale = 1.0, maximum - scale = 1.0, user - scalable = no">
+    <title>个人就诊记录查询</title>
+    <style>
+        body {
+            font-family: Arial, sans - serif;
+            background-color: #F1F3F5;
+            margin: 0;
+            width: 100%;
+        }
+
+        .visit-funding-pay {
+            background-color: #FFF;
+            border-radius: 20px;
+            padding: 10px;
+            ;
+            margin-top: 20px;
+        }
+
+        .visit-detail-information {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            background-color: #FFF;
+            height: 100px;
+        }
+
+        .visit-funding-pay-content {
+            background-color: #F1F3F5;
+            padding: 20px;
+            border-radius: 20px;
+        }
+
+        .visit-funding-title {
+            margin-bottom: 20px
+        }
+
+        .visit-funding-pay-content-detail {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="visit-detail-information">
+        <image src="./hospital.svg" />
+        <div>南京明基医院</div>
+        <div>￥102.00</div>
+    </div>
+    <div class="visit-funding-pay">
+        <div class="visit-funding-title">基金支付</div>
+        <div class="visit-funding-pay-content">
+            <div class="visit-funding-pay-content-detail">
+                <div>统筹基金支付</div>
+                <div>30.00</div>
+            </div>
+            <div class="visit-funding-pay-content-detail">
+                <div>大病保险支付</div>
+                <div>10.00</div>
+            </div>
+            <div class="visit-funding-pay-content-detail">
+                <div>补充保险支付</div>
+                <div>40.00</div>
+            </div>
+            <div class="visit-funding-pay-content-detail">
+                <div>医疗救助支付</div>
+                <div>50.00</div>
+            </div>
+            <div class="visit-funding-pay-content-detail">
+                <div>其他基金支付</div>
+                <div>40.00</div>
+            </div>
+            <div class="visit-funding-pay-content-detail">
+                <div>公务员补助支付</div>
+                <div>100.00</div>
+            </div>
+        </div>
+    </div>
+    <div class="visit-funding-pay">
+        <div class="visit-funding-title">个人支付</div>
+        <div class="visit-funding-pay-content">
+            <div class="visit-funding-pay-content-detail">
+                <div>统筹基金支付</div>
+                <div>10.00</div>
+            </div>
+            <div class="visit-funding-pay-content-detail">
+                <div>大病保险支付</div>
+                <div>30.00</div>
+            </div>
+            <div class="visit-funding-pay-content-detail">
+                <div>补充保险支付</div>
+                <div>80.00</div>
+            </div>
+            <div class="visit-funding-pay-content-detail">
+                <div>医疗救助支付</div>
+                <div>0.00</div>
+            </div>
+            <div class="visit-funding-pay-content-detail">
+                <div>其他基金支付</div>
+                <div>80.00</div>
+            </div>
+            <div class="visit-funding-pay-content-detail">
+                <div>公务员补助支付</div>
+                <div>100.00</div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function callNativeShare() {
+        nativeShare.share();
+    }
+
+    function callNativePreview(srcList, index) {
+        nativeShare.preview(srcList, index);
+    }
+    /*
+     * 给所有image标签绑定点击事件
+     */
+    let imageList = document.querySelectorAll(".image-preview")
+    let srcList = []
+    imageList.forEach((element, index) => {
+        element.addEventListener("click", function () {
+            let scrList = [...imageList].map(value => {
+                return value.src
+            })
+            callNativePreview(scrList, index)
+        })
+    })
+</script>
+
+</html>

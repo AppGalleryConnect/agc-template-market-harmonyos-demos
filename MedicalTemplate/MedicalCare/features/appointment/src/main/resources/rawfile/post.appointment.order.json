@@ -1,0 +1,8 @@
+{
+  "orderId": "202501017465123",
+  "orderStr": "{\"app_id\":\"***\",\"merc_no\":\"***\",\"prepay_id\":\"xxx\",\"timestamp\":\"1680259863114\",\"noncestr\":\"1487b8a60ed9f9ecc0ba759fbec23f4f\",\"sign\":\"****\",\"auth_id\":\"***\"}",
+  "hospitalInfo": {
+    "name": "鸿蒙医院",
+    "address": "门诊楼3楼615诊室"
+  }
+}

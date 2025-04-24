@@ -1,0 +1,9 @@
+{
+  "routerMap": [
+    {
+      "name": "VipPageView",
+      "pageSourceFile": "src/main/ets/views/VipPage.ets",
+      "buildFunction": "VipPageBuilder"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "@ohos_agcit/children_education_homepage",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "packageType": "InterfaceHar",
+  "dependencies": {
+    "@ohos_agcit/children_education_selected": "../../services/selected",
+    "@ohos_agcit/children_education_cartoon": "../../services/cartoon",
+    "@ohos_agcit/children_education_englishzone": "../../services/englishZone",
+    "@ohos_agcit/children_education_sing": "../../services/sing",
+    "@ohos_agcit/children_education_chinese": "../../services/chinese",
+    "@ohos_agcit/children_education_utils": "../../../commons/utils"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "routerMap": [
+    {
+      "name": "confirmOrder",
+      "pageSourceFile": "src/main/ets/components/ConfirmOrder.ets",
+      "buildFunction": "ConfirmOrderBuilder",
+      "data": {
+        "description" : "this is ConfirmOrder"
+      }
+    },
+    {
+      "name": "orderCard",
+      "pageSourceFile": "src/main/ets/components/OrderCardList.ets",
+      "buildFunction": "OrderCardListBuilder",
+      "data": {
+        "description" : "this is OrderCardList"
+      }
+    }
+  ]
+}

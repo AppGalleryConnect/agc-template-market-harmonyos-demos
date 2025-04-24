@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh - CN">
+
+<head>
+    <meta charset="UTF - 8">
+    <meta name="viewport"
+        content="width=device-width, initial - scale = 1.0, maximum - scale = 1.0, user - scalable = no">
+    <title>个人参保信息查询</title>
+    <style>
+        body {
+            font-family: Arial, sans - serif;
+            background-color: #F1F3F5;
+            margin: 0;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .basic-information-header {
+            font-weight: 600;
+        }
+
+        .basic-information-header::before {
+            content: '|';
+            width: 2px;
+            height: 20px;
+            color: #2036F3;
+            margin-right: 10px;
+        }
+
+        .basic-information {
+            padding: 20px;
+            background-color: #FFF;
+            border-radius: 20px;
+        }
+
+        .basic-information-content {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .insured-information-header {
+            font-weight: 600;
+        }
+
+        .insured-information-header::before {
+            content: '|';
+            width: 2px;
+            height: 20px;
+            color: #2036F3;
+            margin-right: 10px;
+        }
+
+        .insured-information {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #FFF;
+            border-radius: 20px;
+        }
+
+        .insured-information-content {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .insured-information-content-details {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .insured-type {
+            font-weight: 600
+        }
+
+        .insured-basic-information {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            background-color: #F1F3F5;
+            padding: 20px 20px 20px 20px;
+            border-radius: 20px;
+        }
+
+        .toggle {
+            display:block
+        }
+    </style>
+</head>
+
+<body>
+    <div class="basic-information">
+        <div class="basic-information-header">个人基本信息</div>
+        <div class="basic-information-content">
+            <div class="insured-type">姓名</div>
+            <div>张xx</div>
+        </div>
+        <div class="basic-information-content">
+            <div class="insured-type">身份证号码</div>
+            <div>3**********2</div>
+        </div>
+        <div class="basic-information-content">
+            <div class="insured-type">参保状态</div>
+            <div>已参保</div>
+        </div>
+    </div>
+    <div class="insured-information">
+        <div class="insured-information-header">个人参保信息</div>
+        <div class="insured-information-content">
+            <div class="insured-type">参保险种</div>
+            <div class="insured-information-content-details">
+                <div>职工基础医疗保险</div>
+                <image src="./ic_public_left_arrow.svg" />
+            </div>
+        </div>
+        <div class="insured-basic-information toggle">
+            <div class="insured-information-content">
+                <div class="insured-type">参保单位</div>
+                <div class="insured-information-content-details">
+                    <div>xxxxxxxxxxxxxxxx</div>
+                </div>
+            </div>
+            <div class="insured-information-content">
+                <div class="insured-type">参保单位编码</div>
+                <div class="insured-information-content-details">
+                    <div>xxxxxxxxxxxxxxxxxxxxxx</div>
+                </div>
+            </div>
+            <div class="insured-information-content">
+                <div class="insured-type">参保时间</div>
+                <div class="insured-information-content-details">
+                    <div>2025-02-05</div>
+                </div>
+            </div>
+            <div class="insured-information-content">
+                <div class="insured-type">参保状态</div>
+                <div class="insured-information-content-details">
+                    <div>已参保</div>
+                </div>
+            </div>
+            <div class="insured-information-content">
+                <div class="insured-type">参保所属划分</div>
+                <div class="insured-information-content-details">
+                    <div>xxxxxx</div>
+                </div>
+            </div>
+        </div>
+        <div class="insured-information-content">
+            <div class="insured-type">参保险种</div>
+            <div class="insured-information-content-details">
+                <div>大额医疗费用补助</div>
+                <image src="./ic_public_left_arrow.svg" />
+            </div>
+        </div>
+        <div class="insured-information-content">
+            <div class="insured-type">参保险种</div>
+            <div class="insured-information-content-details">
+                <div>410</div>
+                <image src="./ic_public_left_arrow.svg" />
+            </div>
+        </div>
+        <div class="insured-information-content">
+            <div class="insured-type">参保险种</div>
+            <div class="insured-information-content-details">
+                <div>城乡居民基础医疗保险</div>
+                <image src="./ic_public_left_arrow.svg" />
+            </div>
+        </div>
+        <div class="insured-information-content">
+            <div class="insured-type">参保险种</div>
+            <div class="insured-information-content-details">
+                <div>城乡居民大病医疗保险</div>
+                <image src="./ic_public_left_arrow.svg" />
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function callNativeShare() {
+        nativeShare.share();
+    }
+
+    function callNativePreview(srcList, index) {
+        nativeShare.preview(srcList, index);
+    }
+    /*
+     * 给所有image标签绑定点击事件
+     */
+    let imageList = document.querySelectorAll(".image-preview")
+    let srcList = []
+    imageList.forEach((element, index) => {
+        element.addEventListener("click", function () {
+            let scrList = [...imageList].map(value => {
+                return value.src
+            })
+            callNativePreview(scrList, index)
+        })
+    })
+</script>
+
+</html>

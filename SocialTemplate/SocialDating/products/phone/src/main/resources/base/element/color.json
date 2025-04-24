@@ -1,0 +1,20 @@
+{
+  "color": [
+    {
+      "name": "start_window_background",
+      "value": "#FFF5F5F5"
+    },
+    {
+      "name": "button_background_color",
+      "value": "#FFFE4F35"
+    },
+    {
+      "name": "member_service_item_background",
+      "value": "#FFD6F0FD"
+    },
+    {
+      "name": "title_font_color",
+      "value": "#333333"
+    }
+  ]
+}

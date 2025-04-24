@@ -1,0 +1,28 @@
+{
+  "module": {
+    "name": "schedule",
+    "type": "har",
+    "description": "$string:module_desc",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ],
+    "routerMap": "$profile:router_map",
+    "requestPermissions":[
+      {
+        "name" : "ohos.permission.READ_CALENDAR",
+        "reason": "$string:read_calendar_reason",
+        "usedScene": {
+          "when":"inuse"
+        }
+      },
+      {
+        "name" : "ohos.permission.WRITE_CALENDAR",
+        "reason": "$string:write_calendar_reason",
+        "usedScene": {
+          "when":"always"
+        }
+      }
+    ]
+  }
+}

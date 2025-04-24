@@ -1,0 +1,16 @@
+{
+  "ret": {
+    "retCode": 0,
+    "retMsg": "SUCCESS"
+  },
+  "page": {
+  },
+  "list": [
+    {
+      "phoneNo": "12200010001",
+      "nickName": "红娘小林姐",
+      "weixinNo": "750927hihaof",
+      "profilePictureUrl": "app.media.header_image"
+    }
+  ]
+}

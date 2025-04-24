@@ -1,0 +1,36 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "desc_activity_booking_submit",
+      "value": "desc_activity_booking_submit"
+    },
+    {
+      "name": "activity_desc_title",
+      "value": "activity_desc_title"
+    },
+    {
+      "name": "activity_desc_content",
+      "value": "activity_desc_content"
+    },
+    {
+      "name": "title_activity",
+      "value": "title_activity"
+    },
+    {
+      "name": "agcit_huawei_postpartum_care_center_activities",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_postpartum_care_center_activities",
+      "value": "sceneTemplate"
+    },
+    {
+      "name": "agcitkid_huawei_postpartum_care_center_activities",
+      "value": "agcit_huawei_postpartum_care_center_components/1.0.0,agcit_huawei_postpartum_care_center_utils/1.0.0"
+    }
+  ]
+}

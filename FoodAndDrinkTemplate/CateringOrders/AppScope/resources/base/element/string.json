@@ -1,0 +1,204 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "catering_orders"
+    },
+    {
+      "name": "pick_table",
+      "value": "请选择餐桌"
+    },
+    {
+      "name": "pick_dinner_num",
+      "value": "请选择用餐人数"
+    },
+    {
+      "name": "next_step",
+      "value": "下一步"
+    },
+    {
+      "name": "confirm",
+      "value": "确定"
+    },
+    {
+      "name": "cancel",
+      "value": "取消"
+    },
+    {
+      "name": "currency_symbol",
+      "value": "￥"
+    },
+    {
+      "name": "currency_symbol_pre_params",
+      "value": "%s￥"
+    },
+    {
+      "name": "currency_symbol_post_params",
+      "value": "￥%s"
+    },
+    {
+      "name": "yuan",
+      "value": "元"
+    },
+    {
+      "name": "yuan_params",
+      "value": "%s元"
+    },
+    {
+      "name": "huawei_pay",
+      "value": "华为支付"
+    },
+    {
+      "name": "pay_success",
+      "value": "支付成功"
+    },
+    {
+      "name": "pay_failed",
+      "value": "支付失败"
+    },
+    {
+      "name": "discount",
+      "value": "%s折"
+    },
+    {
+      "name": "store_rest",
+      "value": "小店休息一下~~"
+    },
+    {
+      "name": "add_good",
+      "value": "加菜"
+    },
+    {
+      "name": "contact_us",
+      "value": "联系客服"
+    },
+    {
+      "name": "store_dining",
+      "value": "门店就餐"
+    },
+    {
+      "name": "packing_box",
+      "value": "打包服务费"
+    },
+    {
+      "name": "dinner_num_label",
+      "value": "就餐人数"
+    },
+    {
+      "name": "dinner_num",
+      "value": "%d人"
+    },
+    {
+      "name": "new_user_discount_label",
+      "value": "新用户下单立减"
+    },
+    {
+      "name": "store_discount_label",
+      "value": "店铺活动满减"
+    },
+    {
+      "name": "coupon_label",
+      "value": "优惠券"
+    },
+    {
+      "name": "remark",
+      "value": "备注"
+    },
+    {
+      "name": "full_available",
+      "value": "满%s可用"
+    },
+    {
+      "name": "valid_until",
+      "value": "有效期至%s"
+    },
+    {
+      "name": "expired",
+      "value": "已过期"
+    },
+    {
+      "name": "all",
+      "value": "全部"
+    },
+    {
+      "name": "available",
+      "value": "可用"
+    },
+    {
+      "name": "store_address_error",
+      "value": "商户地址错误！"
+    },
+    {
+      "name": "pay_failed_msg",
+      "value": "支付失败！错误码：%s"
+    },
+    {
+      "name": "picking",
+      "value": "打包带走"
+    },
+    {
+      "name": "none",
+      "value": "无"
+    },
+    {
+      "name": "save",
+      "value": "保存"
+    },
+    {
+      "name": "instruction",
+      "value": "使用说明"
+    },
+    {
+      "name": "use_now",
+      "value": "立即使用"
+    },
+    {
+      "name": "instruction_label",
+      "value": "使用说明："
+    },
+    {
+      "name": "select_pay_type",
+      "value": "选择支付方式"
+    },
+    {
+      "name": "pay_now",
+      "value": "立即支付"
+    },
+    {
+      "name": "coupon_type",
+      "value": "全品类可用"
+    },
+    {
+      "name": "below_threshold",
+      "value": "距离使用门槛还差%d元"
+    },
+    {
+      "name": "tab_order",
+      "value": "点餐"
+    },
+    {
+      "name": "tab_order_list",
+      "value": "订单"
+    },
+    {
+      "name": "tab_mine",
+      "value": "我的"
+    },
+    {
+      "name": "discount_money",
+      "value": "已优惠"
+    },
+    {
+      "name": "should_pay",
+      "value": "应付"
+    },
+    {
+      "name": "agcit_huawei_catering_orders",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_catering_orders",
+      "value": "industryTemplate"
+    }
+  ]
+}

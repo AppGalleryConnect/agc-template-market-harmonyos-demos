@@ -1,0 +1,28 @@
+{
+  "color": [
+    {
+      "name": "start_window_background",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "card_list_background",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "list_item_count_background",
+      "value": "#290a59f7"
+    },
+    {
+      "name": "service_card_background",
+      "value": "#e6f5fd"
+    },
+    {
+      "name": "service_card_button_background",
+      "value": "#3093FA"
+    },
+    {
+      "name": "title_background_color",
+      "value": "#F1F3F5"
+    }
+  ]
+}

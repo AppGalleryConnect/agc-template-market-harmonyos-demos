@@ -1,0 +1,20 @@
+{
+  "routerMap": [
+    {
+      "name": "Address",
+      "pageSourceFile": "src/main/ets/pages/Address.ets",
+      "buildFunction": "AddressBuilder",
+      "data": {
+        "description": "this is Address"
+      }
+    },
+    {
+      "name": "Addresses",
+      "pageSourceFile": "src/main/ets/pages/Addresses.ets",
+      "buildFunction": "AddressesBuilder",
+      "data": {
+        "description": "this is Addresses"
+      }
+    }
+  ]
+}

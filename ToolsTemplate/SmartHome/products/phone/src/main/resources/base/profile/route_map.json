@@ -1,0 +1,12 @@
+{
+  "routerMap": [
+    {
+      "name": "AccessControlPage",
+      "pageSourceFile": "src/main/ets/pages/AccessControlPage.ets",
+      "buildFunction": "AccessControlPageBuilder",
+      "data": {
+        "description": ""
+      }
+    }
+  ]
+}

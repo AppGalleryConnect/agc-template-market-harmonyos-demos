@@ -1,0 +1,44 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "母婴模板-月子中心"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "母婴模板-月子中心"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "母婴模板-月子中心"
+    },
+    {
+      "name": "EntryFormAbility_desc",
+      "value": "母婴模板-月子中心"
+    },
+    {
+      "name": "EntryFormAbility_label",
+      "value": "母婴模板-月子中心"
+    },
+    {
+      "name": "permission_reason_location",
+      "value": "需要计算月子中心门店的距离"
+    },
+    {
+      "name": "permission_reason_read_calendar",
+      "value": "申请读取日程权限"
+    },
+    {
+      "name": "permission_reason_write_calendar",
+      "value": "申请写入日程权限"
+    },
+    {
+      "name": "PhoneFormAbility_desc",
+      "value": "母婴模板-月子中心"
+    },
+    {
+      "name": "PhoneFormAbility_label",
+      "value": "母婴模板-月子中心"
+    }
+  ]
+}

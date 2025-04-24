@@ -1,0 +1,16 @@
+{
+  "name": "composite",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "packageType": "InterfaceHar",
+  "dependencies": {
+    "commons": "file:../../commons",
+    "member": "file:../member",
+    "feed": "file:../feed",
+    "user": "file:../user",
+    "activity": "file:../activity"
+  }
+}

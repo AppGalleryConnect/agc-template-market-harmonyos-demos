@@ -1,0 +1,66 @@
+{
+  "app": {
+    "signingConfigs": [
+    ],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "compatibleSdkVersion": "5.0.2(14)",
+        "runtimeOS": "HarmonyOS",
+        "buildOption": {
+          "strictMode": {
+            "caseSensitiveCheck": true,
+            "useNormalizedOHMUrl": true
+          }
+        }
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug",
+      },
+      {
+        "name": "release"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "phone",
+      "srcPath": "./products/phone",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "appointment",
+      "srcPath": "./features/appointment"
+    },
+    {
+      "name": "common",
+      "srcPath": "./common/common"
+    },
+    {
+      "name": "patient",
+      "srcPath": "./features/patient"
+    },
+    {
+      "name": "notification",
+      "srcPath": "./features/notification"
+    },
+    {
+      "name": "report",
+      "srcPath": "./features/report"
+    },
+    {
+      "name": "personal",
+      "srcPath": "./features/personal",
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "vehicleModel",
+      "value": "VehicleModel"
+    },
+    {
+      "name": "font_regular",
+      "value": "Font_regular"
+    },
+    {
+      "name": "luxury",
+      "value": "Luxury"
+    },
+    {
+      "name": "mileage",
+      "value": "Mileage"
+    },
+    {
+      "name": "totalMileage",
+      "value": "2000km"
+    },
+    {
+      "name": "roadTime",
+      "value": "RoadTime"
+    },
+    {
+      "name": "timeExample",
+      "value": "20200320"
+    },
+    {
+      "name": "basicInfo",
+      "value": "BasicInfo"
+    },
+    {
+      "name": "completeInfo",
+      "value": "CompleteInfo"
+    },
+    {
+      "name": "licenseNum",
+      "value": "LicenseNum"
+    },
+    {
+      "name": "mileagekm",
+      "value": "Mileagekm"
+    },
+    {
+      "name": "mileageInput",
+      "value": "MileageInput"
+    },
+    {
+      "name": "roadTimeInput",
+      "value": "RoadTimeInput"
+    },
+    {
+      "name": "identifyNumber",
+      "value": "IdentifyNumber"
+    },
+    {
+      "name": "writeVehicleModel",
+      "value": "WriteVehicleModel"
+    },
+    {
+      "name": "engineNumInput",
+      "value": "EngineNumInput"
+    },
+    {
+      "name": "engineNum",
+      "value": "EngineNum"
+    },
+    {
+      "name": "save",
+      "value": "Save"
+    },
+    {
+      "name": "addVehicle",
+      "value": "AddVehicle"
+    },
+    {
+      "name": "addLoveCar",
+      "value": "AddLoveCar"
+    },
+    {
+      "name": "saveSuccess",
+      "value": "SaveSucess"
+    },
+    {
+      "name": "hotBranding",
+      "value": "HotBranding"
+    }
+  ]
+}

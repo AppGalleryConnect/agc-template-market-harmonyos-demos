@@ -1,0 +1,96 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "vehicleModel",
+      "value": "车辆型号"
+    },
+    {
+      "name": "font_regular",
+      "value": "鸿蒙黑体"
+    },
+    {
+      "name": "luxury",
+      "value": "动感豪华"
+    },
+    {
+      "name": "mileage",
+      "value": "当前里程"
+    },
+    {
+      "name": "totalMileage",
+      "value": "2000km"
+    },
+    {
+      "name": "roadTime",
+      "value": "上路时间"
+    },
+    {
+      "name": "timeExample",
+      "value": "2020年03月20日"
+    },
+    {
+      "name": "basicInfo",
+      "value": "基本信息"
+    },
+    {
+      "name": "completeInfo",
+      "value": "完善信息为您精准匹配服务"
+    },
+    {
+      "name": "licenseNum",
+      "value": "车牌号"
+    },
+    {
+      "name": "mileagekm",
+      "value": "当前里程(km)"
+    },
+    {
+      "name": "mileageInput",
+      "value": "输入里程精准匹配"
+    },
+    {
+      "name": "roadTimeInput",
+      "value": "请填写上路时间"
+    },
+    {
+      "name": "identifyNumber",
+      "value": "车辆识别号"
+    },
+    {
+      "name": "engineNumInput",
+      "value": "请填写发动机号"
+    },
+    {
+      "name": "engineNum",
+      "value": "发动机号"
+    },
+    {
+      "name": "save",
+      "value": "保存"
+    },
+    {
+      "name": "addVehicle",
+      "value": "添加车辆"
+    },
+    {
+      "name": "writeVehicleModel",
+      "value": "请输入车辆型号"
+    },
+    {
+      "name": "addLoveCar",
+      "value": "添加爱车"
+    },
+    {
+      "name": "saveSuccess",
+      "value": "保存成功"
+    },
+    {
+      "name": "hotBranding",
+      "value": "热门品牌"
+    }
+  ]
+}

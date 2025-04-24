@@ -1,0 +1,28 @@
+{
+  "routerMap": [
+    {
+      "name": "newScheduleDialog",
+      "pageSourceFile": "src/main/ets/schedule/NewSchedule.ets",
+      "buildFunction": "newScheduleBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "editScheduleDialog",
+      "pageSourceFile": "src/main/ets/schedule/EditSchedule.ets",
+      "buildFunction": "editScheduleBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "scheduleDetailDialog",
+      "pageSourceFile": "src/main/ets/schedule/ScheduleDetail.ets",
+      "buildFunction": "scheduleDetailBuilder",
+      "data": {
+        "description": ""
+      }
+    }
+  ]
+}

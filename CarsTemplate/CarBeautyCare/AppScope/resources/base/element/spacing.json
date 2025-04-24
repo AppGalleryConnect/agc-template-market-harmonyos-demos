@@ -1,0 +1,44 @@
+{
+  "string": [
+    {
+      "name": "margin_xs",
+      "value": "4vp"
+    },
+    {
+      "name": "margin_s",
+      "value": "8vp"
+    },
+    {
+      "name": "margin_m",
+      "value": "16vp"
+    },
+    {
+      "name": "margin_l",
+      "value": "24vp"
+    },
+    {
+      "name": "margin_xl",
+      "value": "44vp"
+    },
+    {
+      "name": "padding_xs",
+      "value": "4vp"
+    },
+    {
+      "name": "padding_s",
+      "value": "8vp"
+    },
+    {
+      "name": "padding_m",
+      "value": "16vp"
+    },
+    {
+      "name": "padding_l",
+      "value": "24vp"
+    },
+    {
+      "name": "padding_xl",
+      "value": "44vp"
+    }
+  ]
+}

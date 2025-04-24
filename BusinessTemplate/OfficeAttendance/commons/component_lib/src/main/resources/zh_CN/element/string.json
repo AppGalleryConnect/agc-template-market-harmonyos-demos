@@ -1,0 +1,44 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "today",
+      "value": "今天"
+    },
+    {
+      "name": "whole_day",
+      "value": "全天"
+    },
+    {
+      "name": "btn_confirm",
+      "value": "确定"
+    },
+    {
+      "name": "new_agency_task",
+      "value": "新建待办"
+    },
+    {
+      "name": "setting_plan_time",
+      "value": "设置截止时间"
+    },
+    {
+      "name": "select_attach",
+      "value": "添加附件"
+    },
+    {
+      "name": "btn_cancel",
+      "value": "取消"
+    },
+    {
+      "name": "btn_delete",
+      "value": "删除"
+    },
+    {
+      "name": "schedule_detail_title",
+      "value": "日程详情"
+    }
+  ]
+}

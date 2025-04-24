@@ -1,0 +1,56 @@
+{
+  "string": [
+    {
+      "name": "renminbi",
+      "value": "¥"
+    },
+    {
+      "name": "font_regular",
+      "value": "鸿蒙黑体"
+    },
+    {
+      "name": "recShop",
+      "value": "推荐使用门店"
+    },
+    {
+      "name": "coupon_detail",
+      "value": "优惠券详情"
+    },
+    {
+      "name": "coupon",
+      "value": "优惠券"
+    },
+    {
+      "name": "ntNine",
+      "value": "￥99"
+    },
+    {
+      "name": "tntNine",
+      "value": "满￥299可用"
+    },
+    {
+      "name": "littleCoupon",
+      "value": "小保养券"
+    },
+    {
+      "name": "channel",
+      "value": "使用渠道：元服务"
+    },
+    {
+      "name": "dueTime",
+      "value": "2025.06.30 23:59到期"
+    },
+    {
+      "name": "robbery",
+      "value": "立即抢"
+    },
+    {
+      "name": "my_Coupon",
+      "value": "我的优惠券"
+    },
+    {
+      "name": "instruction",
+      "value": "使用说明"
+    }
+  ]
+}

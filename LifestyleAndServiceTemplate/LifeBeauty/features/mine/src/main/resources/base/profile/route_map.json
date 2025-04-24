@@ -1,0 +1,24 @@
+{
+  "routerMap": [
+    {
+      "name": "AppointmentList",
+      "pageSourceFile": "src/main/ets/pages/AppointmentList.ets",
+      "buildFunction": "appointmentListBuilder"
+    },
+    {
+      "name": "SingleCardList",
+      "pageSourceFile": "src/main/ets/pages/SingleVisitList.ets",
+      "buildFunction": "SingleCardVisitListBuilder"
+    },
+    {
+      "name": "GroupList",
+      "pageSourceFile": "src/main/ets/pages/GroupList.ets",
+      "buildFunction": "GroupListBuilder"
+    },
+    {
+      "name": "BookGroupDetail",
+      "pageSourceFile": "src/main/ets/pages/BookGroupDetail.ets",
+      "buildFunction": "BookGroupDetailBuilder"
+    }
+  ]
+}

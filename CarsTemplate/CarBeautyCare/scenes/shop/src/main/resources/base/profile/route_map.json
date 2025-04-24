@@ -1,0 +1,12 @@
+{
+  "routerMap": [
+    {
+      "name": "shop",
+      "pageSourceFile": "src/main/ets/components/ShopView.ets",
+      "buildFunction": "ShowViewBuilder",
+      "data": {
+        "description" : "this is ShopView"
+      }
+    }
+  ]
+}

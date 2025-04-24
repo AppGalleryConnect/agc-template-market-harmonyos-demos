@@ -1,0 +1,28 @@
+{
+  "string": [
+    {
+      "name": "shared_desc",
+      "value": "description"
+    },
+    {
+      "name": "purchase",
+      "value": "purchase"
+    },
+    {
+      "name": "upgrade_vip",
+      "value": "upgrade_vip"
+    },
+    {
+      "name": "learning_vip",
+      "value": "learning_vip"
+    },
+    {
+      "name": "vip_agreement",
+      "value": "vip_agreement"
+    },
+    {
+      "name": "read_before_purchase",
+      "value": "read_before_purchase"
+    }
+  ]
+}

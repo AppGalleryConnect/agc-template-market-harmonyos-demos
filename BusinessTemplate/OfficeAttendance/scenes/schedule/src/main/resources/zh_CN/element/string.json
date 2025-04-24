@@ -1,0 +1,236 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "label"
+    },
+    {
+      "name": "permission_reason_location",
+      "value": "获取位置信息的原因"
+    },
+    {
+      "name": "schedule",
+      "value": "日程"
+    },
+    {
+      "name": "btn_confirm",
+      "value": "确定"
+    },
+    {
+      "name": "new_succ_tip",
+      "value": "新建成功"
+    },
+    {
+      "name": "edit_succ_tip",
+      "value": "编辑成功"
+    },
+    {
+      "name": "trip_conflicting",
+      "value": "冲突"
+    },
+    {
+      "name": "lunar_calendar",
+      "value": "农历"
+    },
+    {
+      "name": "whole_day",
+      "value": "全天"
+    },
+    {
+      "name": "schedule_begin_time",
+      "value": "开始"
+    },
+    {
+      "name": "schedule_end_time",
+      "value": "结束"
+    },
+    {
+      "name": "schedule_repeat",
+      "value": "重复"
+    },
+    {
+      "name": "schedule_reminder",
+      "value": "提醒"
+    },
+    {
+      "name": "new_schedule",
+      "value": "新建日程"
+    },
+    {
+      "name": "schedule_repeat_no",
+      "value": "不重复"
+    },
+    {
+      "name": "schedule_repeat_day",
+      "value": "每天"
+    },
+    {
+      "name": "schedule_repeat_week",
+      "value": "每周"
+    },
+    {
+      "name": "schedule_repeat_month",
+      "value": "每月"
+    },
+    {
+      "name": "schedule_repeat_year",
+      "value": "每年"
+    },
+    {
+      "name": "reminder_type_on_time",
+      "value": "准时"
+    },
+    {
+      "name": "reminder_type_before_5_min",
+      "value": "提前5分钟"
+    },
+    {
+      "name": "reminder_type_before_10_min",
+      "value": "提前10分钟"
+    },
+    {
+      "name": "reminder_type_before_15_min",
+      "value": "提前15分钟"
+    },
+    {
+      "name": "reminder_type_before_30_min",
+      "value": "提前30分钟"
+    },
+    {
+      "name": "aagcit_huawei_office_attendance_schedule",
+      "value": "1.0.0"
+    },
+    {
+      "name": "aagcittype_huawei_office_attendance_schedule",
+      "value": "sceneTemplate"
+    },
+    {
+      "name": "new_success",
+      "value": "新建成功"
+    },
+    {
+      "name": "edit_success",
+      "value": "修改成功"
+    },
+    {
+      "name": "search_tip",
+      "value": "搜索"
+    },
+    {
+      "name": "reminder_on_time",
+      "value": "准时"
+    },
+    {
+      "name": "reminder_before_5min",
+      "value": "5分钟前"
+    },
+    {
+      "name": "reminder_before_10min",
+      "value": "10分钟前"
+    },
+    {
+      "name": "reminder_before_15min",
+      "value": "15分钟前"
+    },
+    {
+      "name": "reminder_before_30min",
+      "value": "30分钟前"
+    },
+    {
+      "name": "reminder_before_1h",
+      "value": "1小时前"
+    },
+    {
+      "name": "reminder_before_2h",
+      "value": "2小时前"
+    },
+    {
+      "name": "reminder_before_1d",
+      "value": "1天前"
+    },
+    {
+      "name": "reminder_before_2d",
+      "value": "2天前"
+    },
+    {
+      "name": "reminder_on_day_9clock",
+      "value": "当天(上午9点)"
+    },
+    {
+      "name": "reminder_before_1day_9clock",
+      "value": "1天前(上午9点)"
+    },
+    {
+      "name": "reminder_before_2day_9clock",
+      "value": "2天前(上午9点)"
+    },
+    {
+      "name": "reminder_before_3day_9clock",
+      "value": "3天前(上午9点)"
+    },
+    {
+      "name": "reminder_before_1week_9clock",
+      "value": "1周前(上午9点)"
+    },
+    {
+      "name": "reminder_title",
+      "value": "添加提醒"
+    },
+    {
+      "name": "schedule_title_empty_tip",
+      "value": "请输入标题"
+    },
+    {
+      "name": "read_calendar_reason",
+      "value": "日历读取测试"
+    },
+    {
+      "name": "write_calendar_reason",
+      "value": "日历编辑测试"
+    },
+    {
+      "name": "delete_desc",
+      "value": "删除"
+    },
+    {
+      "name": "edit_desc",
+      "value": "编辑"
+    },
+    {
+      "name": "location_desc",
+      "value": "地点"
+    },
+    {
+      "name": "delete_schedule_title",
+      "value": "删除日程"
+    },
+    {
+      "name": "delete_schedule_content",
+      "value": "被删除的日程无法恢复"
+    },
+    {
+      "name": "description",
+      "value": "请添加描述说明"
+    },
+    {
+      "name": "location_label",
+      "value": "获取定位"
+    },
+    {
+      "name": "schedule_title",
+      "value": "日程标题"
+    },
+    {
+      "name": "schedule_lc_desc",
+      "value": "中国农历"
+    }
+  ]
+}

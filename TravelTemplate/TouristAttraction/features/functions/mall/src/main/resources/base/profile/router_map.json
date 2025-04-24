@@ -1,0 +1,28 @@
+{
+  "routerMap": [
+    {
+      "name": "Mall",
+      "pageSourceFile": "src/main/ets/pages/MallView.ets",
+      "buildFunction": "MallBuilder",
+      "data": {
+        "description": "this is Mall"
+      }
+    },
+    {
+      "name": "CommodityDetail",
+      "pageSourceFile": "src/main/ets/pages/CommodityDetail.ets",
+      "buildFunction": "CommodityDetailBuilder",
+      "data": {
+        "description": "this is HomeView"
+      }
+    },
+    {
+      "name": "CommodityReserve",
+      "pageSourceFile": "src/main/ets/pages/CommodityReserve.ets",
+      "buildFunction": "CommodityReserveBuilder",
+      "data": {
+        "description": "this is CommodityReserve"
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "integer": [
+    {
+      "name": "user_label_height",
+      "value": 32
+    },
+    {
+      "name": "user_label_border_radius",
+      "value": 16
+    },
+    {
+      "name": "user_label_margin",
+      "value": 6
+    }
+  ]
+}

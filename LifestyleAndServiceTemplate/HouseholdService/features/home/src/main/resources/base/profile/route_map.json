@@ -1,0 +1,34 @@
+{
+  "routerMap": [
+    {
+      "name": "CityList",
+      "pageSourceFile": "src/main/ets/pages/CityList.ets",
+      "buildFunction": "CityListBuilder"
+    },
+    {
+      "name": "SearchPage",
+      "pageSourceFile": "src/main/ets/pages/SearchPage.ets",
+      "buildFunction": "SearchPageBuilder"
+    },
+    {
+      "name": "GoodDetail",
+      "pageSourceFile": "src/main/ets/pages/GoodDetail.ets",
+      "buildFunction": "GoodDetailBuilder"
+    },
+    {
+      "name": "OrderPage",
+      "pageSourceFile": "src/main/ets/pages/OrderPage.ets",
+      "buildFunction": "OrderPageBuilder"
+    },
+    {
+      "name": "SuccessPay",
+      "pageSourceFile": "src/main/ets/pages/SuccessPay.ets",
+      "buildFunction": "SuccessPayBuilder"
+    },
+    {
+      "name": "ToPay",
+      "pageSourceFile": "src/main/ets/pages/ToPay.ets",
+      "buildFunction": "ToPayBuilder"
+    }
+  ]
+}

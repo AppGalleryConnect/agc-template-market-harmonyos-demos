@@ -1,0 +1,9 @@
+{
+  "routerMap": [
+    {
+      "name": "CommonPhotoPicker",
+      "pageSourceFile": "src/main/ets/page/PhotoPicker.ets",
+      "buildFunction": "PhotoPickerBuilder"
+    }
+  ]
+}

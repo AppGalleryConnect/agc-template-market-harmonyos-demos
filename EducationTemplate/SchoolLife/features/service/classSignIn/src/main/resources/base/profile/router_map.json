@@ -1,0 +1,9 @@
+{
+  "routerMap": [
+    {
+      "name": "ClassSignInPage",
+      "pageSourceFile": "src/main/ets/pages/ClassSignInPage.ets",
+      "buildFunction": "classSignInPageBuilder"
+    }
+  ]
+}

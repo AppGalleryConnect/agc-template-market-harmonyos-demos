@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "service",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

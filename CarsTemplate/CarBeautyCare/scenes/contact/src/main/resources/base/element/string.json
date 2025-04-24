@@ -1,0 +1,48 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "add_phone_number",
+      "value": "Add_Phone_number"
+    },
+    {
+      "name": "name",
+      "value": "Name"
+    },
+    {
+      "name": "font_regular",
+      "value": "Font_regular"
+    },
+    {
+      "name": "name_input",
+      "value": "Name_input"
+    },
+    {
+      "name": "phone_number_input",
+      "value": "Phone_number_input"
+    },
+    {
+      "name": "save",
+      "value": "Save"
+    },
+    {
+      "name": "contact_add",
+      "value": "Contact_add"
+    },
+    {
+      "name": "contact_num",
+      "value": "Contact_num："
+    },
+    {
+      "name": "contactInfo_add",
+      "value": "ContactInfo_add"
+    },
+    {
+      "name": "contactInfo",
+      "value": "ContactInfo"
+    }
+  ]
+}

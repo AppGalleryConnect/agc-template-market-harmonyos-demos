@@ -1,0 +1,10 @@
+{
+  "src": [
+    "pages/MainEntry",
+    "pages/EmptyPage"
+  ],
+  "window": {
+    "designWidth": 720,
+    "autoDesignWidth": false
+  }
+}

@@ -1,0 +1,280 @@
+{
+  "string": [
+    {
+      "name": "shared_desc",
+      "value": "description"
+    },
+    {
+      "name": "month_sale",
+      "value": "月售%s"
+    },
+    {
+      "name": "select_package",
+      "value": "选套餐"
+    },
+    {
+      "name": "select_spec",
+      "value": "选规格"
+    },
+    {
+      "name": "selected",
+      "value": "已选："
+    },
+    {
+      "name": "good_number",
+      "value": "数量"
+    },
+    {
+      "name": "add_car",
+      "value": "加入购物车"
+    },
+    {
+      "name": "add_success",
+      "value": "添加成功！"
+    },
+    {
+      "name": "place_order",
+      "value": "去结算"
+    },
+    {
+      "name": "total_price",
+      "value": "共计"
+    },
+    {
+      "name": "unordered_must_good",
+      "value": "未点必选品"
+    },
+    {
+      "name": "need_goods",
+      "value": "请选择商品后下单"
+    },
+    {
+      "name": "need_must_goods",
+      "value": "请选择必选品"
+    },
+    {
+      "name": "clear_car",
+      "value": "清空购物车"
+    },
+    {
+      "name": "list_bottom",
+      "value": "我是有底线的~"
+    },
+    {
+      "name": "new_user_discount",
+      "value": "新用户下单立减%s元"
+    },
+    {
+      "name": "claim_now",
+      "value": "立即领取"
+    },
+    {
+      "name": "collected",
+      "value": "已领取"
+    },
+    {
+      "name": "claiming_succeeded",
+      "value": "领取成功"
+    },
+    {
+      "name": "claiming_failed",
+      "value": "领取失败"
+    },
+    {
+      "name": "search_goods",
+      "value": "搜索商品"
+    },
+    {
+      "name": "fill_remarks",
+      "value": "填写备注"
+    },
+    {
+      "name": "car_empty_toast",
+      "value": "购物车商品为空，请选择商品后结算"
+    },
+    {
+      "name": "place_order_failed_msg",
+      "value": "下单失败！错误码：%s"
+    },
+    {
+      "name": "confirm_order",
+      "value": "确认订单"
+    },
+    {
+      "name": "my_location",
+      "value": "您的位置"
+    },
+    {
+      "name": "store_dining_desc",
+      "value": "门店就餐更方便"
+    },
+    {
+      "name": "picking_desc",
+      "value": "打包带走更方便"
+    },
+    {
+      "name": "select_coupon",
+      "value": "选择商家优惠券"
+    },
+    {
+      "name": "total_pay",
+      "value": "合计"
+    },
+    {
+      "name": "commit_order",
+      "value": "提交订单"
+    },
+    {
+      "name": "can_use",
+      "value": "可使用"
+    },
+    {
+      "name": "can_not_use",
+      "value": "不可使用"
+    },
+    {
+      "name": "selected_coupon",
+      "value": "已选%s张，可减"
+    },
+    {
+      "name": "order_remark",
+      "value": "备注"
+    },
+    {
+      "name": "quick_input",
+      "value": "快速输入"
+    },
+    {
+      "name": "input_remark_info",
+      "value": "请输入备注信息"
+    },
+    {
+      "name": "store_detail",
+      "value": "门店详情"
+    },
+    {
+      "name": "maps",
+      "value": "地图"
+    },
+    {
+      "name": "telephone",
+      "value": "电话"
+    },
+    {
+      "name": "monday_to_sunday",
+      "value": "周一至周日  "
+    },
+    {
+      "name": "merchant_qualifications",
+      "value": "商家资质"
+    },
+    {
+      "name": "merchant_env",
+      "value": "商家环境"
+    },
+    {
+      "name": "merchant_commitment",
+      "value": "商家承诺"
+    },
+    {
+      "name": "food_safe",
+      "value": "食品安全"
+    },
+    {
+      "name": "licensed",
+      "value": "执照营业"
+    },
+    {
+      "name": "worry_free",
+      "value": "无忧保障"
+    },
+    {
+      "name": "basic_service",
+      "value": "基础服务"
+    },
+    {
+      "name": "free_wifi",
+      "value": "免费wifi"
+    },
+    {
+      "name": "free_parking",
+      "value": "免费停车"
+    },
+    {
+      "name": "store_announce",
+      "value": "店铺公告"
+    },
+    {
+      "name": "validity",
+      "value": "有效期"
+    },
+    {
+      "name": "order_validity_desc",
+      "value": "订单当天有效，随时可退"
+    },
+    {
+      "name": "usage_rules",
+      "value": "使用规则"
+    },
+    {
+      "name": "usage_rules_desc1",
+      "value": "1、仅限堂食，不可使用包间"
+    },
+    {
+      "name": "usage_rules_desc2",
+      "value": "2、套餐菜品不可更换，单次消费不可与其他套餐和优惠券叠加使用"
+    },
+    {
+      "name": "use_time",
+      "value": "使用时间"
+    },
+    {
+      "name": "use_time_desc",
+      "value": "营业时间内可用"
+    },
+    {
+      "name": "good_details",
+      "value": "商品详情"
+    },
+    {
+      "name": "package_details",
+      "value": "套餐详情"
+    },
+    {
+      "name": "buy_notes",
+      "value": "购买须知"
+    },
+    {
+      "name": "add_failed",
+      "value": "添加失败！"
+    },
+    {
+      "name": "shop_discount_title",
+      "value": "店铺活动"
+    },
+    {
+      "name": "remark_count_show",
+      "value": "%d/100"
+    },
+    {
+      "name": "recommendation",
+      "value": "推荐"
+    },
+    {
+      "name": "diner_num_default",
+      "value": "1人"
+    },
+    {
+      "name": "sales_more",
+      "value": "月售100+"
+    },
+    {
+      "name": "show_more",
+      "value": "查看更多"
+    },
+    {
+      "name": "update_order_failed",
+      "value": "订单更新失败"
+    }
+  ]
+}

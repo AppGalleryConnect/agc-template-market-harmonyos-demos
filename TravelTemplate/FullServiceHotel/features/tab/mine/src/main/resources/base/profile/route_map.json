@@ -1,0 +1,9 @@
+{
+  "routerMap": [
+    {
+      "name": "ProfileEditPage",
+      "pageSourceFile": "src/main/ets/pages/ProfileEditPage.ets",
+      "buildFunction": "profileEditPageBuilder"
+    }
+  ]
+}

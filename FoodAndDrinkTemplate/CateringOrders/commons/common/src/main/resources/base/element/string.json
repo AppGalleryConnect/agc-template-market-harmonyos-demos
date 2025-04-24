@@ -1,0 +1,44 @@
+{
+  "string": [
+    {
+      "name": "shared_desc",
+      "value": "description"
+    },
+    {
+      "name": "business_time",
+      "value": "营业时间"
+    },
+    {
+      "name": "call",
+      "value": "一键拨号"
+    },
+    {
+      "name": "must_good",
+      "value": "必选品"
+    },
+    {
+      "name": "request_failed",
+      "value": "请求失败"
+    },
+    {
+      "name": "cancel_pay",
+      "value": "取消支付"
+    },
+    {
+      "name": "pay_failed",
+      "value": "支付失败"
+    },
+    {
+      "name": "network_error",
+      "value": "网络链接异常"
+    },
+    {
+      "name": "duplicate_request",
+      "value": "重复请求"
+    },
+    {
+      "name": "copy_success",
+      "value": "复制成功"
+    }
+  ]
+}

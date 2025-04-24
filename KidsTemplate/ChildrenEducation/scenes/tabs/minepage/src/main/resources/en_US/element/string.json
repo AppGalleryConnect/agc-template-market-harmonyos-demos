@@ -1,0 +1,96 @@
+{
+  "string": [
+    {
+      "name": "shared_desc",
+      "value": "description"
+    },
+    {
+      "name": "privacyAgreementPath",
+      "value": "https://privacy.consumer.huawei.com/legal/id/authentication-terms.htm?code=CN&language=zh-CN"
+    },
+    {
+      "name": "get_mobile_number_error",
+      "value": "Failed to obtain the anonymous mobile number."
+    },
+    {
+      "name": "account_link",
+      "value": "account_link"
+    },
+    {
+      "name": "common_service",
+      "value": "common_service"
+    },
+    {
+      "name": "view_history",
+      "value": "view_history"
+    },
+    {
+      "name": "setting",
+      "value": "setting"
+    },
+    {
+      "name": "account_unlink",
+      "value": "account_unlink"
+    },
+    {
+      "name": "contact_us",
+      "value": "contact_us"
+    },
+    {
+      "name": "app_user_agreement",
+      "value": "User Service Agreement, "
+    },
+    {
+      "name": "app_privacy_policy",
+      "value": "Privacy Policy,"
+    },
+    {
+      "name": "huaweiId_user_authentication_protocol",
+      "value": "HUAWEI ID User Authentication Agreement"
+    },
+    {
+      "name":"and",
+      "value":" and "
+    },
+    {
+      "name":"end",
+      "value":"."
+    },
+    {
+      "name":"read_and_agree",
+      "value":"read_and_agree"
+    },
+    {
+      "name": "hwid_no_internet_connect",
+      "value": "hwid_no_internet_connect"
+    },
+    {
+      "name": "bind_huaweiId_number",
+      "value": "bind_huaweiId_number"
+    },
+    {
+      "name": "read_and_agree_protocol",
+      "value": "read_and_agree_protocol"
+    },
+    {
+      "name": "avatar",
+      "value": "avatar"
+    },
+    {
+      "name": "nickName",
+      "value": "nickName"
+    },
+    {
+      "name": "save",
+      "value": "save"
+    },
+    {
+      "name": "personalInformation",
+      "value": "personalInformation"
+    },
+    {
+      "name": "log_out",
+      "value": "log_out"
+    }
+  ]
+}

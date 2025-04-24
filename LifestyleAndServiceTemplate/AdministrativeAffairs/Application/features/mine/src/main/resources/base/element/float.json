@@ -1,0 +1,152 @@
+{
+  "float": [
+    {
+      "name": "mine_progress_width",
+      "value": "40vp"
+    },
+    {
+      "name": "mine_progress_height",
+      "value": "40vp"
+    },
+    {
+      "name": "mine_progress_padding",
+      "value": "20vp"
+    },
+    {
+      "name": "mine_progress_margin_top",
+      "value": "40vp"
+    },
+    {
+      "name": "mine_progress_padding_left",
+      "value": "16vp"
+    },
+    {
+      "name": "mine_progress_padding_right",
+      "value": "10vp"
+    },
+    {
+      "name": "mine_avatar_width",
+      "value": "64vp"
+    },
+    {
+      "name": "mine_avatar_height",
+      "value": "64vp"
+    },
+    {
+      "name": "mine_avatar_margin_right",
+      "value": "12vp"
+    },
+    {
+      "name": "mine_phone_width",
+      "value": "16vp"
+    },
+    {
+      "name": "mine_phone_height",
+      "value": "16vp"
+    },
+    {
+      "name": "mine_link_height",
+      "value": "12vp"
+    },
+    {
+      "name": "mine_link_width",
+      "value": "12vp"
+    },
+    {
+      "name": "mine_link_padding",
+      "value": "8vp"
+    },
+    {
+      "name": "mine_link_margin_top",
+      "value": "18vp"
+    },
+    {
+      "name": "mine_link_padding_left",
+      "value": "20vp"
+    },
+    {
+      "name": "mine_link_padding_right",
+      "value": "10vp"
+    },
+    {
+      "name": "mine_call_width",
+      "value": "35vp"
+    },
+    {
+      "name": "mine_call_height",
+      "value": "35vp"
+    },
+    {
+      "name": "mine_recommended_padding",
+      "value": "5vp"
+    },
+    {
+      "name": "mine_call_padding",
+      "value": "20vp"
+    },
+    {
+      "name": "mine_setting_width",
+      "value": "30vp"
+    },
+    {
+      "name": "mine_setting_height",
+      "value": "30vp"
+    },
+    {
+      "name": "mine_setting_margin_right",
+      "value": "10vp"
+    },
+    {
+      "name": "mine_more_width",
+      "value": "30vp"
+    },
+    {
+      "name": "mine_more_height",
+      "value": "30vp"
+    },
+    {
+      "name": "mine_setting_padding_top",
+      "value": "15vp"
+    },
+    {
+      "name": "mine_setting_padding_bottom",
+      "value": "15vp"
+    },
+    {
+      "name": "mine_setting_padding_right",
+      "value": "12vp"
+    },
+    {
+      "name": "mine_setting_padding_left",
+      "value": "12vp"
+    },
+    {
+      "name": "mine_sheet_height",
+      "value": "253vp"
+    },
+    {
+      "name": "mine_service_margin_top",
+      "value": "20vp"
+    },
+    {
+      "name": "mine_progress_margin_left",
+      "value": "24vp"
+    },
+    {
+      "name": "mine_page_margin",
+      "value": "64vp"
+    },
+    {
+      "name": "mine_page_width",
+      "value": "328vp"
+    },
+    {
+      "name": "mine_page_height",
+      "value": "245vp"
+    },
+    {
+      "name": "call_icon_size",
+      "value": "24vp"
+    }
+  ]
+}

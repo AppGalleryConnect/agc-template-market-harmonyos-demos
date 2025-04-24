@@ -1,0 +1,80 @@
+{
+  "string": [
+    {
+      "name": "phone_example",
+      "value": "18000000000"
+    },
+    {
+      "name": "car_example",
+      "value": "宝马-5系"
+    },
+    {
+      "name": "beauty_service",
+      "value": "美容服务"
+    },
+    {
+      "name": "order_price",
+      "value": "订单总价"
+    },
+    {
+      "name": "payment_required",
+      "value": "需付款"
+    },
+    {
+      "name": "renminbi",
+      "value": "￥"
+    },
+    {
+      "name": "fiveHundred",
+      "value": "500"
+    },
+    {
+      "name": "totalDiscount",
+      "value": "共计优惠"
+    },
+    {
+      "name": "orderSubmit",
+      "value": "立即购买"
+    },
+    {
+      "name": "zero",
+      "value": "￥0"
+    },
+    {
+      "name": "order_confirm",
+      "value": "确认订单"
+    },
+    {
+      "name": "total",
+      "value": "全部"
+    },
+    {
+      "name": "pending_pay",
+      "value": "待付款"
+    },
+    {
+      "name": "canceled",
+      "value": "已取消"
+    },
+    {
+      "name": "zunjie_maintain",
+      "value": "尊界保养（新街口店）"
+    },
+    {
+      "name": "closed",
+      "value": "已完成"
+    },
+    {
+      "name": "twoService",
+      "value": "共2项服务，实付款199"
+    },
+    {
+      "name": "good_deal",
+      "value": "待付款"
+    },
+    {
+      "name": "noorder",
+      "value": "暂无订单记录"
+    }
+  ]
+}

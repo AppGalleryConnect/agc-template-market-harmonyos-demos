@@ -1,0 +1,65 @@
+{
+  "ret": {
+    "retCode": 0,
+    "retMsg": "SUCCESS"
+  },
+  "list": [
+    {
+      "id": 3000001,
+      "uid": 100091,
+      "enrollTime": 1740748400000,
+      "status": 0,
+      "activity": {
+        "activityId": 1,
+        "name": "高尔夫交友",
+        "resource0Url": "app.media.img_activity_golf",
+        "activityStartTime": 1740758400000,
+        "activityEndTime": 1740844800000,
+        "address": "南京市玄武区环陵路9号钟山高尔夫俱乐部"
+      }
+    },
+    {
+      "id": 3000002,
+      "uid": 100091,
+      "enrollTime": 1740780800000,
+      "status": 1,
+      "activity": {
+        "activityId": 2,
+        "name": "野营交友",
+        "subTitle": "户外交友 玩乐社交",
+        "resource0Url": "app.media.img_activity_camp",
+        "activityStartTime": 1740790800000,
+        "activityEndTime": 1740823200000,
+        "address": "南京市鼓楼区五马渡江岸"
+      }
+    },
+    {
+      "id": 3000003,
+      "uid": 100091,
+      "enrollTime": 1740748400000,
+      "status": 2,
+      "activity": {
+        "activityId": 1,
+        "name": "高尔夫交友",
+        "resource0Url": "app.media.img_activity_golf",
+        "activityStartTime": 1740758400000,
+        "activityEndTime": 1740844800000,
+        "address": "南京市玄武区环陵路9号钟山高尔夫俱乐部"
+      }
+    },
+    {
+      "id": 3000004,
+      "uid": 100091,
+      "enrollTime": 1738374200000,
+      "status": 3,
+      "activity": {
+        "activityId": 4,
+        "name": "户外徒步活动",
+        "resource0Url": "app.media.img_activity_travel",
+        "activityStartTime": 1738375200000,
+        "activityEndTime": 1738382400000,
+        "address": "南京市玄武区环陵路9号钟山风景区"
+      }
+    }
+  ]
+}

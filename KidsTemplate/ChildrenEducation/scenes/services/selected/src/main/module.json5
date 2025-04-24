@@ -1,0 +1,24 @@
+{
+  "module": {
+    "name": "selected",
+    "type": "shared",
+    "routerMap": "$profile:router_map",
+    "deviceTypes": [
+      "phone"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": true,
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.INTERNET",
+        "usedScene": {
+          "abilities": [
+            "EntryAbility"
+          ],
+          "when": "inuse"
+        },
+        "reason": "$string:reason"
+      }
+    ]
+  }
+}

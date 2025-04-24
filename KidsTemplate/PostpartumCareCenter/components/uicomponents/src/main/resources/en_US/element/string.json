@@ -1,0 +1,168 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "obtain_location_permission",
+      "value": "obtain_location_permission"
+    },
+    {
+      "name": "package_price_list",
+      "value": "Package Price List"
+    },
+    {
+      "name": "visit_Consulting",
+      "value": "Consult now"
+    },
+    {
+      "name": "visit_booking",
+      "value": "visit_booking"
+    },
+    {
+      "name": "booking_personal_info",
+      "value": "Please fill in personal information"
+    },
+    {
+      "name": "booking_must",
+      "value": "*"
+    },
+    {
+      "name": "booking_name",
+      "value": "Name"
+    },
+    {
+      "name": "booking_name_input",
+      "value": "Please enter name"
+    },
+    {
+      "name": "booking_telephone",
+      "value": "phone number"
+    },
+    {
+      "name": "booking_telephone_input",
+      "value": "booking_telephone_input"
+    },
+    {
+      "name": "booking_store",
+      "value": "booking_store"
+    },
+    {
+      "name": "booking_date",
+      "value": "booking_date"
+    },
+    {
+      "name": "booking_date_input",
+      "value": "booking_date_input"
+    },
+    {
+      "name": "booking_project",
+      "value": "booking_project"
+    },
+    {
+      "name": "booking_project_description",
+      "value": "booking_project_description"
+    },
+    {
+      "name": "booking_tips",
+      "value": "booking_tips"
+    },
+    {
+      "name": "booking_comfort_experience",
+      "value": "booking_comfort_experience"
+    },
+    {
+      "name": "booking_sightseeing_experience",
+      "value": "booking_sightseeing_experience"
+    },
+    {
+      "name": "booking_price",
+      "value": "booking_price"
+    },
+    {
+      "name": "booking_free",
+      "value": "booking_free"
+    },
+    {
+      "name": "booking_button",
+      "value": "booking_button"
+    },
+    {
+      "name": "store_type_description",
+      "value": "store_type_description"
+    },
+    {
+      "name": "store_type_description_en",
+      "value": "Room type"
+    },
+    {
+      "name": "activity_booking_success",
+      "value": "activity_booking_success"
+    },
+    {
+      "name": "booking_success_message",
+      "value": "booking_success_message"
+    },
+    {
+      "name": "booking_add_calendar",
+      "value": "booking_add_calendar"
+    },
+    {
+      "name": "booking_calendar_add_success",
+      "value": "booking_calendar_add_success"
+    },
+    {
+      "name": "feedback_title",
+      "value": "feedback_title"
+    },
+    {
+      "name": "feedback_content_desc",
+      "value": "feedback_content_desc"
+    },
+    {
+      "name": "feedback_content_guide",
+      "value": "feedback_content_guide"
+    },
+    {
+      "name": "submit_immediately",
+      "value": "submit_immediately"
+    },
+    {
+      "name": "activity_info",
+      "value": "activity_info"
+    },
+    {
+      "name": "activity_name",
+      "value": "activity_name"
+    },
+    {
+      "name": "booking_phone",
+      "value": "booking_phone"
+    },
+    {
+      "name": "activity_address",
+      "value": "activity_address"
+    },
+    {
+      "name": "unbind_account",
+      "value": "unbind_account"
+    },
+    {
+      "name": "bind_account",
+      "value": "bind_account"
+    },
+    {
+      "name": "unbind_dialog_message",
+      "value": "unbind_dialog_message？"
+    },
+    {
+      "name": "cancel",
+      "value": "cancel"
+    },
+    {
+      "name": "confirm",
+      "value": "confirm"
+    }
+  ]
+}

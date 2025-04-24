@@ -1,0 +1,17 @@
+<svg width="24.000000" height="24.000000" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs>
+		<clipPath id="clip24_1616">
+			<rect width="24.000000" height="24.000000" fill="white" fill-opacity="0"/>
+		</clipPath>
+	</defs>
+	<g clip-path="url(#clip24_1616)">
+		<path d="M5.1 2L18.89 2C19.5 2 20 2.48 20 3.08L20 20.91C20 21.51 19.5 22 18.89 22L7.31 22C5.48 22 4 20.54 4 18.75L4 3.08C4 2.48 4.49 2 5.1 2Z" fill="#007DFF" fill-opacity="1.000000" fill-rule="evenodd"/>
+		<path d="M6.2 4.16L12.27 4.16C12.58 4.16 12.82 4.4 12.82 4.7L12.82 7.94C12.82 8.24 12.58 8.48 12.27 8.48L6.2 8.48C5.9 8.48 5.65 8.24 5.65 7.94L5.65 4.7C5.65 4.4 5.9 4.16 6.2 4.16Z" fill="#FFFFFF" fill-opacity="1.000000" fill-rule="evenodd"/>
+		<path d="M6.34 11.18L17.1 11.18C17.48 11.18 17.79 11.49 17.79 11.86C17.79 12.23 17.48 12.54 17.1 12.54L6.34 12.54C5.96 12.54 5.65 12.23 5.65 11.86C5.65 11.49 5.96 11.18 6.34 11.18Z" fill="#FFFFFF" fill-opacity="1.000000" fill-rule="evenodd"/>
+		<path d="M6.34 17.67L13.24 17.67C13.62 17.67 13.93 17.97 13.93 18.35C13.93 18.72 13.62 19.02 13.24 19.02L6.34 19.02C5.96 19.02 5.65 18.72 5.65 18.35C5.65 17.97 5.96 17.67 6.34 17.67Z" fill="#FFFFFF" fill-opacity="1.000000" fill-rule="evenodd"/>
+		<path d="M6.34 14.43L17.1 14.43C17.48 14.43 17.79 14.73 17.79 15.1C17.79 15.48 17.48 15.78 17.1 15.78L6.34 15.78C5.96 15.78 5.65 15.48 5.65 15.1C5.65 14.73 5.96 14.43 6.34 14.43Z" fill="#FFFFFF" fill-opacity="1.000000" fill-rule="evenodd"/>
+	</g>
+</svg>

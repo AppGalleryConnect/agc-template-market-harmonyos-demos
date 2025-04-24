@@ -1,0 +1,56 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "certification_progress",
+      "value": "办证进度"
+    },
+    {
+      "name": "certification_nickname",
+      "value": "华为用户"
+    },
+    {
+      "name": "not_associated",
+      "value": "未关联"
+    },
+    {
+      "name": "disassociate",
+      "value": "解除关联"
+    },
+    {
+      "name": "associated_account",
+      "value": "关联账号"
+    },
+    {
+      "name": "sure_release",
+      "value": "请确认是否解除账号关联？"
+    },
+    {
+      "name": "contact_online",
+      "value": "在线联系"
+    },
+    {
+      "name": "call_number",
+      "value": "一键拨号"
+    },
+    {
+      "name": "call_number_cancel",
+      "value": "取消"
+    },
+    {
+      "name": "recommended",
+      "value": "推荐"
+    },
+    {
+      "name": "contact_service",
+      "value": "联系客服"
+    },
+    {
+      "name": "mine_title",
+      "value": "我的"
+    }
+  ]
+}

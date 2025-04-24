@@ -1,0 +1,77 @@
+[
+  {
+    "mapFeature": "poi.tourism",
+    "options": "all",
+    "paint": {
+      "weight": 1,
+      "saturation": 0,
+      "lightness": 0
+    }
+  },
+  {
+    "mapFeature": "poi.tourism",
+    "options": "geometry",
+    "paint": {
+      "weight": 1,
+      "color": "#1c2b1c"
+    }
+  },
+  {
+    "mapFeature": "poi.tourism",
+    "options": "geometry.fill",
+    "paint": {
+      "color": "#dbe3eb"
+    }
+  },
+  {
+    "mapFeature": "poi.tourism",
+    "options": "labels.text",
+    "paint": {
+      "color": "#357e35"
+    }
+  },
+  {
+    "mapFeature": "poi.tourism",
+    "options": "labels.icon",
+    "paint": {
+      "icon-type": "simple"
+    }
+  },
+  {
+    "mapFeature": "poi.tourism",
+    "options": "labels.text.fill",
+    "visibility": true,
+    "paint": {
+      "weight": 3.5,
+      "saturation": 0,
+      "lightness": 0
+    }
+  },
+  {
+    "mapFeature": "poi.tourism",
+    "options": "geometry.stroke",
+    "visibility": true,
+    "paint": {
+      "color": "#6b3d58"
+    }
+  },
+  {
+    "mapFeature": "poi.tourism",
+    "options": "geometry.icon",
+    "visibility": true,
+    "paint": {
+      "color": "#6b3d58"
+    }
+  },
+  {
+    "mapFeature": "poi.tourism",
+    "options": "labels.text.stroke",
+    "visibility": true,
+    "paint": {
+      "color": "#4336a6",
+      "lightness": 0,
+      "saturation": 0,
+      "weight": 1
+    }
+  }
+]

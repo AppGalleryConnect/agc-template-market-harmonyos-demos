@@ -1,0 +1,48 @@
+{
+  "string": [
+    {
+      "name": "shared_desc",
+      "value": "description"
+    },
+    {
+      "name": "mine",
+      "value": "我的"
+    },
+    {
+      "name": "unconnected",
+      "value": "未关联"
+    },
+    {
+      "name": "connect_account",
+      "value": "关联账号"
+    },
+    {
+      "name": "disconnect_account",
+      "value": "解除关联"
+    },
+    {
+      "name": "subscribe_notice_service",
+      "value": "通知订阅"
+    },
+    {
+      "name": "disconnect_dialog_title",
+      "value": "账号解除关联"
+    },
+    {
+      "name": "disconnect_tips",
+      "value": "请确认是否解除账号关联？"
+    },
+    {
+      "name": "confirm_disconnect",
+      "value": "确定"
+    },
+    {
+      "name": "modify_nick_name_dialog_title",
+      "value": "修改用户昵称"
+    },
+    {
+      "name": "dialog_cancel",
+      "value": "取消"
+    }
+  ]
+}

@@ -1,0 +1,3238 @@
+<!doctype html>
+<html>
+  <head>
+    <title>DatingPlatform</title>
+    <style type="text/css">
+      body {
+	font-family: Trebuchet MS, sans-serif;
+	font-size: 15px;
+	color: #444;
+	margin-right: 24px;
+}
+
+h1	{
+	font-size: 25px;
+}
+h2	{
+	font-size: 20px;
+}
+h3	{
+	font-size: 16px;
+	font-weight: bold;
+}
+hr	{
+	height: 1px;
+	border: 0;
+	color: #ddd;
+	background-color: #ddd;
+}
+
+.app-desc {
+  clear: both;
+  margin-left: 20px;
+}
+.param-name {
+  width: 100%;
+}
+.license-info {
+  margin-left: 20px;
+}
+
+.license-url {
+  margin-left: 20px;
+}
+
+.model {
+  margin: 0 0 0px 20px;
+}
+
+.method {
+  margin-left: 20px;
+}
+
+.method-notes	{
+	margin: 10px 0 20px 0;
+	font-size: 90%;
+	color: #555;
+}
+
+pre {
+  padding: 10px;
+  margin-bottom: 2px;
+}
+
+.http-method {
+ text-transform: uppercase;
+}
+
+pre.get {
+  background-color: #0f6ab4;
+}
+
+pre.post {
+  background-color: #10a54a;
+}
+
+pre.put {
+  background-color: #c5862b;
+}
+
+pre.delete {
+  background-color: #a41e22;
+}
+
+.huge	{
+	color: #fff;
+}
+
+pre.example {
+  background-color: #f3f3f3;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+code {
+  white-space: pre;
+}
+
+.nickname {
+  font-weight: bold;
+}
+
+.method-path {
+  font-size: 1.5em;
+  background-color: #0f6ab4;
+}
+
+.up {
+  float:right;
+}
+
+.parameter {
+  width: 500px;
+}
+
+.param {
+  width: 500px;
+  padding: 10px 0 0 20px;
+  font-weight: bold;
+}
+
+.param-desc {
+  width: 700px;
+  padding: 0 0 0 20px;
+  color: #777;
+}
+
+.param-type {
+  font-style: italic;
+}
+
+.param-enum-header {
+width: 700px;
+padding: 0 0 0 60px;
+color: #777;
+font-weight: bold;
+}
+
+.param-enum {
+width: 700px;
+padding: 0 0 0 80px;
+color: #777;
+font-style: italic;
+}
+
+.field-label {
+  padding: 0;
+  margin: 0;
+  clear: both;
+}
+
+.field-items	{
+	padding: 0 0 15px 0;
+	margin-bottom: 15px;
+}
+
+.return-type {
+  clear: both;
+  padding-bottom: 10px;
+}
+
+.param-header {
+  font-weight: bold;
+}
+
+.method-tags {
+  text-align: right;
+}
+
+.method-tag {
+  background: none repeat scroll 0% 0% #24A600;
+  border-radius: 3px;
+  padding: 2px 10px;
+  margin: 2px;
+  color: #FFF;
+  display: inline-block;
+  text-decoration: none;
+}
+
+    </style>
+  </head>
+  <body>
+  <h1>DatingPlatform</h1>
+    <div class="app-desc">DatingPlatform</div>
+    
+    
+    <div class="app-desc">Version: v1</div>
+    <div class="app-desc">BasePath:</div>
+    <div class="license-info"></div>
+    <div class="license-url"></div>
+  <h2>Access</h2>
+
+  <h2><a name="__Methods">Methods</a></h2>
+  [ Jump to <a href="#__Models">Models</a> ]
+
+  <h3>Table of Contents </h3>
+  <div class="method-summary"></div>
+  <h4><a href="#Activiy">Activiy</a></h4>
+  <ul>
+  <li><a href="#enrollActivity"><code><span class="http-method">post</span> /activity/enroll</code></a></li>
+  <li><a href="#getActivity"><code><span class="http-method">get</span> /activity/{activityId}</code></a></li>
+  <li><a href="#getEnrolledActivity"><code><span class="http-method">get</span> /activity/enrolled/{uid}/{pageSize}/{curPage}</code></a></li>
+  <li><a href="#queryActivities"><code><span class="http-method">get</span> /activity/list/{pageSize}/{curPage}</code></a></li>
+  </ul>
+  <h4><a href="#Comment">Comment</a></h4>
+  <ul>
+  <li><a href="#createComment"><code><span class="http-method">post</span> /comment</code></a></li>
+  </ul>
+  <h4><a href="#Feed">Feed</a></h4>
+  <ul>
+  <li><a href="#createFeed"><code><span class="http-method">post</span> /feed</code></a></li>
+  <li><a href="#deleteFeed"><code><span class="http-method">delete</span> /feed/{feedId}</code></a></li>
+  <li><a href="#getFeed"><code><span class="http-method">get</span> /feed/{feedId}</code></a></li>
+  <li><a href="#queryFeeds"><code><span class="http-method">get</span> /feed/list/{pageSize}/{curPage}</code></a></li>
+  </ul>
+  <h4><a href="#Like">Like</a></h4>
+  <ul>
+  <li><a href="#createLike"><code><span class="http-method">post</span> /like</code></a></li>
+  </ul>
+  <h4><a href="#MatchMaker">MatchMaker</a></h4>
+  <ul>
+  <li><a href="#queryMatchMaker"><code><span class="http-method">get</span> /matchmaker/list/{pageSize}/{curPage}</code></a></li>
+  </ul>
+  <h4><a href="#Membership">Membership</a></h4>
+  <ul>
+  <li><a href="#getMembershipList"><code><span class="http-method">get</span> /membership/list</code></a></li>
+  <li><a href="#subscribeMembership"><code><span class="http-method">post</span> /membership/subscribe</code></a></li>
+  </ul>
+  <h4><a href="#User">User</a></h4>
+  <ul>
+  <li><a href="#createUser"><code><span class="http-method">post</span> /user</code></a></li>
+  <li><a href="#deleteUser"><code><span class="http-method">delete</span> /user/{hwUnionId}</code></a></li>
+  <li><a href="#followUser"><code><span class="http-method">post</span> /user/follow</code></a></li>
+  <li><a href="#getFollowedUsers"><code><span class="http-method">get</span> /user/followed</code></a></li>
+  <li><a href="#getRecommendedUser"><code><span class="http-method">get</span> /user/recommended/{hwUnionId}/{curPage}/{pageSize}</code></a></li>
+  <li><a href="#getUser"><code><span class="http-method">get</span> /user/{hwUnionId}</code></a></li>
+  <li><a href="#login"><code><span class="http-method">get</span> /user/login/{authorizationCode}</code></a></li>
+  <li><a href="#queryUser"><code><span class="http-method">post</span> /user/query</code></a></li>
+  <li><a href="#updateUser"><code><span class="http-method">put</span> /user/{hwUnionId}</code></a></li>
+  </ul>
+
+  <h1><a name="Activiy">Activiy</a></h1>
+  <div class="method"><a name="enrollActivity"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /activity/enroll</code></pre></div>
+    <div class="method-summary">报名活动 (<span class="nickname">enrollActivity</span>)</div>
+    <div class="method-notes">报名活动</div>
+
+
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">enrollActivityReq <a href="#EnrollActivityRequest">EnrollActivityRequest</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  
+		  
+	  </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#CommonRsp">CommonRsp</a>
+      
+    </div>
+
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    响应
+        <a href="#CommonRsp">CommonRsp</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getActivity"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /activity/{activityId}</code></pre></div>
+    <div class="method-summary">查询活动详情 (<span class="nickname">getActivity</span>)</div>
+    <div class="method-notes">查询活动详情</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">activityId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; 活动Id format: int64</div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#GetActivityResponse">GetActivityResponse</a>
+      
+    </div>
+
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    GetActivityResponse
+        <a href="#GetActivityResponse">GetActivityResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getEnrolledActivity"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /activity/enrolled/{uid}/{pageSize}/{curPage}</code></pre></div>
+    <div class="method-summary">查询用户参与的活动列表 (<span class="nickname">getEnrolledActivity</span>)</div>
+    <div class="method-notes">查询用户参与的活动列表</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">uid (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; 用户id format: int64</div><div class="param">pageSize (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; 单页最大数量 format: int32</div><div class="param">curPage (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; 当前页 format: int32</div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#QueryEnrolledActivityResponse">QueryEnrolledActivityResponse</a>
+      
+    </div>
+
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    响应
+        <a href="#QueryEnrolledActivityResponse">QueryEnrolledActivityResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="queryActivities"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /activity/list/{pageSize}/{curPage}</code></pre></div>
+    <div class="method-summary">查询活动列表 (<span class="nickname">queryActivities</span>)</div>
+    <div class="method-notes">查询活动列表</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">pageSize (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; 单页最大数量 format: int32</div><div class="param">curPage (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; 当前页 format: int32</div>
+    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">city (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; 活动举办地 </div>
+    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#QueryActivityResponse">QueryActivityResponse</a>
+      
+    </div>
+
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    QueryActivityResponse
+        <a href="#QueryActivityResponse">QueryActivityResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Comment">Comment</a></h1>
+  <div class="method"><a name="createComment"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /comment</code></pre></div>
+    <div class="method-summary">发起评论 (<span class="nickname">createComment</span>)</div>
+    <div class="method-notes">发起评论</div>
+
+
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">createComment <a href="#CreateCommentRequest">CreateCommentRequest</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  
+		  
+	  </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#CommonRsp">CommonRsp</a>
+      
+    </div>
+
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    响应
+        <a href="#CommonRsp">CommonRsp</a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Feed">Feed</a></h1>
+  <div class="method"><a name="createFeed"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /feed</code></pre></div>
+    <div class="method-summary">创建动态 (<span class="nickname">createFeed</span>)</div>
+    <div class="method-notes">创建动态</div>
+
+
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">createFeedReq <a href="#CreateFeedRequest">CreateFeedRequest</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  
+		  
+	  </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#CreateFeedResponse">CreateFeedResponse</a>
+      
+    </div>
+
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Response
+        <a href="#CreateFeedResponse">CreateFeedResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deleteFeed"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /feed/{feedId}</code></pre></div>
+    <div class="method-summary">删除单个动态 (<span class="nickname">deleteFeed</span>)</div>
+    <div class="method-notes">删除单个动态</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">feedId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; 动态的id format: int64</div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#CommonRsp">CommonRsp</a>
+      
+    </div>
+
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    删除动态响应
+        <a href="#CommonRsp">CommonRsp</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getFeed"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /feed/{feedId}</code></pre></div>
+    <div class="method-summary">查询动态详情 (<span class="nickname">getFeed</span>)</div>
+    <div class="method-notes">查询单个动态</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">feedId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; 动态的id format: int64</div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#GetFeedResponse">GetFeedResponse</a>
+      
+    </div>
+
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Response
+        <a href="#GetFeedResponse">GetFeedResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="queryFeeds"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /feed/list/{pageSize}/{curPage}</code></pre></div>
+    <div class="method-summary">查询动态列表 (<span class="nickname">queryFeeds</span>)</div>
+    <div class="method-notes">查询动态列表</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">pageSize (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; 单页最大数量 format: int32</div><div class="param">curPage (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; 当前页 format: int32</div>
+    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">queryType (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; 查询类型，0：查询推荐动态， 1：查询关注用户的动态 2：查询我点赞过的动态 3：查询我被赞过的动态 4：查询我评论过的动态
+5：查询我被评论过的动态 6：按用户查询 format: int32</div><div class="param">uid (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; 用户id format: int64</div>
+    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#QueryFeedResponse">QueryFeedResponse</a>
+      
+    </div>
+
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Response
+        <a href="#QueryFeedResponse">QueryFeedResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Like">Like</a></h1>
+  <div class="method"><a name="createLike"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /like</code></pre></div>
+    <div class="method-summary">点赞 (<span class="nickname">createLike</span>)</div>
+    <div class="method-notes">点赞</div>
+
+
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">createLikeReq <a href="#CreateLikeRequest">CreateLikeRequest</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  
+		  
+	  </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#CommonRsp">CommonRsp</a>
+      
+    </div>
+
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    响应
+        <a href="#CommonRsp">CommonRsp</a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="MatchMaker">MatchMaker</a></h1>
+  <div class="method"><a name="queryMatchMaker"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /matchmaker/list/{pageSize}/{curPage}</code></pre></div>
+    <div class="method-summary">查询红娘 (<span class="nickname">queryMatchMaker</span>)</div>
+    <div class="method-notes">查询红娘</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">pageSize (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; 单页最大数量 format: int32</div><div class="param">curPage (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; 当前页 format: int32</div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#QueryMatchMakerResponse">QueryMatchMakerResponse</a>
+      
+    </div>
+
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    QueryMatchMakerResponse
+        <a href="#QueryMatchMakerResponse">QueryMatchMakerResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="Membership">Membership</a></h1>
+  <div class="method"><a name="getMembershipList"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /membership/list</code></pre></div>
+    <div class="method-summary">查询会员服务列表 (<span class="nickname">getMembershipList</span>)</div>
+    <div class="method-notes">查询会员服务列表</div>
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#QueryMemberShipRsp">QueryMemberShipRsp</a>
+    </div>
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    响应
+        <a href="#QueryMemberShipRsp">QueryMemberShipRsp</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="subscribeMembership"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /membership/subscribe</code></pre></div>
+    <div class="method-summary">订购会员服务 (<span class="nickname">subscribeMembership</span>)</div>
+    <div class="method-notes">订购会员服务</div>
+
+
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">subscribeMembership <a href="#SubscribeMembershipRequest">SubscribeMembershipRequest</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  
+		  
+	  </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#CommonRsp">CommonRsp</a>
+      
+    </div>
+
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    响应
+        <a href="#CommonRsp">CommonRsp</a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="User">User</a></h1>
+  <div class="method"><a name="createUser"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /user</code></pre></div>
+    <div class="method-summary">注册用户 (<span class="nickname">createUser</span>)</div>
+    <div class="method-notes">Create User</div>
+
+
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">createUserRequest <a href="#CreateUserRequest">CreateUserRequest</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  
+		  
+	  </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#CreateUserResponse">CreateUserResponse</a>
+      
+    </div>
+
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    CreateUserResponse
+        <a href="#CreateUserResponse">CreateUserResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deleteUser"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /user/{hwUnionId}</code></pre></div>
+    <div class="method-summary">删除用户 (<span class="nickname">deleteUser</span>)</div>
+    <div class="method-notes">删除用户</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">hwUnionId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; hwUnionId </div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#CommonRsp">CommonRsp</a>
+      
+    </div>
+
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Response
+        <a href="#CommonRsp">CommonRsp</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="followUser"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /user/follow</code></pre></div>
+    <div class="method-summary">关注用户 (<span class="nickname">followUser</span>)</div>
+    <div class="method-notes">关注用户</div>
+
+
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">followUserRequest <a href="#FollowUserRequest">FollowUserRequest</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  
+		  
+	  </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#CommonRsp">CommonRsp</a>
+      
+    </div>
+
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Response
+        <a href="#CommonRsp">CommonRsp</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getFollowedUsers"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /user/followed</code></pre></div>
+    <div class="method-summary">获取关注的用户列表 (<span class="nickname">getFollowedUsers</span>)</div>
+    <div class="method-notes">获取关注的用户列表</div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">uid (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; 用户id format: int64</div><div class="param">queryType (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; 查询类型，0-查询我关注的用户列表 1-查询关注我的用户列表 format: int32</div><div class="param">pageSize (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; 单页最大数量 format: int32</div><div class="param">curPage (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; 当前页 format: int32</div>
+    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#QueryUserResponse">QueryUserResponse</a>
+      
+    </div>
+
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Response
+        <a href="#QueryUserResponse">QueryUserResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getRecommendedUser"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /user/recommended/{hwUnionId}/{curPage}/{pageSize}</code></pre></div>
+    <div class="method-summary">获取推荐用户 (<span class="nickname">getRecommendedUser</span>)</div>
+    <div class="method-notes">获取推荐用户</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">hwUnionId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; hwUnionId </div><div class="param">pageSize (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; 单页最大数量 format: int32</div><div class="param">curPage (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; 当前页 format: int32</div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#QueryUserResponse">QueryUserResponse</a>
+      
+    </div>
+
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Response
+        <a href="#QueryUserResponse">QueryUserResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getUser"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /user/{hwUnionId}</code></pre></div>
+    <div class="method-summary">查询用户 (<span class="nickname">getUser</span>)</div>
+    <div class="method-notes">get user info by hwUnionId</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">hwUnionId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; hwUnionId </div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#GetUserResponse">GetUserResponse</a>
+      
+    </div>
+
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Demo Information
+        <a href="#GetUserResponse">GetUserResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="login"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /user/login/{authorizationCode}</code></pre></div>
+    <div class="method-summary">用户登录 (<span class="nickname">login</span>)</div>
+    <div class="method-notes">用户登录</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">authorizationCode (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; authorizationCode </div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#LoginResponse">LoginResponse</a>
+      
+    </div>
+
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Response
+        <a href="#LoginResponse">LoginResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="queryUser"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /user/query</code></pre></div>
+    <div class="method-summary">搜索用户 (<span class="nickname">queryUser</span>)</div>
+    <div class="method-notes">搜索用户</div>
+
+
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">queryUserRequest <a href="#QueryUserRequest">QueryUserRequest</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  
+		  
+	  </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#QueryUserResponse">QueryUserResponse</a>
+      
+    </div>
+
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Response
+        <a href="#QueryUserResponse">QueryUserResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="updateUser"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /user/{hwUnionId}</code></pre></div>
+    <div class="method-summary">修改用户 (<span class="nickname">updateUser</span>)</div>
+    <div class="method-notes">Update User</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">hwUnionId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; huawei union id </div>
+    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">updateUserReq <a href="#UpdateUserRequest">UpdateUserRequest</a> (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash;  
+		  
+	  </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#CommonRsp">CommonRsp</a>
+      
+    </div>
+
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    响应
+        <a href="#CommonRsp">CommonRsp</a>
+  </div> <!-- method -->
+  <hr/>
+
+  <h2><a name="__Models">Models</a></h2>
+  [ Jump to <a href="#__Methods">Methods</a> ]
+
+  <h3>Table of Contents</h3>
+  <ol>
+    <li><a href="#ActivityBriefInfo"><code>ActivityBriefInfo</code> - </a></li>
+    <li><a href="#ActivityInfo"><code>ActivityInfo</code> - </a></li>
+    <li><a href="#BasicUserInfo"><code>BasicUserInfo</code> - </a></li>
+    <li><a href="#Comment"><code>Comment</code> - </a></li>
+    <li><a href="#CommonRsp"><code>CommonRsp</code> - </a></li>
+    <li><a href="#CreateCommentRequest"><code>CreateCommentRequest</code> - </a></li>
+    <li><a href="#CreateFeedRequest"><code>CreateFeedRequest</code> - </a></li>
+    <li><a href="#CreateFeedResponse"><code>CreateFeedResponse</code> - </a></li>
+    <li><a href="#CreateLikeRequest"><code>CreateLikeRequest</code> - </a></li>
+    <li><a href="#CreateUserRequest"><code>CreateUserRequest</code> - </a></li>
+    <li><a href="#CreateUserResponse"><code>CreateUserResponse</code> - </a></li>
+    <li><a href="#EnrollActivityRequest"><code>EnrollActivityRequest</code> - </a></li>
+    <li><a href="#EnrolledActivityInfo"><code>EnrolledActivityInfo</code> - </a></li>
+    <li><a href="#FeedInfo"><code>FeedInfo</code> - </a></li>
+    <li><a href="#FollowUserRequest"><code>FollowUserRequest</code> - </a></li>
+    <li><a href="#GetActivityResponse"><code>GetActivityResponse</code> - </a></li>
+    <li><a href="#GetFeedResponse"><code>GetFeedResponse</code> - </a></li>
+    <li><a href="#GetUserResponse"><code>GetUserResponse</code> - </a></li>
+    <li><a href="#LoginResponse"><code>LoginResponse</code> - </a></li>
+    <li><a href="#MatchMaker"><code>MatchMaker</code> - </a></li>
+    <li><a href="#MateSelectionCriteria"><code>MateSelectionCriteria</code> - </a></li>
+    <li><a href="#MemberShip"><code>MemberShip</code> - </a></li>
+    <li><a href="#Page"><code>Page</code> - </a></li>
+    <li><a href="#QueryActivityResponse"><code>QueryActivityResponse</code> - </a></li>
+    <li><a href="#QueryEnrolledActivityResponse"><code>QueryEnrolledActivityResponse</code> - </a></li>
+    <li><a href="#QueryFeedResponse"><code>QueryFeedResponse</code> - </a></li>
+    <li><a href="#QueryMatchMakerResponse"><code>QueryMatchMakerResponse</code> - </a></li>
+    <li><a href="#QueryMemberShipRsp"><code>QueryMemberShipRsp</code> - </a></li>
+    <li><a href="#QueryUserRequest"><code>QueryUserRequest</code> - </a></li>
+    <li><a href="#QueryUserResponse"><code>QueryUserResponse</code> - </a></li>
+    <li><a href="#SubscribeMembershipRequest"><code>SubscribeMembershipRequest</code> - </a></li>
+    <li><a href="#UpdateUserRequest"><code>UpdateUserRequest</code> - </a></li>
+    <li><a href="#UserActionSummary"><code>UserActionSummary</code> - </a></li>
+    <li><a href="#UserFullInfo"><code>UserFullInfo</code> - </a></li>
+    <li><a href="#UserInfo"><code>UserInfo</code> - </a></li>
+  </ol>
+
+  <div class="model">
+    <h3><a name="ActivityBriefInfo"><code>ActivityBriefInfo</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>活动基本信息</div>
+    <div class="field-items">
+      <div class="param">
+        activityId (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#long">long</a></span>
+                 活动id format: int64
+                 </br>
+                 
+            </div>
+      <div class="param">
+        name (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 活动名 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        desc (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 活动描述信息 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        resource0Url (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 活动宣传图 
+                 </br>
+                 
+            </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ActivityInfo"><code>ActivityInfo</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>活动详情</div>
+    <div class="field-items">
+      <div class="param">
+        activityId (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#long">long</a></span>
+                 活动id format: int64
+                 </br>
+                 
+            </div>
+      <div class="param">
+        name (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 活动名 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        desc (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 活动描述信息 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        city (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 活动举办的城市 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        address (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 活动具体地址 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        fee (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#number">number</a></span>
+                 活动报名费 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        activityStartTime (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#long">long</a></span>
+                 活动开始时间，毫秒数 format: int64
+                 </br>
+                 
+            </div>
+      <div class="param">
+        activityEndTime (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#long">long</a></span>
+                 活动结束时间，毫秒数 format: int64
+                 </br>
+                 
+            </div>
+      <div class="param">
+        activityUserNumber (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 活动总人数 format: int32
+                 </br>
+                 
+            </div>
+      <div class="param">
+        activityEnrolledCount (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 已报名人数 format: int32
+                 </br>
+                 
+            </div>
+      <div class="param">
+        resource0Url (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 活动宣传图 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        resource1Url (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 活动详情图1 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        resource2Url (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 活动详情图2 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        resource3Url (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 活动详情图3 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        descTitle (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 活动介绍标题 
+                 </br>
+            </div>
+      <div class="param">
+        descDetail (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 活动介绍详情 
+                 </br>
+            </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="BasicUserInfo"><code>BasicUserInfo</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>用户基本信息</div>
+    <div class="field-items">
+      <div class="param">
+        uid 
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#long">long</a></span>
+                 用户id format: int64
+                 </br>
+                 
+            </div>
+      <div class="param">
+        hwUnionId 
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 华为账号的unionId 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        userNo 
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 用户编号 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        nickName 
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 用户昵称 
+                 </br>
+                 
+            </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Comment"><code>Comment</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>评论详情</div>
+    <div class="field-items">
+      <div class="param">
+        commentId (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#long">long</a></span>
+                 评论id format: int64
+                 </br>
+                 
+            </div>
+      <div class="param">
+        commentType (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 评论类型：0-评论，1-回复 format: int32
+                 </br>
+                 
+            </div>
+      <div class="param">
+        uid (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#long">long</a></span>
+                 发起评论的用户的id format: int64
+                 </br>
+                 
+            </div>
+      <div class="param">
+        nickName (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 发起评论的用户昵称 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        content (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 评论内容 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        createTime (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#long">long</a></span>
+                 评论发生时间，毫秒数 format: int64
+                 </br>
+                 
+            </div>
+      <div class="param">
+        recipientUid (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#long">long</a></span>
+                 被回复的用户的id format: int64
+                 </br>
+                 
+            </div>
+      <div class="param">
+        recipientNickName (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 被回复的用户昵称 
+                 </br>
+                 
+            </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="CommonRsp"><code>CommonRsp</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>基础响应对象</div>
+    <div class="field-items">
+      <div class="param">
+        retCode 
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 返回码 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        retMsg 
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 返回信息 
+                 </br>
+                 
+            </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="CreateCommentRequest"><code>CreateCommentRequest</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>创建评论</div>
+    <div class="field-items">
+      <div class="param">
+        feedId 
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#long">long</a></span>
+                 评论的动态的id format: int64
+                 </br>
+                 
+            </div>
+      <div class="param">
+        uid (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#long">long</a></span>
+                 当前用户id format: int64
+                 </br>
+                 
+            </div>
+      <div class="param">
+        recipientUid (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#long">long</a></span>
+                 被回复的用户id format: int64
+                 </br>
+                 
+            </div>
+      <div class="param">
+        content 
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 评论内容 
+                 </br>
+                 
+            </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="CreateFeedRequest"><code>CreateFeedRequest</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>创建动态</div>
+    <div class="field-items">
+      <div class="param">
+        uid 
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#long">long</a></span>
+                 uid format: int64
+                 </br>
+                 
+            </div>
+      <div class="param">
+        feedMsg 
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 动态的信息 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        resourceUrls (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">array[string]</a></span>
+                 发布的动态中图片的地址 
+                 </br>
+                 
+            </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="CreateFeedResponse"><code>CreateFeedResponse</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>创建动态响应对象</div>
+    <div class="field-items">
+      <div class="param">
+        ret 
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#CommonRsp">CommonRsp</a></span>
+                  
+                 </br>
+                 
+            </div>
+      <div class="param">
+        feedId (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#long">long</a></span>
+                 feedId format: int64
+                 </br>
+                 
+            </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="CreateLikeRequest"><code>CreateLikeRequest</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>点赞</div>
+    <div class="field-items">
+      <div class="param">
+        feedId 
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#long">long</a></span>
+                 点赞的动态的id format: int64
+                 </br>
+                 
+            </div>
+      <div class="param">
+        uid (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#long">long</a></span>
+                 当前用户id format: int64
+                 </br>
+                 
+            </div>
+      <div class="param">
+        type (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#">object</a></span>
+                 操作类型，取值如下
+0：点赞
+1：取消点赞 format: int64
+                 </br>
+                 
+            </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="CreateUserRequest"><code>CreateUserRequest</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>创建用户请求</div>
+    <div class="field-items">
+      <div class="param">
+        hwUnionId 
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 华为账号的unionId 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        gender 
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 性别，0：男，1：女 format: int32
+                 </br>
+                 
+            </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">0</div><div class="param-enum">1</div>
+      <div class="param">
+        birth 
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 出生日期，格式为yyyy-MM-dd 
+                 </br>
+                 <span> example: 2001-01-01T00:00:00.000+00:00 </span>
+            </div>
+      <div class="param">
+        maritalStatus 
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 婚姻状态，0：未婚，1：离异，2：丧偶 format: int32
+                 </br>
+                 
+            </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">0</div><div class="param-enum">1</div><div class="param-enum">2</div>
+      <div class="param">
+        currentResidence (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 现居地 
+                 </br>
+                 <span> example: 江苏南京 </span>
+            </div>
+      <div class="param">
+        monthlyIncome (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 月收入，0: 3000以下, ：3001--5000，2：5001--8000，3：8001--10000，4：10000—20000，5：20001—50000，6：50000以上 format: int32
+                 </br>
+                 
+            </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">0</div><div class="param-enum">1</div><div class="param-enum">2</div><div class="param-enum">3</div><div class="param-enum">4</div><div class="param-enum">5</div><div class="param-enum">6</div>
+      <div class="param">
+        education (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 学历，0：初中，1：高中/中专，2：大专，3：大学本科，4：硕士，5：博士 format: int32
+                 </br>
+                 
+            </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">0</div><div class="param-enum">1</div><div class="param-enum">2</div><div class="param-enum">3</div><div class="param-enum">4</div><div class="param-enum">5</div>
+      <div class="param">
+        originFrom (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 籍贯地 
+                 </br>
+                 <span> example: 江苏南京 </span>
+            </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="CreateUserResponse"><code>CreateUserResponse</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>创建用户响应对象</div>
+    <div class="field-items">
+      <div class="param">
+        ret 
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#CommonRsp">CommonRsp</a></span>
+                  
+                 </br>
+                 
+            </div>
+      <div class="param">
+        basicUserInfo (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#BasicUserInfo">BasicUserInfo</a></span>
+                  
+                 </br>
+                 
+            </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="EnrollActivityRequest"><code>EnrollActivityRequest</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">
+        activityId (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#long">long</a></span>
+                 活动id format: int64
+                 </br>
+                 
+            </div>
+      <div class="param">
+        uid (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#long">long</a></span>
+                 uid format: int64
+                 </br>
+                 
+            </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="EnrolledActivityInfo"><code>EnrolledActivityInfo</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>用户参与的活动信息</div>
+    <div class="field-items">
+      <div class="param">
+        uid (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#long">long</a></span>
+                 用户id format: int64
+                 </br>
+                 
+            </div>
+      <div class="param">
+        enrolledTime (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#long">long</a></span>
+                 活动报名时间，毫秒数 format: int64
+                 </br>
+                 
+            </div>
+      <div class="param">
+        status (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#long">long</a></span>
+                 参与活动状态，取值如下
+0：待付款
+1：已报名
+2：已结束
+3：已取消 format: int64
+                 </br>
+                 
+            </div>
+      <div class="param">
+        activity (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#ActivityBriefInfo">ActivityBriefInfo</a></span>
+                  
+                 </br>
+                 
+            </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="FeedInfo"><code>FeedInfo</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>动态详情</div>
+    <div class="field-items">
+      <div class="param">
+        feedId (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#long">long</a></span>
+                 动态的id format: int64
+                 </br>
+                 
+            </div>
+      <div class="param">
+        uid (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#long">long</a></span>
+                 用户唯一id format: int64
+                 </br>
+                 
+            </div>
+      <div class="param">
+        userNo (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 用户编号 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        nickName (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 用户名称 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        profilePictureUrl (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 头像地址 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        feedMsg (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 动态的信息 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        resource1Url (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 发布的动态中图片1的地址 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        resource2Url (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 发布的动态中图片2的地址 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        resource3Url (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 发布的动态中图片3的地址 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        resource4Url (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 发布的动态中图片4的地址 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        resource5Url (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 发布的动态中图片5的地址 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        resource6Url (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 发布的动态中图片6的地址 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        resource7Url (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 发布的动态中图片7的地址 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        resource8Url (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 发布的动态中图片8的地址 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        resource9Url (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 发布的动态中图片9的地址 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        creationDate (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#long">long</a></span>
+                 创建时间，毫秒数 format: int64
+                 </br>
+                 
+            </div>
+      <div class="param">
+        likes (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#BasicUserInfo">array[BasicUserInfo]</a></span>
+                 已点赞的用户 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        comments (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#Comment">array[Comment]</a></span>
+                 评论 
+                 </br>
+                 
+            </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="FollowUserRequest"><code>FollowUserRequest</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>关注用户请求</div>
+    <div class="field-items">
+      <div class="param">
+        followUid 
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 关注的用户的id format: int6
+                 </br>
+                 
+            </div>
+      <div class="param">
+        uid (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#long">long</a></span>
+                 当前用户id format: int64
+                 </br>
+                 
+            </div>
+      <div class="param">
+        type (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#">object</a></span>
+                 操作类型，取值如下
+0：关注
+1：取消关注 format: int64
+                 </br>
+                 
+            </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="GetActivityResponse"><code>GetActivityResponse</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>查询活动详情对象</div>
+    <div class="field-items">
+      <div class="param">
+        ret 
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#CommonRsp">CommonRsp</a></span>
+                  
+                 </br>
+                 
+            </div>
+      <div class="param">
+        activity (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#ActivityInfo">ActivityInfo</a></span>
+                  
+                 </br>
+                 
+            </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="GetFeedResponse"><code>GetFeedResponse</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>查询动态响应对象</div>
+    <div class="field-items">
+      <div class="param">
+        ret 
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#CommonRsp">CommonRsp</a></span>
+                  
+                 </br>
+                 
+            </div>
+      <div class="param">
+        feed (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#FeedInfo">FeedInfo</a></span>
+                  
+                 </br>
+                 
+            </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="GetUserResponse"><code>GetUserResponse</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>查询用户详情响应对象</div>
+    <div class="field-items">
+      <div class="param">
+        ret 
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#CommonRsp">CommonRsp</a></span>
+                  
+                 </br>
+                 
+            </div>
+      <div class="param">
+        userInfo (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#UserFullInfo">UserFullInfo</a></span>
+                  
+                 </br>
+                 
+            </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="LoginResponse"><code>LoginResponse</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>用户登录响应对象</div>
+    <div class="field-items">
+      <div class="param">
+        ret 
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#CommonRsp">CommonRsp</a></span>
+                  
+                 </br>
+                 
+            </div>
+      <div class="param">
+        accessToken (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 访问token 
+                 </br>
+                 
+            </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="MatchMaker"><code>MatchMaker</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>红娘信息</div>
+    <div class="field-items">
+      <div class="param">
+        nickName (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 昵称 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        weixinNo (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 微信号 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        phoneNo (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 手机号 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        profilePictureUrl (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 头像 
+                 </br>
+                 
+            </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="MateSelectionCriteria"><code>MateSelectionCriteria</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>择偶条件</div>
+    <div class="field-items">
+      <div class="param">
+        ageStart (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 最小年龄 format: int32
+                 </br>
+                 
+            </div>
+      <div class="param">
+        ageEnd (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 最大年龄 format: int32
+                 </br>
+                 
+            </div>
+      <div class="param">
+        gender (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 性别，0：男，1：女 format: int32
+                 </br>
+                 
+            </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">0</div><div class="param-enum">1</div>
+      <div class="param">
+        heightStart (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 最低身高 format: int32
+                 </br>
+                 
+            </div>
+      <div class="param">
+        heightEnd (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 最高身高 format: int32
+                 </br>
+                 
+            </div>
+      <div class="param">
+        currentResidence (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 现居地 
+                 </br>
+                 <span> example: 江苏南京 </span>
+            </div>
+      <div class="param">
+        monthlyIncome (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 对月收入的要求，逗号分隔的多个数字，数字范围如下，-1:不限，0: 3000以下, 1：3000以上，2：6000以上，3：1万以上 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        education (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 对学历的要求，逗号分隔的多个数字，数字范围如下，-1:不限，0：高中/中专，1：大专，2：大学本科，4：硕士及以上 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        originFrom (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 籍贯地 
+                 </br>
+                 <span> example: 江苏南京 </span>
+            </div>
+      <div class="param">
+        ethnicGroup (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 民族 
+                 </br>
+                 <span> example: 汉族 </span>
+            </div>
+      <div class="param">
+        job (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 职业 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        hasChildren (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 已有孩子的情况，逗号分隔的多个数字，数字范围如下
+-1：不限
+0：没有孩子
+1：有孩子且住在一起
+2：有孩子且偶尔住一起
+3：有孩子但不在身边 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        expectationOfChildren (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 是否想要孩子，逗号分隔的多个数字，数字范围如下
+-1：不限
+0：想要孩子
+1：不想要孩子
+2：要看情况 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        smoking (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 吸烟情况，逗号分隔的多个数字，数字范围如下
+-1：不限
+0：不吸烟
+1：稍微抽一点
+2：抽得很多 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        drinking (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 喝酒情况，逗号分隔的多个数字，数字范围如下
+-1：不限
+0：不喝酒
+1：稍微喝一点酒
+2：喝得很多 
+                 </br>
+            </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="MemberShip"><code>MemberShip</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>会员服务</div>
+    <div class="field-items">
+      <div class="param">
+        name (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 名称 
+                 </br>
+            </div>
+      <div class="param">
+        days (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 会员服务持续的天数 format: int32
+                 </br>
+            </div>
+      <div class="param">
+        fee (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#number">number</a></span>
+                 会员服务价格 
+                 </br>
+            </div>
+      <div class="param">
+        desc (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 会员服务说明 format: int64
+                 </br>
+                 
+            </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Page"><code>Page</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>分页对象</div>
+    <div class="field-items">
+      <div class="param">
+        totalCount 
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 总数 format: int32
+                 </br>
+                 
+            </div>
+      <div class="param">
+        totalPages (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 分页数 format: int32
+                 </br>
+                 
+            </div>
+      <div class="param">
+        curPage 
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 当前页 format: int32
+                 </br>
+                 
+            </div>
+      <div class="param">
+        pageSize (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 分页大小 format: int32
+                 </br>
+                 
+            </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="QueryActivityResponse"><code>QueryActivityResponse</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>查询活动列表响应对象</div>
+    <div class="field-items">
+      <div class="param">
+        ret 
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#CommonRsp">CommonRsp</a></span>
+                  
+                 </br>
+                 
+            </div>
+      <div class="param">
+        page (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#Page">Page</a></span>
+                  
+                 </br>
+                 
+            </div>
+      <div class="param">
+        list (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#">object</a></span>
+                 动态详细信息 
+                 </br>
+                 
+            </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="QueryEnrolledActivityResponse"><code>QueryEnrolledActivityResponse</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>查询用户参与的活动列表</div>
+    <div class="field-items">
+      <div class="param">
+        ret 
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#CommonRsp">CommonRsp</a></span>
+                  
+                 </br>
+                 
+            </div>
+      <div class="param">
+        page (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#Page">Page</a></span>
+                  
+                 </br>
+                 
+            </div>
+      <div class="param">
+        list (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#">object</a></span>
+                 参与的活动信息列表 
+                 </br>
+                 
+            </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="QueryFeedResponse"><code>QueryFeedResponse</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>查询动态列表响应对象</div>
+    <div class="field-items">
+      <div class="param">
+        ret 
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#CommonRsp">CommonRsp</a></span>
+                  
+                 </br>
+                 
+            </div>
+      <div class="param">
+        page (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#Page">Page</a></span>
+                  
+                 </br>
+                 
+            </div>
+      <div class="param">
+        list (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#">object</a></span>
+                 动态详细信息 
+                 </br>
+                 
+            </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="QueryMatchMakerResponse"><code>QueryMatchMakerResponse</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>查询红娘列表响应对象</div>
+    <div class="field-items">
+      <div class="param">
+        ret 
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#CommonRsp">CommonRsp</a></span>
+                  
+                 </br>
+                 
+            </div>
+      <div class="param">
+        page (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#Page">Page</a></span>
+                  
+                 </br>
+                 
+            </div>
+      <div class="param">
+        list (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#">object</a></span>
+                 红娘信息列表 
+                 </br>
+                 
+            </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="QueryMemberShipRsp"><code>QueryMemberShipRsp</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>查询会员服务列表</div>
+    <div class="field-items">
+      <div class="param">
+        ret 
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#CommonRsp">CommonRsp</a></span>
+                 </br>
+            </div>
+      <div class="param">
+        list (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#">object</a></span>
+                 会员服务列表 
+                 </br>
+            </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="QueryUserRequest"><code>QueryUserRequest</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>查询匹配用户请求</div>
+    <div class="field-items">
+      <div class="param">
+        uid (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#long">long</a></span>
+                 用户唯一id format: int64
+                 </br>
+                 
+            </div>
+      <div class="param">
+        ageStart (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 最小年龄 format: int32
+                 </br>
+                 
+            </div>
+      <div class="param">
+        ageEnd (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 最大年龄 format: int32
+                 </br>
+                 
+            </div>
+      <div class="param">
+        gender (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 性别，0：男，1：女 format: int32
+                 </br>
+                 
+            </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">0</div><div class="param-enum">1</div>
+      <div class="param">
+        heightStart (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 最低身高 format: int32
+                 </br>
+                 
+            </div>
+      <div class="param">
+        heightEnd (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 最高身高 format: int32
+                 </br>
+                 
+            </div>
+      <div class="param">
+        monthlyIncome (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 对月收入的要求，逗号分隔的多个数字，数字范围如下，-1:不限，0: 3000以下, 1：3000以上，2：6000以上，3：1万以上 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        education (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 对学历的要求，逗号分隔的多个数字，数字范围如下，-1:不限，0：高中/中专，1：大专，2：大学本科，4：硕士及以上 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        currentResidence (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 现居地 
+                 </br>
+                 <span> example: 江苏南京 </span>
+            </div>
+      <div class="param">
+        originFrom (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 籍贯地 
+                 </br>
+                 <span> example: 江苏南京 </span>
+            </div>
+      <div class="param">
+        ethnicGroup (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 民族 
+                 </br>
+                 <span> example: 汉族 </span>
+            </div>
+      <div class="param">
+        job (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 职业 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        hasChildren (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 已有孩子的情况，逗号分隔的多个数字，数字范围如下
+0：没有孩子
+1：有孩子且住在一起
+2：有孩子且偶尔住一起
+3：有孩子但不在身边 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        house (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 购房情况，逗号分隔的多个数字，数字范围如下
+0:已购房
+1:打算婚后购房
+2:和家人同住 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        hasBuyCar (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 购车情况
+0：未买车
+1：已买车 format: int32
+                 </br>
+                 
+            </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">0</div><div class="param-enum">1</div>
+      <div class="param">
+        pageSize (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 单页最大数量 format: int32
+                 </br>
+                 
+            </div>
+      <div class="param">
+        curPage (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 当前页 format: int32
+                 </br>
+                 
+            </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="QueryUserResponse"><code>QueryUserResponse</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>查询匹配用户响应对象</div>
+    <div class="field-items">
+      <div class="param">
+        ret 
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#CommonRsp">CommonRsp</a></span>
+                  
+                 </br>
+                 
+            </div>
+      <div class="param">
+        users (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#UserFullInfo">array[UserFullInfo]</a></span>
+                 用户列表 
+                 </br>
+                 
+            </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="SubscribeMembershipRequest"><code>SubscribeMembershipRequest</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>订购会员服务</div>
+    <div class="field-items">
+      <div class="param">
+        uid (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#long">long</a></span>
+                 用户id format: int64
+                 </br>
+                 
+            </div>
+      <div class="param">
+        fee (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#number">number</a></span>
+                 会员服务实付价格 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        membershipStartTime (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#long">long</a></span>
+                 会员服务开始时间，毫秒数 format: int64
+                 </br>
+                 
+            </div>
+      <div class="param">
+        membershipEndTime (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#long">long</a></span>
+                 会员服务结束时间，毫秒数 format: int64
+                 </br>
+                 
+            </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="UpdateUserRequest"><code>UpdateUserRequest</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">
+        userInfo (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#UserInfo">UserInfo</a></span>
+                  
+                 </br>
+                 
+            </div>
+      <div class="param">
+        mateSelectionCriteria (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#MateSelectionCriteria">MateSelectionCriteria</a></span>
+                  
+                 </br>
+                 
+            </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="UserActionSummary"><code>UserActionSummary</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>用户操作汇总</div>
+    <div class="field-items">
+      <div class="param">
+        followUserCount (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 关注用户总数 format: int32
+                 </br>
+                 
+            </div>
+      <div class="param">
+        likeCount (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 点赞总数 format: int32
+                 </br>
+                 
+            </div>
+      <div class="param">
+        commentCount (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 评论总数 format: int32
+                 </br>
+                 
+            </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="UserFullInfo"><code>UserFullInfo</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>用户完整信息</div>
+    <div class="field-items">
+      <div class="param">
+        userInfo (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#UserInfo">UserInfo</a></span>
+                  
+                 </br>
+                 
+            </div>
+      <div class="param">
+        mateSelectionCriteria (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#MateSelectionCriteria">MateSelectionCriteria</a></span>
+                  
+                 </br>
+                 
+            </div>
+      <div class="param">
+        userActionSummary (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#UserActionSummary">UserActionSummary</a></span>
+                  
+                 </br>
+                 
+            </div>
+      <div class="param">
+        recentFeedImages (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">array[string]</a></span>
+                 近期动态的图片 
+                 </br>
+                 
+            </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="UserInfo"><code>UserInfo</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>用户信息</div>
+    <div class="field-items">
+      <div class="param">
+        hwUnionId (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 华为账号的unionId 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        userNo (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 用户编号 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        nickName (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 用户昵称 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        realNameAuthFlag (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 是否已实名认证，0：否，1：是 format: int32
+                 </br>
+                 
+            </div>
+      <div class="param">
+        gender (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 性别，0：男，1：女 format: int32
+                 </br>
+                 
+            </div>
+      <div class="param">
+        birth (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 出生日期，格式为yyyy-MM-dd 
+                 </br>
+                 <span> example: 2001-01-01T00:00:00.000+00:00 </span>
+            </div>
+      <div class="param">
+        currentResidence (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 现居地 
+                 </br>
+                 <span> example: 江苏南京 </span>
+            </div>
+      <div class="param">
+        monthlyIncome (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 月收入，0: 3000以下, ：3001--5000，2：5001--8000，3：8001--10000，4：10000—20000，5：20001—50000，6：50000以上 format: int32
+                 </br>
+                 
+            </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">0</div><div class="param-enum">1</div><div class="param-enum">2</div><div class="param-enum">3</div><div class="param-enum">4</div><div class="param-enum">5</div><div class="param-enum">6</div>
+      <div class="param">
+        education (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 学历，0：初中，1：高中/中专，2：大专，3：大学本科，4：硕士，5：博士 format: int32
+                 </br>
+                 
+            </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">0</div><div class="param-enum">1</div><div class="param-enum">2</div><div class="param-enum">3</div><div class="param-enum">4</div><div class="param-enum">5</div>
+      <div class="param">
+        originFrom (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 籍贯地 
+                 </br>
+                 <span> example: 江苏南京 </span>
+            </div>
+      <div class="param">
+        ethnicGroup (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 民族 
+                 </br>
+                 <span> example: 汉族 </span>
+            </div>
+      <div class="param">
+        job (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 职业 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        hasChildren (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 已有孩子的情况
+0：没有孩子
+1：有孩子且住在一起
+2：有孩子且偶尔住一起
+3：有孩子但不在身边 format: int32
+                 </br>
+                 
+            </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">0</div><div class="param-enum">1</div><div class="param-enum">2</div><div class="param-enum">3</div>
+      <div class="param">
+        expectationOfChildren (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 是否想要孩子
+0：想要孩子
+1：不想要孩子
+2：要看情况 format: int32
+                 </br>
+                 
+            </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">0</div><div class="param-enum">1</div><div class="param-enum">2</div>
+      <div class="param">
+        smoking (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 吸烟情况
+0：不吸烟
+1：稍微抽一点
+2：抽得很多 format: int32
+                 </br>
+                 
+            </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">0</div><div class="param-enum">1</div><div class="param-enum">2</div>
+      <div class="param">
+        drinking (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 喝酒情况
+0：不喝酒
+1：稍微喝一点酒
+2：喝得很多 format: int32
+                 </br>
+                 
+            </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">0</div><div class="param-enum">1</div><div class="param-enum">2</div>
+      <div class="param">
+        house (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 购房情况
+0:已购房
+1:打算婚后购房
+2:和家人同住 format: int32
+                 </br>
+                 
+            </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">0</div><div class="param-enum">1</div><div class="param-enum">2</div>
+      <div class="param">
+        hasBuyCar (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 购车情况
+0：未买车
+1：已买车 format: int32
+                 </br>
+                 
+            </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">0</div><div class="param-enum">1</div>
+      <div class="param">
+        weight (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 体重,单位kg format: int32
+                 </br>
+                 
+            </div>
+      <div class="param">
+        whenToMarry (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 何时结婚
+0：认同闪婚
+1：一年内
+2：两年内
+3：三年内
+4：时机成熟就结婚 format: int32
+                 </br>
+                 
+            </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">0</div><div class="param-enum">1</div><div class="param-enum">2</div>
+      <div class="param">
+        weixinNo (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 微信号 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        hobbies (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 兴趣爱好 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        selfIntroduction (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 自我介绍 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        profilePictureUrl (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">string</a></span>
+                 头像地址 
+                 </br>
+                 
+            </div>
+      <div class="param">
+        isVip (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 是否会员
+0：否
+1：是 format: int32
+                 </br>
+                 
+            </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">0</div><div class="param-enum">1</div>
+      <div class="param">
+        isPublic (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#integer">integer</a></span>
+                 用户资料是否公开，默认是
+0：否
+1：是 format: int32
+                 </br>
+                 
+            </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">0</div><div class="param-enum">1</div>
+      <div class="param">
+        album (optional)
+        </div>
+            <div class="param-desc">
+                <span class="param-type"><a href="#string">array[string]</a></span>
+                 相册，数组中每个元素是一个照片的url 
+                 </br>
+                 
+            </div>
+    </div>  <!-- field-items -->
+  </div>
+  </body>
+</html>

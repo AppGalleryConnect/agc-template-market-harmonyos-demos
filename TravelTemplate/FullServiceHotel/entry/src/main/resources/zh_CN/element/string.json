@@ -1,0 +1,32 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "这是一个适用于综合酒店的元服务模板"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "这是一个适用于综合酒店的元服务模板"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "综合酒店模板"
+    },
+    {
+      "name": "EntryFormAbility_desc",
+      "value": "这是一个适用于综合酒店的元服务卡片"
+    },
+    {
+      "name": "EntryFormAbility_label",
+      "value": "综合酒店卡片"
+    },
+    {
+      "name": "widget_desc",
+      "value": "这是一个综合酒店的服务卡片."
+    },
+    {
+      "name": "widget_display_name",
+      "value": "综合酒店卡片"
+    }
+  ]
+}

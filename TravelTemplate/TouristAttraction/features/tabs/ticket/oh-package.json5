@@ -1,0 +1,17 @@
+{
+  "name": "ticket",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "packageType": "InterfaceHar",
+  "dependencies": {
+    "common": "file:../../../commons/common",
+    "types": "file:../../../commons/types",
+    "components": "file:../../../commons/components",
+    "network": "file:../../../commons/network",
+    "tourist": "file:../../functions/tourist",
+    "@hw-agconnect/ui-calendar-picker": "^1.0.2"
+  }
+}

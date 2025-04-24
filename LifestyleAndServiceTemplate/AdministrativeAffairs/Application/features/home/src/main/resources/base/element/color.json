@@ -1,0 +1,20 @@
+{
+  "color": [
+    {
+      "name": "home_color_grey",
+      "value": "#F1F2F3"
+    },
+    {
+      "name": "hot_service_bg",
+      "value": "#2036F3"
+    },
+    {
+      "name": "home_location_color",
+      "value": "#5180FF"
+    },
+    {
+      "name": "home_location_bg",
+      "value": "#3067FF"
+    }
+  ]
+}

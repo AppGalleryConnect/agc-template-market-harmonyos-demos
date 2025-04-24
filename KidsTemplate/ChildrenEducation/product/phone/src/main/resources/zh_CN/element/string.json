@@ -1,0 +1,28 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "儿童教育模板"
+    },
+    {
+      "name": "home_page",
+      "value": "首页"
+    },
+    {
+      "name": "mine_page",
+      "value": "我的"
+    },
+    {
+      "name": "Used_Duration",
+      "value": "本日使用时间已到达设置时长"
+    }
+  ]
+}

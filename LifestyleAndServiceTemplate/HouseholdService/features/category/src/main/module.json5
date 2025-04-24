@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "category",
+    "type": "har",
+    "deviceTypes": [
+      "phone",
+    ]
+  }
+}

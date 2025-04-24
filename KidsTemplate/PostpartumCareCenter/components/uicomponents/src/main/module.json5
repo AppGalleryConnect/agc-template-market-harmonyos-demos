@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "uicomponents",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ],
+    "routerMap": "$profile:router_map"
+  }
+}

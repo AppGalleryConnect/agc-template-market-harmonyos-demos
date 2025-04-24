@@ -1,0 +1,22 @@
+[
+  {
+    "id": "all",
+    "icon": "app.media.progress_all",
+    "name": "全部"
+  },
+  {
+    "id": "be_reviewed",
+    "icon": "app.media.progress_be_reviewed",
+    "name": "待审核"
+  },
+  {
+    "id": "review",
+    "icon": "app.media.progress_review",
+    "name": "已审核"
+  },
+  {
+    "id": "duplicating",
+    "icon": "app.media.progress_duplicating",
+    "name": "已撤销"
+  }
+]

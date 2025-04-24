@@ -1,0 +1,40 @@
+{
+  "string": [
+    {
+      "name": "font_size_16",
+      "value": "16lpx"
+    },
+    {
+      "name": "font_size_18",
+      "value": "18lpx"
+    },
+    {
+      "name": "font_size_20",
+      "value": "20lpx"
+    },
+    {
+      "name": "font_size_24",
+      "value": "24lpx"
+    },
+    {
+      "name": "font_size_28",
+      "value": "28lpx"
+    },
+    {
+      "name": "font_size_32",
+      "value": "32lpx"
+    },
+    {
+      "name": "font_size_36",
+      "value": "36lpx"
+    },
+    {
+      "name": "font_size_40",
+      "value": "40lpx"
+    },
+    {
+      "name": "font_size_48",
+      "value": "48lpx"
+    }
+  ]
+}

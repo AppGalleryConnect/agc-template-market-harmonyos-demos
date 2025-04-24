@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "component_lib",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ],
+    "routerMap": "$profile:router_map"
+  }
+}

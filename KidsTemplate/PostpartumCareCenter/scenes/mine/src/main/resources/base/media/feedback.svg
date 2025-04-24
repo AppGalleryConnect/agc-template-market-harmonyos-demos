@@ -1,0 +1,21 @@
+<svg width="24.000000" height="24.000000" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs>
+		<clipPath id="clip167_1548">
+			<rect width="24.000000" height="24.000000" fill="white" fill-opacity="0"/>
+		</clipPath>
+	</defs>
+	<g clip-path="url(#clip167_1548)">
+		<path d="M4.7 16.44L4.67 16.43C4.53 16.03 4.73 15.61 5.13 15.47C5.52 15.33 5.95 15.53 6.09 15.92L6.07 15.95L4.7 16.44ZM9.06 17.42L9.06 17.39C9.41 17.15 9.87 17.24 10.11 17.58C10.35 17.93 10.26 18.39 9.92 18.62L9.89 18.62L9.06 17.42Z" fill="#000000" fill-opacity="0" fill-rule="nonzero"/>
+		<path d="M5.38 16.18C5.71 17.1 5.41 18.07 4.5 19.1C3.13 20.65 7.71 19.24 9.49 18.01" stroke="#666666" stroke-opacity="1.000000" stroke-width="1.500000" stroke-linejoin="round" stroke-linecap="round"/>
+		<path d="M12.02 18.98L12 19C11.58 19 11.25 18.66 11.25 18.25C11.25 17.83 11.58 17.5 12 17.5L12.02 17.52L12.02 18.98ZM5.81 15.58L5.84 15.58C6.17 15.83 6.24 16.29 5.98 16.63C5.73 16.96 5.27 17.03 4.93 16.77L4.93 16.75L5.81 15.58Z" fill="#000000" fill-opacity="0" fill-rule="nonzero"/>
+		<path d="M12 18.25C17.1 18.25 21.25 15.17 21.25 11.37C21.25 7.57 17.1 4.5 12 4.5C6.89 4.5 2.75 7.57 2.75 11.37C2.75 13.25 3.74 14.93 5.39 16.17" stroke="#666666" stroke-opacity="1.000000" stroke-width="1.500000" stroke-linejoin="round" stroke-linecap="round"/>
+		<path d="M5.38 16.18C5.71 17.1 5.41 18.07 4.5 19.1C3.13 20.65 7.71 19.24 9.49 18.01C11.34 16.73 4.63 14.06 5.38 16.18Z" fill="#FFFFFF" fill-opacity="0" fill-rule="evenodd"/>
+		<path d="M4.5 19.1C3.13 20.65 7.71 19.24 9.49 18.01C11.34 16.73 4.63 14.06 5.38 16.18C5.71 17.1 5.41 18.07 4.5 19.1Z" stroke="#FFFFFF" stroke-opacity="0" stroke-width="1.000000" stroke-linejoin="round"/>
+		<ellipse cx="12.000000" cy="11.375000" rx="9.250000" ry="6.875000" fill="#FFFFFF" fill-opacity="0"/>
+		<ellipse cx="12.000000" cy="11.375000" rx="9.250000" ry="6.875000" stroke="#FFFFFF" stroke-opacity="0" stroke-width="1.000000" stroke-linejoin="round"/>
+		<path d="M7.00002 11.5C7.00002 10.9478 7.44773 10.5 8.00002 10.5C8.5523 10.5 9.00002 10.9478 9.00002 11.5C9.00002 12.0522 8.5523 12.5 8.00002 12.5C7.44773 12.5 7.00002 12.0522 7.00002 11.5ZM11 11.5C11 10.9478 11.4477 10.5 12 10.5C12.5523 10.5 13 10.9478 13 11.5C13 12.0522 12.5523 12.5 12 12.5C11.4477 12.5 11 12.0522 11 11.5ZM16 10.5C15.4477 10.5 15 10.9478 15 11.5C15 12.0522 15.4477 12.5 16 12.5C16.5523 12.5 17 12.0522 17 11.5C17 10.9478 16.5523 10.5 16 10.5Z" clip-rule="evenodd" fill="#666666" fill-opacity="1.000000" fill-rule="evenodd"/>
+	</g>
+</svg>

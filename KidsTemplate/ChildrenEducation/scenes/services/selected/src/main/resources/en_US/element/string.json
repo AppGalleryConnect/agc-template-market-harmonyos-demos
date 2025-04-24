@@ -1,0 +1,12 @@
+{
+  "string": [
+    {
+      "name": "shared_desc",
+      "value": "description"
+    },
+    {
+      "name": "interactive_section",
+      "value": "interactive_section"
+    }
+  ]
+}

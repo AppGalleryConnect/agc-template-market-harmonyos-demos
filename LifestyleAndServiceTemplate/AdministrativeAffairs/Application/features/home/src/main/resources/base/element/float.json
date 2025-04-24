@@ -1,0 +1,104 @@
+{
+  "float": [
+    {
+      "name": "person_grid_size_width",
+      "value": "160vp"
+    },
+    {
+      "name": "person_grid_size_height",
+      "value": "60vp"
+    },
+    {
+      "name": "home_safe_area",
+      "value": "60vp"
+    },
+    {
+      "name": "person_card_radius_topL",
+      "value": "0vp"
+    },
+    {
+      "name": "person_card_radius_topR",
+      "value": "0vp"
+    },
+    {
+      "name": "person_card_radius_botR",
+      "value": "24vp"
+    },
+    {
+      "name": "person_card_radius_botL",
+      "value": "24vp"
+    },
+    {
+      "name": "person_card_margin",
+      "value": "19vp"
+    },
+    {
+      "name": "hot_line_icon_height",
+      "value": "20vp"
+    },
+    {
+      "name": "hot_line_icon_width",
+      "value": "2vp"
+    },
+    {
+      "name": "hot_header_margin",
+      "value": "11vp"
+    },
+    {
+      "name": "hot_service_padding",
+      "value": "10vp"
+    },
+    {
+      "name": "hot_service_margin",
+      "value": "12vp"
+    },
+    {
+      "name": "banner_icon_size",
+      "value": "40vp"
+    },
+    {
+      "name": "banner_gird_margin",
+      "value": "20vp"
+    },
+    {
+      "name": "banner_gird_margin_top",
+      "value": "20vp"
+    },
+    {
+      "name": "banner_gird_margin_left",
+      "value": "27vp"
+    },
+    {
+      "name": "banner_gird_margin_bottom",
+      "value": "25vp"
+    },
+    {
+      "name": "banner_gird_margin_right",
+      "value": "27vp"
+    },
+    {
+      "name": "personal_card_margin_top",
+      "value": "16vp"
+    },
+    {
+      "name": "personal_card_margin_bottom",
+      "value": "32vp"
+    },
+    {
+      "name": "personal_card_padding",
+      "value": "16vp"
+    },
+    {
+      "name": "home_pull_down_size",
+      "value": "16vp"
+    },
+    {
+      "name": "home_margin_left",
+      "value": "20vp"
+    },
+    {
+      "name": "banner_grid_height",
+      "value": "189vp"
+    }
+  ]
+}

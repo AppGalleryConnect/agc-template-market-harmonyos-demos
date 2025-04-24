@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh - CN">
+
+<head>
+    <meta charset="UTF - 8">
+    <meta name="viewport"
+        content="width=device-width, initial - scale = 1.0, maximum - scale = 1.0, user - scalable = no">
+    <title>个人就诊记录查询</title>
+    <style>
+        body {
+            font-family: Arial, sans - serif;
+            background-color: #F1F3F5;
+            margin: 0;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .visit-information {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: #FFF;
+        }
+
+        .visit-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #FFF;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .visit-content-hospital {
+            display: flex;
+            justify-content: space-between;
+
+        }
+
+        .visit-content-detail {
+            margin-left: 20px;
+        }
+
+        .visit-content-date {
+            font-size: 14px;
+            color: #000
+        }
+    </style>
+</head>
+
+<body>
+    <div class="visit-information">
+        <div>查询时间</div>
+        <div>2024-12-01</div>
+        <div>/</div>
+        <div>2025-02-02</div>
+    </div>
+    <div>
+        <div>
+            <div class="visit-content">
+                <div class="visit-content-hospital">
+                    <image src="./hospital.svg" />
+                    <div class="visit-content-detail">
+                        <div>南京明基医院</div>
+                        <div class="visit-content-date">2025/01/25</div>
+                    </div>
+                </div>
+                <div>￥102.00</div>
+            </div>
+            <div class="visit-content">
+                <div class="visit-content-hospital">
+                    <image src="./hospital.svg" />
+                    <div class="visit-content-detail">
+                        <div>南京明基医院</div>
+                        <div class="visit-content-date">2025/01/25</div>
+                    </div>
+                </div>
+                <div>￥102.00</div>
+            </div>
+            <div class="visit-content">
+                <div class="visit-content-hospital">
+                    <image src="./hospital.svg" />
+                    <div class="visit-content-detail">
+                        <div>南京明基医院</div>
+                        <div class="visit-content-date">2025/01/25</div>
+                    </div>
+                </div>
+                <div>￥102.00</div>
+            </div>
+            <div class="visit-content">
+                <div class="visit-content-hospital">
+                    <image src="./hospital.svg" />
+                    <div class="visit-content-detail">
+                        <div>南京明基医院</div>
+                        <div class="visit-content-date">2025/01/25</div>
+                    </div>
+                </div>
+                <div>￥102.00</div>
+            </div>
+            <div class="visit-content">
+                <div class="visit-content-hospital">
+                    <image src="./hospital.svg" />
+                    <div class="visit-content-detail">
+                        <div>南京明基医院</div>
+                        <div class="visit-content-date">2025/01/25</div>
+                    </div>
+                </div>
+                <div>￥102.00</div>
+            </div>
+            <div class="visit-content">
+                <div class="visit-content-hospital">
+                    <image src="./hospital.svg" />
+                    <div class="visit-content-detail">
+                        <div>南京明基医院</div>
+                        <div class="visit-content-date">2025/01/25</div>
+                    </div>
+                </div>
+                <div>￥102.00</div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    let imageList = document.querySelectorAll(".visit-content")
+    imageList.forEach((element, index) => {
+        element.addEventListener("click", function () {
+            window.location.href = './visit-detail.html'
+        })
+    })
+</script>
+
+</html>

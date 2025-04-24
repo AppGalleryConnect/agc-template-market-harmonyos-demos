@@ -1,0 +1,76 @@
+{
+  "string": [
+    {
+      "name": "shared_desc",
+      "value": "description"
+    },
+    {
+      "name": "question_title",
+      "value": "帮助您使用更顺畅"
+    },
+    {
+      "name": "question_desc",
+      "value": "请选择一个问题类型"
+    },
+    {
+      "name": "personal_center",
+      "value": "我的"
+    },
+    {
+      "name": "disassociate",
+      "value": "解除关联"
+    },
+    {
+      "name": "associate_account",
+      "value": "关联账号"
+    },
+    {
+      "name": "wallet",
+      "value": "我的钱包"
+    },
+    {
+      "name": "points",
+      "value": "我的积分"
+    },
+    {
+      "name": "points_param",
+      "value": "%s积分"
+    },
+    {
+      "name": "my_center",
+      "value": "我的中心"
+    },
+    {
+      "name": "my_order",
+      "value": "我的订单"
+    },
+    {
+      "name": "my_coupon",
+      "value": "我的优惠券"
+    },
+    {
+      "name": "help_center",
+      "value": "帮助中心"
+    },
+    {
+      "name": "faqs",
+      "value": "常见问题"
+    },
+    {
+      "name": "customer_phone",
+      "value": "客服电话"
+    },
+    {
+      "name": "no_relative",
+      "value": "未关联"
+    },
+    {
+      "name": "my_coupon_desc",
+      "value": "用券更划算"
+    },
+    {
+      "name": "coupon_used",
+      "value": "已使用"
+    }
+  ]
+}

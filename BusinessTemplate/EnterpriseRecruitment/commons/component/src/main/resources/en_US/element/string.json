@@ -1,0 +1,76 @@
+{
+  "string": [
+    {
+      "name": "information",
+      "value": "Information"
+    },
+    {
+      "name": "job",
+      "value": "Job"
+    },
+    {
+      "name": "mine",
+      "value": "Mine"
+    },
+    {
+      "name": "mine_login",
+      "value": "Login"
+    },
+    {
+      "name": "mine_bind_phone",
+      "value": "bind phone"
+    },
+    {
+      "name": "mine_unbind_phone",
+      "value": "unbind phone"
+    },
+    {
+      "name": "mine_unbind_phone_successfully",
+      "value": "unbind phone successfully"
+    },
+    {
+      "name": "mine_my_favorite",
+      "value": "My Favorite"
+    },
+    {
+      "name": "mine_delivery_info",
+      "value": "Delivery"
+    },
+    {
+      "name": "mine_resume_management",
+      "value": "Resume Management"
+    },
+    {
+      "name": "mine_resume_upload",
+      "value": "Resume Upload"
+    },
+    {
+      "name": "mine_resume_view",
+      "value": "Resume View"
+    },
+    {
+      "name": "resume_management_notify",
+      "value": "A maximum of three resumes can be uploaded in PDF format."
+    },
+    {
+      "name": "upload_attachment",
+      "value": "Upload Attachment"
+    },
+    {
+      "name": "upload_from_local",
+      "value": "Upload From Local"
+    },
+    {
+      "name": "upload_from_management",
+      "value": "Pick From Management"
+    },
+    {
+      "name": "hwid_no_internet_connect",
+      "value": "No Internet connection. Check your network settings. "
+    },
+    {
+      "name": "hwid_text_button_known",
+      "value": "OK"
+    }
+  ]
+}

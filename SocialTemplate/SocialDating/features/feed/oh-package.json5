@@ -1,0 +1,13 @@
+{
+  "name": "feed",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "commons": "file:../../commons",
+    "member": "file:../member"
+  }
+}
+

@@ -1,0 +1,12 @@
+{
+  "module": {
+    "name": "feed",
+    "type": "har",
+    "description": "$string:module_desc",
+    "deviceTypes": [
+      "phone"
+    ],
+    "installationFree": true,
+    "routerMap": '$profile:route_map',
+  }
+}

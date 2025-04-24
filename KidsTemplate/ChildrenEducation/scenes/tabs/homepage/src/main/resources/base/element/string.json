@@ -1,0 +1,28 @@
+{
+  "string": [
+    {
+      "name": "shared_desc",
+      "value": "description"
+    },
+    {
+      "name": "selected",
+      "value": "selected"
+    },
+    {
+      "name": "cartoon",
+      "value": "cartoon"
+    },
+    {
+      "name": "english_zone",
+      "value": "english_zone"
+    },
+    {
+      "name": "sing",
+      "value": "sing"
+    },
+    {
+      "name": "chinese",
+      "value": "chinese"
+    }
+  ]
+}

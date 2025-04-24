@@ -1,0 +1,16 @@
+{
+  "float": [
+    {
+      "name": "page_text_font_size",
+      "value": "24fp"
+    },
+    {
+      "name": "account_verification_tip",
+      "value": "22fp"
+    },
+    {
+      "name": "account_verification_input",
+      "value": "18fp"
+    }
+  ]
+}

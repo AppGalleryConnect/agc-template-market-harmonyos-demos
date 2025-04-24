@@ -1,0 +1,27 @@
+[
+  {
+    "title": "首页",
+    "icon": "app.media.home_icon",
+    "iconSel": "app.media.home_selected_icon"
+  },
+  {
+    "title": "服务",
+    "icon": "app.media.service_icon",
+    "iconSel": "app.media.service_selected_icon"
+  },
+  {
+    "title": "医保码",
+    "icon": "app.media.qr_code",
+    "iconSel": "app.media.qr_code"
+  },
+  {
+    "title": "资讯",
+    "icon": "app.media.news_icon",
+    "iconSel": "app.media.news_selected_icon"
+  },
+  {
+    "title": "我的",
+    "icon": "app.media.mine_icon",
+    "iconSel": "app.media.mine_selected_icon"
+  }
+]

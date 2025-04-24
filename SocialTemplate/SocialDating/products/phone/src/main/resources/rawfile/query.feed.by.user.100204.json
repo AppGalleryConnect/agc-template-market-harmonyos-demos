@@ -1,0 +1,24 @@
+{
+  "ret": {
+    "retCode": 0,
+    "retMsg": "SUCCESS"
+  },
+  "page": {
+    "totalCount": 1,
+    "totalPages": 1,
+    "curPage": 1,
+    "pageSize": 10
+  },
+  "list": [
+    {
+      "feedId": 200014,
+      "uid": 100204,
+      "userNo": "100204",
+      "nickName": "又来了",
+      "profilePictureUrl": "app.media.head_image_3",
+      "feedMsg": "灯塔!",
+      "resourceUrl": ["app.media.feed2_thumbnail"],
+      "creationDate": 1737600629000
+    }
+  ]
+}

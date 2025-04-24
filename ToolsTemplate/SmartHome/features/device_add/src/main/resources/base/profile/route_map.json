@@ -1,0 +1,53 @@
+{
+  "routerMap": [
+    {
+      "name": "AddDevicePage",
+      "pageSourceFile": "src/main/ets/pages/AddDevicePage.ets",
+      "buildFunction": "AddDevicePageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "ManualAddPage",
+      "pageSourceFile": "src/main/ets/pages/ManualAddPage.ets",
+      "buildFunction": "ManualAddPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "SearchDevicePage",
+      "pageSourceFile": "src/main/ets/pages/SearchDevicePage.ets",
+      "buildFunction": "SearchDevicePageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "SelectWifiPage",
+      "pageSourceFile": "src/main/ets/pages/SelectWifiPage.ets",
+      "buildFunction": "SelectWifiPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "ConfigDevicePage",
+      "pageSourceFile": "src/main/ets/pages/ConfigDevicePage.ets",
+      "buildFunction": "ConfigDevicePageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "AddInstructionPage",
+      "pageSourceFile": "src/main/ets/pages/AddInstructionPage.ets",
+      "buildFunction": "AddInstructionPageBuilder",
+      "data": {
+        "description": ""
+      }
+    }
+
+  ]
+}

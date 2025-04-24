@@ -1,0 +1,12 @@
+{
+  "name": "@ohos_agcit/office_attendance_network",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@ohos/axios": "^2.2.4",
+    "@ohos_agcit/office_attendance_common_lib": "file:../common_lib"
+  }
+}

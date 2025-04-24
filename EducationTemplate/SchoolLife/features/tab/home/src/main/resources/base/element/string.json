@@ -1,0 +1,68 @@
+{
+  "string": [
+    {
+      "name": "shared_desc",
+      "value": "description"
+    },
+    {
+      "name": "home_page",
+      "value": "首页"
+    },
+    {
+      "name": "home_search",
+      "value": "搜索"
+    },
+    {
+      "name": "home_class_sign_in",
+      "value": "上课啦"
+    },
+    {
+      "name": "home_course_tab",
+      "value": "课程表"
+    },
+    {
+      "name": "home_ability_other_tab",
+      "value": "其他"
+    },
+    {
+      "name": "today_schedule",
+      "value": "今日课表"
+    },
+    {
+      "name": "tomorrow_schedule",
+      "value": "明日课表"
+    },
+    {
+      "name": "home_all",
+      "value": "全部"
+    },
+    {
+      "name": "home_lesson",
+      "value": "节"
+    },
+    {
+      "name": "teacher",
+      "value": "讲师："
+    },
+    {
+      "name": "classroom",
+      "value": "教室："
+    },
+    {
+      "name": "get_course_failed",
+      "value": "获取课表失败"
+    },
+    {
+      "name": "click_retry",
+      "value": "点击重试"
+    },
+    {
+      "name": "no_course_in_schedule",
+      "value": "暂无预课程安排"
+    },
+    {
+      "name": "all_course",
+      "value": "全部课程"
+    }
+  ]
+}

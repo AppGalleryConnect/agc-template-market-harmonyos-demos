@@ -1,0 +1,18 @@
+{
+  "module": {
+    "name": "mine",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ],
+    "routerMap": "$profile:router_map",
+    "requestPermissions": [
+      {
+        "name" : "ohos.permission.GET_NETWORK_INFO",
+        "usedScene": {
+          "when": "inuse"
+        }
+      }
+    ]
+  }
+}

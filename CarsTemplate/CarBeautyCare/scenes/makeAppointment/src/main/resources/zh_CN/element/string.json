@@ -1,0 +1,100 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "reserve_project",
+      "value": "预约项目"
+    },
+    {
+      "name": "shop_service",
+      "value": "到店服务"
+    },
+    {
+      "name": "pay_done",
+      "value": "完成付款"
+    },
+    {
+      "name": "reserve_immediately",
+      "value": "立即预约"
+    },
+    {
+      "name": "time_choose",
+      "value": "选择时间"
+    },
+    {
+      "name": "reserve_free",
+      "value": "免费预约"
+    },
+    {
+      "name": "reserve_already",
+      "value": "您已经预约过此时间段"
+    },
+    {
+      "name": "reserve_success",
+      "value": "预约成功"
+    },
+    {
+      "name": "arrive_early",
+      "value": "温馨提示：请您在预约时间提前10分钟到店，根据门店实际情况为您优先安排服务。若您过时到店，则需要根据门店实际情况，现场排队。"
+    },
+    {
+      "name": "reserve_shop",
+      "value": "预约门店"
+    },
+    {
+      "name": "reserve",
+      "value": "预约"
+    },
+    {
+      "name": "reserve_none",
+      "value": "暂无预约记录"
+    },
+    {
+      "name": "myReserve",
+      "value": "我的预约"
+    },
+    {
+      "name": "font_regular",
+      "value": "鸿蒙黑体"
+    },
+    {
+      "name": "cancel_reserve_success",
+      "value": "取消预约成功"
+    },
+    {
+      "name": "cancel_reserve_failure",
+      "value": "取消预约失败"
+    },
+    {
+      "name": "license_number",
+      "value": "苏A58888"
+    },
+    {
+      "name": "maintain_reserve",
+      "value": "保养服务，预约专用"
+    },
+    {
+      "name": "detail",
+      "value": "明细"
+    },
+    {
+      "name": "reserve_cancel",
+      "value": "取消预约"
+    },
+    {
+      "name": "cancel_confirm",
+      "value": "确认是否取消预约"
+    },
+    {
+      "name": "confirm",
+      "value": "确认"
+    },
+    {
+      "name": "cancel",
+      "value": "取消"
+    }
+  ]
+}

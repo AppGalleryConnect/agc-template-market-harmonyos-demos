@@ -1,0 +1,64 @@
+{
+  "float": [
+    {
+      "name": "title_font_size",
+      "value": "24vp"
+    },
+    {
+      "name": "font_size_8",
+      "value": "8vp"
+    },
+    {
+      "name": "font_size_9",
+      "value": "9vp"
+    },
+    {
+      "name": "font_size_10",
+      "value": "10vp"
+    },
+    {
+      "name": "font_size_11",
+      "value": "11vp"
+    },
+    {
+      "name": "font_size_12",
+      "value": "12vp"
+    },
+    {
+      "name": "font_size_13",
+      "value": "13vp"
+    },
+    {
+      "name": "font_size_14",
+      "value": "14vp"
+    },
+    {
+      "name": "font_size_15",
+      "value": "15vp"
+    },
+    {
+      "name": "font_size_16",
+      "value": "16vp"
+    },
+    {
+      "name": "font_size_17",
+      "value": "17vp"
+    },
+    {
+      "name": "font_size_18",
+      "value": "18vp"
+    },
+    {
+      "name": "font_size_19",
+      "value": "19vp"
+    },
+    {
+      "name": "font_size_20",
+      "value": "20vp"
+    },
+    {
+      "name": "font_size_22",
+      "value": "22vp"
+    }
+  ]
+}

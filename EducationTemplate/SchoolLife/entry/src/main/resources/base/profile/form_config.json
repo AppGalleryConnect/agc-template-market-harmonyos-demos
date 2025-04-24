@@ -1,0 +1,25 @@
+{
+  "forms": [
+    {
+      "name": "school_life_widget",
+      "displayName": "$string:school_lift_widget_display_name",
+      "description": "$string:school_lift_widget_desc",
+      "src": "./ets/school_life_widget/pages/SchoolLifeWidgetCard.ets",
+      "uiSyntax": "arkts",
+      "window": {
+        "designWidth": 720,
+        "autoDesignWidth": true
+      },
+      "colorMode": "auto",
+      "isDynamic": true,
+      "isDefault": true,
+      "updateEnabled": false,
+      "scheduledUpdateTime": "10:30",
+      "updateDuration": 1,
+      "defaultDimension": "1*2",
+      "supportDimensions": [
+        "1*2"
+      ]
+    }
+  ]
+}

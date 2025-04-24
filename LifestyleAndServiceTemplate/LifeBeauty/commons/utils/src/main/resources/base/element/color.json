@@ -1,0 +1,44 @@
+{
+  "color": [
+    {
+      "name": "common_page_bg",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "common_theme_color",
+      "value": "#E64566"
+    },
+    {
+      "name": "common_member",
+      "value": "#FAE2B8"
+    },
+    {
+      "name": "common_card_bg",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "common_fg_white",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "home_tab_unselected",
+      "value": "#777989"
+    },
+    {
+      "name": "common_grey",
+      "value": "#565656"
+    },
+    {
+      "name": "grey_20",
+      "value": "#CCCCCC"
+    },
+    {
+      "name": "grey_60",
+      "value": "#666666"
+    },
+    {
+      "name": "grey_90",
+      "value": "#191919"
+    }
+  ]
+}

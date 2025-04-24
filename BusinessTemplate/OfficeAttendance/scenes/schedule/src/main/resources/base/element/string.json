@@ -1,0 +1,244 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "label"
+    },
+    {
+      "name": "permission_reason_location",
+      "value": "permission_reason_location"
+    },
+    {
+      "name": "schedule",
+      "value": "schedule"
+    },
+    {
+      "name": "btn_confirm",
+      "value": "btn_confirm"
+    },
+    {
+      "name": "new_succ_tip",
+      "value": "new_succ_tip"
+    },
+    {
+      "name": "edit_succ_tip",
+      "value": "edit_succ_tip"
+    },
+    {
+      "name": "trip_conflicting",
+      "value": "trip_conflicting"
+    },
+    {
+      "name": "lunar_calendar",
+      "value": "lunar_calendar"
+    },
+    {
+      "name": "whole_day",
+      "value": "whole_day"
+    },
+    {
+      "name": "schedule_begin_time",
+      "value": "schedule_begin_time"
+    },
+    {
+      "name": "schedule_end_time",
+      "value": "schedule_end_time"
+    },
+    {
+      "name": "schedule_repeat",
+      "value": "schedule_repeat"
+    },
+    {
+      "name": "schedule_reminder",
+      "value": "schedule_reminder"
+    },
+    {
+      "name": "new_schedule",
+      "value": "new_schedule"
+    },
+    {
+      "name": "schedule_repeat_no",
+      "value": "schedule_repeat_no"
+    },
+    {
+      "name": "schedule_repeat_day",
+      "value": "schedule_repeat_day"
+    },
+    {
+      "name": "schedule_repeat_week",
+      "value": "schedule_repeat_week"
+    },
+    {
+      "name": "schedule_repeat_month",
+      "value": "schedule_repeat_month"
+    },
+    {
+      "name": "schedule_repeat_year",
+      "value": "schedule_repeat_year"
+    },
+    {
+      "name": "reminder_type_on_time",
+      "value": "reminder_type_on_time"
+    },
+    {
+      "name": "reminder_type_before_5_min",
+      "value": "reminder_type_before_5_min"
+    },
+    {
+      "name": "reminder_type_before_10_min",
+      "value": "reminder_type_before_10_min"
+    },
+    {
+      "name": "reminder_type_before_15_min",
+      "value": "reminder_type_before_15_min"
+    },
+    {
+      "name": "reminder_type_before_30_min",
+      "value": "reminder_type_before_30_min"
+    },
+    {
+      "name": "aagcit_huawei_office_attendance_schedule",
+      "value": "1.0.0"
+    },
+    {
+      "name": "aagcittype_huawei_office_attendance_schedule",
+      "value": "sceneTemplate"
+    },
+    {
+      "name": "new_success",
+      "value": "success"
+    },
+    {
+      "name": "edit_success",
+      "value": "success"
+    },
+    {
+      "name": "search_tip",
+      "value": "search_tip"
+    },
+    {
+      "name": "reminder_on_time",
+      "value": "reminder_on_time"
+    },
+    {
+      "name": "reminder_before_5min",
+      "value": "reminder_before_5min"
+    },
+    {
+      "name": "reminder_before_10min",
+      "value": "reminder_before_10min"
+    },
+    {
+      "name": "reminder_before_15min",
+      "value": "reminder_before_15min"
+    },
+    {
+      "name": "reminder_before_30min",
+      "value": "reminder_before_30min"
+    },
+    {
+      "name": "reminder_before_1h",
+      "value": "reminder_before_1h"
+    },
+    {
+      "name": "reminder_before_2h",
+      "value": "reminder_before_2h"
+    },
+    {
+      "name": "reminder_before_1d",
+      "value": "reminder_before_1d"
+    },
+    {
+      "name": "reminder_before_2d",
+      "value": "reminder_before_2d"
+    },
+    {
+      "name": "reminder_on_day_9clock",
+      "value": "reminder_on_day_9clock"
+    },
+    {
+      "name": "reminder_before_1day_9clock",
+      "value": "reminder_before_1day_9clock"
+    },
+    {
+      "name": "reminder_before_2day_9clock",
+      "value": "reminder_before_2day_9clock"
+    },
+    {
+      "name": "reminder_before_3day_9clock",
+      "value": "reminder_before_3day_9clock"
+    },
+    {
+      "name": "reminder_before_1week_9clock",
+      "value": "reminder_before_1week_9clock"
+    },
+    {
+      "name": "reminder_title",
+      "value": "reminder_title"
+    },
+    {
+      "name": "schedule_title_empty_tip",
+      "value": "schedule_title_empty_tip"
+    },
+    {
+      "name": "read_calendar_reason",
+      "value": "read_calendar_reason"
+    },
+    {
+      "name": "write_calendar_reason",
+      "value": "write_calendar_reason"
+    },
+    {
+      "name": "delete_desc",
+      "value": "delete_desc"
+    },
+    {
+      "name": "edit_desc",
+      "value": "edit_desc"
+    },
+    {
+      "name": "location_desc",
+      "value": "location_desc"
+    },
+    {
+      "name": "delete_schedule_title",
+      "value": "delete_schedule_title"
+    },
+    {
+      "name": "delete_schedule_content",
+      "value": "delete_schedule_content"
+    },
+    {
+      "name": "description",
+      "value": "description"
+    },
+    {
+      "name": "location_label",
+      "value": "location_label"
+    },
+    {
+      "name": "schedule_title",
+      "value": "schedule_title"
+    },
+    {
+      "name": "schedule_lc_desc",
+      "value": "china calendar"
+    },
+    {
+      "name": "agcit_huawei_office_attendance_schedule",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_office_attendance_schedule",
+      "value": "sceneTemplate"
+    }
+  ]
+}

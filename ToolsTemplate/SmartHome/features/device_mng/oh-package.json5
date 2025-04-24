@@ -1,0 +1,15 @@
+{
+  "name": "device_mng",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@ohos/mqtt": "^2.0.18",
+    "utils": "file:../../commons/utils",
+    "device_add": "file:../../features/device_add",
+    "uicomponents": "file:../../commons/uicomponents",
+    "external_interactions": "file:../../commons/external_interactions"
+  }
+}

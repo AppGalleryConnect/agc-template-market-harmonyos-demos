@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "carKeyboard",
+    "type": "har",
+    "deviceTypes": [
+      "default"
+    ]
+  }
+}

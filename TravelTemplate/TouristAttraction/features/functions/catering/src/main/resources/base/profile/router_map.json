@@ -1,0 +1,28 @@
+{
+  "routerMap": [
+    {
+      "name": "Catering",
+      "pageSourceFile": "src/main/ets/pages/Catering.ets",
+      "buildFunction": "CateringBuilder",
+      "data": {
+        "description": "this is Catering"
+      }
+    },
+    {
+      "name": "CateringDetail",
+      "pageSourceFile": "src/main/ets/pages/CateringDetail.ets",
+      "buildFunction": "CateringDetailBuilder",
+      "data": {
+        "description": "this is CateringDetail"
+      }
+    },
+    {
+      "name": "AccommodationDetail",
+      "pageSourceFile": "src/main/ets/pages/AccommodationDetail.ets",
+      "buildFunction": "AccommodationDetailBuilder",
+      "data": {
+        "description": "this is AccommodationDetail"
+      }
+    }
+  ]
+}

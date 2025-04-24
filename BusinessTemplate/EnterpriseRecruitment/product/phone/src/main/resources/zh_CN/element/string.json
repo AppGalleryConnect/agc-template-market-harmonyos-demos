@@ -1,0 +1,330 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "企业直招"
+    },
+    {
+      "name": "module_desc",
+      "value": "默认模块"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "默认描述"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "企业直招"
+    },
+    {
+      "name": "app_information",
+      "value": "首页"
+    },
+    {
+      "name": "app_job",
+      "value": "职位"
+    },
+    {
+      "name": "app_mine",
+      "value": "我的"
+    },
+    {
+      "name": "information_title1_string",
+      "value": "公司简介"
+    },
+    {
+      "name": "information_content1_string",
+      "value": "公司校招项目为您提供一个了解公司文化、人才以及平台的机会。作为毕业生加入，您将拥有更加宽广的职业发展道路。我们鼓励您根据个人倾向及专业能力选择最适合自己的业务领域。"
+    },
+    {
+      "name": "information_title2_string",
+      "value": "企业文化"
+    },
+    {
+      "name": "information_content2_string",
+      "value": "为客户提供业务能力是公司的优先要务，我们汇聚各领域的大量优秀人才，为客户量身定制市场领先洞察，以提升竞争力。"
+    },
+    {
+      "name": "information_title3_string",
+      "value": "企业愿景"
+    },
+    {
+      "name": "information_content3_string",
+      "value": "获得公众、利益相关方以及公司内部信任的承诺，指引着公司业务的不断加强。提升客户体验是首要目标，持续不断地提升伙伴的核心竞争力。"
+    },
+    {
+      "name": "information_aboutUs",
+      "value": "关于我们"
+    }
+  ,
+    {
+      "name": "information_hobbies",
+      "value": "企业生活"
+    },
+    {
+      "name": "information_title1_hobbies",
+      "value": "企业期望"
+    },
+    {
+      "name": "information_content1_hobbies",
+      "value": "公司的文化企业期望让每个员工提升能力，为每个客观提升核心竞争力"
+    },
+    {
+      "name": "information_title2_hobbies",
+      "value": "兴趣小组"
+    },
+    {
+      "name": "information_content2_hobbies",
+      "value": "为您准备了大量的兴趣俱乐部，志同道合的人等你"
+    },
+    {
+      "name": "information_title3_hobbies",
+      "value": "程序猿节"
+    },
+    {
+      "name": "information_content3_hobbies",
+      "value": "专为程序猿设定的节日，为你喝彩"
+    },
+    {
+      "name": "job_jobName1",
+      "value": "前端开发工程师"
+    },
+    {
+      "name": "job_salary1",
+      "value": "18000元*13"
+    },
+    {
+      "name": "job_responsibility1",
+      "value": "1.熟练掌握JavaScript、ES5/6、CSS，对解决浏览器兼容性问题、前端性能优化有一定的经验。\n2.理解工程化思想，对构建和持续集成有一定认识，熟悉一种构建工具。 理解组件化开发思想，有一定的设计能力，熟悉最少一种前端主流框架。 \n3.具备良好的服务意识、责任心、较强的学习能力、优秀的团队沟通与协作能力。"
+    },
+    {
+      "name": "job_description1",
+      "value": "1.熟练掌握JavaScript、ES5/6、CSS，对解决浏览器兼容性问题、前端性能优化有一定的经验。\n2.理解工程化思想，对构建和持续集成有一定认识，熟悉一种构建工具。 理解组件化开发思想，有一定的设计能力，熟悉最少一种前端主流框架。 \n3.具备良好的服务意识、责任心、较强的学习能力、优秀的团队沟通与协作能力。"
+    },
+    {
+      "name": "job_jobType1",
+      "value": "前端"
+    },
+    {
+      "name": "job_releaseTime1",
+      "value": "2025-01-24"
+    },
+    {
+      "name": "job_jobName2",
+      "value": "后端开发工程师"
+    },
+    {
+      "name": "job_salary2",
+      "value": "18000元*13"
+    },
+    {
+      "name": "job_responsibility2",
+      "value": "1、计算机、软件、通信等相关专业；\n2、热爱编程，基础扎实，熟悉掌握但不限于JAVA/C++/C/Python/JS/HTML/GO/Rust等编程语言中的一种或数种，有良好的编程习惯；\n3、具备独立工作能力和解决问题的能力、善于沟通，乐于合作，热衷新技术，善于总结分享，喜欢动手实践；\n4、对数据结构、算法有一定了解；\n5、优选条件：\n1）熟悉TCP/IP协议及互联网常见应用和协议的原理；\n2）有IT应用软件、互联网软件、IOS/安卓等相关产品开发经验，不满足于课堂所学，在校期间积极参加校内外软件编程大赛或积极参于编程开源社区组织；\n3）熟悉JS/AS/AJAX/HTML5/CSS等前端开发技术。"
+    },
+    {
+      "name": "job_description2",
+      "value": " 1、熟练主流开发框架springmvc、springboot. mbatis等； \n2、熟悉分布式、缓存、消息、负载均衡等高性能架构相 关开发技术； \n3、 一定的web开发经验，熟悉html、css，熟悉 java, ajax, query, hights \n4、熟悉mysql、oracle等数据库，具有良好的数据库基 础，熟练使用sql语句和优化；深刻理解面向对象思想 熟悉设计模式，具有扎实的java基础，熟练掌握svn git、maven等项目版本管理及构建工具。"
+    },
+    {
+      "name": "job_jobType2",
+      "value": "后端"
+    },
+    {
+      "name": "job_releaseTime2",
+      "value": "2025-01-24"
+    },
+    {
+      "name": "job_jobName3",
+      "value": "设计师"
+    },
+    {
+      "name": "job_salary3",
+      "value": "18000元*13"
+    },
+    {
+      "name": "job_responsibility3",
+      "value": "1、工业设计、数字媒体设计、视觉设计、交互设计、计算机等专业；\n2、掌握以下一项或多项能力：交互设计、平面/3D视觉设计、HCI设计、动效设计、3D建模渲染、Web/Android/IOS/C++/JAVA/JavaScript/HTML/Flash/CSS等前端界面编程；\n3、英语四级以上、具备较强的英语阅读、书写和口语能力。"
+    },
+    {
+      "name": "job_description3",
+      "value": "1. 配合产品总监完成HMI流程设计及交互原型，保证产品流畅性、易用性； \n2.参与市场调研和用户研究，根据设计研究的结果对设计方案进行优化；\n3.协作完成产品交互规范文档。"
+    },
+    {
+      "name": "job_jobType3",
+      "value": "设计"
+    },
+    {
+      "name": "job_releaseTime3",
+      "value": "2025-01-24"
+    },
+    {
+      "name": "job_jobName4",
+      "value": "校招—设计师"
+    },
+    {
+      "name": "job_salary4",
+      "value": "18000元*13"
+    },
+    {
+      "name": "job_responsibility4",
+      "value": "\n1、工业设计、数字媒体设计、视觉设计、交互设计、计算机等专业；\n2、掌握以下一项或多项能力：交互设计、平面/3D视觉设计、HCI设计、动效设计、3D建模渲染、Web/Android/IOS/C++/JAVA/JavaScript/HTML/Flash/CSS等前端界面编程；\n3、英语四级以上、具备较强的英语阅读、书写和口语能力。"
+    },
+    {
+      "name": "job_description4",
+      "value": "\n1. 配合产品总监完成HMI流程设计及交互原型，保证产品流畅性、易用性；\n2.参与市场调研和用户研究，根据设计研究的结果对设计方案进行优化；\n3.协作完成产品交互规范文档。"
+    },
+    {
+      "name": "job_jobType4",
+      "value": "设计"
+    },
+    {
+      "name": "job_releaseTime4",
+      "value": "2025-01-24"
+    },
+    {
+      "name": "job_jobName5",
+      "value": "校招—前端开发工程师"
+    },
+    {
+      "name": "job_salary5",
+      "value": "18000元*13"
+    },
+    {
+      "name": "job_responsibility5",
+      "value": "1.熟练掌握JavaScript、ES5/6、CSS，对解决浏览器兼容性问题、前端性能优化有一定的经验。\n2.理解工程化思想，对构建和持续集成有一定认识，熟悉一种构建工具。 理解组件化开发思想，有一定的设计能力，熟悉最少一种前端主流框架。\n3.具备良好的服务意识、责任心、较强的学习能力、优秀的团队沟通与协作能力。"
+    },
+    {
+      "name": "job_description5",
+      "value": "1. 配合产品总监完成HMI流程设计及交互原型，保证产品流畅性、易用性；\n2.参与市场调研和用户研究，根据设计研究的结果对设计方案进行优化；\n3.协作完成产品交互规范文档。"
+    },
+    {
+      "name": "job_jobType5",
+      "value": "前端"
+    },
+    {
+      "name": "job_releaseTime5",
+      "value": "2025-01-24"
+    },
+    {
+      "name": "job_jobName6",
+      "value": "校招—后端开发工程师"
+    },
+    {
+      "name": "job_salary6",
+      "value": "18000元*13"
+    },
+    {
+      "name": "job_responsibility6",
+      "value": "1、计算机、软件、通信等相关专业；\n2、热爱编程，基础扎实，熟悉掌握但不限于JAVA/C++/C/Python/JS/HTML/GO/Rust等编程语言中的一种或数种，有良好的编程习惯；\n3、具备独立工作能力和解决问题的能力、善于沟通，乐于合作，热衷新技术，善于总结分享，喜欢动手实践；\n4、对数据结构、算法有一定了解；\n5、优选条件：\n1）熟悉TCP/IP协议及互联网常见应用和协议的原理；\n2）有IT应用软件、互联网软件、IOS/安卓等相关产品开发经验，不满足于课堂所学，在校期间积极参加校内外软件编程大赛或积极参于编程开源社区组织；\n3）熟悉JS/AS/AJAX/HTML5/CSS等前端开发技术。"
+    },
+    {
+      "name": "job_description6",
+      "value": "1、负责产品/平台的软件需求分析、架构设计、代码开发、单元测试、集成测试、静态检查、本地构成、测试环境搭建、问题定位、资料开发等工作；\n2、负责相关系统/模块的代码看护及重构，持续优化提升代码质量；\n3、负责后端故障诊断和项目支持技术活动，包括产品维护、疑难问题解决、重大项目支撑等。"
+    },
+    {
+      "name": "job_jobType6",
+      "value": "后端"
+    },
+    {
+      "name": "job_releaseTime6",
+      "value": "2025-01-24"
+    },
+
+    {
+      "name": "job_jobBase",
+      "value": "南京"
+    },
+    {
+      "name": "job_jobBase2",
+      "value": "深圳"
+    },
+    {
+      "name": "job_company",
+      "value": "某企业"
+    },
+    {
+      "name": "job_job_type1",
+      "value": "社招岗位"
+    },
+    {
+      "name": "job_job_type2",
+      "value": "校招岗位"
+    },
+    {
+      "name": "shared_desc",
+      "value": "description"
+    },
+    {
+      "name": "privacyAgreementPath",
+      "value": "https://privacy.consumer.huawei.com/legal/id/authentication-terms.htm?code=CN&language=zh-CN"
+    },
+    {
+      "name": "get_mobile_number_error",
+      "value": "获取匿名手机号失败"
+    },
+    {
+      "name": "account_link",
+      "value": "关联账号"
+    },
+    {
+      "name": "common_service",
+      "value": "常用服务"
+    },
+    {
+      "name": "view_history",
+      "value": "观看历史"
+    },
+    {
+      "name": "setting",
+      "value": "设置"
+    },
+    {
+      "name": "account_unlink",
+      "value": "解除关联"
+    },
+    {
+      "name": "contact_us",
+      "value": "联系我们"
+    },
+    {
+      "name": "app_user_agreement",
+      "value": "《XXXX用户协议》"
+    },
+    {
+      "name": "app_privacy_policy",
+      "value": "《XXXX隐私政策》"
+    },
+    {
+      "name": "huaweiId_user_authentication_protocol",
+      "value": "《华为账号用户认证协议》"
+    },
+    {
+      "name":"and",
+      "value":"和"
+    },
+    {
+      "name":"end",
+      "value":"。"
+    },
+    {
+      "name":"read_and_agree",
+      "value":"已阅读并同意"
+    },
+    {
+      "name": "hwid_no_internet_connect",
+      "value": "网络未连接，请检查网络设置"
+    },
+    {
+      "name": "bind_huaweiId_number",
+      "value": "华为账号绑定号码"
+    },
+    {
+      "name": "read_and_agree_protocol",
+      "value": "请先阅读并同意协议"
+    },
+    {
+      "name": "mine_login",
+      "value": "点击登录"
+    }
+  ]
+}

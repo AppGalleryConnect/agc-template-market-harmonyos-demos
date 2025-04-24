@@ -1,0 +1,12 @@
+{
+  "color": [
+    {
+      "name": "checkin_background",
+      "value": "#3093FA"
+    },
+    {
+      "name": "light_gray",
+      "value": "#bfbfbf"
+    }
+  ]
+}

@@ -1,0 +1,339 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "app_name"
+    },
+    {
+      "name": "module_desc",
+      "value": "default module"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "default entry"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "Enterprise Recruitment"
+    },
+    {
+      "name": "app_information",
+      "value": "Information"
+    },
+    {
+      "name": "app_job",
+      "value": "app_job"
+    },
+    {
+      "name": "app_mine",
+      "value": "Mine"
+    },
+    {
+      "name": "information_title1_string",
+      "value": "information_title"
+    },
+    {
+      "name": "information_content1_string",
+      "value": "information_content1_string"
+    },
+    {
+      "name": "information_title2_string",
+      "value": "information_title2_string"
+    },
+    {
+      "name": "information_content2_string",
+      "value": "information_content2_string"
+    },
+    {
+      "name": "information_title3_string",
+      "value": "information_title3_string"
+    },
+    {
+      "name": "information_content3_string",
+      "value": "information_content3_string"
+    },
+    {
+      "name": "information_aboutUs",
+      "value": "information_aboutUs"
+    }
+  ,
+    {
+      "name": "information_hobbies",
+      "value": "information_hobbies"
+    },
+    {
+      "name": "information_title1_hobbies",
+      "value": "EXTRA MILE"
+    },
+    {
+      "name": "information_content1_hobbies",
+      "value": "information_content1_hobbies"
+    },
+    {
+      "name": "information_title2_hobbies",
+      "value": "information_title2_hobbies"
+    },
+    {
+      "name": "information_content2_hobbies",
+      "value": "information_content2_hobbies"
+    },
+    {
+      "name": "information_title3_hobbies",
+      "value": "information_title3_hobbies"
+    },
+    {
+      "name": "information_content3_hobbies",
+      "value": "information_content3_hobbies"
+    },
+    {
+      "name": "job_jobName1",
+      "value": "job_jobName1"
+    },
+    {
+      "name": "job_salary1",
+      "value": "job_salary1"
+    },
+    {
+      "name": "job_responsibility1",
+      "value": "job_responsibility1"
+    },
+    {
+      "name": "job_description1",
+      "value": "job_description1"
+    },
+    {
+      "name": "job_jobType1",
+      "value": "job_jobType1"
+    },
+    {
+      "name": "job_releaseTime1",
+      "value": "job_releaseTime1"
+    },
+    {
+      "name": "job_jobName2",
+      "value": "job_jobName2"
+    },
+    {
+      "name": "job_salary2",
+      "value": "job_salary2"
+    },
+    {
+      "name": "job_responsibility2",
+      "value": "job_responsibility2"
+    },
+    {
+      "name": "job_description2",
+      "value": "job_description2"
+    },
+    {
+      "name": "job_jobType2",
+      "value": "job_jobType2"
+    },
+    {
+      "name": "job_releaseTime2",
+      "value": "job_releaseTime2"
+    },
+    {
+      "name": "job_jobName3",
+      "value": "job_jobName3"
+    },
+    {
+      "name": "job_salary3",
+      "value": "job_salary3"
+    },
+    {
+      "name": "job_responsibility3",
+      "value": "job_responsibility3"
+    },
+    {
+      "name": "job_description3",
+      "value": "job_description3"
+    },
+    {
+      "name": "job_jobType3",
+      "value": "job_jobType3"
+    },
+    {
+      "name": "job_releaseTime3",
+      "value": "job_releaseTime3"
+    },
+    {
+      "name": "job_jobName4",
+      "value": "job_jobName4"
+    },
+    {
+      "name": "job_salary4",
+      "value": "job_salary4"
+    },
+    {
+      "name": "job_responsibility4",
+      "value": "job_responsibility4"
+    },
+    {
+      "name": "job_description4",
+      "value": "job_description4"
+    },
+    {
+      "name": "job_jobType4",
+      "value": "job_jobType4"
+    },
+    {
+      "name": "job_releaseTime4",
+      "value": "job_releaseTime4"
+    },
+    {
+      "name": "job_jobName5",
+      "value": "job_jobName5"
+    },
+    {
+      "name": "job_salary5",
+      "value": "job_salary5"
+    },
+    {
+      "name": "job_responsibility5",
+      "value": "job_responsibility5"
+    },
+    {
+      "name": "job_description5",
+      "value": "job_description5"
+    },
+    {
+      "name": "job_jobType5",
+      "value": "job_jobType5"
+    },
+    {
+      "name": "job_releaseTime5",
+      "value": "job_releaseTime5"
+    },
+    {
+      "name": "job_jobName6",
+      "value": "job_jobName6"
+    },
+    {
+      "name": "job_salary6",
+      "value": "job_salary6"
+    },
+    {
+      "name": "job_responsibility6",
+      "value": "job_responsibility6"
+    },
+    {
+      "name": "job_description6",
+      "value": "job_description6"
+    },
+    {
+      "name": "job_jobType6",
+      "value": "job_jobType6"
+    },
+    {
+      "name": "job_releaseTime6",
+      "value": "job_releaseTime6"
+    },
+
+    {
+      "name": "job_jobBase",
+      "value": "job_jobBase"
+    },
+    {
+      "name": "job_jobBase2",
+      "value": "job_jobBase2"
+    },
+    {
+      "name": "job_company",
+      "value": "job_company"
+    },
+    {
+      "name": "job_job_type1",
+      "value": "job_job_type1"
+    },
+    {
+      "name": "job_job_type2",
+      "value": "job_job_type2"
+    },
+
+    {
+      "name": "shared_desc",
+      "value": "description"
+    },
+    {
+      "name": "reason",
+      "value": "Used to initiate network data requests."
+    },
+    {
+      "name": "privacyAgreementPath",
+      "value": "https://privacy.consumer.huawei.com/legal/id/authentication-terms.htm?code=CN&language=zh-CN"
+    },
+    {
+      "name": "get_mobile_number_error",
+      "value": "Failed to obtain the anonymous mobile number."
+    },
+    {
+      "name": "account_link",
+      "value": "account_link"
+    },
+    {
+      "name": "common_service",
+      "value": "common_service"
+    },
+    {
+      "name": "view_history",
+      "value": "view_history"
+    },
+    {
+      "name": "setting",
+      "value": "setting"
+    },
+    {
+      "name": "account_unlink",
+      "value": "account_unlink"
+    },
+    {
+      "name": "contact_us",
+      "value": "contact_us"
+    },
+    {
+      "name": "app_user_agreement",
+      "value": "User Service Agreement, "
+    },
+    {
+      "name": "app_privacy_policy",
+      "value": "Privacy Policy,"
+    },
+    {
+      "name": "huaweiId_user_authentication_protocol",
+      "value": "HUAWEI ID User Authentication Agreement"
+    },
+    {
+      "name":"and",
+      "value":" and "
+    },
+    {
+      "name":"end",
+      "value":"."
+    },
+    {
+      "name":"read_and_agree",
+      "value":"read_and_agree"
+    },
+    {
+      "name": "hwid_no_internet_connect",
+      "value": "hwid_no_internet_connect"
+    },
+    {
+      "name": "bind_huaweiId_number",
+      "value": "bind_huaweiId_number"
+    },
+    {
+      "name": "read_and_agree_protocol",
+      "value": "bind_huaweiId_number"
+    },
+    {
+      "name": "mine_bind_phone",
+      "value": "bind phone"
+    },
+    {
+      "name": "mine_login",
+      "value": "Login"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "ret": {
+    "retCode": 0,
+    "retMsg": "SUCCESS"
+  },
+  "userFullInfo": {
+    "userInfo": {
+      "hwUnionId": "uid100091",
+      "uid": 100091,
+      "userNo": "100091",
+      "nickName": "奔跑的蜗牛",
+      "realNameAuthFlag": 0,
+      "gender": 0,
+      "birth": "2000-01-01",
+      "selfIntroduction": "宁缺毋滥，不将就",
+      "profilePictureUrl": "app.media.head_image_2",
+      "album": [
+        "app.media.feed_thumbnail",
+        "app.media.feed2_thumbnail"
+      ],
+      "education": 3,
+      "currentResidence": "北京",
+      "originFrom": "北京",
+      "job": "医疗/护理",
+      "monthlyIncome": 4,
+      "isVip": 0
+    },
+    "mateSelectionCriteria": {
+      "ageStart": 22,
+      "ageEnd": 30,
+      "gender": 1,
+      "education": 2,
+      "heightStart": 170,
+      "currentResidence": "北京",
+      "monthlyIncome": "3",
+      "education": "3",
+      "originFrom": "北京",
+      "hasChildren": "0",
+      "expectationOfChildren": "1",
+      "smoking": "0",
+      "drinking": "0",
+      "marriageStatus": "0,1"
+    },
+    "userActionSummary": {
+      "followUserCount": 0,
+      "likedCount": 0,
+      "commentCount": 0
+    },
+    "recentFeedImages": [
+      "app.media.head_image_2",
+      "app.media.feed_thumbnail",
+      "app.media.feed2_thumbnail"
+    ]
+  }
+}

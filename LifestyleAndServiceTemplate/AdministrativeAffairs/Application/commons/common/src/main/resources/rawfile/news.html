@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh - CN">
+
+<head>
+    <meta charset="UTF - 8">
+    <meta name="viewport"
+          content="width=device-width, initial - scale = 1.0, maximum - scale = 1.0, user - scalable = no">
+    <title>我的H5页面</title>
+    <style>
+        body {
+            font-family: Arial, sans - serif;
+            margin: 0;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .footer {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer p {
+            color: #1296db;
+        }
+
+        .news-time {
+            color: #707070;
+        }
+    </style>
+</head>
+
+<body>
+<div class="header">
+    <h1>重磅！国家医保局启动新的医保改革，事关医保报销</h1>
+    <p class="news-time">2025-01-20 07:38·社保解读</p>
+</div>
+<div class="content">
+    <p>2025年1月16日，国家医保局印发了《关于推进基本医保基金即时结算改革的通知》，预示着2025年1月起，将有越来越多的地区可以实现职工医保和城乡居民医保费及时结算报销，一改过去定期报销带来的麻烦！</p>
+    <image class="image-preview"
+           src="https://pics4.baidu.com/feed/6a600c338744ebf8b0b37512ca77bd246159a77d.jpeg@f_auto?token=43db8bd83a8cd6be94a714cccb1a1601"
+           style="width: 100%;" />
+    <p>按照《通知》的计划安排，国家医保局拟在1-5月份先选择17个省的76个地区（详见本文最后附表）作为医保即时结算国家层面先行试点地区，其中，河北、浙江、安徽、海南、贵州、青海六地为全省试点，6月份在总结试点经验的基础上出台《基本医保基金即时结算经办规程》，7月份在全国范围内正式启动医保即时结算改革，到年底实现80%左右地区能够及时结算，2026年全国所有地区全部实现医保及时结算。
+
+    <p>本次医保即时结算改革的机构范围，既有纳入定点的全部医疗机构，也有纳入定点的全部药店。</p>
+
+    <p>结算的费用范围既包括在定点医疗机构发生的普通门诊费、慢特病门诊费、住院费、生育费，也包括在定点药店购药发生的费用。</p>
+
+    <p>涉及的人员范围为全部参保人员，既包括参加职工医保的人员（机关事业单位职工、企业职工和参加企业职工医保的灵活就业人员），也包括参加城乡居民医保的人员。</p>
+    </p>
+    <image class="image-preview"
+           src="https://pics4.baidu.com/feed/3c6d55fbb2fb431634762e76332a2c2d08f7d3e9.jpeg@f_auto?token=821a077363181468cb61f24f1008b001"
+           style="width: 100%;" />
+    <p>本次改革的最大受益者首先是医疗机构和药店，对于他们来说，改革后在不超过20个工作日就能够收到医保基金划拨的钱，自己垫付的时间大幅缩短，这样，不仅资金压力大大减轻，同时结算效率和经办流程简化后，也能够大量减少事务工作量和减少一定的人工成本。
+    </p>
+    <p>其次是广大医保参保人员，医疗机构和药店的资金能够及时到位，他们就没有任何理由再久拖参保人员的医药费用，这样的话，参保人员就能够更快拿到医保报销的费用，减少因为延迟报销带来的经济负担。</p>
+    <h2>总之，这次改革最终的目的，就是为广大参保人员享受到及时结算的好处和便捷！这对于广大参保人员来说应该是好消息，而最大的期盼，就是希望政府和医疗机构能够将即时结算改革的利好尽快辐射到广大参保人员。</h2>
+    <image class="image-preview"
+           src="https://pics0.baidu.com/feed/6c224f4a20a446233ca719498bac18000df3d7cc.jpeg@f_auto?token=b801c4ac83b139e93c2d1c5a90a466cb"
+           style="width: 100%;" />
+</div>
+</body>
+<script>
+    function callNativeShare() {
+        nativeShare.share();
+    }
+
+    function callNativePreview(srcList,index) {
+        nativeShare.preview(srcList,index);
+    }
+    /*
+     * 给所有image标签绑定点击事件
+     */
+    let imageList = document.querySelectorAll(".image-preview")
+    let srcList = []
+    imageList.forEach((element, index) => {
+        element.addEventListener("click", function () {
+            let scrList = [...imageList].map(value => {
+                return value.src
+            })
+            callNativePreview(scrList, index)
+        })
+    })
+</script>
+
+</html>

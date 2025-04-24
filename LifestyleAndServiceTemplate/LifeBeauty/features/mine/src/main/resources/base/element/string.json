@@ -1,0 +1,104 @@
+{
+  "string": [
+    {
+      "name": "schedule_added",
+      "value": "已添加日程"
+    },
+    {
+      "name": "schedule_to_add",
+      "value": "添加至日程"
+    },
+    {
+      "name": "subscribe_added",
+      "value": "已订阅通知"
+    },
+    {
+      "name": "subscribe_to_add",
+      "value": "订阅通知"
+    },
+    {
+      "name": "toast_appoint_canceled",
+      "value": "已取消预约"
+    },
+    {
+      "name": "toast_schedule_cannot_cancel",
+      "value": "日程提醒暂不支持取消"
+    },
+    {
+      "name": "toast_schedule_added",
+      "value": "已添加至日程"
+    },
+    {
+      "name": "toast_subscribe_cannot_cancel",
+      "value": "订阅通知暂不支持取消"
+    },
+    {
+      "name": "btn_cancel_appoint",
+      "value": "取消预约"
+    },
+    {
+      "name": "text_appoint_time_desc",
+      "value": "预约时间 %s"
+    },
+    {
+      "name": "form_item_project",
+      "value": "项目："
+    },
+    {
+      "name": "form_item_contact",
+      "value": "联系人："
+    },
+    {
+      "name": "form_item_nums",
+      "value": "人数："
+    },
+    {
+      "name": "form_content_nums",
+      "value": "%s人"
+    },
+    {
+      "name": "form_item_remark",
+      "value": "备注："
+    },
+    {
+      "name": "form_item_remark_empty",
+      "value": "暂无"
+    },
+    {
+      "name": "dialog_cancel_appoint_title",
+      "value": "是否取消预约"
+    },
+    {
+      "name": "dialog_cancel_appoint_no",
+      "value": "不取消"
+    },
+    {
+      "name": "dialog_cancel_appoint_yes",
+      "value": "取消预约"
+    },
+    {
+      "name": "btn_cancel_bind_phone",
+      "value": "解除关联"
+    },
+    {
+      "name": "default_user_name",
+      "value": "华为用户"
+    },
+    {
+      "name": "appoint_history_title",
+      "value": "预约记录"
+    },
+    {
+      "name": "empty_history_need_login",
+      "value": "关联手机号后查看预约记录"
+    },
+    {
+      "name": "empty_history",
+      "value": "暂无预约记录"
+    },
+    {
+      "name": "mine_page_title",
+      "value": "我的"
+    }
+  ]
+}

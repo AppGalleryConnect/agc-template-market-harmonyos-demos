@@ -1,0 +1,34 @@
+{
+  "routerMap": [
+    {
+      "name": "GoodDetail",
+      "pageSourceFile": "src/main/ets/pages/GoodDetail.ets",
+      "buildFunction": "GoodDetailBuilder"
+    },
+    {
+      "name": "BookGood",
+      "pageSourceFile": "src/main/ets/pages/BookGood.ets",
+      "buildFunction": "BookGoodBuilder"
+    },
+    {
+      "name": "SingleCardDetail",
+      "pageSourceFile": "src/main/ets/pages/SingleCardDetail.ets",
+      "buildFunction": "SingleCardDetailBuilder"
+    },
+    {
+      "name": "GroupDetail",
+      "pageSourceFile": "src/main/ets/pages/GroupDetail.ets",
+      "buildFunction": "GroupDetailBuilder"
+    },
+    {
+      "name": "SubmitOrder",
+      "pageSourceFile": "src/main/ets/pages/SubmitOrder.ets",
+      "buildFunction": "SubmitOrderBuilder"
+    },
+    {
+      "name": "SuccessPay",
+      "pageSourceFile": "src/main/ets/pages/SuccessPay.ets",
+      "buildFunction": "SuccessPayBuilder"
+    }
+  ]
+}

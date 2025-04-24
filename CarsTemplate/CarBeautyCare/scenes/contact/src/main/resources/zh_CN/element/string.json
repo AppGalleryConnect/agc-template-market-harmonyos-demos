@@ -1,0 +1,48 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "add_phone_number",
+      "value": "手机号"
+    },
+    {
+      "name": "name",
+      "value": "姓名"
+    },
+    {
+      "name": "font_regular",
+      "value": "鸿蒙黑体"
+    },
+    {
+      "name": "name_input",
+      "value": "请输入姓名"
+    },
+    {
+      "name": "phone_number_input",
+      "value": "请输入手机号"
+    },
+    {
+      "name": "save",
+      "value": "保存"
+    },
+    {
+      "name": "contact_add",
+      "value": "添加联系人信息"
+    },
+    {
+      "name": "contact_num",
+      "value": "号码："
+    },
+    {
+      "name": "contactInfo_add",
+      "value": "添加新联系人信息"
+    },
+    {
+      "name": "contactInfo",
+      "value": "联系人信息"
+    }
+  ]
+}

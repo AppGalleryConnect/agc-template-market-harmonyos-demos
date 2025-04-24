@@ -1,0 +1,13 @@
+{
+  "name": "device_simulation",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "",
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "utils": "file:../../commons/utils",
+    "@ohos/mqtt": "^2.0.18"
+  }
+}
+

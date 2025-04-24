@@ -1,0 +1,20 @@
+{
+  "routerMap": [
+    {
+      "name": "TouristsPage",
+      "pageSourceFile": "src/main/ets/pages/TouristsPage.ets",
+      "buildFunction": "TouristsPageBuilder",
+      "data": {
+        "description": "this is Tourists"
+      }
+    },
+    {
+      "name": "TouristPage",
+      "pageSourceFile": "src/main/ets/pages/TouristPage.ets",
+      "buildFunction": "TouristPageBuilder",
+      "data": {
+        "description": "this is Tourist"
+      }
+    }
+  ]
+}

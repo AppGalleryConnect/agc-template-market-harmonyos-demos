@@ -1,0 +1,16 @@
+{
+  "name": "phone",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "",
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "@ohos_agcit/postpartum_care_center_utils": "file:../../components/utils",
+    "@ohos_agcit/postpartum_care_center_uicomponents": "file:../../components/uicomponents",
+    "@ohos_agcit/postpartum_care_center_home": "file:../../scenes/home",
+    "@ohos_agcit/postpartum_care_center_mine": "file:../../scenes/mine",
+    "@ohos_agcit/postpartum_care_center_stores": "file:../../scenes/stores",
+    "@ohos_agcit/postpartum_care_center_activities": "file:../../scenes/activities"
+  }
+}
