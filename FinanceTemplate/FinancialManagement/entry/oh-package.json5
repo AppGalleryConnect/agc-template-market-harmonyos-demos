@@ -1,0 +1,17 @@
+{
+  "name": "entry",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "",
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "home": "file:../scenes/tab/home",
+    "mine": "file:../scenes/tab/mine",
+    "@ohos/axios": "^2.2.4",
+    "commonlib": "file:../commons/commonlib",
+    "network": "file:../commons/network",
+    "@hw-agconnect/ui-base": "^1.0.0"
+  }
+}
+

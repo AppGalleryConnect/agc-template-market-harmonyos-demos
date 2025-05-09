@@ -1,0 +1,20 @@
+{
+  "integer": [
+    {
+      "name": "icon_size_12",
+      "value": 12
+    },
+    {
+      "name": "icon_size_16",
+      "value": 16
+    },
+    {
+      "name": "icon_size_20",
+      "value": 20
+    },
+    {
+      "name": "icon_size_32",
+      "value": 32
+    }
+  ]
+}

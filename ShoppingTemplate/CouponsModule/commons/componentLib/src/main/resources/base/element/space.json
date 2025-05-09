@@ -1,0 +1,12 @@
+{
+  "string": [
+    {
+      "name": "margin_4",
+      "value": "4vp"
+    },
+    {
+      "name": "padding_8",
+      "value": "8vp"
+    }
+  ]
+}

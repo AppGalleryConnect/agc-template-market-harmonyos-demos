@@ -1,0 +1,14 @@
+{
+  "module": {
+    "name": "home",
+    "type": "shared",
+    "description": "$string:shared_desc",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false,
+    "routerMap": "$profile:router_map"
+  }
+}

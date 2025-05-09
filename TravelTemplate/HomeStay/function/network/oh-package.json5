@@ -1,0 +1,17 @@
+{
+  "name": "network",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "packageType": "InterfaceHar",
+  "dependencies": {
+    "@ohos/axios": "^2.2.4",
+    "util": "file:../../common/util",
+    "account": "file:../account",
+    "type": "file:../../common/type",
+    "calendar": "file:../calendar",
+    "constant": "file:../../common/constant"
+  }
+}

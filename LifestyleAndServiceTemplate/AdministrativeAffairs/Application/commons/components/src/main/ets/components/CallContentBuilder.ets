@@ -14,7 +14,7 @@ export function CallContentBuilder(callback: () => void = () => {
   Column() {
     Column() {
       Column({ space: Constants.CONTAINER_SPACE_TWENTY }) {
-        Text('1234-567890')
+        Text('01234-567890')
           .fontSize($r('sys.float.Subtitle_L'))
           .fontColor($r('sys.color.font_primary'))
           .fontSize(FontWeight.Medium)
@@ -37,7 +37,7 @@ export function CallContentBuilder(callback: () => void = () => {
         /*
          * 拉起拨号界面并指定号码
          * */
-        startCallDialog('1234-567890')
+        startCallDialog('01234-567890')
       })
 
       Row() {

@@ -1,0 +1,16 @@
+{
+  "float": [
+    {
+      "name": "call_icon_size",
+      "value": "24vp"
+    },
+    {
+      "name": "button_height_Forty",
+      "value": "40vp"
+    },
+    {
+      "name": "button_border_radius_thirty",
+      "value": "30vp"
+    }
+  ]
+}

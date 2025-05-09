@@ -1,0 +1,20 @@
+{
+  "color": [
+    {
+      "name": "system_color_green",
+      "value": "#62B42E"
+    },
+    {
+      "name": "background_color_white",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "font_color_white",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "placeholderColor_color_white",
+      "value": "#FFFFFF"
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "float": [
+    {
+      "name": "space_xs",
+      "value": "2"
+    },
+    {
+      "name": "space_sm",
+      "value": "5"
+    },
+    {
+      "name": "space_md",
+      "value": "5"
+    },
+    {
+      "name": "space_lg",
+      "value": "5"
+    },
+    {
+      "name": "space_xl",
+      "value": "5"
+    },
+    {
+      "name": "font_size_base",
+      "value": "5"
+    },
+    {
+      "name": "font_size_small",
+      "value": "10"
+    },
+    {
+      "name": "font_size_medium",
+      "value": "5"
+    },
+    {
+      "name": "font_size_large",
+      "value": "5"
+    },
+    {
+      "name": "font_size_xlarge",
+      "value": "5"
+    },
+    {
+      "name": "width_xs",
+      "value": "5"
+    },
+    {
+      "name": "width_sm",
+      "value": "24"
+    },
+    {
+      "name": "width_md",
+      "value": "5"
+    },
+    {
+      "name": "width_lg",
+      "value": "5"
+    },
+    {
+      "name": "width_xl",
+      "value": "5"
+    },
+    {
+      "name": "height_xs",
+      "value": "5"
+    },
+    {
+      "name": "height_sm",
+      "value": "24"
+    },
+    {
+      "name": "height_md",
+      "value": "5"
+    },
+    {
+      "name": "height_lg",
+      "value": "5"
+    },
+    {
+      "name": "height_xl",
+      "value": "5"
+    }
+  ]
+}

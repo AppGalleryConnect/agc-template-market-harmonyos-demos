@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "parse",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

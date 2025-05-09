@@ -1,0 +1,25 @@
+{
+ "overrides": [
+    {
+      "files": "*.ets",
+      "options": {
+        "parser": "typescript"
+      }
+    }
+  ],
+  printWidth: 120,
+  tabWidth: 2,
+  useTabs: false,
+  semi: true,
+  singleQuote: true,
+  quoteProps: 'as-needed',
+  trailingComma: 'all',
+  bracketSpacing: true,
+  arrowParens: 'always',
+  proseWrap: 'preserve',
+  htmlWhitespaceSensitivity: 'css',
+  vueIndentScriptAndStyle: false,
+  endOfLine: 'auto',
+  embeddedLanguageFormatting: 'auto',
+  singleAttributePerLine: false,
+}

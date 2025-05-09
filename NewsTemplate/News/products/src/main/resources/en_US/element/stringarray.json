@@ -1,0 +1,358 @@
+{
+  "strarray": [
+    {
+      "name": "city_data_A",
+      "value": [
+        {
+          "value": "Aershan"
+        },
+        {
+          "value": "Altay"
+        },
+        {
+          "value": "Anqing"
+        },
+        {
+          "value": "Anyang"
+        }
+      ]
+    },
+    {
+      "name": "city_data_an",
+      "value": [
+        {
+          "value": "Anqing"
+        },
+        {
+          "value": "Anyang"
+        }
+      ]
+    },
+    {
+      "name": "city_data_B",
+      "value": [
+        {
+          "value": "Beijing"
+        },
+        {
+          "value": "Bozhou"
+        },
+        {
+          "value": "Baotou"
+        },
+        {
+          "value": "Baoji"
+        }
+      ]
+    },
+    {
+      "name": "city_data_C",
+      "value": [
+        {
+          "value": "Chongqing"
+        },
+        {
+          "value": "Changchun"
+        },
+        {
+          "value": "Changsha"
+        },
+        {
+          "value": "Chengdu"
+        }
+      ]
+    },
+    {
+      "name": "city_data_D",
+      "value": [
+        {
+          "value": "Dali"
+        },
+        {
+          "value": "Dalian"
+        }
+      ]
+    },
+    {
+      "name": "city_data_E",
+      "value": [
+        {
+          "value": "Enshi"
+        }
+      ]
+    },
+    {
+      "name": "city_data_F",
+      "value": [
+        {
+          "value": "Fuzhou"
+        },
+        {
+          "value": "Fuyang"
+        },
+        {
+          "value": "Foshan"
+        },
+        {
+          "value": "Fushun"
+        }
+      ]
+    },
+    {
+      "name": "city_data_G",
+      "value": [
+        {
+          "value": "Guangzhou"
+        },
+        {
+          "value": "Guilin"
+        },
+        {
+          "value": "Ganzhou"
+        },
+        {
+          "value": "Gaoxiong"
+        }
+      ]
+    },
+    {
+      "name": "city_data_H",
+      "value": [
+        {
+          "value": "Harbin"
+        },
+        {
+          "value": "Hefei"
+        },
+        {
+          "value": "Hangzhou"
+        },
+        {
+          "value": "Hohhot"
+        },
+        {
+          "value": "Tsurugang"
+        },
+        {
+          "value": "Hulan"
+        }
+      ]
+    },
+    {
+      "name": "city_data_J",
+      "value": [
+        {
+          "value": "Jinan"
+        },
+        {
+          "value": "Jiujiang"
+        },
+        {
+          "value": "Jiamusi"
+        }
+      ]
+    },
+    {
+      "name": "city_data_K",
+      "value": [
+        {
+          "value": "Kaifeng"
+        },
+        {
+          "value": "Kunming"
+        }
+      ]
+    },
+    {
+      "name": "city_data_L",
+      "value": [
+        {
+          "value": "Lanzhou"
+        },
+        {
+          "value": "Lijiang"
+        },
+        {
+          "value": "Luoyang"
+        }
+      ]
+    },
+    {
+      "name": "city_data_M",
+      "value": [
+        {
+          "value": "Ma`anshan"
+        }
+      ]
+    },
+    {
+      "name": "city_data_N",
+      "value": [
+        {
+          "value": "Nanchang"
+        },
+        {
+          "value": "Nanjing"
+        },
+        {
+          "value": "Ningbo"
+        }
+      ]
+    },
+    {
+      "name": "city_data_P",
+      "value": [
+        {
+          "value": "Putian"
+        }
+      ]
+    },
+    {
+      "name": "city_data_Q",
+      "value": [
+        {
+          "value": "Qingdao"
+        },
+        {
+          "value": "Qitaihe"
+        },
+        {
+          "value": "Qinhuangdao"
+        }
+      ]
+    },
+    {
+      "name": "city_data_R",
+      "value": [
+        {
+          "value": "Ruijin"
+        }
+      ]
+    },
+    {
+      "name": "city_data_S",
+      "value": [
+        {
+          "value": "Shanghai"
+        },
+        {
+          "value": "Shenyang"
+        },
+        {
+          "value": "shijiazhuang"
+        },
+        {
+          "value": "Sanya"
+        },
+        {
+          "value": "Shuangyashan"
+        }
+      ]
+    },
+    {
+      "name": "city_data_T",
+      "value": [
+        {
+          "value": "Tianjin"
+        },
+        {
+          "value": "Taiyuan"
+        },
+        {
+          "value": "Turpan"
+        }
+      ]
+    },
+    {
+      "name": "city_data_W",
+      "value": [
+        {
+          "value": "Wuhan"
+        }
+      ]
+    },
+    {
+      "name": "city_data_X",
+      "value": [
+        {
+          "value": "Xi`an"
+        },
+        {
+          "value": "Xianyang"
+        },
+        {
+          "value": "Xinyang"
+        }
+      ]
+    },
+    {
+      "name": "city_data_Y",
+      "value": [
+        {
+          "value": "Yinchuan"
+        },
+        {
+          "value": "Yanji"
+        },
+        {
+          "value": "Yichang"
+        }
+      ]
+    },
+    {
+      "name": "city_data_Z",
+      "value": [
+        {
+          "value": "Zhengzhou"
+        },
+        {
+          "value": "Zhuhai"
+        },
+        {
+          "value": "Zhangjiakou"
+        }
+      ]
+    },
+    {
+      "name": "hot_city",
+      "value": [
+        {
+          "value": "Beijing"
+        },
+        {
+          "value": "Shanghai"
+        },
+        {
+          "value": "Guangzhou"
+        },
+        {
+          "value": "Shenzhen"
+        },
+        {
+          "value": "Hangzhou"
+        },
+        {
+          "value": "Nanjing"
+        },
+        {
+          "value": "Suzhou"
+        },
+        {
+          "value": "Tianjin"
+        },
+        {
+          "value": "Wuhan"
+        },
+        {
+          "value": "Changsha"
+        },
+        {
+          "value": "Chongqing"
+        },
+        {
+          "value": "Chengdu"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "module": {
+    "name": "shopping",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ],
+    "routerMap": "$profile:route_map",
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.VIBRATE"
+      }
+    ]
+  }
+}

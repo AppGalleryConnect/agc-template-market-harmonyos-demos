@@ -1,0 +1,108 @@
+{
+  "string": [
+    {
+      "name": "no_data",
+      "value": "暂无数据"
+    },
+    {
+      "name": "medical_security_title",
+      "value": "政务模版"
+    },
+    {
+      "name": "medical_version",
+      "value": "版本："
+    },
+    {
+      "name": "opinions_suggestions",
+      "value": "意见建议"
+    },
+    {
+      "name": "suggestions_description",
+      "value": "问题描述"
+    },
+    {
+      "name": "suggestions_description_placeholder",
+      "value": "请输入问题描述"
+    },
+    {
+      "name": "suggestions_image_upload",
+      "value": "问题截图（选填）"
+    },
+    {
+      "name": "suggestions_contact",
+      "value": "联系方式（选填）"
+    },
+    {
+      "name": "suggestions_contact_placeholder",
+      "value": "请填写联系手机"
+    },
+    {
+      "name": "suggestions_submit",
+      "value": "提交"
+    },
+    {
+      "name": "suggestions_problem_description",
+      "value": "请输入问题描述"
+    },
+    {
+      "name": "suggestions_problem_phone",
+      "value": "请输入正确的手机号"
+    },
+    {
+      "name": "suggestions_submit_success",
+      "value": "意见提交成功"
+    },
+    {
+      "name": "reservation_tips",
+      "value": "左滑可删除"
+    },
+    {
+      "name": "version_code",
+      "value": "版本号："
+    },
+    {
+      "name": "mock_name",
+      "value": "张三"
+    },
+    {
+      "name": "mock_id_card",
+      "value": "123xxxxxxxxxxxxxxxxxxx"
+    },
+    {
+      "name": "mock_title",
+      "value": "本二维码为模拟展示，实际二维码生成请以业务为准"
+    },
+    {
+      "name": "problem_description",
+      "value": "问题描述"
+    },
+    {
+      "name": "problem_screenshot",
+      "value": "问题截图"
+    },
+    {
+      "name": "no_search_data",
+      "value": "暂未查询到数据"
+    },
+    {
+      "name": "avatar",
+      "value": "头像"
+    },
+    {
+      "name": "name",
+      "value": "昵称"
+    },
+    {
+      "name": "phone_number",
+      "value": "电话"
+    },
+    {
+      "name": "log_out",
+      "value": "退出登录"
+    },
+    {
+      "name": "log_out_confirm",
+      "value": "确认退出登录吗?"
+    }
+  ]
+}

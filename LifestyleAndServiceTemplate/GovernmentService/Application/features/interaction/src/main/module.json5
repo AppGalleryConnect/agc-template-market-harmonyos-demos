@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "interaction",
+    "type": "har",
+    "deviceTypes": [
+      "phone",
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "string": [
+    {
+      "name": "font_size_8",
+      "value": "8vp"
+    },
+    {
+      "name": "font_size_10",
+      "value": "10vp"
+    },
+    {
+      "name": "font_size_12",
+      "value": "12vp"
+    },
+    {
+      "name": "font_size_14",
+      "value": "14vp"
+    },
+    {
+      "name": "font_size_18",
+      "value": "18vp"
+    },
+    {
+      "name": "font_size_20",
+      "value": "20vp"
+    },
+    {
+      "name": "font_size_24",
+      "value": "24vp"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "expected_trip_label",
+      "value": "预计"
+    },
+    {
+      "name": "actual_trip_label",
+      "value": "实际"
+    },
+    {
+      "name": "plan_trip_label",
+      "value": "计划"
+    }
+  ]
+}

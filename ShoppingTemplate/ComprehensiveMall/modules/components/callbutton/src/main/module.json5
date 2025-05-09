@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "callbutton",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "entry",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "",
+  "author": "",
+  "license": "",
+  "dependencies": {
+    commonlib: "file:../commons/commonLib",
+    componentlib: "file:../commons/componentLib",
+    "mine": "file:../features/mine",
+    "home": "file:../features/home",
+    "video": "file:../features/video"
+  }
+}
+

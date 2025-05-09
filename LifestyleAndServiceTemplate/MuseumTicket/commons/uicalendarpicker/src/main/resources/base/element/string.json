@@ -1,0 +1,53 @@
+{
+    "string":[
+        {
+            "name":"cancel",
+            "value":"Cancel",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"confirm",
+            "value":"Confirm",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"select_placeholder",
+            "value":"Select",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"disable_day_label",
+            "value":"Unavailable",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"title_date",
+            "value":"Select date",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"title_datetime",
+            "value":"Select date and time",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"show_time_label",
+            "value":"Now",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

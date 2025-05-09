@@ -1,0 +1,55 @@
+{
+  "newsList": [
+    {
+      "newsContent": "HarmonyOS Connect伙伴峰会在上海举办，此次峰会展示了鸿蒙智联生态业务的最新发展成果及业务战略布局。",
+      "newsId": "0",
+      "newsTime": "2022年08月16日",
+      "newsTitle": "HarmonyOS Connect伙伴峰会上海站圆满结束",
+      "newsImage": "new0.png"
+    },
+    {
+      "newsContent": "华为发布机场智能运控中心等五大航空解决方案，引领行业智能化升级。华为交通智慧化军团副总裁董方朔参加",
+      "newsId": "1",
+      "newsTime": "2024年3月22日",
+      "newsTitle": "华为发布机场智能运控中心等五大航空解决方案，加速行业智能化",
+      "newsImage": "news1.jpg"
+    },
+    {
+      "newsContent": "全球光网络知名媒体Lightwave颁发了光通信年度创新大奖（Lightwave+BTR Innovation Reviews），华为全光数据中心方案。",
+      "newsId": "2",
+      "newsTime": "2022年7月26日",
+      "newsTitle": "华为斩获九项Lightwave+BTR光通信年度创新大奖"
+    },
+    {
+      "newsContent": "华为泰国公司副总经理张晓祥在大会致辞中指出，人类已进入AI时代，通用人工智能正加速到来。",
+      "newsId": "3",
+      "newsTime": "2022年5月19日",
+      "newsTitle": "共筑数智未来：2025华为泰国合作伙伴大会成功召开"
+    },
+    {
+      "newsContent": "星闪技术深度整合通讯、定位、感知三大功能，解决传统技术功能单一的局限，为消费者带来全场景新体验。",
+      "newsId": "4",
+      "newsTime": "2022年5月15日",
+      "newsTitle": "AI时代的短距连接革新与全场景体验升级"
+    },
+    {
+      "newsContent": "鸿蒙智联始持续聚焦体验、效率和质量的提升,携手伙伴致力于为消费者打造全场景智慧生活新体验。",
+      "newsId": "5",
+      "newsTime": "2022年5月15日",
+      "newsTitle": "鸿蒙智联推荐模组赋能生态产品鸿蒙智家一致体验",
+      "newsImage": "news2.jpg"
+    },
+    {
+      "newsContent": "本次峰会，华为智选与伙伴一起预告了多款新品，致力为消费者提供高品质的纯净用水体验；安全的家庭看护；高端创新的个护产品。",
+      "newsId": "6",
+      "newsTime": "2023年4月11日",
+      "newsTitle": "华为智选开启战略转型，产品势能全面提升"
+    },
+    {
+      "newsContent": "华为携手19家合作伙伴发布城市全域数字化转型联合行动计划，共同构建端到端解决方案能力，加速城市全域数字化转型。",
+      "newsId": "7",
+      "newsTime": "2024年7月15日",
+      "newsTitle": "华为携手伙伴发布城市全域数字化转型联合行动计划"
+    }
+  ]
+}

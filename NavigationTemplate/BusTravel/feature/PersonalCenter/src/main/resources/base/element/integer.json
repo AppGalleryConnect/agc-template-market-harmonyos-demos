@@ -1,0 +1,52 @@
+{
+  "integer": [
+    {
+      "name": "text_font_little_big",
+      "value": 18
+    },
+    {
+      "name": "text_font_big",
+      "value": 16
+    },
+    {
+      "name": "text_font_normal",
+      "value": 14
+    },
+    {
+      "name": "text_font_small",
+      "value": 12
+    },
+    {
+      "name": "text_font_little_small",
+      "value": 10
+    },
+    {
+      "name": "hd_width",
+      "value": 48
+    },
+    {
+      "name": "center_icon_width_normal",
+      "value": 23
+    },
+    {
+      "name": "center_item_margin_left",
+      "value": 8
+    },
+    {
+      "name": "center_more_icon_width",
+      "value": 7
+    },
+    {
+      "name": "center_more_icon_height",
+      "value": 13
+    },
+    {
+      "name": "center_item_height",
+      "value": 51
+    },
+    {
+      "name": "divider_margin",
+      "value": 20
+    }
+  ]
+}

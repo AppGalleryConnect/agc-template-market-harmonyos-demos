@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "FinancialManagement"
+    },
+    {
+      "name": "agcit_huawei_financial_management",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_financial_management",
+      "value": "industryTemplate"
+    }
+  ]
+}

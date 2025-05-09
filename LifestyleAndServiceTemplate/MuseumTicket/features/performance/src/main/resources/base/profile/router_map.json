@@ -1,0 +1,54 @@
+{
+  "routerMap": [
+    {
+      "name": "PerformanceDetail",
+      "pageSourceFile": "src/main/ets/pages/PerformanceDetail.ets",
+      "buildFunction": "PerformanceDetailBuilder",
+      "data": {
+        "description": "this is PerformanceDetailBuilder"
+      }
+    },
+    {
+      "name": "PerformancePage",
+      "pageSourceFile": "src/main/ets/pages/PerformancePage.ets",
+      "buildFunction": "PerformancePageBuilder",
+      "data": {
+        "description": "this is PerformancePageBuilder"
+      }
+    },
+    {
+      "name": "BuyTicket",
+      "pageSourceFile": "src/main/ets/pages/BuyTicket.ets",
+      "buildFunction": "BuyTicketBuilder",
+      "data": {
+        "description": "this is BuyTicketBuilder"
+      }
+    },
+    {
+      "name": "BuySuccess",
+      "pageSourceFile": "src/main/ets/pages/BuySuccess.ets",
+      "buildFunction": "BuySuccessBuilder",
+      "data": {
+        "description": "this is BuySuccessBuilder"
+      }
+    },
+    {
+      "name": "BuyInfo",
+      "pageSourceFile": "src/main/ets/pages/BuyInfo.ets",
+      "buildFunction": "BuyInfoBuilder",
+      "data": {
+        "description": "this is BuyInfoBuilder"
+      }
+    },
+    {
+      "name": "TicketOwner",
+      "pageSourceFile": "src/main/ets/pages/TicketOwner.ets",
+      "buildFunction": "TicketOwnerBuilder",
+      "data": {
+        "description": "this is TicketOwnerBuilder"
+      }
+    }
+
+
+  ]
+}

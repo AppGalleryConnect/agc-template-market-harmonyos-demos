@@ -1,0 +1,80 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "hot_research_zone_title",
+      "value": "为你推荐"
+    },
+    {
+      "name": "specialized_services",
+      "value": "专题服务"
+    },
+    {
+      "name": "more",
+      "value": "更多"
+    },
+    {
+      "name": "physical_examination_services",
+      "value": "体检服务"
+    },
+    {
+      "name": "physical_examination_services_query",
+      "value": "体检预约/报告查询"
+    },
+    {
+      "name": "sports_fitness",
+      "value": "体育健身"
+    },
+    {
+      "name": "venue_reservation",
+      "value": "场馆预定"
+    },
+    {
+      "name": "management",
+      "value": "管理"
+    },
+    {
+      "name": "ID_Code",
+      "value": "身份码"
+    },
+    {
+      "name": "searching_for",
+      "value": "请输入关键字搜索"
+    },
+    {
+      "name": "searching",
+      "value": "搜索"
+    },
+    {
+      "name": "cancel",
+      "value": "取消"
+    },
+    {
+      "name": "service_management",
+      "value": "服务管理"
+    },
+    {
+      "name": "save",
+      "value": "保存"
+    },
+    {
+      "name": "my_service",
+      "value": "我的服务"
+    },
+    {
+      "name": "medical_insurance",
+      "value": "医保"
+    },
+    {
+      "name": "service_search_placeholder",
+      "value": "请输入要搜索的服务"
+    },
+    {
+      "name": "service_search",
+      "value": "请输入要搜索的服务"
+    }
+  ]
+}

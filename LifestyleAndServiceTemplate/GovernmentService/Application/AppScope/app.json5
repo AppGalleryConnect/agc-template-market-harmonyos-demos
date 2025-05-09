@@ -1,0 +1,20 @@
+{
+  "app": {
+    /*
+    :todo
+    */
+    "bundleName": "com.huawei.xxxxx",
+    "vendor": "example",
+    "versionCode": 1000000,
+    "versionName": "1.0.0",
+    "icon": "$media:ic_start_icon",
+    "label": "$string:app_name"
+  }
+}
+
+
+
+
+
+
+

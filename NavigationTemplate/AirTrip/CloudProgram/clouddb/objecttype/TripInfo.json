@@ -1,0 +1,33 @@
+{
+  "objectTypeName": "TripInfo",
+  "fields": [
+    {"fieldName": "id", "fieldType": "String", "notNull": true, "belongPrimaryKey": true},
+    {"fieldName": "flightNo", "fieldType": "String"},
+    {"fieldName": "airlineName", "fieldType": "String"},
+    {"fieldName": "aircraftType", "fieldType": "String"},
+    {"fieldName": "aircraftAge", "fieldType": "String"},
+    {"fieldName": "flyMiles", "fieldType": "String"},
+    {"fieldName": "flyDuration", "fieldType": "String"},
+    {"fieldName": "planTakeoffTime", "fieldType": "String"},
+    {"fieldName": "planLandingTime", "fieldType": "String"},
+    {"fieldName": "actualTakeoffTime", "fieldType": "String"},
+    {"fieldName": "actualLandingTime", "fieldType": "String"},
+    {"fieldName": "departureCity", "fieldType": "String"},
+    {"fieldName": "departureAirport", "fieldType": "String"},
+    {"fieldName": "destinationCity", "fieldType": "String"},
+    {"fieldName": "destinationAirport", "fieldType": "String"},
+    {"fieldName": "mealType", "fieldType": "String"},
+    {"fieldName": "spaceType", "fieldType": "String"},
+    {"fieldName": "includeTaxPrice", "fieldType": "Double"},
+    {"fieldName": "seatNo", "fieldType": "String"},
+    {"fieldName": "ticketNo", "fieldType": "String"},
+    {"fieldName": "status", "fieldType": "String"}
+  ],
+  "indexes": [],
+  "permissions": [
+    {"role": "World", "rights": ["Read"]},
+    {"role": "Authenticated", "rights": ["Read", "Upsert"]},
+    {"role": "Creator", "rights": ["Read", "Upsert", "Delete"]},
+    {"role": "Administrator", "rights": ["Read", "Upsert", "Delete"]}
+  ]
+}

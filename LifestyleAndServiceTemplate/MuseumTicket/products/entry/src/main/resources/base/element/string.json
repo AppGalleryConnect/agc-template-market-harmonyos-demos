@@ -1,0 +1,44 @@
+{
+  "string": [
+    {
+      "name": "EntryAbility_label",
+      "value": "博物馆模版"
+    },
+    {
+      "name": "permission_reason_location",
+      "value": "获取博物馆位置"
+    },
+    {
+      "name": "module_desc",
+      "value": "这是一个适用于博物馆的元服务模板"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "这是一个适用于博物馆的元服务模板"
+    },
+    {
+      "name": "EntryFormAbility_desc",
+      "value": "这是一个适用于博物馆的元服务卡片"
+    },
+    {
+      "name": "EntryFormAbility_label",
+      "value": "博物馆模版卡片"
+    },
+    {
+      "name": "widget_desc",
+      "value": "这是一个博物馆模版的服务卡片."
+    },
+    {
+      "name": "widget_display_name",
+      "value": "博物馆模版卡片"
+    },
+    {
+      "name": "widget1_desc",
+      "value": "This is a service widget."
+    },
+    {
+      "name": "widget1_display_name",
+      "value": "widget1"
+    }
+  ]
+}

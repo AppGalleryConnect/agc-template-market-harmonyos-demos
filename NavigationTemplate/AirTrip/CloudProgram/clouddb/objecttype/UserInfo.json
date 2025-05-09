@@ -1,0 +1,17 @@
+{
+  "objectTypeName": "UserInfo",
+  "fields": [
+    {"fieldName": "idToken", "fieldType": "String","notNull": true,"belongPrimaryKey": true},
+    {"fieldName": "authCode", "fieldType": "String"},
+    {"fieldName": "userName", "fieldType": "String"},
+    {"fieldName": "avatar", "fieldType": "String"},
+    {"fieldName": "phoneNumber", "fieldType": "String"}
+  ],
+  "indexes": [],
+  "permissions": [
+    {"role": "World", "rights": ["Read"]},
+    {"role": "Authenticated", "rights": ["Read", "Upsert"]},
+    {"role": "Creator", "rights": ["Read", "Upsert", "Delete"]},
+    {"role": "Administrator", "rights": ["Read", "Upsert", "Delete"]}
+  ]
+}

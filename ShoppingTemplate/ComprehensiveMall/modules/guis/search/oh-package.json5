@@ -1,0 +1,14 @@
+{
+  "name": "@guis/search",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@common/router": "file:../../common/router",
+    "@common/const": "file:../../common/const",
+    "@common/network": "file:../../common/network",
+    "@common/cache": "file:../../common/cache"
+  }
+}

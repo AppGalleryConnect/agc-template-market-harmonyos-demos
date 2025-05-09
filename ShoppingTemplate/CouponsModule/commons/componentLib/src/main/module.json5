@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "componentLib",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+    ]
+  }
+}

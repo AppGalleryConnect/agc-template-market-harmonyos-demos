@@ -1,0 +1,17 @@
+[
+  {
+    "icon": "app.media.startIcon",
+    "name": "联系客服",
+    "moreIcon": "app.media.startIcon"
+  },
+  {
+    "icon": "app.media.startIcon",
+    "name": "关于我们",
+    "moreIcon": "app.media.startIcon"
+  },
+  {
+    "icon": "app.media.startIcon",
+    "name": "注销账号",
+    "moreIcon": "app.media.startIcon"
+  }
+]

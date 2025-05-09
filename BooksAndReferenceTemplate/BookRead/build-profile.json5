@@ -1,0 +1,67 @@
+{
+  "app": {
+    "signingConfigs": [
+
+    ],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "compatibleSdkVersion": "5.0.0(12)",
+        "runtimeOS": "HarmonyOS",
+        "buildOption": {
+          "strictMode": {
+            "caseSensitiveCheck": true,
+            "useNormalizedOHMUrl": true
+          }
+        }
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug",
+      },
+      {
+        "name": "release"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "parse",
+      "srcPath": "./commons/parse"
+    },
+    {
+      "name": "common",
+      "srcPath": "./commons/common",
+    },
+    {
+      "name": "book_home",
+      "srcPath": "./feature/book_home",
+    },
+    {
+      "name": "book_person",
+      "srcPath": "./feature/book_person",
+    },
+    {
+      "name": "book_read",
+      "srcPath": "./feature/book_read",
+    },
+    {
+      "name": "book_shelf",
+      "srcPath": "./feature/book_shelf",
+    }
+  ]
+}

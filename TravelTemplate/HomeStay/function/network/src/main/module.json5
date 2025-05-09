@@ -1,0 +1,13 @@
+{
+  "module": {
+    "name": "network",
+    "type": "shared",
+    "description": "$string:shared_desc",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false,
+  }
+}

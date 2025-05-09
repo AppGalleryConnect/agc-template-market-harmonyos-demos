@@ -1,0 +1,18 @@
+{
+  "appSelected": {
+    "appId": "xxxxx",
+    "appName": "xxxxx",
+    "deviceTypes": [
+      {
+        "deviceType": 4
+      }
+    ],
+    "enableSites": "CN",
+    "installationFree": 1,
+    "packageType": 7,
+    "projectId": "xxxxx",
+    "projectName": "xxxxx",
+    "siteId": "CN"
+  },
+  "teamId": "xxxxx"
+}

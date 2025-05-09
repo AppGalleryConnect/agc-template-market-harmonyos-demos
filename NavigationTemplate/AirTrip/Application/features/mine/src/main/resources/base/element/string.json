@@ -1,0 +1,40 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "disassociate",
+      "value": "解除关联"
+    },
+    {
+      "name": "associate_account",
+      "value": "关联账号"
+    },
+    {
+      "name": "customer_phone",
+      "value": "客服电话"
+    },
+    {
+      "name": "contact_service",
+      "value": "联系客服"
+    },
+    {
+      "name": "cancel",
+      "value": "取消"
+    },
+    {
+      "name": "call_number",
+      "value": "一键拨号"
+    },
+    {
+      "name": "no_relative",
+      "value": "华为用户"
+    },
+    {
+      "name": "add_passenger_tip",
+      "value": "温馨提醒：填写信息需与乘机人证件一致，否则影响登机"
+    }
+  ]
+}

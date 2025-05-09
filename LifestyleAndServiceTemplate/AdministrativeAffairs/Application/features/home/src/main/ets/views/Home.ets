@@ -58,7 +58,6 @@ export struct Home {
       this.serviceList = result?.convenienceService ?? []
       AppStorage.setOrCreate('homeServiceList', eventData.data?.homeServiceList)
     };
-
     emitter.on(event, callback);
   }
 

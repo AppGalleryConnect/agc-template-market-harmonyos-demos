@@ -1,0 +1,16 @@
+{
+  "name": "entry",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "",
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "common": 'file:../common',
+    "routedesign": "file:../feature/RouteDesign",
+    "codescan": "file:../feature/CodeScan",
+    "personalcenter": "file:../feature/PersonalCenter",
+    "frontpage": "file:../feature/frontpage"
+  }
+}
+

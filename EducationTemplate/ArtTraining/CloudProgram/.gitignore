@@ -1,0 +1,12 @@
+**/node_modules
+/.idea
+**/build
+/.hvigor
+.cxx
+/.clangd
+/.clang-format
+/.clang-tidy
+**/.test
+/.appanalyzer
+/signature
+**/package-lock.json

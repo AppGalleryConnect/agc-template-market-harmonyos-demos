@@ -1,0 +1,178 @@
+{
+  "/book/list": {
+    "books": [
+      {
+        "id": "1",
+        "author": "作者",
+        "name": "设计理论实践应用",
+        "coverUrl": "app.media.book_image_1",
+        "category": "艺术",
+        "rate": "8",
+        "epubUrl": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/txy-mxryw/book_read%2Ftest.epub?token=bd48cbc3-c479-414e-8b0a-fdd97d0b07cf",
+        "description": "《设计理论实践应用》是一本致力于搭建设计理论与实际应用桥梁的专业书籍。在设计领域，理论与实践的紧密结合是产出优秀设计作品、推动行业发展的关键，本书正是围绕这一核心要点展开深入探讨",
+        "count": "102",
+        "popular": "10.5",
+        "isFree": true
+      },
+      {
+        "id": "2",
+        "author": "作者",
+        "name": "小羊肖恩",
+        "coverUrl": "app.media.book_image_6",
+        "category": "文学",
+        "rate": "7",
+        "epubUrl": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/txy-mxryw/book_read%2Ftest.epub?token=bd48cbc3-c479-414e-8b0a-fdd97d0b07cf",
+        "description": "《小羊肖恩》系列图书是一套深受孩子们喜爱的读物，其蓝本源自全球知名的同名动画片，由英国阿德曼动画有限公司精心打造。这一系列图书以独特的魅力，将动画中的精彩世界延伸至书页之间，为小读者们带来了无尽欢乐与成长启发。",
+        "count": "102",
+        "popular": "10.5",
+        "isFree": false
+      },
+      {
+        "id": "3",
+        "author": "作者",
+        "name": "十年能源变革",
+        "coverUrl": "app.media.book_image_3",
+        "category": "艺术",
+        "rate": "6",
+        "epubUrl": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/txy-mxryw/book_read%2Ftest.epub?token=bd48cbc3-c479-414e-8b0a-fdd97d0b07cf",
+        "description": "",
+        "count": "102",
+        "popular": "10.5",
+        "isFree": true
+      },
+      {
+        "id": "4",
+        "author": "作者",
+        "name": "鸿蒙生态应用白皮书",
+        "coverUrl": "app.media.book_image_4",
+        "category": "文学",
+        "rate": "5",
+        "epubUrl": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/txy-mxryw/book_read%2Ftest.epub?token=bd48cbc3-c479-414e-8b0a-fdd97d0b07cf",
+        "description": "认知觉醒",
+        "count": "102",
+        "popular": "10.5",
+        "isFree": false
+      },
+      {
+        "id": "5",
+        "author": "作者",
+        "name": "旅途",
+        "coverUrl": "app.media.book_image_7",
+        "category": "艺术",
+        "rate": "7",
+        "epubUrl": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/txy-mxryw/book_read%2Ftest.epub?token=bd48cbc3-c479-414e-8b0a-fdd97d0b07cf",
+        "description": "",
+        "count": "102",
+        "popular": "10.5",
+        "isFree": false
+      },
+      {
+        "id": "6",
+        "author": "作者",
+        "name": "自我觉醒与改变",
+        "coverUrl": "app.media.book_image_2",
+        "category": "艺术",
+        "rate": "7",
+        "epubUrl": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/txy-mxryw/book_read%2Ftest.epub?token=bd48cbc3-c479-414e-8b0a-fdd97d0b07cf",
+        "description": "",
+        "count": "102",
+        "popular": "10.5",
+        "isFree": false
+      }
+    ]
+  },
+  "/book/favourite": {
+    "books": [
+    ]
+  },
+  "/book/borrow": {
+    "borrows": [
+      {
+        "id": "123456",
+        "borrowBegin": 1741708800000,
+        "borrowEnd": 1741968000000,
+        "borrowNum": 1,
+        "borrowDeadline": 1742054400000,
+        "status": 0,
+        "borrowBooks": [
+          {
+            "id": "15",
+            "author": "作者",
+            "name": "十年能源变革3",
+            "coverUrl": "app.media.book_image_3",
+            "category": "",
+            "rate": "8",
+            "epubUrl": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/txy-mxryw/book_read%2Ftest.epub?token=bd48cbc3-c479-414e-8b0a-fdd97d0b07cf",
+            "description": "十年能源变革3"
+          },
+          {
+            "id": "16",
+            "author": "作者",
+            "name": "旅途4",
+            "coverUrl": "app.media.book_image_7",
+            "category": "",
+            "rate": "",
+            "epubUrl": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/txy-mxryw/book_read%2Ftest.epub?token=bd48cbc3-c479-414e-8b0a-fdd97d0b07cf",
+            "description": ""
+          }
+        ]
+      },
+      {
+        "id": "7894010",
+        "borrowBegin": 1741708800000,
+        "borrowEnd": 1741968000000,
+        "borrowNum": 1,
+        "borrowDeadline": 1742054400000,
+        "status": 1,
+        "borrowBooks": [
+          {
+            "id": "17",
+            "author": "作者",
+            "name": "十年能源变革3",
+            "coverUrl": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/txy-mxryw/book_read%2Ftest.epub?token=bd48cbc3-c479-414e-8b0a-fdd97d0b07cf",
+            "category": "",
+            "rate": "",
+            "epubUrl": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/txy-mxryw/book_read%2Fwaerdenghu.epub?token=b9b9112b-97f2-4962-90b5-c55c0d9a1d13",
+            "description": ""
+          }
+        ]
+      },
+      {
+        "id": "7456463",
+        "borrowBegin": 1741708800000,
+        "borrowEnd": 1741968000000,
+        "borrowNum": 1,
+        "borrowDeadline": 1742054400000,
+        "status": 2,
+        "borrowBooks": [
+          {
+            "id": "18",
+            "author": "作者",
+            "name": "旅途4",
+            "coverUrl": "app.media.book_image_7",
+            "category": "",
+            "rate": "",
+            "epubUrl": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/txy-mxryw/book_read%2Ftest.epub?token=bd48cbc3-c479-414e-8b0a-fdd97d0b07cf",
+            "description": ""
+          }
+        ]
+      }
+    ]
+  },
+  "/user/info": {
+    "user": {
+      "id": "12323",
+      "nickName": "事例",
+      "birthday": "2000-13-01",
+      "telephone": "a1xxxx1111",
+      "borrowCardStart": 1731340800000,
+      "borrowCardEnd": 1762876800000,
+      "totalReading": 15,
+      "totalListening": 15
+    }
+  },
+  "/book/history": {
+    "books": [
+    ]
+  }
+}

@@ -1,0 +1,6995 @@
+[
+  {
+    "lineName": "1路(四惠枢纽站--老山公交场站)",
+    "coordX": 116.49043704419871,
+    "coordY": 39.905362090079805,
+    "stationName": "四惠枢纽站",
+    "sequence": 1
+  },
+  {
+    "lineName": "1路(四惠枢纽站--老山公交场站)",
+    "coordX": 116.46907599869752,
+    "coordY": 39.907187359680854,
+    "stationName": "八王坟西",
+    "sequence": 2
+  },
+  {
+    "lineName": "1路(四惠枢纽站--老山公交场站)",
+    "coordX": 116.46393832208466,
+    "coordY": 39.9070745991766,
+    "stationName": "郎家园",
+    "sequence": 3
+  },
+  {
+    "lineName": "1路(四惠枢纽站--老山公交场站)",
+    "coordX": 116.45858366958655,
+    "coordY": 39.90727690414249,
+    "stationName": "大北窑东",
+    "sequence": 4
+  },
+  {
+    "lineName": "1路(四惠枢纽站--老山公交场站)",
+    "coordX": 116.45407154683198,
+    "coordY": 39.907355966940855,
+    "stationName": "大北窑西",
+    "sequence": 5
+  },
+  {
+    "lineName": "1路(四惠枢纽站--老山公交场站)",
+    "coordX": 116.44212103752118,
+    "coordY": 39.90718810493572,
+    "stationName": "永安里路口西",
+    "sequence": 6
+  },
+  {
+    "lineName": "1路(四惠枢纽站--老山公交场站)",
+    "coordX": 116.43569663536329,
+    "coordY": 39.907213295168,
+    "stationName": "日坛路",
+    "sequence": 7
+  },
+  {
+    "lineName": "1路(四惠枢纽站--老山公交场站)",
+    "coordX": 116.42225816629666,
+    "coordY": 39.90716095385164,
+    "stationName": "北京站口东",
+    "sequence": 8
+  },
+  {
+    "lineName": "1路(四惠枢纽站--老山公交场站)",
+    "coordX": 116.409959502231,
+    "coordY": 39.90688009921161,
+    "stationName": "东单路口西",
+    "sequence": 9
+  },
+  {
+    "lineName": "1路(四惠枢纽站--老山公交场站)",
+    "coordX": 116.39555119563305,
+    "coordY": 39.906433993256506,
+    "stationName": "天安门东",
+    "sequence": 10
+  },
+  {
+    "lineName": "1路(四惠枢纽站--老山公交场站)",
+    "coordX": 116.38761164153448,
+    "coordY": 39.90617363150561,
+    "stationName": "天安门西",
+    "sequence": 11
+  },
+  {
+    "lineName": "1路(四惠枢纽站--老山公交场站)",
+    "coordX": 116.37208679356857,
+    "coordY": 39.90587025507795,
+    "stationName": "西单路口东",
+    "sequence": 12
+  },
+  {
+    "lineName": "1路(四惠枢纽站--老山公交场站)",
+    "coordX": 116.35227530224662,
+    "coordY": 39.905929821769796,
+    "stationName": "复兴门内",
+    "sequence": 13
+  },
+  {
+    "lineName": "1路(四惠枢纽站--老山公交场站)",
+    "coordX": 116.34404266172115,
+    "coordY": 39.90596042226712,
+    "stationName": "南礼士路",
+    "sequence": 14
+  },
+  {
+    "lineName": "1路(四惠枢纽站--老山公交场站)",
+    "coordX": 116.33962505507175,
+    "coordY": 39.90599922864069,
+    "stationName": "工会大楼",
+    "sequence": 15
+  },
+  {
+    "lineName": "1路(四惠枢纽站--老山公交场站)",
+    "coordX": 116.32687164170157,
+    "coordY": 39.906377040709735,
+    "stationName": "木樨地西",
+    "sequence": 16
+  },
+  {
+    "lineName": "1路(四惠枢纽站--老山公交场站)",
+    "coordX": 116.31688359623962,
+    "coordY": 39.90619923382066,
+    "stationName": "军事博物馆",
+    "sequence": 17
+  },
+  {
+    "lineName": "1路(四惠枢纽站--老山公交场站)",
+    "coordX": 116.30417067766058,
+    "coordY": 39.90626497066535,
+    "stationName": "公主坟",
+    "sequence": 18
+  },
+  {
+    "lineName": "1路(四惠枢纽站--老山公交场站)",
+    "coordX": 116.29515882800123,
+    "coordY": 39.90628955450815,
+    "stationName": "翠微路口",
+    "sequence": 19
+  },
+  {
+    "lineName": "1路(四惠枢纽站--老山公交场站)",
+    "coordX": 116.28747458662117,
+    "coordY": 39.90628458951859,
+    "stationName": "万寿路口西",
+    "sequence": 20
+  },
+  {
+    "lineName": "1路(四惠枢纽站--老山公交场站)",
+    "coordX": 116.28175456829122,
+    "coordY": 39.90627461943415,
+    "stationName": "东翠路口",
+    "sequence": 21
+  },
+  {
+    "lineName": "1路(四惠枢纽站--老山公交场站)",
+    "coordX": 116.27629499737773,
+    "coordY": 39.90628043675041,
+    "stationName": "沙沟路口西",
+    "sequence": 22
+  },
+  {
+    "lineName": "1路(四惠枢纽站--老山公交场站)",
+    "coordX": 116.27171529400863,
+    "coordY": 39.90627545919818,
+    "stationName": "五棵松桥东",
+    "sequence": 23
+  },
+  {
+    "lineName": "1路(四惠枢纽站--老山公交场站)",
+    "coordX": 116.26025346175729,
+    "coordY": 39.906264977173315,
+    "stationName": "永定路口东",
+    "sequence": 24
+  },
+  {
+    "lineName": "1路(四惠枢纽站--老山公交场站)",
+    "coordX": 116.24568998539827,
+    "coordY": 39.90625423768205,
+    "stationName": "玉泉路口西",
+    "sequence": 25
+  },
+  {
+    "lineName": "1路(四惠枢纽站--老山公交场站)",
+    "coordX": 116.23627695451134,
+    "coordY": 39.9062353888852,
+    "stationName": "八宝山",
+    "sequence": 26
+  },
+  {
+    "lineName": "1路(四惠枢纽站--老山公交场站)",
+    "coordX": 116.23121195334639,
+    "coordY": 39.90622555667634,
+    "stationName": "地铁八宝山站",
+    "sequence": 27
+  },
+  {
+    "lineName": "1路(四惠枢纽站--老山公交场站)",
+    "coordX": 116.22747649080247,
+    "coordY": 39.911919357777286,
+    "stationName": "老山南路东口",
+    "sequence": 28
+  },
+  {
+    "lineName": "1路(四惠枢纽站--老山公交场站)",
+    "coordX": 116.22589725997786,
+    "coordY": 39.915476230478674,
+    "stationName": "老山公交场站",
+    "sequence": 29
+  },
+  {
+    "lineName": "1路(老山公交场站--四惠枢纽站)",
+    "coordX": 116.22695170104853,
+    "coordY": 39.91359697187638,
+    "stationName": "老山公交场站",
+    "sequence": 1
+  },
+  {
+    "lineName": "1路(老山公交场站--四惠枢纽站)",
+    "coordX": 116.22773894914513,
+    "coordY": 39.9105305706762,
+    "stationName": "老山南路东口",
+    "sequence": 2
+  },
+  {
+    "lineName": "1路(老山公交场站--四惠枢纽站)",
+    "coordX": 116.23129103447185,
+    "coordY": 39.90615359569277,
+    "stationName": "地铁八宝山站",
+    "sequence": 3
+  },
+  {
+    "lineName": "1路(老山公交场站--四惠枢纽站)",
+    "coordX": 116.23616989299323,
+    "coordY": 39.906155363491344,
+    "stationName": "八宝山",
+    "sequence": 4
+  },
+  {
+    "lineName": "1路(老山公交场站--四惠枢纽站)",
+    "coordX": 116.24519189657347,
+    "coordY": 39.906152281179814,
+    "stationName": "玉泉路口西",
+    "sequence": 5
+  },
+  {
+    "lineName": "1路(老山公交场站--四惠枢纽站)",
+    "coordX": 116.25963979041721,
+    "coordY": 39.90617336095348,
+    "stationName": "永定路口东",
+    "sequence": 6
+  },
+  {
+    "lineName": "1路(老山公交场站--四惠枢纽站)",
+    "coordX": 116.26713669223268,
+    "coordY": 39.906164806142236,
+    "stationName": "五棵松桥西",
+    "sequence": 7
+  },
+  {
+    "lineName": "1路(老山公交场站--四惠枢纽站)",
+    "coordX": 116.27591348537862,
+    "coordY": 39.90617388475172,
+    "stationName": "沙沟路口西",
+    "sequence": 8
+  },
+  {
+    "lineName": "1路(老山公交场站--四惠枢纽站)",
+    "coordX": 116.28165572477486,
+    "coordY": 39.90618075457481,
+    "stationName": "东翠路口",
+    "sequence": 9
+  },
+  {
+    "lineName": "1路(老山公交场站--四惠枢纽站)",
+    "coordX": 116.28722801248446,
+    "coordY": 39.906162958356994,
+    "stationName": "万寿路口西",
+    "sequence": 10
+  },
+  {
+    "lineName": "1路(老山公交场站--四惠枢纽站)",
+    "coordX": 116.29480451410316,
+    "coordY": 39.90618214216685,
+    "stationName": "翠微路口",
+    "sequence": 11
+  },
+  {
+    "lineName": "1路(老山公交场站--四惠枢纽站)",
+    "coordX": 116.30444810850123,
+    "coordY": 39.90612247685201,
+    "stationName": "公主坟",
+    "sequence": 12
+  },
+  {
+    "lineName": "1路(老山公交场站--四惠枢纽站)",
+    "coordX": 116.31934398538853,
+    "coordY": 39.90608052006554,
+    "stationName": "军事博物馆",
+    "sequence": 13
+  },
+  {
+    "lineName": "1路(老山公交场站--四惠枢纽站)",
+    "coordX": 116.3263718480093,
+    "coordY": 39.90591301842517,
+    "stationName": "木樨地西",
+    "sequence": 14
+  },
+  {
+    "lineName": "1路(老山公交场站--四惠枢纽站)",
+    "coordX": 116.33937361641976,
+    "coordY": 39.90587368735454,
+    "stationName": "工会大楼",
+    "sequence": 15
+  },
+  {
+    "lineName": "1路(老山公交场站--四惠枢纽站)",
+    "coordX": 116.34420933073754,
+    "coordY": 39.905833139451985,
+    "stationName": "南礼士路",
+    "sequence": 16
+  },
+  {
+    "lineName": "1路(老山公交场站--四惠枢纽站)",
+    "coordX": 116.35307383367896,
+    "coordY": 39.905744588136436,
+    "stationName": "复兴门内",
+    "sequence": 17
+  },
+  {
+    "lineName": "1路(老山公交场站--四惠枢纽站)",
+    "coordX": 116.37104304192309,
+    "coordY": 39.905670302492524,
+    "stationName": "西单路口东",
+    "sequence": 18
+  },
+  {
+    "lineName": "1路(老山公交场站--四惠枢纽站)",
+    "coordX": 116.383433769422,
+    "coordY": 39.905843567555095,
+    "stationName": "天安门西",
+    "sequence": 19
+  },
+  {
+    "lineName": "1路(老山公交场站--四惠枢纽站)",
+    "coordX": 116.39502320807108,
+    "coordY": 39.90623902555861,
+    "stationName": "天安门东",
+    "sequence": 20
+  },
+  {
+    "lineName": "1路(老山公交场站--四惠枢纽站)",
+    "coordX": 116.40903176332405,
+    "coordY": 39.906689561759705,
+    "stationName": "东单路口西",
+    "sequence": 21
+  },
+  {
+    "lineName": "1路(老山公交场站--四惠枢纽站)",
+    "coordX": 116.42334088321711,
+    "coordY": 39.907003236739314,
+    "stationName": "北京站口东",
+    "sequence": 22
+  },
+  {
+    "lineName": "1路(老山公交场站--四惠枢纽站)",
+    "coordX": 116.436782115336,
+    "coordY": 39.90707518533474,
+    "stationName": "日坛路",
+    "sequence": 23
+  },
+  {
+    "lineName": "1路(老山公交场站--四惠枢纽站)",
+    "coordX": 116.44049396890657,
+    "coordY": 39.9070589723889,
+    "stationName": "永安里路口西",
+    "sequence": 24
+  },
+  {
+    "lineName": "1路(老山公交场站--四惠枢纽站)",
+    "coordX": 116.45304551868568,
+    "coordY": 39.90673759047747,
+    "stationName": "大北窑西",
+    "sequence": 25
+  },
+  {
+    "lineName": "1路(老山公交场站--四惠枢纽站)",
+    "coordX": 116.45861583262058,
+    "coordY": 39.906800004718754,
+    "stationName": "大北窑东",
+    "sequence": 26
+  },
+  {
+    "lineName": "1路(老山公交场站--四惠枢纽站)",
+    "coordX": 116.46443200833856,
+    "coordY": 39.90693590251454,
+    "stationName": "郎家园",
+    "sequence": 27
+  },
+  {
+    "lineName": "1路(老山公交场站--四惠枢纽站)",
+    "coordX": 116.4905735397551,
+    "coordY": 39.90554048895886,
+    "stationName": "四惠枢纽站",
+    "sequence": 28
+  },
+  {
+    "lineName": "10路(南菜园--航天桥东)",
+    "coordX": 116.3461839818313,
+    "coordY": 39.87651413206432,
+    "stationName": "南菜园",
+    "sequence": 1
+  },
+  {
+    "lineName": "10路(南菜园--航天桥东)",
+    "coordX": 116.3519895712955,
+    "coordY": 39.87654664347781,
+    "stationName": "白纸坊路口西",
+    "sequence": 2
+  },
+  {
+    "lineName": "10路(南菜园--航天桥东)",
+    "coordX": 116.35772405342877,
+    "coordY": 39.87803296093228,
+    "stationName": "南樱桃园路口北",
+    "sequence": 3
+  },
+  {
+    "lineName": "10路(南菜园--航天桥东)",
+    "coordX": 116.3575859095213,
+    "coordY": 39.88102801032524,
+    "stationName": "牛街南口",
+    "sequence": 4
+  },
+  {
+    "lineName": "10路(南菜园--航天桥东)",
+    "coordX": 116.35753472901213,
+    "coordY": 39.883139980587345,
+    "stationName": "牛街礼拜寺",
+    "sequence": 5
+  },
+  {
+    "lineName": "10路(南菜园--航天桥东)",
+    "coordX": 116.3574613718207,
+    "coordY": 39.88694290301066,
+    "stationName": "牛街",
+    "sequence": 6
+  },
+  {
+    "lineName": "10路(南菜园--航天桥东)",
+    "coordX": 116.3573612281002,
+    "coordY": 39.88942992914483,
+    "stationName": "宣武医院",
+    "sequence": 7
+  },
+  {
+    "lineName": "10路(南菜园--航天桥东)",
+    "coordX": 116.35721262880597,
+    "coordY": 39.896161831422646,
+    "stationName": "槐柏树街东口",
+    "sequence": 8
+  },
+  {
+    "lineName": "10路(南菜园--航天桥东)",
+    "coordX": 116.35721628372053,
+    "coordY": 39.89882670542856,
+    "stationName": "长椿街路口北",
+    "sequence": 9
+  },
+  {
+    "lineName": "10路(南菜园--航天桥东)",
+    "coordX": 116.35714284616627,
+    "coordY": 39.90326661322054,
+    "stationName": "新文化街西口",
+    "sequence": 10
+  },
+  {
+    "lineName": "10路(南菜园--航天桥东)",
+    "coordX": 116.35826858559228,
+    "coordY": 39.905893890355955,
+    "stationName": "民族文化宫",
+    "sequence": 11
+  },
+  {
+    "lineName": "10路(南菜园--航天桥东)",
+    "coordX": 116.35227530224662,
+    "coordY": 39.905929821769796,
+    "stationName": "复兴门内",
+    "sequence": 12
+  },
+  {
+    "lineName": "10路(南菜园--航天桥东)",
+    "coordX": 116.34404266172115,
+    "coordY": 39.90596042226712,
+    "stationName": "南礼士路",
+    "sequence": 13
+  },
+  {
+    "lineName": "10路(南菜园--航天桥东)",
+    "coordX": 116.33809522657987,
+    "coordY": 39.90728394323368,
+    "stationName": "三里河东路南口",
+    "sequence": 14
+  },
+  {
+    "lineName": "10路(南菜园--航天桥东)",
+    "coordX": 116.3390566376307,
+    "coordY": 39.91114503139458,
+    "stationName": "月坛南街南站",
+    "sequence": 15
+  },
+  {
+    "lineName": "10路(南菜园--航天桥东)",
+    "coordX": 116.33895251864972,
+    "coordY": 39.91387310318616,
+    "stationName": "月坛南街北站",
+    "sequence": 16
+  },
+  {
+    "lineName": "10路(南菜园--航天桥东)",
+    "coordX": 116.33869854568185,
+    "coordY": 39.91802938769425,
+    "stationName": "月坛北街北站",
+    "sequence": 17
+  },
+  {
+    "lineName": "10路(南菜园--航天桥东)",
+    "coordX": 116.334391587853,
+    "coordY": 39.92189214856133,
+    "stationName": "阜外西口",
+    "sequence": 18
+  },
+  {
+    "lineName": "10路(南菜园--航天桥东)",
+    "coordX": 116.32573329748547,
+    "coordY": 39.92189156257092,
+    "stationName": "甘家口西",
+    "sequence": 19
+  },
+  {
+    "lineName": "10路(南菜园--航天桥东)",
+    "coordX": 116.32149103160276,
+    "coordY": 39.9221177089505,
+    "stationName": "白堆子口东",
+    "sequence": 20
+  },
+  {
+    "lineName": "10路(南菜园--航天桥东)",
+    "coordX": 116.31368379899943,
+    "coordY": 39.922489640187365,
+    "stationName": "马神庙",
+    "sequence": 21
+  },
+  {
+    "lineName": "10路(南菜园--航天桥东)",
+    "coordX": 116.30878665448606,
+    "coordY": 39.92280382342985,
+    "stationName": "航天桥东",
+    "sequence": 22
+  },
+  {
+    "lineName": "10路(航天桥东--南菜园)",
+    "coordX": 116.30918083975574,
+    "coordY": 39.922401107790506,
+    "stationName": "航天桥东",
+    "sequence": 1
+  },
+  {
+    "lineName": "10路(航天桥东--南菜园)",
+    "coordX": 116.31443212586863,
+    "coordY": 39.92236522405682,
+    "stationName": "马神庙",
+    "sequence": 2
+  },
+  {
+    "lineName": "10路(航天桥东--南菜园)",
+    "coordX": 116.32151299320802,
+    "coordY": 39.92202167067976,
+    "stationName": "白堆子口东",
+    "sequence": 3
+  },
+  {
+    "lineName": "10路(航天桥东--南菜园)",
+    "coordX": 116.33104617062904,
+    "coordY": 39.921648441393025,
+    "stationName": "甘家口东",
+    "sequence": 4
+  },
+  {
+    "lineName": "10路(航天桥东--南菜园)",
+    "coordX": 116.33504813494562,
+    "coordY": 39.92176893268742,
+    "stationName": "阜外西口",
+    "sequence": 5
+  },
+  {
+    "lineName": "10路(航天桥东--南菜园)",
+    "coordX": 116.33851985692098,
+    "coordY": 39.918652685787514,
+    "stationName": "月坛北街北站",
+    "sequence": 6
+  },
+  {
+    "lineName": "10路(航天桥东--南菜园)",
+    "coordX": 116.33882677719653,
+    "coordY": 39.91399532567849,
+    "stationName": "月坛南街北站",
+    "sequence": 7
+  },
+  {
+    "lineName": "10路(航天桥东--南菜园)",
+    "coordX": 116.33894087877697,
+    "coordY": 39.91123123713847,
+    "stationName": "月坛南街南站",
+    "sequence": 8
+  },
+  {
+    "lineName": "10路(航天桥东--南菜园)",
+    "coordX": 116.33796151829604,
+    "coordY": 39.90729518636187,
+    "stationName": "三里河东路南口",
+    "sequence": 9
+  },
+  {
+    "lineName": "10路(航天桥东--南菜园)",
+    "coordX": 116.34420933073754,
+    "coordY": 39.905833139451985,
+    "stationName": "南礼士路",
+    "sequence": 10
+  },
+  {
+    "lineName": "10路(航天桥东--南菜园)",
+    "coordX": 116.35341220760714,
+    "coordY": 39.905740066717975,
+    "stationName": "复兴门内",
+    "sequence": 11
+  },
+  {
+    "lineName": "10路(航天桥东--南菜园)",
+    "coordX": 116.35700805508662,
+    "coordY": 39.90345979941709,
+    "stationName": "新文化街西口",
+    "sequence": 12
+  },
+  {
+    "lineName": "10路(航天桥东--南菜园)",
+    "coordX": 116.35707548656274,
+    "coordY": 39.89914689416625,
+    "stationName": "长椿街路口北",
+    "sequence": 13
+  },
+  {
+    "lineName": "10路(航天桥东--南菜园)",
+    "coordX": 116.35710003322757,
+    "coordY": 39.8945120693125,
+    "stationName": "槐柏树街东口",
+    "sequence": 14
+  },
+  {
+    "lineName": "10路(航天桥东--南菜园)",
+    "coordX": 116.35715926577231,
+    "coordY": 39.89187610558406,
+    "stationName": "宣武医院",
+    "sequence": 15
+  },
+  {
+    "lineName": "10路(航天桥东--南菜园)",
+    "coordX": 116.35732267623342,
+    "coordY": 39.88642612684916,
+    "stationName": "牛街",
+    "sequence": 16
+  },
+  {
+    "lineName": "10路(航天桥东--南菜园)",
+    "coordX": 116.3573779948773,
+    "coordY": 39.883168204069655,
+    "stationName": "牛街礼拜寺",
+    "sequence": 17
+  },
+  {
+    "lineName": "10路(航天桥东--南菜园)",
+    "coordX": 116.35751414025952,
+    "coordY": 39.8801811547324,
+    "stationName": "牛街南口",
+    "sequence": 18
+  },
+  {
+    "lineName": "10路(航天桥东--南菜园)",
+    "coordX": 116.35760931056704,
+    "coordY": 39.87755514873344,
+    "stationName": "南樱桃园路口北",
+    "sequence": 19
+  },
+  {
+    "lineName": "10路(航天桥东--南菜园)",
+    "coordX": 116.35244470334268,
+    "coordY": 39.87663992613495,
+    "stationName": "白纸坊路口西",
+    "sequence": 20
+  },
+  {
+    "lineName": "10路(航天桥东--南菜园)",
+    "coordX": 116.34655021398414,
+    "coordY": 39.87669950397421,
+    "stationName": "南菜园",
+    "sequence": 21
+  },
+  {
+    "lineName": "11路(大北窑东--孛罗营)",
+    "coordX": 116.45861583262058,
+    "coordY": 39.906800004718754,
+    "stationName": "大北窑东",
+    "sequence": 1
+  },
+  {
+    "lineName": "11路(大北窑东--孛罗营)",
+    "coordX": 116.46443200833856,
+    "coordY": 39.90693590251454,
+    "stationName": "郎家园",
+    "sequence": 2
+  },
+  {
+    "lineName": "11路(大北窑东--孛罗营)",
+    "coordX": 116.47157812772687,
+    "coordY": 39.904978354428565,
+    "stationName": "八王坟南",
+    "sequence": 3
+  },
+  {
+    "lineName": "11路(大北窑东--孛罗营)",
+    "coordX": 116.4715412403888,
+    "coordY": 39.90302333727127,
+    "stationName": "光辉桥南",
+    "sequence": 4
+  },
+  {
+    "lineName": "11路(大北窑东--孛罗营)",
+    "coordX": 116.4713626349242,
+    "coordY": 39.89476820957375,
+    "stationName": "九龙山",
+    "sequence": 5
+  },
+  {
+    "lineName": "11路(大北窑东--孛罗营)",
+    "coordX": 116.47406168851334,
+    "coordY": 39.89183090152679,
+    "stationName": "九龙山路口东",
+    "sequence": 6
+  },
+  {
+    "lineName": "11路(大北窑东--孛罗营)",
+    "coordX": 116.48060270265805,
+    "coordY": 39.8918346705632,
+    "stationName": "大郊亭桥西",
+    "sequence": 7
+  },
+  {
+    "lineName": "11路(大北窑东--孛罗营)",
+    "coordX": 116.48617159032716,
+    "coordY": 39.89175002993906,
+    "stationName": "大郊亭桥东",
+    "sequence": 8
+  },
+  {
+    "lineName": "11路(大北窑东--孛罗营)",
+    "coordX": 116.49016068931789,
+    "coordY": 39.89169387852575,
+    "stationName": "地铁百子湾站",
+    "sequence": 9
+  },
+  {
+    "lineName": "11路(大北窑东--孛罗营)",
+    "coordX": 116.49437166007476,
+    "coordY": 39.89170343630085,
+    "stationName": "唐家村",
+    "sequence": 10
+  },
+  {
+    "lineName": "11路(大北窑东--孛罗营)",
+    "coordX": 116.50320996651362,
+    "coordY": 39.8917297027672,
+    "stationName": "小海子",
+    "sequence": 11
+  },
+  {
+    "lineName": "11路(大北窑东--孛罗营)",
+    "coordX": 116.50803282165305,
+    "coordY": 39.89165782776374,
+    "stationName": "四根旗杆",
+    "sequence": 12
+  },
+  {
+    "lineName": "11路(大北窑东--孛罗营)",
+    "coordX": 116.51374144281152,
+    "coordY": 39.8916501938679,
+    "stationName": "方家村",
+    "sequence": 13
+  },
+  {
+    "lineName": "11路(大北窑东--孛罗营)",
+    "coordX": 116.5197613990988,
+    "coordY": 39.8916468897907,
+    "stationName": "朝阳半壁店",
+    "sequence": 14
+  },
+  {
+    "lineName": "11路(大北窑东--孛罗营)",
+    "coordX": 116.52139344890563,
+    "coordY": 39.8872675002802,
+    "stationName": "观音堂北",
+    "sequence": 15
+  },
+  {
+    "lineName": "11路(大北窑东--孛罗营)",
+    "coordX": 116.52156656094074,
+    "coordY": 39.882917172113935,
+    "stationName": "观音堂",
+    "sequence": 16
+  },
+  {
+    "lineName": "11路(大北窑东--孛罗营)",
+    "coordX": 116.52311738023121,
+    "coordY": 39.87750256483311,
+    "stationName": "古塔公园",
+    "sequence": 17
+  },
+  {
+    "lineName": "11路(大北窑东--孛罗营)",
+    "coordX": 116.52448346287898,
+    "coordY": 39.87257340362117,
+    "stationName": "王四营",
+    "sequence": 18
+  },
+  {
+    "lineName": "11路(大北窑东--孛罗营)",
+    "coordX": 116.52634398724521,
+    "coordY": 39.868310442284574,
+    "stationName": "王四营桥东",
+    "sequence": 19
+  },
+  {
+    "lineName": "11路(大北窑东--孛罗营)",
+    "coordX": 116.53167977169863,
+    "coordY": 39.86633386864401,
+    "stationName": "孛罗营村北",
+    "sequence": 20
+  },
+  {
+    "lineName": "11路(大北窑东--孛罗营)",
+    "coordX": 116.5317104160086,
+    "coordY": 39.86179518645777,
+    "stationName": "孛罗营",
+    "sequence": 21
+  },
+  {
+    "lineName": "11路(孛罗营--大北窑东)",
+    "coordX": 116.53152087649256,
+    "coordY": 39.86155074003754,
+    "stationName": "孛罗营",
+    "sequence": 1
+  },
+  {
+    "lineName": "11路(孛罗营--大北窑东)",
+    "coordX": 116.52609297812596,
+    "coordY": 39.86179714453636,
+    "stationName": "孛罗营村北",
+    "sequence": 2
+  },
+  {
+    "lineName": "11路(孛罗营--大北窑东)",
+    "coordX": 116.52500692652558,
+    "coordY": 39.86632209279231,
+    "stationName": "王四营桥南",
+    "sequence": 3
+  },
+  {
+    "lineName": "11路(孛罗营--大北窑东)",
+    "coordX": 116.52454065573646,
+    "coordY": 39.872519555734705,
+    "stationName": "王四营",
+    "sequence": 4
+  },
+  {
+    "lineName": "11路(孛罗营--大北窑东)",
+    "coordX": 116.5231384396176,
+    "coordY": 39.87758561638199,
+    "stationName": "古塔公园",
+    "sequence": 5
+  },
+  {
+    "lineName": "11路(孛罗营--大北窑东)",
+    "coordX": 116.52163572775072,
+    "coordY": 39.88344733175328,
+    "stationName": "观音堂",
+    "sequence": 6
+  },
+  {
+    "lineName": "11路(孛罗营--大北窑东)",
+    "coordX": 116.52149173089954,
+    "coordY": 39.887656745419775,
+    "stationName": "观音堂北",
+    "sequence": 7
+  },
+  {
+    "lineName": "11路(孛罗营--大北窑东)",
+    "coordX": 116.5192415902922,
+    "coordY": 39.89194546119511,
+    "stationName": "朝阳半壁店",
+    "sequence": 8
+  },
+  {
+    "lineName": "11路(孛罗营--大北窑东)",
+    "coordX": 116.5130860724188,
+    "coordY": 39.891947324849546,
+    "stationName": "方家村",
+    "sequence": 9
+  },
+  {
+    "lineName": "11路(孛罗营--大北窑东)",
+    "coordX": 116.50736633588046,
+    "coordY": 39.89198087509967,
+    "stationName": "四根旗杆",
+    "sequence": 10
+  },
+  {
+    "lineName": "11路(孛罗营--大北窑东)",
+    "coordX": 116.50312361109907,
+    "coordY": 39.89199843564878,
+    "stationName": "小海子",
+    "sequence": 11
+  },
+  {
+    "lineName": "11路(孛罗营--大北窑东)",
+    "coordX": 116.49566351512024,
+    "coordY": 39.89203727531586,
+    "stationName": "唐家村",
+    "sequence": 12
+  },
+  {
+    "lineName": "11路(孛罗营--大北窑东)",
+    "coordX": 116.48738714562978,
+    "coordY": 39.892035618058806,
+    "stationName": "大郊亭桥东",
+    "sequence": 13
+  },
+  {
+    "lineName": "11路(孛罗营--大北窑东)",
+    "coordX": 116.47904590717711,
+    "coordY": 39.8920011451712,
+    "stationName": "大郊亭桥西",
+    "sequence": 14
+  },
+  {
+    "lineName": "11路(孛罗营--大北窑东)",
+    "coordX": 116.47355383119421,
+    "coordY": 39.89201846148904,
+    "stationName": "九龙山路口东",
+    "sequence": 15
+  },
+  {
+    "lineName": "11路(孛罗营--大北窑东)",
+    "coordX": 116.47149809095525,
+    "coordY": 39.89498057619405,
+    "stationName": "九龙山",
+    "sequence": 16
+  },
+  {
+    "lineName": "11路(孛罗营--大北窑东)",
+    "coordX": 116.4717407259111,
+    "coordY": 39.90483381305336,
+    "stationName": "八王坟南",
+    "sequence": 17
+  },
+  {
+    "lineName": "11路(孛罗营--大北窑东)",
+    "coordX": 116.46983266164045,
+    "coordY": 39.90718043378089,
+    "stationName": "八王坟西",
+    "sequence": 18
+  },
+  {
+    "lineName": "11路(孛罗营--大北窑东)",
+    "coordX": 116.46375269608342,
+    "coordY": 39.90707711273987,
+    "stationName": "郎家园",
+    "sequence": 19
+  },
+  {
+    "lineName": "11路(孛罗营--大北窑东)",
+    "coordX": 116.4587492007317,
+    "coordY": 39.907277316099666,
+    "stationName": "大北窑东",
+    "sequence": 20
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.72047778232289,
+    "coordY": 40.05608610780222,
+    "stationName": "沙浮",
+    "sequence": 1
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.71379540819366,
+    "coordY": 40.04683626391656,
+    "stationName": "吴庄",
+    "sequence": 2
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.7133097866588,
+    "coordY": 40.04306900721454,
+    "stationName": "吴庄南",
+    "sequence": 3
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.7126964371781,
+    "coordY": 40.03913290703402,
+    "stationName": "沿河市场",
+    "sequence": 4
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.70924321284818,
+    "coordY": 40.03909401037062,
+    "stationName": "沿河车站",
+    "sequence": 5
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.70147782810633,
+    "coordY": 40.04051940598114,
+    "stationName": "沿河卫生院",
+    "sequence": 6
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.70006523458979,
+    "coordY": 40.04739111011946,
+    "stationName": "西树行",
+    "sequence": 7
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.70012173816346,
+    "coordY": 40.05029086448146,
+    "stationName": "北河小学",
+    "sequence": 8
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.70028074042104,
+    "coordY": 40.05527734382557,
+    "stationName": "北河",
+    "sequence": 9
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.69975583723385,
+    "coordY": 40.064270588797484,
+    "stationName": "王家场南",
+    "sequence": 10
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.69888046048733,
+    "coordY": 40.07574217636162,
+    "stationName": "王家场西",
+    "sequence": 11
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.69864165739186,
+    "coordY": 40.07868934250941,
+    "stationName": "王家场北",
+    "sequence": 12
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.69463258148113,
+    "coordY": 40.08543616108472,
+    "stationName": "仁和园二街",
+    "sequence": 13
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.68211156488772,
+    "coordY": 40.08538177827084,
+    "stationName": "顺福路路口",
+    "sequence": 14
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.6778135139927,
+    "coordY": 40.08538971862812,
+    "stationName": "富林路路口",
+    "sequence": 15
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.67323246525142,
+    "coordY": 40.08539836879528,
+    "stationName": "顺泰路路口",
+    "sequence": 16
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.66728748858576,
+    "coordY": 40.08508778572656,
+    "stationName": "顺义疾控中心",
+    "sequence": 17
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.66225583050088,
+    "coordY": 40.08542244305904,
+    "stationName": "顺和花园北",
+    "sequence": 18
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.65877362507786,
+    "coordY": 40.086147054416266,
+    "stationName": "顺鑫汇",
+    "sequence": 19
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.66137781301504,
+    "coordY": 40.08958383082106,
+    "stationName": "林河大街",
+    "sequence": 20
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.6632148311104,
+    "coordY": 40.095578861546805,
+    "stationName": "顺义一中东",
+    "sequence": 21
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.66326231236633,
+    "coordY": 40.09865653636227,
+    "stationName": "仁悦居",
+    "sequence": 22
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.66324380425831,
+    "coordY": 40.10316122089598,
+    "stationName": "石园东苑",
+    "sequence": 23
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.66327408859755,
+    "coordY": 40.10821275637639,
+    "stationName": "电信大楼",
+    "sequence": 24
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.66206119996876,
+    "coordY": 40.111013855293514,
+    "stationName": "石园东区北门",
+    "sequence": 25
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.65901085996217,
+    "coordY": 40.11103769021299,
+    "stationName": "石园北区",
+    "sequence": 26
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.65584476557198,
+    "coordY": 40.11104469348958,
+    "stationName": "顺义五中",
+    "sequence": 27
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.65280409409917,
+    "coordY": 40.111956307888455,
+    "stationName": "仓上小区",
+    "sequence": 28
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.65136569351513,
+    "coordY": 40.12281302463228,
+    "stationName": "东风小学",
+    "sequence": 29
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.65103105319842,
+    "coordY": 40.12727523266419,
+    "stationName": "顺义区医院",
+    "sequence": 30
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.65123964989002,
+    "coordY": 40.13399221320589,
+    "stationName": "便民街东口",
+    "sequence": 31
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.6479662555821,
+    "coordY": 40.1359209802147,
+    "stationName": "胜利小区",
+    "sequence": 32
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.64345106028345,
+    "coordY": 40.136223909049896,
+    "stationName": "中山西街",
+    "sequence": 33
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.63733228323925,
+    "coordY": 40.13632509760447,
+    "stationName": "西门",
+    "sequence": 34
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.63466113533308,
+    "coordY": 40.131917726334976,
+    "stationName": "西辛小学",
+    "sequence": 35
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.63294747892448,
+    "coordY": 40.12852065338728,
+    "stationName": "社教中心",
+    "sequence": 36
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.62929783909672,
+    "coordY": 40.12572821207215,
+    "stationName": "四季花城西",
+    "sequence": 37
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.62701872004513,
+    "coordY": 40.12470543100681,
+    "stationName": "石景苑南",
+    "sequence": 38
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.6234240663774,
+    "coordY": 40.12254024660088,
+    "stationName": "石景苑站",
+    "sequence": 39
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.62217714286201,
+    "coordY": 40.11647029000008,
+    "stationName": "望泉桥东",
+    "sequence": 40
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.60513483854857,
+    "coordY": 40.115203609997494,
+    "stationName": "南法信",
+    "sequence": 41
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.60120260934923,
+    "coordY": 40.11332770010991,
+    "stationName": "海关大楼",
+    "sequence": 42
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.60199498932708,
+    "coordY": 40.104949049219655,
+    "stationName": "航空食品",
+    "sequence": 43
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.60253895308011,
+    "coordY": 40.10146107717962,
+    "stationName": "航空货运",
+    "sequence": 44
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.60304090413041,
+    "coordY": 40.09825108597798,
+    "stationName": "航空货运基地",
+    "sequence": 45
+  },
+  {
+    "lineName": "顺12路(沙浮--航空配餐)",
+    "coordX": 116.60349081791573,
+    "coordY": 40.09562406193736,
+    "stationName": "航空配餐",
+    "sequence": 46
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.63103545454209,
+    "coordY": 39.902650671922224,
+    "stationName": "地铁通州北苑站",
+    "sequence": 1
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.63390245011105,
+    "coordY": 39.89933855917077,
+    "stationName": "科印小区",
+    "sequence": 2
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.63968152324749,
+    "coordY": 39.89277667427714,
+    "stationName": "日光清城",
+    "sequence": 3
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.64720952823585,
+    "coordY": 39.8906278065769,
+    "stationName": "果园西",
+    "sequence": 4
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.64931613099029,
+    "coordY": 39.888836098203335,
+    "stationName": "果园南",
+    "sequence": 5
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.64766283129869,
+    "coordY": 39.88651719142734,
+    "stationName": "蓝调沙龙小区",
+    "sequence": 6
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.64487465288691,
+    "coordY": 39.88241632882418,
+    "stationName": "翠屏南里",
+    "sequence": 7
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.64150763104243,
+    "coordY": 39.879306272605994,
+    "stationName": "西小马",
+    "sequence": 8
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.63816319471421,
+    "coordY": 39.87669494039756,
+    "stationName": "旗舰凯旋小区",
+    "sequence": 9
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.63505685321553,
+    "coordY": 39.87427299082629,
+    "stationName": "小稿村西口",
+    "sequence": 10
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.63242316387615,
+    "coordY": 39.87171812140657,
+    "stationName": "大稿新村",
+    "sequence": 11
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.62832267200098,
+    "coordY": 39.86635727257509,
+    "stationName": "大稿村南口",
+    "sequence": 12
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.62348087882724,
+    "coordY": 39.86156684704419,
+    "stationName": "万盛南街西口",
+    "sequence": 13
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.62043474097722,
+    "coordY": 39.85903658899241,
+    "stationName": "铺头村路口",
+    "sequence": 14
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.61067150006726,
+    "coordY": 39.85221638362372,
+    "stationName": "四合庄路口",
+    "sequence": 15
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.60657577520114,
+    "coordY": 39.848759482126276,
+    "stationName": "口子村",
+    "sequence": 16
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.60331432874203,
+    "coordY": 39.846112472087185,
+    "stationName": "口子村南",
+    "sequence": 17
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.60108942210483,
+    "coordY": 39.844295583268234,
+    "stationName": "江场村",
+    "sequence": 18
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.59622603390606,
+    "coordY": 39.840331294896316,
+    "stationName": "大鲁店北口",
+    "sequence": 19
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.58991172106842,
+    "coordY": 39.834983020698,
+    "stationName": "大鲁店南口",
+    "sequence": 20
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.5836251262018,
+    "coordY": 39.82914104001873,
+    "stationName": "东石村桥北",
+    "sequence": 21
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.57539020964961,
+    "coordY": 39.820436169660105,
+    "stationName": "东石村桥南",
+    "sequence": 22
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.57366916160845,
+    "coordY": 39.81800002429391,
+    "stationName": "泰禾一号小区",
+    "sequence": 23
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.56719553031745,
+    "coordY": 39.80979248712794,
+    "stationName": "铺西路西口",
+    "sequence": 24
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.56303784771052,
+    "coordY": 39.802634125778056,
+    "stationName": "次渠西口",
+    "sequence": 25
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.56171316647757,
+    "coordY": 39.80019259792319,
+    "stationName": "定海园二里站",
+    "sequence": 26
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.56047251846653,
+    "coordY": 39.79776611342468,
+    "stationName": "定海园东",
+    "sequence": 27
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.55886296468674,
+    "coordY": 39.79699589903347,
+    "stationName": "定海园",
+    "sequence": 28
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.55043078611051,
+    "coordY": 39.78869393339965,
+    "stationName": "科创十街",
+    "sequence": 29
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.54637610874416,
+    "coordY": 39.78513968148451,
+    "stationName": "康宁科技东门",
+    "sequence": 30
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.54921297188938,
+    "coordY": 39.78179133630636,
+    "stationName": "天骥智谷东门",
+    "sequence": 31
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.53814850796012,
+    "coordY": 39.774206511719434,
+    "stationName": "康定街东口",
+    "sequence": 32
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.53160712206947,
+    "coordY": 39.77109357673019,
+    "stationName": "地铁同济南路站",
+    "sequence": 33
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.5311549864477,
+    "coordY": 39.76923865629377,
+    "stationName": "永昌南路南站",
+    "sequence": 34
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.54011363417328,
+    "coordY": 39.75894333453703,
+    "stationName": "凉水河桥南",
+    "sequence": 35
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.5409884787668,
+    "coordY": 39.754392691066954,
+    "stationName": "通州第二医院",
+    "sequence": 36
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.54947254900205,
+    "coordY": 39.75687323935366,
+    "stationName": "马驹桥商业街",
+    "sequence": 37
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.55084324922038,
+    "coordY": 39.75069336613937,
+    "stationName": "马驹桥",
+    "sequence": 38
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.55084371835794,
+    "coordY": 39.74680879534104,
+    "stationName": "马驹桥二号桥",
+    "sequence": 39
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.5510279602897,
+    "coordY": 39.739735926780035,
+    "stationName": "通州姚村",
+    "sequence": 40
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.55124637387206,
+    "coordY": 39.731816253586494,
+    "stationName": "小古二路",
+    "sequence": 41
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.55129881205711,
+    "coordY": 39.72909067993917,
+    "stationName": "周营北口",
+    "sequence": 42
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.5474304165879,
+    "coordY": 39.72827270596264,
+    "stationName": "小张湾",
+    "sequence": 43
+  },
+  {
+    "lineName": "T12路(地铁通州北苑站--房辛店)",
+    "coordX": 116.53832102904926,
+    "coordY": 39.72414641074549,
+    "stationName": "房辛店",
+    "sequence": 44
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.42720315173631,
+    "coordY": 39.99589660220988,
+    "stationName": "小营公交场站",
+    "sequence": 1
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.43089226995367,
+    "coordY": 39.99518996229638,
+    "stationName": "姜庄湖",
+    "sequence": 2
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.42960109430958,
+    "coordY": 39.9923191529009,
+    "stationName": "育慧东路",
+    "sequence": 3
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.42524416980012,
+    "coordY": 39.99231315539594,
+    "stationName": "世纪村",
+    "sequence": 4
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.42025435028505,
+    "coordY": 39.99233028388826,
+    "stationName": "小营东路",
+    "sequence": 5
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.41777917367448,
+    "coordY": 39.99082883807286,
+    "stationName": "惠新东桥北",
+    "sequence": 6
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.41780381908579,
+    "coordY": 39.98602106065806,
+    "stationName": "惠新东桥南",
+    "sequence": 7
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.41805584570892,
+    "coordY": 39.980542527528584,
+    "stationName": "对外经贸大学",
+    "sequence": 8
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.41838919108557,
+    "coordY": 39.973434139640915,
+    "stationName": "中日医院",
+    "sequence": 9
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.41857728227366,
+    "coordY": 39.96683858808242,
+    "stationName": "和平东桥南",
+    "sequence": 10
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.41873298595117,
+    "coordY": 39.96295489684997,
+    "stationName": "和平里东街",
+    "sequence": 11
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.41889214976119,
+    "coordY": 39.955506349938204,
+    "stationName": "和平里路口南",
+    "sequence": 12
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.41899283694552,
+    "coordY": 39.95118362162655,
+    "stationName": "和平里南口",
+    "sequence": 13
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.41734904467599,
+    "coordY": 39.948315130252496,
+    "stationName": "北小街豁口",
+    "sequence": 14
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.41254462868613,
+    "coordY": 39.948149136435916,
+    "stationName": "雍和宫桥东",
+    "sequence": 15
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.41026268153952,
+    "coordY": 39.94674865338876,
+    "stationName": "雍和宫",
+    "sequence": 16
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.41043821651733,
+    "coordY": 39.94375388174658,
+    "stationName": "国子监",
+    "sequence": 17
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.41051155971525,
+    "coordY": 39.94156801470575,
+    "stationName": "北新桥路口北",
+    "sequence": 18
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.41080876353898,
+    "coordY": 39.93419849883561,
+    "stationName": "东四十二条",
+    "sequence": 19
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.4093687896278,
+    "coordY": 39.93216069510244,
+    "stationName": "张自忠路",
+    "sequence": 20
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.40462857199516,
+    "coordY": 39.93206444213419,
+    "stationName": "宽街路口东",
+    "sequence": 21
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.39785515322637,
+    "coordY": 39.932123960948765,
+    "stationName": "南锣鼓巷",
+    "sequence": 22
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.3928850171127,
+    "coordY": 39.9320801673324,
+    "stationName": "地安门东",
+    "sequence": 23
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.3847616634077,
+    "coordY": 39.93206178295761,
+    "stationName": "北海北门",
+    "sequence": 24
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.38156866390577,
+    "coordY": 39.931903564222004,
+    "stationName": "东官房",
+    "sequence": 25
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.37468667050163,
+    "coordY": 39.931657756919876,
+    "stationName": "厂桥路口东",
+    "sequence": 26
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.36683538862724,
+    "coordY": 39.92966486012696,
+    "stationName": "平安里路口南",
+    "sequence": 27
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.36700553942057,
+    "coordY": 39.926654786774215,
+    "stationName": "大红罗厂西口",
+    "sequence": 28
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.3649489502858,
+    "coordY": 39.92259538661327,
+    "stationName": "西四路口西",
+    "sequence": 29
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.36039394940161,
+    "coordY": 39.92252724440021,
+    "stationName": "白塔寺东",
+    "sequence": 30
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.35312362249218,
+    "coordY": 39.92241180253929,
+    "stationName": "阜成门内",
+    "sequence": 31
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.34688591675894,
+    "coordY": 39.92097693135288,
+    "stationName": "南礼士路北口",
+    "sequence": 32
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.34710579328348,
+    "coordY": 39.91845366787492,
+    "stationName": "月坛公园",
+    "sequence": 33
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.3460127540513,
+    "coordY": 39.91260175802605,
+    "stationName": "儿童医院路口西",
+    "sequence": 34
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.34160695179652,
+    "coordY": 39.91263940106255,
+    "stationName": "二七剧场路北口",
+    "sequence": 35
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.33635537556253,
+    "coordY": 39.91269789691573,
+    "stationName": "三里河东口",
+    "sequence": 36
+  },
+  {
+    "lineName": "13路(小营公交场站--西城三里河)",
+    "coordX": 116.33041373503619,
+    "coordY": 39.91274701380767,
+    "stationName": "西城三里河",
+    "sequence": 37
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.3303897973737,
+    "coordY": 39.91268506183989,
+    "stationName": "西城三里河",
+    "sequence": 1
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.33739907871234,
+    "coordY": 39.912628983550015,
+    "stationName": "三里河东口",
+    "sequence": 2
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.34115193085728,
+    "coordY": 39.9125862110484,
+    "stationName": "二七剧场路北口",
+    "sequence": 3
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.34549282610628,
+    "coordY": 39.91254264497377,
+    "stationName": "儿童医院路口西",
+    "sequence": 4
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.34717976738662,
+    "coordY": 39.91748358471438,
+    "stationName": "月坛公园",
+    "sequence": 5
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.3482141022145,
+    "coordY": 39.922163668777934,
+    "stationName": "阜成门",
+    "sequence": 6
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.35305875119933,
+    "coordY": 39.92234690546167,
+    "stationName": "阜成门内",
+    "sequence": 7
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.360892153957,
+    "coordY": 39.922475576081105,
+    "stationName": "白塔寺东",
+    "sequence": 8
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.36718565463129,
+    "coordY": 39.92382669635346,
+    "stationName": "西四路口北",
+    "sequence": 9
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.36707645035257,
+    "coordY": 39.92659470778503,
+    "stationName": "大红罗厂西口",
+    "sequence": 10
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.36690628938949,
+    "coordY": 39.929680777650724,
+    "stationName": "平安里路口南",
+    "sequence": 11
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.37196367640789,
+    "coordY": 39.93143030468316,
+    "stationName": "厂桥路口西",
+    "sequence": 12
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.37877384009295,
+    "coordY": 39.93170945788205,
+    "stationName": "东官房",
+    "sequence": 13
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.38428094265998,
+    "coordY": 39.93195002834483,
+    "stationName": "北海北门",
+    "sequence": 14
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.3918091770765,
+    "coordY": 39.93198335686156,
+    "stationName": "地安门东",
+    "sequence": 15
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.39630897742782,
+    "coordY": 39.9320109133241,
+    "stationName": "南锣鼓巷",
+    "sequence": 16
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.4041763460082,
+    "coordY": 39.93194228448036,
+    "stationName": "宽街路口东",
+    "sequence": 17
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.40835501099919,
+    "coordY": 39.932009133637294,
+    "stationName": "张自忠路",
+    "sequence": 18
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.41077766095789,
+    "coordY": 39.93478445524576,
+    "stationName": "东四十二条",
+    "sequence": 19
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.41054267461769,
+    "coordY": 39.94088206166777,
+    "stationName": "北新桥路口北",
+    "sequence": 20
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.41040706413172,
+    "coordY": 39.94473482332714,
+    "stationName": "国子监",
+    "sequence": 21
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.4103757822312,
+    "coordY": 39.94673072483183,
+    "stationName": "雍和宫",
+    "sequence": 22
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.4120531906299,
+    "coordY": 39.94779879922171,
+    "stationName": "雍和宫桥东",
+    "sequence": 23
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.41671029319201,
+    "coordY": 39.9479525534218,
+    "stationName": "北小街豁口",
+    "sequence": 24
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.41905788223796,
+    "coordY": 39.95152267422661,
+    "stationName": "和平里南口",
+    "sequence": 25
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.41892678244314,
+    "coordY": 39.95875725700215,
+    "stationName": "和平里路口北",
+    "sequence": 26
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.41878200947544,
+    "coordY": 39.96328793283035,
+    "stationName": "和平里东街",
+    "sequence": 27
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.41869641999362,
+    "coordY": 39.96700970004535,
+    "stationName": "和平东桥南",
+    "sequence": 28
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.41856384376916,
+    "coordY": 39.970137443862335,
+    "stationName": "和平东桥北",
+    "sequence": 29
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.41844013855933,
+    "coordY": 39.974376152246755,
+    "stationName": "中日医院",
+    "sequence": 30
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.41821430847749,
+    "coordY": 39.97854376278641,
+    "stationName": "对外经贸大学",
+    "sequence": 31
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.41788497945355,
+    "coordY": 39.98558815649001,
+    "stationName": "惠新东桥南",
+    "sequence": 32
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.4178965659974,
+    "coordY": 39.988946029181676,
+    "stationName": "惠新东桥北",
+    "sequence": 33
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.41973462748813,
+    "coordY": 39.99223073895008,
+    "stationName": "小营东路",
+    "sequence": 34
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.4250298172137,
+    "coordY": 39.992225884745025,
+    "stationName": "世纪村",
+    "sequence": 35
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.42996481574816,
+    "coordY": 39.99220569434818,
+    "stationName": "育慧东路",
+    "sequence": 36
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.4309864476012,
+    "coordY": 39.99527710208296,
+    "stationName": "姜庄湖",
+    "sequence": 37
+  },
+  {
+    "lineName": "13路(西城三里河--小营公交场站)",
+    "coordX": 116.42715100889473,
+    "coordY": 39.99627851477795,
+    "stationName": "小营公交场站",
+    "sequence": 38
+  },
+  {
+    "lineName": "14路(角门南站--北京三十九中学)",
+    "coordX": 116.37177269998942,
+    "coordY": 39.83872505343635,
+    "stationName": "角门南站",
+    "sequence": 1
+  },
+  {
+    "lineName": "14路(角门南站--北京三十九中学)",
+    "coordX": 116.37562285163041,
+    "coordY": 39.84430217119953,
+    "stationName": "角门",
+    "sequence": 2
+  },
+  {
+    "lineName": "14路(角门南站--北京三十九中学)",
+    "coordX": 116.38040554698186,
+    "coordY": 39.84529748467292,
+    "stationName": "西马场北口",
+    "sequence": 3
+  },
+  {
+    "lineName": "14路(角门南站--北京三十九中学)",
+    "coordX": 116.380791746877,
+    "coordY": 39.84931599147322,
+    "stationName": "马家堡东口",
+    "sequence": 4
+  },
+  {
+    "lineName": "14路(角门南站--北京三十九中学)",
+    "coordX": 116.38070690111434,
+    "coordY": 39.856458636431384,
+    "stationName": "洋桥北",
+    "sequence": 5
+  },
+  {
+    "lineName": "14路(角门南站--北京三十九中学)",
+    "coordX": 116.38067249144267,
+    "coordY": 39.85987946855808,
+    "stationName": "四路通",
+    "sequence": 6
+  },
+  {
+    "lineName": "14路(角门南站--北京三十九中学)",
+    "coordX": 116.38149830762099,
+    "coordY": 39.87233627851387,
+    "stationName": "陶然桥北",
+    "sequence": 7
+  },
+  {
+    "lineName": "14路(角门南站--北京三十九中学)",
+    "coordX": 116.38122770266706,
+    "coordY": 39.87859713277549,
+    "stationName": "太平街",
+    "sequence": 8
+  },
+  {
+    "lineName": "14路(角门南站--北京三十九中学)",
+    "coordX": 116.37880101541693,
+    "coordY": 39.883098565065794,
+    "stationName": "虎坊路",
+    "sequence": 9
+  },
+  {
+    "lineName": "14路(角门南站--北京三十九中学)",
+    "coordX": 116.3786186498401,
+    "coordY": 39.88717250318,
+    "stationName": "虎坊桥路口南",
+    "sequence": 10
+  },
+  {
+    "lineName": "14路(角门南站--北京三十九中学)",
+    "coordX": 116.37828693735088,
+    "coordY": 39.89498638521294,
+    "stationName": "琉璃厂",
+    "sequence": 11
+  },
+  {
+    "lineName": "14路(角门南站--北京三十九中学)",
+    "coordX": 116.37795759065203,
+    "coordY": 39.899953408959774,
+    "stationName": "和平门内",
+    "sequence": 12
+  },
+  {
+    "lineName": "14路(角门南站--北京三十九中学)",
+    "coordX": 116.37723371811916,
+    "coordY": 39.90403378845275,
+    "stationName": "六部口",
+    "sequence": 13
+  },
+  {
+    "lineName": "14路(角门南站--北京三十九中学)",
+    "coordX": 116.3755632980613,
+    "coordY": 39.91194981425705,
+    "stationName": "力学胡同",
+    "sequence": 14
+  },
+  {
+    "lineName": "14路(角门南站--北京三十九中学)",
+    "coordX": 116.37559222873712,
+    "coordY": 39.92011044576178,
+    "stationName": "府右街",
+    "sequence": 15
+  },
+  {
+    "lineName": "14路(角门南站--北京三十九中学)",
+    "coordX": 116.374130498601,
+    "coordY": 39.92187965354304,
+    "stationName": "西安门",
+    "sequence": 16
+  },
+  {
+    "lineName": "14路(角门南站--北京三十九中学)",
+    "coordX": 116.373521181222,
+    "coordY": 39.92948189895345,
+    "stationName": "厂桥路口南",
+    "sequence": 17
+  },
+  {
+    "lineName": "14路(角门南站--北京三十九中学)",
+    "coordX": 116.37078632542034,
+    "coordY": 39.929396566523664,
+    "stationName": "北京四中",
+    "sequence": 18
+  },
+  {
+    "lineName": "14路(角门南站--北京三十九中学)",
+    "coordX": 116.37095772742487,
+    "coordY": 39.9246285867124,
+    "stationName": "北京三十九中学",
+    "sequence": 19
+  },
+  {
+    "lineName": "14路(北京三十九中学--角门南站)",
+    "coordX": 116.37095772742487,
+    "coordY": 39.9246285867124,
+    "stationName": "北京三十九中学",
+    "sequence": 1
+  },
+  {
+    "lineName": "14路(北京三十九中学--角门南站)",
+    "coordX": 116.37242146342909,
+    "coordY": 39.921153280183276,
+    "stationName": "西安门",
+    "sequence": 2
+  },
+  {
+    "lineName": "14路(北京三十九中学--角门南站)",
+    "coordX": 116.3756042417284,
+    "coordY": 39.919915443674775,
+    "stationName": "府右街",
+    "sequence": 3
+  },
+  {
+    "lineName": "14路(北京三十九中学--角门南站)",
+    "coordX": 116.37558434339768,
+    "coordY": 39.91143081855111,
+    "stationName": "力学胡同",
+    "sequence": 4
+  },
+  {
+    "lineName": "14路(北京三十九中学--角门南站)",
+    "coordX": 116.37695894418327,
+    "coordY": 39.904239997355454,
+    "stationName": "六部口",
+    "sequence": 5
+  },
+  {
+    "lineName": "14路(北京三十九中学--角门南站)",
+    "coordX": 116.37780074602661,
+    "coordY": 39.89981853475875,
+    "stationName": "和平门内",
+    "sequence": 6
+  },
+  {
+    "lineName": "14路(北京三十九中学--角门南站)",
+    "coordX": 116.37834010467246,
+    "coordY": 39.89331442225867,
+    "stationName": "琉璃厂",
+    "sequence": 7
+  },
+  {
+    "lineName": "14路(北京三十九中学--角门南站)",
+    "coordX": 116.3784998836804,
+    "coordY": 39.88612764050094,
+    "stationName": "虎坊桥路口南",
+    "sequence": 8
+  },
+  {
+    "lineName": "14路(北京三十九中学--角门南站)",
+    "coordX": 116.38113547254954,
+    "coordY": 39.88092507665122,
+    "stationName": "太平街北口",
+    "sequence": 9
+  },
+  {
+    "lineName": "14路(北京三十九中学--角门南站)",
+    "coordX": 116.38117012366273,
+    "coordY": 39.87561631831194,
+    "stationName": "太平街",
+    "sequence": 10
+  },
+  {
+    "lineName": "14路(北京三十九中学--角门南站)",
+    "coordX": 116.38129638149869,
+    "coordY": 39.87288037722889,
+    "stationName": "陶然桥北",
+    "sequence": 11
+  },
+  {
+    "lineName": "14路(北京三十九中学--角门南站)",
+    "coordX": 116.38057750438256,
+    "coordY": 39.86033550591005,
+    "stationName": "四路通",
+    "sequence": 12
+  },
+  {
+    "lineName": "14路(北京三十九中学--角门南站)",
+    "coordX": 116.38055524704737,
+    "coordY": 39.85462983949665,
+    "stationName": "洋桥南",
+    "sequence": 13
+  },
+  {
+    "lineName": "14路(北京三十九中学--角门南站)",
+    "coordX": 116.38070078363226,
+    "coordY": 39.84955703670118,
+    "stationName": "马家堡东口",
+    "sequence": 14
+  },
+  {
+    "lineName": "14路(北京三十九中学--角门南站)",
+    "coordX": 116.38029765827505,
+    "coordY": 39.84506757061215,
+    "stationName": "西马场北口",
+    "sequence": 15
+  },
+  {
+    "lineName": "14路(北京三十九中学--角门南站)",
+    "coordX": 116.37596552110618,
+    "coordY": 39.84426288492802,
+    "stationName": "角门",
+    "sequence": 16
+  },
+  {
+    "lineName": "14路(北京三十九中学--角门南站)",
+    "coordX": 116.37242478985522,
+    "coordY": 39.840000336922756,
+    "stationName": "角门南站",
+    "sequence": 17
+  },
+  {
+    "lineName": "15路(天桥商场--动物园枢纽站)",
+    "coordX": 116.39172989364643,
+    "coordY": 39.879417687554124,
+    "stationName": "天桥商场",
+    "sequence": 1
+  },
+  {
+    "lineName": "15路(天桥商场--动物园枢纽站)",
+    "coordX": 116.38911924766838,
+    "coordY": 39.88157824738208,
+    "stationName": "福长街",
+    "sequence": 2
+  },
+  {
+    "lineName": "15路(天桥商场--动物园枢纽站)",
+    "coordX": 116.38579713954253,
+    "coordY": 39.88496734589682,
+    "stationName": "友谊医院西",
+    "sequence": 3
+  },
+  {
+    "lineName": "15路(天桥商场--动物园枢纽站)",
+    "coordX": 116.38135081446521,
+    "coordY": 39.884879748609535,
+    "stationName": "永安路",
+    "sequence": 4
+  },
+  {
+    "lineName": "15路(天桥商场--动物园枢纽站)",
+    "coordX": 116.37862267917203,
+    "coordY": 39.886915512422696,
+    "stationName": "虎坊桥路口南",
+    "sequence": 5
+  },
+  {
+    "lineName": "15路(天桥商场--动物园枢纽站)",
+    "coordX": 116.37850914838553,
+    "coordY": 39.89183736501279,
+    "stationName": "琉璃厂南",
+    "sequence": 6
+  },
+  {
+    "lineName": "15路(天桥商场--动物园枢纽站)",
+    "coordX": 116.37812580189733,
+    "coordY": 39.89714340806395,
+    "stationName": "和平门外",
+    "sequence": 7
+  },
+  {
+    "lineName": "15路(天桥商场--动物园枢纽站)",
+    "coordX": 116.37098601902463,
+    "coordY": 39.898535676967924,
+    "stationName": "宣武门东",
+    "sequence": 8
+  },
+  {
+    "lineName": "15路(天桥商场--动物园枢纽站)",
+    "coordX": 116.3643749163893,
+    "coordY": 39.90588279932453,
+    "stationName": "西单路口西",
+    "sequence": 9
+  },
+  {
+    "lineName": "15路(天桥商场--动物园枢纽站)",
+    "coordX": 116.35826858559228,
+    "coordY": 39.905893890355955,
+    "stationName": "民族文化宫",
+    "sequence": 10
+  },
+  {
+    "lineName": "15路(天桥商场--动物园枢纽站)",
+    "coordX": 116.35248291270501,
+    "coordY": 39.90592849754435,
+    "stationName": "复兴门内",
+    "sequence": 11
+  },
+  {
+    "lineName": "15路(天桥商场--动物园枢纽站)",
+    "coordX": 116.34646149254579,
+    "coordY": 39.90746222030064,
+    "stationName": "南礼士路南口",
+    "sequence": 12
+  },
+  {
+    "lineName": "15路(天桥商场--动物园枢纽站)",
+    "coordX": 116.34671044747168,
+    "coordY": 39.9117176170237,
+    "stationName": "北京儿童医院西门",
+    "sequence": 13
+  },
+  {
+    "lineName": "15路(天桥商场--动物园枢纽站)",
+    "coordX": 116.34727871207171,
+    "coordY": 39.91635046690542,
+    "stationName": "月坛公园",
+    "sequence": 14
+  },
+  {
+    "lineName": "15路(天桥商场--动物园枢纽站)",
+    "coordX": 116.33959670869898,
+    "coordY": 39.91710780320016,
+    "stationName": "月坛北街",
+    "sequence": 15
+  },
+  {
+    "lineName": "15路(天桥商场--动物园枢纽站)",
+    "coordX": 116.33850959557485,
+    "coordY": 39.920891610936486,
+    "stationName": "展览路口南",
+    "sequence": 16
+  },
+  {
+    "lineName": "15路(天桥商场--动物园枢纽站)",
+    "coordX": 116.33782018911658,
+    "coordY": 39.92812456767979,
+    "stationName": "百万庄东口",
+    "sequence": 17
+  },
+  {
+    "lineName": "15路(天桥商场--动物园枢纽站)",
+    "coordX": 116.33791251989035,
+    "coordY": 39.931804249548165,
+    "stationName": "二里沟东口",
+    "sequence": 18
+  },
+  {
+    "lineName": "15路(天桥商场--动物园枢纽站)",
+    "coordX": 116.33793100838744,
+    "coordY": 39.935518065835545,
+    "stationName": "北京展览馆",
+    "sequence": 19
+  },
+  {
+    "lineName": "15路(天桥商场--动物园枢纽站)",
+    "coordX": 116.33387401245552,
+    "coordY": 39.93560355433707,
+    "stationName": "动物园枢纽站",
+    "sequence": 20
+  },
+  {
+    "lineName": "15路(动物园枢纽站--天桥商场)",
+    "coordX": 116.33375414877953,
+    "coordY": 39.9366537360696,
+    "stationName": "动物园枢纽站",
+    "sequence": 1
+  },
+  {
+    "lineName": "15路(动物园枢纽站--天桥商场)",
+    "coordX": 116.3369212295765,
+    "coordY": 39.935536912417625,
+    "stationName": "北京展览馆",
+    "sequence": 2
+  },
+  {
+    "lineName": "15路(动物园枢纽站--天桥商场)",
+    "coordX": 116.33766385915663,
+    "coordY": 39.93343663729674,
+    "stationName": "二里沟东口",
+    "sequence": 3
+  },
+  {
+    "lineName": "15路(动物园枢纽站--天桥商场)",
+    "coordX": 116.33772046660617,
+    "coordY": 39.9276637685313,
+    "stationName": "百万庄东口",
+    "sequence": 4
+  },
+  {
+    "lineName": "15路(动物园枢纽站--天桥商场)",
+    "coordX": 116.3380422652676,
+    "coordY": 39.923679345354316,
+    "stationName": "展览路口北",
+    "sequence": 5
+  },
+  {
+    "lineName": "15路(动物园枢纽站--天桥商场)",
+    "coordX": 116.33851985692098,
+    "coordY": 39.918652685787514,
+    "stationName": "月坛北街北站",
+    "sequence": 6
+  },
+  {
+    "lineName": "15路(动物园枢纽站--天桥商场)",
+    "coordX": 116.34077117991704,
+    "coordY": 39.91706169956262,
+    "stationName": "月坛北街",
+    "sequence": 7
+  },
+  {
+    "lineName": "15路(动物园枢纽站--天桥商场)",
+    "coordX": 116.34660098821814,
+    "coordY": 39.917082573596325,
+    "stationName": "月坛公园",
+    "sequence": 8
+  },
+  {
+    "lineName": "15路(动物园枢纽站--天桥商场)",
+    "coordX": 116.34669245547978,
+    "coordY": 39.91194163771297,
+    "stationName": "北京儿童医院西门",
+    "sequence": 9
+  },
+  {
+    "lineName": "15路(动物园枢纽站--天桥商场)",
+    "coordX": 116.3463956096482,
+    "coordY": 39.90759432578704,
+    "stationName": "南礼士路南口",
+    "sequence": 10
+  },
+  {
+    "lineName": "15路(动物园枢纽站--天桥商场)",
+    "coordX": 116.35307383367896,
+    "coordY": 39.905744588136436,
+    "stationName": "复兴门内",
+    "sequence": 11
+  },
+  {
+    "lineName": "15路(动物园枢纽站--天桥商场)",
+    "coordX": 116.3612866580324,
+    "coordY": 39.905721762203285,
+    "stationName": "民族文化宫",
+    "sequence": 12
+  },
+  {
+    "lineName": "15路(动物园枢纽站--天桥商场)",
+    "coordX": 116.36786349189755,
+    "coordY": 39.90225584853508,
+    "stationName": "西单路口南",
+    "sequence": 13
+  },
+  {
+    "lineName": "15路(动物园枢纽站--天桥商场)",
+    "coordX": 116.36914431768976,
+    "coordY": 39.898370613074576,
+    "stationName": "宣武门东",
+    "sequence": 14
+  },
+  {
+    "lineName": "15路(动物园枢纽站--天桥商场)",
+    "coordX": 116.37806195955288,
+    "coordY": 39.89634249263221,
+    "stationName": "和平门外",
+    "sequence": 15
+  },
+  {
+    "lineName": "15路(动物园枢纽站--天桥商场)",
+    "coordX": 116.3784032067883,
+    "coordY": 39.89208843192682,
+    "stationName": "琉璃厂南",
+    "sequence": 16
+  },
+  {
+    "lineName": "15路(动物园枢纽站--天桥商场)",
+    "coordX": 116.37845679123365,
+    "coordY": 39.887141624164094,
+    "stationName": "虎坊桥路口南",
+    "sequence": 17
+  },
+  {
+    "lineName": "15路(动物园枢纽站--天桥商场)",
+    "coordX": 116.38217824711144,
+    "coordY": 39.88484724357022,
+    "stationName": "永安路",
+    "sequence": 18
+  },
+  {
+    "lineName": "15路(动物园枢纽站--天桥商场)",
+    "coordX": 116.38584911388207,
+    "coordY": 39.88497132242495,
+    "stationName": "友谊医院西",
+    "sequence": 19
+  },
+  {
+    "lineName": "15路(动物园枢纽站--天桥商场)",
+    "coordX": 116.38698077588997,
+    "coordY": 39.883598909225285,
+    "stationName": "友谊医院",
+    "sequence": 20
+  },
+  {
+    "lineName": "15路(动物园枢纽站--天桥商场)",
+    "coordX": 116.38765803808064,
+    "coordY": 39.87938285364064,
+    "stationName": "南纬路",
+    "sequence": 21
+  },
+  {
+    "lineName": "15路(动物园枢纽站--天桥商场)",
+    "coordX": 116.39028319219938,
+    "coordY": 39.87945701874873,
+    "stationName": "天桥商场",
+    "sequence": 22
+  },
+  {
+    "lineName": "16路(动物园枢纽站--二里庄)",
+    "coordX": 116.33429299543559,
+    "coordY": 39.936208748172064,
+    "stationName": "动物园枢纽站",
+    "sequence": 1
+  },
+  {
+    "lineName": "16路(动物园枢纽站--二里庄)",
+    "coordX": 116.34380404821867,
+    "coordY": 39.93835548785038,
+    "stationName": "西直门外",
+    "sequence": 2
+  },
+  {
+    "lineName": "16路(动物园枢纽站--二里庄)",
+    "coordX": 116.34574480795797,
+    "coordY": 39.94011408186564,
+    "stationName": "地铁西直门站",
+    "sequence": 3
+  },
+  {
+    "lineName": "16路(动物园枢纽站--二里庄)",
+    "coordX": 116.34216183227825,
+    "coordY": 39.94367914831101,
+    "stationName": "北下关",
+    "sequence": 4
+  },
+  {
+    "lineName": "16路(动物园枢纽站--二里庄)",
+    "coordX": 116.33722032546044,
+    "coordY": 39.945345971748516,
+    "stationName": "北京交通大学",
+    "sequence": 5
+  },
+  {
+    "lineName": "16路(动物园枢纽站--二里庄)",
+    "coordX": 116.33105369674682,
+    "coordY": 39.94895532433725,
+    "stationName": "大柳树南站",
+    "sequence": 6
+  },
+  {
+    "lineName": "16路(动物园枢纽站--二里庄)",
+    "coordX": 116.3296504013658,
+    "coordY": 39.952845831122204,
+    "stationName": "大柳树北站",
+    "sequence": 7
+  },
+  {
+    "lineName": "16路(动物园枢纽站--二里庄)",
+    "coordX": 116.33475937354392,
+    "coordY": 39.95654007081172,
+    "stationName": "皂君庙",
+    "sequence": 8
+  },
+  {
+    "lineName": "16路(动物园枢纽站--二里庄)",
+    "coordX": 116.33795127657733,
+    "coordY": 39.95669918571972,
+    "stationName": "皂君庙东站",
+    "sequence": 9
+  },
+  {
+    "lineName": "16路(动物园枢纽站--二里庄)",
+    "coordX": 116.3437418440767,
+    "coordY": 39.95672686569912,
+    "stationName": "明光村西站",
+    "sequence": 10
+  },
+  {
+    "lineName": "16路(动物园枢纽站--二里庄)",
+    "coordX": 116.34599818203944,
+    "coordY": 39.95669299306636,
+    "stationName": "明光村",
+    "sequence": 11
+  },
+  {
+    "lineName": "16路(动物园枢纽站--二里庄)",
+    "coordX": 116.35228384327179,
+    "coordY": 39.95658273537296,
+    "stationName": "北京邮电大学南门",
+    "sequence": 12
+  },
+  {
+    "lineName": "16路(动物园枢纽站--二里庄)",
+    "coordX": 116.36174345893404,
+    "coordY": 39.9565690787879,
+    "stationName": "北京师范大学南门",
+    "sequence": 13
+  },
+  {
+    "lineName": "16路(动物园枢纽站--二里庄)",
+    "coordX": 116.3645537194744,
+    "coordY": 39.960285359356476,
+    "stationName": "铁狮子坟",
+    "sequence": 14
+  },
+  {
+    "lineName": "16路(动物园枢纽站--二里庄)",
+    "coordX": 116.36386248507633,
+    "coordY": 39.97012282434258,
+    "stationName": "北太平桥北",
+    "sequence": 15
+  },
+  {
+    "lineName": "16路(动物园枢纽站--二里庄)",
+    "coordX": 116.36379009925986,
+    "coordY": 39.97399075972574,
+    "stationName": "牡丹园",
+    "sequence": 16
+  },
+  {
+    "lineName": "16路(动物园枢纽站--二里庄)",
+    "coordX": 116.36363883874951,
+    "coordY": 39.97780379545078,
+    "stationName": "牡丹园北",
+    "sequence": 17
+  },
+  {
+    "lineName": "16路(动物园枢纽站--二里庄)",
+    "coordX": 116.36346864179683,
+    "coordY": 39.981348865498575,
+    "stationName": "志新桥南",
+    "sequence": 18
+  },
+  {
+    "lineName": "16路(动物园枢纽站--二里庄)",
+    "coordX": 116.36316832242997,
+    "coordY": 39.98740399653057,
+    "stationName": "志新桥北",
+    "sequence": 19
+  },
+  {
+    "lineName": "16路(动物园枢纽站--二里庄)",
+    "coordX": 116.36296409481149,
+    "coordY": 39.99161808073919,
+    "stationName": "志新北里",
+    "sequence": 20
+  },
+  {
+    "lineName": "16路(动物园枢纽站--二里庄)",
+    "coordX": 116.35883945357088,
+    "coordY": 39.99354551665743,
+    "stationName": "二里庄南口",
+    "sequence": 21
+  },
+  {
+    "lineName": "16路(动物园枢纽站--二里庄)",
+    "coordX": 116.35861622,
+    "coordY": 39.99830862602632,
+    "stationName": "二里庄",
+    "sequence": 22
+  },
+  {
+    "lineName": "16路(二里庄--动物园枢纽站)",
+    "coordX": 116.35863023690797,
+    "coordY": 39.99799161998907,
+    "stationName": "二里庄",
+    "sequence": 1
+  },
+  {
+    "lineName": "16路(二里庄--动物园枢纽站)",
+    "coordX": 116.35877256323458,
+    "coordY": 39.99356460932965,
+    "stationName": "二里庄南口",
+    "sequence": 2
+  },
+  {
+    "lineName": "16路(二里庄--动物园枢纽站)",
+    "coordX": 116.3628662334163,
+    "coordY": 39.99170320226274,
+    "stationName": "志新北里",
+    "sequence": 3
+  },
+  {
+    "lineName": "16路(二里庄--动物园枢纽站)",
+    "coordX": 116.3630924981637,
+    "coordY": 39.98693011261427,
+    "stationName": "志新桥北",
+    "sequence": 4
+  },
+  {
+    "lineName": "16路(二里庄--动物园枢纽站)",
+    "coordX": 116.36331681139302,
+    "coordY": 39.98181503833823,
+    "stationName": "志新桥南",
+    "sequence": 5
+  },
+  {
+    "lineName": "16路(二里庄--动物园枢纽站)",
+    "coordX": 116.36351199937486,
+    "coordY": 39.97803794555673,
+    "stationName": "牡丹园北",
+    "sequence": 6
+  },
+  {
+    "lineName": "16路(二里庄--动物园枢纽站)",
+    "coordX": 116.36365030269674,
+    "coordY": 39.974035933189086,
+    "stationName": "牡丹园",
+    "sequence": 7
+  },
+  {
+    "lineName": "16路(二里庄--动物园枢纽站)",
+    "coordX": 116.36371173705595,
+    "coordY": 39.96991302143562,
+    "stationName": "北太平桥北",
+    "sequence": 8
+  },
+  {
+    "lineName": "16路(二里庄--动物园枢纽站)",
+    "coordX": 116.35976036509172,
+    "coordY": 39.966602342820856,
+    "stationName": "北太平桥西",
+    "sequence": 9
+  },
+  {
+    "lineName": "16路(二里庄--动物园枢纽站)",
+    "coordX": 116.35322681361254,
+    "coordY": 39.966541875651934,
+    "stationName": "蓟门桥东",
+    "sequence": 10
+  },
+  {
+    "lineName": "16路(二里庄--动物园枢纽站)",
+    "coordX": 116.3469843888865,
+    "coordY": 39.9628980832377,
+    "stationName": "蓟门桥南",
+    "sequence": 11
+  },
+  {
+    "lineName": "16路(二里庄--动物园枢纽站)",
+    "coordX": 116.34715847051959,
+    "coordY": 39.959494926552374,
+    "stationName": "明光桥北",
+    "sequence": 12
+  },
+  {
+    "lineName": "16路(二里庄--动物园枢纽站)",
+    "coordX": 116.34586844169141,
+    "coordY": 39.956737211563336,
+    "stationName": "明光村",
+    "sequence": 13
+  },
+  {
+    "lineName": "16路(二里庄--动物园枢纽站)",
+    "coordX": 116.34293552910533,
+    "coordY": 39.95679426894632,
+    "stationName": "明光村西站",
+    "sequence": 14
+  },
+  {
+    "lineName": "16路(二里庄--动物园枢纽站)",
+    "coordX": 116.3386916408792,
+    "coordY": 39.95681483501947,
+    "stationName": "皂君庙东站",
+    "sequence": 15
+  },
+  {
+    "lineName": "16路(二里庄--动物园枢纽站)",
+    "coordX": 116.33476834459684,
+    "coordY": 39.95661005135932,
+    "stationName": "皂君庙",
+    "sequence": 16
+  },
+  {
+    "lineName": "16路(二里庄--动物园枢纽站)",
+    "coordX": 116.32951575594103,
+    "coordY": 39.95247410184208,
+    "stationName": "大柳树北站",
+    "sequence": 17
+  },
+  {
+    "lineName": "16路(二里庄--动物园枢纽站)",
+    "coordX": 116.33076434905976,
+    "coordY": 39.94900087012102,
+    "stationName": "大柳树南站",
+    "sequence": 18
+  },
+  {
+    "lineName": "16路(二里庄--动物园枢纽站)",
+    "coordX": 116.3369479386692,
+    "coordY": 39.94525147495723,
+    "stationName": "北京交通大学",
+    "sequence": 19
+  },
+  {
+    "lineName": "16路(二里庄--动物园枢纽站)",
+    "coordX": 116.34042850811154,
+    "coordY": 39.9439322170769,
+    "stationName": "北下关",
+    "sequence": 20
+  },
+  {
+    "lineName": "16路(二里庄--动物园枢纽站)",
+    "coordX": 116.34557015536024,
+    "coordY": 39.94019837588984,
+    "stationName": "地铁西直门站",
+    "sequence": 21
+  },
+  {
+    "lineName": "16路(二里庄--动物园枢纽站)",
+    "coordX": 116.34189407568503,
+    "coordY": 39.938368832988914,
+    "stationName": "西直门外",
+    "sequence": 22
+  },
+  {
+    "lineName": "16路(二里庄--动物园枢纽站)",
+    "coordX": 116.33388593032446,
+    "coordY": 39.93604051449195,
+    "stationName": "动物园枢纽站",
+    "sequence": 23
+  },
+  {
+    "lineName": "17路(石榴园东--崇文门东)",
+    "coordX": 116.41234861645327,
+    "coordY": 39.8445378468124,
+    "stationName": "石榴园东",
+    "sequence": 1
+  },
+  {
+    "lineName": "17路(石榴园东--崇文门东)",
+    "coordX": 116.40851219668755,
+    "coordY": 39.8450503992691,
+    "stationName": "石榴园",
+    "sequence": 2
+  },
+  {
+    "lineName": "17路(石榴园东--崇文门东)",
+    "coordX": 116.4084148604019,
+    "coordY": 39.84711322326709,
+    "stationName": "石榴园北",
+    "sequence": 3
+  },
+  {
+    "lineName": "17路(石榴园东--崇文门东)",
+    "coordX": 116.40828043048212,
+    "coordY": 39.84969699893594,
+    "stationName": "光彩路北站",
+    "sequence": 4
+  },
+  {
+    "lineName": "17路(石榴园东--崇文门东)",
+    "coordX": 116.40807371213594,
+    "coordY": 39.854135633680364,
+    "stationName": "赵公口桥南",
+    "sequence": 5
+  },
+  {
+    "lineName": "17路(石榴园东--崇文门东)",
+    "coordX": 116.40776173812394,
+    "coordY": 39.86000214440784,
+    "stationName": "定安路",
+    "sequence": 6
+  },
+  {
+    "lineName": "17路(石榴园东--崇文门东)",
+    "coordX": 116.40760732737463,
+    "coordY": 39.86235993755756,
+    "stationName": "琉璃井",
+    "sequence": 7
+  },
+  {
+    "lineName": "17路(石榴园东--崇文门东)",
+    "coordX": 116.40743778330054,
+    "coordY": 39.86569267408077,
+    "stationName": "李村",
+    "sequence": 8
+  },
+  {
+    "lineName": "17路(石榴园东--崇文门东)",
+    "coordX": 116.40972676817478,
+    "coordY": 39.87181160660648,
+    "stationName": "天坛南门东",
+    "sequence": 9
+  },
+  {
+    "lineName": "17路(石榴园东--崇文门东)",
+    "coordX": 116.41503770521173,
+    "coordY": 39.87414229894729,
+    "stationName": "东侧路",
+    "sequence": 10
+  },
+  {
+    "lineName": "17路(石榴园东--崇文门东)",
+    "coordX": 116.41477162246278,
+    "coordY": 39.88030177120571,
+    "stationName": "天坛体育场",
+    "sequence": 11
+  },
+  {
+    "lineName": "17路(石榴园东--崇文门东)",
+    "coordX": 116.4144468340155,
+    "coordY": 39.88366534239418,
+    "stationName": "法华寺",
+    "sequence": 12
+  },
+  {
+    "lineName": "17路(石榴园东--崇文门东)",
+    "coordX": 116.41287357010344,
+    "coordY": 39.888380898823115,
+    "stationName": "红桥路口北",
+    "sequence": 13
+  },
+  {
+    "lineName": "17路(石榴园东--崇文门东)",
+    "coordX": 116.41278220330652,
+    "coordY": 39.89053873047898,
+    "stationName": "磁器口南",
+    "sequence": 14
+  },
+  {
+    "lineName": "17路(石榴园东--崇文门东)",
+    "coordX": 116.4125894553085,
+    "coordY": 39.894899388653776,
+    "stationName": "花市路口南",
+    "sequence": 15
+  },
+  {
+    "lineName": "17路(石榴园东--崇文门东)",
+    "coordX": 116.41601867620633,
+    "coordY": 39.899082955989186,
+    "stationName": "崇文门东",
+    "sequence": 16
+  },
+  {
+    "lineName": "17路(崇文门东--石榴园东)",
+    "coordX": 116.41601867620633,
+    "coordY": 39.899082955989186,
+    "stationName": "崇文门东",
+    "sequence": 1
+  },
+  {
+    "lineName": "17路(崇文门东--石榴园东)",
+    "coordX": 116.423082453182,
+    "coordY": 39.89928026703799,
+    "stationName": "东便门",
+    "sequence": 2
+  },
+  {
+    "lineName": "17路(崇文门东--石榴园东)",
+    "coordX": 116.43172550010574,
+    "coordY": 39.89638427932326,
+    "stationName": "东花市大街东口",
+    "sequence": 3
+  },
+  {
+    "lineName": "17路(崇文门东--石榴园东)",
+    "coordX": 116.42848116334848,
+    "coordY": 39.89628445517217,
+    "stationName": "铁辘轳把",
+    "sequence": 4
+  },
+  {
+    "lineName": "17路(崇文门东--石榴园东)",
+    "coordX": 116.42385308951654,
+    "coordY": 39.896124339510486,
+    "stationName": "小市口",
+    "sequence": 5
+  },
+  {
+    "lineName": "17路(崇文门东--石榴园东)",
+    "coordX": 116.41418500220404,
+    "coordY": 39.89581756394556,
+    "stationName": "羊市口",
+    "sequence": 6
+  },
+  {
+    "lineName": "17路(崇文门东--石榴园东)",
+    "coordX": 116.41243432541025,
+    "coordY": 39.894709285075535,
+    "stationName": "花市路口南",
+    "sequence": 7
+  },
+  {
+    "lineName": "17路(崇文门东--石榴园东)",
+    "coordX": 116.41262109016525,
+    "coordY": 39.89015663033037,
+    "stationName": "磁器口南",
+    "sequence": 8
+  },
+  {
+    "lineName": "17路(崇文门东--石榴园东)",
+    "coordX": 116.41273955419756,
+    "coordY": 39.88744184434621,
+    "stationName": "红桥路口北",
+    "sequence": 9
+  },
+  {
+    "lineName": "17路(崇文门东--石榴园东)",
+    "coordX": 116.41398025320976,
+    "coordY": 39.88423694179,
+    "stationName": "法华寺",
+    "sequence": 10
+  },
+  {
+    "lineName": "17路(崇文门东--石榴园东)",
+    "coordX": 116.41458237001571,
+    "coordY": 39.8806275999969,
+    "stationName": "天坛体育场",
+    "sequence": 11
+  },
+  {
+    "lineName": "17路(崇文门东--石榴园东)",
+    "coordX": 116.41487848974369,
+    "coordY": 39.87442115222584,
+    "stationName": "东侧路",
+    "sequence": 12
+  },
+  {
+    "lineName": "17路(崇文门东--石榴园东)",
+    "coordX": 116.40986788581107,
+    "coordY": 39.87181769119384,
+    "stationName": "天坛南门东",
+    "sequence": 13
+  },
+  {
+    "lineName": "17路(崇文门东--石榴园东)",
+    "coordX": 116.40740265151089,
+    "coordY": 39.866534612067845,
+    "stationName": "李村",
+    "sequence": 14
+  },
+  {
+    "lineName": "17路(崇文门东--石榴园东)",
+    "coordX": 116.40758024409908,
+    "coordY": 39.86286289673866,
+    "stationName": "琉璃井",
+    "sequence": 15
+  },
+  {
+    "lineName": "17路(崇文门东--石榴园东)",
+    "coordX": 116.40769669843853,
+    "coordY": 39.85994511446242,
+    "stationName": "定安路",
+    "sequence": 16
+  },
+  {
+    "lineName": "17路(崇文门东--石榴园东)",
+    "coordX": 116.40797666298033,
+    "coordY": 39.85395859311088,
+    "stationName": "赵公口桥南",
+    "sequence": 17
+  },
+  {
+    "lineName": "17路(崇文门东--石榴园东)",
+    "coordX": 116.40821243584088,
+    "coordY": 39.84925298876483,
+    "stationName": "光彩路北站",
+    "sequence": 18
+  },
+  {
+    "lineName": "17路(崇文门东--石榴园东)",
+    "coordX": 116.40841007624287,
+    "coordY": 39.84538532385263,
+    "stationName": "石榴园",
+    "sequence": 19
+  },
+  {
+    "lineName": "17路(崇文门东--石榴园东)",
+    "coordX": 116.41260988622618,
+    "coordY": 39.844451040661056,
+    "stationName": "石榴园东",
+    "sequence": 20
+  },
+  {
+    "lineName": "18路(惠新东桥南--国际展览中心)",
+    "coordX": 116.41731613112705,
+    "coordY": 39.98652257716237,
+    "stationName": "惠新东桥南",
+    "sequence": 1
+  },
+  {
+    "lineName": "18路(惠新东桥南--国际展览中心)",
+    "coordX": 116.41642258934122,
+    "coordY": 39.98208093819143,
+    "stationName": "对外经贸大学北",
+    "sequence": 2
+  },
+  {
+    "lineName": "18路(惠新东桥南--国际展览中心)",
+    "coordX": 116.4134181949952,
+    "coordY": 39.982051440697724,
+    "stationName": "惠新里",
+    "sequence": 3
+  },
+  {
+    "lineName": "18路(惠新东桥南--国际展览中心)",
+    "coordX": 116.40906518732345,
+    "coordY": 39.98197154058563,
+    "stationName": "安苑路",
+    "sequence": 4
+  },
+  {
+    "lineName": "18路(惠新东桥南--国际展览中心)",
+    "coordX": 116.40542266708579,
+    "coordY": 39.98185177025355,
+    "stationName": "安苑东里",
+    "sequence": 5
+  },
+  {
+    "lineName": "18路(惠新东桥南--国际展览中心)",
+    "coordX": 116.4010778321569,
+    "coordY": 39.98024149681025,
+    "stationName": "奥体东门",
+    "sequence": 6
+  },
+  {
+    "lineName": "18路(惠新东桥南--国际展览中心)",
+    "coordX": 116.4012059688538,
+    "coordY": 39.97170186780653,
+    "stationName": "安贞里",
+    "sequence": 7
+  },
+  {
+    "lineName": "18路(惠新东桥南--国际展览中心)",
+    "coordX": 116.40122721437692,
+    "coordY": 39.96983994666329,
+    "stationName": "安贞桥北",
+    "sequence": 8
+  },
+  {
+    "lineName": "18路(惠新东桥南--国际展览中心)",
+    "coordX": 116.40146017285237,
+    "coordY": 39.962999269883795,
+    "stationName": "安外甘水桥",
+    "sequence": 9
+  },
+  {
+    "lineName": "18路(惠新东桥南--国际展览中心)",
+    "coordX": 116.40160280199304,
+    "coordY": 39.95849048083214,
+    "stationName": "蒋宅口",
+    "sequence": 10
+  },
+  {
+    "lineName": "18路(惠新东桥南--国际展览中心)",
+    "coordX": 116.40171026668996,
+    "coordY": 39.955171637073356,
+    "stationName": "地坛体育馆",
+    "sequence": 11
+  },
+  {
+    "lineName": "18路(惠新东桥南--国际展览中心)",
+    "coordX": 116.40179680711285,
+    "coordY": 39.95120081440438,
+    "stationName": "地坛西门",
+    "sequence": 12
+  },
+  {
+    "lineName": "18路(惠新东桥南--国际展览中心)",
+    "coordX": 116.4120531906299,
+    "coordY": 39.94779879922171,
+    "stationName": "雍和宫桥东",
+    "sequence": 13
+  },
+  {
+    "lineName": "18路(惠新东桥南--国际展览中心)",
+    "coordX": 116.41671029319201,
+    "coordY": 39.9479525534218,
+    "stationName": "北小街豁口",
+    "sequence": 14
+  },
+  {
+    "lineName": "18路(惠新东桥南--国际展览中心)",
+    "coordX": 116.42720582586503,
+    "coordY": 39.94348370768039,
+    "stationName": "东直门北",
+    "sequence": 15
+  },
+  {
+    "lineName": "18路(惠新东桥南--国际展览中心)",
+    "coordX": 116.42964839917224,
+    "coordY": 39.94345517428832,
+    "stationName": "香河园路西口",
+    "sequence": 16
+  },
+  {
+    "lineName": "18路(惠新东桥南--国际展览中心)",
+    "coordX": 116.43273636206419,
+    "coordY": 39.94550282860339,
+    "stationName": "香河园",
+    "sequence": 17
+  },
+  {
+    "lineName": "18路(惠新东桥南--国际展览中心)",
+    "coordX": 116.43981775422507,
+    "coordY": 39.9509369125664,
+    "stationName": "左家庄",
+    "sequence": 18
+  },
+  {
+    "lineName": "18路(惠新东桥南--国际展览中心)",
+    "coordX": 116.4441473205959,
+    "coordY": 39.954448231912885,
+    "stationName": "三元桥西站",
+    "sequence": 19
+  },
+  {
+    "lineName": "18路(惠新东桥南--国际展览中心)",
+    "coordX": 116.44304972943138,
+    "coordY": 39.96012580053633,
+    "stationName": "静安庄东",
+    "sequence": 20
+  },
+  {
+    "lineName": "18路(惠新东桥南--国际展览中心)",
+    "coordX": 116.43538841864671,
+    "coordY": 39.95871468469311,
+    "stationName": "国际展览中心",
+    "sequence": 21
+  },
+  {
+    "lineName": "18路(国际展览中心--惠新东桥西)",
+    "coordX": 116.43504871684738,
+    "coordY": 39.95830212481212,
+    "stationName": "国际展览中心",
+    "sequence": 1
+  },
+  {
+    "lineName": "18路(国际展览中心--惠新东桥西)",
+    "coordX": 116.44325434156768,
+    "coordY": 39.95948823402374,
+    "stationName": "静安庄东",
+    "sequence": 2
+  },
+  {
+    "lineName": "18路(国际展览中心--惠新东桥西)",
+    "coordX": 116.44401195484939,
+    "coordY": 39.95451595454479,
+    "stationName": "三元桥西站",
+    "sequence": 3
+  },
+  {
+    "lineName": "18路(国际展览中心--惠新东桥西)",
+    "coordX": 116.44013047261623,
+    "coordY": 39.951314485419445,
+    "stationName": "左家庄",
+    "sequence": 4
+  },
+  {
+    "lineName": "18路(国际展览中心--惠新东桥西)",
+    "coordX": 116.43223938461105,
+    "coordY": 39.94505205797035,
+    "stationName": "香河园",
+    "sequence": 5
+  },
+  {
+    "lineName": "18路(国际展览中心--惠新东桥西)",
+    "coordX": 116.4299119055163,
+    "coordY": 39.943497561357624,
+    "stationName": "香河园路西口",
+    "sequence": 6
+  },
+  {
+    "lineName": "18路(国际展览中心--惠新东桥西)",
+    "coordX": 116.4238964993538,
+    "coordY": 39.94853721605223,
+    "stationName": "北官厅",
+    "sequence": 7
+  },
+  {
+    "lineName": "18路(国际展览中心--惠新东桥西)",
+    "coordX": 116.41734904467599,
+    "coordY": 39.948315130252496,
+    "stationName": "北小街豁口",
+    "sequence": 8
+  },
+  {
+    "lineName": "18路(国际展览中心--惠新东桥西)",
+    "coordX": 116.41254462868613,
+    "coordY": 39.948149136435916,
+    "stationName": "雍和宫桥东",
+    "sequence": 9
+  },
+  {
+    "lineName": "18路(国际展览中心--惠新东桥西)",
+    "coordX": 116.40194488383129,
+    "coordY": 39.95105385666519,
+    "stationName": "地坛西门",
+    "sequence": 10
+  },
+  {
+    "lineName": "18路(国际展览中心--惠新东桥西)",
+    "coordX": 116.4018474512162,
+    "coordY": 39.954141710876414,
+    "stationName": "地坛体育馆",
+    "sequence": 11
+  },
+  {
+    "lineName": "18路(国际展览中心--惠新东桥西)",
+    "coordX": 116.40173882381018,
+    "coordY": 39.95872450389373,
+    "stationName": "蒋宅口",
+    "sequence": 12
+  },
+  {
+    "lineName": "18路(国际展览中心--惠新东桥西)",
+    "coordX": 116.4015841742406,
+    "coordY": 39.96334928466193,
+    "stationName": "安外甘水桥",
+    "sequence": 13
+  },
+  {
+    "lineName": "18路(国际展览中心--惠新东桥西)",
+    "coordX": 116.40139925754723,
+    "coordY": 39.96998697891231,
+    "stationName": "安贞桥北",
+    "sequence": 14
+  },
+  {
+    "lineName": "18路(国际展览中心--惠新东桥西)",
+    "coordX": 116.4013570367951,
+    "coordY": 39.97159390536337,
+    "stationName": "安贞里",
+    "sequence": 15
+  },
+  {
+    "lineName": "18路(国际展览中心--惠新东桥西)",
+    "coordX": 116.40121396366608,
+    "coordY": 39.97958655251229,
+    "stationName": "奥体东门",
+    "sequence": 16
+  },
+  {
+    "lineName": "18路(国际展览中心--惠新东桥西)",
+    "coordX": 116.40448715177732,
+    "coordY": 39.981739415100755,
+    "stationName": "安苑东里",
+    "sequence": 17
+  },
+  {
+    "lineName": "18路(国际展览中心--惠新东桥西)",
+    "coordX": 116.40921331416041,
+    "coordY": 39.98191062787633,
+    "stationName": "安苑路",
+    "sequence": 18
+  },
+  {
+    "lineName": "18路(国际展览中心--惠新东桥西)",
+    "coordX": 116.41108951260557,
+    "coordY": 39.98517765395639,
+    "stationName": "惠新西街北口",
+    "sequence": 19
+  },
+  {
+    "lineName": "18路(国际展览中心--惠新东桥西)",
+    "coordX": 116.41500726739397,
+    "coordY": 39.9872334998699,
+    "stationName": "惠新东桥西",
+    "sequence": 20
+  },
+  {
+    "lineName": "19路(动物园枢纽站--翠林小区)",
+    "coordX": 116.33383596858286,
+    "coordY": 39.93662458434223,
+    "stationName": "动物园枢纽站",
+    "sequence": 1
+  },
+  {
+    "lineName": "19路(动物园枢纽站--翠林小区)",
+    "coordX": 116.3369212295765,
+    "coordY": 39.935536912417625,
+    "stationName": "北京展览馆",
+    "sequence": 2
+  },
+  {
+    "lineName": "19路(动物园枢纽站--翠林小区)",
+    "coordX": 116.33766385915663,
+    "coordY": 39.93343663729674,
+    "stationName": "二里沟东口",
+    "sequence": 3
+  },
+  {
+    "lineName": "19路(动物园枢纽站--翠林小区)",
+    "coordX": 116.34276316781187,
+    "coordY": 39.93100859993742,
+    "stationName": "三塔寺",
+    "sequence": 4
+  },
+  {
+    "lineName": "19路(动物园枢纽站--翠林小区)",
+    "coordX": 116.34601241945364,
+    "coordY": 39.93099299445467,
+    "stationName": "车公庄西",
+    "sequence": 5
+  },
+  {
+    "lineName": "19路(动物园枢纽站--翠林小区)",
+    "coordX": 116.34723655177078,
+    "coordY": 39.92615412982205,
+    "stationName": "马尾沟",
+    "sequence": 6
+  },
+  {
+    "lineName": "19路(动物园枢纽站--翠林小区)",
+    "coordX": 116.34698342487559,
+    "coordY": 39.923298671420234,
+    "stationName": "阜外医院",
+    "sequence": 7
+  },
+  {
+    "lineName": "19路(动物园枢纽站--翠林小区)",
+    "coordX": 116.34688591675894,
+    "coordY": 39.92097693135288,
+    "stationName": "南礼士路北口",
+    "sequence": 8
+  },
+  {
+    "lineName": "19路(动物园枢纽站--翠林小区)",
+    "coordX": 116.34730269861271,
+    "coordY": 39.91607643837236,
+    "stationName": "月坛公园",
+    "sequence": 9
+  },
+  {
+    "lineName": "19路(动物园枢纽站--翠林小区)",
+    "coordX": 116.34669245547978,
+    "coordY": 39.91194163771297,
+    "stationName": "北京儿童医院西门",
+    "sequence": 10
+  },
+  {
+    "lineName": "19路(动物园枢纽站--翠林小区)",
+    "coordX": 116.3463956096482,
+    "coordY": 39.90759432578704,
+    "stationName": "南礼士路南口",
+    "sequence": 11
+  },
+  {
+    "lineName": "19路(动物园枢纽站--翠林小区)",
+    "coordX": 116.34642012715858,
+    "coordY": 39.903123480518026,
+    "stationName": "真武庙",
+    "sequence": 12
+  },
+  {
+    "lineName": "19路(动物园枢纽站--翠林小区)",
+    "coordX": 116.34506531911694,
+    "coordY": 39.899826932242476,
+    "stationName": "西便门外",
+    "sequence": 13
+  },
+  {
+    "lineName": "19路(动物园枢纽站--翠林小区)",
+    "coordX": 116.34217960102517,
+    "coordY": 39.89790903606529,
+    "stationName": "天宁寺桥北",
+    "sequence": 14
+  },
+  {
+    "lineName": "19路(动物园枢纽站--翠林小区)",
+    "coordX": 116.34212254076019,
+    "coordY": 39.891448433333856,
+    "stationName": "广安门北",
+    "sequence": 15
+  },
+  {
+    "lineName": "19路(动物园枢纽站--翠林小区)",
+    "coordX": 116.34962966121479,
+    "coordY": 39.88790985955153,
+    "stationName": "广安门内",
+    "sequence": 16
+  },
+  {
+    "lineName": "19路(动物园枢纽站--翠林小区)",
+    "coordX": 116.35270228068283,
+    "coordY": 39.88405215996218,
+    "stationName": "枣林前街路口北",
+    "sequence": 17
+  },
+  {
+    "lineName": "19路(动物园枢纽站--翠林小区)",
+    "coordX": 116.35298146540612,
+    "coordY": 39.87849899901012,
+    "stationName": "白纸坊",
+    "sequence": 18
+  },
+  {
+    "lineName": "19路(动物园枢纽站--翠林小区)",
+    "coordX": 116.35773541504248,
+    "coordY": 39.87503309539198,
+    "stationName": "南樱桃园路口南",
+    "sequence": 19
+  },
+  {
+    "lineName": "19路(动物园枢纽站--翠林小区)",
+    "coordX": 116.35785255119644,
+    "coordY": 39.8723860634169,
+    "stationName": "右安门内",
+    "sequence": 20
+  },
+  {
+    "lineName": "19路(动物园枢纽站--翠林小区)",
+    "coordX": 116.35805696742834,
+    "coordY": 39.86636808733887,
+    "stationName": "右安门",
+    "sequence": 21
+  },
+  {
+    "lineName": "19路(动物园枢纽站--翠林小区)",
+    "coordX": 116.35825113226055,
+    "coordY": 39.86247702156187,
+    "stationName": "右安门外",
+    "sequence": 22
+  },
+  {
+    "lineName": "19路(动物园枢纽站--翠林小区)",
+    "coordX": 116.35846535806245,
+    "coordY": 39.857848974441836,
+    "stationName": "翠林小区",
+    "sequence": 23
+  },
+  {
+    "lineName": "19路(翠林小区--动物园枢纽站)",
+    "coordX": 116.35855219744069,
+    "coordY": 39.85796284597832,
+    "stationName": "翠林小区",
+    "sequence": 1
+  },
+  {
+    "lineName": "19路(翠林小区--动物园枢纽站)",
+    "coordX": 116.35837300680043,
+    "coordY": 39.86184288406725,
+    "stationName": "右安门外",
+    "sequence": 2
+  },
+  {
+    "lineName": "19路(翠林小区--动物园枢纽站)",
+    "coordX": 116.35816676425362,
+    "coordY": 39.86650092470608,
+    "stationName": "右安门",
+    "sequence": 3
+  },
+  {
+    "lineName": "19路(翠林小区--动物园枢纽站)",
+    "coordX": 116.35794337383,
+    "coordY": 39.8725639250671,
+    "stationName": "右安门内",
+    "sequence": 4
+  },
+  {
+    "lineName": "19路(翠林小区--动物园枢纽站)",
+    "coordX": 116.35685171493166,
+    "coordY": 39.87679627814504,
+    "stationName": "南樱桃园路口西",
+    "sequence": 5
+  },
+  {
+    "lineName": "19路(翠林小区--动物园枢纽站)",
+    "coordX": 116.35300251018442,
+    "coordY": 39.87783799936056,
+    "stationName": "白纸坊",
+    "sequence": 6
+  },
+  {
+    "lineName": "19路(翠林小区--动物园枢纽站)",
+    "coordX": 116.35270828888724,
+    "coordY": 39.88389915801648,
+    "stationName": "枣林前街路口北",
+    "sequence": 7
+  },
+  {
+    "lineName": "19路(翠林小区--动物园枢纽站)",
+    "coordX": 116.35257418546038,
+    "coordY": 39.88668823278308,
+    "stationName": "白广路北口",
+    "sequence": 8
+  },
+  {
+    "lineName": "19路(翠林小区--动物园枢纽站)",
+    "coordX": 116.3498970986131,
+    "coordY": 39.88823641065091,
+    "stationName": "广安门内",
+    "sequence": 9
+  },
+  {
+    "lineName": "19路(翠林小区--动物园枢纽站)",
+    "coordX": 116.34395463953629,
+    "coordY": 39.891809212829656,
+    "stationName": "广安门北",
+    "sequence": 10
+  },
+  {
+    "lineName": "19路(翠林小区--动物园枢纽站)",
+    "coordX": 116.34540905860372,
+    "coordY": 39.89630150367761,
+    "stationName": "天宁寺桥东",
+    "sequence": 11
+  },
+  {
+    "lineName": "19路(翠林小区--动物园枢纽站)",
+    "coordX": 116.34651124168455,
+    "coordY": 39.90076243176072,
+    "stationName": "西便门外",
+    "sequence": 12
+  },
+  {
+    "lineName": "19路(翠林小区--动物园枢纽站)",
+    "coordX": 116.34638603681796,
+    "coordY": 39.904381482552054,
+    "stationName": "真武庙",
+    "sequence": 13
+  },
+  {
+    "lineName": "19路(翠林小区--动物园枢纽站)",
+    "coordX": 116.34646149254579,
+    "coordY": 39.90746222030064,
+    "stationName": "南礼士路南口",
+    "sequence": 14
+  },
+  {
+    "lineName": "19路(翠林小区--动物园枢纽站)",
+    "coordX": 116.34671044747168,
+    "coordY": 39.9117176170237,
+    "stationName": "北京儿童医院西门",
+    "sequence": 15
+  },
+  {
+    "lineName": "19路(翠林小区--动物园枢纽站)",
+    "coordX": 116.34727871207171,
+    "coordY": 39.91635046690542,
+    "stationName": "月坛公园",
+    "sequence": 16
+  },
+  {
+    "lineName": "19路(翠林小区--动物园枢纽站)",
+    "coordX": 116.34695588612104,
+    "coordY": 39.92010485020442,
+    "stationName": "南礼士路北口",
+    "sequence": 17
+  },
+  {
+    "lineName": "19路(翠林小区--动物园枢纽站)",
+    "coordX": 116.34709614814561,
+    "coordY": 39.92368646641923,
+    "stationName": "阜外医院",
+    "sequence": 18
+  },
+  {
+    "lineName": "19路(翠林小区--动物园枢纽站)",
+    "coordX": 116.34546506829349,
+    "coordY": 39.92683809504455,
+    "stationName": "马尾沟",
+    "sequence": 19
+  },
+  {
+    "lineName": "19路(翠林小区--动物园枢纽站)",
+    "coordX": 116.34331343941493,
+    "coordY": 39.92761877577668,
+    "stationName": "车公庄南街",
+    "sequence": 20
+  },
+  {
+    "lineName": "19路(翠林小区--动物园枢纽站)",
+    "coordX": 116.342320093228,
+    "coordY": 39.931102374530404,
+    "stationName": "三塔寺",
+    "sequence": 21
+  },
+  {
+    "lineName": "19路(翠林小区--动物园枢纽站)",
+    "coordX": 116.33934448044845,
+    "coordY": 39.93111167983772,
+    "stationName": "二里沟东口",
+    "sequence": 22
+  },
+  {
+    "lineName": "19路(翠林小区--动物园枢纽站)",
+    "coordX": 116.33793100838744,
+    "coordY": 39.935518065835545,
+    "stationName": "北京展览馆",
+    "sequence": 23
+  },
+  {
+    "lineName": "19路(翠林小区--动物园枢纽站)",
+    "coordX": 116.33388593032446,
+    "coordY": 39.93604051449195,
+    "stationName": "动物园枢纽站",
+    "sequence": 24
+  },
+  {
+    "lineName": "101路(红庙路口东--百万庄西口)",
+    "coordX": 116.47435894966068,
+    "coordY": 39.91439275057208,
+    "stationName": "红庙路口东",
+    "sequence": 1
+  },
+  {
+    "lineName": "101路(红庙路口东--百万庄西口)",
+    "coordX": 116.46962299567429,
+    "coordY": 39.91459354261865,
+    "stationName": "红庙路口西",
+    "sequence": 2
+  },
+  {
+    "lineName": "101路(红庙路口东--百万庄西口)",
+    "coordX": 116.46518154093505,
+    "coordY": 39.91503253853733,
+    "stationName": "小庄路口东",
+    "sequence": 3
+  },
+  {
+    "lineName": "101路(红庙路口东--百万庄西口)",
+    "coordX": 116.45426775660026,
+    "coordY": 39.91839196353177,
+    "stationName": "呼家楼西",
+    "sequence": 4
+  },
+  {
+    "lineName": "101路(红庙路口东--百万庄西口)",
+    "coordX": 116.448791433494,
+    "coordY": 39.919778426546735,
+    "stationName": "关东店",
+    "sequence": 5
+  },
+  {
+    "lineName": "101路(红庙路口东--百万庄西口)",
+    "coordX": 116.44312578961389,
+    "coordY": 39.92168148114452,
+    "stationName": "东大桥路口西",
+    "sequence": 6
+  },
+  {
+    "lineName": "101路(红庙路口东--百万庄西口)",
+    "coordX": 116.4387598520865,
+    "coordY": 39.922072104620845,
+    "stationName": "神路街",
+    "sequence": 7
+  },
+  {
+    "lineName": "101路(红庙路口东--百万庄西口)",
+    "coordX": 116.43315710801379,
+    "coordY": 39.92295440725752,
+    "stationName": "朝阳门外",
+    "sequence": 8
+  },
+  {
+    "lineName": "101路(红庙路口东--百万庄西口)",
+    "coordX": 116.4262957914582,
+    "coordY": 39.92312329814019,
+    "stationName": "朝阳门内",
+    "sequence": 9
+  },
+  {
+    "lineName": "101路(红庙路口东--百万庄西口)",
+    "coordX": 116.4179720592535,
+    "coordY": 39.92306673529431,
+    "stationName": "朝内小街",
+    "sequence": 10
+  },
+  {
+    "lineName": "101路(红庙路口东--百万庄西口)",
+    "coordX": 116.41266094590922,
+    "coordY": 39.92303122769712,
+    "stationName": "东四路口东",
+    "sequence": 11
+  },
+  {
+    "lineName": "101路(红庙路口东--百万庄西口)",
+    "coordX": 116.40689011134029,
+    "coordY": 39.92298676214281,
+    "stationName": "美术馆东",
+    "sequence": 12
+  },
+  {
+    "lineName": "101路(红庙路口东--百万庄西口)",
+    "coordX": 116.39844643463714,
+    "coordY": 39.922927383211274,
+    "stationName": "沙滩路口西",
+    "sequence": 13
+  },
+  {
+    "lineName": "101路(红庙路口东--百万庄西口)",
+    "coordX": 116.38927306333764,
+    "coordY": 39.921868403357344,
+    "stationName": "神武门",
+    "sequence": 14
+  },
+  {
+    "lineName": "101路(红庙路口东--百万庄西口)",
+    "coordX": 116.38279623655518,
+    "coordY": 39.92097328036114,
+    "stationName": "北海",
+    "sequence": 15
+  },
+  {
+    "lineName": "101路(红庙路口东--百万庄西口)",
+    "coordX": 116.37217473686312,
+    "coordY": 39.921213516810525,
+    "stationName": "西安门",
+    "sequence": 16
+  },
+  {
+    "lineName": "101路(红庙路口东--百万庄西口)",
+    "coordX": 116.36877968520099,
+    "coordY": 39.92270596126009,
+    "stationName": "西四路口东",
+    "sequence": 17
+  },
+  {
+    "lineName": "101路(红庙路口东--百万庄西口)",
+    "coordX": 116.36084122775378,
+    "coordY": 39.9225366417587,
+    "stationName": "白塔寺东",
+    "sequence": 18
+  },
+  {
+    "lineName": "101路(红庙路口东--百万庄西口)",
+    "coordX": 116.35302879845939,
+    "coordY": 39.922412949041004,
+    "stationName": "阜成门内",
+    "sequence": 19
+  },
+  {
+    "lineName": "101路(红庙路口东--百万庄西口)",
+    "coordX": 116.34820410292339,
+    "coordY": 39.92231467905001,
+    "stationName": "阜成门",
+    "sequence": 20
+  },
+  {
+    "lineName": "101路(红庙路口东--百万庄西口)",
+    "coordX": 116.3441843073574,
+    "coordY": 39.9221904867702,
+    "stationName": "阜成门外",
+    "sequence": 21
+  },
+  {
+    "lineName": "101路(红庙路口东--百万庄西口)",
+    "coordX": 116.34110283121886,
+    "coordY": 39.92208689868915,
+    "stationName": "展览路",
+    "sequence": 22
+  },
+  {
+    "lineName": "101路(红庙路口东--百万庄西口)",
+    "coordX": 116.334657990181,
+    "coordY": 39.921901652210714,
+    "stationName": "阜外西口",
+    "sequence": 23
+  },
+  {
+    "lineName": "101路(红庙路口东--百万庄西口)",
+    "coordX": 116.3283810793482,
+    "coordY": 39.923008449195464,
+    "stationName": "甘家口北",
+    "sequence": 24
+  },
+  {
+    "lineName": "101路(红庙路口东--百万庄西口)",
+    "coordX": 116.3285911118059,
+    "coordY": 39.92685789008208,
+    "stationName": "百万庄西口",
+    "sequence": 25
+  },
+  {
+    "lineName": "101路(百万庄西口--红庙路口东)",
+    "coordX": 116.3289752332985,
+    "coordY": 39.92685615809636,
+    "stationName": "百万庄西口",
+    "sequence": 1
+  },
+  {
+    "lineName": "101路(百万庄西口--红庙路口东)",
+    "coordX": 116.33174692197409,
+    "coordY": 39.926849903158576,
+    "stationName": "百万庄中街",
+    "sequence": 2
+  },
+  {
+    "lineName": "101路(百万庄西口--红庙路口东)",
+    "coordX": 116.33560325620901,
+    "coordY": 39.92682969509108,
+    "stationName": "百万庄东口",
+    "sequence": 3
+  },
+  {
+    "lineName": "101路(百万庄西口--红庙路口东)",
+    "coordX": 116.33955519136062,
+    "coordY": 39.92189867779025,
+    "stationName": "展览路",
+    "sequence": 4
+  },
+  {
+    "lineName": "101路(百万庄西口--红庙路口东)",
+    "coordX": 116.34417933737691,
+    "coordY": 39.92203550179155,
+    "stationName": "阜成门外",
+    "sequence": 5
+  },
+  {
+    "lineName": "101路(百万庄西口--红庙路口东)",
+    "coordX": 116.3482141022145,
+    "coordY": 39.922163668777934,
+    "stationName": "阜成门",
+    "sequence": 6
+  },
+  {
+    "lineName": "101路(百万庄西口--红庙路口东)",
+    "coordX": 116.35305875119933,
+    "coordY": 39.92234690546167,
+    "stationName": "阜成门内",
+    "sequence": 7
+  },
+  {
+    "lineName": "101路(百万庄西口--红庙路口东)",
+    "coordX": 116.360892153957,
+    "coordY": 39.922475576081105,
+    "stationName": "白塔寺东",
+    "sequence": 8
+  },
+  {
+    "lineName": "101路(百万庄西口--红庙路口东)",
+    "coordX": 116.36970151435753,
+    "coordY": 39.92268997065147,
+    "stationName": "西四路口东",
+    "sequence": 9
+  },
+  {
+    "lineName": "101路(百万庄西口--红庙路口东)",
+    "coordX": 116.37242146342909,
+    "coordY": 39.921153280183276,
+    "stationName": "西安门",
+    "sequence": 10
+  },
+  {
+    "lineName": "101路(百万庄西口--红庙路口东)",
+    "coordX": 116.38352879801391,
+    "coordY": 39.9208478781361,
+    "stationName": "北海",
+    "sequence": 11
+  },
+  {
+    "lineName": "101路(百万庄西口--红庙路口东)",
+    "coordX": 116.38984589927928,
+    "coordY": 39.92186423646602,
+    "stationName": "神武门",
+    "sequence": 12
+  },
+  {
+    "lineName": "101路(百万庄西口--红庙路口东)",
+    "coordX": 116.39927062417034,
+    "coordY": 39.92287547777592,
+    "stationName": "沙滩路口西",
+    "sequence": 13
+  },
+  {
+    "lineName": "101路(百万庄西口--红庙路口东)",
+    "coordX": 116.40640580868154,
+    "coordY": 39.92284854491344,
+    "stationName": "美术馆东",
+    "sequence": 14
+  },
+  {
+    "lineName": "101路(百万庄西口--红庙路口东)",
+    "coordX": 116.41266496687842,
+    "coordY": 39.92289823610134,
+    "stationName": "东四路口东",
+    "sequence": 15
+  },
+  {
+    "lineName": "101路(百万庄西口--红庙路口东)",
+    "coordX": 116.41800111246451,
+    "coordY": 39.92294576837863,
+    "stationName": "朝内小街",
+    "sequence": 16
+  },
+  {
+    "lineName": "101路(百万庄西口--红庙路口东)",
+    "coordX": 116.42615956838894,
+    "coordY": 39.92299912261578,
+    "stationName": "朝阳门内",
+    "sequence": 17
+  },
+  {
+    "lineName": "101路(百万庄西口--红庙路口东)",
+    "coordX": 116.4337383649281,
+    "coordY": 39.92280535796186,
+    "stationName": "朝阳门外",
+    "sequence": 18
+  },
+  {
+    "lineName": "101路(百万庄西口--红庙路口东)",
+    "coordX": 116.43824262386075,
+    "coordY": 39.9220541622617,
+    "stationName": "神路街",
+    "sequence": 19
+  },
+  {
+    "lineName": "101路(百万庄西口--红庙路口东)",
+    "coordX": 116.44530764625884,
+    "coordY": 39.92097194841953,
+    "stationName": "东大桥路口东",
+    "sequence": 20
+  },
+  {
+    "lineName": "101路(百万庄西口--红庙路口东)",
+    "coordX": 116.44906926754095,
+    "coordY": 39.91943305087682,
+    "stationName": "关东店",
+    "sequence": 21
+  },
+  {
+    "lineName": "101路(百万庄西口--红庙路口东)",
+    "coordX": 116.45329681301472,
+    "coordY": 39.91835768421989,
+    "stationName": "呼家楼西",
+    "sequence": 22
+  },
+  {
+    "lineName": "101路(百万庄西口--红庙路口东)",
+    "coordX": 116.46574551927313,
+    "coordY": 39.9146220543116,
+    "stationName": "小庄路口东",
+    "sequence": 23
+  },
+  {
+    "lineName": "101路(百万庄西口--红庙路口东)",
+    "coordX": 116.46963607551221,
+    "coordY": 39.9143235898532,
+    "stationName": "红庙路口西",
+    "sequence": 24
+  },
+  {
+    "lineName": "101路(百万庄西口--红庙路口东)",
+    "coordX": 116.47501538789318,
+    "coordY": 39.9139436287918,
+    "stationName": "红庙路口东",
+    "sequence": 25
+  },
+  {
+    "lineName": "102路(动物园枢纽站--角门南站)",
+    "coordX": 116.33288919835601,
+    "coordY": 39.935853388353515,
+    "stationName": "动物园枢纽站",
+    "sequence": 1
+  },
+  {
+    "lineName": "102路(动物园枢纽站--角门南站)",
+    "coordX": 116.327141495595,
+    "coordY": 39.934284357488515,
+    "stationName": "二里沟",
+    "sequence": 2
+  },
+  {
+    "lineName": "102路(动物园枢纽站--角门南站)",
+    "coordX": 116.32759600372948,
+    "coordY": 39.92992666473558,
+    "stationName": "百万庄",
+    "sequence": 3
+  },
+  {
+    "lineName": "102路(动物园枢纽站--角门南站)",
+    "coordX": 116.32802953075503,
+    "coordY": 39.92580700484126,
+    "stationName": "甘家口大厦",
+    "sequence": 4
+  },
+  {
+    "lineName": "102路(动物园枢纽站--角门南站)",
+    "coordX": 116.33104617062904,
+    "coordY": 39.921648441393025,
+    "stationName": "甘家口东",
+    "sequence": 5
+  },
+  {
+    "lineName": "102路(动物园枢纽站--角门南站)",
+    "coordX": 116.33504813494562,
+    "coordY": 39.92176893268742,
+    "stationName": "阜外西口",
+    "sequence": 6
+  },
+  {
+    "lineName": "102路(动物园枢纽站--角门南站)",
+    "coordX": 116.33955519136062,
+    "coordY": 39.92189867779025,
+    "stationName": "展览路",
+    "sequence": 7
+  },
+  {
+    "lineName": "102路(动物园枢纽站--角门南站)",
+    "coordX": 116.3444298155627,
+    "coordY": 39.922043068862294,
+    "stationName": "阜成门外",
+    "sequence": 8
+  },
+  {
+    "lineName": "102路(动物园枢纽站--角门南站)",
+    "coordX": 116.3482141022145,
+    "coordY": 39.922163668777934,
+    "stationName": "阜成门",
+    "sequence": 9
+  },
+  {
+    "lineName": "102路(动物园枢纽站--角门南站)",
+    "coordX": 116.35305875119933,
+    "coordY": 39.92234690546167,
+    "stationName": "阜成门内",
+    "sequence": 10
+  },
+  {
+    "lineName": "102路(动物园枢纽站--角门南站)",
+    "coordX": 116.360892153957,
+    "coordY": 39.922475576081105,
+    "stationName": "白塔寺东",
+    "sequence": 11
+  },
+  {
+    "lineName": "102路(动物园枢纽站--角门南站)",
+    "coordX": 116.365745816975,
+    "coordY": 39.92253343043001,
+    "stationName": "西四路口西",
+    "sequence": 12
+  },
+  {
+    "lineName": "102路(动物园枢纽站--角门南站)",
+    "coordX": 116.36738216138919,
+    "coordY": 39.917762724245016,
+    "stationName": "缸瓦市",
+    "sequence": 13
+  },
+  {
+    "lineName": "102路(动物园枢纽站--角门南站)",
+    "coordX": 116.36750242913135,
+    "coordY": 39.914389729885656,
+    "stationName": "甘石桥",
+    "sequence": 14
+  },
+  {
+    "lineName": "102路(动物园枢纽站--角门南站)",
+    "coordX": 116.36768081528992,
+    "coordY": 39.90948073806835,
+    "stationName": "西单商场",
+    "sequence": 15
+  },
+  {
+    "lineName": "102路(动物园枢纽站--角门南站)",
+    "coordX": 116.36784041816412,
+    "coordY": 39.903075838113246,
+    "stationName": "西单路口南",
+    "sequence": 16
+  },
+  {
+    "lineName": "102路(动物园枢纽站--角门南站)",
+    "coordX": 116.36793669608488,
+    "coordY": 39.89988887202703,
+    "stationName": "宣武门内",
+    "sequence": 17
+  },
+  {
+    "lineName": "102路(动物园枢纽站--角门南站)",
+    "coordX": 116.36814214771698,
+    "coordY": 39.89420790047471,
+    "stationName": "校场口",
+    "sequence": 18
+  },
+  {
+    "lineName": "102路(动物园枢纽站--角门南站)",
+    "coordX": 116.36813565501265,
+    "coordY": 39.89029008932859,
+    "stationName": "菜市口北",
+    "sequence": 19
+  },
+  {
+    "lineName": "102路(动物园枢纽站--角门南站)",
+    "coordX": 116.37263446461753,
+    "coordY": 39.88786654318566,
+    "stationName": "果子巷",
+    "sequence": 20
+  },
+  {
+    "lineName": "102路(动物园枢纽站--角门南站)",
+    "coordX": 116.3784998836804,
+    "coordY": 39.88612764050094,
+    "stationName": "虎坊桥路口南",
+    "sequence": 21
+  },
+  {
+    "lineName": "102路(动物园枢纽站--角门南站)",
+    "coordX": 116.38113547254954,
+    "coordY": 39.88092507665122,
+    "stationName": "太平街北口",
+    "sequence": 22
+  },
+  {
+    "lineName": "102路(动物园枢纽站--角门南站)",
+    "coordX": 116.38117012366273,
+    "coordY": 39.87561631831194,
+    "stationName": "太平街",
+    "sequence": 23
+  },
+  {
+    "lineName": "102路(动物园枢纽站--角门南站)",
+    "coordX": 116.38128335362576,
+    "coordY": 39.87317237052928,
+    "stationName": "陶然桥北",
+    "sequence": 24
+  },
+  {
+    "lineName": "102路(动物园枢纽站--角门南站)",
+    "coordX": 116.38057750438256,
+    "coordY": 39.86033550591005,
+    "stationName": "四路通",
+    "sequence": 25
+  },
+  {
+    "lineName": "102路(动物园枢纽站--角门南站)",
+    "coordX": 116.38055524704737,
+    "coordY": 39.85462983949665,
+    "stationName": "洋桥南",
+    "sequence": 26
+  },
+  {
+    "lineName": "102路(动物园枢纽站--角门南站)",
+    "coordX": 116.38070078363226,
+    "coordY": 39.84955703670118,
+    "stationName": "马家堡东口",
+    "sequence": 27
+  },
+  {
+    "lineName": "102路(动物园枢纽站--角门南站)",
+    "coordX": 116.38029765827505,
+    "coordY": 39.84506757061215,
+    "stationName": "西马场北口",
+    "sequence": 28
+  },
+  {
+    "lineName": "102路(动物园枢纽站--角门南站)",
+    "coordX": 116.37941713975692,
+    "coordY": 39.83885055805572,
+    "stationName": "西马场",
+    "sequence": 29
+  },
+  {
+    "lineName": "102路(动物园枢纽站--角门南站)",
+    "coordX": 116.37495621323049,
+    "coordY": 39.838848081321075,
+    "stationName": "西马小区",
+    "sequence": 30
+  },
+  {
+    "lineName": "102路(动物园枢纽站--角门南站)",
+    "coordX": 116.37256066584582,
+    "coordY": 39.839768220585135,
+    "stationName": "角门南站",
+    "sequence": 31
+  },
+  {
+    "lineName": "102路(角门南站--动物园枢纽站)",
+    "coordX": 116.37242478985522,
+    "coordY": 39.840000336922756,
+    "stationName": "角门南站",
+    "sequence": 1
+  },
+  {
+    "lineName": "102路(角门南站--动物园枢纽站)",
+    "coordX": 116.37586231771947,
+    "coordY": 39.8387863089728,
+    "stationName": "西马小区",
+    "sequence": 2
+  },
+  {
+    "lineName": "102路(角门南站--动物园枢纽站)",
+    "coordX": 116.38047123449351,
+    "coordY": 39.83949979631213,
+    "stationName": "西马场",
+    "sequence": 3
+  },
+  {
+    "lineName": "102路(角门南站--动物园枢纽站)",
+    "coordX": 116.38040554698186,
+    "coordY": 39.84529748467292,
+    "stationName": "西马场北口",
+    "sequence": 4
+  },
+  {
+    "lineName": "102路(角门南站--动物园枢纽站)",
+    "coordX": 116.380791746877,
+    "coordY": 39.84931599147322,
+    "stationName": "马家堡东口",
+    "sequence": 5
+  },
+  {
+    "lineName": "102路(角门南站--动物园枢纽站)",
+    "coordX": 116.38070690111434,
+    "coordY": 39.856458636431384,
+    "stationName": "洋桥北",
+    "sequence": 6
+  },
+  {
+    "lineName": "102路(角门南站--动物园枢纽站)",
+    "coordX": 116.38067250186886,
+    "coordY": 39.85979747307017,
+    "stationName": "四路通",
+    "sequence": 7
+  },
+  {
+    "lineName": "102路(角门南站--动物园枢纽站)",
+    "coordX": 116.38149830762099,
+    "coordY": 39.87233627851387,
+    "stationName": "陶然桥北",
+    "sequence": 8
+  },
+  {
+    "lineName": "102路(角门南站--动物园枢纽站)",
+    "coordX": 116.38122770266706,
+    "coordY": 39.87859713277549,
+    "stationName": "太平街",
+    "sequence": 9
+  },
+  {
+    "lineName": "102路(角门南站--动物园枢纽站)",
+    "coordX": 116.37880101541693,
+    "coordY": 39.883098565065794,
+    "stationName": "虎坊路",
+    "sequence": 10
+  },
+  {
+    "lineName": "102路(角门南站--动物园枢纽站)",
+    "coordX": 116.37578712239787,
+    "coordY": 39.88805669585547,
+    "stationName": "虎坊桥路口西",
+    "sequence": 11
+  },
+  {
+    "lineName": "102路(角门南站--动物园枢纽站)",
+    "coordX": 116.37267740366842,
+    "coordY": 39.88796649738137,
+    "stationName": "果子巷",
+    "sequence": 12
+  },
+  {
+    "lineName": "102路(角门南站--动物园枢纽站)",
+    "coordX": 116.36831250667319,
+    "coordY": 39.88962892406878,
+    "stationName": "菜市口北",
+    "sequence": 13
+  },
+  {
+    "lineName": "102路(角门南站--动物园枢纽站)",
+    "coordX": 116.36834099225742,
+    "coordY": 39.89337671820076,
+    "stationName": "校场口",
+    "sequence": 14
+  },
+  {
+    "lineName": "102路(角门南站--动物园枢纽站)",
+    "coordX": 116.36832266120231,
+    "coordY": 39.89616561068489,
+    "stationName": "宣武门外",
+    "sequence": 15
+  },
+  {
+    "lineName": "102路(角门南站--动物园枢纽站)",
+    "coordX": 116.36798404802515,
+    "coordY": 39.90448461515038,
+    "stationName": "西单路口南",
+    "sequence": 16
+  },
+  {
+    "lineName": "102路(角门南站--动物园枢纽站)",
+    "coordX": 116.36772062005258,
+    "coordY": 39.9105956452283,
+    "stationName": "西单商场",
+    "sequence": 17
+  },
+  {
+    "lineName": "102路(角门南站--动物园枢纽站)",
+    "coordX": 116.36738817417168,
+    "coordY": 39.917598724285334,
+    "stationName": "缸瓦市",
+    "sequence": 18
+  },
+  {
+    "lineName": "102路(角门南站--动物园枢纽站)",
+    "coordX": 116.36731098053836,
+    "coordY": 39.919936714427585,
+    "stationName": "西四路口南",
+    "sequence": 19
+  },
+  {
+    "lineName": "102路(角门南站--动物园枢纽站)",
+    "coordX": 116.3689664434231,
+    "coordY": 39.92271575770449,
+    "stationName": "西四路口东",
+    "sequence": 20
+  },
+  {
+    "lineName": "102路(角门南站--动物园枢纽站)",
+    "coordX": 116.36084122775378,
+    "coordY": 39.9225366417587,
+    "stationName": "白塔寺东",
+    "sequence": 21
+  },
+  {
+    "lineName": "102路(角门南站--动物园枢纽站)",
+    "coordX": 116.35312362249218,
+    "coordY": 39.92241180253929,
+    "stationName": "阜成门内",
+    "sequence": 22
+  },
+  {
+    "lineName": "102路(角门南站--动物园枢纽站)",
+    "coordX": 116.34820410292339,
+    "coordY": 39.92231467905001,
+    "stationName": "阜成门",
+    "sequence": 23
+  },
+  {
+    "lineName": "102路(角门南站--动物园枢纽站)",
+    "coordX": 116.3441843073574,
+    "coordY": 39.9221904867702,
+    "stationName": "阜成门外",
+    "sequence": 24
+  },
+  {
+    "lineName": "102路(角门南站--动物园枢纽站)",
+    "coordX": 116.34110283121886,
+    "coordY": 39.92208689868915,
+    "stationName": "展览路",
+    "sequence": 25
+  },
+  {
+    "lineName": "102路(角门南站--动物园枢纽站)",
+    "coordX": 116.334657990181,
+    "coordY": 39.921901652210714,
+    "stationName": "阜外西口",
+    "sequence": 26
+  },
+  {
+    "lineName": "102路(角门南站--动物园枢纽站)",
+    "coordX": 116.3283810793482,
+    "coordY": 39.923008449195464,
+    "stationName": "甘家口北",
+    "sequence": 27
+  },
+  {
+    "lineName": "102路(角门南站--动物园枢纽站)",
+    "coordX": 116.32792556593637,
+    "coordY": 39.9274131375459,
+    "stationName": "甘家口大厦",
+    "sequence": 28
+  },
+  {
+    "lineName": "102路(角门南站--动物园枢纽站)",
+    "coordX": 116.32764685903933,
+    "coordY": 39.93014855849572,
+    "stationName": "百万庄",
+    "sequence": 29
+  },
+  {
+    "lineName": "102路(角门南站--动物园枢纽站)",
+    "coordX": 116.32723930752609,
+    "coordY": 39.93399618196591,
+    "stationName": "二里沟",
+    "sequence": 30
+  },
+  {
+    "lineName": "102路(角门南站--动物园枢纽站)",
+    "coordX": 116.33243313637136,
+    "coordY": 39.936581215955954,
+    "stationName": "动物园枢纽站",
+    "sequence": 31
+  },
+  {
+    "lineName": "103路(动物园枢纽站--北京站西)",
+    "coordX": 116.33257389523229,
+    "coordY": 39.9359729757615,
+    "stationName": "动物园枢纽站",
+    "sequence": 1
+  },
+  {
+    "lineName": "103路(动物园枢纽站--北京站西)",
+    "coordX": 116.327141495595,
+    "coordY": 39.934284357488515,
+    "stationName": "二里沟",
+    "sequence": 2
+  },
+  {
+    "lineName": "103路(动物园枢纽站--北京站西)",
+    "coordX": 116.32759600372948,
+    "coordY": 39.92992666473558,
+    "stationName": "百万庄",
+    "sequence": 3
+  },
+  {
+    "lineName": "103路(动物园枢纽站--北京站西)",
+    "coordX": 116.32802953075503,
+    "coordY": 39.92580700484126,
+    "stationName": "甘家口大厦",
+    "sequence": 4
+  },
+  {
+    "lineName": "103路(动物园枢纽站--北京站西)",
+    "coordX": 116.33104617062904,
+    "coordY": 39.921648441393025,
+    "stationName": "甘家口东",
+    "sequence": 5
+  },
+  {
+    "lineName": "103路(动物园枢纽站--北京站西)",
+    "coordX": 116.33504813494562,
+    "coordY": 39.92176893268742,
+    "stationName": "阜外西口",
+    "sequence": 6
+  },
+  {
+    "lineName": "103路(动物园枢纽站--北京站西)",
+    "coordX": 116.33955519136062,
+    "coordY": 39.92189867779025,
+    "stationName": "展览路",
+    "sequence": 7
+  },
+  {
+    "lineName": "103路(动物园枢纽站--北京站西)",
+    "coordX": 116.34417933737691,
+    "coordY": 39.92203550179155,
+    "stationName": "阜成门外",
+    "sequence": 8
+  },
+  {
+    "lineName": "103路(动物园枢纽站--北京站西)",
+    "coordX": 116.3482141022145,
+    "coordY": 39.922163668777934,
+    "stationName": "阜成门",
+    "sequence": 9
+  },
+  {
+    "lineName": "103路(动物园枢纽站--北京站西)",
+    "coordX": 116.35295394604407,
+    "coordY": 39.92234706760427,
+    "stationName": "阜成门内",
+    "sequence": 10
+  },
+  {
+    "lineName": "103路(动物园枢纽站--北京站西)",
+    "coordX": 116.360892153957,
+    "coordY": 39.922475576081105,
+    "stationName": "白塔寺东",
+    "sequence": 11
+  },
+  {
+    "lineName": "103路(动物园枢纽站--北京站西)",
+    "coordX": 116.36970151435753,
+    "coordY": 39.92268997065147,
+    "stationName": "西四路口东",
+    "sequence": 12
+  },
+  {
+    "lineName": "103路(动物园枢纽站--北京站西)",
+    "coordX": 116.37242146342909,
+    "coordY": 39.921153280183276,
+    "stationName": "西安门",
+    "sequence": 13
+  },
+  {
+    "lineName": "103路(动物园枢纽站--北京站西)",
+    "coordX": 116.38352879801391,
+    "coordY": 39.9208478781361,
+    "stationName": "北海",
+    "sequence": 14
+  },
+  {
+    "lineName": "103路(动物园枢纽站--北京站西)",
+    "coordX": 116.38939902807303,
+    "coordY": 39.92184936621648,
+    "stationName": "神武门",
+    "sequence": 15
+  },
+  {
+    "lineName": "103路(动物园枢纽站--北京站西)",
+    "coordX": 116.39866348703194,
+    "coordY": 39.92286540718651,
+    "stationName": "沙滩路口西",
+    "sequence": 16
+  },
+  {
+    "lineName": "103路(动物园枢纽站--北京站西)",
+    "coordX": 116.4002125036624,
+    "coordY": 39.91798382311289,
+    "stationName": "骑河楼",
+    "sequence": 17
+  },
+  {
+    "lineName": "103路(动物园枢纽站--北京站西)",
+    "coordX": 116.40217571364984,
+    "coordY": 39.91392741751798,
+    "stationName": "东安门大街",
+    "sequence": 18
+  },
+  {
+    "lineName": "103路(动物园枢纽站--北京站西)",
+    "coordX": 116.4060917225603,
+    "coordY": 39.91410477045158,
+    "stationName": "新东安市场",
+    "sequence": 19
+  },
+  {
+    "lineName": "103路(动物园枢纽站--北京站西)",
+    "coordX": 116.4075401621393,
+    "coordY": 39.91043060425488,
+    "stationName": "校尉胡同",
+    "sequence": 20
+  },
+  {
+    "lineName": "103路(动物园枢纽站--北京站西)",
+    "coordX": 116.40504082609756,
+    "coordY": 39.908345583734615,
+    "stationName": "王府井路口北",
+    "sequence": 21
+  },
+  {
+    "lineName": "103路(动物园枢纽站--北京站西)",
+    "coordX": 116.40546786433711,
+    "coordY": 39.90214702418181,
+    "stationName": "台基厂",
+    "sequence": 22
+  },
+  {
+    "lineName": "103路(动物园枢纽站--北京站西)",
+    "coordX": 116.40729838007488,
+    "coordY": 39.899529961094395,
+    "stationName": "台基厂路口东",
+    "sequence": 23
+  },
+  {
+    "lineName": "103路(动物园枢纽站--北京站西)",
+    "coordX": 116.40998645164078,
+    "coordY": 39.89960243584392,
+    "stationName": "崇文门西",
+    "sequence": 24
+  },
+  {
+    "lineName": "103路(动物园枢纽站--北京站西)",
+    "coordX": 116.41546876875067,
+    "coordY": 39.9011353872221,
+    "stationName": "北京站西街",
+    "sequence": 25
+  },
+  {
+    "lineName": "103路(动物园枢纽站--北京站西)",
+    "coordX": 116.4185923839225,
+    "coordY": 39.90335417927547,
+    "stationName": "北京站西",
+    "sequence": 26
+  },
+  {
+    "lineName": "103路(北京站西--动物园枢纽站)",
+    "coordX": 116.41812377532413,
+    "coordY": 39.903268721896936,
+    "stationName": "北京站西",
+    "sequence": 1
+  },
+  {
+    "lineName": "103路(北京站西--动物园枢纽站)",
+    "coordX": 116.41412336673,
+    "coordY": 39.900287313888484,
+    "stationName": "北京站西街",
+    "sequence": 2
+  },
+  {
+    "lineName": "103路(北京站西--动物园枢纽站)",
+    "coordX": 116.41056193288783,
+    "coordY": 39.89973978833809,
+    "stationName": "崇文门西",
+    "sequence": 3
+  },
+  {
+    "lineName": "103路(北京站西--动物园枢纽站)",
+    "coordX": 116.4072123072375,
+    "coordY": 39.899631914580574,
+    "stationName": "台基厂路口东",
+    "sequence": 4
+  },
+  {
+    "lineName": "103路(北京站西--动物园枢纽站)",
+    "coordX": 116.4054799234721,
+    "coordY": 39.901739047147096,
+    "stationName": "台基厂",
+    "sequence": 5
+  },
+  {
+    "lineName": "103路(北京站西--动物园枢纽站)",
+    "coordX": 116.4051328497358,
+    "coordY": 39.908573609799404,
+    "stationName": "王府井路口北",
+    "sequence": 6
+  },
+  {
+    "lineName": "103路(北京站西--动物园枢纽站)",
+    "coordX": 116.40773097883942,
+    "coordY": 39.91294359347211,
+    "stationName": "校尉胡同",
+    "sequence": 7
+  },
+  {
+    "lineName": "103路(北京站西--动物园枢纽站)",
+    "coordX": 116.40654500701065,
+    "coordY": 39.914157970109926,
+    "stationName": "新东安市场",
+    "sequence": 8
+  },
+  {
+    "lineName": "103路(北京站西--动物园枢纽站)",
+    "coordX": 116.40225773787837,
+    "coordY": 39.91400143584061,
+    "stationName": "东安门大街",
+    "sequence": 9
+  },
+  {
+    "lineName": "103路(北京站西--动物园枢纽站)",
+    "coordX": 116.40029656153013,
+    "coordY": 39.917727848440336,
+    "stationName": "骑河楼",
+    "sequence": 10
+  },
+  {
+    "lineName": "103路(北京站西--动物园枢纽站)",
+    "coordX": 116.39844643463714,
+    "coordY": 39.922927383211274,
+    "stationName": "沙滩路口西",
+    "sequence": 11
+  },
+  {
+    "lineName": "103路(北京站西--动物园枢纽站)",
+    "coordX": 116.38930804882911,
+    "coordY": 39.921899391474945,
+    "stationName": "神武门",
+    "sequence": 12
+  },
+  {
+    "lineName": "103路(北京站西--动物园枢纽站)",
+    "coordX": 116.38279623655518,
+    "coordY": 39.92097328036114,
+    "stationName": "北海",
+    "sequence": 13
+  },
+  {
+    "lineName": "103路(北京站西--动物园枢纽站)",
+    "coordX": 116.37217473686312,
+    "coordY": 39.921213516810525,
+    "stationName": "西安门",
+    "sequence": 14
+  },
+  {
+    "lineName": "103路(北京站西--动物园枢纽站)",
+    "coordX": 116.36877968520099,
+    "coordY": 39.92270596126009,
+    "stationName": "西四路口东",
+    "sequence": 15
+  },
+  {
+    "lineName": "103路(北京站西--动物园枢纽站)",
+    "coordX": 116.36084122775378,
+    "coordY": 39.9225366417587,
+    "stationName": "白塔寺东",
+    "sequence": 16
+  },
+  {
+    "lineName": "103路(北京站西--动物园枢纽站)",
+    "coordX": 116.35302879845939,
+    "coordY": 39.922412949041004,
+    "stationName": "阜成门内",
+    "sequence": 17
+  },
+  {
+    "lineName": "103路(北京站西--动物园枢纽站)",
+    "coordX": 116.34820410292339,
+    "coordY": 39.92231467905001,
+    "stationName": "阜成门",
+    "sequence": 18
+  },
+  {
+    "lineName": "103路(北京站西--动物园枢纽站)",
+    "coordX": 116.3441843073574,
+    "coordY": 39.9221904867702,
+    "stationName": "阜成门外",
+    "sequence": 19
+  },
+  {
+    "lineName": "103路(北京站西--动物园枢纽站)",
+    "coordX": 116.34110283121886,
+    "coordY": 39.92208689868915,
+    "stationName": "展览路",
+    "sequence": 20
+  },
+  {
+    "lineName": "103路(北京站西--动物园枢纽站)",
+    "coordX": 116.334657990181,
+    "coordY": 39.921901652210714,
+    "stationName": "阜外西口",
+    "sequence": 21
+  },
+  {
+    "lineName": "103路(北京站西--动物园枢纽站)",
+    "coordX": 116.3283810793482,
+    "coordY": 39.923008449195464,
+    "stationName": "甘家口北",
+    "sequence": 22
+  },
+  {
+    "lineName": "103路(北京站西--动物园枢纽站)",
+    "coordX": 116.32792556593637,
+    "coordY": 39.9274131375459,
+    "stationName": "甘家口大厦",
+    "sequence": 23
+  },
+  {
+    "lineName": "103路(北京站西--动物园枢纽站)",
+    "coordX": 116.32764685903933,
+    "coordY": 39.93014855849572,
+    "stationName": "百万庄",
+    "sequence": 24
+  },
+  {
+    "lineName": "103路(北京站西--动物园枢纽站)",
+    "coordX": 116.32723930752609,
+    "coordY": 39.93399618196591,
+    "stationName": "二里沟",
+    "sequence": 25
+  },
+  {
+    "lineName": "103路(北京站西--动物园枢纽站)",
+    "coordX": 116.33243313637136,
+    "coordY": 39.936581215955954,
+    "stationName": "动物园枢纽站",
+    "sequence": 26
+  },
+  {
+    "lineName": "104路(地铁柳芳站--北京站西)",
+    "coordX": 116.42495403525123,
+    "coordY": 39.95809816102809,
+    "stationName": "地铁柳芳站",
+    "sequence": 1
+  },
+  {
+    "lineName": "104路(地铁柳芳站--北京站西)",
+    "coordX": 116.43079577869808,
+    "coordY": 39.95821730745186,
+    "stationName": "柳芳北街",
+    "sequence": 2
+  },
+  {
+    "lineName": "104路(地铁柳芳站--北京站西)",
+    "coordX": 116.43436221227088,
+    "coordY": 39.95828697516433,
+    "stationName": "国际展览中心",
+    "sequence": 3
+  },
+  {
+    "lineName": "104路(地铁柳芳站--北京站西)",
+    "coordX": 116.44325434156768,
+    "coordY": 39.95948823402374,
+    "stationName": "静安庄东",
+    "sequence": 4
+  },
+  {
+    "lineName": "104路(地铁柳芳站--北京站西)",
+    "coordX": 116.43945634999753,
+    "coordY": 39.95507607555348,
+    "stationName": "左家庄东里",
+    "sequence": 5
+  },
+  {
+    "lineName": "104路(地铁柳芳站--北京站西)",
+    "coordX": 116.43274838099208,
+    "coordY": 39.953429536155774,
+    "stationName": "柳芳东口",
+    "sequence": 6
+  },
+  {
+    "lineName": "104路(地铁柳芳站--北京站西)",
+    "coordX": 116.42957000439925,
+    "coordY": 39.95324067408458,
+    "stationName": "柳芳西口",
+    "sequence": 7
+  },
+  {
+    "lineName": "104路(地铁柳芳站--北京站西)",
+    "coordX": 116.428576657421,
+    "coordY": 39.95681509740458,
+    "stationName": "西坝河南路",
+    "sequence": 8
+  },
+  {
+    "lineName": "104路(地铁柳芳站--北京站西)",
+    "coordX": 116.42379711491276,
+    "coordY": 39.958146716617954,
+    "stationName": "地铁柳芳站(西行)",
+    "sequence": 9
+  },
+  {
+    "lineName": "104路(地铁柳芳站--北京站西)",
+    "coordX": 116.41698835268326,
+    "coordY": 39.95803541178921,
+    "stationName": "和平里路口西",
+    "sequence": 10
+  },
+  {
+    "lineName": "104路(地铁柳芳站--北京站西)",
+    "coordX": 116.41147034454221,
+    "coordY": 39.95792199835998,
+    "stationName": "和平里北街",
+    "sequence": 11
+  },
+  {
+    "lineName": "104路(地铁柳芳站--北京站西)",
+    "coordX": 116.4074500505662,
+    "coordY": 39.957853641714,
+    "stationName": "兴化路南口",
+    "sequence": 12
+  },
+  {
+    "lineName": "104路(地铁柳芳站--北京站西)",
+    "coordX": 116.40357974483616,
+    "coordY": 39.95779705877941,
+    "stationName": "蒋宅口东",
+    "sequence": 13
+  },
+  {
+    "lineName": "104路(地铁柳芳站--北京站西)",
+    "coordX": 116.40180284290682,
+    "coordY": 39.950938826199376,
+    "stationName": "地坛西门",
+    "sequence": 14
+  },
+  {
+    "lineName": "104路(地铁柳芳站--北京站西)",
+    "coordX": 116.40199866907017,
+    "coordY": 39.94507110633689,
+    "stationName": "安定门内",
+    "sequence": 15
+  },
+  {
+    "lineName": "104路(地铁柳芳站--北京站西)",
+    "coordX": 116.40214308398329,
+    "coordY": 39.94227625388455,
+    "stationName": "方家胡同",
+    "sequence": 16
+  },
+  {
+    "lineName": "104路(地铁柳芳站--北京站西)",
+    "coordX": 116.40229277020407,
+    "coordY": 39.93738148778864,
+    "stationName": "交道口南",
+    "sequence": 17
+  },
+  {
+    "lineName": "104路(地铁柳芳站--北京站西)",
+    "coordX": 116.40236914888996,
+    "coordY": 39.93466361688695,
+    "stationName": "北兵马司",
+    "sequence": 18
+  },
+  {
+    "lineName": "104路(地铁柳芳站--北京站西)",
+    "coordX": 116.40259071266895,
+    "coordY": 39.93098382550391,
+    "stationName": "宽街路口南",
+    "sequence": 19
+  },
+  {
+    "lineName": "104路(地铁柳芳站--北京站西)",
+    "coordX": 116.40280240024454,
+    "coordY": 39.92632007468758,
+    "stationName": "大佛寺",
+    "sequence": 20
+  },
+  {
+    "lineName": "104路(地铁柳芳站--北京站西)",
+    "coordX": 116.40450356575705,
+    "coordY": 39.923739734669226,
+    "stationName": "美术馆北",
+    "sequence": 21
+  },
+  {
+    "lineName": "104路(地铁柳芳站--北京站西)",
+    "coordX": 116.40472442743092,
+    "coordY": 39.91792705676842,
+    "stationName": "灯市西口",
+    "sequence": 22
+  },
+  {
+    "lineName": "104路(地铁柳芳站--北京站西)",
+    "coordX": 116.41040855263303,
+    "coordY": 39.91737493075273,
+    "stationName": "灯市东口",
+    "sequence": 23
+  },
+  {
+    "lineName": "104路(地铁柳芳站--北京站西)",
+    "coordX": 116.41150281079494,
+    "coordY": 39.915276734228634,
+    "stationName": "米市大街",
+    "sequence": 24
+  },
+  {
+    "lineName": "104路(地铁柳芳站--北京站西)",
+    "coordX": 116.41162278691611,
+    "coordY": 39.90849610456528,
+    "stationName": "东单路口北",
+    "sequence": 25
+  },
+  {
+    "lineName": "104路(地铁柳芳站--北京站西)",
+    "coordX": 116.41204198653722,
+    "coordY": 39.90221666901878,
+    "stationName": "崇文门内",
+    "sequence": 26
+  },
+  {
+    "lineName": "104路(地铁柳芳站--北京站西)",
+    "coordX": 116.41546876875067,
+    "coordY": 39.9011353872221,
+    "stationName": "北京站西街",
+    "sequence": 27
+  },
+  {
+    "lineName": "104路(地铁柳芳站--北京站西)",
+    "coordX": 116.4185923839225,
+    "coordY": 39.90335417927547,
+    "stationName": "北京站西",
+    "sequence": 28
+  },
+  {
+    "lineName": "104路(北京站西--地铁柳芳站)",
+    "coordX": 116.4181598203726,
+    "coordY": 39.90328575627385,
+    "stationName": "北京站西",
+    "sequence": 1
+  },
+  {
+    "lineName": "104路(北京站西--地铁柳芳站)",
+    "coordX": 116.4141754200655,
+    "coordY": 39.90031235425564,
+    "stationName": "北京站西街",
+    "sequence": 2
+  },
+  {
+    "lineName": "104路(北京站西--地铁柳芳站)",
+    "coordX": 116.41213597902683,
+    "coordY": 39.902991701075976,
+    "stationName": "崇文门内",
+    "sequence": 3
+  },
+  {
+    "lineName": "104路(北京站西--地铁柳芳站)",
+    "coordX": 116.41183308566849,
+    "coordY": 39.90771728295965,
+    "stationName": "东单路口北",
+    "sequence": 4
+  },
+  {
+    "lineName": "104路(北京站西--地铁柳芳站)",
+    "coordX": 116.41159692961868,
+    "coordY": 39.91503780833546,
+    "stationName": "米市大街",
+    "sequence": 5
+  },
+  {
+    "lineName": "104路(北京站西--地铁柳芳站)",
+    "coordX": 116.4104756111484,
+    "coordY": 39.917376972968064,
+    "stationName": "灯市东口",
+    "sequence": 6
+  },
+  {
+    "lineName": "104路(北京站西--地铁柳芳站)",
+    "coordX": 116.4048163918965,
+    "coordY": 39.9186060630232,
+    "stationName": "灯市西口",
+    "sequence": 7
+  },
+  {
+    "lineName": "104路(北京站西--地铁柳芳站)",
+    "coordX": 116.40456352235275,
+    "coordY": 39.92433473216212,
+    "stationName": "美术馆北",
+    "sequence": 8
+  },
+  {
+    "lineName": "104路(北京站西--地铁柳芳站)",
+    "coordX": 116.40288943358117,
+    "coordY": 39.926363098149594,
+    "stationName": "大佛寺",
+    "sequence": 9
+  },
+  {
+    "lineName": "104路(北京站西--地铁柳芳站)",
+    "coordX": 116.40275097341757,
+    "coordY": 39.92948793117751,
+    "stationName": "宽街路口南",
+    "sequence": 10
+  },
+  {
+    "lineName": "104路(北京站西--地铁柳芳站)",
+    "coordX": 116.40251616200923,
+    "coordY": 39.93504864140555,
+    "stationName": "北兵马司",
+    "sequence": 11
+  },
+  {
+    "lineName": "104路(北京站西--地铁柳芳站)",
+    "coordX": 116.40237770164596,
+    "coordY": 39.938196477950235,
+    "stationName": "交道口南",
+    "sequence": 12
+  },
+  {
+    "lineName": "104路(北京站西--地铁柳芳站)",
+    "coordX": 116.40221803356165,
+    "coordY": 39.942911248199685,
+    "stationName": "方家胡同",
+    "sequence": 13
+  },
+  {
+    "lineName": "104路(北京站西--地铁柳芳站)",
+    "coordX": 116.40210368301331,
+    "coordY": 39.94529212430039,
+    "stationName": "安定门内",
+    "sequence": 14
+  },
+  {
+    "lineName": "104路(北京站西--地铁柳芳站)",
+    "coordX": 116.40188668264146,
+    "coordY": 39.95244978719738,
+    "stationName": "地坛西门",
+    "sequence": 15
+  },
+  {
+    "lineName": "104路(北京站西--地铁柳芳站)",
+    "coordX": 116.40401697750032,
+    "coordY": 39.95768820846616,
+    "stationName": "蒋宅口东",
+    "sequence": 16
+  },
+  {
+    "lineName": "104路(北京站西--地铁柳芳站)",
+    "coordX": 116.40867997202213,
+    "coordY": 39.95778728898742,
+    "stationName": "兴化路南口",
+    "sequence": 17
+  },
+  {
+    "lineName": "104路(北京站西--地铁柳芳站)",
+    "coordX": 116.413416279871,
+    "coordY": 39.95786240332585,
+    "stationName": "和平里北街",
+    "sequence": 18
+  },
+  {
+    "lineName": "104路(北京站西--地铁柳芳站)",
+    "coordX": 116.41558267027919,
+    "coordY": 39.957920161885724,
+    "stationName": "和平里路口西",
+    "sequence": 19
+  },
+  {
+    "lineName": "104路(北京站西--地铁柳芳站)",
+    "coordX": 116.42494602238195,
+    "coordY": 39.95809315103656,
+    "stationName": "地铁柳芳站",
+    "sequence": 20
+  },
+  {
+    "lineName": "105路(天桥--白石桥东)",
+    "coordX": 116.3927172836704,
+    "coordY": 39.883089332348334,
+    "stationName": "天桥",
+    "sequence": 1
+  },
+  {
+    "lineName": "105路(天桥--白石桥东)",
+    "coordX": 116.38834807660032,
+    "coordY": 39.88492633738414,
+    "stationName": "友谊医院东",
+    "sequence": 2
+  },
+  {
+    "lineName": "105路(天桥--白石桥东)",
+    "coordX": 116.38129285933613,
+    "coordY": 39.88485178645311,
+    "stationName": "永安路",
+    "sequence": 3
+  },
+  {
+    "lineName": "105路(天桥--白石桥东)",
+    "coordX": 116.3756132948149,
+    "coordY": 39.88804584336984,
+    "stationName": "虎坊桥路口西",
+    "sequence": 4
+  },
+  {
+    "lineName": "105路(天桥--白石桥东)",
+    "coordX": 116.37267740366842,
+    "coordY": 39.88796649738137,
+    "stationName": "果子巷",
+    "sequence": 5
+  },
+  {
+    "lineName": "105路(天桥--白石桥东)",
+    "coordX": 116.36831250400377,
+    "coordY": 39.88964992308612,
+    "stationName": "菜市口北",
+    "sequence": 6
+  },
+  {
+    "lineName": "105路(天桥--白石桥东)",
+    "coordX": 116.3683329903902,
+    "coordY": 39.893473722577525,
+    "stationName": "校场口",
+    "sequence": 7
+  },
+  {
+    "lineName": "105路(天桥--白石桥东)",
+    "coordX": 116.36832465756763,
+    "coordY": 39.89617360811215,
+    "stationName": "宣武门外",
+    "sequence": 8
+  },
+  {
+    "lineName": "105路(天桥--白石桥东)",
+    "coordX": 116.36798505713192,
+    "coordY": 39.904402617627504,
+    "stationName": "西单路口南",
+    "sequence": 9
+  },
+  {
+    "lineName": "105路(天桥--白石桥东)",
+    "coordX": 116.36771962125933,
+    "coordY": 39.91059664631026,
+    "stationName": "西单商场",
+    "sequence": 10
+  },
+  {
+    "lineName": "105路(天桥--白石桥东)",
+    "coordX": 116.36738115879231,
+    "coordY": 39.91779372408554,
+    "stationName": "缸瓦市",
+    "sequence": 11
+  },
+  {
+    "lineName": "105路(天桥--白石桥东)",
+    "coordX": 116.36731298114547,
+    "coordY": 39.91991071323069,
+    "stationName": "西四路口南",
+    "sequence": 12
+  },
+  {
+    "lineName": "105路(天桥--白石桥东)",
+    "coordX": 116.36704149799877,
+    "coordY": 39.926594747908936,
+    "stationName": "大红罗厂西口",
+    "sequence": 13
+  },
+  {
+    "lineName": "105路(天桥--白石桥东)",
+    "coordX": 116.36693336463858,
+    "coordY": 39.92879978228431,
+    "stationName": "平安里路口南",
+    "sequence": 14
+  },
+  {
+    "lineName": "105路(天桥--白石桥东)",
+    "coordX": 116.36665905128594,
+    "coordY": 39.93421388032085,
+    "stationName": "护国寺",
+    "sequence": 15
+  },
+  {
+    "lineName": "105路(天桥--白石桥东)",
+    "coordX": 116.36658078436864,
+    "coordY": 39.93715485312139,
+    "stationName": "新街口南",
+    "sequence": 16
+  },
+  {
+    "lineName": "105路(天桥--白石桥东)",
+    "coordX": 116.36087804427663,
+    "coordY": 39.93921391535633,
+    "stationName": "新开胡同",
+    "sequence": 17
+  },
+  {
+    "lineName": "105路(天桥--白石桥东)",
+    "coordX": 116.3534638642048,
+    "coordY": 39.93914259872149,
+    "stationName": "西直门内",
+    "sequence": 18
+  },
+  {
+    "lineName": "105路(天桥--白石桥东)",
+    "coordX": 116.34231816495098,
+    "coordY": 39.938447081857205,
+    "stationName": "西直门外",
+    "sequence": 19
+  },
+  {
+    "lineName": "105路(天桥--白石桥东)",
+    "coordX": 116.33067406705025,
+    "coordY": 39.93705551743615,
+    "stationName": "动物园",
+    "sequence": 20
+  },
+  {
+    "lineName": "105路(天桥--白石桥东)",
+    "coordX": 116.32645471321437,
+    "coordY": 39.937129558115195,
+    "stationName": "白石桥东",
+    "sequence": 21
+  },
+  {
+    "lineName": "105路(白石桥东--天桥)",
+    "coordX": 116.32558774740106,
+    "coordY": 39.936806233653535,
+    "stationName": "白石桥东",
+    "sequence": 1
+  },
+  {
+    "lineName": "105路(白石桥东--天桥)",
+    "coordX": 116.32948084166132,
+    "coordY": 39.9366277994659,
+    "stationName": "动物园",
+    "sequence": 2
+  },
+  {
+    "lineName": "105路(白石桥东--天桥)",
+    "coordX": 116.34305064196593,
+    "coordY": 39.9382528045302,
+    "stationName": "西直门外",
+    "sequence": 3
+  },
+  {
+    "lineName": "105路(白石桥东--天桥)",
+    "coordX": 116.35401385293437,
+    "coordY": 39.93914575739743,
+    "stationName": "西直门内",
+    "sequence": 4
+  },
+  {
+    "lineName": "105路(白石桥东--天桥)",
+    "coordX": 116.36155297047111,
+    "coordY": 39.9392220180132,
+    "stationName": "新开胡同",
+    "sequence": 5
+  },
+  {
+    "lineName": "105路(白石桥东--天桥)",
+    "coordX": 116.36437067209921,
+    "coordY": 39.93924441921329,
+    "stationName": "新街口西",
+    "sequence": 6
+  },
+  {
+    "lineName": "105路(白石桥东--天桥)",
+    "coordX": 116.36667208609408,
+    "coordY": 39.933799881872105,
+    "stationName": "护国寺",
+    "sequence": 7
+  },
+  {
+    "lineName": "105路(白石桥东--天桥)",
+    "coordX": 116.36685838805334,
+    "coordY": 39.92942184344391,
+    "stationName": "平安里路口南",
+    "sequence": 8
+  },
+  {
+    "lineName": "105路(白石桥东--天桥)",
+    "coordX": 116.36700654505836,
+    "coordY": 39.92659978786883,
+    "stationName": "大红罗厂西口",
+    "sequence": 9
+  },
+  {
+    "lineName": "105路(白石桥东--天桥)",
+    "coordX": 116.36710667902916,
+    "coordY": 39.92447775998315,
+    "stationName": "西四路口北",
+    "sequence": 10
+  },
+  {
+    "lineName": "105路(白石桥东--天桥)",
+    "coordX": 116.36738216138919,
+    "coordY": 39.917762724245016,
+    "stationName": "缸瓦市",
+    "sequence": 11
+  },
+  {
+    "lineName": "105路(白石桥东--天桥)",
+    "coordX": 116.36750242913135,
+    "coordY": 39.914389729885656,
+    "stationName": "甘石桥",
+    "sequence": 12
+  },
+  {
+    "lineName": "105路(白石桥东--天桥)",
+    "coordX": 116.36768081528992,
+    "coordY": 39.90948073806835,
+    "stationName": "西单商场",
+    "sequence": 13
+  },
+  {
+    "lineName": "105路(白石桥东--天桥)",
+    "coordX": 116.36783240743006,
+    "coordY": 39.90324383968097,
+    "stationName": "西单路口南",
+    "sequence": 14
+  },
+  {
+    "lineName": "105路(白石桥东--天桥)",
+    "coordX": 116.36793669608488,
+    "coordY": 39.89988887202703,
+    "stationName": "宣武门内",
+    "sequence": 15
+  },
+  {
+    "lineName": "105路(白石桥东--天桥)",
+    "coordX": 116.36814214771698,
+    "coordY": 39.89420790047471,
+    "stationName": "校场口",
+    "sequence": 16
+  },
+  {
+    "lineName": "105路(白石桥东--天桥)",
+    "coordX": 116.36813565501265,
+    "coordY": 39.89029008932859,
+    "stationName": "菜市口北",
+    "sequence": 17
+  },
+  {
+    "lineName": "105路(白石桥东--天桥)",
+    "coordX": 116.37263446461753,
+    "coordY": 39.88786654318566,
+    "stationName": "果子巷",
+    "sequence": 18
+  },
+  {
+    "lineName": "105路(白石桥东--天桥)",
+    "coordX": 116.37845679123365,
+    "coordY": 39.887141624164094,
+    "stationName": "虎坊桥路口南",
+    "sequence": 19
+  },
+  {
+    "lineName": "105路(白石桥东--天桥)",
+    "coordX": 116.38217824711144,
+    "coordY": 39.88484724357022,
+    "stationName": "永安路",
+    "sequence": 20
+  },
+  {
+    "lineName": "105路(白石桥东--天桥)",
+    "coordX": 116.38831308919163,
+    "coordY": 39.88492434950217,
+    "stationName": "友谊医院东",
+    "sequence": 21
+  },
+  {
+    "lineName": "105路(白石桥东--天桥)",
+    "coordX": 116.39214428564185,
+    "coordY": 39.88367140115994,
+    "stationName": "天桥",
+    "sequence": 22
+  },
+  {
+    "lineName": "106路(东直门枢纽站--北京南站)",
+    "coordX": 116.42972689335996,
+    "coordY": 39.940761396317754,
+    "stationName": "东直门枢纽站",
+    "sequence": 1
+  },
+  {
+    "lineName": "106路(东直门枢纽站--北京南站)",
+    "coordX": 116.42431029834792,
+    "coordY": 39.939727075120054,
+    "stationName": "东直门内",
+    "sequence": 2
+  },
+  {
+    "lineName": "106路(东直门枢纽站--北京南站)",
+    "coordX": 116.41645904488225,
+    "coordY": 39.939638654640824,
+    "stationName": "东内小街",
+    "sequence": 3
+  },
+  {
+    "lineName": "106路(东直门枢纽站--北京南站)",
+    "coordX": 116.41064808325625,
+    "coordY": 39.93840922719204,
+    "stationName": "北新桥路口南",
+    "sequence": 4
+  },
+  {
+    "lineName": "106路(东直门枢纽站--北京南站)",
+    "coordX": 116.41080876353898,
+    "coordY": 39.93419849883561,
+    "stationName": "东四十二条",
+    "sequence": 5
+  },
+  {
+    "lineName": "106路(东直门枢纽站--北京南站)",
+    "coordX": 116.41093834091153,
+    "coordY": 39.93058472845565,
+    "stationName": "魏家胡同",
+    "sequence": 6
+  },
+  {
+    "lineName": "106路(东直门枢纽站--北京南站)",
+    "coordX": 116.41111806815937,
+    "coordY": 39.926161026026456,
+    "stationName": "钱粮胡同",
+    "sequence": 7
+  },
+  {
+    "lineName": "106路(东直门枢纽站--北京南站)",
+    "coordX": 116.4113068533729,
+    "coordY": 39.92136134858053,
+    "stationName": "东四路口南",
+    "sequence": 8
+  },
+  {
+    "lineName": "106路(东直门枢纽站--北京南站)",
+    "coordX": 116.41146239552548,
+    "coordY": 39.91824058274461,
+    "stationName": "灯市东口",
+    "sequence": 9
+  },
+  {
+    "lineName": "106路(东直门枢纽站--北京南站)",
+    "coordX": 116.41164639340062,
+    "coordY": 39.91176198084626,
+    "stationName": "米市大街",
+    "sequence": 10
+  },
+  {
+    "lineName": "106路(东直门枢纽站--北京南站)",
+    "coordX": 116.41162278691611,
+    "coordY": 39.90849610456528,
+    "stationName": "东单路口北",
+    "sequence": 11
+  },
+  {
+    "lineName": "106路(东直门枢纽站--北京南站)",
+    "coordX": 116.41204198653722,
+    "coordY": 39.90221666901878,
+    "stationName": "崇文门内",
+    "sequence": 12
+  },
+  {
+    "lineName": "106路(东直门枢纽站--北京南站)",
+    "coordX": 116.41248260179206,
+    "coordY": 39.8929124022358,
+    "stationName": "磁器口北",
+    "sequence": 13
+  },
+  {
+    "lineName": "106路(东直门枢纽站--北京南站)",
+    "coordX": 116.41274757982026,
+    "coordY": 39.88730385675767,
+    "stationName": "红桥路口北",
+    "sequence": 14
+  },
+  {
+    "lineName": "106路(东直门枢纽站--北京南站)",
+    "coordX": 116.40951266305204,
+    "coordY": 39.88696773262007,
+    "stationName": "红桥路口西",
+    "sequence": 15
+  },
+  {
+    "lineName": "106路(东直门枢纽站--北京南站)",
+    "coordX": 116.40465734595045,
+    "coordY": 39.88687740744364,
+    "stationName": "天坛北门",
+    "sequence": 16
+  },
+  {
+    "lineName": "106路(东直门枢纽站--北京南站)",
+    "coordX": 116.40007444446007,
+    "coordY": 39.88674418477644,
+    "stationName": "金鱼池",
+    "sequence": 17
+  },
+  {
+    "lineName": "106路(东直门枢纽站--北京南站)",
+    "coordX": 116.39562982614851,
+    "coordY": 39.885818928381944,
+    "stationName": "天桥路口东",
+    "sequence": 18
+  },
+  {
+    "lineName": "106路(东直门枢纽站--北京南站)",
+    "coordX": 116.39214428564185,
+    "coordY": 39.88367140115994,
+    "stationName": "天桥",
+    "sequence": 19
+  },
+  {
+    "lineName": "106路(东直门枢纽站--北京南站)",
+    "coordX": 116.38797456491089,
+    "coordY": 39.882153602297315,
+    "stationName": "北纬路东站",
+    "sequence": 20
+  },
+  {
+    "lineName": "106路(东直门枢纽站--北京南站)",
+    "coordX": 116.38331787725642,
+    "coordY": 39.88201372757631,
+    "stationName": "北纬路",
+    "sequence": 21
+  },
+  {
+    "lineName": "106路(东直门枢纽站--北京南站)",
+    "coordX": 116.38113547254954,
+    "coordY": 39.88092507665122,
+    "stationName": "太平街北口",
+    "sequence": 22
+  },
+  {
+    "lineName": "106路(东直门枢纽站--北京南站)",
+    "coordX": 116.38117012366273,
+    "coordY": 39.87561631831194,
+    "stationName": "太平街",
+    "sequence": 23
+  },
+  {
+    "lineName": "106路(东直门枢纽站--北京南站)",
+    "coordX": 116.38128335362576,
+    "coordY": 39.87317237052928,
+    "stationName": "陶然桥北",
+    "sequence": 24
+  },
+  {
+    "lineName": "106路(东直门枢纽站--北京南站)",
+    "coordX": 116.37785787222603,
+    "coordY": 39.867025082157966,
+    "stationName": "南站幸福路",
+    "sequence": 25
+  },
+  {
+    "lineName": "106路(东直门枢纽站--北京南站)",
+    "coordX": 116.37101129830273,
+    "coordY": 39.864677310761074,
+    "stationName": "北京南站",
+    "sequence": 26
+  },
+  {
+    "lineName": "106路(北京南站--东直门枢纽站)",
+    "coordX": 116.37009141894855,
+    "coordY": 39.86465625995948,
+    "stationName": "北京南站",
+    "sequence": 1
+  },
+  {
+    "lineName": "106路(北京南站--东直门枢纽站)",
+    "coordX": 116.37668482155982,
+    "coordY": 39.86795095627388,
+    "stationName": "永定门汽车站",
+    "sequence": 2
+  },
+  {
+    "lineName": "106路(北京南站--东直门枢纽站)",
+    "coordX": 116.38149830762099,
+    "coordY": 39.87233627851387,
+    "stationName": "陶然桥北",
+    "sequence": 3
+  },
+  {
+    "lineName": "106路(北京南站--东直门枢纽站)",
+    "coordX": 116.38122368377314,
+    "coordY": 39.878768126847085,
+    "stationName": "太平街",
+    "sequence": 4
+  },
+  {
+    "lineName": "106路(北京南站--东直门枢纽站)",
+    "coordX": 116.38267228444246,
+    "coordY": 39.882004091565065,
+    "stationName": "北纬路",
+    "sequence": 5
+  },
+  {
+    "lineName": "106路(北京南站--东直门枢纽站)",
+    "coordX": 116.3907087378853,
+    "coordY": 39.8822307756759,
+    "stationName": "北纬路东站",
+    "sequence": 6
+  },
+  {
+    "lineName": "106路(北京南站--东直门枢纽站)",
+    "coordX": 116.39263919452362,
+    "coordY": 39.88386230739975,
+    "stationName": "天桥",
+    "sequence": 7
+  },
+  {
+    "lineName": "106路(北京南站--东直门枢纽站)",
+    "coordX": 116.39411088922736,
+    "coordY": 39.88531804858738,
+    "stationName": "天桥路口东",
+    "sequence": 8
+  },
+  {
+    "lineName": "106路(北京南站--东直门枢纽站)",
+    "coordX": 116.40018348363287,
+    "coordY": 39.88668720583821,
+    "stationName": "金鱼池",
+    "sequence": 9
+  },
+  {
+    "lineName": "106路(北京南站--东直门枢纽站)",
+    "coordX": 116.40524168151778,
+    "coordY": 39.8868326338524,
+    "stationName": "天坛北门",
+    "sequence": 10
+  },
+  {
+    "lineName": "106路(北京南站--东直门枢纽站)",
+    "coordX": 116.41081382011059,
+    "coordY": 39.88666955104154,
+    "stationName": "红桥路口西",
+    "sequence": 11
+  },
+  {
+    "lineName": "106路(北京南站--东直门枢纽站)",
+    "coordX": 116.41287357010344,
+    "coordY": 39.888380898823115,
+    "stationName": "红桥路口北",
+    "sequence": 12
+  },
+  {
+    "lineName": "106路(北京南站--东直门枢纽站)",
+    "coordX": 116.41269581319516,
+    "coordY": 39.892922556782686,
+    "stationName": "磁器口北",
+    "sequence": 13
+  },
+  {
+    "lineName": "106路(北京南站--东直门枢纽站)",
+    "coordX": 116.41213798696002,
+    "coordY": 39.902944704564455,
+    "stationName": "崇文门内",
+    "sequence": 14
+  },
+  {
+    "lineName": "106路(北京南站--东直门枢纽站)",
+    "coordX": 116.41178479443724,
+    "coordY": 39.90964316661435,
+    "stationName": "东单路口北",
+    "sequence": 15
+  },
+  {
+    "lineName": "106路(北京南站--东直门枢纽站)",
+    "coordX": 116.41169436442064,
+    "coordY": 39.912345988911035,
+    "stationName": "米市大街",
+    "sequence": 16
+  },
+  {
+    "lineName": "106路(北京南站--东直门枢纽站)",
+    "coordX": 116.41143329258043,
+    "coordY": 39.91883553829803,
+    "stationName": "灯市东口",
+    "sequence": 17
+  },
+  {
+    "lineName": "106路(北京南站--东直门枢纽站)",
+    "coordX": 116.41130381910199,
+    "coordY": 39.92160833635262,
+    "stationName": "东四路口南",
+    "sequence": 18
+  },
+  {
+    "lineName": "106路(北京南站--东直门枢纽站)",
+    "coordX": 116.41110297472434,
+    "coordY": 39.92678599058701,
+    "stationName": "钱粮胡同",
+    "sequence": 19
+  },
+  {
+    "lineName": "106路(北京南站--东直门枢纽站)",
+    "coordX": 116.41091825762986,
+    "coordY": 39.9310956947308,
+    "stationName": "魏家胡同",
+    "sequence": 20
+  },
+  {
+    "lineName": "106路(北京南站--东直门枢纽站)",
+    "coordX": 116.41077766095789,
+    "coordY": 39.93478445524576,
+    "stationName": "东四十二条",
+    "sequence": 21
+  },
+  {
+    "lineName": "106路(北京南站--东直门枢纽站)",
+    "coordX": 116.41066916242579,
+    "coordY": 39.937935259574196,
+    "stationName": "北新桥路口南",
+    "sequence": 22
+  },
+  {
+    "lineName": "106路(北京南站--东直门枢纽站)",
+    "coordX": 116.41834043931794,
+    "coordY": 39.93958842849452,
+    "stationName": "东内小街",
+    "sequence": 23
+  },
+  {
+    "lineName": "106路(北京南站--东直门枢纽站)",
+    "coordX": 116.42492333063774,
+    "coordY": 39.93964584901153,
+    "stationName": "东直门内",
+    "sequence": 24
+  },
+  {
+    "lineName": "106路(北京南站--东直门枢纽站)",
+    "coordX": 116.43272800878292,
+    "coordY": 39.94026902202987,
+    "stationName": "东直门枢纽站",
+    "sequence": 25
+  },
+  {
+    "lineName": "107路(东直门枢纽站--白石桥东)",
+    "coordX": 116.42972689335996,
+    "coordY": 39.940761396317754,
+    "stationName": "东直门枢纽站",
+    "sequence": 1
+  },
+  {
+    "lineName": "107路(东直门枢纽站--白石桥东)",
+    "coordX": 116.42453767473424,
+    "coordY": 39.9397293589908,
+    "stationName": "东直门内",
+    "sequence": 2
+  },
+  {
+    "lineName": "107路(东直门枢纽站--白石桥东)",
+    "coordX": 116.41645904488225,
+    "coordY": 39.939638654640824,
+    "stationName": "东内小街",
+    "sequence": 3
+  },
+  {
+    "lineName": "107路(东直门枢纽站--白石桥东)",
+    "coordX": 116.40864827477107,
+    "coordY": 39.939545991622346,
+    "stationName": "北新桥路口西",
+    "sequence": 4
+  },
+  {
+    "lineName": "107路(东直门枢纽站--白石桥东)",
+    "coordX": 116.40397528011067,
+    "coordY": 39.93948391330328,
+    "stationName": "交道口东",
+    "sequence": 5
+  },
+  {
+    "lineName": "107路(东直门枢纽站--白石桥东)",
+    "coordX": 116.39931751944202,
+    "coordY": 39.93945881371264,
+    "stationName": "小经厂",
+    "sequence": 6
+  },
+  {
+    "lineName": "107路(东直门枢纽站--白石桥东)",
+    "coordX": 116.39411698957144,
+    "coordY": 39.93941072245931,
+    "stationName": "宝钞胡同",
+    "sequence": 7
+  },
+  {
+    "lineName": "107路(东直门枢纽站--白石桥东)",
+    "coordX": 116.38980900592377,
+    "coordY": 39.936774641283634,
+    "stationName": "鼓楼",
+    "sequence": 8
+  },
+  {
+    "lineName": "107路(东直门枢纽站--白石桥东)",
+    "coordX": 116.3899684523347,
+    "coordY": 39.93294175087266,
+    "stationName": "地安门外",
+    "sequence": 9
+  },
+  {
+    "lineName": "107路(东直门枢纽站--白石桥东)",
+    "coordX": 116.3847616634077,
+    "coordY": 39.93206178295761,
+    "stationName": "北海北门",
+    "sequence": 10
+  },
+  {
+    "lineName": "107路(东直门枢纽站--白石桥东)",
+    "coordX": 116.38156866390577,
+    "coordY": 39.931903564222004,
+    "stationName": "东官房",
+    "sequence": 11
+  },
+  {
+    "lineName": "107路(东直门枢纽站--白石桥东)",
+    "coordX": 116.37468667050163,
+    "coordY": 39.931657756919876,
+    "stationName": "厂桥路口东",
+    "sequence": 12
+  },
+  {
+    "lineName": "107路(东直门枢纽站--白石桥东)",
+    "coordX": 116.36847197877385,
+    "coordY": 39.93137994385394,
+    "stationName": "平安里路口东",
+    "sequence": 13
+  },
+  {
+    "lineName": "107路(东直门枢纽站--白石桥东)",
+    "coordX": 116.35987969617499,
+    "coordY": 39.9310895933723,
+    "stationName": "平安医院",
+    "sequence": 14
+  },
+  {
+    "lineName": "107路(东直门枢纽站--白石桥东)",
+    "coordX": 116.355622977571,
+    "coordY": 39.931061664716836,
+    "stationName": "官园",
+    "sequence": 15
+  },
+  {
+    "lineName": "107路(东直门枢纽站--白石桥东)",
+    "coordX": 116.3463656883574,
+    "coordY": 39.93108039287896,
+    "stationName": "车公庄西",
+    "sequence": 16
+  },
+  {
+    "lineName": "107路(东直门枢纽站--白石桥东)",
+    "coordX": 116.342320093228,
+    "coordY": 39.931102374530404,
+    "stationName": "三塔寺",
+    "sequence": 17
+  },
+  {
+    "lineName": "107路(东直门枢纽站--白石桥东)",
+    "coordX": 116.33934448044845,
+    "coordY": 39.93111167983772,
+    "stationName": "二里沟东口",
+    "sequence": 18
+  },
+  {
+    "lineName": "107路(东直门枢纽站--白石桥东)",
+    "coordX": 116.33793100838744,
+    "coordY": 39.935518065835545,
+    "stationName": "北京展览馆",
+    "sequence": 19
+  },
+  {
+    "lineName": "107路(东直门枢纽站--白石桥东)",
+    "coordX": 116.33051842156522,
+    "coordY": 39.9370538124042,
+    "stationName": "动物园",
+    "sequence": 20
+  },
+  {
+    "lineName": "107路(东直门枢纽站--白石桥东)",
+    "coordX": 116.32664627488516,
+    "coordY": 39.937115191682715,
+    "stationName": "白石桥东",
+    "sequence": 21
+  },
+  {
+    "lineName": "107路(白石桥东--东直门枢纽站)",
+    "coordX": 116.32546602560882,
+    "coordY": 39.936820466687436,
+    "stationName": "白石桥东",
+    "sequence": 1
+  },
+  {
+    "lineName": "107路(白石桥东--东直门枢纽站)",
+    "coordX": 116.32959158866694,
+    "coordY": 39.93662858884868,
+    "stationName": "动物园",
+    "sequence": 2
+  },
+  {
+    "lineName": "107路(白石桥东--东直门枢纽站)",
+    "coordX": 116.33691324581827,
+    "coordY": 39.93554792662927,
+    "stationName": "北京展览馆",
+    "sequence": 3
+  },
+  {
+    "lineName": "107路(白石桥东--东直门枢纽站)",
+    "coordX": 116.33766385915663,
+    "coordY": 39.93343663729674,
+    "stationName": "二里沟东口",
+    "sequence": 4
+  },
+  {
+    "lineName": "107路(白石桥东--东直门枢纽站)",
+    "coordX": 116.34276316781187,
+    "coordY": 39.93100859993742,
+    "stationName": "三塔寺",
+    "sequence": 5
+  },
+  {
+    "lineName": "107路(白石桥东--东直门枢纽站)",
+    "coordX": 116.35209745621817,
+    "coordY": 39.930952049813456,
+    "stationName": "车公庄东",
+    "sequence": 6
+  },
+  {
+    "lineName": "107路(白石桥东--东直门枢纽站)",
+    "coordX": 116.3562119497657,
+    "coordY": 39.93094480076515,
+    "stationName": "官园",
+    "sequence": 7
+  },
+  {
+    "lineName": "107路(白石桥东--东直门枢纽站)",
+    "coordX": 116.36001848612777,
+    "coordY": 39.93095740919989,
+    "stationName": "平安医院",
+    "sequence": 8
+  },
+  {
+    "lineName": "107路(白石桥东--东直门枢纽站)",
+    "coordX": 116.36796865570405,
+    "coordY": 39.931263507069424,
+    "stationName": "平安里路口东",
+    "sequence": 9
+  },
+  {
+    "lineName": "107路(白石桥东--东直门枢纽站)",
+    "coordX": 116.37622314549328,
+    "coordY": 39.93161944547241,
+    "stationName": "厂桥路口东",
+    "sequence": 10
+  },
+  {
+    "lineName": "107路(白石桥东--东直门枢纽站)",
+    "coordX": 116.37877384009295,
+    "coordY": 39.93170945788205,
+    "stationName": "东官房",
+    "sequence": 11
+  },
+  {
+    "lineName": "107路(白石桥东--东直门枢纽站)",
+    "coordX": 116.38395613081067,
+    "coordY": 39.93193119718242,
+    "stationName": "北海北门",
+    "sequence": 12
+  },
+  {
+    "lineName": "107路(白石桥东--东直门枢纽站)",
+    "coordX": 116.39001335926847,
+    "coordY": 39.93357771299932,
+    "stationName": "地安门外",
+    "sequence": 13
+  },
+  {
+    "lineName": "107路(白石桥东--东直门枢纽站)",
+    "coordX": 116.38982304154138,
+    "coordY": 39.93646564971027,
+    "stationName": "鼓楼",
+    "sequence": 14
+  },
+  {
+    "lineName": "107路(白石桥东--东直门枢纽站)",
+    "coordX": 116.39434098096052,
+    "coordY": 39.93941770177982,
+    "stationName": "宝钞胡同",
+    "sequence": 15
+  },
+  {
+    "lineName": "107路(白石桥东--东直门枢纽站)",
+    "coordX": 116.39960359209415,
+    "coordY": 39.939462853290024,
+    "stationName": "小经厂",
+    "sequence": 16
+  },
+  {
+    "lineName": "107路(白石桥东--东直门枢纽站)",
+    "coordX": 116.4039452768274,
+    "coordY": 39.939389906851574,
+    "stationName": "交道口东",
+    "sequence": 17
+  },
+  {
+    "lineName": "107路(白石桥东--东直门枢纽站)",
+    "coordX": 116.40940889306795,
+    "coordY": 39.93944942702239,
+    "stationName": "北新桥路口西",
+    "sequence": 18
+  },
+  {
+    "lineName": "107路(白石桥东--东直门枢纽站)",
+    "coordX": 116.41832942501811,
+    "coordY": 39.939586417745254,
+    "stationName": "东内小街",
+    "sequence": 19
+  },
+  {
+    "lineName": "107路(白石桥东--东直门枢纽站)",
+    "coordX": 116.42488827139522,
+    "coordY": 39.939647804424716,
+    "stationName": "东直门内",
+    "sequence": 20
+  },
+  {
+    "lineName": "107路(白石桥东--东直门枢纽站)",
+    "coordX": 116.43272901138974,
+    "coordY": 39.94026502378857,
+    "stationName": "东直门枢纽站",
+    "sequence": 21
+  },
+  {
+    "lineName": "108路(崇文门--大屯南)",
+    "coordX": 116.41281116099265,
+    "coordY": 39.89896236737727,
+    "stationName": "崇文门",
+    "sequence": 1
+  },
+  {
+    "lineName": "108路(崇文门--大屯南)",
+    "coordX": 116.41213798696002,
+    "coordY": 39.902944704564455,
+    "stationName": "崇文门内",
+    "sequence": 2
+  },
+  {
+    "lineName": "108路(崇文门--大屯南)",
+    "coordX": 116.41183308566849,
+    "coordY": 39.90771728295965,
+    "stationName": "东单路口北",
+    "sequence": 3
+  },
+  {
+    "lineName": "108路(崇文门--大屯南)",
+    "coordX": 116.41169436442064,
+    "coordY": 39.912345988911035,
+    "stationName": "米市大街",
+    "sequence": 4
+  },
+  {
+    "lineName": "108路(崇文门--大屯南)",
+    "coordX": 116.41037652503611,
+    "coordY": 39.91737191074714,
+    "stationName": "灯市东口",
+    "sequence": 5
+  },
+  {
+    "lineName": "108路(崇文门--大屯南)",
+    "coordX": 116.40588919783515,
+    "coordY": 39.91723055180105,
+    "stationName": "灯市西口",
+    "sequence": 6
+  },
+  {
+    "lineName": "108路(崇文门--大屯南)",
+    "coordX": 116.40456652525909,
+    "coordY": 39.92432473367335,
+    "stationName": "美术馆北",
+    "sequence": 7
+  },
+  {
+    "lineName": "108路(崇文门--大屯南)",
+    "coordX": 116.40288142922773,
+    "coordY": 39.92636909557157,
+    "stationName": "大佛寺",
+    "sequence": 8
+  },
+  {
+    "lineName": "108路(崇文门--大屯南)",
+    "coordX": 116.40274395323158,
+    "coordY": 39.929621923748016,
+    "stationName": "宽街路口南",
+    "sequence": 9
+  },
+  {
+    "lineName": "108路(崇文门--大屯南)",
+    "coordX": 116.4025141608986,
+    "coordY": 39.93505064077516,
+    "stationName": "北兵马司",
+    "sequence": 10
+  },
+  {
+    "lineName": "108路(崇文门--大屯南)",
+    "coordX": 116.40237770164596,
+    "coordY": 39.938196477950235,
+    "stationName": "交道口南",
+    "sequence": 11
+  },
+  {
+    "lineName": "108路(崇文门--大屯南)",
+    "coordX": 116.40221602188554,
+    "coordY": 39.94299624430449,
+    "stationName": "方家胡同",
+    "sequence": 12
+  },
+  {
+    "lineName": "108路(崇文门--大屯南)",
+    "coordX": 116.40211169838406,
+    "coordY": 39.94519713011597,
+    "stationName": "安定门内",
+    "sequence": 13
+  },
+  {
+    "lineName": "108路(崇文门--大屯南)",
+    "coordX": 116.40189369292698,
+    "coordY": 39.95239079125478,
+    "stationName": "地坛西门",
+    "sequence": 14
+  },
+  {
+    "lineName": "108路(崇文门--大屯南)",
+    "coordX": 116.40173882381018,
+    "coordY": 39.95872450389373,
+    "stationName": "蒋宅口",
+    "sequence": 15
+  },
+  {
+    "lineName": "108路(崇文门--大屯南)",
+    "coordX": 116.4015841742406,
+    "coordY": 39.96334928466193,
+    "stationName": "安外甘水桥",
+    "sequence": 16
+  },
+  {
+    "lineName": "108路(崇文门--大屯南)",
+    "coordX": 116.40138817694948,
+    "coordY": 39.970585952552085,
+    "stationName": "安贞里",
+    "sequence": 17
+  },
+  {
+    "lineName": "108路(崇文门--大屯南)",
+    "coordX": 116.40129976111334,
+    "coordY": 39.97358881287136,
+    "stationName": "五路居",
+    "sequence": 18
+  },
+  {
+    "lineName": "108路(崇文门--大屯南)",
+    "coordX": 116.40121396366608,
+    "coordY": 39.97958655251229,
+    "stationName": "奥体东门",
+    "sequence": 19
+  },
+  {
+    "lineName": "108路(崇文门--大屯南)",
+    "coordX": 116.40145649793637,
+    "coordY": 39.99173210663566,
+    "stationName": "安慧桥北",
+    "sequence": 20
+  },
+  {
+    "lineName": "108路(崇文门--大屯南)",
+    "coordX": 116.4015189963956,
+    "coordY": 39.995832948094204,
+    "stationName": "炎黄艺术馆",
+    "sequence": 21
+  },
+  {
+    "lineName": "108路(崇文门--大屯南)",
+    "coordX": 116.4015955377617,
+    "coordY": 39.99964080314704,
+    "stationName": "大屯南",
+    "sequence": 22
+  },
+  {
+    "lineName": "108路(大屯东--崇文门)",
+    "coordX": 116.40320096971168,
+    "coordY": 40.001556154028734,
+    "stationName": "大屯东",
+    "sequence": 1
+  },
+  {
+    "lineName": "108路(大屯东--崇文门)",
+    "coordX": 116.40149142452852,
+    "coordY": 40.00022175397354,
+    "stationName": "大屯南",
+    "sequence": 2
+  },
+  {
+    "lineName": "108路(大屯东--崇文门)",
+    "coordX": 116.4014078929698,
+    "coordY": 39.9963209019974,
+    "stationName": "炎黄艺术馆",
+    "sequence": 3
+  },
+  {
+    "lineName": "108路(大屯东--崇文门)",
+    "coordX": 116.40132441266147,
+    "coordY": 39.99202206476488,
+    "stationName": "安慧桥北",
+    "sequence": 4
+  },
+  {
+    "lineName": "108路(大屯东--崇文门)",
+    "coordX": 116.40108280869437,
+    "coordY": 39.98043848986449,
+    "stationName": "奥体东门",
+    "sequence": 5
+  },
+  {
+    "lineName": "108路(大屯东--崇文门)",
+    "coordX": 116.40116176407773,
+    "coordY": 39.97318179910849,
+    "stationName": "五路居",
+    "sequence": 6
+  },
+  {
+    "lineName": "108路(大屯东--崇文门)",
+    "coordX": 116.40123211131348,
+    "coordY": 39.970659915058775,
+    "stationName": "安贞里",
+    "sequence": 7
+  },
+  {
+    "lineName": "108路(大屯东--崇文门)",
+    "coordX": 116.40146017285237,
+    "coordY": 39.962999269883795,
+    "stationName": "安外甘水桥",
+    "sequence": 8
+  },
+  {
+    "lineName": "108路(大屯东--崇文门)",
+    "coordX": 116.4016068247119,
+    "coordY": 39.95832448831989,
+    "stationName": "蒋宅口",
+    "sequence": 9
+  },
+  {
+    "lineName": "108路(大屯东--崇文门)",
+    "coordX": 116.40179680711285,
+    "coordY": 39.95120081440438,
+    "stationName": "地坛西门",
+    "sequence": 10
+  },
+  {
+    "lineName": "108路(大屯东--崇文门)",
+    "coordX": 116.40199866907017,
+    "coordY": 39.94507110633689,
+    "stationName": "安定门内",
+    "sequence": 11
+  },
+  {
+    "lineName": "108路(大屯东--崇文门)",
+    "coordX": 116.40214308398329,
+    "coordY": 39.94227625388455,
+    "stationName": "方家胡同",
+    "sequence": 12
+  },
+  {
+    "lineName": "108路(大屯东--崇文门)",
+    "coordX": 116.40229277020407,
+    "coordY": 39.93738148778864,
+    "stationName": "交道口南",
+    "sequence": 13
+  },
+  {
+    "lineName": "108路(大屯东--崇文门)",
+    "coordX": 116.40236914888996,
+    "coordY": 39.93466361688695,
+    "stationName": "北兵马司",
+    "sequence": 14
+  },
+  {
+    "lineName": "108路(大屯东--崇文门)",
+    "coordX": 116.40259071266895,
+    "coordY": 39.93098382550391,
+    "stationName": "宽街路口南",
+    "sequence": 15
+  },
+  {
+    "lineName": "108路(大屯东--崇文门)",
+    "coordX": 116.40280240024454,
+    "coordY": 39.92632007468758,
+    "stationName": "大佛寺",
+    "sequence": 16
+  },
+  {
+    "lineName": "108路(大屯东--崇文门)",
+    "coordX": 116.40450356575705,
+    "coordY": 39.923739734669226,
+    "stationName": "美术馆北",
+    "sequence": 17
+  },
+  {
+    "lineName": "108路(大屯东--崇文门)",
+    "coordX": 116.40637150090615,
+    "coordY": 39.91724376201334,
+    "stationName": "灯市西口",
+    "sequence": 18
+  },
+  {
+    "lineName": "108路(大屯东--崇文门)",
+    "coordX": 116.41001221214252,
+    "coordY": 39.917361685419515,
+    "stationName": "灯市东口",
+    "sequence": 19
+  },
+  {
+    "lineName": "108路(大屯东--崇文门)",
+    "coordX": 116.41164639340062,
+    "coordY": 39.91176198084626,
+    "stationName": "米市大街",
+    "sequence": 20
+  },
+  {
+    "lineName": "108路(大屯东--崇文门)",
+    "coordX": 116.41161980052168,
+    "coordY": 39.90836710808279,
+    "stationName": "东单路口北",
+    "sequence": 21
+  },
+  {
+    "lineName": "108路(大屯东--崇文门)",
+    "coordX": 116.41204198653722,
+    "coordY": 39.90221666901878,
+    "stationName": "崇文门内",
+    "sequence": 22
+  },
+  {
+    "lineName": "108路(大屯东--崇文门)",
+    "coordX": 116.41380214003216,
+    "coordY": 39.89935410220833,
+    "stationName": "崇文门",
+    "sequence": 23
+  },
+  {
+    "lineName": "109路(东大桥公交场站--北京西站南广场)",
+    "coordX": 116.44512405670113,
+    "coordY": 39.92173353714899,
+    "stationName": "东大桥公交场站",
+    "sequence": 1
+  },
+  {
+    "lineName": "109路(东大桥公交场站--北京西站南广场)",
+    "coordX": 116.4431789281603,
+    "coordY": 39.92167658741583,
+    "stationName": "东大桥路口西",
+    "sequence": 2
+  },
+  {
+    "lineName": "109路(东大桥公交场站--北京西站南广场)",
+    "coordX": 116.4387598520865,
+    "coordY": 39.922072104620845,
+    "stationName": "神路街",
+    "sequence": 3
+  },
+  {
+    "lineName": "109路(东大桥公交场站--北京西站南广场)",
+    "coordX": 116.43283642871614,
+    "coordY": 39.92298289078752,
+    "stationName": "朝阳门外",
+    "sequence": 4
+  },
+  {
+    "lineName": "109路(东大桥公交场站--北京西站南广场)",
+    "coordX": 116.42636691641849,
+    "coordY": 39.92312439271445,
+    "stationName": "朝阳门内",
+    "sequence": 5
+  },
+  {
+    "lineName": "109路(东大桥公交场站--北京西站南广场)",
+    "coordX": 116.41829147758718,
+    "coordY": 39.92306704643742,
+    "stationName": "朝内小街",
+    "sequence": 6
+  },
+  {
+    "lineName": "109路(东大桥公交场站--北京西站南广场)",
+    "coordX": 116.41263992523773,
+    "coordY": 39.92302821247752,
+    "stationName": "东四路口东",
+    "sequence": 7
+  },
+  {
+    "lineName": "109路(东大桥公交场站--北京西站南广场)",
+    "coordX": 116.40664594873222,
+    "coordY": 39.922982648610805,
+    "stationName": "美术馆东",
+    "sequence": 8
+  },
+  {
+    "lineName": "109路(东大桥公交场站--北京西站南广场)",
+    "coordX": 116.39847043942763,
+    "coordY": 39.92292738547793,
+    "stationName": "沙滩路口西",
+    "sequence": 9
+  },
+  {
+    "lineName": "109路(东大桥公交场站--北京西站南广场)",
+    "coordX": 116.3888881747972,
+    "coordY": 39.92193852050041,
+    "stationName": "神武门",
+    "sequence": 10
+  },
+  {
+    "lineName": "109路(东大桥公交场站--北京西站南广场)",
+    "coordX": 116.38282022162713,
+    "coordY": 39.920970266804574,
+    "stationName": "北海",
+    "sequence": 11
+  },
+  {
+    "lineName": "109路(东大桥公交场站--北京西站南广场)",
+    "coordX": 116.37274508928927,
+    "coordY": 39.92122796671149,
+    "stationName": "西安门",
+    "sequence": 12
+  },
+  {
+    "lineName": "109路(东大桥公交场站--北京西站南广场)",
+    "coordX": 116.36877889056186,
+    "coordY": 39.92110302852539,
+    "stationName": "西四丁字街",
+    "sequence": 13
+  },
+  {
+    "lineName": "109路(东大桥公交场站--北京西站南广场)",
+    "coordX": 116.36738116057387,
+    "coordY": 39.917779724670524,
+    "stationName": "缸瓦市",
+    "sequence": 14
+  },
+  {
+    "lineName": "109路(东大桥公交场站--北京西站南广场)",
+    "coordX": 116.36750242913135,
+    "coordY": 39.914389729885656,
+    "stationName": "甘石桥",
+    "sequence": 15
+  },
+  {
+    "lineName": "109路(东大桥公交场站--北京西站南广场)",
+    "coordX": 116.36768081363614,
+    "coordY": 39.90949373750965,
+    "stationName": "西单商场",
+    "sequence": 16
+  },
+  {
+    "lineName": "109路(东大桥公交场站--北京西站南广场)",
+    "coordX": 116.36783742062478,
+    "coordY": 39.90308784094713,
+    "stationName": "西单路口南",
+    "sequence": 17
+  },
+  {
+    "lineName": "109路(东大桥公交场站--北京西站南广场)",
+    "coordX": 116.36793970520847,
+    "coordY": 39.89978587327462,
+    "stationName": "宣武门内",
+    "sequence": 18
+  },
+  {
+    "lineName": "109路(东大桥公交场站--北京西站南广场)",
+    "coordX": 116.36814214275863,
+    "coordY": 39.89424689868885,
+    "stationName": "校场口",
+    "sequence": 19
+  },
+  {
+    "lineName": "109路(东大桥公交场站--北京西站南广场)",
+    "coordX": 116.36813566085995,
+    "coordY": 39.890244091474564,
+    "stationName": "菜市口北",
+    "sequence": 20
+  },
+  {
+    "lineName": "109路(东大桥公交场站--北京西站南广场)",
+    "coordX": 116.36415152788541,
+    "coordY": 39.88794989060974,
+    "stationName": "菜市口西",
+    "sequence": 21
+  },
+  {
+    "lineName": "109路(东大桥公交场站--北京西站南广场)",
+    "coordX": 116.35627828944081,
+    "coordY": 39.88803856666325,
+    "stationName": "牛街路口西",
+    "sequence": 22
+  },
+  {
+    "lineName": "109路(东大桥公交场站--北京西站南广场)",
+    "coordX": 116.35165573542776,
+    "coordY": 39.88811060548274,
+    "stationName": "广安门内",
+    "sequence": 23
+  },
+  {
+    "lineName": "109路(东大桥公交场站--北京西站南广场)",
+    "coordX": 116.33207002899842,
+    "coordY": 39.88858796612254,
+    "stationName": "达官营",
+    "sequence": 24
+  },
+  {
+    "lineName": "109路(东大桥公交场站--北京西站南广场)",
+    "coordX": 116.32842532325677,
+    "coordY": 39.88861487743563,
+    "stationName": "广外甘石桥",
+    "sequence": 25
+  },
+  {
+    "lineName": "109路(东大桥公交场站--北京西站南广场)",
+    "coordX": 116.32250590867999,
+    "coordY": 39.888722226901045,
+    "stationName": "湾子",
+    "sequence": 26
+  },
+  {
+    "lineName": "109路(东大桥公交场站--北京西站南广场)",
+    "coordX": 116.3188618555594,
+    "coordY": 39.89206707770679,
+    "stationName": "北京西站南广场",
+    "sequence": 27
+  },
+  {
+    "lineName": "109路(北京西站南广场--东大桥公交场站)",
+    "coordX": 116.31867142262098,
+    "coordY": 39.89102649182714,
+    "stationName": "北京西站南广场",
+    "sequence": 1
+  },
+  {
+    "lineName": "109路(北京西站南广场--东大桥公交场站)",
+    "coordX": 116.32272442292177,
+    "coordY": 39.88858781283612,
+    "stationName": "湾子",
+    "sequence": 2
+  },
+  {
+    "lineName": "109路(北京西站南广场--东大桥公交场站)",
+    "coordX": 116.32697864716059,
+    "coordY": 39.88854564547683,
+    "stationName": "广外甘石桥",
+    "sequence": 3
+  },
+  {
+    "lineName": "109路(北京西站南广场--东大桥公交场站)",
+    "coordX": 116.33347088753949,
+    "coordY": 39.88843634262673,
+    "stationName": "达官营",
+    "sequence": 4
+  },
+  {
+    "lineName": "109路(北京西站南广场--东大桥公交场站)",
+    "coordX": 116.35398640939506,
+    "coordY": 39.88797199605455,
+    "stationName": "广安门内",
+    "sequence": 5
+  },
+  {
+    "lineName": "109路(北京西站南广场--东大桥公交场站)",
+    "coordX": 116.3568163660528,
+    "coordY": 39.88789878840225,
+    "stationName": "牛街路口西",
+    "sequence": 6
+  },
+  {
+    "lineName": "109路(北京西站南广场--东大桥公交场站)",
+    "coordX": 116.36303322210128,
+    "coordY": 39.88781630377463,
+    "stationName": "菜市口西",
+    "sequence": 7
+  },
+  {
+    "lineName": "109路(北京西站南广场--东大桥公交场站)",
+    "coordX": 116.36831250667319,
+    "coordY": 39.88962892406878,
+    "stationName": "菜市口北",
+    "sequence": 8
+  },
+  {
+    "lineName": "109路(北京西站南广场--东大桥公交场站)",
+    "coordX": 116.36834099225742,
+    "coordY": 39.89337671820076,
+    "stationName": "校场口",
+    "sequence": 9
+  },
+  {
+    "lineName": "109路(北京西站南广场--东大桥公交场站)",
+    "coordX": 116.36832266120231,
+    "coordY": 39.89616561068489,
+    "stationName": "宣武门外",
+    "sequence": 10
+  },
+  {
+    "lineName": "109路(北京西站南广场--东大桥公交场站)",
+    "coordX": 116.36798404802515,
+    "coordY": 39.90448461515038,
+    "stationName": "西单路口南",
+    "sequence": 11
+  },
+  {
+    "lineName": "109路(北京西站南广场--东大桥公交场站)",
+    "coordX": 116.36772062005258,
+    "coordY": 39.9105956452283,
+    "stationName": "西单商场",
+    "sequence": 12
+  },
+  {
+    "lineName": "109路(北京西站南广场--东大桥公交场站)",
+    "coordX": 116.36738817417168,
+    "coordY": 39.917598724285334,
+    "stationName": "缸瓦市",
+    "sequence": 13
+  },
+  {
+    "lineName": "109路(北京西站南广场--东大桥公交场站)",
+    "coordX": 116.37031894777195,
+    "coordY": 39.92113138746458,
+    "stationName": "西四丁字街",
+    "sequence": 14
+  },
+  {
+    "lineName": "109路(北京西站南广场--东大桥公交场站)",
+    "coordX": 116.37242146342909,
+    "coordY": 39.921153280183276,
+    "stationName": "西安门",
+    "sequence": 15
+  },
+  {
+    "lineName": "109路(北京西站南广场--东大桥公交场站)",
+    "coordX": 116.38352879801391,
+    "coordY": 39.9208478781361,
+    "stationName": "北海",
+    "sequence": 16
+  },
+  {
+    "lineName": "109路(北京西站南广场--东大桥公交场站)",
+    "coordX": 116.38984589927928,
+    "coordY": 39.92186423646602,
+    "stationName": "神武门",
+    "sequence": 17
+  },
+  {
+    "lineName": "109路(北京西站南广场--东大桥公交场站)",
+    "coordX": 116.39866348703194,
+    "coordY": 39.92286540718651,
+    "stationName": "沙滩路口西",
+    "sequence": 18
+  },
+  {
+    "lineName": "109路(北京西站南广场--东大桥公交场站)",
+    "coordX": 116.40640580868154,
+    "coordY": 39.92284854491344,
+    "stationName": "美术馆东",
+    "sequence": 19
+  },
+  {
+    "lineName": "109路(北京西站南广场--东大桥公交场站)",
+    "coordX": 116.41266496687842,
+    "coordY": 39.92289823610134,
+    "stationName": "东四路口东",
+    "sequence": 20
+  },
+  {
+    "lineName": "109路(北京西站南广场--东大桥公交场站)",
+    "coordX": 116.41800111246451,
+    "coordY": 39.92294576837863,
+    "stationName": "朝内小街",
+    "sequence": 21
+  },
+  {
+    "lineName": "109路(北京西站南广场--东大桥公交场站)",
+    "coordX": 116.42615956838894,
+    "coordY": 39.92299912261578,
+    "stationName": "朝阳门内",
+    "sequence": 22
+  },
+  {
+    "lineName": "109路(北京西站南广场--东大桥公交场站)",
+    "coordX": 116.4337383649281,
+    "coordY": 39.92280535796186,
+    "stationName": "朝阳门外",
+    "sequence": 23
+  },
+  {
+    "lineName": "109路(北京西站南广场--东大桥公交场站)",
+    "coordX": 116.43824262386075,
+    "coordY": 39.9220541622617,
+    "stationName": "神路街",
+    "sequence": 24
+  },
+  {
+    "lineName": "109路(北京西站南广场--东大桥公交场站)",
+    "coordX": 116.44501484045934,
+    "coordY": 39.92112733664652,
+    "stationName": "东大桥路口东",
+    "sequence": 25
+  },
+  {
+    "lineName": "109路(北京西站南广场--东大桥公交场站)",
+    "coordX": 116.44614776605985,
+    "coordY": 39.92221265090218,
+    "stationName": "东大桥公交场站",
+    "sequence": 26
+  }
+]

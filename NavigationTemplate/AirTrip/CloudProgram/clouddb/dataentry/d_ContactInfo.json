@@ -1,0 +1,11 @@
+{
+  "cloudDBZoneName": "AirTripZone",
+  "objectTypeName": "ContactInfo",
+  "objects": [
+    {
+      "id": "1001231100000001",
+      "contactName": "张三",
+      "contactPhone": "12345678912"
+    }
+  ]
+}

@@ -74,7 +74,7 @@
       {
         // 替换应用的clientID
         "name": "client_id",
-        "value": "112357537"
+        "value": "xxx"
       }
     ],
     "extensionAbilities": [

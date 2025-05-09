@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>图标/我/icon_my_order2 2</title>
+    <g id="" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon" transform="translate(-176.000000, -381.000000)">
+            <g id="图标/我/icon_my_order2" transform="translate(176.000000, 381.000000)">
+                <rect id="图标/我/icon_my_order1" fill-opacity="0" fill="#D8D8D8" x="0" y="0" width="24" height="24"></rect>
+                <path d="M13,3 L19,3 C21.209139,3 23,4.790861 23,7 L23,15 C23,17.209139 21.209139,19 19,19 L9,19 L9,19 L9,7 C9,4.790861 10.790861,3 13,3 Z" id="矩形" stroke="#333333" stroke-width="1.2"></path>
+                <path d="M1.23177872,12.7218655 L5.70015367,7.3598156 C5.89014749,7.13182301 6.1715951,7 6.46837495,7 L9,7 L9,7 L9,19 L2,19 C1.44771525,19 1,18.5522847 1,18 L1,13.3620499 C1,13.1281134 1.08201622,12.9015805 1.23177872,12.7218655 Z" id="矩形" stroke="#333333" stroke-width="1.2"></path>
+                <path d="M7,7 L7,12 C7,12.5522847 6.55228475,13 6,13 L1,13 L1,13" id="路径-13" stroke="#333333" stroke-width="1.2"></path>
+                <circle id="椭圆形" stroke="#333333" stroke-width="1.2" fill="#FFFFFF" cx="5.5" cy="19.5" r="1.9"></circle>
+                <circle id="椭圆形" stroke="#333333" stroke-width="1.2" fill="#FFFFFF" cx="17.5" cy="19.5" r="1.9"></circle>
+            </g>
+        </g>
+    </g>
+</svg>

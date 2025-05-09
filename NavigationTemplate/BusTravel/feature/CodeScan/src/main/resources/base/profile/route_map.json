@@ -1,0 +1,28 @@
+{
+  "routerMap": [
+    {
+      "name": "CloudCard",
+      "pageSourceFile": "src/main/ets/index/CloudCard.ets",
+      "buildFunction": "CloudCardBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "CodeScanPage",
+      "pageSourceFile": "src/main/ets/index/CodeScanPage.ets",
+      "buildFunction": "CodeScanPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "ActivateCloudCard",
+      "pageSourceFile": "src/main/ets/index/ActivateCloudCard.ets",
+      "buildFunction": "ActivateCloudCardBuilder",
+      "data": {
+        "description": ""
+      }
+    }
+  ]
+}

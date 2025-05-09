@@ -1,0 +1,16 @@
+{
+  "color": [
+    {
+      "name": "search_color",
+      "value": "#0D000000"
+    },
+    {
+      "name": "font_color_gray",
+      "value": "#99000000"
+    },
+    {
+      "name": "background_color",
+      "value": "#F1F3F5"
+    }
+  ]
+}

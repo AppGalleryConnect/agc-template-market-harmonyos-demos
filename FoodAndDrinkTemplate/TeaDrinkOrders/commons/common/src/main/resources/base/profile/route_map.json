@@ -1,0 +1,28 @@
+{
+  "routerMap": [
+    {
+      "name": "HwMap",
+      "pageSourceFile": "src/main/ets/components/HwMap.ets",
+      "buildFunction": "HwMapBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "PreviewImagePage",
+      "pageSourceFile": "src/main/ets/components/PreviewImagePage.ets",
+      "buildFunction": "PreviewImagePageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "MemberCodePage",
+      "pageSourceFile": "src/main/ets/components/MemberCodePage.ets",
+      "buildFunction": "MemberCodePageBuilder",
+      "data": {
+        "description": ""
+      }
+    }
+  ]
+}

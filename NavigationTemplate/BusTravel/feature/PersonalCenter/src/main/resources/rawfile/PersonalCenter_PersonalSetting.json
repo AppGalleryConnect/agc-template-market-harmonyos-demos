@@ -1,0 +1,22 @@
+[
+  {
+    "name": "姓名",
+    "moreIcon": "app.media.moreicon"
+  },
+  {
+    "name": "性别",
+    "moreIcon": "app.media.moreicon"
+  },
+  {
+    "name": "设置密码",
+    "moreIcon": "app.media.moreicon"
+  },
+  {
+    "name": "变绑手机",
+    "moreIcon": "app.media.moreicon"
+  },
+  {
+    "name": "注销账号",
+    "moreIcon": "app.media.moreicon"
+  }
+]

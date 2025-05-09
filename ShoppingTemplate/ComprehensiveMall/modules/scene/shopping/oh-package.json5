@@ -1,0 +1,24 @@
+{
+  "name": "@scene/shopping",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@components/titlebar": "file:../../components/titlebar",
+    "@components/igrid": "file:../../components/igrid",
+    "@components/iwaterflow": "file:../../components/iwaterflow",
+    "@components/loginbutton": "file:../../components/loginbutton",
+    "@common/router": "file:../../common/router",
+    "@common/const": "file:../../common/const",
+    "@common/network": "file:../../common/network",
+    "@common/cache": "file:../../common/cache",
+    "@common/resource": "file:../../common/resource",
+    "@common/customtypes": "file:../../common/customtypes",
+    "@common/data": "file:../../common/data",
+    "@guis/search": "file:../../guis/search",
+    "@guis/browser": "file:../../guis/browser",
+    "@guis/cards": "file:../../guis/cards"
+  }
+}

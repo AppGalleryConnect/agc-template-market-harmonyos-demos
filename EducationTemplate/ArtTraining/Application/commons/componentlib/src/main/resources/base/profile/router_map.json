@@ -1,0 +1,28 @@
+{
+  "routerMap": [
+    {
+      "name": "BindPhonePage",
+      "pageSourceFile": "src/main/ets/pages/BindPhonePage/Index.ets",
+      "buildFunction": "bindPhonePageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "CommonConfirmDialog",
+      "pageSourceFile": "src/main/ets/dialog/CommonConfirmDialog.ets",
+      "buildFunction": "commonConfirmDialogBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "ContactCustomerServiceDialog",
+      "pageSourceFile": "src/main/ets/dialog/ContactCustomerServiceDialog.ets",
+      "buildFunction": "contactCustomerServiceBuilder",
+      "data": {
+        "description": ""
+      }
+    }
+  ]
+}

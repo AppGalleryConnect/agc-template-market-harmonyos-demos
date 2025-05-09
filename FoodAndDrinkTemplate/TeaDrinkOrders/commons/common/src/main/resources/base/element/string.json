@@ -1,0 +1,120 @@
+{
+  "string": [
+    {
+      "name": "shared_desc",
+      "value": "description"
+    },
+    {
+      "name": "business_time",
+      "value": "营业时间"
+    },
+    {
+      "name": "call",
+      "value": "一键拨号"
+    },
+    {
+      "name": "request_failed",
+      "value": "请求失败"
+    },
+    {
+      "name": "cancel_pay",
+      "value": "取消支付"
+    },
+    {
+      "name": "pay_failed",
+      "value": "支付失败"
+    },
+    {
+      "name": "network_error",
+      "value": "网络链接异常"
+    },
+    {
+      "name": "duplicate_request",
+      "value": "重复请求"
+    },
+    {
+      "name": "copy_success",
+      "value": "复制成功"
+    },
+    {
+      "name": "insulation_bag",
+      "value": "保温袋"
+    },
+    {
+      "name": "insulation_bag_desc",
+      "value": "保持低温，口感更好~"
+    },
+    {
+      "name": "call_phone",
+      "value": "拨打电话"
+    },
+    {
+      "name": "tab_home",
+      "value": "首页"
+    },
+    {
+      "name": "tab_order",
+      "value": "点单"
+    },
+    {
+      "name": "tab_order_list",
+      "value": "我的订单"
+    },
+    {
+      "name": "show_pick_num",
+      "value": "请出示取餐码"
+    },
+    {
+      "name": "process_ordered",
+      "value": "已下单"
+    },
+    {
+      "name": "process_making",
+      "value": "制作中"
+    },
+    {
+      "name": "process_finished",
+      "value": "已完成"
+    },
+    {
+      "name": "memberCode",
+      "value": "会员码"
+    },
+    {
+      "name": "refresh",
+      "value": "刷新"
+    },
+    {
+      "name": "memberAccount",
+      "value": "会员账号："
+    },
+    {
+      "name": "permission_failed",
+      "value": "权限获取失败"
+    },
+    {
+      "name": "loading",
+      "value": "加载中"
+    },
+    {
+      "name": "select_pay_type",
+      "value": "选择支付方式"
+    },
+    {
+      "name": "wait_pay",
+      "value": "支付金额："
+    },
+    {
+      "name": "below_threshold",
+      "value": "距离使用门槛还差%s元"
+    },
+    {
+      "name": "empty_data",
+      "value": "暂无数据"
+    },
+    {
+      "name": "delivery_info",
+      "value": "配送信息"
+    }
+  ]
+}

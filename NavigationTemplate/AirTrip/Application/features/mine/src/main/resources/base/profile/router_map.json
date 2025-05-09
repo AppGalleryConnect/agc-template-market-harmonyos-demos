@@ -1,0 +1,68 @@
+{
+  "routerMap": [
+    {
+      "name": "SelectPassengerPage",
+      "pageSourceFile": "src/main/ets/pages/SelectPassengerPage.ets",
+      "buildFunction": "selectPassengerPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "AddPassengerPage",
+      "pageSourceFile": "src/main/ets/pages/AddPassengerPage.ets",
+      "buildFunction": "addPassengerPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "OrderDetailPage",
+      "pageSourceFile": "src/main/ets/pages/OrderDetailPage.ets",
+      "buildFunction": "orderDetailPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "PayPage",
+      "pageSourceFile": "src/main/ets/pages/PayPage.ets",
+      "buildFunction": "payPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "UserInfoSettingPage",
+      "pageSourceFile": "src/main/ets/pages/UserInfoSettingPage.ets",
+      "buildFunction": "userInfoSettingPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "OrderCenterPage",
+      "pageSourceFile": "src/main/ets/pages/OrderCenterPage.ets",
+      "buildFunction": "orderCenterPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "PassengerListPage",
+      "pageSourceFile": "src/main/ets/pages/PassengerListPage.ets",
+      "buildFunction": "passengerListPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "SettingPage",
+      "pageSourceFile": "src/main/ets/pages/SettingPage.ets",
+      "buildFunction": "settingPageBuilder",
+      "data": {
+        "description": ""
+      }
+    }
+  ]
+}

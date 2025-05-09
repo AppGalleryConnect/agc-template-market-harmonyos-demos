@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "serviceAgreement",
+      "value": "《南京乘车码服务协议》"
+    },
+    {
+      "name": "permissionAgreement",
+      "value": "《用户隐私协议》"
+    }
+  ]
+}

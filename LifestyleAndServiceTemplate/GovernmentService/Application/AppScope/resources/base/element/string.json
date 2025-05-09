@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "政务模版"
+    },
+    {
+      "name": "agcit_huawei_government_template",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_government_template",
+      "value": "industryTemplate"
+    }
+  ]
+}

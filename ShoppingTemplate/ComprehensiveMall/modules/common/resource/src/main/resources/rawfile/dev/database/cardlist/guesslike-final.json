@@ -1,0 +1,480 @@
+{
+  "code": 0,
+  "message": "",
+  "data": {
+    "isFinalData": true,
+    "cards": [
+      {
+        "type": "ProductCard",
+        "model": {
+          "skuId": 100001,
+          "productId": "product_10001",
+          "contents": {
+            "banner": [
+              {
+                "constructionType": "Image",
+                "preset": "banner",
+                "data": "app://dev/media/spec/mock_spec_pink.jpg"
+              },
+              {
+                "constructionType": "Image",
+                "preset": "banner",
+                "data": "app://dev/media/spec/mock_spec_white.jpg"
+              },
+              {
+                "constructionType": "Image",
+                "preset": "banner",
+                "data": "app://dev/media/spec/mock_spec_stripe.jpg"
+              }
+            ],
+            "title": [
+              {
+                "constructionType": "Text",
+                "preset": "primary",
+                "data": "时尚轻商务系列针织打底纯羊毛内搭"
+              }
+            ],
+            "label": [
+            ],
+            "price": [
+              {
+                "constructionType": "Text",
+                "preset": "price",
+                "data": "188"
+              },
+              {
+                "constructionType": "Text",
+                "preset": "dashPrice",
+                "data": "200"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "type": "ProductCard",
+        "model": {
+          "productId": "product_10002",
+          "skuId": 100002,
+          "contents": {
+            "banner": [
+              {
+                "constructionType": "Image",
+                "preset": "banner",
+                "data": "app://dev/media/spec/mock_spec_white.jpg"
+              },
+              {
+                "constructionType": "Image",
+                "preset": "banner",
+                "data": "app://dev/media/spec/mock_spec_pink.jpg"
+              },
+              {
+                "constructionType": "Image",
+                "preset": "banner",
+                "data": "app://dev/media/spec/mock_spec_stripe.jpg"
+              }
+
+            ],
+            "title": [
+              {
+                "constructionType": "Text",
+                "preset": "primary",
+                "data": "时尚轻商务系列针织打底纯羊毛内搭"
+              }
+            ],
+            "label": [
+              {
+                "constructionType": "Text",
+                "preset": "leaf",
+                "data": "热销爆款"
+              },
+              {
+                "constructionType": "Text",
+                "preset": "leaf",
+                "data": "新风潮"
+              }
+            ],
+            "promotion": [
+            ],
+            "price": [
+              {
+                "constructionType": "Text",
+                "preset": "price",
+                "data": "188.88"
+              },
+              {
+                "constructionType": "Text",
+                "preset": "dashPrice",
+                "data": "300"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "type": "ProductCard",
+        "model": {
+          "productId": "product_10003",
+          "skuId": 100001,
+          "contents": {
+            "banner": [
+              {
+                "constructionType": "Image",
+                "preset": "banner",
+                "data": "app://dev/media/spec/mock_spec_stripe.jpg"
+              }
+            ],
+            "title": [
+              {
+                "constructionType": "Text",
+                "preset": "primary",
+                "data": "时尚轻商务系列针织打底纯羊毛内搭"
+              }
+            ],
+            "label": [
+            ],
+            "promotion": [
+              {
+                "constructionType": "Tag",
+                "preset": "tag1",
+                "data": "任选2件7.5折,任选3件7折"
+              }
+            ],
+            "price": [
+              {
+                "constructionType": "Text",
+                "preset": "price",
+                "data": "188"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "type": "ProductCard",
+        "model": {
+          "productId": "product_10004",
+          "skuId": 100001,
+          "contents": {
+            "banner": [
+              {
+                "constructionType": "Image",
+                "preset": "banner",
+                "data": "app://dev/media/spec/mock_spec_green.jpg"
+              }
+            ],
+            "title": [
+              {
+                "constructionType": "Text",
+                "preset": "primary",
+                "data": "时尚轻商务系列针织打底纯羊毛内搭"
+              }
+            ],
+            "label": [
+              {
+                "constructionType": "Text",
+                "preset": "snow",
+                "data": "上新折扣"
+              },
+              {
+                "constructionType": "Text",
+                "preset": "leaf",
+                "data": "热销爆款"
+              },
+              {
+                "constructionType": "Text",
+                "preset": "secondary",
+                "data": "热销爆款"
+              }
+            ],
+            "promotion": [
+              {
+                "constructionType": "Tag",
+                "preset": "tag1",
+                "data": "8.9折"
+              },
+              {
+                "constructionType": "Tag",
+                "preset": "tag1",
+                "data": "任选3件9折,任选5件8.6折"
+              },
+              {
+                "constructionType": "Tag",
+                "preset": "tag1",
+                "data": "满1000元赠送礼品"
+              }
+            ],
+            "price": [
+              {
+                "constructionType": "Text",
+                "preset": "price",
+                "data": "188"
+              },
+              {
+                "constructionType": "Text",
+                "preset": "dashPrice",
+                "data": "200"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "type": "ProductCard",
+        "model": {
+          "productId": "product_10001",
+          "skuId": 100001,
+          "contents": {
+            "banner": [
+              {
+                "constructionType": "Image",
+                "preset": "banner",
+                "data": "app://dev/media/spec/mock_spec_pink.jpg"
+              }
+            ],
+            "title": [
+              {
+                "constructionType": "Text",
+                "preset": "primary",
+                "data": "时尚轻商务系列针织打底纯羊毛内搭"
+              }
+            ],
+            "label": [
+              {
+                "constructionType": "Text",
+                "preset": "snow",
+                "data": "上新折扣"
+              },
+              {
+                "constructionType": "Text",
+                "preset": "leaf",
+                "data": "热销爆款"
+              },
+              {
+                "constructionType": "Text",
+                "preset": "secondary",
+                "data": "热销爆款"
+              }
+            ],
+            "promotion": [
+              {
+                "constructionType": "Tag",
+                "preset": "tag1",
+                "data": "8.9折"
+              },
+              {
+                "constructionType": "Tag",
+                "preset": "tag1",
+                "data": "任选3件9折,任选5件8.6折"
+              },
+              {
+                "constructionType": "Tag",
+                "preset": "tag1",
+                "data": "满1000元赠送礼品"
+              }
+            ],
+            "price": [
+              {
+                "constructionType": "Text",
+                "preset": "price",
+                "data": "188"
+              },
+              {
+                "constructionType": "Text",
+                "preset": "dashPrice",
+                "data": "200"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "type": "ProductCard",
+        "model": {
+          "productId": "product_10002",
+          "skuId": 100002,
+          "contents": {
+            "banner": [
+              {
+                "constructionType": "Image",
+                "preset": "banner",
+                "data": "app://dev/media/spec/mock_spec_white.jpg"
+              }
+            ],
+            "title": [
+              {
+                "constructionType": "Text",
+                "preset": "primary",
+                "data": "待到山花烂漫时待到山花烂漫时待到山花烂漫时"
+              }
+            ],
+            "label": [
+              {
+                "constructionType": "Text",
+                "preset": "leaf",
+                "data": "热销爆款"
+              },
+              {
+                "constructionType": "Text",
+                "preset": "leaf",
+                "data": "新风潮"
+              }
+            ],
+            "promotion": [
+            ],
+            "price": [
+              {
+                "constructionType": "Text",
+                "preset": "price",
+                "data": "188.88"
+              },
+              {
+                "constructionType": "Text",
+                "preset": "dashPrice",
+                "data": "300"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "type": "ProductCard",
+        "model": {
+          "productId": "product_10003",
+          "skuId": 100001,
+          "contents": {
+            "banner": [
+              {
+                "constructionType": "Image",
+                "preset": "banner",
+                "data": "app://dev/media/spec/mock_spec_stripe.jpg"
+              }
+            ],
+            "title": [
+              {
+                "constructionType": "Text",
+                "preset": "primary",
+                "data": "时尚轻商务系列针织打底纯羊毛内搭"
+              }
+            ],
+            "label": [
+              {
+                "constructionType": "Text",
+                "preset": "snow",
+                "data": "上新折扣"
+              },
+              {
+                "constructionType": "Text",
+                "preset": "leaf",
+                "data": "热销爆款"
+              },
+              {
+                "constructionType": "Text",
+                "preset": "secondary",
+                "data": "热销爆款"
+              }
+            ],
+            "promotion": [
+              {
+                "constructionType": "Tag",
+                "preset": "tag1",
+                "data": "8.9折"
+              },
+              {
+                "constructionType": "Tag",
+                "preset": "tag1",
+                "data": "任选3件9折,任选5件8.6折"
+              },
+              {
+                "constructionType": "Tag",
+                "preset": "tag1",
+                "data": "满1000元赠送礼品"
+              }
+            ],
+            "price": [
+              {
+                "constructionType": "Text",
+                "preset": "price",
+                "data": "188"
+              },
+              {
+                "constructionType": "Text",
+                "preset": "dashPrice",
+                "data": "200"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "type": "ProductCard",
+        "model": {
+          "productId": "product_10004",
+          "skuId": 100001,
+          "contents": {
+            "banner": [
+              {
+                "constructionType": "Image",
+                "preset": "banner",
+                "data": "app://dev/media/spec/mock_spec_green.jpg"
+              }
+            ],
+            "title": [
+              {
+                "constructionType": "Text",
+                "preset": "primary",
+                "data": "时尚轻商务系列针织打底纯羊毛内搭"
+              }
+            ],
+            "label": [
+              {
+                "constructionType": "Text",
+                "preset": "snow",
+                "data": "上新折扣"
+              },
+              {
+                "constructionType": "Text",
+                "preset": "leaf",
+                "data": "热销爆款"
+              },
+              {
+                "constructionType": "Text",
+                "preset": "secondary",
+                "data": "热销爆款"
+              }
+            ],
+            "promotion": [
+              {
+                "constructionType": "Tag",
+                "preset": "tag1",
+                "data": "8.9折"
+              },
+              {
+                "constructionType": "Tag",
+                "preset": "tag1",
+                "data": "任选3件9折,任选5件8.6折"
+              },
+              {
+                "constructionType": "Tag",
+                "preset": "tag1",
+                "data": "满1000元赠送礼品"
+              }
+            ],
+            "price": [
+              {
+                "constructionType": "Text",
+                "preset": "price",
+                "data": "188"
+              },
+              {
+                "constructionType": "Text",
+                "preset": "dashPrice",
+                "data": "200"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

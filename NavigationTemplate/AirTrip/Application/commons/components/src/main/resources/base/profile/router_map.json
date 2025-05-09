@@ -1,0 +1,28 @@
+{
+  "routerMap": [
+    {
+      "name": "WebPage",
+      "pageSourceFile": "src/main/ets/pages/WebPage.ets",
+      "buildFunction": "webPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "CitySelectionPage",
+      "pageSourceFile": "src/main/ets/pages/CitySelectionPage.ets",
+      "buildFunction": "citySelectionPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "CalendarPage",
+      "pageSourceFile": "src/main/ets/pages/CalendarPage.ets",
+      "buildFunction": "calendarPageBuilder",
+      "data": {
+        "description": ""
+      }
+    }
+  ]
+}

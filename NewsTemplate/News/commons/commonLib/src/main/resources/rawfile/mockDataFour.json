@@ -1,0 +1,55 @@
+{
+  "newsList": [
+    {
+      "newsContent": "With the development of science and technology and the improvement of people's living standards, cars have become an indispensable means of transportation in people's lives, while also contributing to environmental protection",
+      "newsId": "0",
+      "newsTime": "April 20, 2023",
+      "newsTitle": "Advantages of New Energy Vehicles in Environmental Protection: Reducing Carbon Emissions",
+      "newsImage": "news3.png"
+    },
+    {
+      "newsContent": "Spiders are one of the diverse species in terrestrial ecosystems, capable of using webs to trap flying pests and playing an important role in maintaining ecosystem balance",
+      "newsId": "1",
+      "newsTime": "June 11, 2022",
+      "newsTitle": "Wild spiders' seemingly evil 'animals: Despite their small bodies, they are much smarter than you imagine"
+    },
+    {
+      "newsContent": "Fruits are rich in vitamins that can promote metabolism. Especially when the weather is relatively dry, eating fruits with high moisture content is harmful to the human body",
+      "newsId": "2",
+      "newsTime": "June 10, 2022",
+      "newsTitle": "What are the specific benefits of eating fruits"
+    },
+    {
+      "newsContent": "As a major invention of the 20th century, airplanes have increasingly become an indispensable tool for modern travel, and at the same time, the field of aircraft manufacturing involves more and more professions",
+      "newsId": "3",
+      "newsTime": "May 15, 2022",
+      "newsTitle": "The new aircraft is about to debut at the air show"
+    },
+    {
+      "newsContent": "Against the backdrop of numerous problems caused by uncivilized dog ownership, incidents of dogs injuring people have once again received attention. A large number of netizens have discussed the issue of dog management. After all",
+      "newsId": "4",
+      "newsTime": "March 22, 2024",
+      "newsTitle": "Involving dog ownership regulations! Latest statement from behavioral experts: Refine management and improve the environment"
+    },
+    {
+      "newsContent": "Books are our teachers, teaching us a lot of knowledge and principles; Books are like lighthouses that illuminate our path forward. Books are like rain and dew, nourishing my thirst for knowledge.",
+      "newsId": "5",
+      "newsTime": "May 15, 2022",
+      "newsTitle": "Book List Recommendation: Books I will never throw away",
+      "newsImage": "news4.png"
+    },
+    {
+      "newsContent": "Dark energy is a mysterious form of energy that occupies the majority of the energy density in the universe. The temperature in the universe is even lower than absolute zero in space.",
+      "newsId": "6",
+      "newsTime": "May 19, 2022",
+      "newsTitle": "Cosmic Mysteries: The Mysteries of the Universe You Should Know, Worth a Look"
+    },
+    {
+      "newsContent": "Walking into the mountains, I was filled with a gentle breeze, and the faint fragrance made me feel refreshed. I didn't bring any gifts, but I was filled with excitement.",
+      "newsId": "7",
+      "newsTime": "May 19, 2022",
+      "newsTitle": "Get close to nature and have close contact with it",
+      "newsImage": "new5.png"
+    }
+  ]
+}

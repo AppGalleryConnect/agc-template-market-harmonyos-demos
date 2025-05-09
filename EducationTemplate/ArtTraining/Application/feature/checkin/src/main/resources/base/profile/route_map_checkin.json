@@ -1,0 +1,36 @@
+{
+  "routerMap": [
+    {
+      "name": "ActivityIntroductionPage",
+      "pageSourceFile": "src/main/ets/pages/ActivityIntroductionPage.ets",
+      "buildFunction": "activityIntroductionPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "TaskCheckInPage",
+      "pageSourceFile": "src/main/ets/pages/TaskCheckInPage.ets",
+      "buildFunction": "checkInTaskPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "SubmitCheckInPage",
+      "pageSourceFile": "src/main/ets/pages/SubmitCheckInPage.ets",
+      "buildFunction": "submitCheckInPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "FullScreenMediaPage",
+      "pageSourceFile": "src/main/ets/pages/FullScreenMediaPage.ets",
+      "buildFunction": "fullScreenMediaPageBuilder",
+      "data": {
+        "description": ""
+      }
+    }
+  ]
+}

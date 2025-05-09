@@ -1,0 +1,34 @@
+{
+  "routerMap": [
+    {
+      "name": "ProductSearchPage",
+      "pageSourceFile": "src/main/ets/pages/ProductSearchPage.ets",
+      "buildFunction": "buildProductSearchPage"
+    },
+    {
+      "name": "ProductSearchResultsPage",
+      "pageSourceFile": "src/main/ets/pages/ProductSearchResultsPage.ets",
+      "buildFunction": "buildProductSearchResultsPage"
+    },
+    {
+      "name": "ProductInfoPage",
+      "pageSourceFile": "src/main/ets/pages/ProductInfoPage.ets",
+      "buildFunction": "buildProductInfoPage"
+    },
+    {
+      "name": "OrderSubmitPage",
+      "pageSourceFile": "src/main/ets/pages/OrderSubmitPage.ets",
+      "buildFunction": "buildOrderSubmitPage"
+    },
+    {
+      "name": "SubCategoryPage",
+      "pageSourceFile": "src/main/ets/pages/SubCategoryPage.ets",
+      "buildFunction": "buildSubCategoryPage"
+    },
+    {
+      "name": "CartPage",
+      "pageSourceFile": "src/main/ets/pages/CartPage.ets",
+      "buildFunction": "buildCartPage"
+    }
+  ]
+}

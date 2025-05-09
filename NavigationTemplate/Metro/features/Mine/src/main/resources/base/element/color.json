@@ -1,0 +1,36 @@
+{
+  "color": [
+    {
+      "name": "color_checked",
+      "value": "#0A59F7"
+    },
+    {
+      "name": "background_color",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "font_gray",
+      "value": "#99000000"
+    },
+    {
+      "name": "background_white",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "background_connect_account",
+      "value": "#0D000000"
+    },
+    {
+      "name": "font_black",
+      "value": "#E6000000"
+    },
+    {
+      "name": "background_unconnected_account",
+      "value": "#1A466DFA"
+    },
+    {
+      "name": "font_blue",
+      "value": "#466DFA"
+    }
+  ]
+}

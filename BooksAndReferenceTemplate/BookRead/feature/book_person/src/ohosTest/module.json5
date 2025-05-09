@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "book_person_test",
+    "type": "feature",
+    "deviceTypes": [
+     "phone"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false
+  }
+}

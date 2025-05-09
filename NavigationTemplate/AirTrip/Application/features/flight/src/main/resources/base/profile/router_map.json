@@ -1,0 +1,52 @@
+{
+  "routerMap": [
+    {
+      "name": "FlightListPage",
+      "pageSourceFile": "src/main/ets/pages/FlightListPage.ets",
+      "buildFunction": "flightListPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "FlightDetailPage",
+      "pageSourceFile": "src/main/ets/pages/FlightDetailPage.ets",
+      "buildFunction": "flightDetailPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "FlightSearchListPage",
+      "pageSourceFile": "src/main/ets/pages/FlightSearchListPage.ets",
+      "buildFunction": "flightSearchListPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "FlightTrackInfoPage",
+      "pageSourceFile": "src/main/ets/pages/FlightTrackInfoPage.ets",
+      "buildFunction": "flightTrackInfoPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "FlightNumListPage",
+      "pageSourceFile": "src/main/ets/pages/FlightNumListPage.ets",
+      "buildFunction": "flightNumListPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "SubmitOrderPage",
+      "pageSourceFile": "src/main/ets/pages/SubmitOrderPage.ets",
+      "buildFunction": "submitOrderPageBuilder",
+      "data": {
+        "description": ""
+      }
+    }
+  ]
+}

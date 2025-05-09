@@ -1,0 +1,52 @@
+{
+  "routerMap": [
+    {
+      "name": "MyComment",
+      "pageSourceFile": "src/main/ets/components/MyComment.ets",
+      "buildFunction": "myCommentBuilder",
+      "data": {
+        "description" : "this is myComment"
+      }
+    },
+    {
+      "name": "HistoryRecord",
+      "pageSourceFile": "src/main/ets/components/HistoryRecord.ets",
+      "buildFunction": "historyRecordBuilder",
+      "data": {
+        "description" : "this is history record"
+      }
+    },
+    {
+      "name": "MySettings",
+      "pageSourceFile": "src/main/ets/components/MySettings.ets",
+      "buildFunction": "mySettingsBuilder",
+      "data": {
+        "description" : "this is my settings"
+      }
+    },
+    {
+      "name": "PrivacyPolicyPage",
+      "pageSourceFile": "src/main/ets/components/PrivacyPolicyPage.ets",
+      "buildFunction": "privacyPolicyPageBuilder",
+      "data": {
+        "description" : "this is my policy"
+      }
+    },
+    {
+      "name": "SetFontSize",
+      "pageSourceFile": "src/main/ets/components/SetFontSize.ets",
+      "buildFunction": "setFontSizeBuilder",
+      "data": {
+        "description" : "this is my fontsize"
+      }
+    },
+    {
+      "name": "UserInfoSettingPage",
+      "pageSourceFile": "src/main/ets/components/UserInfoSettingPage.ets",
+      "buildFunction": "userInfoSettingPageBuilder",
+      "data": {
+        "description": ""
+      }
+    }
+  ]
+}

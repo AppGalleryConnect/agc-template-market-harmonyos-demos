@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "search",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ]
+  }
+}

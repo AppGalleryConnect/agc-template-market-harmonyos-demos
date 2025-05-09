@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "H5",
+    "type": "har",
+    "deviceTypes": [
+      "phone",
+    ]
+  }
+}

@@ -1,0 +1,170 @@
+[
+  {
+    "lineName": "1路",
+    "startStation": "四惠枢纽站",
+    "endStation": "老山公交场站",
+    "lon": 116.490437,
+    "lat": 39.90536209,
+    "orders": 0
+  },
+  {
+    "lineName": "10路",
+    "startStation": "南菜园",
+    "endStation": "航天桥东",
+    "lon": 116.346184,
+    "lat": 39.87651413,
+    "orders": 0
+  },
+  {
+    "lineName": "11路",
+    "startStation": "大北窑东",
+    "endStation": "孛罗营",
+    "lon": 116.4586158,
+    "lat": 39.9068,
+    "orders": 0
+  },
+  {
+    "lineName": "顺12路",
+    "startStation": "沙浮",
+    "endStation": "航空配餐",
+    "lon": 116.7204778,
+    "lat": 40.05608611,
+    "orders": 0
+  },
+  {
+    "lineName": "T12路",
+    "startStation": "地铁通州北苑站",
+    "endStation": "房辛店",
+    "lon": 116.6310355,
+    "lat": 39.90265067,
+    "orders": 0
+  },
+  {
+    "lineName": "13路",
+    "startStation": "小营公交场站",
+    "endStation": "西城三里河",
+    "lon": 116.4272032,
+    "lat": 39.9958966,
+    "orders": 0
+  },
+  {
+    "lineName": "14路",
+    "startStation": "角门南站",
+    "endStation": "北京三十九中学",
+    "lon": 116.3717727,
+    "lat": 39.83872505,
+    "orders": 0
+  },
+  {
+    "lineName": "15路",
+    "startStation": "天桥商场",
+    "endStation": "动物园枢纽站",
+    "lon": 116.3917299,
+    "lat": 39.87941769,
+    "orders": 0
+  },
+  {
+    "lineName": "16路",
+    "startStation": "动物园枢纽站",
+    "endStation": "二里庄",
+    "lon": 116.334293,
+    "lat": 39.93620875,
+    "orders": 0
+  },
+  {
+    "lineName": "17路",
+    "startStation": "石榴园东",
+    "endStation": "崇文门东",
+    "lon": 116.4123486,
+    "lat": 39.84453785,
+    "orders": 0
+  },
+  {
+    "lineName": "18路",
+    "startStation": "惠新东桥南",
+    "endStation": "国际展览中心",
+    "lon": 116.4173161,
+    "lat": 39.98652258,
+    "orders": 0
+  },
+  {
+    "lineName": "19路",
+    "startStation": "动物园枢纽站",
+    "endStation": "翠林小区",
+    "lon": 116.333836,
+    "lat": 39.93662458,
+    "orders": 0
+  },
+  {
+    "lineName": "101路",
+    "startStation": "红庙路口东",
+    "endStation": "百万庄西口",
+    "lon": 116.4743589,
+    "lat": 39.91439275,
+    "orders": 0
+  },
+  {
+    "lineName": "102路",
+    "startStation": "动物园枢纽站",
+    "endStation": "角门南站",
+    "lon": 116.3328892,
+    "lat": 39.93585339,
+    "orders": 0
+  },
+  {
+    "lineName": "103路",
+    "startStation": "动物园枢纽站",
+    "endStation": "北京站西",
+    "lon": 116.3325739,
+    "lat": 39.93597298,
+    "orders": 0
+  },
+  {
+    "lineName": "104路",
+    "startStation": "地铁柳芳站",
+    "endStation": "北京站西",
+    "lon": 116.424954,
+    "lat": 39.95809816,
+    "orders": 0
+  },
+  {
+    "lineName": "105路",
+    "startStation": "天桥",
+    "endStation": "白石桥东",
+    "lon": 116.3927173,
+    "lat": 39.88308933,
+    "orders": 0
+  },
+  {
+    "lineName": "106路",
+    "startStation": "东直门枢纽站",
+    "endStation": "北京南站",
+    "lon": 116.4297269,
+    "lat": 39.9407614,
+    "orders": 0
+  },
+  {
+    "lineName": "107路",
+    "startStation": "东直门枢纽站",
+    "endStation": "白石桥东",
+    "lon": 116.4297269,
+    "lat": 39.9407614,
+    "orders": 0
+  },
+  {
+    "lineName": "108路",
+    "startStation": "崇文门",
+    "endStation": "大屯南",
+    "lon": 116.4128112,
+    "lat": 39.89896237,
+    "orders": 0
+  },
+  {
+    "lineName": "109路",
+    "startStation": "东大桥公交场站",
+    "endStation": "北京西站南广场",
+    "lon": 116.4451241,
+    "lat": 39.92173354,
+    "orders": 0
+  }
+]

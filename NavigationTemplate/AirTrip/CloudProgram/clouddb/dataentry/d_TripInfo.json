@@ -1,0 +1,29 @@
+{
+  "cloudDBZoneName": "AirTripZone",
+  "objectTypeName": "TripInfo",
+  "objects": [
+    {
+      "id": "tripId_1743502386020",
+      "flightNo": "HM001",
+      "airlineName": "海南航空",
+      "aircraftType": "波音737Max",
+      "aircraftAge": "0.6年",
+      "flyMiles": "598.3公里",
+      "flyDuration": "9小时34分钟",
+      "planTakeoffTime": "2025/04/01 17:15",
+      "planLandingTime": "2025/04/01 18:35",
+      "actualTakeoffTime": "string1",
+      "actualLandingTime": "string1",
+      "departureCity": "上海",
+      "departureAirport": "上海虹桥",
+      "destinationCity": "南京",
+      "destinationAirport": "南京禄口",
+      "mealType": "小食",
+      "spaceType": "ECONOMY_CLASS",
+      "includeTaxPrice": 800.0,
+      "seatNo": "",
+      "ticketNo": "ticketNo_1743502386023",
+      "status": "1"
+    }
+  ]
+}

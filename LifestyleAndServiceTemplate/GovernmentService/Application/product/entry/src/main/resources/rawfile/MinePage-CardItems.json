@@ -1,0 +1,14 @@
+[
+  {
+    "buttonName": "亮证",
+    "icon": "app.media.mine_model_pic3",
+    "name": "居民身份证",
+    "color": "#5393f4"
+  },
+  {
+    "buttonName": "亮证",
+    "icon": "app.media.mine_model_pic4",
+    "name": "社保卡",
+    "color": "#68c669"
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "name": "entry",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "",
+  "author": "",
+  "license": "",
+  "dependencies": {
+    commonlib: "file:../commons/commonLib",
+    componentlib: "file:../commons/componentLib",
+    qrcode: "file:../features/QRCode",
+    mine: "file:../features/Mine",
+    home: "file:../features/Home",
+    trip: "file:../features/Trip"
+  }
+}
+

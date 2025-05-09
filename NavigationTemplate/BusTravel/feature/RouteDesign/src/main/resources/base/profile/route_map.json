@@ -1,0 +1,28 @@
+{
+  "routerMap": [
+    {
+      "name": "RouteDetail",
+      "pageSourceFile": "src/main/ets/page/routeDetail.ets",
+      "buildFunction": "RouteDetailBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "RealTimeBus",
+      "pageSourceFile": "src/main/ets/page/realTimeBus.ets",
+      "buildFunction": "RealTimeBusBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "BusLinePlan",
+      "pageSourceFile": "src/main/ets/page/BusLinePlan.ets",
+      "buildFunction": "BusLinePlanBuilder",
+      "data": {
+        "description": ""
+      }
+    }
+  ]
+}

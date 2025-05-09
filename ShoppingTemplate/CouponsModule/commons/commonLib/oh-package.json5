@@ -1,0 +1,9 @@
+{
+  "name": "commonlib",
+  "version": "1.0.0",
+  "description": "公共通用模块",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {}
+}

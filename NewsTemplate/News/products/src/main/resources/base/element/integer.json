@@ -1,0 +1,148 @@
+{
+  "integer": [
+    {
+      "name": "search_height",
+      "value": 40
+    },
+    {
+      "name": "placeholderFont_size",
+      "value": 14
+    },
+    {
+      "name": "padding_left",
+      "value": 10
+    },
+    {
+      "name": "padding_right",
+      "value": 16
+    },
+    {
+      "name": "text_font",
+      "value": 14
+    },
+    {
+      "name": "txt_margin_left",
+      "value": 5
+    },
+    {
+      "name": "txt_margin_bottom",
+      "value": 50
+    },
+    {
+      "name": "text_margin_left2",
+      "value": 3
+    },
+    {
+      "name": "row_margin_bottom",
+      "value": 14
+    },
+    {
+      "name": "text_margin_bottom",
+      "value": 12
+    },
+    {
+      "name": "text_height",
+      "value": 28
+    },
+    {
+      "name": "text_border_radius",
+      "value": 18
+    },
+    {
+      "name": "list_item_height",
+      "value": 30
+    },
+    {
+      "name": "font_size",
+      "value": 16
+    },
+    {
+      "name": "search_list_height",
+      "value": 30
+    },
+    {
+      "name": "text_font_size",
+      "value": 14
+    },
+    {
+      "name": "divider_strokeWidth",
+      "value": 2
+    },
+    {
+      "name": "divider_start",
+      "value": 0
+    },
+    {
+      "name": "divider_end",
+      "value": 20
+    },
+    {
+      "name": "margin_top",
+      "value": 20
+    },
+    {
+      "name": "pop_position_x",
+      "value": 50
+    },
+    {
+      "name": "pop_position_y",
+      "value": 350
+    },
+    {
+      "name": "select_font",
+      "value": 16
+    },
+    {
+      "name": "pop_font",
+      "value": 30
+    },
+    {
+      "name": "padding_bottom",
+      "value": 10
+    },
+    {
+      "name": "search_margin_top",
+      "value": 15
+    },
+    {
+      "name": "list_margin_top",
+      "value": 5
+    },
+    {
+      "name": "news_title_text_font_size",
+      "value": 16
+    },
+    {
+      "name": "news_content_font_size",
+      "value": 14
+    },
+    {
+      "name": "news_content_font_line_height",
+      "value": 18
+    },
+    {
+      "name": "news_time_font_size",
+      "value": 10
+    },
+    {
+      "name": "news_list_border_radius",
+      "value": 16
+    },
+    {
+      "name": "back_top_img_size",
+      "value": 24
+    },
+    {
+      "name": "back_top_img_background_size",
+      "value": 48
+    },
+    {
+      "name": "back_top_bag_radius",
+      "value": 36
+    },
+    {
+      "name": "back_top_margin",
+      "value": 12
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "src": [
+    "pages/MainEntry",
+    "pages/CitySearch"
+  ]
+}

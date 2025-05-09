@@ -1,0 +1,20 @@
+{
+  "routerMap": [
+    {
+      "name": "ItineraryPage",
+      "pageSourceFile": "src/main/ets/pages/ItineraryPage.ets",
+      "buildFunction": "itineraryPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "ItineraryDetailPage",
+      "pageSourceFile": "src/main/ets/pages/ItineraryDetailPage.ets",
+      "buildFunction": "itineraryDetailPageBuilder",
+      "data": {
+        "description": ""
+      }
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "string": [
+    {
+      "name": "width_percent_25",
+      "value": "25%"
+    },
+    {
+      "name": "width_percent_40",
+      "value": "40%"
+    },
+    {
+      "name": "width_percent_half",
+      "value": "50%"
+    },
+    {
+      "name": "width_percent_75",
+      "value": "75%"
+    },
+    {
+      "name": "width_percent_full",
+      "value": "100%"
+    },
+    {
+      "name": "height_percent_25",
+      "value": "25%"
+    },
+    {
+      "name": "height_percent_half",
+      "value": "50%"
+    },
+    {
+      "name": "height_percent_75",
+      "value": "75%"
+    },
+    {
+      "name": "height_percent_full",
+      "value": "100%"
+    }
+  ]
+}

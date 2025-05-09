@@ -1,0 +1,22 @@
+[
+  {
+    "id": "001",
+    "losttime": "2024-11-01",
+    "type": "身份证",
+    "line": "公交10路",
+    "detail": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "pic1": "app.media.picpic",
+    "pic2": "app.media.picpic",
+    "pic3": "app.media.picpic"
+  },
+  {
+    "id": "002",
+    "losttime": "2024-11-03",
+    "type": "雨伞",
+    "line": "公交8路",
+    "detail": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "pic1": "app.media.picpic",
+    "pic2": "app.media.picpic",
+    "pic3": "app.media.picpic"
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "HomeStay"
+    },
+    {
+      "name": "agcit_huawei_home_stay",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_home_stay",
+      "value": "industryTemplate"
+    }
+  ]
+}

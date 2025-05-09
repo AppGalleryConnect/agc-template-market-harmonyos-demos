@@ -1,7 +1,7 @@
 import { AbilityConstant, bundleManager, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
-import { cloudFunction } from '@kit.CloudFoundationKit';
+import { cloudFunction, cloudResPrefetch } from '@kit.CloudFoundationKit';
 import { Constants, FormCardJump, PreloadResponse } from 'common';
 import { pushService } from '@kit.PushKit';
 import { BusinessError } from '@kit.BasicServicesKit';
@@ -91,18 +91,15 @@ export default class EntryAbility extends UIAbility {
   }
 
   functionPreload() {
-    let promise = cloudFunction.call({
-      name: 'preload', // 预加载缓存数据的云函数名称
-      timeout: Constants.REQUEST_TIME_OUT, // 获取缓存数据的超时时间
-      loadMode: cloudFunction.LoadMode.PRELOAD, // 获取缓存数据必须设置为PRELOAD
-    });
-    promise.then((data: cloudFunction.FunctionResult) => { // 接口调用成功处理缓存的应用数据
-      hilog.info(0x0000, 'testTag', 'get preload cache successfully');
-      this.initPreload(data.result as PreloadResponse); // data.result即是缓存的应用数据
-    }).catch((err: Error) => {
-      hilog.error(0x0000, 'testTag', 'fail to get preload cache: %{public}s', err.message);
-      this.functionNormal(); // 使用普通方式获取应用数据
-    });
+    cloudResPrefetch.getPrefetchResult(cloudResPrefetch.PrefetchMode.INSTALL_PREFETCH)
+      .then((data: cloudResPrefetch.PrefetchResult) => {
+        hilog.info(0x0000, 'testTag', `Succeeded in getting install prefetch data, result: ${JSON.stringify(data.result)}`);
+        this.initPreload(data.result as PreloadResponse); // data.result即是缓存的应用数据
+      }).catch((err: BusinessError) => {
+      hilog.error(0x0000, 'testTag', `Failed to get install prefetch data, code: ${err.code}, message: ${err.message}`);
+      // 使用原有方式获取应用数据
+      this.functionNormal();
+    })
   }
 
   functionNormal() {

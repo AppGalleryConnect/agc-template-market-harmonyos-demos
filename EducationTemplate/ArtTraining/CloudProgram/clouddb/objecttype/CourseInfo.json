@@ -1,0 +1,144 @@
+{
+  "indexes": [],
+  "permissions": [
+    {
+      "role": "World",
+      "rights": ["Read"]
+    },
+    {
+      "role": "Authenticated",
+      "rights": ["Read"]
+    },
+    {
+      "role": "Creator",
+      "rights": ["Read", "Upsert", "Delete"]
+    },
+    {
+      "role": "Administrator",
+      "rights": ["Read", "Upsert", "Delete"]
+    }
+  ],
+  "objectTypeName": "CourseInfo",
+  "fields": [
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "courseId",
+      "notNull": true,
+      "isSensitive": false,
+      "belongPrimaryKey": true,
+      "fieldType": "Integer"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "type",
+      "notNull": false,
+      "isSensitive": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Integer"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "name",
+      "notNull": false,
+      "isSensitive": false,
+      "belongPrimaryKey": false,
+      "fieldType": "String"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "summary",
+      "notNull": false,
+      "isSensitive": false,
+      "belongPrimaryKey": false,
+      "fieldType": "String"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "detail",
+      "notNull": false,
+      "isSensitive": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Text"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "mainDiagram",
+      "notNull": false,
+      "isSensitive": false,
+      "belongPrimaryKey": false,
+      "fieldType": "String"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "price",
+      "notNull": false,
+      "isSensitive": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Float"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "expireType",
+      "notNull": false,
+      "isSensitive": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Integer"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "startTime",
+      "notNull": false,
+      "isSensitive": false,
+      "belongPrimaryKey": false,
+      "fieldType": "String"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "endTime",
+      "notNull": false,
+      "isSensitive": false,
+      "belongPrimaryKey": false,
+      "fieldType": "String"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "orderTime",
+      "notNull": false,
+      "isSensitive": false,
+      "belongPrimaryKey": false,
+      "fieldType": "String"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "classHour",
+      "notNull": false,
+      "isSensitive": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Integer"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "status",
+      "notNull": false,
+      "isSensitive": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Integer"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "currentHour",
+      "notNull": false,
+      "isSensitive": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Integer"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "timetable",
+      "notNull": false,
+      "isSensitive": false,
+      "belongPrimaryKey": false,
+      "fieldType": "String"
+    }
+  ]
+}

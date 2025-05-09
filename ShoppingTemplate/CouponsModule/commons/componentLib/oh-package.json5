@@ -1,0 +1,11 @@
+{
+  "name": "componentlib",
+  "version": "1.0.0",
+  "description": "公共组件模块",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    commonlib: 'file:../commonLib'
+  }
+}

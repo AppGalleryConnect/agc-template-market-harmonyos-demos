@@ -1,0 +1,337 @@
+[
+  {
+    "tabName": "按主题",
+    "tabIndex": 0,
+    "leftTabList": [
+      {
+        "leftTabName": "健康医保",
+        "leftTabContentList": [
+          {
+            "list": [
+              {
+                "icon": "app.media.office_page_pic4",
+                "text": "预约挂号"
+              },
+              {
+                "icon": "app.media.office_page_pic5",
+                "text": "报告查询"
+              },
+              {
+                "icon": "app.media.office_page_pic6",
+                "text": "扫码就医"
+              },
+              {
+                "icon": "app.media.office_page_pic7",
+                "text": "检查预约"
+              },
+              {
+                "icon": "app.media.office_page_pic8",
+                "text": "智能导诊"
+              }
+            ],
+            "title": "就医"
+          },
+          {
+            "list": [
+              {
+                "icon": "app.media.office_page_pic9",
+                "text": "医保查询"
+              },
+              {
+                "icon": "app.media.office_page_pic10",
+                "text": "居民电子健康卡"
+              }
+            ],
+            "title": "医保"
+          }
+        ]
+      },
+      {
+        "leftTabName": "社保",
+        "leftTabContentList": [
+          {
+            "title": "社保",
+            "list": [
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "社保查询"
+              },
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "社保医保税务参保一件事联办"
+              },
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "个人权益记录查询打印"
+              },
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "离退休人员死亡待遇申领"
+              },
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "实体社会保障卡应用状态查询"
+              },
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "社会保障卡正式挂失"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "leftTabName": "公积金",
+        "leftTabContentList": [
+          {
+            "list": [
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "公积金业务大厅"
+              },
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "公积金查询"
+              },
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "省公积金"
+              },
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "购房提取"
+              },
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "异地转移申请"
+              }
+            ],
+            "title": "公积金业务"
+          }
+        ]
+      },
+      {
+        "leftTabName": "教育就业",
+        "leftTabContentList": [
+          {
+            "list": [
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "启蒙乐园"
+              },
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "名师课堂"
+              },
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "百科解读"
+              },
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "精品课堂"
+              },
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "视频公开课"
+              }
+            ],
+            "title": "教育就业"
+          }
+        ]
+      },
+      {
+        "leftTabName": "交通出行",
+        "leftTabContentList": [
+          {
+            "list": [
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "公交出行"
+              },
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "交通服务"
+              },
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "有轨电车"
+              },
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "汽车售票点"
+              },
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "火车售票点"
+              }
+            ],
+            "title": "交通出行"
+          }
+        ]
+      },
+      {
+        "leftTabName": "文旅服务",
+        "leftTabContentList": [
+          {
+            "list": [
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "去旅游"
+              },
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "旅游攻略"
+              },
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "文旅资讯"
+              },
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "智慧旅游"
+              },
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "特色旅游"
+              },
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "文化场馆"
+              },
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "旅游打卡地"
+              }
+            ],
+            "title": "文旅服务"
+          }
+        ]
+      },
+      {
+        "leftTabName": "金融服务",
+        "leftTabContentList": [
+          {
+            "list": [
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "上证指数"
+              },
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "创业板指数"
+              },
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "证券行情"
+              },
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "信用额度"
+              }
+            ],
+            "title": "金融服务"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "tabName": "按人生事",
+    "tabIndex": 1,
+    "leftTabList": [
+      {
+        "leftTabName": "生活服务",
+        "leftTabContentList": [
+          {
+            "title": "生活服务",
+            "list": [
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "话费充值"
+              },
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "社保医保税务参保一件事联办"
+              },
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "消费服务"
+              },
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "汽车报废"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "leftTabName": "婚姻生育",
+        "leftTabContentList": [
+          {
+            "title": "婚姻生育",
+            "list": [
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "婚姻登记"
+              },
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "妇儿之家"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "leftTabName": "不动产",
+        "leftTabContentList": [
+          {
+            "title": "不动产",
+            "list": [
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "房产交易服务"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "tabName": "按部门",
+    "tabIndex": 2,
+    "leftTabList": [
+      {
+        "leftTabName": "司法公证",
+        "leftTabContentList": [
+          {
+            "title": "司法公证",
+            "list": [
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "法律咨询"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "leftTabName": "出境入境",
+        "leftTabContentList": [
+          {
+            "title": "出境入境",
+            "list": [
+              {
+                "icon": "app.media.office_page_classifieds",
+                "text": "出境入境管理"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

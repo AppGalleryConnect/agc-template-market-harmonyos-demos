@@ -1,0 +1,20 @@
+{
+  "routerMap": [
+    {
+      "name": "SpecificContentSearch",
+      "pageSourceFile": "src/main/ets/components/SpecificContentSearch.ets",
+      "buildFunction": "SpecificContentSearchBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "PrivacyPolicyDetailPage",
+      "pageSourceFile": "src/main/ets/page/PrivacyPolicyDetailPage.ets",
+      "buildFunction": "PrivacyPolicyDetailPageBuilder",
+      "data": {
+        "description": ""
+      }
+    }
+  ]
+}

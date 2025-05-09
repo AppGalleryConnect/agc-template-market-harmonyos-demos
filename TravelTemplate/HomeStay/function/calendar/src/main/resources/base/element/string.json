@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "shared_desc",
+      "value": "description"
+    },
+    {
+      "name": "check_in",
+      "value": "入住日期"
+    },
+    {
+      "name": "leave_out",
+      "value": "离店日期"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+    "string":[
+        {
+            "name":"confirm",
+            "value":"ལེགས་འགྲུབ་བྱུང་།",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"select_placeholder",
+            "value":"འདེམས་རོགས།",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel",
+            "value":"འདོར་བ།",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

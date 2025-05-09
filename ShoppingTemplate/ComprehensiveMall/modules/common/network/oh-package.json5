@@ -1,0 +1,17 @@
+{
+  "name": "@common/network",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@ohos/axios": "^2.2.4",
+    "@common/const": "file:../const",
+    "@common/customtypes": "file:../customtypes",
+    "@common/data": "file:../data",
+    "@common/resource": "file:../resource"
+  },
+  "devDependencies": {},
+  "dynamicDependencies": {}
+}

@@ -1,0 +1,34 @@
+{
+  "files": [
+    "**/*.ets"
+  ],
+  "ignore": [
+    "**/src/ohosTest/**/*",
+    "**/src/test/**/*",
+    "**/src/mock/**/*",
+    "**/node_modules/**/*",
+    "**/oh_modules/**/*",
+    "**/build/**/*",
+    "**/BuildProfile.ets",
+    "**/.preview/**/*",
+  ],
+  "ruleSet": [
+    "plugin:@performance/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@hw-stylistic/recommended",
+    "plugin:@security/all",
+  ],
+  "rules": {
+    // 尽可能的使用单引号
+    "@typescript-eslint/quotes": [
+      "error",
+      "single"
+    ],
+    // 要求使用===和!==
+    "eqeqeq": "error",
+    // 不使用的代码段建议直接删除
+    "@security/no-commented-code": "warn",
+    // 代码中禁止包含未使用的表达式
+    "@typescript-eslint/no-unused-expressions": "error"
+  }
+}

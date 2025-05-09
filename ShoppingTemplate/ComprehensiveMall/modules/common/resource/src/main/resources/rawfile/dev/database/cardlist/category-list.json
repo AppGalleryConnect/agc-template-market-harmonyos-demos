@@ -1,0 +1,56 @@
+{
+  "code": 0,
+  "message": "",
+  "data": [
+    {
+      "id": "shu_cai_dou_zhi_pin",
+      "label": "精选",
+      "iconUrl": "app://dev/media/category/icon1.png"
+    },
+    {
+      "id": "rou_qin_dan",
+      "label": "清洁用品",
+      "iconUrl": "app://dev/media/category/icon2.png"
+    },
+    {
+      "id": "hai_xian_shui_chan",
+      "label": "全棉用品",
+      "iconUrl": "app://dev/media/category/icon3.png"
+    },
+    {
+      "id": "shui_guo_xian_hua",
+      "label": "安睡香氛",
+      "iconUrl": "app://dev/media/category/icon4.png"
+    },
+    {
+      "id": "ru_pin_hong_bei",
+      "label": "福利",
+      "iconUrl": "app://dev/media/category/icon5.png"
+    },
+    {
+      "id": "dong_pin_mian_dian",
+      "label": "运动休闲",
+      "iconUrl": "app://dev/media/category/icon6.png"
+    },
+    {
+      "id": "liang_you_diao_wei",
+      "label": "成人服装",
+      "iconUrl": "app://dev/media/category/icon7.png"
+    },
+    {
+      "id": "jiu_shui_yin_liao",
+      "label": "折扣商品",
+      "iconUrl": "app://dev/media/category/icon8.png"
+    },
+    {
+      "id": "xiu_xian_ling_shi",
+      "label": "美妆彩妆",
+      "iconUrl": "app://dev/media/category/icon9.png"
+    },
+    {
+      "id": "shu_shi_kuai_shou_cai",
+      "label": "饰品首饰",
+      "iconUrl": "app://dev/media/category/icon10.png"
+    }
+  ]
+}

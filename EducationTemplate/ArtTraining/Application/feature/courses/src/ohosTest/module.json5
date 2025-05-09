@@ -1,0 +1,12 @@
+{
+  "module": {
+    "name": "courses_test",
+    "type": "feature",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": true
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "color": [
+    {
+      "name": "color_white",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "color_black",
+      "value": "#000000"
+    },
+    {
+      "name": "color_grey",
+      "value": "#ccc"
+    },
+    {
+      "name": "convenience_service_bg",
+      "value": "#2036F3"
+    },
+    {
+      "name": "convenience_service_content_bg",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "drug_inquiry_content_bg",
+      "value": "#F2F2F2"
+    },
+    {
+      "name": "drug_inquiry_bg",
+      "value": "#f1f2f3"
+    },
+    {
+      "name": "institutions_tag_bg",
+      "value": "#007DFF"
+    },
+    {
+      "name": "institutions_card_fillColor",
+      "value": "#1296db"
+    },
+    {
+      "name": "institutions_card_bg",
+      "value": "#CCE5FF"
+    },
+    {
+      "name": "institutions_address_color",
+      "value": "#676767"
+    },
+    {
+      "name": "institutions_appointment_fillColor",
+      "value": "#00B588"
+    },
+    {
+      "name": "search_color",
+      "value": "#1296db"
+    },
+    {
+      "name": "code_color",
+      "value": "#5479DA"
+    },
+    {
+      "name": "link_color",
+      "value": "#E0E3E8"
+    },
+    {
+      "name": "medical_card_bg",
+      "value": "#2F56BC"
+    },
+    {
+      "name": "person_card_bg",
+      "value": "#F5F5F5"
+    },
+    {
+      "name": "record_bg",
+      "value": "#f1f2f3"
+    },
+    {
+      "name": "record_sheet_color",
+      "value": "#00B688"
+    },
+    {
+      "name": "record_sheet_cancel",
+      "value": "#DCF6F7"
+    },
+    {
+      "name": "record_sheet_cancel_color",
+      "value": "#00B588"
+    },
+    {
+      "name": "record_sheet_submit_color",
+      "value": "#00BBB4"
+    },
+    {
+      "name": "older_model_grey",
+      "value": "#f1f2f3"
+    },
+    {
+      "name": "about_bg",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "suggestions_area_fontColor",
+      "value": "#182431"
+    },
+    {
+      "name": "service_card_bg",
+      "value": "#F1F2F3"
+    },
+    {
+      "name": "service_search",
+      "value": "#F2F2F2"
+    },
+    {
+      "name": "person_color",
+      "value": "#0A59F7"
+    }
+  ]
+}

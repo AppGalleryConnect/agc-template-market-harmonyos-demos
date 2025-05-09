@@ -1,0 +1,17 @@
+{
+  "name": "entry",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "",
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "parse": "file:../commons/parse",
+    "common": "file:../commons/common",
+    "book_home": "file:../feature/book_home",
+    "book_person": "file:../feature/book_person",
+    "book_read": "file:../feature/book_read",
+    "book_shelf": "file:../feature/book_shelf"
+  }
+}
+

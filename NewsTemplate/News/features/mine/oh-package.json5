@@ -1,0 +1,15 @@
+{
+  "name": "mine",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+//    refreshNews: "file:../../entry/src/main/ets/components/",
+    commonlib: "file:../../commons/commonLib",
+    componentlib: "file:../../commons/componentLib",
+    network: "file:../../commons/network",
+//    home: "file:../../features/home"
+  }
+}

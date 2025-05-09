@@ -1,0 +1,12 @@
+{
+  "routerMap": [
+    {
+      "name": "OrderDetailPage",
+      "pageSourceFile": "src/main/ets/pages/OrderDetailPage.ets",
+      "buildFunction": "OrderDetailPageBuilder",
+      "data": {
+        "description": ""
+      }
+    }
+  ]
+}

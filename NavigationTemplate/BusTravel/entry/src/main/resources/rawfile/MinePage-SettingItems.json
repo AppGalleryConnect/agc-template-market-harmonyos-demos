@@ -1,0 +1,14 @@
+[
+  {
+    "icon": "app.media.connect",
+    "name": "联系客服",
+    "moreIcon": "app.media.moreicon",
+    "url": "ConnectService"
+  },
+  {
+    "icon": "app.media.aboutus",
+    "name": "关于我们",
+    "moreIcon": "app.media.moreicon",
+    "url": "AboutUs"
+  }
+]

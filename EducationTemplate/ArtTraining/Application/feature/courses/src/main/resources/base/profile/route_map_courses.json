@@ -1,0 +1,28 @@
+{
+  "routerMap": [
+    {
+      "name": "CourseDetailPage",
+      "pageSourceFile": "src/main/ets/pages/CourseDetailPage.ets",
+      "buildFunction": "courseDetailPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "CoursePrepayPage",
+      "pageSourceFile": "src/main/ets/pages/CoursePrepayPage.ets",
+      "buildFunction": "coursePrepayPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "OrderSubmittedPage",
+      "pageSourceFile": "src/main/ets/pages/OrderSubmittedPage.ets",
+      "buildFunction": "orderSubmittedPageBuilder",
+      "data": {
+        "description": ""
+      }
+    }
+  ]
+}

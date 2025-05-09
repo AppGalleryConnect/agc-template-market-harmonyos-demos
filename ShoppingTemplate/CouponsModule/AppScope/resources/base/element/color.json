@@ -1,0 +1,32 @@
+{
+  "color": [
+    {
+      "name": "icon_color_active",
+      "value": "#EE3B55"
+    },
+    {
+      "name": "icon_color_frozen",
+      "value": "#717272"
+    },
+    {
+      "name": "sys_brand_fuchsia",
+      "value": "#EE3C56"
+    },
+    {
+      "name": "sys_background_gary",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "sys_background_white",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "remind_orange",
+      "value": "#E84026"
+    },
+    {
+      "name": "light_red",
+      "value": "#fdedf0"
+    }
+  ]
+}

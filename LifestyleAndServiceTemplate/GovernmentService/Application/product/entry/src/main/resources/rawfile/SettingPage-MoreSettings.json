@@ -1,0 +1,30 @@
+[
+  {
+    "isFirst": true,
+    "settingItem": {
+      "name": "意见反馈",
+      "moreIcon": "app.media.mine_model_pic14"
+    }
+  },
+  {
+    "isFirst": false,
+    "settingItem": {
+      "name": "反馈列表",
+      "moreIcon": "app.media.mine_model_pic14"
+    }
+  },
+  {
+    "isFirst": false,
+    "settingItem": {
+      "name": "清空缓存",
+      "moreIcon": "app.media.mine_model_pic14"
+    }
+  },
+  {
+    "isFirst": false,
+    "settingItem": {
+      "name": "隐私声明",
+      "moreIcon": "app.media.mine_model_pic14"
+    }
+  }
+]

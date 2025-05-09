@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "ArtTraining"
+    },
+    {
+      "name": "permission_reason_location",
+      "value": "用于获取当前定位"
+    },
+    {
+      "name": "apply_read_calendar_reason",
+      "value": "申请读取日程权限"
+    },
+    {
+      "name": "apply_write_calendar_reason",
+      "value": "申请写入日程权限"
+    }
+  ]
+}

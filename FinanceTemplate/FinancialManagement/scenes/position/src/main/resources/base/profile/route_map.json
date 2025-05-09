@@ -1,0 +1,79 @@
+{
+  "routerMap": [
+    {
+      "name": "PositionInfo",
+      "pageSourceFile": "src/main/ets/pages/PositionInfo.ets",
+      "buildFunction": "PositionInfoBuilder"
+    },
+    {
+      "name": "Redemption",
+      "pageSourceFile": "src/main/ets/pages/Redemption.ets",
+      "buildFunction": "RedemptionBuilder"
+    },
+    {
+      "name": "TransactionRecordList",
+      "pageSourceFile": "src/main/ets/pages/TransactionList.ets",
+      "buildFunction": "TransactionRecordListBuilder"
+    },
+    {
+      "name": "TransactionRecordInfo",
+      "pageSourceFile": "src/main/ets/pages/TransactionInfo.ets",
+      "buildFunction": "TransactionRecordInfoBuilder"
+    },
+    {
+      "name": "MyRegularChoice",
+      "pageSourceFile": "src/main/ets/pages/MyRegularChoice.ets",
+      "buildFunction": "MyRegularChoiceBuilder"
+    },
+    {
+      "name": "MyRegularInvestment",
+      "pageSourceFile": "src/main/ets/pages/MyRegularInvestment.ets",
+      "buildFunction": "MyRegularInvestmentBuilder"
+    },
+    {
+      "name": "MyRegularInvestmentInfo",
+      "pageSourceFile": "src/main/ets/pages/MyRegularInvestmentInfo.ets",
+      "buildFunction": "MyRegularInvestmentInfoBuilder"
+    },
+    {
+      "name": "RevenueInfo",
+      "pageSourceFile": "src/main/ets/pages/RevenueInfo.ets",
+      "buildFunction": "RevenueInfoBuilder"
+    },
+    {
+      "name": "Other",
+      "pageSourceFile": "src/main/ets/pages/Other.ets",
+      "buildFunction": "OtherBuilder"
+    },
+    {
+      "name": "FinancialAccount",
+      "pageSourceFile": "src/main/ets/pages/FinancialAccount.ets",
+      "buildFunction": "FinancialAccountBuilder"
+    },
+    {
+      "name": "FinancialAgreement",
+      "pageSourceFile": "src/main/ets/pages/FinancialAgreement.ets",
+      "buildFunction": "FinancialAgreementBuilder"
+    },
+    {
+      "name": "Preview",
+      "pageSourceFile": "src/main/ets/pages/Preview.ets",
+      "buildFunction": "PreviewBuilder"
+    },
+    {
+      "name": "PositionRecord",
+      "pageSourceFile": "src/main/ets/pages/PositionRecord.ets",
+      "buildFunction": "PositionRecordBuilder"
+    },
+    {
+      "name": "InvestmentRecordInfo",
+      "pageSourceFile": "src/main/ets/pages/InvestmentRecordInfo.ets",
+      "buildFunction": "InvestmentRecordInfoBuilder"
+    },
+    {
+      "name": "TransactionSearch",
+      "pageSourceFile": "src/main/ets/pages/TransactionSearch.ets",
+      "buildFunction": "TransactionSearchBuilder"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "code": 0,
+  "message": "",
+  "data": {
+    "id": "10000",
+    "token": "mock_token",
+    "maskedPhoneNumber": "123****0000",
+    "nickname": "用户123"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "float": [
+    {
+      "name": "tabBuilder_image_width",
+      "value": "24vp"
+    },
+    {
+      "name": "tabBuilder_image_height",
+      "value": "24vp"
+    },
+    {
+      "name": "tabBuilder_font_size",
+      "value": "12vp"
+    }
+  ]
+}

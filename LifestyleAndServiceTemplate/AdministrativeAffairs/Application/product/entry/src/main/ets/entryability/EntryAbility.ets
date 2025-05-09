@@ -5,7 +5,7 @@ import {
   PermissionRequestResult,
   Permissions,
   UIAbility,
-  Want
+  Want,
 } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
@@ -14,11 +14,12 @@ import {
   BrightnessUtil,
   CloudFunction,
   CloudFunctionHomeResult,
+  CloudHomeListResult,
   EmitterEventId,
   GlobalContext,
-  HomeServiceList
+  HomeServiceList,
 } from 'common';
-import { cloudFunction } from '@kit.CloudFoundationKit';
+import { cloudFunction, cloudResPrefetch } from '@kit.CloudFoundationKit';
 import { calendarManager } from '@kit.CalendarKit';
 import { pushService } from '@kit.PushKit';
 
@@ -40,22 +41,25 @@ export default class EntryAbility extends UIAbility {
     * */
   private event: emitter.InnerEvent = {
     eventId: EmitterEventId.GET_SERVICE,
-    priority: emitter.EventPriority.HIGH
+    priority: emitter.EventPriority.HIGH,
   };
 
   functionPreload() {
-    CloudFunction.getHomeServiceList(cloudFunction.LoadMode.PRELOAD).then((resp: cloudFunction.FunctionResult) => {
-      if ((resp as CloudFunctionHomeResult).result.ret.code === 0) {
-        let result: HomeServiceList = (resp as CloudFunctionHomeResult).result.result as HomeServiceList
+    // 获取安装预加载数据
+    cloudResPrefetch.getPrefetchResult(cloudResPrefetch.PrefetchMode.INSTALL_PREFETCH)
+      .then((data: cloudResPrefetch.PrefetchResult) => {
+        let result: HomeServiceList = (data.result as CloudHomeListResult).result as HomeServiceList
         emitter.emit(this.event, {
           data: {
-            homeServiceList: result
-          }
+            homeServiceList: result,
+          },
         });
         AppStorage.setOrCreate('homeServiceList', result)
-      }
-    }).catch((err: Error) => {
-      hilog.error(0x0000, 'testTag', 'fail to get preload cache: %{public}s', err.message);
+        hilog.info(0x0000, 'testTag',
+          `Succeeded in getting install prefetch data, result: ${JSON.stringify(data.result)}`);
+      }).catch((err: BusinessError) => {
+      hilog.error(0x0000, 'testTag', `Failed to get install prefetch data, code: ${err.code}, message: ${err.message}`);
+      // 使用原有方式获取应用数据
       this.functionNormal()
     })
   }
@@ -66,8 +70,8 @@ export default class EntryAbility extends UIAbility {
         let result: HomeServiceList = (resp as CloudFunctionHomeResult).result.result as HomeServiceList
         emitter.emit(this.event, {
           data: {
-            homeServiceList: result
-          }
+            homeServiceList: result,
+          },
         });
         AppStorage.setOrCreate('homeServiceList', result)
       }

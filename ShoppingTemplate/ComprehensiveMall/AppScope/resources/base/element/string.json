@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "综合商城模板"
+    },
+    {
+      "name": "agcit_huawei_comprehensive_mall",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_comprehensive_mall",
+      "value": "industryTemplate"
+    }
+  ]
+}

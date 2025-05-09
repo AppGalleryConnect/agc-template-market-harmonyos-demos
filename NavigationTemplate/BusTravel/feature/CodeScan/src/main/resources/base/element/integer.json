@@ -1,0 +1,24 @@
+{
+  "integer": [
+    {
+      "name": "text_font_little_big",
+      "value": 18
+    },
+    {
+      "name": "text_font_big",
+      "value": 16
+    },
+    {
+      "name": "text_font_normal",
+      "value": 14
+    },
+    {
+      "name": "text_font_small",
+      "value": 12
+    },
+    {
+      "name": "text_font_little_small",
+      "value": 10
+    }
+  ]
+}

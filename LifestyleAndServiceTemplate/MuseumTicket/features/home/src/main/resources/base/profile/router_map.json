@@ -1,0 +1,39 @@
+{
+  "routerMap": [
+    {
+      "name": "IntroducePage",
+      "pageSourceFile": "src/main/ets/pages/IntroducePage.ets",
+      "buildFunction": "IntroducePageBuilder",
+      "data": {
+        "description": "this is IntroducePageBuilder"
+      }
+    },
+    {
+
+      "name": "ExplainPage",
+      "pageSourceFile": "src/main/ets/pages/ExplainPage.ets",
+      "buildFunction": "ExplainPageBuilder",
+      "data": {
+        "description": "this is ExplainPageBuilder"
+      }
+    },
+    {
+
+      "name": "MapPage",
+      "pageSourceFile": "src/main/ets/pages/MapPage.ets",
+      "buildFunction": "MapPageBuilder",
+      "data": {
+        "description": "this is MapPageBuilder"
+      }
+    },
+    {
+
+      "name": "ParkingPage",
+      "pageSourceFile": "src/main/ets/pages/ParkingPage.ets",
+      "buildFunction": "ParkingPageBuilder",
+      "data": {
+        "description": "this is ParkingPageBuilder"
+      }
+    }
+  ]
+}

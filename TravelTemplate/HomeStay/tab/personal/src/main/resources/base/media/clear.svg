@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>删除</title>
+    <g id="" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon" transform="translate(-482.000000, -162.000000)">
+            <g id="删除" transform="translate(482.000000, 162.000000)">
+                <circle id="椭圆形" fill="#171717" cx="6" cy="6" r="6"></circle>
+                <g id="图标/16/icon_close备份" transform="translate(1.757462, 1.757317)" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+                    <g id="编组" transform="translate(4.242538, 4.242538) rotate(-45.000000) translate(-4.242538, -4.242538) translate(1.242538, 1.242683)">
+                        <line x1="1.048503e-17" y1="2.95497123" x2="6" y2="2.95497123" id="路径-2"></line>
+                        <line x1="3" y1="0" x2="3" y2="5.99970915" id="路径-3"></line>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

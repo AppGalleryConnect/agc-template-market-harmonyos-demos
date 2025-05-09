@@ -1,0 +1,12 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "tracking_consent",
+      "value": "获取开放匿名设备标识符（Open Anonymous Device Identifier, OAID）"
+    }
+  ]
+}

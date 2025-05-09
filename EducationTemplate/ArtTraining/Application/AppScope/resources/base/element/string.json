@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "艺术培训行业模板"
+    },
+    {
+      "name": "agcit_huawei_art_training",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_art_training",
+      "value": "industryTemplate"
+    }
+  ]
+}

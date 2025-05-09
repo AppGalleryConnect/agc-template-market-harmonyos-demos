@@ -1,0 +1,23 @@
+{
+  "appSelected": {
+    "appId": "xxxxx",
+    "appName": "政务模板",
+    "deviceTypes": [
+      {
+        "appAdapters": "",
+        "deviceType": 4
+      },
+      {
+        "appAdapters": "",
+        "deviceType": 5
+      }
+    ],
+    "enableSites": "CN",
+    "installationFree": 0,
+    "packageType": 7,
+    "projectId": "xxxxx",
+    "projectName": "政务模板",
+    "siteId": "CN"
+  },
+  "teamId": "xxxxx"
+}

@@ -1,0 +1,25 @@
+{
+    "string":[
+        {
+            "name":"confirm",
+            "value":"پۈتتى",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"select_placeholder",
+            "value":"تاللاش",
+            "attr":{
+                "priority":"translate"
+            }
+        },
+        {
+            "name":"cancel",
+            "value":"بىكار قىلىش",
+            "attr":{
+                "priority":"translate"
+            }
+        }
+    ]
+}

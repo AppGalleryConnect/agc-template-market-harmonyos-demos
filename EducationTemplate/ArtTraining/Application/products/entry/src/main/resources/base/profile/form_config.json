@@ -1,0 +1,46 @@
+{
+  "forms": [
+    {
+      "name": "mini",
+      "displayName": "$string:mini_display_name",
+      "description": "$string:mini_desc",
+      "src": "./ets/mini/pages/MiniCard.ets",
+      "uiSyntax": "arkts",
+      "window": {
+        "designWidth": 720,
+        "autoDesignWidth": true
+      },
+      "colorMode": "auto",
+      "isDynamic": true,
+      "isDefault": true,
+      "updateEnabled": false,
+      "scheduledUpdateTime": "10:30",
+      "updateDuration": 1,
+      "defaultDimension": "1*2",
+      "supportDimensions": [
+        "1*2"
+      ]
+    },
+    {
+      "name": "middle",
+      "displayName": "$string:mini_display_name",
+      "description": "$string:mini_desc",
+      "src": "./ets/middle/pages/MiddleCard.ets",
+      "uiSyntax": "arkts",
+      "window": {
+        "designWidth": 720,
+        "autoDesignWidth": true
+      },
+      "colorMode": "auto",
+      "isDynamic": true,
+      "isDefault": false,
+      "updateEnabled": false,
+      "scheduledUpdateTime": "10:30",
+      "updateDuration": 1,
+      "defaultDimension": "2*2",
+      "supportDimensions": [
+        "2*2"
+      ]
+    }
+  ]
+}

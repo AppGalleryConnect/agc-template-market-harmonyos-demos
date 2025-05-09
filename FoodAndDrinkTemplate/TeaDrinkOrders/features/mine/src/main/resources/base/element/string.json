@@ -1,0 +1,148 @@
+{
+  "string": [
+    {
+      "name": "shared_desc",
+      "value": "description"
+    },
+    {
+      "name": "question_title",
+      "value": "帮助您使用更顺畅"
+    },
+    {
+      "name": "question_desc",
+      "value": "请选择一个问题类型"
+    },
+    {
+      "name": "personal_center",
+      "value": "个人中心"
+    },
+    {
+      "name": "disassociate",
+      "value": "解除关联"
+    },
+    {
+      "name": "associate_account",
+      "value": "关联账号"
+    },
+    {
+      "name": "wallet",
+      "value": "钱包"
+    },
+    {
+      "name": "points",
+      "value": "积分"
+    },
+    {
+      "name": "points_param",
+      "value": "%s分"
+    },
+    {
+      "name": "my_center",
+      "value": "我的中心"
+    },
+    {
+      "name": "my_order",
+      "value": "我的订单"
+    },
+    {
+      "name": "my_coupon",
+      "value": "我的优惠券"
+    },
+    {
+      "name": "help_center",
+      "value": "帮助中心"
+    },
+    {
+      "name": "faqs",
+      "value": "常见问题"
+    },
+    {
+      "name": "customer_phone",
+      "value": "客服电话"
+    },
+    {
+      "name": "use_now",
+      "value": "立即使用"
+    },
+    {
+      "name": "relate_account_msg1",
+      "value": "帐号关联失败，请重试~"
+    },
+    {
+      "name": "relate_account_msg2",
+      "value": "帐号关联失败"
+    },
+    {
+      "name": "drink_value",
+      "value": "茶力值"
+    },
+    {
+      "name": "drink_process",
+      "value": "再点%d杯升级"
+    },
+    {
+      "name": "lv_value",
+      "value": "Lv %d"
+    },
+    {
+      "name": "address_mg",
+      "value": "地址管理"
+    },
+    {
+      "name": "complete_user_info",
+      "value": "完善信息"
+    },
+    {
+      "name": "nickname",
+      "value": "昵称"
+    },
+    {
+      "name": "sex",
+      "value": "性别"
+    },
+    {
+      "name": "sex_note",
+      "value": "*注意性别选定之后不支持更改"
+    },
+    {
+      "name": "select_male",
+      "value": "我是男生"
+    },
+    {
+      "name": "select_female",
+      "value": "我是女生"
+    },
+    {
+      "name": "complete",
+      "value": "完成"
+    },
+    {
+      "name": "modify_success",
+      "value": "修改成功~"
+    },
+    {
+      "name": "modify_failed",
+      "value": "修改失败！"
+    },
+    {
+      "name": "inputMsg",
+      "value": "请输入信息"
+    },
+    {
+      "name": "input_nickname",
+      "value": "请输入昵称"
+    },
+    {
+      "name": "lv_undefined",
+      "value": "？？"
+    },
+    {
+      "name": "setting",
+      "value": "设置"
+    },
+    {
+      "name": "privacy",
+      "value": "隐私政策"
+    }
+  ]
+}

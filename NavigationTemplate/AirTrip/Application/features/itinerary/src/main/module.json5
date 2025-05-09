@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "itinerary",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ],
+    "routerMap": "$profile:router_map"
+  }
+}

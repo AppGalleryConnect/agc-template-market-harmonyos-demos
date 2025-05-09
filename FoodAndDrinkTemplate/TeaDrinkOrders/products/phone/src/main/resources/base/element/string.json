@@ -1,0 +1,92 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "茶饮"
+    },
+    {
+      "name": "INTERNET_REASON",
+      "value": "获取访问互联网权限"
+    },
+    {
+      "name": "location_permission",
+      "value": "查看商家位置功能需要允许应用运行时获取位置信息"
+    },
+    {
+      "name": "EntryFormAbility_desc",
+      "value": "form_description"
+    },
+    {
+      "name": "EntryFormAbility_label",
+      "value": "form_label"
+    },
+    {
+      "name": "widget_desc",
+      "value": "茶饮卡片"
+    },
+    {
+      "name": "widget_display_name",
+      "value": "茶饮卡片"
+    },
+    {
+      "name": "card_title",
+      "value": "茶饮卡片"
+    },
+    {
+      "name": "introduction",
+      "value": "Introduction"
+    },
+    {
+      "name": "order",
+      "value": "畅饮一杯"
+    },
+    {
+      "name": "storeName",
+      "value": "店铺名称"
+    },
+    {
+      "name": "goOrderDetail",
+      "value": "立即查看"
+    },
+    {
+      "name": "order_pick_num",
+      "value": "取餐码"
+    },
+    {
+      "name": "form_title_takeaway",
+      "value": "您的订单派送中"
+    },
+    {
+      "name": "form_making_desc1",
+      "value": "前方"
+    },
+    {
+      "name": "form_making_desc2",
+      "value": "杯制作中"
+    },
+    {
+      "name": "form_making_desc3",
+      "value": "预计等待"
+    },
+    {
+      "name": "form_making_desc4",
+      "value": "分钟"
+    },
+    {
+      "name": "delivery_time",
+      "value": "预计送达时间："
+    },
+    {
+      "name": "delivery_distance",
+      "value": "距你 %s分钟"
+    }
+  ]
+}

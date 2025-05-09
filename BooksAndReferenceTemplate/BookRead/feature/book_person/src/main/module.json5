@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "book_person",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

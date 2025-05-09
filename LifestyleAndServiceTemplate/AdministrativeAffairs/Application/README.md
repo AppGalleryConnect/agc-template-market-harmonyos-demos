@@ -1,4 +1,4 @@
-# 医保模板
+# 生活服务（医保）元服务模板快速入门
 
 ## 目录
 
@@ -27,7 +27,7 @@
 
 | 首页                           | 服务                              | 我的                           | 资讯                           |
 |------------------------------|---------------------------------|------------------------------|------------------------------|
-| ![首页](./screenshot/home.png) | ![服务](./screenshot/service.png) | ![我的](./screenshot/mine.png) | ![资讯](./screenshot/news.png) |
+| <img src="screenshot/home.png" alt="首页" width="300"> | <img src="screenshot/service.png" alt="服务" width="300"> | <img src="screenshot/mine.png" alt="我的" width="300"> | <img src="screenshot/news.png" alt="资讯" width="300"> |
 
 本模板主要页面及核心功能如下所示：
 
@@ -143,13 +143,13 @@
 
 ### 软件
 
-* DevEco Studio版本：DevEco Studio 5.0.0 Release及以上
-* HarmonyOS SDK版本：HarmonyOS 5.0.0 Release SDK及以上
+* DevEco Studio版本：DevEco Studio 5.0.4 release Release及以上
+* HarmonyOS SDK版本：HarmonyOS 5.0.4 release SDK及以上
 
 ### 硬件
 
 * 设备类型：华为手机（直板机）
-* HarmonyOS版本：HarmonyOS 5.0.0 Release及以上
+* HarmonyOS版本：HarmonyOS 5.0.4 release及以上
 
 ## 快速入门
 
@@ -161,8 +161,7 @@
 
 2. 在AppGallery Connect创建元服务，将包名配置到模板中。
 
-   a. 参考[创建元服务](https://developer.huawei.com/consumer/cn/doc/app/agc-help-createharmonyapp-0000001945392297)
-   为元服务创建APPID，并进行关联。
+   a. 参考[创建元服务](https://developer.huawei.com/consumer/cn/doc/app/agc-help-createharmonyapp-0000001945392297)为元服务创建APPID，并进行关联。
 
    b. 返回应用列表页面，查看元服务的包名。
 
@@ -171,9 +170,10 @@
 3. 配置签名。
 
    a. 参考[开通地图服务](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/map-config-agc) 依次开通地图服务、位置服务、定位服务。
-   ![截图](screenshot/img_14.png)
 
-   b. 为元服务进行[手工签名](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/ide-signing-V5#section297715173233)。
+   <img src="screenshot/img_14.png" alt="开通服务" width="600">
+
+   b. 为元服务进行[手工签名](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-signing)。
 
    c. 添加公钥指纹，详细参考：[配置应用证书指纹](https://developer.huawei.com/consumer/cn/doc/app/agc-help-signature-info-0000001628566748#section5181019153511)。
 
@@ -182,24 +182,36 @@
    a. [开通元函数服务](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/cloudfoundation-enable-function)和[开通云数据库服务](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/cloudfoundation-enable-database)
 
    b. 在CloudProgram/cloud-config.json文件中配置相关信息，依次填写当前项目的appId、appName、projectId、teamId、projectName，相关信息查询参考[查看应用基本信息](https://developer.huawei.com/consumer/cn/doc/app/agc-help-appinfo-0000001100014694) 。
-   ![截图](screenshot/img_19.png)
-   ![截图](screenshot/img_18.png)
+
+   <img src="screenshot/img_19.png" alt="配置信息" width="600">
+   <img src="screenshot/img_18.png" alt="查询信息" width="600">
 
    c.  部署云数据库。右击clouddb选择“deploy Cloud db”进行部署，部署成功之后可以在AGC上查看数据库状态。
-   ![截图](screenshot/img_20.png)
-   ![截图](screenshot/img_21.png)
+
+   <img src="screenshot/img_20.png" alt="部署数据库">
+   <img src="screenshot/img_21.png" alt="查询数据库" width="600">
 
    d. 部署云函数。右击goven-userinfo，点击Deploy 'goven-userinfo'部署云函数，类似操作部署home-service、informations-service和service-list。
-   ![截图](screenshot/img_11.png)
+
+   <img src="screenshot/img_11.png" alt="部署云函数">
 
    e. 云函数部署成功，可以在AGC上查看相关记录。
-   ![截图](screenshot/img_10.png)
+
+   <img src="screenshot/img_10.png" alt="查询云函数" width="600">
+
+   d.修改云函数中govn-userinfo中获取手机号的client_id以及client_secret为你当前项目中的client_id和client_secret。
+
+   <img src="screenshot/img_24.png" alt="配置id和secret" width="600">
+
 5. 配置预加载。
 
-   a. [开通预加载服务](https://developer.huawei.com/consumer/cn/doc/AppGallery-connect-Guides/agc-preload-enable-0000001834523102) 。
+   a. [开通预加载服务](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/cloudfoundation-enable-prefetch)。
 
    b. 为预加载绑定签名部署的云函数home-service。
-   ![截图](screenshot/img_13.png)
+
+   <img src="screenshot/img_13.png" alt="选择云函数" width="600">
+
+   c. 详细预加载文档，请参考：https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/cloudfoundation-prefetch-service
 
 6. 配置华为账号服务。
 
@@ -216,7 +228,7 @@
 
 1. 连接调试手机和PC。
 
-2. 对元服务[手工签名](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/ide-signing-V5#section297715173233)。
+2. 对元服务[手工签名](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-signing)。
 
 3. 菜单选择“Run > Run 'entry' ”或者“Run > Debug 'entry' ”，运行或调试模板工程。
 

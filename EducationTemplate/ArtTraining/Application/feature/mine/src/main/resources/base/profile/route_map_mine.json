@@ -1,0 +1,76 @@
+{
+  "routerMap": [
+    {
+      "name": "MyOrderPage",
+      "pageSourceFile": "src/main/ets/pages/MyOrderPage.ets",
+      "buildFunction": "myOrderPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "OrderDetailPage",
+      "pageSourceFile": "src/main/ets/pages/OrderDetailPage.ets",
+      "buildFunction": "orderDetailPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "MyCoursePage",
+      "pageSourceFile": "src/main/ets/pages/MyCoursePage.ets",
+      "buildFunction": "myCoursePageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "MyIDCardPage",
+      "pageSourceFile": "src/main/ets/pages/MyIDCardPage.ets",
+      "buildFunction": "myIDCardPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "TimetablePage",
+      "pageSourceFile": "src/main/ets/pages/TimetablePage.ets",
+      "buildFunction": "timetablePageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "MyCheckInPage",
+      "pageSourceFile": "src/main/ets/pages/MyCheckInPage.ets",
+      "buildFunction": "myCheckInPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "UserInfoEditPage",
+      "pageSourceFile": "src/main/ets/pages/UserInfoEditPage.ets",
+      "buildFunction": "userInfoEditBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "AboutUsPage",
+      "pageSourceFile": "src/main/ets/pages/AboutUsPage.ets",
+      "buildFunction": "aboutUsPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "PrivacyPage",
+      "pageSourceFile": "src/main/ets/pages/PrivacyPage.ets",
+      "buildFunction": "privacyPageBuilder",
+      "data": {
+        "description": ""
+      }
+    }
+  ]
+}

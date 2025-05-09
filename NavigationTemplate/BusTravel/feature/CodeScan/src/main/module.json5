@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "CodeScan",
+    "type": "har",
+    "deviceTypes": [
+      "default"
+    ],
+    "routerMap": "$profile:route_map"
+  }
+}

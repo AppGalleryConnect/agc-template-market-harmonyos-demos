@@ -1,0 +1,52 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "出行模板"
+    },
+    {
+      "name": "home_tab_label",
+      "value": "首页"
+    },
+    {
+      "name": "route_tab_label",
+      "value": "出行"
+    },
+    {
+      "name": "code_scan_label",
+      "value": "乘车码"
+    },
+    {
+      "name": "service_tab_label",
+      "value": "服务大厅"
+    },
+    {
+      "name": "personal_tab_label",
+      "value": "我的"
+    },
+    {
+      "name": "icon_image_width",
+      "value": "24vp"
+    },
+    {
+      "name": "icon_image_height",
+      "value": "24vp"
+    },
+    {
+      "name": "home_tab_fontsize",
+      "value": "10fp"
+    },
+    {
+      "name": "tab_font_style",
+      "value": "HarmonyOS_Sans_SC"
+    }
+  ]
+}

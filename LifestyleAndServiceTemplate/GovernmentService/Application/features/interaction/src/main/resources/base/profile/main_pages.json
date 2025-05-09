@@ -1,0 +1,9 @@
+{
+  "src": [
+    "pages/InteractionPage"
+  ],
+  "window": {
+    "designWidth": 720,
+    "autoDesignWidth": true
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "cloud-program",
+  "version": "1.0.0",
+  "private": true,
+  "description": "add shared dependencies for cloud functions",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prettier:fix": "prettier --write \"**/*.{js,ts,vue,css,scss,html,json,md}\""
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.11.11",
+    "typescript": "^5.4.2"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "igrid",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ]
+  }
+}

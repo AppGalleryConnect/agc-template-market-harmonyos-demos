@@ -1,0 +1,9 @@
+{
+  "src": [
+    "pages/Index"
+  ],
+  "window": {
+    "autoDesignWidth": false,
+    "designWidth": 360
+  }
+}

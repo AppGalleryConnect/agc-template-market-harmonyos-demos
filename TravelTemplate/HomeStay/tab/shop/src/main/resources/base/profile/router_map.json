@@ -1,0 +1,44 @@
+{
+  "routerMap": [
+    {
+      "name": "Purchase",
+      "pageSourceFile": "src/main/ets/pages/Purchase.ets",
+      "buildFunction": "PurchaseBuilder",
+      "data": {
+        "description": "this is Purchase"
+      }
+    },
+    {
+      "name": "Shop",
+      "pageSourceFile": "src/main/ets/pages/Shop.ets",
+      "buildFunction": "ShopBuilder",
+      "data": {
+        "description": "this is Purchase"
+      }
+    },
+    {
+      "name": "CommodityDetail",
+      "pageSourceFile": "src/main/ets/pages/CommodityDetail.ets",
+      "buildFunction": "CommodityDetailBuilder",
+      "data": {
+        "description": "this is CommodityDetail"
+      }
+    },
+    {
+      "name": "CommodityList",
+      "pageSourceFile": "src/main/ets/pages/CommodityList.ets",
+      "buildFunction": "CommodityListBuilder",
+      "data": {
+        "description": "this is CommodityList"
+      }
+    },
+    {
+      "name": "CommodityWaterFlow",
+      "pageSourceFile": "src/main/ets/components/CommodityWaterFlow.ets",
+      "buildFunction": "CommodityWaterFlowBuilder",
+      "data": {
+        "description": "this is CommodityList"
+      }
+    }
+  ]
+}

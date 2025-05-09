@@ -1,0 +1,36 @@
+{
+  "routerMap": [
+    {
+      "name": "OrderPage",
+      "pageSourceFile": "src/main/ets/pages/OrderPage.ets",
+      "buildFunction": "OrderPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "MerchantDetailPage",
+      "pageSourceFile": "src/main/ets/pages/MerchantDetailPage.ets",
+      "buildFunction": "MerchantDetailPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "GoodDetailPage",
+      "pageSourceFile": "src/main/ets/pages/GoodDetailPage.ets",
+      "buildFunction": "GoodDetailPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "ConfirmOrderPage",
+      "pageSourceFile": "src/main/ets/pages/ConfirmOrderPage.ets",
+      "buildFunction": "ConfirmOrderPageBuilder",
+      "data": {
+        "description": ""
+      }
+    }
+  ]
+}

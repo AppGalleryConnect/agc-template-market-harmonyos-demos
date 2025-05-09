@@ -1,0 +1,76 @@
+{
+  "color": [
+    {
+      "name": "stationsInformation_default",
+      "value": "#E6000000"
+    },
+    {
+      "name": "stationsInformation_background_color",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "font_color_gray",
+      "value": "#99000000"
+    },
+    {
+      "name": "background_color_white",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "orange",
+      "value": "#FE4F35"
+    },
+    {
+      "name": "background_color_orange",
+      "value": "#FFEDEA"
+    },
+    {
+      "name": "grey",
+      "value": "#66000000"
+    },
+    {
+      "name": "background_color_cancel",
+      "value": "#0D000000"
+    },
+    {
+      "name": "background_color_line1",
+      "value": "#46B1E3"
+    },
+    {
+      "name": "divider",
+      "value": "#33000000"
+    },
+    {
+      "name": "background_color_line2",
+      "value": "#E84026"
+    },
+    {
+      "name": "background_color_line3",
+      "value": "#64BB5C"
+    },
+    {
+      "name": "background_color_line4",
+      "value": "#564AF7"
+    },
+    {
+      "name": "background_color_line5",
+      "value": "#F7CE00"
+    },
+    {
+      "name": "background_color_line10",
+      "value": "#ED955F"
+    },
+    {
+      "name": "background_color_lineS1",
+      "value": "#61CFBE"
+    },
+    {
+      "name": "background_color_lineS3",
+      "value": "#AC49F5"
+    },
+    {
+      "name": "test",
+      "value": "#99000000"
+    }
+  ]
+}

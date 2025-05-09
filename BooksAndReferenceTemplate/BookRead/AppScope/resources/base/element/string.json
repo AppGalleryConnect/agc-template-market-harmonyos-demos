@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "阅读听书"
+    },
+    {
+      "name": "agcit_huawei_book_read",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_book_read",
+      "value": "industryTemplate"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "app": {
+    "signingConfigs": [
+    ],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "compatibleSdkVersion": "5.0.0(12)",
+        "runtimeOS": "HarmonyOS",
+        "buildOption": {
+          "strictMode": {
+            "caseSensitiveCheck": true,
+            "useNormalizedOHMUrl": true
+          }
+        }
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug",
+      },
+      {
+        "name": "release"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./products/entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "commonlib",
+      "srcPath": "./commons/commonlib"
+    },
+    {
+      "name": "componentlib",
+      "srcPath": "./commons/componentlib"
+    },
+    {
+      "name": "network",
+      "srcPath": "./commons/network",
+    },
+    {
+      "name": "courses",
+      "srcPath": "./feature/courses",
+    },
+    {
+      "name": "checkin",
+      "srcPath": "./feature/checkin"
+    },
+    {
+      "name": "mine",
+      "srcPath": "./feature/mine",
+    },
+    {
+      "name": "home",
+      "srcPath": "./feature/home",
+    }
+  ]
+}

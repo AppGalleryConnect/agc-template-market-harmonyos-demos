@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "componentlib",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ]
+  }
+}

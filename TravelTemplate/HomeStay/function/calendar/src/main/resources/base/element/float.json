@@ -1,0 +1,16 @@
+{
+  "float": [
+    {
+      "name": "home_check_in_font_size",
+      "value": "12vp"
+    },
+    {
+      "name": "home_check_in_margin_top",
+      "value": "6vp"
+    },
+    {
+      "name": "home_date_font_size",
+      "value": "18vp"
+    }
+  ]
+}

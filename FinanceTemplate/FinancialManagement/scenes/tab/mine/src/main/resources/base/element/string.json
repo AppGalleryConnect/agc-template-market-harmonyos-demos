@@ -1,0 +1,28 @@
+{
+  "string": [
+    {
+      "name": "shared_desc",
+      "value": "description"
+    },
+    {
+      "name": "avatar",
+      "value": "avatar"
+    },
+    {
+      "name": "nickName",
+      "value": "nickName"
+    },
+    {
+      "name": "save",
+      "value": "save"
+    },
+    {
+      "name": "personalInformation",
+      "value": "personalInformation"
+    },
+    {
+      "name": "log_out",
+      "value": "log_out"
+    }
+  ]
+}

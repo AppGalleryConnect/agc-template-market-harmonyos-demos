@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "uicalendarpicker",
+    "type": "har",
+    "deviceTypes": [
+      "phone",
+    ]
+  }
+}

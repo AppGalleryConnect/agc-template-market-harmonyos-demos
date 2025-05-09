@@ -1,0 +1,22 @@
+[
+  {
+    "title": "首页",
+    "icon": "app.media.ic_01_on",
+    "iconSel": "app.media.ic_01_off"
+  },
+  {
+    "title": "办事",
+    "icon": "app.media.ic_02_on",
+    "iconSel": "app.media.ic_02_off"
+  },
+  {
+    "title": "互动",
+    "icon": "app.media.ic_03_on",
+    "iconSel": "app.media.ic_03_off"
+  },
+  {
+    "title": "我的",
+    "icon": "app.media.ic_04_on",
+    "iconSel": "app.media.ic_04_off"
+  }
+]

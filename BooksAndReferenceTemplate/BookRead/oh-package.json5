@@ -1,0 +1,11 @@
+{
+  "modelVersion": "5.0.0",
+  "description": "Please describe the basic information.",
+  "dependencies": {
+    "@hw-agconnect/ui-base": "^1.0.1",
+    "@hw-agconnect/ui-calendar-picker": "^1.0.2",
+    "@hw-agconnect/ui-countdown": "^1.0.0",
+  },
+  "devDependencies": {},
+  "dynamicDependencies": {}
+}

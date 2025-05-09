@@ -1,0 +1,7 @@
+{
+  "src": [
+    "pages/SplashFullScreenAdPage",
+    "pages/SplashPage",
+    "pages/MainPage"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "color": [
+    {
+      "name": "fontColor_text3",
+      "value": "#FFFFFFFF"
+    },
+    {
+      "name": "tab_sel_color",
+      "value": "#FF2C4C83"
+    },
+    {
+      "name": "bgc",
+      "value": "#FF000000"
+    },
+    {
+      "name": "text_font_color",
+      "value": "#FFFFFFFF"
+    },
+    {
+      "name": "listColor",
+      "value": "#FF000000"
+    },
+    {
+      "name": "news_title_fontColor",
+      "value": "#FFFFFFFF"
+    },
+    {
+      "name": "news_content_fontColor",
+      "value": "#FFFFFFFF"
+    },
+    {
+      "name": "listViewColor",
+      "value": "#FF000000"
+    },
+    {
+      "name": "start_window_background",
+      "value": "#FF000000"
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "routerMap": [
+    {
+      "name": "StationsInformationPage",
+      "pageSourceFile": "src/main/ets/page/StationsInformationPage.ets",
+      "buildFunction": "StationsInformationPageBuilder",
+      "data": {
+        "description": "this is StationsInformationPage"
+      }
+    },
+    {
+      "name": "ProhibitArticlePage",
+      "pageSourceFile": "src/main/ets/page/ProhibitArticlePage.ets",
+      "buildFunction": "ProhibitArticlePageBuilder",
+      "data": {
+        "description": "this is ProhibitArticlePage"
+      }
+    },
+    {
+      "name": "BuyTicketsPage",
+      "pageSourceFile": "src/main/ets/page/BuyTicketsPage.ets",
+      "buildFunction": "BuyTicketsPageBuilder",
+      "data": {
+        "description": "this is BuyTicketsPage"
+      }
+    },
+    {
+      "name": "TicketsDetailPage",
+      "pageSourceFile": "src/main/ets/page/TicketsDetailPage.ets",
+      "buildFunction": "TicketsDetailPageBuilder",
+      "data": {
+        "description": "this is TicketsDetailPage"
+      }
+    },
+    {
+      "name": "CheckOutPage",
+      "pageSourceFile": "src/main/ets/page/CheckOutPage.ets",
+      "buildFunction": "CheckOutPageBuilder",
+      "data": {
+        "description": "this is CheckOutPage"
+      }
+    },
+    {
+      "name": "moreNewsPage",
+      "pageSourceFile": "src/main/ets/page/moreNewsPage.ets",
+      "buildFunction": "moreNewsPageBuilder",
+      "data": {
+        "description": "this is moreNewsPage"
+      }
+    },
+    {
+      "name": "newsDetailPage",
+      "pageSourceFile": "src/main/ets/page/newsDetailPage.ets",
+      "buildFunction": "newsDetailPageBuilder",
+      "data": {
+        "description": "this is newsDetailPage"
+      }
+    },
+    {
+      "name": "StationsSearchPage",
+      "pageSourceFile": "src/main/ets/page/StationsSearchPage.ets",
+      "buildFunction": "StationsSearchPageBuilder",
+      "data": {
+        "description": "this is StationsSearchPage"
+      }
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "src": [
+    "pages/MinePage"
+  ],
+  "window": {
+    "designWidth": 720,
+    "autoDesignWidth": true
+  }
+}

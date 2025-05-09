@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "performance_test",
+    "type": "feature",
+    "deviceTypes": [
+      "phone",
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": true
+  }
+}

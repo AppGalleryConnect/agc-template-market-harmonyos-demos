@@ -1,0 +1,28 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "set_size_small",
+      "value": "小"
+    },
+    {
+      "name": "set_size_normal",
+      "value": "标准"
+    },
+    {
+      "name": "set_size_large",
+      "value": "大"
+    },
+    {
+      "name": "set_size_extra_large",
+      "value": "超大"
+    },
+    {
+      "name": "set_size_huge",
+      "value": "特大"
+    }
+  ]
+}

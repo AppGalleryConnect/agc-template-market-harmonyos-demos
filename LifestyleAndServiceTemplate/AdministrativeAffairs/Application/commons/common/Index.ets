@@ -30,7 +30,7 @@ export { GridBanner,
   CalendarResult,
   CloudFunctionInstitutionsResult,
   CloudFunctionInquiryResult,
-  NavigationParams,CallSheetParams } from './src/main/ets/model/CommonInterface'
+  NavigationParams,CallSheetParams,CloudHomeListResult } from './src/main/ets/model/CommonInterface'
 
 export { GlobalContext } from './src/main/ets/utils/GlobalContext'
 

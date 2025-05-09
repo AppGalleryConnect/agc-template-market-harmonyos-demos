@@ -1,0 +1,19 @@
+{
+  "name": "home",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "packageType": "InterfaceHar",
+  "dependencies": {
+    "calendar": "file:../../function/calendar",
+    "util": "file:../../common/util",
+    "network": "file:../../function/network",
+    "account": "file:../../function/account",
+    "type": "file:../../common/type",
+    "constant": "file:../../common/constant",
+    "component": "file:../../common/component",
+    "mapview": "file:../../function/mapview"
+  }
+}

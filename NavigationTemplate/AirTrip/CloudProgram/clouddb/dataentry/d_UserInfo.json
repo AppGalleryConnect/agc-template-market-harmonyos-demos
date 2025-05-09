@@ -1,0 +1,13 @@
+{
+  "cloudDBZoneName": "AirTripZone",
+  "objectTypeName": "UserInfo",
+  "objects": [
+    {
+      "idToken": "AAAaAa_xAAkAAK7C4b_8ec12345678912",
+      "authCode": "AAAaAa_xAAkAAK7C4b_8ec12345678912",
+      "userName": "华为用户",
+      "avatar": "",
+      "phoneNumber": "12345678912"
+    }
+  ]
+}

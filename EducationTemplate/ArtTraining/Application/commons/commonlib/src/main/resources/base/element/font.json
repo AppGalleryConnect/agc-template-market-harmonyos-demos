@@ -1,0 +1,40 @@
+{
+  "string": [
+    {
+      "name": "font_size_6",
+      "value": "6fp"
+    },
+    {
+      "name": "font_size_8",
+      "value": "8fp"
+    },
+    {
+      "name": "font_size_10",
+      "value": "10fp"
+    },
+    {
+      "name": "font_size_12",
+      "value": "12fp"
+    },
+    {
+      "name": "font_size_14",
+      "value": "14fp"
+    },
+    {
+      "name": "font_size_16",
+      "value": "16fp"
+    },
+    {
+      "name": "font_size_18",
+      "value": "18fp"
+    },
+    {
+      "name": "font_size_20",
+      "value": "20fp"
+    },
+    {
+      "name": "font_size_24",
+      "value": "24fp"
+    }
+  ]
+}

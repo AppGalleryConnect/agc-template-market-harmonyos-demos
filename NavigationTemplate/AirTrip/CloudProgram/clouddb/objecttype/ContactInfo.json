@@ -1,0 +1,15 @@
+{
+  "objectTypeName": "ContactInfo",
+  "fields": [
+    {"fieldName": "id", "fieldType": "String", "notNull": true, "belongPrimaryKey": true},
+    {"fieldName": "contactName", "fieldType": "String"},
+    {"fieldName": "contactPhone", "fieldType": "String"},
+  ],
+  "indexes": [],
+  "permissions": [
+    {"role": "World", "rights": ["Read"]},
+    {"role": "Authenticated", "rights": ["Read", "Upsert"]},
+    {"role": "Creator", "rights": ["Read", "Upsert", "Delete"]},
+    {"role": "Administrator", "rights": ["Read", "Upsert", "Delete"]}
+  ]
+}

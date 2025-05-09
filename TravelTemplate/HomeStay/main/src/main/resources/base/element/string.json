@@ -1,0 +1,32 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "原舍望山民宿"
+    },
+    {
+      "name": "reason",
+      "value": "Allow the app to use the Internet network during the login scenario"
+    },
+    {
+      "name": "getNetworkInfo",
+      "value": "Allow the app to obtain network information during the login scenario"
+    },
+    {
+      "name": "add_remark",
+      "value": "请添加备注"
+    },
+    {
+      "name": "about",
+      "value": "关于民宿"
+    }
+  ]
+}

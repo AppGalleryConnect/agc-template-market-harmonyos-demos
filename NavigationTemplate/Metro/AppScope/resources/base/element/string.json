@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "EmptyTemplate"
+    },
+    {
+      "name": "agcit_huawei_metro",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_metro",
+      "value": "industryTemplate"
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "app": {
+    "signingConfigs": [
+    ],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "compatibleSdkVersion": "5.0.1(13)",
+        "runtimeOS": "HarmonyOS",
+        "buildOption": {
+          "strictMode": {
+            "caseSensitiveCheck": true,
+            "useNormalizedOHMUrl": true
+          }
+        }
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug",
+      },
+      {
+        "name": "release"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./products/entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "customtypes",
+      "srcPath": "./modules/common/customtypes"
+    },
+    {
+      "name": "router",
+      "srcPath": "./modules/common/router"
+    },
+    {
+      "name": "network",
+      "srcPath": "./modules/common/network"
+    },
+    {
+      "name": "cache",
+      "srcPath": "./modules/common/cache"
+    },
+    {
+      "name": "const",
+      "srcPath": "./modules/common/const",
+    },
+    {
+      "name": "resource",
+      "srcPath": "./modules/common/resource",
+    },
+    {
+      "name": "tabswiper",
+      "srcPath": "./modules/components/tabswiper"
+    },
+    {
+      "name": "tabs",
+      "srcPath": "./modules/guis/tabs"
+    },
+    {
+      "name": "browser",
+      "srcPath": "./modules/guis/browser"
+    },
+    {
+      "name": "search",
+      "srcPath": "./modules/guis/search"
+    },
+    {
+      "name": "cards",
+      "srcPath": "./modules/guis/cards"
+    },
+    {
+      "name": "shopping",
+      "srcPath": "./modules/scene/shopping",
+    },
+    {
+      "name": "titlebar",
+      "srcPath": "./modules/components/titlebar",
+    },
+    {
+      "name": "order",
+      "srcPath": "./modules/scene/order",
+    },
+    {
+      "name": "igrid",
+      "srcPath": "./modules/components/igrid",
+    },
+    {
+      "name": "irow",
+      "srcPath": "./modules/components/irow",
+    },
+    {
+      "name": "data",
+      "srcPath": "./modules/common/data",
+    },
+    {
+      "name": "iwaterflow",
+      "srcPath": "./modules/components/iwaterflow"
+    },
+    {
+      "name": "loginbutton",
+      "srcPath": "./modules/components/loginbutton",
+    },
+    {
+      "name": "callbutton",
+      "srcPath": "./modules/components/callbutton",
+    }
+  ]
+}

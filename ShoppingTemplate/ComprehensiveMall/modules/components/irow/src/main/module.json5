@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "irow",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ]
+  }
+}

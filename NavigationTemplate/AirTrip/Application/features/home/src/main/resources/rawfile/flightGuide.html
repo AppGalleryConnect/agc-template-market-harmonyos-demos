@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>XX航空 - 乘机指南</title>
+
+    <style>
+      body {
+        font-family: "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        color: #333;
+        background-color: #f5f5f5;
+        line-height: 1.6;
+      }
+
+      .guide-header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 44px;
+        background: linear-gradient(135deg, #1e88e5, #0d47a1);
+        color: white;
+        display: flex;
+        align-items: center;
+        padding: 0 15px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        z-index: 100;
+      }
+
+      .guide-header h1 {
+        font-size: 18px;
+        margin: 0 auto;
+      }
+
+      .back-btn {
+        font-size: 20px;
+      }
+
+      /* 主要内容区 */
+      .guide-container {
+        margin-top: 14px;
+        padding-bottom: 40px;
+      }
+
+      /* 快速导航 */
+      .quick-nav {
+        display: flex;
+        justify-content: space-around;
+        padding: 15px 0;
+        background: white;
+        margin-bottom: 10px;
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 12px;
+        color: #666;
+      }
+
+      .nav-item i {
+        font-size: 24px;
+        margin-bottom: 5px;
+        color: #1e88e5;
+      }
+
+      /* 指南内容区 */
+      .guide-section {
+        display: none;
+        padding: 15px;
+        background: white;
+        border-radius: 8px;
+        margin: 10px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      .guide-section.active {
+        display: block;
+      }
+
+      .guide-section h2 {
+        color: #1e88e5;
+        font-size: 18px;
+        margin-top: 0;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #eee;
+      }
+
+      /* 时间线样式 */
+      .timeline {
+        position: relative;
+        padding-left: 30px;
+      }
+
+      .timeline:before {
+        content: "";
+        position: absolute;
+        left: 10px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: #1e88e5;
+      }
+
+      .timeline-item {
+        position: relative;
+        margin-bottom: 20px;
+      }
+
+      .timeline-time {
+        font-size: 14px;
+        font-weight: bold;
+        color: #1e88e5;
+        margin-bottom: 5px;
+      }
+
+      .timeline-content {
+        background: #f9f9f9;
+        padding: 10px;
+        border-radius: 5px;
+      }
+
+      .timeline-content h3 {
+        margin: 0 0 5px 0;
+        font-size: 16px;
+      }
+
+      /* 信息卡片 */
+      .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+
+      .info-card {
+        width: 48%;
+        background: #f9f9f9;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        overflow: hidden;
+      }
+
+      .card-header {
+        background: #1e88e5;
+        color: white;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+      }
+
+      .card-header i {
+        margin-right: 8px;
+        font-size: 20px;
+      }
+
+      .card-header h3 {
+        margin: 0;
+        font-size: 16px;
+      }
+
+      .card-body {
+        padding: 10px;
+      }
+
+      .card-body ul {
+        padding-left: 20px;
+        margin: 0;
+      }
+
+      /* 浮动按钮 */
+      .floating-actions {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        padding: 10px;
+        background: white;
+        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #1e88e5, #0d47a1);
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 25px;
+        font-size: 16px;
+        display: inline-flex;
+        align-items: center;
+      }
+
+      .btn-primary i {
+        margin-right: 8px;
+      }
+
+      /* 响应式设计 */
+      @media (max-width: 360px) {
+        .info-card {
+          width: 100%;
+        }
+      }
+      /* 安检流程步骤 */
+      .process-steps {
+        background: white;
+        border-radius: 12px;
+        padding: 15px;
+        margin-bottom: 20px;
+      }
+
+      .step {
+        position: relative;
+        padding: 10px 0 10px 50px;
+        border-left: 2px dashed #1e88e5;
+        margin-left: 25px;
+      }
+
+      .step:last-child {
+        border-left: none;
+      }
+
+      .step-icon {
+        position: absolute;
+        left: -25px;
+        top: 10px;
+        width: 40px;
+        height: 40px;
+        background: #1e88e5;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        box-shadow: 0 3px 6px rgba(30, 136, 229, 0.3);
+      }
+
+      .split-items {
+        display: flex;
+        justify-content: space-between;
+        padding: 0;
+      }
+
+      .split-items li {
+        list-style: none;
+        text-align: center;
+        width: 30%;
+      }
+
+      .split-items i {
+        display: block;
+        font-size: 24px;
+        color: #1e88e5;
+        margin-bottom: 5px;
+      }
+
+      /* 标签页样式 */
+      .tab-buttons {
+        display: flex;
+        border-bottom: 1px solid #eee;
+        margin-bottom: 15px;
+      }
+
+      .tab-btn {
+        flex: 1;
+        padding: 12px;
+        background: none;
+        border: none;
+        border-bottom: 3px solid transparent;
+        font-size: 14px;
+      }
+
+      .tab-btn.active {
+        border-bottom-color: #1e88e5;
+        color: #1e88e5;
+        font-weight: bold;
+      }
+
+      .tab-content {
+        display: none;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+
+      .danger-item,
+      .restricted-item {
+        display: flex;
+        align-items: center;
+        padding: 12px;
+        background: #fff9f9;
+        border-radius: 8px;
+        margin-bottom: 10px;
+      }
+
+      .danger-item i {
+        color: #f44336;
+        font-size: 24px;
+        margin-right: 15px;
+      }
+
+      .restricted-item i {
+        color: #ff9800;
+        font-size: 24px;
+        margin-right: 15px;
+      }
+
+      /* 实时等待时间 */
+      .wait-time {
+        display: flex;
+        justify-content: space-around;
+        margin: 15px 0;
+      }
+
+      .time-block {
+        text-align: center;
+        padding: 15px;
+        border-radius: 8px;
+        background: #f5f5f5;
+        width: 45%;
+      }
+      .time-block.highlight {
+        background: #e3f2fd;
+        border: 1px solid #1e88e5;
+      }
+
+      .btn-secondary {
+        background: white;
+        color: #1e88e5;
+        border: 1px solid #1e88e5;
+        padding: 10px 20px;
+        border-radius: 20px;
+        display: block;
+        margin: 0 auto;
+      }
+      /* 登机进度条 */
+      .boarding-progress {
+        padding: 15px 20px;
+        background: white;
+        border-radius: 12px;
+        margin-bottom: 15px;
+      }
+
+      .progress-steps {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        margin-bottom: 5px;
+      }
+
+      .step {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 2;
+      }
+
+      .step-dot {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #ddd;
+        margin-bottom: 5px;
+        border: 3px solid white;
+        box-sizing: content-box;
+      }
+
+      .step.completed .step-dot {
+        background: #4caf50;
+      }
+
+      .step.active .step-dot {
+        background: #1e88e5;
+        transform: scale(1.2);
+      }
+
+      .step span {
+        font-size: 12px;
+        color: #999;
+        white-space: nowrap;
+      }
+
+      .step.active span {
+        color: #1e88e5;
+        font-weight: bold;
+      }
+
+      .progress-bar {
+        height: 4px;
+        background: #eee;
+        border-radius: 2px;
+        position: relative;
+        top: -18px;
+        margin: 0 30px;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(to right, #4caf50, #1e88e5);
+        border-radius: 2px;
+        transition: width 0.5s ease;
+      }
+
+      /* 时间轴样式 */
+      .boarding-timeline {
+        background: white;
+        border-radius: 12px;
+        padding: 15px;
+        margin-bottom: 15px;
+      }
+
+      .timeline-item {
+        display: flex;
+        padding: 10px 0;
+        position: relative;
+      }
+
+      .timeline-item.urgent .timeline-badge {
+        background: #ff5722;
+      }
+
+      .timeline-badge {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: #1e88e5;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+        flex-shrink: 0;
+      }
+
+      .timeline-content {
+        flex: 1;
+      }
+
+      .time-display {
+        font-size: 18px;
+        font-weight: bold;
+        margin: 5px 0;
+      }
+
+      .countdown {
+        color: #1e88e5;
+        font-weight: bold;
+      }
+
+      .alert-bubble {
+        background: #fff3e0;
+        padding: 8px 12px;
+        border-radius: 18px;
+        display: inline-flex;
+        align-items: center;
+        margin-top: 8px;
+        font-size: 14px;
+      }
+
+      .alert-bubble i {
+        color: #ff9800;
+        margin-right: 5px;
+      }
+
+      /* 登机口信息 */
+      .gate-info {
+        display: flex;
+        align-items: center;
+        margin: 10px 0;
+      }
+
+      .gate-number {
+        font-size: 28px;
+        font-weight: bold;
+        color: #1e88e5;
+        margin-right: 10px;
+      }
+
+      .terminal {
+        background: #e3f2fd;
+        color: #0d47a1;
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+      }
+
+      .btn-navigate {
+        background: #1e88e5;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 20px;
+        display: inline-flex;
+        align-items: center;
+        margin: 5px 0;
+      }
+
+      .btn-navigate i {
+        margin-right: 5px;
+      }
+
+      .distance-info {
+        color: #666;
+        font-size: 13px;
+        margin-top: 8px;
+        display: flex;
+        align-items: center;
+      }
+
+      /* 状态卡片 */
+      .status-cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+
+      .status-card {
+        width: 48%;
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        margin-bottom: 15px;
+      }
+
+      .weather-card {
+        background: linear-gradient(135deg, #64b5f6, #1e88e5);
+        color: white;
+      }
+
+      .card-header {
+        padding: 12px 15px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #eee;
+      }
+
+      .weather-card .card-header {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .card-header h3 {
+        margin: 0;
+        font-size: 16px;
+        flex: 1;
+        padding: 0 10px;
+      }
+
+      .status-tag {
+        font-size: 12px;
+        padding: 3px 8px;
+        border-radius: 4px;
+      }
+
+      .on-time {
+        background: #e8f5e9;
+        color: #2e7d32;
+      }
+
+      .weather-temp {
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      .card-body {
+        padding: 12px 15px;
+      }
+
+      .info-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        font-size: 14px;
+      }
+
+      .group-badge {
+        background: #1e88e5;
+        color: white;
+        padding: 2px 8px;
+        border-radius: 10px;
+        font-size: 12px;
+      }
+
+      .weather-info {
+        display: flex;
+        align-items: center;
+      }
+
+      .weather-icon {
+        width: 24px;
+        height: 24px;
+        margin-right: 10px;
+        position: relative;
+      }
+
+      .weather-icon.sunny:after {
+        content: "☀️";
+        position: absolute;
+        font-size: 20px;
+      }
+
+      /* 紧急通知 */
+      .emergency-notice {
+        background: #fff3e0;
+        border-left: 4px solid #ff9800;
+        padding: 12px 15px;
+        border-radius: 0 8px 8px 0;
+        margin-top: 10px;
+      }
+
+      .notice-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+
+      .notice-header i {
+        color: #ff9800;
+        margin-right: 8px;
+        font-size: 20px;
+      }
+
+      .notice-header h3 {
+        margin: 0;
+        color: #ff5722;
+      }
+
+      .btn-compensation {
+        background: none;
+        border: 1px solid #ff9800;
+        color: #ff9800;
+        padding: 6px 12px;
+        border-radius: 15px;
+        margin-top: 8px;
+        font-size: 13px;
+      }
+
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 主要内容区 -->
+    <main class="guide-container">
+      <!-- 快速导航 -->
+      <section class="quick-nav">
+        <div class="nav-item" data-target="checkin">
+          <i class="icon-checkin"></i>
+          <span>值机办理</span>
+        </div>
+        <div class="nav-item" data-target="luggage">
+          <i class="icon-luggage"></i>
+          <span>行李须知</span>
+        </div>
+        <div class="nav-item" data-target="security">
+          <i class="icon-security"></i>
+          <span>安检指南</span>
+        </div>
+        <div class="nav-item" data-target="boarding">
+          <i class="icon-boarding"></i>
+          <span>登机流程</span>
+        </div>
+      </section>
+
+      <!-- 指南内容区 -->
+      <section class="guide-content">
+        <!-- 值机办理 -->
+        <article id="checkin" class="guide-section active">
+          <h2>值机办理指南</h2>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-time">航班起飞前48小时</div>
+              <div class="timeline-content">
+                <h3>在线值机开放</h3>
+                <p>您可以通过XX航空APP、官网或微信小程序办理在线值机</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-time">航班起飞前2小时</div>
+              <div class="timeline-content">
+                <h3>机场柜台值机截止</h3>
+                <p>国内航班值机柜台通常在起飞前2小时开放，起飞前45分钟关闭</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 行李须知 -->
+        <article id="luggage" class="guide-section">
+          <h2>行李规定</h2>
+          <div class="card-container">
+            <div class="info-card">
+              <div class="card-header">
+                <i class="icon-carryon"></i>
+                <h3>随身行李</h3>
+              </div>
+              <div class="card-body">
+                <ul>
+                  <li>经济舱：1件，≤5kg，20×40×55cm</li>
+                  <li>商务舱：2件，每件≤5kg</li>
+                  <li>液体容器≤100ml，总量≤1L</li>
+                </ul>
+              </div>
+            </div>
+            <div class="info-card">
+              <div class="card-header">
+                <i class="icon-checked"></i>
+                <h3>托运行李</h3>
+              </div>
+              <div class="card-body">
+                <ul>
+                  <li>经济舱：≤20kg</li>
+                  <li>商务舱：≤30kg</li>
+                  <li>单件≤32kg，三边和≤158cm</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 安检指南内容区 -->
+        <article id="security" class="guide-section">
+          <h2><i class="icon-shield"></i> 安检指南</h2>
+
+          <!-- 安检流程时间轴 -->
+          <div class="process-steps">
+            <div class="step">
+              <div class="step-icon">1</div>
+              <h3>证件准备</h3>
+              <p>提前准备好<strong>登机牌+有效身份证件</strong></p>
+              <div class="tip-bubble">
+                <i class="icon-lightbulb"></i> 电子登机牌也可使用
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-icon">2</div>
+              <h3>物品分类</h3>
+              <ul class="split-items">
+                <li>
+                  <i class="icon-laptop"></i>
+                  <span>电子产品</span>
+                </li>
+                <li>
+                  <i class="icon-bottle"></i>
+                  <span>液体容器</span>
+                </li>
+                <li>
+                  <i class="icon-coat"></i>
+                  <span>外套/腰带</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- 违禁品交互式清单 -->
+          <div class="tab-container">
+            <div class="tab-buttons">
+              <button class="tab-btn active" data-tab="prohibited">
+                违禁物品
+              </button>
+              <button class="tab-btn" data-tab="restricted">限制物品</button>
+              <button class="tab-btn" data-tab="tips">快速通关</button>
+            </div>
+
+            <div class="tab-content active" id="prohibited">
+              <div class="danger-item">
+                <i class="icon-danger"></i>
+                <div>
+                  <h4>禁止携带</h4>
+                  <p>枪支、爆炸物、管制刀具等</p>
+                </div>
+              </div>
+              <!-- 更多违禁品项... -->
+            </div>
+
+            <div class="tab-content" id="restricted">
+              <div class="restricted-item">
+                <i class="icon-alert"></i>
+                <div>
+                  <h4>液体物品</h4>
+                  <p>单瓶≤100ml，总量≤1L需透明袋封装</p>
+                </div>
+              </div>
+              <!-- 更多限制项... -->
+            </div>
+
+            <div class="tab-content" id="tips">
+              <ul class="tip-list">
+                <li>
+                  <i class="icon-star"></i>
+                  <strong>提前取出：</strong>电脑、雨伞、充电宝单独放置
+                </li>
+                <li>
+                  <i class="icon-star"></i>
+                  <strong>穿着建议：</strong>避免穿高帮鞋/复杂饰品
+                </li>
+                <!-- 更多技巧... -->
+              </ul>
+            </div>
+          </div>
+
+          <!-- 机场安检实况 -->
+          <div class="live-info">
+            <h3><i class="icon-clock"></i> 当前安检等待时间</h3>
+            <div class="wait-time">
+              <div class="time-block">
+                <span>普通通道</span>
+                <strong id="normal-wait">15分钟</strong>
+              </div>
+              <div class="time-block highlight">
+                <span>快速通道</span>
+                <strong id="express-wait">5分钟</strong>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 登机流程内容区 -->
+        <article id="boarding" class="guide-section">
+          <!-- 动态时间轴 -->
+          <div class="boarding-timeline">
+            <div class="timeline-item urgent">
+              <div class="timeline-badge">
+                <i class="icon-alarm"></i>
+              </div>
+              <div class="timeline-content">
+                <h3>登机时间</h3>
+                <p class="time-display" id="boarding-time">14:20-14:50</p>
+                <p class="countdown" id="boarding-countdown">剩余35分钟</p>
+                <div class="alert-bubble">
+                  <i class="icon-warning"></i>
+                  登机口将于<strong id="gate-close">14:40</strong>关闭
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-badge">
+                <i class="icon-gate"></i>
+              </div>
+              <div class="timeline-content">
+                <h3>登机口信息</h3>
+                <div class="gate-info">
+                  <span class="gate-number">B12</span>
+                  <span class="terminal">T2航站楼</span>
+                </div>
+                <button class="btn-navigate" id="nav-to-gate">
+                  <i class="icon-navigation"></i> 导航到登机口
+                </button>
+                <div class="distance-info">
+                  <i class="icon-walk"></i> 步行约8分钟 |
+                  <i class="icon-elevator"></i> 需乘坐电梯
+                </div>
+              </div>
+            </div>
+
+            <!-- 更多时间轴项... -->
+          </div>
+
+          <!-- 登机状态卡片 -->
+          <div class="status-cards">
+            <div class="status-card" id="boarding-status">
+              <div class="card-header">
+                <i class="icon-plane"></i>
+                <h3>航班状态</h3>
+                <span class="status-tag on-time">准点</span>
+              </div>
+              <div class="card-body">
+                <div class="flight-info">
+                  <div class="info-row">
+                    <span>航班号</span>
+                    <strong>CA1234</strong>
+                  </div>
+                  <div class="info-row">
+                    <span>机型</span>
+                    <strong>空客A330</strong>
+                  </div>
+                  <div class="info-row">
+                    <span>登机分组</span>
+                    <strong class="group-badge">Group 2</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="status-card weather-card">
+              <div class="card-header">
+                <i class="icon-weather"></i>
+                <h3>目的地天气</h3>
+                <span class="weather-temp">28°C</span>
+              </div>
+              <div class="card-body">
+                <div class="weather-info">
+                  <span class="weather-icon sunny"></span>
+                  <span>晴 | 湿度42%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 紧急通知区域 -->
+          <div class="emergency-notice hidden" id="delay-notice">
+            <div class="notice-header">
+              <i class="icon-alert"></i>
+              <h3>航班延误通知</h3>
+            </div>
+            <div class="notice-body">
+              <p>
+                您的航班因天气原因延误，预计登机时间调整为<strong
+                  id="new-boarding-time"
+                  >15:30</strong
+                >
+              </p>
+              <button class="btn-compensation">查看补偿政策</button>
+            </div>
+          </div>
+        </article>
+        <!-- 更多内容区... -->
+      </section>
+    </main>
+
+    <!-- 底部浮动按钮 -->
+    <div class="floating-actions">
+      <button class="btn-primary" onclick="">
+        <i class="icon-checkin"></i> 立即值机
+      </button>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // 快速导航切换
+        const navItems = document.querySelectorAll(".nav-item");
+        const guideSections = document.querySelectorAll(".guide-section");
+
+        navItems.forEach((item) => {
+          item.addEventListener("click", function () {
+            const target = this.getAttribute("data-target");
+
+            // 更新导航项状态
+            navItems.forEach((nav) => nav.classList.remove("active"));
+            this.classList.add("active");
+
+            // 切换内容区
+            guideSections.forEach((section) => {
+              section.classList.remove("active");
+              if (section.id === target) {
+                section.classList.add("active");
+              }
+            });
+
+            // 平滑滚动到对应区域
+            document.getElementById(target).scrollIntoView({
+              behavior: "smooth",
+            });
+          });
+        });
+
+        // 默认显示第一个部分
+        if (navItems.length > 0) {
+          navItems[0].classList.add("active");
+        }
+        if (guideSections.length > 0) {
+          guideSections[0].classList.add("active");
+        }
+
+        // 实时航班状态检查
+        function checkFlightStatus() {
+          // 这里可以添加API调用获取航班状态
+          console.log("Checking flight status...");
+        }
+
+        // 每5分钟检查一次航班状态
+        setInterval(checkFlightStatus, 300000);
+        checkFlightStatus();
+
+        // 标签页切换
+        const tabBtns = document.querySelectorAll(".tab-btn");
+        tabBtns.forEach((btn) => {
+          btn.addEventListener("click", function () {
+            const tabId = this.getAttribute("data-tab");
+
+            // 更新按钮状态
+            tabBtns.forEach((b) => b.classList.remove("active"));
+            this.classList.add("active");
+
+            // 切换内容
+            document.querySelectorAll(".tab-content").forEach((content) => {
+              content.classList.remove("active");
+              if (content.id === tabId) {
+                content.classList.add("active");
+              }
+            });
+          });
+        });
+
+        // 旋转动画
+        const style = document.createElement("style");
+        style.textContent = `
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+.icon-spinner.spin {
+    animation: spin 1s linear infinite;
+    display: inline-block;
+}
+`;
+        document.head.appendChild(style);
+      });
+    </script>
+  </body>
+</html>

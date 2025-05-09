@@ -1,0 +1,96 @@
+{
+  "indexes": [],
+  "permissions": [
+    {
+      "role": "World",
+      "rights": ["Read"]
+    },
+    {
+      "role": "Authenticated",
+      "rights": ["Read"]
+    },
+    {
+      "role": "Creator",
+      "rights": ["Read", "Upsert", "Delete"]
+    },
+    {
+      "role": "Administrator",
+      "rights": ["Read", "Upsert", "Delete"]
+    }
+  ],
+  "objectTypeName": "CheckInRecord",
+  "fields": [
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "userId",
+      "notNull": false,
+      "isSensitive": false,
+      "belongPrimaryKey": false,
+      "fieldType": "String"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "taskId",
+      "notNull": false,
+      "isSensitive": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Integer"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "activityId",
+      "notNull": false,
+      "isSensitive": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Integer"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "textDetail",
+      "notNull": false,
+      "isSensitive": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Text"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "pictureDetail",
+      "notNull": false,
+      "isSensitive": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Text"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "audioDetail",
+      "notNull": false,
+      "isSensitive": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Text"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "videoDetail",
+      "notNull": false,
+      "isSensitive": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Text"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "createTime",
+      "notNull": false,
+      "isSensitive": false,
+      "belongPrimaryKey": false,
+      "fieldType": "Date"
+    },
+    {
+      "isNeedEncrypt": false,
+      "fieldName": "recordId",
+      "notNull": true,
+      "isSensitive": false,
+      "belongPrimaryKey": true,
+      "fieldType": "String"
+    }
+  ]
+}

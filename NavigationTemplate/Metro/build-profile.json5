@@ -1,0 +1,69 @@
+{
+  "app": {
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "compatibleSdkVersion": "5.0.0(12)",
+        "runtimeOS": "HarmonyOS",
+        "buildOption": {
+          "strictMode": {
+            "caseSensitiveCheck": true,
+            "useNormalizedOHMUrl": true
+          }
+        }
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug"
+      },
+      {
+        "name": "release"
+      }
+    ],
+
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "commonLib",
+      "srcPath": "./commons/commonLib",
+    },
+    {
+      "name": "componentLib",
+      "srcPath": "./commons/componentLib",
+    },
+    {
+      "name": "network",
+      "srcPath": "./commons/network",
+    },
+    {
+      "name": "QRCode",
+      "srcPath": "./features/QRCode",
+    },
+    {
+      "name": "Mine",
+      "srcPath": "./features/Mine",
+    },
+    {
+      "name": "Home",
+      "srcPath": "./features/Home",
+    },
+    {
+      "name": "Trip",
+      "srcPath": "./features/Trip",
+    }
+  ]
+}

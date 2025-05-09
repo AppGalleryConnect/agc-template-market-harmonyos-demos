@@ -1,0 +1,60 @@
+{
+  "color": [
+    {
+      "name": "background_color",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "tab_background_color_selected",
+      "value": "#FE4F35"
+    },
+    {
+      "name": "tab_background_color",
+      "value": "#0D000000"
+    },
+    {
+      "name": "tab_font_color_selected",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "tab_font_color",
+      "value": "#E6000000"
+    },
+    {
+      "name": "highlight_font_color",
+      "value": "#FE4F35"
+    },
+    {
+      "name": "refresh",
+      "value": "#0A59F7"
+    },
+    {
+      "name": "divider_color",
+      "value": "#33000000"
+    },
+    {
+      "name": "radio_selected",
+      "value": "#0A59F7"
+    },
+    {
+      "name": "unavailableTicket",
+      "value": "#E6E8E9"
+    },
+    {
+      "name": "bill_voice_background_color",
+      "value": "#1AE54730"
+    },
+    {
+      "name": "bill_voice_font_color",
+      "value": "#E54730"
+    },
+    {
+      "name": "font_color_gray",
+      "value": "#66000000"
+    },
+    {
+      "name": "test",
+      "value": "#66000000"
+    }
+  ]
+}

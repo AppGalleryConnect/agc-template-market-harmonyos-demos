@@ -1,0 +1,12 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "hot_research_zone_title",
+      "value": "为你推荐"
+    }
+  ]
+}

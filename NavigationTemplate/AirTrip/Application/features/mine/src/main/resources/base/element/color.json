@@ -1,0 +1,28 @@
+{
+  "color": [
+    {
+      "name": "color_btn_gray_bg",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "color_btn_emphasize_bg",
+      "value": "#466DFA"
+    },
+    {
+      "name": "color_text_red",
+      "value": "#D94838"
+    },
+    {
+      "name": "color_page_bg",
+      "value": "#fff5f3f3"
+    },
+    {
+      "name": "color_link_bg",
+      "value": "#1A466DFA"
+    },
+    {
+      "name": "color_text_green",
+      "value": "#64BB5C"
+    }
+  ]
+}

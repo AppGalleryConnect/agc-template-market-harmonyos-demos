@@ -1,0 +1,31 @@
+{
+  "cloudDBZoneName": "AirTripZone",
+  "objectTypeName": "OrderInfo",
+  "objects": [
+    {
+      "id": "orderId_1743415287361",
+      "orderNo": "1743415287361",
+      "createTime": 1744798232606,
+      "flightId": "flight_id_4",
+      "flightNo": "HM001",
+      "airlineName": "自由航空",
+      "aircraftType": "波音737Max",
+      "takeoffTime": "2025/03/31 17:15",
+      "landingTime": "2025/03/31 18:35",
+      "departureCity": "广州",
+      "departureAirport": "广州白云机场",
+      "destinationCity": "南京",
+      "destinationAirport": "南京禄口机场",
+      "mealType": "小食",
+      "spaceType": "ECONOMY_CLASS",
+      "spacePrice": 1980,
+      "airportConstructionPrice": 60,
+      "fuelPrice": 30,
+      "includeTaxPrice": 2000,
+      "contactName": "张三",
+      "contactPhone": "12345678912",
+      "status": 0,
+      "passengerList": "[{\"id\":\"1001202310010001\",\"name\":\"张三\",\"certificateType\":\"身份证\",\"certificateNo\":\"000000000000000000\",\"phone\":\"12345678912\"}]"
+    }
+  ]
+}

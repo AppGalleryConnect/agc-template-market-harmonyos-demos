@@ -1,0 +1,32 @@
+export class Order {
+  id: number = 0
+  orderSn: string = ''
+  passengerId: number = 0
+  passengerName: string = ''
+  passengerPhone: string = ''
+  commodityId: number = 0
+  orderName: string = ''
+  orderStatus: number = 0
+  orderType: number = 0
+  count: number = 1
+  amount: number = 0
+  orderRemark: string = ''
+  goodsBanner: string | Resource = ''
+  goodsCounterPrice: number = 0
+  goodsRetailPrice: number = 0
+  goodsCount: number = 0
+  roomTypeBanner: string | Resource = ''
+  roomTypeOriginalPrice: number = 0
+  roomTypeActualPrice: number = 0
+  planCheckInDate: string = ''
+  planCheckOutDate: string = ''
+  dayCount: number = 0
+  orderTotalPrice: number = 0
+  rule: string = ''
+  openId: string = ''
+  appId: string = ''
+  createTime: string = ''
+  updateTime: string = ''
+  servicePhone: string = ''
+  sfc: string = ''
+}

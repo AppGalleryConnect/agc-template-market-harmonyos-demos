@@ -1,0 +1,44 @@
+{
+  "routerMap": [
+    {
+      "name": "PayMethodsPage",
+      "pageSourceFile": "src/main/ets/page/PayMethodsPage.ets",
+      "buildFunction": "PayMethodsPageBuilder",
+      "data": {
+        "description": "this is PayMethodsPage"
+      }
+    },
+    {
+      "name": "RecordingPage",
+      "pageSourceFile": "src/main/ets/page/RecordingPage.ets",
+      "buildFunction": "RecordingPageBuilder",
+      "data": {
+        "description": "this is RecordingPage"
+      }
+    },
+    {
+      "name": "LineMapPage",
+      "pageSourceFile": "src/main/ets/page/LineMapPage.ets",
+      "buildFunction": "LineMapPageBuilder",
+      "data": {
+        "description": "this is LineMapPage"
+      }
+    },
+    {
+      "name": "MyTicketsPage",
+      "pageSourceFile": "src/main/ets/page/MyTicketsPage.ets",
+      "buildFunction": "MyTicketsPageBuilder",
+      "data": {
+        "description": "this is MyTicketsPage"
+      }
+    },
+    {
+      "name": "InvoicePage",
+      "pageSourceFile": "src/main/ets/page/InvoicePage.ets",
+      "buildFunction": "InvoicePageBuilder",
+      "data": {
+        "description": "this is InvoicePage"
+      }
+    }
+  ]
+}

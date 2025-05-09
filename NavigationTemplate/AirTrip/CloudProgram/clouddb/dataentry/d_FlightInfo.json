@@ -1,0 +1,21 @@
+{
+  "cloudDBZoneName": "AirTripZone",
+  "objectTypeName": "FlightInfo",
+  "objects": [
+    {
+      "id": "17156546543265",
+      "flightNo": "CA1516",
+      "airlineName": "中国",
+      "aircraftType": "波音737Max",
+      "takeoffTime": "2025/04/09 07:15",
+      "landingTime": "2025/04/09 10:15",
+      "departureCity": "上海",
+      "departureAirport": "上海虹桥机场",
+      "destinationCity": "北京",
+      "destinationAirport": "北京首都机场",
+      "mealType": "无餐",
+      "lowestPrice": "1106",
+      "lowestDiscount": "2.0"
+    }
+  ]
+}

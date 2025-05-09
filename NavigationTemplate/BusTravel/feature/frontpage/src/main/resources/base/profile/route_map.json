@@ -1,0 +1,44 @@
+{
+  "routerMap": [
+    {
+      "name": "HomePage",
+      "pageSourceFile": "src/main/ets/pages/HomePage.ets",
+      "buildFunction": "HomePageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "NewsHotspot",
+      "pageSourceFile": "src/main/ets/pages/NewsHotspot.ets",
+      "buildFunction": "NewsHotspotBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "LostFind",
+      "pageSourceFile": "src/main/ets/pages/LostFind.ets",
+      "buildFunction": "LostFindBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "NewsDetail",
+      "pageSourceFile": "src/main/ets/pages/NewsDetail.ets",
+      "buildFunction": "NewsDetailBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "ProhibitedItemsPage",
+      "pageSourceFile": "src/main/ets/pages/ProhibitedItemsPage.ets",
+      "buildFunction": "ProhibitedItemsPageBuilder",
+      "data": {
+        "description": ""
+      }
+    }
+  ]
+}

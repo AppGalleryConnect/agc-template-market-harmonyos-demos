@@ -1,0 +1,88 @@
+{
+  "string": [
+    {
+      "name": "shared_desc",
+      "value": "description"
+    },
+    {
+      "name": "store_list",
+      "value": "门店列表"
+    },
+    {
+      "name": "tab_select_store",
+      "value": "选择门店"
+    },
+    {
+      "name": "tab_my_collection",
+      "value": "我的收藏"
+    },
+    {
+      "name": "search",
+      "value": "搜索"
+    },
+    {
+      "name": "can_takeaways",
+      "value": "可外带"
+    },
+    {
+      "name": "make_now",
+      "value": "现在下单，立即制作"
+    },
+    {
+      "name": "store_open_time",
+      "value": "营业时间："
+    },
+    {
+      "name": "wait_num_pre",
+      "value": "预计等待 "
+    },
+    {
+      "name": "wait_num_post",
+      "value": "杯"
+    },
+    {
+      "name": "good_morning",
+      "value": "上午好!"
+    },
+    {
+      "name": "good_afternoon",
+      "value": "下午好!"
+    },
+    {
+      "name": "score",
+      "value": "积分"
+    },
+    {
+      "name": "coupon_num",
+      "value": "优惠券"
+    },
+    {
+      "name": "pick_self_desc",
+      "value": "快速取单，无需等待"
+    },
+    {
+      "name": "takeaways_desc",
+      "value": "外卖下单，足不出户"
+    },
+    {
+      "name": "collect_six",
+      "value": "集六送一"
+    },
+    {
+      "name": "collect_six_desc",
+      "value": "本店消费满六杯，免费送一杯饮品"
+    },
+    {
+      "name": "membership_day",
+      "value": "周二会员日"
+    },
+    {
+      "name": "collapse_map",
+      "value": "收起地图"
+    },
+    {
+      "name": "expand_map",
+      "value": "展开地图"
+    }
+  ]
+}

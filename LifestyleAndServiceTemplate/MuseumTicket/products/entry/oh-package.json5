@@ -1,0 +1,17 @@
+{
+  "name": "entry",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "",
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "commonlib": "file:../../commons/commonlib",
+    "home": "file:../../features/home",
+    "mine": "file:../../features/mine",
+    "order": "file:../../features/order",
+    "network": "file:../../commons/network",
+    "uicalendarpicker": "file:../../commons/uicalendarpicker"
+  }
+}
+

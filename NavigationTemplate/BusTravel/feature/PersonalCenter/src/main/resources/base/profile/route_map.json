@@ -1,0 +1,76 @@
+{
+  "routerMap": [
+    {
+      "name": "PersonalSetting",
+      "pageSourceFile": "src/main/ets/pages/PersonalSetting.ets",
+      "buildFunction": "PersonalSettingBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "Login",
+      "pageSourceFile": "src/main/ets/pages/Login.ets",
+      "buildFunction": "LoginBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "MinePage",
+      "pageSourceFile": "src/main/ets/pages/MinePage.ets",
+      "buildFunction": "MinePageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "MineWallet",
+      "pageSourceFile": "src/main/ets/pages/MineWallet.ets",
+      "buildFunction": "MineWalletBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "MyOrder",
+      "pageSourceFile": "src/main/ets/pages/MyOrder.ets",
+      "buildFunction": "MyOrderBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "AboutUs",
+      "pageSourceFile": "src/main/ets/pages/AboutUs.ets",
+      "buildFunction": "AboutUsBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "PrivacyPage",
+      "pageSourceFile": "src/main/ets/pages/PrivacyPage.ets",
+      "buildFunction": "PrivacyPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "Suggestion",
+      "pageSourceFile": "src/main/ets/pages/Suggestion.ets",
+      "buildFunction": "SuggestionBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "SettingsPage",
+      "pageSourceFile": "src/main/ets/pages/SettingsPage.ets",
+      "buildFunction": "SettingsPageBuilder",
+      "data": {
+        "description": ""
+      }
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "objectTypeName": "OrderInfo",
+  "fields": [
+    {"fieldName": "id", "fieldType": "String", "notNull": true, "belongPrimaryKey": true},
+    {"fieldName": "orderNo", "fieldType": "String"},
+    {"fieldName": "createTime", "fieldType": "Long"},
+    {"fieldName": "flightId", "fieldType": "String"},
+    {"fieldName": "flightNo", "fieldType": "String"},
+    {"fieldName": "airlineName", "fieldType": "String"},
+    {"fieldName": "aircraftType", "fieldType": "String"},
+    {"fieldName": "takeoffTime", "fieldType": "String"},
+    {"fieldName": "landingTime", "fieldType": "String"},
+    {"fieldName": "departureCity", "fieldType": "String"},
+    {"fieldName": "departureAirport", "fieldType": "String"},
+    {"fieldName": "destinationCity", "fieldType": "String"},
+    {"fieldName": "destinationAirport", "fieldType": "String"},
+    {"fieldName": "mealType", "fieldType": "String"},
+    {"fieldName": "spaceType", "fieldType": "String"},
+    {"fieldName": "spacePrice", "fieldType": "Double"},
+    {"fieldName": "airportConstructionPrice", "fieldType": "Double"},
+    {"fieldName": "fuelPrice", "fieldType": "Double"},
+    {"fieldName": "includeTaxPrice", "fieldType": "Double"},
+    {"fieldName": "contactName", "fieldType": "String"},
+    {"fieldName": "contactPhone", "fieldType": "String"},
+    {"fieldName": "status", "fieldType": "Integer"},
+    {"fieldName": "passengerList", "fieldType": "Text"}
+  ],
+  "indexes": [],
+  "permissions": [
+    {"role": "World", "rights": ["Read"]},
+    {"role": "Authenticated", "rights": ["Read", "Upsert"]},
+    {"role": "Creator", "rights": ["Read", "Upsert", "Delete"]},
+    {"role": "Administrator", "rights": ["Read", "Upsert", "Delete"]}
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "string": [
+    {
+      "name": "border_radius_8",
+      "value": "8vp"
+    },
+    {
+      "name": "border_radius_16",
+      "value": "16vp"
+    }
+  ]
+}

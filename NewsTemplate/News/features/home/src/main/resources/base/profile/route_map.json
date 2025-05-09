@@ -1,0 +1,28 @@
+{
+  "routerMap": [
+    {
+      "name": "NewsDetail",
+      "pageSourceFile": "src/main/ets/components/NewsDetail.ets",
+      "buildFunction": "newsDetailBuilder",
+      "data": {
+        "description" : "this is news detail"
+      }
+    },
+    {
+      "name": "CommentDetail",
+      "pageSourceFile": "src/main/ets/components/CommentDetail.ets",
+      "buildFunction": "commentDetailBuilder",
+      "data": {
+        "description" : "this is comment detail"
+      }
+    },
+    {
+      "name": "PullToRefreshNews",
+      "pageSourceFile": "src/main/ets/components/PullToRefreshNews.ets",
+      "buildFunction": "pullToRefreshNewsBuilder",
+      "data": {
+        "description" : "this is comment detail"
+      }
+    }
+  ]
+}

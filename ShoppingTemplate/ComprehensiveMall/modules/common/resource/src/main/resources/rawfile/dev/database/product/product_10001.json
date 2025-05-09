@@ -1,0 +1,158 @@
+{
+  "code": 0,
+  "message": "",
+  "data": {
+    "id": "product_10001",
+    "banners": [
+      "app://dev/media/spec/mock_spec_pink.jpg",
+      "app://dev/media/spec/mock_spec_white.jpg",
+      "app://dev/media/spec/mock_spec_stripe.jpg"
+    ],
+    "price": "188",
+    "dashPrice": "200",
+    "sales": "已售 3000+",
+    "title": "时尚轻商务系列针织打底纯羊毛内搭",
+    "tags": [
+      "退货包邮费最高减￥5"
+    ],
+    "logistics": [
+      {
+        "icon": "app://dev/media/icon/ic_truck.svg",
+        "content": "48小时内发货"
+      },
+      {
+        "icon": "",
+        "content": "免运费｜江苏无锡发货"
+      }
+    ],
+    "service": [
+      {
+        "icon": "app://dev/media/icon/ic_heart.svg",
+        "content": "运费险｜7天无理由"
+      }
+    ],
+    "pictures": [
+      "app://dev/media/spec/mock_spec_white.jpg",
+      "app://dev/media/spec/mock_spec_stripe.jpg",
+      "app://dev/media/spec/mock_spec_pink.jpg",
+      "app://dev/media/spec/mock_spec_green.jpg"
+    ],
+    "selectionInfo": {
+      "defaultBanner": "app://dev/media/spec/mock_spec_pink.jpg",
+      "basicPrice": "188",
+      "priceRange": "188-200",
+      "priceRemark": "实付",
+      "totalPriceRemark": "共实付",
+      "services": [
+        "运费险｜7天无理由",
+        "48小时内发货"
+      ],
+      "skuItems": [
+        {
+          "skuCode": "sku_100001",
+          "specs": {
+            "型号": "uuid_160_80A",
+            "外观颜色": "uuid_pink"
+          },
+          "stock": 7,
+          "price": 188,
+          "dashPrice": 200
+        },
+        {
+          "skuCode": "sku_100002",
+          "specs": {
+            "型号": "uuid_165_84A",
+            "外观颜色": "uuid_pink"
+          },
+          "stock": 1,
+          "price": 188,
+          "dashPrice": 200
+        },
+        {
+          "skuCode": "sku_100003",
+          "specs": {
+            "型号": "uuid_170_88A",
+            "外观颜色": "uuid_pink"
+          },
+          "stock": 3,
+          "price": 188,
+          "dashPrice": 200
+        },
+        {
+          "skuCode": "sku_100004",
+          "specs": {
+            "型号": "uuid_160_80A",
+            "外观颜色": "uuid_white"
+          },
+          "stock": 5,
+          "price": 200,
+          "dashPrice": 200
+        },
+        {
+          "skuCode": "sku_100005",
+          "specs": {
+            "型号": "uuid_165_84A",
+            "外观颜色": "uuid_white"
+          },
+          "stock": 0,
+          "price": 200,
+          "dashPrice": 200
+        },
+        {
+          "skuCode": "sku_100006",
+          "specs": {
+            "型号": "uuid_170_88A",
+            "外观颜色": "uuid_white"
+          },
+          "stock": 0,
+          "price": 200,
+          "dashPrice": 200
+        }
+      ],
+      "specOptions": [
+        {
+          "key": "尺码",
+          "values": [
+            {
+              "id": "uuid_160_80A",
+              "text": "160/80A"
+            },
+            {
+              "id": "uuid_165_84A",
+              "text": "165/84A"
+            },
+            {
+              "id": "uuid_170_88A",
+              "text": "170/88A"
+            }
+          ]
+        }
+      ],
+      "specOptionWithImage": {
+        "key": "外观颜色",
+        "values": [
+          {
+            "id": "uuid_pink",
+            "text": "粉色",
+            "image": "app://dev/media/spec/mock_spec_pink.jpg"
+          },
+          {
+            "id": "uuid_white",
+            "text": "白色",
+            "image": "app://dev/media/spec/mock_spec_white.jpg"
+          },
+          {
+            "id": "uuid_blue",
+            "text": "条纹",
+            "image": "app://dev/media/spec/mock_spec_stripe.jpg"
+          },
+          {
+            "id": "uuid_gold",
+            "text": "绿色",
+            "image": "app://dev/media/spec/mock_spec_green.jpg"
+          }
+        ]
+      }
+    }
+  }
+}

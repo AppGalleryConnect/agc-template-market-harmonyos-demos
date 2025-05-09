@@ -1,0 +1,80 @@
+{
+  "objectTypeName": "govn_template_userInfo",
+  "fields": [
+    {
+      "fieldName": "idToken",
+      "fieldType": "String",
+      "belongPrimaryKey": true,
+      "notNull": true,
+      "isNeedEncrypt": false,
+      "isSensitive": false
+    },
+    {
+      "fieldName": "authCode",
+      "fieldType": "String",
+      "belongPrimaryKey": false,
+      "notNull": false,
+      "isNeedEncrypt": false,
+      "isSensitive": false
+    },
+    {
+      "fieldName": "userName",
+      "fieldType": "String",
+      "belongPrimaryKey": false,
+      "notNull": false,
+      "isNeedEncrypt": false,
+      "isSensitive": false
+    },
+    {
+      "fieldName": "avatar",
+      "fieldType": "String",
+      "belongPrimaryKey": false,
+      "notNull": false,
+      "isNeedEncrypt": false,
+      "isSensitive": false
+    },
+    {
+      "fieldName": "phoneNumber",
+      "fieldType": "String",
+      "belongPrimaryKey": false,
+      "notNull": false,
+      "isNeedEncrypt": false,
+      "isSensitive": false
+    }
+  ],
+  "indexes": [],
+  "permissions": [
+    {
+      "role": "World",
+      "rights": [
+        "Read",
+        "Upsert",
+        "Delete"
+      ]
+    },
+    {
+      "role": "Authenticated",
+      "rights": [
+        "Read",
+        "Upsert",
+        "Delete"
+      ]
+    },
+    {
+      "role": "Creator",
+      "rights": [
+        "Read",
+        "Upsert",
+        "Delete"
+      ]
+    },
+    {
+      "role": "Administrator",
+      "rights": [
+        "Read",
+        "Upsert",
+        "Delete"
+      ]
+    }
+  ]
+}

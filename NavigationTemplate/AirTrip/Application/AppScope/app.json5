@@ -1,0 +1,11 @@
+{
+  "app": {
+    "bundleName": "com.atomicservice.xxxx",
+    "bundleType": "atomicService",
+    "vendor": "example",
+    "versionCode": 1000000,
+    "versionName": "1.0.0",
+    "icon": "$media:ic_logo",
+    "label": "$string:app_name"
+  }
+}

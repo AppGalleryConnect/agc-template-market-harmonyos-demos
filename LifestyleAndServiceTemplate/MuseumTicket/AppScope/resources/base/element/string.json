@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "MuseumTicket"
+    },
+    {
+      "name": "agcit_huawei_museum_ticket",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_museum_ticket",
+      "value": "industryTemplate"
+    }
+  ]
+}

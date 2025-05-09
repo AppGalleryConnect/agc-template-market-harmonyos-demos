@@ -1,0 +1,68 @@
+{
+  "color": [
+    {
+      "name": "pure_white",
+      "value": "#ffffff"
+    },
+    {
+      "name": "reader_view_background_0",
+      "value": "#FBF0DB"
+    },
+    {
+      "name": "reader_view_background_1",
+      "value": "#FDE4E3"
+    },
+    {
+      "name": "reader_view_background_2",
+      "value": "#C3E7CE"
+    },
+    {
+      "name": "reader_view_background_3",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "font_modifier_inner_color",
+      "value": "#f7f7f7"
+    },
+    {
+      "name": "font_returned",
+      "value": "#000600"
+    },
+    {
+      "name": "font_borrowing",
+      "value": "#5BA854"
+    },
+    {
+      "name": "font_overdue",
+      "value": "#E84026"
+    },
+    {
+      "name": "slider_selected_color",
+      "value": "#E84026"
+    },
+    {
+      "name": "common_background",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "free_color",
+      "value": "#64BB5C"
+    },
+    {
+      "name": "member_color",
+      "value": "#F9A01E"
+    },
+    {
+      "name": "reading_is_perfect",
+      "value": "#ED6F21"
+    },
+    {
+      "name": "ic_color",
+      "value": "#FE4F35"
+    },
+    {
+      "name": "button_color",
+      "value": "#0A59F7"
+    }
+  ]
+}

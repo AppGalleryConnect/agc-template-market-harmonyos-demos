@@ -1,0 +1,176 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "模块描述"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "描述"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "新闻首页"
+    },
+    {
+      "name": "news_title_image_height",
+      "value": "16vp"
+    },
+    {
+      "name": "news_title_image_width",
+      "value": "40vp"
+    },
+    {
+      "name": "list_image_weight",
+      "value": "110vp"
+    },
+    {
+      "name": "list_image_height",
+      "value": "110vp"
+    },
+    {
+      "name": "image_margin",
+      "value": "12vp"
+    },
+    {
+      "name": "news_page_height",
+      "value": "93.3%"
+    },
+    {
+      "name": "news_List_width",
+      "value": "100%"
+    },
+    {
+      "name": "news_list_margin_bottom",
+      "value": "12vp"
+    },
+    {
+      "name": "placeholder",
+      "value": "武汉"
+    },
+    {
+      "name": "location",
+      "value": "当前定位"
+    },
+    {
+      "name": "news_title_row_height",
+      "value": "20vp"
+    },
+    {
+      "name": "news_title_row_margin_top",
+      "value": "10vp"
+    },
+    {
+      "name": "city_text_width",
+      "value": "20%"
+    },
+    {
+      "name": "city_padding_right",
+      "value": "10%"
+    },
+    {
+      "name": "news_content_height",
+      "value": "14vp"
+    },
+    {
+      "name": "news_content_margin",
+      "value": "10vp"
+    },
+    {
+      "name": "news_column_margin",
+      "value": "12vp"
+    },
+    {
+      "name": "news_row_padding",
+      "value": "12vp"
+    },
+    {
+      "name": "news_item_height",
+      "value": "130vp"
+    },
+    {
+      "name": "text_input_border",
+      "value": "1.5"
+    },
+    {
+      "name": "home_header_stack_width",
+      "value": "95%"
+    },
+    {
+      "name": "mock1",
+      "value": "mockDataOne.json"
+    },
+    {
+      "name": "mock2",
+      "value": "mockDataTwo.json"
+    },
+    {
+      "name": "refresh",
+      "value": "刷新成功"
+    },
+    {
+      "name": "search_text",
+      "value": "搜索"
+    },
+    {
+      "name": "get_location",
+      "value": "获取定位"
+    },
+    {
+      "name": "tab_bar_option_one",
+      "value": "首页"
+    },
+    {
+      "name": "tab_bar_option_two",
+      "value": "关注"
+    },
+    {
+      "name": "tab_bar_option_three",
+      "value": "我的"
+    },
+    {
+      "name": "blank_view_text",
+      "value": "暂无数据"
+    },
+    {
+      "name": "tab_bar_type1",
+      "value": "全部"
+    },
+    {
+      "name": "tab_bar_type2",
+      "value": "国内"
+    },
+    {
+      "name": "tab_bar_type3",
+      "value": "国际"
+    },
+    {
+      "name": "tab_bar_type4",
+      "value": "娱乐"
+    },
+    {
+      "name": "tab_bar_type5",
+      "value": "军事"
+    },
+    {
+      "name": "tab_bar_type6",
+      "value": "体育"
+    },
+    {
+      "name": "tab_bar_type7",
+      "value": "科技"
+    },
+    {
+      "name": "tab_bar_type8",
+      "value": "财经"
+    },
+    {
+      "name": "location_desc",
+      "value": "允许应用在新闻首页场景获取设备位置信息"
+    },
+    {
+      "name": "approximately_location_desc",
+      "value": "允许应用在新闻首页场景获取设备模糊位置信息"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "module": {
+    "name": "common",
+    "type": "har",
+    "deviceTypes": [
+      "phone",
+    ],
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.APP_TRACKING_CONSENT",
+        "reason": "$string:tracking_consent",
+        "usedScene": {
+          "abilities": [
+            "FormAbility"
+          ],
+          "when": "inuse"
+        }
+      }
+    ]
+  }
+}

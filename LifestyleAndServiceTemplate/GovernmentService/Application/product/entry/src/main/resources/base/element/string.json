@@ -1,0 +1,28 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "模块描述"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "政务模板"
+    },
+    {
+      "name": "press_once",
+      "value": "再按一次退出应用"
+    },
+    {
+      "name": "location_reason",
+      "value": "应用需要获取用户的地理位置，以便提供与位置相关的服务，例如地图导航、获取当前地理位置等"
+    },
+    {
+      "name": "camera_reason",
+      "value": "应用需要获取相机，以便提供扫码等相关服务"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "cards",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ]
+  }
+}

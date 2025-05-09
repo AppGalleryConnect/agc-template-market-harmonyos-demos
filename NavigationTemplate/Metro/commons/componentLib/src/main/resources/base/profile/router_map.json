@@ -1,0 +1,12 @@
+{
+  "routerMap": [
+    {
+      "name": "BindPhoneDialog",
+      "pageSourceFile": "src/main/ets/dialog/BindPhoneDialog.ets",
+      "buildFunction": "bindPhoneDialogBuilder",
+      "data": {
+        "description": ""
+      }
+    }
+  ]
+}

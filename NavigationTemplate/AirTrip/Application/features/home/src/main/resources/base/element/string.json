@@ -1,0 +1,24 @@
+{
+  "string": [
+    {
+      "name": "one_way_label",
+      "value": "单程"
+    },
+    {
+      "name": "round_trip_label",
+      "value": "往返"
+    },
+    {
+      "name": "any_cabin_class",
+      "value": "不限舱位"
+    },
+    {
+      "name": "economy_class",
+      "value": "经济舱"
+    },
+    {
+      "name": "first_class",
+      "value": "公务舱/头等舱"
+    }
+  ]
+}

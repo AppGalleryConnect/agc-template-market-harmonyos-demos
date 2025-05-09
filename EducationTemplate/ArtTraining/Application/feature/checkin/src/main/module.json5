@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "checkin",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ],
+    "routerMap": "$profile:route_map_checkin"
+  }
+}

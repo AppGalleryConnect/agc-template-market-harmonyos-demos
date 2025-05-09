@@ -1,0 +1,17 @@
+{
+  "objectTypeName": "PassengerInfo",
+  "fields": [
+    {"fieldName": "id", "fieldType": "String", "notNull": true, "belongPrimaryKey": true},
+    {"fieldName": "name", "fieldType": "String"},
+    {"fieldName": "certificateType", "fieldType": "String"},
+    {"fieldName": "certificateNo", "fieldType": "String"},
+    {"fieldName": "phone", "fieldType": "String"}
+  ],
+  "indexes": [],
+  "permissions": [
+    {"role": "World", "rights": ["Read"]},
+    {"role": "Authenticated", "rights": ["Read", "Upsert"]},
+    {"role": "Creator", "rights": ["Read", "Upsert", "Delete"]},
+    {"role": "Administrator", "rights": ["Read", "Upsert", "Delete"]}
+  ]
+}

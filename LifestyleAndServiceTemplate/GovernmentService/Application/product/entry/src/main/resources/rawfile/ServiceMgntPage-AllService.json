@@ -1,0 +1,62 @@
+[
+  {
+    "name": "健康医保",
+    "pic": "app.media.home_page_pic6"
+  },
+  {
+    "name": "社保",
+    "pic": "app.media.home_page_pic4"
+  },
+  {
+    "name": "公积金",
+    "pic": "app.media.home_page_pic5"
+  },
+  {
+    "name": "教育就业",
+    "pic": "app.media.home_page_pic2"
+  },
+  {
+    "name": "行驶驾驶",
+    "pic": "app.media.home_page_pic19"
+  },
+  {
+    "name": "生活服务",
+    "pic": "app.media.home_page_pic20"
+  },
+  {
+    "name": "身份户籍",
+    "pic": "app.media.home_page_pic21"
+  },
+  {
+    "name": "旅游景区",
+    "pic": "app.media.home_page_pic23"
+  },
+  {
+    "name": "人才计划",
+    "pic": "app.media.home_page_pic24"
+  },
+  {
+    "name": "信用报告",
+    "pic": "app.media.home_page_pic25"
+  },
+  {
+    "name": "加油服务",
+    "pic": "app.media.home_page_pic26"
+  },
+  {
+    "name": "医院服务",
+    "pic": "app.media.home_page_pic27"
+  },
+  {
+    "name": "岗位补贴",
+    "pic": "app.media.home_page_pic28"
+  },
+  {
+    "name": "热线电话",
+    "pic": "app.media.home_page_pic29"
+  },
+  {
+    "name": "网约护理",
+    "pic": "app.media.home_page_pic30"
+  }
+]

@@ -1,0 +1,37 @@
+<svg width="24.000000" height="24.000000" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs>
+		<clipPath id="clip37_1656">
+			<rect width="24.000000" height="24.000000" fill="white" fill-opacity="0"/>
+		</clipPath>
+	</defs>
+	<g clip-path="url(#clip37_1656)">
+		<circle cx="12.000000" cy="12.000000" r="12.000000" fill="#62B42E" fill-opacity="1.000000"/>
+		<circle cx="12.000000" cy="12.000000" r="12.000000" stroke="#000000" stroke-opacity="0" stroke-width="1.000000"/>
+		<path d="M12.23 17.06C12.52 17.44 12.88 17.76 13.29 18L6 18L6 17.06L12.23 17.06ZM18 17.06L18 18L16.7 18C17.11 17.76 17.48 17.44 17.76 17.06L18 17.06Z" fill="#FFFFFF" fill-opacity="0" fill-rule="nonzero"/>
+		<path d="M13.29 18L6 18L6 17.06L12.23 17.06C12.52 17.44 12.88 17.76 13.29 18ZM18 18L16.7 18C17.11 17.76 17.48 17.44 17.76 17.06L18 17.06L18 18Z" stroke="#000000" stroke-opacity="0" stroke-width="1.000000"/>
+		<mask id="mask37_1662" mask-type="alpha" maskUnits="userSpaceOnUse" x="6.000000" y="17.063995" width="12.000000" height="0.936737">
+			<path d="M12.23 17.06C12.52 17.44 12.88 17.76 13.29 18L6 18L6 17.06L12.23 17.06ZM18 17.06L18 18L16.7 18C17.11 17.76 17.48 17.44 17.76 17.06L18 17.06Z" fill="#FFFFFF" fill-opacity="1.000000" fill-rule="nonzero"/>
+		</mask>
+		<g mask="url(#mask37_1662)">
+			<circle cx="11.875000" cy="15.264008" r="2.250000" fill="#FFFFFF" fill-opacity="1.000000"/>
+			<circle cx="11.875000" cy="15.264008" r="2.250000" stroke="#FFFFFF" stroke-opacity="1.000000" stroke-width="1.000000" stroke-linejoin="round"/>
+		</g>
+		<mask id="mask37_1668" mask-type="alpha" maskUnits="userSpaceOnUse" x="6.000000" y="6.000000" width="12.000732" height="12.000736">
+			<path d="M18 6L18 13.29C17.4 12.25 16.28 11.55 15 11.55C13.09 11.55 11.55 13.09 11.55 15C11.55 16.28 12.25 17.4 13.29 18L6 18L6 6L18 6ZM18 16.7L18 18L16.7 18C17.24 17.69 17.69 17.24 18 16.7Z" fill="#FFFFFF" fill-opacity="1.000000" fill-rule="nonzero"/>
+		</mask>
+		<g mask="url(#mask37_1668)">
+			<path d="M11.6 7.32C13.12 7.32 14.4 8.34 14.79 9.73C14.85 9.93 14.88 10.14 14.9 10.36C14.91 10.44 14.91 10.53 14.91 10.61C14.91 12.93 15.39 14.6 16.35 15.61C16.44 15.7 16.44 15.85 16.34 15.94C16.3 15.98 16.24 16.01 16.18 16.01L7.2 16.01C7.07 16.01 6.97 15.9 6.97 15.77C6.97 15.72 6.99 15.66 7.02 15.62C7.87 14.61 8.29 12.94 8.29 10.61L8.29 10.49C8.3 10.46 8.3 10.42 8.3 10.38C8.32 10.16 8.35 9.94 8.41 9.75C8.79 8.35 10.07 7.32 11.6 7.32Z" fill="#FFFFFF" fill-opacity="1.000000" fill-rule="evenodd"/>
+			<path d="M14.79 9.73C14.85 9.93 14.88 10.14 14.9 10.36C14.91 10.44 14.91 10.53 14.91 10.61C14.91 12.93 15.39 14.6 16.35 15.61C16.44 15.7 16.44 15.85 16.34 15.94C16.3 15.98 16.24 16.01 16.18 16.01L7.2 16.01C7.07 16.01 6.97 15.9 6.97 15.77C6.97 15.72 6.99 15.66 7.02 15.62C7.87 14.61 8.29 12.94 8.29 10.61L8.29 10.49C8.3 10.46 8.3 10.42 8.3 10.38C8.32 10.16 8.35 9.94 8.41 9.75C8.79 8.35 10.07 7.32 11.6 7.32C13.12 7.32 14.4 8.34 14.79 9.73Z" stroke="#FFFFFF" stroke-opacity="1.000000" stroke-width="1.000000" stroke-linejoin="round"/>
+		</g>
+		<line x1="11.605469" y1="6.625000" x2="11.605469" y2="7.276062" stroke="#FFFFFF" stroke-opacity="0" stroke-width="1.000000"/>
+		<circle cx="15.000092" cy="15.000008" r="2.400000" fill="#C6E9A8" fill-opacity="1.000000"/>
+		<circle cx="15.000092" cy="15.000008" r="2.400000" stroke="#C6E9A8" stroke-opacity="1.000000" stroke-width="1.000000" stroke-linejoin="round"/>
+		<path d="M11.6 6.47C11.68 6.47 11.75 6.54 11.75 6.62L11.75 7.27C11.75 7.35 11.68 7.42 11.6 7.42C11.52 7.42 11.45 7.35 11.45 7.27L11.45 6.62C11.45 6.54 11.52 6.47 11.6 6.47Z" fill="#FFFFFF" fill-opacity="1.000000" fill-rule="nonzero"/>
+		<path d="M11.75 6.62L11.75 7.27C11.75 7.35 11.68 7.42 11.6 7.42C11.52 7.42 11.45 7.35 11.45 7.27L11.45 6.62C11.45 6.54 11.52 6.47 11.6 6.47C11.68 6.47 11.75 6.54 11.75 6.62Z" stroke="#FFFFFF" stroke-opacity="1.000000" stroke-width="1.000000" stroke-linejoin="round"/>
+		<path d="M14.21 13.67L14.2 13.65C14.2 13.37 14.42 13.15 14.7 13.15C14.97 13.15 15.2 13.37 15.2 13.65L15.18 13.67L14.21 13.67ZM16.19 15.67L16.22 15.67C16.43 15.85 16.46 16.16 16.27 16.37C16.09 16.58 15.78 16.61 15.57 16.42L15.57 16.4L16.19 15.67Z" fill="#000000" fill-opacity="0" fill-rule="nonzero"/>
+		<path d="M14.7 13.65L14.7 15.01L15.9 16.04" stroke="#62B42E" stroke-opacity="1.000000" stroke-width="1.000000" stroke-linejoin="round" stroke-linecap="round"/>
+	</g>
+</svg>

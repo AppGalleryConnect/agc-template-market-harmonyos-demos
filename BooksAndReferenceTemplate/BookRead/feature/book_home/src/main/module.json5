@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "book_home",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

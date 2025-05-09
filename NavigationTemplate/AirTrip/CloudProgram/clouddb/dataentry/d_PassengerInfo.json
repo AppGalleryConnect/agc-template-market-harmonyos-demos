@@ -1,0 +1,13 @@
+{
+  "cloudDBZoneName": "AirTripZone",
+  "objectTypeName": "PassengerInfo",
+  "objects": [
+    {
+      "id": "1712346513213",
+      "name": "王五",
+      "certificateType": "idCard",
+      "certificateNo": "000000000000000000",
+      "phone": "12345678912"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "routerMap": [
+    {
+      "name": "MyCouponsPage",
+      "pageSourceFile": "src/main/ets/pages/MyCouponsPage.ets",
+      "buildFunction": "MyCouponsPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "UserInfoPage",
+      "pageSourceFile": "src/main/ets/pages/UserInfoPage.ets",
+      "buildFunction": "UserInfoPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "AddressMgPage",
+      "pageSourceFile": "src/main/ets/pages/AddressMgPage.ets",
+      "buildFunction": "AddressMgPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "AddAddressPage",
+      "pageSourceFile": "src/main/ets/pages/AddAddressPage.ets",
+      "buildFunction": "AddAddressPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "SettingPage",
+      "pageSourceFile": "src/main/ets/pages/SettingPage.ets",
+      "buildFunction": "SettingPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "PrivacyPage",
+      "pageSourceFile": "src/main/ets/pages/PrivacyPage.ets",
+      "buildFunction": "PrivacyPageBuilder",
+      "data": {
+        "description": ""
+      }
+    }
+  ]
+}

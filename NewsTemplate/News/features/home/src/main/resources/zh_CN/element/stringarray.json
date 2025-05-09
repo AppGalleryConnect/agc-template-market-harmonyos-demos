@@ -1,0 +1,358 @@
+{
+  "strarray": [
+    {
+      "name": "city_data_A",
+      "value": [
+        {
+          "value": "阿尔山"
+        },
+        {
+          "value": "阿勒泰地区"
+        },
+        {
+          "value": "安庆"
+        },
+        {
+          "value": "安阳"
+        }
+      ]
+    },
+    {
+      "name": "city_data_an",
+      "value": [
+        {
+          "value": "安庆"
+        },
+        {
+          "value": "安阳"
+        }
+      ]
+    },
+    {
+      "name": "city_data_B",
+      "value": [
+        {
+          "value": "北京"
+        },
+        {
+          "value": "亳州"
+        },
+        {
+          "value": "包头"
+        },
+        {
+          "value": "宝鸡"
+        }
+      ]
+    },
+    {
+      "name": "city_data_C",
+      "value": [
+        {
+          "value": "重庆"
+        },
+        {
+          "value": "长春"
+        },
+        {
+          "value": "长沙"
+        },
+        {
+          "value": "成都"
+        }
+      ]
+    },
+    {
+      "name": "city_data_D",
+      "value": [
+        {
+          "value": "大理"
+        },
+        {
+          "value": "大连"
+        }
+      ]
+    },
+    {
+      "name": "city_data_E",
+      "value": [
+        {
+          "value": "恩施"
+        }
+      ]
+    },
+    {
+      "name": "city_data_F",
+      "value": [
+        {
+          "value": "福州"
+        },
+        {
+          "value": "阜阳"
+        },
+        {
+          "value": "佛山"
+        },
+        {
+          "value": "抚顺"
+        }
+      ]
+    },
+    {
+      "name": "city_data_G",
+      "value": [
+        {
+          "value": "广州"
+        },
+        {
+          "value": "桂林"
+        },
+        {
+          "value": "赣州"
+        },
+        {
+          "value": "高雄"
+        }
+      ]
+    },
+    {
+      "name": "city_data_H",
+      "value": [
+        {
+          "value": "哈尔滨"
+        },
+        {
+          "value": "合肥"
+        },
+        {
+          "value": "杭州"
+        },
+        {
+          "value": "呼和浩特"
+        },
+        {
+          "value": "鹤岗"
+        },
+        {
+          "value": "呼兰"
+        }
+      ]
+    },
+    {
+      "name": "city_data_J",
+      "value": [
+        {
+          "value": "济南"
+        },
+        {
+          "value": "九江"
+        },
+        {
+          "value": "佳木斯"
+        }
+      ]
+    },
+    {
+      "name": "city_data_K",
+      "value": [
+        {
+          "value": "开封"
+        },
+        {
+          "value": "昆明"
+        }
+      ]
+    },
+    {
+      "name": "city_data_L",
+      "value": [
+        {
+          "value": "兰州"
+        },
+        {
+          "value": "丽江"
+        },
+        {
+          "value": "洛阳"
+        }
+      ]
+    },
+    {
+      "name": "city_data_M",
+      "value": [
+        {
+          "value": "马鞍山"
+        }
+      ]
+    },
+    {
+      "name": "city_data_N",
+      "value": [
+        {
+          "value": "南昌"
+        },
+        {
+          "value": "南京"
+        },
+        {
+          "value": "宁波"
+        }
+      ]
+    },
+    {
+      "name": "city_data_P",
+      "value": [
+        {
+          "value": "莆田"
+        }
+      ]
+    },
+    {
+      "name": "city_data_Q",
+      "value": [
+        {
+          "value": "青岛"
+        },
+        {
+          "value": "七台河"
+        },
+        {
+          "value": "秦皇岛"
+        }
+      ]
+    },
+    {
+      "name": "city_data_R",
+      "value": [
+        {
+          "value": "瑞金"
+        }
+      ]
+    },
+    {
+      "name": "city_data_S",
+      "value": [
+        {
+          "value": "上海"
+        },
+        {
+          "value": "沈阳"
+        },
+        {
+          "value": "石家庄"
+        },
+        {
+          "value": "三亚"
+        },
+        {
+          "value": "双鸭山"
+        }
+      ]
+    },
+    {
+      "name": "city_data_T",
+      "value": [
+        {
+          "value": "天津"
+        },
+        {
+          "value": "太原"
+        },
+        {
+          "value": "吐鲁番"
+        }
+      ]
+    },
+    {
+      "name": "city_data_W",
+      "value": [
+        {
+          "value": "武汉"
+        }
+      ]
+    },
+    {
+      "name": "city_data_X",
+      "value": [
+        {
+          "value": "西安"
+        },
+        {
+          "value": "咸阳"
+        },
+        {
+          "value": "信阳"
+        }
+      ]
+    },
+    {
+      "name": "city_data_Y",
+      "value": [
+        {
+          "value": "银川"
+        },
+        {
+          "value": "延吉"
+        },
+        {
+          "value": "宜昌"
+        }
+      ]
+    },
+    {
+      "name": "city_data_Z",
+      "value": [
+        {
+          "value": "郑州"
+        },
+        {
+          "value": "珠海"
+        },
+        {
+          "value": "张家口"
+        }
+      ]
+    },
+    {
+      "name": "hot_city",
+      "value": [
+        {
+          "value": "北京"
+        },
+        {
+          "value": "上海"
+        },
+        {
+          "value": "广州"
+        },
+        {
+          "value": "深圳"
+        },
+        {
+          "value": "杭州"
+        },
+        {
+          "value": "南京"
+        },
+        {
+          "value": "苏州"
+        },
+        {
+          "value": "天津"
+        },
+        {
+          "value": "武汉"
+        },
+        {
+          "value": "长沙"
+        },
+        {
+          "value": "重庆"
+        },
+        {
+          "value": "成都"
+        }
+      ]
+    }
+  ]
+}

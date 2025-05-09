@@ -1,0 +1,12 @@
+{
+  "module": {
+    "name": "mine_test",
+    "type": "feature",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "flight",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ],
+    "routerMap": "$profile:router_map"
+  }
+}

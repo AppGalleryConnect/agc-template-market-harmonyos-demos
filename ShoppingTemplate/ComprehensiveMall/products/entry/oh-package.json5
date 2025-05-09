@@ -1,0 +1,28 @@
+{
+  "name": "entry",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "",
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "@components/tabswiper": "file:../../modules/components/tabswiper",
+    "@components/titlebar": "file:../../modules/components/titlebar",
+    "@components/iwaterflow": "file:../../modules/components/iwaterflow",
+    "@components/loginbutton": "file:../../modules/components/loginbutton",
+    "@components/callbutton": "file:../../modules/components/callbutton",
+    "@common/customtypes": "file:../../modules/common/customtypes",
+    "@common/router": "file:../../modules/common/router",
+    "@common/const": "file:../../modules/common/const",
+    "@common/resource": "file:../../modules/common/resource",
+    "@common/cache": "file:../../modules/common/cache",
+    "@common/network": "file:../../modules/common/network",
+    "@common/data": "file:../../modules/common/data",
+    "@guis/tabs": "file:../../modules/guis/tabs",
+    "@guis/browser": "file:../../modules/guis/browser",
+    "@guis/search": "file:../../modules/guis/search",
+    "@guis/cards": "file:../../modules/guis/cards",
+    "@scene/order": "file:../../modules/scene/order",
+    "@scene/shopping": "file:../../modules/scene/shopping"
+  }
+}

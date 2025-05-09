@@ -1,0 +1,14 @@
+{
+  "routerMap": [
+    {
+      "name": "HomePage",
+      "pageSourceFile": "src/main/ets/pages/HomePage.ets",
+      "buildFunction": "HomePageBuilder"
+    },
+    {
+      "name": "InformationInfo",
+      "pageSourceFile": "src/main/ets/pages/InformationInfo.ets",
+      "buildFunction": "InformationInfoBuilder"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "cloudDBZoneName": "govnTemplateUserInfo",
+  "objectTypeName": "govn_template_userInfo",
+  "objects": [
+    {
+      "idToken": "string1",
+      "authCode": "string1",
+      "userName": "string1",
+      "avatar": "string1",
+      "phoneNumber": "string1"
+    },
+    {
+      "idToken": "string2",
+      "authCode": "string2",
+      "userName": "string2",
+      "avatar": "string2",
+      "phoneNumber": "string2"
+    }
+  ]
+}

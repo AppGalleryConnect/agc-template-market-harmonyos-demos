@@ -1,0 +1,14 @@
+{
+  "name": "qrcode",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    commonlib: "file:../../commons/commonLib",
+    mine: 'file:../Mine',
+    home: 'file:../Home',
+    componentlib: "file:../../commons/componentLib"
+  }
+}

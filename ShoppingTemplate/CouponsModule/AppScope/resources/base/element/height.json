@@ -1,0 +1,28 @@
+{
+  "string": [
+    {
+      "name": "line_height_12",
+      "value": "12vp"
+    },
+    {
+      "name": "line_height_13",
+      "value": "13vp"
+    },
+    {
+      "name": "line_height_14",
+      "value": "14vp"
+    },
+    {
+      "name": "line_height_16",
+      "value": "16vp"
+    },
+    {
+      "name": "line_height_18",
+      "value": "18vp"
+    },
+    {
+      "name": "line_height_21",
+      "value": "21vp"
+    }
+  ]
+}

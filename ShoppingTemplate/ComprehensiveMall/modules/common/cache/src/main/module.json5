@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "cache",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ]
+  }
+}

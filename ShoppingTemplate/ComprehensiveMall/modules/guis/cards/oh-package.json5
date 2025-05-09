@@ -1,0 +1,13 @@
+{
+  "name": "@guis/cards",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@common/customtypes": "file:../../common/customtypes",
+    "@common/resource": "file:../../common/resource",
+    "@components/irow": "file:../../components/irow"
+  }
+}

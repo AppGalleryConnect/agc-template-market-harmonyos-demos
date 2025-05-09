@@ -1,0 +1,40 @@
+{
+  "string": [
+    {
+      "name": "shared_desc",
+      "value": "description"
+    },
+    {
+      "name": "please_select",
+      "value": "请选择"
+    },
+    {
+      "name": "repositioning",
+      "value": "重新定位"
+    },
+    {
+      "name": "lookup_service",
+      "value": "查找服务"
+    },
+    {
+      "name": "search",
+      "value": "搜索"
+    },
+    {
+      "name": "no_service",
+      "value": "暂时无法查询到该办事项。"
+    },
+    {
+      "name": "get_site_failed",
+      "value": "获取位置信息失败,请重试！"
+    },
+    {
+      "name": "site_list",
+      "value": "站点列表"
+    },
+    {
+      "name": "current_site",
+      "value": "当前位置："
+    }
+  ]
+}

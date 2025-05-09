@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "titlebar",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ]
+  }
+}

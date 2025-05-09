@@ -1,0 +1,9 @@
+{
+  "src": [
+    "pages/Home"
+  ],
+  "window": {
+    "designWidth": 720,
+    "autoDesignWidth": true
+  }
+}

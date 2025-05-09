@@ -1,0 +1,16 @@
+{
+  "color": [
+    {
+      "name": "ali_pay",
+      "value": "#0A59F7"
+    },
+    {
+      "name": "huawei_pay",
+      "value": "#CC0A59F7"
+    },
+    {
+      "name": "wechat_pay",
+      "value": "#64BB5C"
+    }
+  ]
+}

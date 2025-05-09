@@ -1,4 +1,4 @@
-# 餐饮（点餐）行业模板快速入门
+# 美食（点餐）元服务模板快速入门
 
 ## 目录
 - [功能介绍](#功能介绍)
@@ -17,7 +17,7 @@
 
 | 点餐                                        | 订单                                     | 我的                                   |
 | ------------------------------------------- |----------------------------------------|--------------------------------------|
-| ![点餐](screenshots/Screenshot_order.png) | ![订单](screenshots/Screenshot_list.png) | ![我的](screenshots/Screenshot_mine.png) |
+| <img src="screenshots/Screenshot_order.png" alt="点餐" width="300"> | <img src="screenshots/Screenshot_list.png" alt="订单" width="300"> | <img src="screenshots/Screenshot_mine.png" alt="我的" width="300"> |
 
 
 本模板主要页面及核心功能清单如下所示：
@@ -60,7 +60,7 @@
 
 本模板工程代码结构如下所示：
 ```
-agcit_huawei_catering_orders
+CateringOrders
   ├─commons/common/src/main
   │  ├─ets
   │  │  ├─axiosHttpRequest
@@ -163,11 +163,11 @@ agcit_huawei_catering_orders
 
 ## 环境要求
 ### 软件
-* DevEco Studio版本：DevEco Studio 5.0.0 Release及以上
-* HarmonyOS SDK版本：HarmonyOS 5.0.0 Release SDK及以上
+* DevEco Studio版本：DevEco Studio 5.0.4 Release及以上
+* HarmonyOS SDK版本：HarmonyOS 5.0.4 Release SDK及以上
 ### 硬件
 * 设备类型：华为手机（直板机）
-* HarmonyOS版本：HarmonyOS 5.0.0 Release及以上
+* HarmonyOS版本：HarmonyOS 5.0.4 Release及以上
 
 
 ## 快速入门
@@ -186,43 +186,38 @@ agcit_huawei_catering_orders
 
 3. 配置服务器域名。
 
-   本模板接口均采用mock数据，由于元服务包体大小有限制，部分图片资源将从云端拉取，所以需为模板项目[配置服务器域名](https://developer.huawei.com/consumer/cn/doc/atomic-guides-V5/agc-help-harmonyos-server-domain-V5)，“httpRequest合法域名”需要配置为：`https://agc-storage-drcn.platform.dbankcloud.cn`
+   本模板接口均采用mock数据，由于元服务包体大小有限制，部分图片资源将从云端拉取，所以需为模板项目[配置服务器域名](https://developer.huawei.com/consumer/cn/doc/atomic-guides/agc-help-harmonyos-server-domain)，“httpRequest合法域名”需要配置为：`https://agc-storage-drcn.platform.dbankcloud.cn`
 
 4. 配置华为账号服务。
 
-   a. 将元服务的client ID配置到phone[entry]模块的module.json5文件，详细参考：[配置Client ID](https://developer.huawei.com/consumer/cn/doc/atomic-guides-V5/account-atomic-client-id-V5)。
+   a. 将元服务的client ID配置到phone[entry]模块的module.json5文件，详细参考：[配置Client ID](https://developer.huawei.com/consumer/cn/doc/atomic-guides/account-atomic-client-id)。
 
    b. 添加公钥指纹，详细参考：[配置应用证书指纹](https://developer.huawei.com/consumer/cn/doc/app/agc-help-signature-info-0000001628566748#section5181019153511)。
 
-   c. 如需获取用户真实手机号，需要申请phone权限，详细参考：[配置scope权限](https://developer.huawei.com/consumer/cn/doc/atomic-guides-V5/account-guide-atomic-permissions-V5)。在端侧使用快速验证手机号码Button进行[验证获取手机号码](https://developer.huawei.com/consumer/cn/doc/atomic-guides-V5/account-guide-atomic-get-phonenumber-V5)。
+   c. 如需获取用户真实手机号，需要申请phone权限，详细参考：[配置scope权限](https://developer.huawei.com/consumer/cn/doc/atomic-guides/account-guide-atomic-permissions)。在端侧使用快速验证手机号码Button进行[验证获取手机号码](https://developer.huawei.com/consumer/cn/doc/atomic-guides/account-guide-atomic-get-phonenumber)。
 
-5. 配置地图服务。
+5. [开通地图服务](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/map-config-agc)。
 
-   a. 将元服务的client ID配置到phone[entry]模块的module.json5文件，如果华为账号服务已配置，可跳过此步骤。
-
-   b. 添加公钥指纹，如果华为账号服务已配置，可跳过此步骤。
-
-   c. [开通地图服务](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/map-config-agc-V5#section16133115441516)。
 6. 配置支付服务。
 
-   华为支付当前仅支持商户接入，在使用服务前，需要完成商户入网、开发服务等相关配置，本模板仅提供了端侧集成的示例。详细参考：[支付服务接入准备](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/payment-preparations-V5)。
+   华为支付当前仅支持商户接入，在使用服务前，需要完成商户入网、开发服务等相关配置，本模板仅提供了端侧集成的示例。详细参考：[支付服务接入准备](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/payment-preparations)。
 
 7. 配置预加载服务。
 
-   a. [开通预加载](https://developer.huawei.com/consumer/cn/doc/AppGallery-connect-Guides/agc-preload-enable-0000001834523102)。
+   a. [开通预加载](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/cloudfoundation-enable-prefetch)。
 
-   b. [开通云函数](https://developer.huawei.com/consumer/cn/doc/AppGallery-connect-Guides/agc-preload-enable-cloudfunction-0000001834682910)。
+   b. [开通云函数](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/cloudfoundation-enable-function)。
 
    c. 打包云函数包：进入工程preload目录，将目录下的文件压缩为zip文件。
 
-   d. [创建云函数](https://developer.huawei.com/consumer/cn/doc/AppGallery-connect-Guides/agc-preload-develop-cloudfunction-traditional-0000002035974992#section444315422578)。
+   d. [创建云函数](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/cloudfoundation-create-and-config-function)。
 
    * “函数名称”为“preload”
    * “触发方式”为“事件调用”
    * “触发器类型”为“HTTP触发器”，其他保持默认
    * “代码输入类型”为“*.zip文件”，代码文件上传上一步打包的zip文件
 
-   e. [配置预加载](https://developer.huawei.com/consumer/cn/doc/AppGallery-connect-Guides/agc-preload-configure-0000001848140816)：函数名称配置为上一步创建的云函数
+   e. [配置安装预加载](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/cloudfoundation-prefetch-config)：安装预加载函数名称配置为上一步创建的云函数
 
 8. （可选）如果从应用自己服务器请求数据，需要配置服务器请求信息。
 
@@ -230,13 +225,17 @@ agcit_huawei_catering_orders
 
    b. 打开CateringOrders\common\src\main\ets\AxiosHttpRequest\AxiosRequest.ets文件，将config.params配置为请求中的固定参数列表。
 
+###  运行调试工程
 
+1. 连接调试手机和PC。
 
+2. 对元服务签名：由于模板中集成了华为账号、地图等服务，所以需要采用[手工签名](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-signing)。
+
+3. 菜单选择“Run > Run 'phone' ”或者“Run > Debug 'phone' ”，运行或调试模板工程。
 
 
 ## 示例效果
-界面展示
-![截图](screenshots/Screenshot_1.png) ![截图](screenshots/Screenshot_2.png)![截图](screenshots/Screenshot_3.png)![截图](screenshots/Screenshot_4.png)
+<img src="screenshots/Screenshot_1.png" alt="商品列表" width="300">  <img src="screenshots/Screenshot_2.png" alt="商品详情" width="300">  <img src="screenshots/Screenshot_3.png" alt="套餐详情" width="300">  <img src="screenshots/Screenshot_4.png" alt="确认订单" width="300">
 
 ## 权限要求
 - 获取位置权限：ohos.permission.APPROXIMATELY_LOCATION、ohos.permission.LOCATION

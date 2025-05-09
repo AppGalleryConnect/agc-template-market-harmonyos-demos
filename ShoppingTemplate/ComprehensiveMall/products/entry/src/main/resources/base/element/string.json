@@ -1,0 +1,24 @@
+{
+  "string": [
+    {
+      "name": "EntryAbility_label",
+      "value": "综合商城模板"
+    },
+    {
+      "name": "EntryFormAbility_desc",
+      "value": "form_description"
+    },
+    {
+      "name": "EntryFormAbility_label",
+      "value": "form_label"
+    },
+    {
+      "name": "widget_desc",
+      "value": "综合商城服务卡片"
+    },
+    {
+      "name": "widget_display_name",
+      "value": "综合商城服务卡片"
+    }
+  ]
+}

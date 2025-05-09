@@ -1,0 +1,13 @@
+{
+  "module": {
+    "name": "performance",
+    "type": "shared",
+    "description": "$string:shared_desc",
+    "routerMap": "$profile:router_map",
+    "deviceTypes": [
+      "phone",
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": true,
+  }
+}

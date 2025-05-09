@@ -1,0 +1,20 @@
+{
+  "color": [
+    {
+      "name": "tab_icon_active_color",
+      "value": "#FFE64566"
+    },
+    {
+      "name": "tab_icon_inactive_color",
+      "value": "#99000000"
+    },
+    {
+      "name": "tab_text_active_color",
+      "value": "#FFE64566"
+    },
+    {
+      "name": "tab_text_inactive_color",
+      "value": "#99000000"
+    }
+  ]
+}

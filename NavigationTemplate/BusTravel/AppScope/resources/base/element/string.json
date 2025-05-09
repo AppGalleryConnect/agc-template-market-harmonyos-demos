@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "出行模板"
+    },
+    {
+      "name": "agcit_huawei_bus_travel",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_bus_travel",
+      "value": "industryTemplate"
+    }
+  ]
+}

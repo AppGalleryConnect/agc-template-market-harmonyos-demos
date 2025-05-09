@@ -1,0 +1,44 @@
+{
+  "routerMap": [
+    {
+      "name": "ProductList",
+      "pageSourceFile": "src/main/ets/pages/ProductList.ets",
+      "buildFunction": "ProductListBuilder"
+    },
+    {
+      "name": "ProductSearch",
+      "pageSourceFile": "src/main/ets/pages/ProductSearch.ets",
+      "buildFunction": "ProductSearchBuilder"
+    },
+    {
+      "name": "ProductInfo",
+      "pageSourceFile": "src/main/ets/pages/ProductInfo.ets",
+      "buildFunction": "ProductInfoBuilder"
+    },
+    {
+      "name": "HistoricalPerformance",
+      "pageSourceFile": "src/main/ets/pages/HistoricalPerformance.ets",
+      "buildFunction": "HistoricalPerformanceBuilder"
+    },
+    {
+      "name": "Purchase",
+      "pageSourceFile": "src/main/ets/pages/Purchase.ets",
+      "buildFunction": "PurchaseBuilder"
+    },
+    {
+      "name": "FinancialInformation",
+      "pageSourceFile": "src/main/ets/pages/FinancialInformation.ets",
+      "buildFunction": "FinancialInformationBuilder"
+    },
+    {
+      "name": "Rule",
+      "pageSourceFile": "src/main/ets/pages/Rule.ets",
+      "buildFunction": "RuleBuilder"
+    },
+    {
+      "name": "Privacy",
+      "pageSourceFile": "src/main/ets/pages/Privacy.ets",
+      "buildFunction": "PrivacyBuilder"
+    }
+  ]
+}

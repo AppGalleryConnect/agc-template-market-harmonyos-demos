@@ -1,0 +1,5 @@
+export { MinePage } from './src/main/ets/pages/MinePage'
+export { Message } from './src/main/ets/pages/Message'
+export { Login } from './src/main/ets/pages/LogIn'
+export { Settings } from './src/main/ets/pages/Settings'
+export { LoginWithHuaweiIDComponent } from './src/main/ets/pages/LoginWithHuaweiID'

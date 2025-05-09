@@ -1,0 +1,1 @@
+export { itineraryPageBuilder } from './src/main/ets/pages/ItineraryPage'

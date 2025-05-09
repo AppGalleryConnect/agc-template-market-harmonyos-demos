@@ -1,0 +1,12 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "calendar_tip",
+      "value": "价格显示为单日成人票价最低价，价格有波动，以实际支付为准"
+    }
+  ]
+}

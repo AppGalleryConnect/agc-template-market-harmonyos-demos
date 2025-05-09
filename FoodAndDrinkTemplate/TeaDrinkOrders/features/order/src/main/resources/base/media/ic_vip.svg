@@ -1,0 +1,18 @@
+<svg width="12.000000" height="12.000000" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs>
+		<linearGradient x1="6.000000" y1="0.000000" x2="6.000000" y2="12.000000" id="paint_linear_149_3499_0" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#F9E000"/>
+			<stop offset="1.000000" stop-color="#ED8C00"/>
+		</linearGradient>
+	</defs>
+	<linearGradient x1="6.000000" y1="0.000000" x2="6.000000" y2="12.000000" id="paint_linear_149_34990_0" gradientUnits="userSpaceOnUse">
+		<stop stop-color="#F9E000"/>
+		<stop offset="1.000000" stop-color="#ED8C00"/>
+	</linearGradient>
+	<path d="M0.41 6.07L4.38 11.22C5.05 12.09 6.31 12.25 7.18 11.58C7.32 11.48 7.44 11.35 7.55 11.21L11.58 5.96C12.04 5.36 12.12 4.56 11.8 3.88L10.47 1.12C10.13 0.43 9.43 0 8.67 0L3.74 0C3.04 0 2.4 0.36 2.03 0.95L0.29 3.82C-0.14 4.52 -0.09 5.42 0.41 6.07Z" fill="url(#paint_linear_149_34990_0)" fill-opacity="1.000000" fill-rule="evenodd"/>
+	<path d="M10.73 1.68C10.67 1.55 10.58 1.37 10.47 1.12C10.13 0.43 9.43 0 8.67 0L3.74 0C3.04 0 2.4 0.36 2.03 0.95L0.29 3.82C-0.14 4.52 -0.09 5.42 0.41 6.07L4.38 11.22C5.05 12.09 6.31 12.25 7.18 11.58C7.32 11.48 7.44 11.35 7.55 11.21L11.58 5.96C12.04 5.36 12.12 4.56 11.8 3.88C11.55 3.36 11.36 2.97 11.23 2.71L10.73 1.68Z" fill="#FFFFFF" fill-opacity="0" fill-rule="evenodd"/>
+	<path d="M5.51 10.36L2.85 6.27C2.7 6.03 2.76 5.73 3 5.58C3.23 5.42 3.53 5.49 3.69 5.72L5.93 9.17L8.17 5.72C8.32 5.49 8.62 5.42 8.86 5.58C9.09 5.73 9.16 6.03 9.01 6.27L6.35 10.36C6.31 10.42 6.26 10.47 6.2 10.51C6.06 10.6 5.93 10.63 5.82 10.6C5.7 10.58 5.6 10.5 5.51 10.36Z" fill="#FFFFFF" fill-opacity="1.000000" fill-rule="evenodd"/>
+</svg>

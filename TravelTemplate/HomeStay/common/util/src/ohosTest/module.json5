@@ -1,0 +1,12 @@
+{
+  "module": {
+    "name": "util_test",
+    "type": "feature",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": true
+  }
+}

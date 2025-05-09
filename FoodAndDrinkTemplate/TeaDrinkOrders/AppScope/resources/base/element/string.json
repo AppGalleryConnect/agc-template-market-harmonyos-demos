@@ -1,0 +1,384 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "tea_drink_orders"
+    },
+    {
+      "name": "pick_table",
+      "value": "请选择餐桌"
+    },
+    {
+      "name": "pick_dinner_num",
+      "value": "请选择用餐人数"
+    },
+    {
+      "name": "next_step",
+      "value": "下一步"
+    },
+    {
+      "name": "confirm",
+      "value": "确定"
+    },
+    {
+      "name": "cancel",
+      "value": "取消"
+    },
+    {
+      "name": "currency_symbol",
+      "value": "￥"
+    },
+    {
+      "name": "currency_symbol_pre_params",
+      "value": "%s￥"
+    },
+    {
+      "name": "currency_symbol_post_params",
+      "value": "￥%s"
+    },
+    {
+      "name": "yuan",
+      "value": "元"
+    },
+    {
+      "name": "yuan_params",
+      "value": "%s元"
+    },
+    {
+      "name": "huawei_pay",
+      "value": "华为支付"
+    },
+    {
+      "name": "pay_success",
+      "value": "支付成功"
+    },
+    {
+      "name": "pay_failed",
+      "value": "支付失败"
+    },
+    {
+      "name": "discount",
+      "value": "%s折"
+    },
+    {
+      "name": "store_rest",
+      "value": "小店休息一下~~"
+    },
+    {
+      "name": "add_good",
+      "value": "加菜"
+    },
+    {
+      "name": "contact_us",
+      "value": "联系客服"
+    },
+    {
+      "name": "pick_self",
+      "value": "到店自取"
+    },
+    {
+      "name": "packing_box",
+      "value": "打包服务费"
+    },
+    {
+      "name": "dinner_num_label",
+      "value": "餐具数量"
+    },
+    {
+      "name": "dinner_num",
+      "value": "%s份"
+    },
+    {
+      "name": "new_user_discount_label",
+      "value": "新用户下单立减"
+    },
+    {
+      "name": "store_discount_label",
+      "value": "店铺活动满减"
+    },
+    {
+      "name": "coupon_label",
+      "value": "优惠券"
+    },
+    {
+      "name": "remark",
+      "value": "备注"
+    },
+    {
+      "name": "full_available",
+      "value": "满%s可用"
+    },
+    {
+      "name": "valid_until",
+      "value": "%s ~ %s"
+    },
+    {
+      "name": "expired",
+      "value": "已过期"
+    },
+    {
+      "name": "all",
+      "value": "全部"
+    },
+    {
+      "name": "available",
+      "value": "可使用"
+    },
+    {
+      "name": "used",
+      "value": "已使用"
+    },
+    {
+      "name": "store_address_error",
+      "value": "商户地址错误！"
+    },
+    {
+      "name": "pay_failed_msg",
+      "value": "支付失败！错误码：%s"
+    },
+    {
+      "name": "takeaway_delivery",
+      "value": "外卖配送"
+    },
+    {
+      "name": "none",
+      "value": "无"
+    },
+    {
+      "name": "save",
+      "value": "保存"
+    },
+    {
+      "name": "select_coupon",
+      "value": "选择商家优惠券"
+    },
+    {
+      "name": "discount_money",
+      "value": "已优惠"
+    },
+    {
+      "name": "should_pay",
+      "value": "应付"
+    },
+    {
+      "name": "fill_remarks",
+      "value": "口味、偏好等要求"
+    },
+    {
+      "name": "order_time",
+      "value": "下单时间"
+    },
+    {
+      "name": "order_id",
+      "value": "订单号"
+    },
+    {
+      "name": "copy",
+      "value": "复制"
+    },
+    {
+      "name": "order_type",
+      "value": "取餐方式"
+    },
+    {
+      "name": "order_pick_self",
+      "value": "自提"
+    },
+    {
+      "name": "cancel_failed",
+      "value": "取消失败"
+    },
+    {
+      "name": "cancel_success",
+      "value": "取消成功"
+    },
+    {
+      "name": "to_be_paid",
+      "value": "待支付"
+    },
+    {
+      "name": "making",
+      "value": "制作中"
+    },
+    {
+      "name": "canceled",
+      "value": "已取消"
+    },
+    {
+      "name": "delivering",
+      "value": "配送中"
+    },
+    {
+      "name": "completed",
+      "value": "已完成"
+    },
+    {
+      "name": "pick_self_tag",
+      "value": "自提"
+    },
+    {
+      "name": "takeaway_tag",
+      "value": "外卖"
+    },
+    {
+      "name": "tab_mine",
+      "value": "我的"
+    },
+    {
+      "name": "address_default",
+      "value": "常用"
+    },
+    {
+      "name": "address_home",
+      "value": "家"
+    },
+    {
+      "name": "address_company",
+      "value": "公司"
+    },
+    {
+      "name": "address_school",
+      "value": "学校"
+    },
+    {
+      "name": "membership_code",
+      "value": "会员码"
+    },
+    {
+      "name": "instruction",
+      "value": "使用说明"
+    },
+    {
+      "name": "use_now",
+      "value": "立即使用"
+    },
+    {
+      "name": "instruction_label",
+      "value": "使用说明："
+    },
+    {
+      "name": "delete",
+      "value": "删除"
+    },
+    {
+      "name": "deleteSuccessfully",
+      "value": "删除成功"
+    },
+    {
+      "name": "deleteFailed",
+      "value": "删除失败，请重试"
+    },
+    {
+      "name": "no_relate",
+      "value": "未关联"
+    },
+    {
+      "name": "no_relative_account_msg",
+      "value": "请先关联账号"
+    },
+    {
+      "name": "pay_now",
+      "value": "立即支付"
+    },
+    {
+      "name": "address_tag",
+      "value": "标签"
+    },
+    {
+      "name": "add_address",
+      "value": "新增收货地址"
+    },
+    {
+      "name": "save_address",
+      "value": "保存地址"
+    },
+    {
+      "name": "address",
+      "value": "地址"
+    },
+    {
+      "name": "select_address",
+      "value": "选择收货地址"
+    },
+    {
+      "name": "man",
+      "value": "先生"
+    },
+    {
+      "name": "house_number",
+      "value": "门牌号"
+    },
+    {
+      "name": "address_num_tip",
+      "value": "填写详细地址，例：1幢1层102室"
+    },
+    {
+      "name": "address_user",
+      "value": "收货人"
+    },
+    {
+      "name": "address_tel",
+      "value": "手机号"
+    },
+    {
+      "name": "input_address_pre",
+      "value": "请输入您的收货地址"
+    },
+    {
+      "name": "select_address_pre",
+      "value": "请选择收货地址"
+    },
+    {
+      "name": "input_address_num",
+      "value": "请输入门牌号"
+    },
+    {
+      "name": "input_address_user",
+      "value": "请输入收货人"
+    },
+    {
+      "name": "input_address_tel",
+      "value": "请输入手机号"
+    },
+    {
+      "name": "save_address_success",
+      "value": "收货地址保存成功~"
+    },
+    {
+      "name": "save_address_failed",
+      "value": "收货地址保存失败！"
+    },
+    {
+      "name": "address_tel_tip",
+      "value": "请正确填写手机号"
+    },
+    {
+      "name": "woman",
+      "value": "女士"
+    },
+    {
+      "name": "nanjing",
+      "value": "南京市"
+    },
+    {
+      "name": "address_favorites",
+      "value": "99%附近用户选择"
+    },
+    {
+      "name": "modify_address",
+      "value": "修改收货地址"
+    },
+    {
+      "name": "address_tel_error",
+      "value": "手机号格式不正确"
+    },
+    {
+      "name": "agcit_huawei_tea_drink_orders",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_tea_drink_orders",
+      "value": "industryTemplate"
+    }
+  ]
+}

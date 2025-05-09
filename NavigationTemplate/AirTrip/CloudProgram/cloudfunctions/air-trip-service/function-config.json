@@ -1,0 +1,15 @@
+{
+  "handler": "airTripService.myHandler",
+  "functionType": 0,
+  "triggers": [
+    {
+      "type": "http",
+      "properties": {
+        "enableUrlDecode": true,
+        "authFlag": "true",
+        "authAlgor": "HDA-SYSTEM",
+        "authType": "apigw-client"
+      }
+    }
+  ]
+}

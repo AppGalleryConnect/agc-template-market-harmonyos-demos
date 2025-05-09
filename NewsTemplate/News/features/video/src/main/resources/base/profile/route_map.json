@@ -1,0 +1,12 @@
+{
+  "routerMap": [
+    {
+      "name": "VideoDetailPage",
+      "pageSourceFile": "src/main/ets/pages/VideoDetailPage.ets",
+      "buildFunction": "videoDetailPageBuilder",
+      "data": {
+        "description" : "this is VideoDetailPage"
+      }
+    }
+  ]
+}

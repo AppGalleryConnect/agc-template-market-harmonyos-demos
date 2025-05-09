@@ -1,0 +1,20 @@
+{
+  "routerMap": [
+    {
+      "name": "HomePage",
+      "pageSourceFile": "src/main/ets/pages/HomePage.ets",
+      "buildFunction": "HomePageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "SelectStorePage",
+      "pageSourceFile": "src/main/ets/pages/SelectStorePage.ets",
+      "buildFunction": "SelectStorePageBuilder",
+      "data": {
+        "description": ""
+      }
+    }
+  ]
+}

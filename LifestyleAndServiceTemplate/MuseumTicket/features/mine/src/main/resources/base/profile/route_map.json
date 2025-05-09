@@ -1,0 +1,44 @@
+{
+  "routerMap": [
+    {
+      "name": "ProfileEditPage",
+      "pageSourceFile": "src/main/ets/pages/ProfileEditPage.ets",
+      "buildFunction": "ProfileEditPageBuilder",
+      "data": {
+        "description": "this is ProfileEditPageBuilder"
+      }
+    },
+    {
+      "name": "VisitorPage",
+      "pageSourceFile": "src/main/ets/pages/VisitorPage.ets",
+      "buildFunction": "VisitorPageBuilder",
+      "data": {
+        "description": "this is VisitorPageBuilder"
+      }
+    },
+    {
+      "name": "EditVisitorPage",
+      "pageSourceFile": "src/main/ets/pages/EditVisitorPage.ets",
+      "buildFunction": "EditVisitorPageBuilder",
+      "data": {
+        "description": "this is EditVisitorPageBuilder"
+      }
+    },
+    {
+      "name": "AddVisitorPage",
+      "pageSourceFile": "src/main/ets/pages/AddVisitorPage.ets",
+      "buildFunction": "AddVisitorPageBuilder",
+      "data": {
+        "description": "this is AddVisitorPageBuilder"
+      }
+    },
+    {
+      "name": "PrivacyPage",
+      "pageSourceFile": "src/main/ets/pages/PrivacyPage.ets",
+      "buildFunction": "PrivacyPageBuilder",
+      "data": {
+        "description": "this is PrivacyPageBuilder"
+      }
+    }
+  ]
+}

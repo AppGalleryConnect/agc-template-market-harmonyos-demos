@@ -1,0 +1,68 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "优惠券模块"
+    },
+    {
+      "name": "currency_symbol",
+      "value": "￥"
+    },
+    {
+      "name": "discount",
+      "value": "折"
+    },
+    {
+      "name": "full_available",
+      "value": "满%s元可用"
+    },
+    {
+      "name": "no_threshold",
+      "value": "无门槛"
+    },
+    {
+      "name": "discount_available",
+      "value": "%s折扣券"
+    },
+    {
+      "name": "coupon_type",
+      "value": "全品类可用"
+    },
+    {
+      "name": "below_threshold",
+      "value": "距离使用门槛还差%s元"
+    },
+    {
+      "name": "below_startTime",
+      "value": "距离活动开始还差%s"
+    },
+    {
+      "name": "instruction",
+      "value": "使用说明"
+    },
+    {
+      "name": "use_now",
+      "value": "立即使用"
+    },
+    {
+      "name": "instruction_label",
+      "value": "使用说明："
+    },
+    {
+      "name": "selected_coupon",
+      "value": "已选%s张，可减"
+    },
+    {
+      "name": "confirm",
+      "value": "确定"
+    },
+    {
+      "name": "agcit_huawei_coupons_module",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_coupons_module",
+      "value": "industryTemplate"
+    }
+  ]
+}

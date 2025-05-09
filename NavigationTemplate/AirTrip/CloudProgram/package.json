@@ -1,0 +1,15 @@
+{
+  "name": "cloud-program",
+  "version": "1.0.0",
+  "private": true,
+  "description": "add shared dependencies for cloud functions",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.11.11",
+    "typescript": "^5.4.2"
+  }
+}

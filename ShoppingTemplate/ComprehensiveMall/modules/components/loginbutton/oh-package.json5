@@ -1,0 +1,13 @@
+{
+  "name": "@components/loginbutton",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@common/network": "file:../../common/network",
+    "@common/customtypes": "file:../../common/customtypes",
+    "@common/data": "file:../../common/data"
+  }
+}

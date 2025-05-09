@@ -1,0 +1,18 @@
+{
+  "name": "map",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "packageType": "InterfaceHar",
+  "dependencies": {
+    "network": "file:../../function/network",
+    "account": "file:../../function/account",
+    "home": "file:../home",
+    "personal": "file:../personal",
+    "type": "file:../../common/type",
+    "constant": "file:../../common/constant",
+    "mapview": "file:../../function/mapview"
+  }
+}

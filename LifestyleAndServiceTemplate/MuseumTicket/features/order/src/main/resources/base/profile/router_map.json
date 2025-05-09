@@ -1,0 +1,53 @@
+{
+  "routerMap": [
+    {
+      "name": "MyOrders",
+      "pageSourceFile": "src/main/ets/pages/MyOrders.ets",
+      "buildFunction": "MyOrdersBuilder",
+      "data": {
+        "description": "this is MyOrdersBuilder"
+      }
+    },
+    {
+      "name": "TicketDetail",
+      "pageSourceFile": "src/main/ets/pages/TicketDetail.ets",
+      "buildFunction": "TicketDetailBuilder",
+      "data": {
+        "description": "this is TicketDetailBuilder"
+      }
+    },
+    {
+      "name": "OrderTicket",
+      "pageSourceFile": "src/main/ets/pages/OrderTicket.ets",
+      "buildFunction": "OrderTicketBuilder",
+      "data": {
+        "description": "this is OrderTicketBuilder"
+      }
+    },
+    {
+      "name": "OrderInfo",
+      "pageSourceFile": "src/main/ets/pages/OrderInfo.ets",
+      "buildFunction": "OrderInfoBuilder",
+      "data": {
+        "description": "this is OrderInfoBuilder"
+      }
+    },
+    {
+      "name": "OrderSuccess",
+      "pageSourceFile": "src/main/ets/pages/OrderSuccess.ets",
+      "buildFunction": "OrderSuccessBuilder",
+      "data": {
+        "description": "this is OrderSuccessBuilder"
+      }
+    },
+
+    {
+      "name": "ContactsPage",
+      "pageSourceFile": "src/main/ets/pages/ContactsPage.ets",
+      "buildFunction": "ContactsPageBuilder",
+      "data": {
+        "description": "this is ContactsPageBuilder"
+      }
+    }
+  ]
+}

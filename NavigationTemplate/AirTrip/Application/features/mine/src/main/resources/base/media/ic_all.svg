@@ -1,0 +1,16 @@
+<svg width="32.000000" height="32.000000" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs>
+		<clipPath id="clip42_2335">
+			<rect width="32.000000" height="32.000000" fill="white" fill-opacity="0"/>
+		</clipPath>
+	</defs>
+	<g clip-path="url(#clip42_2335)">
+		<path d="M15 12L15 4.33C15 2.67 13.65 1.33 12 1.33L4.33 1.33C2.67 1.33 1.33 2.67 1.33 4.33L1.33 12C1.33 13.65 2.67 15 4.33 15L12 15C13.65 15 15 13.65 15 12Z" fill="#466DFA" fill-opacity="1.000000" fill-rule="evenodd"/>
+		<circle cx="23.833313" cy="8.166656" r="6.833333" fill="#6889FF" fill-opacity="1.000000"/>
+		<path d="M15 27.66L15 20C15 18.34 13.65 17 12 17L4.33 17C2.67 17 1.33 18.34 1.33 20L1.33 27.66C1.33 29.32 2.67 30.66 4.33 30.66L12 30.66C13.65 30.66 15 29.32 15 27.66Z" fill="#466DFA" fill-opacity="1.000000" fill-rule="evenodd"/>
+		<path d="M30.66 27.66L30.66 20C30.66 18.34 29.32 17 27.66 17L20 17C18.34 17 17 18.34 17 20L17 27.66C17 29.32 18.34 30.66 20 30.66L27.66 30.66C29.32 30.66 30.66 29.32 30.66 27.66Z" fill="#466DFA" fill-opacity="1.000000" fill-rule="evenodd"/>
+	</g>
+</svg>

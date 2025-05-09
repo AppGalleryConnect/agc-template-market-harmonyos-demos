@@ -1,0 +1,20 @@
+{
+  "routerMap": [
+    {
+      "name": "MyCoupons",
+      "pageSourceFile": "src/main/ets/pages/MyCouponsPage.ets",
+      "buildFunction": "myCouponsPageBuilder",
+      "data": {
+        "description": "我的优惠券页面"
+      }
+    },
+    {
+      "name": "SelectCoupons",
+      "pageSourceFile": "src/main/ets/pages/SelectCouponsPage.ets",
+      "buildFunction": "selectCouponsPageBuilder",
+      "data": {
+        "description": "选择优惠券页面"
+      }
+    }
+  ]
+}

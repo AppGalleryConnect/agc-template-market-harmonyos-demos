@@ -1,0 +1,20 @@
+<svg width="14.000000" height="14.000000" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs>
+		<clipPath id="clip74_5487">
+			<rect id="ic_public_position" width="14.000000" height="14.000000" fill="white" fill-opacity="0"/>
+		</clipPath>
+	</defs>
+	<g clip-path="url(#clip74_5487)">
+		<path id="path1" d="M0 6.99C0 5.9 -0.01 4.8 0 3.71C-0.01 3.18 0.06 2.65 0.19 2.14C0.48 1.05 1.18 0.41 2.27 0.16C2.81 0.04 3.37 -0.01 3.92 3.05e-5C6.02 3.05e-5 8.11 3.05e-5 10.21 3.05e-5C10.74 -0.01 11.27 0.05 11.79 0.18C12.9 0.45 13.57 1.16 13.83 2.27C13.95 2.8 14 3.33 13.99 3.87C13.99 5.99 13.99 8.11 13.99 10.23C14 10.75 13.94 11.28 13.81 11.79C13.54 12.91 12.83 13.57 11.72 13.83C11.17 13.95 10.62 14 10.06 13.99C7.97 13.99 5.88 13.99 3.8 13.99C3.26 14 2.73 13.94 2.21 13.81C1.09 13.54 0.41 12.83 0.16 11.71C0.03 11.14 0 10.57 0 10C0 9 0 7.99 0 6.99Z" fill="#FFFFFF" fill-opacity="0" fill-rule="evenodd"/>
+		<circle id="path2" cx="7.000000" cy="7.000000" r="7.000000" fill="#FFFFFF" fill-opacity="0"/>
+		<path id="path5" d="M7 13.41C7 13.41 12.18 9.45 12.18 5.68C12.18 2.81 9.86 0.58 7 0.58C4.13 0.58 1.81 2.81 1.81 5.68C1.81 9.45 7 13.41 7 13.41Z" fill="#FFFFFF" fill-opacity="0" fill-rule="evenodd"/>
+		<path id="path5" d="M12.18 5.68C12.18 2.81 9.86 0.58 7 0.58C4.13 0.58 1.81 2.81 1.81 5.68C1.81 9.45 7 13.41 7 13.41C7 13.41 12.18 9.45 12.18 5.68Z" fill="#000000" fill-opacity="0" fill-rule="nonzero"/>
+		<path id="path5" d="M7 0.58C4.13 0.58 1.81 2.81 1.81 5.68C1.81 9.45 7 13.41 7 13.41C7 13.41 12.18 9.45 12.18 5.68C12.18 2.81 9.86 0.58 7 0.58Z" stroke="#0A554A" stroke-opacity="1.000000" stroke-width="0.997500" stroke-linejoin="round"/>
+		<circle id="path6" cx="7.000000" cy="5.771393" r="1.638322" fill="#FFFFFF" fill-opacity="0"/>
+		<circle id="path6" cx="7.000000" cy="5.771393" r="1.638322" fill="#000000" fill-opacity="0"/>
+		<circle id="path6" cx="7.000000" cy="5.771393" r="1.638322" stroke="#0A554A" stroke-opacity="1.000000" stroke-width="0.997500"/>
+	</g>
+</svg>

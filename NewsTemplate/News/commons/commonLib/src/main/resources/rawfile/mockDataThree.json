@@ -1,0 +1,55 @@
+{
+  "newsList": [
+    {
+      "newsContent": "As we are accustomed to city life, perhaps taking a trip to the seaside can relieve our fatigue and invite three to five friends to experience the sunshine by the seaside together",
+      "newsId": "0",
+      "newsTime": "August 16th, 2022",
+      "newsTitle": "A luxurious invitation from the seaside scenery, let's experience the elegant time facing the sea together.",
+      "newsImage": "new0.png"
+    },
+    {
+      "newsContent": "Artificial intelligence is a constantly evolving field, a technology that achieves intelligence through computers and algorithms.",
+      "newsId": "1",
+      "newsTime": "March 22, 2024",
+      "newsTitle": "Will artificial intelligence have a profound impact on humanity.",
+      "newsImage": "news1.jpg"
+    },
+    {
+      "newsContent": "The World Health Organization explicitly states that health is not just the absence of physical illnesses and frailty, but a state of physical, psychological, and social functioning in good condition.",
+      "newsId": "2",
+      "newsTime": "July 26, 2022",
+      "newsTitle": "Spiritual counseling, strengthening quality cultivation"
+    },
+    {
+      "newsContent": "Dark energy is a mysterious form of energy that occupies the majority of the energy density in the universe. The temperature in the universe is even lower than absolute zero in space.",
+      "newsId": "3",
+      "newsTime": "May 19, 2022",
+      "newsTitle": "Cosmic Mysteries: The Mysteries of the Universe You Should Know, Worth a Look"
+    },
+    {
+      "newsContent": "Books are our teachers, teaching us a lot of knowledge and principles; Books are like lighthouses that illuminate our path forward. Books are like rain and dew, nourishing my thirst for knowledge.",
+      "newsId": "4",
+      "newsTime": "May 15, 2022",
+      "newsTitle": "Book List Recommendation: Books I will never throw away"
+    },
+    {
+      "newsContent": "The richness of species ranks among the top in the country, and some animal populations unique to deserts or mountains are only distributed in Xinjiang and adjacent areas, becoming the darling of people's attention.",
+      "newsId": "5",
+      "newsTime": "May 15, 2022",
+      "newsTitle": "Wild animals hide on the winter plateau, cute animals that everyone loves",
+      "newsImage": "news2.jpg"
+    },
+    {
+      "newsContent": "Usually, the seat number is marked on the ticket. If you cannot find your seat or have any questions, you can contact airport staff at any time. Carrying luggage on a plane",
+      "newsId": "6",
+      "newsTime": "April 11, 2023",
+      "newsTitle": "Must see for flying: Detailed explanation of boarding process and precautions, how much do you know"
+    },
+    {
+      "newsContent": "The construction of village level roads has made significant progress, and the winding paths in rural areas, like a ribbon, tightly connect the fields together.",
+      "newsId": "7",
+      "newsTime": "July 15, 2024",
+      "newsTitle": "One of the most winding rural roads in the world, with beautiful scenery along the way"
+    }
+  ]
+}

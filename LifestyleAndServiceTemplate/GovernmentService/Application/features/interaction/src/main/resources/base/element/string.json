@@ -1,0 +1,24 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "interaction_title",
+      "value": "打造魅力鹏城  建设生态城市"
+    },
+    {
+      "name": "voice_online",
+      "value": "民声在线"
+    },
+    {
+      "name": "customer_service",
+      "value": "有事问客服"
+    },
+    {
+      "name": "intelligent_customer",
+      "value": "智能客服"
+    }
+  ]
+}

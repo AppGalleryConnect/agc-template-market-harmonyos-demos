@@ -1,0 +1,48 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "这是一个适用于艺术培训行业的元服务模板"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "这是一个适用于艺术培训行业的元服务模板"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "艺术培训行业模板"
+    },
+    {
+      "name": "EntryFormAbility_desc",
+      "value": "这是一个适用于艺术培训行业的元服务卡片"
+    },
+    {
+      "name": "EntryFormAbility_label",
+      "value": "艺术培训行业模板卡片"
+    },
+    {
+      "name": "mini_card_desc",
+      "value": "这是一个适用于艺术培训行业的元服务卡片"
+    },
+    {
+      "name": "mini_card_display_name",
+      "value": "艺术培训行业模板卡片"
+    },
+    {
+      "name": "mini_desc",
+      "value": "这是一个适用于艺术培训行业的元服务卡片"
+    },
+    {
+      "name": "mini_display_name",
+      "value": "艺术培训行业模板卡片"
+    },
+    {
+      "name": "middle_desc",
+      "value": "This is a service widget."
+    },
+    {
+      "name": "middle_display_name",
+      "value": "middle widget"
+    }
+  ]
+}

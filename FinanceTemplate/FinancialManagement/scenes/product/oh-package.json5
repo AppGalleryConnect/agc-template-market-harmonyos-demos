@@ -1,0 +1,15 @@
+{
+  "name": "product",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "packageType": "InterfaceHar",
+  "dependencies": {
+    "@hw-agconnect/ui-base": "^1.0.0",
+    "commonlib": "file:../../commons/commonlib",
+    "componentlib": "file:../../commons/componentlib",
+    "network": "file:../../commons/network",
+  }
+}

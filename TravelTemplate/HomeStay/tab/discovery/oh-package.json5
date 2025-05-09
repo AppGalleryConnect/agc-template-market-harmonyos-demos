@@ -1,0 +1,17 @@
+{
+  "name": "discovery",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "packageType": "InterfaceHar",
+  "dependencies": {
+    "util": "file:../../common/util",
+    "network": "file:../../function/network",
+    "account": "file:../../function/account",
+    "constant": "file:../../common/constant",
+    "type": "file:../../common/type",
+    "component": "file:../../common/component"
+  }
+}

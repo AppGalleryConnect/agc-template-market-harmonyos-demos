@@ -1,0 +1,13 @@
+{
+  "module": {
+    "name": "position",
+    "type": "shared",
+    "description": "$string:shared_desc",
+    "deviceTypes": [
+      "phone",
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false,
+    "routerMap": "$profile:route_map"
+  }
+}

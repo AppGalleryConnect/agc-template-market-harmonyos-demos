@@ -1,0 +1,12 @@
+{
+  "routerMap": [
+    {
+      "name": "IndexPage",
+      "pageSourceFile": "src/main/ets/pages/IndexPage.ets",
+      "buildFunction": "IndexPageBuilder",
+      "data": {
+        "description": ""
+      }
+    }
+  ]
+}
