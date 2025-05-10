@@ -1,0 +1,56 @@
+{
+  "color": [
+    {
+      "name": "start_window_background",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "font_color_black",
+      "value": "#000000"
+    },
+    {
+      "name": "font_color_grey",
+      "value": "#FF626262"
+    },
+    {
+      "name": "font_color_blue",
+      "value": "#007dff"
+    },
+    {
+      "name": "font_color_yellow",
+      "value": "#966426"
+    },
+    {
+      "name": "font_color_white",
+      "value": "#ffffff"
+    },
+    {
+      "name": "font_color_red",
+      "value": "#FFE94949"
+    },
+    {
+      "name": "font_color_time_red",
+      "value": "#C4272B"
+    },
+    {
+      "name": "background_color_light",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "item_title_font",
+      "value": "#E6000000"
+    },
+    {
+      "name": "background_color_almanac",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "splits_color",
+      "value": "#cccccc"
+    },
+    {
+      "name": "mine_drive_color",
+      "value": "#ffe9f0f0"
+    }
+  ]
+}

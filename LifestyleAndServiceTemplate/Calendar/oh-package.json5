@@ -1,0 +1,12 @@
+{
+  "modelVersion": "5.0.0",
+  "description": "Please describe the basic information.",
+  "dependencies": {
+    "dayjs": "^1.11.13",
+    "lunar": "^1.0.0"
+  },
+  "devDependencies": {
+    "@ohos/hypium": "1.0.19",
+  },
+  "dynamicDependencies": {}
+}

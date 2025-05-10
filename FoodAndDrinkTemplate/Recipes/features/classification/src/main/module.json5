@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "classification",
+    "type": "har",
+    "description": "$string:shared_desc",
+    "deviceTypes": [
+      "phone"
+    ],
+    "routerMap":"$profile:router_map"
+  }
+}

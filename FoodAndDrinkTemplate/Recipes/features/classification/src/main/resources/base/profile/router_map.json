@@ -1,0 +1,20 @@
+{
+  "routerMap": [
+    {
+      "name": "DishesPage",
+      "pageSourceFile": "src/main/ets/pages/DishesPage.ets",
+      "buildFunction": "DishesPageBuilder",
+      "data": {
+        "description": "this is DishesPageBuilder"
+      }
+    },
+    {
+      "name": "ShoppingBasketPage",
+      "pageSourceFile": "src/main/ets/pages/ShoppingBasketPage.ets",
+      "buildFunction": "ShoppingBasketPageBuilder",
+      "data": {
+        "description": "this is ShoppingBasketPageBuilder"
+      }
+    }
+  ]
+}

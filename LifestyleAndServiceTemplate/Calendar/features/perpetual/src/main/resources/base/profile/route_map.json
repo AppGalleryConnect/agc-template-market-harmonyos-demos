@@ -1,0 +1,36 @@
+{
+  "routerMap": [
+    {
+      "name": "FestivalDetails",
+      "pageSourceFile": "src/main/ets/components/FestivalDetails.ets",
+      "buildFunction": "FestivalDetailsBuilder",
+      "data": {
+        "description" : "this is FestivalDetails"
+      }
+    },
+    {
+      "name": "QueryJiDay",
+      "pageSourceFile": "src/main/ets/components/QueryJiDay.ets",
+      "buildFunction": "QueryJiDayBuilder",
+      "data": {
+        "description" : "this is QueryJiDay"
+      }
+    },
+    {
+      "name": "JiDayDetail",
+      "pageSourceFile": "src/main/ets/components/JiDayDetail.ets",
+      "buildFunction": "JiDayDetailBuilder",
+      "data": {
+        "description" : "this is JiDayDetail"
+      }
+    },
+    {
+      "name": "DateCalculation",
+      "pageSourceFile": "src/main/ets/components/DateCalculation.ets",
+      "buildFunction": "DateCalculationBuilder",
+      "data": {
+        "description" : "this is DateCalculation"
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "routerMap": [
+    {
+      "name": "SearchPage",
+      "pageSourceFile": "src/main/ets/pages/SearchPage.ets",
+      "buildFunction": "SearchPageBuilder",
+      "data": {
+        "description": "this is SearchPageBuilder"
+      }
+    },
+    {
+      "name": "ResultPage",
+      "pageSourceFile": "src/main/ets/pages/ResultPage.ets",
+      "buildFunction": "ResultPageBuilder",
+      "data": {
+        "description": "this is ResultPageBuilder"
+      }
+    }
+  ]
+}

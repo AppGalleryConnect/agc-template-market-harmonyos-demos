@@ -1,0 +1,52 @@
+{
+  "routerMap": [
+    {
+      "name": "PersonInformation",
+      "pageSourceFile": "src/main/ets/components/PersonInformation.ets",
+      "buildFunction": "PersonInformationBuilder",
+      "data": {
+        "description" : "this is PersonInformation"
+      }
+    },
+    {
+      "name": "SettingLevel",
+      "pageSourceFile": "src/main/ets/components/SettingLevel.ets",
+      "buildFunction": "SettingLevelBuilder",
+      "data": {
+        "description" : "this is SettingLevel"
+      }
+    },
+    {
+      "name": "Login",
+      "pageSourceFile": "src/main/ets/components/Login.ets",
+      "buildFunction": "LoginBuilder",
+      "data": {
+        "description" : "this is Login"
+      }
+    },
+    {
+      "name": "LoginWithHuaweiID",
+      "pageSourceFile": "src/main/ets/components/LoginWithHuaweiID.ets",
+      "buildFunction": "LoginWithHuaweiIDComponentBuilder",
+      "data": {
+        "description" : "this is LoginWithHuaweiID"
+      }
+    },
+    {
+      "name": "PrivacyPolicyPage",
+      "pageSourceFile": "src/main/ets/components/PrivacyPolicyPage.ets",
+      "buildFunction": "PrivacyPolicyPageBuilder",
+      "data": {
+        "description" : "this is PrivacyPolicyPage"
+      }
+    },
+    {
+      "name": "TermsOfServicePage",
+      "pageSourceFile": "src/main/ets/components/TermsOfServicePage.ets",
+      "buildFunction": "TermsOfServicePageBuilder",
+      "data": {
+        "description" : "this is TermsOfServicePage"
+      }
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "search",
+    "type": "har",
+    "routerMap": '$profile:router_map',
+    "description": "$string:shared_desc",
+    "deviceTypes": [
+      "phone"
+    ],
+  }
+}

@@ -1,0 +1,12 @@
+[
+  {
+    "id": "information",
+    "icon": "app.media.setting",
+    "name": "个人信息"
+  },
+  {
+    "id": "setting",
+    "icon": "app.media.setting",
+    "name": "设置"
+  }
+]

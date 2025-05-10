@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "font_color_black",
+      "value": "#E6000000"
+    },
+    {
+      "name": "font_color_gray",
+      "value": "#99000000"
+    },
+    {
+      "name": "bg_red",
+      "value": "#E84026"
+    }
+  ]
+}

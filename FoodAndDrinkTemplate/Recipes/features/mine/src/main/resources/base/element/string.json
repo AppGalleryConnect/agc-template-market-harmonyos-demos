@@ -1,0 +1,32 @@
+{
+  "string": [
+    {
+      "name": "shared_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "label"
+    },
+    {
+      "name": "scope_not_supported",
+      "value": "The scopes or permissions are not supported."
+    },
+    {
+      "name": "app_not_required_scopes_or_permissions",
+      "value": "The app does not have the required scopes or permissions."
+    },
+    {
+      "name": "service_error",
+      "value": "Service or network error. Please try again later."
+    },
+    {
+      "name": "not_login_in",
+      "value": "You have not logged in with your Huawei ID. Please try again."
+    }
+  ]
+}

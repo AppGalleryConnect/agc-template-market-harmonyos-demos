@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "perpetual",
+    "type": "har",
+    "routerMap": "$profile:route_map",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ]
+  }
+}

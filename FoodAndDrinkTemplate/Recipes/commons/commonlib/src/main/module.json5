@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "commonlib",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

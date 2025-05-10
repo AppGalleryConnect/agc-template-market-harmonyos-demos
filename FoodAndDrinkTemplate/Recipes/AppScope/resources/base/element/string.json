@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "菜谱模板"
+    },
+    {
+      "name": "agcit_huawei_recipes",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_recipes",
+      "value": "industryTemplate"
+    }
+  ]
+}

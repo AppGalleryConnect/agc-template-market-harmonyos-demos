@@ -1,0 +1,17 @@
+{
+  "name": "entry",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "",
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "commonlib": 'file:../../commons/commonlib',
+    "home": 'file:../../features/home',
+    "classification": 'file:../../features/classification',
+    "mine": 'file:../../features/mine',
+    "network": 'file:../../commons/network',
+    "search": 'file:../../features/search'
+  }
+}
+

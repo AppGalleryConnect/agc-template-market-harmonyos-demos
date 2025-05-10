@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "mine",
+    "type": "har",
+    "description": "$string:shared_desc",
+    "routerMap": '$profile:router_map',
+    "deviceTypes": [
+      "phone"
+    ],
+  }
+}
