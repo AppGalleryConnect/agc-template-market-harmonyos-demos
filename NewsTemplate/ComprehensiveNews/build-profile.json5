@@ -5,7 +5,7 @@
       {
         "name": "default",
         "signingConfig": "default",
-        "targetSdkVersion": "6.0.2(22)",
+        "targetSdkVersion": "6.1.0(23)",
         "compatibleSdkVersion": "6.0.0(20)",
         "runtimeOS": "HarmonyOS",
         "buildOption": {
@@ -95,6 +95,10 @@
       "srcPath": "./commons/lib_av_details"
     },
     {
+      "name": "lib_search",
+      "srcPath": "./commons/lib_search"
+    },
+    {
       "name": "module_channeledit",
       "srcPath": "./components/module_channeledit"
     },
@@ -149,6 +153,10 @@
     {
       "name": "module_login",
       "srcPath": "./components/module_login"
+    },
+    {
+      "name": "module_search",
+      "srcPath": "./components/module_search"
     },
     {
       "name": "module_share",

@@ -11,7 +11,7 @@
 
 本组件提供了分类展示菜谱列表的相关功能。
 
-<img src="./screenshot/LinkCategory1.PNG" width="300">
+<img src="./screenshot/LinkCategory1.jpg" width="300">
 
 ## 约束与限制
 
@@ -19,7 +19,7 @@
 
 - DevEco Studio版本：DevEco Studio 5.0.4 Release及以上
 - HarmonyOS SDK版本：HarmonyOS 5.0.4 Release SDK及以上
-- 设备类型：华为手机（包括双折叠和阔折叠）
+- 设备类型：华为手机（包括双折叠和阔折叠）、华为平板
 - 系统版本：HarmonyOS 5.0.4(16)及以上
 
 ### 权限

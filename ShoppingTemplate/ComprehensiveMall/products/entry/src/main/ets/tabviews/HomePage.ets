@@ -1,5 +1,5 @@
 import { LoadingStatus } from 'lib_foundation';
-import { CommonSymbol, NavTitleBar } from 'lib_widget';
+import { CommonLoading, CommonSymbol, NavTitleBar } from 'lib_widget';
 import { HomePageContent } from '../components/HomePageContent';
 import { HomePageVM } from '../viewmodels/HomePageVM';
 
@@ -27,8 +27,7 @@ export struct HomePage {
         Scroll(this.scroller) {
           Column() {
             if (this.vm.loadingStatus === LoadingStatus.LOADING) {
-              LoadingProgress()
-                .width($r('app.float.loading_icon_size'))
+              CommonLoading()
             } else if (this.vm.loadingStatus === LoadingStatus.SUCCESS) {
               HomePageContent({
                 categoryList: this.vm.categoryList,

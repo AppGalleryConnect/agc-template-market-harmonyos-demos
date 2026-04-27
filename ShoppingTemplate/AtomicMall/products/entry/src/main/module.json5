@@ -1,0 +1,99 @@
+{
+  "module": {
+    "name": "entry",
+    "type": "entry",
+    "mainElement": "EntryAbility",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ],
+    "routerMap": "$profile:route_map",
+    "deliveryWithInstall": true,
+    "installationFree": true,
+    "pages": "$profile:main_pages",
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.INTERNET"
+      },
+      {
+        "name": "ohos.permission.DETECT_GESTURE"
+      },
+      {
+        "name": "ohos.permission.PREPARE_APP_TERMINATE"
+      }
+    ],
+    "metadata": [
+// todo: 修改client_id
+      {
+        "name": "client_id",
+        "value": "******"
+      },
+      {
+        "name": "appgallery_privacy_hosted",
+        "value": "1"
+      },
+// todo: 更新隐私协议配置链接
+      {
+        "name": "appgallery_privacy_link_privacy_statement",
+        "value": "https://www.example.com/"
+      },
+      {
+        "name": "appgallery_privacy_link_user_agreement",
+        "value": "https://www.example.com/"
+      }
+    ],
+    "querySchemes": [
+      "weixin",
+      "wxopensdk",
+      "qqopenapi",
+      "https",
+      "geo"
+    ],
+    "abilities": [
+      {
+        "name": "EntryAbility",
+        "srcEntry": "./ets/entryability/EntryAbility.ets",
+        "description": "",
+        "icon": "$media:app_icon",
+        "label": "$string:EntryAbility_label",
+        "startWindowIcon": "$media:app_icon",
+        "startWindowBackground": "$color:start_window_background",
+        "exported": true,
+        "skills": [
+          {
+            "entities": [
+              "entity.system.home"
+            ],
+            "actions": [
+              "ohos.want.action.home"
+            ]
+          },
+          {
+            "entities": [
+              "entity.system.browser"
+            ],
+            "actions": [
+              "ohos.want.action.viewData"
+            ],
+            "domainVerify": true
+          }
+        ]
+      }
+    ],
+    "extensionAbilities": [
+      {
+        "name": "EntryFormAbility",
+        "srcEntry": "./ets/entryformability/EntryFormAbility.ets",
+        "label": "$string:EntryFormAbility_label",
+        "description": "$string:EntryFormAbility_desc",
+        "type": "form",
+        "metadata": [
+          {
+            "name": "ohos.extension.form",
+            "resource": "$profile:form_config"
+          }
+        ]
+      }
+    ]
+  }
+}

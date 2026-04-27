@@ -1,0 +1,14 @@
+{
+  "module": {
+    "name": "module_custom_service_chat",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ],
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.INTERNET"
+      }
+    ]
+  }
+}

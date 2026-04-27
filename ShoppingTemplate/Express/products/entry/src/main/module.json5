@@ -5,7 +5,8 @@
     "description": "$string:module_desc",
     "mainElement": "EntryAbility",
     "deviceTypes": [
-      "phone"
+      "phone",
+      "tablet"
     ],
     "metadata": [
 /*
@@ -25,6 +26,12 @@
         "name": "ohos.permission.INTERNET"
       }
     ],
+    "querySchemes": [
+      "weixin",
+      "wxopensdk",
+      "alipays",
+      "https"
+    ],
     "abilities": [
       {
         "name": "EntryAbility",
@@ -35,6 +42,12 @@
         "startWindowIcon": "$media:startIcon",
         "startWindowBackground": "$color:start_window_background",
         "exported": true,
+        "metadata": [
+          {
+            "name": "ohos.ability.shortcuts",
+            "resource": "$profile:shortcuts_config"
+          }
+        ],
         "skills": [
           {
             "entities": [

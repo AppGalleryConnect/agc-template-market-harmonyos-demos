@@ -9,7 +9,7 @@
     "lib_foundation": "file:../../commons/lib_foundation",
     "lib_network": "file:../../commons/lib_network",
     "lib_widget": "file:../../commons/lib_widget",
-    "module_coupons": "file:../../components/module_coupons",
+    "coupons": "file:../../components/coupons",
     "app_setting": "file:../../components/app_setting",
     "aggregated_login": "file:../../components/aggregated_login",
     "collect_personal_info": "file:../../components/collect_personal_info",

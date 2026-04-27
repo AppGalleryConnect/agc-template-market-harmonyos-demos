@@ -1,6 +1,5 @@
-import { BusinessError } from '@kit.BasicServicesKit'
-import dayjs from 'dayjs'
-import { Logger, PopViewUtils } from 'lib_common'
+import { BusinessError, pasteboard } from '@kit.BasicServicesKit'
+import { CommonConstants, CommonSelectDialog, GlobalContextUtils, Logger, PopViewUtils, TimeUtils } from 'lib_common'
 import { BuilderParams, CommentInfo } from '../model/Model'
 import { CommentUtils } from '../utils/CommentUtils'
 import { CommentEventDispatcher } from '../utils/EventDispatcher'
@@ -15,12 +14,12 @@ export struct CommentCard {
   @Param articleInfo: CommentInfo = new CommentInfo()
   @Param navPathStack: NavPathStack = new NavPathStack()
   @Param isDark: boolean = false
+  @Param isNeedReply: boolean = false
   @BuilderParam replyComponentBuilder: () => void;
   @BuilderParam totalCommentBuilder: () => void;
   @Event onDeleteComment: (commentId: string) => void = () => {
   }
   @Local feedCommentVM: FeedCommentVM = FeedCommentVM.instance;
-  @Param isNeedReply: boolean = false
   private customDialogComponentId: number = 0
 
   @Computed
@@ -31,33 +30,48 @@ export struct CommentCard {
   @Builder
   customDialogComponent() {
     Column() {
-      Text('是否删除此评论')
+      Text('确定删除此评论？')
         .fontWeight(FontWeight.Medium)
         .fontColor($r('sys.color.font_primary'))
-      Row({ space: 50 }) {
-        Button('取消').onClick(() => {
-          try {
-            this.getUIContext().getPromptAction().closeCustomDialog(this.customDialogComponentId)
-          } catch (error) {
-            Logger.error(TAG, 'closeCustomDialog fail, error: ' + JSON.stringify(error));
-          }
-        })
-          .backgroundColor(Color.Transparent)
-          .fontColor($r('sys.color.font_primary'))
-        Button('删除').onClick(() => {
-          this.onDeleteComment(this.commentInfo.commentId)
-          CommentEventDispatcher.dispatchToDeleteComment(this.commentInfo.commentId)
-          PopViewUtils.closePopView()
-          try {
-            this.getUIContext().getPromptAction().closeCustomDialog(this.customDialogComponentId)
-          } catch (error) {
-            Logger.error(TAG, 'closeCustomDialog fail, error: ' + JSON.stringify(error));
-          }
-        })
-          .backgroundColor(Color.Transparent)
+      Row() {
+        Button('取消')
+          .width(CommonConstants.HALF_PERCENT)
+          .height(40)
+          .buttonStyle(ButtonStyleMode.TEXTUAL)
+          .onClick(() => {
+            try {
+              this.getUIContext().getPromptAction().closeCustomDialog(this.customDialogComponentId)
+            } catch (error) {
+              Logger.error(TAG, 'closeCustomDialog fail, error: ' + JSON.stringify(error));
+            }
+          })
+        Button('删除')
+          .width(CommonConstants.HALF_PERCENT)
+          .height(40)
+          .buttonStyle(ButtonStyleMode.TEXTUAL)
           .fontColor($r('sys.color.warning'))
+          .onClick(() => {
+            this.onDeleteComment(this.commentInfo.commentId)
+            CommentEventDispatcher.dispatchToDeleteComment(this.commentInfo.commentId)
+            PopViewUtils.closePopView()
+            try {
+              this.getUIContext().getPromptAction().closeCustomDialog(this.customDialogComponentId)
+            } catch (error) {
+              Logger.error(TAG, 'closeCustomDialog fail, error: ' + JSON.stringify(error));
+            }
+          })
       }
-    }.height(120).padding({ top: 32, bottom: 8 }).justifyContent(FlexAlign.SpaceBetween)
+      .width(CommonConstants.FULL_PERCENT)
+    }
+    .width(CommonConstants.FULL_PERCENT)
+    .height(120)
+    .padding({
+      top: 24,
+      bottom: 16,
+      left: 24,
+      right: 24,
+    })
+    .justifyContent(FlexAlign.SpaceBetween)
   }
 
   @Computed
@@ -72,7 +86,32 @@ export struct CommentCard {
       this.feedCommentVM.addComment(this.commentInfo, replyContent)
     })
   }
+  pressCopy = () => {
+    PopViewUtils.closePopView()
+    try {
+      const pasteboardData = pasteboard.createData(pasteboard.MIMETYPE_TEXT_PLAIN, this.commentInfo.commentBody);
+      const systemPasteboard = pasteboard.getSystemPasteboard();
+      systemPasteboard.setDataSync(pasteboardData);
+      GlobalContextUtils.showToast({ message: '已复制评论' });
+    } catch (e) {
+      Logger.error(TAG, 'Fail to copy to pasteboard, error: ' + JSON.stringify(e));
+    }
+  }
+  pressReport = () => {
+    PopViewUtils.closePopView()
+    CommonSelectDialog.show({
+      list: ['淫秽色情', '营销广告', '网络暴力', '违法信息', '虚假谣言', '养老诈骗'],
+      submit: () => {
+        PopViewUtils.closePopView()
+        GlobalContextUtils.showToast({ message: '已举报该评论' });
+      },
+      cancel: () => {
+        PopViewUtils.closePopView()
+      },
+    })
+  }
   pressDelete = () => {
+    PopViewUtils.closePopView()
     this.getUIContext()
       .getPromptAction()
       .openCustomDialog({
@@ -123,7 +162,7 @@ export struct CommentCard {
           Row() {
             Row() {
               Text() {
-                Span('回复')
+                Span('回复').fontColor($r('sys.color.font_secondary'))
                 Span(`@${this.commentInfo.parentComment?.author?.authorNickName}:`)
                   .fontColor($r('app.color.app_theme'))
                   .onClick(() => {
@@ -148,7 +187,7 @@ export struct CommentCard {
 
           Row() {
             Row({ space: 16 }) {
-              Text(dayjs(this.commentInfo.createTime).format('YYYY-MM-DD HH:mm'))
+              Text(TimeUtils.formatDate(this.commentInfo.createTime))
                 .fontSize(10 * this.feedCommentVM.fontSizeRatio)
                 .fontColor($r('sys.color.font_secondary'))
               Text('回复')
@@ -191,17 +230,20 @@ export struct CommentCard {
           }
         }.width('100%').alignItems(HorizontalAlign.Start)
         .gesture(
+          // 评论长按拉起交互面板
           LongPressGesture({ repeat: false })
             .onAction(() => {
-              let builderParams: BuilderParams = {
+              const builderParams: BuilderParams = {
                 reply: this.pressReply,
+                copy: this.pressCopy,
+                report: this.pressReport,
                 delete: this.pressDelete,
                 cancel: this.pressCancel,
                 isCommentOwner: this.commentInfo.author.authorId === this.feedCommentVM.userInfo.authorId,
                 fontSizeRatio: this.feedCommentVM.fontSizeRatio,
               }
               PopViewUtils.showPopView<BuilderParams>(wrapBuilder(confirmDialogView), {
-                alignment: DialogAlignment.Bottom,
+                alignment: DialogAlignment.Center,
               }, builderParams)
             }),
         )

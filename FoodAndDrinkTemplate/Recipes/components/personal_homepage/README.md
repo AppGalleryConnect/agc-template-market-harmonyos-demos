@@ -21,7 +21,7 @@
 
 - DevEco Studio版本：DevEco Studio 5.0.4 Release及以上
 - HarmonyOS SDK版本：HarmonyOS 5.0.4 Release SDK及以上
-- 设备类型：华为手机（包括双折叠和阔折叠）
+- 设备类型：华为手机（包括双折叠和阔折叠）、华为平板
 - 系统版本：HarmonyOS 5.0.4(16)及以上
 
 ### 权限
@@ -34,9 +34,9 @@
    如果是在DevEco Studio使用插件集成组件，则无需安装组件，请忽略此步骤。
    如果是从生态市场下载组件，请参考以下步骤安装组件。  
    a. 解压下载的组件包，将包中所有文件夹拷贝至您工程根目录的xxx目录下。  
-   b. 在项目根目录build-profile.json5并添加base_ui、featured_recipes和personal_homepage模块。
+   b. 在项目根目录build-profile.json5并添加base_ui、featured_recipes、aggregated_ads和personal_homepage模块。
    ```typescript
-   // 在项目根目录的build-profile.json5填写base_ui、featured_recipes和personal_homepage路径。其中xxx为组件存在的目录名
+   // 在项目根目录的build-profile.json5填写base_ui、featured_recipes、aggregated_ads和personal_homepage路径。其中xxx为组件存在的目录名
    "modules": [
      {
        "name": "base_ui",
@@ -49,6 +49,10 @@
      {
        "name": "personal_homepage",
        "srcPath": "./xxx/personal_homepage",
+     },
+     {
+       "name": "aggregated_ads",
+       "srcPath": "./xxx/aggregated_ads",
      }
    ]
    ```
@@ -58,7 +62,8 @@
    "dependencies": {
      "base_ui": "file:./xxx/base_ui",
      "featured_recipes": "file:./xxx/featured_recipes",
-     "personal_homepage": "file:./xxx/personal_homepage"
+     "personal_homepage": "file:./xxx/personal_homepage",
+     "aggregated_ads": "file:../aggregated_ads"
    }
    ```
    
@@ -72,34 +77,26 @@
 
    ```typescript
    PersonalHomepage({
-       bloggerInfo: this.vm.bloggerInfo,
        recipeList: this.vm.recipeList,
-       isSelf: true,
-       isLogin: this.vm.userInfo.isLogin,
        currentIndex: this.vm.currentIndex,
-       userTagBuilderParam: (): void => {
-         // 用户标签插槽
-       },
-       membershipBuilderParam: (): void => {
-         // 开通会员插槽
-       },
+       isToDelete: this.isToDelete,
        uploadBuilderParam: (): void => {
           // 上传菜谱插槽
        },
-       onClickCb: (id: number) => {
+       onClickCb: (id: number, index: number) => {
          // 跳转菜谱详情
        },
        jumpBloggerInfo: (id: number) => {
          // 跳转博主详情
        },
-       changeTabIndex: (index: number) => {
-         // 切换tab时，更新数据
+       deleteRecipes: (ids: number[]) => {
+         // 删除菜谱
        },
-       login: () => {
-         // 未登录时跳转登录
+       changeDeleteState: (isToDelete: boolean) => {
+         // 切换删除状态
        },
-       jumpFollowers: () => {
-         // 跳转关注页面
+       changeSelect: (id: number, flag: boolean) => {
+         // 切换tab
        },
      })
    ```
@@ -122,30 +119,28 @@ PersonalHomepage(options?: PersonalHomepageOptions)
 
 | 名称           | 类型                                        | 必填 | 说明           |
 |--------------|-------------------------------------------|----|--------------|
-| bloggerInfo  | [BloggerInfo](#BloggerInfo对象说明)[]         | 是  | 博主个人信息       |
 | recipeList   | [RecipeBriefInfo](#RecipeBriefInfo对象说明)[] | 是  | 菜谱列表         |
-| isSelf       | boolean                                   | 否  | 是否是个人中心      |
-| isLogin      | boolean                                   | 否  | 是否已登录        |
-| isFollower   | boolean                                   | 否  | 是否已关注        |
 | currentIndex | number                                    | 是  | tab栏索引       |
 | isToDelete   | boolean                                   | 否  | 删除场景时是否是删除状态 |
 
 ### BloggerInfo对象说明
 
-| 名称             | 类型          | 必填 | 说明    |
-|----------------|-------------|----|-------|
-| id             | number      | 是  | 博主序号  |
-| name           | string      | 是  | 博主名称  |
-| avatar         | ResourceStr | 是  | 博主头像  |
-| profile        | string      | 是  | 博主简介  |
-| sex            | string      | 是  | 博主性别  |
-| createdAccount | string      | 是  | 创建日期  |
-| ipLocation     | string      | 是  | IP归属地 |
-| bloggerType    | string      | 是  | 博主标签  |
-| followers      | number      | 是  | 关注数   |
-| fans           | number      | 是  | 粉丝数   |
-| beFavorite     | number      | 是  | 被收藏   |
-| beFollowed     | number      | 是  | 被跟做   |
+| 名称                | 类型                | 必填 | 说明     |
+|-------------------|-------------------|----|--------|
+| id                | number            | 是  | 博主序号   |
+| name              | string            | 是  | 博主名称   |
+| avatar            | ResourceStr       | 是  | 博主头像   |
+| profile           | string            | 是  | 博主简介   |
+| sex               | string            | 是  | 博主性别   |
+| createdAccount    | string            | 是  | 创建日期   |
+| ipLocation        | string            | 是  | IP归属地  |
+| bloggerType       | string            | 是  | 博主标签   |
+| followers         | number            | 是  | 关注数    |
+| fans              | number            | 是  | 粉丝数    |
+| beFavorite        | number            | 是  | 被收藏    |
+| beFollowed        | number            | 是  | 被跟做    |
+| myRecipeList      | RecipeBriefInfo[] | 是  | 我的菜谱数据 |
+| collectRecipeList | RecipeBriefInfo[] | 是  | 我的收藏数据 |
 
 ### RecipeBriefInfo对象说明
 
@@ -163,6 +158,9 @@ PersonalHomepage(options?: PersonalHomepageOptions)
 | thumbnail    | string | 是  | 菜谱缩略图  |
 | views        | number | 否  | 浏览数    |
 | likes        | number | 是  | 收藏数    |
+| video        | string | 是  | 视频链接   |
+| coverUrl     | string | 否  | 封面链接   |
+| heatness     | number | 否  | 热度     |
 
 ### 事件
 
@@ -170,7 +168,7 @@ PersonalHomepage(options?: PersonalHomepageOptions)
 
 #### onClickCb
 
-onClickCb(callback: (id: number) => void)
+onClickCb(callback: (id: number, index: number) => void)
 
 跳转菜谱详情
 
@@ -179,21 +177,6 @@ onClickCb(callback: (id: number) => void)
 jumpBloggerInfo(callback: (id: number) => void)
 
 跳转博主详情
-#### changeTabIndex
-
-changeTabIndex(callback: (index: number) => void)
-
-切换tab时，更新数据
-#### login
-
-login(callback: () => void)
-
-未登录时跳转登录
-#### jumpFollowers
-
-jumpFollowers(callback: () => void)
-
-跳转关注页面
 
 #### deleteRecipes
 
@@ -203,9 +186,15 @@ deleteRecipes(callback: (ids: number[]) => void)
 
 #### changeDeleteState
 
-changeDeleteState(callback: (isToDelete: boolean) => void)
+changeDeleteState(isToDelete: boolean)
 
 删除场景时，长按菜谱触发删除选中
+
+#### changeSelect
+
+changeSelect(callback: (id: number, flag: boolean) => void)
+
+切换tab栏
 
 ## 示例代码
 
@@ -249,38 +238,29 @@ struct Index {
    build() {
       RelativeContainer() {
          PersonalHomepage({
-            bloggerInfo: this.bloggerInfo,
             recipeList: this.recipeList,
-            isSelf: false,
-            isLogin: false,
             currentIndex: this.currentIndex,
-            userTagBuilderParam: (): void => {
-               // 用户标签插槽
-            },
-            membershipBuilderParam: (): void => {
-               // 开通会员插槽
-            },
             uploadBuilderParam: (): void => {
                // 上传菜谱插槽
             },
-            onClickCb: (id: number) => {
+            onClickCb: (id: number, index: number) => {
                // 跳转菜谱详情
                promptAction.showToast({ message: '跳转菜谱详情' })
             },
+            deleteRecipes: (ids: number[]) => {
+               // 删除菜谱
+               promptAction.showToast({ message: '删除菜谱' })
+            },
+            changeDeleteState: (isToDelete: boolean) => {
+               // 切换删除状态
+               promptAction.showToast({ message: '切换删除状态' })
+            },
+            changeSelect: (id: number, flag: boolean) => {
+               // 未登录时跳转登录
+               promptAction.showToast({ message: '切换tab' })
+            },
             jumpBloggerInfo: (id: number) => {
                // 跳转博主详情
-               promptAction.showToast({ message: '跳转博主详情' })
-            },
-            changeTabIndex: (index: number) => {
-               // 切换tab时，更新数据
-               this.currentIndex = index
-            },
-            login: () => {
-               // 未登录时跳转登录
-               promptAction.showToast({ message: '未登录时跳转登录' })
-            },
-            jumpFollowers: () => {
-               // 跳转关注页面
                promptAction.showToast({ message: '跳转关注页面' })
             },
          })

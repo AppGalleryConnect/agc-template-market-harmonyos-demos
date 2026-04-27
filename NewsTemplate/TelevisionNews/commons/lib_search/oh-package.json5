@@ -1,0 +1,14 @@
+{
+  "name": "lib_search",
+  "version": "1.0.1",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@hw-agconnect/ui-toast": "^1.0.0",
+    "@hw-agconnect/util-log": "^1.0.0",
+    'lib_tv_apis': "file:../../commons/lib_tv_apis",
+    'lib_common': "file:../../commons/lib_common"
+  }
+}

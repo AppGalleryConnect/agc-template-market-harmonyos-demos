@@ -34,3 +34,18 @@ export class MyMenuItem implements ContentModifier<MenuItemConfiguration> {
     return wrapBuilder(MenuItemBuilder)
   }
 }
+
+@ObservedV2
+export class RecipesTypes {
+  @Trace id: number = 0;
+  @Trace icon: string = '';
+  @Trace type: string = '';
+  @Trace title?: string = '';
+  @Trace img: string = '';
+  @Trace fontColor: string = '';
+  @Trace bgColor: string = '';
+}
+
+export interface PopResult {
+  todayCalories: number;
+}

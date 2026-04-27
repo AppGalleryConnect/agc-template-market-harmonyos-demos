@@ -1,7 +1,8 @@
-import { buildTitleBar, CommonConstants, RouterMap, RouterModule } from 'commonlib';
+import { buildTitleBar, CommonConstants, PreferenceUtil, RouterMap, RouterModule } from 'commonlib';
 import { LengthMetrics } from '@kit.ArkUI';
 import { DietPlanPageVM } from '../viewModels/DietPlanPageVM';
 import { FoodCalories, FoodCategory, MyMenuItem } from '../types/Index';
+import { emitter } from '@kit.BasicServicesKit';
 
 @Builder
 export function DietPlanPageBuilder() {
@@ -11,9 +12,23 @@ export function DietPlanPageBuilder() {
 @ComponentV2
 struct DietPlanPage {
   @Local vm: DietPlanPageVM = new DietPlanPageVM();
+  @Local colorMode: number = -1
 
   aboutToAppear(): void {
     this.vm.init()
+    try {
+      let colorMode = Number(PreferenceUtil.getInstance().get(CommonConstants.LIGHT_DARK_KEY, 1))
+      this.colorMode = colorMode;
+      emitter.on('colorModeChange', (event: emitter.EventData) => {
+        let colorMode = event.data!.colorMode as number;
+        this.colorMode = colorMode;
+      });
+    } catch (e) {
+    }
+  }
+
+  aboutToDisappear(): void {
+    emitter.off('colorModeChange');
   }
 
   @Computed
@@ -39,7 +54,7 @@ struct DietPlanPage {
         .fontSize(12)
         .fontColor($r('sys.color.font_primary'))
         .textAlign(TextAlign.Center)
-        .width(68 * this.vm.pageWidth)
+        .width(68 * this.vm.getLines)
         .margin({
           left: 12,
           right: 8,
@@ -48,7 +63,8 @@ struct DietPlanPage {
         })
     }
     .justifyContent(FlexAlign.Start)
-    .backgroundColor(this.vm.currentIndex === index ? $r('sys.color.background_primary') : '#00000000')
+    .backgroundColor(this.vm.currentIndex === index ? $r('sys.color.comp_background_primary') :
+      '')
     .width('100%')
     .height(40)
     .constraintSize({ maxWidth: '100%' })
@@ -59,7 +75,7 @@ struct DietPlanPage {
 
   build() {
     NavDestination() {
-      Column({ space: 12 }) {
+      Column() {
         Row({ space: 12 }) {
           Select(this.vm.menuList)
             .selected(this.vm.selectIndex)
@@ -87,12 +103,15 @@ struct DietPlanPage {
               .hitTestBehavior(HitTestMode.Transparent)
           }.layoutWeight(1)
           .onClick(() => {
-            RouterModule.push(RouterMap.SEARCH_FOOD_PAGE, { 'id': this.vm.selectIndex } as Record<string, number>,
-              (popInfo: PopInfo) => {
-                if (popInfo.result) {
-                  RouterModule.pop(popInfo.result)
-                }
-              })
+            let data: Record<string, Object> = {
+              'id': this.vm.selectIndex,
+              'selectFoods': this.vm.selectFoods
+            }
+            RouterModule.push(RouterMap.SEARCH_FOOD_PAGE, data, (popInfo: PopInfo) => {
+              if (popInfo.result) {
+                RouterModule.pop(popInfo.result)
+              }
+            })
           })
         }.width('100%').padding({ left: 16, right: 16 })
 
@@ -106,9 +125,9 @@ struct DietPlanPage {
               }
             }, (item: FoodCategory, index: number) => item.name + index)
           }
-          .width(92 * this.vm.pageWidth)
+          .width(92 * this.vm.getLines)
           .height('100%')
-          .backgroundColor('#F1F3F5')
+          .backgroundColor($r('sys.color.comp_background_tertiary'))
           .listDirection(Axis.Vertical) // 排列方向
           .scrollBar(BarState.Off)
 
@@ -146,7 +165,7 @@ struct DietPlanPage {
                       .width(CommonConstants.FULL_WIDTH)
                       .padding({ top: 12, bottom: 4, left: 4 })
 
-                      Divider().strokeWidth(1).margin({ bottom: 12 })
+                      Divider().strokeWidth('1px').margin({ bottom: 12 })
                     }
                   }.onClick(() => {
                   })
@@ -169,7 +188,7 @@ struct DietPlanPage {
           .contentEndOffset(12)
           .onScrollIndex((start: number) => this.vm.currentIndexChangeAction(start, false))
           .bindSheet($$this.vm.showAddFoodSheet, this.addFoodSheet(), {
-            height: 400,
+            height: this.vm.breakPointModel.currentBreakpoint === 'sm' ? 400 : 560,
             blurStyle: BlurStyle.Thick,
             preferType: SheetType.CENTER,
             showClose: false,
@@ -196,15 +215,23 @@ struct DietPlanPage {
           Button('确定')
             .backgroundColor(this.vm.selectFoods.length ? '#E84026' : '#1A000000')
             .fontColor(this.vm.selectFoods.length ? '' : $r('sys.color.font_tertiary'))
-            .layoutWeight(1)
             .onClick(() => {
               this.vm.addDietPlan()
             })
+            .width(this.vm.getLines === 1 ? 256 : 448)
         }
-        .padding({ left: 24, right: 24 })
+        .width('100%')
+        .justifyContent(FlexAlign.SpaceBetween)
+        .padding({
+          left: 24,
+          right: 24,
+          bottom: 24,
+          top: 12
+        })
+        .backgroundColor($r('sys.color.comp_background_tertiary'))
         .bindSheet($$this.vm.showCheckedFoods, this.checkedFoods(), {
           blurStyle: BlurStyle.Thick,
-          height:330,
+          height: 330,
           preferType: SheetType.CENTER,
           showClose: true,
           title: { title: '已添加' },
@@ -212,7 +239,9 @@ struct DietPlanPage {
         });
       }
     }
+    .backgroundColor($r('sys.color.comp_background_primary'))
     .title(buildTitleBar('饮食计划'), { paddingStart: LengthMetrics.vp(16) })
+    .padding({ top: 40 })
   }
 
   @Builder
@@ -258,6 +287,8 @@ struct DietPlanPage {
             .borderRadius(12)
             .maxLength(20)
             .maxLength(10)
+            .backgroundColor($r('sys.color.comp_background_tertiary'))
+
           TextInput({ text: $$this.vm.inputWeight, placeholder: '输入食品重量（克 /毫升）' })
             .fontSize(12)
             .fontColor($r('sys.color.font_primary'))
@@ -268,6 +299,8 @@ struct DietPlanPage {
             .borderRadius(12)
             .maxLength(10)
             .maxLength(10)
+            .backgroundColor($r('sys.color.comp_background_tertiary'))
+
           TextInput({ text: $$this.vm.inputCalories, placeholder: '输入食品热量（千卡）' })
             .fontSize(12)
             .fontColor($r('sys.color.font_primary'))
@@ -278,15 +311,26 @@ struct DietPlanPage {
             .borderRadius(12)
             .maxLength(10)
             .maxLength(10)
+            .backgroundColor($r('sys.color.comp_background_tertiary'))
+
         }
         .alignItems(HorizontalAlign.Start)
-        .backgroundColor($r('sys.color.background_primary'))
+        .backgroundColor($r('sys.color.comp_background_list_card'))
         .margin({ top: 16 })
         .padding(12)
         .borderRadius(16)
       }.margin({ top: 24 })
 
       Row({ space: 16 }) {
+        Button('取消')
+          .fontSize($r('sys.float.Body_L'))
+          .fontWeight(FontWeight.Medium)
+          .fontColor($r('sys.color.font_primary'))
+          .backgroundColor($r('sys.color.comp_background_tertiary'))
+          .layoutWeight(1)
+          .onClick(() => {
+            this.vm.showAddFoodSheet = false
+          })
         Button('确定')
           .fontSize($r('sys.float.Body_L'))
           .fontWeight(FontWeight.Medium)
@@ -296,21 +340,12 @@ struct DietPlanPage {
           .onClick(() => {
             this.vm.confirmBtn()
           })
-        Button('取消')
-          .fontSize($r('sys.float.Body_L'))
-          .fontWeight(FontWeight.Medium)
-          .fontColor($r('sys.color.font_primary'))
-          .backgroundColor('#e6e8e9')
-          .layoutWeight(1)
-          .onClick(() => {
-            this.vm.showAddFoodSheet = false
-          })
-      }.margin({ top: 24 })
+      }.margin({ top: this.vm.breakPointModel.currentBreakpoint === 'sm' ? 24 : 220 })
     }
     .width(CommonConstants.FULL_WIDTH)
-    .height(400)
+    .height(this.vm.breakPointModel.currentBreakpoint === 'sm' ? 400 : 560)
     .padding({ left: 16, right: 16, top: 8 })
-    .backgroundColor($r('sys.color.background_secondary'))
+    .backgroundColor(this.colorMode === 1 ? $r('sys.color.comp_background_gray') : '')
     .borderRadius({ topLeft: 32, topRight: 32 })
     .constraintSize({ maxWidth: CommonConstants.FULL_WIDTH })
   }
@@ -322,9 +357,9 @@ struct DietPlanPage {
         Blank().layoutWeight(1)
         Row() {
           Image($r('app.media.ic_delete'))
-            .size({width: 20, height: 20})
+            .size({ width: 20, height: 20 })
             .align(Alignment.End)
-            .margin({right: 8})
+            .margin({ right: 8 })
           Text('清空')
             .fontSize(14)
             .fontWeight(FontWeight.Medium)
@@ -334,11 +369,13 @@ struct DietPlanPage {
             .borderRadius(12)
         }.onClick(() => {
           this.vm.selectFoods = [];
+          this.vm.addDietPlan()
           this.vm.showCheckedFoods = false;
         })
       }
-      Divider().strokeWidth(1).margin({ bottom: 12 })
-      List({scroller: this.vm.checkedScroller }) {
+
+      Divider().strokeWidth('1px').margin({ bottom: 4 })
+      List({ scroller: this.vm.checkedScroller }) {
         ForEach(this.vm.selectFoods, (item: FoodCalories) => {
           ListItem() {
             Column() {
@@ -357,6 +394,7 @@ struct DietPlanPage {
                 }
                 .alignItems(HorizontalAlign.Start)
                 .layoutWeight(1)
+
                 Checkbox({ name: `${item.id}`, group: `foodGroup` })
                   .select(this.vm.selectFoods.some(food => food.id === item.id))
                   .height(20)
@@ -365,7 +403,7 @@ struct DietPlanPage {
                   .shape(CheckBoxShape.CIRCLE)
                   .onClick(() => {
                     this.vm.changeFood(item);
-                    if(this.vm.selectFoods.length === 0){
+                    if (this.vm.selectFoods.length === 0) {
                       this.vm.showCheckedFoods = false;
                     }
                   })
@@ -373,14 +411,15 @@ struct DietPlanPage {
               .justifyContent(FlexAlign.SpaceBetween)
               .width(CommonConstants.FULL_WIDTH)
               .padding({ top: 12, bottom: 4, left: 4 })
-              Divider().strokeWidth(1).margin({ bottom: 12 })
+
+              Divider().strokeWidth('1px').margin({ bottom: 12 })
             }
           }
-        },(item: FoodCalories) => item.id.toString())
+        }, (item: FoodCalories) => item.id.toString())
       }
     }
+    .backgroundColor(this.colorMode === 1 ? $r('sys.color.comp_background_gray') : '')
     .padding({ left: 28, right: 28 })
     .margin({ top: 6 })
-    .backgroundColor(Color.White)
   }
 }

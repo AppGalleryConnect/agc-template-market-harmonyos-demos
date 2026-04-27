@@ -1,0 +1,26 @@
+{
+  "module": {
+    "name": "address_management",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ],
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.VIBRATE"
+      },
+      {
+        "name": "ohos.permission.INTERNET"
+      },
+      {
+        "name": "ohos.permission.MICROPHONE",
+        "reason": "$string:apply_microphone_reason",
+        "usedScene": {
+          "when": "inuse"
+        }
+      }
+    ],
+    "routerMap": "$profile:route_map"
+  }
+}

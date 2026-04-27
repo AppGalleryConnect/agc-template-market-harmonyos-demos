@@ -89,7 +89,7 @@ export struct TopTextBottomVideo {
               .fontColor($r('sys.color.font_primary'))
           }
         }
-        .width('65%')
+        .width('100%')
         .alignItems(HorizontalAlign.Start)
 
         Column() {

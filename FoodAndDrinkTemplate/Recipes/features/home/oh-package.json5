@@ -11,6 +11,8 @@
     "base_ui": 'file:../../components/base_ui',
     "featured_recipes": 'file:../../components/featured_recipes',
     "home_search": "file:../../components/home_search",
-    "personal_homepage": "file:../../components/personal_homepage"
+    "personal_homepage": "file:../../components/personal_homepage",
+    "module_transition": 'file:../../components/module_transition',
+    "aggregated_ads": 'file:../../components/aggregated_ads'
   }
 }

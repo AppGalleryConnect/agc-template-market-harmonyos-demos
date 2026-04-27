@@ -1,6 +1,6 @@
 import { util } from '@kit.ArkTS';
 import { ShareData } from '@tencent/qq-open-sdk';
-import { ShareAppType, ShareWay } from './ShareEnum';
+import { ShareAppType, ShareWay, ShareContentType } from './ShareEnum';
 
 /**
  * 分享数据
@@ -12,6 +12,8 @@ export interface ShareRecordData {
   coverUrl?: string;
   thumbUrl?: ResourceStr;
   landingPageUrl?: string;
+  imageUrl?: string | PixelMap;
+  shareType?: ShareContentType;
   createTime?: number;
   type?: number;
 }
@@ -26,6 +28,8 @@ export interface ShareOptions {
   sheetTitle?: string;
   posterSheetTitle?: string;
   excludedAbilities?: (ShareAppType | ShareWay)[];
+  enableKnockShare?: boolean;
+  enableGestureShare?: boolean;
 }
 
 /**
@@ -53,6 +57,13 @@ export class ShareViewData {
   @Trace sheetTitle: string = '分享到';
   @Trace posterSheetTitle: string = '生成海报';
   @Trace excludedAbilities: (ShareAppType | ShareWay)[] = [];
+  @Trace enableKnockShare: boolean = true;
+  @Trace enableGestureShare: boolean = true;
+  @Trace shareType: ShareContentType = ShareContentType.LINK;
+  // 外部传入，支持网络地址图片、沙箱图片、base64以及PixelMap对象
+  @Trace imageUrl: string | PixelMap = '';
+  // 内部沙箱路径
+  @Trace imageUri: string = '';
   @Trace closeSheet: () => void = () => {
   };
   @Trace extraInfo: ExtraInfo = {
@@ -73,6 +84,8 @@ export class ShareViewData {
     this.thumbUrl = data.thumbUrl ?? '';
     this.landingPageUrl = data.landingPageUrl ?? '';
     this.createTime = data.createTime ?? 0;
+    this.shareType = data.shareType ?? ShareContentType.LINK;
+    this.imageUrl = data.imageUrl ?? '';
     this.type = data.type ?? 0;
   }
 
@@ -87,6 +100,8 @@ export class ShareViewData {
     this.sheetTitle = options.sheetTitle ?? '分享到';
     this.posterSheetTitle = options.posterSheetTitle ?? '生成海报';
     this.excludedAbilities = options.excludedAbilities ?? [];
+    this.enableKnockShare = options.enableKnockShare ?? true;
+    this.enableGestureShare = options.enableGestureShare ?? true;
   }
 
   /**
@@ -118,9 +133,10 @@ export class QQShareData extends ShareData {
  */
 export interface QQShareContent {
   msg_style: number;
-  title: string;
-  summary: string
-  brief: string
-  url: string;
-  picture_url: string;
+  title?: string;
+  summary?: string
+  brief?: string
+  url?: string;
+  picture_url?: string;
+  share_uris?: string[]
 }

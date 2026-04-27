@@ -64,8 +64,6 @@ export interface BaseNews {
   postBody?: string
   // 动态-图片链接
   postImgList?: PostImgList[]
-  // 新闻来源
-  articleFrom?: string
   // 动态布局参数
   navInfo: NavInfo
   // 额外信息
@@ -76,4 +74,12 @@ export interface BaseNews {
   isLocalPublish?: boolean
   questionAndAnswer?: QuestionsAndAnswer
   keywordPairs?: KeyWordPair[]
+  // 直播开始时间（毫秒时间戳）
+  liveStartTime?: number
+  // 直播结束时间（毫秒时间戳）
+  liveEndTime?: number
+  // 标签
+  tags: string[]
+  // 城市定位
+  city?: string
 }

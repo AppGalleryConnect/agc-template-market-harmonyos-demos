@@ -9,3 +9,5 @@ export { MediaController } from './src/main/ets/controller/MediaController'
 export { AudioConstants } from './src/main/ets/constants/Constants'
 
 export { AudioPlayerState } from './src/main/ets/model/AudioData'
+
+export { EventMap } from './src/main/ets/constants/EventMap'

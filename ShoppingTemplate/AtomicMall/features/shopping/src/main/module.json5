@@ -1,0 +1,12 @@
+{
+  "module": {
+    "name": "shopping",
+    "type": "shared",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ],
+    "routerMap": "$profile:route_map",
+    "deliveryWithInstall": true
+  }
+}

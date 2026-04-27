@@ -19,7 +19,9 @@ struct BrowsingHistory {
   build() {
     NavDestination() {
       Recipes({ recipeList: this.vm.history });
-    }.title(buildTitleBar('浏览记录'), { paddingStart: LengthMetrics.vp(16) });
+    }
+    .title(buildTitleBar('浏览记录'), { paddingStart: LengthMetrics.vp(16) })
+    .padding({top: 40})
   }
 }
 

@@ -1,351 +1,453 @@
-import { InternalAxiosRequestConfig } from '@ohos/axios';
-import { CommonUtil } from 'module_base';
-import { ExpressStatus, OrderStatus, OrderType, PaymentMethod, ShippingMethod } from '../common/Constant';
+import AxiosMockAdapter from '@hw-agconnect/axios-mock-adapter';
+import { AxiosRequestConfig, HttpStatusCode } from '@ohos/axios';
+import { URL_MAP } from '../common/Constant';
+import { AddressBookDB } from '../database/AddressBookDB';
+import { CouponDB } from '../database/CouponDB';
+import { GoodsDB } from '../database/GoodsDB';
+import { LogisticsDB } from '../database/LogisticsDB';
+import { ParcelDB } from '../database/ParcelDB';
+import { PointDetailDB } from '../database/PointDetailDB';
+import { TaskDB } from '../database/TaskDB';
+import { TemplateDB } from '../database/TemplateDB';
+import { UserCouponDB } from '../database/UserCouponDB';
+import { UserDB } from '../database/UserDB';
+import { UserSignDB } from '../database/UserSignDB';
+import { AddressBook } from '../model/AddressBook';
 import {
-  GetOrderListRequest,
-  ICouponRequest,
-  IPrepayRequest,
-  IVipPrepayRequest,
-  NormalRequest,
-  RemakeRequest,
-  UpdateOrderRequest,
+  IUserIdRequest,
+  IDeleteAddress,
+  IPhoneRequest,
+  ISetDefaultAddress,
+  ICommonTemplateReq,
+  ISignWeekRequest,
+  IUserSignRequest,
+  IUserPointRequest,
+  IPointHistoryRequest,
+  IParcelDetailRequest,
+  IClaimCouponRequest,
 } from '../model/IRequest';
-import { IOrder, IOrderInfo, IPrepay, IUserInfo } from '../model/IResponse';
+import { Logistics } from '../model/Logistics';
+import { Parcel } from '../model/Parcel';
+import { Task } from '../model/Task';
+import { Template } from '../model/Template';
+import { User } from '../model/User';
 import { MockData } from './MockData';
 
 export class MockApi {
-  static userLogin() {
-    return MockData.USER_INFO
-  }
+  public start(adapter: AxiosMockAdapter) {
+    // 用户登录
+    adapter.onPost(URL_MAP.USER_LOGIN).reply((config: AxiosRequestConfig) => {
+      return new Promise((resolve) => {
+        setTimeout(async() => {
+          const data = JSON.parse(config.data) as IPhoneRequest;
+          const userInfo = await UserDB.userLogin(data.phone);
+          resolve([HttpStatusCode.Ok, userInfo]);
+        }, 300);
+      });
+    });
 
-  static getUserInfo(): IUserInfo {
-    return MockData.USER_INFO;
-  }
+    // 用户登出
+    adapter.onPost(URL_MAP.USER_LOGOUT).reply((config: AxiosRequestConfig) => {
+      return new Promise((resolve) => {
+        setTimeout(async() => {
+          const data = JSON.parse(config.data) as IPhoneRequest;
+          const loginStatus = await UserDB.userLogout(data.phone);
+          resolve([HttpStatusCode.Ok, loginStatus]);
+        }, 300);
+      });
+    });
 
-  static updateUserInfo(config?: InternalAxiosRequestConfig) {
-    const data: IUserInfo = config?.params
-    CommonUtil.assign(MockData.USER_INFO, data);
-    return true;
-  }
+    // 获取用户信息
+    adapter.onGet(URL_MAP.GET_USER_INFO).reply((config: AxiosRequestConfig) => {
+      return new Promise((resolve) => {
+        setTimeout(async() => {
+          const data: IPhoneRequest = config.params;
+          const userInfo = await UserDB.queryUser(data.phone);
+          resolve([HttpStatusCode.Ok, userInfo]);
+        }, 300);
+      });
+    });
 
-  static vipPrepay(config?: InternalAxiosRequestConfig) {
-    const data: IVipPrepayRequest = config?.params
-    const timestamp = new Date().getTime();
-    const orderNo: string = timestamp.toString();
-    const resp: IPrepay = {
-      id: timestamp,
-      orderNo: orderNo,
-      orderStr: '',
-      timestamp: orderNo,
-    };
-    return resp
-  }
+    // 更新用户信息
+    adapter.onPut(URL_MAP.UPDATE_USER_INFO).reply((config: AxiosRequestConfig) => {
+      return new Promise((resolve) => {
+        setTimeout(async() => {
+          const data = JSON.parse(config.data) as User;
+          const resp = await UserDB.updateUser(data);
+          resolve([HttpStatusCode.Ok, resp]);
+        }, 300);
+      });
+    });
 
-  static getCheckInList() {
-    return MockData.CHECK_IN_LIST
-  }
+    // 获取用户本周签到数据
+    adapter.onGet(URL_MAP.WEEKLY_SIGN).reply((config: AxiosRequestConfig) => {
+      return new Promise((resolve) => {
+        setTimeout(async() => {
+          const data: ISignWeekRequest = config.params;
+          const resp = await UserSignDB.getWeeklyData(data.userId, data.monday);
+          resolve([HttpStatusCode.Ok, resp]);
+        }, 300);
+      });
+    });
 
-  static getCouponList(config?: InternalAxiosRequestConfig) {
-    const data: ICouponRequest = config?.params
-    if (data.isVip) {
-      return MockData.COUPON_LIST.concat(MockData.VIP_COUPON_LIST)
-    } else {
-      return MockData.COUPON_LIST
-    }
-  }
+    // 签到操作
+    adapter.onPost(URL_MAP.DO_SIGN).reply((config: AxiosRequestConfig) => {
+      return new Promise((resolve) => {
+        setTimeout(async() => {
+          const data = JSON.parse(config.data) as IUserSignRequest;
+          const isSubscribe = await UserSignDB.doSign(data);
+          resolve([HttpStatusCode.Ok, isSubscribe]);
+        }, 300);
+      });
+    });
 
-  static getCompanyList() {
-    return MockData.COMPANY_LIST
-  }
+    // 获取地址列表
+    adapter.onGet(URL_MAP.ADDRESS_LIST).reply((config: AxiosRequestConfig) => {
+      return new Promise((resolve) => {
+        setTimeout(async() => {
+          const data: IUserIdRequest = config.params;
+          const addressList = await AddressBookDB.queryAddressList(data.userId);
+          resolve([HttpStatusCode.Ok, addressList]);
+        }, 300);
+      });
+    });
 
-  static getGoodsList() {
-    return MockData.GOODS_LIST
-  }
+    // 获取默认地址
+    adapter.onGet(URL_MAP.DEFAULT_ADDRESS).reply((config: AxiosRequestConfig) => {
+      return new Promise((resolve) => {
+        setTimeout(async() => {
+          const data: IUserIdRequest = config.params;
+          const address = await AddressBookDB.queryDefaultAddress(data.userId);
+          resolve([HttpStatusCode.Ok, address]);
+        }, 300);
+      });
+    });
 
-  static getServicePointList() {
-    return MockData.SERVICE_POINT_LIST
-  }
+    // 新增地址
+    adapter.onPost(URL_MAP.ADD_ADDRESS).reply((config: AxiosRequestConfig) => {
+      return new Promise((resolve) => {
+        setTimeout(async() => {
+          const data = JSON.parse(config.data) as AddressBook;
+          const resp = await AddressBookDB.addAddress(data);
+          resolve([HttpStatusCode.Ok, resp]);
+        }, 300);
+      });
+    });
 
-  public static getOrderList(config?: InternalAxiosRequestConfig) {
-    const data: GetOrderListRequest = config?.params
-    const orderList = MockData.ORDER_LIST
-    if (data.status && data.status === OrderStatus.DO_ING) {
-      const res = orderList.filter((item) => {
-        return item.status === OrderStatus.DO_ING
-      }).filter((item) => {
-        if (data.orderNo) {
-          return item.orderNo === data.orderNo
-        }
-        return true
-      })
-      return res
-    }
-    if (data.type && data.type === OrderType.SEND) {
-      const res = orderList.filter((item) => {
-        return item.type === OrderType.SEND
-      }).filter((item) => {
-        if (data.orderNo) {
-          return item.orderNo === data.orderNo
-        }
-        return true
-      }).filter((item) => {
-        if (data.expressStatus && data.expressStatus !== ExpressStatus.ALL) {
-          return item.expressStatus === data.expressStatus
-        }
-        return true
-      })
-        .filter((item) => {
-          return item.status === OrderStatus.SUCCESS
-        })
-      return res
-    }
-    if (data.type && data.type === OrderType.RECEIVE) {
-      const res = orderList.filter((item) => {
-        return item.type === OrderType.RECEIVE
-      }).filter((item) => {
-        if (data.orderNo) {
-          return item.orderNo === data.orderNo
-        }
-        return true
-      })
-        .filter((item) => {
-          if (data.expressStatus && data.expressStatus !== ExpressStatus.ALL) {
-            return item.expressStatus === data.expressStatus
-          }
-          return true
-        })
-        .filter((item) => {
-          return item.status === OrderStatus.SUCCESS
-        })
-      return res
-    }
-    return orderList
-  }
+    // 更新地址信息
+    adapter.onPut(URL_MAP.UPDATE_ADDRESS).reply((config: AxiosRequestConfig) => {
+      return new Promise((resolve) => {
+        setTimeout(async() => {
+          const data = JSON.parse(config.data) as AddressBook;
+          const param = config.params as ISetDefaultAddress;
+          const resp = await AddressBookDB.updateAddressBook(data, param.isSetDefault);
+          resolve([HttpStatusCode.Ok, resp]);
+        }, 300);
+      });
+    });
 
-  static getEstimatedPrice() {
-    return 100
-  }
-
-  static prepay(config?: InternalAxiosRequestConfig) {
-    const data: IPrepayRequest = config?.params
-    const company = MockData.COMPANY_LIST.find((item) => {
-      return item.id === data.expressCompanyId
+    // 删除地址
+    adapter.onDelete(URL_MAP.DELETE_ADDRESS).reply((config: AxiosRequestConfig) => {
+      return new Promise((resolve) => {
+        setTimeout(async() => {
+          const param = config.params as IDeleteAddress;
+          const resp = await AddressBookDB.deleteAddress(param.addressId);
+          resolve([HttpStatusCode.Ok, resp]);
+        }, 300);
+      });
     })
-    const timestamp = new Date().getTime();
-    const orderNo: string = timestamp.toString();
-    const order: IOrder = {
-      id: timestamp,
-      type: OrderType.SEND,
-      status: OrderStatus.SUCCESS,
-      expressStatus: ExpressStatus.PICKUP_PENDING,
-      companyName: company?.name ?? '',
-      orderNo: Date.now() + '',
-      remark: '',
-      deliveryTime: CommonUtil.formatFullDate(new Date()),
-      receiptTime: '',
-      price: 0,
-      sendAddress: data.sendAddress,
-      getAddress: data.getAddress,
-      goods: {
-        id: data.goodsInfo.id,
-        name: data.goodsInfo.name,
-        weight: data.goodsInfo.weight,
-        volume: data.goodsInfo.volume,
-      },
-      day: data.day ?? '',
-      time: data.time ?? '',
-      paymentMethod: data.payMethod ?? PaymentMethod.PAY_NOW,
-      shippingMethod: data.shippingMethod,
-      mailCode: CommonUtil.rand(1000, 9999),
-    }
-    MockData.ORDER_LIST.unshift(order)
-    const resp: IPrepay = {
-      id: timestamp,
-      orderNo: orderNo,
-      orderStr: '',
-      timestamp: orderNo,
-    };
-    return resp
-  }
 
-  static deleteOrder(config?: InternalAxiosRequestConfig) {
-    const data: NormalRequest = config?.params
-    const index = MockData.ORDER_LIST.findIndex((item) => {
-      return item.id === data.id
+    // 查询寄件模板列表
+    adapter.onGet(URL_MAP.TEMPLATE_LIST).reply((config: AxiosRequestConfig) => {
+      return new Promise((resolve) => {
+        setTimeout(async() => {
+          const data: IUserIdRequest = config.params;
+          const templateList = await TemplateDB.queryTemplateList(data.userId);
+          resolve([HttpStatusCode.Ok, templateList]);
+        }, 300);
+      });
+    });
+
+    // 新增寄件模板
+    adapter.onPost(URL_MAP.ADD_TEMPLATE).reply((config: AxiosRequestConfig) => {
+      return new Promise((resolve) => {
+        setTimeout(async() => {
+          const data = JSON.parse(config.data) as Template;
+          const resp = await TemplateDB.addTemplate(data);
+          resolve([HttpStatusCode.Ok, resp]);
+        }, 300);
+      });
+    });
+
+    // 查询寄件模板详情
+    adapter.onGet(URL_MAP.TEMPLATE_DETAIL).reply((config: AxiosRequestConfig) => {
+      return new Promise((resolve) => {
+        setTimeout(async() => {
+          const data: ICommonTemplateReq = config.params;
+          const templateDetail = await TemplateDB.queryTemplateDetail(data.templateId);
+          resolve([HttpStatusCode.Ok, templateDetail]);
+        }, 300);
+      });
+    });
+
+    // 更新寄件模板
+    adapter.onPut(URL_MAP.UPDATE_TEMPLATE).reply((config: AxiosRequestConfig) => {
+      return new Promise((resolve) => {
+        setTimeout(async() => {
+          const data = JSON.parse(config.data) as Template;
+          const resp = await TemplateDB.updateTemplate(data);
+          resolve([HttpStatusCode.Ok, resp]);
+        }, 300);
+      });
+    });
+
+    // 删除寄件模板
+    adapter.onDelete(URL_MAP.DELETE_TEMPLATE).reply((config: AxiosRequestConfig) => {
+      return new Promise((resolve) => {
+        setTimeout(async() => {
+          const param = config.params as ICommonTemplateReq;
+          const resp = await TemplateDB.deleteTemplate(param.templateId);
+          resolve([HttpStatusCode.Ok, resp]);
+        }, 300);
+      });
     })
-    MockData.ORDER_LIST.splice(index, 1)
-    return undefined
-  }
 
-  static getOrderCount() {
-    const sendOrderCount: number = MockData.ORDER_LIST.filter((item) => {
-      return item.type === OrderType.SEND
-    }).filter((item) => {
-      return item.status === OrderStatus.SUCCESS
-    }).length
+    // 查询物品类型列表
+    adapter.onGet(URL_MAP.GOODS_LIST).reply(() => {
+      return new Promise((resolve) => {
+        setTimeout(async() => {
+          const goodsList = await GoodsDB.queryGoodsList()
+          resolve([HttpStatusCode.Ok, goodsList]);
+        }, 300);
+      });
+    });
 
-    const getOrderCount: number = MockData.ORDER_LIST.filter((item) => {
-      return item.type === OrderType.RECEIVE
-    }).filter((item) => {
-      return item.status === OrderStatus.SUCCESS
-    }).length
+    // 创建寄件订单
+    adapter.onPost(URL_MAP.CREATE_ORDER).reply((config: AxiosRequestConfig) => {
+      return new Promise((resolve) => {
+        setTimeout(async() => {
+          const data = JSON.parse(config.data) as Parcel;
+          const resp = await ParcelDB.createParcel(data);
+          resolve([HttpStatusCode.Ok, resp]);
+        }, 300);
+      });
+    });
 
-    const pendingOrderCount: number = MockData.ORDER_LIST.filter((item) => {
-      return item.status === OrderStatus.DO_ING
-    }).filter((item) => {
-      return item.type === OrderType.RECEIVE
-    }).length
+    // 获取订单列表
+    adapter.onGet(URL_MAP.ORDER_LIST).reply(() => {
+      return new Promise(async (resolve) => {
+        setTimeout(async() => {
+          const resp = await ParcelDB.queryParcelList();
+          resolve([HttpStatusCode.Ok, resp]);
+        }, 300);
+      });
+    });
 
-    return [sendOrderCount, getOrderCount, pendingOrderCount]
-  }
+    // 获取订单列表最新一条数据
+    adapter.onGet(URL_MAP.ORDER_LATEST).reply(() => {
+      return new Promise(async (resolve) => {
+        const resp = await ParcelDB.queryLatestParcel();
+        resolve([HttpStatusCode.Ok, resp]);
+      });
+    });
 
-  public static updateOrder(config?: InternalAxiosRequestConfig) {
-    const data: UpdateOrderRequest = JSON.parse(config?.data ?? '{}') as UpdateOrderRequest
-    const index = MockData.ORDER_LIST.findIndex((item) => {
-      return item.id === data.id
+    // 获取订单详情
+    adapter.onGet(URL_MAP.ORDER_DETAIL).reply((config: AxiosRequestConfig) => {
+      const param = config.params as IParcelDetailRequest;
+      return new Promise((resolve) => {
+        setTimeout(async() => {
+          const resp = await ParcelDB.queryParcelDetail(param.orderNo);
+          resolve([HttpStatusCode.Ok, resp]);
+        }, 300);
+      });
+
+    });
+
+    // 更新订单
+    adapter.onPut(URL_MAP.UPDATE_ORDER).reply((config: AxiosRequestConfig) => {
+      return new Promise((resolve) => {
+        setTimeout(async() => {
+          const data = JSON.parse(config.data) as Parcel;
+          const resp = await ParcelDB.updateParcel(data)
+          resolve([HttpStatusCode.Ok, resp]);
+        }, 300);
+      });
     })
-    if (index !== -1) {
-      const order = MockData.ORDER_LIST[index]
-      if (data.expressStatus) {
-        order.expressStatus = data.expressStatus
-      }
-      if (data.sendAddress) {
-        order.sendAddress = data.sendAddress
-      }
-      if (data.getAddress) {
-        order.getAddress = data.getAddress
-      }
-      if (data.expressStatus) {
-        order.expressStatus = data.expressStatus
-      }
-      if (data.goodsInfo) {
-        order.goods = data.goodsInfo
-      }
-      if (data.paymentMethod) {
-        order.paymentMethod = data.paymentMethod
-      }
-      if (data.companyId) {
-        const company = MockData.COMPANY_LIST.find((item) => {
-          return item.id === data.companyId
-        })
-        if (company) {
-          order.companyName = company?.name
-        }
-      }
-      if (data.day) {
-        order.day = data.day
-      }
-      if (data.time) {
-        order.time = data.time
-      }
-      if (data.servicePointId) {
-        order.servicePointId = data.servicePointId
-      }
-      if (data.grid) {
-        order.grid = data.grid
-      }
-      if (data.couponId) {
-        order.couponId = data.couponId
-      }
-    }
-    return undefined
-  }
 
-  static addRemakeToOrder(config?: InternalAxiosRequestConfig) {
-    const data: RemakeRequest = JSON.parse(config?.data ?? '{}') as RemakeRequest
-    const index = MockData.ORDER_LIST.findIndex((item) => {
-      return item.id === data.id
+    // 删除订单
+    adapter.onDelete(URL_MAP.DELETE_ORDER).reply((config: AxiosRequestConfig) => {
+      return new Promise((resolve) => {
+        setTimeout(async() => {
+          const param = config.params as IParcelDetailRequest;
+          const resp = await ParcelDB.deleteParcel(param.orderNo);
+          resolve([HttpStatusCode.Ok, resp]);
+        }, 300);
+      });
     })
-    if (index !== -1) {
-      MockData.ORDER_LIST[index].remark = data.remake
-    }
-    return undefined
-  }
 
-  public static async getOrderInfo(config?: InternalAxiosRequestConfig) {
-    const data: NormalRequest = config?.params
-    const orderInfo: IOrderInfo = MockData.ORDER_INFO
-    const order = MockData.ORDER_LIST.find((item) => {
-      return item.id === Number(data.id)
-    })
-    if (order) {
-      orderInfo.id = order.id
-      orderInfo.type = order.type
-      orderInfo.status = order.status
-      orderInfo.expressStatus = order.expressStatus
-      orderInfo.price = order.price
-      orderInfo.companyName = order.companyName
-      orderInfo.orderNo = order.orderNo
-      orderInfo.sendAddress = order.sendAddress
-      orderInfo.getAddress = order.getAddress
-      orderInfo.goods = order.goods
-      orderInfo.day = order.day
-      orderInfo.time = order.time
-      orderInfo.paymentMethod = order.paymentMethod
-      orderInfo.servicePointId = order.servicePointId
-      orderInfo.grid = order.grid
-      orderInfo.couponId = order.couponId
-      orderInfo.shippingMethod = order.shippingMethod
-      orderInfo.mailCode = order.mailCode
-      if (order.sendAddress) {
-        orderInfo.sendPosition = order.sendAddress.name
-        const address =
-          order.sendAddress.province + order.sendAddress.city + order.sendAddress.district + order.sendAddress.street +
-          order.sendAddress.detail
-        const res = await CommonUtil.getAddressesFromLocationName(address)
-        orderInfo.origins = {
-          'latitude': res[0].latitude ?? 0,
-          'longitude': res[0].longitude ?? 0,
-        }
-      }
-      if (order.getAddress) {
-        orderInfo.getPosition = order.getAddress.name
-        if (orderInfo.shippingMethod === ShippingMethod.SELF_SENDING &&
-          orderInfo.expressStatus === ExpressStatus.ALL) {
-          const servicePoint = MockData.SERVICE_POINT_LIST.find((item) => {
-            return orderInfo.servicePointId === item.id
-          })
-          if (servicePoint) {
-            orderInfo.destination = servicePoint.position
-          }
-        } else {
-          let address =
-            order.getAddress.province + order.getAddress.city + order.getAddress.district + order.getAddress.street +
-            order.getAddress.detail
-          let res = await CommonUtil.getAddressesFromLocationName(address)
-          if (res.length === 0) {
-            address =
-              order.getAddress.province + order.getAddress.city + order.getAddress.district + order.getAddress.street
-            res = await CommonUtil.getAddressesFromLocationName(address)
-          }
-          orderInfo.destination = {
-            'latitude': res[0].latitude ?? 0,
-            'longitude': res[0].longitude ?? 0,
-          }
-        }
-      }
+    // 创建运单物流轨迹
+    adapter.onPost(URL_MAP.CREATE_LOGISTICS).reply((config: AxiosRequestConfig) => {
+      return new Promise((resolve) => {
+        setTimeout(async() => {
+          const data = JSON.parse(config.data) as Logistics;
+          const resp = await LogisticsDB.createLogistics(data);
+          resolve([HttpStatusCode.Ok, resp]);
+        }, 300);
+      });
+    });
 
-      switch (order.expressStatus) {
-        case ExpressStatus.PICKUP_PENDING:
-          orderInfo.logisticsInfo = MockData.LOGISTICS_INFO.slice(0, 1)
-          break
-        case ExpressStatus.PICKUP_ENDING:
-          orderInfo.logisticsInfo = MockData.LOGISTICS_INFO.slice(0, 2)
-          break
-        case ExpressStatus.IN_TRANSIT:
-          orderInfo.logisticsInfo = MockData.LOGISTICS_INFO.slice(0, 3)
-          break
-        case ExpressStatus.IN_DELIVERY:
-          orderInfo.logisticsInfo = MockData.LOGISTICS_INFO.slice(0, 4)
-          break
-        case ExpressStatus.SIGNED_FOR:
-          orderInfo.logisticsInfo = MockData.LOGISTICS_INFO
-          break
-        default:
-          break
-      }
-    }
+    // 查询运单的物流轨迹个数
+    adapter.onGet(URL_MAP.LOGISTICS_COUNT).reply((config: AxiosRequestConfig) => {
+      return new Promise((resolve) => {
+        setTimeout(async() => {
+          const param = config.params as IParcelDetailRequest;
+          const resp = await LogisticsDB.queryLogisticsCountByNumber(param.orderNo);
+          resolve([HttpStatusCode.Ok, resp]);
+        }, 300);
+      });
+    });
 
-    return orderInfo
+    // 自动补全运单的物流轨迹
+    adapter.onPost(URL_MAP.AUTO_UPDATE_LOGISTICS).reply((config: AxiosRequestConfig) => {
+      return new Promise((resolve) => {
+        setTimeout(async() => {
+          const data = JSON.parse(config.data) as Parcel;
+          const resp = await ParcelDB.autoUpdateLogistics(data);
+          resolve([HttpStatusCode.Ok, resp]);
+        }, 300);
+      });
+    });
+
+    // 新增积分明细
+    adapter.onPost(URL_MAP.ADD_POINTS_DETAIL).reply((config: AxiosRequestConfig) => {
+      return new Promise((resolve) => {
+        setTimeout(async() => {
+          const data = JSON.parse(config.data) as IUserPointRequest;
+          const resp = await PointDetailDB.changePoints(data);
+          resolve([HttpStatusCode.Ok, resp]);
+        }, 300);
+      });
+    });
+
+    // 获取积分明细列表
+    adapter.onGet(URL_MAP.POINTS_HISTORY).reply((config: AxiosRequestConfig) => {
+      return new Promise((resolve) => {
+        setTimeout(async() => {
+          const param = config.params as IPointHistoryRequest;
+          const resp = await PointDetailDB.queryPointHistory(param);
+          resolve([HttpStatusCode.Ok, resp]);
+        }, 300);
+      });
+    });
+
+    // 获取用户日常任务
+    adapter.onGet(URL_MAP.DAILY_TASK).reply((config: AxiosRequestConfig) => {
+      return new Promise((resolve) => {
+        setTimeout(async() => {
+          const param = config.params as IUserIdRequest;
+          const resp = await TaskDB.queryTaskList(param.userId);
+          resolve([HttpStatusCode.Ok, resp]);
+        }, 300);
+      });
+    });
+
+    // 完成日常任务，领取积分
+    adapter.onPost(URL_MAP.CLAIM_TASK_REWARD).reply((config: AxiosRequestConfig) => {
+      return new Promise((resolve) => {
+        setTimeout(async() => {
+          const data = JSON.parse(config.data) as Task;
+          const param = config.params as IUserIdRequest;
+          const resp = await TaskDB.claimTaskReward(param.userId, data);
+          resolve([HttpStatusCode.Ok, resp]);
+        }, 300);
+      });
+    });
+
+    // 获取服务点列表
+    adapter.onGet(URL_MAP.SERVICE_POINT_LIST).reply(() => {
+      return [HttpStatusCode.Ok, MockData.SERVICE_POINT_LIST];
+    });
+
+    // 获取快递公司列表
+    adapter.onGet(URL_MAP.COMPANY_LIST).reply(() => {
+      return [HttpStatusCode.Ok, MockData.COMPANY_LIST];
+    });
+
+    // 获取用户优惠券列表
+    adapter.onGet(URL_MAP.USER_COUPON_LIST).reply((config: AxiosRequestConfig) => {
+      return new Promise((resolve) => {
+        setTimeout(async() => {
+          const data: IUserIdRequest = config.params;
+          let resp = await UserCouponDB.queryUserCouponList(data.userId);
+          resolve([HttpStatusCode.Ok, resp]);
+        }, 300);
+      });
+    });
+
+    // 获取福利页优惠券列表
+    adapter.onGet(URL_MAP.COUPON_TEMPLATE_LIST).reply((config: AxiosRequestConfig) => {
+      return new Promise((resolve) => {
+        setTimeout(async() => {
+          const data: IUserIdRequest = config.params;
+          let resp = await CouponDB.queryCouponList(data.userId);
+          resolve([HttpStatusCode.Ok, resp]);
+        }, 300);
+      });
+    });
+
+    // 领取优惠券
+    adapter.onPost(URL_MAP.CLAIM_COUPON).reply((config: AxiosRequestConfig) => {
+      return new Promise((resolve) => {
+        setTimeout(async() => {
+          const data = JSON.parse(config.data) as IClaimCouponRequest;
+          const resp = await UserCouponDB.claimCoupon(data.userId, data.couponId);
+          resolve([HttpStatusCode.Ok, resp]);
+        }, 300);
+      });
+    });
+
+    // 一键领取所有包含“会员”限制说明的专属优惠券
+    adapter.onPost(URL_MAP.BATCH_CLAIM_COUPON).reply((config: AxiosRequestConfig) => {
+      return new Promise((resolve) => {
+        setTimeout(async() => {
+          const data = JSON.parse(config.data) as IUserIdRequest;
+          const resp = await UserCouponDB.claimMemberBenefitCoupons(data.userId);
+          resolve([HttpStatusCode.Ok, resp]);
+        }, 300);
+      });
+    });
+
+    // 检查是否有未领取的会员专属优惠券
+    adapter.onPost(URL_MAP.HAS_UN_CLAIM_COUPON).reply((config: AxiosRequestConfig) => {
+      return new Promise((resolve) => {
+        setTimeout(async() => {
+          const data = JSON.parse(config.data) as IUserIdRequest;
+          const resp = await UserCouponDB.hasUnclaimedMemberCoupons(data.userId);
+          resolve([HttpStatusCode.Ok, resp]);
+        }, 300);
+      });
+    });
+
+    // 使用优惠券
+    adapter.onPut(URL_MAP.USE_COUPON).reply((config: AxiosRequestConfig) => {
+      return new Promise((resolve) => {
+        setTimeout(async() => {
+          const data = JSON.parse(config.data) as IClaimCouponRequest;
+          const resp = await UserCouponDB.useCoupon(data.userId, data.couponId);
+          resolve([HttpStatusCode.Ok, resp]);
+        }, 300);
+      });
+    });
+
+    // 退还优惠券
+    adapter.onPut(URL_MAP.REFUND_COUPON).reply((config: AxiosRequestConfig) => {
+      return new Promise((resolve) => {
+        setTimeout(async() => {
+          const data = JSON.parse(config.data) as IClaimCouponRequest;
+          const resp = await UserCouponDB.refundCoupon(data.userId, data.couponId);
+          resolve([HttpStatusCode.Ok, resp]);
+        }, 300);
+      });
+    });
   }
 }

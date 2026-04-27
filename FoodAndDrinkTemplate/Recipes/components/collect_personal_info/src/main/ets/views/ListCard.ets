@@ -66,11 +66,6 @@ export struct ListCard {
             left: Constants.PADDING_S,
             right: Constants.PADDING_S,
           })
-          .borderRadius($r('app.float.large_radius'))
-          .stateStyles({
-            normal: this.normalStyles,
-            pressed: this.pressedStyles,
-          })
           .onTouchIntercept(() => {
             if (v.type === FormType.CHOOSE_AVATAR) {
               return HitTestMode.None;
@@ -80,9 +75,6 @@ export struct ListCard {
           .onClick(() => {
             if (v.onClick) {
               v.onClick();
-              return;
-            }
-            if(v.type === 'phone_input'){
               return;
             }
             if (v.selectOptions?.length) {
@@ -99,8 +91,6 @@ export struct ListCard {
     .width(Constants.FULL_PERCENT)
     .height('auto')
     .lanes(this.lanes)
-    .borderRadius($r('app.float.large_radius'))
-    .backgroundColor($r('sys.color.comp_background_primary'))
     .visibility(this.list.length > 0 ? Visibility.Visible : Visibility.None)
     .divider({
       strokeWidth: '1px',
@@ -109,6 +99,8 @@ export struct ListCard {
       endMargin: Constants.PADDING_M,
     })
     .padding(Constants.PADDING_XS)
+    .borderRadius($r('app.float.large_radius'))
+    .backgroundColor($r('sys.color.comp_background_list_card'))
   }
 
   isAvatarScene(v: ObservedInfoItem) {
@@ -185,7 +177,7 @@ export struct ListCard {
 
   @Styles
   normalStyles() {
-    .backgroundColor($r('sys.color.comp_background_primary'))
+    .backgroundColor($r('sys.color.comp_background_list_card'))
   }
 
   @Styles

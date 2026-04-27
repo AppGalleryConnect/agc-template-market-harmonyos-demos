@@ -1,10 +1,10 @@
 import { AppStorageV2, window } from '@kit.ArkUI';
-import { GridRowColSetting } from '../common/GridRowColSetting';
-import { Logger } from '../common/Logger';
 import { BusinessError } from '@kit.BasicServicesKit';
+import { UtilLog as Logger } from '@hw-agconnect/util-log';
+import { GridRowColSetting } from '../common/GridRowColSetting';
 import { BreakpointModel } from './BreakpointModel';
 
-const TAG = '[WindowModel]';
+const TAG = '[WindowModel]'
 
 /**
  * 窗口持久化
@@ -17,6 +17,8 @@ export class CustomWindowModel {
   @Trace windowLeftPadding: Length | undefined = undefined;
   @Trace windowRightPadding: Length | undefined = undefined;
   @Trace avoidBottomPadding: Length = 0;
+  private context: Context | undefined;
+  private uiContext: UIContext | undefined;
 
   /**
    * 获取页面左边距
@@ -58,12 +60,16 @@ export class CustomWindowModel {
    * 获取底部避让区域高度
    */
   public getAvoidBottomPadding: () => void = () => {
-    window.getLastWindow(getContext()).then(currentWindow => {
-      const area = currentWindow.getWindowAvoidArea(window.AvoidAreaType.TYPE_NAVIGATION_INDICATOR);
-      this.avoidBottomPadding = px2vp(area.bottomRect.height);
-    }).catch((e: BusinessError) => {
-      Logger.error(TAG, 'getAvoidBottomPadding fail, error: ' + JSON.stringify(e));
-    });
+    window.getLastWindow(this.context).then(currentWindow => {
+      try {
+        const area = currentWindow.getWindowAvoidArea(window.AvoidAreaType.TYPE_NAVIGATION_INDICATOR);
+        this.avoidBottomPadding = this.uiContext!.px2vp(area.bottomRect.height);
+      } catch (error) {
+        Logger.error(TAG, `getWindowAvoidArea failed. error: ${JSON.stringify(error)}`)
+      }
+    }).catch((err: BusinessError) => {
+      Logger.error(TAG, `getLastWindow failed. error: ${JSON.stringify(err)}`)
+    })
   }
 
   /**
@@ -71,21 +77,34 @@ export class CustomWindowModel {
    */
   public onAvoidAreaChange() {
     this.getAvoidBottomPadding();
-    window.getLastWindow(getContext()).then(currentWindow => {
-      currentWindow.on('avoidAreaChange', this.getAvoidBottomPadding);
-    }).catch((e: BusinessError) => {
-      Logger.error(TAG, 'getLastWindow fail, error: ' + JSON.stringify(e));
-    });
+    window.getLastWindow(this.context).then(currentWindow => {
+      try {
+        currentWindow.on('avoidAreaChange', this.getAvoidBottomPadding);
+      } catch (e) {
+        Logger.error(TAG, 'getWindowAvoidArea fail, error: ' + JSON.stringify(e));
+      }
+    }).catch((err: BusinessError) => {
+      Logger.error(TAG, `registerWindowBottomPadding failed. error: ${JSON.stringify(err)}`)
+    })
   }
 
   /**
    * 取消监听底部避让区域变化
    */
   public offAvoidAreaChange() {
-    window.getLastWindow(getContext()).then(currentWindow => {
+    window.getLastWindow(this.context).then(currentWindow => {
       currentWindow.off('avoidAreaChange', this.getAvoidBottomPadding);
-    }).catch((e: BusinessError) => {
-      Logger.error(TAG, 'offAvoidAreaChange fail, error: ' + JSON.stringify(e));
-    });
+    }).catch((err: BusinessError) => {
+      Logger.error(TAG, `unRegisterWindowBottomPadding failed. error: ${JSON.stringify(err)}`)
+    })
+  }
+
+
+  /**
+   * 初始化context
+   */
+  public init(uiContext: UIContext) {
+    this.uiContext = uiContext;
+    this.context = this.uiContext.getHostContext();
   }
 }

@@ -3,6 +3,22 @@
     {
       "name": "page_text_font_size",
       "value": "50fp"
+    },
+    {
+      "name": "user_icon_width",
+      "value": "48vp"
+    },
+    {
+      "name": "medium_img_width",
+      "value": "16vp"
+    },
+    {
+      "name": "arrow_right_w",
+      "value": "12vp"
+    },
+    {
+      "name": "large_radius",
+      "value": "16vp"
     }
   ]
 }

@@ -14,6 +14,7 @@ export class Constants {
   static readonly MAX_IMG_COUNT: number = 18;
   static readonly MAX_VIDEO_COUNT: number = 1;
   static readonly MAX_VIDEO_SIZE: number = 500;
+  static readonly DEFAULT_LOCATION_TEXT = '添加位置';
 }
 
 export interface ImageContent {

@@ -28,7 +28,7 @@ export class PreferenceUtil {
     return preferenceUtil
   }
 
-  public put(key: string, value: object | string) {
+  public put(key: string, value: object | string | number) {
     if (!this.dataPreferences) {
       Logger.info(`PreferenceUtil: dataPreferences is null`)
     }
@@ -41,7 +41,7 @@ export class PreferenceUtil {
     }
   }
 
-  public get(key: string, defaultValue?: object | string) {
+  public get(key: string, defaultValue?: object | string | number) {
     try {
       let data = this.dataPreferences?.getSync(key, defaultValue)
       Logger.info(`PreferenceUtil: get: ${key} = ${JSON.stringify(data)}`)

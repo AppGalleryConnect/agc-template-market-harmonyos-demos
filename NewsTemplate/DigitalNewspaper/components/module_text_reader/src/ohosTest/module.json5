@@ -1,0 +1,12 @@
+{
+  "module": {
+    "name": "module_text_reader_test",
+    "type": "feature",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "module": {
+    "name": "module_global_feature_test",
+    "type": "feature",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": true
+  }
+}

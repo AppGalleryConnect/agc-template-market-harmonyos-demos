@@ -8,7 +8,7 @@ export class FlexLayoutEngine {
   @Trace setting: LayoutSetting = new LayoutSetting()
   @Trace articles: JSONObject = ''
   @Trace breakpointModel: BreakpointModel = new BreakpointModel()
-  @Trace extraInfo: Record<string, number | string | boolean | Record<string, string | boolean>[]> = {}
+  @Trace extraInfo: Record<string, number | string | boolean | Record<string, string | boolean>[] | Function> = {}
   @Trace frameController: FrameController = new FrameController()
 
   /*
@@ -18,7 +18,7 @@ export class FlexLayoutEngine {
    * @param extraInfo 额外参数
    * */
   public createJsonLoader(setting: LayoutSetting, articles: JSONObject,
-    extraInfo: Record<string, number | string | boolean | Record<string, string | boolean>[]>) {
+    extraInfo: Record<string, number | string | boolean | Record<string, string | boolean>[] | Function>) {
     this.setting = setting
     this.articles = articles
     this.extraInfo = extraInfo

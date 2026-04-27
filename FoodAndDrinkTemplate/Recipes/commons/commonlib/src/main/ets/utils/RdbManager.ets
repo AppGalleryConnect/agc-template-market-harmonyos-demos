@@ -14,7 +14,7 @@ export class RdbManager {
 
   async initDatabase(context: Context) {
     const STORE_CONFIG: relationalStore.StoreConfig = {
-      name: 'database.recipesdb',
+      name: 'database.recipesdbV3',
       securityLevel: relationalStore.SecurityLevel.S1
     }
     try {
@@ -105,6 +105,9 @@ export class RdbManager {
     obj.views = recipes.views;
     obj.likes = recipes.likes;
     obj.isCollected = collectStatus;
+    obj.video = recipes.video;
+    obj.heatness = recipes.heatness!;
+    obj.isVip = recipes.isVip!;
     return obj;
   }
 
@@ -129,7 +132,10 @@ export class RdbManager {
             thumbnail: '',
             views: 0,
             likes: 0,
-            isCollected: 0
+            isCollected: 0,
+            video: '',
+            heatness: 0,
+            isVip: 0
           };
           tmp.id = resultSet.getLong(resultSet.getColumnIndex('id'));
           tmp.title = resultSet.getString(resultSet.getColumnIndex('title'));
@@ -144,6 +150,9 @@ export class RdbManager {
           tmp.views = resultSet.getLong(resultSet.getColumnIndex('views'));
           tmp.likes = resultSet.getLong(resultSet.getColumnIndex('likes'));
           tmp.isCollected = resultSet.getLong(resultSet.getColumnIndex('isCollected'));
+          tmp.video = resultSet.getString(resultSet.getColumnIndex('video'));
+          tmp.heatness = resultSet.getLong(resultSet.getColumnIndex('heatness'));
+          tmp.isVip = resultSet.getLong(resultSet.getColumnIndex('isVip'));
           list[i] = tmp;
           resultSet.goToNextRow();
         }

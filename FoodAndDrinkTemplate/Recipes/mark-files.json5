@@ -1,0 +1,12 @@
+{
+  "project": {},
+  "modules": [],
+  "files": [
+    {
+      "name": "FeaturedRecipes",
+      "path": "components/featured_recipes/src/main/ets/components/FeaturedRecipes.ets",
+      "usage": "精选推荐组件，用于展示菜谱卡片瀑布流",
+      "layout": "组件为列排列。顶部是标题栏；底部是瀑布流，左右和上下排列 "
+    }
+  ]
+}

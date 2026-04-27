@@ -1,8 +1,8 @@
+import { UserInfoModel } from 'lib_common';
 import { CommentInfo, Tmp } from '../model/Model';
 import { CommentCard } from '../components/CommentCard';
 import { FeedCommentVM } from '../viewmodel/FeedCommentVM';
 import { CommentEventDispatcher } from '../utils/EventDispatcher';
-import { UserInfoModel } from 'lib_common';
 import { CommentUtils } from '../utils/CommentUtils';
 
 @ComponentV2
@@ -12,13 +12,18 @@ export struct FeedComment {
   @Param fontSizeRatio: number = 1
   @Param isDark: boolean = false
   @Param userInfo: UserInfoModel = new UserInfoModel()
-  @Param feedCommentScroller:Scroller = new Scroller()
+  @Param feedCommentScroller: Scroller = new Scroller()
   @Local feedCommentVM: FeedCommentVM = FeedCommentVM.instance;
-  @Event addComment: (commentInfo: CommentInfo, parentCommentId: string) => void = () => {};
-  @Event giveLike: (commentInfo: CommentInfo, isLike: boolean) => void = () => {};
-  @Event onGoAuthorInfo: (authorId: string) => void = () => {};
-  @Event onDeleteComment: (commentId: string) => void = () => {};
-  @Event onFirstComment:(commentContent: string) => void = () => {}
+  @Event addComment: (commentInfo: CommentInfo, parentCommentId: string) => void = () => {
+  };
+  @Event giveLike: (commentInfo: CommentInfo, isLike: boolean) => void = () => {
+  };
+  @Event onGoAuthorInfo: (authorId: string) => void = () => {
+  };
+  @Event onDeleteComment: (commentId: string) => void = () => {
+  };
+  @Event onFirstComment: (commentContent: string) => void = () => {
+  }
   @BuilderParam commentTopViewBuilder: () => void = this.commentTopView;
 
   @Monitor('fontSizeRatio')
@@ -64,7 +69,7 @@ export struct FeedComment {
   @Builder
   replyComponent(params: Tmp, replyComments: CommentInfo[]) {
     Column() {
-      ForEach(params.paramA1?.slice(0, 3), (item: CommentInfo, index: number) => {
+      ForEach(params.paramA1?.slice(0, 3), (item: CommentInfo) => {
         ListItem() {
           Column() {
             Column() {
@@ -108,10 +113,10 @@ export struct FeedComment {
 
   @Builder
   commentComponent(params: Tmp) {
-    ForEach(params.paramA1, (item: CommentInfo, index: number) => {
+    ForEach(params.paramA1, (item: CommentInfo) => {
       CommentCard({
         commentInfo: item,
-        isDark:this.isDark,
+        isDark: this.isDark,
         navPathStack: this.navPathStack,
         replyComponentBuilder: () => {
           this.replyComponent({ paramA1: item.replyComments }, item.replyComments)
@@ -126,7 +131,7 @@ export struct FeedComment {
       Span('评论·')
       Span(JSON.stringify(this.commentList?.length))
     }
-    .fontSize(18*this.fontSizeRatio)
+    .fontSize(18 * this.fontSizeRatio)
     .fontWeight(FontWeight.Bold)
     .fontColor($r('sys.color.font_primary'))
     .width('100%')
@@ -143,7 +148,7 @@ export struct FeedComment {
             Column({ space: 16 }) {
               Text('暂无评论，点击抢首评')
                 .fontWeight(FontWeight.Medium)
-                .fontSize(16*this.fontSizeRatio)
+                .fontSize(16 * this.fontSizeRatio)
                 .fontColor($r('sys.color.font_primary'))
               Button('写评论')
                 .fontColor($r('sys.color.font_on_primary'))
@@ -154,7 +159,7 @@ export struct FeedComment {
                   left: 16,
                   right: 16,
                 })
-                .fontSize(16*this.fontSizeRatio)
+                .fontSize(16 * this.fontSizeRatio)
                 .onClick(() => {
                   CommentUtils.commentSheetOpen(null, (commentContent: string) => {
                     this.onFirstComment(commentContent)

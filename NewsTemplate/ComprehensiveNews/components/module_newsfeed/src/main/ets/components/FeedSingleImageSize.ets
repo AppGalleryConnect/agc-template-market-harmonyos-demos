@@ -1,5 +1,8 @@
+import { taskpool } from '@kit.ArkTS';
+import { Logger } from 'lib_common';
 import { PostImgList, FeedCardInfoModel } from '../model/RecommendModel';
-import { FeedImageModifier } from '../utils/FeedImageModifier';
+import { calculateImageSize, FeedImageModifier, SendableImageCalcData } from '../utils/FeedImageModifier';
+
 
 /*
  * 单张图片的展示
@@ -20,10 +23,20 @@ export struct FeedSingleImageSize {
   }
   @Event onImageClick: () => void = () => {
   }
-  @Local modifier: FeedImageModifier | undefined = undefined;
+  @Local imageModifier: FeedImageModifier | undefined = undefined;
 
-  aboutToAppear(): void {
-    this.modifier = new FeedImageModifier(this.curFeedCardInfo)
+  async aboutToAppear() {
+    /**
+     * 子线程计算图片大小等相关信息
+     * */
+    try {
+      const calcData = SendableImageCalcData.fromFeedCardInfo(this.curFeedCardInfo);
+      const task = new taskpool.Task(calculateImageSize, calcData);
+      const result = await taskpool.execute(task) as SendableImageCalcData;
+      this.imageModifier = new FeedImageModifier(result);
+    } catch (e) {
+      Logger.error(TAG, 'an error occurred on the taskpool.' + JSON.stringify(e))
+    }
   }
 
   @Computed
@@ -36,7 +49,7 @@ export struct FeedSingleImageSize {
       Row() {
         Stack({ alignContent: Alignment.BottomEnd }) {
           Image(this.postImgListItem.picVideoUrl)
-            .attributeModifier(this.modifier)
+            .attributeModifier(this.imageModifier)
             .objectFit(ImageFit.Cover)
             .autoResize(true)
             .visibility(this.postImgListItem.surfaceUrl ? Visibility.None : Visibility.Visible)
@@ -60,7 +73,7 @@ export struct FeedSingleImageSize {
           Image(this.postImgListItem.surfaceUrl).objectFit(ImageFit.Cover)
             .borderRadius(12)
             .clip(true)
-            .attributeModifier(this.modifier)
+            .attributeModifier(this.imageModifier)
           Image($r('app.media.playBtn')).width(36)
             .height(36)
         }

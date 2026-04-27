@@ -1,0 +1,13 @@
+{
+  "name": "app_setting",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@hw-agconnect/util-log": "^1.0.0",
+    "@hw-agconnect/ui-toast": "^1.0.0",
+    "module_ui_base": "file:../module_ui_base"
+  }
+}

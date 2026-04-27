@@ -34,23 +34,22 @@ export struct QuickLoginPage {
       this.nextRouter = params.url
     }
   }
+
   huaweiLogin = async (loginParams: LoginParams): Promise<void> => {
     this.getUIContext().getPromptAction().showToast({ message: '华为一键登录成功' })
     this.loginSuccess(loginParams.unionID ?? '')
   }
-
   wxLogin = async (): Promise<void> => {
     this.getUIContext().getPromptAction().showToast({ message: '微信登录成功' })
   }
-
   verifyCodeLogin = async (loginParams: LoginParams): Promise<void> => {
     try {
       const data = await this.promptAction.showDialog({
         title: '温馨提示',
         message: '模拟验证码登录成功？',
         buttons: [
-          { text: '取消', color: '#000000' },
-          { text: '确认', color: '#000000' },
+          { text: '取消', color: $r('sys.color.font_secondary') },
+          { text: '确认', color: $r('sys.color.font_secondary') },
         ]
       })
       if (data.index === 1) {
@@ -62,11 +61,9 @@ export struct QuickLoginPage {
       Logger.error('弹窗操作异常:', (err as BusinessError).message);
     }
   }
-
   obtainVerifyCode = async () => {
     this.getUIContext().getPromptAction().showToast({ message: '获取验证码为模拟场景，真实获取验证码以业务实现为准' })
   }
-
   handleLoginFail = (loginChannelType: LoginChannelType, error: LoginFailError) => {
     if (loginChannelType === LoginChannelType.HUAWEI) {
       const businessError = error as BusinessError
@@ -75,10 +72,10 @@ export struct QuickLoginPage {
         title: '温馨提示',
         message: errorMsg + '是否先模拟登录成功？',
         buttons: [
-          { text: '取消', color: '#000000' },
-          { text: '确认', color: '#000000' },
+          { text: '取消', color: $r('sys.color.brand') },
+          { text: '确认', color: $r('sys.color.brand') },
         ]
-      }, (err: BusinessError, data) => {  // 按钮动作回调
+      }, (err: BusinessError, data) => { // 按钮动作回调
         // 根据按钮索引处理动作
         if (data.index === 1) {
           this.getUIContext().getPromptAction().showToast({ message: '华为一键登录成功' })
@@ -89,7 +86,6 @@ export struct QuickLoginPage {
       return;
     }
   }
-
 
   build() {
     NavDestination() {
@@ -122,14 +118,13 @@ export struct QuickLoginPage {
           obtainVerifyCode: this.obtainVerifyCode,
           loginController: this.controller,
         });
-      }.backgroundColor('#F1F3F5')
+      }
       .edgeEffect(EdgeEffect.Spring);
     }
     .hideTitleBar(true)
     .title(buildTitleBar(''))
     .width('100%')
     .height('100%')
-    .backgroundColor('#F1F3F5');
   }
 
   loginSuccess(unionID: string) {
@@ -137,11 +132,12 @@ export struct QuickLoginPage {
     let data: UserInfo = {
       id: 0,
       avatar: 'default_avatar',
-      name: '',
+      name: 'xx',
       nickname: '华为用户',
-      sex: '',
-      cellphone: '',
-      birthday: '',
+      sex: '男',
+      cellphone: '10000001111',
+      birthday: '1990-10-01',
+      introDesc: '在自己的小世界里，做一个快乐的普通人，把节奏放慢，享受生活！十六岁的青春张扬 十八岁的未来可期，携零零碎碎的美好奔赴未知的将来！',
       code: unionID,
       isLogin: true,
       isMembership: false,

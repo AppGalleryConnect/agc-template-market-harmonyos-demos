@@ -1,0 +1,15 @@
+{
+  "name": "lib_search",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "lib_common": "file:../../commons/lib_common",
+    "lib_widget": "file:../lib_widget",
+    "lib_news_api": "file:../lib_news_api",
+    "lib_flex_layout": "file:../../commons/lib_flex_layout",
+    "module_search": "file:../../components/module_search"
+  }
+}

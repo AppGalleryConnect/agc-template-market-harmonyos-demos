@@ -9,6 +9,11 @@
       "name": "PublishPostPage",
       "pageSourceFile": "src/main/ets/pages/PublishPostPage.ets",
       "buildFunction": "PublishPostPageBuilder"
+    },
+    {
+      "name": "TopicResultPage",
+      "pageSourceFile": "src/main/ets/pages/TopicResultPage.ets",
+      "buildFunction": "TopicResultPageBuilder"
     }
   ]
 }

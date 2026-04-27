@@ -1,0 +1,14 @@
+{
+  "name": "mine",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "lib_common": "file:../../commons/lib_common",
+    "lib_tv_apis": "file:../../commons/lib_tv_apis",
+    "lib_tv_details": "file:../../commons/lib_tv_details",
+    "module_feedback": "file:../../components/module_feedback"
+  }
+}

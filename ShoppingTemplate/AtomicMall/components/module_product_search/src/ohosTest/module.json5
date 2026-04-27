@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "module_product_search_test",
+    "type": "feature",
+    "deviceTypes": [
+      "phone"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false
+  }
+}

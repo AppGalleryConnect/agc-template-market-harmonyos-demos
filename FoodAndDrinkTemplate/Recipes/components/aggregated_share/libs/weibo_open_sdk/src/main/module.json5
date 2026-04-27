@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "weibo_open_sdk",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ]
+  }
+}

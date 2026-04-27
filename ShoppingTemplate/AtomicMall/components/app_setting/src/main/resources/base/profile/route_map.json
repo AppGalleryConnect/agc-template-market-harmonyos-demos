@@ -1,0 +1,24 @@
+{
+  "routerMap": [
+    {
+      "name": "SettingFont",
+      "pageSourceFile": "src/main/ets/pages/SettingFont.ets",
+      "buildFunction": "SettingFontBuilder"
+    },
+    {
+      "name": "SettingPrivacy",
+      "pageSourceFile": "src/main/ets/pages/SettingPrivacy.ets",
+      "buildFunction": "SettingPrivacyBuilder"
+    },
+    {
+      "name": "SettingH5",
+      "pageSourceFile": "src/main/ets/pages/SettingH5.ets",
+      "buildFunction": "SettingH5Builder"
+    },
+    {
+      "name": "SettingAbout",
+      "pageSourceFile": "src/main/ets/pages/SettingAbout.ets",
+      "buildFunction": "SettingAboutBuilder"
+    }
+  ]
+}

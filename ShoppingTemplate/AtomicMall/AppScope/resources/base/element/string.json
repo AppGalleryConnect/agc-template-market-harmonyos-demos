@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "AtomicMall"
+    },
+    {
+      "name": "agcit_huawei_atomic_mall",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_atomic_mall",
+      "value": "industryTemplate"
+    },
+    {
+      "name": "agcitkid_huawei_atomic_mall",
+      "value": "agcit_huawei_comprehensive_mall_module_product_search/1.0.2,agcit_huawei_common_coupons/1.0.0,agcit_huawei_comprehensive_mall_module_product_review/1.0.2,agcit_huawei_comprehensive_mall_module_custom_service_chat/1.0.1,agcit_huawei_comprehensive_mall_module_product_filter/1.0.2,agcit_huawei_common_address_management/1.0.0,agcit_huawei_common_atomicservice_login/1.0.0,agcit_huawei_common_app_setting/1.0.0,agcit_huawei_common_collect_personal_info/1.0.0,agcit_huawei_common_membership/1.0.0,agcit_huawei_common_feedback/1.0.0,agcit_huawei_common_imagepreview/1.0.0"
+    }
+  ]
+}

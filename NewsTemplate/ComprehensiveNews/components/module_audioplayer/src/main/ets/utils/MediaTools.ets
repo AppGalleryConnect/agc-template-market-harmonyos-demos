@@ -4,6 +4,7 @@ import { UtilLog } from '@hw-agconnect/util-log';
 import * as AudioSubWindow from '../components/AudioSubWindowPlayer';
 import { AudioConstants } from '../constants/Constants';
 import { MediaViewModel } from '../viewmodel/MediaViewModel';
+import { EventMap } from '../constants/EventMap';
 
 const TAG = '[MediaTools]';
 
@@ -33,7 +34,7 @@ export class MediaTools {
         await windowClass.resize(uiContext.vp2px(AudioConstants.SUB_WIN_STATE_0_WIDTH),
           uiContext.vp2px(AudioConstants.SUB_WIN_HEIGHT));
         await windowClass.showWindow();
-        emitter.on('destroy_sub_window',() => {
+        emitter.on(EventMap.DESTROY_SUB_WINDOW, () => {
           MediaTools.destroySubWindow(AudioConstants.AUDIO_SUB_NAME)
         })
       } catch (err) {
@@ -66,7 +67,7 @@ export class MediaTools {
     try {
       let hasSubWindow = await MediaTools.getSubWindow()
       if (hasSubWindow) {
-        emitter.off('destroy_sub_window')
+        emitter.off(EventMap.DESTROY_SUB_WINDOW)
         await window.findWindow(windowName).destroyWindow()
       }
     } catch (e) {

@@ -5,6 +5,7 @@ import { HintParam, MemberList, MemberParams, MemberShipPrivilege, Privacy, Prod
 import { MemberShipVM } from '../viewmodel/MemberShipVM';
 import { MemberPrivacy } from '../component/MemberPrivacy';
 import { privacyCheckHint } from '../component/PrivacyCheckHint';
+import { BreakpointType } from '../constant/Enum';
 
 @Preview
 @ComponentV2
@@ -12,11 +13,14 @@ export struct MemberShipPage {
   vm: MemberShipVM = MemberShipVM.instance;
   @Local privacy: Privacy = new Privacy();
   @Local cardWidth: number = 0;
+  @Local screenWidth: number = 0;
   @Local avoidHeight: number = 0;
+  @Local isBelowMD: boolean = false;
+  @Local subscribeButtonAreaWidth: string = '100%';
   @Param linearColors: Array<[
     ResourceColor,
     number
-  ]> = [['#FFFFFF', 0.0], ['#E5EDF5', 0.5], ['#0A59F7', 1.0]];
+  ]> = [['#FFFFFF', 0.0], ['#0A59F7', 1.0]];
   @Param themeColor: ResourceStr = $r('sys.color.background_emphasize');
   @Param btnFontColor: ResourceStr = $r('sys.color.background_emphasize');
   @Param routerModule: NavPathStack = new NavPathStack();
@@ -94,14 +98,14 @@ export struct MemberShipPage {
         Image($r('app.media.membership_back')).size({ width: 40, height: 40 }).onClick(() => {
           this.routerModule.pop();
         });
-        Text('会员中心').fontSize(20).fontWeight(FontWeight.Bold).fontColor('#000000');
-      }.position({ left: 16 }).zIndex(2);
+        Text('会员中心').fontSize(20).fontWeight(FontWeight.Bold).fontColor($r('sys.color.font_primary'));
+      }.position({ left: 16, top: 46 }).zIndex(2);
     }
   }
 
   @Builder
   Owned() {
-    Column() {
+    Stack({ alignContent: Alignment.Bottom }) {
       Stack({ alignContent: Alignment.TopEnd }) {
         Column()
           .size({ height: 180, width: '100%' })
@@ -120,42 +124,61 @@ export struct MemberShipPage {
           .margin({ right: 24, top: 12 });
       };
 
-      Row() {
-        Column({ space: 8 }) {
-          Text() {
-            Span(this.vm.isMember ? '已有会员' : '非会员')
-              .fontSize(18)
-              .fontColor($r('sys.color.font_primary'));
-            Span(this.memberStatus).fontSize(14).fontColor($r('sys.color.font_secondary'));
-          };
+      GridRow({
+        columns: 12,
+        breakpoints: { value: ['320vp', '600vp', '840vp', '1440vp'] },
+      }) {
+        GridCol({
+          span: {
+            xs: 12,
+            sm: 12,
+            md: 12,
+            lg: this.isSheet ? 12 : 8,
+          },
+          offset: {
+            xs: 0,
+            sm: 0,
+            md: 0,
+            lg: 2,
+          },
+        }) {
+          Row() {
+            Column({ space: 8 }) {
+              Text() {
+                Span(this.vm.isMember ? '已有会员' : '非会员')
+                  .fontSize(18)
+                  .fontColor($r('sys.color.font_primary'));
+                Span(this.memberStatus).fontSize(14).fontColor($r('sys.color.font_secondary'));
+              };
 
-          Text(this.vm.isMember ?
-            (this.vm.isRenewMember ? `${this.vm.getFormatTime(this.vm.expiresTime)}到期` :
-              `${this.lastPurchaseProductExpireTime}到期`) :
-            '购买并开通会员后可查看有效期')
-            .fontSize(12)
-            .fontColor($r('sys.color.font_primary'));
-        }.width('calc(100% - 84vp)').alignItems(HorizontalAlign.Start);
+              Text(this.vm.isMember ?
+                (this.vm.isRenewMember ? `${this.vm.getFormatTime(this.vm.expiresTime)}到期` :
+                  `${this.lastPurchaseProductExpireTime}到期`) :
+                '购买并开通会员后可查看有效期')
+                .fontSize(12)
+                .fontColor($r('sys.color.font_primary'));
+            }.width('calc(100% - 84vp)').alignItems(HorizontalAlign.Start);
 
-        Button(this.vm.isMember ? '会员管理' : '暂未开通')
-          .fontColor(this.vm.isMember ? this.btnFontColor :
-            $r('sys.color.font_primary'))
-          .backgroundColor(this.vm.isMember ? this.themeColor :
-            $r('sys.color.comp_background_tertiary'))
-          .fontSize(12)
-          .size({ height: 28 })
-          .onClick(() => {
-            if (this.vm.isMember) {
-              this.vm.manageSubscribe(this.getUIContext().getHostContext() as common.UIAbilityContext);
-            }
-          });
-      }
-      .position({ x: 16, y: 108 })
-      .borderRadius(16)
-      .padding(12)
-      .width('calc(100% - 32vp)')
-      .justifyContent(FlexAlign.SpaceBetween)
-      .backgroundColor($r('sys.color.comp_background_primary'));
+            Button(this.vm.isMember ? '会员管理' : '暂未开通')
+              .fontColor(this.vm.isMember ? this.btnFontColor :
+                $r('sys.color.font_primary'))
+              .backgroundColor(this.vm.isMember ? this.themeColor :
+                $r('sys.color.comp_background_tertiary'))
+              .fontSize(12)
+              .size({ height: 28 })
+              .onClick(() => {
+                if (this.vm.isMember) {
+                  this.vm.manageSubscribe(this.getUIContext().getHostContext() as common.UIAbilityContext);
+                }
+              });
+          }
+          .borderRadius(16)
+          .padding(12)
+          .justifyContent(FlexAlign.SpaceBetween)
+          .backgroundColor($r('sys.color.comp_background_primary'))
+          .margin({ top: 24 });
+        };
+      }.padding({ left: 16, right: 16 });
     };
   }
 
@@ -230,7 +253,7 @@ export struct MemberShipPage {
               this.vm.selectedProductIndex = index;
             });
           };
-        },(item: iap.Product) => item.id);
+        });
       }
       .width('100%')
       .height(124)
@@ -265,7 +288,7 @@ export struct MemberShipPage {
               }.alignItems(HorizontalAlign.Start).width('calc(100% - 48vp)');
             }.width('100%');
           };
-        },(item: MemberShipPrivilege) => item.id);
+        });
       }
       .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: true })
       .padding(12)
@@ -306,7 +329,7 @@ export struct MemberShipPage {
         }
         .fontSize(12)
         .opacity(0.6)
-        .width(`calc(100% - 64vp)`)
+        .width(this.isBelowMD ? `calc(100% - 64vp)` : '')
         .maxLines(2)
         .bindSheet($$this.vm.isShow, MemberPrivacy(this.privacy.content), {
           title: { title: this.privacy.title },
@@ -319,7 +342,7 @@ export struct MemberShipPage {
       }.width('100%').justifyContent(FlexAlign.Center);
 
       Button('立即开通')
-        .width('calc(100% - 32vp)')
+        .width(`calc(${this.subscribeButtonAreaWidth} - 32vp)`)
         .backgroundColor(this.themeColor)
         .fontColor(this.btnFontColor)
         .onClick(() => {
@@ -354,14 +377,56 @@ export struct MemberShipPage {
                 this.Owned();
               }
 
-              if (this.vm.productInfoList.length) {
-                Column() {
-                  this.Plan();
-                  this.Privilege();
-                }.padding({ left: 16, right: 16 });
-              } else {
-                this.EmptyHint();
-              }
+              GridRow({
+                columns: 12,
+                breakpoints: { value: ['320vp', '600vp', '840vp', '1440vp'] },
+              }) {
+                GridCol({
+                  span: {
+                    xs: 12,
+                    sm: 12,
+                    md: 12,
+                    lg: this.isSheet ? 12 : 8,
+                  },
+                  offset: {
+                    xs: 0,
+                    sm: 0,
+                    md: 0,
+                    lg: 2,
+                  },
+                }) {
+                  if (this.vm.productInfoList.length) {
+                    Column() {
+                      this.Plan();
+                      this.Privilege();
+                    }.padding({ left: 16, right: 16 });
+                  } else {
+                    this.EmptyHint();
+                  }
+                };
+              }.onBreakpointChange((breakpoints: string) => {
+                if (this.isSheet) {
+                  this.cardWidth = Math.floor((this.screenWidth - 48) / 3);
+                  if (breakpoints === BreakpointType.XS || breakpoints === BreakpointType.SM) {
+                    this.isBelowMD = true;
+                  } else if (breakpoints === BreakpointType.MD || breakpoints === BreakpointType.LG) {
+                    this.isBelowMD = false;
+                  }
+                } else {
+                  if (breakpoints === BreakpointType.XS || breakpoints === BreakpointType.SM) {
+                    this.isBelowMD = true;
+                    this.cardWidth = Math.floor((this.screenWidth - 48) / 3);
+                  } else if (breakpoints === BreakpointType.MD) {
+                    this.cardWidth = Math.floor((this.screenWidth - 48) / 3);
+                    this.subscribeButtonAreaWidth = '60%';
+                    this.isBelowMD = false;
+                  } else if (breakpoints === BreakpointType.LG) {
+                    this.cardWidth = Math.floor((this.screenWidth * (8 / 12) - 48) / 3);
+                    this.subscribeButtonAreaWidth = '60%';
+                    this.isBelowMD = false;
+                  }
+                }
+              });
             };
           }
           .align(Alignment.Top)
@@ -379,7 +444,7 @@ export struct MemberShipPage {
         .backgroundColor($r('sys.color.background_secondary'))
         .justifyContent(FlexAlign.SpaceBetween)
         .onSizeChange((oldValue: SizeOptions, newValue: SizeOptions) => {
-          this.cardWidth = Math.floor((newValue.width as number - 48) / 3);
+          this.screenWidth = newValue.width as number;
         });
       }
     }

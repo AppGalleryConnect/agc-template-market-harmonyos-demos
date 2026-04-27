@@ -1,0 +1,20 @@
+{
+  "color": [
+    {
+      "name": "system_color_background_white",
+      "value": "#ffffff"
+    },
+    {
+      "name": "system_color_background_gray",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "brand_red",
+      "value": "#ED6F21"
+    },
+    {
+      "name": "btn_gray",
+      "value": "#e7e7e8"
+    }
+  ]
+}

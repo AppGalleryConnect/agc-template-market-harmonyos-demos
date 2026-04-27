@@ -6,11 +6,6 @@
       "buildFunction": "HomePageBuilder"
     },
     {
-      "name": "NewsSearch",
-      "pageSourceFile": "src/main/ets/pages/NewsSearch.ets",
-      "buildFunction": "NewsSearchBuilder"
-    },
-    {
       "name": "NewsPost",
       "pageSourceFile": "src/main/ets/pages/NewsPost.ets",
       "buildFunction": "NewsPostBuilder"

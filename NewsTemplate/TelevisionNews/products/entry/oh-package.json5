@@ -1,0 +1,16 @@
+{
+  "name": "entry",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "",
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "lib_common": "file:../../commons/lib_common",
+    "lib_tv_apis": "file:../../commons/lib_tv_apis",
+    "home": "file:../../features/home",
+    "mine": "file:../../features/mine",
+    "module_transition": "file:../../components/module_transition"
+  }
+}
+

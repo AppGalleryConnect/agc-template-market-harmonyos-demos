@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "module_notice_center",
+    "type": "har",
+    "routerMap": "$profile:route_map",
+    "deviceTypes": [
+      "default"
+    ]
+  }
+}

@@ -1,12 +1,20 @@
 import { RecipeIngredient, Step, UploadRecipeData } from '../types/Index';
 import { UploadRecipeVM } from '../viewModels/UploadRecipeVM';
-import { LengthMetrics, promptAction } from '@kit.ArkUI';
+import { LengthMetrics, promptAction, window } from '@kit.ArkUI';
 import { common } from '@kit.AbilityKit';
+import { KeyboardAvoidMode } from '@kit.ArkUI';
 
 @ComponentV2
 export struct UploadRecipe {
   @Local vm: UploadRecipeVM = new UploadRecipeVM();
-@Event uploadRecipe:(data:UploadRecipeData)=>void=()=>{}
+  @Event uploadRecipe: (data: UploadRecipeData) => void = () => {
+  };
+  private context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+
+  aboutToAppear(): void {
+    // 获取窗口实例并关闭避让
+    this.getUIContext().setKeyboardAvoidMode(KeyboardAvoidMode.NONE);
+  }
 
   build() {
     Column() {
@@ -25,45 +33,45 @@ export struct UploadRecipe {
               });
 
             Text('主图').titleBaseStyle();
-            Text('图片尺寸16:9，格式jpg/png，主体居中')
+            Text('图片尺寸16:9，支持上传图片，视频，动图，主体居中')
               .fontSize(12)
-              .fontColor('#99000000')
+              .fontColor($r('sys.color.font_secondary'))
               .margin({ top: 4, bottom: 12 });
 
             if (this.vm.mainImg) {
               Image(this.vm.mainImg).width(120).height(120).borderRadius(12).onClick(() => {
-                this.vm.selectImage(this.getUIContext().getHostContext() as common.UIAbilityContext).then(res => {
-                  this.vm.mainImg = res;
+                this.vm.selectImage(this.context, 0).then(async res => {
+                  this.vm.mainImg = await this.vm.showFile(res, this.getUIContext(), 0);
                 });
-              });
+              })
             } else {
               Column() {
-                Image($r('app.media.ic_public_add')).width(20).fillColor('#66000000');
-                Text('上传主图').fontSize(14).fontColor('#66000000').margin({ top: 8 });
+                Image($r('app.media.ic_public_add')).width(20).fillColor($r('sys.color.font_tertiary'));
+                Text('上传媒体文件').fontSize(14).fontColor($r('sys.color.font_tertiary')).margin({ top: 8 });
               }
               .width(120)
               .height(120)
-              .backgroundColor('#F1F3F5')
+              .backgroundColor($r('sys.color.comp_background_tertiary'))
               .borderRadius(12)
               .justifyContent(FlexAlign.Center)
               .onClick(() => {
-                this.vm.selectImage(this.getUIContext().getHostContext() as common.UIAbilityContext).then(res => {
-                  this.vm.mainImg = res;
+                this.vm.selectImage(this.context, 0).then(async res => {
+                  this.vm.mainImg = await this.vm.showFile(res, this.getUIContext(), 0);
                 });
               });
             }
-
 
             Text('描述').titleBaseStyle().margin({ top: 15, bottom: 8 });
             TextArea({ placeholder: '请输入菜谱背后的故事', text: this.vm.description })
               .width('100%')
               .height(91)
-              .backgroundColor('#F1F3F5')
+              .backgroundColor($r('sys.color.comp_background_tertiary'))
               .borderRadius(12)
               .fontSize(14)
+              .fontColor($r('sys.color.font_primary'))
               .maxLength(this.vm.maxLength)
               .placeholderFont({ size: 14 })
-              .placeholderColor('#66000000')
+              .placeholderColor($r('sys.color.font_secondary'))
               .padding({
                 left: 12,
                 right: 12,
@@ -83,7 +91,7 @@ export struct UploadRecipe {
           }.columnWrapExtend();
 
           Column() {
-            Text('用料').margin({ bottom: 4 });
+            Text('用料').titleBaseStyle().margin({ bottom: 4 });
             List({ space: 8 }) {
               ForEach(this.vm.ingredients, (item: RecipeIngredient, index) => {
                 ListItem() {
@@ -143,37 +151,38 @@ export struct UploadRecipe {
             ForEach(this.vm.steps, (item: Step, index) => {
               ListItem() {
                 Column({ space: 12 }) {
-                  Text(`步骤${index + 1}`);
+                  Text(`步骤${index + 1}`).titleBaseStyle();
                   if (item.stepImg) {
                     Image(item.stepImg).width(120).height(120).borderRadius(12).onClick(() => {
-                      this.vm.selectImage(this.getUIContext().getHostContext() as common.UIAbilityContext).then(res => {
-                        item.stepImg = res;
+                      this.vm.selectImage(this.context, 1).then(async res => {
+                        item.stepImg = await this.vm.showFile(res, this.getUIContext(), 1);
                       });
                     });
                   } else {
                     Column() {
-                      Image($r('app.media.ic_public_add')).width(20).fillColor('#66000000');
-                      Text('上传步骤图').fontSize(14).fontColor('#66000000').margin({ top: 8 });
+                      Image($r('app.media.ic_public_add')).width(20).fillColor($r('sys.color.font_tertiary'));
+                      Text('上传步骤图').fontSize(14).fontColor($r('sys.color.font_tertiary')).margin({ top: 8 });
                     }
                     .width(120)
                     .height(120)
-                    .backgroundColor('#F1F3F5')
+                    .backgroundColor($r('sys.color.comp_background_tertiary'))
                     .borderRadius(12)
                     .justifyContent(FlexAlign.Center)
                     .onClick(() => {
-                      this.vm.selectImage(this.getUIContext().getHostContext() as common.UIAbilityContext).then(res => {
-                        item.stepImg = res;
+                      this.vm.selectImage(this.context, 1).then(async res => {
+                        item.stepImg = await this.vm.showFile(res, this.getUIContext(), 1);
                       });
                     });
                   }
 
                   TextInput({ placeholder: '请输入步骤说明', text: item.description })
                     .height(56)
-                    .backgroundColor('#F1F3F5')
+                    .backgroundColor($r('sys.color.comp_background_tertiary'))
                     .borderRadius(12)
                     .fontSize(14)
+                    .fontColor($r('sys.color.font_primary'))
                     .placeholderFont({ size: 14 })
-                    .placeholderColor('#66000000')
+                    .placeholderColor($r('sys.color.font_secondary'))
                     .padding(12)
                     .maxLength(200)
                     .onChange((res) => {
@@ -205,7 +214,7 @@ export struct UploadRecipe {
             }, (item: Step, index) => item.stepImg + index);
           };
         }.padding({ top: 12, bottom: 20 });
-      }.height('calc(100% - 76vp)').align(Alignment.Top).scrollBar(BarState.Off).edgeEffect(EdgeEffect.Spring);
+      }.height('calc(100% - 76vp)').align(Alignment.Top).scrollBar(BarState.Off).edgeEffect(EdgeEffect.Spring)
 
       Row() {
         Button('上传')
@@ -219,19 +228,27 @@ export struct UploadRecipe {
               const data: UploadRecipeData = {
                 description: this.vm.description,
                 title: this.vm.title,
-                mainImg: this.vm.mainImg,
+                mainImg: !this.vm.isMovingPhoto && this.vm.video ? '' : this.vm.mainImg,
                 ingredients: this.vm.ingredients,
                 steps: this.vm.steps,
+                video: this.vm.video,
+                coverUrl: this.vm.video ? this.vm.mainImg : '',
               }
               this.uploadRecipe(data)
             }
           });
-      }.height(76).width('100%').padding({ left: 40, right: 40, top: 24 });
+      }
+      .padding({
+        left: 40,
+        right: 40,
+        top: 8,
+        bottom: 20
+      });
     }
     .height('100%')
-    .backgroundColor('#F1F3F5')
-    .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.BOTTOM])
+    .backgroundColor($r('sys.color.comp_background_gray'))
   }
+
   @Builder
   itemEnd(index: number) {
     Row() {
@@ -280,12 +297,14 @@ export struct UploadRecipe {
   @Builder
   addContentBuilder() {
     Row() {
-      Image($r('app.media.ic_public_add')).width(8).height(8).fillColor('#E84026');
+      Image($r('app.media.ic_public_add_circle'))
+        .width(16)
+        .height(16)
+        .borderRadius(8)
     }
-    .width(16)
-    .height(16)
+    .width(18)
+    .height(18)
     .borderRadius(8)
-    .backgroundColor(Color.White)
     .justifyContent(FlexAlign.Center);
 
     Text('添加一行').fontSize(14).fontColor(Color.White);
@@ -295,28 +314,30 @@ export struct UploadRecipe {
 @Extend(TextInput)
 function inputBaseExtend() {
   .fontSize(14)
+  .fontColor($r('sys.color.font_primary'))
   .placeholderFont({ size: 14 })
-  .placeholderColor('#66000000')
-  .backgroundColor('#F1F3F5');
+  .placeholderColor($r('sys.color.font_secondary'))
+  .backgroundColor($r('sys.color.comp_background_tertiary'));
 }
 
 @Extend(TextInput)
 function inputSmallExtend() {
   .fontSize(12)
+  .fontColor($r('sys.color.font_primary'))
   .placeholderFont({ size: 12 })
-  .placeholderColor('#66000000')
-  .backgroundColor('#F1F3F5');
+  .placeholderColor($r('sys.color.font_secondary'))
+  .backgroundColor($r('sys.color.comp_background_tertiary'));
 }
 
 @Extend(Text)
 function titleBaseStyle() {
-  .fontSize(16).fontColor('#E6000000').fontWeight(FontWeight.Medium);
+  .fontSize(16).fontColor($r('sys.color.font_primary')).fontWeight(FontWeight.Medium);
 }
 
 @Extend(Column)
 function columnWrapExtend() {
   .width('100%')
-  .backgroundColor('#FFFFFF')
+  .backgroundColor($r('sys.color.comp_background_gray'))
   .padding({
     left: 16,
     right: 16,

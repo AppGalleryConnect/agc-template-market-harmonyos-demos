@@ -1,7 +1,11 @@
 {
-  "modelVersion": "5.0.5",
+  "modelVersion": "6.0.0",
   "description": "Please describe the basic information.",
   "dependencies": {
+    "@hw-agconnect/ui-toast": "^1.0.0",
+    "@hw-agconnect/ui-dialog": "^1.0.0",
+    "@hw-agconnect/ui-skeleton": "^1.0.0",
+    "module_advertisement": "file:./components/module_advertisement"
   },
   "devDependencies": {},
   "dynamicDependencies": {}

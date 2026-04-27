@@ -41,9 +41,10 @@ export struct InteractionFeedCard {
       shareData: {
         recordId: this.cardInfo.id,
         title: this.cardInfo.title,
-        subTitle: this.cardInfo.articleFrom,
+        subTitle: this.cardInfo.author?.authorNickName,
         createTime: this.cardInfo.createTime,
-        coverUrl: this.cardInfo.postImgList?.[0]?.picVideoUrl,
+        coverUrl: this.cardInfo.postImgList?.[0]?.surfaceUrl || this.cardInfo.postImgList?.[0]?.picVideoUrl,
+        type: this.cardInfo.type,
       },
       shareRenderBuilder: () => {
         this.shareCommentBuilder()

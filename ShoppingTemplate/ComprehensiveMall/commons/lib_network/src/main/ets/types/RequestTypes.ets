@@ -26,6 +26,7 @@ export interface OrderCreateInfo {
   originalPrice: number;
   finalPrice: number;
   discounts: DiscountItem[];
+  couponId?: string;
   receivingMethod: number; //1: 快递物流  2: 到店自提
 }
 
@@ -60,6 +61,32 @@ export interface UserLoginReq {
   verifyCode?: string
   unionID?: string
   authorizationCode?: string
+}
+
+export interface GetCouponListReq {
+  // 用户ID
+  userId: string;
+  // 优惠券状态: '0'-待使用; '1'-已使用; '2'-已过期
+  couponStatus?: number;
+  // 分页
+  page?: number;
+  limit?: number;
+}
+
+export interface ClaimCouponReq {
+  // 用户ID
+  userId: string;
+  // 要领取的优惠券ID
+  couponId: string;
+}
+
+export interface UpdateCouponReq {
+  // 用户ID
+  userId: string;
+  // 优惠券ID
+  couponId: string;
+  // 更新后的状态: '0'-待使用; '1'-已使用; '2'-已过期
+  couponStatus: number;
 }
 
 /** 秒杀场次列表请求 */

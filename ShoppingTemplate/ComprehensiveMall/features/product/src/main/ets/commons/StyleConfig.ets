@@ -19,11 +19,17 @@ export class ProductSwiperStyleConfig {
 
   @Computed
   public static get swiperPadding() {
-    return BreakpointSystem.currentBreakpoint.value === BreakpointTypeEnum.MD ? 0 : $r('app.string.space_l');
+    return BreakpointSystem.currentBreakpoint.value === BreakpointTypeEnum.MD ? 0 : $r('app.float.space_l');
   }
 
   @Computed
   public static get imagePadding() {
+    if (BreakpointSystem.currentBreakpoint.value === BreakpointTypeEnum.SM) {
+      return {
+        left: 6,
+        right: 6,
+      } as Padding
+    }
     return BreakpointSystem.currentBreakpoint.value === BreakpointTypeEnum.MD ?
       {
         left: 6,

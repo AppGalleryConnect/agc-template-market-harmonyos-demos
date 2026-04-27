@@ -1,0 +1,12 @@
+{
+  "module": {
+    "name": "module_shopping_cart_test",
+    "type": "feature",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": true
+  }
+}

@@ -5,7 +5,7 @@ export enum RouterMap {
   SPLASH_PAGE = 'SplashPage',
   // 首页模块
   HOME_PAGE = 'HomePage',
-  NEWS_SEARCH = 'NewsSearch',
+  NEWS_SEARCH = 'ResultPage',
   NEWS_POST = 'NewsPost',
   NEWS_PUBLISH_SELECT = 'NewsPublishSelect',
   DIGITAL_NEWSPAPER = 'ENewsPage',
@@ -28,12 +28,14 @@ export enum RouterMap {
   ARTICLE_FEED_DETAILS = 'ArticleFeedDetails',
   // 互动模块
   PUBLISH_POST_PAGE = 'PublishPostPage',
+  TOPIC_RESULT_PAGE = 'TopicResultPage',
   // 我的模块
   MINE_COMMENT_PAGE = 'CommentPage',
   MINE_MESSAGE_PAGE = 'MessagePage',
   MINE_MARK_PAGE = 'MarkPage',
   MINE_LIKE_PAGE = 'LikePage',
   MINE_HISTORY_PAGE = 'HistoryPage',
+  MINE_LIVE_RESERVATION_PAGE = 'LiveReservationPage',
   MINE_MSG_COMMENT = 'MessageCommentReplyPage',
   MINE_MSG_COMMENT_DETAIL = 'MessageSingleCommentList',
   MINE_MSG_FANS = 'MessageFansPage',

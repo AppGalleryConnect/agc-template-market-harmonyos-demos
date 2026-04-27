@@ -1,72 +1,128 @@
-import { IOrder } from 'lib_foundation';
+import { Constants } from '../common/Constants';
 
-@Entry
+const storageWidget = new LocalStorage();
+
+@Extend(Text)
+function textFancy() {
+  .width(Constants.FULL_PERCENT)
+  .fontSize(16)
+  .fontColor($r('sys.color.font_primary'))
+  .fontWeight(700)
+}
+
+@Entry(storageWidget)
 @Component
 struct WidgetCard {
-  @LocalStorageProp('productList') productList: IOrder[] = []
   readonly actionType: string = 'router';
   readonly abilityName: string = 'EntryAbility';
+  @LocalStorageProp('formDimension') formDimension: number = 2;
+  @LocalStorageProp('isLogin') isLogin: boolean = false;
+  @LocalStorageProp('orderNo') orderNo: string = '';
+  @LocalStorageProp('senderCity') senderCity: string = '';
+  @LocalStorageProp('receiverCity') receiverCity: string = '';
+  @LocalStorageProp('logistics') logistics: string = '';
+
+  postFormCard(routeUrl: string, orderNo: string) {
+    postCardAction(this, {
+      action: this.actionType,
+      abilityName: this.abilityName,
+      params: {
+        source: 'FormCard',
+        pageUrl: routeUrl,
+        extraParam: orderNo,
+      },
+    });
+  }
 
   build() {
-    Row() {
+    Column() {
+      this.headerBuilder()
+
       Column() {
-        Row() {
-          Image($r('app.media.startIcon'))
-            .width(20)
-            .height(20)
-            .margin({ right: 8 })
-          Text('物流信息')
-            .fontSize(14)
-            .fontWeight(FontWeight.Medium)
-            .fontColor($r('sys.color.font_primary'))
-        }
-        .margin({ bottom: 12 })
+        if (this.isLogin) {
+          if (this.orderNo) {
+            Text(`${this.senderCity} - ${this.receiverCity}`)
+              .textFancy()
+              .maxLines(1)
+              .textOverflow({ overflow: TextOverflow.Ellipsis })
+            Text(this.logistics)
+              .width(Constants.FULL_PERCENT)
+              .fontSize(14)
+              .fontColor($r('sys.color.font_secondary'))
+              .fontWeight(400)
+              .maxLines(2)
+              .textOverflow({ overflow: TextOverflow.Ellipsis })
+              .margin({ top: 6, bottom: 6 })
 
-        ForEach(this.productList, (item: IOrder) => {
-          Row() {
-            Text() {
-              Span(item.sendAddress.city)
-              Span('-')
-              Span(item.getAddress.city)
-            }
-            .fontSize(16)
-            .fontWeight(FontWeight.Medium)
-            .fontColor($r('sys.color.font_primary'))
+            this.commonBtnView('查询进度', Constants.ORDER_INFO_PAGE)
+          } else {
+            Text('暂无物流信息')
+              .textFancy()
+              .margin({ top: 6, bottom: 20 })
+
+            this.commonBtnView('去寄件', Constants.EXPRESS_PAGE)
           }
-          .margin({ bottom: 12 })
-
-          Text('正在发往' + item.getAddress.city)
-            .fontSize(12)
-            .fontWeight(FontWeight.Regular)
+        } else {
+          Text('当前未登录')
+            .textFancy()
+            .textAlign(TextAlign.Center)
+          Text('不登录看不到信息~')
+            .width(Constants.FULL_PERCENT)
+            .textAlign(TextAlign.Center)
+            .fontSize(14)
             .fontColor($r('sys.color.font_secondary'))
-            .margin({ bottom: 17 })
-          Button('查询进度')
-            .width(126)
-            .controlSize(ControlSize.SMALL)
-            .backgroundColor(Color.White)
-            .fontSize($r('sys.float.Body_M'))
-            .fontColor('#317AF7')
-            .fontWeight(FontWeight.Regular)
-            .onClick(() => {
-              postCardAction(this, {
-                action: this.actionType,
-                abilityName: this.abilityName,
-                params: {
-                  id: item.id,
-                },
-              });
-            });
-        }, (item: IOrder) => JSON.stringify(item))
+            .fontWeight(400)
+            .margin({ top: 6, bottom: 16 })
+
+          this.commonBtnView('去登录', Constants.QUICK_LOGIN_PAGE)
+        }
       }
-      .width('100%')
-      .height('100%')
-      .padding(12)
-      .linearGradient({
-        direction: GradientDirection.Bottom, // 渐变方向
-        repeating: true, // 渐变颜色是否重复
-        colors: [[0xEFF5FF, 0.0], [0xEFF5FF, 0.24], [0x8BAFF0, 1]], // 数组末尾元素占比小于1时满足重复着色效果
-      })
+      .layoutWeight(1)
+      .width(Constants.FULL_PERCENT)
+      .justifyContent(FlexAlign.Center)
+      .alignItems(HorizontalAlign.Start)
     }
-    .height('100%')
+    .width(Constants.FULL_PERCENT)
+    .height(Constants.FULL_PERCENT)
+    .alignItems(HorizontalAlign.Start)
+    .padding(Constants.PADDING_M)
+    .backgroundImage($r('app.media.widget_card_bg'))
+    .backgroundImageSize({ width: '100%', height: '100%' })
+  }
+
+  @Builder
+  headerBuilder() {
+    Row({ space: 8 }) {
+      Image($r('app.media.startIcon')).width(20).height(20)
+      Text('物流信息')
+        .fontSize(14)
+        .fontColor($r('sys.color.font_primary'))
+        .fontWeight(400)
+        .layoutWeight(1)
+    }
+    .width(Constants.FULL_PERCENT)
+    .onClick(() => {
+      postCardAction(this, {
+        action: this.actionType,
+        abilityName: this.abilityName,
+      });
+    })
+  }
+
+  @Builder
+  commonBtnView(label: string, routeUrl: string) {
+    Row() {
+      Button(label)
+        .fontSize($r('sys.float.Body_M'))
+        .fontColor($r('sys.color.font_emphasize'))
+        .width(126)
+        .height(28)
+        .backgroundColor(Color.White)
+        .onClick(() => {
+          this.postFormCard(routeUrl, this.orderNo)
+        })
+    }
+    .width(Constants.FULL_PERCENT)
+    .justifyContent(FlexAlign.Center)
   }
 }

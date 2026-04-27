@@ -82,7 +82,6 @@ export class NewsFeedInfo implements NewsResponse {
   postBody: string = '';
   // 图片链接
   postImgList: PostImgList[] = [];
-  articleFrom: string = '';
   publishTime: string = '';
   questionAndAnswer: QuestionAndAnswer = new QuestionAndAnswer();
   keywordPairs: KeyWordPair[] = [];

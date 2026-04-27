@@ -1,0 +1,18 @@
+{
+  "module": {
+    "name": "module_imagepreview",
+    "type": "har",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ],
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.VIBRATE"
+      },
+      {
+        "name": "ohos.permission.INTERNET",
+      },
+    ]
+  }
+}

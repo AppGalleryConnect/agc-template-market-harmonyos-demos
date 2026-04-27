@@ -1,0 +1,14 @@
+{
+  "name": "lib_tv_details",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    'module_swipeplayer': 'file:../../components/module_swipeplayer',
+    'module_transition': "file:../../components/module_transition",
+    "lib_common": "file:../../commons/lib_common",
+    "lib_tv_apis": "file:../../commons/lib_tv_apis"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "entry",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "",
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "atomicservice_login": "file:../../components/atomicservice_login",
+    "lib_foundation": "file:../../commons/lib_foundation",
+    "lib_widget": "file:../../commons/lib_widget",
+    "lib_network": "file:../../commons/lib_network",
+    "module_shopping_cart": "file:../../components/module_shopping_cart",
+    "module_product_category": "file:../../components/module_product_category",
+    "feedback": "file:../../components/feedback",
+    "module_notice_center": "file:../../components/module_notice_center",
+    "module_transition": "file:../../components/module_transition",
+    "address_management": "file:../../components/address_management",
+    "membership": "file:../../components/membership",
+    "module_global_feature": "file:../../components/module_global_feature"
+  },
+  "devDependencies": {},
+  "dynamicDependencies": {
+    "member": "file:../../features/member",
+    "setting": "file:../../features/setting",
+    "shopping": "file:../../features/shopping",
+    "points": "file:../../features/points",
+    "product": "file:../../features/product",
+    "order": "file:../../features/order"
+  }
+}

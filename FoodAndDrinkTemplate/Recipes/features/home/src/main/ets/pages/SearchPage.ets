@@ -1,7 +1,8 @@
-import { buildTitleBar, CommonConstants, PreferenceUtil, RouterModule } from 'commonlib';
+import { buildTitleBar, CommonConstants, PreferenceUtil, RouterMap, RouterModule } from 'commonlib';
 import { LengthMetrics } from '@kit.ArkUI';
 import { SearchPageVM } from '../viewModels/SearchPageVM';
 import { HomeSearch } from 'home_search';
+import { LoneTakeAnimationsTransition, LongTakeTransitionParam } from 'module_transition';
 
 @Builder
 export function SearchPageBuilder() {
@@ -17,6 +18,21 @@ struct SearchPage {
     this.vm.getHotkeys();
     this.vm.getDefaultSearch();
     this.vm.historyInfo = PreferenceUtil.getInstance().get(CommonConstants.SEARCH_KEYS) as [] ?? [];
+  }
+
+  private onColumnClicked(indexValue: string, snapShotComponentId: string): void {
+    let param: Record<string, Object> = {};
+    let clickedIndex = parseInt(indexValue);
+    param.id = clickedIndex;
+    param.indexValue = clickedIndex;
+    param.snapShotId = snapShotComponentId;
+
+    let longTakeTransitionParam: LongTakeTransitionParam | undefined =
+      LoneTakeAnimationsTransition.generateLongTakeParam(this.getUIContext(), snapShotComponentId, 9);
+    if (longTakeTransitionParam) {
+      param.longTakeTransitionParam = longTakeTransitionParam;
+    }
+    RouterModule.push(RouterMap.DISHES, param)
   }
 
   build() {
@@ -39,8 +55,8 @@ struct SearchPage {
               this.vm.isShowResult = false
               this.vm.resultList = this.vm.resultList.filter(() => false)
             },
-            goRecipeDetail: (id: number) => {
-              this.vm.goRecipeDetail(id)
+            goRecipeDetail: (id: number, index: number) => {
+              this.onColumnClicked(id.toString(), `recipes_flow_${id}_${index}`)
             },
             submitKeyWords: (keyword: string) => {
               this.vm.submitKeyWords(keyword)
@@ -50,6 +66,9 @@ struct SearchPage {
             },
             clearRecords: () => {
               this.vm.clearRecords()
+            },
+            changeRecipes: (keyword: string) => {
+              this.vm.searchDishes(keyword)
             }
           })
       }
@@ -57,10 +76,11 @@ struct SearchPage {
       .scrollBar(BarState.Off)
       .edgeEffect(EdgeEffect.Spring)
       .align(Alignment.Top)
-      .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.BOTTOM]);
     }
     .title(buildTitleBar(this.vm.title, this.vm.formPage === CommonConstants.CLASSIFICATION_PAGE),
-      { paddingStart: LengthMetrics.vp(16) });
+      { paddingStart: LengthMetrics.vp(16) })
+    .backgroundColor($r('sys.color.comp_background_gray'))
+    .padding({top: 40})
   }
 }
 

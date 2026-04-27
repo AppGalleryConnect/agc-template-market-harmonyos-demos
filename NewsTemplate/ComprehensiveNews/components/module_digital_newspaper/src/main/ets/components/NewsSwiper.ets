@@ -1,8 +1,11 @@
+import { UtilLog } from '@hw-agconnect/util-log';
 import { BasicDataSource } from '../common/BasicDataSource';
 import { Constant } from '../common/Constant';
 import { AreaModel } from '../common/AreaModel';
 import { NewsArea } from '../model/NewsArea';
 import { NewsPageWithAreaInfo } from '../model/NewspaperPage';
+
+const TAG = '[NewsSwiper]';
 
 @ComponentV2
 export struct NewsSwiper {
@@ -11,7 +14,7 @@ export struct NewsSwiper {
   @Param controller: SwiperController = new SwiperController();
   @Event $currentPage: (pageNum: number) => void = () => {
   };
-  @Event jumpNewsDetail: (area: NewsArea) => void = (area: NewsArea) => {
+  @Event jumpNewsDetail: (area: NewsArea) => void = () => {
   };
   @Consumer() containerSize: AreaModel = new AreaModel();
   @Local dataSource: BasicDataSource<NewsPageWithAreaInfo> = new BasicDataSource();
@@ -30,7 +33,7 @@ export struct NewsSwiper {
     this.dataSource.setData(this.newspaperPages);
   }
 
-  @Monitor('containerSize.width','containerSize.height')
+  @Monitor('containerSize.width', 'containerSize.height')
   onContainerChange() {
     const containerRatio = this.containerSize.width / this.containerSize.height;
     if (this.imgRatio > containerRatio) {
@@ -41,6 +44,16 @@ export struct NewsSwiper {
       this.imgW = Constant.DEFAULT_AUTO;
       this.imgH = Constant.FULL_PERCENT;
       this.swiperH = `calc(100% - ${this.containerSize.bottomHeight}vp)`;
+    }
+  }
+
+  onReachEnd(index: number, targetIndex: number) {
+    try {
+      if (index === targetIndex && targetIndex === this.newspaperPages.length - 1) {
+        this.getUIContext().getPromptAction().showToast({ message: '已到底部，可选择往期' });
+      }
+    } catch (e) {
+      UtilLog.error(TAG, `Fail to . Code: ${e.code}, message: ${e.message}`);
     }
   }
 
@@ -62,7 +75,7 @@ export struct NewsSwiper {
             this.onContainerChange();
           }
         })
-        .onSizeChange((oldValue, newValue) => {
+        .onSizeChange((_oldValue, newValue) => {
           if (newValue.width !== 0) {
             this.imgRenderSize.width = newValue.width as number;
             this.imgRenderSize.height = newValue.height as number;
@@ -112,6 +125,7 @@ export struct NewsSwiper {
       .cachedCount(2)
       .onAnimationStart((index: number, targetIndex: number) => {
         this.$currentPage(targetIndex);
+        this.onReachEnd(index, targetIndex);
       })
 
       Row()

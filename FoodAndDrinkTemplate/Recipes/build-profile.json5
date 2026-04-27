@@ -5,8 +5,8 @@
       {
         "name": "default",
         "signingConfig": "default",
-        "compatibleSdkVersion": "5.0.4(16)",
-        "targetSdkVersion": "5.0.4(16)",
+        "compatibleSdkVersion": "5.1.1(19)",
+        "targetSdkVersion": "6.0.2(22)",
         "runtimeOS": "HarmonyOS",
         "buildOption": {
           "strictMode": {
@@ -113,6 +113,22 @@
     {
       "name": "membership",
       "srcPath": "./components/membership"
+    },
+    {
+      "name": "module_transition",
+      "srcPath": "./components/module_transition"
+    },
+    {
+      "name": "aggregated_share",
+      "srcPath": "./components/aggregated_share"
+    },
+    {
+      "name": "image_preview",
+      "srcPath": "./components/image_preview"
+    },
+    {
+      "name": "floating_navbar",
+      "srcPath": "./components/floating_navbar"
     }
   ]
 }

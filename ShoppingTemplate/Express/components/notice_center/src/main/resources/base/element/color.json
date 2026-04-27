@@ -1,0 +1,12 @@
+{
+  "color": [
+    {
+      "name": "theme_color",
+      "value": "#e64566"
+    },
+    {
+      "name": "background_color_grey",
+      "value": "#f1f3f5"
+    }
+  ]
+}

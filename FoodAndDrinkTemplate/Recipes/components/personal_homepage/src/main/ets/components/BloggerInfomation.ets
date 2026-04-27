@@ -1,6 +1,6 @@
-import { BreakpointModel, BreakpointType } from 'base_ui';
 import { BloggerInfo } from '../types/Index';
-import { AppStorageV2 } from '@kit.ArkUI';
+import { CircleShape } from '@kit.ArkUI';
+import { CommonConstants } from '../common/CommonConstants';
 
 @ComponentV2
 export struct BloggerInfomation {
@@ -8,56 +8,165 @@ export struct BloggerInfomation {
   @Param isSelf: boolean = false;
   @Param isLogin: boolean = false;
   @Param isFollower: boolean = false;
-  @BuilderParam userTagBuilderParam: () => void = this.userTagBuilder;
-  @BuilderParam membershipBuilderParam: () => void = this.membershipBuilder;
   @Event jumpFollowers: () => void = () => {
   }
   @Event login: () => void = () => {
   }
   @Event followCb: (isFollower: boolean) => void = () => {
   }
-  columnOptions: BreakpointType<number> = new BreakpointType<number>({
-    sm: 2,
-    md: 4,
-    lg: 4,
-    xl: 4,
-  });
-  @Local breakPointModel: BreakpointModel = AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
-
-  @Builder
-  userTagBuilder() {
-  }
-
-  @Builder
-  membershipBuilder() {
-  }
-
-  @Computed
-  get gridCount() {
-    return this.columnOptions.getValue(this.breakPointModel.currentBreakpoint);
+  @Event jumpMemberCenter: () => void = () => {
   }
 
   build() {
-    Column({ space: 12 }) {
+    Column() {
       Column() {
-        Column({ space: 12 }) {
-          Row() {
+        if (this.isSelf) {
+          if (this.isLogin) {
             Column() {
-              Text(!this.bloggerInfo.name && this.isSelf ? '华为用户' : this.bloggerInfo.name)
-                .fontSize(24)
-                .fontWeight(FontWeight.Medium)
+              Row({ space: CommonConstants.SPACE_L }) {
+                Image(this.bloggerInfo.avatar)
+                  .width($r('app.float.user_icon_width'))
+                  .clipShape(new CircleShape({ width: 48, height: 48 }))
+                  .draggable(false)
+                Column({ space: CommonConstants.SPACE_XXS }) {
+                  Row() {
+                    Text(this.bloggerInfo.name)
+                      .fontSize(18)
+                      .fontColor($r('sys.color.font_primary'))
+                      .fontWeight(FontWeight.Medium)
+                    SymbolGlyph($r('sys.symbol.v_diamond_fill'))
+                      .fontColor([this.bloggerInfo.isMembership ? $r('app.color.membership') :
+                        $r('sys.color.font_tertiary')])
+                      .fontWeight(FontWeight.Normal)
+                      .fontSize(16)
+                      .margin({
+                        left: CommonConstants.PADDING_S,
+                      })
+                    Text('会员')
+                      .fontSize(12)
+                      .fontColor(this.bloggerInfo.isMembership ? $r('sys.color.font_primary') :
+                        $r('sys.color.font_tertiary'))
+                      .fontWeight(FontWeight.Regular)
+                      .margin({
+                        left: CommonConstants.PADDING_XXS,
+                      })
+                  }
+
+                  Row({ space: CommonConstants.SPACE_XS }) {
+                    Image($r('app.media.ic_phone'))
+                      .width($r('app.float.medium_img_width'))
+                      .draggable(false)
+                      .fillColor($r('sys.color.icon_secondary'))
+                    Text(this.bloggerInfo.phoneNumber)
+                      .fontSize(12)
+                      .fontColor($r('sys.color.font_secondary'))
+                  }
+                }
+                .layoutWeight(1)
+                .alignItems(HorizontalAlign.Start)
+
+                Image($r('app.media.ic_right'))
+                  .width($r('app.float.arrow_right_w'))
+                  .draggable(false)
+              }
+              .borderRadius($r('app.float.large_radius'))
+              .padding(CommonConstants.PADDING_S)
+              .stateStyles({
+                normal: this.normalStyles,
+                pressed: this.pressedStyles,
+              })
+              .backgroundColor(Color.Transparent)
+              .onClick(() => {
+                this.login()
+              })
+
+              Divider().width(CommonConstants.FULL_PERCENT).margin({
+                left: CommonConstants.PADDING_S,
+                right: CommonConstants.PADDING_S,
+                top: CommonConstants.PADDING_XS,
+                bottom: CommonConstants.PADDING_XS,
+              }).backgroundColor($r('sys.color.comp_divider'))
+
+              Row() {
+                Text(this.bloggerInfo.isMembership ? '请查看您的会员权益' : '开通会员享受更多权益')
+                  .fontSize(14)
+                  .fontColor($r('sys.color.font_primary'))
+                  .fontWeight(FontWeight.Regular)
+                Button('会员中心')
+                  .fontSize($r('sys.float.Body_M'))
+                  .fontColor($r('sys.color.font_primary'))
+                  .backgroundColor($r('app.color.membership'))
+                  .height(28)
+                  .onClick(() => {
+                    this.jumpMemberCenter()
+                  })
+              }
+              .width(CommonConstants.FULL_PERCENT)
+              .justifyContent(FlexAlign.SpaceBetween)
+              .padding({
+                left: CommonConstants.PADDING_S,
+                right: CommonConstants.PADDING_S,
+                top: CommonConstants.PADDING_S,
+                bottom: CommonConstants.PADDING_S,
+              })
+            }
+          } else {
+            Row({ space: CommonConstants.SPACE_L }) {
+              Image($r('app.media.ic_user_unlogin'))
+                .width($r('app.float.user_icon_width'))
+                .draggable(false)
+              Column({ space: CommonConstants.SPACE_XXS }) {
+                Text('点击登录')
+                  .fontSize(18)
+                  .fontColor($r('sys.color.font_primary'))
+                  .fontWeight(FontWeight.Medium)
+                Text('登录后享受更多服务')
+                  .fontSize(12)
+                  .fontColor($r('sys.color.font_primary'))
+              }
+              .layoutWeight(1)
+              .alignItems(HorizontalAlign.Start)
+
+              Image($r('app.media.ic_right'))
+                .width($r('app.float.arrow_right_w'))
+                .draggable(false)
+            }
+            .borderRadius($r('app.float.large_radius'))
+            .padding(CommonConstants.PADDING_S)
+            .stateStyles({
+              normal: this.normalStyles,
+              pressed: this.pressedStyles,
+            })
+            .backgroundColor(Color.Transparent)
+            .onClick(() => {
+              this.login()
+            })
+          }
+        } else {
+          Row({ space: CommonConstants.SPACE_L }) {
+            Image(this.bloggerInfo.avatar)
+              .width($r('app.float.user_icon_width'))
+              .clipShape(new CircleShape({ width: 48, height: 48 }))
+              .draggable(false)
+            Column({ space: CommonConstants.SPACE_XXS }) {
+              Text(this.bloggerInfo.name)
+                .fontSize(18)
                 .fontColor($r('sys.color.font_primary'))
-              this.userTagBuilderParam()
-            }.alignItems(HorizontalAlign.Start)
-
-            Image(this.bloggerInfo.avatar).width(64).height(64).borderRadius(32)
-          }.width('100%').justifyContent(FlexAlign.SpaceBetween).onClick(() => {
-            this.login()
-          })
-
-          this.membershipBuilderParam()
+                .fontWeight(FontWeight.Medium)
+            }
+            .layoutWeight(1)
+            .alignItems(HorizontalAlign.Start)
+          }
+          .borderRadius($r('app.float.large_radius'))
+          .padding(CommonConstants.PADDING_S)
+          .backgroundColor(Color.Transparent)
         }
+      }
+      .backgroundColor($r('sys.color.comp_background_list_card'))
+      .padding(CommonConstants.PADDING_XS)
+      .borderRadius($r('app.float.large_radius'))
 
+      Column({ space: 12 }) {
         Column() {
           Row() {
             Text(this.bloggerInfo.sex).fontSize(12).fontColor($r('sys.color.font_primary'))
@@ -65,21 +174,21 @@ export struct BloggerInfomation {
               .width(6)
               .height(6)
               .borderRadius(3)
-              .backgroundColor($r('sys.color.black'))
+              .backgroundColor($r('sys.color.icon_primary'))
               .margin({ left: 8, right: 8 })
             Text(this.bloggerInfo.createdAccount).fontSize(12).fontColor($r('sys.color.font_primary'))
             Row()
               .width(6)
               .height(6)
               .borderRadius(3)
-              .backgroundColor($r('sys.color.black'))
+              .backgroundColor($r('sys.color.icon_primary'))
               .margin({ left: 8, right: 8 })
             Text(this.bloggerInfo.ipLocation).fontSize(12).fontColor($r('sys.color.font_primary'))
             Row()
               .width(6)
               .height(6)
               .borderRadius(3)
-              .backgroundColor($r('sys.color.black'))
+              .backgroundColor($r('sys.color.icon_primary'))
               .margin({ left: 8, right: 8 })
             Text(this.bloggerInfo.bloggerType).fontSize(12).fontColor($r('sys.color.font_primary'))
           }.width('100%')
@@ -88,35 +197,43 @@ export struct BloggerInfomation {
             Text('简介：').fontSize(12).fontColor($r('sys.color.font_primary'))
             Text(this.bloggerInfo.profile).fontSize(12).fontColor($r('sys.color.font_primary'))
           }.width('100%').alignItems(HorizontalAlign.Start).margin({ top: 12 })
-        }.padding(12).visibility(!this.isSelf || this.isLogin ? Visibility.Visible : Visibility.None)
-      }.width('100%').borderRadius(16)
+        }.padding(12)
+      }
+      .backgroundColor($r('sys.color.comp_background_list_card'))
+      .margin({ top: 12 })
+      .borderRadius($r('app.float.large_radius'))
 
       Row() {
-        Row({ space: 8 }) {
+        Row() {
           Column() {
             Text(this.bloggerInfo.getFollowers()).fontSize(12).fontColor($r('sys.color.font_primary'))
             Text('关注').fontSize(12).fontColor($r('sys.color.font_primary')).margin({ top: 6 })
-          }.onClick(() => {
+          }
+          .onClick(() => {
             this.jumpFollowers()
           })
 
+          Blank()
           Column() {
             Text(this.bloggerInfo.getFans()).fontSize(12).fontColor($r('sys.color.font_primary'))
             Text('粉丝').fontSize(12).fontColor($r('sys.color.font_primary')).margin({ top: 6 })
-          }.margin({left: this.gridCount !== 2 && !this.isSelf ? 40 : 0})
+          }
 
+          Blank()
           Column() {
             Text(this.bloggerInfo.getBeFavorite()).fontSize(12).fontColor($r('sys.color.font_primary'))
             Text('被收藏').fontSize(12).fontColor($r('sys.color.font_primary')).margin({ top: 6 })
-          }.margin({left: this.gridCount !== 2 && !this.isSelf ? 40 : 0})
+          }
 
+          Blank()
           Column() {
             Text(this.bloggerInfo.getBeFollowed()).fontSize(12).fontColor($r('sys.color.font_primary'))
             Text('被跟做').fontSize(12).fontColor($r('sys.color.font_primary')).margin({ top: 6 })
-          }.margin({left: this.gridCount !== 2 && !this.isSelf ? 40 : 0})
+          }
         }
-        .width(this.gridCount === 2 || !this.isSelf ? '80%' : '100%')
-        .justifyContent(this.gridCount === 2 || !this.isSelf ? null : FlexAlign.SpaceAround)
+        .width(this.isSelf ? '100%' : '80%')
+        .padding({ left: 16, right: 16 })
+
         Button(this.isFollower ? '已关注' : '关注', { controlSize: ControlSize.SMALL })
           .fontSize($r('sys.float.Body_M'))
           .fontColor(this.isFollower ? '#E84026' : $r('sys.color.font_on_primary'))
@@ -126,10 +243,23 @@ export struct BloggerInfomation {
           .onClick(() => {
             this.followCb(!this.isFollower)
           })
-      }.padding(12).width('100%')
-      .justifyContent(FlexAlign.SpaceBetween).borderRadius(16)
-      // .justifyContent(this.gridCount === 2 ? FlexAlign.SpaceBetween : FlexAlign.SpaceAround).borderRadius(16)
+      }
+      .width('100%')
+      .height(60)
+      .margin({ top: 10 })
+      .justifyContent(FlexAlign.SpaceBetween)
+      .borderRadius($r('app.float.large_radius'))
     }
-    .width('100%')
+    .backgroundColor($r('sys.color.comp_background_gray'))
+  }
+
+  @Styles
+  normalStyles() {
+    .backgroundColor($r('sys.color.comp_background_gray'))
+  }
+
+  @Styles
+  pressedStyles(): void {
+    .backgroundColor($r('sys.color.interactive_pressed'))
   }
 }

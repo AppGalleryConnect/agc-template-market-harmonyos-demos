@@ -1,6 +1,7 @@
-import { IGoods } from 'lib_foundation'
+import { LengthMetrics } from '@kit.ArkUI';
+import { ToastDialog } from '@hw-agconnect/ui-toast'
+import { IGoods, CommonStepper, CommonTitle, BottomBtn } from 'lib_foundation'
 import { GoodsPageVM } from '../viewModels/GoodsPageVM'
-import { CommonCounter } from 'module_base'
 
 @Builder
 export function GoodsPageBuilder() {
@@ -10,14 +11,22 @@ export function GoodsPageBuilder() {
 @Entry
 @ComponentV2
 struct GoodsPage {
-  vm: GoodsPageVM = GoodsPageVM.instance
-  controllerSearch: SearchController = new SearchController()
-  controllerInputLong: TextInputController = new TextInputController()
-  controllerInputWidth: TextInputController = new TextInputController()
-  controllerInputHeight: TextInputController = new TextInputController()
+  vm: GoodsPageVM = new GoodsPageVM();
+  controllerSearch: SearchController = new SearchController();
+  controllerInputLong: TextInputController = new TextInputController();
+  controllerInputWidth: TextInputController = new TextInputController();
+  controllerInputHeight: TextInputController = new TextInputController();
+
+  aboutToAppear(): void {
+    // 查询物品信息
+    this.vm.init();
+  }
 
   build() {
     NavDestination() {
+      CommonTitle({
+        title: '物品信息',
+      })
       Column() {
         Scroll() {
           Column() {
@@ -25,21 +34,18 @@ struct GoodsPage {
               Image($r('app.media.ic_warning_1'))
                 .width(12)
                 .height(12)
-              Text('请如实填写，因填写不实导致相关责任损失的，有您自行承担')
+              Text('请如实填写，因填写不实导致相关责任损失的，由您自行承担')
                 .fontSize(10)
                 .fontWeight(FontWeight.Regular)
                 .fontColor($r('sys.color.font_tertiary'))
+                .lineHeight(13)
             }
             .width('100%')
-            .margin({ top: 8, bottom: 12 })
+            .margin({ top: 8 })
 
-            Column() {
-              Text('热门类型')
-                .fontSize(14)
-                .fontWeight(FontWeight.Bold)
-                .fontColor($r('sys.color.font_primary'))
-                .margin({ bottom: 8 })
-              Flex({ wrap: FlexWrap.Wrap }) {
+            Column({ space: 8 }) {
+              this.titleBuilder('物品类型')
+              Flex({ wrap: FlexWrap.Wrap, space: { main: LengthMetrics.vp(8), cross: LengthMetrics.vp(8) } }) {
                 ForEach(this.vm.goodsList, (goods: IGoods, index: number) => {
                   Row() {
                     Text(goods.name)
@@ -52,10 +58,12 @@ struct GoodsPage {
                   .justifyContent(FlexAlign.Center)
                   .alignItems(VerticalAlign.Center)
                   .borderRadius(8)
-                  .backgroundColor(this.vm.selectedGoods?.id === goods.id ? '#0A59F7' : '#C4C4C4')
-                  .margin((index + 1) % 4 === 0 ? { bottom: 8 } : { bottom: 8, right: 5 })
+                  .backgroundColor(this.vm.selectedGoods?.id === goods.id ?
+                    $r('sys.color.comp_background_emphasize') : $r('sys.color.comp_background_tertiary')
+                  )
                   .onClick(() => {
-                    this.vm.selectedGoods = goods
+                    this.vm.selectedGoods = goods;
+                    this.vm.weight = goods.weight;
                   })
                 }, (item: IGoods[]) => JSON.stringify(item))
               }
@@ -66,10 +74,21 @@ struct GoodsPage {
 
             Row() {
               this.titleBuilder('预估重量')
-              CommonCounter({
-                weight: this.vm.weight,
+
+              CommonStepper({
+                value: this.vm.weight,
                 unit: 'kg',
+                min: 1,
+                max: 9999,
+                buttonType: ButtonType.Circle,
+                isBorder: false,
                 onChange: (value) => {
+                  if (value <= 0) {
+                    return;
+                  }
+                  if (value > 9999) {
+                    return;
+                  }
                   this.vm.weight = value
                 },
               })
@@ -78,7 +97,7 @@ struct GoodsPage {
             .justifyContent(FlexAlign.SpaceBetween)
             .cardStyles()
 
-            Column() {
+            Column({ space: 8 }) {
               Row() {
                 this.titleBuilder('总体积')
                 Row() {
@@ -87,10 +106,7 @@ struct GoodsPage {
                     .fontWeight(FontWeight.Regular)
                     .fontColor($r('sys.color.font_tertiary'))
                     .margin({ right: 4 })
-                  Toggle({ type: ToggleType.Switch, isOn: true })
-                    .onChange((value) => {
-                      this.vm.showVolume = value
-                    })
+                  Toggle({ type: ToggleType.Switch, isOn: $$this.vm.showVolume })
                 }
               }
               .width('100%')
@@ -98,10 +114,31 @@ struct GoodsPage {
 
               if (this.vm.showVolume) {
                 Row() {
-                  CommonCounter({
-                    weight: this.vm.volume,
+                  CommonStepper({
+                    value: this.vm.volume,
                     unit: 'm³',
+                    min: 1,
+                    max: 99,
+                    buttonType: ButtonType.Circle,
+                    isBorder: false,
                     onChange: (value) => {
+                      if (value <= 0) {
+                        return;
+                      }
+                      if (value > 99) {
+                        ToastDialog.showToast({
+                          message: '包裹总体积不能超过99立方米',
+                          toastAlignment: DialogAlignment.Center,
+                          toastOption: {
+                            toastBackgroundColor: '#99000000',
+                            toastBackgroundBlur: BlurStyle.NONE,
+                          },
+                          fontType: {
+                            fontColor: '#FFFFFF'
+                          }
+                        })
+                        return;
+                      }
                       this.vm.volume = value
                     },
                   })
@@ -118,7 +155,7 @@ struct GoodsPage {
                     .backgroundColor('rgba(196,196,196,0.2)')
                     .width(72)
                     .height(28)
-                    .padding({ top: 0, bottom: 0 })
+                    .padding({ left: 12, top: 0, bottom: 0 })
                     .onChange((value) => {
                       this.vm.length = value
                       this.vm.calcVolume()
@@ -135,7 +172,7 @@ struct GoodsPage {
                     .backgroundColor('rgba(196,196,196,0.2)')
                     .width(72)
                     .height(28)
-                    .padding({ top: 0, bottom: 0 })
+                    .padding({ left: 12, top: 0, bottom: 0 })
                     .onChange((value) => {
                       this.vm.width = value
                       this.vm.calcVolume()
@@ -152,7 +189,7 @@ struct GoodsPage {
                     .backgroundColor('rgba(196,196,196,0.2)')
                     .width(72)
                     .height(28)
-                    .padding({ top: 0, bottom: 0 })
+                    .padding({ left: 12, top: 0, bottom: 0 })
                     .onChange((value) => {
                       this.vm.height = value
                       this.vm.calcVolume()
@@ -167,10 +204,21 @@ struct GoodsPage {
 
             Row() {
               this.titleBuilder('件数')
-              CommonCounter({
-                weight: this.vm.count,
+
+              CommonStepper({
+                value: this.vm.count,
                 unit: '件',
+                min: 1,
+                max: 999,
+                buttonType: ButtonType.Circle,
+                isBorder: false,
                 onChange: (value) => {
+                  if (value <= 0) {
+                    return;
+                  }
+                  if (value > 999) {
+                    return;
+                  }
                   this.vm.count = value
                 },
               })
@@ -179,44 +227,43 @@ struct GoodsPage {
             .justifyContent(FlexAlign.SpaceBetween)
             .cardStyles()
           }
-          .padding({ left: 16, right: 16 })
+          .padding({
+            left: this.vm.breakPointModel.pagePadding,
+            right: this.vm.breakPointModel.pagePadding
+          })
         }
         .scrollBar(BarState.Off)
         .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: false })
       }
       .layoutWeight(1)
 
-      Row() {
-        Button('保存')
-          .width('100%')
-          .onClick(() => {
-            this.vm.save()
-          })
-      }
-      .width('100%')
-      .padding({ left: 28, right: 28 })
-      .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.BOTTOM]);
+      BottomBtn({
+        text: '保存',
+        paddingSize: { left: 28, right: 28, bottom: this.vm.windowModel.windowBottomPadding },
+        onAction: () => {
+          this.vm.save()
+        }
+      })
     }
-    .backgroundColor('#F1F3F5')
-    .title('物品信息')
-    .onShown(() => {
-      this.vm.init()
-    })
+    .hideTitleBar(true)
+    .backgroundColor($r('sys.color.background_secondary'))
   }
 
   @Styles
   cardStyles(){
     .padding(12)
     .backgroundColor(Color.White)
-    .margin({ bottom: 12 })
-    .borderRadius(8)
+    .borderRadius(16)
+    .margin({ top: 12 })
   }
 
   @Builder
   titleBuilder(text: string) {
     Text(text)
-      .fontSize(14)
+      .fontSize(16)
       .fontWeight(FontWeight.Bold)
       .fontColor($r('sys.color.font_primary'))
+      .lineHeight(21)
+      .textAlign(TextAlign.Start)
   }
 }

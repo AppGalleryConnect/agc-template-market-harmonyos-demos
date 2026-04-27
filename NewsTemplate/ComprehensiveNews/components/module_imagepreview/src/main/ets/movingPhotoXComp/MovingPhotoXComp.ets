@@ -80,14 +80,16 @@ export struct MovingPhotoXComp {
         })
         .height(this.surfaceH)
         .width(this.surfaceW)
+        .gesture(LongPressGesture())
       Image(this.imageSrc.imageUrl)
         .objectFit(ImageFit.Contain)
         .draggable(false)
         .gesture(
           GestureGroup(GestureMode.Exclusive,
-            LongPressGesture().onAction(() => {
-              this.avPlayerController.videoPlay()
-            })
+            LongPressGesture()
+              .onAction(() => {
+                this.avPlayerController.videoPlay()
+              })
               .onActionEnd(() => {
                 this.avPlayerController.videoStop()
               }),

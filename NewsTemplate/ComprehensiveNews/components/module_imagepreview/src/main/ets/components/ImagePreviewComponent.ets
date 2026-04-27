@@ -46,6 +46,11 @@ export struct ImagePreviewComponent {
     }
   }
 
+  shouldShowIndicator() {
+    return this.options.showIndicator && !this.animating && this.firstLoad ? Visibility.Visible :
+      Visibility.Hidden
+  }
+
   build() {
     Stack({ alignContent: Alignment.TopStart }) {
       Column()
@@ -150,7 +155,7 @@ export struct ImagePreviewComponent {
         }
         .width(PreviewConstants.FULL_SIZE)
         .hitTestBehavior(HitTestMode.Transparent)
-        .visibility(!this.animating && this.firstLoad ? Visibility.Visible : Visibility.Hidden)
+        .visibility(this.shouldShowIndicator())
 
         // 顶部自定义组件插槽
         if (this.topBuilder) {

@@ -7,6 +7,10 @@
     {
       "name": "reason",
       "value": "获得oaid"
+    },
+    {
+      "name": "agcit_huawei_comprehensive_news",
+      "value": "1.0.5"
     }
   ]
 }

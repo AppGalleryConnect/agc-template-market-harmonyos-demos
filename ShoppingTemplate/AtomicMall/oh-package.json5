@@ -1,0 +1,14 @@
+{
+  "modelVersion": "6.0.2",
+  "description": "Please describe the basic information.",
+  "scripts": {
+    "lint:fix": "eslint . --ext .js,.ets,.jsx,.tsx --fix"
+  },
+  "dependencies": {
+    "@hw-agconnect/util-log": "1.0.0",
+    "@hw-agconnect/ui-toast": "1.0.0"
+  },
+  "overrides": {
+    "@ohos/axios": "2.2.4"
+  }
+}

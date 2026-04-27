@@ -1,0 +1,18 @@
+{
+  "routerMap": [
+    {
+      "name": "ProductSwiperPage",
+      "pageSourceFile": "src/main/ets/views/ProductSwiperPage.ets",
+      "buildFunction": "buildProductSwiperPage"
+    },    {
+      "name": "ProductInfoPage",
+      "pageSourceFile": "src/main/ets/views/ProductInfoPage.ets",
+      "buildFunction": "buildProductInfoPage"
+    },
+    {
+      "name": "ProductReviewPage",
+      "pageSourceFile": "src/main/ets/views/ProductReviewPage.ets",
+      "buildFunction": "buildProductReviewPage"
+    }
+  ]
+}

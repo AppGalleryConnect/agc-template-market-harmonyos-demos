@@ -54,7 +54,7 @@ export struct OtherLoginPage {
             .fontSize($r('sys.float.Body_L'))
             .fontColor($r('sys.color.font_primary'))
             .borderRadius($r('app.float.radius_20'))
-            .backgroundColor($r('sys.color.background_primary'))
+            .backgroundColor($r('sys.color.comp_background_list_card'))
             .placeholderColor($r('sys.color.font_secondary'))
             .placeholderFont({ size: $r('sys.float.Body_L') })
             .onChange((value) => {
@@ -74,10 +74,12 @@ export struct OtherLoginPage {
 
           Stack({ alignContent: Alignment.End }) {
             TextInput({ text: $$this.vm.verifyCode, placeholder: $r('app.string.verification_code') })
-              .layoutWeight(1)
+              .width(Constants.FULL_PERCENT)
+              .height(Constants.INPUT_HEIGHT)
+              .constraintSize({ maxWidth: Constants.MAX_WIDTH })
               .fontSize($r('sys.float.Body_L'))
               .fontColor($r('sys.color.font_primary'))
-              .backgroundColor(Color.Transparent)
+              .backgroundColor($r('sys.color.comp_background_list_card'))
               .placeholderColor($r('sys.color.font_secondary'))
               .placeholderFont({ size: $r('sys.float.Body_L') })
               .onChange((value) => this.vm.verifyCode = value)
@@ -235,6 +237,7 @@ export struct OtherLoginPage {
               })
             }
             .padding({ left: Constants.PADDING_L, right: Constants.PADDING_L })
+            .margin({ top: 22 })
             .width(Constants.FULL_PERCENT)
             .height(Constants.SHEET_TITLE_H)
           }

@@ -6,6 +6,7 @@ export interface UserInfo {
   sex: string;
   cellphone: string;
   birthday: string;
+  introDesc:string;
   code: string;
   isLogin: boolean;
   isMembership: boolean;
@@ -37,4 +38,7 @@ export interface recipesData {
   views: number;
   likes: number;
   isCollected: number;
+  video: string;
+  heatness? : number;
+  isVip? : number
 }

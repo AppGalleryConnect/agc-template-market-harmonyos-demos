@@ -4,10 +4,11 @@ import UIAbility from '@ohos.app.ability.UIAbility';
 import { KeyboardAvoidMode } from '@ohos.arkui.UIContext';
 import window from '@ohos.window';
 import { ShareService } from 'aggregated_share';
-import { PushUtil } from 'lib_foundation';
+import { ColorModeUtil, PushUtil, routerStack, WindowUtil } from 'lib_foundation';
 import { LoneTakeAnimationsTransition } from 'module_transition';
 import { UtilLog } from '@hw-agconnect/util-log';
 import { SetupUtil } from '../utils/SetupUtil';
+import { splitNavStore } from '../utils/SplitNavStore';
 
 const TAG: string = '[EntryAbility]';
 
@@ -27,15 +28,16 @@ export default class EntryAbility extends UIAbility {
       showStack: false,
     });
     UtilLog.info(TAG, 'set global log config success.');
-    try {
-      this.context
-        .getApplicationContext()
-        .setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_LIGHT);
-    } catch (err) {
-      UtilLog.error(TAG, JSON.stringify(err));
-    }
+    ColorModeUtil.applySavedColorMode(this.context);
     this.shareServiceImpl.handleWant(want, this.context);
     SetupUtil.handleWant(want);
+    const productId = want.parameters?.productId as string | undefined;
+    if (productId) {
+      splitNavStore.productId = productId;
+      const rawSlotId = want.parameters?.slotId as string | undefined;
+      splitNavStore.slotId = rawSlotId && rawSlotId.length > 0 ? rawSlotId : undefined;
+      splitNavStore.isSplitPage = want.parameters?.isSplitPage === true;
+    }
   }
 
   onWindowStageCreate(windowStage: window.WindowStage): void {
@@ -51,6 +53,11 @@ export default class EntryAbility extends UIAbility {
         UtilLog.error(TAG, JSON.stringify(err));
       }
     });
+  }
+
+  onWindowStageActive(windowStage: window.WindowStage): void {
+    routerStack.setActive('EntryAbility');
+    WindowUtil.setActiveContext('EntryAbility');
   }
 
   onNewWant(want: Want): void {

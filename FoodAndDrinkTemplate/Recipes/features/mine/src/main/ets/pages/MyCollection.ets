@@ -17,6 +17,7 @@ struct MyCollection {
       Recipes({ recipeList: this.vm.collections });
     }
     .title(buildTitleBar('我的收藏'), { paddingStart: LengthMetrics.vp(16) })
+    .padding({top: 40})
     .onWillShow(() => {
       this.vm.queryCollection();
     });

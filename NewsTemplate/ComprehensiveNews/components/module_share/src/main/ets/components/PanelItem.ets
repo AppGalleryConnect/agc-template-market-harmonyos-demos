@@ -1,19 +1,17 @@
-import { image } from '@kit.ImageKit';
 import { CommonConstants } from '../common/Constants';
-import { ShareAppType, ShareWay } from '../common/ShareEnum';
+import { ShareAppType, ShareWay, ShareContentType } from '../common/ShareEnum';
 import { ShareKinds, ShareViewData } from '../common/ShareParams';
-import { saveImgToAlbum } from '../utils/FileUtils';
 import { WXShareUtils } from '../utils/WXShareUtils';
 import { QQShareUtils } from '../utils/QQShareUtils';
 import { WeiboShareUtils } from '../utils/WeiboShareUtils';
 import { SystemShareUtils } from '../utils/SystemShareUtils';
 import { CustomTouchModifier } from '../common/Styles';
+import { saveImgToAlbum } from '../utils/FileUtils';
 
 @ComponentV2
 export struct PanelItem {
   @Require @Param value: ShareKinds;
   @Require @Param data: ShareViewData;
-  @Param @Require pixmap: image.PixelMap;
   @Event showPoster: () => void = () => {
   };
   @Local systemShare: SystemShareUtils = SystemShareUtils.instance;
@@ -38,7 +36,7 @@ export struct PanelItem {
         this.showPoster();
         break;
       case ShareWay.COPY_TO_PASTEBOARD:
-        this.systemShare.copy(this.getUIContext(), this.data);
+        this.systemShare.copy(this.data);
         this.handleAutoClose();
         break;
       case ShareWay.SYSTEM:
@@ -50,16 +48,27 @@ export struct PanelItem {
   }
 
   sendImage() {
+    if (!this.data.imageUri) {
+      return;
+    }
     switch (this.value.kindId) {
       case ShareAppType.WECHAT_SESSION:
       case ShareAppType.WECHAT_TIMELINE:
-        this.wxShare.shareImage(this.getUIContext(), this.pixmap, this.value.kindId);
+        this.wxShare.shareImage(this.getUIContext(), this.data, this.value.kindId);
+        break;
+      case ShareAppType.QQ:
+        this.qqShare.shareImage(this.getUIContext(), this.data);
         break;
       case ShareAppType.WEIBO:
-        this.weiboShare.share(this.getUIContext(), this.data, this.pixmap);
+        this.weiboShare.share(this.getUIContext(), this.data);
         break;
       case ShareWay.SAVE_TO_ALBUM:
-        saveImgToAlbum(this.getUIContext(), this.pixmap).then(() => {
+        saveImgToAlbum(this.getUIContext(), this.data.imageUri).then(() => {
+          this.handleAutoClose();
+        });
+        break;
+      case ShareWay.SYSTEM:
+        this.systemShare.share(this.getUIContext()).then(() => {
           this.handleAutoClose();
         });
         break;
@@ -94,7 +103,7 @@ export struct PanelItem {
     .borderRadius(8)
     .attributeModifier(this.touchModifier)
     .onClick(() => {
-      if (this.value.isPoster) {
+      if (this.data.shareType === ShareContentType.IMAGE || this.value.isPoster) {
         this.sendImage();
       } else {
         this.sendTextOrUrl();

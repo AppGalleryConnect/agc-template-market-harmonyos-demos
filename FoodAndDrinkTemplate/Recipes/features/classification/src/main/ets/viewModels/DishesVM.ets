@@ -1,11 +1,25 @@
-import { AccountUtil, AppStorageMap, Logger, RdbManager, RouterMap, RouterModule, recipesData, CommonConstants,
-  GlobalContextUtils, BreakpointModel, BreakpointType } from 'commonlib';
-import { addCollection, changeFollowers, queryRecipeDetail, RecipeBriefInfo, RecipeDetail, removeCollection } from 'network';
+import {
+  AccountUtil,
+  AppStorageMap,
+  BreakpointModel,
+  BreakpointType,
+  CommonConstants,
+  GlobalContextUtils,
+  Logger,
+  RdbManager,
+  recipesData,
+  RouterMap,
+  RouterModule,
+  SystemBarOperation
+} from 'commonlib';
+import { addCollection, changeFollowers, queryRecipeDetail, RecipeDetail, removeCollection } from 'network';
 import { BasketList } from '../types/Index';
-import { AppStorageV2, PersistenceV2, promptAction } from '@kit.ArkUI';
+import { AppStorageV2, PersistenceV2 } from '@kit.ArkUI';
 import { common } from '@kit.AbilityKit';
-
-const TAG = '[DishesVM]';
+import { LongTakeAnimationProperties, LongTakeTransitionParam } from 'module_transition';
+import { MovingPhotoViewController, photoAccessHelper } from '@kit.MediaLibraryKit';
+import { CommentModel } from '../model/CommentModel';
+import { CommentStore } from './CommentStore';
 
 @ObservedV2
 export class DishesVM {
@@ -15,34 +29,77 @@ export class DishesVM {
   @Trace collection: boolean = false
   @Trace isFollower: boolean = false
   scroller: Scroller = new Scroller();
+  stepScroller: Scroller = new Scroller();
   private context: common.UIAbilityContext = GlobalContextUtils.globalUIAbilityContext;
   private rdbManager: RdbManager = new RdbManager(this.context);
   @Trace breakPointModel: BreakpointModel = AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
+  @Trace indexValue: number = -1;
+  @Trace longTakeSession: LongTakeAnimationProperties = new LongTakeAnimationProperties();
+  @Trace longTakeTransitionParam: LongTakeTransitionParam | undefined = undefined;
+  @Trace pageInfos: NavPathStack = RouterModule.getStack();
+  @Trace src: photoAccessHelper.MovingPhoto | undefined = undefined;
+  @Trace showPip: boolean = false;
+  @Trace isFold: boolean = true;
+  @Trace isFullScreen: boolean = true;
+  @Trace comments: CommentModel[] = [];
+  @Trace isStop: boolean = false;
+  controller: MovingPhotoViewController = new MovingPhotoViewController();
+  videoController: VideoController = new VideoController();
+  commentsScroller: ListScroller = new ListScroller();
+  sliderHeight: BreakpointType<string> = new BreakpointType<string>({
+    sm: '92%',
+    md: '97%',
+    lg: '92%',
+    xl: '92%',
+  });
+  marginLeft: BreakpointType<number> = new BreakpointType<number>({
+    sm: 8,
+    md: 20,
+    lg: 28,
+    xl: 28,
+  });
 
   async init() {
     let recipeRouter = RouterModule.getNavParam<RecipeDetail>(RouterMap.DISHES)
     await this.rdbManager.initDatabase(this.context);
     Logger.info('Dishes detail router params:', JSON.stringify(recipeRouter))
+    if (recipeRouter?.id) {
+      this.comments = CommentStore.instance().getByRecipeId(recipeRouter?.id);
+    }
     queryRecipeDetail(recipeRouter?.id || 0).then(async res => {
       if (res.status === 200) {
         this.recipeDetail = res.data;
+        if (!this.recipeDetail?.video || (this.recipeDetail?.video && this.recipeDetail.thumbnail)) {
+          this.isFullScreen = false;
+        } else {
+          SystemBarOperation.setWindowSystemBarProp({
+            statusBarContentColor: '#ffffff',
+          })
+        }
+        if (this.recipeDetail?.video && this.recipeDetail.thumbnail) {
+          let imageUri = this.recipeDetail.thumbnail;
+          let videoUri = this.recipeDetail.video;
+          this.src = await photoAccessHelper.MediaAssetManager.loadMovingPhoto(this.context, imageUri, videoUri);
+        }
         // 查询rdb数据，判断是insert还是update
         const result: recipesData[] = await this.rdbManager.query(this.recipeDetail.title, false);
-        if(!result.length) {
+        if (!result.length) {
           let recipes: recipesData = {
             id: this.recipeDetail.id,
             title: this.recipeDetail.title,
-            description:  this.recipeDetail.description,
-            category:  this.recipeDetail.category,
-            cookingTime:  this.recipeDetail.cookingTime,
-            difficulty:  this.recipeDetail.difficulty,
-            authorId:  this.recipeDetail.authorId,
-            author:  this.recipeDetail.author,
-            authorAvatar:  this.recipeDetail.authorAvatar,
-            thumbnail:  this.recipeDetail.thumbnail,
-            views:  this.recipeDetail.views,
-            likes:  this.recipeDetail.likes,
-            isCollected: 0
+            description: this.recipeDetail.description,
+            category: this.recipeDetail.category,
+            cookingTime: this.recipeDetail.cookingTime,
+            difficulty: this.recipeDetail.difficulty,
+            authorId: this.recipeDetail.authorId,
+            author: this.recipeDetail.author,
+            authorAvatar: this.recipeDetail.authorAvatar,
+            thumbnail: this.recipeDetail.thumbnail,
+            views: this.recipeDetail.views,
+            likes: this.recipeDetail.likes,
+            isCollected: 0,
+            video: this.recipeDetail.video,
+            heatness: this.recipeDetail.heatness
           }
           await this.rdbManager.insertData(recipes, 0);
         }
@@ -52,11 +109,21 @@ export class DishesVM {
     })
   }
 
+  addComment(comment: string, score: number) {
+    if (this.recipeDetail?.id) {
+      let authorId = AccountUtil.getUserInfo().id;
+      let nickName = AccountUtil.getUserInfo().nickname;
+      let icon = AccountUtil.getUserInfo().avatar;
+      CommentStore.instance().addComment(this.recipeDetail.id, authorId, nickName, icon, comment, score);
+      this.comments = CommentStore.instance().getByRecipeId(this.recipeDetail?.id);
+    }
+  }
+
   async addCollection() {
-    if(CommonConstants.RDB_FLAG) {
+    if (CommonConstants.RDB_FLAG) {
       // rdb 处理
       if (this.recipeDetail) {
-        let recipes:recipesData = JSON.parse(JSON.stringify(this.recipeDetail));
+        let recipes: recipesData = JSON.parse(JSON.stringify(this.recipeDetail));
         await this.rdbManager.updateData(recipes, 1);
         this.collection = true
       }
@@ -72,9 +139,9 @@ export class DishesVM {
 
   async cancelCollection() {
     // rdb 处理
-    if(CommonConstants.RDB_FLAG) {
+    if (CommonConstants.RDB_FLAG) {
       if (this.recipeDetail) {
-        let recipes:recipesData = JSON.parse(JSON.stringify(this.recipeDetail));
+        let recipes: recipesData = JSON.parse(JSON.stringify(this.recipeDetail));
         await this.rdbManager.updateData(recipes, 0);
         this.collection = false
       }
@@ -142,8 +209,22 @@ export class DishesVM {
     this.isFollower = isFollower
   }
 
+  showFullScreen() {
+    this.isFullScreen = true;
+  }
+
   @Computed
   get breakPoint() {
     return this.breakPointModel.currentBreakpoint;
+  }
+
+  @Computed
+  get heightPercent() {
+    return this.sliderHeight.getValue(this.breakPointModel.currentBreakpoint);
+  }
+
+  @Computed
+  get dishMargin() {
+    return this.marginLeft.getValue(this.breakPointModel.currentBreakpoint);
   }
 }

@@ -2,6 +2,15 @@ import { ChatEnum, NewsEnum } from '../../constants/Constants';
 import { PostImgList } from '../base/BaseModel';
 
 /**
+ * 查询动态请求字段
+ */
+export interface PostQueryRequest {
+  currentIndex: number;
+  currentPage: number;
+  topicTitle?: string;
+}
+
+/**
  * 发布动态请求字段
  */
 export interface PostRequest {
@@ -10,6 +19,9 @@ export interface PostRequest {
 
   // 图片、视频链接
   postImgList?: PostImgList[];
+
+  // 城市定位
+  city?: string;
 }
 
 /**
@@ -71,6 +83,15 @@ export interface NewsRequest {
 }
 
 /**
+ * 添加预约请求
+ */
+export interface AddReservationRequest {
+  newsId: string
+  liveStartTime: number
+  eventId: number
+}
+
+/**
  * 搜索
  */
 export interface SearchRequest {
@@ -93,14 +114,6 @@ export interface AddArticleRequest {
 export interface AddFlexLayoutRequest {
   articleId: string;
   setting: string;
-}
-
-/**
- * 查询推荐请求
- */
-export interface QueryListRequest {
-  currentIndex: number;
-  currentPage: number;
 }
 
 /**

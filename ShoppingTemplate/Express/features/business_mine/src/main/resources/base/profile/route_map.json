@@ -6,19 +6,14 @@
       "buildFunction": "QuickLoginPageBuilder"
     },
     {
-      "name": "EditNamePage",
-      "pageSourceFile": "src/main/ets/pages/EditNamePage.ets",
-      "buildFunction": "EditNamePageBuilder"
-    },
-    {
-      "name": "EditPhonePage",
-      "pageSourceFile": "src/main/ets/pages/EditPhonePage.ets",
-      "buildFunction": "EditPhonePageBuilder"
-    },
-    {
       "name": "PersonalInformationPage",
       "pageSourceFile": "src/main/ets/pages/PersonalInformationPage.ets",
       "buildFunction": "PersonalInformationPageBuilder"
+    },
+    {
+      "name": "CouponPage",
+      "pageSourceFile": "src/main/ets/pages/CouponPage.ets",
+      "buildFunction": "buildCouponPage"
     },
     {
       "name": "PrivacyPage",
@@ -31,14 +26,19 @@
       "buildFunction": "SettingPageBuilder"
     },
     {
-      "name": "VipPage",
-      "pageSourceFile": "src/main/ets/pages/VipPage.ets",
-      "buildFunction": "VipPageBuilder"
+      "name": "SettingPrivacyPage",
+      "pageSourceFile": "src/main/ets/pages/SettingPrivacyPage.ets",
+      "buildFunction": "settingPrivacyPageBuilder"
     },
     {
       "name": "PurchasePage",
       "pageSourceFile": "src/main/ets/pages/PurchasePage.ets",
       "buildFunction": "PurchasePageBuilder"
+    },
+    {
+      "name": "RealNameAuthPage",
+      "pageSourceFile": "src/main/ets/pages/RealNameAuthPage.ets",
+      "buildFunction": "RealNameAuthPageBuilder"
     }
   ]
 }

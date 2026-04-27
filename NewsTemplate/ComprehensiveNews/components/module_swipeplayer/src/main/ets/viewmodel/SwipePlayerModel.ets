@@ -44,6 +44,7 @@ export class SwipePlayerModel extends VideoPlayerModel {
     this.playerId = 'player_' + data.getVideoId() + util.generateRandomUUID();
 
     if (this.index === 0 && avPlayerController) {
+      Logger.debug(TAG, 'isFromList is true');
       this.isFromList = true;
       this.itemAVPlayer = avPlayerController!.avPlayer
       this.itemAVPlayer?.pause().catch((e: BusinessError) => {
@@ -60,6 +61,7 @@ export class SwipePlayerModel extends VideoPlayerModel {
     try {
       // 从视频推荐页或新闻详情页进入的短视频滑动页
       if (this.isFromList && this.index === 0 && this.itemAVPlayer) {
+        Logger.debug(TAG, 'itemAVPlayer exist');
         this.showCover = false
         this.isPause = false
         this.itemAVPlayer!.surfaceId = this.surfaceId

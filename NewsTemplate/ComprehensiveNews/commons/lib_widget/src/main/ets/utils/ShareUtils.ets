@@ -1,7 +1,8 @@
 import { window } from '@kit.ArkUI';
 import { harmonyShare } from '@kit.ShareKit';
+import { BusinessError } from '@kit.BasicServicesKit';
 import { Logger } from 'lib_common';
-import { SharePicker, ShareRecordData } from 'module_share';
+import { ShareAppType, ShareOptions, SharePicker, ShareRecordData } from 'module_share';
 
 const TAG = '[ShareUtils]';
 
@@ -9,6 +10,20 @@ const TAG = '[ShareUtils]';
  * 分享工具类
  */
 export class ShareUtils {
+  /**
+   * 打开分享半模态弹窗
+   * @param uiContext
+   * @param shareData
+   * @param options
+   */
+  public openSheet(uiContext: UIContext, shareData: ShareRecordData, options?: ShareOptions) {
+    const picker: SharePicker = new SharePicker(shareData);
+    picker.show(uiContext, options ?? {
+      autoClose: true,
+      excludedAbilities: [ShareAppType.WEIBO],
+    });
+  }
+
   /**
    * 直接分享到微信
    * @param uiContext

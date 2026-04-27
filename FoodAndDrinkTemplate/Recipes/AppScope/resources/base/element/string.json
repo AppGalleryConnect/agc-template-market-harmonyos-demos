@@ -6,7 +6,7 @@
     },
     {
       "name": "agcit_huawei_recipes",
-      "value": "1.0.6"
+      "value": "1.0.7"
     },
     {
       "name": "agcittype_huawei_recipes",
@@ -14,7 +14,7 @@
     },
     {
       "name": "agcitkid_huawei_recipes",
-      "value": "agcit_huawei_recipes_aggregated_ads/1.0.2,agcit_huawei_recipes_calorie_calculation/1.0.4,agcit_huawei_recipes_featured_recipes/1.0.5,agcit_huawei_recipes_home_search/1.0.4,agcit_huawei_recipes_link_category/1.0.4,agcit_huawei_recipes_personal_homepage/1.0.4,agcit_huawei_recipes_shopping_basket/1.0.4,agcit_huawei_recipes_upload_recipe/1.0.4"
+      "value": "agcit_huawei_recipes_aggregated_ads/1.0.3,agcit_huawei_common_login/1.0.2,agcit_huawei_common_membership/1.0.2,agcit_huawei_recipes_calorie_calculation/1.0.5,agcit_huawei_recipes_featured_recipes/1.0.6,agcit_huawei_recipes_home_search/1.0.5,agcit_huawei_recipes_link_category/1.0.5,agcit_huawei_recipes_personal_homepage/1.0.5,agcit_huawei_recipes_shopping_basket/1.0.5,agcit_huawei_recipes_upload_recipe/1.0.5,agcit_huawei_common_app_setting/1.0.1,agcit_huawei_common_collect_personal_info/1.0.1,agcit_huawei_common_share/1.0.2,agcit_huawei_recipes_module_imagepreview/1.0.0,agcit_huawei_recipes_module_transition/1.0.0"
     }
   ]
 }

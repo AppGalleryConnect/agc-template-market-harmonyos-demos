@@ -1,10 +1,17 @@
 import { BusinessError, pasteboard } from '@kit.BasicServicesKit';
 import { CashierPicker, PaymentType, aggregatedPaymentService } from 'aggregated_payment';
-import { RouterMap, routerStack, SafeJson, WindowUtil } from 'lib_foundation';
-import { AddressInfo, LogisticsItem, OrderApis, OrderItem, OrderSkuItem,
+import { RouterMap, routerStack, SafeJson, WindowUtil, iData } from 'lib_foundation';
+import {
+  AddressInfo,
+  CouponApis,
+  LogisticsItem,
+  OrderApis,
+  OrderItem,
+  OrderSkuItem,
   OrderStatus,
   ProductApis,
-  ShoppingCartApis } from 'lib_network';
+  ShoppingCartApis,
+} from 'lib_network';
 import { OrderReviewReq } from 'lib_network';
 import { CartUpdateResp } from 'lib_network/src/main/ets/types/responses/CartResponse';
 import { CommonConfirmDialog, CustomServiceSheet } from 'lib_widget';
@@ -12,6 +19,7 @@ import { UtilLog as Logger, UtilLog } from '@hw-agconnect/util-log';
 import {
   ORDER_STATUS_COMPLETE,
   ORDER_STATUS_PENDING_PAYMENT,
+  ORDER_STATUS_PENDING_PICKUP,
   ORDER_STATUS_PENDING_RECEIPT,
   ORDER_STATUS_PENDING_REVIEW,
   ORDER_STATUS_PENDING_SHIPMENT,
@@ -33,6 +41,7 @@ export class OrderUtil {
       [OrderStatusMap.CANCELED, '已取消'],
       [OrderStatusMap.PENDING_SHIPMENT, '待发货'],
       [OrderStatusMap.PENDING_RECEIPT, '待收货'],
+      [OrderStatusMap.PENDING_PICKUP, '待取件'],
       [OrderStatusMap.PENDING_REVIEW, '交易成功'],
       [OrderStatusMap.REVIEWED, '已完成'],
       [OrderStatusMap.REFUND_IN_PROGRESS, '退款中'],
@@ -45,7 +54,7 @@ export class OrderUtil {
     if (method === OrderShipmentMap.EXPRESS) {
       return '快递到家';
     } else if (method === OrderShipmentMap.SELF_PICK_UP) {
-      return '到店自取';
+      return '到店自提';
     }
     return '';
   }
@@ -58,24 +67,24 @@ export class OrderUtil {
       [202, '已揽收'],
       [203, '运输中'],
       [204, '派件中'],
-      [205, '待取件'],
+      [205, '待收货'],
       [301, '已签收'],
     ]);
     return labelMap.get(status) ?? '';
   }
 
-  public static getLogisticStatusTime(node:LogisticsItem){
-    if(node.details.length){
+  public static getLogisticStatusTime(node: LogisticsItem) {
+    if (node.details.length) {
       return node.details[node.details.length-1].time;
     }
     return '';
   }
 
-  public static getCourierInfo(info?:LogisticsItem[]){
-    if(info?.length && info[0].courier && info[0].contactPhone) {
+  public static getCourierInfo(info?: LogisticsItem[]) {
+    if (info?.length && info[0].courier && info[0].contactPhone) {
       return {
-        name:info[0].courier,
-        contactPhone:info[0].contactPhone,
+        name: info[0].courier,
+        contactPhone: info[0].contactPhone,
       } as CourierInfo;
     }
     return undefined;
@@ -87,6 +96,7 @@ export class OrderUtil {
       [OrderStatusMap.PENDING_PAYMENT, ORDER_STATUS_PENDING_PAYMENT],
       [OrderStatusMap.PENDING_SHIPMENT, ORDER_STATUS_PENDING_SHIPMENT],
       [OrderStatusMap.PENDING_RECEIPT, ORDER_STATUS_PENDING_RECEIPT],
+      [OrderStatusMap.PENDING_PICKUP, ORDER_STATUS_PENDING_PICKUP],
       [OrderStatusMap.PENDING_REVIEW, ORDER_STATUS_PENDING_REVIEW],
       [OrderStatusMap.REVIEWED, ORDER_STATUS_REVIEWED],
       [OrderStatusMap.REFUND_IN_PROGRESS, ORDER_STATUS_REFUND_IN_PROGRESS],
@@ -104,6 +114,7 @@ export class OrderUtil {
       [OrderActionMap.IMMEDIATE_PAYMENT, OrderUtil.handleImmediatePayment],
       [OrderActionMap.URGE_SHIPMENT, OrderUtil.handleUrgeShipment],
       [OrderActionMap.CONFIRM_RECEIPT, OrderUtil.handleConfirmReceipt],
+      [OrderActionMap.CONFIRM_PICKUP, OrderUtil.handleConfirmPickup],
       [OrderActionMap.CANCEL_ORDER, OrderUtil.handleCancelOrder],
       [OrderActionMap.UPDATE_ADDRESS, OrderUtil.handleUpdateAddress],
       [OrderActionMap.REVIEW, OrderUtil.handleReview],
@@ -125,6 +136,27 @@ export class OrderUtil {
     }
   }
 
+  public static async updateCouponStatus(couponId: string | undefined, couponStatus: number): Promise<boolean> {
+    if (!couponId) {
+      return true;
+    }
+    const userId: string = iData.global.userInfo.phone;
+    const res = await CouponApis.updateCoupon({
+      userId,
+      couponId,
+      couponStatus,
+    });
+    if (res.code !== 0) {
+      if (couponStatus === 1) {
+        WindowUtil.toast('优惠券状态更新失败，请稍后重试');
+      } else {
+        WindowUtil.toast('优惠券恢复失败，请稍后重试');
+      }
+      return false;
+    }
+    return true;
+  }
+
   /**
    * 立即支付
    * @param param
@@ -142,17 +174,20 @@ export class OrderUtil {
         }
       });
     aggregatedPaymentService.registerPaymentCallback(
-      (type: PaymentType, isSuccess: boolean) => {
+      async (_type: PaymentType, isSuccess: boolean) => {
         if (!isSuccess) {
           WindowUtil.toast('本地调试阶段，模拟支付成功回调');
         }
+        const payStatus = order.orderInfo.receivingMethod === OrderShipmentMap.SELF_PICK_UP
+          ? OrderStatusMap.PENDING_PICKUP
+          : OrderStatus.PENDING_SHIPMENT;
         OrderApis.updateDetail(param.orderNo, {
-          status: OrderStatus.PENDING_SHIPMENT,
-        }).then((res)=>{
-          if(res.code === 0){
+          status: payStatus,
+        }).then((res) => {
+          if (res.code === 0) {
             WindowUtil.toast('订单支付成功！');
           }
-        }).finally(()=>{
+        }).finally(() => {
           routerStack.replacePathByName(RouterMap.ORDER_INFO, param.orderNo);
           cashierPicker.close();
         });
@@ -194,14 +229,39 @@ export class OrderUtil {
   }
 
   /**
+   * 确认取件（到店自提）
+   * @param param
+   */
+  public static handleConfirmPickup(param: OrderActionReq) {
+    CommonConfirmDialog.show({
+      primaryTitle: '提示',
+      secondaryTitle: '确认已取件了吗？',
+      content: '请到店取件确认无误后再确认',
+      confirm: () => {
+        OrderApis.updateDetail(param.orderNo, {
+          status: OrderStatusMap.PENDING_REVIEW,
+        }).then(() => {
+          WindowUtil.toast('订单确认取件成功');
+          param.callback?.();
+        });
+      },
+    });
+  }
+
+  /**
    * 取消订单
    * @param param
    */
   public static handleCancelOrder(param: OrderActionReq) {
+    const order = param.data as OrderItem;
     CommonConfirmDialog.show({
       primaryTitle: '提示',
       content: '取消后无法恢复，是否确认取消订单',
-      confirm: () => {
+      confirm: async () => {
+        const isCouponUpdated = await OrderUtil.updateCouponStatus(order?.orderInfo?.couponId, 0);
+        if (!isCouponUpdated) {
+          return;
+        }
         OrderApis.updateDetail(param.orderNo, {
           status: OrderStatusMap.CANCELED,
         }).then((res) => {
@@ -292,8 +352,10 @@ export class OrderUtil {
    */
   public static handleCancelRefund(param: OrderActionReq) {
     const data = param.data as OrderItem;
-    let status: number = 0;
-    if (data?.logisticInfo?.length === 1) {
+    let status: number;
+    if (data?.orderInfo?.receivingMethod === OrderShipmentMap.SELF_PICK_UP) {
+      status = OrderStatusMap.PENDING_PICKUP;
+    } else if (data?.logisticInfo?.length === 1) {
       status = OrderStatusMap.PENDING_SHIPMENT;
     } else {
       status = OrderStatusMap.PENDING_RECEIPT;
@@ -330,7 +392,7 @@ export class OrderUtil {
         const promise = ShoppingCartApis.addSkuToCart({
           skuCode: item.skuCode,
           count: item.count,
-          priceType:item.priceType,
+          priceType: item.priceType,
         });
         promises.push(promise);
       });
@@ -389,7 +451,7 @@ export class OrderUtil {
     }
   }
 
-  private static async _startPayment(type: PaymentType){
+  private static async _startPayment(type: PaymentType) {
     // todo: 根据支付类型向服务器请求支付所需参数
     try {
       if (type === PaymentType.ALIPAY) {
@@ -399,7 +461,7 @@ export class OrderUtil {
          * 临时测试时，orderInfo 不推荐传入空字符串，这会导致跳转至支付宝行为仅仅是跳转，不会有支付相关的交互
          * 未安装支付宝且参数真实时，SDK 会尝试使用 this.navPathStack 跳转至 H5 页面继续支付，该参数可不传
          */
-        aggregatedPaymentService.requestPaymentByAliPay({ orderInfo: 'ORDER_INFO' }, routerStack);
+        aggregatedPaymentService.requestPaymentByAliPay({ orderInfo: 'ORDER_INFO' }, routerStack.getActiveStack());
       } else if (type === PaymentType.HUAWEI) {
         /**
          * 请求拉起华为支付

@@ -1,40 +1,56 @@
-import { paymentService } from '@kit.PaymentKit';
-import { BusinessError } from '@kit.BasicServicesKit';
-import { common } from '@kit.AbilityKit';
-import { selectData } from '../constants';
 import {
-  addRemakeToOrder,
-  deleteOrder,
-  ExpressStatus,
-  getOrderCount,
-  getOrderList,
-  GetOrderListRequest,
-  IOrder,
-  OrderStatus,
-  OrderType,
+  BaseViewModel,
+  BreakpointNameEnum,
+  HttpApi,
+  Parcel,
+  ParcelStatus,
+  PayMethod,
+  PayStatus,
+  ToastLoading,
 } from 'lib_foundation';
-import { BaseViewModel, contextUtil, IAddrInfo, Logger, toastUtil } from 'module_base';
+import { MOCK_RECEIVER_PHONE, FILTER_OPTIONS } from '../constants';
+import { OrderInfo, TabBtnItem, TabBtnType } from '../models/Model';
 
 
 @ObservedV2
 export class QueryPageVM extends BaseViewModel {
   private static _instance: QueryPageVM;
-  context: common.UIAbilityContext = contextUtil.getContext() as common.UIAbilityContext;
-  @Trace public orderList: IOrder[] = []
-  @Trace public selectedIndex: number = 0
-  @Trace public selectedOrder: IOrder | undefined
-  @Trace public type: OrderType = OrderType.SEND
-  @Trace public status: OrderStatus = OrderStatus.SUCCESS
-  @Trace public sendCount: number = 0
-  @Trace public getCount: number = 0
-  @Trace public pendingCount: number = 0
-  @Trace public selectData: SelectOption[] = selectData
-  @Trace public deleteExpressId: number = 0
-  @Trace public remake: string = ''
-  @Trace public searchText: string = ''
-  @Trace public selectedExpressStatus: string = ''
-  @Trace public sendAddress: IAddrInfo | undefined
-  @Trace public getAddress: IAddrInfo | undefined
+  // tab
+  @Trace tabBarList: TabBtnItem[] = [
+    new TabBtnItem('寄件', 0, TabBtnType.SEND_EXPRESS),
+    new TabBtnItem('收件', 0, TabBtnType.RECEIVE_EXPRESS),
+    new TabBtnItem('待支付', 0, TabBtnType.PENDING_PAY),
+  ]
+  @Trace type: TabBtnType = TabBtnType.SEND_EXPRESS;
+  // 选择tab的index
+  @Trace selectedIndex: number = 0;
+  // 全部订单
+  @Trace allOrderList: OrderInfo[] = [];
+  // 寄件订单
+  @Trace sendOrderList: OrderInfo[] = [];
+  // 收件订单
+  @Trace receiveOrderList: OrderInfo[] = [];
+  // 待支付订单
+  @Trace pendingPayOrderList: OrderInfo[] = [];
+  // 搜索文本
+  @Trace searchText: string = '';
+  // 筛选项列表
+  @Trace filterData: SelectOption[] = FILTER_OPTIONS;
+  // 筛选选择的状态
+  @Trace selectedExpressStatus: string = '筛选';
+  // 下拉刷新
+  @Trace isRefreshing: boolean = false
+  // 订单状态对应的过滤逻辑映射
+  private statusMap: Record<string, (status: ParcelStatus) => boolean> = {
+    '待取件': (s) => s === ParcelStatus.AWAITING_PICKUP,
+    '待入柜': (s) => s === ParcelStatus.PENDING_LOCKER,
+    '已取件': (s) => s === ParcelStatus.COLLECTED,
+    '运送中': (s) => s === ParcelStatus.IN_TRANSIT,
+    '派送中': (s) => s === ParcelStatus.DELIVERY,
+    '待签收': (s) => s === ParcelStatus.OUT_FOR_DELIVERY,
+    '已签收': (s) => s === ParcelStatus.DELIVERED,
+    '已取消': (s) => s === ParcelStatus.CANCELED,
+  };
 
   public static get instance() {
     if (!QueryPageVM._instance) {
@@ -43,80 +59,120 @@ export class QueryPageVM extends BaseViewModel {
     return QueryPageVM._instance;
   }
 
-  init() {
-    if (this.userInfoModel.isLogin) {
-      this.getOrderCount()
-      this.getOrderList()
+  @Computed
+  get waterFlowLanes() {
+    const currentBreakpoint = this.breakPointModel.currentBreakpoint;
+    switch (currentBreakpoint) {
+      case BreakpointNameEnum.LG:
+      case BreakpointNameEnum.XL:
+        return 2;
+      default:
+        return 1;
     }
   }
 
-  public reFresh() {
-    this.getOrderCount()
-    this.getOrderList()
+  // 过滤方法
+  filterOrders(list: OrderInfo[], isReceiveMode: boolean): OrderInfo[] {
+    const searchText = this.searchText;
+    const targetStatus = this.selectedExpressStatus;
+    const tempList = list.filter((item: OrderInfo) => {
+      // 判断是寄件人还是收件人
+      const isIdentityMatch = isReceiveMode
+        ? item.receiverPhone === MOCK_RECEIVER_PHONE
+        : item.receiverPhone !== MOCK_RECEIVER_PHONE;
+
+      if (!isIdentityMatch) {
+        return false;
+      }
+      // 搜索词匹配
+      const phoneToMatch = isReceiveMode ? item.receiverPhone : item.senderPhone;
+      const isInclude = phoneToMatch.includes(searchText) || item.parcelNumber.includes(searchText);
+
+      if (!isInclude) {
+        return false;
+      }
+      // 状态匹配
+      const statusFilter = this.statusMap[targetStatus];
+      return statusFilter ? statusFilter(item.status) : true;
+    });
+
+    return tempList;
   }
 
-  public logout() {
-    this.orderList = []
-    this.sendCount = 0
-    this.getCount = 0
-    this.pendingCount = 0
-  }
-
-  public async getOrderList() {
-    const data: GetOrderListRequest = {
-      type: this.type,
-      status: this.status,
-      cellphone: '',
-      orderNo: '',
-      expressStatus: this.selectedExpressStatus as ExpressStatus,
+  // 查询订单列表
+  async queryOrderList(isSearch: boolean = true) {
+    ToastLoading.open();
+    // 运单列表页mock自动处理运单的物流轨迹状态, 只处理未签收和未取消的寄件订单
+    const list = await HttpApi.queryParcelList();
+    if (list.length) {
+      const tasks = list
+        .filter((item) => item.status < ParcelStatus.DELIVERED && item.receiverPhone !== MOCK_RECEIVER_PHONE)
+        .map((item) => HttpApi.autoUpdateLogistics(item));
+      // 并行执行所有请求
+      await Promise.all(tasks);
     }
-    if (this.searchText.length === 11) {
-      data.cellphone = this.searchText
-    } else {
-      data.orderNo = this.searchText
-    }
-    const res = await getOrderList(data)
-    this.orderList = res
-    if (this.type === OrderType.SEND) {
-      this.sendCount = res.length
-    }
-    if (this.type === OrderType.RECEIVE) {
-      this.getCount = res.length
-    }
-    if (this.type === OrderType.ALL) {
-      this.pendingCount = res.length
-    }
+    // 重新查询列表数据
+    HttpApi.queryParcelList().then(async (resp) => {
+      // 这里的收件订单是mock插入的
+      if (resp.length) {
+        this.allOrderList = resp.map((item: Parcel) => new OrderInfo(item));
+        if (isSearch) {
+          this.handleSearchList();
+        } else {
+          // 寄件
+          this.sendOrderList = this.filterOrders(this.allOrderList, false);
+          // 收件
+          this.receiveOrderList = this.filterOrders(this.allOrderList, true);
+          // 待支付：寄件人且寄付现结且未支付  OR  收件人且到付且未支付
+          this.pendingPayOrderList = this.allOrderList.filter((item) => {
+            const isReceiver = (item.receiverPhone === MOCK_RECEIVER_PHONE ||
+              item.receiverPhone === this.userInfoModel.phone);
+
+            if (isReceiver) {
+              return item.paymentStatus === PayStatus.PENDING && (item.receiverPhone.includes(this.searchText) ||
+              item.parcelNumber.includes(this.searchText));
+            } else {
+              return item.paymentStatus === PayStatus.PENDING && item.status < ParcelStatus.DELIVERED &&
+                item.payMethod === PayMethod.PREPAID && (item.senderPhone.includes(this.searchText) ||
+              item.parcelNumber.includes(this.searchText));
+            }
+          });
+          this.tabBarList[0].count = this.sendOrderList.length;
+          this.tabBarList[1].count = this.receiveOrderList.length;
+          this.tabBarList[2].count = this.pendingPayOrderList.length;
+        }
+      }
+    }).finally(() => {
+      this.isRefreshing = false;
+      ToastLoading.close();
+    })
   }
 
-  public async getOrderCount() {
-    const res = await getOrderCount()
-    this.sendCount = res[0]
-    this.getCount = res[1]
-    this.pendingCount = res[2]
-  }
+  handleSearchList() {
+    // 寄件
+    if (this.type === TabBtnType.SEND_EXPRESS) {
+      this.sendOrderList = this.filterOrders(this.allOrderList, false);
+      this.tabBarList[0].count = this.sendOrderList.length;
+    } else if (this.type === TabBtnType.RECEIVE_EXPRESS) {
+      // 收件
+      this.receiveOrderList = this.filterOrders(this.allOrderList, true);
+      this.tabBarList[1].count = this.receiveOrderList.length;
+    } else if (this.type === TabBtnType.PENDING_PAY) {
+      // 待支付
+      this.pendingPayOrderList = this.allOrderList.filter((item) => {
+        const isReceiver = (item.receiverPhone === MOCK_RECEIVER_PHONE ||
+          item.receiverPhone === this.userInfoModel.phone);
 
-  public async deleteOrder(id: number) {
-    await deleteOrder(id)
-    toastUtil.showToast('删除成功！');
-    this.reFresh()
-  }
-
-  public async addRemakeToOrder(id: number, remake: string) {
-    await addRemakeToOrder({ id, remake })
-    toastUtil.showToast('修改成功！');
-    this.remake = ''
-    this.reFresh()
-  }
-
-  public async prepay() {
-    paymentService
-      .requestPayment(this.context, '')
-      .then(() => {
-        Logger.info('succeeded in paying');
-      })
-      .catch((error: BusinessError) => {
-        toastUtil.showToast('支付失败！');
-        Logger.error(`failed to pay, error.code: ${error.code}, error.message: ${error.message}`);
+        if (isReceiver) {
+          return item.paymentStatus === PayStatus.PENDING && (item.receiverPhone.includes(this.searchText) ||
+          item.parcelNumber.includes(this.searchText));
+        } else {
+          return item.paymentStatus === PayStatus.PENDING && item.status < ParcelStatus.DELIVERED &&
+            item.payMethod === PayMethod.PREPAID && (item.senderPhone.includes(this.searchText) ||
+            item.parcelNumber.includes(this.searchText));
+        }
       });
+      this.tabBarList[2].count = this.pendingPayOrderList.length;
+    }
   }
 }

@@ -9,3 +9,12 @@ export enum VideoType {
   TELEVISION,
   BROADCAST
 }
+
+/**
+ * 直播状态
+ */
+export enum VideoLiveStatus {
+  LIVE,
+  FUTURE,
+  EXPIRED,
+}

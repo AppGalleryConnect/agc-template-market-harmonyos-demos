@@ -52,13 +52,17 @@ export interface NewsResponse {
   // 动态布局参数
   navInfo?: NavInfo
   // 额外信息
-  extraInfo?: Record<string, string | boolean | Record<string, string | boolean>[]>
-  // 来源
-  articleFrom?: string
+  extraInfo?: Record<string, string | number | boolean | Record<string, string | boolean>[]>
   // 播放次数
   playCount?: string
   // 总数
   totalCount?: number
   // 关联文章id
   relationId?: string
+  // 直播开始时间（毫秒时间戳）
+  liveStartTime?: number
+  // 直播结束时间（毫秒时间戳）
+  liveEndTime?: number
+  // 新闻标签
+  tags?: string[]
 }

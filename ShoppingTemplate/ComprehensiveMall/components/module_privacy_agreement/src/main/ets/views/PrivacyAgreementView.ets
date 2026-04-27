@@ -52,8 +52,8 @@ export struct PrivacyAgreementView {
                 .fontSize($r('sys.float.Title_L'))
                 .fontWeight(FontWeight.Medium)
                 .margin({
-                  top: $r('app.string.space_xl'),
-                  bottom: $r('app.string.space_xs'),
+                  top: $r('app.float.space_xl'),
+                  bottom: $r('app.float.space_xs'),
                 })
               Text(this.appDesc)
                 .fontSize($r('sys.float.Body_M'))
@@ -88,20 +88,20 @@ export struct PrivacyAgreementView {
                 })
             }
             .padding({
-              top: $r('app.string.space_l'),
-              bottom: $r('app.string.space_l'),
+              top: $r('app.float.space_l'),
+              bottom: $r('app.float.space_l'),
             })
           }
           .constraintSize({ maxWidth: 480 })
           .margin({
-            top: $r('app.string.space_m'),
+            top: $r('app.float.space_m'),
           })
         }
         .layoutWeight(1)
         .padding({
-          left: $r('app.string.space_l'),
-          right: $r('app.string.space_l'),
-          bottom: $r('app.string.space_l'),
+          left: $r('app.float.space_l'),
+          right: $r('app.float.space_l'),
+          bottom: $r('app.float.space_l'),
         })
 
         if (this.openSheet) {
@@ -120,7 +120,7 @@ export struct PrivacyAgreementView {
         Text(`您需要同意协议才能体验${this.appName}`)
           .fontWeight(FontWeight.Bold)
           .fontSize(20)
-          .margin({ top: $r('app.string.space_l') })
+          .margin({ top: $r('app.float.space_l') })
         this.confirmContentBuilder()
         Row({ space: 16 }) {
           Button('退出应用')
@@ -147,21 +147,21 @@ export struct PrivacyAgreementView {
             })
         }
         .padding({
-          top: $r('app.string.space_l'),
-          bottom: $r('app.string.space_l'),
+          top: $r('app.float.space_l'),
+          bottom: $r('app.float.space_l'),
         })
       }
-      .padding($r('app.string.space_m'))
+      .padding($r('app.float.space_m'))
       .backgroundColor($r('app.color.background_color_primary'))
-      .borderRadius($r('app.string.border_radius_32'))
+      .borderRadius($r('app.float.border_radius_xl'))
     }
     .height($r('app.string.size_percent_full'))
     .width($r('app.string.size_percent_full'))
     .backgroundColor($r('sys.color.mask_fourth'))
     .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])
     .padding({
-      left: $r('app.string.space_l'),
-      right: $r('app.string.space_l'),
+      left: $r('app.float.space_l'),
+      right: $r('app.float.space_l'),
     })
     .justifyContent(FlexAlign.Center)
 
@@ -183,8 +183,8 @@ export struct PrivacyAgreementView {
       }
       .fontSize($r('sys.float.Caption_M'))
       .margin({
-        top: $r('app.string.space_l'),
-        bottom: $r('app.string.space_s'),
+        top: $r('app.float.space_l'),
+        bottom: $r('app.float.space_s'),
       })
 
       Text('请您仔细阅读上述声明，点击“同意”，即表示您知悉并同意我们向您提供本应用服务。')

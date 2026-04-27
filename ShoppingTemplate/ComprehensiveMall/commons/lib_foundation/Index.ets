@@ -1,6 +1,6 @@
 export { iData, GlobalStateMgr } from './src/main/ets/utils/IData';
 
-export { routerStack } from './src/main/ets/utils/RouterStack';
+export { routerUtil as routerStack } from './src/main/ets/utils/RouterUtil';
 
 export {
   BreakpointTypeEnum,
@@ -35,3 +35,5 @@ export { MotionUtil } from './src/main/ets/utils/MotionUtil';
 export { FileUtil } from './src/main/ets/utils/FileUtil';
 
 export { CalendarUtil } from './src/main/ets/utils/CalendarUtil';
+
+export { ColorModeUtil } from './src/main/ets/utils/ColorModeUtil';

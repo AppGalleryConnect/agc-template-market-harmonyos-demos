@@ -7,6 +7,7 @@ export interface RecipeIngredient {
 export interface RecipeStep {
   stepNumber: number;
   description: string;
+  stepImg?: string;
 }
 
 export interface RecipeDetail extends RecipeBriefInfo {
@@ -28,6 +29,11 @@ export interface RecipeBriefInfo {
   thumbnail: string;
   views: number;
   likes: number;
+  video: string;
+  coverUrl?: string;
+  linearColor?: Array<[string, number]>;
+  heatness? : number;
+  isVip? : number;
 }
 
 export interface QueryListParams {
@@ -50,6 +56,9 @@ export interface UploadRecipeBody {
   description: string;
   ingredients: Array<RecipeIngredient>;
   steps: Array<RecipeStep>;
+  image: string;
+  video?: string;
+  coverUrl?: string;
 }
 
 export interface DeleteMyRecipeBody {

@@ -95,6 +95,7 @@ export class FeedCardInfoModel {
   postImgList?: PostImgList[] = []
   totalCount?: number
   isWatch?: boolean = false
+  city?: string = ''
 
   constructor(value?: FeedCardInfoModel) {
     this.id = value?.id ?? ''
@@ -112,6 +113,7 @@ export class FeedCardInfoModel {
     this.postImgList = value?.postImgList ?? []
     this.isWatch = value?.isWatch ?? false
     this.relativeTime = value?.relativeTime ?? ''
+    this.city = value?.city ?? ''
   }
 }
 

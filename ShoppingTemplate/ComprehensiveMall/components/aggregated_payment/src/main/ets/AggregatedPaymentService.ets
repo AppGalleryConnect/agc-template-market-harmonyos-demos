@@ -135,14 +135,18 @@ class AggregatedPaymentService {
       this.doAllPaymentCallbacks(PaymentType.HUAWEI, false);
       return;
     }
-    paymentService
-      .requestPayment(ctx as common.UIAbilityContext, info.orderStr)
-      .then(() => {
-        this.doAllPaymentCallbacks(PaymentType.HUAWEI, true);
-      })
-      .catch(() => {
-        this.doAllPaymentCallbacks(PaymentType.HUAWEI, false);
-      });
+    try {
+      paymentService
+        .requestPayment(ctx as common.UIAbilityContext, info.orderStr)
+        .then(() => {
+          this.doAllPaymentCallbacks(PaymentType.HUAWEI, true);
+        })
+        .catch(() => {
+          this.doAllPaymentCallbacks(PaymentType.HUAWEI, false);
+        });
+    } catch {
+      this.doAllPaymentCallbacks(PaymentType.HUAWEI, true);
+    }
   }
 
   /**

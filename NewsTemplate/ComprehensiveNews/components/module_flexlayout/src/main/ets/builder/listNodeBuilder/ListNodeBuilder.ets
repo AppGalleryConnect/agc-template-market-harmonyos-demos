@@ -19,7 +19,7 @@ export struct ListBuilder {
   @Param articles: JSONObject[] = []
   @Param viewLayout: LayoutSetting = new LayoutSetting()
   @Param style: Record<string, string | number> = {}
-  @Param extraInfo: Record<string, number | string | boolean | Record<string, string | boolean>[]> = {}
+  @Param extraInfo: Record<string, number | string | boolean | Function | Record<string, string | boolean>[]> = {}
   @Param nodeControllerFactory: NodeControllerFactory = new NodeControllerFactory()
   @Local flexLayoutBreakPointVM: FlexLayoutBreakPointVM | undefined = undefined
 

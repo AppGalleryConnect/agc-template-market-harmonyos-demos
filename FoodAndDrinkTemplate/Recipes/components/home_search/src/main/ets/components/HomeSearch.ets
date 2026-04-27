@@ -1,10 +1,11 @@
 import { RecipeBriefInfo, SortType, TabItem } from '../types/Index';
+import { HotSearch } from './HotSearch';
 import { SearchKeys } from './SearchKeys';
 import { SearchResult } from './SearchResult';
 
 @ComponentV2
 export struct HomeSearch {
-  @Param hotInfo: string[] = []
+  @Param hotInfo: RecipeBriefInfo[] = []
   @Param resultList: RecipeBriefInfo[] = [];
   @Param isShowResult: boolean = false;
   @Param isShowSearch: boolean = true;
@@ -24,11 +25,12 @@ export struct HomeSearch {
   }
   @Event changeShowResult: (flag: boolean) => void = () => {
   }
-  @Event goRecipeDetail: (id: number) => void = () => {
+  @Event goRecipeDetail: (id: number, index: number) => void = () => {
   }
   @Event submitKeyWords: (keyword: string) => void = () => {}
   @Event onKeyClick: (keyword: string) => void = () => {}
   @Event clearRecords: () => void = () => {}
+  @Event changeRecipes: (keyword: string) => void = () => {}
 
 
   aboutToAppear(): void {
@@ -62,12 +64,16 @@ export struct HomeSearch {
         SearchResult({
           curTabIndex: this.curTabIndex,
           resultList: this.resultList,
+          keyword: this.keyword,
           changeIndex: (index: number) => {
             this.curTabIndex = index
             this.changeIndex(index, this.keyword)
           },
-          goRecipeDetail: (id: number) => {
-            this.goRecipeDetail(id)
+          goRecipeDetail: (id: number, index: number) => {
+            this.goRecipeDetail(id, index)
+          },
+          changeRecipes: (name: string) => {
+            this.changeRecipes(name)
           },
         })
       } else {
@@ -92,14 +98,11 @@ export struct HomeSearch {
         }
         .margin({ top: 16 }).visibility(this.historyInfo.length ? Visibility.Visible : Visibility.None)
 
-        SearchKeys({
-          title: '热门搜索',
+        HotSearch({
+          title: '热搜榜',
           keys: this.hotInfo,
-          onKeyClick: (item) => {
-            this.keyword = item;
-            this.onKeyClick(this.keyword);
-            this.searchDishes(this.keyword);
-            this.curTabIndex = 0
+          goRecipeDetail: (id: number, index: number) => {
+            this.goRecipeDetail(id, index)
           },
         }).margin({ top: 24 })
       }

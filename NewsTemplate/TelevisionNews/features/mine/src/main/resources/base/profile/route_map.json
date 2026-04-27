@@ -1,0 +1,9 @@
+{
+  "routerMap": [
+    {
+      "name": "SubscribePage",
+      "pageSourceFile": "src/main/ets/components/SubscribePage.ets",
+      "buildFunction": "SubscribePageBuilder"
+    }
+  ]
+}

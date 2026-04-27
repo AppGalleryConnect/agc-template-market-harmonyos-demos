@@ -57,24 +57,42 @@ export class VideoServiceMock {
       return [HttpStatusCode.Ok, result];
     });
 
-    // 查询直播视频
+    // 查询直播视频（返回正在直播的视频）
     adapter.onGet('/video/live/list').reply(() => {
+      const now = Date.now();
       const videos = MockVideo.liveVideoList
+        .filter((video: BaseNews) => {
+          // 返回正在直播的视频：liveStartTime <= now && liveEndTime > now
+          return video.liveStartTime && video.liveStartTime <= now &&
+          video.liveEndTime && video.liveEndTime > now;
+        })
         .map((video: BaseNews) => this.baseNewsMock.queryNews(video.id))
-        .filter(v => Boolean(v)) as NewsResponse[];
-      const result = Utils.shuffleArray([...videos]);
-      return [HttpStatusCode.Ok, result];
+        .filter(v => Boolean(v)) as NewsResponse[]
+      videos.sort((a, b) => (a.liveStartTime || 0) - (b.liveStartTime || 0));
+      return [HttpStatusCode.Ok, videos];
     });
 
-    // 查询精彩回放视频
-    adapter.onGet('/video/highlight/list').reply(() => {
-      // 将直播的mock数据剔除
-      const videos = MockVideo.list
-        .filter((item) => MockVideo.liveVideoList.findIndex(x => x.id === item.id) === -1)
+    // 查询直播预约列表（只返回未开始的直播）
+    adapter.onGet('/video/reservation/list').reply(() => {
+      const now = Date.now();
+      const videos = MockVideo.liveVideoList
+        .filter((video: BaseNews) => video.liveStartTime && video.liveStartTime > now)
         .map((video: BaseNews) => this.baseNewsMock.queryNews(video.id))
         .filter(v => Boolean(v)) as NewsResponse[];
-      const result = Utils.shuffleArray([...videos]);
-      return [HttpStatusCode.Ok, result];
+      videos.sort((a, b) => (a.liveStartTime || 0) - (b.liveStartTime || 0));
+      return [HttpStatusCode.Ok, videos];
+    });
+
+    // 查询精彩回放视频（返回已结束的直播）
+    adapter.onGet('/video/highlight/list').reply(() => {
+      const now = Date.now();
+      // 返回已结束的直播：liveEndTime <= now
+      const expiredLiveVideos = MockVideo.liveVideoList
+        .filter((item) => item.liveEndTime && item.liveEndTime <= now)
+        .map((video: BaseNews) => this.baseNewsMock.queryNews(video.id))
+        .filter(v => Boolean(v)) as NewsResponse[];
+      expiredLiveVideos.sort((a, b) => (a.liveEndTime || 0) - (b.liveEndTime || 0));
+      return [HttpStatusCode.Ok, expiredLiveVideos];
     });
 
     // 根据id查询详细信息

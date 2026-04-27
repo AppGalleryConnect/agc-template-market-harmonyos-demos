@@ -69,7 +69,7 @@ export struct ProductReviewCreation {
       .scrollBar(BarState.Off)
       .edgeEffect(EdgeEffect.Spring)
       .align(Alignment.Top)
-      .margin({ bottom: $r('app.string.space_l') })
+      .margin({ bottom: $r('app.float.space_l') })
 
       Button('提交')
         .backgroundColor($r('app.color.theme_color'))
@@ -83,7 +83,7 @@ export struct ProductReviewCreation {
     .backgroundColor($r('app.color.background_color_grey'))
     .height($r('app.string.size_percent_full'))
     .width($r('app.string.size_percent_full'))
-    .padding($r('app.string.space_l'))
+    .padding($r('app.float.space_l'))
   }
 
   @Builder
@@ -154,7 +154,7 @@ export struct ProductReviewCreation {
       .height(120)
       .align(Alignment.TopStart)
       .selectedBackgroundColor($r('app.color.theme_color'))
-      .backgroundColor($r('sys.color.white'))
+      .backgroundColor($r('app.color.background_color_primary'))
       .caretColor($r('app.color.theme_color'))
       .placeholderFont({ size: 14 })
       .placeholderColor($r('sys.color.font_tertiary'))
@@ -176,14 +176,14 @@ export struct ProductReviewCreation {
         Image(skuItem.banner)
           .width(60)
           .height(60)
-          .borderRadius($r('app.string.border_radius_8'))
-          .margin({ right: $r('app.string.space_s') })
+          .borderRadius($r('app.float.border_radius_s'))
+          .margin({ right: $r('app.float.space_s') })
         Column({ space: 8 }) {
           Text(skuItem.title)
-            .fontSize($r('app.string.font_size_14'))
+            .fontSize($r('app.float.font_size_14'))
             .fontColor($r('app.color.font_color_level2'))
           Text(skuItem.skuDesc)
-            .fontSize($r('app.string.font_size_12'))
+            .fontSize($r('app.float.font_size_12'))
             .fontColor($r('app.color.font_color_level3'))
         }
         .alignItems(HorizontalAlign.Start)
@@ -225,7 +225,7 @@ export struct ProductReviewCreation {
           .backgroundColor($r('sys.color.comp_background_tertiary'))
           .aspectRatio(1)
           .justifyContent(FlexAlign.Center)
-          .borderRadius($r('app.string.border_radius_16'))
+          .borderRadius($r('app.float.border_radius_l'))
           .onClick(() => {
             MediaFileUtil.getMediaFromAlbum(model, this.getUIContext())
           })
@@ -240,7 +240,7 @@ export struct ProductReviewCreation {
             Image(item.uri)
               .width($r('app.string.size_percent_full'))
               .aspectRatio(1)
-              .borderRadius($r('app.string.border_radius_16'))
+              .borderRadius($r('app.float.border_radius_l'))
               .onClick(() => {
                 const options = new ImagePreviewOptions()
                 const mediaList: SourceImageModel[] = model.mediaList.map((item) => {
@@ -274,7 +274,7 @@ export struct ProductReviewCreation {
     }
     .width($r('app.string.size_percent_full'))
     .margin({
-      top: $r('app.string.space_m'),
+      top: $r('app.float.space_m'),
     })
   }
 
@@ -287,8 +287,8 @@ export struct ProductReviewCreation {
           .height(40)
           .aspectRatio(1)
           .draggable(false)
-          .margin({ right: $r('app.string.space_s') })
-          .borderRadius($r('app.string.border_radius_capsule'))
+          .margin({ right: $r('app.float.space_s') })
+          .borderRadius($r('app.float.border_radius_capsule'))
           .stateStyles({
             normal: {
               .backgroundColor($r('app.color.background_color_transparent'))
@@ -302,16 +302,16 @@ export struct ProductReviewCreation {
             this.previewItem = undefined
           })
         Text(this.previewSheetTitle)
-          .fontSize($r('app.string.font_size_20'))
+          .fontSize($r('app.float.font_size_20'))
           .fontColor($r('app.color.font_color_level1'))
           .fontWeight(FontWeight.Medium);
       }
       .width($r('app.string.size_percent_full'))
-      .margin({ top: 36, bottom: $r('app.string.space_l') })
+      .margin({ top: 36, bottom: $r('app.float.space_l') })
       .justifyContent(FlexAlign.Start)
       .alignItems(VerticalAlign.Center)
       .backgroundColor($r('app.color.background_color_primary'))
-      .padding({ left: $r('app.string.space_l') });
+      .padding({ left: $r('app.float.space_l') });
 
       if (this.previewItem?.uri) {
         if (this.previewItem.type === ReviewMediaType.IMAGE) {
@@ -321,7 +321,7 @@ export struct ProductReviewCreation {
               .height($r('app.string.size_percent_full'))
               .objectFit(ImageFit.Contain)
           }
-          .padding($r('app.string.space_l'))
+          .padding($r('app.float.space_l'))
           .layoutWeight(1);
         } else if (this.previewItem.type === ReviewMediaType.VIDEO) {
           Row() {
@@ -330,7 +330,7 @@ export struct ProductReviewCreation {
             })
               .width($r('app.string.size_percent_full'));
           }
-          .padding($r('app.string.space_l'))
+          .padding($r('app.float.space_l'))
         }
       }
     }

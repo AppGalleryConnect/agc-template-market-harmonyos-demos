@@ -1,0 +1,24 @@
+{
+  "color": [
+    {
+      "name": "font_color_level1",
+      "value": "#FFFFFFFF"
+    },
+    {
+      "name": "font_color_level2",
+      "value": "#99FFFFFF"
+    },
+    {
+      "name": "background_color_primary",
+      "value": "#202224"
+    },
+    {
+      "name": "background_color_grey",
+      "value": "#000000"
+    },
+    {
+      "name": "background_color_button_grey",
+      "value": "#1AFFFFFF"
+    }
+  ]
+}

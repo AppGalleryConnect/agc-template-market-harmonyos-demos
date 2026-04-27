@@ -10,7 +10,7 @@ import { Constants } from '../constants/Constants';
 import { SwipePlayerModel } from '../viewmodel/SwipePlayerModel';
 import { PlayerSpeedRateView } from './PlayerSpeedRateView';
 import { DownloadWithoutWlanEnum, VideoNetworkModel, VideoNetworkSetting } from '../models/VideoNetworkModel';
-import { handleSandboxVideoUrl, toast } from '../utils/Util';
+import { handleSandboxVideoUrl, isDisplayModeFolded, toast } from '../utils/Util';
 import { BreakpointModel } from '../models/BreakpointModel';
 import { PiPWindowModel } from '../models/PiPWindowModel';
 import { EventKey } from '../constants/EventKey';
@@ -158,13 +158,14 @@ export struct VideoPlayerView {
     let isLandscape = (monitor.value()?.now) as boolean;
     if (!isLandscape) {
       this.vm.isClickFullScreenBtn = false;
-      return
+      return;
     }
-    // 自动横屏：组件处于显示状态、横屏、当前索引视频、不是通过点击全屏按钮的横屏、直板机状态下
+    const isFoldMode = isDisplayModeFolded();
+    // 自动横屏：组件处于显示状态、横屏、当前索引视频、不是通过点击全屏按钮的横屏、直板机（折叠屏折叠态）状态下
     if (this.index === this.currentIndex && isLandscape && this.isShown && !this.vm.isClickFullScreenBtn &&
-      this.breakpointModel.currentBreakpoint === BreakpointNameEnum.SM
+      (this.breakpointModel.currentBreakpoint === BreakpointNameEnum.SM || isFoldMode)
     ) {
-      this.handleFullScreen(false)
+      this.handleFullScreen(false);
     }
   }
 

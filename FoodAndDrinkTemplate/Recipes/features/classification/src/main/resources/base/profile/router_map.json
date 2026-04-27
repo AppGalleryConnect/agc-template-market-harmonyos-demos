@@ -9,6 +9,14 @@
       }
     },
     {
+      "name": "DishesModePage",
+      "pageSourceFile": "src/main/ets/pages/DishesModePage.ets",
+      "buildFunction": "DishesModePageBuilder",
+      "data": {
+        "description": "this is DishesModePageBuilder"
+      }
+    },
+    {
       "name": "ShoppingBasketPage",
       "pageSourceFile": "src/main/ets/pages/ShoppingBasketPage.ets",
       "buildFunction": "ShoppingBasketPageBuilder",

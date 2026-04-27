@@ -33,7 +33,7 @@ export function setSeek(avPlayer: media.AVPlayer | undefined, seek: number) {
   }
   let states = [AVPlayerState.PREPARED, AVPlayerState.PLAYING, AVPlayerState.PAUSED, AVPlayerState.COMPLETED]
   if (states.includes(avPlayer.state as AVPlayerState)) {
-    avPlayer.seek(seek, media.SeekMode.SEEK_PREV_SYNC);
+    avPlayer.seek(seek, media.SeekMode.SEEK_CLOSEST);
   }
 }
 
@@ -182,22 +182,30 @@ export function closeFileSync(file: number | fs.File): void {
   }
 }
 
-// 判断是否是大折叠、阔折叠外屏、小折叠内屏
+// 判断是否是折叠屏展开态
 export const isDisplayModeFull = (): boolean => {
   try {
-    // 是否可折叠
-    let isFoldable = display.isFoldable();
-    // 当前设备的显示模式
-    let foldDisplayMode: display.FoldDisplayMode | undefined = undefined
-    if (isFoldable) {
-      foldDisplayMode = display.getFoldDisplayMode();
-    }
-    return foldDisplayMode === display.FoldDisplayMode.FOLD_DISPLAY_MODE_FULL;
+    const foldStatus = display.getFoldStatus();
+    return display.isFoldable() && foldStatus === display.FoldStatus.FOLD_STATUS_EXPANDED;
   } catch (e) {
     Logger.error(TAG, 'isDisplayModeFull fail, error: ' + JSON.stringify(e));
     return false;
   }
 }
+
+/**
+ * 判断折叠屏是否处于折叠态
+ */
+export const isDisplayModeFolded = () => {
+  try {
+    const foldStatus = display.getFoldStatus();
+    return display.isFoldable() && foldStatus === display.FoldStatus.FOLD_STATUS_FOLDED;
+  } catch (err) {
+    let error = err as BusinessError;
+    Logger.error(TAG, `isDisplayModeFolded err, error code: ${error.code}, error message: ${error.message}`);
+    return false;
+  }
+};
 
 export function registerAVPlayerCallback(
   avPlayer: media.AVPlayer,

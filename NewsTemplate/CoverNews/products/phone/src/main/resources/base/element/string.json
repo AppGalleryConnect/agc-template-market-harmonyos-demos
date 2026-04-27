@@ -1,0 +1,44 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "封面新闻模板"
+    },
+    {
+      "name": "PhoneAbility_desc",
+      "value": "封面新闻模板"
+    },
+    {
+      "name": "PhoneAbility_label",
+      "value": "封面新闻模板"
+    },
+    {
+      "name": "tab_home",
+      "value": "首页"
+    },
+    {
+      "name": "tab_mine",
+      "value": "我的"
+    },
+    {
+      "name": "PhoneFormAbility_desc",
+      "value": "封面新闻模板"
+    },
+    {
+      "name": "PhoneFormAbility_label",
+      "value": "封面新闻模板"
+    },
+    {
+      "name": "NewsCard2x2_desc",
+      "value": "封面新闻模板"
+    },
+    {
+      "name": "NewsCard2x2_display_name",
+      "value": "封面新闻模板"
+    },
+    {
+      "name": "agcit_huawei_cover_news",
+      "value": "1.0.0"
+    }
+  ]
+}

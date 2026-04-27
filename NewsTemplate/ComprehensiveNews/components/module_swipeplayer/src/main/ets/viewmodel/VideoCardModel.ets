@@ -25,7 +25,6 @@ export class VideoCardModel extends VideoPlayerModel {
   @Trace isPause: boolean = true;
   @Trace enableAVSession: boolean = false;
   @Trace enableCastPlay: boolean = false;
-  @Trace breakpointModel: BreakpointModel = new BreakpointModel();
   // 视频卡片控制器
   @Trace videoCardPlayerController: VideoCardPlayerController = new VideoCardPlayerController()
   videoNetwork?: VideoNetworkModel

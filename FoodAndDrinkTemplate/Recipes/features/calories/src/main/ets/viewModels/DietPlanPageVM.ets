@@ -2,13 +2,15 @@ import { BreakpointModel, BreakpointType, RouterMap, RouterModule } from 'common
 import {
   addCustomFood,
   addDietPlans,
+  clearDietPlans,
   CustomFoodBody,
   FoodPlanCaloriesBody,
   queryDietPlan,
   queryFoodCategory,
 } from 'network';
 import { FoodCalories, FoodCategory } from '../types/Index';
-import { AppStorageV2, promptAction } from '@kit.ArkUI';
+import { AppStorageV2 } from '@kit.ArkUI';
+import { ToastDialog as promptAction } from '@hw-agconnect/ui-toast';
 
 @ObservedV2
 export class DietPlanPageVM {
@@ -124,7 +126,18 @@ export class DietPlanPageVM {
       this.submitLoading = false
     })
   }
-
+  clearDietPlan() {
+    this.submitLoading = true
+    clearDietPlans().then(res => {
+      if (res.status === 200) {
+        RouterModule.pop('success')
+      } else {
+        promptAction.showToast({ message: '已清除~' })
+      }
+    }).finally(() => {
+      this.submitLoading = false
+    })
+  }
   confirmBtn() {
     if (this.submitLoading) {
       return
@@ -196,7 +209,7 @@ export class DietPlanPageVM {
   }
 
   @Computed
-  get pageWidth() {
+  get getLines() {
     return this.columnOptions.getValue(this.breakPointModel.currentBreakpoint);
   }
 }

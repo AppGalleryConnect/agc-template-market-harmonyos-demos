@@ -6,8 +6,9 @@
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
-    'module_base': 'file:../module_base',
-    "module_address": "file:../module_address",
-    "module_address_card": "file:../module_address_card"
+    "lib_foundation": "file:../../commons/lib_foundation",
+    "@hw-agconnect/util-log": "^1.0.0",
+    "@hw-agconnect/ui-toast": "^1.0.0",
+    "address_management": "file:../../components/address_management"
   }
 }

@@ -3,7 +3,8 @@
     "name": "network",
     "type": "har",
     "deviceTypes": [
-      "phone"
+      "phone",
+      "tablet"
     ]
   }
 }

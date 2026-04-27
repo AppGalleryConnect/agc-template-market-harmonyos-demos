@@ -1,6 +1,13 @@
 import { MockImageData, MockImageMap } from './MockImageMap';
 import { PriceType } from '../../types/EnumTypes';
-import { OrderSkuItem, AddressInfo, LogisticsItem, OrderExpressInfo, OrderItem } from '../../types/OrderTypes';
+import {
+  OrderSkuItem,
+  AddressInfo,
+  LogisticsItem,
+  OrderExpressInfo,
+  OrderItem,
+  PickupStoreInfo,
+} from '../../types/OrderTypes';
 import { DiscountItem } from '../../types/ProductTypes';
 
 const mockSku1: OrderSkuItem = {
@@ -46,6 +53,14 @@ const mockAddress: AddressInfo = {
   longitude: 116.30,
 };
 
+export const DEFAULT_PICKUP_STORE: PickupStoreInfo = {
+  storeName: '综合商城自提点（海淀店）',
+  address: '北京市海淀区中关村大街1号',
+  businessHour:'09:00 - 20:00',
+  cellphone:'021-88888888',
+  latitude: 39.98,
+  longitude: 116.31,
+};
 
 const mockLogistic101: LogisticsItem = {
   icon: $r('app.media.ic_car'),
@@ -105,7 +120,7 @@ const mockLogistic204: LogisticsItem = {
     desc: '【北京市】北京市海淀区分拨交付中心 派件交给【华为快递员，联系电话： 12345678910 ，正在派送途中（有事呼叫我，勿找平台，少一次投诉，多一份感恩）',
     time: '2025-03-03 20:00:00',
   }],
-  courier: '华为快递员',
+  courier: '快递员',
   contactPhone: '12345678910',
 };
 
@@ -116,7 +131,7 @@ const mockLogistic205: LogisticsItem = {
     desc: '【代收点】您的快递已暂存至XX小区快递点，请及时领取签收，如有疑问请联系： 10000000000 ',
     time: '2025-03-04 08:00:00',
   }],
-  courier: '华为快递员',
+  courier: '快递员',
   contactPhone: '12345678910',
 };
 
@@ -136,12 +151,12 @@ export const mockExpress: OrderExpressInfo = {
   sendPosition: '南京市',
   getPosition: '北京市',
   origins: {
-    latitude: 31.975,
-    longitude: 118.78,
+    latitude: 32.06,
+    longitude: 118.22,
   },
   destination: {
-    latitude: 31.976,
-    longitude: 118.86,
+    latitude: 39.95,
+    longitude: 116.3,
   },
   waypoints: [
     { longitude: 118.78, latitude: 31.982 },
@@ -252,6 +267,29 @@ export class MockOrderData {
         mockLogistic101,
       ],
       skuInfo: [mockSku1, mockSku2],
+    },
+    {
+      orderInfo: {
+        status: 8, // 待取件（到店自提）
+        receivingMethod: 1,
+        orderNo: '20231012007',
+        addressInfo: {
+          name: DEFAULT_PICKUP_STORE.storeName,
+          cellphone: '025-88888888',
+          address: DEFAULT_PICKUP_STORE.address,
+          latitude: DEFAULT_PICKUP_STORE.latitude,
+          longitude: DEFAULT_PICKUP_STORE.longitude,
+        },
+        orderTime: 1697020800000,
+        remark: '到店自提',
+        originalPrice: 200,
+        finalPrice: 180,
+        discounts: [mockDiscountItem],
+        pickupCode: 'MOCK07',
+        pickupStoreInfo: DEFAULT_PICKUP_STORE,
+      },
+      logisticInfo: [],
+      skuInfo: [mockSku1],
     },
     {
       orderInfo: {

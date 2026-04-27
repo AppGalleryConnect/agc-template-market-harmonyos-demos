@@ -1,11 +1,10 @@
-import { buildTitleBar, RouterMap, RouterModule } from 'commonlib';
+import { buildTitleBar, CommonConstants, RouterMap, RouterModule } from 'commonlib';
 import { LengthMetrics } from '@kit.ArkUI';
 
 @Builder
 export function NoticeDetailPageBuilder() {
   NoticeDetailPage();
 }
-
 
 @ComponentV2
 struct NoticeDetailPage {
@@ -29,6 +28,7 @@ struct NoticeDetailPage {
       .margin({ top: 20 })
       .padding({ left: 16, right: 16 })
     }.title(buildTitleBar(this.title), { paddingStart: LengthMetrics.vp(16) })
+    .padding({ top: CommonConstants.STATUS_BAR_HEIGHT })
   }
 }
 

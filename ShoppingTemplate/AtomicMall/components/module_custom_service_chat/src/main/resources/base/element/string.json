@@ -1,0 +1,12 @@
+{
+  "string": [
+    {
+      "name": "agcit_huawei_comprehensive_mall_module_custom_service_chat",
+      "value": "1.0.1"
+    },
+    {
+      "name": "agcittype_huawei_comprehensive_mall_module_custom_service_chat",
+      "value": "serviceComponent"
+    }
+  ]
+}

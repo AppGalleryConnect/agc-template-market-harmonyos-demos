@@ -1,4 +1,5 @@
-import { BreakpointSystem, ProductInfoPageParam } from 'lib_foundation';
+import { common } from '@kit.AbilityKit';
+import { BreakpointSystem, BreakpointTypeEnum, ProductInfoPageParam } from 'lib_foundation';
 import { CommonSymbol, NavTitleBar } from 'lib_widget';
 import { ProductInfoVM } from '../viewmodels/ProductInfoVM';
 import {
@@ -52,17 +53,24 @@ export struct ProductInfoPage {
     .onReady((context) => {
       const params = context.pathInfo.param as ProductInfoPageParam | undefined;
       if (params) {
-        this.vm.initData(params)
+        const abilityName: string =
+          (this.getUIContext().getHostContext() as common.UIAbilityContext)?.abilityInfo?.name ??
+            'EntryAbility';
+        this.vm.initData(params, abilityName);
       }
+      this.vm.registerWindowActiveListener()
     })
     .onShown(async () => {
-      this.vm.getProductInfo()
       ShareUtil.registerGestureShare(this.getUIContext())
+      this.vm.getProductInfo()
       this.vm.countdown?.startCountdownTimer()
     })
     .onHidden(() => {
       ShareUtil.unregisterGestureShare()
       this.vm.countdown?.stopCountdownTimer()
+    })
+    .onDisAppear(() => {
+      this.vm.unregisterWindowActiveListener()
     })
   }
 
@@ -82,11 +90,24 @@ export struct ProductInfoPage {
             })
 
           CommonSymbol({ src: $r('sys.symbol.share') })
-            .width(40)
-            .height(40)
             .onClick(() => {
               this.vm.openShare()
             })
+
+          if (BreakpointSystem.currentBreakpoint.value !== BreakpointTypeEnum.SM || this.vm.isSplitScreen) {
+            CommonSymbol({
+              src: this.vm.isSplitScreen
+                ? $r('sys.symbol.arrow_down_right_and_arrow_up_left')
+                : $r('sys.symbol.rectangle_split_2x1'),
+            })
+              .onClick(() => {
+                if (this.vm.isSplitScreen) {
+                  this.vm.mergeSplitScreen();
+                } else {
+                  this.vm.startSplitScreen();
+                }
+              })
+          }
         }
       }
       .justifyContent(FlexAlign.End)
@@ -191,7 +212,7 @@ export struct ProductInfoPage {
         .onClick(() => {
           this.vm.handleClickCustomService()
         })
-        .margin({ right: $r('app.string.space_l') })
+        .margin({ right: BreakpointSystem.isTablet ? $r('app.float.space_xl') : $r('app.float.space_l') })
 
         Badge({
           count: this.vm.isLogin ? this.vm.cartNum : 0,

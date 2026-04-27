@@ -18,7 +18,7 @@ struct SafePage {
         appIcon: $r('app.media.app_icon'),
         appName: '综合商城模板',
         appDesc: '这是一个适用于网络购物的综合商城应用模板',
-        stack: routerStack,
+        stack: routerStack.getActiveStack(),
         handleConfirm: () => {
           if (SetupUtil.navInfo) {
             routerStack.replacePath({

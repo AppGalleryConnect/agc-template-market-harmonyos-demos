@@ -1,6 +1,6 @@
 import * as wxopensdk from '@tencent/wechat_open_sdk';
 import { common } from '@kit.AbilityKit';
-import { PersistenceV2, promptAction } from '@kit.ArkUI';
+import { PersistenceV2 } from '@kit.ArkUI';
 import { util } from '@kit.ArkTS';
 import { authentication, loginComponentManager } from '@kit.AccountKit';
 import { BusinessError } from '@kit.BasicServicesKit';
@@ -10,8 +10,7 @@ import { ExtraInfo, LoginParams, NavParam, PrivacyContent } from '../model/Index
 import { ApiController, LoginEventDispatcher } from '../utils/Utils';
 import { LoginSheetUtils } from '../utils/LoginSheetUtils';
 import { OnWXResp, wxEventHandler } from '../utils/WXApiUtils';
-import { WXLoginService } from '../utils/WXLoginService'
-
+import { WXLoginService } from '../utils/WXLoginService';
 
 @ObservedV2
 export class AggregatedLoginVM {
@@ -33,6 +32,7 @@ export class AggregatedLoginVM {
   isSheet: boolean = false;
   autoSheet: boolean = false;
   isPersistence: boolean = false;
+  uiContext?: UIContext;
   private loginService: WXLoginService = WXLoginService.instance;
   @Trace apiController: ApiController = new ApiController(
     () => new Promise(() => {
@@ -41,9 +41,8 @@ export class AggregatedLoginVM {
   }));
   logTag: string = 'QuickLoginButtonComponent';
   domainId: number = 0x0000;
-  obtainVerifyCode: () => Promise<void> = () => new Promise(() => {
+  obtainVerifyCode: (phone: string) => Promise<void> = () => new Promise(() => {
   });
-
   controller: loginComponentManager.LoginWithHuaweiIDButtonController =
     new loginComponentManager.LoginWithHuaweiIDButtonController()
     // 需要用户同意协议才能完成华为账号登录，请先设置协议状态为NOT_ACCEPTED，当用户同意协议后设置协议状态为ACCEPTED，才可以完成华为账号登录
@@ -52,7 +51,6 @@ export class AggregatedLoginVM {
         response: loginComponentManager.HuaweiIDCredential) => {
         this.handleLoginWithHuaweiIDButton(error, response);
       });
-
   // 定义固定文本部分
   fixedTexts: loginComponentManager.PrivacyText[] = [
     {
@@ -80,17 +78,18 @@ export class AggregatedLoginVM {
     this.isSelected = false
     this.enableStatus = true
     this.phoneNum = ''
-    this.verifyCode  = ''
+    this.verifyCode = ''
     this.verifyCodeTime = 0
     clearInterval(this.timer)
   }
 
   setValue(isSheet: boolean, autoSheet: boolean, isPersistence: boolean, apiController: ApiController,
-    obtainVerifyCode: () => Promise<void>) {
+    uiContext: UIContext, obtainVerifyCode: (phone: string) => Promise<void>) {
     this.isSheet = isSheet;
     this.autoSheet = autoSheet;
     this.isPersistence = isPersistence;
     this.apiController = apiController;
+    this.uiContext = uiContext;
     this.obtainVerifyCode = obtainVerifyCode;
   }
 
@@ -102,9 +101,15 @@ export class AggregatedLoginVM {
     req.state = extraInfo.state;
     req.transaction = extraInfo.transaction;
 
-    let finished = await this.loginService.wxApi.sendReq(getContext(this) as common.UIAbilityContext, req);
+    let finished =
+      await this.loginService.wxApi.sendReq(this.uiContext?.getHostContext() as common.UIAbilityContext, req);
     if (!finished) {
-      promptAction.showToast({ message: '未安装微信' });
+      try {
+        this.uiContext?.getPromptAction().showToast({ message: '未安装微信' });
+      } catch (error) {
+        hilog.error(this.domainId, this.logTag,
+          `Failed to showToast. Code is ${error.code}, Message is ${error.message}`);
+      }
     }
   }
 
@@ -113,11 +118,12 @@ export class AggregatedLoginVM {
     if (this.isSelected) {
       this.wxLogin(extraInfo);
     } else {
-      promptAction.showToast({
-        message: $r('app.string.select_the_agreement'),
-        duration: 1500,
-        bottom: 80,
-      })
+      try {
+        this.uiContext?.getPromptAction().showToast({ message: $r('app.string.select_the_agreement') })
+      } catch (error) {
+        hilog.error(this.domainId, this.logTag,
+          `Failed to showToast. Code is ${error.code}, Message is ${error.message}`);
+      }
     }
   }
 
@@ -139,15 +145,30 @@ export class AggregatedLoginVM {
    **/
   validateLogin(): boolean {
     if (this.verifyCode === '' || (this.isPersistence ? this.persistenceData.phoneNumber : this.phoneNum) === '') {
-      promptAction.showToast({ message: '手机号或验证码不能为空！' })
+      try {
+        this.uiContext?.getPromptAction().showToast({ message: '手机号或验证码不能为空！' })
+      } catch (error) {
+        hilog.error(this.domainId, this.logTag,
+          `Failed to showToast. Code is ${error.code}, Message is ${error.message}`);
+      }
       return false
     }
     if (!/^\d{6}$/.test(this.verifyCode)) {
-      promptAction.showToast({ message: '验证码不正确！' })
+      try {
+        this.uiContext?.getPromptAction().showToast({ message: '验证码不正确！' })
+      } catch (error) {
+        hilog.error(this.domainId, this.logTag,
+          `Failed to showToast. Code is ${error.code}, Message is ${error.message}`);
+      }
       return false
     }
     if (!/^1[3-9]\d{9}$/.test(this.isPersistence ? this.persistenceData.phoneNumber : this.phoneNum)) {
-      promptAction.showToast({ message: '手机号码不正确！' })
+      try {
+        this.uiContext?.getPromptAction().showToast({ message: '手机号码不正确！' })
+      } catch (error) {
+        hilog.error(this.domainId, this.logTag,
+          `Failed to showToast. Code is ${error.code}, Message is ${error.message}`);
+      }
       return false
     }
     return true
@@ -158,11 +179,12 @@ export class AggregatedLoginVM {
    **/
   clickLogInButton(): void {
     if (!this.isSelected) {
-      promptAction.showToast({
-        message: $r('app.string.select_the_agreement'),
-        duration: 1500,
-        bottom: 80,
-      });
+      try {
+        this.uiContext?.getPromptAction().showToast({ message: $r('app.string.select_the_agreement') });
+      } catch (error) {
+        hilog.error(this.domainId, this.logTag,
+          `Failed to showToast. Code is ${error.code}, Message is ${error.message}`);
+      }
       return;
     }
     if (!this.validateLogin()) {
@@ -187,9 +209,14 @@ export class AggregatedLoginVM {
   getVerifyCode(): void {
     if ((this.isPersistence ? this.persistenceData.phoneNumber : this.phoneNum) === '' ||
       !/^1[3-9]\d{9}$/.test(this.isPersistence ? this.persistenceData.phoneNumber : this.phoneNum)) {
-      promptAction.showToast({ message: '请输入正确的手机号' })
+      try {
+        this.uiContext?.getPromptAction().showToast({ message: '请输入正确的手机号' })
+      } catch (error) {
+        hilog.error(this.domainId, this.logTag,
+          `Failed to showToast. Code is ${error.code}, Message is ${error.message}`);
+      }
     } else {
-      this.obtainVerifyCode().then(() => {
+      this.obtainVerifyCode(this.isPersistence ? this.persistenceData.phoneNumber : this.phoneNum).then(() => {
         this.verifyCodeTime = 60;
         this.timer = setInterval(() => {
           this.verifyCodeTime--;
@@ -232,19 +259,21 @@ export class AggregatedLoginVM {
         this.authorizationCode = response.data!.authorizationCode;
         const anonymousPhone = response.data?.extraInfo?.quickLoginAnonymousPhone as string;
         if (anonymousPhone) {
-          hilog.info(0x0002, 'testTag', 'Succeeded in authentication.');
+          hilog.info(this.domainId, this.logTag, 'Succeeded in authentication.');
           this.anonymousPhone = anonymousPhone;
           return;
         }
-        hilog.info(0x0002, 'testTag', 'Succeeded in authentication. AnonymousPhone is empty.');
+        hilog.info(this.domainId, this.logTag, 'Succeeded in authentication. AnonymousPhone is empty.');
       }).catch((error: BusinessError) => {
         // todo 以下内容配置好可用的调试证书和client_id后删除，当前为模拟数据
         this.unionID = util.generateRandomUUID();
         this.openID = util.generateRandomUUID();
         this.anonymousPhone = '183******12';
+        hilog.error(this.domainId, this.logTag,
+          `Failed to execute request. Code is ${error.code}, Message is ${error.message}`);
       });
     } catch (error) {
-      hilog.info(0x0002, 'testTag', 'quick login failed ' + JSON.stringify(error));
+      hilog.info(this.domainId, 'testTag', 'quick login failed ' + JSON.stringify(error));
     }
   }
 
@@ -269,9 +298,7 @@ export class AggregatedLoginVM {
           privacyText.push(this.fixedTexts[1]);
         }
       }
-
     });
-
     return privacyText;
   }
 
@@ -303,11 +330,12 @@ export class AggregatedLoginVM {
       hilog.error(this.domainId, this.logTag,
         `Failed to click LoginWithHuaweiIDButton. errCode is ${error.code}, errMessage is ${error.message}`);
       if (error.code === LoginErrorCode.ERROR_CODE_AGREEMENT_STATUS_NOT_ACCEPTED) {
-        promptAction.showToast({
-          message: $r('app.string.select_the_agreement'),
-          duration: 1500,
-          bottom: 80,
-        });
+        try {
+          this.uiContext?.getPromptAction().showToast({ message: $r('app.string.select_the_agreement') });
+        } catch (error) {
+          hilog.error(this.domainId, this.logTag,
+            `Failed to showToast. Code is ${error.code}, Message is ${error.message}`);
+        }
         return;
       } else {
         LoginEventDispatcher.dispatchToLoginFail(LoginChannelType.HUAWEI, error)
@@ -320,6 +348,7 @@ export class AggregatedLoginVM {
         if (response) {
           hilog.info(this.domainId, this.logTag, 'Succeeded in clicking LoginWithHuaweiIDButton.');
           let loginParams: LoginParams = {
+            anonymousPhone: this.anonymousPhone,
             unionID: this.unionID,
             authorizationCode: this.authorizationCode
           }
@@ -330,11 +359,7 @@ export class AggregatedLoginVM {
           })
         }
       } else {
-        promptAction.showToast({
-          message: $r('app.string.select_the_agreement'),
-          duration: 1500,
-          bottom: 80,
-        });
+        this.uiContext?.getPromptAction().showToast({ message: $r('app.string.select_the_agreement') });
       }
     } catch (err) {
       hilog.error(this.domainId, this.logTag,

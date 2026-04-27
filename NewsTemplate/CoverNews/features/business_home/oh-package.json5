@@ -1,0 +1,13 @@
+{
+  "name": "business_home",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@atomicservice/ascfapi": "1.0.12",
+    "lib_common": "file:../../commons/lib_common",
+    "image_preview": "file:../../components/image_preview"
+  }
+}

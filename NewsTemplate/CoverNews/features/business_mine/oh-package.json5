@@ -1,0 +1,13 @@
+{
+  "name": "business_mine",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "lib_common": "file:../../commons/lib_common",
+    "atomicservice_login": "file:../../components/atomicservice_login",
+    "feedback": "file:../../components/feedback",
+  }
+}

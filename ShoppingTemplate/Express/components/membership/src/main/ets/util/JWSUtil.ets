@@ -1,5 +1,5 @@
 import { util } from '@kit.ArkTS';
-import { hilog } from '@kit.PerformanceAnalysisKit';
+import { UtilLog } from '@hw-agconnect/util-log';
 
 const TAG: string = 'JWSUtil';
 const BASE64_PADDING_MOD: number = 4;
@@ -28,7 +28,7 @@ export class JWSUtil {
       }
       result = textDecoder.decodeToString(base64.decodeSync(payload));
     } catch (err) {
-      hilog.error(0xFF00, TAG, `decodeJwsObj parse err: ${JSON.stringify(err)}`);
+      UtilLog.error(TAG, `decodeJwsObj parse err: ${JSON.stringify(err)}`);
     }
     return result;
   }

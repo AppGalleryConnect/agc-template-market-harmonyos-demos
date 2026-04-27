@@ -27,6 +27,7 @@ export class RecipeBriefInfo {
   @Trace thumbnail: string = ''
   @Trace views: number = 0;
   @Trace likes: number = 0;
+  @Trace video: string = '';
 }
 
 @ObservedV2
@@ -34,8 +35,10 @@ export class BloggerInfo {
   @Trace id: number = 0
   @Trace name: string = ''
   @Trace avatar: ResourceStr = ''
-  @Trace profile: string = ''
-  @Trace sex: string = ''
+  @Trace phoneNumber: string = ''
+  @Trace isMembership: boolean = false
+  @Trace profile: string = '未知'
+  @Trace sex: string = '未知'
   @Trace createdAccount: string = ''
   @Trace ipLocation: string = ''
   @Trace bloggerType: string = ''
@@ -45,6 +48,7 @@ export class BloggerInfo {
   @Trace beFollowed: number = 0
   @Trace myRecipeList: RecipeBriefInfo[] = []
   @Trace collectRecipeList: RecipeBriefInfo[] = []
+
   getFollowers(): string {
     return this.formatNumber(this.followers)
   }
@@ -87,6 +91,5 @@ export class BloggerInfo {
     this.beFollowed = beFollowed;
     this.myRecipeList = myRecipeList;
     this.collectRecipeList = collectRecipeList;
-
   }
 }

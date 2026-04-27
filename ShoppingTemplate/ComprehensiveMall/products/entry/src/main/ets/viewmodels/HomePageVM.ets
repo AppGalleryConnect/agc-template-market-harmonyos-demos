@@ -99,7 +99,9 @@ export class HomePageVM {
         handlePhotoResult: (uri: string | PixelMap) => {
           if (typeof uri === 'string') {
             this._readFileToPixelMap(uri).then((res) => {
-              this._getSegmentationImage(res);
+              if (res) {
+                this._getSegmentationImage(res);
+              }
             });
           } else {
             this._getSegmentationImage(uri);

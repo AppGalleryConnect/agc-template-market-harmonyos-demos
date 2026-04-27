@@ -1,8 +1,9 @@
 import { UIUtils } from '@kit.ArkUI';
 import { emitter } from '@kit.BasicServicesKit';
 import { LoginSheetUtils } from 'lib_account';
-import { BaseViewModel, RouterParams, RouterToNews } from 'lib_common';
-import { MineServiceApi, NewsResponse, PostServiceApi } from 'lib_news_api';
+import { BaseViewModel, RouterParams, RouterToNews, EventEnum, CommonBreakpoint } from 'lib_common';
+import { MineServiceApi, NewsResponse, PostQueryRequest, PostServiceApi } from 'lib_news_api';
+import { Topic } from 'module_post';
 import { LoneTakeAnimationsTransition, LongTakeTransitionParam } from 'module_transition';
 import { TabEnum } from '../common/Constants';
 
@@ -12,11 +13,22 @@ export class InteractionViewModel extends BaseViewModel {
   @Trace isRefreshing: boolean = false
   @Trace interactionList: NewsResponse[] = []
   @Trace resourceId: TabEnum = TabEnum.Watch
+  @Trace selectedId: number = 0;
   @Trace isLoading: boolean = false
   @Trace currentIndex: number = 10
   @Trace currentPage: number = 0
-  @Trace selectId: number = 0
+  @Trace topic: Topic = { id: '', title: '' }
   private uiContext: UIContext
+  private apiMap: Map<number, (params: PostQueryRequest) => Promise<NewsResponse[]>> =
+    new Map([[0, PostServiceApi.queryPostFollowList], [1, PostServiceApi.queryPostRecommendList],
+      [2, PostServiceApi.queryPostRecommendList], [3, PostServiceApi.queryPostTopicList]])
+  public scroller: Scroller = new Scroller();
+  @Trace lanesCount: CommonBreakpoint<number> = new CommonBreakpoint<number>({
+    sm: 1,
+    md: 2,
+    lg: 3,
+    xl: 3,
+  });
 
   constructor(uiContext: UIContext) {
     super()
@@ -34,25 +46,25 @@ export class InteractionViewModel extends BaseViewModel {
   public init(resourceId: TabEnum) {
     this.resourceId = resourceId
     this.refresh()
-    this.setOnListenRefresh()
   }
 
+  private onRecommendRefresh: () => void = () => {
+    if (this.selectedId === TabEnum.Recommend) {
+      this.scroller.scrollEdge(Edge.Top);
+    }
+    this.refresh();
+  };
+
   setOnListenRefresh() {
-    emitter.on('recommendRefresh', () => {
-      this.refresh()
-    })
+    emitter.on(EventEnum.INTERACTION_RECOMMEND_REFRESH, this.onRecommendRefresh);
+  }
+
+  setTopic(topic: Topic) {
+    this.topic = topic;
   }
 
   setOffListenRefresh() {
-    emitter.off('recommendRefresh')
-  }
-
-  public setSelectId(selectId: number) {
-    this.selectId = selectId
-  }
-
-  public emitterOff() {
-    this.setOffListenRefresh()
+    emitter.off(EventEnum.INTERACTION_RECOMMEND_REFRESH, this.onRecommendRefresh);
   }
 
   // 懒加载id，会根据枚举值进行页面刷新
@@ -69,32 +81,22 @@ export class InteractionViewModel extends BaseViewModel {
       .join('+');
   }
 
-  public async setActionData(actionAPi: () => Promise<NewsResponse[]>) {
-    this.interactionList = await actionAPi()
+  public async setActionData() {
+    const actionAPi = this.apiMap.get(this.resourceId)!
+    this.interactionList = await actionAPi({
+      currentIndex: this.currentIndex,
+      currentPage: this.currentPage,
+      topicTitle: this.topic.title,
+    })
     this.interactionList = this.interactionList.map(item => UIUtils.makeObserved(item))
     this.isRefreshing = false
   }
 
-  public tabSwitch() {
-    switch (this.resourceId) {
-      case TabEnum.Watch:
-        this.setActionData(PostServiceApi.queryPostFollowList)
-        break
-      case TabEnum.Recommend:
-        this.setActionData(PostServiceApi.queryPostRecommendList)
-        break
-      case TabEnum.Nearby:
-        this.setActionData(PostServiceApi.queryPostRecommendList)
-        break
-    }
-  }
-
   public refresh() {
     this.isRefreshing = true
-    const apiMap: Map<number, () => Promise<NewsResponse[]>> =
-      new Map([[0, PostServiceApi.queryPostFollowList], [1, PostServiceApi.queryPostRecommendList],
-        [2, PostServiceApi.queryPostRecommendList]])
-    this.setActionData(apiMap.get(this.resourceId)!)
+    this.currentIndex = 10;
+    this.currentPage = 0;
+    this.setActionData()
   }
 
   public watchOperation() {
@@ -163,10 +165,15 @@ export class InteractionViewModel extends BaseViewModel {
 
   public async loadMore() {
     this.isLoading = true
-    this.currentIndex += this.currentPage
-    this.currentPage += 5
-    let followList = await PostServiceApi.queryPostFollowList(this.currentIndex, this.currentPage)
-    if (!followList.length) {
+    this.currentPage += 10
+    this.currentIndex = this.currentPage + 10
+    const actionAPi = this.apiMap.get(this.resourceId)!
+    const followList = await actionAPi({
+      currentIndex: this.currentIndex,
+      currentPage: this.currentPage,
+      topicTitle: this.topic.title,
+    })
+    if (!followList?.length) {
       this.emptyToast()
     } else {
       followList.forEach(item => this.interactionList.push(UIUtils.makeObserved(item)))

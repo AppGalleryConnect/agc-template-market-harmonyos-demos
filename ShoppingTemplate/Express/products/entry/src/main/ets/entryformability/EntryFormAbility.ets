@@ -1,32 +1,28 @@
 import { formBindingData, FormExtensionAbility, formInfo } from '@kit.FormKit';
 import { Want } from '@kit.AbilityKit';
-import { Logger, PreferenceUtil } from 'module_base';
-import { WidgetCardVM } from '../viewmodels/WidgetCardVM';
+import { CardInfo, Logger, PreferenceUtil, WidgetCardModel } from 'lib_foundation';
 
-const vm: WidgetCardVM = WidgetCardVM.instance
+const TAG: string = '[PhoneFormAbility]';
 
 export default class EntryFormAbility extends FormExtensionAbility {
   onAddForm(want: Want) {
-    let formId: string = want.parameters?.[formInfo.FormParam.IDENTITY_KEY] as string;
-    Logger.info(`[WidgetAbility] onAddForm formId: ${formId}`);
-    if (!formId) {
-      return formBindingData.createFormBindingData({
-        text: 'onAddFormWithoutFormId',
-      });
+    let formId: string = ''
+    let formDimension = 2;
+    if (want?.parameters) {
+      formId = want.parameters[formInfo.FormParam.IDENTITY_KEY] as string
+      // 获取卡片类型
+      formDimension = want.parameters[formInfo.FormParam.DIMENSION_KEY] as number
+      Logger.info(TAG, `want.parameters formId: ${formId}`);
     }
+    let cardInfo: CardInfo = { formId, formDimension };
     try {
-      PreferenceUtil.getInstance(this.context).putToArray(this.getFormPreferenceKey(), formId);
-      vm.publishFormId(formId)
+      PreferenceUtil.getInstance(this.context).putToArray('card_id', JSON.stringify(cardInfo));
     } catch (e) {
-      Logger.error(`[WidgetAbility] onAddForm error: ${e}`);
+      Logger.error(TAG, `onAddForm error: ${e}`);
     }
-    if (PreferenceUtil.getInstance(this.context).get('formDataInfo')) {
-      PreferenceUtil.getInstance(this.context).get(this.getFormPreferenceKey())
-      const formDataInfo = PreferenceUtil.getInstance().get('formDataInfo') as object;
-      return formBindingData.createFormBindingData(formDataInfo);
-    } else {
-      return formBindingData.createFormBindingData({});
-    }
+    const formData = PreferenceUtil.getCardDataArray(this.context);
+    Logger.info(TAG, `onAddForm formData: ${formData}`);
+    return formBindingData.createFormBindingData(JSON.parse(formData));
   }
 
   onCastToNormalForm(formId: string) {
@@ -34,8 +30,12 @@ export default class EntryFormAbility extends FormExtensionAbility {
     // converted to a normal form.
   }
 
-  onUpdateForm(formId: string) {
+  async onUpdateForm(formId: string) {
     // Called to notify the form provider to update a specified form.
+    Logger.info(TAG, `onUpdateForm, formId = ${formId}`);
+    const formData = PreferenceUtil.getCardDataArray(this.context);
+    Logger.info(TAG, `onUpdateForm formData: ${formData}`);
+    PreferenceUtil.updateCard(JSON.parse(formData) as WidgetCardModel, this.context, formId)
   }
 
   onFormEvent(formId: string, message: string) {
@@ -43,20 +43,12 @@ export default class EntryFormAbility extends FormExtensionAbility {
   }
 
   onRemoveForm(formId: string) {
-    // Called to notify the form provider that a specified form has been destroyed.
-    try {
-      PreferenceUtil.getInstance(this.context).removeFromArray(this.getFormPreferenceKey(), formId);
-    } catch (e) {
-      Logger.error(`[WidgetAbility] onRemoveForm error: ${e}`);
-    }
+    Logger.info(TAG, `onRemoveForm, formId = ${formId}`);
+    PreferenceUtil.removeCard(formId, this.context)
   }
 
   onAcquireFormState(want: Want) {
     // Called to return a {@link FormState} object.
     return formInfo.FormState.READY;
-  }
-
-  private getFormPreferenceKey() {
-    return 'order_status_widget_form_id';
   }
 };

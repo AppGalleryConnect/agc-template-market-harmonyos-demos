@@ -1,0 +1,12 @@
+{
+  "color": [
+    {
+      "name": "cast_play_pause_bg",
+      "value": "#666666"
+    },
+    {
+      "name": "cast_slider_block",
+      "value": "#FFFFFF"
+    }
+  ]
+}

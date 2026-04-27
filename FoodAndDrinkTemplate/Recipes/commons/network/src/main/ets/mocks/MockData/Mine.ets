@@ -215,7 +215,7 @@ const followers: BloggerFollower[] = [
   },
 ];
 
-let mineList: Array<number> = [2, 10, 18, 2, 10, 18];
+let mineList: Array<number> = [10, 18, 3, 4, 5,1,11,9];
 
 let historyList: Array<number> = [1, 2];
 

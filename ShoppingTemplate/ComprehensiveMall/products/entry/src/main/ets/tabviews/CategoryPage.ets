@@ -5,8 +5,8 @@ import { ProductCategory } from 'module_product_category';
 
 @ComponentV2
 export struct CategoryPageContent {
-  @Param
-  public initId: string = '';
+  @Local
+  initId: string = '';
   @Local
   isLoading: boolean = false;
   @Local
@@ -86,12 +86,13 @@ export struct CategoryPageContent {
     .onReady((context)=>{
       if(context.pathInfo.param){
         this.isChildRoute = true
+        this.initId = context.pathInfo.param as string
       }
     })
   }
 }
 
 @Builder
-export function buildCategoryPage(initId?: string) {
-  CategoryPageContent({ initId: initId })
+export function buildCategoryPage() {
+  CategoryPageContent()
 }

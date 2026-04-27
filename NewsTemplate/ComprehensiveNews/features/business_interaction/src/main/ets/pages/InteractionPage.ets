@@ -11,10 +11,10 @@ import {
   WindowModel,
 } from 'lib_common'
 import { NavHeaderBar } from 'lib_widget';
+import { NewsSearchEntry } from 'lib_search';
 import { TopBar } from '../components/TopBar';
 import { TabItem, TAB_LIST } from '../common/Constants';
 import { InterActionTabContent } from '../components/InterActionTabContent';
-import { NewsSearchTransition } from 'lib_widget';
 
 @Builder
 export function InteractionPageBuilder() {
@@ -62,16 +62,19 @@ struct InteractionPage {
         Tabs({ index: this.targetIndex }) {
           ForEach(TAB_LIST, (v: TabItem) => {
             TabContent() {
-              InterActionTabContent({
-                resource: v,
-                selectedId: this.selectedId,
-              })
+              Column() {
+                InterActionTabContent({
+                  resource: v,
+                  selectedId: this.selectedId,
+                })
+              }
+              .layoutWeight(1)
             }
           }, (v: TabItem) => v.id + v.label)
         }
         .barHeight(0)
         .layoutWeight(1)
-        .onAnimationStart((index: number, targetIndex: number) => {
+        .onAnimationStart((_index: number, targetIndex: number) => {
           this.selectedId = TAB_LIST[targetIndex].id
         })
         .onChange((index: number) => {
@@ -81,7 +84,7 @@ struct InteractionPage {
       .attributeModifier(this.modifier)
       .width(CommonConstants.FULL_PERCENT)
       .height(CommonConstants.FULL_PERCENT)
-      .backgroundColor($r('sys.color.background_secondary'))
+      .backgroundColor($r('sys.color.background_tertiary'))
       .padding({
         bottom: this.pagePaddingBottom,
       })
@@ -92,9 +95,7 @@ struct InteractionPage {
   @Builder
   rightHeadPartBuilder() {
     Row({ space: CommonConstants.SPACE_S }) {
-      NewsSearchTransition({
-        componentId: 'interactionPage',
-      })
+      NewsSearchEntry({ name: 'interaction' })
       Button() {
         SymbolGlyph($r('sys.symbol.plus'))
           .fontColor([$r('sys.color.font_primary')])

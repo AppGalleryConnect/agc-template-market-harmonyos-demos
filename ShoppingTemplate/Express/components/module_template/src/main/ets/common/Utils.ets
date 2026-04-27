@@ -4,15 +4,6 @@ import { PaymentMethod } from './Constant';
  * 通用Utils
  */
 export class CommonUtils {
-  static assign(target: Object, ...source: Object[]) {
-    for (let s of source) {
-      for (let key of Object.keys(s)) {
-        const value = Reflect.get(s, key) as Object;
-        Reflect.set(target, key, value)
-      }
-    }
-  }
-
   public static getShippingMethodValue(key: number): string {
     switch (key) {
       case 1:

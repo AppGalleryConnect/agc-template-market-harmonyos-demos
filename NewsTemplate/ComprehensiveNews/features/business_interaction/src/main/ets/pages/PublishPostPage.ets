@@ -1,7 +1,7 @@
 import { common } from '@kit.AbilityKit'
-import { CommonConstants, RouterUtils } from 'lib_common'
+import { CommonConstants, RouterMap, RouterUtils } from 'lib_common'
 import { NavHeaderBar } from 'lib_widget'
-import { PostImgVideoItem, PublishPostComp } from 'module_post'
+import { PostController, PostImgVideoItem, PublishPostComp, Topic } from 'module_post'
 import { PublishPostViewModel } from '../viewmodels/PublishPostVM'
 
 @Builder
@@ -14,6 +14,7 @@ export struct PublishPostPage {
   vm: PublishPostViewModel = new PublishPostViewModel();
 
   aboutToAppear(): void {
+    this.vm.init();
     this.vm.onKeyBoard(this.getUIContext().getHostContext() as common.UIAbilityContext);
   }
 
@@ -38,10 +39,23 @@ export struct PublishPostPage {
       Column() {
         PublishPostComp({
           fontRatio: this.vm.settingInfo.fontSizeRatio,
-          controller: this.vm.controller,
-          onChange: (body: string, mediaList: PostImgVideoItem[]) => {
+          richEditorController: this.vm.controller,
+          postController: this.vm.postController,
+          themeColor: $r('app.color.app_theme'),
+          userList: this.vm.userList,
+          topicList: this.vm.topicList,
+          attachedTopic: this.vm.attachedTopic,
+          onChange: (body: string, mediaList: PostImgVideoItem[], cityLocation?: string) => {
             this.vm.body = body;
             this.vm.mediaList = mediaList;
+            this.vm.cityLocation = cityLocation ?? '';
+          },
+          jumpTopicPage: (topic) => {
+            const params: Record<string, Object | Topic | PostController> = {
+              'topic': topic,
+              'postController': this.vm.postController,
+            }
+            RouterUtils.pushPathByName(RouterMap.TOPIC_RESULT_PAGE, params);
           },
         })
       }
@@ -52,6 +66,9 @@ export struct PublishPostPage {
       })
     }
     .hideTitleBar(true)
+    .onReady((context) => {
+      this.vm.initRouterParams(context);
+    })
     .onBackPressed(() => {
       return this.vm.onBackPressed();
     })
@@ -63,10 +80,10 @@ export struct PublishPostPage {
       Button('发表')
         .width(72)
         .height(40)
+        .opacity(this.vm.enablePublish() ? 1 : 0.4)
         .fontSize($r('sys.float.Body_L'))
-        .fontColor(this.vm.enablePublish() ? $r('sys.color.font_on_primary') : $r('sys.color.font_tertiary'))
-        .backgroundColor(this.vm.enablePublish() ? $r('app.color.app_theme') :
-        $r('sys.color.comp_background_tertiary'))
+        .fontColor($r('sys.color.font_on_primary'))
+        .backgroundColor($r('app.color.app_theme'))
         .onClick(() => {
           this.vm.publishPost();
         })

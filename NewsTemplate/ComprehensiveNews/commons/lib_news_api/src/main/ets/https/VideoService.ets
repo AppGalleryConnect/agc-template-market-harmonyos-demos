@@ -44,6 +44,14 @@ export class VideoService extends BaseNewsService {
   }
 
   /**
+   * 查询直播预约列表
+   * @returns
+   */
+  public queryLiveReservationList(): Promise<NewsResponse[]> {
+    return request.get('/video/reservation/list');
+  }
+
+  /**
    * 根据id查询详细信息
    * @param id
    * @returns

@@ -1,4 +1,4 @@
-import { IServicePoint } from 'lib_foundation'
+import { BottomBtn, CommonNoticeBar, CommonTitle, IServicePoint } from 'lib_foundation'
 import { StoreCard } from '../components/StoreCard'
 import { ServicePointPageVM } from '../viewModels/ServicePointPageVM'
 
@@ -10,7 +10,7 @@ export function ServicePointPageBuilder() {
 @Entry
 @ComponentV2
 struct ServicePointPage {
-  vm: ServicePointPageVM = ServicePointPageVM.instance
+  vm: ServicePointPageVM = new ServicePointPageVM();
 
   aboutToAppear(): void {
     this.vm.init()
@@ -18,59 +18,56 @@ struct ServicePointPage {
 
   build() {
     NavDestination() {
+      CommonTitle({
+        title: '服务点查询',
+      })
       Column() {
         Scroll() {
-          Column() {
-            Row() {
-              Image($r('app.media.ic_warning_service'))
-                .width(12)
-                .height(12)
-                .margin({ right: 4 })
-              Text('下单后，前往任意柜机都可以投放哦～')
-                .fontSize(10)
-                .fontWeight(FontWeight.Regular)
-                .fontColor(Color.White)
-            }
-            .width('100%')
-            .backgroundColor('rgba(10,89,247,0.8)')
-            .borderRadius(8)
-            .padding({
-              left: 12,
-              right: 12,
-              top: 8,
-              bottom: 8
+          Column({ space: 12 }) {
+            CommonNoticeBar({
+              text: '下单后，前往任意柜机都可以投放哦～'
             })
-            .margin({ bottom: 12 })
 
-            ForEach(this.vm.servicePointList, (servicePoint: IServicePoint) => {
-              StoreCard({
-                servicePoint: servicePoint,
-                isSelected: this.vm.selectedServicePoint?.id === servicePoint.id
-              })
+            List({ space: 12 }) {
+              ForEach(this.vm.servicePointList, (servicePoint: IServicePoint) => {
+                ListItem() {
+                  StoreCard({
+                    servicePoint: servicePoint,
+                    isSelected: this.vm.selectedServicePoint?.id === servicePoint.id
+                  })
+                }
                 .onClick(() => {
                   this.vm.selectedServicePoint = servicePoint
                 })
-            }, (item: IServicePoint[]) => JSON.stringify(item))
+              }, (item: IServicePoint) => JSON.stringify(item))
+            }
+            .width('100%')
+            .layoutWeight(1)
+            .lanes(this.vm.listLanes, 12)
           }
-          .padding({ left: 16, right: 16 })
+          .padding({
+            left: this.vm.breakPointModel.pagePadding,
+            right: this.vm.breakPointModel.pagePadding,
+            top: 8,
+          })
         }
+        .width('100%')
+        .height('100%')
         .scrollBar(BarState.Off)
         .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: false })
+        .align(Alignment.Top)
       }
-      .height('calc(100% - 46vp)')
+      .layoutWeight(1)
 
-      Row() {
-        Button('保存')
-          .width('100%')
-          .onClick(() => {
-            this.vm.save()
-          })
-      }
-      .width('100%')
-      .height(76)
-      .padding({ left: 28, right: 28 })
+      BottomBtn({
+        text: '保存',
+        paddingSize: { left: 28, right: 28, bottom: this.vm.windowModel.windowBottomPadding },
+        onAction: () => {
+          this.vm.save()
+        }
+      })
     }
-    .backgroundColor('#F1F3F5')
-    .title('自寄点')
+    .hideTitleBar(true)
+    .backgroundColor($r('sys.color.background_secondary'))
   }
 }

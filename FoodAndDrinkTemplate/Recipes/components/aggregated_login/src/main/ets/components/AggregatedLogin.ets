@@ -31,8 +31,9 @@ export struct AggregatedLogin {
   )
   @Param loginController: LoginController = new LoginController();
   @Event handleLoginFail: (loginChannelType: LoginChannelType, error: LoginFailError) => void =
-    () => {}
-  @Event obtainVerifyCode: () => Promise<void> = () => new Promise(() => {
+    () => {
+    }
+  @Event obtainVerifyCode: (phone: string) => Promise<void> = () => new Promise(() => {
   });
 
   aboutToAppear(): void {
@@ -41,7 +42,8 @@ export struct AggregatedLogin {
       (loginChannelType: LoginChannelType, error: LoginFailError) => {
         this.handleLoginFail(loginChannelType, error)
       }
-    this.vm.setValue(this.isSheet, this.autoSheet, this.isPersistence, this.apiController, this.obtainVerifyCode)
+    this.vm.setValue(this.isSheet, this.autoSheet, this.isPersistence, this.apiController, this.getUIContext(),
+      this.obtainVerifyCode)
     this.loginController.clearLoginInfo = () => {
       this.vm.resetInstance()
     }
@@ -161,12 +163,13 @@ export struct AggregatedLogin {
           top: Constants.PADDING_M,
           bottom: Constants.PADDING_M,
         })
+        .margin({bottom: 28})
         .constraintSize({ maxWidth: Constants.MAX_WIDTH })
         .height(Constants.SHEET_TITLE_H)
         .width(Constants.FULL_PERCENT)
     }
     .alignItems(HorizontalAlign.Center)
-    .backgroundColor($r('sys.color.background_secondary'))
+    .backgroundColor($r('sys.color.comp_background_gray'))
     .padding({
       left: Constants.PADDING_L, right: Constants.PADDING_L,
       bottom: this.isSheet ? Constants.WINDOW_BOTTOM_PADDING : Constants.ZERO
@@ -190,6 +193,7 @@ export struct AggregatedLogin {
             this.routerModule.pop();
           })
         }
+        .margin({ top: 22 })
         .padding({ left: Constants.PADDING_L, right: Constants.PADDING_L })
         .width(Constants.FULL_PERCENT)
         .height(Constants.SHEET_TITLE_H)
@@ -199,5 +203,6 @@ export struct AggregatedLogin {
     }
     .height(Constants.FULL_PERCENT)
     .width(Constants.FULL_PERCENT)
+    .backgroundColor($r('sys.color.comp_background_gray'))
   }
 }

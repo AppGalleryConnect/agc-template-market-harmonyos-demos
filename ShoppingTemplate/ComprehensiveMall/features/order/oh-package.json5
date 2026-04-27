@@ -13,7 +13,7 @@
     "module_shopping_cart": "file:../../components/module_shopping_cart",
     "address_management": "file:../../components/address_management",
     "aggregated_payment": "file:../../components/aggregated_payment",
-    "module_coupons": "file:../../components/module_coupons",
+    "coupons": "file:../../components/coupons",
     "image_preview": "file:../../components/image_preview"
   }
 }

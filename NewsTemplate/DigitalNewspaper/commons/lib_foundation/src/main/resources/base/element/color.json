@@ -1,0 +1,48 @@
+{
+  "color": [
+    {
+      "name": "common_page_bg",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "common_theme_color",
+      "value": "#0A59F7"
+    },
+    {
+      "name": "common_theme_color_90",
+      "value": "#2269F7"
+    },
+    {
+      "name": "common_theme_color_5",
+      "value": "#F2F6FE"
+    },
+    {
+      "name": "common_red",
+      "value": "#E84026"
+    },
+    {
+      "name": "common_card_bg",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "common_grey",
+      "value": "#565656"
+    },
+    {
+      "name": "grey_5",
+      "value": "#F2F2F2"
+    },
+    {
+      "name": "grey_10",
+      "value": "#E5E5E5"
+    },
+    {
+      "name": "grey_20",
+      "value": "#CCCCCC"
+    },
+    {
+      "name": "grey_60",
+      "value": "#666666"
+    }
+  ]
+}

@@ -8,7 +8,6 @@ import { AuthorCard } from '../builder/AuthorBuilder'
 import { ArticleSourceBuilder } from '../builder/ArticleSourceBuilder'
 import { CardViewModel } from '../viewmodel/CardViewModel'
 
-
 @Builder
 export function TopTextBottomImageCard(cardData: LayoutParams) {
   NativeComponent({

@@ -1,6 +1,6 @@
 import { PersistenceV2 } from '@kit.ArkUI';
 import { CommonConstants, FormatCount, UserInfoModel } from 'lib_common';
-import { Share } from 'lib_widget';
+import { Share, ShareContentType, ShareUtils } from 'lib_widget';
 import { ImagePreview, ImagePreviewOptions, SourceImageModel } from 'module_imagepreview';
 import { ArticleTextEllipsis } from './ArticleTextEllipsis';
 import { FeedSingleImageSize } from './FeedSingleImageSize';
@@ -8,9 +8,9 @@ import { PostImgList, FeedCardInfoModel } from '../model/RecommendModel';
 import { calculateDimensions, getColumnsTemplate, getDateDiff } from '../utils/Index';
 import { ImagePreviewVM } from '../viewmodel/ImagePreviewVM';
 
-/*
+/**
  * 动态中心内容
- * */
+ */
 
 const TAG = '[FeedDetail]';
 
@@ -59,6 +59,15 @@ export struct FeedDetail {
         },
         onScale: () => {
           this.imagePreviewVM.isExpand = true
+        },
+        onLongPress: (index: number) => {
+          new ShareUtils().openSheet(this.getUIContext(),
+            {
+              shareType: ShareContentType.IMAGE,
+              imageUrl: this.curFeedCardInfo.postImgList?.[index].picVideoUrl,
+              title: '',
+            },
+          );
         },
       })
       .setPreviewListener({
@@ -154,7 +163,7 @@ export struct FeedDetail {
       Blank()
 
       Column() {
-        Text(`${this.clickedIndex + 1} / ${this.computeImageCount().length}`)
+        Text(`${this.clickedIndex + 1} / ${this.curFeedCardInfo.postImgList?.length}`)
           .fontColor($r('sys.color.font_primary'))
           .fontSize(12)
           .constraintSize({ minWidth: 50 })
@@ -367,6 +376,7 @@ export struct FeedDetail {
                       this.options
                         .setImageList(this.getImageList(this.curFeedCardInfo.postImgList!))
                         .setInitIndex(index)
+                        .setShowIndicator(false)
                       ImagePreview.open(this.getUIContext(), this.options)
                     },
                     onVideo: () => {

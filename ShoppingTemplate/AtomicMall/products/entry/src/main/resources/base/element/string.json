@@ -1,0 +1,40 @@
+{
+  "string": [
+    {
+      "name": "EntryAbility_label",
+      "value": "综合商城模板"
+    },
+    {
+      "name": "SecondAbility_label",
+      "value": "分屏-商品详情"
+    },
+    {
+      "name": "EntryFormAbility_desc",
+      "value": "综合商城服务卡片"
+    },
+    {
+      "name": "EntryFormAbility_label",
+      "value": "综合商城服务卡片"
+    },
+    {
+      "name": "widget_desc",
+      "value": "综合商城服务卡片"
+    },
+    {
+      "name": "widget_display_name",
+      "value": "综合商城服务卡片"
+    },
+    {
+      "name": "shortcuts_scan",
+      "value": "扫一扫"
+    },
+    {
+      "name": "shortcuts_orders",
+      "value": "待收货"
+    },
+    {
+      "name": "agcit_huawei_comprehensive_mall",
+      "value": "1.0.2"
+    }
+  ]
+}

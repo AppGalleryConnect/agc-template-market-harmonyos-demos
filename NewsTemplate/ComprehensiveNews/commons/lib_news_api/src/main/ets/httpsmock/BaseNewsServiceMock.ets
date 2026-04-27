@@ -13,7 +13,7 @@ import { CommentServiceMock } from './CommentServiceMock';
 import { MockBroadcast } from './mockdata/MockBroadcast';
 import { MockTelevision } from './mockdata/MockTelevision';
 import { AvResponse } from '../params/response/AvResponse';
-import { PRESET_KEYWORD, PRESET_KEYWORD_CONTENT } from '../constants/Constants';
+import { PRESET_KEYWORD, PRESET_KEYWORD_CONTENT, TextSpanInfo } from '../constants/Constants';
 
 /**
  * 新闻基础Mock
@@ -51,7 +51,10 @@ export class BaseNewsServiceMock {
       const params = config.params as SearchRequest;
       let abstractList = new AbstractRequestListData();
       abstractList.list = [...MockArticle.list, ...MockVideo.list, ...MockPost.list]
-        .filter(v => v.title.includes(params.search))
+        .filter(v => {
+          const title = this.handleTitle(v.title);
+          return title.includes(params.search);
+        })
         .map(v => this.handleRawNews(v))
         .map(v => this.layoutTrans(v));
       if (params.search === PRESET_KEYWORD && abstractList.list.length) {
@@ -113,6 +116,19 @@ export class BaseNewsServiceMock {
       }
       return [HttpStatusCode.Ok];
     });
+  }
+
+  /**
+   * 获取纯文本的标题
+   * @param title
+   * @returns
+   */
+  handleTitle(title: string): string {
+    try {
+      return (JSON.parse(title || '[]') as TextSpanInfo[]).map(v => v.text).join('');
+    } catch (e) {
+      return title || '';
+    }
   }
 
   /**

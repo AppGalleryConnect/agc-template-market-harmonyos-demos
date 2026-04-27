@@ -1,6 +1,6 @@
 import { display, window } from '@kit.ArkUI';
 import { deviceInfo } from '@kit.BasicServicesKit';
-import { BaseViewModel, BreakpointNameEnum, Logger } from 'lib_common';
+import { BaseViewModel, BreakpointNameEnum, Logger, RouterMap, RouterUtils } from 'lib_common';
 import { AvModel } from 'lib_news_api';
 import { isDisplayModeFull, setOrientation } from 'module_swipeplayer';
 import {
@@ -73,13 +73,16 @@ export class VideoVM extends BaseViewModel {
   }
 
   private displayFoldStatusChangeCallback = (data: display.FoldStatus) => {
+    const lastName = RouterUtils.getLastPathName();
+    if (lastName !== RouterMap.VIDEO_PROGRAM_DETAILS) {
+      return;
+    }
     if (data === display.FoldStatus.FOLD_STATUS_FOLDED) {
-      const isFullMode = isDisplayModeFull();
-      if (isFullMode) {
-        setOrientation(this.uiContext, window.Orientation.FOLLOW_DESKTOP)
-      } else {
-        setOrientation(this.uiContext, window.Orientation.USER_ROTATION_PORTRAIT)
-      }
+      Logger.debug(TAG, 'set USER_ROTATION_PORTRAIT')
+      setOrientation(this.uiContext, window.Orientation.USER_ROTATION_PORTRAIT)
+    } else if (data === display.FoldStatus.FOLD_STATUS_EXPANDED) {
+      Logger.debug(TAG, 'set FOLLOW_DESKTOP')
+      setOrientation(this.uiContext, window.Orientation.FOLLOW_DESKTOP);
     }
   }
 

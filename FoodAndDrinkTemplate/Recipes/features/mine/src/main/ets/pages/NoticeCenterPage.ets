@@ -1,4 +1,4 @@
-import { buildTitleBar } from 'commonlib';
+import { buildTitleBar, CommonConstants } from 'commonlib';
 import { Notice } from 'network';
 import { LengthMetrics } from '@kit.ArkUI';
 import { NoticeCenterPageVM } from '../viewModels/NoticeCenterPageVM';
@@ -19,7 +19,7 @@ struct NoticeCenterPage {
 
   build() {
     NavDestination() {
-      Divider().strokeWidth(1)
+      Divider().strokeWidth('1px')
       if (this.vm.noticeList.length) {
         List({ space: 8 }) {
           ForEach(this.vm.noticeList, (item: Notice) => {
@@ -48,7 +48,7 @@ struct NoticeCenterPage {
               .width('100%')
               .padding(12)
               .justifyContent(FlexAlign.SpaceBetween)
-              .backgroundColor($r('sys.color.background_secondary'))
+              .backgroundColor($r('sys.color.comp_background_gray'))
               .borderRadius(16)
               .onClick(() => {
                 this.vm.jumpUrl(item)
@@ -65,10 +65,9 @@ struct NoticeCenterPage {
           Text('~~空空如也~~').fontSize(12).margin({ top: 24 }).opacity(0.6);
         }.margin({ top: 72 });
       }
-
-
     }
     .title(buildTitleBar('消息中心'), { paddingStart: LengthMetrics.vp(16) })
+    .padding({ top: CommonConstants.STATUS_BAR_HEIGHT })
   }
 }
 

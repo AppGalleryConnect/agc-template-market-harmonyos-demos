@@ -152,7 +152,6 @@ struct Index {
          postImgList: [
            'https://agc-storage-drcn.platform.dbankcloud.cn/v0/news-hnp2d/news_1.jpg'
          ],
-         articleFrom: '1号选手',
        },
      ],
      extraInfo: {

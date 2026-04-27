@@ -1,48 +1,40 @@
-import { emitter } from '@kit.BasicServicesKit';
-import { getServicePointList, IServicePoint, RouterModule } from 'lib_foundation';
-import { Logger, RouterMap, toastUtil } from 'module_base';
-
+import { ToastDialog } from '@hw-agconnect/ui-toast';
+import { IServicePoint, RouterModule, RouterMap, HttpApi, BaseViewModel, BreakpointNameEnum } from 'lib_foundation';
 
 @ObservedV2
-export class ServicePointPageVM {
-  private static _instance: ServicePointPageVM;
-  @Trace public servicePointList: IServicePoint[] = []
-  @Trace public selectedServicePoint: IServicePoint | undefined
+export class ServicePointPageVM extends BaseViewModel {
+  @Trace servicePointList: IServicePoint[] = [];
+  @Trace selectedServicePoint: IServicePoint | undefined;
 
-  public static get instance() {
-    if (!ServicePointPageVM._instance) {
-      ServicePointPageVM._instance = new ServicePointPageVM();
+  @Computed
+  get listLanes() {
+    const currentBreakpoint = this.breakPointModel.currentBreakpoint;
+    switch (currentBreakpoint) {
+      case BreakpointNameEnum.LG:
+      case BreakpointNameEnum.XL:
+        return 2;
+      default:
+        return 1;
     }
-    return ServicePointPageVM._instance;
   }
 
-  public async init() {
+  async init() {
     const param = RouterModule.getNavParam<number>({ url: RouterMap.SERVICE_POINT_PAGE })
     this.getServicePointList(param)
   }
 
-  public async getServicePointList(id?: number) {
-    const res = await getServicePointList()
-    this.servicePointList = res;
+  async getServicePointList(id?: number) {
+    const resp = await HttpApi.getServicePointList()
+    this.servicePointList = resp;
     if (id) {
-      this.selectedServicePoint = this.servicePointList.find((item) => {
-        return item.id === id
-      })
+      this.selectedServicePoint = this.servicePointList.find((item) => item.id === id);
     } else {
-      this.selectedServicePoint = res[0]
+      this.selectedServicePoint = resp[0];
     }
   }
 
-  public save() {
-    RouterModule.pop()
-    let servicePoint: emitter.EventData = {
-      data: this.selectedServicePoint,
-    };
-    try {
-      emitter.emit('servicePoint', servicePoint);
-    } catch (e) {
-      Logger.error(JSON.stringify(e))
-    }
-    toastUtil.showToast('保存成功！');
+  save() {
+    ToastDialog.showToast({ message: '保存成功！'});
+    RouterModule.pop(this.selectedServicePoint)
   }
 }

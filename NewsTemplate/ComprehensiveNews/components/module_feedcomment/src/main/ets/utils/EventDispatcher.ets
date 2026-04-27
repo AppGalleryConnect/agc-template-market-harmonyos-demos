@@ -2,10 +2,11 @@ import { CommentInfo } from '../model/Model';
 
 export class CommentEventDispatcher {
   static addCommentCallback?: (commentInfo: CommentInfo, parentCommentId: string) => void;
-  static giveLikeCallback?: (commentInfo: CommentInfo,isLike:boolean) => void;
+  static giveLikeCallback?: (commentInfo: CommentInfo, isLike: boolean) => void;
   static goUserHome?: (authorId: string) => void;
   static interceptLogin?: (isLoginCb: (isLogin: boolean) => void) => void;
   static deleteComment: (commentId: string) => void;
+  static reportComment: (commentId: string) => void;
 
   static dispatchToAddComment(commentInfo: CommentInfo, parentCommentId: string) {
     if (CommentEventDispatcher.addCommentCallback) {
@@ -19,9 +20,15 @@ export class CommentEventDispatcher {
     }
   }
 
-  static dispatchToGiveLike(commentInfo: CommentInfo,isLike:boolean) {
+  static dispatchToReportComment(commentId: string) {
+    if (CommentEventDispatcher.reportComment) {
+      CommentEventDispatcher.reportComment(commentId);
+    }
+  }
+
+  static dispatchToGiveLike(commentInfo: CommentInfo, isLike: boolean) {
     if (CommentEventDispatcher.giveLikeCallback) {
-      CommentEventDispatcher.giveLikeCallback(commentInfo,isLike);
+      CommentEventDispatcher.giveLikeCallback(commentInfo, isLike);
     }
   }
 

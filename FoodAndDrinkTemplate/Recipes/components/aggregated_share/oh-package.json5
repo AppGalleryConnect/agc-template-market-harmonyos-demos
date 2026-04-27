@@ -1,0 +1,19 @@
+{
+  "name": "aggregated_share",
+  "version": "1.0.2",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "dayjs": "1.11.13",
+    "@tencent/wechat_open_sdk": "1.0.15",
+    "@tencent/qq-open-sdk": "1.0.3",
+    // todo 修改为真实的微博SDK依赖
+    "core": "file:./libs/weibo_open_sdk",
+    "@hw-agconnect/util-log": "^1.0.0",
+    "@hw-agconnect/ui-toast": "^1.0.0"
+  },
+  "devDependencies": {},
+  "dynamicDependencies": {}
+}

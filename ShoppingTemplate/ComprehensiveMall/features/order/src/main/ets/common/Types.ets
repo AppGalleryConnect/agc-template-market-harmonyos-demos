@@ -51,11 +51,11 @@ export interface CourierInfo {
 
 
 export class MyButtonModifier implements AttributeModifier<ButtonAttribute> {
-  buttonStyle: OrderButtonStyleMap = OrderButtonStyleMap.FULFILL;
+  buttonStyle: OrderButtonStyleMap = OrderButtonStyleMap.PRIMARY;
   size: ControlSize = ControlSize.NORMAL;
 
   constructor(
-    buttonStyle: OrderButtonStyleMap = OrderButtonStyleMap.FULFILL,
+    buttonStyle: OrderButtonStyleMap = OrderButtonStyleMap.PRIMARY,
     size: ControlSize = ControlSize.NORMAL,
   ) {
     this.buttonStyle = buttonStyle;
@@ -78,20 +78,19 @@ export class MyButtonModifier implements AttributeModifier<ButtonAttribute> {
       })
       .constraintSize({ minWidth: this.size === ControlSize.NORMAL ? 96 : 64 });
 
-    if (this.buttonStyle === OrderButtonStyleMap.FULFILL) {
+    if (this.buttonStyle === OrderButtonStyleMap.PRIMARY) {
       instance.backgroundColor($r('app.color.theme_color'));
     } else {
       instance
         .backgroundColor($r('app.color.background_color_primary'))
-        .borderWidth(1);
-      if (this.buttonStyle === OrderButtonStyleMap.OUTLINE) {
+      if (this.buttonStyle === OrderButtonStyleMap.SECONDARY) {
         instance
-          .borderColor($r('app.color.theme_color'))
+          .backgroundColor($r('app.color.background_color_button_grey'))
           .fontColor($r('app.color.theme_color'));
-      } else if (this.buttonStyle === OrderButtonStyleMap.GREY) {
+      } else if (this.buttonStyle === OrderButtonStyleMap.OTHERS) {
         instance
-          .borderColor($r('app.color.font_color_level2'))
-          .fontColor($r('app.color.font_color_level2'));
+          .backgroundColor($r('app.color.background_color_button_grey'))
+          .fontColor($r('app.color.font_color_level1'));
       }
     }
   }

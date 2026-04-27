@@ -4,6 +4,7 @@ import { BaseAuthor, MyAuthor } from '../database/AuthorType';
 import { BaseComment } from '../database/CommentType';
 import { SafeRandomGenerate } from '../utils/SafeRandomNumer';
 import {
+  AddReservationRequest,
   AuthorRequest,
   DeleteCommentRequest,
   ModifyPersonalInfoRequest,
@@ -19,6 +20,7 @@ import { BaseNewsServiceMock } from './BaseNewsServiceMock';
 import { CommentServiceMock } from './CommentServiceMock';
 import { AuthorServiceMock } from './AuthorServiceMock';
 import { AvResponse } from '../params/response/AvResponse';
+import { ReservationInfo } from '../database/AuthorType';
 
 /**
  * 我的Mock
@@ -292,6 +294,118 @@ export class MineServiceMock {
       }
       if (params.authorDesc) {
         mineUserInfo.authorDesc = params.authorDesc;
+      }
+      return [HttpStatusCode.Ok];
+    });
+
+    // 添加预约
+    adapter.onPost('/my/reservation/add').reply((config: AxiosRequestConfig) => {
+      const data = JSON.parse(config.data) as AddReservationRequest;
+      const mineUserInfo = this.authorMock.queryAuthorRaw() as MyAuthor;
+      if (!mineUserInfo.myReservations) {
+        mineUserInfo.myReservations = [];
+      }
+      mineUserInfo.myReservations.splice(0, 0, {
+        newsId: data.newsId,
+        liveStartTime: data.liveStartTime,
+        eventId: data.eventId,
+      });
+      return [HttpStatusCode.Ok];
+    });
+
+    // 取消预约
+    adapter.onPost('/my/reservation/cancel').reply((config: AxiosRequestConfig) => {
+      const data = JSON.parse(config.data) as NewsRequest;
+      const mineUserInfo = this.authorMock.queryAuthorRaw() as MyAuthor;
+      if (mineUserInfo.myReservations) {
+        const index = mineUserInfo.myReservations.findIndex(item => item.newsId === data.newsId);
+        if (index !== -1) {
+          mineUserInfo.myReservations.splice(index, 1);
+        }
+      }
+      return [HttpStatusCode.Ok];
+    });
+
+    // 查询我的预约列表
+    adapter.onGet('/my/reservation/list').reply(() => {
+      const mineUserInfo = this.authorMock.queryAuthorRaw() as MyAuthor;
+      if (!mineUserInfo.myReservations) {
+        return [HttpStatusCode.Ok, []];
+      }
+      const list = mineUserInfo.myReservations
+        .map((item: ReservationInfo) => {
+          const news = this.baseNewsMock.queryNews(item.newsId);
+          if (news) {
+            // 直接设置eventId字段
+            if (!news.extraInfo) {
+              news.extraInfo = {};
+            }
+            news.extraInfo.eventId = item.eventId;
+          }
+          return news;
+        })
+        .filter(v => Boolean(v)) as NewsResponse[];
+      const now = Date.now();
+      list.sort((a, b) => {
+        const aStart = a.liveStartTime ?? 0;
+        const bStart = b.liveStartTime ?? 0;
+
+        // 定义状态优先级：直播中(2) > 即将直播(1) > 已过期(0)
+        const getLiveStatus = (item: NewsResponse): number => {
+          const start = item.liveStartTime ?? 0;
+          const end = item.liveEndTime ?? 0;
+          // 直播中：当前时间在开始和结束时间之间
+          if (now >= start && now <= end) {
+            return 2;
+          }
+          // 即将直播：当前时间早于开始时间
+          if (now < start) {
+            return 1;
+          }
+          // 已过期：当前时间晚于结束时间
+          return 0;
+        };
+
+        // 第一步：按状态优先级排序（高优先级在前）
+        const statusDiff = getLiveStatus(b) - getLiveStatus(a);
+        if (statusDiff !== 0) {
+          return statusDiff;
+        }
+
+        // 第二步：同状态下按直播开始时间排序（默认升序，即早的在前）
+        return aStart - bStart;
+      });
+
+
+      return [HttpStatusCode.Ok, list];
+    });
+
+    // 批量删除预约记录
+    adapter.onPost('/my/reservation/delete').reply((config: AxiosRequestConfig) => {
+      const newsIds = JSON.parse(config.data) as string[];
+      const mineUserInfo = this.authorMock.queryAuthorRaw() as MyAuthor;
+      if (mineUserInfo.myReservations) {
+        mineUserInfo.myReservations = mineUserInfo.myReservations.filter(item => !newsIds.includes(item.newsId));
+      }
+      return [HttpStatusCode.Ok];
+    });
+
+    // 拉黑作者
+    adapter.onPost('/my/block/author').reply((config: AxiosRequestConfig) => {
+      const authorId = config.data as string;
+      const mineUserInfo = this.authorMock.queryAuthorRaw() as MyAuthor;
+      if (mineUserInfo && !mineUserInfo.myBlockAuthors.includes(authorId)) {
+        mineUserInfo.myBlockAuthors.push(authorId);
+      }
+      return [HttpStatusCode.Ok];
+    });
+
+    // 屏蔽新闻
+    adapter.onPost('/my/block/news').reply((config: AxiosRequestConfig) => {
+      const newsId = config.data as string;
+      const mineUserInfo = this.authorMock.queryAuthorRaw() as MyAuthor;
+      if (mineUserInfo && !mineUserInfo.myBlockNewsList.includes(newsId)) {
+        mineUserInfo.myBlockNewsList.push(newsId);
       }
       return [HttpStatusCode.Ok];
     });

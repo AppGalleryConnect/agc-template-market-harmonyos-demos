@@ -1,0 +1,13 @@
+{
+  "name": "lib_foundation",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@ohos/axios": "2.2.4",
+    "dayjs": "1.11.13",
+    "@hw-agconnect/ui-toast": "^1.0.0"
+  }
+}

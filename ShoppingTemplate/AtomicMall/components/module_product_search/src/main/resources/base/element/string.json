@@ -1,0 +1,12 @@
+{
+  "string": [
+    {
+      "name": "agcit_huawei_comprehensive_mall_module_product_search",
+      "value": "1.0.2"
+    },
+    {
+      "name": "agcittype_huawei_comprehensive_mall_module_product_search",
+      "value": "serviceComponent"
+    }
+  ]
+}

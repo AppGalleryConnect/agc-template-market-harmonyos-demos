@@ -1,0 +1,14 @@
+{
+  "routerMap": [
+    {
+      "name": "NoticeCenterPage",
+      "pageSourceFile": "src/main/ets/views/NoticeCenterPage.ets",
+      "buildFunction": "buildNoticeCenterPage"
+    },
+    {
+      "name": "NoticeListPage",
+      "pageSourceFile": "src/main/ets/views/NoticeListPage.ets",
+      "buildFunction": "buildNoticeListPage"
+    }
+  ]
+}

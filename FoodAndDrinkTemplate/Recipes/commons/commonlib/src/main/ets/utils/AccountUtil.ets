@@ -17,6 +17,7 @@ export class UserInfoModel {
   @Trace sex: string = '';
   @Trace cellphone: string = '';
   @Trace birthday: string = '';
+  @Trace introDesc: string = '';
   @Trace code: string = '';
   @Trace isLogin: boolean = false;
   @Trace isMembership: boolean = false;
@@ -96,8 +97,8 @@ export class AccountUtil {
     AccountUtil._userInfo.code = code;
   }
 
-  public static updateMembership() {
-    AccountUtil._userInfo.isMembership = true;
+  public static updateMembership(isMembership: boolean = false) {
+    AccountUtil._userInfo.isMembership = isMembership;
     PersistenceV2.save(AppStorageMap.USER_INFO)
   }
 
@@ -121,6 +122,7 @@ export class AccountUtil {
     AccountUtil._userInfo.birthday = data.birthday;
     AccountUtil._userInfo.id = data.id;
     AccountUtil._userInfo.avatar = data.avatar;
+    AccountUtil._userInfo.introDesc = data.introDesc;
     AccountUtil._userInfo.isLogin = data.isLogin;
     AccountUtil._userInfo.isMembership = data.isMembership;
     PersistenceV2.save(AppStorageMap.USER_INFO)

@@ -13,6 +13,7 @@ import {
   NewsEnum,
   CommonConstants,
   loadingPage,
+  EventEnum,
 } from 'lib_common';
 import { CommentResponse, NewsResponse } from 'lib_news_api';
 import { BaseAgent, NavHeaderBar, Share } from 'lib_widget';
@@ -87,7 +88,7 @@ export struct ArticleFeedDetails {
     .onClick(() => {
       this.newsBreakPoint.switchSplit()
     })
-    .visibility(this.newsBreakPoint.isSmDevice ? Visibility.Visible : Visibility.None)
+    .visibility(this.newsBreakPoint.isLargeDevice ? Visibility.Visible : Visibility.None)
   }
 
   @Builder
@@ -121,7 +122,7 @@ export struct ArticleFeedDetails {
       shareData: {
         recordId: this.newsFeedVM.articleDetails.id,
         title: this.newsFeedVM.articleDetails.title,
-        subTitle: this.newsFeedVM.articleDetails.articleFrom,
+        subTitle: this.newsFeedVM.articleDetails?.author?.authorNickName,
         createTime: this.newsFeedVM.articleDetails.createTime,
         coverUrl: handlerCoverImage(this.newsFeedVM.articleDetails),
       },
@@ -314,10 +315,16 @@ export struct ArticleFeedDetails {
           })
         }
         .layoutWeight(1)
+        .parallelGesture(
+          PinchGesture({ fingers: 2 })
+            .onActionStart(() => this.newsBreakPoint.pinchGestureUtils.onActionStart())
+            .onActionUpdate((event: GestureEvent) => this.newsBreakPoint.pinchGestureUtils.onActionUpdate(event))
+            .onActionEnd(() => this.newsBreakPoint.pinchGestureUtils.onActionEnd()),
+        )
 
         Flex({ justifyContent: FlexAlign.Center }) {
           BaseAgent({ queryText: '' });
-        }.width('100%').position({ bottom: 108 }).visibility(this.isShow ? Visibility.Visible: Visibility.None);
+        }.width('100%').position({ bottom: 108 }).visibility(this.isShow ? Visibility.Visible : Visibility.None);
 
         Column() {
           CommentOperation({
@@ -338,7 +345,7 @@ export struct ArticleFeedDetails {
             },
             onComment: (commentContent: string) => {
               this.newsFeedVM.addNewsComment(commentContent)
-              emitter.emit('recommendRefresh')
+              emitter.emit(EventEnum.INTERACTION_RECOMMEND_REFRESH)
             },
           })
         }

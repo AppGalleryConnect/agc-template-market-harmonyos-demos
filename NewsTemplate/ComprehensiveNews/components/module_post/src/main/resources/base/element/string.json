@@ -5,8 +5,12 @@
       "value": "page from package"
     },
     {
+      "name": "apply_location_reason",
+      "value": "支持在帖子中显示您的城市定位"
+    },
+    {
       "name": "agcit_huawei_comprehensive_news_module_post",
-      "value": "1.0.3"
+      "value": "1.0.4"
     },
     {
       "name": "agcittype_huawei_comprehensive_news_module_post",

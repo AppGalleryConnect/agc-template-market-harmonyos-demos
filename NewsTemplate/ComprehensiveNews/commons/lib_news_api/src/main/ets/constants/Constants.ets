@@ -57,6 +57,14 @@ export enum ChatEnum {
 }
 
 /**
+ * 文本片段信息接口
+ */
+export interface TextSpanInfo {
+  text: string; // 文本内容
+  type: 'topic' | 'contact' | 'default'; // 类型
+}
+
+/**
  * 搜索生成摘要的预置关键字
  */
 export const PRESET_KEYWORD = '物流';

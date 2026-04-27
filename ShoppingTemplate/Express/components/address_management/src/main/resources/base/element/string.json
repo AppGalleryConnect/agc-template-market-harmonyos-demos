@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "apply_microphone_reason",
+      "value": "录音需要获取麦克风权限"
+    },
+    {
+      "name": "agcit_huawei_common_address_management",
+      "value": "1.0.1"
+    },
+    {
+      "name": "agcittype_huawei_common_address_management",
+      "value": "serviceComponent"
+    }
+  ]
+}

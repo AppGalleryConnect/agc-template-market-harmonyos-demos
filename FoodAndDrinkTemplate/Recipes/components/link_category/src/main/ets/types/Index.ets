@@ -18,4 +18,5 @@ export interface RecipeBriefInfo {
   thumbnail: string;
   views: number;
   likes: number;
+  linearColor?: Array<[string, number]>
 }

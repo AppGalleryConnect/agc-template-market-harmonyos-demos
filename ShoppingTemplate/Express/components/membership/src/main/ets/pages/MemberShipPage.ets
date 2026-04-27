@@ -22,7 +22,7 @@ export struct MemberShipPage {
     number
   ]> = [['#FFFFFF', 0.0], ['#0A59F7', 1.0]];
   @Param themeColor: ResourceStr = $r('sys.color.background_emphasize');
-  @Param btnFontColor: ResourceStr = $r('sys.color.background_emphasize');
+  @Param btnFontColor: ResourceStr = $r('sys.color.font_on_primary');
   @Param routerModule: NavPathStack = new NavPathStack();
   @Param isSheet: boolean = false;
   @Param productsInfo: ProductInfo[] = [];
@@ -97,17 +97,28 @@ export struct MemberShipPage {
   Operation() {
     if (!this.isSheet) {
       Row({ space: 8 }) {
-        Image($r('app.media.membership_back')).size({ width: 40, height: 40 }).onClick(() => {
+        Button() {
+          SymbolGlyph($r('sys.symbol.chevron_backward'))
+            .fontColor([$r('sys.color.font_primary')])
+            .fontWeight(FontWeight.Normal)
+            .fontSize(24)
+        }
+        .width(40)
+        .height(40)
+        .type(ButtonType.Circle)
+        .backgroundColor($r('sys.color.comp_background_tertiary'))
+        .onClick(() => {
           this.routerModule.pop();
         });
+
         Text('会员中心').fontSize(20).fontWeight(FontWeight.Bold).fontColor($r('sys.color.font_primary'));
-      }.position({ left: 16 }).zIndex(2);
+      }.height(56).position({ left: 16, top: 38 }).zIndex(2)
     }
   }
 
   @Builder
   Owned() {
-    Stack({ alignContent: Alignment.Bottom }) {
+    Stack({ alignContent: Alignment.Top }) {
       Stack({ alignContent: Alignment.TopEnd }) {
         Column()
           .size({ height: 180, width: '100%' })
@@ -123,7 +134,7 @@ export struct MemberShipPage {
           .opacity(0.5)
           .size({ height: 100, width: 100 })
           .rotate({ angle: 15 })
-          .margin({ right: 24, top: 12 });
+          .margin({ right: 24, top: 38 });
       };
 
       GridRow({
@@ -178,7 +189,7 @@ export struct MemberShipPage {
           .padding(12)
           .justifyContent(FlexAlign.SpaceBetween)
           .backgroundColor($r('sys.color.comp_background_primary'))
-          .margin({ top: 24 });
+          .margin({ top: 144 });
         };
       }.padding({ left: 16, right: 16 });
     };
@@ -202,60 +213,63 @@ export struct MemberShipPage {
         .width('100%')
         .textAlign(TextAlign.Start);
       List({ space: 8 }) {
-        LazyForEach(this.vm.productInfoListDataSource, (item: iap.Product, index: number) => {
-          ListItem() {
-            Stack({ alignContent: Alignment.Bottom }) {
-              Column({ space: 12 }) {
-                Text(item.name)
-                  .fontWeight(FontWeight.Medium)
-                  .fontSize(14)
-                  .maxLines(2)
-                  .textOverflow({ overflow: TextOverflow.Ellipsis });
-                Text(`${item.localPrice?.split('.')[0]}`)
-                  .fontWeight(FontWeight.Bold)
-                  .fontSize(24)
-                  .fontColor($r('sys.color.font_primary'));
-              }
-              .height('100%')
-              .justifyContent(FlexAlign.Center)
-              .borderRadius(8)
-              .alignItems(HorizontalAlign.Center)
-              .padding(16);
-
-              Stack() {
-                Row() {
+        Repeat(this.vm.productInfoList)
+          .each((productInfo: RepeatItem<iap.Product>) => {
+            ListItem() {
+              Stack({ alignContent: Alignment.Bottom }) {
+                Column({ space: 12 }) {
+                  Text(productInfo.item.name)
+                    .fontWeight(FontWeight.Medium)
+                    .fontSize(14)
+                    .maxLines(2)
+                    .textOverflow({ overflow: TextOverflow.Ellipsis });
+                  Text(`${productInfo.item.localPrice?.split('.')[0]}`)
+                    .fontWeight(FontWeight.Bold)
+                    .fontSize(24)
+                    .fontColor($r('sys.color.font_primary'));
                 }
-                .borderRadius({ bottomLeft: 6, bottomRight: 6 })
-                .width('100%')
-                .height(24)
-                .backgroundColor(this.vm.selectedProductIndex === index ? this.themeColor :
-                  $r('sys.color.comp_background_tertiary'))
-                .opacity(this.vm.selectedProductIndex === index ? 0.1 : 1);
+                .height('100%')
+                .justifyContent(FlexAlign.Center)
+                .borderRadius(8)
+                .alignItems(HorizontalAlign.Center)
+                .padding(16);
 
-                Text(item.description)
-                  .maxLines(1)
-                  .textOverflow({ overflow: TextOverflow.MARQUEE })
+                Stack() {
+                  Row() {
+                  }
+                  .borderRadius({ bottomLeft: 6, bottomRight: 6 })
                   .width('100%')
-                  .textAlign(TextAlign.Center)
-                  .fontSize(12)
-                  .fontColor($r('sys.color.font_primary'));
+                  .height(24)
+                  .backgroundColor(this.vm.selectedProductIndex === productInfo.index ? this.themeColor :
+                    $r('sys.color.comp_background_tertiary'))
+                  .opacity(this.vm.selectedProductIndex === productInfo.index ? 0.1 : 1);
+
+                  Text(productInfo.item.description)
+                    .maxLines(1)
+                    .textOverflow({ overflow: TextOverflow.MARQUEE })
+                    .width('100%')
+                    .textAlign(TextAlign.Center)
+                    .fontSize(12)
+                    .fontColor($r('sys.color.font_primary'));
+                }
+                .borderRadius({ bottomLeft: 6, bottomRight: 6 });
               }
-              .borderRadius({ bottomLeft: 6, bottomRight: 6 });
-            }
-            .width(this.cardWidth)
-            .backgroundColor(this.vm.selectedProductIndex === index ? $r('sys.color.background_secondary') :
-              $r('sys.color.comp_background_primary'))
-            .border({
-              width: this.vm.selectedProductIndex === index ? 2 : 1,
-              radius: 8,
-              color: this.vm.selectedProductIndex === index ? this.themeColor :
-                $r('sys.color.comp_background_secondary'),
-            })
-            .onClick(() => {
-              this.vm.selectedProductIndex = index;
-            });
-          };
-        }, (v: iap.Product) => v.id);
+              .width(this.cardWidth)
+              .backgroundColor(this.vm.selectedProductIndex === productInfo.index ? $r('sys.color.background_secondary') :
+                $r('sys.color.comp_background_primary'))
+              .border({
+                width: this.vm.selectedProductIndex === productInfo.index ? 2 : 1,
+                radius: 8,
+                color: this.vm.selectedProductIndex === productInfo.index ? this.themeColor :
+                  $r('sys.color.comp_background_secondary'),
+              })
+              .onClick(() => {
+                this.vm.selectedProductIndex = productInfo.index;
+              });
+            };
+          })
+          .key((item: iap.Product) => item.id)
+          .virtualScroll()
       }
       .width('100%')
       .height(124)
@@ -290,7 +304,7 @@ export struct MemberShipPage {
               }.alignItems(HorizontalAlign.Start).width('calc(100% - 48vp)');
             }.width('100%');
           };
-        });
+        }, (item: MemberShipPrivilege) => JSON.stringify(item));
       }
       .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: true })
       .padding(12)
@@ -432,10 +446,10 @@ export struct MemberShipPage {
             };
           }
           .align(Alignment.Top)
-          .height('80%')
           .padding({ bottom: 4 })
           .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP])
-          .scrollBar(BarState.Off);
+          .scrollBar(BarState.Off)
+          .layoutWeight(1);
 
           if (this.renewMemberSubscribedStatus) {
             this.Activation();
@@ -450,6 +464,7 @@ export struct MemberShipPage {
         });
       }
     }
+    .height('100%')
     .hideTitleBar(true)
     .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])
     .onReady((context: NavDestinationContext) => {

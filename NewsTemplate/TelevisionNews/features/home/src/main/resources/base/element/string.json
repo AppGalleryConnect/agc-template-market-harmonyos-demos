@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "shared_desc",
+      "value": "description"
+    },
+    {
+      "name": "border_radius_14",
+      "value": "14"
+    },
+    {
+      "name": "margin_16",
+      "value": "16"
+    },
+    {
+      "name": "agcit_huawei_television_news",
+      "value": "1.0.0"
+    }
+  ]
+}

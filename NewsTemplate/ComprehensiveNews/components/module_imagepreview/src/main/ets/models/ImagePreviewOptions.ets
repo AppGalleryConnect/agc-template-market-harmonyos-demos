@@ -96,6 +96,10 @@ export class ImagePreviewOptions extends BaseOptions {
    * 动图是否自动播放，false状态下手指按压触发播放
    */
   movingPhotoAutoPlay?: boolean = true
+  /**
+   * 是否显示图片指示器
+   */
+  showIndicator?: boolean = true
 
   /**
    * 设置组件快照id
@@ -118,6 +122,14 @@ export class ImagePreviewOptions extends BaseOptions {
    */
   setLongTake(longTake: boolean): ImagePreviewOptions {
     this.longTake = longTake
+    return this
+  }
+
+  /**
+   * 是否开启图片指示器
+   */
+  setShowIndicator(showIndicator: boolean): ImagePreviewOptions {
+    this.showIndicator = showIndicator
     return this
   }
 

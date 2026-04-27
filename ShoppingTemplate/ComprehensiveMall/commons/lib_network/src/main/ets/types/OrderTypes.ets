@@ -7,9 +7,18 @@ export interface OrderItem {
   skuInfo: OrderSkuItem[];
 }
 
+/** 自提门店信息（用于订单详情展示与导航） */
+export interface PickupStoreInfo {
+  storeName: string;
+  address: string;
+  cellphone: string;
+  businessHour: string;
+  latitude?: number;
+  longitude?: number;
+}
 
 export interface OrderInfo {
-  status: number; // 0: 待付款, 1: 已取消, 2: 待发货, 3: 待收货, 4: 待评价, 5:已评价（已完成）, 6: 退款/售后, 7:已退款
+  status: number; // 0: 待付款, 1: 已取消, 2: 待发货, 3: 待收货, 4: 待评价, 5:已评价（已完成）, 6: 退款/售后, 7:已退款, 8: 待取件
   orderNo: string;
   addressInfo: AddressInfo;
   orderTime: number; // 时间戳
@@ -17,9 +26,15 @@ export interface OrderInfo {
   originalPrice: number;
   finalPrice: number;
   discounts: DiscountItem[];
+  couponId?: string;
   remainingTime?: number;
   refundTime?: string;
   receivingMethod: number; //1: 快递物流  2: 到店自提
+  /** 取件码（到店自提订单） */
+  pickupCode?: string;
+
+  /** 自提门店（到店自提订单） */
+  pickupStoreInfo?: PickupStoreInfo;
 }
 
 export interface AddressInfo {

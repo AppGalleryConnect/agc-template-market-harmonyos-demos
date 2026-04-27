@@ -1,16 +1,33 @@
 import { AxiosRequestConfig, HttpStatusCode } from '@ohos/axios';
 import AxiosMockAdapter from '@hw-agconnect/axios-mock-adapter';
 import { RequestUrlMap } from '../../constants/RequestUrlMap';
-import { PriceType } from '../../types/EnumTypes';
-import { OrderItem, OrderSkuItem, OrderExpressInfo } from '../../types/OrderTypes';
+import { PriceType, ShippingOption } from '../../types/EnumTypes';
+import {
+  AddressInfo,
+  OrderItem,
+  OrderInfo,
+  OrderSkuItem,
+  OrderExpressInfo,
+} from '../../types/OrderTypes';
 import {
   OrderCreateReq, OrderReviewReq, OrderUpdateReq, PreOrderInfoReq,
 } from '../../types/RequestTypes';
 import { BaseResponse } from '../../types/responses/BaseResponse';
-import { PreOrderResp, OrderListResp, OrderExpressResp, OrderCreateResp } from '../../types/responses/OrderResponse';
-import { mockExpress, MockOrderData } from '../mockdata/MockOrderData';
+import { PreOrderResp, OrderListResp, OrderExpressResp, OrderCreateResp, DefaultPickupStoreResp } from '../../types/responses/OrderResponse';
+import { DEFAULT_PICKUP_STORE, mockExpress, MockOrderData } from '../mockdata/MockOrderData';
 import { MockProductData } from '../mockdata/MockProductData';
 import { MockSeckillData } from '../mockdata/MockSeckillData';
+
+const PICKUP_CODE_CHARS: string = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+function generateRandomPickupCode(len: number): string {
+  let result: string = '';
+  for (let i = 0; i < len; i++) {
+    const idx = Math.floor(Math.random() * PICKUP_CODE_CHARS.length);
+    result += PICKUP_CODE_CHARS.charAt(idx);
+  }
+  return result;
+}
 
 export class OrderMockApis {
   private readonly PAGE_SIZE = 6;
@@ -58,6 +75,17 @@ export class OrderMockApis {
           code: 0,
           skuList,
           totalPrice: totalPriceTemp / 100,
+        };
+        return [HttpStatusCode.Ok, res];
+      });
+
+    // 获取默认自提地址（门店）
+    adapter
+      .onGet(RequestUrlMap.ORDER_DEFAULT_PICKUP)
+      .reply(() => {
+        const res: DefaultPickupStoreResp = {
+          code: 0,
+          data: DEFAULT_PICKUP_STORE,
         };
         return [HttpStatusCode.Ok, res];
       });
@@ -151,21 +179,35 @@ export class OrderMockApis {
         const orderTime = new Date().getTime();
         const orderNo = 'mock_order_' + orderTime;
         const remainingTime = orderTime + 60 * 60 * 1000 * 24;
+        const isSelfPickup = data.orderInfo.receivingMethod === ShippingOption.SELF_PICK_UP;
+        const storeAddressInfo: AddressInfo = {
+          name: DEFAULT_PICKUP_STORE.storeName,
+          cellphone: DEFAULT_PICKUP_STORE.cellphone,
+          address: DEFAULT_PICKUP_STORE.address,
+          latitude: DEFAULT_PICKUP_STORE.latitude,
+          longitude: DEFAULT_PICKUP_STORE.longitude,
+        };
+        const orderInfo: OrderInfo = {
+          status: 0,
+          orderNo,
+          addressInfo: isSelfPickup ? storeAddressInfo : data.orderInfo.addressInfo,
+          orderTime,
+          remark: data.orderInfo.remark ?? '',
+          originalPrice: data.orderInfo.originalPrice,
+          finalPrice: data.orderInfo.finalPrice,
+          discounts: data.orderInfo.discounts,
+          couponId: data.orderInfo.couponId,
+          remainingTime,
+          receivingMethod: data.orderInfo.receivingMethod,
+        };
+        if (isSelfPickup) {
+          orderInfo.pickupCode = generateRandomPickupCode(6);
+          orderInfo.pickupStoreInfo = DEFAULT_PICKUP_STORE
+        }
         const orderItem: OrderItem = {
           skuInfo: data.skuList,
           logisticInfo: [],
-          orderInfo: {
-            status: 0,
-            orderNo,
-            addressInfo: data.orderInfo.addressInfo,
-            orderTime,
-            remark: data.orderInfo.remark ?? '',
-            originalPrice: data.orderInfo.originalPrice,
-            finalPrice: data.orderInfo.finalPrice,
-            discounts: data.orderInfo.discounts,
-            remainingTime,
-            receivingMethod: data.orderInfo.receivingMethod,
-          },
+          orderInfo,
         };
         this._orderList.unshift(orderItem);
         const res: OrderCreateResp = {

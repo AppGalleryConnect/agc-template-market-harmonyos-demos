@@ -1,7 +1,17 @@
-import { SettingPageVM } from '../viewModels/SettingPageVM';
-import { TipsDialog } from '@kit.ArkUI';
-import { RouterModule } from 'lib_foundation';
-import { RouterMap } from 'module_base';
+import { AppStorageV2, PersistenceV2 } from '@kit.ArkUI';
+import { AboutModel,
+  AgreementModel,
+  SettingGroup, SettingItem, SettingType, SettingView, SupportedSetting } from 'app_setting';
+import {
+  RouterModule,
+  RouterMap,
+  UserInfoModel,
+  CommonDialogUtil,
+  HttpApi,
+  CommonTitle,
+  WindowUtil,
+  WindowInfo,
+} from 'lib_foundation';
 
 
 @Builder
@@ -11,134 +21,105 @@ export function SettingPageBuilder() {
 
 @ComponentV2
 export struct SettingPage {
-  vm: SettingPageVM = SettingPageVM.instance
-  dialogControllerLogout: CustomDialogController = new CustomDialogController({
-    builder: TipsDialog({
-      content: '是否确认退出登录?',
-      primaryButton: {
-        value: '取消',
-      },
-      secondaryButton: {
-        value: '确认',
-        role: ButtonRole.ERROR,
-        action: () => {
-          this.vm.logout()
-        },
-      },
-    }),
-  })
+  @Local userInfoModel: UserInfoModel = PersistenceV2.connect(UserInfoModel, () => new UserInfoModel())!;
+  @Local windowModel: WindowInfo = AppStorageV2.connect(WindowInfo, () => new WindowInfo())!;
+  @Local group1: SettingGroup = new SettingGroup();
+  @Local group2: SettingGroup = new SettingGroup();
+  @Local group3: SettingGroup = new SettingGroup();
+  @Local showMask: boolean = true;
+
+  aboutToAppear(): void {
+    this.group1.setList([
+      new SettingItem()
+        .setType(SettingType.ROUTER)
+        .setLabel('个人信息')
+        .setRouterParam({ routerName: RouterMap.PERSONAL_INFO_PAGE }),
+      new SettingItem()
+        .setType(SettingType.ROUTER)
+        .setLabel('隐私设置')
+        .setSupportedType(SupportedSetting.PRIVACY)
+        .setExtraParams({
+          userAgreement: 'resource://rawfile/static/html/user-agreement.html',
+          privacyPolicy: 'resource://rawfile/static/html/privacy-policy.html',
+          thirtyItem: 'resource://rawfile/static/html/third-party-info.html',
+          personalCollection: 'resource://rawfile/static/html/personal-info-collection.html',
+        } as AgreementModel)
+    ]);
+
+    this.group2.setList([
+      new SettingItem()
+        .setSupportedType(SupportedSetting.CLEAR_CACHE),
+    ]);
+
+    this.group3.setList([
+      new SettingItem()
+        .setSupportedType(SupportedSetting.ABOUT)
+        .setExtraParams({
+          icpText: '苏ICP备xxxx号-xxx',
+          copyrightText: '华为xx 版权所有 © 2019-2025',
+          hotline: '00000000',
+        } as AboutModel),
+    ])
+  }
+
+  // 退出登录
+  openLogoutDialog() {
+    CommonDialogUtil.open({ content: '是否确认退出登录？' }, () => {
+      HttpApi.userLogout(this.userInfoModel.phone).then(() => {
+        this.userInfoModel.isLogin = false;
+        this.userInfoModel.isRealName = 0;
+        RouterModule.pop();
+      })
+    })
+  }
 
   build() {
     NavDestination() {
+      CommonTitle({
+        title: '设置',
+      })
       Column() {
         Scroll() {
           Column() {
-            Row() {
-              Text('推送通知')
-                .fontSize(16)
-                .fontWeight(FontWeight.Regular)
-                .fontColor($r('sys.color.font_primary'))
-
-              Toggle({ type: ToggleType.Switch, isOn: true })
-            }
-            .contentStyles()
-            .justifyContent(FlexAlign.SpaceBetween)
-            .margin({ bottom: 12 })
-
-            Row() {
-              Text('清除缓存')
-                .fontSize(16)
-                .fontWeight(FontWeight.Regular)
-                .fontColor($r('sys.color.font_primary'))
-
-              Row() {
-                Text(this.vm.size.toString())
-                  .fontSize(16)
-                  .fontWeight(FontWeight.Regular)
-                  .fontColor($r('sys.color.font_secondary'))
-
-                Image($r('app.media.ic_arrow_right'))
-                  .width(12)
-                  .height(12)
+            SettingView({
+              pathStack: RouterModule.stack,
+              settingList: [this.group1, this.group2, this.group3],
+              isNeedTopPadding: false,
+              pagePadding: {
+                top: this.windowModel.windowTopPadding,
+                bottom: this.windowModel.windowBottomPadding
               }
-            }
-            .contentStyles()
-            .justifyContent(FlexAlign.SpaceBetween)
-            .onClick(() => {
-              this.vm.clearCache()
             })
-            .margin({ bottom: 12 })
-
-            Row() {
-              this.contentBuilder('隐私政策')
+              .layoutWeight(1)
+            if (this.userInfoModel.isLogin) {
+              Row() {
+                Button('退出登录')
+                  .width('100%')
+                  .constraintSize({ maxWidth: 360 })
+                  .fontColor($r('sys.color.font_primary'))
+                  .backgroundColor($r('sys.color.comp_background_tertiary'))
+                  .onClick(() => {
+                    this.openLogoutDialog();
+                  })
+              }
+              .width('100%')
+              .justifyContent(FlexAlign.Center)
+              .padding({ left: 28, right: 28 })
             }
-            .margin({ bottom: 12 })
-
-            this.contentBuilder('用户协议')
           }
-          .margin({
-            left: 16,
-            right: 16,
-          });
-        }
-        .scrollBar(BarState.Off)
-        .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: false })
-      }
-      .layoutWeight(1)
-
-      if (this.vm.userInfoModel.isLogin) {
-        Row() {
-          Button('退出登录')
-            .fontColor($r('sys.color.font_emphasize'))
-            .fontSize($r('sys.float.Body_L'))
-            .fontWeight(FontWeight.Medium)
-            .backgroundColor($r('sys.color.comp_background_tertiary'))
-            .width('100%')
-            .borderRadius(20)
-            .onClick(() => {
-              this.dialogControllerLogout.open()
-            });
         }
         .width('100%')
-        .padding({ left: 16, right: 16 })
-        .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.BOTTOM]);
+        .height('100%')
+        .scrollBar(BarState.Off)
+        .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: false })
+        .padding({
+          bottom: this.windowModel.windowBottomPadding + 12
+        })
       }
+      .width('100%')
+      .layoutWeight(1)
     }
-    .title('设置')
+    .hideTitleBar(true)
     .backgroundColor($r('sys.color.background_secondary'))
-  }
-
-  @Builder
-  contentBuilder(title: string) {
-    Row() {
-      Text(title)
-        .fontSize(16)
-        .fontWeight(FontWeight.Regular)
-        .fontColor($r('sys.color.font_primary'))
-
-      Row() {
-        Image($r('app.media.ic_arrow_right'))
-          .width(12)
-          .height(12)
-      }
-    }
-    .contentStyles()
-    .justifyContent(FlexAlign.SpaceBetween)
-    .onClick(() => {
-      RouterModule.push({ url: RouterMap.PRIVACY_PAGE })
-    })
-  }
-
-  @Styles
-  contentStyles(){
-    .width('100%')
-    .padding({
-      top: 20,
-      bottom: 20,
-      left: 18,
-      right: 18,
-    })
-    .borderRadius(16)
-    .backgroundColor(Color.White)
   }
 }

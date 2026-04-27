@@ -1,5 +1,4 @@
-import { Logger } from 'module_base';
-
+import { Logger } from '../utils/Logger';
 
 export interface NavRouterInfo {
   url: string; // 需要跳转的路由名
@@ -13,9 +12,9 @@ export class RouterModule {
   public static urlMap: Record<string, string> = {};
 
   // 跳转到指定路由栈的指定路由页面
-  public static push(info: NavRouterInfo, animated?: boolean) {
+  public static push(info: NavRouterInfo, onPop?: Callback<PopInfo>, animated?: boolean) {
     try {
-      RouterModule.stack.pushPathByName(info.url, info.param, animated);
+      RouterModule.stack.pushPathByName(info.url, info.param, onPop, animated);
     } catch (err) {
       Logger.info('navigation stack push failed::' + JSON.stringify(err));
     }
@@ -31,9 +30,9 @@ export class RouterModule {
   }
 
   // 弹出栈顶元素
-  public static pop(animated?: boolean) {
+  public static pop(result?: Object, animated?: boolean) {
     try {
-      RouterModule.stack.pop(animated);
+      RouterModule.stack.pop(result, animated);
     } catch (err) {
       Logger.info('navigation stack pop failed::' + JSON.stringify(err));
     }

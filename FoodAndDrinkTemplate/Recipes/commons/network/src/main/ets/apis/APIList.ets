@@ -88,7 +88,7 @@ export const deleteMyRecipe = (ids: number[]): Promise<AxiosResponse<void, Delet
 };
 
 // 热门搜索词
-export const querySearchHotkeys = (): Promise<AxiosResponse<Array<string>, void>> => {
+export const querySearchHotkeys = (): Promise<AxiosResponse<Array<RecipeBriefInfo>, void>> => {
   const url = '/recipe/hot-keys';
   return axiosInstance.get(url);
 };
@@ -121,6 +121,13 @@ export const addDietPlans =
       foodList,
     };
     return axiosInstance.post(url, data);
+  };
+
+// 删除饮食计划
+export const clearDietPlans =
+  (): Promise<AxiosResponse<number, void>> => {
+    const url = '/calories/clear-diet-plans';
+    return axiosInstance.post(url);
   };
 
 // 查询博主信息

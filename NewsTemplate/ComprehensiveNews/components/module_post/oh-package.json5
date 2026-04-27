@@ -8,5 +8,6 @@
   "dependencies": {
     "@hw-agconnect/util-log": "1.0.0",
     "module_imagepreview": "file:../module_imagepreview",
+    "module_highlight": "file:../module_highlight",
   }
 }

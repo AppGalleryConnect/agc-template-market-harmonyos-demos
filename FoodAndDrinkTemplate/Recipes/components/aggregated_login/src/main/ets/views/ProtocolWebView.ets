@@ -47,6 +47,7 @@ struct ProtocolWebView {
         }
         .width(Constants.FULL_PERCENT)
         .margin({
+          top:32,
           bottom: Constants.SPACE_S,
         })
 
@@ -65,10 +66,9 @@ struct ProtocolWebView {
       })
       .height(Constants.FULL_PERCENT)
       .width(Constants.FULL_PERCENT)
-      .backgroundColor($r('sys.color.background_secondary'))
     }
     .hideTitleBar(true)
-    .backgroundColor($r('sys.color.background_secondary'))
+    .backgroundColor($r('sys.color.comp_background_gray'))
     .onReady((context) => {
       this.stack = context.pathStack;
       const params = context.pathInfo.param as ProtocolRouterParams;
@@ -91,9 +91,8 @@ struct ProtocolWebView {
       .darkMode(WebDarkMode.Auto)
       .forceDarkAccess(true)
       .verticalScrollBarAccess(false)
-      .backgroundColor($r('sys.color.background_primary'))
       .layoutWeight(1)
-      .backgroundColor($r('sys.color.background_secondary'))
+      .backgroundColor($r('sys.color.comp_background_gray'))
       .onControllerAttached(() => {
         if (this.content.startsWith('http://') || this.content.startsWith('https://')) {
           this.webViewController.loadUrl(this.content)

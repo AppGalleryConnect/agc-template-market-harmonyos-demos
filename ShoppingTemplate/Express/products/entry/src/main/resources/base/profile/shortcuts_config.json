@@ -1,0 +1,19 @@
+{
+  "shortcuts": [
+    {
+      "shortcutId": "shortcuts_shipping",
+      "label": "$string:shortcuts_shipping",
+      "icon": "$media:ic_shortcuts_shipping",
+      "wants": [
+        {
+          "bundleName": "kdwl.1.1",
+          "moduleName": "entry",
+          "abilityName": "EntryAbility",
+          "parameters": {
+            "shortCutKey": "ExpressPage"
+          }
+        }
+      ]
+    }
+  ]
+}

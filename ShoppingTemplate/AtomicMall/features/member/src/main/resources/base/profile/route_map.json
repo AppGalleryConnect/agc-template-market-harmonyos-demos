@@ -1,0 +1,14 @@
+{
+  "routerMap": [
+    {
+      "name": "MemberSubscriptionPage",
+      "pageSourceFile": "src/main/ets/views/MemberSubscriptionPage.ets",
+      "buildFunction": "buildMemberSubscriptionPage"
+    },
+    {
+      "name": "BindPhonePage",
+      "pageSourceFile": "src/main/ets/views/BindPhonePage.ets",
+      "buildFunction": "buildBindPhonePage"
+    }
+  ]
+}

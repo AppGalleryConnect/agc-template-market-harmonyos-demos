@@ -1,6 +1,10 @@
 import { componentUtils, ComponentUtils, MeasureOptions } from '@kit.ArkUI'
+import { TopicResponse } from 'lib_news_api';
+import { Logger, RouterMap, RouterUtils, TextSpanInfo } from 'lib_common';
 import { ComInfoType } from 'module_imagepreview'
 import { Highlight } from 'module_highlight'
+
+const TAG = '[ArticleTextEllipsis]';
 
 @ComponentV2
 export struct ArticleTextEllipsis {
@@ -9,21 +13,34 @@ export struct ArticleTextEllipsis {
   @Param omitContent: string = '…'
   @Param fontSizeRatio: number = 1
   @Param searchKey: string = ''
-
-  @Monitor('rows', 'text')
-  onStrChange(monitor: IMonitor) {
-    monitor.dirty.forEach((path: string) => {
-      this.formatText()
-    })
-  }
-
+  @Local textSpanList: TextSpanInfo[] = [];
+  @Local showTextSpanList: TextSpanInfo[] = [];
   @Local rows: number = 3
-  @Local showText: string = ''
   @Local isExpand: boolean = false
   @Local textWidth: number = 0
   @Local textHeight: number = 0
   @Local maxLineHeight: number = 0
   private uiContext = this.getUIContext()
+  private timeId: number = 0;
+
+  @Monitor('rows', 'text')
+  onStrChange() {
+    this.handleTextClip();
+  }
+
+  @Monitor('showTextSpanList.length')
+  onShowTextSpanListChange() {
+    Logger.debug(TAG, 'Monitor showTextSpanList: ' + JSON.stringify(this.showTextSpanList));
+  }
+
+  aboutToAppear(): void {
+    this.handleTextClip();
+  }
+
+  aboutToDisappear(): void {
+    clearTimeout(this.timeId);
+  }
+
   /**
    * 测量文字尺寸
    */
@@ -54,44 +71,57 @@ export struct ArticleTextEllipsis {
     }
   }
 
-  @Builder
-  OmitContent() {
-    Row() {
-      Text(this.omitContent)
-        .fontSize(16 * this.fontSizeRatio)
-        .fontWeight(FontWeight.Medium)
-      Text('全文')
-        .fontColor($r('app.color.app_theme'))
-        .fontSize(16 * this.fontSizeRatio)
-        .fontWeight(FontWeight.Medium)
+  getTextSpanList() {
+    try {
+      this.textSpanList = JSON.parse(this.text);
+    } catch (e) {
+      this.textSpanList = [{ text: this.text, type: 'default' }];
     }
   }
 
-  aboutToAppear(): void {
-    this.formatText()
+  handleTextClip() {
+    this.getTextSpanList();
+    this.textWidth = this.getComponentsInfo(this.uiContext, 'essay').width;
+    if (this.textWidth > 0) {
+      this.formatText();
+      return;
+    }
+    this.timeId = setTimeout(() => {
+      this.handleTextClip();
+    }, 100);
   }
 
   formatText() {
-    setTimeout(() => {
-      this.textWidth = this.getComponentsInfo(this.uiContext, 'essay').width
-      this.textHeight = this.measureText(this.text)
-      this.maxLineHeight = this.measureText(this.text, this.rows)
-      if (this.textHeight > this.maxLineHeight && this.isAll) {
-        this.getTextByWidth()
-      } else {
-        this.showText = this.text
-      }
-    }, 100)
+    const text = this.textSpanList.map(v => v.text).join('');
+    this.textHeight = this.measureText(text);
+    this.maxLineHeight = this.measureText(text, this.rows);
+    Logger.debug(TAG,
+      'this.textWidth: ' + this.textWidth + ', this.textHeight: ' + this.textHeight + ', this.maxLineHeight' +
+        this.maxLineHeight + ', text' + text);
+    if (this.textHeight > this.maxLineHeight && this.isAll) {
+      this.getTextByWidth();
+    } else {
+      this.showTextSpanList = this.textSpanList;
+    }
   }
 
   getTextByWidth() {
-    let clipText = this.text
+    this.showTextSpanList = JSON.parse(JSON.stringify(this.textSpanList))
+    let clipText = this.showTextSpanList.map(v => v.text).join('');
     let textHeight = this.textHeight
     while (textHeight > this.maxLineHeight) {
-      clipText = clipText.substring(0, clipText.length - (this.rows * 2))
+      let end = this.showTextSpanList[this.showTextSpanList.length - 1];
+      if (end.type === 'default') {
+        end.text = end.text.substring(0, end.text.length - (this.rows * 2))
+      } else {
+        end.text = '';
+      }
+      if (!end.text) {
+        this.showTextSpanList.pop();
+      }
+      clipText = this.showTextSpanList.map(v => v.text).join('');
       textHeight = this.measureText(clipText + (this.textHeight > this.maxLineHeight ? this.omitContent : ''))
     }
-    this.showText = clipText
   }
 
   measureText(text: string, rows?: number): number {
@@ -103,21 +133,46 @@ export struct ArticleTextEllipsis {
     }).height
   }
 
+  @Computed
+  get textString() {
+    return this.textSpanList.map(v => v.text).join('');
+  }
+
+  @Computed
+  get showTextString() {
+    return this.showTextSpanList.map(v => v.text).join('');
+  }
+
   build() {
     Row() {
       if (this.searchKey) {
         Highlight({
           keywords: [this.searchKey as string],
-          sourceString: this.isExpand ? this.text : this.showText,
+          sourceString: this.isExpand ? this.textString : this.showTextString,
           highLightColor: '#E84026',
           textColor: $r('sys.color.font_primary'),
         })
       } else {
         Text() {
-          Span(this.isExpand ? this.text : this.showText)
-            .fontColor($r('sys.color.font_primary'))
-            .fontWeight(FontWeight.Medium)
-            .fontSize(16 * this.fontSizeRatio)
+          ForEach(this.isExpand ? this.textSpanList : this.showTextSpanList, (v: TextSpanInfo) => {
+            if (v.type === 'topic') {
+              Span(v.text)
+                .fontColor($r('app.color.app_theme'))
+                .fontWeight(FontWeight.Medium)
+                .fontSize(16 * this.fontSizeRatio)
+                .onClick(() => {
+                  const params: Record<string, Object | TopicResponse> = {
+                    'topic': { id: '', title: v.text } as TopicResponse,
+                  }
+                  RouterUtils.pushPathByName(RouterMap.TOPIC_RESULT_PAGE, params);
+                })
+            } else {
+              Span(v.text)
+                .fontColor(v.type === 'default' ? $r('sys.color.font_primary') : $r('app.color.app_theme'))
+                .fontWeight(FontWeight.Medium)
+                .fontSize(16 * this.fontSizeRatio)
+            }
+          }, (v: TextSpanInfo) => v.text + v.type)
           if (this.textHeight > this.maxLineHeight && !this.isExpand && this.isAll) {
             Span(this.omitContent)
               .fontSize(16 * this.fontSizeRatio)

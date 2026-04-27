@@ -15,6 +15,22 @@
       "data": {
         "description": "this is SearchFoodPageBuilder"
       }
+    },
+    {
+      "name": "CaloriesPage",
+      "pageSourceFile": "src/main/ets/pages/CaloriesPage.ets",
+      "buildFunction": "CaloriesPageBuilder",
+      "data": {
+        "description": "this is CaloriesPageBuilder"
+      }
+    },
+    {
+      "name": "HealthyRecipesPage",
+      "pageSourceFile": "src/main/ets/pages/HealthyRecipesPage.ets",
+      "buildFunction": "HealthyRecipesPageBuilder",
+      "data": {
+        "description": "this is HealthyRecipesPageBuilder"
+      }
     }
   ]
 }

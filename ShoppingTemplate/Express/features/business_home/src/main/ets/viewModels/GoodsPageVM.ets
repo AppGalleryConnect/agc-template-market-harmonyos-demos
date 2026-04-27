@@ -1,37 +1,45 @@
-import { getGoodsList, IGoods, RouterModule } from 'lib_foundation';
-import { emitter } from '@kit.BasicServicesKit';
-import { toastUtil } from 'module_base';
+import { ToastDialog } from '@hw-agconnect/ui-toast';
+import { BaseViewModel, HttpApi, IGoods, RouterMap, RouterModule } from 'lib_foundation';
 
 @ObservedV2
-export class GoodsPageVM {
-  private static _instance: GoodsPageVM;
-  @Trace public goodsList: IGoods[] = []
-  @Trace public selectedGoods: IGoods | undefined
-  @Trace public weight: number = 1
-  @Trace public volume: number = 0
-  @Trace public length: string = ''
-  @Trace public width: string = ''
-  @Trace public height: string = ''
-  @Trace public count: number = 1
-  @Trace public showVolume: boolean = true
+export class GoodsPageVM extends BaseViewModel {
+  @Trace goodsList: IGoods[] = []
+  @Trace selectedGoods: IGoods | undefined;
+  @Trace curGoodsName: string = '';
+  @Trace weight: number = 1;
+  @Trace volume: number = 0;
+  @Trace length: string = '';
+  @Trace width: string = '';
+  @Trace height: string = '';
+  @Trace count: number = 1;
+  @Trace showVolume: boolean = false;
 
-  public static get instance() {
-    if (!GoodsPageVM._instance) {
-      GoodsPageVM._instance = new GoodsPageVM();
+  init() {
+    // 处理参数
+    const params = RouterModule.getNavParam({ url: RouterMap.GOODS_PAGE }) as IGoods;
+    if (params) {
+      this.curGoodsName = params.name;
+      this.weight = params.weight;
+      if (params.count) {
+        this.count = params.count;
+      }
+      if (params.volume) {
+        this.volume = params.volume;
+        this.showVolume = true;
+      }
     }
-    return GoodsPageVM._instance;
+    this.getGoodsList();
   }
 
-  public async init() {
-    this.getGoodsList()
+  async getGoodsList() {
+    const resp = await HttpApi.queryGoodsList();
+    if (resp.length) {
+      this.goodsList = resp as IGoods[];
+
+      const currentGoods = this.goodsList.find((item) => item.name === this.curGoodsName)
+      this.selectedGoods = currentGoods;
+    }
   }
-
-
-  public async getGoodsList() {
-    const res = await getGoodsList()
-    this.goodsList = res
-  }
-
   public calcVolume() {
     if (this.length && this.width && this.height) {
       const length = parseInt(this.length) / 100
@@ -45,15 +53,15 @@ export class GoodsPageVM {
 
   public check(): boolean {
     if (!this.selectedGoods) {
-      toastUtil.showToast('请选择物品类型！');
+      ToastDialog.showToast({ message: '请选择物品类型！' });
       return false
     }
     if (!this.weight || this.weight === 0) {
-      toastUtil.showToast('请选填写重量！');
+      ToastDialog.showToast({ message: '请选填写重量！' });
       return false
     }
     if (!this.count || this.count === 0) {
-      toastUtil.showToast('请选填写件数！');
+      ToastDialog.showToast({ message: '请选填写件数！' });
       return false
     }
     return true
@@ -72,15 +80,6 @@ export class GoodsPageVM {
       weight: this.weight,
       volume: this.volume,
     }
-    toastUtil.showToast('保存成功！');
-    RouterModule.pop()
-    let goods: emitter.EventData = {
-      data: goodsData,
-    };
-    try {
-      emitter.emit('goods', goods);
-    } catch (e) {
-      JSON.stringify(e)
-    }
+    RouterModule.pop(goodsData);
   }
 }

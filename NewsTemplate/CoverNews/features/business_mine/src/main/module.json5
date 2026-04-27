@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "business_mine",
+    "type": "har",
+    "routerMap": "$profile:mine_route_map",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ]
+  }
+}

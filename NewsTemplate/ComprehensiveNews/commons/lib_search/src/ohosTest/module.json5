@@ -1,0 +1,12 @@
+{
+  "module": {
+    "name": "lib_search_test",
+    "type": "feature",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false
+  }
+}

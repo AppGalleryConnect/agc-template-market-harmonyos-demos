@@ -22,6 +22,8 @@ export class RecipeItem {
   @Trace star: number = 0;
   @Trace avatar: ResourceStr = '';
   @Trace nickname: string = '';
+  @Trace video: string = '';
+  @Trace isVip: number = 0;
 }
 
 @ObservedV2

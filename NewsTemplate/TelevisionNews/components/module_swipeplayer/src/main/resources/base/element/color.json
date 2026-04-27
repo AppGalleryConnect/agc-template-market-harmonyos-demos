@@ -1,0 +1,36 @@
+{
+  "color": [
+    {
+      "name": "color_black_40",
+      "value": "#66000000"
+    },
+    {
+      "name": "slide_default_selected_color",
+      "value": "#858584"
+    },
+    {
+      "name": "slide_selected_color",
+      "value": "#007dff"
+    },
+    {
+      "name": "slide_default_track_color",
+      "value": "#353436"
+    },
+    {
+      "name": "landscape_slide_track_color",
+      "value": "#33FFFFFF"
+    },
+    {
+      "name": "cast_play_pause_bg",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "cast_slider_block",
+      "value": "#E5E5E5"
+    },
+    {
+      "name": "circle_btn_bg",
+      "value": "#19FFFFFF"
+    }
+  ]
+}

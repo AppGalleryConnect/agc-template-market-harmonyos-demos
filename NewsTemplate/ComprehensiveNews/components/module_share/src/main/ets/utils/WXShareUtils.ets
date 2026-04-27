@@ -1,12 +1,12 @@
-import { common } from '@kit.AbilityKit';
 import * as wxopensdk from '@tencent/wechat_open_sdk';
-import { Logger } from '../common/Logger';
+import { common } from '@kit.AbilityKit';
+import { ToastDialog as promptAction } from '@hw-agconnect/ui-toast';
+import { UtilLog } from '@hw-agconnect/util-log';
 import { ShareAppType } from '../common/ShareEnum';
 import { ShareViewData } from '../common/ShareParams';
 import { OnWXResp } from '../model/WXApiWrap';
 import { ShareService } from '../ShareService';
-import { downloadImage, compressImage, saveImgToSandbox } from './FileUtils';
-import { showToast } from './ToastUtils';
+import { compressImage, downloadImage } from './FileUtils';
 
 const TAG = '[WXShareUtils]';
 
@@ -17,7 +17,6 @@ export class WXShareUtils {
   private static _instance: WXShareUtils;
   private shareService = ShareService.instance;
   private shareData: ShareViewData = new ShareViewData();
-  private uiContext: UIContext | undefined = undefined;
 
   /**
    * 获取实例
@@ -32,11 +31,12 @@ export class WXShareUtils {
 
   /**
    * 判断微信是否安装
+   * @param uiContext
    * @param callback
    */
   private isWXAPPCallback(uiContext: UIContext, callback: Function) {
     if (!this.shareService.wxApi.isWXAppInstalled()) {
-      uiContext.showAlertDialog({ message: '请先安装微信' })
+      uiContext.showAlertDialog({ message: '请先安装微信' });
     } else {
       callback();
     }
@@ -44,13 +44,16 @@ export class WXShareUtils {
 
   /**
    * 分享图片
-   * @param type
-   * @param image
+   * @param uiContext
+   * @param data
+   * @Param type
    */
-  shareImage(uiContext: UIContext, image: PixelMap, type: ShareAppType) {
+  shareImage(uiContext: UIContext, data: ShareViewData, type: ShareAppType) {
     this.isWXAPPCallback(uiContext, async () => {
       const imageObject = new wxopensdk.WXImageObject();
-      imageObject.uri = await saveImgToSandbox(uiContext, image);
+      if (data.imageUri) {
+        imageObject.uri = data.imageUri;
+      }
 
       const mediaMessage = new wxopensdk.WXMediaMessage();
       mediaMessage.mediaObject = imageObject;
@@ -70,6 +73,7 @@ export class WXShareUtils {
 
   /**
    * 分享网页
+   * @param uiContext
    * @param data
    * @param type
    */
@@ -83,7 +87,6 @@ export class WXShareUtils {
       mediaMessage.title = data.title;
       mediaMessage.description = data.subTitle;
       mediaMessage.mediaObject = webpageObject;
-
       try {
         if (data.thumbUrl) {
           let thumbBuffer = new ArrayBuffer(100);
@@ -95,13 +98,12 @@ export class WXShareUtils {
             thumbBuffer = await compressImage(thumbRawData.buffer as ArrayBuffer);
           }
           if (thumbBuffer.byteLength / 1024 > 64) {
-            Logger.error(TAG, `thumbData is over 64K, buffer length: ${thumbBuffer.byteLength / 1024}K`);
+            UtilLog.error(TAG, `thumbData is over 64K, buffer length: ${thumbBuffer.byteLength / 1024}K`);
           }
-
           mediaMessage.thumbData = new Uint8Array(thumbBuffer);
         }
-      } catch (e) {
-        Logger.error(TAG, 'handle thumbUrl fail, error: ' + JSON.stringify(e));
+      } catch (error) {
+        UtilLog.error(TAG, `Failed to get media content, errCode: ${error.code}, errMessage: ${error.message}`);
       }
 
       const req = new wxopensdk.SendMessageToWXReq();
@@ -119,9 +121,9 @@ export class WXShareUtils {
 
   /**
    * 监听分享回调
+   * @param data
    */
-  public registerOnWXRespCallback(uiContext: UIContext, data: ShareViewData) {
-    this.uiContext = uiContext;
+  public registerOnWXRespCallback(data: ShareViewData) {
     this.shareData = data;
     this.shareService.wxEventHandler.registerOnWXRespCallback(this.handleResp);
   }
@@ -140,17 +142,16 @@ export class WXShareUtils {
   private handleResp: OnWXResp = (err) => {
     switch (err.errCode) {
       case wxopensdk.ErrCode.ERR_OK:
-        showToast(this.uiContext, { message: '分享成功' });
+        promptAction.showToast({ message: '分享成功' });
         if (this.shareData.autoClose) {
           this.shareData.closeSheet();
         }
         break;
       case wxopensdk.ErrCode.ERR_USER_CANCEL:
-        showToast(this.uiContext, { message: '分享取消' });
+        promptAction.showToast({ message: '分享取消' });
         break;
       default:
-        Logger.error(TAG, 'share to wechat fail, error: ' + JSON.stringify(err));
-        showToast(this.uiContext, { message: '分享失败: ' + err.errStr || '未知错误' });
+        promptAction.showToast({ message: '分享失败: ' + err.errStr });
         break;
     }
   }

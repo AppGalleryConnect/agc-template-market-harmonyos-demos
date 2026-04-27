@@ -184,6 +184,48 @@
         });
       };
 
+      const compressImageNew = (file) => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          const reader = new FileReader();
+
+          reader.onload = (e) => {
+            img.src = e.target.result;
+            img.crossOrigin = "anonymous";
+          };
+
+          reader.onerror = () => reject(new Error("图片读取失败"));
+          reader.readAsDataURL(file);
+
+          img.onload = () => {
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+
+            const originalWidth = img.width;
+            const originalHeight = img.height;
+
+            let targetWidth, targetHeight;
+            if (originalWidth > 500) {
+              targetWidth = 500;
+              targetHeight = (originalHeight * targetWidth) / originalWidth;
+            } else {
+              targetWidth = originalWidth;
+              targetHeight = originalHeight;
+            }
+
+            canvas.width = targetWidth;
+            canvas.height = targetHeight;
+            ctx.clearRect(0, 0, targetWidth, targetHeight);
+            ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
+
+            let base64 = canvas.toDataURL("image/jpeg")
+            resolve(base64)
+          };
+
+          img.onerror = () => reject(new Error("图片加载失败"));
+        });
+      };
+
       const example_image_upload_handler = (blobInfo, progress) => {
         return new Promise(async (resolve, reject) => {
           try {
@@ -478,6 +520,34 @@
         });
       }
 
+      function initImageButton(editor) {
+          // 覆盖原生图片按钮点击行为
+          editor.ui.registry.addButton('myImage', {
+            icon: 'image',
+            tooltip: '插入图片',
+            onAction() {
+              // 直接触发文件选择，不弹任何窗口
+              const input = document.createElement('input');
+              input.type = 'file';
+              input.accept = 'image/*';
+              input.onchange = async (e) => {
+                const file = e.target.files[0];
+
+                const reader = new FileReader();
+                reader.onload = async () => {
+                  // 压缩图片
+                  const base64Str = await compressImageNew(file);
+
+                  // 直接插入编辑器
+                  editor.insertContent(`<img src="${base64Str}" width="500">`);
+                };
+                reader.readAsDataURL(file);
+              };
+              input.click(); // 触发 onShowFileSelector
+            }
+          });
+      }
+
       function insertHorizontalLine() {
         if (currentEditor) {
           currentEditor.insertContent("<p></p><hr><p></p>");
@@ -516,12 +586,12 @@
         plugins: "link image lists",
         menubar: false,
         toolbar: [
-          "emoji image | removeformat undo redo ",
+          "emoji myImage | removeformat undo redo ",
           "bold italic underline strikethrough fontsize forecolor backcolor",
           "alignleft aligncenter alignright | bullist numlist | horizontalline ",
         ],
         font_size_formats: "14px 16px 18px 20px",
-        images_upload_handler: example_image_upload_handler,
+        // images_upload_handler: example_image_upload_handler,
         content_style:
           "img {max-width: 50%; /* 设置图片最大宽度为100% */height: auto; /* 确保图片保持横纵比 */}",
         toolbar_sticky: false,
@@ -533,7 +603,7 @@
         placeholder: "请输入正文",
         setup: function (editor) {
           currentEditor = editor;
-
+          initImageButton(editor);
           initEmojiButton(editor);
           initEmojiHideListeners(editor);
           // 字体大小按钮配置

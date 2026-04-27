@@ -52,8 +52,8 @@ struct PrivacyPreview {
       .width($r('app.string.size_percent_full'))
       .justifyContent(FlexAlign.Center)
       .padding({
-        top: $r('app.string.space_l'),
-        bottom: $r('app.string.space_l'),
+        top: $r('app.float.space_l'),
+        bottom: $r('app.float.space_l'),
       })
     }
     .backgroundColor($r('sys.color.background_secondary'))

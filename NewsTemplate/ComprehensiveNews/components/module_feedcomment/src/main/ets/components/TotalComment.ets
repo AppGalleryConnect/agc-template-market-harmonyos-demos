@@ -69,6 +69,7 @@ export struct TotalComment {
 
           ListItem() {
             Text('全部回复')
+              .fontColor($r('sys.color.font_primary'))
               .fontWeight(FontWeight.Medium)
           }
           .padding({

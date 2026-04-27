@@ -4,15 +4,18 @@ import { EasyEditorController } from '../utils/Controller';
 
 @ComponentV2
 export struct ArticlePost {
-  @Param fontSizeRatio:number = 1
+  @Param fontSizeRatio: number = 1
   @Param darkMode: boolean = false
+  @Param customPadding: Padding = {};
+  @Event onTitleChange: (value: string) => void = () => {
+  }
+  @Event onContentChange: (value: string) => void = () => {
+  }
   private editorController: EasyEditorController = new EasyEditorController()
   @Local content: string = ''
   @Local hideRichOperation: boolean = false
   @Local title: string = ''
   @Local isValidate: boolean = false
-  @Event onTitleChange:(value:string) => void = () => {}
-  @Event onContentChange:(value:string) => void = () => {}
 
   @Builder
   contentArea() {
@@ -54,6 +57,12 @@ export struct ArticlePost {
       }
       .visibility(this.isValidate && this.title.trim().length < 2 ? Visibility.Visible : Visibility.None)
     }
+    .width('100%')
+    .height('auto')
+    .padding({
+      left: this.customPadding.left,
+      right: this.customPadding.right,
+    })
     .divider({
       strokeWidth: 0.5,
       color: $r('sys.color.comp_divider'),
@@ -72,7 +81,7 @@ export struct ArticlePost {
               this.contentArea()
               EasyEditor({
                 controller: this.editorController,
-                darkMode:this.darkMode,
+                darkMode: this.darkMode,
                 hideRichOperation: this.hideRichOperation,
                 config: {
                   before_init: {

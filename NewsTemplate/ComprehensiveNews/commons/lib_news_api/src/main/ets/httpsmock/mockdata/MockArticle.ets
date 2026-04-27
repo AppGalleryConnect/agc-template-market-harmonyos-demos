@@ -7,6 +7,7 @@ export class MockArticle {
       id: 'article_1',
       type: NewsEnum.Article,
       title: '中方决定同意与美方进行接触',
+      tags: ['中方', '美方', '建筑', '地产'],
       authorId: '001',
       markCount: 0,
       postImgList: [
@@ -37,7 +38,6 @@ export class MockArticle {
       shareCount: 12000,
       isLiked: false,
       isMarked: false,
-      articleFrom: '华为用户',
       navInfo: {
         setting: '{"type":"view","children":[{"type":"view","children":[{"type":"List","children":[{"type":"native","showType":"LeftTextRightImageCard","name":"左文右图"}],"style":{"backgroundColor":"#FFFFFF","padding-top":"12","padding-bottom":"12"}}]}]}',
       },
@@ -46,6 +46,7 @@ export class MockArticle {
       id: 'article_2',
       type: NewsEnum.Article,
       title: '一揽子金融政策打出“组合拳”',
+      tags: ['金融', '政治', '国家', '货币'],
       authorId: 'author_2',
       markCount: 0,
       recommends: [{
@@ -98,7 +99,6 @@ export class MockArticle {
       likeCount: 6000,
       shareCount: 12000,
       isMarked: false,
-      articleFrom: '2号选手',
       navInfo: {
         setting: '{"type":"view","children":[{"type":"view","children":[{"type":"List","children":[{"type":"native","showType":"LeftTextRightImageCard","name":"左文右图"}],"style":{"backgroundColor":"#FFFFFF","padding-top":"12","padding-bottom":"12"}}]}]}',
       },
@@ -107,6 +107,7 @@ export class MockArticle {
       id: 'article_3',
       type: NewsEnum.Article,
       title: '中俄两国走出一条合作共赢的崭新道路',
+      tags: ['国际形势', '合作共赢', '新道路', '政治'],
       authorId: 'author_3',
       markCount: 0,
       recommends: [{
@@ -134,7 +135,6 @@ export class MockArticle {
                     </div>
                   `,
       commentCount: 25,
-      articleFrom: '2号选手',
       likeCount: 6000,
       shareCount: 12000,
       isMarked: false,
@@ -147,6 +147,7 @@ export class MockArticle {
       id: 'article_4',
       type: NewsEnum.Article,
       title: '90万名员工了，刘强东在想什么？他的CEO在忙什么？',
+      tags: ['企业', '京东', '财报', '电商'],
       authorId: 'author_4',
       markCount: 0,
       recommends: [{
@@ -177,7 +178,6 @@ export class MockArticle {
       shareCount: 12000,
       commentCount: 25,
       isLiked: false,
-      articleFrom: '2号选手',
       navInfo: {
         setting: '{"type":"view","children":[{"type":"view","children":[{"type":"List","children":[{"type":"native","showType":"LeftTextRightImageCard","name":"左文右图"}],"style":{"backgroundColor":"#FFFFFF","padding-top":"12","padding-bottom":"12"}}]}]}',
       },
@@ -186,6 +186,7 @@ export class MockArticle {
       id: 'article_5',
       type: NewsEnum.Article,
       title: '2025年社会物流总额将超360万亿元',
+      tags: ['物流', '金融', '采购', '消费市场'],
       authorId: 'author_5',
       markCount: 0,
       recommends: [{
@@ -215,7 +216,6 @@ export class MockArticle {
       commentCount: 25,
       isLiked: false,
       likeCount: 6000,
-      articleFrom: '2号选手',
       isMarked: false,
       navInfo: {
         setting: '{"type":"view","children":[{"type":"view","children":[{"type":"List","children":[{"type":"native","showType":"LeftTextRightImageCard","name":"左文右图"}],"style":{"backgroundColor":"#FFFFFF","padding-top":"12","padding-bottom":"12"}}]}]}',
@@ -225,6 +225,7 @@ export class MockArticle {
       id: 'article_6',
       type: NewsEnum.Article,
       title: '住建部称住宅层高标准将提至不低于3米，层高低的房子不值钱了？',
+      tags: ['住房', '高层', '房屋设计', '交通'],
       authorId: 'author_1',
       markCount: 0,
       recommends: [{
@@ -283,7 +284,6 @@ export class MockArticle {
                          </p>
                     </div>
                   `,
-      articleFrom: '1号选手',
       navInfo: {
         setting: '{"type":"view","children":[{"type":"view","children":[{"type":"List","children":[{"type":"native","showType":"TopTextBottomImageCard","name":"上文下图"}],"style":{"backgroundColor":"#FFFFFF","padding-bottom":"12","margin-top":"12"}}]}]}',
       },
@@ -292,6 +292,7 @@ export class MockArticle {
       id: 'article_7',
       type: NewsEnum.Article,
       title: '中国物流与采购联合会：2024年社会物流总额将超360万亿元',
+      tags: ['物流', '金融', '采购', '消费市场'],
       authorId: 'author_2',
       markCount: 0,
       createTime: 1751089800000,
@@ -333,7 +334,6 @@ export class MockArticle {
                     <p style="line-height:35px;">从物流费用来看，衡量物流运行效率的重要指标——社会物流总费用与 GDP 的比率，降至近年内的最低点，有效降低全社会物流成本行动取得初步成效。2024年，社会物流总费用与GDP的比率为14.1%，比上年下降0.3个百分点。</p>
                     </div>
                   `,
-      articleFrom: '2号选手',
       navInfo: {
         setting: '{"type":"view","children":[{"type":"view","children":[{"type":"List","children":[{"type":"native","showType":"LeftTextRightImageCard","name":"左文右图"}],"style":{"backgroundColor":"#FFFFFF","padding-top":"12","padding-bottom":"12"}}]}]}',
       },
@@ -342,6 +342,7 @@ export class MockArticle {
       id: 'article_8',
       type: NewsEnum.Article,
       title: '两个尾号8个“7”的手机号均以200多万拍卖，买家为同一人',
+      tags: ['拍卖', '手机号', '运营商', '收藏'],
       authorId: 'author_3',
       markCount: 0,
       createTime: 1751089800000,
@@ -377,7 +378,6 @@ export class MockArticle {
                     <p style="line-height:35px;">不过，也有观点认为，手机号的实际使用价值有限，高价拍卖更多反映的是特定群体对数字符号的偏好，投资需谨慎。目前，这两个手机号的过户手续正在办理中，后续是否会再次进入流通市场引发关注</p>
                     </div>
                   `,
-      articleFrom: '3号选手',
       navInfo: {
         setting: '{"type":"view","children":[{"type":"view","children":[{"type":"List","children":[{"type":"native","showType":"LeftTextRightImageCard","name":"左文右图"}],"style":{"backgroundColor":"#FFFFFF","padding-bottom":"12","margin-top":"12"}}]}]}',
       },
@@ -385,7 +385,8 @@ export class MockArticle {
     {
       id: 'article_9',
       type: NewsEnum.Video,
-      title: '第12波！伊朗猛砸高超弹，400秒击中以色列，撕裂世界第一防空网',
+      title: '第11波！伊朗猛砸高超弹，400秒击中以色列，撕裂世界第一防空网',
+      tags: ['伊朗', '战争', '军事', '导弹'],
       authorId: 'author_4',
       markCount: 0,
       createTime: 1751089800000,
@@ -409,7 +410,6 @@ export class MockArticle {
       ],
       videoUrl: 'https://e-file.huawei.com/mediares/MarketingMaterial_MCD/EBG/PUBLIC/zh/2025/04/5feb8457-d5e9-4949-a181-795e4d873af9.mp4',
       coverUrl: 'https://e-file.huawei.com/mediares/Video_MCD/EBG/PUBLIC/zh/2025/04/3c04b872-197d-4551-a353-0eb99def6ca2.png',
-      articleFrom: '4号选手',
       videoDuration: 48234,
       navInfo: {
         setting: '{"type":"view","children":[{"type":"view","children":[{"type":"List","children":[{"type":"native","showType":"TopTextBottomBigImageCard","name":"上文下大图"}],"style":{"backgroundColor":"#FFFFFF","padding-top":"12","padding-bottom":"12"}}]}]}',
@@ -419,6 +419,7 @@ export class MockArticle {
       id: 'article_10',
       type: NewsEnum.Article,
       title: '特朗普将封禁DeepSeek？外交部给出回应',
+      tags: ['特朗普', 'DeepSeek', 'AI', '外交部'],
       createTime: 1751089800000,
       authorId: 'author_11',
       markCount: 0,
@@ -453,7 +454,6 @@ export class MockArticle {
                     <p style="line-height:35px;">此前，自今年年初 DeepSeek 惊艳亮相、震撼世界以来，美国就一直在想方设法打压 DeepSeek，以遏制中国在人工智能技术上的发展。当地时间 1 月 28 日，美国多名官员表示 DeepSeek 是 “偷窃”，正对其影响开展国家安全调查。1 月 30 日，美国国会众议院首席行政事务官向国会办公室发出通知，警告国会办公室不要使用 DeepSeek 的服务，特朗普还称 DeepSeek 的出现 “给美国相关产业敲响了警钟” 。如今关于特朗普政府将封禁 DeepSeek 的消息传出，引发国际社会广泛关注，后续进展本报将持续跟踪报道。</p>
                     </div>
                   `,
-      articleFrom: '1号选手',
       navInfo: {
         setting: '{"type":"view","children":[{"type":"view","children":[{"type":"List","children":[{"type":"native","showType":"LeftTextRightImageCard","name":"左文右图"}],"style":{"backgroundColor":"#FFFFFF","padding-top":"12","padding-bottom":"12"}}]}]}',
       },
@@ -462,6 +462,7 @@ export class MockArticle {
       id: 'article_11',
       type: NewsEnum.Video,
       title: 'DeepSeek的所谓综合排名以“开创性+跨学科影响+方法论',
+      tags: ['DeepSeek', 'AI排名', 'AI方法论', 'AI跨学科'],
       authorId: 'author_6',
       createTime: new Date().getTime(),
       commentCount: 10,
@@ -493,9 +494,10 @@ export class MockArticle {
       },
     },
     {
-      id: 'article_7',
+      id: 'article_20',
       type: NewsEnum.Article,
       title: '中国物流与采购联合会：2024年社会物流总额将超360万亿元',
+      tags: ['物流', '金融', '采购', '消费市场'],
       createTime: 1751089800000,
       authorId: 'author_8',
       markCount: 0,
@@ -531,15 +533,15 @@ export class MockArticle {
                     <p style="line-height:35px;">从物流费用来看，衡量物流运行效率的重要指标 —— 社会物流总费用与 GDP 的比率，降至近年内的最低点，有效降低全社会物流成本行动取得初步成效。2024 年，社会物流总费用与 GDP 的比率为 14.1%，比上年下降 0.3 个百分点。</p>
                     </div>
                   `,
-      articleFrom: '1号选手',
       navInfo: {
         setting: '{"type":"view","children":[{"type":"view","children":[{"type":"List","children":[{"type":"native","showType":"LeftTextRightImageCard","name":"左文右图"}],"style":{"backgroundColor":"#FFFFFF","padding-top":"12","padding-bottom":"12"}}]}]}',
       },
     },
     {
-      id: 'article_7',
+      id: 'article_21',
       type: NewsEnum.Article,
       title: '中国物流与采购联合会：2024年社会物流总额将超360万亿元',
+      tags: ['物流', '金融', '采购', '消费市场'],
       createTime: 1751089800000,
       authorId: 'author_9',
       markCount: 0,
@@ -575,7 +577,6 @@ export class MockArticle {
                     <p style="line-height:35px;">从物流费用来看，衡量物流运行效率的重要指标 —— 社会物流总费用与 GDP 的比率，降至近年内的最低点，有效降低全社会物流成本行动取得初步成效。2024 年，社会物流总费用与 GDP 的比率为 14.1%，比上年下降 0.3 个百分点。</p>
                     </div>
                   `,
-      articleFrom: '1号选手',
       navInfo: {
         setting: '{"type":"view","children":[{"type":"view","children":[{"type":"List","children":[{"type":"native","showType":"LeftTextRightImageCard","name":"左文右图"}],"style":{"backgroundColor":"#FFFFFF","padding-top":"12","padding-bottom":"12"}}]}]}',
       },
@@ -584,6 +585,7 @@ export class MockArticle {
       id: 'article_13',
       type: NewsEnum.Article,
       title: '二胎家庭” 如何平衡关爱？心理专家支招避免 “隐形偏爱',
+      tags: ['二胎', '平衡', '心理学', '家庭'],
       createTime: 1751089800000,
       authorId: 'author_9',
       markCount: 0,
@@ -618,7 +620,6 @@ export class MockArticle {
                     <p style="line-height:35px;">在 [专家姓名] 看来，孩子对父母的爱极为敏感，即便是细微的差别对待，都可能使他们产生被忽视或不被爱的感觉。长期处于这种环境下，孩子可能会出现自卑、焦虑、叛逆等心理问题，还可能导致兄弟姐妹之间的关系紧张。</p>
                     </div>
                   `,
-      articleFrom: '1号选手',
       navInfo: {
         setting: '{"type":"view","children":[{"type":"view","children":[{"type":"List","children":[{"type":"native","showType":"LeftTextRightImageCard","name":"左文右图"}],"style":{"backgroundColor":"#FFFFFF","padding-top":"12","padding-bottom":"12"}}]}]}',
       },
@@ -627,6 +628,7 @@ export class MockArticle {
       id: 'article_14',
       type: NewsEnum.Article,
       title: '多地推行 “弹性休假” 政策，助力职场父母兼顾工作与家庭陪伴',
+      tags: ['弹性休假', '工作平衡', '职场', '全职家庭'],
       createTime: 1751089800000,
       authorId: 'author_6',
       markCount: 0,
@@ -679,7 +681,6 @@ export class MockArticle {
                       </div>
                     </div>
                   `,
-      articleFrom: '1号选手',
       navInfo: {
         setting: '{"type":"view","children":[{"type":"view","children":[{"type":"List","children":[{"type":"native","showType":"TopTextBottomImageCard","name":"上文下图"}],"style":{"backgroundColor":"#FFFFFF","padding-bottom":"12","margin-top":"12"}}]}]}',
       },
@@ -688,6 +689,7 @@ export class MockArticle {
       id: 'article_15',
       type: NewsEnum.Article,
       title: '传统家庭仪式遇新解读：年轻人用 “线上家宴” 连接异地亲人，空巢家庭” 不再孤单，社区 “银龄互助” 让老人结伴生活',
+      tags: ['仪式', '老人', '互助', '空巢家庭'],
       createTime: 1751089800000,
       authorId: 'author_5',
       markCount: 0,
@@ -725,7 +727,6 @@ export class MockArticle {
                       <p style="line-height:35px;">从企业角度看，虽然弹性休假在一定程度上对管理提出了挑战，但也存在积极意义。实行弹性工作制，有利于提升员工的工作满意度和忠诚度，减少员工因工作与家庭冲突产生的离职意愿，从而降低企业的人才流失率。携程集团联合创始人、董事局主席梁建章就曾表示，未来可探索 4 天工作制或缩短工作时间来提高工作效率，携程也在积极实践 。</p>
                     </div>
                   `,
-      articleFrom: '1号选手',
       navInfo: {
         setting: '{"type":"view","children":[{"type":"view","children":[{"type":"List","children":[{"type":"native","showType":"TopTextBottomImageCard","name":"上文下图"}],"style":{"backgroundColor":"#FFFFFF","padding-bottom":"12","margin-top":"12"}}]}]}',
       },
@@ -734,6 +735,7 @@ export class MockArticle {
       id: 'article_16',
       type: NewsEnum.Article,
       title: '传统家庭仪式遇新解读：年轻人用 “线上家宴” 连接异地亲人，空巢家庭” 不再孤单，社区 “银龄互助” 让老人结伴生活',
+      tags: ['仪式', '老人', '互助', '空巢家庭'],
       createTime: 1751089800000,
       authorId: 'author_5',
       markCount: 0,
@@ -774,7 +776,6 @@ export class MockArticle {
                       <p style="line-height:35px;">从企业角度看，虽然弹性休假在一定程度上对管理提出了挑战，但也存在积极意义。实行弹性工作制，有利于提升员工的工作满意度和忠诚度，减少员工因工作与家庭冲突产生的离职意愿，从而降低企业的人才流失率。携程集团联合创始人、董事局主席梁建章就曾表示，未来可探索 4 天工作制或缩短工作时间来提高工作效率，携程也在积极实践 。</p>
                     </div>
                   `,
-      articleFrom: '1号选手',
       navInfo: {
         setting: '{"type":"view","children":[{"type":"view","children":[{"type":"List","children":[{"type":"native","showType":"TopTextBottomImageCard","name":"上文下图"}],"style":{"backgroundColor":"#FFFFFF","padding-bottom":"12","margin-top":"12"}}]}]}',
       },
@@ -783,6 +784,7 @@ export class MockArticle {
       id: 'article_17',
       type: NewsEnum.Article,
       title: '七旬夫妇坚持手写家书 20 年，笔墨间藏着对子女的牵挂',
+      tags: ['家书', '家庭', '牵挂', '职场'],
       createTime: 1751089800000,
       authorId: 'author_5',
       markCount: 0,
@@ -816,7 +818,6 @@ export class MockArticle {
                     <p style="line-height:35px;">从企业角度看，虽然弹性休假在一定程度上对管理提出了挑战，但也存在积极意义。实行弹性工作制，有利于提升员工的工作满意度和忠诚度，减少员工因工作与家庭冲突产生的离职意愿，从而降低企业的人才流失率。携程集团联合创始人、董事局主席梁建章就曾表示，未来可探索 4 天工作制或缩短工作时间来提高工作效率，携程也在积极实践 。</p>
                     </div>
                   `,
-      articleFrom: '1号选手',
       navInfo: {
         setting: '{"type":"view","children":[{"type":"view","children":[{"type":"List","children":[{"type":"native","showType":"LeftTextRightImageCard","name":"左文右图"}],"style":{"backgroundColor":"#FFFFFF","padding-top":"12","padding-bottom":"12"}}]}]}',
       },
@@ -825,6 +826,7 @@ export class MockArticle {
       id: 'article_digital_1',
       type: NewsEnum.Article,
       title: '人工智能助力教育公平：偏远地区学生迎来优质教育资源',
+      tags: ['人工智能', '偏远学区', '教育资源', '在线平台'],
       authorId: 'author_1',
       markCount: 0,
       recommends: [{
@@ -860,7 +862,6 @@ export class MockArticle {
                          </p>
                     </div>
                   `,
-      articleFrom: '1号选手',
       navInfo: {
         setting: '{"type":"view","children":[{"type":"view","children":[{"type":"List","children":[{"type":"native","showType":"TopTextBottomImageCard","name":"上文下图"}],"style":{"backgroundColor":"#FFFFFF","padding-bottom":"12","margin-top":"12"}}]}]}',
       },
@@ -869,6 +870,7 @@ export class MockArticle {
       id: 'article_digital_2',
       type: NewsEnum.Article,
       title: '全球经济复苏新动力：人工智能推动增长，绿色经济成未来焦点',
+      tags: ['全球经济', '人工智能', '绿色经济', '经济复苏'],
       authorId: 'author_1',
       markCount: 0,
       recommends: [{
@@ -910,7 +912,6 @@ export class MockArticle {
                          </p>
                     </div>
                   `,
-      articleFrom: '1号选手',
       navInfo: {
         setting: '{"type":"view","children":[{"type":"view","children":[{"type":"List","children":[{"type":"native","showType":"TopTextBottomImageCard","name":"上文下图"}],"style":{"backgroundColor":"#FFFFFF","padding-bottom":"12","margin-top":"12"}}]}]}',
       },
@@ -919,6 +920,7 @@ export class MockArticle {
       id: 'article_digital_3',
       type: NewsEnum.Article,
       title: '人工智能推动增长，绿色经济成未来焦点',
+      tags: ['全球经济', '人工智能', '绿色经济', '经济复苏'],
       authorId: 'author_1',
       markCount: 0,
       recommends: [{
@@ -969,7 +971,6 @@ export class MockArticle {
                          </p>
                     </div>
                   `,
-      articleFrom: '1号选手',
       navInfo: {
         setting: '{"type":"view","children":[{"type":"view","children":[{"type":"List","children":[{"type":"native","showType":"TopTextBottomImageCard","name":"上文下图"}],"style":{"backgroundColor":"#FFFFFF","padding-bottom":"12","margin-top":"12"}}]}]}',
       },
@@ -978,6 +979,7 @@ export class MockArticle {
       id: 'article_digital_4',
       type: NewsEnum.Article,
       title: '人工智能：经济增长的新引擎',
+      tags: ['全球经济', '人工智能', '绿色经济', '经济复苏'],
       authorId: 'author_1',
       markCount: 0,
       recommends: [{
@@ -1019,7 +1021,6 @@ export class MockArticle {
                          </p>
                     </div>
                   `,
-      articleFrom: '1号选手',
       navInfo: {
         setting: '{"type":"view","children":[{"type":"view","children":[{"type":"List","children":[{"type":"native","showType":"TopTextBottomImageCard","name":"上文下图"}],"style":{"backgroundColor":"#FFFFFF","padding-bottom":"12","margin-top":"12"}}]}]}',
       },
@@ -1028,6 +1029,7 @@ export class MockArticle {
       id: 'article_digital_5',
       type: NewsEnum.Article,
       title: '绿色经济：未来的增长方向',
+      tags: ['全球经济', '人工智能', '绿色经济', '经济复苏'],
       authorId: 'author_1',
       markCount: 0,
       recommends: [{
@@ -1057,7 +1059,6 @@ export class MockArticle {
                          </p>
                     </div>
                   `,
-      articleFrom: '1号选手',
       navInfo: {
         setting: '{"type":"view","children":[{"type":"view","children":[{"type":"List","children":[{"type":"native","showType":"TopTextBottomImageCard","name":"上文下图"}],"style":{"backgroundColor":"#FFFFFF","padding-bottom":"12","margin-top":"12"}}]}]}',
       },
@@ -1067,6 +1068,7 @@ export class MockArticle {
     id: '',
     type: NewsEnum.Post,
     title: '',
+    tags: ['生活', '军事', '科技', '自然'],
     authorId: '',
     markCount: 0,
     postImgList: [
@@ -1083,7 +1085,6 @@ export class MockArticle {
     shareCount: 0,
     isLiked: false,
     isMarked: false,
-    articleFrom: '',
     navInfo: {
       setting: '',
     },

@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "module_product_review_test",
+    "type": "feature",
+    "deviceTypes": [
+      "default"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false
+  }
+}

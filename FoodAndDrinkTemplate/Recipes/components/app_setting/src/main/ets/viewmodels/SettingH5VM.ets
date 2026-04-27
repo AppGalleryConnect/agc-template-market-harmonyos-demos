@@ -1,4 +1,5 @@
 import { webview } from '@kit.ArkWeb';
+import { UtilLog } from '@hw-agconnect/util-log';
 import { SettingPageEnum } from '../types/SettingType';
 import { BaseViewModel } from '../models/BaseViewModel';
 
@@ -16,16 +17,21 @@ export class SettingH5VM extends BaseViewModel {
   }
 
   onControllerAttached() {
-    if (this.isUrl(this.content)) {
-      this.webViewController.loadUrl(this.content);
-    } else {
-      this.webViewController.loadData(
-        this.content,
-        'text/html',
-        'UTF-8',
-        '',
-        '',
-      );
+    try {
+      if (this.isUrl(this.content)) {
+        this.webViewController.loadUrl(this.content);
+      } else {
+        this.webViewController.loadData(
+          this.content,
+          'text/html',
+          'UTF-8',
+          '',
+          '',
+        );
+      }
+    } catch (error) {
+      UtilLog.error(0x000F, '[SettingH5VM]',
+        `Failed to load data, errCode: ${error.code}, errMessage: ${error.message}`);
     }
   }
 

@@ -1,0 +1,11 @@
+{
+  "name": "module_imagepreview",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@hw-agconnect/util-log": "1.0.0",
+  }
+}

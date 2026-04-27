@@ -103,7 +103,8 @@ export default class LazyDataSource<T> extends BasicDataSource<T> {
   }
 
   public clear(): void {
-    this.dataArray.splice(0, this.dataArray?.length)
+    this.dataArray.splice(0, this.dataArray?.length);
+    this.notifyDataReload();
   }
 
   public isEmpty(): boolean {

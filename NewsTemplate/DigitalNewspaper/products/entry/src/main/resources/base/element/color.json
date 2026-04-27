@@ -1,0 +1,32 @@
+{
+  "color": [
+    {
+      "name": "start_window_background",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "theme_color",
+      "value": "#FB4127"
+    },
+    {
+      "name": "bottom_bar",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "img_bg",
+      "value": "#E5E5EA"
+    },
+    {
+      "name": "pressed_bg",
+      "value": "#19000000"
+    },
+    {
+      "name": "item_title_font",
+      "value": "#E6000000"
+    },
+    {
+      "name": "widget_title_bg",
+      "value": "#F1F4FB"
+    }
+  ]
+}

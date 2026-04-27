@@ -3,7 +3,8 @@
     "name": "aggregated_ads",
     "type": "har",
     "deviceTypes": [
-      "default"
+      "default",
+      "tablet"
     ]
   }
 }

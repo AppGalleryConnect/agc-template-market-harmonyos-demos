@@ -13,7 +13,8 @@ export const nodeMap: Map<string | number, BuilderNode<[FrameNodeParams]> | unde
 
 const nodeControllerFactory: NodeControllerFactory = new NodeControllerFactory()
 
-export function setNodeMap(extraInfo: Record<string, number | string | boolean | Record<string, string | boolean>[]>,
+export function setNodeMap(extraInfo: Record<string, number | string | boolean
+  | Function | Record<string, string | boolean>[]>,
   nativeNode: BuilderNode<[FrameNodeParams]>) {
   let flowIndex = extraInfo.flowIndex as number
   if (!nodeMap.get(flowIndex)) {
@@ -32,7 +33,7 @@ export function setNodeMap(extraInfo: Record<string, number | string | boolean |
  * */
 
 export function FrameNodeFactory(vm: LayoutSetting, articles: JSONObject[],
-  extraInfo: Record<string, number | string | boolean | Record<string, string | boolean>[]>,
+  extraInfo: Record<string, number | string | boolean | Function | Record<string, string | boolean>[]>,
   context: UIContext): FrameNode | null {
 
   try {
@@ -120,7 +121,7 @@ function setColumnNodeAttr(node: typeNode.Column, style: Record<string, string |
 export class FrameController extends NodeController {
   setting: LayoutSetting = new LayoutSetting()
   articles: JSONObject[] = []
-  extraInfo: Record<string, number | string | boolean | Record<string, string | boolean>[]> = {}
+  extraInfo: Record<string, number | string | boolean | Function | Record<string, string | boolean>[]> = {}
   private rootNode: FrameNode | null = null;
 
   /*
@@ -130,7 +131,7 @@ export class FrameController extends NodeController {
    * @param extraInfo 额外自定义字段
    * */
   initFrameNode(setting: LayoutSetting, articles: JSONObject[],
-    extraInfo: Record<string, number | string | boolean | Record<string, string | boolean>[]>): void {
+    extraInfo: Record<string, number | string | boolean | Function | Record<string, string | boolean>[]>): void {
     this.setting = setting
     this.articles = articles
     this.extraInfo = extraInfo

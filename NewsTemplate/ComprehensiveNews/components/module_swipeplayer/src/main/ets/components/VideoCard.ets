@@ -1,7 +1,7 @@
 import { media } from '@kit.MediaKit'
 import { BusinessError } from '@kit.BasicServicesKit'
 import { AVPlayerState, BreakpointNameEnum, PageNameEnum, VideoPlayerData } from '../type/Index'
-import { handleSandboxVideoUrl, secondToTime, toast } from '../utils/Util'
+import { handleSandboxVideoUrl, isDisplayModeFolded, secondToTime, toast } from '../utils/Util'
 import { Constants } from '../constants/Constants'
 import { VideoProgressBar } from './VideoProgressBar'
 import { AVPlayerManager } from '../controller/AVPlayerManager'
@@ -66,6 +66,7 @@ export struct VideoCard {
   // 提示开通会员的内容
   @Param membershipBuilder: WrappedBuilder<[() => void]> | undefined = undefined;
   @Param isMute: boolean = false
+  @Param isDetailBack: boolean = false;
   // 点击title，回调事件
   @Event onClickEvent: (avPlayerController: AVPlayerController | undefined, callback: () => void) => void;
   // 播放list某个item的视频
@@ -81,6 +82,12 @@ export struct VideoCard {
   // xComponent ready回调
   @Event xComponentReadyCallback: (controller: XComponentController) => void;
   @Event onMute: (value: boolean) => void = () => {
+  };
+  // 视频状态变成complete的回调
+  @Event onStateComplete: () => void = () => {
+  };
+  // 全屏操作状态回调
+  @Event onFullScreenOperation: (isStarting: boolean) => void = () => {
   };
   @Provider() showMembershipOverlay: boolean = false;
   // XComponent控制器
@@ -139,7 +146,9 @@ export struct VideoCard {
   };
   // 播放完成状态监听事件
   private completedListeners = () => {
+    this.onStateComplete();
     if (this.isFromDetailCard) {
+      this.vm.isPause = true;
       return
     }
     // 设置自动播放下一个，且推荐视频自动播放开关打开，则当前视频播放完之后，继续播放下一个
@@ -230,7 +239,7 @@ export struct VideoCard {
   @Monitor('vm.pipWindowModel.isReleaseVideoPlayer')
   onReleaseVideoPlayer() {
     Logger.debug(TAG, 'onReleaseVideoPlayer this.vm.pipWindowModel.isReleaseVideoPlayer: ' +
-    this.vm.pipWindowModel.isReleaseVideoPlayer,
+      this.vm.pipWindowModel.isReleaseVideoPlayer,
       'this.isNeedRelease:' + this.isNeedRelease);
     if (this.vm.pipWindowModel.isReleaseVideoPlayer && this.isNeedRelease) {
       Logger.debug(TAG, 'onReleaseVideoPlayer handlerDisappear')
@@ -263,14 +272,27 @@ export struct VideoCard {
   @Monitor('isLandscape')
   onChangeOrientation(monitor: IMonitor) {
     const isLandscape = (monitor.value()?.now) as boolean;
+    Logger.debug(TAG, 'isLandscape: ' + this.isLandscape + ', isShown:' + this.isShown + ', isClickFullScreenBtn:' +
+      this.vm.isClickFullScreenBtn + ',currentBreakpoint:' + this.vm.breakpointModel.currentBreakpoint)
     if (!isLandscape) {
       this.vm.isClickFullScreenBtn = false;
       return
     }
-    // 自动横屏：组件处于显示状态、横屏、当前索引视频、不是通过点击全屏按钮的横屏、直板机状态下
+
+    // 获取当前页面，避免重复进入
+    const allPathNames = this.pathStack.getAllPathName();
+    const lastPath = allPathNames.length > 0 ? allPathNames[allPathNames.length - 1] : '';
+    if (lastPath === PageNameEnum.VIDEO_LANDSCAPE_PAGE) {
+      Logger.debug(TAG, 'current already landScapePage');
+      return;
+    }
+    const isFoldMode = isDisplayModeFolded();
+    // 自动横屏：组件处于显示状态、横屏、当前索引视频、不是通过点击全屏按钮的横屏、直板机（折叠屏折叠态）状态下
     if (isLandscape && this.isShown && !this.vm.isClickFullScreenBtn &&
-      this.vm.breakpointModel.currentBreakpoint === BreakpointNameEnum.SM
+      (this.vm.breakpointModel.currentBreakpoint === BreakpointNameEnum.SM || isFoldMode)
     ) {
+      Logger.debug(TAG, 'auto fullscreen');
+      this.onFullScreenOperation(true);
       this.handleFullScreen(false);
     }
   }
@@ -296,6 +318,9 @@ export struct VideoCard {
   }
 
   aboutToAppear() {
+    Logger.debug(TAG, 'aboutToAppear, isFromDetailCard:' + this.isFromDetailCard + ', news title: ' +
+      this.videoData.getVideoTitle());
+
     if (this.isFromDetailCard) {
       this.vm.avPlayerManager = new AVPlayerManager()
     }
@@ -352,7 +377,7 @@ export struct VideoCard {
   }
 
   aboutToDisappear(): void {
-    Logger.debug(TAG, 'aboutToDisappear');
+    Logger.debug(TAG, 'aboutToDisappear, news title: ' + this.videoData.getVideoTitle());
     this.vm.handlerDisappear();
   }
 
@@ -499,6 +524,7 @@ export struct VideoCard {
     param.isMute = this.isMute;
     param.isHideSlide = this.isHideSlide;
     param.videoCardPlayerController = this.videoCardPlayerController;
+    param.isFromDetailCard = this.isFromDetailCard;
     if (this.membershipBuilder) {
       param.membershipBuilder = this.membershipBuilder;
     }
@@ -598,10 +624,29 @@ export struct VideoCard {
               onSwitchPlayCallback: () => {
                 this.switchPlayPause()
               },
-              onSwitchFullScreenCallback: () => {
-                if (this.isFromDetailCard && this.pathStack) {
-                  this.handleFullScreen()
+              onSwitchFullScreenCallback: async () => {
+                Logger.debug(TAG, 'start switch full screen');
+                // 状态锁 如果详情页触发了返回，则屏蔽全屏按钮点击事件
+                if (this.isDetailBack) {
+                  Logger.debug(TAG, 'switch full screen block: isDetailBack is true');
+                  return;
                 }
+
+                this.onFullScreenOperation(true);
+
+                try {
+                  await this.vm.pipWindowModel?.pipController?.stopPiP();
+                } catch (e) {
+                  Logger.error(TAG, 'Fail to stopPiP, error: ' + JSON.stringify(e));
+                }
+
+                // 延迟进入全屏页面，等待pip对应的VideoCard销毁
+                setTimeout(() => {
+                  if (this.isFromDetailCard && this.pathStack) {
+                    Logger.debug(TAG, 'hand fullscreen');
+                    this.handleFullScreen();
+                  }
+                }, 100);
               },
             })
           }
@@ -638,7 +683,7 @@ export struct VideoCard {
 
         // 流量提示
         if (this.currentIndex === this.index && this.videoNetwork &&
-        this.videoNetwork.isCellular && !this.videoNetwork.canUseMobileData
+          this.videoNetwork.isCellular && !this.videoNetwork.canUseMobileData
         ) {
           Column({ space: Constants.SPACE_M }) {
             Row({ space: Constants.SPACE_S }) {

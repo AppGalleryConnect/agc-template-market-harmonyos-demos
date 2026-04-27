@@ -1,0 +1,36 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "数字报元服务"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "数字报元服务"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "数字报元服务"
+    },
+    {
+      "name": "agcit_huawei_digital_newspaper",
+      "value": "1.0.0"
+    },
+    {
+      "name": "EntryFormAbility_desc",
+      "value": "form_description"
+    },
+    {
+      "name": "EntryFormAbility_label",
+      "value": "form_label"
+    },
+    {
+      "name": "widget_desc",
+      "value": "数字报元服务."
+    },
+    {
+      "name": "widget_display_name",
+      "value": "数字报元服务"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "module": {
+    "name": "lib_foundation",
+    "type": "har",
+    "deviceTypes": [
+      "phone",
+    ],
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.INTERNET"
+      }
+    ]
+  }
+}

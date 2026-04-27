@@ -63,5 +63,12 @@ export { BreakpointModel } from './src/main/ets/models/BreakpointModel';
 
 export { GlobalContextUtils } from './src/main/ets/utils/ContextUtils';
 
+export { SettingModel } from './src/main/ets/models/SettingModel';
 
+export { PushUtils } from './src/main/ets/push/PushUtils';
 
+export { NavHeaderBar } from './src/main/ets/components/NavHeaderBar'
+
+export { CommentUtil } from './src/main/ets/utils/CommentUtil'
+
+export { SystemBarOperation } from './src/main/ets/utils/SystemBarOperation'

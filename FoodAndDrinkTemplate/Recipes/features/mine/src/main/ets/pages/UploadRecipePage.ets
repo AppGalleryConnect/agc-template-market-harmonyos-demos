@@ -20,6 +20,8 @@ struct UploadRecipePage {
         },
       })
     }
+    .backgroundColor($r('sys.color.comp_background_gray'))
+    .padding({ top: 24})
     .title(buildTitleBar('上传菜谱'), { paddingStart: LengthMetrics.vp(16) });
   }
 

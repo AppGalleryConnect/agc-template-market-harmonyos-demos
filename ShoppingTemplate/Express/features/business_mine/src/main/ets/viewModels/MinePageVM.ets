@@ -1,4 +1,4 @@
-import { BaseViewModel } from 'module_base'
+import { BaseViewModel } from 'lib_foundation'
 
 @ObservedV2
 export class MinePageVM extends BaseViewModel {

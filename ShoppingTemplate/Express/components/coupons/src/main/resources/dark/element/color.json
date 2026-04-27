@@ -1,0 +1,80 @@
+{
+  "color": [
+    {
+      "name": "theme_color",
+      "value": "#e64566"
+    },
+    {
+      "name": "theme_color_second",
+      "value": "#FFF9A01E"
+    },
+    {
+      "name": "font_color_level1",
+      "value": "#FFFFFFFF"
+    },
+    {
+      "name": "font_color_level1_invert",
+      "value": "#ffffff"
+    },
+    {
+      "name": "font_color_level2",
+      "value": "#99FFFFFF"
+    },
+    {
+      "name": "font_color_level3",
+      "value": "#66FFFFFF"
+    },
+    {
+      "name": "divider_color",
+      "value": "#c4c4c4"
+    },
+    {
+      "name": "warning_color",
+      "value": "#e84026"
+    },
+    {
+      "name": "background_color_primary",
+      "value": "#202224"
+    },
+    {
+      "name": "background_color_grey",
+      "value": "#000000"
+    },
+    {
+      "name": "background_color_sheet",
+      "value": "#E62E3033"
+    },
+    {
+      "name": "background_color_theme",
+      "value": "#FFFFF3F6"
+    },
+    {
+      "name": "background_color_theme_second",
+      "value": "#FFFFF8EE"
+    },
+    {
+      "name": "background_color_button_grey",
+      "value": "#1AFFFFFF"
+    },
+    {
+      "name": "stepper_btn_bg_color",
+      "value": "#3C3C3E"
+    },
+    {
+      "name": "background_color_transparent",
+      "value": "#00000000"
+    },
+    {
+      "name": "icon_color_grey",
+      "value": "#33000000"
+    },
+    {
+      "name": "label_color_primary",
+      "value": "#0096FA"
+    },
+    {
+      "name": "label_color_secondary",
+      "value": "#827CFB"
+    }
+  ]
+}

@@ -9,6 +9,7 @@ import {
   CommonConfirmDialog,
   ContinueModel,
   FileUtils,
+  GlobalContextUtils,
   GridRowColSetting,
   Logger,
   RouterParams,
@@ -26,7 +27,7 @@ import { ShareUtils } from 'lib_widget'
 import { LoginSheetUtils } from 'lib_account'
 import { AVSessionUtils } from 'lib_av_details'
 import { LoneTakeAnimationsTransition, LongTakeAnimationProperties, LongTakeTransitionParam } from 'module_transition'
-import { CommentInfo, KeyWordPair, NewsFeedInfo } from '../model/Model'
+import { CommentInfo, NewsFeedInfo } from '../model/Model'
 import { MakeObCommentServed } from '../utils/Utils'
 import { FeedBreakPointVM } from './FeedBreakPointVM'
 
@@ -154,7 +155,9 @@ export class NewsFeedVM extends BaseViewModel {
       this.commentInfoList.splice(index, 1);
     }
     this.articleDetails.commentCount--
-    CommentServiceApi.deleteComment(commentId)
+    CommentServiceApi.deleteComment(commentId).then(() => {
+      GlobalContextUtils.showToast({ message: '删除成功' });
+    })
   }
 
   public setCommentInfo(commentInfoList: CommentInfo[], comment: CommentResponse, isLike: boolean) {
@@ -310,7 +313,7 @@ export class NewsFeedVM extends BaseViewModel {
   }
 
   public findKeywordExplain() {
-    let target = this.articleDetails.keywordPairs.find((item)=> item.keyword === this.keyword)
+    let target = this.articleDetails.keywordPairs.find((item) => item.keyword === this.keyword)
     return target?.explain ?? '';
   }
 

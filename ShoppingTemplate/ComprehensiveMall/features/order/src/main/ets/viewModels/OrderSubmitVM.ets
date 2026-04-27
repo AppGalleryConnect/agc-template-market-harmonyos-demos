@@ -9,6 +9,7 @@ import {
   OrderCreateReq,
   OrderPosition,
   OrderSkuItem,
+  PickupStoreInfo,
   PreOrderInfoReq,
   ShippingOption,
   ShoppingCartApis,
@@ -39,6 +40,8 @@ export class OrderSubmitVM {
   @Trace
   discountId: string = '';
   @Trace
+  discountAmount: number = 0;
+  @Trace
   remark: string = '';
   @Trace
   remarkCache: string = '';
@@ -50,8 +53,18 @@ export class OrderSubmitVM {
     originalPrice: 0,
     discountList: [],
   };
-  readonly SHOP_ADDRESS: string = '江苏省南京市XX路';
-  readonly SHOP_PHONE: string = '12345678';
+  @Trace
+  defaultPickupStore: PickupStoreInfo | undefined = undefined;
+
+  @Computed
+  get SHOP_ADDRESS(): string {
+    return this.defaultPickupStore?.address ?? '加载中...';
+  }
+
+  @Computed
+  get SHOP_PHONE(): string {
+    return this.defaultPickupStore?.cellphone ?? '';
+  }
 
   @Computed
   get ShippingLabel() {
@@ -83,6 +96,11 @@ export class OrderSubmitVM {
           latitude: res.latitude,
           longitude: res.longitude,
         };
+      }
+    });
+    OrderApis.getDefaultPickupStore().then((res) => {
+      if (res.code === 0) {
+        this.defaultPickupStore = res.data;
       }
     });
     OrderApis.getPreOrderInfo(preOrderRequest)
@@ -128,6 +146,12 @@ export class OrderSubmitVM {
     }).then((res) => {
       if (res.code === 0) {
         this.cartPrice = res.data;
+        const existingCoupon = this.cartPrice.discountList.find(item => item.type === 2);
+        if (!existingCoupon) {
+          this.cartPrice.discountList.push(discountItem);
+        }else {
+          existingCoupon.discountPrice = value;
+        }
       }
     });
   }
@@ -143,26 +167,41 @@ export class OrderSubmitVM {
       WindowUtil.toast('请选择地址');
       return;
     }
+    if (
+      this.shippingIndex === ShippingOption.SELF_PICK_UP &&
+        this.defaultPickupStore === undefined
+    ) {
+      WindowUtil.toast('自提点信息加载中，请稍候');
+      return;
+    }
     this.createOrder();
   }
 
   // todo: 创建订单，此处为mock实现
   async createOrder() {
-    const addressInfo: AddressInfo =
-      this.shippingIndex === ShippingOption.EXPRESS
-        ? {
+    let addressInfo: AddressInfo;
+    if (this.shippingIndex === ShippingOption.EXPRESS) {
+      addressInfo = {
         name: this.customerName,
         cellphone: this.customerPhone,
         address: this.customerAddress,
-      }
-        : {
-        name: this.customerName,
-        cellphone: this.SHOP_PHONE,
-        address: this.SHOP_ADDRESS,
       };
-    addressInfo.latitude = this.getPosition.latitude;
-    addressInfo.longitude = this.getPosition.longitude;
-    addressInfo.city = this.city;
+      addressInfo.latitude = this.getPosition.latitude;
+      addressInfo.longitude = this.getPosition.longitude;
+      addressInfo.city = this.city;
+    } else {
+      const pickupStore = this.defaultPickupStore;
+      if (pickupStore === undefined) {
+        return;
+      }
+      addressInfo = {
+        name: pickupStore.storeName,
+        cellphone: pickupStore.cellphone,
+        address: pickupStore.address,
+      };
+      addressInfo.latitude = pickupStore.latitude;
+      addressInfo.longitude = pickupStore.longitude;
+    }
     const data: OrderCreateReq = {
       skuList: this.skuList,
       orderInfo: {
@@ -170,6 +209,7 @@ export class OrderSubmitVM {
         remark: this.remark,
         originalPrice: this.cartPrice.originalPrice,
         finalPrice: this.cartPrice.finalPrice,
+        couponId: this.discountId || undefined,
         receivingMethod: this.shippingIndex,
         discounts: this.cartPrice.discountList,
       },
@@ -193,6 +233,7 @@ export class OrderSubmitVM {
         priceType: item.priceType,
       });
     });
+    OrderUtil.updateCouponStatus(this.discountId, 1)
     ShoppingCartApis.deleteSkuFromCart({
       skuList: codes,
       isRemain: false,

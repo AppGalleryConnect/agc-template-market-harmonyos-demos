@@ -1,14 +1,6 @@
 {
   "string": [
     {
-      "name": "agcit_huawei_common_login",
-      "value": "1.0.1"
-    },
-    {
-      "name": "agcittype_huawei_common_login",
-      "value": "serviceComponent"
-    },
-    {
       "name": "scope_not_supported",
       "value": "The scopes or permissions are not supported."
     },
@@ -95,6 +87,14 @@
     {
       "name": "wx_login",
       "value": "微信"
+    },
+    {
+      "name": "agcit_huawei_common_login",
+      "value": "1.0.1"
+    },
+    {
+      "name": "agcittype_huawei_common_login",
+      "value": "serviceComponent"
     }
   ]
 }

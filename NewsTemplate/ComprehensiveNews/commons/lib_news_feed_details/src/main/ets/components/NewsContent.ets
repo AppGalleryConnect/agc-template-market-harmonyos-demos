@@ -1,9 +1,17 @@
 import { PersistenceV2 } from '@kit.ArkUI'
 import { webview } from '@kit.ArkWeb'
-import { image } from '@kit.ImageKit'
 import { BusinessError } from '@kit.BasicServicesKit'
-import { FormatCount, Logger, RouterMap, RouterUtils, SettingModel, TimeUtils } from 'lib_common'
-import { BaseAgent, Share } from 'lib_widget'
+import {
+  FormatCount,
+  GlobalContextUtils,
+  Logger,
+  RouterMap,
+  RouterUtils,
+  SettingModel,
+  TimeUtils,
+  FontPinchGestureUtils,
+} from 'lib_common'
+import { BaseAgent, Share, ShareContentType, ShareUtils } from 'lib_widget'
 import { ImagePreview, ImagePreviewOptions, SourceImageModel } from 'module_imagepreview'
 import { handlerCoverImage } from '../utils/Utils'
 import NewsFeedVM from '../viewmodel/NewsFeedVM'
@@ -32,10 +40,12 @@ export struct NewsContent {
   }
   @Event onComment: () => void = () => {
   }
-  @Event onQuestionExpand: (isShow: boolean) => void = (isShow: boolean) => {
+  @Event onQuestionExpand: (isShow: boolean) => void = () => {
   };
   @Local isQuestionExpanded: boolean = false;
   @Local isShow: boolean = false;
+  @Local webFontPinchUtils: FontPinchGestureUtils = new FontPinchGestureUtils();
+  @Local currentFontScale: number = 1;
   @Local timer: number = 0
   @Local richTextHeight: number = 300
   @Local newsBreakPoint: FeedBreakPointVM = new FeedBreakPointVM()
@@ -46,6 +56,19 @@ export struct NewsContent {
       .catch((e: BusinessError) => {
         Logger.error(TAG, 'runJavaScript fail, error: ' + JSON.stringify(e));
       });
+  }
+
+  @Monitor('settingInfo.fontSizeRatio')
+  onFontSizeRatioChange() {
+    if (this.settingInfo.fontSizeRatio !== 1) {
+      // 应用内设置了字体大小，禁用手势缩放
+      this.webFontPinchUtils.setGestureEnabled(false);
+      this.currentFontScale = 1;
+    } else {
+      // 应用内字体大小为 1（正常），启用手势缩放
+      this.webFontPinchUtils.setGestureEnabled(true);
+      this.currentFontScale = 1;
+    }
   }
 
   expandAnimation() {
@@ -152,6 +175,24 @@ export struct NewsContent {
   aboutToAppear(): void {
     this.nativeObj.preview = this.preview
     this.nativeObj.keywordExplain = this.showKeywordSheet
+    webview.WebviewController.setWebDebuggingAccess(false);
+
+    // 初始化手势缩放工具类
+    this.webFontPinchUtils
+      .setOnFontSizeChange((scale: number) => {
+        this.currentFontScale = scale;
+      })
+      .setOnReachMinScale(() => {
+        GlobalContextUtils.showToast({ message: '已缩至最小' });
+      })
+      .setOnReachMaxScale(() => {
+        GlobalContextUtils.showToast({ message: '已放至最大' });
+      });
+
+    // 根据应用内设置判断是否启用手势缩放
+    if (this.settingInfo.fontSizeRatio !== 1) {
+      this.webFontPinchUtils.setGestureEnabled(false);
+    }
   }
 
   preview = (srcList: string[], index: number) => {
@@ -161,9 +202,19 @@ export struct NewsContent {
       .setInitIndex(index)
       .setLoop(true)
       .setLongTake(false)
+      .setImageActionListener({
+        onLongPress: (index: number) => {
+          new ShareUtils().openSheet(this.getUIContext(),
+            {
+              shareType: ShareContentType.IMAGE,
+              imageUrl: srcList[index],
+              title: '',
+            },
+          );
+        },
+      })
     ImagePreview.open(this.getUIContext(), options)
   }
-
   showKeywordSheet = (keyword: string) => {
     this.newsFeedVM.keyword = keyword;
     this.isShow = true;
@@ -187,7 +238,7 @@ export struct NewsContent {
       shareData: {
         recordId: this.newsFeedVM.articleDetails.id,
         title: this.newsFeedVM.articleDetails.title,
-        subTitle: this.newsFeedVM.articleDetails.articleFrom,
+        subTitle: this.newsFeedVM.articleDetails.author?.authorNickName,
         createTime: this.newsFeedVM.articleDetails.createTime,
         coverUrl: handlerCoverImage(this.newsFeedVM.articleDetails),
       },
@@ -204,7 +255,7 @@ export struct NewsContent {
     } else if (this.settingInfo.fontSizeRatio > 1) {
       return this.settingInfo.fontSizeRatio * 2
     }
-    return this.settingInfo.fontSizeRatio * 1.2
+    return this.settingInfo.fontSizeRatio * 1.2 * this.currentFontScale
   }
 
   @Builder
@@ -381,6 +432,12 @@ export struct NewsContent {
                 Logger.error(TAG, 'runJavaScript fail, error: ' + JSON.stringify(e));
               });
           })
+          .parallelGesture(
+            PinchGesture({ fingers: 2 })
+              .onActionStart(() => this.webFontPinchUtils.onActionStart())
+              .onActionUpdate((event: GestureEvent) => this.webFontPinchUtils.onActionUpdate(event))
+              .onActionEnd(() => this.webFontPinchUtils.onActionEnd()),
+          )
       }.bindSheet($$this.isShow, this.sheetBuilder(), {
         height: SheetSize.FIT_CONTENT,
         title: { title: this.newsFeedVM.keyword },

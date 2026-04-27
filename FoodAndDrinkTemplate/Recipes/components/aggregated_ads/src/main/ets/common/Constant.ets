@@ -21,7 +21,10 @@ export enum AdType {
   SPLASH_AD = 1,
 
   // Banner ad.
-  BANNER_AD = 8
+  BANNER_AD = 8,
+
+  // Native ad.
+  NATIVE_AD = 3
 }
 
 export class Constants {

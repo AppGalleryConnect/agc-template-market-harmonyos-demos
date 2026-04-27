@@ -27,11 +27,13 @@ export class NewsModel implements NewsResponse {
   @Trace richContent: string
   @Trace recommends: NewsResponse[]
   @Trace navInfo?: NavInfo
-  @Trace extraInfo?: Record<string, string | boolean | Record<string, string | boolean>[]>
-  @Trace articleFrom?: string
+  @Trace extraInfo?: Record<string, string | number | boolean | Record<string, string | boolean>[]>
   @Trace playCount?: string
   @Trace totalCount?: number
   @Trace relationId?: string
+  @Trace isReserved: boolean = false;
+  @Trace liveStartTime: number = 0
+  @Trace liveEndTime: number = 0
 
   constructor(v: NewsResponse) {
     this.id = v.id;
@@ -56,9 +58,10 @@ export class NewsModel implements NewsResponse {
     this.recommends = v.recommends || []
     this.navInfo = v.navInfo
     this.extraInfo = v.extraInfo
-    this.articleFrom = v.articleFrom
     this.playCount = v.playCount
     this.totalCount = v.totalCount
     this.relationId = v.relationId
+    this.liveStartTime = v.liveStartTime ?? 0;
+    this.liveEndTime = v.liveEndTime ?? 0;
   }
 }

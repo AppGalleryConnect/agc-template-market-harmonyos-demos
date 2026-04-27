@@ -48,7 +48,6 @@ export class ShareService {
   public initQQ(appId: number): ShareService {
     this.qqOpenApi = QQOpenApiFactory.createApi(appId, {
       forceEnableWeb: false,
-      autoHandleAuthResult: true,
     });
     return this;
   }

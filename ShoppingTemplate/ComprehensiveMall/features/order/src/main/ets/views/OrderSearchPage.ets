@@ -1,4 +1,4 @@
-import { CommonScroll, ContainerColumn, NavTitleBar } from 'lib_widget';
+import { CommonLoading, CommonScroll, ContainerColumn, NavTitleBar } from 'lib_widget';
 import { buildButtonList, buildOrderInfoCard } from '../components/OrderInfoCard';
 import { buildNoOrderCard } from '../components/NoOrderCard';
 import { OrderItem } from 'lib_network';
@@ -18,7 +18,7 @@ struct OrderSearchPage {
 
       CommonScroll({ bgColor: $r('app.color.background_color_grey') }) {
         if (this.vm.isLoading) {
-          LoadingProgress().width($r('app.float.loading_icon_size'))
+          CommonLoading()
         } else {
           Column() {
             if ( this.vm.keywords) {

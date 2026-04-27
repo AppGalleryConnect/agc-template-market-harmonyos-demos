@@ -4,12 +4,12 @@ import { JSONObject, LayoutSetting } from './CommonModel'
 export class FrameNodeParams {
   viewLayout: LayoutSetting
   articles: JSONObject[]
-  extraInfo?: Record<string, number | string | boolean | Record<string, string | boolean>[]>
+  extraInfo?: Record<string, number | string | boolean | Function | Record<string, string | boolean>[]>
   style: Record<string, string | number>
   nodeControllerFactory?: NodeControllerFactory
 
   constructor(viewLayout: LayoutSetting, articles: JSONObject[], style: Record<string, string | number>,
-    extraInfo?: Record<string, number | string | boolean | Record<string, string | boolean>[]>,
+    extraInfo?: Record<string, number | string | boolean | Function | Record<string, string | boolean>[]>,
     nodeControllerFactory?: NodeControllerFactory) {
     this.viewLayout = viewLayout
     this.articles = articles

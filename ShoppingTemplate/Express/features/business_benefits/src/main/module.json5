@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "business_benefits",
+    "type": "har",
+    "routerMap": "$profile:route_map",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ]
+  }
+}

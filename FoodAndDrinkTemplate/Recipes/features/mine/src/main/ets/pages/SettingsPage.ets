@@ -20,17 +20,19 @@ struct SettingsPage {
           SettingView({
             pathStack: RouterModule.getStack(),
             isLogin: true,
-            settingList: [this.vm.group1, this.vm.group2, this.vm.group3, this.vm.group4],
+            settingList: [this.vm.group1, this.vm.group6, this.vm.group2, this.vm.group3, this.vm.group4,
+              this.vm.group5],
             signOutApi: () => this.vm.logout(),
           })
         }
         .width('100%')
       }
       .height('100%')
-      .backgroundColor('#F1F3F5')
+      .backgroundColor($r('sys.color.comp_background_gray'))
       .justifyContent(FlexAlign.SpaceBetween);
     }
-    .title(buildTitleBar('设置'), { paddingStart: LengthMetrics.vp(16) });
+    .title(buildTitleBar('设置'), { paddingStart: LengthMetrics.vp(16) })
+    .padding({ top: 40 })
   }
 }
 

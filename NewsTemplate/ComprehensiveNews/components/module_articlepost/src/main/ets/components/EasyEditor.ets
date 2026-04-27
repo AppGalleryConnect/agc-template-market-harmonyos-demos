@@ -1,5 +1,6 @@
 import { webview } from '@kit.ArkWeb';
 import { BusinessError, Callback } from '@kit.BasicServicesKit';
+import { photoAccessHelper } from '@kit.MediaLibraryKit';
 import { UtilLog } from '@hw-agconnect/util-log';
 import { RawEditorOptions } from '../options/tinymce'
 import { EasyEditorBridge } from '../utils/Bridge';
@@ -92,6 +93,7 @@ export struct EasyEditor {
       'onHideOperation': 'onHideOperation',
       'setDarkMode': 'setDarkMode',
     })
+    webview.WebviewController.setWebDebuggingAccess(false);
   }
 
   aboutToDisappear(): void {
@@ -109,6 +111,8 @@ export struct EasyEditor {
       .backgroundColor($r('sys.color.background_primary'))
       .onlineImageAccess(true)
       .databaseAccess(true)
+      .darkMode(WebDarkMode.Auto)
+      .forceDarkAccess(true)
       .onControllerAttached(() => {
         try {
           this._privateController.registerJavaScriptProxy(new EasyEditorBridge(this),
@@ -130,8 +134,27 @@ export struct EasyEditor {
           UtilLog.error(TAG, 'onControllerAttached fail, error: ' + JSON.stringify(e));
         }
       })
+      .onShowFileSelector((event) => {
+        if (event) {
+          this.selectFile(event.result);
+        }
+        return true;
+      })
       .width('100%')
       .layoutWeight(1)
+  }
+
+  async selectFile(result: FileSelectorResult): Promise<void> {
+    try {
+      const photoSelectOptions = new photoAccessHelper.PhotoSelectOptions();
+      photoSelectOptions.MIMEType = photoAccessHelper.PhotoViewMIMETypes.IMAGE_TYPE;
+      photoSelectOptions.maxSelectNumber = 1;
+      const photoPicker = new photoAccessHelper.PhotoViewPicker();
+      const chooseFile: photoAccessHelper.PhotoSelectResult = await photoPicker.select(photoSelectOptions);
+      result.handleFileList(chooseFile.photoUris);
+    } catch (e) {
+      UtilLog.error(TAG, `Failed to select photo, code: ${e.code}, message: ${e.message}`);
+    }
   }
 
   /**

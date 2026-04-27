@@ -1,4 +1,4 @@
-import { MovingPhotoView, MovingPhotoViewAttribute, MovingPhotoViewController } from '@kit.MediaLibraryKit'
+import { MovingPhotoView, MovingPhotoViewController } from '@kit.MediaLibraryKit'
 import { PreviewConstants } from '../constants/Constants'
 import { ImagePreviewOptions } from '../models/ImagePreviewOptions'
 import { PreviewComponentInfo, SourceImageModel } from '../models/PreviewModel'
@@ -32,10 +32,10 @@ export struct SwiperMovingPhotoItem {
     this.movingPhotoVM.getMovingPhoto()
   }
 
-  @Monitor('startIndex','isPrepared')
+  @Monitor('startIndex', 'isPrepared')
   startIndexChange() {
     // 切换到对应的页签，自动播放动图
-    if(!this.params.movingPhotoAutoPlay) {
+    if (!this.params.movingPhotoAutoPlay) {
       return
     }
     if (this.startIndex === this.index && this.isPrepared) {

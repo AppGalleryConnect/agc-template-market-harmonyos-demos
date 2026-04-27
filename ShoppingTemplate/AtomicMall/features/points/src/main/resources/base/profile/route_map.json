@@ -1,0 +1,37 @@
+{
+  "routerMap": [
+    {
+      "name": "PointsMallPage",
+      "pageSourceFile": "src/main/ets/views/PointsMallPage.ets",
+      "buildFunction": "buildPointsMallPage"
+    },
+    {
+      "name": "PointsRecordPage",
+      "pageSourceFile": "src/main/ets/views/PointsRecordPage.ets",
+      "buildFunction": "buildPointsRecordPage"
+    },
+    {
+      "name": "RedemptionSubmitPage",
+      "pageSourceFile": "src/main/ets/views/RedemptionSubmitPage.ets",
+      "buildFunction": "buildRedemptionSubmitPage"
+    },
+    {
+      "name": "RedemptionListPage",
+      "pageSourceFile": "src/main/ets/views/RedemptionListPage.ets",
+      "buildFunction": "buildRedemptionListPage"
+    },
+    {
+      "name": "RedemptionInfoPage",
+      "pageSourceFile": "src/main/ets/views/RedemptionInfoPage.ets",
+      "buildFunction": "buildRedemptionInfoPage"
+    },
+    {
+      "name": "UpdateAddressPage",
+      "pageSourceFile": "src/main/ets/views/UpdateAddressPage.ets",
+      "buildFunction": "buildUpdateAddressPage",
+      "data": {
+        "description": "通用修改地址页面（从 lib_widget 复用）"
+      }
+    }
+  ]
+}

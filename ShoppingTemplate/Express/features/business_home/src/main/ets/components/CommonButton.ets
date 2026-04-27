@@ -11,9 +11,9 @@ export struct CommonButton {
         .fontSize(12)
         .fontWeight(FontWeight.Medium)
         .fontColor('#0A59F7')
+        .lineHeight(16)
     }
-    .height(24)
-    .padding({ left: 8, right: 8 })
+    .padding({ left: 8, right: 8, top: 4, bottom: 4 })
     .backgroundColor('#BFD5FF')
     .borderRadius(16)
     .justifyContent(FlexAlign.Center)

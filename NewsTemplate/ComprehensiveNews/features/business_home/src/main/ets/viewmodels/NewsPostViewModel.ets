@@ -1,7 +1,13 @@
 import { AppStorageV2 } from '@kit.ArkUI'
 import { emitter } from '@kit.BasicServicesKit'
 import {
-  BaseViewModel, BreakpointModel, BreakpointNameEnum, CoverUri, RouterMap, RouterUtils,
+  BaseViewModel,
+  BreakpointModel,
+  BreakpointNameEnum,
+  CoverUri,
+  EventEnum,
+  RouterMap,
+  RouterUtils,
 } from 'lib_common'
 import { ArticleServiceApi, PostImgList } from 'lib_news_api'
 import { Constants, NewsStyleEnum, newsStyleList, videoSetting } from '../constants/NewsConstants'
@@ -62,34 +68,41 @@ export class NewsPostViewModel extends BaseViewModel {
       // 添加到动态布局文件中
       RouterUtils.popToName(RouterMap.INDEX_PAGE);
       // 通知关注刷新
-      emitter.emit('follow_recommend_fresh');
+      emitter.emit(EventEnum.HOME_FOLLOW_REFRESH);
     })
   }
 
   public async publishVideo(surface: string, videoUri: string, title: string) {
+    if (title.length > 30) {
+      this.contextModel.showToast({ message: '描述不超过30字' })
+      return;
+    }
     if (!surface) {
       this.contextModel.showToast({ message: '未上传视频' })
-      return
+      return;
     }
-    /*
+    /**
      * 使用视频模板
-     * */
-    let postImgList: PostImgList[] = [{
-      picVideoUrl: videoUri,
-      surfaceUrl: surface,
-    }]
+     */
+    const postImgList: PostImgList[] = [
+      {
+        picVideoUrl: videoUri,
+        surfaceUrl: surface,
+      },
+    ]
     ArticleServiceApi.addArticle(title, '', videoSetting, postImgList).then(async (articleInfo) => {
       // 添加到动态布局文件中
       await ArticleServiceApi.addFlexLayout(articleInfo.id, videoSetting);
       RouterUtils.replacePathByName(RouterMap.INDEX_PAGE);
       // 通知首页刷新
-      emitter.emit('follow_recommend_fresh');
+      emitter.emit(EventEnum.HOME_FOLLOW_REFRESH);
     })
   }
 
   public handleImageSize(content: string) {
     // 需要统一处理富文本image的宽高
-    return content = content.replaceAll('<img', '<img class="image-preview post-image"')
+    const contentResp = content.replaceAll('<img', '<img class="image-preview post-image"')
+    return contentResp
   }
 
   public async validate() {

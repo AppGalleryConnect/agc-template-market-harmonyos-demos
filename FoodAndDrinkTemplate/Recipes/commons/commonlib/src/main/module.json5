@@ -3,7 +3,8 @@
     "name": "commonlib",
     "type": "har",
     "deviceTypes": [
-      "phone"
+      "phone",
+      "tablet"
     ]
   }
 }

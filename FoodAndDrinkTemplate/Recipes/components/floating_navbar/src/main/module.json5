@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "floating_navbar",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ]
+  }
+}

@@ -1,7 +1,6 @@
 import request from '../common/BaseRequest';
 import { NewsResponse } from '../params/response/NewsResponse';
 import { AbstractRequestListData, RequestListData } from '../params/response/LayoutResponse';
-import { NewsRequest } from '../params/request/CommonRequest';
 
 /**
  * 新闻基础类
@@ -67,24 +66,6 @@ export class BaseNewsService {
    */
   public queryAuthorPosts(userId: string): Promise<RequestListData[]> {
     return request.get('/author/post/list', { params: { authorId: userId } });
-  }
-
-  /**
-   * 收藏
-   * @param newsId
-   */
-  public addMark(newsId: string): Promise<void> {
-    const data: NewsRequest = { newsId };
-    return request.post('/news/mark/add', data);
-  }
-
-  /**
-   * 取消收藏
-   * @param newsId
-   */
-  public cancelMark(newsId: string): Promise<void> {
-    const data: NewsRequest = { newsId };
-    return request.post('/news/mark/cancel', data);
   }
 }
 

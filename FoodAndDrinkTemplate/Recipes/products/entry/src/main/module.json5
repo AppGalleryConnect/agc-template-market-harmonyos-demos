@@ -5,7 +5,8 @@
     "description": "$string:module_desc",
     "mainElement": "EntryAbility",
     "deviceTypes": [
-      "phone"
+      "phone",
+      "tablet"
     ],
     "querySchemes": [
       "weixin",
@@ -26,6 +27,16 @@
             "EntryAbility"
           ],
           "when": "inuse"
+        }
+      },
+      {
+        "name": "ohos.permission.KEEP_BACKGROUND_RUNNING",
+        "reason": "$string:EntryAbility_label",
+        "usedScene": {
+          "abilities": [
+            "EntryAbility"
+          ],
+          "when": "always"
         }
       }
     ],
@@ -52,8 +63,28 @@
               "entity.system.home"
             ],
             "actions": [
-              "action.system.home"
+              "ohos.want.action.home"
             ]
+          },
+          {
+            "entities": [
+              "entity.system.browsable"
+            ],
+            "actions": [
+              "ohos.want.action.viewData"
+            ],
+            "uris": [
+              {
+// scheme须配置为https
+                "scheme": "https",
+// host须配置为关联的域名
+                "host": "linking.xiaobingtang.cn",
+// path可选，表示域名服务器上的目录或文件路径，例如xxxx/path1中的path1
+// 如果应用只能处理部分特定的path，则此处应该配置应用所支持的path，避免出现应用不能处理的path链接也被引流到应用中的问题
+                "path": "recipes"
+              }
+            ],
+            "domainVerify": true
           }
         ]
       }

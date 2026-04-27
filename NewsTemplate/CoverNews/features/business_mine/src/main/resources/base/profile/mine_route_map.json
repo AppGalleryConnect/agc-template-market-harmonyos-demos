@@ -1,0 +1,9 @@
+{
+  "routerMap": [
+    {
+      "name": "MineLikePage",
+      "pageSourceFile": "src/main/ets/pages/MineLikePage.ets",
+      "buildFunction": "MineLikePageBuilder"
+    }
+  ]
+}

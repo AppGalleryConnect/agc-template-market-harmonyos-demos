@@ -17,5 +17,6 @@
     "app_setting": 'file:../../components/app_setting',
     "collect_personal_info": 'file:../../components/collect_personal_info',
     "membership": 'file:../../components/membership',
+    "module_transition": 'file:../../components/module_transition'
   }
 }

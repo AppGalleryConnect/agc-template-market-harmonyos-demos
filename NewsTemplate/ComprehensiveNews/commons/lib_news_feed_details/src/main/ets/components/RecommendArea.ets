@@ -40,7 +40,7 @@ export struct RecommendArea {
                   .fontWeight(FontWeight.Medium)
                   .fontSize(16 * this.settingInfo.fontSizeRatio)
                 Row() {
-                  Text(item?.articleFrom)
+                  Text(item?.author?.authorNickName)
                     .fontSize(12 * this.settingInfo.fontSizeRatio).fontColor($r('sys.color.font_tertiary'))
                   Text(item?.publishTime)
                     .fontSize(12 * this.settingInfo.fontSizeRatio)

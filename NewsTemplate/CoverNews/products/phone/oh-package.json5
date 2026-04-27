@@ -1,0 +1,15 @@
+{
+  "name": "phone",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "",
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "lib_common": "file:../../commons/lib_common",
+    "atomicservice_login": "file:../../components/atomicservice_login",
+    "business_home": "file:../../features/business_home",
+    "business_mine": "file:../../features/business_mine",
+  }
+}
+

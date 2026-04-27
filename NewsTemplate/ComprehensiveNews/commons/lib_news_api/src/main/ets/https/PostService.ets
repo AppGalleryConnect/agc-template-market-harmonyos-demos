@@ -1,5 +1,6 @@
 import request from '../common/BaseRequest';
-import { PostRequest } from '../params/request/CommonRequest';
+import { TopicResponse } from '../params/response/TopicResponse';
+import { PostQueryRequest, PostRequest } from '../params/request/CommonRequest';
 import { NewsResponse } from '../params/response/NewsResponse';
 import { BaseNewsService } from './BaseNewsService';
 
@@ -9,22 +10,37 @@ import { BaseNewsService } from './BaseNewsService';
 export class PostService extends BaseNewsService {
   /**
    * 查询推荐
-   * @param currentIndex
-   * @param currentPage
+   * @param params
    * @returns
    */
-  public queryPostRecommendList(currentIndex: number = 10, currentPage = 0): Promise<NewsResponse[]> {
-    return request.get('/post/recommend/list', { params: { currentIndex, currentPage } });
+  public queryPostRecommendList(params: PostQueryRequest): Promise<NewsResponse[]> {
+    return request.get('/post/recommend/list', { params });
   }
 
   /**
    * 查询关注
-   * @param currentIndex
-   * @param currentPage
+   * @param params
    * @returns
    */
-  public queryPostFollowList(currentIndex: number = 10, currentPage = 0): Promise<NewsResponse[]> {
-    return request.get('/post/follow/list', { params: { currentIndex, currentPage } });
+  public queryPostFollowList(params: PostQueryRequest): Promise<NewsResponse[]> {
+    return request.get('/post/follow/list', { params });
+  }
+
+  /**
+   * 查询话题相关
+   * @param params
+   * @returns
+   */
+  public queryPostTopicList(params: PostQueryRequest): Promise<NewsResponse[]> {
+    return request.get('/post/topic/list', { params });
+  }
+
+  /**
+   * 查询话题列表
+   * @returns
+   */
+  public queryTopicList(): Promise<TopicResponse[]> {
+    return request.get('/topic/list');
   }
 
   /**

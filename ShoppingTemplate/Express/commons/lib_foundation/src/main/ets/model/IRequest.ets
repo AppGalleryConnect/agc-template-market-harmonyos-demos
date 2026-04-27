@@ -1,64 +1,65 @@
-import { IAddrInfo } from 'module_base';
-import { ExpressStatus, OrderStatus, OrderType, PaymentMethod, ShippingMethod } from '../common/Constant';
-import { IGoods } from './IResponse';
-
-export interface NormalRequest {
-  id: number
+export interface IPhoneRequest {
+  phone: string
 }
 
-// 支付订单
-export interface IPrepayRequest {
-  sendAddress: IAddrInfo,
-  getAddress: IAddrInfo,
-  goodsInfo: IGoods,
-  payMethod: PaymentMethod,
-  shippingMethod: ShippingMethod,
-  expressCompanyId?: number,
-  day?: string,
-  time?: string,
-  servicePointId?: number,
-  grid?: string,
-  couponId?: number,
+// 根据用户id获取数据
+export interface IUserIdRequest {
+  userId: number
 }
 
-//支付vip
-export interface IVipPrepayRequest {
-  id: number,
+// 设置默认地址
+export interface ISetDefaultAddress {
+  isSetDefault: boolean;
+}
+
+// 删除地址
+export interface IDeleteAddress {
+  addressId: number
+}
+
+// 寄件模板Id
+export interface ICommonTemplateReq {
+  templateId: number
+}
+
+export interface ISignWeekRequest {
   userId: number,
-  price: number,
+  monday: number,
 }
 
-//获取优惠券
-export interface ICouponRequest {
-  isVip: boolean
+export interface IClaimCouponRequest {
+  userId: number,
+  couponId: number,
 }
 
-// 获取当前条件的快递
-export interface GetOrderListRequest {
-  orderNo?: string;
-  cellphone?: string,
-  type?: OrderType,
-  status?: OrderStatus,
-  expressStatus?: ExpressStatus
+export interface IUserSignRequest {
+  userId: number,
+  dayIndex: number,
+  points: number,
+  monday: number,
 }
 
-export interface UpdateOrderRequest {
-  expressCompanyId?: number | undefined;
-  id?: number,
-  sendAddress?: IAddrInfo,
-  getAddress?: IAddrInfo,
-  expressStatus?: ExpressStatus,
-  goodsInfo?: IGoods,
-  paymentMethod?: PaymentMethod,
-  companyId?: number,
-  day?: string,
-  time?: string,
-  servicePointId?: number,
-  grid?: string,
-  couponId?: number,
+export interface IUserPointRequest {
+  userId: number,
+  amount: number,
+  desc: string
 }
 
-export interface RemakeRequest {
-  id: number,
-  remake: string,
+export interface IPointHistoryRequest {
+  userId: number,
+  startTime: number,
+  endTime: number,
+}
+
+export interface IParcelDetailRequest {
+  orderNo: string,
+}
+
+/**
+ * 订单操作入参
+ */
+export interface OrderActionReq {
+  orderNo: string;
+  callback?: () => void;
+  data?: ESObject;
 }

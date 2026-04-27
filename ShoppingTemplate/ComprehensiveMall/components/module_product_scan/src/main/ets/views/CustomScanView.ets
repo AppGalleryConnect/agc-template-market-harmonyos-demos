@@ -2,7 +2,7 @@ import { common, abilityAccessCtrl } from '@kit.AbilityKit';
 import { window } from '@kit.ArkUI';
 import { BusinessError } from '@kit.BasicServicesKit';
 import { scanBarcode } from '@kit.ScanKit';
-import { Logger, SafeJson } from 'module_ui_base';
+import { CommonSymbol, Logger, SafeJson } from 'module_ui_base';
 import { TabIndexMap } from '../commons/Constants';
 import { CustomScanOptions } from '../commons/Types';
 import { CameraUtil } from '../utils/CameraUtil';
@@ -31,14 +31,14 @@ export struct CustomScanView {
   options?: CustomScanOptions
   vm: CustomScanVM = new CustomScanVM(this.getUIContext())
 
-  @Monitor('userGrant','options')
+  @Monitor('userGrant', 'options')
   async init() {
     if (this.userGrant) {
       this.vm.init(this.options)
     }
   }
 
-  @Monitor('currentIndex','release')
+  @Monitor('currentIndex', 'release')
   async releaseScan() {
     // 页面消失或隐藏时，停止并释放相机流
     if (this.release) {
@@ -152,9 +152,10 @@ export struct CustomScanView {
   buildOverlay() {
     Column() {
       if (this.stack?.size?.() > 0) {
-        Image($r('app.media.ic_back'))
-          .width(40)
-          .margin({ top: 40 })
+        CommonSymbol({
+          src: $r('sys.symbol.chevron_left'),
+          color: Color.White,
+        })
           .onClick(() => {
             if (this.currentIndex === TabIndexMap.CAMERA && this.vm.cameraResult) {
               this.vm.initCamera()
@@ -164,6 +165,7 @@ export struct CustomScanView {
               this.stack.pop()
             }
           })
+          .margin({ top: $r('app.float.space_xl') })
       }
 
       Blank()
@@ -199,8 +201,8 @@ export struct CustomScanView {
       .width($r('app.string.size_percent_full'))
       .justifyContent(FlexAlign.SpaceAround)
       .margin({
-        bottom: $r('app.string.space_xl'),
-        top: $r('app.string.space_xl'),
+        bottom: $r('app.float.space_xl'),
+        top: $r('app.float.space_xl'),
       })
 
       Tabs() {
@@ -225,7 +227,7 @@ export struct CustomScanView {
     .height($r('app.string.size_percent_full'))
     .alignItems(HorizontalAlign.Start)
     .justifyContent(FlexAlign.Start)
-    .padding($r('app.string.space_l'))
+    .padding($r('app.float.space_l'))
   }
 
   @Builder
@@ -235,16 +237,16 @@ export struct CustomScanView {
         .fontSize(32)
         .fontColor([$r('app.color.font_color_level1_invert')])
     }
-    .backgroundColor($r('app.color.background_color_grey_light'))
+    .backgroundColor($r('app.color.background_color_button_grey'))
     .height(48)
     .width(48)
     .borderRadius(24)
-    .margin({ bottom: $r('app.string.space_xs') })
+    .margin({ bottom: $r('app.float.space_xs') })
     .justifyContent(FlexAlign.Center)
 
     Text(label)
       .fontColor($r('app.color.font_color_level1_invert'))
-      .fontSize($r('app.string.font_size_12'))
+      .fontSize($r('app.float.font_size_12'))
   }
 
   async requestCameraPermission() {

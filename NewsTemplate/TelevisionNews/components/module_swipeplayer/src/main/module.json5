@@ -1,0 +1,22 @@
+{
+  "module": {
+    "name": "module_swipeplayer",
+    "type": "har",
+    "routerMap": "$profile:route_map",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ],
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.INTERNET",
+      },
+      {
+        "name": "ohos.permission.GET_NETWORK_INFO",
+      },
+      {
+        "name": "ohos.permission.KEEP_BACKGROUND_RUNNING",
+      }
+    ]
+  }
+}

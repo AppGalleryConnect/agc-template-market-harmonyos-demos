@@ -1,9 +1,8 @@
-import { CustomContentDialog, TipsDialog } from '@kit.ArkUI';
-import { RouterMap, CommonDivider, IParam } from 'module_base';
+import { UIDialog } from '@hw-agconnect/ui-dialog';
+import { BottomBtn, CommonEmpty, CommonTitle, PageStatus } from 'lib_foundation';
 import { TemplateListPageVM } from '../viewmodel/TemplateListPageVM';
-import { ITemplate } from '../http/Type';
 import { CommonUtils } from '../common/Utils';
-import { Context, ctx } from '../common/Context';
+import { MoreMenuItem, TemplateInfo } from '../models/Model';
 
 @Builder
 export function TemplateListPageBuilder() {
@@ -13,275 +12,244 @@ export function TemplateListPageBuilder() {
 @Entry
 @ComponentV2
 struct TemplateListPage {
-  vm: TemplateListPageVM = TemplateListPageVM.instance
-  @Local
-  public ctx: Context = ctx
-  dialogControllerDelete: CustomDialogController = new CustomDialogController({
-    builder: TipsDialog({
-      content: '是否删除当前模板?',
-      primaryButton: {
-        value: '取消',
-        action: () => {
-          console.info('Callback when the first button is clicked')
-        },
-      },
-      secondaryButton: {
-        value: '删除',
-        role: ButtonRole.ERROR,
-        action: () => {
-          if (this.vm.selectedTemplate) {
-            this.vm.deleteTemplate(this.vm.selectedTemplate.id)
-          }
-        },
-      },
-    }),
-  })
-  editDialogController: CustomDialogController = new CustomDialogController({
-    builder: CustomContentDialog({
-      contentBuilder: () => {
-        this.buildContent();
-      },
-      contentAreaPadding: {
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-      },
-    }),
-    cancel: () => {
-      this.vm.editName = ''
+  vm: TemplateListPageVM = new TemplateListPageVM();
+
+  // 模板列表更多操作菜单
+  moreMenuList: MoreMenuItem[] = [
+    {
+      name: '修改模板名称',
+      onClick: (template: TemplateInfo) => { this.modifyTemplateName(template) }
     },
-  })
+    {
+      name: '编辑模板',
+      onClick: (template: TemplateInfo) => { this.vm.editTemplate(template) }
+    },
+    {
+      name: '删除模板',
+      fontColor: $r('sys.color.warning'),
+      onClick: (template: TemplateInfo) => { this.vm.deleteTemplate(template) }
+    },
+  ]
+
+  // 更新修改模板名称
+  modifyTemplateName(template: TemplateInfo) {
+    this.vm.editName = template.name;
+    UIDialog.open({
+      showConfirmButton: true,
+      showCancelButton: true,
+      contentBuilder: (): void => this.modifyNameInputBuilder(),
+      confirmButtonOptions: {
+        buttonFontColor: $r('sys.color.font_emphasize'),
+        buttonFontSize: 16,
+        buttonBgColor: Color.Transparent
+      },
+      cancelButtonOptions: {
+        buttonFontColor: $r('sys.color.font_secondary'),
+        buttonFontSize: 16,
+        buttonBgColor: Color.Transparent
+      },
+      onConfirm: () => {
+        this.vm.updateName(template)
+      },
+      closeOnClickMask: false,
+      closeOnBackPress: false,
+    })
+  }
 
   build() {
     NavDestination() {
+      CommonTitle({
+        title: '我的模板'
+      })
       Column() {
-        List() {
-          ForEach(this.vm.templateList, (template: ITemplate) => {
-            ListItem() {
-              Column() {
-                Column() {
-                  Row() {
-                    Image($r('app.media.ic_more'))
-                      .width(24)
-                      .height(24)
-                      .onClick(() => {
-                        this.vm.selectedTemplate = template
-                      })
-                  }
-                  .width('100%')
-                  .justifyContent(FlexAlign.End)
-                  .margin({ bottom: 13 })
-
-                  this.contentBuilder('物品类型', template.goods.name)
-                  CommonDivider()
-                  this.contentBuilder('物品重量', template.weight.toString())
-                  CommonDivider()
-                  this.contentBuilder('寄件方式', CommonUtils.getShippingMethodValue(template.shippingMethod))
-                  CommonDivider()
-                  this.contentBuilder('付款方式', CommonUtils.getPaymentMethodValue(template.paymentMethod))
-
-                  Row() {
-                    Button('去寄件', { controlSize: ControlSize.SMALL })
-                      .width(60)
-                      .fontColor(Color.White)
-                      .backgroundColor('#0A59F7')
-                      .onClick(() => {
-                        if (typeof this.ctx.onPushPath === 'function') {
-                          this.ctx.onPushPath(template.id)
-                          return
-                        }
-                        const param: IParam = {
-                          templateId: template.id,
-                        }
-
-                        this.vm.stack.removeByName(RouterMap.EXPRESS_PAGE)
-                        this.vm.stack.pushPath({ name: RouterMap.EXPRESS_PAGE, param })
-                        this.vm.stack.removeByName(RouterMap.TEMPLATE_LIST_PAGE)
-                        this.vm.stack.removeByName(RouterMap.TEMPLATE_PAGE)
-                      })
-                  }
-                  .width('100%')
-                  .justifyContent(FlexAlign.End)
-                  .margin({ top: 12 })
+        if (this.vm.pageStatus === PageStatus.SUCCESS) {
+          List({ space: 12 }) {
+            Repeat(this.vm.newTemplateList)
+              .each((templateInfo: RepeatItem<TemplateInfo>) => {
+                ListItem() {
+                  this.templateCard(templateInfo.item)
                 }
-                .borderRadius(16)
-                .backgroundColor(Color.White)
-                .padding(12)
-
-                Row() {
-                  Text(template.name)
-                    .fontSize(14)
-                    .fontWeight(FontWeight.Medium)
-                    .fontColor(Color.White)
-                }
-                .width(56)
-                .height(37)
-                .justifyContent(FlexAlign.Center)
-                .backgroundColor('#999999')
-                .borderRadius({ topLeft: 16, bottomRight: 14 })
-                .position({ top: 0, left: 0 })
-
-                if (this.vm.showEditButton(template)) {
-                  Column() {
-                    Row() {
-                      Text('修改模板名称')
-                        .fontSize(14)
-                        .fontWeight(FontWeight.Regular)
-                        .fontColor($r('sys.color.font_secondary'))
-                    }
-                    .onClick(() => {
-                      this.editDialogController.open()
-                    })
-
-                    CommonDivider()
-
-                    Row() {
-                      Text('编辑模板')
-                        .fontSize(14)
-                        .fontWeight(FontWeight.Regular)
-                        .fontColor($r('sys.color.font_secondary'))
-                    }
-                    .onClick(() => {
-                      this.vm.stack.pushPath({ name: RouterMap.TEMPLATE_PAGE, param: this.vm.selectedTemplate })
-                    })
-
-                    CommonDivider()
-
-                    Row() {
-                      Text('删除模板')
-                        .fontSize(14)
-                        .fontWeight(FontWeight.Regular)
-                        .fontColor('#E84026')
-                    }
-                    .onClick(() => {
-                      this.dialogControllerDelete.open()
-                    })
-                  }
-                  .width(108)
-                  .padding(12)
-                  .position({ right: 12, top: 44 })
-                  .backgroundColor(Color.White)
-                  .shadow({
-                    offsetX: 0,
-                    offsetY: 4,
-                    radius: 4,
-                    color: 'rgba(0,0,0,0.25)',
-                  })
-                  .borderRadius(8)
-                  .zIndex(99)
-                }
-              }
-            }
-            .margin({ bottom: 12 })
-          }, (item: ITemplate) => JSON.stringify(item))
+              })
+              .key((item: TemplateInfo) => JSON.stringify(item))
+          }
+          .width('100%')
+          .height('100%')
+          .lanes(this.vm.listLanes, 12)
+          .scrollBar(BarState.Off)
+          .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: false })
+          .padding({
+            left: this.vm.breakPointModel.pagePadding,
+            right: this.vm.breakPointModel.pagePadding
+          })
+        } else if (this.vm.pageStatus === PageStatus.EMPTY) {
+          this.emptyView()
         }
-        .scrollBar(BarState.Off)
-        .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: false })
       }
-      .padding({ left: 16, right: 16 })
-      .onClick(() => {
-        this.vm.selectedTemplate = undefined
+      .layoutWeight(1)
+      .padding({ bottom: this.vm.windowModel.windowBottomPadding })
+    }
+    .hideTitleBar(true)
+    .backgroundColor($r('sys.color.background_secondary'))
+    .onWillShow(() => {
+      // 获取我的模板列表
+      this.vm.getTemplateList()
+    })
+  }
+
+  @Builder
+  templateCard(template: TemplateInfo) {
+    Column() {
+      Row() {
+        Text(template.name)
+          .fontColor($r('sys.color.font_primary'))
+          .fontSize(16)
+          .fontWeight(700)
+          .lineHeight(21)
+
+        Button() {
+          SymbolGlyph($r('sys.symbol.dot_grid_1x2'))
+            .fontSize(16)
+            .fontColor([$r('sys.color.icon_primary')])
+        }
+        .type(ButtonType.Normal)
+        .width(24)
+        .height(24)
+        .backgroundColor(Color.Transparent)
+        .bindMenu(this.moreMenuBuilder(template))
+      }
+      .width('100%')
+      .padding(12)
+      .justifyContent(FlexAlign.SpaceBetween)
+      .backgroundColor($r('sys.color.comp_background_secondary'))
+      .borderRadius({ topLeft: 16, topRight: 16 })
+
+      Column({ space: 12 }) {
+        this.contentBuilder('物品类型', template.goodsName)
+        Divider().color($r('sys.color.comp_divider'))
+
+        this.contentBuilder('物品重量', template.goodsWeight + 'kg')
+        Divider().color($r('sys.color.comp_divider'))
+
+        this.contentBuilder('寄件方式', CommonUtils.getShippingMethodValue(template.shippingMethod))
+        Divider().color($r('sys.color.comp_divider'))
+
+        this.contentBuilder('付款方式', CommonUtils.getPaymentMethodValue(template.paymentMethod))
+
+        this.shippingBtnBuilder(template.id)
+      }
+      .backgroundColor(Color.White)
+      .padding(12)
+      .borderRadius({ bottomLeft: 16, bottomRight: 16 })
+    }
+  }
+
+  @Builder
+  moreMenuBuilder(template: TemplateInfo) {
+    List() {
+      ForEach(this.moreMenuList, (item: MoreMenuItem) => {
+        ListItem() {
+          Row() {
+            Text(item.name)
+              .fontSize(16)
+              .fontWeight(500)
+              .lineHeight(21)
+              .fontColor(item.fontColor || $r('sys.color.font_primary'))
+          }
+          .width('100%')
+          .padding({ top: 12, bottom: 12 })
+          .onClick(() => {
+            item.onClick(template)
+          })
+        }
+      }, (item: MoreMenuItem) => JSON.stringify(item))
+    }
+    .width(152)
+    .padding({ left: 16, right: 16, top: 4, bottom: 4 })
+    .divider({ strokeWidth: 0.5, color: $r('sys.color.comp_divider') })
+    .scrollBar(BarState.Off)
+  }
+
+  @Builder
+  modifyNameInputBuilder() {
+    Column() {
+      Text('修改模板名称')
+        .fontSize(18)
+        .fontWeight(FontWeight.Medium)
+        .fontColor($r('sys.color.font_primary'))
+
+      Row() {
+        TextInput({ text: $$this.vm.editName, placeholder: '请输入模板名称' })
+          .placeholderColor($r('sys.color.font_tertiary'))
+          .placeholderFont({ size: 14, weight: FontWeight.Regular })
+          .height(40)
+          .fontSize(14)
+          .backgroundColor(Color.Transparent)
+      }
+      .width('100%')
+      .height(40)
+      .margin({ top: 16 })
+      .backgroundColor($r('sys.color.comp_background_tertiary'))
+      .borderRadius(8)
+    }
+    .width('100%')
+    .padding({ left: 16, right: 16 })
+  }
+
+  @Builder
+  emptyView() {
+    Column() {
+      Column({space: 12}) {
+        CommonEmpty({
+          emptyDesc: '暂无模版，快去添加吧',
+          emptyIcon: $r('app.media.img_template_empty')
+        })
+      }
+      .layoutWeight(1)
+      .margin({ bottom: 40 })
+      .justifyContent(FlexAlign.Center)
+
+      BottomBtn({
+        text: '添加我的模版',
+        onAction: () => {
+          this.vm.addMyTemplate()
+        }
       })
     }
-    .backgroundColor('#F1F3F5')
-    .title('自定义模板')
-    .onReady((context) => {
-      this.vm.setStack(context.pathStack);
-    })
-    .onShown(() => {
-      this.vm.init()
-    })
+    .width('100%')
+    .height('100%')
+    .padding({ left: 16, right: 16 })
   }
 
   @Builder
   contentBuilder(label: string, value: string) {
     Row() {
       Text(label)
-        .fontSize(14)
+        .fontSize(16)
         .fontWeight(FontWeight.Regular)
-        .fontColor($r('sys.color.font_secondary'))
+        .fontColor($r('sys.color.font_primary'))
+        .lineHeight(21)
       Text(value)
         .fontSize(14)
         .fontWeight(FontWeight.Regular)
-        .fontColor($r('sys.color.font_primary'))
+        .fontColor($r('sys.color.font_secondary'))
+        .lineHeight(19)
     }
     .width('100%')
     .justifyContent(FlexAlign.SpaceBetween)
   }
 
-  // 自定义弹出框的内容区
   @Builder
-  buildContent(): void {
-    Column() {
-      Scroll() {
-        Column() {
-          Row() {
-            Text('修改模板名称')
-              .fontSize(16)
-              .fontWeight(FontWeight.Medium)
-              .fontColor($r('sys.color.font_primary'))
-          }
-          .justifyContent(FlexAlign.Center)
-          .width('100%')
-          .margin({ bottom: 12 })
-
-          Row() {
-            TextInput({ text: $$this.vm.editName, placeholder: '请输入模板名称' })
-              .placeholderColor('#999999')
-              .placeholderFont({ size: 14, weight: FontWeight.Regular })
-              .height(40)
-              .fontSize(14)
-              .backgroundColor(Color.Transparent)
-          }
-          .width('100%')
-          .height(40)
-          .padding({ left: 12, right: 12 })
-          .margin({ bottom: 18 })
-          .backgroundColor('rgba(0,0,0,0.05)')
-          .borderRadius(8)
-
-          Row() {
-            Row() {
-              Text('取消')
-            }
-            .width('50%')
-            .height(40)
-            .justifyContent(FlexAlign.Center)
-            .onClick(() => {
-              this.vm.editName = ''
-              this.editDialogController.close()
-            })
-
-            Row() {
-              Button('确认')
-                .width('100%')
-                .height(40)
-                .backgroundColor('#0A59F7')
-            }
-            .width('50%')
-            .height(40)
-            .onClick(async () => {
-              const res = await this.vm.update()
-              if (res) {
-                this.editDialogController.close()
-                this.vm.selectedTemplate = undefined
-              }
-            })
-          }
-          .margin({ top: 28 })
-        }
-        .width('100%')
-        .padding({
-          top: 24,
-          bottom: 16,
-          left: 24,
-          right: 24,
+  shippingBtnBuilder(id: number) {
+    Row() {
+      Button('去寄件')
+        .width(72)
+        .height(28)
+        .onClick(() => {
+          this.vm.shipping(id)
         })
-        .backgroundColor('rgba(255,255,255,0.80)')
-      }
-      .scrollBar(BarState.Off)
-      .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: false })
     }
+    .width('100%')
+    .justifyContent(FlexAlign.End)
+    .margin({ top: 12 })
   }
 }

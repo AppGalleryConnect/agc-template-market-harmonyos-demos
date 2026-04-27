@@ -1,0 +1,19 @@
+{
+  "routerMap": [
+    {
+      "name": "Main",
+      "pageSourceFile": "src/main/ets/pages/Main.ets",
+      "buildFunction": "MainBuilder"
+    },
+    {
+      "name": "NewsDetail",
+      "pageSourceFile": "src/main/ets/pages/NewsDetail.ets",
+      "buildFunction": "NewsDetailBuilder"
+    },
+    {
+      "name": "ImagePreviewPage",
+      "pageSourceFile": "src/main/ets/pages/ImagePreviewPage.ets",
+      "buildFunction": "ImagePreviewPageBuilder"
+    }
+  ]
+}

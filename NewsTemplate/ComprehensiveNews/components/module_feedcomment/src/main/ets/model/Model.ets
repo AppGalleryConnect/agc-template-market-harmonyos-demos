@@ -77,6 +77,8 @@ export class MakeObCommentServed extends CommentInfo {
 
 export interface BuilderParams {
   reply: () => void
+  copy: () => void
+  report: () => void
   delete: () => void
   cancel: () => void
   isCommentOwner: boolean

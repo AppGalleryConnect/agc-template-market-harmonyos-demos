@@ -6,7 +6,7 @@
     },
     {
       "name": "agcit_huawei_express_template",
-      "value": "1.0.2"
+      "value": "1.0.3"
     },
     {
       "name": "agcittype_huawei_express_template",
@@ -14,7 +14,7 @@
     },
     {
       "name": "agcitkid_huawei_express_template",
-      "value": "agcit_huawei_express_template_module_address/1.0.1,agcit_huawei_express_template_module_address_card/1.0.1,agcit_huawei_express_template_module_auth/1.0.1,agcit_huawei_express_template_module_city/1.0.1,agcit_huawei_express_template_module_template/1.0.2"
+      "value": "agcit_huawei_express_template_module_auth/1.0.2,agcit_huawei_common_membership/1.0.2,agcit_huawei_common_address_management/1.0.1,agcit_huawei_common_collect_personal_info/1.0.1,agcit_huawei_common_login/1.0.2,agcit_huawei_common_feedback/1.0.1,agcit_huawei_common_app_setting/1.0.1,agcit_huawei_common_coupons/1.0.0,agcit_huawei_common_payment/1.0.1"
     }
   ]
 }

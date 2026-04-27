@@ -42,9 +42,9 @@ export struct FoodDiary {
               if (item.id === AddMealEnum.ADD_MEAL) {
                 this.showAddSheet = true
               } else {
-                if(item.isFinished){
-                  this.addMeal(item.id,true)
-                }else {
+                if (item.isFinished) {
+                  this.addMeal(item.id, true)
+                } else {
                   this.addMeal(item.id)
                 }
               }
@@ -60,7 +60,7 @@ export struct FoodDiary {
       .borderRadius(16)
       .margin({ top: 12 })
       .columnsTemplate('1fr 1fr 1fr 1fr')
-      .backgroundColor($r('sys.color.background_primary'))
+      .backgroundColor($r('sys.color.comp_background_list_card'))
       .bindSheet($$this.showAddSheet, this.addSnackSheet(), {
         detents: [312, 313, 314],
         height: 360,
@@ -88,7 +88,7 @@ export struct FoodDiary {
                 }
               }.width('100%').justifyContent(FlexAlign.SpaceBetween)
 
-              Divider().strokeWidth(1).margin({ top: 12, bottom: 12 })
+              Divider().strokeWidth('1px').margin({ top: 12, bottom: 12 })
               Column({ space: 14 }) {
                 ForEach(meal.foodList, (food: FoodPlanCalories) => {
                   Row({ space: 8 }) {
@@ -100,8 +100,8 @@ export struct FoodDiary {
                       .height(36)
                       .borderRadius(8)
                       .padding({
-                        top: 10,
-                        bottom: 10,
+                        top: 2,
+                        bottom: 2,
                         left: 8,
                         right: 8,
                       })
@@ -114,8 +114,8 @@ export struct FoodDiary {
                       .height(36)
                       .borderRadius(8)
                       .padding({
-                        top: 10,
-                        bottom: 10,
+                        top: 2,
+                        bottom: 2,
                         left: 8,
                         right: 8,
                       })
@@ -127,8 +127,8 @@ export struct FoodDiary {
                       .height(36)
                       .borderRadius(8)
                       .padding({
-                        top: 10,
-                        bottom: 10,
+                        top: 2,
+                        bottom: 2,
                         left: 8,
                         right: 8,
                       })
@@ -138,7 +138,7 @@ export struct FoodDiary {
                 }, (food: FoodPlanCalories) => JSON.stringify(food))
               }
 
-            }.padding(12).borderRadius(16).backgroundColor($r('sys.color.background_primary')).width('100%')
+            }.padding(12).borderRadius(16).backgroundColor($r('sys.color.comp_background_list_card')).width('100%')
           }, (meal: DietPlans) => JSON.stringify(meal))
         }.margin({ top: 12, bottom: 12 })
       }
@@ -155,7 +155,7 @@ export struct FoodDiary {
         .padding({ top: 12, bottom: 12 })
         .width('100%')
         .textAlign(TextAlign.Center)
-        .backgroundColor($r('sys.color.background_secondary'))
+        .backgroundColor($r('sys.color.comp_background_tertiary'))
         .borderRadius(12)
         .onClick(() => {
           this.addMeal(AddMealEnum.ADD_BREAKFAST)
@@ -168,7 +168,7 @@ export struct FoodDiary {
         .padding({ top: 12, bottom: 12 })
         .width('100%')
         .textAlign(TextAlign.Center)
-        .backgroundColor($r('sys.color.background_secondary'))
+        .backgroundColor($r('sys.color.comp_background_tertiary'))
         .borderRadius(12)
         .onClick(() => {
           this.addMeal(AddMealEnum.ADD_LUNCH)
@@ -181,7 +181,7 @@ export struct FoodDiary {
         .padding({ top: 12, bottom: 12 })
         .width('100%')
         .textAlign(TextAlign.Center)
-        .backgroundColor($r('sys.color.background_secondary'))
+        .backgroundColor($r('sys.color.comp_background_tertiary'))
         .borderRadius(12)
         .onClick(() => {
           this.addMeal(AddMealEnum.ADD_DINNER)

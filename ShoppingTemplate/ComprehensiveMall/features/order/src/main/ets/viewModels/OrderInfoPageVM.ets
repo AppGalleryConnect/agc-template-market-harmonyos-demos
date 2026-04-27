@@ -1,11 +1,15 @@
-import { RouterMap, routerStack } from 'lib_foundation';
+import { RouterMap, routerStack, WindowUtil } from 'lib_foundation';
 import { OrderApis, OrderItem } from 'lib_network';
 import {
   OrderActionMap, OrderShipmentMap, OrderStatusMap,
 } from '../common/Enums';
 import { formatTime } from '../utils';
 import { OrderUtil } from '../utils/OrderUtil';
-import { UpdateAddressSheetOptions } from '../views/UpdateAddressSheet';
+import { buildOrderAddressSheetOptions } from '../views/UpdateAddressSheet';
+import { petalMaps } from '@kit.MapKit';
+import { UtilLog } from '@hw-agconnect/util-log';
+
+const TAG:string = '[OrderInfoPageVM]'
 
 @ObservedV2
 export class OrderInfoPageVM {
@@ -54,6 +58,26 @@ export class OrderInfoPageVM {
   }
 
   @Computed
+  get isPickupOrder(): boolean {
+    if (!this.orderItem) {
+      return false;
+    }
+    return this.orderItem.orderInfo.receivingMethod === OrderShipmentMap.SELF_PICK_UP;
+  }
+
+  @Computed
+  get showPickupSignedRow(): boolean {
+    if (!this.orderItem) {
+      return false;
+    }
+    if (!this.isPickupOrder) {
+      return false;
+    }
+    const status = this.orderItem.orderInfo.status;
+    return status === OrderStatusMap.PENDING_REVIEW || status === OrderStatusMap.REVIEWED;
+  }
+
+  @Computed
   get logisticInfo() {
     const len = this.orderItem?.logisticInfo?.length;
     if (this.orderItem && len) {
@@ -99,14 +123,14 @@ export class OrderInfoPageVM {
       routerStack.pushPath(
         {
           name: RouterMap.ORDER_UPDATE_ADDRESS,
-          param: {
+          param: buildOrderAddressSheetOptions({
             originalAddress: this.orderItem.orderInfo.addressInfo,
             orderNo: this.orderNo,
             handleSubmitSuccess: () => {
               routerStack.pop();
               this.getOrderItem(this.orderNo);
             },
-          } as UpdateAddressSheetOptions,
+          }),
         },
         false,
       );
@@ -144,14 +168,14 @@ export class OrderInfoPageVM {
     routerStack.pushPath(
       {
         name: RouterMap.ORDER_UPDATE_ADDRESS,
-        param: {
+        param: buildOrderAddressSheetOptions({
           originalAddress: this.orderItem?.orderInfo.addressInfo,
           orderNo: this.orderNo,
           handleSubmitSuccess: () => {
             routerStack.pop();
             this.getOrderItem(this.orderNo);
           },
-        } as UpdateAddressSheetOptions,
+        }),
       },
       false,
     );
@@ -163,6 +187,29 @@ export class OrderInfoPageVM {
         name: RouterMap.ORDER_EXPRESS_INFO,
         param: this.orderItem,
       });
+    }
+  }
+
+  /**
+   * 打开地图 App 导航到指定经纬度
+   */
+  async openMapNavigation(latitude: number, longitude: number, _name?: string) {
+    const context = WindowUtil.globalUIAbilityContext;
+    if (!context) {
+      WindowUtil.toast('无法打开地图');
+      return;
+    }
+    try {
+      let params: petalMaps.RoutePlanParams = {
+        destinationPosition: {
+          latitude: latitude,
+          longitude: longitude
+        }
+      };
+      await petalMaps.openMapRoutePlan(context ,params);
+    } catch (e) {
+      WindowUtil.toast('打开地图失败，请确认已安装地图应用');
+      UtilLog.error(TAG, `code:${e.code}, message:${e.message}`);
     }
   }
 }

@@ -14,14 +14,16 @@ struct LaunchAdPage {
         AdServicePage({
           channelType: ChannelType.HUAWEI_AD,
           // todo 替换广告id
-          adId: 'testq6zq98hecj',
+          adId: 'testd7c5cewoj6',
           adType: AdType.SPLASH_AD,
           closeCallBack: () => {
             this.jumpUrl()
           },
         })
-      }.width('100%')
-      .height('100%');
+      }
+      .width('100%')
+      .height('100%')
+      .backgroundColor('#FDF7F8');
     }
     .hideTitleBar(true)
   }

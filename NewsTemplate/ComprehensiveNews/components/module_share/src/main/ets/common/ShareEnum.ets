@@ -17,3 +17,11 @@ export enum ShareWay {
   SYSTEM = 'system_share',
   SAVE_TO_ALBUM = 'save_to_album',
 }
+
+/**
+ * 分享内容类型
+ */
+export enum ShareContentType {
+  LINK = 'link',
+  IMAGE = 'image',
+}

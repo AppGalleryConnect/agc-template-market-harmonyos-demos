@@ -12,6 +12,7 @@ export enum TabEnum {
   Watch = 0,
   Recommend,
   Nearby,
+  Topic,
 }
 
 export const TAB_LIST: TabItem[] = [

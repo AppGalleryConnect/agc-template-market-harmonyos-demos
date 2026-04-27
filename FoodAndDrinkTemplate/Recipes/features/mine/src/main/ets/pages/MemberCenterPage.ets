@@ -25,9 +25,8 @@ struct MemberCenterPage {
     }
   };
   ownedMemberEvent = async (list: MemberList): Promise<void> => {
-    if (list.renewList.length || list.nonRenewList.length) {
-      this.getUIContext().getPromptAction().showToast({ message: `您已拥有会员` });
-    }
+    const isMembership = list.renewList.length > 0 || list.nonRenewList.length > 0;
+    AccountUtil.updateMembership(isMembership);
   };
   queryExpireTime = (productId: string, time?: number): Promise<void> => {
     // 请求开发者服务器获取非周期订阅商品到期时间（涉及商品id、购买次数）
@@ -40,7 +39,7 @@ struct MemberCenterPage {
     let message = '';
     if (param.status === FinishStatus.FINISHED) {
       message = '会员订阅成功';
-      AccountUtil.updateMembership();
+      AccountUtil.updateMembership(true);
     } else if (param.status === FinishStatus.UNFINISHED) {
       message = `会员订阅失败，订阅错误码为${param.errCode}，错误原因为${param.errMsg}`;
     }
@@ -64,7 +63,9 @@ struct MemberCenterPage {
           ownedMemberCallBack: this.ownedMemberEvent,
         });
       }
-    }.hideTitleBar(true)
+    }
+    .hideTitleBar(true)
+    .padding({bottom: 20})
   }
 }
 

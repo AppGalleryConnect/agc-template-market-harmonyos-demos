@@ -1,4 +1,5 @@
 import { BreakpointStorage, BreakpointSystem, BreakpointTypeEnum } from 'lib_foundation';
+import { PriceType } from 'lib_network';
 import { ProductModel } from '../commons/Model';
 import { CartCard } from './CartCard';
 
@@ -17,6 +18,10 @@ export struct CartListView {
   // 商品卡片事件回调
   @Event onCardClick: (id: string, slotId?: string) => void = (id: string) => {
   };
+  // 规格行点击事件回调
+  @Event onSpecClick: (productId: string, skuCode: string, count: number, priceType: PriceType,
+    slotId?: string) => void = () => {
+  };
   @Local curBreakpoint: BreakpointStorage = BreakpointSystem.currentBreakpoint
 
   build() {
@@ -31,6 +36,10 @@ export struct CartListView {
             },
             onCardClick: () => {
               this.onCardClick && this.onCardClick(card.productId, card.slotId);
+            },
+            onSpecClick: () => {
+              this.onSpecClick &&
+                this.onSpecClick(card.productId, card.skuCode, card.count, card.priceType, card.slotId);
             },
             onDelete: (skuCode: string) => {
               this.onDelete && this.onDelete(skuCode);

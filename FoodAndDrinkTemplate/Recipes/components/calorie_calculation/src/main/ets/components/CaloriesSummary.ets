@@ -95,7 +95,8 @@ export struct CaloriesSummary {
       left: 12,
       right: 12,
     })
-    .backgroundColor($r('sys.color.background_primary'))
+    .width('100%')
+    .backgroundColor($r('sys.color.comp_background_list_card'))
     .borderRadius(16)
   }
 }

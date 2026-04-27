@@ -17,6 +17,8 @@ export enum RouterMap {
   HOME = 'HomePage',
   //  菜品详情
   DISHES = 'DishesPage',
+  //烹饪模式
+  DISHES_MODE = 'DishesModePage',
   //  搜索页面
   SEARCH = 'SearchPage',
   //  浏览记录
@@ -59,5 +61,9 @@ export enum RouterMap {
   MEMBER_CENTER_PAGE = 'MemberCenterPage',
   // 会员协议
   MEMBERSHIP_PRIVACY = 'MembershipPrivacy',
+  // 热量计算
+  CALORIES_PAGE = 'CaloriesPage',
+  // 健康食谱
+  HEALTHY_RECIPES_PAGE = 'HealthyRecipesPage',
 }
 

@@ -14,27 +14,6 @@ export struct ArticleDetailsFooter {
     return this.settingInfo.darkSwitch ? $r('app.media.details_like_dark') : $r('app.media.details_like')
   }
 
-  @Builder
-  shareBuilder() {
-    Row() {
-      Image($r('app.media.wechat'))
-        .width(16 * this.settingInfo.fontSizeRatio)
-        .height(14 * this.settingInfo.fontSizeRatio)
-        .margin({ right: 5 })
-        .fillColor($r('sys.color.font_primary'))
-      Text('微信')
-        .fontSize(14 * this.settingInfo.fontSizeRatio)
-        .fontWeight(FontWeight.Regular)
-        .fontColor($r('sys.color.font_primary'))
-    }
-    .backgroundColor($r('sys.color.comp_background_tertiary'))
-    .borderRadius(21)
-    .justifyContent(FlexAlign.Center)
-    .padding({ top: 8, bottom: 8 })
-    .width('48%')
-    .margin({ left: 5 })
-  }
-
   build() {
     Column() {
       Flex() {
@@ -83,7 +62,7 @@ export struct ArticleDetailsFooter {
           instance.shareToWX(this.getUIContext(), {
             recordId: this.newsFeedVM.articleDetails.id,
             title: this.newsFeedVM.articleDetails.title,
-            subTitle: this.newsFeedVM.articleDetails.articleFrom,
+            subTitle: this.newsFeedVM.articleDetails?.author?.authorNickName,
             createTime: this.newsFeedVM.articleDetails.createTime,
             coverUrl: handlerCoverImage(this.newsFeedVM.articleDetails),
           });

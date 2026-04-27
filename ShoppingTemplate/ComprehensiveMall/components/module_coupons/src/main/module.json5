@@ -1,9 +1,0 @@
-{
-  "module": {
-    "name": "module_coupons",
-    "type": "har",
-    "deviceTypes": [
-      "phone"
-    ],
-  }
-}

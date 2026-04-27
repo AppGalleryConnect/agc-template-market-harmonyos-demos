@@ -1,3 +1,4 @@
+import { TextSpanInfo } from 'lib_common';
 import { QQShareData, ShareOptions, SharePicker, ShareRecordData, ShareAppType } from 'module_share';
 
 /**
@@ -22,6 +23,14 @@ export struct Share {
     return Promise.resolve(signData);
   }
 
+  handleTitle(title: string) {
+    try {
+      return (JSON.parse(title || '[]') as TextSpanInfo[]).map(v => v.text).join('');
+    } catch (e) {
+      return title || '';
+    }
+  }
+
   build() {
     Column() {
       if (this.shareRenderBuilder) {
@@ -35,6 +44,7 @@ export struct Share {
       }
     }
     .onClick(() => {
+      this.shareData.title = this.handleTitle(this.shareData.title);
       const picker: SharePicker =
         new SharePicker(this.shareData).setSignQQShareDataCB((shareJson: string) => this.signQQ(shareJson));
       picker.show(this.getUIContext(), this.options);

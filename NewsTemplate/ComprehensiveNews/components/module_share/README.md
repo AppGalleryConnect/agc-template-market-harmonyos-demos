@@ -36,17 +36,19 @@
 
 ### 环境
 
-- DevEco Studio版本：DevEco Studio 5.0.3 Release及以上
-- HarmonyOS SDK版本：HarmonyOS 5.0.3 Release SDK及以上
+- DevEco Studio版本：DevEco Studio 6.0.2 Release及以上
+- HarmonyOS SDK版本：HarmonyOS 6.0.2 Release SDK及以上
 - 设备类型：华为手机（包括双折叠和阔折叠）、平板
-- 系统版本：HarmonyOS 5.0.1(13)及以上
+- 系统版本：HarmonyOS 6.0.0(20)及以上
 
 ### 权限
 
 - 网络权限：ohos.permission.INTERNET
 
 ### 使用约束
+
 - 碰一碰分享：任意一端设备不支持碰一碰能力时，轻碰无任何响应，详细参考：[手机与手机碰一碰分享](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/knock-share-between-phones-overview#section184317615456)。
+- 使用隔空传送功能前，需要先打开隔空传送开关，开启路径：设置 > 系统 > 快捷启动和手势 > 隔空传送。详细参考：[打开设备侧隔空传送开关](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/gestures-share-open)。
 
 ## 使用
 
@@ -93,14 +95,14 @@
    @ComponentV2
    export struct Index {
      build() {
-       Column(){
-       Button('打开分享面板')
-         onClick(() => {
-          const picker: SharePicker = new SharePicker({
-            title: 'HarmonyOS官方模板集成创新活动',
-          });
-          picker.show();
-         )
+       Column() {
+         Button('打开分享面板')
+           .onClick(() => {
+             const picker: SharePicker = new SharePicker({
+               title: 'HarmonyOS官方模板集成创新活动',
+             });
+             picker.show(this.getUIContext());
+           })
        }
      }
    }
@@ -196,7 +198,7 @@
    import AbilityStage from '@ohos.app.ability.AbilityStage';
    import { WBAPI, AuthInfo, SdkListener, WeiboLogger, Utility } from 'core';
    
-   const TAG = 'MyAbilityStage';
+   const TAG = '[MyAbilityStage]';
    
    export default class MyAbilityStage extends AbilityStage {
      private logger: WeiboLogger = new WeiboLogger('weibo_sdk_demo');
@@ -257,7 +259,14 @@
 
 构造函数。
 
-#### show(options?: [ShareOptions](#ShareOptions)): void
+#### show(uiContext: UIContext, options?: [ShareOptions](#ShareOptions)): void
+
+**参数**
+
+| 参数名       | 类型                                                                                                            | 是否必填 | 说明        |
+|-----------|---------------------------------------------------------------------------------------------------------------|------|-----------|
+| uiContext | [UIContext](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/arkts-apis-uicontext-uicontext) | 是    | 应用 UI 上下文 |
+| options   | [ShareOptions](#ShareOptions)                                                                                 | 否    | 分享数据记录    |
 
 拉起分享半模态弹窗。
 
@@ -301,28 +310,32 @@
 
 分享数据记录，包含标题、链接等信息。
 
-| 参数名            | 类型          | 是否必填 | 说明                                         |
-|:---------------|:------------|:-----|:-------------------------------------------|
-| recordId       | string      | 否    | 分享数据的唯一标识，默认值：系统自动生成随机数。                   |
-| title          | string      | 是    | 标题。                                        |
-| subTitle       | string      | 否    | 副标题。                                       |
-| coverUrl       | string      | 否    | 封面图片链接。                                    |
-| thumbUrl       | ResourceStr | 否    | 缩略图链接，支持网络图片和本地资源引用，比如$r('app.media.xxx')。 |
-| landingPageUrl | string      | 否    | 落地页链接。                                     |
-| createTime     | number      | 否    | 创建时间（Unix 时间戳，单位：毫秒）。                      |
+| 参数名            | 类型                                                                                                                 | 是否必填 | 说明                                         |
+|:---------------|:-------------------------------------------------------------------------------------------------------------------|:-----|:-------------------------------------------|
+| recordId       | string                                                                                                             | 否    | 分享数据的唯一标识，默认值：系统自动生成随机数。                   |
+| title          | string                                                                                                             | 是    | 标题。                                        |
+| subTitle       | string                                                                                                             | 否    | 副标题。                                       |
+| coverUrl       | string                                                                                                             | 否    | 封面图片链接。                                    |
+| thumbUrl       | ResourceStr                                                                                                        | 否    | 缩略图链接，支持网络图片和本地资源引用，比如$r('app.media.xxx')。 |
+| landingPageUrl | string                                                                                                             | 否    | 落地页链接。                                     |
+| imageUrl       | string \|  [PixelMap](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/arkts-apis-image-pixelmap) | 否    | 图片链接，支持网络图片、沙箱路径和PixelMap格式。               |
+| shareType      | [ShareContentType](#ShareContentType枚举说明)                                                                          | 否    | 分享类型，默认值：ShareContentType.LINK。            |
+| createTime     | number                                                                                                             | 否    | 创建时间（Unix 时间戳，单位：毫秒）。                      |
 
 ### ShareOptions
 
 分享配置项，用于设置分享面板标题、是否自动关闭、屏蔽分享方式等。
 
-| 参数名               | 类型                                                                 | 是否必填 | 说明                            |
-|:------------------|:-------------------------------------------------------------------|:-----|:------------------------------|
-| autoClose         | boolean                                                            | 否    | 分享面板是否在分享成功后自动关闭。默认值： `true`。 |
-| directPoster      | boolean                                                            | 否    | 是否直接拉起生成海报面板。默认为 `false`。     |
-| extComponentId    | string                                                             | 否    | 外部组件ID，可用于自定义生成海报。            |
-| sheetTitle        | string                                                             | 否    | 分享面板的标题。 默认值：`分享到`。           |
-| posterSheetTitle  | string                                                             | 否    | 生成海报面板的标题。默认值：`生成海报`。         |
-| excludedAbilities | ([ShareAppType](#ShareAppType枚举说明) \| [ShareWay](#ShareWay枚举说明))[] | 否    | 排除的分享方式或分享操作。默认值：`[]`。        |
+| 参数名                | 类型                                                                 | 是否必填 | 说明                            |
+|:-------------------|:-------------------------------------------------------------------|:-----|:------------------------------|
+| autoClose          | boolean                                                            | 否    | 分享面板是否在分享成功后自动关闭。默认值： `true`。 |
+| directPoster       | boolean                                                            | 否    | 是否直接拉起生成海报面板。默认为 `false`。     |
+| extComponentId     | string                                                             | 否    | 外部组件ID，可用于自定义生成海报。            |
+| sheetTitle         | string                                                             | 否    | 分享面板的标题。 默认值：`分享到`。           |
+| posterSheetTitle   | string                                                             | 否    | 生成海报面板的标题。默认值：`生成海报`。         |
+| excludedAbilities  | ([ShareAppType](#ShareAppType枚举说明) \| [ShareWay](#ShareWay枚举说明))[] | 否    | 排除的分享方式或分享操作。默认值：`[]`。        |
+| enableKnockShare   | boolean                                                            | 否    | 是否支持碰一碰分享。默认值：`true`。         |
+| enableGestureShare | boolean                                                            | 否    | 是否支持隔空传送。默认值：`true`。          |  
 
 ### QQShareData
 
@@ -349,6 +362,15 @@
 | COPY_TO_PASTEBOARD | 复制    |
 | SYSTEM             | 系统分享  |
 | SAVE_TO_ALBUM      | 保存到图库 |
+
+### ShareContentType枚举说明
+
+分享内容类型。
+
+| 名称    | 说明 |
+|:------|:---|
+| LINK  | 文本 |
+| IMAGE | 图片 |
 
 ## 示例代码
 
@@ -383,7 +405,7 @@ struct ShareSample1 {
               return Promise.resolve(signData);
             })
 
-            picker.show({
+            picker.show(this.getUIContext(), {
               autoClose: true,
             });
           })
@@ -434,7 +456,7 @@ struct ShareSample2 {
                 createTime: new Date('2025/09-15 08:00:00').getTime(),
                 landingPageUrl: 'https://developer.huawei.com/consumer/cn/activity/301757474300821213',
               });
-              picker.show({
+              picker.show(this.getUIContext(), {
                 extComponentId: 'customSnapshotId',
                 directPoster: true,
               });
@@ -447,6 +469,94 @@ struct ShareSample2 {
       .edgeEffect(EdgeEffect.Spring)
     }
     .title('示例2（自定义海报截图）')
+    .backgroundColor($r('sys.color.background_secondary'))
+  }
+}
+```
+
+### 示例3（图片分享）
+
+```
+import { image } from '@kit.ImageKit';
+import { SharePicker, downloadImage, saveToSandbox, ShareContentType } from 'aggregated_share';
+
+@Entry
+@ComponentV2
+struct ShareSample3 {
+  @Local pixelMap: PixelMap | undefined = undefined;
+  @Local imageUri: string = '';
+
+  build() {
+    NavDestination() {
+      Column({ space: 24 }) {
+        Button('分享网络图片')
+          .onClick(() => {
+            const picker: SharePicker = new SharePicker({
+              title: '分享图片',
+              subTitle: '来自网络的图片',
+              shareType: ShareContentType.IMAGE,
+              imageUrl: 'https://agc-storage-drcn.platform.dbankcloud.cn/v0/template-thwjd/commonwidget%2Fexample960x720.png',
+            });
+
+            picker.show(this.getUIContext(), {
+              autoClose: true,
+            });
+          })
+
+        Button('分享已加载的沙箱图片')
+          .onClick(() => {
+            if (!this.imageUri) {
+              return;
+            }
+            const picker: SharePicker = new SharePicker({
+              title: '分享图片',
+              subTitle: '来自已加载的沙箱图片',
+              shareType: ShareContentType.IMAGE,
+              imageUrl: this.imageUri,
+            });
+
+            picker.show(this.getUIContext(), {
+              autoClose: true,
+            });
+          })
+          .enabled(Boolean(this.imageUri))
+
+        Button('分享已加载的PixelMap图片')
+          .onClick(() => {
+            if (!this.pixelMap) {
+              return;
+            }
+            const picker: SharePicker = new SharePicker({
+              title: '分享图片',
+              subTitle: '来自已加载的PixelMap图片',
+              shareType: ShareContentType.IMAGE,
+              imageUrl: this.pixelMap,
+            });
+
+            picker.show(this.getUIContext(), {
+              autoClose: true,
+            });
+          })
+          .enabled(Boolean(this.pixelMap))
+
+        Button('加载测试图片')
+          .onClick(async () => {
+            try {
+              const imageUrl =
+                'https://agc-storage-drcn.platform.dbankcloud.cn/v0/template-thwjd/commonwidget%2Fexample960x720.png';
+              const buffer = await downloadImage(imageUrl);
+              const imageSource = image.createImageSource(buffer);
+              this.pixelMap = await imageSource.createPixelMap();
+              this.imageUri = await saveToSandbox(this.getUIContext(), buffer);
+            } catch (e) {
+              console.error('加载图片失败', JSON.stringify(e));
+            }
+          })
+
+      }
+      .padding(16)
+    }
+    .title('示例3（图片分享）')
     .backgroundColor($r('sys.color.background_secondary'))
   }
 }

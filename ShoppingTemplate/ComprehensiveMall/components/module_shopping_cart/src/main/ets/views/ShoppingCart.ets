@@ -1,4 +1,5 @@
 import { LoadingStatus } from '../commons/Constants';
+import { PriceType } from 'lib_network';
 import { ProductModel } from '../commons/Model';
 import { CartControlPanel } from '../components/CartControlPanel';
 import { CartListView } from '../components/CartListView';
@@ -28,7 +29,19 @@ export struct ShoppingCart {
   // 商品卡片事件回调
   @Event onCardClick: (id: string, slotId?: string) => void = () => {
   };
+  // 规格行点击事件回调
+  @Event onSpecRowClick: (productId: string, skuCode: string, count: number, priceType: PriceType,
+    slotId?: string) => void = () => {
+  };
+  // 购物车刷新触发键，外部递增此值触发购物车重新加载
+  @Param cartRefreshKey: number = 0;
   vm: CartPageVM = new CartPageVM();
+
+  @Monitor('cartRefreshKey')
+  onCartRefreshKeyChange() {
+    this.vm.cartVersion = '';
+    this.vm.init();
+  }
 
   aboutToAppear(): void {
     this.vm.isLogin = this.isLogin;
@@ -77,6 +90,10 @@ export struct ShoppingCart {
                         isEdit: this.vm.isEdit,
                         onCardClick: (id: string, slotId?: string) => {
                           this.onCardClick && this.onCardClick(id, slotId);
+                        },
+                        onSpecClick: (productId: string, skuCode: string, count: number, priceType: PriceType,
+                          slotId?: string) => {
+                          this.onSpecRowClick && this.onSpecRowClick(productId, skuCode, count, priceType, slotId);
                         },
                         onChangeCount: (skuCode: string) => {
                           // 更新购物车商品的数量
@@ -187,7 +204,7 @@ export struct ShoppingCart {
           this.onBack && this.onBack();
         },
       })
-      Scroll(){
+      Scroll() {
         Column() {
           Image($r('app.media.empty_status_logo'))
             .width(160)
@@ -269,11 +286,12 @@ export struct ShoppingCart {
     Column() {
       Column() {
         Image($r('app.media.empty_status_logo'))
-          .width(160)
-          .height(160)
+          .width(200)
+          .height(200)
+          .borderRadius(100)
           .draggable(false)
           .objectFit(ImageFit.Cover)
-          .margin({ bottom: 16 })
+          .margin({ bottom: $r('app.float.space_l'), top: $r('app.float.space_l') })
         Text('购物车空空如也，去逛逛吧~')
           .fontSize(12)
           .fontColor($r('app.color.font_color_level2'))

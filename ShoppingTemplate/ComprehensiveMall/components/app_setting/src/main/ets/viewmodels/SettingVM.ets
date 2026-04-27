@@ -6,6 +6,7 @@ import { notificationManager } from '@kit.NotificationKit';
 import { Logger } from 'module_ui_base';
 import { ToastDialog as promptAction, ToastDialog } from '@hw-agconnect/ui-toast';
 import { AppGalleryUtils } from '../common/AppGalleryUtils';
+import { ColorModePreference } from '../common/ColorModePreference';
 import { FileUtils } from '../common/FileUtils';
 import { CommonConfirmDialog } from '../components/CommonConfirmDialog';
 import { LOG_TAG } from '../constants/CommonConstants';
@@ -124,31 +125,32 @@ export class SettingViewModel extends BaseViewModel {
 
   handleDark(item: SettingItem) {
     const options = item.selectOptions ?? lightDarkOptions;
-    if (item.selectIndex < options.length && item.selectIndex >= 0) {
-      const colorMode = options[item.selectIndex]
-        .value as ConfigurationConstant.ColorMode;
-      try {
-        this.uiContext
-        ?.getHostContext()
-        ?.getApplicationContext()
-          .setColorMode(colorMode);
-      } catch (err) {
-        Logger.error(LOG_TAG, 'set color mode failed. error: ' + JSON.stringify(err));
+    let initialIndex = item.selectIndex;
+    const savedIndex = ColorModePreference.getSavedColorModeIndex(this.context);
+    if (savedIndex >= 0 && savedIndex < options.length) {
+      initialIndex = savedIndex;
+    } else {
+      const currentColorMode = this.context?.config?.colorMode as ConfigurationConstant.ColorMode;
+      const currentIndex = ColorModePreference.getColorModeIndexByMode(currentColorMode);
+      if (currentIndex >= 0 && currentIndex < options.length) {
+        initialIndex = currentIndex;
       }
     }
+    item.setSelectIndex(initialIndex);
 
     item
       .setType(SettingType.SELECT)
-      .setLabel(item.label ?? '夜间模式')
-      .setSelectOptions(item.selectOptions ?? lightDarkOptions)
+      .setLabel(item.label ?? '显示模式')
+      .setSelectOptions(options)
       .setSelectEvent((index: number) => {
-        const colorMode = lightDarkOptions[index]
+        const colorMode = options[index]
           .value as ConfigurationConstant.ColorMode;
         try {
           this.uiContext
           ?.getHostContext()
           ?.getApplicationContext()
             .setColorMode(colorMode);
+          ColorModePreference.saveColorModeIndex(this.context, index);
           if (item.onChange) {
             item.onChange(colorMode);
           }

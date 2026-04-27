@@ -9,11 +9,13 @@ import {
   RouterMap,
   RouterUtils,
   SettingModel,
+  UserInfoModel,
+  EventEnum,
 } from 'lib_common';
 import { NavHeaderBar } from 'lib_widget';
-import { PostImgList, PostRequest, PostServiceApi } from 'lib_news_api';
+import { AuthorResponse, MineServiceApi, PostImgList, PostRequest, PostServiceApi, TopicResponse } from 'lib_news_api';
 import { ArticlePost } from 'module_articlepost';
-import { PostImgVideoItem, PublishPostComp, FileUtils } from 'module_post';
+import { PostImgVideoItem, PublishPostComp, FileUtils, PostController, Topic, TextSpanInfo } from 'module_post';
 import { KindsList, newsKindsList, NewsSelectType } from '../constants/NewsConstants';
 import { VideoPost } from '../components/VideoPost';
 
@@ -26,6 +28,7 @@ export function NewsPostBuilder() {
 export struct NewsPost {
   @Local breakPointModel: BreakpointModel = AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
   @Local settingInfo: SettingModel = PersistenceV2.connect(SettingModel, () => new SettingModel())!;
+  @Local userInfoModel: UserInfoModel = PersistenceV2.connect(UserInfoModel, () => new UserInfoModel())!;
   @Local newsKindsList: KindsList[] = newsKindsList
   @Local content: string = ''
   @Local title: string = ''
@@ -34,9 +37,32 @@ export struct NewsPost {
   @Local selectedId: string = NewsSelectType.ARTICLE
   @Local postBody: string = ''
   @Local mediaList: PostImgVideoItem[] = []
+  @Local cityLocation: string = ''
   @Local isTabHide: boolean = false
-  @Local controller: TextAreaController = new TextAreaController();
+  @Local controller: RichEditorController = new RichEditorController();
   @Local enableClick: boolean = true;
+  @Local postController: PostController = new PostController();
+  @Local userList: AuthorResponse[] = [];
+  @Local topicList: TopicResponse[] = [];
+
+  aboutToAppear(): void {
+    this.queryListInfo();
+  }
+
+  async queryListInfo() {
+    this.topicList = await PostServiceApi.queryTopicList();
+    this.userList = await MineServiceApi.queryWatchUsers(this.userInfoModel.authorId);
+  }
+
+  @Computed
+  get plainText() {
+    try {
+      const list = JSON.parse(this.postBody) as TextSpanInfo[];
+      return list.map(v => v.text).join('');
+    } catch (e) {
+      return '';
+    }
+  }
 
   @Computed
   get canNext() {
@@ -48,7 +74,7 @@ export struct NewsPost {
 
   @Computed
   get enablePublish() {
-    if (this.postBody) {
+    if (this.plainText) {
       return true;
     }
     if (this.mediaList.length) {
@@ -104,14 +130,13 @@ export struct NewsPost {
       const params: PostRequest = {
         postBody: this.postBody,
         postImgList: list,
+        city: this.cityLocation,
       };
       PostServiceApi.publishPost(params)
         .then(() => {
           GlobalContextUtils.showToast({ message: '发布成功' });
-          /*
-           * 事件分发，通知首页刷新
-           * */
-          emitter.emit('recommendRefresh')
+          // 事件分发，通知互动推荐刷新
+          emitter.emit(EventEnum.INTERACTION_RECOMMEND_REFRESH);
           RouterUtils.pop();
         })
         .catch(() => {
@@ -138,6 +163,10 @@ export struct NewsPost {
             ArticlePost({
               fontSizeRatio: this.settingInfo.fontSizeRatio,
               darkMode: this.settingInfo.darkSwitch,
+              customPadding: {
+                left: this.breakPointModel.pagePadding,
+                right: this.breakPointModel.pagePadding,
+              },
               onTitleChange: (value: string) => {
                 this.title = value
               },
@@ -159,15 +188,30 @@ export struct NewsPost {
           TabContent() {
             PublishPostComp({
               fontRatio: this.settingInfo.fontSizeRatio,
-              controller: this.controller,
-              onChange: (body: string, mediaList: PostImgVideoItem[]) => {
+              richEditorController: this.controller,
+              postController: this.postController,
+              themeColor: $r('app.color.app_theme'),
+              userList: this.userList,
+              topicList: this.topicList,
+              onChange: (body: string, mediaList: PostImgVideoItem[], cityLocation?: string) => {
                 this.postBody = body
                 this.mediaList = mediaList
+                this.cityLocation = cityLocation ?? ''
               },
               isFocus: (isTabHide: boolean) => {
                 this.isTabHide = isTabHide
               },
+              jumpTopicPage: (topic) => {
+                const params: Record<string, Object | Topic | PostController> = {
+                  'topic': topic,
+                  'postController': this.postController,
+                }
+                RouterUtils.pushPathByName(RouterMap.TOPIC_RESULT_PAGE, params);
+              },
             })
+              .margin({
+                top: CommonConstants.PADDING_M,
+              })
           }
         }
         .barHeight(0)
@@ -179,7 +223,6 @@ export struct NewsPost {
           this.targetIndex = index
         })
       }
-      .padding({ left: this.breakPointModel.pagePadding, right: this.breakPointModel.pagePadding })
       .layoutWeight(1)
 
       Column() {

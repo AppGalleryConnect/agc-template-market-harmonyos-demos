@@ -1,9 +1,8 @@
 import { ComponentContent, promptAction } from '@kit.ArkUI';
 import { BusinessError } from '@kit.BasicServicesKit';
-import { hilog } from '@kit.PerformanceAnalysisKit';
+import { UtilLog } from '@hw-agconnect/util-log';
 
 const logTag = 'PopViewUtils';
-const domainId = 0x0000;
 
 enum PopViewShowType {
   OPEN
@@ -94,7 +93,7 @@ export class PopViewUtils {
         },
       };
       prompt.openCustomDialog(componentContent, customOptions).catch((error: BusinessError) => {
-        hilog.error(domainId, logTag,
+        UtilLog.error(logTag,
           `PoPViewUtils dialog open failed. Code is ${error.code}, message is ${error.message}`);
       });
       let infoList = PopViewUtils.shareInstance().infoList;
@@ -103,7 +102,7 @@ export class PopViewUtils {
         popType: type,
       };
       infoList[0] = info;
-      hilog.info(domainId, logTag, 'dialog open, options: ' + JSON.stringify(options));
+      UtilLog.info(logTag, 'dialog open, options: ' + JSON.stringify(options));
     }
   }
 
@@ -119,10 +118,10 @@ export class PopViewUtils {
           return model.com !== info.com;
         });
         prompt.closeCustomDialog(info.com).catch((error: BusinessError) => {
-          hilog.error(domainId, logTag,
+          UtilLog.error(logTag,
             `PoPViewUtils dialog close failed. Code is ${error.code}, message is ${error.message}`);
         });
-        hilog.info(domainId, logTag, 'dialog close');
+        UtilLog.info(logTag, 'dialog close');
       }
     }
   }
@@ -138,7 +137,7 @@ export class PopViewUtils {
         componentContent = new ComponentContent(PopViewUtils.uiContext, contentView as WrappedBuilder<[]>);
       }
       PopViewUtils.uiContext.openBindSheet(componentContent, options).catch((error: BusinessError) => {
-        hilog.error(domainId, logTag,
+        UtilLog.error(logTag,
           `PoPViewUtils sheet open failed. Code is ${error.code}, message is ${error.message}`);
       });
       let sheetList = PopViewUtils.shareInstance().sheetList;
@@ -147,7 +146,7 @@ export class PopViewUtils {
         popType: type,
       };
       sheetList[0] = info;
-      hilog.info(domainId, logTag, 'sheet open, options: ' + JSON.stringify(options));
+      UtilLog.info(logTag, 'sheet open, options: ' + JSON.stringify(options));
     }
   }
 
@@ -162,10 +161,10 @@ export class PopViewUtils {
           return model.com !== info.com;
         });
         PopViewUtils.uiContext.closeBindSheet(info.com).catch((error: BusinessError) => {
-          hilog.error(domainId, logTag,
+          UtilLog.error(logTag,
             `PoPViewUtils sheet close failed. Code is ${error.code}, message is ${error.message}`);
         });
-        hilog.info(domainId, logTag, 'sheet close');
+        UtilLog.info(logTag, 'sheet close');
       }
     }
   }

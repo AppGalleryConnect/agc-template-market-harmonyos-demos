@@ -11,5 +11,10 @@
     "link_category": "file:../../components/link_category",
     "base_ui": "file:../../components/base_ui",
     "shopping_basket": "file:../../components/shopping_basket",
+    "module_transition": "file:../../components/module_transition",
+    "aggregated_share": "file:../../components/aggregated_share",
+    "featured_recipes": "file:../../components/featured_recipes",
+    "image_preview": "file:../../components/image_preview",
+    "aggregated_ads": "file:../../components/aggregated_ads"
   }
 }

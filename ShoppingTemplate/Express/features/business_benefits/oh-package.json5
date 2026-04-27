@@ -1,0 +1,12 @@
+{
+  "name": "business_benefits",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "lib_foundation": "file:../../commons/lib_foundation",
+    "coupons": "file:../../components/coupons"
+  }
+}

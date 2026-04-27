@@ -9,8 +9,10 @@ export struct HwAdService {
   @Param adId: string = '';
   @Param closeCallBack: () => void = () => {
   };
+  @Param adType: number = 1;
   @Local oaid: string = '';
   @Local isShow: boolean = false;
+  @Local visibilityState: Visibility = Visibility.Visible;
   private ads: Array<advertising.Advertisement> = [];
   private splashImageAdReqParams: advertising.AdRequestParams = {
     adId: '',
@@ -30,6 +32,7 @@ export struct HwAdService {
 
   aboutToAppear(): void {
     this.splashImageAdReqParams.adId = this.adId;
+    this.splashImageAdReqParams.adType = this.adType;
     try {
       this.requestOAIDTrackingConsentPermissions(this.context);
     } catch (error) {
@@ -119,15 +122,48 @@ export struct HwAdService {
       .justifyContent(FlexAlign.Center)
       .alignItems(HorizontalAlign.Start)
       .padding({ left: 16 });
-    }.height('100%');
+    }
+    .height('100%')
+    .backgroundColor('#FDF7F8');
+  }
+
+  @Builder
+  nativeCardAd() {
+    Row() {
+      AdComponent({
+        ads: this.ads, displayOptions: this.adDisplayOptions,
+        interactionListener: {
+          onStatusChanged: (status: string) => {
+            switch (status) {
+              case AdStatus.AD_OPEN:
+                break;
+              case AdStatus.AD_CLICKED:
+                break;
+              case AdStatus.AD_CLOSED:
+                this.visibilityState = Visibility.None;
+                break;
+            }
+          },
+        },
+      })
+        .width('100%')
+        .height('100%')
+    }
+    .width('100%')
+    .visibility(this.visibilityState)
+    .justifyContent(FlexAlign.Center)
   }
 
   build() {
     if (this.isShow) {
-      if (this.ads[0].isFullScreen) {
-        this.splashScreenBuilder('100%');
+      if (this.adType === 3) {
+        this.nativeCardAd()
       } else {
-        this.splashHalfScreenBuilder();
+        if (this.ads[0].isFullScreen) {
+          this.splashScreenBuilder('100%');
+        } else {
+          this.splashHalfScreenBuilder();
+        }
       }
     }
   }

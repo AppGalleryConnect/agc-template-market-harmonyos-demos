@@ -32,6 +32,7 @@ struct FollowersPage {
                 .fontColor(item.isFollower ? '#E84026' : $r('sys.color.font_on_primary'))
                 .fontWeight(FontWeight.Medium)
                 .backgroundColor(item.isFollower ? '#33FD4238' : '#FD4238')
+                .margin({right: 18})
                 .onClick(() => {
                   if (!AccountUtil.getUserInfo().isLogin) {
                     RouterModule.push(RouterMap.QUICK_LOGIN_PAGE);
@@ -40,14 +41,17 @@ struct FollowersPage {
                   item.isFollower = !item.isFollower
                 })
             }.width('100%').justifyContent(FlexAlign.SpaceBetween).padding({ top: 12, bottom: 12 })
+
           }
-          .margin({left: this.vm.getLanes === 2 && index % 2 !== 0 ? 18 : 0})
         }, (item: BloggerFollower) => JSON.stringify(item))
       }
-      .padding({ left: 16, right: 16 })
+      .padding({ left: 16 })
       .contentStartOffset(12)
       .contentEndOffset(12)
+      .scrollBar(BarState.Off)
       .lanes(this.vm.getLanes)
-    }.title(buildTitleBar(`${this.vm.authorName}关注的人`), { paddingStart: LengthMetrics.vp(16) })
+    }
+    .title(buildTitleBar(`${this.vm.authorName}关注的人`), { paddingStart: LengthMetrics.vp(16) })
+    .padding({top: 40})
   }
 }

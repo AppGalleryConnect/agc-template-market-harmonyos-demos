@@ -23,6 +23,7 @@ export class ArticleServiceMock {
         id: `article_${Utils.randomArticleId()}`,
         type: NewsEnum.Article,
         title: data.title,
+        tags: ['生活', '军事', '科技', '自然'],
         authorId: this.authorMock.queryAuthorInfo()?.authorId as string,
         markCount: 0,
         postImgList: data.postImgList,
@@ -41,7 +42,6 @@ export class ArticleServiceMock {
         isLiked: false,
         isMarked: false,
         isLocalPublish: true,
-        articleFrom: this.authorMock.queryAuthorInfo()?.authorNickName,
         navInfo: {
           setting: data.setting,
         },

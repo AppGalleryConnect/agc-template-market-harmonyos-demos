@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "agcit_huawei_comprehensive_mall_module_product_review",
+      "value": "1.0.2"
+    },
+    {
+      "name": "agcittype_huawei_comprehensive_mall_module_product_review",
+      "value": "serviceComponent"
+    }
+  ]
+}

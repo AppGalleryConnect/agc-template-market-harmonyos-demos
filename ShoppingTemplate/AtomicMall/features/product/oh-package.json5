@@ -1,0 +1,18 @@
+{
+  "name": "product",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@hw-agconnect/ui-skeleton": "^1.0.0",
+    "lib_foundation": "file:../../commons/lib_foundation",
+    "lib_widget": "file:../../commons/lib_widget",
+    "lib_network": "file:../../commons/lib_network",
+    "module_shopping_cart": "file:../../components/module_shopping_cart",
+    "module_transition": "file:../../components/module_transition",
+    "image_preview": "file:../../components/image_preview",
+    "module_global_feature": "file:../../components/module_global_feature"
+  }
+}

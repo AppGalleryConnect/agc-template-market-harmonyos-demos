@@ -108,7 +108,7 @@ struct OldPhone {
       })
     }
     .title('当前号码')
-    .backgroundColor($r('sys.color.background_secondary'))
+    .backgroundColor($r('sys.color.comp_background_gray'))
     .padding({
       top: Constants.PADDING_S,
     })
@@ -206,7 +206,7 @@ export struct EnterPhoneNumberCore {
               .constraintSize({ minHeight: 48 })
               .fontSize($r('sys.float.Body_L'))
               .fontColor($r('sys.color.font_tertiary'))
-              .backgroundColor($r('sys.color.background_primary'))
+              .backgroundColor($r('sys.color.comp_background_list_card'))
               .borderRadius(20)
               .enabled(false)
               .padding({
@@ -218,7 +218,7 @@ export struct EnterPhoneNumberCore {
               .type(InputType.PhoneNumber)
               .fontSize($r('sys.float.Body_L'))
               .fontColor($r('sys.color.font_primary'))
-              .backgroundColor($r('sys.color.background_primary'))
+              .backgroundColor($r('sys.color.comp_background_list_card'))
               .placeholderColor($r('sys.color.font_secondary'))
               .borderWidth(1)
               .borderColor(this.phoneErrorTip.length ? $r('sys.color.warning') :
@@ -261,7 +261,7 @@ export struct EnterPhoneNumberCore {
             .type(InputType.Number)
             .fontSize($r('sys.float.Body_L'))
             .fontColor($r('sys.color.font_primary'))
-            .backgroundColor($r('sys.color.background_primary'))
+            .backgroundColor($r('sys.color.comp_background_list_card'))
             .placeholderColor($r('sys.color.font_secondary'))
             .borderWidth(1)
             .borderColor(this.verifyCodeValid ? Color.Transparent : $r('sys.color.warning'))

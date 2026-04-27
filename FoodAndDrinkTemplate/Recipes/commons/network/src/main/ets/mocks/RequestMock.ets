@@ -28,6 +28,7 @@ import { DeleteMyRecipeBody, UploadRecipeBody } from '../types/Recipe';
 import {
   addCustomFood,
   addDietPlans,
+  clearDietPlans,
   getFoodCategory,
   queryDietPlan,
   queryDietPlans,
@@ -37,7 +38,7 @@ import { ChangeFollowersBody, CustomFoodBody, DietPlanBody } from '../types/Calo
 import { getNoticeList } from './MockData/Notice';
 
 const mock: AxiosMockAdapter = new AxiosMockAdapter(axiosInstance, {
-  delayResponse: 300,
+  delayResponse: 0,
 });
 
 mock.onGet('/recipe/list').reply(async (config: AxiosRequestConfig) => {
@@ -144,6 +145,10 @@ mock.onGet('/calories/food-category').reply(async (config: AxiosRequestConfig) =
 mock.onPost('/calories/add-diet-plans').reply(async (config: AxiosRequestConfig) => {
   const data = JSON.parse(config.data) as DietPlanBody;
   addDietPlans(data);
+  return [HttpStatusCode.Ok];
+});
+mock.onPost('/calories/clear-diet-plans').reply(async (config: AxiosRequestConfig) => {
+  clearDietPlans();
   return [HttpStatusCode.Ok];
 });
 mock.onGet('/calories/diet-plans').reply(async (config: AxiosRequestConfig) => {

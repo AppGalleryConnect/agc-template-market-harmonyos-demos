@@ -11,6 +11,7 @@
     "lib_account": "file:../../commons/lib_account",
     "lib_flex_layout": "file:../../commons/lib_flex_layout",
     "lib_news_api": "file:../../commons/lib_news_api",
+    "lib_search": "file:../../commons/lib_search",
     "module_highlight": "file:../../components/module_highlight",
     "module_transition": "file:../../components/module_transition",
     "module_post": "file:../../components/module_post",

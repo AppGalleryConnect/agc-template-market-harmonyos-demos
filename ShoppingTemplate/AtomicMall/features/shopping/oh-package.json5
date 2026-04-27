@@ -1,0 +1,20 @@
+{
+  "name": "shopping",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "lib_foundation": "file:../../commons/lib_foundation",
+    "lib_widget": "file:../../commons/lib_widget",
+    "lib_network": "file:../../commons/lib_network",
+    "module_shopping_cart": "file:../../components/module_shopping_cart",
+    "module_product_search": "file:../../components/module_product_search",
+    "module_product_filter": "file:../../components/module_product_filter",
+    "module_custom_service_chat": "file:../../components/module_custom_service_chat",
+    "module_global_feature": "file:../../components/module_global_feature",
+    "module_transition": "file:../../components/module_transition",
+    "address_management": "file:../../components/address_management",
+  }
+}

@@ -1,22 +1,28 @@
 import { common } from '@kit.AbilityKit';
 import { MemberStatusUtil } from 'membership';
-import { BaseViewModel, contextUtil } from 'module_base';
-
-const TAG = '[HomePageVM]';
+import { BaseViewModel, BreakpointNameEnum, ContextUtil, RouterMap, RouterModule } from 'lib_foundation';
 
 @ObservedV2
 export class HomePageVM extends BaseViewModel {
   private static _instance: HomePageVM;
 
-  public static get instance() {
+  static get instance() {
     if (!HomePageVM._instance) {
       HomePageVM._instance = new HomePageVM();
     }
     return HomePageVM._instance;
   }
 
+  @Computed
+  get isTabVertical() {
+    return [
+      BreakpointNameEnum.LG,
+      BreakpointNameEnum.XL,
+    ].includes(this.breakPointModel.currentBreakpoint);
+  }
+
   async queryMemberStatus() {
-    const res = await MemberStatusUtil.queryPurchase(contextUtil.getContext() as common.UIAbilityContext)
+    const res = await MemberStatusUtil.queryPurchase(ContextUtil.globalContext as common.UIAbilityContext)
     if (res) {
       const autoRenewPurchasedList = res.renewList;
       const nonAutoRenewPurchasedList = res.nonRenewList;
@@ -29,5 +35,16 @@ export class HomePageVM extends BaseViewModel {
     } else {
       this.userInfoModel.isVip = false
     }
+  }
+
+  // 登录跳转
+  loginJumpPage(routeName: RouterMap) {
+    if (!this.userInfoModel.isLogin) {
+      RouterModule.push({ url: RouterMap.QUICK_LOGIN_PAGE }, () => {
+        RouterModule.push({ url: routeName });
+      })
+      return
+    }
+    RouterModule.push({ url: routeName })
   }
 }

@@ -1,4 +1,7 @@
 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <metadata>
+    <agcit_code>agcit_huawei_comprehensive_news</agcit_code>
+  </metadata>
 <circle cx="6" cy="6" r="5.625" fill="#FD8E50" stroke="white" stroke-width="0.75"/>
 <path d="M3 3.75L5.34605 9H6.66213L9 3.75H7.70845L6.01635 7.76953H6L4.29155 3.75H3Z" fill="white"/>
 </svg>

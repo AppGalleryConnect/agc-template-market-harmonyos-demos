@@ -2,21 +2,22 @@ import { BreakpointStorage, BreakpointSystem, BreakpointTypeEnum, RouterMap, rou
 import { ContainerColumn, NavTitleBar } from 'lib_widget';
 import { OrderItem } from 'lib_network';
 import { ORDER_TAB_LIST } from '../common/Constants';
-import { OrderTabsMap } from '../common/Enums';
 import { OrderType } from '../common/Types';
 import { buildNoOrderCard } from '../components/NoOrderCard';
 import { buildButtonList, buildOrderInfoCard } from '../components/OrderInfoCard';
 import { OrderListPageVM } from '../viewmodels/OrderListPageVM';
+import { OrderTabsMap } from '../common/Enums';
 
 @Builder
 export function buildOrderListPage() {
-  OrderListPageNew()
+  OrderListPage()
 }
 
 @ComponentV2
-export struct OrderListPageNew {
+export struct OrderListPage {
   @Local
   curBreakpoint: BreakpointStorage = BreakpointSystem.currentBreakpoint
+  tabScroller: Scroller = new Scroller()
   vm: OrderListPageVM = new OrderListPageVM();
 
   build() {
@@ -24,7 +25,6 @@ export struct OrderListPageNew {
       NavTitleBar({
         title: '我的订单',
         showSearchIcon: true,
-        bgColor: $r('app.color.background_color_primary'),
         onSearchClick: () => {
           routerStack.pushPath({ name: RouterMap.ORDER_SEARCH })
         },
@@ -33,6 +33,7 @@ export struct OrderListPageNew {
       this.buildOrderTab()
     }
     .hideTitleBar(true)
+    .backgroundColor($r('app.color.background_color_grey'))
     .onReady((context) => {
       const index = context.pathInfo.param as number | undefined
       this.vm.initOrderTab(index ?? 0)
@@ -53,9 +54,9 @@ export struct OrderListPageNew {
           .fontColor($r('app.color.font_color_level2'))
       }
       .width($r('app.string.size_percent_full'))
-      .backgroundColor($r('sys.color.comp_background_tertiary'))
+      .backgroundColor($r('app.color.background_color_button_grey'))
       .borderRadius($r('app.float.border_radius_capsule'))
-      .padding( $r('app.float.space_m'))
+      .padding($r('app.float.space_m'))
     }
     .padding({
       left: $r('app.float.space_l'),
@@ -63,7 +64,6 @@ export struct OrderListPageNew {
       bottom: $r('app.float.space_m'),
       top: $r('app.float.space_m'),
     })
-    .backgroundColor($r('app.color.background_color_primary'))
     .onClick(() => {
       routerStack.pushPath({ name: RouterMap.ORDER_SEARCH })
     })
@@ -71,45 +71,74 @@ export struct OrderListPageNew {
 
   @Builder
   buildOrderTab() {
-    Tabs({ barPosition: BarPosition.Start, index: this.vm.currentIndex, controller: this.vm.tabController }) {
-      ForEach(ORDER_TAB_LIST, (tab: OrderType, index: number) => {
-        TabContent() {
-          Column() {
-            if (this.vm.isLoading) {
-              LoadingProgress().width(32)
-            } else if (this.vm.currentIndex === index && !this.vm.isLoading) {
-              if (index === OrderTabsMap.REVIEW) {
-                this.buildReviewOrderList()
-              } else {
-                this.buildCommonOrderList(index)
+    Column() {
+      this.buildOrderTabBar()
+      Tabs({ barPosition: BarPosition.Start, index: this.vm.currentIndex, controller: this.vm.tabController }) {
+        ForEach(ORDER_TAB_LIST, (tab: OrderType, index: number) => {
+          TabContent() {
+            Column() {
+              if (this.vm.isLoading) {
+                LoadingProgress().width(32)
+              } else if (this.vm.currentIndex === index && !this.vm.isLoading) {
+                if (index === OrderTabsMap.REVIEW) {
+                  this.buildReviewOrderList()
+                } else {
+                  this.buildCommonOrderList(index)
+                }
               }
             }
+            .layoutWeight(1)
           }
+          .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.BOTTOM])
           .layoutWeight(1)
-        }
-        .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.BOTTOM])
-        .tabBar(this.buildTabBarItem(tab.label, index))
-        .layoutWeight(1)
-        .align(Alignment.Top)
-        .width($r('app.string.size_percent_full'))
-        .backgroundColor($r('app.color.background_color_grey'))
-        .padding({
-          left: $r('app.float.space_l'),
-          right: $r('app.float.space_l'),
-          top: $r('app.float.space_l'),
-        })
-      }, (_tab: OrderType, index: number) => index.toString())
+          .align(Alignment.Top)
+          .width($r('app.string.size_percent_full'))
+          .backgroundColor($r('app.color.background_color_grey'))
+          .padding({
+            left: $r('app.float.space_l'),
+            right: $r('app.float.space_l'),
+            top: $r('app.float.space_l'),
+          })
+        }, (_tab: OrderType, index: number) => index.toString())
+      }
+      .width($r('app.string.size_percent_full'))
+      .layoutWeight(1)
+      .vertical(false)
+      .barHeight(0)
+      .animationDuration(0)
+      .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.BOTTOM])
+      .onChange((index) => {
+        this.vm.changeTab(index)
+      })
     }
     .width($r('app.string.size_percent_full'))
     .layoutWeight(1)
-    .vertical(false)
-    .barHeight(42)
-    .animationDuration(0)
-    .barMode(BarMode.Scrollable)
-    .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.BOTTOM])
-    .onChange((index) => {
-      this.vm.changeTab(index)
+    .alignItems(HorizontalAlign.Start)
+  }
+
+  @Builder
+  buildOrderTabBar() {
+    List({
+      space: 12,
+      scroller: this.tabScroller,
+    }) {
+      ForEach(ORDER_TAB_LIST, (tab: OrderType, index: number) => {
+        ListItem() {
+          this.buildTabBarItem(tab.label, index)
+        }
+      }, (_tab: OrderType, index: number) => index.toString())
+    }
+    .width($r('app.string.size_percent_full'))
+    .padding({
+      left: $r('app.float.space_l'),
+      right: $r('app.float.space_l'),
     })
+    .constraintSize({ minWidth: '100%' })
+    .listDirection(Axis.Horizontal)
+    .scrollBar(BarState.Off)
+    .edgeEffect(EdgeEffect.Spring)
+    .height(40)
+    .margin({ top: $r('app.float.space_s') })
   }
 
   @Builder
@@ -149,6 +178,7 @@ export struct OrderListPageNew {
     })
   }
 
+
   @Builder
   buildReviewOrderList() {
     Column() {
@@ -172,28 +202,20 @@ export struct OrderListPageNew {
     }
   }
 
+
   @Builder
   buildTabBarItem(name: string, index: number) {
-    Column() {
-      Text(name)
-        .fontColor(this.vm.currentIndex === index ? $r('app.color.theme_color') :
-          $r('app.color.font_color_level1'))
-        .fontSize($r('app.float.font_size_14'))
-        .fontWeight(400)
-        .lineHeight(22)
-        .margin({ top: $r('app.float.space_s'), bottom: $r('app.float.space_s') });
-      Row()
-        .height(3)
-        .width(this.curBreakpoint.value === BreakpointTypeEnum.SM ? 20 : 40)
-        .backgroundColor($r('app.color.theme_color'))
-        .borderRadius($r('app.float.border_radius_capsule'))
-        .opacity(this.vm.currentIndex === index ? 1 : 0);
-    }
-    .backgroundColor($r('app.color.background_color_primary'))
-    .padding({
-      left: $r('app.float.space_m'),
-      right: $r('app.float.space_m'),
-    })
+    Button(name)
+      .fontColor(this.vm.currentIndex === index ? $r('sys.color.font_on_primary') :
+        $r('sys.color.font_primary'))
+      .backgroundColor(this.vm.currentIndex === index ? $r('app.color.theme_color') :
+        $r('app.color.background_color_button_grey'))
+      .fontSize($r('sys.float.Body_M'))
+      .height(36)
+      .onClick(() => {
+        this.vm.tabController.changeIndex(index)
+        this.tabScroller.scrollToIndex(index, true, ScrollAlign.CENTER)
+      })
   }
 }
 

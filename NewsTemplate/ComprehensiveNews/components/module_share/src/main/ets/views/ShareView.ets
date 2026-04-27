@@ -1,6 +1,7 @@
 import { AppStorageV2 } from '@kit.ArkUI';
-import { image } from '@kit.ImageKit';
 import { BusinessError } from '@kit.BasicServicesKit';
+import { HdsNavigation, HdsNavigationTitleMode, HdsNavigationAttribute } from '@kit.UIDesignKit';
+import { UtilLog } from '@hw-agconnect/util-log';
 import { UnifiedSharePanel } from '../components/UnifiedSharePanel'
 import { PosterSharePanel } from '../components/PosterSharePanel'
 import { Screenshot } from '../screenshot/Screenshot';
@@ -8,10 +9,18 @@ import { SystemShareUtils } from '../utils/SystemShareUtils';
 import { WXShareUtils } from '../utils/WXShareUtils';
 import { ShareViewData } from '../common/ShareParams';
 import { CommonConstants } from '../common/Constants';
-import { posterShareList, unifiedShareList } from '../common/PanelData';
-import { Logger } from '../common/Logger';
+import { posterShareList, unifiedShareList, unifiedImageShareList } from '../common/PanelData';
 import { ShareConfigModel } from '../model/ShareConfigModel';
-import { clearCache } from '../utils/FileUtils';
+import {
+  saveImgToSandbox,
+  isSandboxPath,
+  downloadImage,
+  isNetPath,
+  saveToSandbox,
+  isBase64Path,
+  base64ToSandbox,
+} from '../utils/FileUtils';
+import { ShareContentType } from '../common/ShareEnum';
 
 @Builder
 export function shareViewBuilder(params: ShareViewData) {
@@ -29,21 +38,23 @@ export struct ShareView {
   @Local systemShare: SystemShareUtils = SystemShareUtils.instance;
   @Local wxShare: WXShareUtils = WXShareUtils.instance;
   @Local sharePosterShow: boolean = false;
-  @Local pixmap: image.PixelMap | undefined = undefined;
 
-  aboutToAppear(): void {
+  async aboutToAppear(): Promise<void> {
     AppStorage.setOrCreate('cacheFiles', []);
+    await this.loadImage();
     this.systemShare.init(this.getUIContext(), this.data);
-    this.systemShare.onKnockShare();
-    this.wxShare.registerOnWXRespCallback(this.getUIContext(), this.data);
+    if (this.data.enableKnockShare) {
+      this.systemShare.onKnockShare();
+    }
+    if (this.data.enableGestureShare) {
+      this.systemShare.onGestureShare();
+    }
+    this.wxShare.registerOnWXRespCallback(this.data);
     this.configModel.registerWindowBottomPadding(this.getUIContext());
   }
 
   aboutToDisappear(): void {
-    this.systemShare.offKnockShare();
-    this.wxShare.unregisterOnWXRespCallback();
-    this.configModel.unRegisterWindowBottomPadding(this.getUIContext());
-    this.clearCacheFiles();
+    UtilLog.debug(TAG, 'aboutToDisappear');
   }
 
   @Monitor('data.sheetType')
@@ -53,23 +64,52 @@ export struct ShareView {
 
   generatePixelmap() {
     const id = this.data.extComponentId ? this.data.extComponentId : CommonConstants.DEFAULT_SNAPSHOT_ID;
-    this.getUIContext().getComponentSnapshot().get(id, ((err: BusinessError, pixmap: image.PixelMap) => {
-      if (err) {
-        Logger.error(TAG, `componentSnapshot get ${id} fail, error: ` + JSON.stringify(err));
-        return;
-      }
-      this.pixmap = pixmap;
-      this.sharePosterShow = true;
-    }))
+    this.getUIContext()
+      .getComponentSnapshot()
+      .get(id)
+      .then((async pixmap => {
+        this.sharePosterShow = true;
+        this.data.imageUri = await saveImgToSandbox(this.getUIContext(), pixmap);
+      }))
+      .catch((err: BusinessError) => {
+        UtilLog.error(TAG, `componentSnapshot get ${id} fail, error: ` + JSON.stringify(err));
+      })
   }
 
-  clearCacheFiles() {
-    const files: string[] = AppStorage.get('cacheFiles') ?? [];
-    clearCache(files);
+  async loadImage() {
+    if (this.data.shareType === ShareContentType.IMAGE && this.data.imageUrl) {
+      try {
+        if (typeof this.data.imageUrl === 'string') {
+          if (isSandboxPath(this.data.imageUrl)) {
+            this.data.imageUri = this.data.imageUrl
+            return;
+          }
+          if (isNetPath(this.data.imageUrl)) {
+            const buffer = await downloadImage(this.data.imageUrl);
+            this.data.imageUri = await saveToSandbox(this.getUIContext(), buffer);
+            return;
+          }
+          if (isBase64Path(this.data.imageUrl)) {
+            this.data.imageUri = await base64ToSandbox(this.getUIContext(), this.data.imageUrl);
+            return;
+          }
+          this.data.imageUri = this.data.imageUrl;
+        } else {
+          this.data.imageUri = await saveImgToSandbox(this.getUIContext(), this.data.imageUrl);
+        }
+      } catch (e) {
+        UtilLog.error(TAG, `loadImage failed, error: ${JSON.stringify(e)}`);
+      }
+    }
   }
 
   @Computed
   get getUnifiedShareList() {
+    if (this.data.shareType === ShareContentType.IMAGE) {
+      return unifiedImageShareList
+        .map(floor => floor.filter(v => !this.data.excludedAbilities.includes(v.kindId)))
+        .filter(floor => floor.length);
+    }
     return unifiedShareList
       .map(floor => floor.filter(v => !this.data.excludedAbilities.includes(v.kindId)))
       .filter(floor => floor.length);
@@ -91,70 +131,60 @@ export struct ShareView {
   }
 
   build() {
-    Column() {
-      Row() {
-        Text(this.sheetTitle)
-          .fontSize($r('sys.float.Title_S'))
-          .fontColor($r('sys.color.font_primary'))
-          .fontWeight(FontWeight.Bold)
-          .maxLines(1)
-      }
-      .width(CommonConstants.FULL_PERCENT)
-      .height(56)
-      .padding({
-        left: CommonConstants.PADDING_L,
-        right: 88,
-      })
+    HdsNavigation() {
+      Column() {
+        Scroll() {
+          Column() {
+            Blank().height(64)
+            if (this.showUnifiedPanel) {
+              UnifiedSharePanel({
+                shareList: this.getUnifiedShareList,
+                data: this.data,
+                showPoster: () => {
+                  this.generatePixelmap();
+                },
+              })
+            }
 
-      Scroll() {
-        Column() {
-          if (this.showUnifiedPanel) {
-            UnifiedSharePanel({
-              shareList: this.getUnifiedShareList,
-              data: this.data,
-              pixmap: this.pixmap,
-              showPoster: () => {
-                this.generatePixelmap();
-              },
-            })
-          }
-
-          if (this.sharePosterShow) {
-            PosterSharePanel({
-              shareList: this.getPosterShareList,
-              data: this.data,
-              pixmap: this.pixmap,
-            })
+            if (this.sharePosterShow) {
+              PosterSharePanel({
+                shareList: this.getPosterShareList,
+                data: this.data,
+              })
+            }
           }
         }
-      }
-      .align(Alignment.Top)
-      .scrollBar(BarState.Off)
-      .edgeEffect(EdgeEffect.Spring)
-      .nestedScroll({
-        scrollForward: NestedScrollMode.PARENT_FIRST,
-        scrollBackward: NestedScrollMode.SELF_FIRST,
-      })
+        .align(Alignment.Top)
+        .scrollBar(BarState.Off)
+        .edgeEffect(EdgeEffect.Spring)
 
-      Screenshot({
-        data: this.data,
-      })
-        .position({ left: -2000, bottom: 0 })
-        .visibility(Visibility.Hidden)
-        .accessibilityGroup(true)
-        .accessibilityLevel('no')
-    }
-    .width(CommonConstants.FULL_PERCENT)
-    .padding({
-      top: CommonConstants.PADDING_S,
-      bottom: this.configModel.bottomPadding,
-    })
-    .onAppear(() => {
-      if (this.data.directPoster) {
-        setTimeout(() => {
-          this.generatePixelmap();
-        }, 100)
+        Screenshot({
+          data: this.data,
+        })
+          .position({ left: -2000, bottom: 0 })
+          .visibility(Visibility.Hidden)
+          .accessibilityGroup(true)
+          .accessibilityLevel('no')
       }
+      .width(CommonConstants.FULL_PERCENT)
+      .padding({
+        top: CommonConstants.PADDING_S,
+        bottom: this.configModel.bottomPadding,
+      })
+      .onAppear(() => {
+        if (this.data.directPoster) {
+          setTimeout(() => {
+            this.generatePixelmap();
+          }, 100)
+        }
+      })
+    }
+    .height('auto')
+    .titleBar({
+      content: {
+        title: { mainTitle: this.sheetTitle },
+      },
     })
+    .titleMode(HdsNavigationTitleMode.MODAL)
   }
 }

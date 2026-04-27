@@ -281,7 +281,6 @@ export class MemberShipVM {
         .catch((err: BusinessError) => {
           this.loading = false;
           WindowUtil.toast(`查询会员商品失败，错误码为${err.code}，请排查后重试~`);
-          this.enablePurchase = false;
           hilog.error(0xFF00, 'MemberShip', `Failed to query products. Code is ${err.code}, message is ${err.message}`);
         });
     } catch {

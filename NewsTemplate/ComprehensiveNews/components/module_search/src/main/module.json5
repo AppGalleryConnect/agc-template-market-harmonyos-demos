@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "module_search",
+    "type": "har",
+    "routerMap": "$profile:route_map",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ]
+  }
+}

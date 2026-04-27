@@ -1,1 +1,1 @@
-export { CaloriesPageBuilder } from './src/main/ets/pages/CaloriesPage';
+export { HealthyPageBuilder } from './src/main/ets/pages/HealthyPage';

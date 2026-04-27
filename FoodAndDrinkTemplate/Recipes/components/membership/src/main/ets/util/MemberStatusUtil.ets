@@ -22,26 +22,25 @@ export class MemberStatusUtil {
       queryType: iap?.PurchaseQueryType.CURRENT_ENTITLEMENT,
     };
 
-    let emptyResult: iap.QueryPurchaseResult = {
-      purchaseDataList: [],
+    let autoRenewPromise: Promise<iap.QueryPurchaseResult> | null = null;
+    let nonRenewPromise: Promise<iap.QueryPurchaseResult> | null = null;
+    let nonConsumePromise: Promise<iap.QueryPurchaseResult> | null = null;
+
+    try {
+      autoRenewPromise = iap?.queryPurchases(uiContext, autoRenewParam);
+      nonRenewPromise = iap?.queryPurchases(uiContext, nonRenewParam);
+      nonConsumePromise = iap?.queryPurchases(uiContext, nonConsumeParam);
+    } catch (e) {
+      hilog.error(0xFF00, 'MemberShip',`query purchase failed with error ${JSON.stringify(e)}`);
     }
 
-    let autoRenewPromise = iap?.queryPurchases(uiContext, autoRenewParam).catch(() => {
-      return emptyResult
-    })
-    let nonRenewPromise = iap?.queryPurchases(uiContext, nonRenewParam).catch(() => {
-      return emptyResult
-    })
-    let nonConsumePromise = iap?.queryPurchases(uiContext, nonConsumeParam).catch(() => {
-      return emptyResult
-    })
     return Promise.all([autoRenewPromise, nonRenewPromise, nonConsumePromise]).then((res) => {
-      let autoRenewPurchasedList = res[0].purchaseDataList;
-      let nonAutoRenewPurchasedList = res[1].purchaseDataList;
-      let nonConsumePurchasedList = res[2].purchaseDataList;
-      memberList.renewList = autoRenewPurchasedList;
-      memberList.nonRenewList = nonAutoRenewPurchasedList;
-      memberList.nonConsumeList = nonConsumePurchasedList;
+      let autoRenewPurchasedList = res[0]?.purchaseDataList;
+      let nonAutoRenewPurchasedList = res[1]?.purchaseDataList;
+      let nonConsumePurchasedList = res[2]?.purchaseDataList;
+      memberList.renewList = autoRenewPurchasedList ?? [];
+      memberList.nonRenewList = nonAutoRenewPurchasedList ?? [];
+      memberList.nonConsumeList = nonConsumePurchasedList ?? [];
       return memberList;
     }).catch((err: BusinessError) => {
       hilog.error(0xFF00, 'MemberShip',

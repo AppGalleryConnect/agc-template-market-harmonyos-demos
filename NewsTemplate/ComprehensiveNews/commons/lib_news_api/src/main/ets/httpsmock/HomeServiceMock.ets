@@ -24,6 +24,7 @@ import { MockBroadcast } from './mockdata/MockBroadcast';
 import { MockDigitalNews } from './mockdata/MockDigitalNews';
 import { MockTelevision } from './mockdata/MockTelevision';
 import { BaseAv } from '../database/AvType';
+import { MyAuthor } from '../database/AuthorType';
 
 /**
  * 首页Mock
@@ -92,13 +93,16 @@ export class HomeServiceMock {
     // 查询首页关注流
     adapter.onGet('/home/follow/list').reply((config: AxiosRequestConfig) => {
       const params = config.params as HomeFollowRequest;
-      const myUserInfo = this.authorMock.queryAuthorRaw();
+      const myUserInfo = this.authorMock.queryAuthorRaw() as MyAuthor;
       const articles = MockArticle.list
+        .filter(v => !myUserInfo.myBlockAuthors.includes(v.authorId))
+        .filter(v => !myUserInfo.myBlockNewsList.includes(v.id))
         .filter(v => (myUserInfo?.watchers.includes(v.authorId) ||
           v.authorId === myUserInfo?.authorId) && params.newsType.includes(v.type))
         .map(v => this.baseNewsMock.handleRawNews(v))
         .map(v => this.baseNewsMock.layoutTrans(v));
       const videos = MockVideo.list
+        .filter(v => !myUserInfo.myBlockAuthors.includes(v.authorId))
         .filter(v => (myUserInfo?.watchers.includes(v.authorId) ||
           v.authorId === myUserInfo?.authorId) && params.newsType.includes(v.type))
         .map(v => this.baseNewsMock.handleRawNews(v))
@@ -221,9 +225,17 @@ export class HomeServiceMock {
     let handleRes = recommendList.map(item => {
       const copyItem = JSON.parse(JSON.stringify(item)) as RequestListData;
       let flexData1 = item.articles.map(articleId => {
+        const mineUserInfo = this.authorMock.queryAuthorRaw() as MyAuthor;
+        if (mineUserInfo?.myBlockNewsList?.includes(articleId)) {
+          return undefined;
+        }
         let raw = this.baseNewsMock.queryRawNews(articleId, false);
         if (raw) {
-          return this.baseNewsMock.handleRawNews(raw);
+          const newsResp = this.baseNewsMock.handleRawNews(raw);
+          if (mineUserInfo?.myBlockAuthors?.includes(newsResp?.author?.authorId)) {
+            return undefined;
+          }
+          return newsResp;
         }
         return raw;
       }).filter(v => Boolean(v))
@@ -231,7 +243,7 @@ export class HomeServiceMock {
       copyItem.navInfo = item.navInfo;
       copyItem.extraInfo = item.extraInfo;
       return copyItem;
-    })
+    }).filter(v => v.articles.length > 0)
     return handleRes;
   }
 

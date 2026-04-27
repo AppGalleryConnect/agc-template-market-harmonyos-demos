@@ -25,7 +25,8 @@
     "order": "file:../../features/order",
     "shopping": "file:../../features/shopping",
     "product": "file:../../features/product",
-    "member": "file:../../features/member"
+    "member": "file:../../features/member",
+    "points": "file:../../features/points"
   },
   "devDependencies": {},
   "dynamicDependencies": {}

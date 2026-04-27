@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "module_product_search",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

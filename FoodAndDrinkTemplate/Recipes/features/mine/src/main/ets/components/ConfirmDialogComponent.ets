@@ -22,6 +22,6 @@ export function ConfirmDialogComponent(params:DialogParams) {
     }
     .size({ width: '80%', height: 120 })
     .justifyContent(FlexAlign.Center)
-    .backgroundColor(Color.White)
+    .backgroundColor($r('sys.color.comp_background_gray'))
     .borderRadius(16);
 }

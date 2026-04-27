@@ -1,6 +1,7 @@
 import { common } from '@kit.AbilityKit';
 import { CommonConstants } from '../constants/CommonConstants';
 import { GridRowColSetting } from '../common/GridRowColSetting';
+import { PopViewUtils } from '../common/PopViewUtils';
 import { LogoutBtn } from '../components/LogoutBtn';
 import { SettingCard } from '../components/SettingCard';
 import { SettingGroup } from '../types/SettingItem';
@@ -29,7 +30,9 @@ export struct SettingView {
     this.initParams();
     this.vm.handleSettingList(this.settingList);
     this.vm.onConfigurationUpdate();
+    this.vm.windowModel.init(this.getUIContext());
     this.vm.windowModel.onAvoidAreaChange();
+    PopViewUtils.init(this.getUIContext())
   }
 
   aboutToDisappear(): void {

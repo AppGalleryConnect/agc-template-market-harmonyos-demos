@@ -1,0 +1,24 @@
+<svg width="48.000000" height="48.000000" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <metadata>
+    <agcit_code>agcit_huawei_atomic_mall</agcit_code>
+  </metadata>
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs>
+		<filter id="filter_92_5707_dd" x="0.000000" y="0.000000" width="48.000000" height="48.000000" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+			<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+			<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+			<feOffset dx="0" dy="4"/>
+			<feGaussianBlur stdDeviation="1.33333"/>
+			<feComposite in2="hardAlpha" operator="out" k2="-1" k3="1"/>
+			<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+			<feBlend mode="normal" in2="BackgroundImageFix" result="effect_dropShadow_1"/>
+			<feBlend mode="normal" in="SourceGraphic" in2="effect_dropShadow_1" result="shape"/>
+		</filter>
+	</defs>
+	<g filter="url(#filter_92_5707_dd)">
+		<circle cx="24.000000" cy="20.000000" r="20.000000" fill="#FFFFFF" fill-opacity="1.000000"/>
+	</g>
+	<path d="M32.18 22.03C31.97 22.03 31.77 21.95 31.6 21.79L24 14.21L16.39 21.79C16.06 22.11 15.57 22.11 15.24 21.79C14.91 21.46 14.91 20.97 15.24 20.65L23.42 12.5C23.75 12.17 24.24 12.17 24.57 12.5L32.75 20.65C33.08 20.97 33.08 21.46 32.75 21.79C32.59 21.95 32.38 22.03 32.18 22.03ZM24 31C23.55 31 23.18 30.63 23.18 30.18L23.18 13.88C23.18 13.44 23.55 13.07 24 13.07C24.45 13.07 24.81 13.44 24.81 13.88L24.81 30.18C24.81 30.63 24.45 31 24 31ZM32.18 10.62L15.81 10.62C15.36 10.62 15 10.26 15 9.81C15 9.36 15.36 9 15.81 9L32.18 9C32.63 9 33 9.36 33 9.81C33 10.26 32.63 10.62 32.18 10.62Z" fill="#000000" fill-opacity="0.400000" fill-rule="nonzero"/>
+</svg>

@@ -8,6 +8,7 @@ import { MediaViewModel } from './MediaViewModel';
 import { PlayerAnimation } from '../animation/PlayerAnimation';
 import { AudioConstants } from '../constants/Constants';
 import { Utils } from '../utils/Utils';
+import { EventMap } from '../constants/EventMap';
 
 const TAG = '[AudioViewModel]';
 
@@ -107,7 +108,7 @@ export class AudioViewModel {
       let eventData: emitter.GenericEventData<string> = {
         data: this.mediaService.audioList[this.mediaService.audioIndex].id,
       };
-      emitter.emit('on_sub_window', eventData)
+      emitter.emit(EventMap.ON_SUB_WINDOW, eventData)
     }
     Utils.changeFocus(MediaViewModel.windowStage!, AudioConstants.AUDIO_SUB_NAME)
   }

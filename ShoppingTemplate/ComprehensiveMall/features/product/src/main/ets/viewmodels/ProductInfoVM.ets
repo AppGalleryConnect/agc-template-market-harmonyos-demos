@@ -1,5 +1,6 @@
 import { calendarManager } from '@kit.CalendarKit';
 import { SharePicker, ShareRecordData } from 'aggregated_share';
+import { AbilityConstant, common, StartOptions, Want } from '@kit.AbilityKit';
 import {
   CalendarUtil,
   CountdownModel,
@@ -7,6 +8,7 @@ import {
   ProductInfoPageParam,
   RouterMap,
   routerStack,
+  SafeJson,
   WindowUtil,
 } from 'lib_foundation';
 import {
@@ -16,11 +18,14 @@ import {
   SeckillApis,
   SeckillProductInfo,
   SeckillReserveReq,
-  SeckillStatus,
   SeckillTimeSlot,
 } from 'lib_network';
 import { CommonConfirmDialog, CustomServiceSheet } from 'lib_widget';
 import { ShareUtil } from '../utils/ShareUtil';
+import { UtilLog } from '@hw-agconnect/util-log';
+import { window } from '@kit.ArkUI';
+
+const TAG: string = '[ProductInfoVM]'
 
 @ObservedV2
 export class ProductInfoVM {
@@ -46,6 +51,16 @@ export class ProductInfoVM {
   countdown?: CountdownModel;
   @Trace
   currentEventId?: number;
+  curWindow?: window.Window
+  /** 当前页面所属的 Ability 名称，由 ProductInfoPage 在 onReady 中注入 */
+  abilityName: string = '';
+  /** 保存 entryWindowActive 事件的回调引用，用于取消订阅 */
+  private _windowActiveCallback?: (type: WindowStatusType) => void
+
+  @Computed
+  get isSplitScreen(): boolean {
+    return routerStack.isSplitActive;
+  }
 
   @Computed
   get isLogin() {
@@ -78,18 +93,24 @@ export class ProductInfoVM {
   }
 
 
-  public async initData(param: ProductInfoPageParam) {
+  public async initData(param: ProductInfoPageParam, abilityName: string = 'EntryAbility') {
+    this.abilityName = abilityName;
     this.productId = param.productId;
     this.slotId = param.slotId;
     this.isLoading = true;
-    await this.getProductInfo();
-    await this._getReviewList();
-    this.isLoading = false;
-    this._getCollectedStatus();
-    ProductApis.addProductViewHistory({
-      productId: this.productId,
-      slotId: this.slotId,
-    });
+    try {
+      await this.getProductInfo();
+      await this._getReviewList();
+      this._getCollectedStatus();
+      ProductApis.addProductViewHistory({
+        productId: this.productId,
+        slotId: this.slotId,
+      });
+    } catch (err) {
+      UtilLog.error('init product info failed. error: ' + JSON.stringify(err))
+    } finally {
+      this.isLoading = false;
+    }
   }
 
   public handleClickMemberLink() {
@@ -147,6 +168,53 @@ export class ProductInfoVM {
   public openShare() {
     const picker: SharePicker = new SharePicker(this.shareOptions);
     picker.show(WindowUtil.globalUIContext);
+  }
+
+  /** 以分屏次窗口方式启动当前商品详情页，实现应用内左右分屏比较 */
+  public async startSplitScreen(): Promise<void> {
+    const context = WindowUtil.globalUIAbilityContext;
+    const want: Want = {
+      bundleName: context.abilityInfo.bundleName,
+      abilityName: 'SecondAbility',
+      parameters: {
+        productId: this.productId,
+        slotId: this.slotId !== undefined ? this.slotId : '',
+        isSplitPage: true,
+      },
+    };
+    const option: StartOptions = {
+      windowMode: AbilityConstant.WindowMode.WINDOW_MODE_SPLIT_SECONDARY,
+    };
+    try {
+      await context.startAbility(want, option);
+      routerStack.isSplitActive = true;
+    } catch (err) {
+      UtilLog.error(TAG, 'split window failed. error: ' + SafeJson.jsonStringify(err))
+    }
+  }
+
+  /** 合并分屏。EntryAbility 侧：迁移 SecondAbility 路由栈后关闭 SecondAbility；SecondAbility 侧：关闭自身 */
+  public async mergeSplitScreen(): Promise<void> {
+    if (!this.isSplitScreen) {
+      return;
+    }
+    if (this.abilityName === 'EntryAbility') {
+      routerStack.migrateStack('SecondAbility', 'EntryAbility');
+      routerStack.isSplitActive = false;
+      const secondCtx = WindowUtil.getUIAbilityContext('SecondAbility');
+      try {
+        await secondCtx?.terminateSelf();
+      } catch (err) {
+        UtilLog.error(TAG, 'terminate SecondAbility failed. error: ' + SafeJson.jsonStringify(err));
+      }
+    } else {
+      const secondCtx = WindowUtil.getUIAbilityContext('SecondAbility');
+      try {
+        await secondCtx?.terminateSelf();
+      } catch (err) {
+        UtilLog.error(TAG, 'terminate self failed. error: ' + SafeJson.jsonStringify(err));
+      }
+    }
   }
 
   public handleNotLogin() {
@@ -258,6 +326,45 @@ export class ProductInfoVM {
     const res = await ProductApis.getProductCollectStatus(this.productId);
     if (res.code === 0 && res.status) {
       this.collectedStatus = true;
+    }
+  }
+
+  /**
+   * 注册主窗口激活事件监听，仅在 EntryAbility 侧有效。
+   * 当 SecondAbility 被系统导航条关闭、主窗口 SHOWN 事件触发时，同步最新分屏状态。
+   */
+  public registerWindowActiveListener(): void {
+    if (this.abilityName !== 'EntryAbility') {
+      return;
+    }
+    this._windowActiveCallback = (statusType: window.WindowStatusType) => {
+      if (statusType === window.WindowStatusType.FULL_SCREEN) {
+        routerStack.isSplitActive = false;
+      }
+    };
+    window.getLastWindow(WindowUtil.globalContext).then((win) => {
+      this.curWindow = win;
+      try {
+        win.on('windowStatusChange', this._windowActiveCallback!)
+      } catch (err) {
+        UtilLog.error(TAG, 'set window status change listener failed. error:' + SafeJson.jsonStringify(err))
+      }
+    }).catch((err: BusinessError) => {
+      UtilLog.error(TAG, 'get last window failed. error:' + SafeJson.jsonStringify(err))
+    })
+  }
+
+  /**
+   * 取消主窗口激活事件监听，防止页面销毁后内存泄漏。
+   */
+  public unregisterWindowActiveListener(): void {
+    if (this.curWindow && this._windowActiveCallback) {
+      try {
+        this.curWindow.off('windowStatusChange', this._windowActiveCallback);
+      } catch (err) {
+        UtilLog.error(TAG, 'remove window status change listener. error:' + SafeJson.jsonStringify(err))
+      }
+      this._windowActiveCallback = undefined;
     }
   }
 }

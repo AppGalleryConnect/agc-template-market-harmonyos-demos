@@ -56,8 +56,8 @@
       "srcPath": "./components/module_shopping_cart"
     },
     {
-      "name": "module_coupons",
-      "srcPath": "./components/module_coupons"
+      "name": "coupons",
+      "srcPath": "./components/coupons"
     },
     {
       "name": "module_product_search",
@@ -130,6 +130,10 @@
     {
       "name": "member",
       "srcPath": "./features/member"
+    },
+    {
+      "name": "points",
+      "srcPath": "./features/points"
     },
     {
       "name": "aggregated_login",

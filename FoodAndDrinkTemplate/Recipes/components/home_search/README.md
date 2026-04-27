@@ -21,7 +21,7 @@
 
 - DevEco Studio版本：DevEco Studio 5.0.4 Release及以上
 - HarmonyOS SDK版本：HarmonyOS 5.0.4 Release SDK及以上
-- 设备类型：华为手机（包括双折叠和阔折叠）
+- 设备类型：华为手机（包括双折叠和阔折叠）、华为平板
 - 系统版本：HarmonyOS 5.0.4(16)及以上
 
 ### 权限
@@ -68,6 +68,7 @@
    HomeSearch({
        hotInfo: this.vm.hotInfo,
        resultList: this.vm.resultList,
+       historyInfo: this.vm.historyInfo,
        paramsKeyword: this.vm.paramsKeyword,
        isShowResult: this.vm.isShowResult,
        isShowSearch: this.vm.formPage === CommonConstants.CLASSIFICATION_PAGE,
@@ -104,8 +105,9 @@ HomeSearch(options?: HomeSearchOptions)
 
 | 名称            | 类型                                        | 必填 | 说明       |
 |---------------|-------------------------------------------|----|----------|
-| hotInfo       | string[]                                  | 否  | 热门搜索     |
+| hotInfo       | [RecipeBriefInfo](#RecipeBriefInfo对象说明)[] | 否  | 热门搜索     |
 | resultList    | [RecipeBriefInfo](#RecipeBriefInfo对象说明)[] | 否  | 搜索结果     |
+| historyInfo   | string[]                                  | 否  | 历史搜索     |
 | paramsKeyword | string                                    | 否  | 默认搜索词    |
 | isShowResult  | boolean                                   | 否  | 是否展示搜索结果 |
 | isShowSearch  | boolean                                   | 否  | 是否展示搜索框  |
@@ -164,7 +166,32 @@ import { HomeSearch, RecipeBriefInfo } from 'home_search';
 @Entry
 @ComponentV2
 struct Index {
-   @Local hotInfo: string[] = ['西红柿炒鸡蛋', '可乐鸡翅']
+   @Local historyInfo: string[] = ['西红柿炒鸡蛋', '可乐鸡翅']
+   @Local hotInfo: RecipeBriefInfo[] = [{
+      id: 1,
+      title: '西红柿炒鸡蛋',
+      description: '西红柿炒鸡蛋',
+      category: '',
+      cookingTime: 0,
+      difficulty: '',
+      author: '美食博主',
+      authorAvatar: 'startIcon',
+      thumbnail: 'startIcon',
+      views: 100,
+      likes: 100,
+   } as RecipeBriefInfo, {
+      id: 2,
+      title: '可乐鸡翅',
+      description: '西红柿炒鸡蛋',
+      category: '',
+      cookingTime: 0,
+      difficulty: '',
+      author: '美食博主',
+      authorAvatar: 'startIcon',
+      thumbnail: 'startIcon',
+      views: 100,
+      likes: 100,
+   } as RecipeBriefInfo];
    @Local resultList: RecipeBriefInfo[] = [{
       id: 1,
       title: '西红柿炒鸡蛋',
@@ -196,6 +223,7 @@ struct Index {
          HomeSearch({
             hotInfo: this.hotInfo,
             resultList: this.resultList,
+            historyInfo: this.historyInfo,
             paramsKeyword: '',
             isShowResult: true,
             isShowSearch: true,

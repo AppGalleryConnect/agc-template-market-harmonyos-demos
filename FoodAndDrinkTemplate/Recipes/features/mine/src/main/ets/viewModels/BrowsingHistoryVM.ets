@@ -15,7 +15,9 @@ export class BrowsingHistoryVM {
     // rdb查询
     if (CommonConstants.RDB_FLAG) {
       await this.rdbManager.initDatabase(this.context);
-      const result: recipesData[] = await this.rdbManager.query('', true);
+      let result: recipesData[] = await this.rdbManager.query('', true);
+      // 屏蔽菜谱上传的数据，因为是模拟，实际上没有id对应的详情，实际开发需要删除这行代码
+      result = result.filter((item) => item.views !== 0)
       this.history = historyListMapper(result);
     } else {
       // 接口查询

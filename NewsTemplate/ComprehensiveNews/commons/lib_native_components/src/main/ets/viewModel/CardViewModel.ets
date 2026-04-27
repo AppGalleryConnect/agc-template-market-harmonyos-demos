@@ -1,7 +1,7 @@
 import { AppStorageV2 } from '@kit.ArkUI';
 import { LoginSheetUtils } from 'lib_account';
 import { BaseViewModel, BreakpointModel, CommonConfirmDialog, RouterParams, RouterToNews } from 'lib_common';
-import { CommentServiceApi, MineServiceApi, NewsResponse } from 'lib_news_api';
+import { MineServiceApi, NewsResponse } from 'lib_news_api';
 import { LayoutParams } from 'module_flexlayout';
 import { PiPWindowModel } from 'module_swipeplayer';
 import { LoneTakeAnimationsTransition, LongTakeTransitionParam } from 'module_transition';
@@ -51,12 +51,10 @@ export class CardViewModel extends BaseViewModel {
     cardInfo.isLiked = !cardInfo.isLiked
     if (cardInfo.isLiked) {
       cardInfo.likeCount += 1
-      CommentServiceApi.addPosterLike(cardInfo.id)
       MineServiceApi.addLike(cardInfo.id)
       return
     }
     cardInfo.likeCount -= 1
-    CommentServiceApi.cancelPosterLike(cardInfo.id)
     MineServiceApi.cancelLike(cardInfo.id)
   }
 
@@ -96,7 +94,7 @@ export class CardViewModel extends BaseViewModel {
       LoneTakeAnimationsTransition.generateLongTakeParam(this.uiContext,
         componentId ? componentId :
           'news_flow_' + cardData.extraInfo.channelId + '_' + cardData.extraInfo.flowIndex + '_' +
-          cardData.extraInfo.flexId, 9);
+            cardData.extraInfo.flexId, 9);
     if (longTakeTransitionParam) {
       params.longTakeTransitionParam = longTakeTransitionParam;
     }

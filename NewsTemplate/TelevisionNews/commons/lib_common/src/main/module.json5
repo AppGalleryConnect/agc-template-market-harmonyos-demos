@@ -1,0 +1,18 @@
+{
+  "module": {
+    "name": "lib_common",
+    "type": "shared",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": true,
+    "routerMap": "$profile:router_map",
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.GET_NETWORK_INFO",
+      }
+    ]
+  }
+}

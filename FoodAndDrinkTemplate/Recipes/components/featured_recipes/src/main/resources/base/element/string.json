@@ -6,11 +6,15 @@
     },
     {
       "name": "agcit_huawei_recipes_featured_recipes",
-      "value": "1.0.5"
+      "value": "1.0.6"
     },
     {
       "name": "agcittype_huawei_recipes_featured_recipes",
       "value": "serviceComponent"
+    },
+    {
+      "name": "agcitkid_huawei_recipes_featured_recipes",
+      "value": "aggregated_ads/1.0.6"
     }
   ]
 }

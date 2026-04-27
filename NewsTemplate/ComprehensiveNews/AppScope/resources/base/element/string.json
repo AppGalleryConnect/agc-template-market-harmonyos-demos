@@ -6,7 +6,7 @@
     },
     {
       "name": "agcit_huawei_comprehensive_news",
-      "value": "1.0.4"
+      "value": "1.0.5"
     },
     {
       "name": "agcittype_huawei_comprehensive_news",
@@ -14,7 +14,7 @@
     },
     {
       "name": "agcitkid_huawei_comprehensive_news",
-      "value": "agcit_huawei_common_login/1.0.1,agcit_huawei_common_share/1.0.1,agcit_huawei_common_app_setting/1.0.0,agcit_huawei_common_feedback/1.0.0,agcit_huawei_common_text_reader/1.0.0,agcit_huawei_common_collect_personal_info/1.0.0,agcit_huawei_common_privacy_consent_dialog/1.0.0,agcit_huawei_common_membership/1.0.3,agcit_huawei_comprehensive_news_module_channeledit/1.0.0,agcit_huawei_comprehensive_news_module_highlight/1.0.0,agcit_huawei_comprehensive_news_module_imagepreview/1.0.0,agcit_huawei_comprehensive_news_module_post/1.0.3,agcit_huawei_comprehensive_news_module_setfontsize/1.0.1,agcit_huawei_comprehensive_news_module_swipeplayer/1.0.4,agcit_huawei_comprehensive_news_module_transition/1.0.0,agcit_huawei_comprehensive_news_module_articlepost/1.0.0,agcit_huawei_comprehensive_news_module_flexlayout/1.0.0,agcit_huawei_comprehensive_news_module_digital_newspaper/1.0.0,agcit_huawei_comprehensive_news_module_audioplayer/1.0.0"
+      "value": "agcit_huawei_common_login/1.0.1,agcit_huawei_common_share/1.0.2,agcit_huawei_common_app_setting/1.0.0,agcit_huawei_common_feedback/1.0.0,agcit_huawei_common_text_reader/1.0.0,agcit_huawei_common_collect_personal_info/1.0.0,agcit_huawei_common_privacy_consent_dialog/1.0.0,agcit_huawei_common_membership/1.0.3,agcit_huawei_common_search/1.0.1,agcit_huawei_comprehensive_news_module_channeledit/1.0.0,agcit_huawei_comprehensive_news_module_highlight/1.0.0,agcit_huawei_comprehensive_news_module_imagepreview/1.0.0,agcit_huawei_comprehensive_news_module_post/1.0.4,agcit_huawei_comprehensive_news_module_setfontsize/1.0.1,agcit_huawei_comprehensive_news_module_swipeplayer/1.0.4,agcit_huawei_comprehensive_news_module_transition/1.0.0,agcit_huawei_comprehensive_news_module_articlepost/1.0.1,agcit_huawei_comprehensive_news_module_flexlayout/1.0.0,agcit_huawei_comprehensive_news_module_digital_newspaper/1.0.1,agcit_huawei_comprehensive_news_module_audioplayer/1.0.0"
     }
   ]
 }

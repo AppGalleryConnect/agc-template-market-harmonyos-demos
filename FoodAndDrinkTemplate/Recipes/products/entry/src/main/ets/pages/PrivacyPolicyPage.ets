@@ -12,8 +12,14 @@ struct PrivacyPolicyPage {
   columnOptions: BreakpointType<number> = new BreakpointType<number>({
     sm: 0,
     md: 70,
-    lg: 70,
-    xl: 70,
+    lg: 20,
+    xl: 20,
+  });
+  paddingOption: BreakpointType<number> = new BreakpointType<number>({
+    sm: 0,
+    md: 140,
+    lg: 186,
+    xl: 186,
   });
   @Local breakPointModel: BreakpointModel = AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
 
@@ -21,6 +27,12 @@ struct PrivacyPolicyPage {
   get pageMargin() {
     return this.columnOptions.getValue(this.breakPointModel.currentBreakpoint);
   }
+
+  @Computed
+  get pagePadding() {
+    return this.paddingOption.getValue(this.breakPointModel.currentBreakpoint);
+  }
+
   build() {
     NavDestination() {
       Scroll() {
@@ -80,9 +92,11 @@ struct PrivacyPolicyPage {
             }.margin({ top: 16 })
           }
           .margin({bottom: this.pageMargin})
+          .padding({left: this.pagePadding, right: this.pagePadding})
         }.height(CommonConstants.FULL_HEIGHT).padding({ left: 16, right: 16 }).justifyContent(FlexAlign.SpaceBetween)
       }.scrollBar(BarState.Off).edgeEffect(EdgeEffect.Spring)
-
-    }.hideTitleBar(true).expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])
+    }
+    .hideTitleBar(true)
+    .padding({bottom: 28})
   }
 }

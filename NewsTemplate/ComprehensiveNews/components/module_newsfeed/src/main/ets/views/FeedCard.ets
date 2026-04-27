@@ -4,10 +4,11 @@ import { FeedDetail } from '../components/FeedDetail';
 import { FeedOperate } from '../components/FeedOperate';
 import { FeedCardInfoModel } from '../model/RecommendModel';
 
-/*
+/**
  * 动态区域组件
  * 标题，图片，地理位置，转发，评论，点赞等相关模块
- * */
+ */
+
 const TAG = '[FeedCard]';
 
 @ComponentV2
@@ -52,10 +53,20 @@ export struct FeedCard {
 
   @Builder
   publishTimeBuilder() {
-    Column() {
+    Row() {
       Text(this.feedCardInfo?.relativeTime)
-        .fontSize(12 * this.fontSizeRatio).fontColor('#8C8C8E')
-    }.alignItems(HorizontalAlign.Start)
+        .fontSize(12 * this.fontSizeRatio)
+        .fontColor($r('sys.color.font_tertiary'))
+      if (this.feedCardInfo?.city) {
+        Text() {
+          Span('IP:')
+          Span(this.feedCardInfo?.city)
+        }
+        .fontSize(12 * this.fontSizeRatio)
+        .fontColor($r('sys.color.font_tertiary'))
+        .margin({ left: 4 })
+      }
+    }
   }
 
   @Builder

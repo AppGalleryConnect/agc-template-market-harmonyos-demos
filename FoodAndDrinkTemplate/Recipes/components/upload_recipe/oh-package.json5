@@ -1,9 +1,11 @@
 {
   "name": "upload_recipe",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Please describe the basic information.",
   "main": "Index.ets",
   "author": "",
   "license": "Apache-2.0",
-  "dependencies": {}
+  "dependencies": {
+    "@hw-agconnect/ui-toast": "^1.0.0"
+  }
 }

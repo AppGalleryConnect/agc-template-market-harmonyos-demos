@@ -54,6 +54,16 @@ class WindowUtil {
   }
 
   /**
+   * 获取指定 Ability 的 UIAbilityContext
+   * @param abilityName Ability 名称，如 'EntryAbility'、'SecondAbility'
+   * @returns 对应的 UIAbilityContext，未注册时返回 undefined
+   */
+  public getUIAbilityContext(abilityName: string): common.UIAbilityContext | undefined {
+    const uiCtx: UIContext | undefined = this.contextMap.get(abilityName);
+    return uiCtx?.getHostContext() as common.UIAbilityContext | undefined;
+  }
+
+  /**
    * 打开toast
    * @param options
    */

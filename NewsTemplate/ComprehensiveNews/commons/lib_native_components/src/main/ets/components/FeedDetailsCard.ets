@@ -60,7 +60,7 @@ export struct NativeComponent {
         title: this.cardData.nativeCardData.title,
         createTime: this.cardData.nativeCardData.createTime,
         coverUrl: this.handlerCoverImage(),
-        subTitle: this.cardData.nativeCardData.articleFrom,
+        subTitle: this.cardData.nativeCardData.author?.authorNickName,
       },
       shareRenderBuilder: () => {
         this.shareCommentBuilder()

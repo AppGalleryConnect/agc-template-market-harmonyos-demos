@@ -1,22 +1,20 @@
-import { formBindingData, formProvider } from '@kit.FormKit';
-import { BusinessError } from '@kit.BasicServicesKit';
-import commonEventManager from '@ohos.commonEventManager';
-import { getOrderList, GetOrderListRequest, IOrder, OrderType } from 'lib_foundation';
-import { Logger, PreferenceUtil } from 'module_base';
+import {
+  PreferenceUtil,
+  HttpApi,
+  BaseViewModel,
+  ContextUtil,
+  WidgetCardModel,
+  KEY_CARD_INFO,
+  Logger,
+} from 'lib_foundation';
 
-
-const TAG: string = 'WidgetCardVM';
-
-class FormData {
-  hasData: boolean = false;
-  productList: IOrder[] = []
-}
+const TAG = '[WidgetCardVM]'
 
 @ObservedV2
-export class WidgetCardVM {
-  eventType: string = 'createCard';
-  private formDataInfo: FormData | undefined = undefined;
+export class WidgetCardVM extends BaseViewModel {
   private static _instance: WidgetCardVM;
+  private queryTimer: number | null = null;
+  private readonly INTERVAL_TIME = 10 * 60 * 1000;
 
   public static get instance() {
     if (!WidgetCardVM._instance) {
@@ -25,106 +23,76 @@ export class WidgetCardVM {
     return WidgetCardVM._instance;
   }
 
-
-  public async getLatestOrder() {
-    const data: GetOrderListRequest = {
-      type: OrderType.RECEIVE,
-    }
-    const res = await getOrderList(data);
-    if (res.length > 0) {
-      const productListData: IOrder[] = res.slice(0, 1)
-      this.formDataInfo = {
-        hasData: true,
-        productList: productListData,
-      };
-      PreferenceUtil.getInstance().put('formDataInfo', this.formDataInfo);
-    }
-  }
-
-  public async updateFormInfo() {
-    try {
-      if (!this.formDataInfo) {
-        return;
-      }
-      this.updateFormData(this.formDataInfo);
-    } catch (e) {
-      Logger.error(`updateFormInfo failed. Cause: ${JSON.stringify(e)}`);
-    }
-  }
-
-  public getFormIdArray() {
-    return PreferenceUtil.getInstance().get(this.getFormPreferenceKey()) as Array<string>;
-  }
-
-  public createFormData(data: FormData): formBindingData.FormBindingData {
-    return formBindingData.createFormBindingData(data);
-  }
-
-  public updateFormData(data: FormData, formId?: string) {
-    if (!this.getFormIdArray()) {
+  // 定时查询物流状态
+  startPolling() {
+    if (this.queryTimer) {
       return;
     }
-    let formInfo = this.createFormData(data);
 
-    let formIdArray: Array<string> = this.getFormIdArray();
-    for (let id of formIdArray) {
-      if (formId && id !== formId) {
-        continue;
-      }
-      formProvider.updateForm(id, formInfo).then(() => {
-        Logger.info(`updateForm success. ${JSON.stringify(data)}`);
-      }).catch((error: BusinessError) => {
-        Logger.info(`Operation updateForm failed. Cause: ${JSON.stringify(error)}`);
-      });
-    }
-  }
-
-  // 发布公共事件跨进程传递卡片id
-  public publishFormId(data: string) {
-    try {
-      commonEventManager.publish(this.eventType, { data, subscriberPermissions: [] }, (err: BusinessError) => {
-        if (err) {
-          Logger.error(TAG, `Failed to publish common event. Code is ${err.code}, message is ${err.message}`);
-        } else {
-          Logger.info(TAG, 'Succeeded in publishing common event.');
-        }
-      });
-    } catch (e) {
-      Logger.error(JSON.stringify(e))
-    }
-  }
-
-  // 订阅获取卡片id
-  public subscribeFormId() {
-    let subscriber: commonEventManager.CommonEventSubscriber;
-    let subscribeInfo: commonEventManager.CommonEventSubscribeInfo = {
-      events: [this.eventType],
-      publisherPermission: '',
-    };
-    try {
-      commonEventManager.createSubscriber(subscribeInfo, (err, data) => {
-        if (err) {
-          Logger.error(`Failed to create subscriber. Code is ${err.code}, message is ${err.message}`);
-          return;
-        }
-        Logger.info('Succeeded in creating subscriber1.');
-        subscriber = data;
-        // 订阅公共事件回调
-        commonEventManager.subscribe(subscriber, (err, data) => {
-          if (err) {
-            Logger.error(`Failed to subscribe common event. Code is ${err.code}, message is ${err.message}`);
-            return;
-          } else {
-            PreferenceUtil.getInstance().putToArray(this.getFormPreferenceKey(), data.data as string);
+    this.queryTimer = setInterval(async () => {
+      if (this.userInfoModel.isLogin) {
+        try {
+          const context = ContextUtil.globalContext;
+          let formData = new WidgetCardModel();
+          const orderData = await this.getLatestOrder();
+          if (orderData) {
+            formData.orderNo = orderData.orderNo;
+            formData.senderCity = orderData.senderCity;
+            formData.receiverCity = orderData.receiverCity;
+            formData.logistics = orderData.logistics;
           }
-        });
-      });
-    } catch (e) {
-      Logger.error(JSON.stringify(e))
+          formData.isLogin = this.userInfoModel.isLogin;
+          PreferenceUtil.getInstance(context).put(KEY_CARD_INFO, JSON.stringify(formData));
+        } catch (error) {
+          Logger.error(TAG, `Failed to get latest order: ${error}`);
+        }
+      }
+    }, this.INTERVAL_TIME);
+  }
+
+  // 更新卡片信息
+  async updateFormCardData(isUpDate: boolean = false) {
+    const context = ContextUtil.globalContext;
+    const data = PreferenceUtil.getCardDataArray(context);
+    let formData = new WidgetCardModel();
+    if (data) {
+      formData = JSON.parse(data) as WidgetCardModel;
+    }
+    if (this.userInfoModel.isLogin) {
+      const orderData = await this.getLatestOrder();
+      if (orderData) {
+        formData.orderNo = orderData.orderNo;
+        formData.senderCity = orderData.senderCity;
+        formData.receiverCity = orderData.receiverCity;
+        formData.logistics = orderData.logistics;
+      }
+    }
+    formData.isLogin = this.userInfoModel.isLogin;
+    PreferenceUtil.getInstance(context).put(KEY_CARD_INFO, JSON.stringify(formData));
+    Logger.info(TAG, `updateFormCardData formData: ${JSON.stringify(formData)}`);
+    if (isUpDate) {
+      PreferenceUtil.updateCard(formData as WidgetCardModel, context)
     }
   }
 
-  private getFormPreferenceKey() {
-    return 'order_status_widget_form_id';
+  // 查询最新一条快递信息
+  public async getLatestOrder() {
+    let formData: WidgetCardModel | undefined = undefined;
+    const latestOrder = await HttpApi.queryLatestParcel()
+    if (latestOrder.detail) {
+      const detail = latestOrder.detail;
+      const logistics = latestOrder?.logs?.[0];
+      formData = new WidgetCardModel();
+      formData.isLogin = true;
+      formData.orderNo = detail.parcelNumber;
+      formData.senderCity = detail.senderCity;
+      formData.receiverCity = detail.receiverCity;
+      if (logistics) {
+        formData.logistics = logistics.description ?? '';
+      }
+      Logger.info(TAG, `getLatestOrder formData: ${JSON.stringify(formData)}`);
+    }
+
+    return formData;
   }
 }

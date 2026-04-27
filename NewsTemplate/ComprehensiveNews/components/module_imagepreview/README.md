@@ -44,8 +44,8 @@
 
 ### 环境
 
-- DevEco Studio版本：DevEco Studio 6.0.1 Release及以上
-- HarmonyOS SDK版本：HarmonyOS 6.0.1 Release SDK及以上
+- DevEco Studio版本：DevEco Studio 6.0.2 Release及以上
+- HarmonyOS SDK版本：HarmonyOS 6.0.2 Release SDK及以上
 - 设备类型：华为手机（包括双折叠和阔折叠）、平板
 - 系统版本：HarmonyOS 6.0.1(21)及以上
 
@@ -147,19 +147,20 @@ ImagePreviewOptions(option: [ImagePreviewOptions](#ImagePreviewOptions对象说�
 | closeOnClickImage   | boolean                                                      | 否       | 是否在点击图片后关闭图片预览， 默认值true                                                                                                                                                                                            |
 ### ImagePreviewOptions对象说明
 
-| 名称                | 类型                                                         | 是否必填 | 说明                                                                                                                                                                                                           |
-| ------------------- | ------------------------------------------------------------ | -------- |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| dataList            | [SourceImageModel](#SourceImageModel对象说明)[]              | 否       | 数据源，静态图片传入imageUrl，动图需要传入静态图片imageUrl，以及videoUrl网络地址或者沙箱地址。支持传入[photoAccessHelper.MovingPhoto](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/arkts-apis-photoaccesshelper-movingphoto)对象 |
-| dialogId            | string                                                       | 否       | 弹窗ID,可通过ID关闭指定弹窗                                                                                                                                                                                             |
-| longTake            | boolean                                                      | 否       | 是否开启一镜到底效果，默认值true，longTake需配合snapshotId结合使用，详情见[示例代码](#示例代码)                                                                                                                                                |
-| snapshotId          | (item: PreviewImgType, index: number) => string = (item, index) => JSON.stringify(item) + index | 否       | 设置item的id 默认值JSON.stringify(item) + index，配置一镜到底效果使用，建议保证id唯一性，详情见[示例代码](#示例代码)                                                                                                                        |
-| showPageText        | boolean                                                      | 否       | 是否显示分页文字，默认值true                                                                                                                                                                                             |
-| dismissAnimation    | boolean                                                      | 否       | 关闭预览动画是否开启， 默认值true                                                                                                                                                                                          |
-| movingPhotoAutoPlay | boolean                                                      | 否       | 动图是否自动播放，false状态下手指按压触发播放， 默认值true                                                                                                                                                                           |
-| builder             | [PreviewCustomBuilder](#PreviewCustomBuilder对象说明)         | 否       | 自定义插槽，提供顶部和底部自定义builder                                                                                                                                                                                      |
-| previewListener     | [previewListener](#previewListener对象说明)                   | 否       | 预览器状态回调，预览器生命周期回调                                                                                                                                                                                            |
-| movingPhotoListener | [movingPhotoListener](#movingPhotoListener对象说明)           | 否       | 动图状态监听回调，动态生命周期回调                                                                                                                                                                                            |
-| imageActionListener | [imageActionListener](#imageActionListener对象说明)           | 否       | 图片操作监听回调，图片所有操作状态回调                                                                                                                                                                                          |
+| 名称                  | 类型                                                         | 是否必填 | 说明                                           |
+|---------------------| ------------------------------------------------------------ | -------- | ---------------------------------------------- |
+| dataList            | [SourceImageModel](#SourceImageModel对象说明)[]              | 否       | 数据源，静态图片传入imageUrl，动图需要传入静态图片imageUrl，以及videoUrl网络地址或者沙箱地址。支持传入[photoAccessHelper.MovingPhoto](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/arkts-apis-photoaccesshelper-movingphoto)对象。 |
+| dialogId            | string                                                       | 否       | 弹窗ID，可通过ID关闭指定弹窗。                  |
+| longTake            | boolean                                                      | 否       | 是否开启一镜到底效果，默认值true，longTake需配合snapshotId结合使用，详情见[示例代码](#示例代码)。 |
+| snapshotId          | (item: PreviewImgType, index: number) => string = (item, index) => JSON.stringify(item) + index | 否       | 设置item的id默认值JSON.stringify(item) + index，配置一镜到底效果使用，建议保证id唯一性，详情见[示例代码](#示例代码)。 |
+| showPageText        | boolean                                                      | 否       | 是否显示分页文字，默认值true。                  |
+| showIndicator       | boolean                                                  | 否       | 是否开启图片指示器，默认值true。                 |
+| dismissAnimation    | boolean                                                      | 否       | 关闭预览动画是否开启， 默认值true。               |
+| movingPhotoAutoPlay | boolean                                                      | 否       | 动图是否自动播放，false状态下手指按压触发播放， 默认值true。 |
+| builder             | [PreviewCustomBuilder](#PreviewCustomBuilder对象说明)        | 否       | 自定义插槽，提供顶部和底部自定义builder。           |
+| previewListener     | [previewListener](#previewListener对象说明)                  | 否       | 预览器状态回调，预览器生命周期回调。                 |
+| movingPhotoListener | [movingPhotoListener](#movingPhotoListener对象说明)          | 否       | 动图状态监听回调，动态生命周期回调。                 |
+| imageActionListener | [imageActionListener](#imageActionListener对象说明)          | 否       | 图片操作监听回调，图片所有操作状态回调。               |
 
 ### SourceImageModel对象说明
 
@@ -309,6 +310,11 @@ setImmersiveMode(immersiveMode?: [ImmersiveMode](https://developer.huawei.com/co
 setLongTake(longTake: boolean): [ImagePreviewOptions](#ImagePreviewOptions对象说明)
 设置是否开启一镜到底效果
 
+### setShowIndicator
+
+setShowIndicator(showIndicator: boolean): [ImagePreviewOptions](#ImagePreviewOptions对象说明)
+是否开启图片指示器
+
 ### setMovingPhotoAutoPlay
 
 setMovingPhotoAutoPlay(movingPhotoAutoPlay: boolean): [ImagePreviewOptions](#ImagePreviewOptions对象说明)
@@ -431,7 +437,7 @@ struct Index {
         .id(this.options.snapshotId(item.imageUrl, index))
         .aspectRatio(1)
         /**
-         * 设置隐藏式为了增强一镜到底效果
+         * 设置隐藏是为了增强一镜到底效果
          * */
         .visibility(index == this.index ? Visibility.Hidden : Visibility.Visible)
         .onClick(() => {

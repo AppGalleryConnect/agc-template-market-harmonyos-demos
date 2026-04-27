@@ -8,8 +8,6 @@ export { ButtonGroup } from './src/main/ets/components/ButtonGroup';
 
 export { CustomBadge } from './src/main/ets/components/CustomBadge';
 
-export { NewsSearchTransition } from './src/main/ets/components/NewsSearchTransition';
-
 export { emptyBuilder, EmptyBuilderParams } from './src/main/ets/components/EmptyBuilder';
 
 export { NetworkExceptionView } from './src/main/ets/components/NetworkExceptionView';

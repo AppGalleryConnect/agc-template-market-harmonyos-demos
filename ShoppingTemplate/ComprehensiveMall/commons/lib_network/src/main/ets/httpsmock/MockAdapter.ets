@@ -5,6 +5,8 @@ import { ProductMockApis } from './mockapis/ProductMock';
 import { SeckillMockApis } from './mockapis/SeckillMock';
 import { ShoppingCartMockApis } from './mockapis/ShoppingCartMock';
 import { UserMockApis } from './mockapis/UserMock';
+import { CouponMockApis } from './mockapis/CouponMock';
+import { PointsMockApis } from './mockapis/PointsMock';
 import instance from '../https/Request';
 
 // 创建mock拦截器
@@ -23,6 +25,8 @@ if (enableMock) {
     new UserMockApis(),
     new SeckillMockApis(),
     new ShoppingCartMockApis(),
+    new CouponMockApis(),
+    new PointsMockApis(),
   ];
   mockApis.forEach((api) => {
     api.start(mockAdapter);

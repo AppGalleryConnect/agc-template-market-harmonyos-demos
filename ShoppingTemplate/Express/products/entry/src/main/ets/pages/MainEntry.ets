@@ -1,11 +1,12 @@
-import { TabListItem } from '../types';
-import { MainEntryVM } from '../viewmodels/MainEntryVM';
 import { HomePage } from 'business_home';
 import { OrderPage } from 'business_order';
+import { BenefitPage } from 'business_benefits';
 import { MinePage } from 'business_mine';
-import { ControllerModule, Logger } from 'module_base';
+import { ControllerModule, RouterMap, RouterModule } from 'lib_foundation';
+import { TabListItem } from '../types';
+import { MainEntryVM } from '../viewmodels/MainEntryVM';
+import { WantUtils } from '../utils/WantUtils';
 import { WidgetCardVM } from '../viewmodels/WidgetCardVM';
-import { emitter } from '@kit.BasicServicesKit';
 
 
 @Builder
@@ -13,27 +14,69 @@ export function MainEntryBuilder() {
   MainEntry()
 }
 
-@Entry
 @ComponentV2
 struct MainEntry {
-  vm: MainEntryVM = MainEntryVM.instance;
-  cardVm: WidgetCardVM = WidgetCardVM.instance;
-  callBackFunc: () => void = async () => {
-    await this.cardVm.getLatestOrder();
-    await this.cardVm.updateFormInfo();
-  };
+  vm: MainEntryVM = new MainEntryVM();
+  formCardVM: WidgetCardVM = WidgetCardVM.instance;
+  @Local opacityList: number[] = [1.0, 0, 0, 0];
   private controller: TabsController = new TabsController();
+  // tab切换动画淡入淡出
+  private customContentTransition: (from: number, to: number) => TabContentAnimatedTransition =
+    (from: number, to: number) => {
+      let tabContentAnimatedTransition = {
+        timeout: 1200,
+        transition: (proxy: TabContentTransitionProxy) => {
+          this.opacityList[from] = 1.0;
+          this.opacityList[to] = 0.1;
+          this.getUIContext()?.animateTo({
+            duration: 200,
+            onFinish: () => {
+              proxy.finishTransition();
+            },
+          }, () => {
+            this.opacityList[from] = 0.1;
+            this.opacityList[to] = 1.0;
+          });
+        },
+      } as TabContentAnimatedTransition;
+      return tabContentAnimatedTransition;
+    };
 
-  aboutToAppear() {
-    this.vm.init();
-    ControllerModule.set(this.controller)
+  // 桌面快捷方式
+  @Monitor('vm.pageRouter.shortcutId')
+  shortcutsChange() {
+    if (this.vm.pageRouter.shortcutId) {
+      WantUtils.jumpToShortcutsPage(this.vm.userInfoModel.isLogin);
+    }
   }
 
-  aboutToDisappear(): void {
-    try {
-      emitter.off('refreshCard', this.callBackFunc);
-    } catch (e) {
-      Logger.error(JSON.stringify(e))
+  // 服务卡片
+  @Monitor('vm.pageRouter.formCardId')
+  formCardChange() {
+    if (this.vm.pageRouter.formCardId) {
+      WantUtils.jumpToFormCardPage();
+    }
+  }
+
+  @Monitor('vm.userInfoModel.isLogin')
+  onLoginChange() {
+    this.formCardVM.updateFormCardData(true);
+  }
+
+  aboutToAppear() {
+    // tabs控制器存起来使用
+    ControllerModule.set(this.controller);
+    // 更新服务卡片
+    this.formCardVM.updateFormCardData();
+    // 开启轮询
+    this.formCardVM.startPolling();
+    // 服务卡片
+    if (this.vm.pageRouter.formCardId) {
+      WantUtils.jumpToFormCardPage();
+    }
+    // 桌面图标
+    if (this.vm.pageRouter.shortcutId) {
+      WantUtils.jumpToShortcutsPage(this.vm.userInfoModel.isLogin);
     }
   }
 
@@ -44,66 +87,60 @@ struct MainEntry {
           TabContent() {
             HomePage()
           }
-          .expandSafeArea([SafeAreaType.SYSTEM])
-          .tabBar(this.tabBarBuilder(0, {
-            label: '寄快递',
-            icon: $r('app.media.ic_home'),
-            iconChecked: $r('app.media.ic_home_selected'),
-          }))
+          .opacity(this.opacityList[0])
+          .tabBar(this.tabBarBuilder(0, this.vm.tabList[0]))
 
           TabContent() {
-            OrderPage()
+            OrderPage({
+              currentTabIndex: this.vm.curIndex
+            })
           }
-          .expandSafeArea([SafeAreaType.SYSTEM])
-          .tabBar(this.tabBarBuilder(1, {
-            label: '查快递',
-            icon: $r('app.media.ic_express'),
-            iconChecked: $r('app.media.ic_express_selected'),
-          }))
+          .opacity(this.opacityList[1])
+          .tabBar(this.tabBarBuilder(1, this.vm.tabList[1]))
+
+          TabContent() {
+            BenefitPage()
+          }
+          .opacity(this.opacityList[2])
+          .tabBar(this.tabBarBuilder(2, this.vm.tabList[2]))
 
           TabContent() {
             MinePage()
           }
-          .expandSafeArea([SafeAreaType.SYSTEM])
-          .tabBar(this.tabBarBuilder(2, {
-            label: '我的',
-            icon: $r('app.media.ic_mine'),
-            iconChecked: $r('app.media.ic_mine_selected'),
-          }))
+          .opacity(this.opacityList[3])
+          .tabBar(this.tabBarBuilder(3, this.vm.tabList[3]))
         }
-        .scrollable(false)
+        .width('100%')
         .height('100%')
-        .animationDuration(0)
-        .barMode(BarMode.Fixed)
+        .scrollable(false)
+        .vertical(this.vm.isTabVertical)
+        .barPosition(this.vm.barPosition)
+        .barWidth(this.vm.tabWidth)
+        .barHeight(this.vm.tabHeight)
+        .customContentTransition(this.customContentTransition)
+        .onContentWillChange((currentIndex: number, comingIndex: number) => {
+          if ((comingIndex === 1 || comingIndex === 2) && !this.vm.userInfoModel.isLogin) {
+            RouterModule.push({ url: RouterMap.QUICK_LOGIN_PAGE }, () => {
+              this.controller.changeIndex(comingIndex);
+            })
+            return false;
+          }
+          return true;
+        })
         .onChange((index: number) => {
           this.vm.curIndex = index;
-          let info: emitter.EventData = {
-            data: {
-              index: index,
-            },
-          };
-          try {
-            emitter.emit('index', info);
-          } catch (e) {
-            Logger.error(JSON.stringify(e))
-          }
         })
-        .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP]);
       }
+      .width('100%')
+      .padding({
+        bottom: this.vm.windowModel.windowBottomPadding
+      })
       .backgroundColor(Color.White)
-      .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.BOTTOM]);
     }
     .hideTitleBar(true)
     .hideToolBar(true)
-    .onShown(async () => {
-      this.cardVm.subscribeFormId()
-      await this.cardVm.getLatestOrder();
-      await this.cardVm.updateFormInfo();
-      try {
-        emitter.on('refreshCard', this.callBackFunc);
-      } catch (e) {
-        Logger.error(JSON.stringify(e))
-      }
+    .onBackPressed(() => {
+      return this.vm.onBackPressed();
     })
   }
 

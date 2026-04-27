@@ -3,7 +3,8 @@
     "name": "base_ui",
     "type": "har",
     "deviceTypes": [
-      "default"
+      "default",
+      "tablet"
     ]
   }
 }

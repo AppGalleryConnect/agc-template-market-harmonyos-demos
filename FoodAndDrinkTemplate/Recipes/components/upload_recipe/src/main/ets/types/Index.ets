@@ -1,3 +1,5 @@
+import { media } from '@kit.MediaKit';
+
 @ObservedV2
 export class RecipeItem {
   @Trace id: number = 0;
@@ -32,8 +34,18 @@ export interface RecipeIngredient {
 // 需要上传的数据
 export interface UploadRecipeData {
   title: string;
-  mainImg: string
+  mainImg: string;
   description: string;
   ingredients: RecipeIngredient[];
   steps: Step[];
+  video?: string;
+  coverUrl?: string;
+}
+
+export class VideoSizeData {
+  public photoSize: media.PixelMapParams = {
+    width: 0,
+    height: 0,
+  };
+  public totalTime: number = 0;
 }

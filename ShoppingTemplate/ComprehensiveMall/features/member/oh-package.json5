@@ -6,11 +6,9 @@
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
-    "dayjs": "1.11.13",
     "lib_foundation": "file:../../commons/lib_foundation",
     "lib_widget": "file:../../commons/lib_widget",
     "lib_network": "file:../../commons/lib_network",
-    "address_management": "file:../../components/address_management",
     "membership": "file:../../components/membership"
   },
   "devDependencies": {},

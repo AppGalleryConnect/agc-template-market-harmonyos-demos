@@ -7,7 +7,7 @@ import { SetupUtil } from '../utils/SetupUtil';
 @ObservedV2
 export class MainEntryVM {
   // 路由栈实例
-  @Trace navStack: NavPathStack = routerStack;
+  @Trace navStack: NavPathStack = routerStack.getActiveStack();
   // 当前页签
   @Trace curIndex: number = 0;
   @Trace firstBackTime: number = 0;

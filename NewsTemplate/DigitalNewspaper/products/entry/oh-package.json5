@@ -1,0 +1,16 @@
+{
+  "name": "entry",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "",
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "@hw-agconnect/util-log": "^1.0.0",
+    "@atomicservice/ascfapi": "1.0.12",
+    "lib_foundation": "file:../../commons/lib_foundation",
+    "module_text_reader": "file:../../components/module_text_reader",
+    "module_image_preview": "file:../../components/module_image_preview"
+  }
+}
+

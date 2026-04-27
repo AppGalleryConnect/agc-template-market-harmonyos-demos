@@ -17,8 +17,8 @@ export function LeftTextRightImageCard(cardData: LayoutParams) {
 @ComponentV2
 struct NativeComponent {
   @Param @Require cardData: LayoutParams
-  @Local settingInfo: SettingModel = PersistenceV2.connect(SettingModel, () => new SettingModel())!
   @Param showAuthor: boolean = true;
+  @Local settingInfo: SettingModel = PersistenceV2.connect(SettingModel, () => new SettingModel())!
   @Local cardViewModel: CardViewModel = new CardViewModel(this.getUIContext())
 
   aboutToAppear(): void {
@@ -49,7 +49,7 @@ struct NativeComponent {
             })
           }
           Row({ space: 8 }) {
-            Text(this.cardData.nativeCardData?.articleFrom)
+            Text(this.cardData.nativeCardData?.author?.authorNickName)
               .fontSize(12 * this.settingInfo.fontSizeRatio)
               .fontColor($r('sys.color.font_tertiary'))
               .visibility(this.showAuthor ? Visibility.Visible : Visibility.None)
@@ -57,6 +57,16 @@ struct NativeComponent {
               TimeUtils.formatDate(this.cardData.nativeCardData?.createTime, 'YYYY-MM-DD HH:mm'))
               .fontSize(12 * this.settingInfo.fontSizeRatio)
               .fontColor($r('sys.color.font_tertiary'))
+              .layoutWeight(1)
+              .textAlign(TextAlign.Start)
+            SymbolGlyph($r('sys.symbol.dot_grid_1x2'))
+              .fontSize(16)
+              .fontColor([$r('sys.color.icon_tertiary')])
+              .onClick(() => {
+                if (this.cardData.extraInfo.onMoreClick) {
+                  (this.cardData.extraInfo.onMoreClick as Function)();
+                }
+              })
           }
           .visibility(this.cardData.extraInfo.isNeedAuthor ? Visibility.None : Visibility.Visible)
         }
@@ -74,7 +84,7 @@ struct NativeComponent {
                     Stack() {
                       BaseImage({
                         url: item.surfaceUrl,
-                        downloadWithoutWlan: this.settingInfo.network.downloadWithoutWlan
+                        downloadWithoutWlan: this.settingInfo.network.downloadWithoutWlan,
                       })
                         .size({ width: 96, height: 72 })
                         .clip(true)
@@ -83,14 +93,14 @@ struct NativeComponent {
                   } else {
                     BaseImage({
                       url: item.picVideoUrl,
-                      downloadWithoutWlan: this.settingInfo.network.downloadWithoutWlan
+                      downloadWithoutWlan: this.settingInfo.network.downloadWithoutWlan,
                     })
                       .size({ width: 96, height: 72 })
                       .clip(true)
                   }
                 }
               }
-            },(item: PostImgList) => JSON.stringify(item))
+            }, (item: PostImgList) => JSON.stringify(item))
           }
         }
       }

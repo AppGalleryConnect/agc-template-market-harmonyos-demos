@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "module_custom_service_chat_test",
+    "type": "feature",
+    "deviceTypes": [
+      "phone"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false
+  }
+}

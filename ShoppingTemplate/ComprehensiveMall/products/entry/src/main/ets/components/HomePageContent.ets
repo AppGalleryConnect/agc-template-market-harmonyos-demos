@@ -136,10 +136,9 @@ export struct HomePageContent {
     .borderRadius($r('app.float.border_radius_l'))
     .onClick(() => {
       if (type === ActivityType.CHECKIN) {
-        routerStack.pushPath({ name: iData.global.isLogin ? RouterMap.USER_MEMBER_BENEFITS : RouterMap.USER_LOGIN })
+        routerStack.pushPath({ name: iData.global.isLogin ? RouterMap.POINTS_MALL : RouterMap.USER_LOGIN })
       } else {
         routerStack.pushPath({ name: RouterMap.PRODUCT_SECKILL })
-
       }
     })
     .flexGrow(1)

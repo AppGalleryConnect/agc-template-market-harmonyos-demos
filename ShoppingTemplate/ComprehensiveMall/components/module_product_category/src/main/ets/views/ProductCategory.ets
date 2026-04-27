@@ -90,7 +90,7 @@ export struct ProductCategory {
               .width(120)
               .height(120);
             Text('暂无数据')
-              .fontSize($r('app.string.font_size_12'))
+              .fontSize($r('app.float.font_size_12'))
               .fontColor($r('app.color.font_color_level2'));
           }
           .layoutWeight(1)
@@ -99,7 +99,7 @@ export struct ProductCategory {
           this.productListBuilder()
         }
       }
-      .padding({ left: $r('app.string.space_l'), right: $r('app.string.space_l') })
+      .padding({ left: $r('app.float.space_l'), right: $r('app.float.space_l') })
       .layoutWeight(1)
     }
     .width('100%')
@@ -151,11 +151,11 @@ export struct ProductCategory {
       })
       Text(this.curSubCategoryList[this.curSubIndex]?.label?.text ?? '')
         .fontColor($r('app.color.font_color_level1'))
-        .fontSize($r('app.string.font_size_14'))
+        .fontSize($r('app.float.font_size_14'))
         .fontWeight(FontWeight.Bold)
         .margin({
-          top: $r('app.string.space_s'),
-          bottom: $r('app.string.space_s'),
+          top: $r('app.float.space_s'),
+          bottom: $r('app.float.space_s'),
         })
     }
     .width($r('app.string.size_percent_full'))
@@ -193,11 +193,11 @@ export struct ProductCategory {
                 Image(item.banner)
                   .width($r('app.string.size_percent_full'))
                   .aspectRatio(1)
-                  .borderRadius($r('app.string.border_radius_8'))
+                  .borderRadius($r('app.float.border_radius_s'))
                 Text(item.title)
-                  .fontSize($r('app.string.font_size_14'))
+                  .fontSize($r('app.float.font_size_14'))
                   .fontColor($r('app.color.font_color_level1'))
-                  .margin({ top: $r('app.string.space_xs') })
+                  .margin({ top: $r('app.float.space_xs') })
                   .maxLines(1)
                   .textOverflow({ overflow: TextOverflow.Ellipsis })
               }
@@ -211,7 +211,7 @@ export struct ProductCategory {
       }
       .width($r('app.string.size_percent_full'))
       .margin({
-        top: $r('app.string.space_m'),
+        top: $r('app.float.space_m'),
       })
     }
     .layoutWeight(1)

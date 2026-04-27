@@ -5,7 +5,7 @@ const TAG = '[SearchPageVM]';
 
 @ObservedV2
 export class SearchPageVM {
-  @Trace hotInfo: string[] = [];
+  @Trace hotInfo: RecipeBriefInfo[] = [];
   // 搜索结果
   @Trace resultList: RecipeBriefInfo[] = [];
   // 是否展示搜索结果
@@ -19,6 +19,9 @@ export class SearchPageVM {
 
   // 搜索菜谱
   public async searchDishes(keyword: string) {
+    if(keyword === '全部') {
+      keyword = '';
+    }
     const res = await queryRecipeList({ name: keyword });
     if (res.status === 200) {
       this.resultList = res.data;

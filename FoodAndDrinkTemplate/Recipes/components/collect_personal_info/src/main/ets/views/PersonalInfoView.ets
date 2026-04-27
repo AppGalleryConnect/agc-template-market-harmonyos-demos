@@ -61,6 +61,7 @@ export struct PersonalInfoView {
     }
     .width(Constants.FULL_PERCENT)
     .height(Constants.FULL_PERCENT)
+    .backgroundColor($r('sys.color.comp_background_gray'))
   }
 
   @Computed

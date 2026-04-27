@@ -20,6 +20,12 @@ export class CommonDataSource<T> implements IDataSource {
     this.notifyDataAdd(index);
   }
 
+  deleteData(index: number) {
+    this.originDataArray.splice(index, 1);
+    this.notifyDataDelete(index);
+    this.notifyDataReload();
+  }
+
   pushData(data: T): void {
     this.originDataArray.push(data);
     this.notifyDataAdd(this.originDataArray.length - 1);

@@ -36,7 +36,7 @@ export interface SwitchInfo {
 
 // 个人数据模型
 export interface PersonalInfo {
-  avatar?: ResourceStr;
+  avatar?: string;
   nickName?: ResourceStr;
   fullName?: ResourceStr;
   gender?: GenderType;

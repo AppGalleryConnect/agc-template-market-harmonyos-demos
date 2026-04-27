@@ -1,7 +1,15 @@
-import { AccountUtil, RouterMap, RouterModule, UserInfo, RdbManager, recipesData, CommonConstants,
+import {
+  AccountUtil,
+  RouterMap,
+  RouterModule,
+  UserInfo,
+  RdbManager,
+  recipesData,
+  CommonConstants,
   BreakpointType,
   BreakpointModel,
-  GlobalContextUtils} from 'commonlib';
+  GlobalContextUtils
+} from 'commonlib';
 import {
   deleteMyRecipe,
   getBloggerInfo,
@@ -30,6 +38,7 @@ export class MinePageVM {
   @Trace currentIndex: number = 1;
   @Trace noticeList: Notice[] = [];
   @Trace isToDelete: boolean = false;
+  @Trace selectIds: number[] = [];
   private static _instance: MinePageVM;
   private context: common.UIAbilityContext = GlobalContextUtils.globalUIAbilityContext;
   private rdbManager: RdbManager = new RdbManager(this.context);
@@ -44,11 +53,11 @@ export class MinePageVM {
   @Trace switchInfo: SwitchInfo = {
     showAvatar: true,
     showNickName: true,
-    showFullName: false,
-    showGender: false,
-    showBirthDate: false,
+    showFullName: true,
+    showGender: true,
+    showBirthDate: true,
     showPhoneNumber: true,
-    showIntroDesc: false,
+    showIntroDesc: true,
   };
   @Trace personalInfo: PersonalInfo = {
     avatar: 'https://agc-storage-drcn.platform.dbankcloud.cn/v0/news-hnp2d/avatar%2Favatar_12.jpg',
@@ -94,16 +103,19 @@ export class MinePageVM {
     return MinePageVM._instance;
   }
 
-  @Monitor('userInfo.nickname', 'userInfo.avatar')
+  @Monitor('userInfo.nickname', 'userInfo.avatar', 'userInfo.isMembership')
   changeUserInfo(monitor: IMonitor) {
-    this.bloggerInfo.name = this.userInfo.isLogin ? this.userInfo.nickname : '去登录'
-    this.bloggerInfo.avatar = this.formatAvatar(this.userInfo.avatar)
+    this.bloggerInfo.name = this.userInfo.isLogin ? this.userInfo.nickname : '去登录';
+    this.bloggerInfo.isMembership = this.userInfo.isLogin ? this.userInfo.isMembership : false;
+    if (typeof this.userInfo.avatar === 'string') {
+      this.bloggerInfo.avatar = this.formatAvatar(this.userInfo.avatar)
+    }
   }
 
   formatAvatar(avatar: string) {
     let newAvatar: ResourceStr
     if (avatar) {
-      if (avatar.startsWith('file://')) {
+      if ((typeof avatar === 'string') && avatar.startsWith('file://')) {
         newAvatar = avatar
       } else {
         newAvatar = $r(`app.media.${avatar}`)
@@ -116,15 +128,23 @@ export class MinePageVM {
 
   init() {
     this.queryUserInfo()
-    this.queryMyRecipeList()
     this.getMyNoticeList()
-    this.queryCollection()
+    // 根据当前 tab 加载对应数据
+    if (this.currentIndex === TabIndexEnum.FIRST) {
+      this.queryMyRecipeList()
+    } else {
+      this.queryCollection()
+    }
   }
 
   refreshMinePage() {
-    this.queryMyRecipeList()
     this.getMyNoticeList()
-    this.queryCollection()
+    // 根据当前 tab 刷新对应数据
+    if (this.currentIndex === TabIndexEnum.FIRST) {
+      this.queryMyRecipeList()
+    } else {
+      this.queryCollection()
+    }
   }
 
   getMyNoticeList() {
@@ -188,6 +208,7 @@ export class MinePageVM {
         if (this.userInfo.isLogin) {
           this.bloggerInfo.name = this.userInfo.nickname
           this.bloggerInfo.avatar = this.formatAvatar(this.userInfo.avatar)
+          this.bloggerInfo.isMembership = this.userInfo.isMembership;
         }
       }
     })
@@ -199,7 +220,9 @@ export class MinePageVM {
 
   changeTabs(index: number) {
     this.currentIndex = index
-    this.isToDelete = false
+    if (this.isToDelete) {
+      this.isToDelete = false
+    }
     if (index === TabIndexEnum.FIRST) {
       this.queryMyRecipeList()
     } else {
@@ -230,8 +253,35 @@ export class MinePageVM {
     if (res.status === 200) {
       this.queryMyRecipeList().then(() => {
         GlobalContextUtils.showToast({ message: '删除成功！' });
-        this.isToDelete = false
+        this.exitDeleteMode()
       });
+    }
+  }
+
+  // 选中/取消选中菜谱
+  toggleSelect(id: number, selected: boolean) {
+    if (selected) {
+      this.selectIds.push(id)
+    } else {
+      this.selectIds = this.selectIds.filter(item => item !== id)
+    }
+  }
+
+  // 进入删除模式
+  enterDeleteMode() {
+    this.isToDelete = true
+  }
+
+  // 退出删除模式
+  exitDeleteMode() {
+    this.isToDelete = false
+    this.selectIds = []
+  }
+
+  // 删除选中的菜谱
+  deleteSelectedRecipes() {
+    if (this.selectIds.length > 0) {
+      this.deleteMyRecipe(this.selectIds)
     }
   }
 

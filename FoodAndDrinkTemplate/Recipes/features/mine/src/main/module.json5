@@ -5,7 +5,8 @@
     "description": "$string:shared_desc",
     "routerMap": '$profile:router_map',
     "deviceTypes": [
-      "phone"
+      "phone",
+      "tablet"
     ],
   }
 }

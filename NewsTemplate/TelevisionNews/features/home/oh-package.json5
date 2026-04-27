@@ -1,0 +1,16 @@
+{
+  "name": "home",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "packageType": "InterfaceHar",
+  "dependencies": {
+    "lib_common": "file:../../commons/lib_common",
+    "lib_tv_apis": "file:../../commons/lib_tv_apis",
+    "lib_tv_details": "file:../../commons/lib_tv_details",
+    "lib_search": "file:../../commons/lib_search",
+    "module_swipeplayer": "file:../../components/module_swipeplayer",
+  }
+}

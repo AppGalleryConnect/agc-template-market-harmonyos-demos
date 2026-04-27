@@ -1,73 +1,108 @@
 import { map, mapCommon, navi } from '@kit.MapKit';
 import { AsyncCallback } from '@kit.BasicServicesKit';
-import { INodeItem } from '../components/CommonTimeLine';
-import { nodeListData } from '../constants';
-import { getOrderInfo, IOrderInfo, RouterModule } from 'lib_foundation';
-import { Logger, RouterMap } from 'module_base';
 import { image } from '@kit.ImageKit';
+import {
+  RouterModule,
+  Logger,
+  RouterMap,
+  HttpApi,
+  CommonUtil,
+  DEFAULT_LATITUDE,
+  DEFAULT_LONGITUDE,
+  STATUS_MAP,
+  ParcelStatus,
+  BaseViewModel,
+  Logistics,
+} from 'lib_foundation';
+import { OrderInfo } from '../models/Model';
 
-const DEFAULT_LATITUDE = 31.97;
-const DEFAULT_LONGITUDE = 118.75;
 
 @ObservedV2
-export class OrderInfoPageVM {
-  private static _instance: OrderInfoPageVM;
-  @Trace public mapOptions?: mapCommon.MapOptions
-  @Trace public mapController?: map.MapComponentController;
-  @Trace public mapEventManager?: map.MapEventManager;
-  @Trace public callback?: AsyncCallback<map.MapComponentController>
-  @Trace public orderInfo: IOrderInfo | undefined
-  @Trace public nodeList: INodeItem[] = []
-  @Trace public offsetX: number = 0;
-  @Trace public offsetY: number = 240;
-  @Trace public positionX: number = 0;
-  @Trace public positionY: number = 0;
-  @Trace public showLoadingMask: boolean = true
-  @Trace uiContext: UIContext | null = null
+export class OrderInfoPageVM extends BaseViewModel {
+  // 订单号
+  @Trace orderNo: string = '';
+  @Trace mapOptions?: mapCommon.MapOptions;
+  @Trace mapController?: map.MapComponentController;
+  @Trace mapEventManager?: map.MapEventManager;
+  @Trace callback?: AsyncCallback<map.MapComponentController>
+  @Trace orderInfo: OrderInfo | undefined;
+  @Trace origin?: mapCommon.LatLng;
+  @Trace destination?: mapCommon.LatLng;
+  @Trace logisticsList: Logistics[] = [];
+  @Trace showLoadingMask: boolean = true;
+  @Trace uiContext: UIContext | null = null;
+  // 地图范围的高度
+  @Trace boundHeight: number = this.windowModel.windowHeight / 2 - 300;
 
-  public static get instance() {
-    if (!OrderInfoPageVM._instance) {
-      OrderInfoPageVM._instance = new OrderInfoPageVM();
+  @Computed
+  get snText() {
+    let company = '';
+    let sn = '';
+    if (this.orderInfo?.expressCompany) {
+      company = this.orderInfo.expressCompany;
     }
-    return OrderInfoPageVM._instance;
+    if (this.orderInfo?.parcelNumber) {
+      sn = this.orderInfo.parcelNumber;
+    }
+    return `${company}：${sn}`
   }
 
-  public init(func1: (() => ESObject), func2: (() => ESObject)) {
-    const param = RouterModule.getNavParam<number>({
-      url: RouterMap.ORDER_INFO_PAGE,
-    });
+  @Computed
+  get statusText() {
+    if (this.orderInfo?.status) {
+      return STATUS_MAP[this.orderInfo.status];
+    }
+    return '';
+  }
+
+  @Computed
+  get curLogisticInfo() {
+    const currentLogistic = this.logisticsList.find((item) => {
+      return item.nodeStatus === this.orderInfo?.status;
+    })
+    return currentLogistic;
+  }
+
+  @Computed
+  get dateTimeText() {
+    let status = this.orderInfo?.status;
+    // 快递员已取件
+    if (status === ParcelStatus.COLLECTED) {
+      return `取件时间：${CommonUtil.formatDate(this.curLogisticInfo?.occurrenceTime, 'MM月DD日 HH:mm')}`;
+    }
+    // 运送和派送
+    const estimatedArrivalStatus = [ParcelStatus.IN_TRANSIT, ParcelStatus.DELIVERY]
+    if (status && estimatedArrivalStatus.includes(status)) {
+      return `预计送达时间：${CommonUtil.formatDate(this.orderInfo?.estimatedArrivalTime, 'MM月DD日 HH:mm')}`;
+    }
+    // 待签收
+    if (status === ParcelStatus.OUT_FOR_DELIVERY) {
+      return `送达时间：${CommonUtil.formatDate(this.orderInfo?.estimatedArrivalTime, 'MM月DD日 HH:mm')}`;
+    }
+    // 已签收
+    if (status === ParcelStatus.DELIVERED) {
+      return `签收时间：${CommonUtil.formatDate(this.orderInfo?.deliveryTime, 'MM月DD日 HH:mm')}`;
+    }
+    return '';
+  }
+
+  initData(func1: (() => ESObject), func2: (() => ESObject)) {
+    const param = RouterModule.getNavParam<string>({ url: RouterMap.ORDER_INFO_PAGE });
     if (param) {
-      this.getOrderInfo(param, func1, func2)
+      this.orderNo = param;
+      this.queryOrderInfo(func1, func2);
     }
   }
 
-  clear() {
-    this.orderInfo = undefined
-  }
-
-  public async getOrderInfo(id: number, func1: (() => ESObject), func2: (() => ESObject)) {
-    const res = await getOrderInfo({ id })
-    this.orderInfo = res
-    this.nodeList = nodeListData.slice(0, this.orderInfo.logisticsInfo.length)
-    for (let i = 0; i < this.nodeList.length; i++) {
-      this.nodeList[i].time = this.orderInfo.logisticsInfo[i].time
-      this.nodeList[i].description = this.orderInfo.logisticsInfo[i].content
-    }
-    this.nodeList.reverse()
-    this.showLoadingMask = false
-    this.testDrivingRoutes()
-    this.addMarker()
-    this.addMarkerCard(func1, func2)
-  }
-
-  public initMap(func1: (() => ESObject), func2: (() => ESObject)) {
+  // 地图初始化
+  initMap() {
     this.mapOptions = {
       position: {
         target: {
           latitude: DEFAULT_LATITUDE,
           longitude: DEFAULT_LONGITUDE,
         },
-        zoom: 10,
+        zoom: 6,
       },
       rotateGesturesEnabled: true,
       scrollGesturesEnabled: true,
@@ -83,32 +118,89 @@ export class OrderInfoPageVM {
           console.info('on-mapLoad');
         }
         this.mapEventManager.on('mapLoad', callback);
-        this.testDrivingRoutes()
-        this.addMarker()
-        this.addMarkerCard(func1, func2)
       }
     };
   }
 
-  async testDrivingRoutes() {
+  // 查询订单详情
+  queryOrderInfo(func1: () => ESObject, func2: () => ESObject) {
+    HttpApi.queryParcelDetail(this.orderNo).then((resp) => {
+      if (resp.detail) {
+        this.orderInfo = new OrderInfo(resp.detail);
+        this.getLocationData(func1, func2);
+      }
+      // 物流轨迹
+      this.logisticsList = resp.logs;
+    }).catch(() => {
+      this.showLoadingMask = false
+    })
+  }
+
+  // 获取经纬度
+  getLocationData(func1: () => ESObject, func2: () => ESObject) {
     if (!this.orderInfo) {
+      return;
+    }
+    this.origin = {
+      latitude: this.orderInfo.senderLatitude,
+      longitude: this.orderInfo.senderLongitude,
+    };
+    this.destination = {
+      latitude: this.orderInfo.receiverLatitude,
+      longitude: this.orderInfo.receiverLongitude,
+    }
+    this.tryRenderMarkers(func1, func2);
+  }
+
+  tryRenderMarkers(func1: () => ESObject, func2: () => ESObject) {
+    if (this.mapController && this.origin && this.destination) {
+      // 计算发送地和目的地的边界
+      const minLat = Math.min(this.origin.latitude, this.destination.latitude);
+      const maxLat = Math.max(this.origin.latitude, this.destination.latitude);
+      const minLng = Math.min(this.origin.longitude, this.destination.longitude);
+      const maxLng = Math.max(this.origin.longitude, this.destination.longitude);
+      const latLngBounds: mapCommon.LatLngBounds = {
+        southwest: { latitude: minLat, longitude: minLng },
+        northeast: { latitude: maxLat, longitude: maxLng }
+      }
+      try {
+        // 新建CameraUpdate对象
+        let cameraUpdate = map.newLatLngBounds(latLngBounds, this.windowModel.windowWidth, this.boundHeight, 150);
+        // 移动相机
+        this.mapController!.moveCamera(cameraUpdate);
+      } catch (e) {
+        Logger.error(`newLatLngBounds failed. error: ${JSON.stringify(e)}`)
+      }
+      this.testDrivingRoutes()
+      this.addMarker();
+      this.addMarkerCard(func1, func2);
+
+      this.showLoadingMask = false
+    }
+  }
+
+  clear() {
+    this.orderInfo = undefined
+    this.showLoadingMask = true
+  }
+
+  async testDrivingRoutes() {
+    if (!this.origin || !this.destination) {
       return
     }
     let params: navi.DrivingRouteParams = {
       // 起点的经纬度
-      origins: [this.orderInfo.origins],
+      origins: [this.origin],
       // 终点的经纬度
-      destination: this.orderInfo.destination,
-      // 路径的途经点
-      waypoints: this.orderInfo.waypoints,
+      destination: this.destination,
       language: 'zh_CN',
     };
     try {
       const result = await navi.getDrivingRoutes(params);
       this.mapController?.addPolyline({
         points: result.routes[0].overviewPolyline,
-        width: 10,
-        color: 0xFFFF2737,
+        width: 15,
+        color: 0xFF0A59F7,
       })
     } catch (e) {
       Logger.error(JSON.stringify(e))
@@ -117,32 +209,18 @@ export class OrderInfoPageVM {
 
   async addMarker() {
     let markerOptions1: mapCommon.MarkerOptions = {
-      position: this.orderInfo!.origins,
-      rotation: 0,
-      visible: true,
-      zIndex: 0,
-      alpha: 1,
-      anchorU: 0.5,
+      position: this.origin!,
       anchorV: 0,
       clickable: true,
-      draggable: true,
-      flat: false,
       icon: $r('app.media.ic_send_map'),
     };
     await this.mapController?.addMarker(markerOptions1)
 
     let markerOptions2: mapCommon.MarkerOptions = {
-      position: this.orderInfo!.destination,
-      rotation: 0,
-      visible: true,
-      zIndex: 0,
-      alpha: 1,
-      anchorU: 0.5,
+      position: this.destination!,
       anchorV: 0,
       clickable: true,
-      draggable: true,
-      flat: false,
-      icon: $r('app.media.ic_get_map'),
+      icon: $r('app.media.ic_receive_map'),
     };
     await this.mapController?.addMarker(markerOptions2)
   }
@@ -151,21 +229,14 @@ export class OrderInfoPageVM {
     this.uiContext?.getComponentSnapshot().createFromBuilder(func1,
       async (error: Error, pixmap: image.PixelMap) => {
         if (error) {
-          console.log('error: ' + JSON.stringify(error))
+          Logger.error('error: ' + JSON.stringify(error))
           return;
         }
         // Marker初始化参数
         let markerOptions: mapCommon.MarkerOptions = {
-          position: this.orderInfo!.origins,
-          rotation: 0,
-          visible: true,
-          zIndex: 0,
-          alpha: 1,
-          anchorU: 0.5,
+          position: this.origin!,
           anchorV: 1,
           clickable: true,
-          draggable: true,
-          flat: false,
           icon: pixmap,
         };
         this.mapController?.addMarker(markerOptions);
@@ -174,21 +245,14 @@ export class OrderInfoPageVM {
     this.uiContext?.getComponentSnapshot().createFromBuilder(func2,
       async (error: Error, pixmap: image.PixelMap) => {
         if (error) {
-          console.log('error: ' + JSON.stringify(error))
+          Logger.error('error: ' + JSON.stringify(error))
           return;
         }
         // Marker初始化参数
         let markerOptions: mapCommon.MarkerOptions = {
-          position: this.orderInfo!.destination,
-          rotation: 0,
-          visible: true,
-          zIndex: 0,
-          alpha: 1,
-          anchorU: 0.5,
+          position: this.destination!,
           anchorV: 1,
           clickable: true,
-          draggable: true,
-          flat: false,
           icon: pixmap,
         };
         this.mapController?.addMarker(markerOptions);

@@ -1,6 +1,6 @@
 import request from '../common/BaseRequest';
 import { BaseComment } from '../database/CommentType';
-import { CommentRequest, NewsRequest } from '../params/request/CommonRequest';
+import { CommentRequest } from '../params/request/CommonRequest';
 import { CommentResponse } from '../params/response/CommentResponse';
 
 /**
@@ -69,24 +69,6 @@ export class CommentService {
   public cancelCommentLike(commentId: string) {
     const data: CommentRequest = { commentId };
     return request.post('/comment/like/cancel', data);
-  }
-
-  /**
-   * 文章动态点赞接口
-   * @param newsId
-   */
-  public addPosterLike(newsId: string) {
-    const data: NewsRequest = { newsId };
-    return request.post('/news/like', data);
-  }
-
-  /**
-   * 文章动态取消点赞接口
-   * @param newsId
-   */
-  public cancelPosterLike(newsId: string) {
-    const data: NewsRequest = { newsId };
-    return request.post('/news/like/cancel', data);
   }
 }
 

@@ -1,0 +1,19 @@
+{
+  "routerMap": [
+    {
+      "name": "MainEntry",
+      "pageSourceFile": "src/main/ets/views/MainEntry.ets",
+      "buildFunction": "MainEntryBuilder"
+    },
+    {
+      "name": "CategoryPage",
+      "pageSourceFile": "src/main/ets/tabviews/CategoryPage.ets",
+      "buildFunction": "buildCategoryPage"
+    },
+    {
+      "name": "CartPage",
+      "pageSourceFile": "src/main/ets/tabviews/CartPage.ets",
+      "buildFunction": "buildCartPage"
+    }
+  ]
+}

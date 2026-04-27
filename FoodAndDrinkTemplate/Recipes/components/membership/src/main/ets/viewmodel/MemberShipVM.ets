@@ -286,14 +286,15 @@ export class MemberShipVM {
   }
 
   getPromiseList(params: iap.QueryProductsParameter) {
-    if (params.productIds.length) {
-      return iap.queryProducts(this.uiContext?.getHostContext() as common.UIAbilityContext, params)
-        .catch((err: BusinessError) => {
-        // 请求失败
-        return [] as iap.Product[]
-      })
+    let promise: Promise<Array<iap.Product>> | undefined = undefined;
+    try {
+      if (params.productIds.length) {
+        promise = iap.queryProducts(this.uiContext?.getHostContext() as common.UIAbilityContext, params);
+      }
+      return promise;
+    } catch (e) {
+      return undefined;
     }
-    return undefined;
   }
 
   async queryPurchase() {

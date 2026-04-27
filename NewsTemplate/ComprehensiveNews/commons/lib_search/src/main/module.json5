@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "lib_search",
+    "type": "har",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ]
+  }
+}

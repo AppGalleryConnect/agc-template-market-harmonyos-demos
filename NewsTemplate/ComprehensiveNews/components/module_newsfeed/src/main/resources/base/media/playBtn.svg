@@ -1,4 +1,7 @@
 <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <metadata>
+    <agcit_code>agcit_huawei_comprehensive_news</agcit_code>
+  </metadata>
 <rect width="64" height="64" rx="32" fill="black" fill-opacity="0.2"/>
 <path d="M22.805 46.0466C23.3732 46.0466 23.8243 45.8627 24.4259 45.5118L44.3777 33.8983C45.4973 33.2466 45.9318 32.7788 45.9318 32.0101C45.9318 31.2414 45.4973 30.7903 44.3777 30.1386L24.4259 18.5084C23.8243 18.1742 23.3732 17.9736 22.805 17.9736C21.769 17.9736 21.1006 18.759 21.1006 20.0123V44.0079C21.1006 45.2612 21.769 46.0466 22.805 46.0466Z" fill="white"/>
 </svg>

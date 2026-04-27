@@ -1,0 +1,36 @@
+{
+  "float": [
+    {
+      "name": "page_text_font_size",
+      "value": "50fp"
+    },
+    {
+      "name": "mine_avatar_width",
+      "value": "48vp"
+    },
+    {
+      "name": "mine_avatar_height",
+      "value": "48vp"
+    },
+    {
+      "name": "mine_phone_width",
+      "value": "16vp"
+    },
+    {
+      "name": "mine_phone_height",
+      "value": "16vp"
+    },
+    {
+      "name": "mine_link_height",
+      "value": "16vp"
+    },
+    {
+      "name": "mine_link_width",
+      "value": "16vp"
+    },
+    {
+      "name": "mine_title_height",
+      "value": "24vp"
+    }
+  ]
+}

@@ -13,8 +13,8 @@ export class ClassificationVM {
   columnOptions: BreakpointType<number> = new BreakpointType<number>({
     sm: 3,
     md: 4,
-    lg: 4,
-    xl: 4,
+    lg: 5,
+    xl: 5,
   });
   @Trace breakPointModel: BreakpointModel = AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
 

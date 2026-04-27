@@ -1,4 +1,5 @@
 import { UtilLog as Logger } from '@hw-agconnect/util-log';
+import { BreakpointSystem } from 'lib_foundation';
 import { CommonSymbol } from 'lib_widget';
 import { LOG_TAG } from '../commons/Constants';
 import { PopupSheetController } from '../commons/Model';
@@ -47,10 +48,10 @@ export struct PopupSheet {
         builder: () => {
           this.ContentBuilder();
         },
-        width: '100%',
+        width: BreakpointSystem.isTablet ? '40%' : '100%',
         backgroundBlurStyle: BlurStyle.NONE,
-        cornerRadius: 0,
-        alignment: DialogAlignment.Bottom,
+        cornerRadius: BreakpointSystem.isTablet ? 32 : 0,
+        alignment: BreakpointSystem.isTablet ? DialogAlignment.Center : DialogAlignment.Bottom,
         isModal: true,
         maskColor: 0x66000000,
         maskRect: {

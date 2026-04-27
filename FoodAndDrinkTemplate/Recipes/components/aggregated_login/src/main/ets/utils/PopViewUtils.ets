@@ -1,5 +1,5 @@
 import { ComponentContent, promptAction } from '@kit.ArkUI';
-import { common } from '@kit.AbilityKit';
+import { BusinessError } from '@kit.BasicServicesKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 
 const logTag = 'PopViewUtils';
@@ -9,9 +9,6 @@ enum PopViewShowType {
   OPEN
 }
 
-async function getUIContext() {
-  return (await (getContext() as common.UIAbilityContext).windowStage.getMainWindow()).getUIContext();
-}
 
 interface PopViewModel {
   com: ComponentContent<Object>;
@@ -26,6 +23,10 @@ export class PopViewUtils {
   private static uiContext: UIContext;
   private infoList: PopViewModel[] = [];
   private sheetList: PopViewModel[] = [];
+
+  public static setUiContext(uiContext: UIContext) {
+    PopViewUtils.uiContext = uiContext;
+  }
 
   /**
    * 打开弹窗
@@ -51,8 +52,9 @@ export class PopViewUtils {
    * @param args
    * @param options
    */
-  public static showSheet<T extends Object>(contentView: WrappedBuilder<[T]> | WrappedBuilder<[]>,
+  public static showSheet<T extends Object>(uiContext: UIContext, contentView: WrappedBuilder<[T]> | WrappedBuilder<[]>,
     options?: SheetOptions, args?: T): void {
+    PopViewUtils.setUiContext(uiContext);
     PopViewUtils.showSheetView(PopViewShowType.OPEN, contentView, args, options);
   }
 
@@ -73,9 +75,6 @@ export class PopViewUtils {
   private static async showDialog<T extends Object>(type: PopViewShowType,
     contentView: WrappedBuilder<[T]> | WrappedBuilder<[]>, args?: T,
     options?: promptAction.BaseDialogOptions): Promise<void> {
-    if (!PopViewUtils.uiContext) {
-      PopViewUtils.uiContext = await getUIContext();
-    }
     if (PopViewUtils.uiContext) {
       let prompt = PopViewUtils.uiContext.getPromptAction();
       let componentContent: ComponentContent<Object> | null = null;
@@ -95,7 +94,10 @@ export class PopViewUtils {
           }
         },
       };
-      prompt.openCustomDialog(componentContent, customOptions);
+      prompt.openCustomDialog(componentContent, customOptions).catch((err: BusinessError) => {
+        hilog.error(domainId, logTag,
+          `Failed to open open custom dialog, errCode: ${err.code}, errMessage: ${err.message}`);
+      });
       let infoList = PopViewUtils.shareInstance().infoList;
       let info: PopViewModel = {
         com: componentContent,
@@ -107,9 +109,6 @@ export class PopViewUtils {
   }
 
   private static async closeDialog(type: PopViewShowType): Promise<void> {
-    if (!PopViewUtils.uiContext) {
-      PopViewUtils.uiContext = await getUIContext();
-    }
     if (PopViewUtils.uiContext) {
       let prompt = PopViewUtils.uiContext.getPromptAction();
       let sameTypeList = PopViewUtils.shareInstance().infoList.filter((model) => {
@@ -120,7 +119,10 @@ export class PopViewUtils {
         PopViewUtils.shareInstance().infoList = PopViewUtils.shareInstance().infoList.filter((model) => {
           return model.com !== info.com;
         })
-        prompt.closeCustomDialog(info.com);
+        prompt.closeCustomDialog(info.com).catch((err: BusinessError) => {
+          hilog.error(domainId, logTag,
+            `Failed to open close custom dialog, errCode: ${err.code}, errMessage: ${err.message}`);
+        });
         hilog.info(domainId, logTag, 'dialog close');
       }
     }
@@ -129,9 +131,6 @@ export class PopViewUtils {
   private static async showSheetView<T extends Object>(type: PopViewShowType,
     contentView: WrappedBuilder<[T]> | WrappedBuilder<[]>, args?: T,
     options?: SheetOptions): Promise<void> {
-    if (!PopViewUtils.uiContext) {
-      PopViewUtils.uiContext = await getUIContext();
-    }
     if (PopViewUtils.uiContext) {
       let componentContent: ComponentContent<Object> | null = null;
       if (args) {
@@ -139,7 +138,10 @@ export class PopViewUtils {
       } else {
         componentContent = new ComponentContent(PopViewUtils.uiContext, contentView as WrappedBuilder<[]>);
       }
-      PopViewUtils.uiContext.openBindSheet(componentContent, options);
+      PopViewUtils.uiContext.openBindSheet(componentContent, options).catch((err: BusinessError) => {
+        hilog.error(domainId, logTag,
+          `Failed to open bindSheet, errCode: ${err.code}, errMessage: ${err.message}`);
+      });
       let sheetList = PopViewUtils.shareInstance().sheetList;
       let info: PopViewModel = {
         com: componentContent,
@@ -151,9 +153,6 @@ export class PopViewUtils {
   }
 
   private static async closeSheetView(type: PopViewShowType): Promise<void> {
-    if (!PopViewUtils.uiContext) {
-      PopViewUtils.uiContext = await getUIContext();
-    }
     if (PopViewUtils.uiContext) {
       let sameTypeList = PopViewUtils.shareInstance().sheetList.filter((model) => {
         return model.popType === type;
@@ -163,7 +162,10 @@ export class PopViewUtils {
         PopViewUtils.shareInstance().sheetList = PopViewUtils.shareInstance().sheetList.filter((model) => {
           return model.com !== info.com;
         })
-        PopViewUtils.uiContext.closeBindSheet(info.com);
+        PopViewUtils.uiContext.closeBindSheet(info.com).catch((err: BusinessError) => {
+          hilog.error(domainId, logTag,
+            `Failed to close bindSheet, errCode: ${err.code}, errMessage: ${err.message}`);
+        });
         hilog.info(domainId, logTag, 'sheet close');
       }
     }

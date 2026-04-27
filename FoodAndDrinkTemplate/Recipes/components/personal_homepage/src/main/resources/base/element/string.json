@@ -6,7 +6,7 @@
     },
     {
       "name": "agcit_huawei_recipes_personal_homepage",
-      "value": "1.0.4"
+      "value": "1.0.5"
     },
     {
       "name": "agcittype_huawei_recipes_personal_homepage",
@@ -14,7 +14,7 @@
     },
     {
       "name": "agcitkid_huawei_recipes_personal_homepage",
-      "value": "agcit_huawei_recipes_featured_recipes/1.0.5"
+      "value": "agcit_huawei_recipes_featured_recipes/1.0.6,aggregated_ads/1.0.6"
     }
   ]
 }

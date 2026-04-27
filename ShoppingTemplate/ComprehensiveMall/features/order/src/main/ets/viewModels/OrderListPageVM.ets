@@ -3,7 +3,7 @@ import { OrderApis, OrderItem } from 'lib_network';
 import { ORDER_TAB_LIST } from '../common/Constants';
 import { OrderActionMap, OrderStatusMap, OrderTabsMap } from '../common/Enums';
 import { OrderUtil } from '../utils/OrderUtil';
-import { UpdateAddressSheetOptions } from '../views/UpdateAddressSheet';
+import { buildOrderAddressSheetOptions } from '../views/UpdateAddressSheet';
 
 @ObservedV2
 export class OrderListPageVM {
@@ -40,6 +40,11 @@ export class OrderListPageVM {
   public async changeTab(index: number) {
     this.currentIndex = index;
     this.orderList = [];
+    this.refreshOrderList();
+  }
+
+  public switchReviewTab(index: number) {
+    this.reviewTabIndex = index;
     this.refreshOrderList();
   }
 
@@ -83,24 +88,19 @@ export class OrderListPageVM {
     this.isRefreshing = false;
   }
 
-  public switchReviewTab(index: number) {
-    this.reviewTabIndex = index;
-    this.refreshOrderList();
-  }
-
   public handleOrderItem(orderItem: OrderItem, action: OrderActionMap) {
     if (action === OrderActionMap.UPDATE_ADDRESS) {
       routerStack.pushPath(
         {
           name: RouterMap.ORDER_UPDATE_ADDRESS,
-          param: {
+          param: buildOrderAddressSheetOptions({
             originalAddress: orderItem.orderInfo.addressInfo,
             orderNo: orderItem.orderInfo.orderNo,
             handleSubmitSuccess: () => {
               routerStack.pop();
               this.refreshOrderList();
             },
-          } as UpdateAddressSheetOptions,
+          }),
         },
         false,
       );

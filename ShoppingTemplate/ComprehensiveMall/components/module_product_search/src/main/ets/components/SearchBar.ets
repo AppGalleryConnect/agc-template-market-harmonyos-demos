@@ -27,12 +27,12 @@ export struct SearchBar {
         Image($r('app.media.ic_left_arrow'))
           .width(24)
           .height(24)
-          .fillColor(Constants.FONT_COLOR_LEVEL1);
+          .fillColor($r('app.color.font_color_level1'));
       }
       .width(40)
       .height(40)
       .borderRadius(Constants.BORDER_RADIUS_CAPSULE)
-      .backgroundColor(Constants.BACKGROUND_COLOR_GREY_2)
+      .backgroundColor($r('app.color.background_color_button_grey'))
       .justifyContent(FlexAlign.Center)
       .alignItems(VerticalAlign.Center)
       .margin({ right: Constants.SPACE_S })
@@ -43,7 +43,7 @@ export struct SearchBar {
       if (this.disabled) {
         Row() {
           Text(this.searchWords)
-            .fontColor(Constants.FONT_COLOR_LEVEL2)
+            .fontColor($r('app.color.font_color_level2'))
             .maxLines(1)
             .textOverflow({ overflow: TextOverflow.Ellipsis })
         }
@@ -55,7 +55,7 @@ export struct SearchBar {
           bottom: Constants.SPACE_S,
         })
         .borderRadius(Constants.BORDER_RADIUS_CAPSULE)
-        .backgroundColor(Constants.BACKGROUND_COLOR_GREY_2)
+        .backgroundColor($r('app.color.background_color_button_grey'))
         .onClick(() => {
           this.clickBack?.();
         });
@@ -66,7 +66,7 @@ export struct SearchBar {
           placeholder: this.placeholder ? this.placeholder : '请输入搜索内容',
         })
           .layoutWeight(1)
-          .backgroundColor(Constants.BACKGROUND_COLOR_GREY_2)
+          .backgroundColor($r('app.color.background_color_button_grey'))
           .searchButton('搜索', {
             fontColor: Constants.THEME_COLOR,
           })
@@ -96,7 +96,7 @@ export struct SearchBar {
       left: Constants.SPACE_L,
       right: Constants.SPACE_S,
     })
-    .backgroundColor(Constants.BACKGROUND_COLOR)
+    .backgroundColor($r('app.color.background_color_primary'))
     .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP]);
 
   }

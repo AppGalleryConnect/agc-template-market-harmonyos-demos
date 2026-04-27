@@ -156,7 +156,7 @@ export class PersonalInfoViewVM {
 
   collectList() {
     if (this.switchInfo.showAvatar) {
-      this.avatarItem.value = this.personalData.avatar!;
+      this.avatarItem.value = this.formatAvatar(this.personalData.avatar!) ;
       this.avatarItem.invocation = this.apiInfo.updateAvatar!;
       this.list1.push(this.avatarItem);
     }
@@ -191,4 +191,19 @@ export class PersonalInfoViewVM {
       this.list4.push(this.introItem);
     }
   }
+
+  formatAvatar(avatar: string) {
+    let newAvatar: ResourceStr
+    if (avatar) {
+      if ((typeof avatar === 'string') && avatar.startsWith('file://')) {
+        newAvatar = avatar
+      } else {
+        newAvatar = $r(`app.media.${avatar}`)
+      }
+    } else {
+      newAvatar = $r('app.media.ic_avatar')
+    }
+    return newAvatar
+  }
+
 }

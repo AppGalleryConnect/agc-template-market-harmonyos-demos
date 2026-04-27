@@ -18,7 +18,7 @@ export struct SearchKeys {
   build() {
     Column() {
       Row() {
-        Text(this.title).fontSize(12).fontColor('#99000000');
+        Text(this.title).fontSize(12).fontColor($r('sys.color.font_primary'));
         this.clearBuilderParam()
       }.justifyContent(FlexAlign.SpaceBetween).margin({ bottom: 12 }).width('100%');
 
@@ -46,7 +46,7 @@ function labelBaseStyle() {
   })
   .fontSize(14)
   .borderRadius(14)
-  .backgroundColor('#0D000000')
+  .backgroundColor($r('sys.color.comp_background_tertiary'))
   .focusable(true)
   .focusOnTouch(true);
 }

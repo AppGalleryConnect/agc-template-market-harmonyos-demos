@@ -3,6 +3,18 @@
     {
       "name": "page_show",
       "value": "page from package"
+    },
+    {
+      "name": "apply_read_calendar_reason",
+      "value": "申请日历读取权限"
+    },
+    {
+      "name": "apply_write_calendar_reason",
+      "value": "申请日历写入权限"
+    },
+    {
+      "name": "agcit_huawei_comprehensive_news",
+      "value": "1.0.5"
     }
   ]
 }

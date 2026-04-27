@@ -1,6 +1,7 @@
 import request from '../common/BaseRequest';
 import { AuthorService } from './AuthorService';
 import {
+  AddReservationRequest,
   AuthorRequest,
   DeleteCommentRequest,
   ModifyPersonalInfoRequest,
@@ -192,6 +193,60 @@ export class MineService extends AuthorService {
    */
   public modifyPersonalInfo(params: ModifyPersonalInfoRequest): Promise<void> {
     return request.post('/modify/personal/info', params);
+  }
+
+  /**
+   * 添加预约
+   * @param newsId
+   * @param liveStartTime
+   * @param eventId
+   */
+  public addReservation(newsId: string, liveStartTime: number, eventId: number): Promise<void> {
+    const data: AddReservationRequest = { newsId, liveStartTime, eventId };
+    return request.post('/my/reservation/add', data);
+  }
+
+  /**
+   * 取消预约
+   * @param newsId
+   */
+  public cancelReservation(newsId: string): Promise<void> {
+    const data: NewsRequest = { newsId };
+    return request.post('/my/reservation/cancel', data);
+  }
+
+  /**
+   * 查询我的预约列表
+   * @returns
+   */
+  public queryMyReservations(): Promise<NewsResponse[]> {
+    return request.get('/my/reservation/list');
+  }
+
+  /**
+   * 批量删除预约记录
+   * @param newsIds
+   */
+  public deleteReservations(newsIds: string[]): Promise<void> {
+    return request.post('/my/reservation/delete', newsIds);
+  }
+
+  /**
+   * 拉黑作者
+   * @param authorId
+   * @returns
+   */
+  public blockAuthor(authorId: string): Promise<void> {
+    return request.post('/my/block/author', authorId);
+  }
+
+  /**
+   * 屏蔽新闻
+   * @param newsId
+   * @returns
+   */
+  public blockNews(newsId: string): Promise<void> {
+    return request.post('/my/block/news', newsId);
   }
 }
 

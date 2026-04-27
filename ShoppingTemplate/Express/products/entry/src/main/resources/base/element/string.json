@@ -26,15 +26,19 @@
     },
     {
       "name": "widget_desc",
-      "value": "This is a service widget."
+      "value": "快递物流模板"
     },
     {
       "name": "widget_display_name",
-      "value": "widget"
+      "value": "快递物流模板"
+    },
+    {
+      "name": "shortcuts_shipping",
+      "value": "寄快递"
     },
     {
       "name": "agcit_huawei_express_template",
-      "value": "1.0.0"
+      "value": "1.0.3"
     }
   ]
 }

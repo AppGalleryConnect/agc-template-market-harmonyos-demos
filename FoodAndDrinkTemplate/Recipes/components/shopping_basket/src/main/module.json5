@@ -3,7 +3,8 @@
     "name": "shopping_basket",
     "type": "har",
     "deviceTypes": [
-      "phone"
+      "phone",
+      "tablet"
     ]
   }
 }

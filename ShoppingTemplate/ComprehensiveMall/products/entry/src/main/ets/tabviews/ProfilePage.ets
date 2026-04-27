@@ -50,7 +50,7 @@ export struct ProfilePage {
       .align(Alignment.Top)
       .edgeEffect(EdgeEffect.Spring)
       .scrollBar(BarState.Off)
-      .padding({ left: $r('app.string.space_l'), right: $r('app.string.space_l') })
+      .padding({ left: $r('app.float.space_l'), right: $r('app.float.space_l') })
     }
     .height('100%')
     .width('100%')
@@ -169,7 +169,7 @@ function buildCheckInArea() {
       }
       .width($r('app.string.size_percent_full'))
       .onClick(() => {
-        routerStack.pushPath({ name: RouterMap.USER_MEMBER_BENEFITS })
+        routerStack.pushPath({ name: RouterMap.POINTS_MALL })
       })
     }
   }

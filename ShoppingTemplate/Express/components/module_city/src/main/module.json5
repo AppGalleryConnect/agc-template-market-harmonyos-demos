@@ -1,9 +1,0 @@
-{
-  "module": {
-    "name": "module_city",
-    "type": "har",
-    "deviceTypes": [
-      "default"
-    ]
-  }
-}

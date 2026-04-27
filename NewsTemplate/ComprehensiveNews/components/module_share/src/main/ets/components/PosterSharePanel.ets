@@ -1,5 +1,4 @@
 import { AppStorageV2 } from '@kit.ArkUI';
-import { image } from '@kit.ImageKit';
 import { ShareKinds, ShareViewData } from '../common/ShareParams'
 import { CommonConstants } from '../common/Constants';
 import { CustomScrollModifier } from '../common/Styles';
@@ -9,7 +8,6 @@ import { PanelItem } from './PanelItem';
 @ComponentV2
 export struct PosterSharePanel {
   @Require @Param data: ShareViewData;
-  @Require @Param pixmap: image.PixelMap;
   @Require @Param shareList: ShareKinds[];
   @Local windowModel: ShareConfigModel = AppStorageV2.connect(ShareConfigModel, () => new ShareConfigModel())!;
   @Local scrollModifier: CustomScrollModifier = new CustomScrollModifier();
@@ -19,7 +17,7 @@ export struct PosterSharePanel {
   build() {
     Column({ space: CommonConstants.PADDING_XXL }) {
       Column() {
-        Image(this.pixmap)
+        Image(this.data.imageUri)
           .objectFit(ImageFit.Contain)
           .onComplete((event) => {
             if (event) {
@@ -43,7 +41,6 @@ export struct PosterSharePanel {
             PanelItem({
               value: value,
               data: this.data,
-              pixmap: this.pixmap,
             })
           }, (value: ShareKinds) => value.kindId)
         }
@@ -58,5 +55,8 @@ export struct PosterSharePanel {
         bottom: CommonConstants.PADDING_M,
       })
     }
+    .padding({
+      top: CommonConstants.PADDING_M,
+    })
   }
 }

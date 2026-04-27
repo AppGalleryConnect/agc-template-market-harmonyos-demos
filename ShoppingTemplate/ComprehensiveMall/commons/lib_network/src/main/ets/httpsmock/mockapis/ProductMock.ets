@@ -137,7 +137,7 @@ export class ProductMockApis {
             code: 404,
             msg: '商品不存在',
           };
-          return [HttpStatusCode.NotFound, errorRes];
+          return [HttpStatusCode.Ok, errorRes];
         }
 
         // 检查是否在秒杀中

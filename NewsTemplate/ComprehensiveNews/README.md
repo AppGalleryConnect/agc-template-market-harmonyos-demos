@@ -15,28 +15,29 @@
 
 此模板提供如下组件，所有组件存放在工程根目录的components下，如果您仅需使用组件，可参考对应组件的指导链接；如果您使用此模板，请参考本文档。
 
-| 组件                                | 描述                                          | 使用指导                                                  |
-|:----------------------------------|:--------------------------------------------|:------------------------------------------------------|
-| 通用登录组件（module_login）              | 支持华为账号一键登录及其他方式登录（微信、手机号登录）                 | [使用指导](components/module_login/README.md)             |
-| 通用分享组件（module_share）              | 支持分享到微信好友、朋友圈、QQ、微博等方式，支持碰一碰分享、生成海报、系统分享等功能 | [使用指导](components/module_share/README.md)             |
-| 通用应用内设置组件（module_app_setting）     | 支持设置开关切换、下拉选择、页面跳转、文本刷新等基础设置项               | [使用指导](components/module_app_setting/README.md)       |
-| 通用问题反馈组件（module_feedback）         | 支持提交问题反馈、查看反馈记录                             | [使用指导](components/module_feedback/README.md)          |
-| 通用朗读组件（module_text_reader）        | 支持文本朗读                                      | [使用指导](components/module_text_reader/README.md)       |
-| 通用个人信息组件（module_personal_info）    | 支持编辑头像、昵称、姓名、性别、手机号、生日、个人简介等                | [使用指导](components/module_personal_info/README.md)     |
-| 通用隐私同意弹窗组件（module_consent_dialog） | 支持全屏、弹窗、半模态等形式的隐私弹窗                         | [使用指导](components/module_consent_dialog/README.md)    |
-| 通用会员组件（module_membership）         | 支持应用内支付进行会员开通                               | [使用指导](components/module_membership/README.md)        |
-| 通用图片预览组件（module_imagepreview）     | 支持预览图片、双指放大、缩小，滑动预览                         | [使用指导](components/module_imagepreview/README.md)      |
-| 新闻广告组件（module_advertisement）      | 支持全屏广告、横幅广告                                 | [使用指导](components/module_advertisement/README.md)     |
-| 频道编辑组件（module_channeledit）        | 支持频道添加、删除、拖拽排序                              | [使用指导](components/module_channeledit/README.md)       |
-| 高亮组件（module_highlight）            | 支持根据关键字高亮显示文本中命中关键词的部分                      | [使用指导](components/module_highlight/README.md)         |
-| 发帖组件（module_post）                 | 支持编辑互动发帖                                    | [使用指导](components/module_post/README.md)              |
-| 字体大小调节组件（module_setfontsize）      | 支持实时查看字体大小调整效果                              | [使用指导](components/module_setfontsize/README.md)       |
-| 短视频滑动组件（module_swipeplayer）       | 支持短视频上下滑动、横竖屏切换、长按倍速、播放进度条拖动等能力             | [使用指导](components/module_swipeplayer/README.md)       |
-| 一镜到底组件（module_transition）         | 支持卡片展开、搜索、查看大图一镜到底                          | [使用指导](components/module_transition/README.md)        |
-| 新闻发布组件（module_articlepost）        | 支持富文本发表新闻                                   | [使用指导](components/module_articlepost/README.md)       |
-| 动态布局组件（module_flexlayout）         | 支持根据描述文件动态布局                                | [使用指导](components/module_flexlayout/README.md)        |
-| 数字报纸组件（module_digital_newspaper）  | 支持浏览传统报纸                                    | [使用指导](components/module_digital_newspaper/README.md) |
-| 音频广播组件（module_audioplayer）        | 音频广播组件                                      | [使用指导](components/module_audioplayer/README.md)       |
+| 组件                                | 描述                                             | 使用指导                                                  |
+|:----------------------------------|:-----------------------------------------------|:------------------------------------------------------|
+| 通用登录组件（module_login）              | 支持华为账号一键登录及其他方式登录（微信、手机号登录）                    | [使用指导](components/module_login/README.md)             |
+| 通用分享组件（module_share）              | 支持分享到微信好友、朋友圈、QQ、微博等方式，支持碰一碰分享、生成海报、系统分享等功能    | [使用指导](components/module_share/README.md)             |
+| 通用应用内设置组件（module_app_setting）     | 支持设置开关切换、下拉选择、页面跳转、文本刷新等基础设置项                  | [使用指导](components/module_app_setting/README.md)       |
+| 通用问题反馈组件（module_feedback）         | 支持提交问题反馈、查看反馈记录                                | [使用指导](components/module_feedback/README.md)          |
+| 通用朗读组件（module_text_reader）        | 支持文本朗读                                         | [使用指导](components/module_text_reader/README.md)       |
+| 通用个人信息组件（module_personal_info）    | 支持编辑头像、昵称、姓名、性别、手机号、生日、个人简介等                   | [使用指导](components/module_personal_info/README.md)     |
+| 通用隐私同意弹窗组件（module_consent_dialog） | 支持全屏、弹窗、半模态等形式的隐私弹窗                            | [使用指导](components/module_consent_dialog/README.md)    |
+| 通用会员组件（module_membership）         | 支持应用内支付进行会员开通                                  | [使用指导](components/module_membership/README.md)        |
+| 通用图片预览组件（module_imagepreview）     | 支持预览图片、双指放大、缩小，滑动预览                            | [使用指导](components/module_imagepreview/README.md)      |
+| 通用搜索组件（module_search）             | 支持显示搜索历史、猜你想搜和热搜榜等，支持搜索联想，支持一多适配，平板提供可选的浅层窗口模式 | [使用指导](components/module_search/README.md)      |
+| 新闻广告组件（module_advertisement）      | 支持全屏广告、横幅广告                                    | [使用指导](components/module_advertisement/README.md)     |
+| 频道编辑组件（module_channeledit）        | 支持频道添加、删除、拖拽排序                                 | [使用指导](components/module_channeledit/README.md)       |
+| 高亮组件（module_highlight）            | 支持根据关键字高亮显示文本中命中关键词的部分                         | [使用指导](components/module_highlight/README.md)         |
+| 发帖组件（module_post）                 | 支持编辑互动发帖                                       | [使用指导](components/module_post/README.md)              |
+| 字体大小调节组件（module_setfontsize）      | 支持实时查看字体大小调整效果                                 | [使用指导](components/module_setfontsize/README.md)       |
+| 短视频滑动组件（module_swipeplayer）       | 支持短视频上下滑动、横竖屏切换、长按倍速、播放进度条拖动等能力                | [使用指导](components/module_swipeplayer/README.md)       |
+| 一镜到底组件（module_transition）         | 支持卡片展开、搜索、查看大图一镜到底                             | [使用指导](components/module_transition/README.md)        |
+| 新闻发布组件（module_articlepost）        | 支持富文本发表新闻                                      | [使用指导](components/module_articlepost/README.md)       |
+| 动态布局组件（module_flexlayout）         | 支持根据描述文件动态布局                                   | [使用指导](components/module_flexlayout/README.md)        |
+| 数字报纸组件（module_digital_newspaper）  | 支持浏览传统报纸                                       | [使用指导](components/module_digital_newspaper/README.md) |
+| 音频广播组件（module_audioplayer）        | 音频广播组件                                         | [使用指导](components/module_audioplayer/README.md)       |
 
 本模板为新闻类应用提供了常用功能的开发样例，模板主要分首页、视频、互动和我的四大模块：
 
@@ -140,7 +141,8 @@
       │   └── 点赞
       │
       └──常用服务  
-          ├── 我的订阅  
+          ├── 我的订阅
+          ├── 我的预约  
           ├── 浏览历史                                        
           ├── 意见反馈                   
           └── 设置
@@ -231,6 +233,8 @@ ComprehensiveNews
 │  │    └──views  
 │  │        └──ArticleFeedDetails.ets                     // 新闻详情页      
 │  │ 
+│  ├──lib_search                                          // 搜索模块
+│  │
 │  └──lib_widget/src/main/ets                             // 通用UI模块             
 │       └──components
 │           ├──BaseImage.ets                              // 基础图片组件
@@ -239,8 +243,7 @@ ComprehensiveNews
 │           ├──CustomBadge.ets                            // 自定义信息标记组件
 │           ├──EmptyBuilder.ets                           // 空白组件
 │           ├──NavHeaderBar.ets                           // 自定义标题栏
-│           ├──NetworkExceptionView.ets                   // 网络异常组件
-│           └──NewsSearchTransition.ets                   // 搜索动画
+│           └──NetworkExceptionView.ets                   // 网络异常组件
 │
 ├──components
 │  ├──module_advertisement                                // 广告组件 
@@ -260,6 +263,7 @@ ComprehensiveNews
 │  ├──module_newsfeed                                     // 动态卡片组件
 │  ├──module_personal_info                                // 个人信息组件
 │  ├──module_post                                         // 发帖组件
+│  ├──module_search                                       // 搜索组件
 │  ├──module_setfontsize                                  // 字体大小调节组件
 │  ├──module_share                                        // 分享组件
 │  ├──module_swipeplayer                                  // 视频组件
@@ -278,7 +282,6 @@ ComprehensiveNews
 │  │        ├──HomePage.ets                               // 首页页面
 │  │        ├──NewsPost.ets                               // 新闻发布入口页面
 │  │        ├──NewsPublishSelect.ets                      // 新闻发布图片选择页面
-│  │        ├──NewsSearch.ets                             // 搜索页面
 │  │        └──VideoPreview.ets                           // 视频预览页面
 │  │
 │  ├──business_interaction/src/main/ets                   // 互动模块             
@@ -344,7 +347,6 @@ ComprehensiveNews
 │       ├──components
 │       │   ├──BroadcastLikeView.ets                      // 广播推荐列表视图 
 │       │   ├──CommentView.ets                            // 评论视图
-│       │   ├──LiveHighlightsView.ets                     // 直播回放视图
 │       │   ├──LiveNoticePreview.ets                      // 直播公告视图
 │       │   ├──LivestreamCard.ets                         // 直播卡片视图
 │       │   ├──LivestreamFooterView.ets                   // 直播底部视图
@@ -398,8 +400,8 @@ ComprehensiveNews
 
 ### 环境
 
-- DevEco Studio版本：DevEco Studio 6.0.2 Release及以上
-- HarmonyOS SDK版本：HarmonyOS 6.0.2 Release SDK及以上
+- DevEco Studio版本：DevEco Studio 6.1.0 Release及以上
+- HarmonyOS SDK版本：HarmonyOS 6.1.0 Release SDK及以上
 - 设备类型：华为手机（包括双折叠和阔折叠）、平板
 - 系统版本：HarmonyOS 6.0.0(20)及以上
 

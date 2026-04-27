@@ -31,9 +31,9 @@ export struct ProductOperationButton {
     Row() {
       Button('加入购物车')
         .bottomButtonStyle(BreakpointSystem.isTablet)
-        .borderColor($r('app.color.background_color_grey_light'))
+        .borderColor($r('app.color.background_color_button_grey'))
         .fontColor($r('app.color.theme_color'))
-        .backgroundColor($r('app.color.background_color_grey_light'))
+        .backgroundColor($r('app.color.background_color_button_grey'))
         .borderRadius({
           topLeft: $r('sys.float.corner_radius_level10'),
           bottomLeft: $r('sys.float.corner_radius_level10'),

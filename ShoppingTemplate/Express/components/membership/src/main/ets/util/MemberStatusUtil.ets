@@ -1,7 +1,7 @@
 import { iap } from '@kit.IAPKit';
 import { common } from '@kit.AbilityKit';
 import { BusinessError } from '@kit.BasicServicesKit';
-import { hilog } from '@kit.PerformanceAnalysisKit';
+import { UtilLog } from '@hw-agconnect/util-log';
 import { MemberList } from '../model/Index';
 
 export class MemberStatusUtil {
@@ -31,7 +31,7 @@ export class MemberStatusUtil {
       nonRenewPromise = iap?.queryPurchases(uiContext, nonRenewParam);
       nonConsumePromise = iap?.queryPurchases(uiContext, nonConsumeParam);
     } catch (e) {
-      hilog.error(0xFF00, 'MemberShip',`query purchase failed with error ${JSON.stringify(e)}`);
+      UtilLog.error('MemberShip',`query purchase failed with error ${JSON.stringify(e)}`);
     }
 
     return Promise.all([autoRenewPromise, nonRenewPromise, nonConsumePromise]).then((res) => {
@@ -43,7 +43,7 @@ export class MemberStatusUtil {
       memberList.nonConsumeList = nonConsumePurchasedList ?? [];
       return memberList;
     }).catch((err: BusinessError) => {
-      hilog.error(0xFF00, 'MemberShip',
+      UtilLog.error('MemberShip',
         `Failed to query purchase record. Code is ${err.code}, message is ${err.message}`);
       return memberList;
     });

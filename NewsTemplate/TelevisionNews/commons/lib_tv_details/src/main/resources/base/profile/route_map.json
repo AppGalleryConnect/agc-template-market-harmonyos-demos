@@ -1,0 +1,14 @@
+{
+  "routerMap": [
+    {
+      "name": "VideoProgramDetails",
+      "pageSourceFile": "src/main/ets/views/VideoProgramDetails.ets",
+      "buildFunction": "VideoProgramDetailsBuilder"
+    },
+    {
+      "name": "VideoProgramHistory",
+      "pageSourceFile": "src/main/ets/views/VideoProgramHistory.ets",
+      "buildFunction": "VideoProgramHistoryBuilder"
+    }
+  ]
+}

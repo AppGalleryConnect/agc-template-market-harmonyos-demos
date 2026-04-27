@@ -14,31 +14,34 @@
 
 此模板提供如下组件，所有组件存放在工程根目录的components下，如果您仅需使用组件，可参考对应组件的指导链接；如果您使用此模板，请参考本文档。
 
-| 组件                          | 描述               | 使用指导                                             |
-|-----------------------------|------------------| ---------------------------------------------------- |
-| 广告组件（aggregated_ads）        | 支持展示开屏广告         | [使用指导](components/aggregated_ads/README.md)      |
-| 通用登录组件（aggregated_login）    | 支持华为账号一键登录及其他方式登录（微信、手机号登录）    | [使用指导](components/aggregated_login/README.md)    |
-| 会员组件（membership）            | 支持应用内支付实现会员开通的能力 | [使用指导](components/membership/README.md)  |
-| 热量计算组件（calorie_calculation） | 支持统计饮食计划的卡路里     | [使用指导](components/calorie_calculation/README.md) |
-| 菜谱瀑布流组件（featured_recipes）   | 支持展示菜谱列表瀑布流      | [使用指导](components/featured_recipes/README.md)    |
-| 搜索组件（home_search）           | 支持菜谱搜索的相关功能      | [使用指导](components/home_search/README.md)         |
-| 分类列表组件（link_category）       | 支持按分类展示菜谱列表      | [使用指导](components/link_category/README.md)       |
-| 个人中心组件（personal_homepage）   | 支持个人中心页面展示       | [使用指导](components/personal_homepage/README.md)   |
-| 菜篮子组件（shopping_basket）      | 支持菜篮子相关功能        | [使用指导](components/shopping_basket/README.md)     |
-| 上传菜谱组件（upload_recipe）       | 支持上传菜谱的功能        | [使用指导](components/upload_recipe/README.md)       |
-| 通用应用内设置组件（app_setting）      | 支持设置基础设置项        | [使用指导](components/app_setting/README.md)       |
-| 通用个人信息组件（collect_personal_info）     | 支持编辑头像、昵称、手机号等         | [使用指导](components/collect_personal_info/README.md)       |
+| 组件                          | 描述               | 使用指导                                               |
+|-----------------------------|------------------|----------------------------------------------------|
+| 广告组件（aggregated_ads）        | 支持展示开屏广告         | [使用指导](components/aggregated_ads/README.md)        |
+| 通用登录组件（aggregated_login）    | 支持华为账号一键登录及其他方式登录（微信、手机号登录）    | [使用指导](components/aggregated_login/README.md)      |
+| 通用分享组件（aggregated_share）    | 支持分享到微信好友、朋友圈、QQ、微博等方式，支持碰一碰分享、生成海报、系统分享等功能    | [使用指导](components/aggregated_share/README.md)      |
+| 通用会员组件（membership）            | 支持应用内支付实现会员开通的能力 | [使用指导](components/membership/README.md)            |
+| 热量计算组件（calorie_calculation） | 支持统计饮食计划的卡路里     | [使用指导](components/calorie_calculation/README.md)   |
+| 菜谱瀑布流组件（featured_recipes）   | 支持展示菜谱列表瀑布流      | [使用指导](components/featured_recipes/README.md)      |
+| 搜索组件（home_search）           | 支持菜谱搜索的相关功能      | [使用指导](components/home_search/README.md)           |
+| 分类列表组件（link_category）       | 支持按分类展示菜谱列表      | [使用指导](components/link_category/README.md)         |
+| 个人中心组件（personal_homepage）   | 支持个人中心页面展示       | [使用指导](components/personal_homepage/README.md)     |
+| 菜篮子组件（shopping_basket）      | 支持菜篮子相关功能        | [使用指导](components/shopping_basket/README.md)       |
+| 上传菜谱组件（upload_recipe）       | 支持上传菜谱的功能        | [使用指导](components/upload_recipe/README.md)         |
+| 通用应用内设置组件（app_setting）      | 支持设置基础设置项        | [使用指导](components/app_setting/README.md)           |
+| 通用个人信息组件（collect_personal_info）     | 支持编辑头像、昵称、手机号等         | [使用指导](components/collect_personal_info/README.md) |
+| 一镜到底组件（module_transition）         | 支持卡片展开、搜索、查看大图一镜到底                          | [使用指导](components/module_transition/README.md)        |
+| 通用图片预览组件（image_preview）       | 支持预览图片、双指放大、缩小，滑动预览                         | [使用指导](components/image_preview/README.md)      |
 
-本模板为美食菜谱类应用提供了常用功能的开发样例，模板主要分首页、分类、热量计算和我的四大模块：
+本模板为美食菜谱类应用提供了常用功能的开发样例，模板主要分首页、分类、健康和我的四大模块：
 
 - 首页：展示菜谱信息，支持按名称、类别搜索菜谱。
-- 分类：按类别展示菜谱，支持查看详情、收藏菜谱、加入菜篮子和管理菜篮子。
-- 热量计算：展示每日热量和每周热量，支持按时间段增加饮食计划，展示计划饮食的热量。
+- 分类：按类别展示菜谱，支持搜索类别，查看详情、收藏菜谱。
+- 健康：展示健康食谱和每日、每周热量，支持按时间段增加饮食计划，展示计划饮食的热量。
 - 我的：展示账号相关信息，展示我的菜谱和上传菜谱，展示收藏的菜谱，展示浏览记录，以及设置等功能。
 
 本模板已集成华为账号服务，只需做少量配置和定制即可快速实现华为账号的登录等功能。
 
-| 首页                                                                | 分类                                                                    | 热量计算                                                                   | 我的                                                                |
+| 首页                                                                | 分类                                                                    | 健康                                                                     | 我的                                                                |
 |-------------------------------------------------------------------|-----------------------------------------------------------------------|------------------------------------------------------------------------|-------------------------------------------------------------------|
 | <img src="screenshots/Screenshot_home.jpeg" alt="首页" width="300"> | <img src="screenshots/Screenshot_category.jpeg" alt="分类" width="300"> | <img src="screenshots/Screenshot_calorie.jpeg" alt="热量计算" width="300"> | <img src="screenshots/Screenshot_mine.jpeg" alt="我的" width="300"> |
 
@@ -61,20 +64,18 @@
  |-- 分类
  |    |-- 分类列表
  |    |-- 菜谱详情
- |    |    |-- 收藏
- |    |    └-- 加入菜篮子
- |    └-- 菜篮子
- |         |-- 全部用料
- |         |-- 菜谱用料
- |         |-- 菜谱新增用料
- |         └-- 删除菜谱
- |-- 热量计算
+ |         |-- 收藏
+ |         └-- 烹饪模式
+ |-- 健康
  |    |-- 日/周热量
  |    └-- 饮食计算
- |         |-- 管理饮食计划
- |         |-- 食物自定义重量
- |         |-- 搜索食物
- |         └-- 添加自定义食物
+ |    |     |-- 管理饮食计划
+ |    |     |-- 食物自定义重量
+ |    |     |-- 搜索食物
+ |    |     └-- 添加自定义食物
+ |    |-- 健康食谱
+ |    |     |-- 健康食谱详情
+ |    |     |-- 健康食谱推荐
  └-- 我的
       |-- 用户信息
       |    |-- 登录
@@ -86,7 +87,6 @@
       |-- 我的收藏
       |-- 服务
       |    |-- 浏览记录
-      |    |-- 菜篮子
       |    └-- 设置
       |         |-- 个人信息
       |         |-- 隐私协议
@@ -208,6 +208,7 @@ Recipes
   │  │  └─types
   │  │         Index.ets                      // 数据类型
   │  └─resources
+  │─components/image_preview                  // 通用图片预览组件
   │─components/link_category/src/main   
   │  ├─ets
   │  │  ├─components
@@ -257,8 +258,12 @@ Recipes
   │  └─resources
   │─features/classification/src/main   
   │  ├─ets
+  │  │  ├─componets
+  │  │  │      BasicInfo.ets                  // 菜谱基础信息
+  │  │  │      BottomZone.ets                 // 详情底部互动区域
+  │  │  │      CommentItem.ets                // 评论组件   
   │  │  ├─constants
-  │  │  │      Enums.ets                      // 枚举数据
+  │  │  │      Enums.ets                      // 枚举数据 
   │  │  ├─pages
   │  │  │      ClassificationPage.ets         // 分类页面
   │  │  │      DishesPage.ets                 // 菜谱详情页面
@@ -343,18 +348,16 @@ Recipes
 
 ### 环境
 
-* DevEco Studio版本：DevEco Studio 5.0.4 Release及以上
-* HarmonyOS SDK版本：HarmonyOS 5.0.4 Release SDK及以上
-* 设备类型：华为手机
-* 系统版本：HarmonyOS 5.0.4(16)及以上
+* DevEco Studio版本：DevEco Studio 6.0.2 Release及以上
+* HarmonyOS SDK版本：HarmonyOS 6.0.2 Release SDK及以上
+* 设备类型：华为手机（包括双折叠）、平板
+* 系统版本：HarmonyOS 5.1.1(19)及以上
 
 ### 权限
 
 - 网络权限：ohos.permission.INTERNET
-
-### 调试
-
-本模板支持使用模拟器调试
+- 跨应用关联权限: ohos.permission.APP_TRACKING_CONSENT
+- 后台运行权限: ohos.permission.KEEP_BACKGROUND_RUNNING
 
 ## 快速入门
 
@@ -376,13 +379,45 @@ Recipes
 
    b. 申请华为账号一键登录所需的权限，详细参考：[申请账号权限](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/account-config-permissions)。
 
-3. 配置支付服务。
+3. 配置推送服务。
 
-   华为支付当前仅支持商户接入，在使用服务前，需要完成商户入网、开发服务等相关配置，本模板仅提供了端侧集成的示例。详细参考：[支付服务接入准备](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/payment-preparations)。
+   a. [开启推送服务](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/push-config-setting)。
 
-4. 对应用进行[手工签名](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-signing#section297715173233)。
+   b. 按照需要的权益[申请通知消息自分类权益](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/push-apply-right)。
 
-5. 添加手工签名所用证书对应的公钥指纹。详细参考：[配置公钥指纹](https://developer.huawei.com/consumer/cn/doc/app/agc-help-cert-fingerprint-0000002278002933)。
+   c. [端云调试](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/push-server)。
+
+4. 配置App Linking服务。
+
+   a. [开通App Linking服务](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/applinking-enable-applinking)
+
+   b. [在开发者网站上关联应用](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/app-linking-startupapp#建立域名与应用关联关系)
+
+   c. [在AGC为应用创建关联的网址域名](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/app-linking-startupapp#在agc为应用创建关联的网址域名)
+
+   d. 在products/entry/src/main路径下的module.json5中配置关联的网址域名，详细参考：[在module.json5中配置关联的网址域名](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/app-linking-startupapp#在modulejson5中配置关联的网址域名)。
+
+   e. 在products/entry/src/main/ets/entryability/EntryAbility.ets#handleAppLink方法中处理传入的链接，详细参考：[处理传入的链接](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/app-linking-startupapp#处理传入的链接)。
+
+5. 配置广告服务。
+
+   a. 如果仅调测广告，可使用测试广告位ID：开屏广告：testu7m3hc4gvm、原生广告：testq6zq98hecj。
+
+   b. 申请正式的广告位ID。登录[鲸鸿动能媒体服务平台](https://developer.huawei.com/consumer/cn/service/ads/publisher/html/index.html?lang=zh)进行申请，具体操作详情请参见[展示位创建](https://developer.huawei.com/consumer/cn/doc/distribution/monetize/zhanshiweichuangjian-0000001132700049)。
+
+6. 配置应用内支付服务。
+
+   a. 您需[开通商户服务](https://developer.huawei.com/consumer/cn/doc/start/merchant-service-0000001053025967)才能开启应用内购买服务。商户服务里配置的银行卡账号、币种，用于接收华为分成收益。
+
+   b. 使用应用内购买服务前，需要打开应用内购买服务开关，此开关是应用级别的，即所有使用IAP Kit功能的应用均需执行此步骤，详情请参考[打开应用内购买服务API开关](https://developer.huawei.com/consumer/cn/doc/app/switch-0000001958955097)。
+
+   c. 开启应用内购买服务开关后，开发者需进一步激活应用内购买服务，具体请参见[激活服务和配置事件通知](https://developer.huawei.com/consumer/cn/doc/app/parameters-0000001931995692)。
+
+7. 配置会员商品信息，详情请参考[配置商品信息](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/iap-config-product)。
+
+8. 对应用进行[手工签名](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-signing#section297715173233)。
+
+9. 添加手工签名所用证书对应的公钥指纹，详细参考：[配置公钥指纹](https://developer.huawei.com/consumer/cn/doc/app/agc-help-cert-fingerprint-0000002278002933)。
 
 ### 运行调试工程
 

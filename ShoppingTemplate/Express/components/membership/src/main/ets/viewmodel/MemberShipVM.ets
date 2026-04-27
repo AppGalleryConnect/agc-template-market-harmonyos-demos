@@ -1,13 +1,12 @@
 import { iap } from '@kit.IAPKit';
 import { common } from '@kit.AbilityKit';
-import { hilog } from '@kit.PerformanceAnalysisKit';
 import { BusinessError } from '@kit.BasicServicesKit';
 import { LevelMode, window } from '@kit.ArkUI';
+import { UtilLog } from '@hw-agconnect/util-log';
 import {
   MemberList,
   MemberParams,
   ProductInfo,
-  ProductInfoListDataSource,
   PurchaseData,
   PurchaseOrderPayload,
   SubGroupStatusPayload,
@@ -32,7 +31,6 @@ export class MemberShipVM {
   @Trace autoRenewPurchasedList: string[] = [];
   @Trace nonAutoRenewPurchasedList: string[] = [];
   @Trace productInfoList: iap.Product[] = []
-  @Trace productInfoListDataSource: ProductInfoListDataSource = new ProductInfoListDataSource()
   @Trace selectedProductIndex: number = 0;
   @Trace isMemberPrivacyChecked: boolean = false;
   @Trace pathStack: NavPathStack = new NavPathStack();
@@ -83,14 +81,14 @@ export class MemberShipVM {
           this.memberParams.errCode = err.code;
           this.memberParams.errMsg = err.message;
           this.subscribeCallBack(this.memberParams);
-          hilog.error(0xFF00, 'MemberShip',
+          UtilLog.error('MemberShip',
             `Failed to create purchase. Code is ${err.code}, message is ${err.message}`);
           if (err.code === iap.IAPErrorCode.PRODUCT_OWNED) {
             this.queryPurchase();
           }
         });
     } catch (e) {
-      hilog.error(0xFF00, 'MemberShip', `Failed to buy products. Code is ${e.code}, message is ${e.message}`);
+      UtilLog.error('MemberShip', `Failed to buy products. Code is ${e.code}, message is ${e.message}`);
     }
   }
 
@@ -166,7 +164,7 @@ export class MemberShipVM {
       // 发货成功后向IAP Kit发送finishPurchase请求，确认发货，完成购买
       this.finishPurchase(purchaseOrderPayload);
     } catch (e) {
-      hilog.error(0xFF00, 'MemberShip', `Failed to deal purchase data. Code is ${e.code}, message is ${e.message}`);
+      UtilLog.error('MemberShip', `Failed to deal purchase data. Code is ${e.code}, message is ${e.message}`);
     }
   }
 
@@ -178,7 +176,7 @@ export class MemberShipVM {
         this.expiresTime = lastSubscriptionStatus?.expiresTime ?? 0;
       }
     } catch (e) {
-      hilog.error(0xFF00, 'MemberShip', `Failed to get renewal time. Code is ${e.code}, message is ${e.message}`);
+      UtilLog.error('MemberShip', `Failed to get renewal time. Code is ${e.code}, message is ${e.message}`);
     }
   }
 
@@ -186,15 +184,15 @@ export class MemberShipVM {
     uiContext.getPromptAction().openCustomDialog(node, {
       levelMode: LevelMode.OVERLAY,
       onWillDismiss: (dismissDialogAction: DismissDialogAction) => {
-        hilog.info(0xFF00, 'MemberShip', JSON.stringify(dismissDialogAction.reason));
+        UtilLog.info('MemberShip', JSON.stringify(dismissDialogAction.reason));
       },
     }).then(() => {
-      hilog.info(0xFF00, 'TAG', 'OpenCustomDialog completed');
+      UtilLog.info('TAG', 'OpenCustomDialog completed');
     })
       .catch((error: BusinessError) => {
         let message = (error as BusinessError).message;
         let code = (error as BusinessError).code;
-        hilog.info(0xFF00, 'TAG', `OpenCustomDialog args error code is ${code}, message is ${message}`);
+        UtilLog.info('TAG', `OpenCustomDialog args error code is ${code}, message is ${message}`);
       });
   }
 
@@ -222,9 +220,9 @@ export class MemberShipVM {
       }
       // 购买完成刷新页面
       this.queryPurchase();
-      hilog.info(0xFF00, 'MemberShip', 'Succeeded in finishing purchase.');
+      UtilLog.info('MemberShip', 'Succeeded in finishing purchase.');
     }).catch((err: BusinessError) => {
-      hilog.error(0xFF00, 'MemberShip', `Failed to buy products. Code is ${err.code}, message is ${err.message}`);
+      UtilLog.error('MemberShip', `Failed to buy products. Code is ${err.code}, message is ${err.message}`);
     });
   }
 
@@ -242,7 +240,6 @@ export class MemberShipVM {
 
   queryProducts(productsInfo: ProductInfo[]) {
     this.productInfoList = []
-    this.productInfoListDataSource.setData([])
     try {
       this.loading = true;
       const renewProductParam: iap.QueryProductsParameter = {
@@ -273,7 +270,6 @@ export class MemberShipVM {
           this.loading = false;
           for (let item of res) {
             this.productInfoList = [...this.productInfoList, ...item ?? []]
-            this.productInfoListDataSource.setData([...this.productInfoListDataSource.getAllData(), ...item ?? []])
           }
         })
         .catch((err: BusinessError) => {
@@ -282,7 +278,7 @@ export class MemberShipVM {
             message: `查询会员商品失败，错误码为${err.code}，请排查后重试~`,
             duration: 1000,
           });
-          hilog.error(0xFF00, 'MemberShip', `Failed to query products. Code is ${err.code}, message is ${err.message}`);
+          UtilLog.error('MemberShip', `Failed to query products. Code is ${err.code}, message is ${err.message}`);
         });
     } catch {
       this.loading = false;
@@ -341,7 +337,7 @@ export class MemberShipVM {
       const height = avoidArea.bottomRect.height;
       return this.uiContext?.px2vp(height) ?? 28;
     } catch (e) {
-      hilog.error(0xFF00, 'MemberShip', `Failed to get avoid height. Code is ${e.code}, message is ${e.message}`);
+      UtilLog.error('MemberShip', `Failed to get avoid height. Code is ${e.code}, message is ${e.message}`);
       return 28;
     }
   }
@@ -351,9 +347,9 @@ export class MemberShipVM {
       windowScreenMode: iap.WindowScreenMode.DIALOG_BOX,
     };
     iap.showManagedSubscriptions(uIAbilityContext, uiWindowParameter, this.groupId).then(() => {
-      hilog.info(0xFF00, 'MemberShip', 'Succeeded in showing subscription page.');
+      UtilLog.info('MemberShip', 'Succeeded in showing subscription page.');
     }).catch((err: BusinessError) => {
-      hilog.error(0xFF00, 'MemberShip',
+      UtilLog.error('MemberShip',
         `Failed to show subscription page. Code is ${err.code}, message is ${err.message}`);
     });
   }

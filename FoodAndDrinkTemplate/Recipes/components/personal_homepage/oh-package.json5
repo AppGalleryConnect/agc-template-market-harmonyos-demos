@@ -1,12 +1,13 @@
 {
   "name": "personal_homepage",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Please describe the basic information.",
   "main": "Index.ets",
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
     "base_ui": "file:../base_ui",
-    "featured_recipes": "file:../featured_recipes"
+    "featured_recipes": "file:../featured_recipes",
+    "aggregated_ads": "file:../aggregated_ads"
   }
 }

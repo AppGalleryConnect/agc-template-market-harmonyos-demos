@@ -256,7 +256,6 @@ export class MockSeckillData {
     if (dateStr.length !== 8) {
       return undefined;
     }
-    ;
     const year = parseInt(dateStr.substring(0, 4));
     const month = parseInt(dateStr.substring(4, 6)) - 1; // JS月份 0-11
     const day = parseInt(dateStr.substring(6, 8));

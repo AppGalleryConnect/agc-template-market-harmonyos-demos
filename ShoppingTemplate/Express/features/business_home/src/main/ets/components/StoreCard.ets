@@ -6,79 +6,66 @@ export struct StoreCard {
   @Param isSelected: boolean = false
 
   build() {
-    Column() {
-      Flex() {
-        Image($r('app.media.store'))
-          .width(50)
-          .height(60)
-          .margin({ right: 12 })
-        Column() {
-          Flex() {
-            Text(this.servicePoint?.name)
-              .fontSize(14)
-              .fontWeight(FontWeight.Regular)
-              .fontColor($r('sys.color.font_secondary'))
-              .maxLines(1)
-              .textOverflow({ overflow: TextOverflow.Ellipsis })
-              .margin({ right: 4 })
-              .flexGrow(1)
-            if (this.servicePoint?.title) {
-              Row() {
-                Text(this.servicePoint?.title)
-                  .fontSize(10)
-                  .fontWeight(FontWeight.Regular)
-                  .fontColor($r('sys.color.font_secondary'))
-              }
-              .width(72)
-              .height(20)
-              .justifyContent(FlexAlign.Center)
-              .backgroundColor('rgba(0,0,0,0.05)')
-              .borderRadius(8)
-            }
-          }
-          .margin({ bottom: 4 })
-
-          Row() {
-            ForEach(this.servicePoint?.tips, (item: string) => {
-              this.tipBuilder(item)
-            }, (item: string[]) => JSON.stringify(item))
-          }
-          .width('100%')
-          .margin({ bottom: 4 })
-
-          Row() {
-            Text() {
-              Span(this.servicePoint?.distance)
-              Span(' ｜ ')
-              Span(this.servicePoint?.positionName)
-            }
-            .fontSize(12)
+    Row({space: 8}) {
+      Image($r('app.media.store'))
+        .width(54)
+        .height(60)
+      Column({ space: 8 }) {
+        Row() {
+          Text(this.servicePoint?.name)
+            .fontSize(14)
             .fontWeight(FontWeight.Regular)
-            .fontColor($r('sys.color.font_tertiary'))
-          }
-          .width('100%')
-        }
-        .flexGrow(1)
-      }
-      .padding({
-        top: 12,
-        bottom: 12,
-        left: 12,
-        right: 20
-      })
+            .fontColor($r('sys.color.font_primary'))
+            .lineHeight(19)
+            .maxLines(2)
+            .textOverflow({ overflow: TextOverflow.Ellipsis })
+            .margin({ right: 4 })
+            .layoutWeight(1)
 
-      if (this.isSelected) {
-        Image($r('app.media.ic_selected'))
-          .width(20)
-          .height(20)
-          .position({ right: 0, bottom: 0 })
+          if (this.servicePoint?.title) {
+            Row() {
+              Text(this.servicePoint?.title)
+                .fontSize(8)
+                .fontWeight(FontWeight.Regular)
+                .fontColor($r('sys.color.font_secondary'))
+            }
+            .padding({left: 8, right: 8, top: 4, bottom: 4})
+            .justifyContent(FlexAlign.Center)
+            .backgroundColor($r('sys.color.comp_background_tertiary'))
+            .borderRadius(8)
+          }
+        }
+        .width('100%')
+        .alignItems(VerticalAlign.Top)
+
+        Row() {
+          ForEach(this.servicePoint?.tips, (item: string) => {
+            this.tipBuilder(item)
+          }, (item: string[]) => JSON.stringify(item))
+        }
+        .width('100%')
+        .margin({ bottom: 4 })
+
+        Row() {
+          Text() {
+            Span(this.servicePoint?.distance)
+            Span(' ｜ ')
+            Span(this.servicePoint?.positionName)
+          }
+          .fontSize(12)
+          .fontWeight(FontWeight.Regular)
+          .fontColor($r('sys.color.font_tertiary'))
+        }
+        .width('100%')
       }
+      .layoutWeight(1)
     }
+    .padding(12)
     .backgroundColor(Color.White)
-    .margin({ bottom: 12 })
-    .borderWidth(this.isSelected ? 1 : 0)
-    .borderColor(this.isSelected ? '#0A59F7' : '')
-    .borderRadius(8)
+    .borderWidth(1)
+    .borderColor(this.isSelected ? $r('sys.color.background_emphasize') : Color.White)
+    .borderRadius(16)
+    .width('100%')
   }
 
   @Builder
@@ -90,8 +77,8 @@ export struct StoreCard {
         .fontColor('#0A59F7')
     }
     .padding({
-      top: 3,
-      bottom: 3,
+      top: 4,
+      bottom: 4,
       left: 8,
       right: 8
     })

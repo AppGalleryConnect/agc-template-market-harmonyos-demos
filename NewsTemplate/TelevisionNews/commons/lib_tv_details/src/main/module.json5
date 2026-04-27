@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "lib_tv_details",
+    'routerMap': '$profile:route_map',
+    "type": "har",
+    "deviceTypes": [
+      "default"
+    ]
+  }
+}

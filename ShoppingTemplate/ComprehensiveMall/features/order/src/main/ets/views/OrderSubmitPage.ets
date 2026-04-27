@@ -1,9 +1,10 @@
 import { AddressManageUtil } from 'address_management';
 import { aggregatedPaymentService } from 'aggregated_payment';
-import { routerStack, WindowUtil } from 'lib_foundation';
+import { iData, routerStack } from 'lib_foundation';
 import { DiscountItem, OrderSkuItem, PreOrderInfoReq, ShippingOption } from 'lib_network';
 import { NavTitleBar } from 'lib_widget';
-import { Coupons } from 'module_coupons';
+import { CouponsController } from 'coupons';
+import { CouponApis } from 'lib_network';
 import { PopupSheet } from 'module_shopping_cart';
 import { OrderSubmitVM } from '../viewmodels/OrderSubmitVM';
 import { ShippingInfoButton } from '../components/ShippingInfoButton';
@@ -111,7 +112,7 @@ export struct OrderSubmitPage {
           .justifyContent(FlexAlign.SpaceBetween);
         }
         .onClick(() => {
-          AddressManageUtil.goToAddressListPage(routerStack, (data) => {
+          AddressManageUtil.goToAddressListPage(routerStack.getActiveStack(), (data) => {
             this.vm.customerAddress = data.province + data.city + data.district + data.street + data.detail;
             this.vm.customerName = data.name;
             this.vm.customerPhone = data.phone;
@@ -169,15 +170,21 @@ export struct OrderSubmitPage {
             content: '-¥' + discount.discountPrice,
             contentColor: $r('app.color.theme_color'),
             callback: () => {
-              Coupons.initContext(WindowUtil.globalUIContext)
-              Coupons.select({
-                totalMoney: this.vm.cartPrice.originalPrice,
-                selectId: this.vm.discountId,
-                confirm: (data) => {
-                  this.vm.addCouponDiscount(data.reduce)
-                  this.vm.discountId = data.selectId;
-                },
-              });
+              const controller = new CouponsController()
+              controller.themeColor = $r('app.color.theme_color')
+              controller.totalMoney = this.vm.cartPrice.originalPrice
+              controller.selectedId = this.vm.discountId
+              controller.reduce = this.vm.discountAmount
+              controller.onLoadCoupons = async () => {
+                const res = await CouponApis.getCoupons({ userId: iData.global.userInfo.phone })
+                return res.code === 0 ? res.couponsList : []
+              }
+              controller.onConfirm = (data) => {
+                this.vm.addCouponDiscount(data.reduce)
+                this.vm.discountId = data.selectId;
+                this.vm.discountAmount = data.reduce;
+              }
+              controller.select(this.getUIContext());
             },
           });
         } else {
@@ -367,7 +374,7 @@ export struct OrderSubmitPage {
               this.vm.remarkCache = value;
             })
             .borderRadius(12)
-            .backgroundColor($r('app.color.background_color_grey_light'));
+            .backgroundColor($r('app.color.background_color_button_grey'));
         }
       }
       .layoutWeight(1)
@@ -378,7 +385,7 @@ export struct OrderSubmitPage {
       Button('确定')
         .width('100%')
         .height(40)
-        .margin({ bottom: $r('app.string.space_m') })
+        .margin({ bottom: $r('app.float.space_m') })
         .backgroundColor($r('app.color.theme_color'))
         .onClick(() => {
           this.vm.remark = this.vm.remarkCache;

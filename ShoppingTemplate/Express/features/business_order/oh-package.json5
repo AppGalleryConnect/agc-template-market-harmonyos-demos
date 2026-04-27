@@ -7,8 +7,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "lib_foundation": "file:../../commons/lib_foundation",
-    "module_base": "file:../../components/module_base",
-    "module_address": "file:../../components/module_address",
-    "module_address_card": "file:../../components/module_address_card"
+    "module_template": "file:../../components/module_template",
+    "address_management": "file:../../components/address_management"
   }
 }

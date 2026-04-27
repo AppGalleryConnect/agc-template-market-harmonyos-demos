@@ -9,5 +9,7 @@
     "commonlib": 'file:../../commons/commonlib',
     "network": 'file:../../commons/network',
     "calorie_calculation": 'file:../../components/calorie_calculation',
+    "@hw-agconnect/ui-toast": "^1.0.0",
+    "module_transition": 'file:../../components/module_transition'
   }
 }

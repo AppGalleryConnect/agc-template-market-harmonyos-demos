@@ -4,10 +4,7 @@ import LazyDataSource from '../utils/LazyDataSource';
 import { RecommendedCard } from './RecommendedCard';
 import { AppStorageV2 } from '@kit.ArkUI';
 
-/**
- * @usage: 精选推荐组件，用于展示菜谱卡片瀑布流
- * @layout: 组件为列排列。顶部是标题栏；底部是瀑布流，左右和上下排列
- */
+
 @ComponentV2
 export struct FeaturedRecipes {
   @Param dishesList: LazyDataSource<RecipeBriefInfo> = new LazyDataSource();
@@ -15,7 +12,11 @@ export struct FeaturedRecipes {
   @Param canDelete: boolean = false;
   @Param isToDelete: boolean = false;
   @Param isLoading: boolean = false;
-  @Event onClickCb: (id: number) => void = () => {
+  @Param hasMore: boolean = true;
+  @Param features: string = '';
+  @Param title: string = '';
+  @Param isFill: boolean = false;
+  @Event onClickCb: (id: number, index: number) => void = () => {
   }
   @Event jumpBloggerInfo: (id: number) => void = () => {
   }
@@ -27,17 +28,17 @@ export struct FeaturedRecipes {
   }
   @Event loadMore: () => void = () => {
   }
+  @Event deleteAds: (id: number, index: number) => void = () => {
+  }
   @BuilderParam uploadBuilderParam: () => void = this.uploadBuilder;
-  private lastTriggerTime: number = 0;
-  private readonly DEBOUNCE_DELAY: number = 1100; // 防抖时间500ms
   // 新增参数
   scroller: Scroller = new Scroller();
   @Local breakPointModel: BreakpointModel = AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
   columnOptions: BreakpointType<number> = new BreakpointType<number>({
     sm: 2,
     md: 4,
-    lg: 4,
-    xl: 4,
+    lg: 6,
+    xl: 6,
   });
 
   @Computed
@@ -50,39 +51,45 @@ export struct FeaturedRecipes {
   }
 
   @Builder
-  itemFoot(params:Record<string,boolean>) {
-    Row({ space: 8 }) {
-      LoadingProgress()
-        .height(32)
-        .width(48)
-      Text('正在加载')
-        .fontSize(14)
-        .fontColor($r('sys.color.font_primary'))
-        .fontWeight(FontWeight.Regular)
+  itemFoot(params: Record<string, boolean>) {
+    if (params.isLoading) {
+      Row({ space: 8 }) {
+        LoadingProgress()
+          .height(32)
+          .width(48)
+        Text('正在加载')
+          .fontSize(14)
+          .fontColor($r('sys.color.font_primary'))
+          .fontWeight(FontWeight.Regular)
+      }
+      .width('100%')
+      .height(params.isLoading ? 40 : 0)
+      .justifyContent(FlexAlign.Center)
+    } else if (!params.hasMore && this.gridCount < 6) { // 导航栏位置
+      Row().width('100%').height(90)
     }
-    .width('100%')
-    .height(params.isLoading ? 40 : 0)
-    .justifyContent(FlexAlign.Center)
-    .visibility(params.isLoading ? Visibility.Visible : Visibility.Hidden)
   }
-
 
   build() {
     Column() {
-      Text('精选推荐')
+      Text(this.title)
         .margin({ bottom: 12 })
         .fontColor($r('sys.color.font_primary'))
         .fontSize(16)
         .width('100%')
         .visibility(this.showTitle ? Visibility.Visible : Visibility.None)
-      WaterFlow({scroller: this.scroller, footer: this.itemFoot({ 'isLoading': this.isLoading })}) {
+      WaterFlow({
+        scroller: this.scroller,
+        footer: this.itemFoot({ 'isLoading': this.isLoading, 'hasMore': this.hasMore })
+      }) {
         this.uploadBuilderParam()
-        LazyForEach(this.dishesList, (item: RecipeBriefInfo) => {
+        LazyForEach(this.dishesList, (item: RecipeBriefInfo, index: number) => {
           FlowItem() {
             RecommendedCard({
               recipe: item,
               canDelete: this.canDelete,
               isToDelete: this.isToDelete,
+              recipeIndex: index,
               jumpBloggerInfo: () => {
                 this.jumpBloggerInfo(item.authorId)
               },
@@ -90,35 +97,30 @@ export struct FeaturedRecipes {
                 this.changeDeleteState(isToDelete)
               },
               onClickCb: (id: number) => {
-                this.onClickCb(id)
+                this.onClickCb(id, index)
               },
               changeSelect: (id: number, flag: boolean) => {
                 this.changeSelect(id, flag)
               },
+              deleteAds: (id: number, index: number) => {
+                this.deleteAds(id, index)
+              },
             })
           }
+          .clip(true)
+          .id(`recipes_flow_${item.id}_${index}_${this.features}`)
         }, (item: RecipeBriefInfo) => item.id.toString())
       }
       .cachedCount(25)
       .columnsGap(8)
       .rowsGap(8)
-      .height('100%')  //影响其他页面
+      .height('100%') //影响其他页面
       .columnsTemplate(Array(this.gridCount).fill('1fr').join(' '))
-      .nestedScroll({scrollForward: NestedScrollMode.PARENT_FIRST, scrollBackward: NestedScrollMode.SELF_FIRST})
+      .nestedScroll({ scrollForward: NestedScrollMode.PARENT_FIRST, scrollBackward: NestedScrollMode.SELF_FIRST })
       .onReachEnd(() => {
-        // 防止回弹时额外触发
-        const now = Date.now()
-        // 检查是否在防抖时间内
-        if (now - this.lastTriggerTime < this.DEBOUNCE_DELAY) {
-          return
-        }
-        if (this.isLoading) {
-          return
-        }
-        this.lastTriggerTime = now
         this.loadMore()
       })
     }
+    .padding({ left: 16, right: 16 })
   }
 }
-

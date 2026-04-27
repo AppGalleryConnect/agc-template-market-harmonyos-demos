@@ -1,0 +1,18 @@
+{
+  "name": "setting",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "lib_foundation": "file:../../commons/lib_foundation",
+    "lib_network": "file:../../commons/lib_network",
+    "lib_widget": "file:../../commons/lib_widget",
+    "coupons": "file:../../components/coupons",
+    "app_setting": "file:../../components/app_setting",
+    "collect_personal_info": "file:../../components/collect_personal_info",
+    "membership": "file:../../components/membership",
+    "@tencent/wechat_open_sdk": "1.0.14"
+  }
+}

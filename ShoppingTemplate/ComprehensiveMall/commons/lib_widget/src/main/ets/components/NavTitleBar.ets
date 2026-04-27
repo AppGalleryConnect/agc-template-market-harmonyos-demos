@@ -17,7 +17,8 @@ export struct NavTitleBar {
   bgColor: ResourceColor = $r('app.color.background_color_transparent');
   @Event
   onBack: () => void = () => {
-    routerStack.pop()
+    const abilityName = routerStack.getAbilityName(this.getUIContext());
+    routerStack.pop(undefined, true, abilityName);
   };
   @Event
   onSearchClick: () => void
@@ -26,7 +27,9 @@ export struct NavTitleBar {
 
   @Computed
   get isSubTitle() {
-    return routerStack.size() > 1 || this.showBackBtn
+    const abilityName = routerStack.getAbilityName(this.getUIContext());
+    const stack = routerStack.getStack(abilityName);
+    return (stack?.size() ?? 0) > 1 || this.showBackBtn;
   }
 
   build() {

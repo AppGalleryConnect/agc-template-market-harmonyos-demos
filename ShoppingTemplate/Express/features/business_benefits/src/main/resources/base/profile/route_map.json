@@ -1,0 +1,14 @@
+{
+  "routerMap": [
+    {
+      "name": "PointsHistoryPage",
+      "pageSourceFile": "src/main/ets/pages/PointsHistoryPage.ets",
+      "buildFunction": "PointsHistoryPageBuilder"
+    },
+    {
+      "name": "VipBenefitPage",
+      "pageSourceFile": "src/main/ets/pages/VipBenefitPage.ets",
+      "buildFunction": "vipBenefitPageBuilder"
+    }
+  ]
+}

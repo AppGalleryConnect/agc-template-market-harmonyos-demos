@@ -1,21 +1,48 @@
 import { emitter } from '@kit.BasicServicesKit';
 import { common } from '@kit.AbilityKit';
-import { BaseViewModel, CommonConfirmDialog, CommonLoadingDialog, Logger, RouterUtils } from 'lib_common';
-import { PostRequest, PostServiceApi, PostImgList } from 'lib_news_api';
-import { PostImgVideoItem, FileUtils } from 'module_post';
+import { BaseViewModel, CommonConfirmDialog, CommonLoadingDialog, EventEnum, Logger, RouterUtils } from 'lib_common';
+import { PostRequest, PostServiceApi, PostImgList, AuthorResponse, TopicResponse, MineServiceApi } from 'lib_news_api';
+import { PostImgVideoItem, FileUtils, PostController, Topic, TextSpanInfo } from 'module_post';
 
 const TAG = '[PublishPostViewModel]';
 
 @ObservedV2
 export class PublishPostViewModel extends BaseViewModel {
-  @Trace body: string = '';
+  @Trace body: string = '[]';
   @Trace mediaList: PostImgVideoItem[] = [];
+  @Trace cityLocation: string = '';
   @Trace paddingBottom: number = this.windowModel.windowBottomPadding;
   @Trace enableClick: boolean = true;
-  @Trace controller: TextAreaController = new TextAreaController();
+  @Trace userList: AuthorResponse[] = [];
+  @Trace topicList: TopicResponse[] = [];
+  @Trace attachedTopic: Topic = { id: '', title: '' };
+  public controller: RichEditorController = new RichEditorController();
+  public postController: PostController = new PostController();
+
+  async init() {
+    this.topicList = await PostServiceApi.queryTopicList();
+    this.userList = await MineServiceApi.queryWatchUsers(this.userInfoModel.authorId);
+  }
+
+  initRouterParams(context: NavDestinationContext) {
+    const params = context.pathInfo.param as Record<string, TopicResponse>;
+    if (params?.topic) {
+      this.attachedTopic = params.topic as Topic;
+    }
+  }
+
+  @Computed
+  get plainText() {
+    try {
+      const list = JSON.parse(this.body) as TextSpanInfo[];
+      return list.map(v => v.text).join('');
+    } catch (e) {
+      return '';
+    }
+  }
 
   enablePublish() {
-    if (this.body) {
+    if (this.plainText) {
       return true;
     }
     if (this.mediaList.length) {
@@ -66,14 +93,13 @@ export class PublishPostViewModel extends BaseViewModel {
       const params: PostRequest = {
         postBody: this.body,
         postImgList: list,
+        city: this.cityLocation,
       };
       PostServiceApi.publishPost(params)
         .then(() => {
           this.contextModel.showToast({ message: '发布成功' });
-          /*
-           * 事件分发，通知首页刷新
-           * */
-          emitter.emit('recommendRefresh')
+          // 事件分发，通知互动推荐刷新
+          emitter.emit(EventEnum.INTERACTION_RECOMMEND_REFRESH);
           RouterUtils.pop();
         })
         .catch(() => {

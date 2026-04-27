@@ -54,7 +54,7 @@ export struct IngredientList {
             left: 12,
             right: 12,
           })
-          .backgroundColor('#F1F3F5')
+          .backgroundColor($r('sys.color.comp_background_list_card'))
           .borderRadius(16)
         }
       }, (item: IngredientItem) => JSON.stringify(item))

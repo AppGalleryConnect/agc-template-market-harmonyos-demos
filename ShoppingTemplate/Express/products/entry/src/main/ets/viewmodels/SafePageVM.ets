@@ -1,23 +1,21 @@
-import { RouterModule } from 'lib_foundation'
-import { contextUtil, PreferenceUtil, RouterMap } from 'module_base';
+import { AppStorageV2 } from '@kit.ArkUI';
+import { ContextUtil, PreferenceUtil, RouterMap, RouterModule, WindowInfo } from 'lib_foundation';
 
 @ObservedV2
 export class SafePageVM {
+  @Trace windowModel: WindowInfo = AppStorageV2.connect(WindowInfo, () => new WindowInfo())!;
+  @Trace openSheet: boolean = false;
+
   privacyClick() {
     RouterModule.push({ url: RouterMap.PRIVACY_PAGE });
   }
 
   agreeBtnClick() {
-    PreferenceUtil.getInstance().put('SafePrivacy', true)
-    RouterModule.clear()
-    RouterModule.push({ url: RouterMap.MAIN_ENTRY });
-  }
-
-  cancelBtnClick() {
-    RouterModule.push({ url: RouterMap.AGREE_PRIVACY_PAGE });
+    PreferenceUtil.getInstance(ContextUtil.globalContext).put('SafePrivacy', true)
+    RouterModule.replace({ url: RouterMap.SPLASH_PAGE });
   }
 
   quitApp() {
-    contextUtil.getContext()?.getApplicationContext().killAllProcesses();
+    ContextUtil.globalContext?.getApplicationContext().killAllProcesses();
   }
 }

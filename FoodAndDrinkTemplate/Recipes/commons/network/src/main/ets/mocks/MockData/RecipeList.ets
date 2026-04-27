@@ -1,16 +1,18 @@
 import { ChangeFollowersBody } from '../../../../../Index';
-import { BloggerInfo, RecipeBriefInfo, RecipeCategory, RecipeDetail, UploadRecipeBody } from '../../types/Recipe';
+import { BloggerInfo,
+  RecipeBriefInfo, RecipeCategory, RecipeDetail, UploadRecipeBody } from '../../types/Recipe';
+import config from './config.json';
 
 const categoryList: Array<RecipeCategory> = [
   { id: 1, name: '热门菜肴', recipeList: [] },
-  { id: 2, name: '家常菜', recipeList: [] },
-  { id: 3, name: '下饭菜', recipeList: [] },
+  { id: 2, name: '蔬菜', recipeList: [] },
+  { id: 3, name: '豆制品', recipeList: [] },
   { id: 4, name: '快手菜', recipeList: [] },
   { id: 5, name: '减脂餐', recipeList: [] },
   { id: 6, name: '肉类', recipeList: [] },
   { id: 7, name: '海鲜', recipeList: [] },
-  { id: 8, name: '蔬菜', recipeList: [] },
-  { id: 9, name: '豆制品', recipeList: [] },
+  { id: 8, name: '家常菜', recipeList: [] },
+  { id: 9, name: '下饭菜', recipeList: [] },
 ];
 
 const recipList: Array<RecipeDetail> = [
@@ -18,12 +20,13 @@ const recipList: Array<RecipeDetail> = [
     id: 1,
     title: '西红柿牛腩',
     description: '牛肉软烂，汤汁浓郁，酸甜可口。',
-    category: '肉类、家常菜、下饭菜、热门菜肴',
+    category: '肉类、家常菜、下饭菜',
     cookingTime: 90,
     difficulty: '中等',
     authorId: 2,
     author: '炖菜高手',
     authorAvatar: 'avatar6',
+    video: '',
     ingredients: [
       {
         name: '牛腩',
@@ -70,42 +73,52 @@ const recipList: Array<RecipeDetail> = [
       {
         stepNumber: 1,
         description: '牛腩切块，焯水捞出洗净。',
+        stepImg: 'stepImg1',
       },
       {
         stepNumber: 2,
         description: '西红柿切块，葱姜蒜切末。',
+        stepImg: 'stepImg2',
       },
       {
         stepNumber: 3,
         description: '锅中倒油，放入葱姜蒜、八角、桂皮炒香。',
+        stepImg: 'stepImg3',
       },
       {
         stepNumber: 4,
         description: '加入牛腩块翻炒，加入料酒、生抽继续翻炒。',
+        stepImg: 'stepImg1',
       },
       {
         stepNumber: 5,
         description: '加入适量清水，没过牛腩，大火煮开后转小火焖煮1小时。',
+        stepImg: 'stepImg2',
       },
       {
         stepNumber: 6,
         description: '加入西红柿块，继续焖煮30分钟，加入盐调味。',
+        stepImg: 'stepImg3',
       },
     ],
     thumbnail: 'thumbnail12',
     views: 1250,
     likes: 850,
+    linearColor: [['rgba(252, 94, 27, 0)', 0], ['rgba(252, 94, 27, 1)', 1]]
   },
   {
     id: 2,
-    title: '可乐鸡翅',
+    title: '非常好吃上头的的可乐鸡翅~~',
     description: '色泽红亮，甜香可口的家常美食。',
-    category: '肉类、家常菜、下饭菜、快手菜、热门菜肴',
+    category: '肉类、家常菜、下饭菜、快手菜',
     cookingTime: 30,
     difficulty: '简单',
     authorId: 1,
     author: '美食新手',
     authorAvatar: 'avatar1',
+    video: '',
+    heatness: 2,
+    isVip: 1,
     ingredients: [
       {
         name: '鸡翅',
@@ -127,39 +140,108 @@ const recipList: Array<RecipeDetail> = [
       {
         stepNumber: 1,
         description: '鸡翅洗净，在鸡翅上划几刀。',
+        stepImg: 'stepImg1',
       },
       {
         stepNumber: 2,
         description: '锅中倒水，放入鸡翅，加入料酒，焯水捞出。',
+        stepImg: 'stepImg2',
       },
       {
         stepNumber: 3,
         description: '锅中倒油，放入鸡翅，煎至两面金黄。',
+        stepImg: 'stepImg3',
       },
       {
         stepNumber: 4,
         description:
         '倒入可乐，没过鸡翅，加入生抽，大火煮开后转小火焖煮20分钟。',
+        stepImg: 'stepImg1',
       },
       {
         stepNumber: 5,
         description: '大火收汁。',
+        stepImg: 'stepImg3',
       },
     ],
     thumbnail: 'thumbnail13',
     views: 900,
     likes: 600,
+    linearColor: [['rgba(216, 158, 84, 0)', 0], ['rgba(216, 158, 84, 1)', 1]]
   },
   {
-    id: 3,
-    title: '宫保鸡丁',
+    id: 202,
+    title: '家常菜',
+    description: '色泽鲜艳，甜香可口的家常美食。',
+    category: '家常菜、下饭菜、快手菜、热门菜肴',
+    cookingTime: 30,
+    difficulty: '简单',
+    authorId: 1,
+    author: '美食新手',
+    authorAvatar: 'avatar1',
+    video: '',
+    heatness: 1,
+    ingredients: [
+      {
+        name: '鸡翅',
+        quantity: '500',
+        unit: '克',
+      },
+      {
+        name: '可乐',
+        quantity: '1',
+        unit: '罐',
+      },
+      {
+        name: '生抽',
+        quantity: '1',
+        unit: '汤匙',
+      },
+    ],
+    steps: [
+      {
+        stepNumber: 1,
+        description: '鸡翅洗净，在鸡翅上划几刀。',
+        stepImg: 'stepImg1',
+      },
+      {
+        stepNumber: 2,
+        description: '锅中倒水，放入鸡翅，加入料酒，焯水捞出。',
+        stepImg: 'stepImg2',
+      },
+      {
+        stepNumber: 3,
+        description: '锅中倒油，放入鸡翅，煎至两面金黄。',
+        stepImg: 'stepImg3',
+      },
+      {
+        stepNumber: 4,
+        description:
+        '倒入可乐，没过鸡翅，加入生抽，大火煮开后转小火焖煮20分钟。',
+        stepImg: 'stepImg1',
+      },
+      {
+        stepNumber: 5,
+        description: '大火收汁。',
+        stepImg: 'stepImg3',
+      },
+    ],
+    thumbnail: 'thumbnail',
+    views: 900,
+    likes: 600,
+    linearColor: [['rgba(216, 158, 84, 0)', 0], ['rgba(216, 158, 84, 1)', 1]]
+  },
+  {
+    id: 30001,
+    title: '测试广告',
     description: '经典的中式家常菜，鸡肉鲜嫩，花生米香脆，口味香辣酸甜。',
-    category: '肉类、家常菜、下饭菜、快手菜、热门菜肴',
+    category: '肉类、家常菜、下饭菜、快手菜',
     cookingTime: 30,
     difficulty: '中等',
-    authorId: 3,
-    author: '美食小厨',
+    authorId: 10001,
+    author: 'xxx广告商',
     authorAvatar: 'avatar4',
+    video: '',
     ingredients: [
       {
         name: '鸡胸肉',
@@ -265,19 +347,147 @@ const recipList: Array<RecipeDetail> = [
       },
     ],
     thumbnail: 'thumbnail1',
+    views: 1100,
+    likes: 600,
+  },
+  {
+    id: 3,
+    title: '宫保鸡丁',
+    description: '经典的中式家常菜，鸡肉鲜嫩，花生米香脆，口味香辣酸甜。',
+    category: '肉类、家常菜、快手菜',
+    cookingTime: 30,
+    difficulty: '中等',
+    authorId: 3,
+    author: '美食小厨',
+    authorAvatar: 'avatar4',
+    video: '',
+    ingredients: [
+      {
+        name: '鸡胸肉',
+        quantity: '250',
+        unit: '克',
+      },
+      {
+        name: '花生米',
+        quantity: '50',
+        unit: '克',
+      },
+      {
+        name: '胡萝卜',
+        quantity: '1',
+        unit: '根',
+      },
+      {
+        name: '黄瓜',
+        quantity: '1',
+        unit: '根',
+      },
+      {
+        name: '干辣椒',
+        quantity: '5',
+        unit: '个',
+      },
+      {
+        name: '葱姜蒜',
+        quantity: '适量',
+        unit: '',
+      },
+      {
+        name: '料酒',
+        quantity: '1',
+        unit: '汤匙',
+      },
+      {
+        name: '生抽',
+        quantity: '2',
+        unit: '汤匙',
+      },
+      {
+        name: '醋',
+        quantity: '1',
+        unit: '汤匙',
+      },
+      {
+        name: '糖',
+        quantity: '1',
+        unit: '汤匙',
+      },
+      {
+        name: '盐',
+        quantity: '适量',
+        unit: '',
+      },
+      {
+        name: '淀粉',
+        quantity: '1',
+        unit: '汤匙',
+      },
+    ],
+    steps: [
+      {
+        stepNumber: 1,
+        description: '将鸡胸肉洗净切丁，加入料酒、生抽、淀粉，抓匀腌制15分钟。',
+        stepImg: 'stepImg3',
+      },
+      {
+        stepNumber: 2,
+        description: '胡萝卜、黄瓜切丁，葱姜蒜切末，干辣椒切段备用。',
+        stepImg: 'stepImg1',
+      },
+      {
+        stepNumber: 3,
+        description: '调一碗料汁，将生抽、醋、糖、盐和适量清水混合均匀。',
+        stepImg: 'stepImg2',
+      },
+      {
+        stepNumber: 4,
+        description: '锅中倒油，油热后放入腌制好的鸡丁滑炒至变色盛出。',
+        stepImg: 'stepImg3',
+      },
+      {
+        stepNumber: 5,
+        description: '锅中留少许底油，放入葱姜蒜末、干辣椒段炒香。',
+        stepImg: 'stepImg1',
+      },
+      {
+        stepNumber: 6,
+        description: '加入胡萝卜丁翻炒至断生。',
+        stepImg: 'stepImg2',
+      },
+      {
+        stepNumber: 7,
+        description: '放入黄瓜丁继续翻炒。',
+      },
+      {
+        stepNumber: 8,
+        description: '倒入炒好的鸡丁，翻炒均匀。',
+      },
+      {
+        stepNumber: 9,
+        description: '倒入调好的料汁，翻炒至汤汁浓稠。',
+        stepImg: 'stepImg1',
+      },
+      {
+        stepNumber: 10,
+        description: '最后加入花生米，翻炒几下即可出锅。',
+      },
+    ],
+    thumbnail: 'thumbnail1',
     views: 1200,
     likes: 800,
+    linearColor: [['rgba(216, 158, 84, 0)', 0], ['rgba(216, 158, 84, 1)', 1]]
   },
   {
     id: 4,
     title: '鱼香肉丝',
     description: '具有鱼香味的经典川菜，肉丝鲜嫩，配菜丰富。',
-    category: '肉类、家常菜、下饭菜、快手菜、热门菜肴',
+    category: '肉类、家常菜、下饭菜、快手菜',
     cookingTime: 25,
     difficulty: '中等',
     authorId: 4,
     author: '川菜大厨',
     authorAvatar: 'avatar5',
+    video: '',
     ingredients: [
       {
         name: '猪里脊肉',
@@ -383,6 +593,8 @@ const recipList: Array<RecipeDetail> = [
     authorId: 5,
     author: '家常美食家',
     authorAvatar: 'avatar6',
+    video: '',
+    heatness: 3,
     ingredients: [
       {
         name: '排骨',
@@ -460,6 +672,8 @@ const recipList: Array<RecipeDetail> = [
     authorId: 6,
     author: '美食达人',
     authorAvatar: 'avatar7',
+    video: '',
+    heatness: 6,
     ingredients: [
       {
         name: '五花肉',
@@ -532,6 +746,7 @@ const recipList: Array<RecipeDetail> = [
     thumbnail: 'thumbnail6',
     views: 1300,
     likes: 850,
+    linearColor: [['rgba(228, 124, 53, 0)', 0], ['rgba(228, 124, 53, 1)', 1]]
   },
   {
     id: 7,
@@ -543,6 +758,8 @@ const recipList: Array<RecipeDetail> = [
     authorId: 7,
     author: '川菜行家',
     authorAvatar: 'avatar8',
+    video: '',
+    heatness: 4,
     ingredients: [
       {
         name: '五花肉',
@@ -611,15 +828,166 @@ const recipList: Array<RecipeDetail> = [
     likes: 750,
   },
   {
+    id: 7002,
+    title: '川菜毛血旺',
+    description: '经典川菜，毛血旺肥而不腻，香辣可口。',
+    category: '肉类、家常菜、下饭菜、快手菜',
+    cookingTime: 30,
+    difficulty: '中等',
+    authorId: 7,
+    author: '川菜行家',
+    authorAvatar: 'avatar8',
+    ingredients: [
+      {
+        name: '五花肉',
+        quantity: '300',
+        unit: '克',
+      },
+      {
+        name: '青椒',
+        quantity: '1',
+        unit: '个',
+      },
+      {
+        name: '红椒',
+        quantity: '1',
+        unit: '个',
+      },
+      {
+        name: '葱姜蒜',
+        quantity: '适量',
+        unit: '',
+      },
+      {
+        name: '豆瓣酱',
+        quantity: '1',
+        unit: '汤匙',
+      },
+      {
+        name: '生抽',
+        quantity: '1',
+        unit: '汤匙',
+      },
+      {
+        name: '料酒',
+        quantity: '1',
+        unit: '汤匙',
+      },
+    ],
+    steps: [
+      {
+        stepNumber: 1,
+        description: '五花肉冷水下锅，加入葱姜、料酒，煮熟捞出切片。',
+      },
+      {
+        stepNumber: 2,
+        description: '青椒、红椒切块，葱姜蒜切末。',
+      },
+      {
+        stepNumber: 3,
+        description: '锅中放少许油，放入五花肉片煸炒出油。',
+      },
+      {
+        stepNumber: 4,
+        description: '放入葱姜蒜末、豆瓣酱炒香。',
+      },
+      {
+        stepNumber: 5,
+        description: '加入生抽翻炒均匀。',
+      },
+      {
+        stepNumber: 6,
+        description: '加入青椒、红椒块翻炒至断生。',
+      },
+    ],
+    thumbnail: '',
+    views: 1050,
+    likes: 750,
+    video: config.videoUrl,
+    coverUrl: config.coverUrl,
+  },
+  {
+    id: 7999,
+    title: '干煸四季豆',
+    description: '清淡鲜美，保留四季豆的原汁原味，营养丰富。',
+    category: '豆类、家常菜、热门菜肴、蔬菜',
+    cookingTime: 20,
+    difficulty: '简单',
+    authorId: 8,
+    author: '四级大厨',
+    authorAvatar: 'avatar6',
+    video: '',
+    heatness: 8,
+    ingredients: [
+      {
+        name: '鲈鱼',
+        quantity: '1',
+        unit: '条',
+      },
+      {
+        name: '葱',
+        quantity: '2',
+        unit: '根',
+      },
+      {
+        name: '姜',
+        quantity: '1',
+        unit: '块',
+      },
+      {
+        name: '蒸鱼豉油',
+        quantity: '2',
+        unit: '汤匙',
+      },
+      {
+        name: '食用油',
+        quantity: '适量',
+        unit: '',
+      },
+      {
+        name: '盐',
+        quantity: '适量',
+        unit: '',
+      },
+    ],
+    steps: [
+      {
+        stepNumber: 1,
+        description: '将鱼处理干净，在鱼身上划几刀，用盐腌制 5 分钟。',
+      },
+      {
+        stepNumber: 2,
+        description: '葱切丝，姜一半切丝，一半切片，将姜片放入鱼肚和划刀处。',
+      },
+      {
+        stepNumber: 3,
+        description: '锅中加水烧开，将鱼放入蒸锅中，大火蒸 10 - 12 分钟。',
+      },
+      {
+        stepNumber: 4,
+        description: '取出蒸好的鱼，倒掉盘中多余的汁水，放上葱丝和姜丝。',
+      },
+      {
+        stepNumber: 5,
+        description: '淋上蒸鱼豉油，再浇上热油即可。',
+      },
+    ],
+    thumbnail: 'thumbnail28',
+    views: 900,
+    likes: 700,
+    linearColor: [['rgba(216, 158, 84, 0)', 0], ['rgba(216, 158, 84, 1)', 1]]
+  },
+  {
     id: 8,
     title: '清蒸鱼',
     description: '清淡鲜美，保留鱼的原汁原味，营养丰富。',
-    category: '海鲜、家常菜、减脂餐、热门菜肴',
+    category: '海鲜、家常菜、减脂餐',
     cookingTime: 20,
     difficulty: '简单',
     authorId: 8,
     author: '海鲜大厨',
     authorAvatar: 'avatar9',
+    video: '',
     ingredients: [
       {
         name: '鲈鱼',
@@ -682,12 +1050,13 @@ const recipList: Array<RecipeDetail> = [
     id: 9,
     title: '油焖大虾',
     description: '色泽红亮，虾肉鲜嫩，味道浓郁。',
-    category: '海鲜、家常菜、下饭菜、热门菜肴',
+    category: '海鲜、家常菜、下饭菜',
     cookingTime: 15,
     difficulty: '中等',
     authorId: 9,
     author: '美食爱好者',
     authorAvatar: 'avatar10',
+    video: '',
     ingredients: [
       {
         name: '大虾',
@@ -774,12 +1143,13 @@ const recipList: Array<RecipeDetail> = [
     id: 10,
     title: '辣炒花蛤',
     description: '香辣可口，是一道下酒好菜。',
-    category: '海鲜、家常菜、下饭菜、快手菜、热门菜肴',
+    category: '海鲜、家常菜、下饭菜、快手菜',
     cookingTime: 10,
     difficulty: '简单',
     authorId: 1,
     author: '美食新手',
     authorAvatar: 'avatar1',
+    video: '',
     ingredients: [
       {
         name: '花蛤',
@@ -866,12 +1236,13 @@ const recipList: Array<RecipeDetail> = [
     id: 11,
     title: '蒜蓉粉丝蒸扇贝',
     description: '粉丝吸收了扇贝的鲜味和蒜蓉的香味，口感丰富。',
-    category: '海鲜、家常菜、减脂餐、热门菜肴',
+    category: '海鲜、家常菜、减脂餐',
     cookingTime: 15,
     difficulty: '中等',
     authorId: 10,
     author: '美食博主',
     authorAvatar: 'avatar6',
+    video: '',
     ingredients: [
       {
         name: '扇贝',
@@ -953,12 +1324,13 @@ const recipList: Array<RecipeDetail> = [
     id: 12,
     title: '海鲜豆腐煲',
     description: '豆腐嫩滑，海鲜鲜美，营养丰富。',
-    category: '海鲜、豆制品、家常菜、下饭菜、热门菜肴',
+    category: '海鲜、豆制品、家常菜、下饭菜',
     cookingTime: 25,
     difficulty: '中等',
     authorId: 11,
     author: '烹饪达人',
     authorAvatar: 'avatar3',
+    video: '',
     ingredients: [
       {
         name: '豆腐',
@@ -1055,12 +1427,13 @@ const recipList: Array<RecipeDetail> = [
     id: 13,
     title: '清炒西兰花',
     description: '一道清爽可口的素菜，西兰花营养丰富。',
-    category: '蔬菜、家常菜、快手菜、减脂餐、热门菜肴',
+    category: '蔬菜、家常菜、快手菜、减脂餐',
     cookingTime: 15,
     difficulty: '简单',
     authorId: 9,
     author: '美食爱好者',
     authorAvatar: 'avatar10',
+    video: '',
     ingredients: [
       { name: '西兰花', quantity: '1', unit: '颗' },
       { name: '蒜', quantity: '3', unit: '瓣' },
@@ -1092,17 +1465,19 @@ const recipList: Array<RecipeDetail> = [
     thumbnail: 'thumbnail24',
     views: 500,
     likes: 200,
+    linearColor: [['rgba(108, 161, 107, 0)', 0], ['rgba(108, 161, 107, 1)', 1]]
   },
   {
     id: 14,
     title: '醋溜白菜',
     description: '酸甜可口，开胃下饭的醋溜白菜。',
-    category: '蔬菜、家常菜、快手菜、减脂餐、热门菜肴',
+    category: '蔬菜、家常菜、快手菜、减脂餐',
     cookingTime: 12,
     difficulty: '简单',
     authorId: 6,
     author: '美食达人',
     authorAvatar: 'avatar5',
+    video: '',
     ingredients: [
       { name: '白菜帮', quantity: '200', unit: '克' },
       { name: '白菜叶', quantity: '100', unit: '克' },
@@ -1144,6 +1519,7 @@ const recipList: Array<RecipeDetail> = [
     thumbnail: 'thumbnail25',
     views: 450,
     likes: 180,
+    linearColor: [['rgba(151, 123, 106, 0)', 0], ['rgba(151, 123, 106, 1)', 1]]
   },
   {
     id: 15,
@@ -1155,6 +1531,8 @@ const recipList: Array<RecipeDetail> = [
     authorId: 12,
     author: '大厨老张',
     authorAvatar: 'avatar6',
+    video: '',
+    heatness: 9,
     ingredients: [
       { name: '茄子', quantity: '200', unit: '克' },
       { name: '土豆', quantity: '200', unit: '克' },
@@ -1197,17 +1575,19 @@ const recipList: Array<RecipeDetail> = [
     thumbnail: 'thumbnail8',
     views: 600,
     likes: 250,
+    linearColor: [['rgba(132, 43, 10, 0)', 0], ['rgba(132, 43, 10, 1)', 1]]
   },
   {
     id: 16,
     title: '蒜蓉生菜',
     description: '简单易做的蒜蓉生菜，清爽解腻。',
-    category: '菜、家常菜、快手菜、减脂餐、热门菜肴',
+    category: '菜、家常菜、快手菜、减脂餐、蔬菜',
     cookingTime: 10,
     difficulty: '简单',
     authorId: 13,
     author: '厨房小白',
     authorAvatar: 'avatar7',
+    video: '',
     ingredients: [
       { name: '生菜', quantity: '2', unit: '颗' },
       { name: '蒜', quantity: '5', unit: '瓣' },
@@ -1235,6 +1615,7 @@ const recipList: Array<RecipeDetail> = [
     thumbnail: 'thumbnail27',
     views: 400,
     likes: 150,
+    linearColor: [['rgba(108, 161, 107, 0)', 0], ['rgba(108, 161, 107, 1)', 1]]
   },
   {
     id: 17,
@@ -1246,6 +1627,8 @@ const recipList: Array<RecipeDetail> = [
     authorId: 14,
     author: '家庭主妇',
     authorAvatar: 'avatar8',
+    video: '',
+    heatness: 5,
     ingredients: [
       { name: '西红柿', quantity: '2', unit: '个' },
       { name: '鸡蛋', quantity: '2 - 3', unit: '个' },
@@ -1286,6 +1669,7 @@ const recipList: Array<RecipeDetail> = [
     thumbnail: 'thumbnail2',
     views: 700,
     likes: 300,
+    linearColor: [['rgba(252, 94, 27, 0)', 0], ['rgba(252, 94, 27, 1)', 1]]
   },
   {
     id: 18,
@@ -1297,6 +1681,8 @@ const recipList: Array<RecipeDetail> = [
     authorId: 1,
     author: '美食新手',
     authorAvatar: 'avatar1',
+    video: '',
+    heatness: 11,
     ingredients: [
       {
         name: '青菜',
@@ -1340,6 +1726,7 @@ const recipList: Array<RecipeDetail> = [
     thumbnail: 'thumbnail11',
     views: 700,
     likes: 500,
+    linearColor: [['rgba(108, 161, 107, 0)', 0], ['rgba(108, 161, 107, 1)', 1]]
   },
   {
     id: 19,
@@ -1351,6 +1738,8 @@ const recipList: Array<RecipeDetail> = [
     authorId: 15,
     author: '川菜大师',
     authorAvatar: 'avatar4',
+    video: '',
+    heatness: 10,
     ingredients: [
       {
         name: '豆腐',
@@ -1431,12 +1820,13 @@ const recipList: Array<RecipeDetail> = [
     id: 20,
     title: '家常豆腐',
     description: '简单又美味的家常菜，豆腐外酥里嫩。',
-    category: '豆制品、家常菜、下饭菜、快手菜、热门菜肴',
+    category: '豆制品、家常菜、下饭菜、快手菜',
     cookingTime: 25,
     difficulty: '中等',
     authorId: 16,
     author: '家庭煮妇',
     authorAvatar: 'avatar5',
+    video: '',
     ingredients: [
       { name: '豆腐', quantity: '1', unit: '块' },
       { name: '青椒', quantity: '1', unit: '个' },
@@ -1487,6 +1877,7 @@ const recipList: Array<RecipeDetail> = [
     authorId: 17,
     author: '养生达人',
     authorAvatar: 'avatar6',
+    video: '',
     ingredients: [
       { name: '鲫鱼', quantity: '1', unit: '条' },
       { name: '豆腐', quantity: '1', unit: '块' },
@@ -1521,17 +1912,19 @@ const recipList: Array<RecipeDetail> = [
     thumbnail: 'thumbnail18',
     views: 600,
     likes: 280,
+    linearColor: [['rgba(179, 165, 120, 0)', 0], ['rgba(179, 165, 120, 1)', 1]]
   },
   {
     id: 22,
     title: '凉拌豆腐',
     description: '清爽可口的凉拌菜，适合夏天食用。',
-    category: '豆制品、家常菜、快手菜、减脂餐、热门菜肴',
+    category: '豆制品、家常菜、快手菜、减脂餐',
     cookingTime: 10,
     difficulty: '简单',
     authorId: 10,
     author: '美食博主',
     authorAvatar: 'avatar6',
+    video: '',
     ingredients: [
       { name: '豆腐', quantity: '1', unit: '块' },
       { name: '香菜', quantity: '适量', unit: '' },
@@ -1568,12 +1961,13 @@ const recipList: Array<RecipeDetail> = [
     id: 23,
     title: '千页豆腐炒肉片',
     description: '千页豆腐口感Q弹，和肉片一起炒很下饭。',
-    category: '豆制品、肉类、家常菜、下饭菜、快手菜、热门菜肴',
+    category: '豆制品、肉类、家常菜、下饭菜、快手菜',
     cookingTime: 20,
     difficulty: '中等',
     authorId: 18,
     author: '资深厨师',
     authorAvatar: 'avatar8',
+    video: '',
     ingredients: [
       { name: '千页豆腐', quantity: '200', unit: '克' },
       { name: '猪肉片', quantity: '100', unit: '克' },
@@ -1617,12 +2011,13 @@ const recipList: Array<RecipeDetail> = [
     id: 24,
     title: '豆腐丸子汤',
     description: '鲜美的豆腐丸子汤，丸子嫩滑，汤鲜味美。',
-    category: '豆制品、家常菜、减脂餐、热门菜肴',
+    category: '豆制品、家常菜、减脂餐',
     cookingTime: 30,
     difficulty: '中等',
     authorId: 9,
     author: '美食爱好者',
     authorAvatar: 'avatar9',
+    video: '',
     ingredients: [
       { name: '豆腐', quantity: '1', unit: '块' },
       { name: '猪肉末', quantity: '100', unit: '克' },
@@ -1658,12 +2053,13 @@ const recipList: Array<RecipeDetail> = [
     id: 25,
     title: '香煎豆腐饼',
     description: '外酥里嫩的豆腐饼，可作为早餐或小吃。',
-    category: '豆制品、家常菜、快手菜、热门菜肴',
+    category: '豆制品、家常菜、快手菜',
     cookingTime: 20,
     difficulty: '中等',
     authorId: 19,
     author: '宝妈',
     authorAvatar: 'avatar10',
+    video: '',
     ingredients: [
       { name: '豆腐', quantity: '1', unit: '块' },
       { name: '胡萝卜', quantity: '半根', unit: '' },
@@ -1734,6 +2130,10 @@ export const getRecipeBriefInfoList = (): Array<RecipeBriefInfo> => {
       thumbnail: item.thumbnail,
       views: item.views,
       likes: item.likes,
+      video: item.video,
+      coverUrl: item.coverUrl,
+      heatness: item.heatness,
+      isVip: item.isVip,
     };
     return recipeInfo;
   }));
@@ -1755,8 +2155,8 @@ export const getRecipeBriefInfoListByIds = (ids: Array<number>): Array<RecipeBri
   return result;
 };
 
-export const getRecipeHotKeys = (): Array<string> => {
-  return recipList.filter((item => item.category.includes('热门菜肴'))).map((item => item.title)).slice(0, 10);
+export const getRecipeHotKeys = (): Array<RecipeBriefInfo> => {
+  return recipList.filter((item => item.category.includes('热门菜肴'))).slice(0, 10);
 };
 
 export const getRecipeCategory = (): Array<RecipeCategory> => {
@@ -1777,11 +2177,13 @@ export const uploadRecipe = (data: UploadRecipeBody): number => {
     authorId: 1,
     author: '美食新手',
     authorAvatar: 'avatar1',
-    thumbnail: 'thumbnail',
+    thumbnail: data.image,
     views: 0,
     likes: 0,
     ingredients: data.ingredients,
     steps: data.steps,
+    video: data.video ?? '',
+    coverUrl: data.coverUrl ?? ''
   };
   recipList.push(recipe);
   return recipe.id;

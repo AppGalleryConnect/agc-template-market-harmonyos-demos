@@ -84,7 +84,7 @@ export class ProductWaterFlowVM {
   }
 
   async getDataList() {
-    if (this.reachEnd) {
+    if (this.reachEnd || this.isLoading) {
       return;
     }
     this.isLoading = true;

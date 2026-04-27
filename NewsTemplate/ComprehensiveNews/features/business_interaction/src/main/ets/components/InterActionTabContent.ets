@@ -1,6 +1,7 @@
-import { CommonConstants, CommonBreakpoint } from 'lib_common'
+import { CommonConstants } from 'lib_common'
 import { LoadMoreFooter } from 'lib_flex_layout';
 import { NewsResponse } from 'lib_news_api';
+import { Topic } from 'module_post';
 import { TabEnum, TabItem } from '../common/Constants';
 import { InteractionViewModel } from '../viewmodels/InteractionViewModel';
 import { InteractionFeedCard } from './InteractionFeedCard'
@@ -10,26 +11,27 @@ import { NoWatcher } from './NoWatcher';
 export struct InterActionTabContent {
   @Param @Require resource: TabItem
   @Param @Require selectedId: number
+  @Param topic: Topic = { id: '', title: '' }
+  @Param paddingTop: number = 16;
   @Local vm: InteractionViewModel = new InteractionViewModel(this.getUIContext());
-  @Local lanesCount: CommonBreakpoint<number> = new CommonBreakpoint<number>({
-    sm: 1,
-    md: 2,
-    lg: 3,
-    xl: 3,
-  });
 
   @Monitor('selectedId')
   setSelectId() {
-    this.vm.setSelectId(this.selectedId)
-    this.vm.refresh()
+    this.vm.selectedId = this.selectedId;
+    if (this.selectedId === this.resource.id) {
+      this.vm.refresh()
+    }
   }
 
   aboutToAppear(): void {
-    this.vm.init(this.resource.id)
+    this.vm.init(this.resource.id);
+    this.vm.setOnListenRefresh();
+    this.vm.setTopic(this.topic);
+    this.vm.selectedId = this.selectedId;
   }
 
   aboutToDisappear(): void {
-    this.vm.emitterOff()
+    this.vm.setOffListenRefresh()
   }
 
   @Builder
@@ -48,7 +50,7 @@ export struct InterActionTabContent {
         .width(CommonConstants.FULL_PERCENT)
       }
       Refresh({ refreshing: $$this.vm.isRefreshing }) {
-        WaterFlow({ footer: this.loadMoreFooter }) {
+        WaterFlow({ footer: this.loadMoreFooter, scroller: this.vm.scroller }) {
           Repeat(this.vm.interactionList)
             .each((repeatItem: RepeatItem<NewsResponse>) => {
               FlowItem() {
@@ -59,29 +61,37 @@ export struct InterActionTabContent {
                 })
               }
               .id('action_flow' + this.resource.id + repeatItem.index)
+              .width(CommonConstants.FULL_PERCENT)
               .backgroundColor($r('sys.color.background_primary'))
               .borderRadius(16)
               .clip(true)
               .padding(CommonConstants.PADDING_M)
             })
-            .key((item: NewsResponse, index: number) => index + this.vm.getEachId(item))
+            .key((item: NewsResponse) => this.vm.getEachId(item))
             .virtualScroll()
         }
+        .cachedCount(2)
         .onReachEnd(() => {
           // 滚动到列表底部时触发加载
           this.vm.loadMore()
         })
+        .width(CommonConstants.FULL_PERCENT)
+        .height(CommonConstants.FULL_PERCENT)
         .edgeEffect(EdgeEffect.Spring)
-        .columnsTemplate(`repeat(${this.lanesCount.getLanes()}, 1fr)`)
+        .columnsTemplate(`repeat(${this.vm.lanesCount.getLanes()}, 1fr)`)
         .columnsGap(16)
         .rowsGap(12)
         .scrollBar(BarState.Off)
         .layoutWeight(1)
-        .padding({
-          left: this.lanesCount.breakpointModel.pagePadding,
-          right: this.lanesCount.breakpointModel.pagePadding,
+        .nestedScroll({
+          scrollForward: NestedScrollMode.PARENT_FIRST,
+          scrollBackward: NestedScrollMode.SELF_FIRST,
         })
-        .margin({ top: 16 })
+        .padding({
+          left: this.vm.lanesCount.breakpointModel.pagePadding,
+          right: this.vm.lanesCount.breakpointModel.pagePadding,
+        })
+        .margin({ top: this.paddingTop })
       }
       .layoutWeight(1)
       .pullToRefresh(true)
@@ -90,6 +100,6 @@ export struct InterActionTabContent {
         this.vm.refresh()
       })
     }
-    .height(CommonConstants.FULL_PERCENT)
+    .layoutWeight(1)
   }
 }

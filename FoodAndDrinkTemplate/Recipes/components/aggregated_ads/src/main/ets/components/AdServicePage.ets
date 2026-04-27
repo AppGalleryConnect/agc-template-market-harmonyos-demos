@@ -35,6 +35,7 @@ export struct AdServicePage {
         if (this.channelType === ChannelType.HUAWEI_AD) {
           HwAdService({
             adId: this.adId,
+            adType: this.adType,
             closeCallBack: this.closeCallBack,
           });
         }

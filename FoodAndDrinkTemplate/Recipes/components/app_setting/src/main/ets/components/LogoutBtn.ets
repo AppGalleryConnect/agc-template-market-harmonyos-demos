@@ -38,7 +38,7 @@ export struct LogoutBtn {
       })
     }
     .visibility(this.visible ? Visibility.Visible : Visibility.None)
-    .margin({ top: CommonConstants.PADDING_L })
+    .margin({ top: CommonConstants.PADDING_L, bottom: 28 })
   }
 
   onSignOutBtnClick() {

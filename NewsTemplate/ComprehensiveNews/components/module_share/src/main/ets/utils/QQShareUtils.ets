@@ -1,7 +1,7 @@
 import { ShareResultType, ShareData } from '@tencent/qq-open-sdk';
+import { ToastDialog as promptAction } from '@hw-agconnect/ui-toast';
 import { QQShareContent, ShareViewData } from '../common/ShareParams';
 import { ShareService } from '../ShareService';
-import { showToast } from './ToastUtils';
 
 /**
  * QQ分享
@@ -28,7 +28,7 @@ export class QQShareUtils {
    */
   public async share(uiContext: UIContext, data: ShareViewData) {
     if (!this.shareService.qqOpenApi.isQQInstalled()) {
-      uiContext.showAlertDialog({ message: '请先安装QQ' })
+      uiContext.showAlertDialog({ message: '请先安装QQ' });
       return;
     }
     const shareData: QQShareContent = {
@@ -39,21 +39,52 @@ export class QQShareUtils {
       url: data.landingPageUrl,
       picture_url: data.coverUrl,
     };
-    const signedShareData = await data.extraInfo.signQQShareData(JSON.stringify(shareData));
-    let result = await this.shareService.qqOpenApi.share(2, signedShareData as ShareData);
-    switch (result.resultType) {
-      case ShareResultType.Success:
-        showToast(uiContext, { message: '分享成功' });
-        if (data.autoClose) {
-          data.closeSheet();
-        }
-        break;
-      case ShareResultType.Cancel:
-        showToast(uiContext, { message: result.message ?? '分享取消' });
-        break;
-      case ShareResultType.Error:
-        showToast(uiContext, { message: '分享失败: ' + result.message });
-        break;
+    this.sendShare(2, shareData, data);
+  }
+
+  /**
+   * 分享图片到QQ
+   * @param uiContext
+   * @param data
+   */
+  public async shareImage(uiContext: UIContext, data: ShareViewData) {
+    if (!this.shareService.qqOpenApi.isQQInstalled()) {
+      uiContext.showAlertDialog({ message: '请先安装QQ' });
+      return;
+    }
+    const shareData: QQShareContent = {
+      msg_style: 6,
+      share_uris: [data.imageUri],
+    };
+    this.sendShare(2, shareData, data);
+  }
+
+  /**
+   * 执行分享
+   * @param type
+   * @param shareData
+   * @param data
+   */
+  private async sendShare(type: number, shareData: QQShareContent, data: ShareViewData) {
+    try {
+      const signedShareData = await data.extraInfo.signQQShareData(JSON.stringify(shareData));
+      const result = await this.shareService.qqOpenApi.share(type, signedShareData as ShareData);
+      switch (result.resultType) {
+        case ShareResultType.Success:
+          promptAction.showToast({ message: '分享成功' });
+          if (data.autoClose) {
+            data.closeSheet();
+          }
+          break;
+        case ShareResultType.Cancel:
+          promptAction.showToast({ message: result.message ?? '分享取消' });
+          break;
+        case ShareResultType.Error:
+          promptAction.showToast({ message: '分享失败: ' + result.message });
+          break;
+      }
+    } catch (e) {
+      promptAction.showToast({ message: '分享失败' });
     }
   }
 }

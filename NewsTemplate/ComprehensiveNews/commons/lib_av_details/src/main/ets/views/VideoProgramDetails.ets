@@ -44,6 +44,8 @@ export struct VideoProgramDetails {
   @Local sectionIndex: number = -1
   @Local isHideSlide: boolean = true
   @Local videoId: string = ''
+  @Local isDetailBack: boolean = false; // 状态锁：是否正在触发页面返回
+  @Local isEnteringFullScreen: boolean = false // 状态锁：是否正在进入全屏
   videoVM: VideoVM = new VideoVM(this.getUIContext())
   avViewModel: AvViewModel = new AvViewModel()
   buttonModifier: CircleButtonModifier = new CircleButtonModifier();
@@ -128,10 +130,26 @@ export struct VideoProgramDetails {
 
   aboutToDisappear(): void {
     Logger.debug(TAG, 'aboutToDisappear');
-    uiObserver.off('navDestinationUpdate', this.landscapeListener)
+    uiObserver.off('navDestinationUpdate', this.landscapeListener);
+    this.isEnteringFullScreen = false;
+    this.isDetailBack = false;
   }
 
   backIntercept() {
+    Logger.debug(TAG, 'start backIntercept');
+    // 避免重复触发返回
+    if (this.isDetailBack) {
+      Logger.debug(TAG, 'backIntercept blocked: isDetailBack: true');
+      return;
+    }
+    this.isDetailBack = true;
+
+    // 检查全局标志位，如果正在进行全屏操作，阻止返回操作
+    if (this.isEnteringFullScreen) {
+      Logger.debug(TAG, 'backIntercept blocked: isEnteringFullScreen is true');
+      return;
+    }
+
     this.videoPipModel.enableVideoPip(this.videoDetails!.id);
     RouterUtils.pop(this.videoDetails);
   }
@@ -287,6 +305,7 @@ export struct VideoProgramDetails {
                     fullScreenIcon: $r('app.media.ic_sys_full_screen'),
                     isNeedMuteIcon: true,
                     isMute: this.videoVM.isMute,
+                    isDetailBack: this.isDetailBack,
                     onMute: (value) => {
                       this.videoVM.setMute(value)
                     },
@@ -304,6 +323,9 @@ export struct VideoProgramDetails {
                     xComponentReadyCallback: (controller: XComponentController) => {
                       this.videoPipModel.setMXComponentController(controller)
                       this.videoPipModel.handlePip()
+                    },
+                    onFullScreenOperation: (isStarting: boolean) => {
+                      this.isEnteringFullScreen = isStarting;
                     },
                   })
                 }
@@ -431,6 +453,8 @@ export struct VideoProgramDetails {
     })
     .onWillShow(() => {
       this.pipWindowModel.isBackPiP = false;
+      this.isEnteringFullScreen = false;
+      this.isDetailBack = false;
       if (this.canPlay) {
         this.videoVM.setOrientation();
       } else {

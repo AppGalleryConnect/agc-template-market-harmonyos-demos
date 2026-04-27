@@ -26,7 +26,7 @@ struct ShoppingBasketPage {
       })
     }
     .title(buildTitleBar('菜篮子'), { paddingStart: LengthMetrics.vp(16) })
-    .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.BOTTOM])
+    .padding({top: 40})
   }
 }
 

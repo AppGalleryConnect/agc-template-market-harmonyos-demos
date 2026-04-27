@@ -108,7 +108,7 @@ export struct ShoppingBasket {
                         .width(200)
                       Row() {
                         Text('查看详情').fontSize(12).fontColor($r('sys.color.font_secondary'))
-                        Image($r('app.media.ic_right')).width(20).height(20).margin({ left: 4 })
+                        Image($r('app.media.ic_public_right_arrow')).width(20).height(20).margin({ left: 4 })
                       }.onClick(() => {
                         this.goRecipeDetail(item.id)
                       })
@@ -198,7 +198,7 @@ export struct ShoppingBasket {
               }, (item: BasketItem) => JSON.stringify(item))
             }
             .bindSheet($$this.showAddSheet, this.addIngredientSheet(), {
-              detents: ['100%', '101%'],
+              detents: [400],
               preferType: SheetType.CENTER,
               title: { title: '添加用料' },
             })
@@ -269,7 +269,11 @@ export struct ShoppingBasket {
     Column() {
       Column() {
         Row() {
-          Text('用料名').fontSize(14).fontWeight(FontWeight.Medium).fontColor($r('sys.color.font_primary')).width(64)
+          Text('用料名')
+            .fontSize(14)
+            .fontWeight(FontWeight.Medium)
+            .fontColor($r('sys.color.font_primary'))
+            .width(90)
           TextInput({ text: $$this.nameTemp, placeholder: '输入用料名' })
             .fontSize(12)
             .fontColor($r('sys.color.font_primary'))
@@ -281,7 +285,11 @@ export struct ShoppingBasket {
         }.padding({ right: 28 })
 
         Row() {
-          Text('数目|备注').fontSize(14).fontWeight(FontWeight.Medium).fontColor($r('sys.color.font_primary')).width(64)
+          Text('数目|备注')
+            .fontSize(14)
+            .fontWeight(FontWeight.Medium)
+            .fontColor($r('sys.color.font_primary'))
+            .width(90)
           TextInput({ text: $$this.quantityTemp, placeholder: '输入数目，备注等' })
             .fontSize(12)
             .fontColor($r('sys.color.font_primary'))

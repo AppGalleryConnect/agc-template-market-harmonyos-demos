@@ -58,6 +58,8 @@ export class LandscapeVideoVM {
   // 是否显示开通会员的内容
   @Trace showMembershipOverlay: boolean = false;
   @Trace disableUpdateBrightAndVolume: boolean = false;
+  // 是否是来源详情卡片
+  @Trace isFromDetailCard: boolean = false;
   positionX: number = 0;
   positionY: number = 0;
   progressController: ProgressController = new ProgressController();
@@ -90,23 +92,44 @@ export class LandscapeVideoVM {
     this.windowClass?.on('windowSizeChange', (size) => {
       this.xComponentWidth = this.uiContext!.px2vp(size.width);
       this.xComponentHeight = this.uiContext!.px2vp(size.height);
-      // 判断是否是大折叠、阔折叠外屏、小折叠内屏
       this.isFullMode = isDisplayModeFull();
-      Logger.debug(TAG, 'this.isFullMode' + this.isFullMode);
+      Logger.debug(TAG, 'this.isFullMode: ' + this.isFullMode + ', width: ' + size.width + ', height: ' + size.height);
       if (!this.isBackFlag && size.width < size.height && !this.isFullMode &&
-      this.pathStack.getAllPathName().includes(PageNameEnum.VIDEO_LANDSCAPE_PAGE)
+        this.pathStack.getAllPathName().includes(PageNameEnum.VIDEO_LANDSCAPE_PAGE)
       ) {
         Logger.debug(TAG, 'on windowSizeChange quitFullScreen');
         this.quitFullScreen();
       }
     })
-    this.showOrHiddenBar()
+    this.showOrHiddenBar();
+  }
+
+  async getWindowInfo() {
+    window.getLastWindow(this.uiContext?.getHostContext())
+      .then((windowClass) => {
+        try {
+          const width = windowClass.getWindowProperties().windowRect.width;
+          const height = windowClass.getWindowProperties().windowRect.height;
+          this.xComponentWidth = this.uiContext!.px2vp(width);
+          this.xComponentHeight = this.uiContext!.px2vp(height);
+        } catch (e) {
+          Logger.error(TAG, `Failed to getWindowProperties, code: ${e.code}, message: ${e.message}`);
+        }
+      })
+      .catch((e: BusinessError) => {
+        Logger.error(TAG, `Failed to getLastWindow, code: ${e.code}, message: ${e.message}`);
+      })
   }
 
   private onStateChange: (state: AVPlayerState) => void = (state) => {
     Logger.debug(TAG, 'stateChange: ' + state);
-    // 横屏时，播放完之后会重头播放，需要保持播放状态
-    this.isPlaying = state === AVPlayerState.PLAYING || state === AVPlayerState.COMPLETED;
+    // 详情页横屏播放完成时暂停，否则继续播放
+    if (this.isFromDetailCard) {
+      this.isPlaying = state === AVPlayerState.PLAYING
+    } else {
+      // 横屏时，播放完之后会重头播放，需要保持播放状态
+      this.isPlaying = state === AVPlayerState.PLAYING || state === AVPlayerState.COMPLETED;
+    }
   }
   private onBufferingUpdate: (infoType: media.BufferingInfoType) => void = (infoType) => {
     if (infoType === media.BufferingInfoType.BUFFERING_START) {
@@ -129,6 +152,7 @@ export class LandscapeVideoVM {
     this.breakpointModel = param.breakpointModel as BreakpointModel
     this.isMute = param.isMute as boolean
     this.isHideSlide = param.isHideSlide as boolean
+    this.isFromDetailCard = param.isFromDetailCard as boolean
     if (param.videoCardPlayerController) {
       this.videoCardPlayerController = param.videoCardPlayerController as VideoCardPlayerController;
       this.videoCardPlayerController.setMembershipOverlay = (value) => {
@@ -186,22 +210,26 @@ export class LandscapeVideoVM {
   }
 
   disappear() {
-    // 清理窗口监听器
-    this.windowClass!.off('windowSizeChange');
-    // 清理avPlayerController的事件监听器
-    this.avPlayerController?.offEvent('stateChange', this.onStateChange);
-    this.avPlayerController?.offEvent('bufferingUpdate', this.onBufferingUpdate);
-    this.videoCardPlayerController.setMembershipOverlay = () => {
-    };
-    // 清空本地引用（不影响共享的 avPlayerController 实例）
-    this.avPlayerController = undefined;
-    this.player = undefined;
-    // 清理音量监听器
-    this.volumeUtil.destroy();
-    // 清理定时器
-    if (this.time) {
-      clearTimeout(this.time);
-      this.time = 0;
+    try {
+      // 清理窗口监听器
+      this.windowClass!.off('windowSizeChange');
+      // 清理avPlayerController的事件监听器
+      this.avPlayerController?.offEvent('stateChange', this.onStateChange);
+      this.avPlayerController?.offEvent('bufferingUpdate', this.onBufferingUpdate);
+      this.videoCardPlayerController.setMembershipOverlay = () => {
+      };
+      // 清空本地引用（不影响共享的 avPlayerController 实例）
+      this.avPlayerController = undefined;
+      this.player = undefined;
+      // 清理音量监听器
+      this.volumeUtil.destroy();
+      // 清理定时器
+      if (this.time) {
+        clearTimeout(this.time);
+        this.time = 0;
+      }
+    } catch (e) {
+      Logger.error(TAG, 'Fail to disappear, error: ' + JSON.stringify(e));
     }
   }
 
@@ -214,12 +242,17 @@ export class LandscapeVideoVM {
     isDevicePlaceFlat((isFlat) => {
       // 默认是跟随桌面
       let orientation = window.Orientation.FOLLOW_DESKTOP;
+      // 处理平放&&进入全屏前是竖屏状态
       if (isFlat) {
-        // 如果设备平放在桌面，设置为临时竖屏
-        orientation = window.Orientation.USER_ROTATION_PORTRAIT;
+        if (this.breakpointModel.orientationBefore === display.Orientation.PORTRAIT) {
+          orientation = window.Orientation.USER_ROTATION_PORTRAIT;
+        } else if (this.breakpointModel.orientationBefore === display.Orientation.PORTRAIT_INVERTED) {
+          orientation = window.Orientation.USER_ROTATION_PORTRAIT_INVERTED;
+        }
       }
       setOrientation(this.uiContext, orientation).then(() => {
-        this.pathStack.pop();
+        Logger.debug(TAG, 'pop, orientation: ' + orientation);
+        this.pathStack.pop(1);
       })
     })
   }
@@ -475,7 +508,7 @@ export class LandscapeVideoVM {
     if (longTakeTransitionParam) {
       longTakeSession.init(navDestContext, longTakeTransitionParam, {
         pop: () => {
-          navDestContext.pathStack.pop()
+          navDestContext.pathStack.pop(1)
         },
       });
     }

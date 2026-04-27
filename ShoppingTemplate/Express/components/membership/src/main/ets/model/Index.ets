@@ -1,5 +1,4 @@
 import { iap } from '@kit.IAPKit';
-import { CommonDataSource } from 'module_base';
 import { FinishStatus } from '../constant/Enum';
 
 export class MemberShipPrivilege {
@@ -77,8 +76,5 @@ export class MemberParams {
 export class Privacy {
   @Trace title: string = '';
   @Trace content: string = '';
-}
-
-export class ProductInfoListDataSource extends CommonDataSource<iap.Product> {
 }
 

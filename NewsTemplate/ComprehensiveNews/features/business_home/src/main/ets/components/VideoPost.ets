@@ -114,12 +114,14 @@ export struct VideoPost {
           .placeholderColor($r('sys.color.font_tertiary'))
           .placeholderFont({ size: 16 * this.fontSizeRatio })
           .backgroundColor(Color.Transparent)
-          .maxLength(30)
-          .onChange((value: string) => {
+          .onChange((_value: string) => {
             this.onValidate(this.isCanBack)
           })
           .padding(0)
           .borderRadius(0)
+          .constraintSize({
+            maxHeight: 200,
+          })
       }
       .flexGrow(1)
       .alignItems(HorizontalAlign.Start)
@@ -131,7 +133,6 @@ export struct VideoPost {
       Column({ space: 16 }) {
         this.videoUpload()
       }
-      .padding({ left: CommonConstants.SPACE_L, right: CommonConstants.SPACE_L })
 
       Column() {
         Button('发布')
@@ -143,9 +144,12 @@ export struct VideoPost {
       }
       .position({ bottom: 32, left: 0 })
       .width(CommonConstants.FULL_PERCENT)
-      .padding({ left: CommonConstants.PADDING_L, right: CommonConstants.PADDING_L })
     }
     .height(CommonConstants.FULL_PERCENT)
     .width(CommonConstants.FULL_PERCENT)
+    .padding({
+      left: this.newsPostViewModel.breakPointModel.pagePadding,
+      right: this.newsPostViewModel.breakPointModel.pagePadding,
+    })
   }
 }

@@ -1,0 +1,40 @@
+{
+  "float": [
+    {
+      "name": "card_title_font_size",
+      "value": "14fp"
+    },
+    {
+      "name": "item_font_size",
+      "value": "12fp"
+    },
+    {
+      "name": "maximum_padding",
+      "value": "12vp"
+    },
+    {
+      "name": "item_margin_top",
+      "value": "2vp"
+    },
+    {
+      "name": "image_margin_bottom",
+      "value": "8vp"
+    },
+    {
+      "name": "info_column_padding",
+      "value": "12vp"
+    },
+    {
+      "name": "info_column_width",
+      "value": "106vp"
+    },
+    {
+      "name": "info_column_height",
+      "value": "112vp"
+    },
+    {
+      "name": "image_border_radius",
+      "value": "8vp"
+    }
+  ]
+}

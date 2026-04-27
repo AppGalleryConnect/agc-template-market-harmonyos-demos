@@ -2,14 +2,14 @@ import {
   CircleButtonModifier,
   CommonConstants,
   LinearColumnModifier,
-  NewsScan,
   RouterMap,
   RouterUtils,
 } from 'lib_common'
 import { FlexLayout } from 'lib_flex_layout';
-import { NewsSearchTransition } from 'lib_widget';
+import { NewsSearchEntry } from 'lib_search';
 import { NavHeaderBar } from 'lib_widget';
 import { FloatingPublishBtn } from '../components/FloatingPublishBtn';
+import { NewsScan } from '../utils/NewsScan';
 import { HomeViewModel } from '../viewmodels/HomeViewModel';
 
 @Builder
@@ -64,9 +64,7 @@ struct HomePage {
   @Builder
   rightHeadPartBuilder() {
     Row({ space: CommonConstants.SPACE_S }) {
-      NewsSearchTransition({
-        componentId: 'homePage',
-      })
+      NewsSearchEntry({ name: 'home' })
 
       Button() {
         SymbolGlyph($r('sys.symbol.line_viewfinder'))

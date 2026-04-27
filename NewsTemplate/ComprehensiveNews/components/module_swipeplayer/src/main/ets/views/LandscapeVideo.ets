@@ -183,6 +183,9 @@ export struct LandscapeVideo {
       clearTimeout(this.vm.time);
       this.vm.resetSystemConfig();
     })
+    .onShown(() => {
+      this.vm.getWindowInfo();
+    })
   }
 
   @Builder

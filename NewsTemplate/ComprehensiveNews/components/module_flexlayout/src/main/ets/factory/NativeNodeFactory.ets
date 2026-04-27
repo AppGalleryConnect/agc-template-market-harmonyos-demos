@@ -6,7 +6,7 @@ export interface NodeParams {
   type: string
   nativeCardData?: JSONObject
   scrollIndex?: number
-  extraInfo?: Record<string, number | string | boolean | Record<string, string | boolean>[]>
+  extraInfo?: Record<string, number | string | boolean | Record<string, string | boolean>[] | Function>
   layout: LayoutSetting
 }
 

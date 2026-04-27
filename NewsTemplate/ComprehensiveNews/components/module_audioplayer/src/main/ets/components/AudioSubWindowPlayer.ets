@@ -2,6 +2,7 @@ import { emitter } from '@kit.BasicServicesKit';
 import { MediaViewModel } from '../viewmodel/MediaViewModel';
 import { AudioConstants } from '../constants/Constants';
 import { AudioViewModel } from '../viewmodel/AudioViewModel';
+import { EventMap } from '../constants/EventMap';
 
 export const entryName: string = AudioConstants.AUDIO_SUB_NAME;
 
@@ -56,7 +57,7 @@ struct AudioSubWindow {
               .fontColor([$r('sys.color.font_on_primary')])
               .onClick(() => {
                 MediaViewModel.getInstance().pause()
-                emitter.emit('destroy_sub_window')
+                emitter.emit(EventMap.DESTROY_SUB_WINDOW)
               })
           }
         }

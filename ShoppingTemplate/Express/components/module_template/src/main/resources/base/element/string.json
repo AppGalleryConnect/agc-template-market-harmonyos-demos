@@ -1,16 +1,12 @@
 {
   "string": [
     {
-      "name": "agcit_huawei_express_template_module_template",
-      "value": "1.0.2"
+      "name": "test",
+      "value": "模板"
     },
     {
-      "name": "agcittype_huawei_express_template_module_template",
-      "value": "serviceComponent"
-    },
-    {
-      "name": "agcitkid_huawei_express_template_module_template",
-      "value": "agcit_huawei_express_template_module_base/1.0.2,agcit_huawei_express_template_module_address/1.0.1,agcit_huawei_express_template_module_address_card/1.0.1"
+      "name": "agcit_huawei_express_template",
+      "value": "1.0.3"
     }
   ]
 }

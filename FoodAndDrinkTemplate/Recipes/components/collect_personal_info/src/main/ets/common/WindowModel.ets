@@ -41,7 +41,12 @@ export class WindowModel {
   public registerWindowBottomPadding() {
     this.getWindowBottomPadding();
     window.getLastWindow(this.context).then(currentWindow => {
-      currentWindow.on('avoidAreaChange', this.getWindowBottomPadding);
+      try {
+        currentWindow.on('avoidAreaChange', this.getWindowBottomPadding);
+      } catch (e) {
+        UtilLog.error(TAG, 'getWindowAvoidArea fail, error: ' + JSON.stringify(e));
+      }
+
     }).catch((err: BusinessError) => {
       UtilLog.error(DOMAIN, TAG, `registerWindowBottomPadding failed. error: ${JSON.stringify(err)}`)
     })

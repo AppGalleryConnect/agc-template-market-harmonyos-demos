@@ -1,5 +1,5 @@
 import { CalorieCalculation } from 'calorie_calculation';
-import { BaseHeader, RouterMap, RouterModule } from 'commonlib';
+import { RouterMap, RouterModule } from 'commonlib';
 import { CaloriesPageVM } from '../viewModels/CaloriesPageVM';
 
 @Builder
@@ -7,7 +7,6 @@ export function CaloriesPageBuilder() {
   CaloriesPage()
 }
 
-@Preview
 @ComponentV2
 struct CaloriesPage {
   @Local vm: CaloriesPageVM = new CaloriesPageVM();
@@ -27,8 +26,6 @@ struct CaloriesPage {
 
   build() {
     NavDestination() {
-      BaseHeader({ title: '热量计算', showRightMenu: true })
-
       CalorieCalculation({
         seriesData: this.vm.seriesData,
         dietPlanList: this.vm.dietPlanList,
@@ -43,8 +40,15 @@ struct CaloriesPage {
           })
         },
       })
-
     }
-    .backgroundColor($r('sys.color.background_secondary'))
+    .backgroundColor($r('sys.color.comp_background_gray'))
+    .title('热量计算')
+    .padding({top: 40})
+    .onBackPressed(() => {
+      let param: Record<string, Object> = {};
+      param.todayCalories = this.todayCalories;
+      RouterModule.pop(param)
+      return true;
+    })
   }
 }

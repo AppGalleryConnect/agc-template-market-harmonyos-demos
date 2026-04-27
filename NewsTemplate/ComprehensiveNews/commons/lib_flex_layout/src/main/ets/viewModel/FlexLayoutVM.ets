@@ -1,10 +1,16 @@
 import { PersistenceV2, UIUtils } from '@kit.ArkUI';
-import { TextReader } from '@kit.SpeechKit';
 import { Permissions } from '@kit.AbilityKit';
-import emitter from '@ohos.events.emitter';
+import { emitter } from '@kit.BasicServicesKit';
 import { TabInfo } from 'module_channeledit';
-import { BaseViewModel, CommonDataSource, LocationUtils, Logger, PermissionUtils, SettingModel } from 'lib_common';
-import { AudioConstants, AudioService } from 'module_audioplayer';
+import {
+  BaseViewModel,
+  CommonDataSource,
+  EventEnum,
+  LocationUtils,
+  Logger,
+  PermissionUtils,
+  SettingModel,
+} from 'lib_common';
 import { HomeServiceApi, RequestListData } from 'lib_news_api';
 import { RendNewsInfo } from '../model/Model';
 import { channelList } from '../constants/ChannelList';
@@ -86,7 +92,7 @@ export class FlexLayoutVM extends BaseViewModel {
 
 
   public initNewsDynamicData() {
-    this.channelsList.filter(item => item.selected).forEach((item: TabInfo, index: number) => {
+    this.channelsList.filter(item => item.selected).forEach((item: TabInfo) => {
       let lazyNewsInfoList: CommonDataSource<RequestListData> = new CommonDataSource()
       this.rendNewsInfoList.push(new RendNewsInfo(item.id, item.text, lazyNewsInfoList))
     })
@@ -164,7 +170,7 @@ export class FlexLayoutVM extends BaseViewModel {
           if (oldV !== newV) {
             this.channelsList[this.localTabIdx].text = newV;
             if (refresh) {
-              emitter.emit('local_refresh');
+              emitter.emit(EventEnum.LOCAL_REFRESH);
             }
           }
         }

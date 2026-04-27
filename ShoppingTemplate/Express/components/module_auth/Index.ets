@@ -1,0 +1,1 @@
+export { RealNameAuthView } from './src/main/ets/views/RealNameAuthView'

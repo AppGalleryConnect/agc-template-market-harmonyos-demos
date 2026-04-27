@@ -1,3 +1,4 @@
+import { CommonSymbol, WindowUtil } from 'module_ui_base';
 import { NoticeRouterMap } from '../commons/Enums';
 import { MessageGroup } from '../commons/Types'
 import { formatTimestamp } from '../commons/Utils';
@@ -16,15 +17,19 @@ export struct NoticeCenterPage {
   @Local
   stack: NavPathStack = new NavPathStack()
   @Local
-  loading:boolean = false
+  loading: boolean = false
+
+  aboutToAppear(): void {
+    WindowUtil.initWindowUtil(this.getUIContext())
+  }
 
   build() {
     NavDestination() {
       Column() {
         this.buildHeader()
-        if(this.loading){
+        if (this.loading) {
           LoadingProgress().width(32).height(32).layoutWeight(1)
-        }else{
+        } else {
           this.buildMessageGroup()
         }
       }
@@ -32,15 +37,15 @@ export struct NoticeCenterPage {
     }
     .hideTitleBar(true)
     .padding({
-      left: $r('app.string.space_l'),
-      right: $r('app.string.space_l'),
+      left: $r('app.float.space_l'),
+      right: $r('app.float.space_l'),
     })
     .onReady((context) => {
       if (context.pathStack) {
         this.stack = context.pathStack;
       }
     })
-    .onShown(()=>{
+    .onShown(() => {
       this.getMessageGroup()
     })
   }
@@ -49,19 +54,11 @@ export struct NoticeCenterPage {
   buildHeader() {
     Row() {
       if (this.stack?.size?.()) {
-        Image($r('app.media.ic_back'))
-          .width(40)
-          .height(40)
-          .aspectRatio(1)
-          .draggable(false)
-          .margin({ right: $r('app.string.space_s') })
-          .borderRadius($r('app.string.border_radius_capsule'))
-          .stateStyles({
-            normal: { .backgroundColor($r('app.color.background_color_transparent'))
-            },
-            pressed: { .backgroundColor($r('sys.color.interactive_pressed'))
-            },
-          })
+        CommonSymbol({
+          src: $r('sys.symbol.chevron_left'),
+          color: $r('app.color.font_color_level1'),
+        })
+          .margin({ right: $r('app.float.space_l') })
           .onClick(() => {
             this.stack.pop()
           })
@@ -85,9 +82,7 @@ export struct NoticeCenterPage {
         NoticeApis.changeAllNoticeReadStatus().then(async (res) => {
           if (res === 0) {
             await this.getMessageGroup()
-            this.getUIContext().getPromptAction().showToast({
-              message: '操作成功',
-            })
+            WindowUtil.toast('操作成功')
           }
         })
       })
@@ -116,7 +111,7 @@ export struct NoticeCenterPage {
                 .height(48)
                 .borderRadius(24)
             }
-            .margin({ right: $r('app.string.space_s') })
+            .margin({ right: $r('app.float.space_s') })
 
             Column({ space: 4 }) {
               Row() {
@@ -144,8 +139,8 @@ export struct NoticeCenterPage {
             .layoutWeight(1)
           }
           .padding({
-            top: $r('app.string.space_m'),
-            bottom: $r('app.string.space_m'),
+            top: $r('app.float.space_m'),
+            bottom: $r('app.float.space_m'),
           })
           .onClick(() => {
             this.stack.pushPath({ name: NoticeRouterMap.NOTICE_LIST, param: group })
@@ -159,7 +154,7 @@ export struct NoticeCenterPage {
       startMargin: 56,
     })
     .scrollBar(BarState.Off)
-    .padding({ top: $r('app.string.space_l') })
+    .padding({ top: $r('app.float.space_l') })
   }
 
   async getMessageGroup() {

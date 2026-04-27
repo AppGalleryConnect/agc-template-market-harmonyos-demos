@@ -15,3 +15,6 @@ BuildProfile.ets
 sign
 **/easy_tinymce
 .codemate
+.codeagent
+.code_review
+AGENTS.md

@@ -1,7 +1,8 @@
 import { LengthMetrics } from '@kit.ArkUI';
-import { CommonConstants } from 'commonlib';
+import { CommonConstants, PreferenceUtil, RouterMap, RouterModule } from 'commonlib';
 import { FoodCalories, MyMenuItem } from '../types/Index';
 import { SearchFoodPageVM } from '../viewModels/SearchFoodPageVM';
+import { emitter } from '@kit.BasicServicesKit';
 
 @Builder
 export function SearchFoodPageBuilder() {
@@ -11,16 +12,30 @@ export function SearchFoodPageBuilder() {
 @ComponentV2
 struct SearchFoodPage {
   @Local vm: SearchFoodPageVM = new SearchFoodPageVM();
+  @Local colorMode: number = -1
 
   aboutToAppear(): void {
     this.vm.init()
+    try {
+      let colorMode = Number(PreferenceUtil.getInstance().get(CommonConstants.LIGHT_DARK_KEY, 1))
+      this.colorMode = colorMode;
+      emitter.on('colorModeChange', (event: emitter.EventData) => {
+        let colorMode = event.data!.colorMode as number;
+        this.colorMode = colorMode;
+      });
+    } catch (e) {
+    }
+  }
+
+  aboutToDisappear(): void {
+    emitter.off('colorModeChange');
   }
 
   build() {
     NavDestination() {
       if (this.vm.searchResul.length) {
         List({ space: 12 }) {
-          ForEach(this.vm.searchResul, (item: FoodCalories) => {
+          ForEach(this.vm.searchResul, (item: FoodCalories, index: number) => {
             ListItem() {
               Column() {
                 Column() {
@@ -31,17 +46,17 @@ struct SearchFoodPage {
                     .margin({ top: 2 })
                 }.width('100%').alignItems(HorizontalAlign.Start)
 
-                Divider().strokeWidth(1).margin({ top: 4 })
+                Divider().strokeWidth('1px').margin({ top: 4 })
               }.onClick(() => {
-                this.vm.showAddFoodSheet = true
+                this.vm.isShowArray[index] = true
               })
-            }.bindSheet($$this.vm.showAddFoodSheet, this.addFoodSheet(item), {
+            }.bindSheet($$this.vm.isShowArray[index], this.addFoodSheet(item, index), {
               height: 533,
               blurStyle: BlurStyle.Thick,
               preferType: SheetType.CENTER,
               showClose: false,
             });
-          }, (item: FoodCalories) => JSON.stringify(item))
+          }, (item: FoodCalories, index: number) => JSON.stringify(item.name + index))
         }
         .margin({ left: 16, right: 16 })
         .width('100%')
@@ -58,10 +73,11 @@ struct SearchFoodPage {
       }
     }
     .title(this.buildTitleBar(), { paddingStart: LengthMetrics.vp(16) })
+    .padding({ top: 40 })
   }
 
   @Builder
-  addFoodSheet(item: FoodCalories) {
+  addFoodSheet(item: FoodCalories, index: number) {
     Column() {
       Column() {
         Row().width(48).height(4).backgroundColor($r('sys.color.icon_fourth')).borderRadius(2)
@@ -84,7 +100,8 @@ struct SearchFoodPage {
               }
             })
           Image($r('app.media.ic_close')).width(40).onClick(() => {
-            this.vm.showAddFoodSheet = false
+            // this.vm.showAddFoodSheet = false
+            this.vm.isShowArray[index] = false
           })
         }
         .width(CommonConstants.FULL_WIDTH)
@@ -97,7 +114,7 @@ struct SearchFoodPage {
           .fontSize(12)
           .fontColor($r('sys.color.font_secondary'))
           .margin({ top: 2 })
-        Divider().strokeWidth(1).margin({ top: 4 })
+        Divider().strokeWidth('1px').margin({ top: 4 })
         Text('请输入重量/容量')
           .fontSize(12)
           .fontWeight(FontWeight.Medium)
@@ -110,12 +127,11 @@ struct SearchFoodPage {
             .placeholderFont({ size: $r('sys.float.Body_L') })
             .placeholderColor($r('sys.color.font_secondary'))
             .enabled(false)
-          Text('克').fontSize(16).fontColor($r('sys.color.font_secondary')).margin({ right: 13 })
+          Text('克').fontSize(16).fontColor($r('sys.color.font_tertiary')).margin({ right: 13 })
         }.alignContent(Alignment.End).margin({ top: 12 })
-
       }
       .alignItems(HorizontalAlign.Start)
-      .backgroundColor($r('sys.color.background_primary'))
+      .backgroundColor($r('sys.color.comp_background_list_card'))
       .margin({ top: 8 })
       .padding(12)
       .borderRadius(16)
@@ -128,15 +144,15 @@ struct SearchFoodPage {
                 .fontSize($r('sys.float.Body_L'))
                 .fontWeight(FontWeight.Medium)
                 .fontColor($r('sys.color.font_primary'))
-                .width(72)
-                .height(48)
+                .width(this.vm.getWidth)
+                .height(this.vm.getHeight)
                 .borderRadius($r('sys.float.corner_radius_level4'))
-                .backgroundColor($r('sys.color.background_primary'))
-                .shadow({
-                  offsetX: 0,
-                  offsetY: 1,
-                  color: '#90949C',
-                  radius: 0,
+                .backgroundColor($r('sys.color.comp_background_primary'))
+                .border({
+                  width: { bottom: 1 },
+                  color: { bottom: $r('sys.color.font_secondary') },
+                  radius: 10,
+                  style: BorderStyle.Solid
                 })
                 .onClick(() => {
                   this.vm.btnClick(item)
@@ -144,20 +160,34 @@ struct SearchFoodPage {
             }
           }, (item: string) => item)
         }
-        .width(240)
-        .height(228)
+        .width(this.vm.breakPointModel.currentBreakpoint === 'sm' ? 240 : 330)
+        .height(this.vm.breakPointModel.currentBreakpoint === 'sm' ? 228 : 290)
         .rowsGap(12)
         .columnsGap(12)
         .columnsTemplate('1fr 1fr 1fr')
 
         Column({ space: 12 }) {
           Button({ type: ButtonType.Normal }) {
-            Image($r('app.media.ic_close')).width(24)
+            Column() {
+              SymbolGlyph($r('sys.symbol.delete_left'))
+                .fontColor([$r('sys.color.icon_primary')])
+                .fontSize(24)
+            }
+            .width('100%')
+            .height('100%')
+            .justifyContent(FlexAlign.Center)
+            .alignItems(HorizontalAlign.Center)
           }
           .layoutWeight(1)
           .width('100%')
           .borderRadius($r('sys.float.corner_radius_level4'))
-          .backgroundColor($r('sys.color.background_primary'))
+          .backgroundColor($r('sys.color.comp_background_primary'))
+          .border({
+            width: { bottom: 1 },
+            color: { bottom: $r('sys.color.font_secondary') },
+            radius: 10,
+            style: BorderStyle.Solid
+          })
           .onClick(() => {
             this.vm.deleteBtn()
           })
@@ -165,21 +195,29 @@ struct SearchFoodPage {
           Button('确定', { type: ButtonType.Normal })
             .layoutWeight(1)
             .width('100%')
-            .fontSize($r('sys.float.Body_L'))
+            .fontSize($r('sys.float.Body_M'))
             .fontWeight(FontWeight.Medium)
             .fontColor($r('sys.color.font_on_primary'))
             .borderRadius($r('sys.float.corner_radius_level4'))
             .backgroundColor('#E84026')
-            .onClick(() => {
-              this.vm.confirmBtn(item)
+            .border({
+              width: { bottom: 1 },
+              color: { bottom: $r('sys.color.font_secondary') },
+              radius: 10,
+              style: BorderStyle.Solid
             })
-        }.layoutWeight(1).height(228)
+            .onClick(() => {
+              this.vm.confirmBtn(item, index)
+            })
+        }
+        .layoutWeight(1)
+        .height(this.vm.breakPointModel.currentBreakpoint === 'sm' ? 228 : 290)
       }.margin({ top: 24 })
     }
+    .backgroundColor(this.colorMode === 0 ? '' : $r('sys.color.comp_background_gray'))
     .width(CommonConstants.FULL_WIDTH)
     .height(533)
     .padding({ left: 16, right: 16, top: 8 })
-    .backgroundColor($r('sys.color.background_secondary'))
     .borderRadius({ topLeft: 32, topRight: 32 })
     .constraintSize({ maxWidth: CommonConstants.FULL_WIDTH })
   }
@@ -192,6 +230,7 @@ struct SearchFoodPage {
         .placeholderFont({ size: $r('sys.float.Body_L') })
         .maxLength(20)
         .layoutWeight(1)
+        .backgroundColor($r('sys.color.comp_background_tertiary'))
         .onChange(() => {
           this.vm.searchFood()
         })

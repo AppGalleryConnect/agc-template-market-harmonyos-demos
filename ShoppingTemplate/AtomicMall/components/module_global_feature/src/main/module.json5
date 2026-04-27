@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "module_global_feature",
+    "type": "har",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ]
+  }
+}

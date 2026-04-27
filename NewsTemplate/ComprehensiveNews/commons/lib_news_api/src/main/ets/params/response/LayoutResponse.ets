@@ -37,7 +37,7 @@ export class AbstractRequestListData {
 export class RequestListData<T = NewsResponse> {
   navInfo: NavInfo = new NavInfo()
   @Trace articles: T[] = []
-  extraInfo: Record<string, string | boolean | Record<string, string | boolean>[]> = {}
+  extraInfo: Record<string, string | number | boolean | Record<string, string | boolean>[]> = {}
 }
 
 export class LayoutStyle {

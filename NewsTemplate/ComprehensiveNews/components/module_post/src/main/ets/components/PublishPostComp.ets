@@ -1,5 +1,6 @@
 import { KeyboardAvoidMode, promptAction } from '@kit.ArkUI';
 import { common } from '@kit.AbilityKit';
+import { Permissions } from '@kit.AbilityKit';
 import { UtilLog } from '@hw-agconnect/util-log';
 import { ImagePreview, ImagePreviewOptions, SourceImageModel } from 'module_imagepreview';
 import {
@@ -14,9 +15,17 @@ import {
   COL_OFFSET,
   ImageContent,
 } from '../constants/Constants';
+import { TextSpanInfo, Topic, User } from '../types/Types';
 import { MediaUtils } from '../utils/MediaUtils';
 import { FileUtils } from '../utils/FileUtils';
 import { getPageMargin } from '../utils/Common';
+import { LocationUtils } from '../utils/LocationUtils';
+import { PermissionUtils } from '../utils/PermissionUtils';
+import { TopicSheetView } from './TopicSheetView';
+import { ContactSheetView } from './ContactSheetView';
+import { PostController } from '../controller/PostController';
+import { RichEditorView } from './RichEditorView';
+import { RichEditorViewController } from '../controller/RichEditorViewController';
 
 const TAG = '[PublishPostComp]';
 
@@ -24,36 +33,80 @@ const TAG = '[PublishPostComp]';
 export struct PublishPostComp {
   // 字体大小比例
   @Param fontRatio: number = 1;
+  // 主体色
+  @Param themeColor: ResourceColor = '#5C79D9';
   // 图片参数
   @Param imageParams: MediaParams = DEFAULT_IMAGE_PARAM;
   // 视频参数
   @Param videoParams: MediaParams = DEFAULT_VIDEO_PARAM;
-  // TextArea控制器
-  @Param controller: TextAreaController = new TextAreaController();
+  // 发帖控制器
+  @Param postController: PostController = new PostController();
+  // RichEditor控制器
+  @Param richEditorController: RichEditorController = new RichEditorController();
+  // 初始化是携带的话题
+  @Param attachedTopic: Topic = { id: '', title: '' };
+  // 话题列表
+  @Param topicList: Topic[] = [];
+  // 联系人列表
+  @Param userList: User[] = [];
   // 图文变化的回调
-  @Event onChange: (body: string, mediaList: PostImgVideoItem[]) => void = () => {
+  @Event onChange: (body: string, mediaList: PostImgVideoItem[], cityLocation?: string) => void = () => {
   };
   // 键盘是否被拉起
   @Event isFocus: (result: boolean) => void = () => {
   }
-  @Local body: string = '';
-  @Local imgList: PostImgVideoItem[] = [];
-  @Local videoList: PostImgVideoItem[] = [];
-  @Local columnsNum: number = 3;
-  @Local breakpoint: string = 'sm';
+  // 跳转话题详情页
+  @Event jumpTopicPage: (topic: Topic) => void = () => {
+  };
+  @Local private body: string = '[]';
+  @Local private imgList: PostImgVideoItem[] = [];
+  @Local private videoList: PostImgVideoItem[] = [];
+  @Local private columnsNum: number = 3;
+  @Local private breakpoint: string = 'sm';
+  @Local private showTopicSheet: boolean = false;
+  @Local private showContactSheet: boolean = false;
+  @Local private selectedTopic: Topic | null = null;
+  @Local private selectedContact: User | null = null;
+  @Local private locationText: string = Constants.DEFAULT_LOCATION_TEXT;
+  @Local private richEditorViewController: RichEditorViewController = new RichEditorViewController();
 
-  @Monitor('body', 'imgList.length', 'videoList.length')
+  @Monitor('body', 'imgList.length', 'videoList.length', 'locationText')
   onContentChange() {
-    this.onChange(this.body, [...this.imgList, ...this.videoList]);
+    this.onChange(this.body, [...this.imgList, ...this.videoList], this.isLocationSelected ? this.locationText : '');
   }
 
   aboutToAppear(): void {
+    this.initConfig();
+    this.addKeyboardListener();
+  }
+
+  aboutToDisappear(): void {
+    this.cancelKeyboardListener();
+  }
+
+  initConfig() {
+    this.postController.joinDiscuss = (topic) => {
+      this.insertTopic(topic);
+    };
+  }
+
+  addKeyboardListener() {
     try {
-      let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
-      let windowClass = (context as common.UIAbilityContext).windowStage.getMainWindowSync();
+      const context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+      const windowClass = (context as common.UIAbilityContext).windowStage.getMainWindowSync();
       windowClass.on('keyboardHeightChange', this.onKeyBoardCB);
     } catch (e) {
-      UtilLog.error(TAG, 'getMainWindowSync fail, error: ' + JSON.stringify(e));
+      UtilLog.error(TAG, 'on keyboardHeightChange fail, error: ' + JSON.stringify(e));
+    }
+  }
+
+  cancelKeyboardListener() {
+    try {
+      const context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+      const windowClass = (context as common.UIAbilityContext).windowStage.getMainWindowSync();
+      windowClass.off('keyboardHeightChange', this.onKeyBoardCB);
+    } catch (e) {
+      UtilLog.error(TAG, 'off keyboardHeightChange fail, error: ' + JSON.stringify(e));
     }
   }
 
@@ -93,6 +146,7 @@ export struct PublishPostComp {
         }
       })
 
+      this.newToolBar()
       this.actionBar()
     }
     .width(Constants.FULL_PERCENT)
@@ -103,6 +157,16 @@ export struct PublishPostComp {
     .onDisAppear(() => {
       this.cancelHandleKeyBoard()
     })
+  }
+
+  @Computed
+  get plainText() {
+    try {
+      const list = JSON.parse(this.body) as TextSpanInfo[];
+      return list.map(v => v.text).join('');
+    } catch (e) {
+      return '';
+    }
   }
 
   @Computed
@@ -121,26 +185,64 @@ export struct PublishPostComp {
     return `最多支持上传${this.videoParams.maxLimit}个视频`;
   }
 
+  @Computed
+  get isLocationSelected() {
+    return this.locationText !== Constants.DEFAULT_LOCATION_TEXT;
+  }
+
   getImageId(v: PostImgVideoItem) {
     return `image_${v.picVideoUrl}_${v.id}`;
   }
 
+  insertTopic(topic: Topic) {
+    this.selectedTopic = topic;
+    this.richEditorViewController.insertTopic(topic);
+    this.showTopicSheet = false;
+  }
+
+  async handleLocationClick() {
+    if (this.isLocationSelected) {
+      return;
+    }
+
+    const locationPermission: Permissions = 'ohos.permission.APPROXIMATELY_LOCATION';
+
+    // 检查权限
+    if (!PermissionUtils.checkPermissionGrant(locationPermission)) {
+      const granted =
+        await PermissionUtils.requestPermissions(this.getUIContext().getHostContext() as Context, [locationPermission]);
+      if (!granted) {
+        return;
+      }
+    }
+
+    // 获取城市信息
+    const city = await LocationUtils.getCurrentCityInfo();
+    this.locationText = city.cityName || Constants.DEFAULT_LOCATION_TEXT;
+  }
+
   @Builder
   textArea() {
-    TextArea({
-      placeholder: '畅所欲言，发表你的想法',
-      text: $$this.body,
-      controller: this.controller,
-    })
-      .fontSize(16 * this.fontRatio)
-      .fontColor($r('sys.color.font_primary'))
-      .placeholderColor($r('sys.color.font_tertiary'))
-      .placeholderFont({ size: 16 * this.fontRatio })
-      .backgroundColor(Color.Transparent)
-      .maxLength(Constants.MAX_BODY_WORD_LIMIT)
-      .height(Constants.MAX_TEXTAREA_HEIGHT)
-      .padding(0)
-      .borderRadius(0)
+    Column() {
+      RichEditorView({
+        controller: this.richEditorController,
+        viewController: this.richEditorViewController,
+        attachedTopic: this.attachedTopic,
+        fontRatio: this.fontRatio,
+        themeColor: this.themeColor,
+        showContactSheet: () => {
+          this.showContactSheet = true;
+        },
+        showTopicSheet: () => {
+          this.showTopicSheet = true;
+        },
+        onChange: (text: string) => {
+          this.body = text;
+        },
+      })
+    }
+    .width(Constants.FULL_PERCENT)
+    .height(Constants.MAX_TEXTAREA_HEIGHT)
   }
 
   @Builder
@@ -181,8 +283,73 @@ export struct PublishPostComp {
   }
 
   @Builder
-  actionBar() {
+  topicSheetBuilder() {
+    TopicSheetView({
+      topicList: this.topicList,
+      onSelect: (topic) => {
+        this.insertTopic(topic);
+      },
+      jumpTopicPage: (topic) => {
+        this.jumpTopicPage(topic);
+      },
+    })
+  }
+
+  @Builder
+  contactSheetBuilder() {
+    ContactSheetView({
+      userList: this.userList,
+      onSelect: (user) => {
+        this.selectedContact = user;
+        this.richEditorViewController.insertContact(user);
+        this.showContactSheet = false;
+      },
+    })
+  }
+
+  @Builder
+  newToolBar() {
     Row() {
+      Row({ space: 4 }) {
+        SymbolGlyph($r('sys.symbol.local'))
+          .fontSize(16)
+          .fontColor(this.isLocationSelected ? [$r('sys.color.brand')] : [$r('sys.color.font_secondary')])
+        Text(this.locationText)
+          .fontSize(14)
+          .fontColor(this.isLocationSelected ? $r('sys.color.brand') : $r('sys.color.font_secondary'))
+
+        if (this.isLocationSelected) {
+          SymbolGlyph($r('sys.symbol.xmark'))
+            .fontSize(16)
+            .fontColor([$r('sys.color.font_secondary')])
+            .onClick(() => {
+              this.locationText = Constants.DEFAULT_LOCATION_TEXT;
+            })
+        }
+      }
+      .padding({
+        left: 8,
+        right: 8,
+        top: 4,
+        bottom: 4,
+      })
+      .backgroundColor($r('sys.color.comp_background_tertiary'))
+      .borderRadius(14)
+      .onClick(() => {
+        this.handleLocationClick();
+      })
+    }
+    .width(Constants.FULL_PERCENT)
+    .height(48)
+    .padding({
+      left: getPageMargin(this.breakpoint),
+      right: getPageMargin(this.breakpoint),
+    })
+  }
+
+  @Builder
+  actionBar() {
+    Row({ space: Constants.PADDING_16 }) {
       Image($r('app.media.ic_public_camera'))
         .width(Constants.ICON_WIDTH)
         .height(Constants.ICON_WIDTH)
@@ -196,12 +363,38 @@ export struct PublishPostComp {
         .height(Constants.ICON_WIDTH)
         .draggable(false)
         .fillColor($r('sys.color.font_primary'))
-        .margin({ left: Constants.PADDING_16 })
         .onClick(() => {
           this.uploadVideo();
         })
+      SymbolGlyph($r('sys.symbol.at'))
+        .fontColor([$r('sys.color.font_primary')])
+        .fontWeight(FontWeight.Normal)
+        .fontSize(Constants.ICON_WIDTH)
+        .onClick(() => {
+          this.showContactSheet = true;
+        })
+        .bindSheet($$this.showContactSheet, this.contactSheetBuilder(), {
+          title: { title: '联系人' },
+          height: SheetSize.LARGE,
+          showClose: true,
+          preferType: SheetType.CENTER,
+        })
+      SymbolGlyph($r('sys.symbol.topic'))
+        .fontColor([$r('sys.color.font_primary')])
+        .fontWeight(FontWeight.Normal)
+        .fontSize(Constants.ICON_WIDTH)
+        .onClick(() => {
+          this.showTopicSheet = true;
+        })
+        .bindSheet($$this.showTopicSheet, this.topicSheetBuilder(), {
+          title: { title: '添加话题' },
+          height: SheetSize.LARGE,
+          showClose: true,
+          preferType: SheetType.CENTER,
+          mode: SheetMode.EMBEDDED,
+        })
       Blank()
-      Text(`${this.body.length}/${Constants.MAX_BODY_WORD_LIMIT}`)
+      Text(`${this.plainText.length}/${Constants.MAX_BODY_WORD_LIMIT}`)
         .fontSize($r('sys.float.Subtitle_M'))
         .fontColor($r('sys.color.font_tertiary'))
     }

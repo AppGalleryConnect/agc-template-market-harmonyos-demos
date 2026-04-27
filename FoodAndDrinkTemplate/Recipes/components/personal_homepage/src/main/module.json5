@@ -3,7 +3,8 @@
     "name": "personal_homepage",
     "type": "har",
     "deviceTypes": [
-      "default"
+      "default",
+      "tablet"
     ]
   }
 }

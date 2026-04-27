@@ -1,0 +1,44 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "电视台元服务"
+    },
+    {
+      "name": "EntryFormAbility_desc",
+      "value": "电视台元服务"
+    },
+    {
+      "name": "EntryFormAbility_label",
+      "value": "form_label"
+    },
+    {
+      "name": "widget_desc",
+      "value": "电视台元服务"
+    },
+    {
+      "name": "widget_display_name",
+      "value": "电视台元服务"
+    },
+    {
+      "name": "card_title",
+      "value": "Title"
+    },
+    {
+      "name": "introduction",
+      "value": "Introduction"
+    },
+    {
+      "name": "agcit_huawei_television_news",
+      "value": "1.0.0"
+    }
+  ]
+}

@@ -14,23 +14,23 @@
 
 本模板提供如下组件，所有组件存放在工程根目录的components下，如果您仅需使用组件，可参考对应组件的指导链接；如果您使用此模板，请参考本文档。
 
-| 组件                                       | 描述                                                         | 使用指导                                                     |
-| ------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| 商城优惠券组件（module_coupons）           | 提供了优惠券的浏览、选择能力                                 | [使用指导](./components/module_coupons/README.md)            |
+| 组件                                 | 描述                                                         | 使用指导                                                     |
+|------------------------------------| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| 通用优惠券组件（coupons）                   | 提供了优惠券的浏览、选择能力                                 | [使用指导](./components/coupons/README.md)            |
 | 商品搜索组件（module_product_search）      | 提供了查看并编辑搜索历史，查看并刷新推荐关键词，查看热搜榜的搜索页面组件 | [使用指导](./components/module_product_search/README.md)     |
 | 商品评价组件（module_product_review）      | 提供商品评价功能，支持评定星级、填写评价、上传图片。         | [使用指导](./components/module_product_review/README.md)     |
 | 客服聊天组件（module_custom_service_chat） | 提供客服聊天组件，提供原生的聊天交互界面。                   | [使用指导](./components/module_custom_service_chat/README.md) |
 | 商品筛选组件（module_product_filter）      | 提供了根据筛选条件对商品进行筛选的功能。                     | [使用指导](./components/module_product_filter/README.md)     |
 | 商品识别组件（module_product_scan）        | 支持扫描商品条码/二维码，拍摄商品图片并获取返回结果。        | [使用指导](./components/module_product_scan/README.md)       |
-| 通用地址管理组件（address_management）     | 提供了新增/编辑/删除地址等功能，支持从地图选址、智能识别地址、获取华为账号收货地址 | [使用指导](./components/address_management/README.md)        |
-| 通用应用内设置组件（app_setting）          | 支持设置开关切换、下拉选择、页面跳转、文本刷新等基础设置项   | [使用指导](./components/app_setting/README.md)               |
+| 通用地址管理组件（address_management）       | 提供了新增/编辑/删除地址等功能，支持从地图选址、智能识别地址、获取华为账号收货地址 | [使用指导](./components/address_management/README.md)        |
+| 通用应用内设置组件（app_setting）             | 支持设置开关切换、下拉选择、页面跳转、文本刷新等基础设置项   | [使用指导](./components/app_setting/README.md)               |
 | 通用登录组件（aggregated_login）           | 支持华为账号一键登录及其他方式登录（微信、手机号登录）       | [使用指导](./components/aggregated_login/README.md)          |
 | 通用支付组件（aggregated_payment）         | 聚合了多方的支付能力。提供开箱即用的收银台选择器 (CashierPicker)以及封装完好的聚合支付服务接口 (aggregatedPaymentService) | [使用指导](./components/aggregated_payment/README.md)        |
 | 通用分享组件（aggregated_share）           | 支持分享到微信好友、朋友圈、QQ、微博等方式，支持碰一碰分享、生成海报、系统分享等功能 | [使用指导](./components/aggregated_share/README.md)          |
-| 通用个人信息组件（collect_personal_info）  | 支持编辑头像、昵称、姓名、性别、手机号、生日、个人简介等     | [使用指导](./components/collect_personal_info/README.md)     |
-| 通用问题反馈组件（feedback）               | 支持提交问题反馈、查看反馈记录                               | [使用指导](./components/feedback/README.md)                  |
+| 通用个人信息组件（collect_personal_info）    | 支持编辑头像、昵称、姓名、性别、手机号、生日、个人简介等     | [使用指导](./components/collect_personal_info/README.md)     |
+| 通用问题反馈组件（feedback）                 | 支持提交问题反馈、查看反馈记录                               | [使用指导](./components/feedback/README.md)                  |
 | 通用会员组件（membership）                 | 通过应用内支付实现会员开通的能力（自动续期订阅会员及非续期订阅会员），开发者可以根据业务需要快速实现应用会员开通 | [使用指导](./components/membership/README.md)                |
-| 通用图片预览组件（image_preview）          | 提供了图片预览相关功能                                       | [使用指导](./components/image_preview/README.md)             |
+| 通用图片预览组件（image_preview）            | 提供了图片预览相关功能                                       | [使用指导](./components/image_preview/README.md)             |
 
 本模板为综合商城应用提供了常用功能的开发样例，模板主要分首页、分类、购物车、和我的四大模块：
 
@@ -126,7 +126,7 @@
 │   ├── collect_personal_info                     // 通用个人信息组件
 │   ├── feedback                                  // 通用意见反馈组件
 │   ├── membership                                // 通用会员组件
-│   ├── module_coupons                            // 优惠券组件
+│   ├── coupons                                   // 优惠券组件
 │   ├── module_custom_service                     // 客服聊天组件
 │   ├── module_notice_center                      // 消息中心组件
 │   ├── module_privacy_agreement                  // 协议授权组件
@@ -195,8 +195,8 @@
 
 ### 环境
 
-- DevEco Studio版本：DevEco Studio 6.0.0 Release及以上
-- HarmonyOS SDK版本：HarmonyOS 6.0.0 Release SDK及以上
+- DevEco Studio版本：DevEco Studio 6.0.2 Release及以上
+- HarmonyOS SDK版本：HarmonyOS 6.0.2 Release SDK及以上
 - 设备类型：华为手机（包括双折叠和阔折叠）、华为平板
 - 系统版本：HarmonyOS 6.0.0(20)及以上
 

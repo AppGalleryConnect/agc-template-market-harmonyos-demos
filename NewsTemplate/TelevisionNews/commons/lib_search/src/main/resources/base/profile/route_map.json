@@ -1,0 +1,9 @@
+{
+  "routerMap": [
+    {
+      "name": "NewsSearch",
+      "pageSourceFile": "src/main/ets/views/NewsSearch.ets",
+      "buildFunction": "NewsSearchBuilder"
+    }
+  ]
+}

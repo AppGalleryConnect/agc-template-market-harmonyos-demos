@@ -1,0 +1,29 @@
+{
+  "routerMap": [
+    {
+      "name": "ProductSearchPage",
+      "pageSourceFile": "src/main/ets/views/ProductSearchPage.ets",
+      "buildFunction": "buildProductSearchPage"
+    },
+    {
+      "name": "ProductSearchResultsPage",
+      "pageSourceFile": "src/main/ets/views/ProductSearchResultsPage.ets",
+      "buildFunction": "buildProductSearchResultsPage"
+    },
+    {
+      "name": "CustomServicePage",
+      "pageSourceFile": "src/main/ets/views/CustomServicePage.ets",
+      "buildFunction": "buildCustomServicePage"
+    },
+    {
+      "name": "SubCategoryPage",
+      "pageSourceFile": "src/main/ets/views/SubCategoryPage.ets",
+      "buildFunction": "buildSubCategoryPage"
+    },
+    {
+      "name": "SeckillListPage",
+      "pageSourceFile": "src/main/ets/views/SeckillListPage.ets",
+      "buildFunction": "buildSeckillListPage"
+    }
+  ]
+}

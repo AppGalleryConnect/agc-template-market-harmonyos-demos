@@ -20,7 +20,7 @@ const categories: FoodCategory[] = [
 ];
 
 const foodData: FoodCalories[] = [
-// ==================== 常用 ====================
+  // ==================== 常用 ====================
   {
     id: 1,
     name: '鸡蛋（水煮）',
@@ -435,16 +435,20 @@ export const addDietPlans = (data: DietPlanBody) => {
     plans.push(food)
     totalCalories = totalCalories + calories
   })
-
   let plan = dietPlans.find(item => item.menuId === data.menuId)
+  if (plans.length === 0) {
+    dietPlans = dietPlans.filter(i => i.menuId !== data.menuId)
+    return
+  }
   if (plan?.id) {
+    plan!.foodList = plans
     const dietPlan: DietPlans = {
       id: plan.id,
       menuId: data.menuId,
       name: data.name,
       desc: calorieRange[data.name],
       totalCalories: totalCalories,
-      foodList: plans,
+      foodList: plan!.foodList,
     };
     dietPlans.forEach((item, index) => {
       if (plan?.id === item.id) {
@@ -463,7 +467,12 @@ export const addDietPlans = (data: DietPlanBody) => {
     };
     dietPlans.push(dietPlan);
   }
+  dietPlans.sort((a, b) => a.menuId - b.menuId)
 };
+
+export const clearDietPlans = () => {
+  dietPlans = [];
+}
 
 export const queryDietPlans = (): Array<DietPlans> => {
   return dietPlans;

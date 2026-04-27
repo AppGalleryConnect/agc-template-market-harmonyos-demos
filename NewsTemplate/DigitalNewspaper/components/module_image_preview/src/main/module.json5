@@ -1,0 +1,15 @@
+{
+  "module": {
+    "name": "module_image_preview",
+    "type": "har",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ],
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.INTERNET",
+      },
+    ]
+  }
+}

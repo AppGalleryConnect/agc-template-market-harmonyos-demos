@@ -12,8 +12,8 @@ export class FollowersPageVM {
   columnOptions: BreakpointType<number> = new BreakpointType<number>({
     sm: 1,
     md: 2,
-    lg: 2,
-    xl: 2,
+    lg: 3,
+    xl: 3,
   });
   @Trace breakPointModel: BreakpointModel = AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
 
@@ -25,7 +25,7 @@ export class FollowersPageVM {
       if (res.status === 200) {
         this.followerList =
           res.data.map(item => new BloggerFollowerClz(item.id, item.authorId, item.author, item.authorAvatar,
-            item.isFollower))
+           authorId === 0 ? !item.isFollower : item.isFollower))
       }
     })
   }

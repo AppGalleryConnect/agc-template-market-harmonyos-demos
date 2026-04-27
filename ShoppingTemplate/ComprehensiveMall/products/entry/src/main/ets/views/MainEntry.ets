@@ -85,8 +85,8 @@ struct MainEntry {
       Text(item.label)
         .fontColor(this.vm.curIndex === index ? $r('app.color.theme_color') :
           $r('app.color.font_color_level3'))
-        .fontSize($r('app.string.font_size_10'))
-        .margin({ top: $r('app.string.space_xs') });
+        .fontSize($r('app.float.font_size_10'))
+        .margin({ top: $r('app.float.space_xs') });
     }
     .width($r('app.string.size_percent_full'))
     .height(BreakpointSystem.isTablet ? 100 : undefined)

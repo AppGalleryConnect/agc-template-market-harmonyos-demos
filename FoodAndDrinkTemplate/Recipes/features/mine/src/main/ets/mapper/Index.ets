@@ -14,6 +14,8 @@ export function historyListMapper(list: RecipeBriefInfo[]) {
     recipeItem.label = item.category.split('、');
     recipeItem.nickname = item.author;
     recipeItem.avatar = item.authorAvatar || 'ic_avatar';
+    recipeItem.video = item.video || 'ic_avatar';
+    recipeItem.isVip = item.isVip || 0;
     recipeList.push(recipeItem);
   });
 
@@ -36,8 +38,10 @@ export function recipeListMapper(list: RecipeBriefInfoResp[]) {
     recipeItem.thumbnail = item.thumbnail;
     recipeItem.views = item.views;
     recipeItem.likes = item.likes;
+    recipeItem.video = item.video;
+    recipeItem.heatness = item.heatness;
+    recipeItem.isVip = item.isVip;
     recipeList.push(recipeItem);
   });
-
   return recipeList;
 }

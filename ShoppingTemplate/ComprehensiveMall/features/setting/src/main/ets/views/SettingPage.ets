@@ -6,7 +6,11 @@ import { CommonConfirmDialog, NavTitleBar } from 'lib_widget';
 @ComponentV2
 export struct SettingPage {
   @Local
-  stack: NavPathStack = routerStack
+  stack: NavPathStack = new NavPathStack()
+
+  aboutToAppear(): void {
+    this.stack = routerStack.getActiveStack();
+  }
   @Local
   group1: SettingGroup = new SettingGroup()
     .setList([
@@ -18,6 +22,12 @@ export struct SettingPage {
         .setType(SettingType.ROUTER)
         .setLabel('隐私设置')
         .setRouterParam({ routerName: RouterMap.SETTING_PRIVACY }),
+    ])
+  @Local
+  groupDisplayMode: SettingGroup = new SettingGroup()
+    .setList([
+      new SettingItem()
+        .setSupportedType(SupportedSetting.LIGHT_DARK_MODE),
     ])
   @Local
   group2: SettingGroup = new SettingGroup()
@@ -44,7 +54,7 @@ export struct SettingPage {
 
         SettingView({
           pathStack: this.stack,
-          settingList: [this.group1, this.group2, this.group3],
+          settingList: [this.group1, this.groupDisplayMode, this.group2, this.group3],
         })
           .layoutWeight(1)
         if (iData.global.isLogin) {

@@ -59,7 +59,6 @@ export struct ProductSwiperPage {
           }
           .cachedCount(3)
           .backgroundColor($r('app.color.background_color_grey'))
-          .layoutWeight(1)
           .vertical(true)
           .autoPlay(false)
           .indicator(false)
@@ -67,11 +66,12 @@ export struct ProductSwiperPage {
           .index($$this.curIndex)
           .disableSwipe(false)
           .displayCount(1)
-          .nextMargin(32, true)
+          .nextMargin(100, true)
           .expandSafeArea([SafeAreaType.SYSTEM])
           .onChange(async () => {
             this.getProductInfo(this.curProduct?.productId)
           })
+          .height('calc(100% - 90vp)')
         }
         .height('100%')
       }
@@ -122,7 +122,7 @@ export struct ProductSwiperPage {
     Column() {
       Image(card.banner)
         .width($r('app.string.size_percent_full'))
-        .objectFit(ImageFit.Contain)
+        .objectFit(ImageFit.Cover)
         .layoutWeight(1)
         .margin({ bottom: $r('app.float.space_l') })
         .onClick(() => {
@@ -205,7 +205,7 @@ export struct ProductSwiperPage {
       .margin({ bottom: $r('app.float.space_l') })
     }
     .backgroundColor($r('app.color.background_color_primary'))
-    // .padding({ bottom: $r('app.float.space_l') })
+    .height('70%')
     .margin({ bottom: $r('app.float.space_l') })
   }
 

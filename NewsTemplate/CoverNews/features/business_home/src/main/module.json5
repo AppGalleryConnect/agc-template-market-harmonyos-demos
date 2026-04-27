@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "business_home",
+    "type": "har",
+    "routerMap": "$profile:home_route_map",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ]
+  }
+}

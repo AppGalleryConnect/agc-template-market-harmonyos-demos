@@ -12,7 +12,13 @@ import { VideoNetworkModel } from '../models/VideoNetworkModel';
 import { GlobalConfigModel } from '../models/GlobalConfigModel';
 import { BreakpointModel } from '../models/BreakpointModel';
 import { PiPWindowModel } from '../models/PiPWindowModel';
-import { closeFileSync, handleSandboxVideoUrl, registerAVPlayerCallback, setOrientation } from '../utils/Util';
+import {
+  closeFileSync,
+  handleSandboxVideoUrl,
+  isDisplayModeFull,
+  registerAVPlayerCallback,
+  setOrientation,
+} from '../utils/Util';
 import { AVPlayerState, PageNameEnum, VideoPlayerData } from '../type/Index';
 import { Logger } from '../utils/Logger';
 
@@ -35,6 +41,7 @@ export class VideoPlayerModel {
   // 是否是通过点击全屏播放按钮跳转到横屏页面
   @Trace isClickFullScreenBtn: boolean = false;
   @Trace videoFileFD: number = 0;
+  @Trace breakpointModel: BreakpointModel = new BreakpointModel();
   @Trace globalConfigModel: GlobalConfigModel = AppStorageV2.connect(GlobalConfigModel, () => new GlobalConfigModel())!;
   @Trace pipWindowModel: PiPWindowModel = AppStorageV2.connect(PiPWindowModel, () => new PiPWindowModel())!;
   // AVPlayer管理器
@@ -128,16 +135,28 @@ export class VideoPlayerModel {
   // 设置窗口旋转
   async handleOrientation() {
     try {
+      const isFullMode = isDisplayModeFull();
       const displayClass = display.getDefaultDisplaySync();
       const orientation = displayClass.orientation;
+      this.breakpointModel.orientationBefore = orientation;
       if (orientation === display.Orientation.LANDSCAPE) {
         await setOrientation(this.uiContext, window.Orientation.USER_ROTATION_LANDSCAPE_INVERTED)
       } else if (orientation === display.Orientation.LANDSCAPE_INVERTED) {
         await setOrientation(this.uiContext, window.Orientation.USER_ROTATION_LANDSCAPE)
       } else if (orientation === display.Orientation.PORTRAIT) {
-        await setOrientation(this.uiContext, window.Orientation.USER_ROTATION_LANDSCAPE)
+        // 双折叠展开态不旋转
+        if (isFullMode) {
+          await setOrientation(this.uiContext, window.Orientation.AUTO_ROTATION)
+        } else {
+          await setOrientation(this.uiContext, window.Orientation.USER_ROTATION_LANDSCAPE)
+        }
       } else if (orientation === display.Orientation.PORTRAIT_INVERTED) {
-        await setOrientation(this.uiContext, window.Orientation.USER_ROTATION_LANDSCAPE_INVERTED)
+        // 双折叠展开态不旋转
+        if (isFullMode) {
+          await setOrientation(this.uiContext, window.Orientation.AUTO_ROTATION)
+        } else {
+          await setOrientation(this.uiContext, window.Orientation.USER_ROTATION_LANDSCAPE_INVERTED)
+        }
       }
     } catch (e) {
       Logger.error(TAG, 'handleOrientation fail, error: ' + JSON.stringify(e));
@@ -154,7 +173,9 @@ export class VideoPlayerModel {
     if (longTakeTransitionParam) {
       param.longTakeTransitionParam = longTakeTransitionParam;
     }
-    this.pathStack?.pushPathByName(PageNameEnum.VIDEO_LANDSCAPE_PAGE, param);
+    this.pathStack?.pushPathByName(PageNameEnum.VIDEO_LANDSCAPE_PAGE, param, () => {
+      this.isClickFullScreenBtn = false;
+    });
   }
 
   onPlayerStateListener(listener: (state: string) => void) {

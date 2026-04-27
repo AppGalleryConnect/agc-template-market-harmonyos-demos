@@ -20,7 +20,7 @@ struct LoginPage {
       Column() {
         // 登录使用
         AggregatedLogin({
-          routerModule: routerStack,
+          routerModule: routerStack.getActiveStack(),
           icon: $r('app.media.app_icon'),
           themeColor: $r('app.color.theme_color'),
           isSheet: false,

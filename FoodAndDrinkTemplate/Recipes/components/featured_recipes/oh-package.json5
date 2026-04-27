@@ -1,11 +1,13 @@
 {
   "name": "featured_recipes",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Please describe the basic information.",
   "main": "Index.ets",
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
-    "base_ui": "file:../base_ui"
+    "base_ui": "file:../base_ui",
+    "aggregated_ads": "file:../aggregated_ads",
+    "@hw-agconnect/util-log": "^1.0.0"
   }
 }

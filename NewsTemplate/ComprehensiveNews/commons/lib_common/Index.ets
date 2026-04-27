@@ -5,7 +5,7 @@ export { EventEnum } from './src/main/ets/constants/EventEnum';
 
 export { TabBarType } from './src/main/ets/constants/TabEnum';
 
-export { VideoType } from './src/main/ets/constants/VideoEnum';
+export { VideoType, VideoLiveStatus } from './src/main/ets/constants/VideoEnum';
 
 export { ShortcutKey } from './src/main/ets/constants/ShortcutEnum';
 
@@ -20,6 +20,8 @@ export { WX_APPID, QQ_APPID } from './src/main/ets/constants/ThirdConstants';
 export { DownloadWithoutWlanEnum, RemindWithoutWlanEnum } from './src/main/ets/constants/NetworkSettingEnum';
 
 export { NewsEnum } from './src/main/ets/constants/NewsEnum';
+
+export { TextSpanInfo } from './src/main/ets/constants/TextSpanInfo';
 
 export {
   BreakpointTypeOptions,
@@ -107,8 +109,6 @@ export { NetworkUtil } from './src/main/ets/utils/NetworkUtil';
 
 export { SystemBarOperation } from './src/main/ets/utils/SystemBarOperation';
 
-export { NewsScan } from './src/main/ets/utils/NewsScan';
-
 export { CommonBreakpoint } from './src/main/ets/utils/CommonBreakpoint';
 
 export { MediaUtils } from './src/main/ets/utils/MediaUtils';
@@ -121,12 +121,22 @@ export { PermissionUtils } from './src/main/ets/utils/PermissionUtils';
 
 export { GlobalContextUtils } from './src/main/ets/utils/ContextUtils';
 
+export { BasePinchGestureUtils } from './src/main/ets/utils/BasePinchGestureUtils';
+
+export { LanesPinchGestureUtils } from './src/main/ets/utils/LanesPinchGestureUtils';
+
+export { FontPinchGestureUtils } from './src/main/ets/utils/FontPinchGestureUtils';
+
+export { CalendarUtils } from './src/main/ets/utils/CalendarUtils';
+
 // dialogs
 export { CommonConfirmDialog, IConfirmDialogParams } from './src/main/ets/dialogs/CommonConfirmDialog';
 
 export { CommonLoadingDialog, loadingView, loadingPage } from './src/main/ets/dialogs/CommonLoading';
 
 export { CommonTipDialog, ITipDialogParams } from './src/main/ets/dialogs/CommonTipDialog';
+
+export { CommonSelectDialog } from './src/main/ets/dialogs/CommonSelectDialog';
 
 // styles
 export { LinearColumnModifier } from './src/main/ets/styles/LinearColumnModifier';

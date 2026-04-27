@@ -3,7 +3,8 @@
     "name": "home_search",
     "type": "har",
     "deviceTypes": [
-      "default"
+      "default",
+      "tablet"
     ]
   }
 }

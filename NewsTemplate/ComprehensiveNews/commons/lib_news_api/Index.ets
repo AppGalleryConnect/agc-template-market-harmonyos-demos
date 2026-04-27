@@ -1,4 +1,4 @@
-import('./src/main//ets/utils/MockUtils');
+import('./src/main/ets/utils/MockUtils');
 
 // 常量
 export { NewsEnum, VideoEnum, ChatEnum } from './src/main/ets/constants/Constants';
@@ -35,6 +35,7 @@ export { NavInfo, PostImgList } from './src/main/ets/params/base/BaseModel';
 
 // 请求参数
 export {
+  PostQueryRequest,
   PostRequest,
   ModifyPersonalInfoRequest,
   SendMessageRequest,
@@ -55,7 +56,9 @@ export { CommentResponse } from './src/main/ets/params/response/CommentResponse'
 
 // 动态布局响应模型
 export {
-  RequestListData, LayoutStyle, AbstractRequestListData,
+  RequestListData,
+  LayoutStyle,
+  AbstractRequestListData,
 } from './src/main/ets/params/response/LayoutResponse';
 
 // 编排新闻评论
@@ -68,6 +71,9 @@ export {
   ChatInfoDetailResponse,
   SystemDetailInfo,
 } from './src/main/ets/params/response/MessageResponse';
+
+// 话题模型
+export { TopicResponse } from './src/main/ets/params/response/TopicResponse';
 
 // 状态模型
 export { NewsModel } from './src/main/ets/observedmodels/NewsModel';

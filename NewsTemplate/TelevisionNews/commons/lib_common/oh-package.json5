@@ -1,0 +1,12 @@
+{
+  "name": "lib_common",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "packageType": "InterfaceHar",
+  "dependencies": {
+    "lib_tv_apis": "file:../lib_tv_apis"
+  }
+}

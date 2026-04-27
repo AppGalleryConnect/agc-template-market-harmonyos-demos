@@ -6,6 +6,7 @@
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
-    "base_ui": "file:../base_ui"
+    "base_ui": "file:../base_ui",
+    "@hw-agconnect/ui-skeleton": "^1.0.0"
   }
 }

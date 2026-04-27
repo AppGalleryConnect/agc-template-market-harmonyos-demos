@@ -1,5 +1,5 @@
-import { buildTitleBar } from 'commonlib';
-import { LengthMetrics } from '@kit.ArkUI';
+import { BreakpointModel, BreakpointType, buildTitleBar } from 'commonlib';
+import { AppStorageV2, LengthMetrics } from '@kit.ArkUI';
 
 @Builder
 export function TermsOfServicePageBuilder() {
@@ -8,6 +8,19 @@ export function TermsOfServicePageBuilder() {
 
 @ComponentV2
 export struct TermsOfServicePage {
+  @Local breakPointModel: BreakpointModel = AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
+  columnOptions: BreakpointType<number> = new BreakpointType<number>({
+    sm: 16,
+    md: 16,
+    lg: 238,
+    xl: 238,
+  });
+
+  @Computed
+  get columnPadding() {
+    return this.columnOptions.getValue(this.breakPointModel.currentBreakpoint);
+  }
+
   build() {
     NavDestination() {
       Scroll() {
@@ -63,10 +76,14 @@ export struct TermsOfServicePage {
           '[具体日期]\n');
       }
       .edgeEffect(EdgeEffect.Spring)
-      .padding(16)
+      .scrollBar(BarState.Off)
+      .padding({ top: this.columnPadding === 16 ? this.columnPadding : 78 , bottom: this.columnPadding,
+        left: this.columnPadding,
+        right: this.columnPadding })
       .height('100%')
       .align(Alignment.Top);
     }
-    .title(buildTitleBar('隐私政策'), { paddingStart: LengthMetrics.vp(16) });
+    .title(buildTitleBar('隐私政策'), { paddingStart: LengthMetrics.vp(16) })
+    .padding({top: 40})
   }
 }

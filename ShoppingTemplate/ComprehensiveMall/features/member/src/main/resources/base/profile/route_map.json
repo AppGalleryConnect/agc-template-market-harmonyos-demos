@@ -1,21 +1,6 @@
 {
   "routerMap": [
     {
-      "name": "MemberBenefitsPage",
-      "pageSourceFile": "src/main/ets/views/MemberBenefitsPage.ets",
-      "buildFunction": "buildMemberBenefitsPage"
-    },
-    {
-      "name": "PointsRecordPage",
-      "pageSourceFile": "src/main/ets/views/PointsRecordPage.ets",
-      "buildFunction": "buildPointsRecordPage"
-    },
-    {
-      "name": "RedemptionSubmitPage",
-      "pageSourceFile": "src/main/ets/views/RedemptionSubmitPage.ets",
-      "buildFunction": "buildRedemptionSubmitPage"
-    },
-    {
       "name": "MemberSubscriptionPage",
       "pageSourceFile": "src/main/ets/views/MemberSubscriptionPage.ets",
       "buildFunction": "buildMemberSubscriptionPage"
