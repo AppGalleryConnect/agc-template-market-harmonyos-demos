@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "painting_color_selector",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

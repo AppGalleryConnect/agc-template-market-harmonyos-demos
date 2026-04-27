@@ -1,0 +1,19 @@
+{
+  "routerMap": [
+    {
+      "name": "GoodDetail",
+      "pageSourceFile": "src/main/ets/pages/GoodDetail.ets",
+      "buildFunction": "GoodDetailBuilder"
+    },
+    {
+      "name": "OrderPage",
+      "pageSourceFile": "src/main/ets/pages/OrderPage.ets",
+      "buildFunction": "OrderPageBuilder"
+    },
+    {
+      "name": "CitySelectPage",
+      "pageSourceFile": "src/main/ets/pages/CitySelectPage.ets",
+      "buildFunction": "citySelectBuilder"
+    }
+  ]
+}

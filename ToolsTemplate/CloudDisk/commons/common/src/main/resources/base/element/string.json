@@ -1,0 +1,32 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "search_placeholder",
+      "value": "搜索提示词"
+    },
+    {
+      "name": "home",
+      "value": "首页"
+    },
+    {
+      "name": "backup",
+      "value": "备份"
+    },
+    {
+      "name": "file",
+      "value": "文件"
+    },
+    {
+      "name": "mine",
+      "value": "我的"
+    },
+    {
+      "name": "delete_message_prompt",
+      "value": "是否删除%s消息 ？"
+    }
+  ]
+}

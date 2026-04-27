@@ -1,0 +1,12 @@
+{
+  "name": "countdown",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {},
+  "type": "component",
+  "usage": "提供轻量级倒计时功能的组件，用于在页面出现时自动开始从指定秒数倒计时，并在结束时触发回调。适用于录制准备、流程提示、计时提醒等场景。支持可配置倒计时秒数、倒计时结束回调、默认圆形样式等功能。",
+  "zhName": "倒计时组件"
+}

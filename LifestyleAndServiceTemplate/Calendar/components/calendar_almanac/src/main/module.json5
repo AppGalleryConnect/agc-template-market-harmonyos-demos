@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "calendar_almanac",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet",
+    ]
+  }
+}

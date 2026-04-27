@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "audio_edit_home",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

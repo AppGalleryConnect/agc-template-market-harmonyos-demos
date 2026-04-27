@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "handheld_bullet_test",
+    "type": "feature",
+    "deviceTypes": [
+      "default"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false
+  }
+}

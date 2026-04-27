@@ -1,0 +1,22 @@
+{
+  "modelVersion": "5.0.5",
+  "description": "Please describe the basic information.",
+  "template": {
+    "domain": "回收服务",
+    "name": "回收服务应用模板",
+    "usage": "本模板为回收类应用提供了常用功能的开发样例，模板主要分首页和我的两大模块。首页提供订单详情、流程步骤线、物流时间轴、师傅热线、上门地址/时间修改等功能；我的模块提供登录、个人信息管理、意见反馈、设置等功能。已集成回收服务、华为账号、订单流程、地址管理、银行卡等服务，支持创建订单、编辑地址、我的设置等特性。",
+    "scene": "template,generate",
+    "sdk": [],
+    "color": {
+      "themeFilePath": "",
+      "mainThemeName": "",
+      "secondThemeName": "",
+      "themeFileContent": ""
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@ohos/hypium": "1.0.21"
+  },
+  "dynamicDependencies": {}
+}

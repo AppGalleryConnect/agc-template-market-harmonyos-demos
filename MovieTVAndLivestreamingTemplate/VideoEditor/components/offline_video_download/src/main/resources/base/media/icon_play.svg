@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns:xlink="http://www.w3.org/1999/xlink"
+     height="24px"
+     version="1.1"
+     viewBox="0 0 24 24"
+     width="24px"
+     xmlns="http://www.w3.org/2000/svg">
+    <title>icon_pause</title>
+    <defs>
+        <path
+            d="M19.7541071,9.806969 L8.736431,3.33971866 C7.54502607,2.64037754 6.02158251,3.05539763 5.33372456,4.26669198 C5.11509768,4.65168644 5,5.08840778 5,5.53296109 L5,18.4674618 C5,19.866144 6.11523809,21 7.490954,21 C7.92820775,21 8.35775814,20.8829809 8.736431,20.6607042 L19.7541071,14.1934539 C20.945512,13.4941127 21.3537175,11.9452367 20.6658595,10.7339423 C20.4472326,10.3489479 20.1327799,10.0292457 19.7541071,9.806969 Z"
+            id="path-1"></path>
+    </defs>
+    <g
+        fill="none"
+        fill-rule="evenodd"
+        id="icon_pause"
+        stroke="none"
+        stroke-width="1">
+        <mask
+            fill="white"
+            id="mask-2">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use
+            fill="#000000"
+            id="形状结合"
+            xlink:href="#path-1"></use>
+    </g>
+</svg>

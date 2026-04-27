@@ -1,0 +1,19 @@
+{
+  "module": {
+    "name": "guitar_tuning",
+    "type": "har",
+    "routerMap":"$profile:route_map" ,
+    "deviceTypes": [
+      "phone"
+    ],
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.MICROPHONE",
+        "reason": "$string:apply_microphone_reason",
+        "usedScene": {
+          "when": "inuse"
+        }
+      }
+    ]
+  }
+}

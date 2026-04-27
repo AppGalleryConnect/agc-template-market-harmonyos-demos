@@ -1,0 +1,80 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "个税计算器"
+    },
+    {
+      "name": "personal_income_tax_calculator",
+      "value": "个人所得税计算器"
+    },
+    {
+      "name": "Revenue_type",
+      "value": "收入类型"
+    },
+    {
+      "name": "Pre_tax_salary",
+      "value": "税前收入"
+    },
+    {
+      "name": "Insurance",
+      "value": "社保，公积金个人部分"
+    },
+    {
+      "name": "Deduction",
+      "value": "专项附加扣除"
+    },
+    {
+      "name": "Threshold",
+      "value": "起征点（基本减除费用）"
+    },
+    {
+      "name": "BONUS_INCOME",
+      "value": "收入金额"
+    },
+    {
+      "name": "WageIncome",
+      "value": "工资、薪金所得（综合所得）"
+    },
+    {
+      "name": "calculation",
+      "value": "计算"
+    },
+    {
+      "name": "calculation_result",
+      "value": "计算结果"
+    },
+    {
+      "name": "calculation_formula",
+      "value": "计算公式："
+    },
+    {
+      "name": "comment",
+      "value": "累计预扣预缴应纳税所得额=累计收入-累计免税收入-累计减除费用-累计专项扣除-累计专项附加扣除-累计依法确定的其他扣除\n\n本期应预扣预缴税额=（累计预扣预缴应纳税所得额×预扣率-速算扣除数)-累计减免税额-累计已预扣预缴税额\n\n其中：\n个税起征点5000元/月,以年为单位乘以12计算。"
+    },
+    {
+      "name": "labour_comment",
+      "value": "劳务报酬所得应当按次或者按月预扣预缴税款\n\n(一)超过四千：\n\n劳务报酬所得 =收入*(1-20%)\n\n(一)未超四千：\n\n劳务报酬所得 =收入-800元\n\n劳务报酬所得应预扣预缴税额=预扣预缴应纳税所得额×预扣率-速算扣除数"
+    },
+    {
+      "name": "royalties_comment",
+      "value": "特许权使用费所得应当按次或者按月预扣预缴税款\n\n(一)超过四千：\n\n特许权使用费所得 =收入*(1-20%)\n\n(一)未超四千：\n\n特许权使用费所得 =收入-800元\n\n特许权使用费得应预扣预缴税额=预扣预缴应纳税所得额×预扣率-速算扣除数"
+    },
+    {
+      "name": "agcit_huawei_individual_income_tax_calculator",
+      "value": "1.0.1"
+    },
+    {
+      "name": "agcittype_huawei_individual_income_tax_calculator",
+      "value": "serviceComponent"
+    }
+  ]
+}

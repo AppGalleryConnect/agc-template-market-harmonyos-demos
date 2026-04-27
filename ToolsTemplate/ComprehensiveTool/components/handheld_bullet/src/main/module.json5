@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "handheld_bullet",
+    "type": "har",
+    "routerMap": '$profile:router_map',
+    "deviceTypes": [
+      "default"
+    ]
+  }
+}

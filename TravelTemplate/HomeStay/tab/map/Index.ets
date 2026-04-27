@@ -1,0 +1,1 @@
+export { MapPage } from './src/main/ets/pages/MapPage';

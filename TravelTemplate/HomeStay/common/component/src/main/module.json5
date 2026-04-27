@@ -1,0 +1,12 @@
+{
+  "module": {
+    "name": "component",
+    "type": "har",
+    "description": "$string:shared_desc",
+    "deviceTypes": [
+      "phone",
+    ],
+    "installationFree": false,
+    "routerMap": "$profile:router_map"
+  }
+}

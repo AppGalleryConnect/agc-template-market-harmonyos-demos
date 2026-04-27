@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "aggregated_payment",
+    "type": "har",
+    "deviceTypes": [
+      "default"
+    ],
+  }
+}

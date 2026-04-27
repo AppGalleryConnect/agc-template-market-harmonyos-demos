@@ -1,0 +1,29 @@
+{
+  "name": "clouddisk_file",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "feature",
+  "usage": "文件管理模块：提供文件浏览、上传、下载、删除、重命名、移动等文件操作功能，支持文件传输管理",
+  "zhName": "文件",
+  "tabPage": "FileManagerPage",
+  "tabImage": "screenshot/file.jpg",
+  "tabOrder": 2,
+  "dependencies": {
+    "clouddisk_file_operation": "file:../../components/clouddisk_file_operation",
+    "clouddisk_file_select": "file:../../components/clouddisk_file_select",
+    "oh_router": "file:../../commons/OHRouter",
+    "common": "file:../../commons/common",
+    "module_share": "file:../../components/module_share",
+    "clouddisk_file_detail": "file:../../components/clouddisk_file_detail",
+    "module_cloud_upload": "file:../../components/module_cloud_upload",
+    "collect_personal_info": "file:../../components/collect_personal_info",
+    "cloud_file_base": "file:../../components/cloud_file_base",
+    "cloud_operation_item": "file:../../components/cloud_operation_item",
+    "cloud_view_switch": "file:../../components/cloud_view_switch",
+    "cloud_multilevel_navigation": "file:../../components/cloud_multilevel_navigation",
+    "cloud_privatespace": "file:../../components/cloud_privatespace"
+  }
+}

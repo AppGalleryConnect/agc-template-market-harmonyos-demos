@@ -1,0 +1,19 @@
+{
+  "routerMap": [
+    {
+      "name": "CastPage",
+      "pageSourceFile": "src/main/ets/pages/CastPage.ets",
+      "buildFunction": "CastPageBuilder"
+    },
+    {
+      "name": "CastControllerPage",
+      "pageSourceFile": "src/main/ets/pages/CastControllerPage.ets",
+      "buildFunction": "CastControllerPageBuilder"
+    },
+    {
+      "name": "FileListPage",
+      "pageSourceFile": "src/main/ets/pages/FileListPage.ets",
+      "buildFunction": "FileListPageBuilder"
+    }
+  ]
+}

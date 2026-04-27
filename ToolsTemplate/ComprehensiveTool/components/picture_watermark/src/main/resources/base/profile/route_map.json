@@ -1,0 +1,28 @@
+{
+  "routerMap": [
+    {
+      "name": "WaterMarksShow",
+      "pageSourceFile": "src/main/ets/pages/WaterMarksShowPage.ets",
+      "buildFunction": "waterMarksShowPageBuilder",
+      "data": {
+        "description": "this is WaterMarksShowPage"
+      }
+    },
+    {
+      "name": "WaterMarksEdit",
+      "pageSourceFile": "src/main/ets/pages/WaterMarksEditPage.ets",
+      "buildFunction": "waterMarksEditPageBuilder",
+      "data": {
+        "description": "this is WaterMarksEditPage"
+      }
+    },
+    {
+      "name": "HistoryRecords",
+      "pageSourceFile": "src/main/ets/pages/HistoryRecordsPage.ets",
+      "buildFunction": "historyRecordsPageBuilder",
+      "data": {
+        "description": "this is HistoryRecordsPage"
+      }
+    }
+  ]
+}

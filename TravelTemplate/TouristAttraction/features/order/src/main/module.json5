@@ -1,0 +1,29 @@
+{
+  "module": {
+    "name": "order",
+    "type": "shared",
+    "deliveryWithInstall": true,
+    "description": "$string:shared_desc",
+    "deviceTypes": [
+      "phone",
+    ],
+    "installationFree": true,
+    "routerMap": "$profile:router_map",
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.READ_CALENDAR",
+        "reason": "$string:apply_read_calendar_reason",
+        "usedScene": {
+          "when": "inuse"
+        }
+      },
+      {
+        "name": "ohos.permission.WRITE_CALENDAR",
+        "reason": "$string:apply_write_calendar_reason",
+        "usedScene": {
+          "when": "inuse"
+        }
+      }
+    ]
+  }
+}

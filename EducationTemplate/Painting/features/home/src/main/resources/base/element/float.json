@@ -1,0 +1,60 @@
+{
+  "float": [
+    {
+      "name": "page_text_font_size",
+      "value": "50fp"
+    },
+    {
+      "name": "vp_31",
+      "value": "31vp"
+    },
+    {
+      "name": "vp_180",
+      "value": "180vp"
+    },
+    {
+      "name": "vp_3",
+      "value": "3vp"
+    },
+    {
+      "name": "vp_130",
+      "value": "130vp"
+    },
+    {
+      "name": "op",
+      "value": "0.9"
+    },
+    {
+      "name": "vp_40",
+      "value": "40vp"
+    },
+    {
+      "name": "vp_8",
+      "value": "8vp"
+    },
+    {
+      "name": "vp_24",
+      "value": "24vp"
+    },
+    {
+      "name": "vp_10",
+      "value": "10vp"
+    },
+    {
+      "name": "vp_12",
+      "value": "12vp"
+    },
+    {
+      "name": "vp_4",
+      "value": "4vp"
+    },
+    {
+      "name": "vp_48",
+      "value": "48vp"
+    },
+    {
+      "name": "vp_16",
+      "value": "16vp"
+    }
+  ]
+}

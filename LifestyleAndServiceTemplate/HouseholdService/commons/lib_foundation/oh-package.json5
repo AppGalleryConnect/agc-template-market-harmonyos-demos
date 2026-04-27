@@ -1,0 +1,16 @@
+{
+  "name": "lib_foundation",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@ohos/axios": "2.2.6",
+    "module_base": "file:../../components/module_base",
+    "search": "file:../../components/search",
+    "@hw-agconnect/util-log": "^1.0.0"
+  },
+  "devDependencies": {},
+  "dynamicDependencies": {}
+}

@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "exchange_calculator",
+    "type": "har",
+    "routerMap": "$profile:route_map",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "main",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "",
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "personal": "file:../tab/personal",
+    "home": "file:../tab/home",
+    "map": "file:../tab/map",
+    "shop": "file:../tab/shop",
+    "network": "file:../common/network",
+    "type": "file:../common/type",
+    "constant": "file:../common/constant",
+    "component": "file:../common/component",
+    "travel_discovery": "file:../components/travel_discovery",
+    "util": "file:../common/util"
+  }
+}

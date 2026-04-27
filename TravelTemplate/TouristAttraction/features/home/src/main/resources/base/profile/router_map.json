@@ -1,0 +1,76 @@
+{
+  "routerMap": [
+    {
+      "name": "HomeView",
+      "pageSourceFile": "src/main/ets/pages/HomeView.ets",
+      "buildFunction": "HomeBuilder",
+      "data": {
+        "description": "this is HomeView"
+      }
+    },
+    {
+      "name": "Attractions",
+      "pageSourceFile": "src/main/ets/pages/Attractions.ets",
+      "buildFunction": "AttractionsBuilder",
+      "data": {
+        "description": "this is Attractions"
+      }
+    },
+    {
+      "name": "AttractionDetail",
+      "pageSourceFile": "src/main/ets/pages/AttractionDetail.ets",
+      "buildFunction": "AttractionDetailBuilder",
+      "data": {
+        "description": "this is AttractionDetail"
+      }
+    },
+    {
+      "name": "Bulletins",
+      "pageSourceFile": "src/main/ets/pages/Bulletins.ets",
+      "buildFunction": "BulletinsBuilder",
+      "data": {
+        "description": "this is Bulletins"
+      }
+    },
+    {
+      "name": "BulletinDetail",
+      "pageSourceFile": "src/main/ets/pages/BulletinDetail.ets",
+      "buildFunction": "BulletinDetailBuilder",
+      "data": {
+        "description": "this is BulletinDetail"
+      }
+    },
+    {
+      "name": "Route",
+      "pageSourceFile": "src/main/ets/pages/Route.ets",
+      "buildFunction": "RouteBuilder",
+      "data": {
+        "description": "this is HomeView"
+      }
+    },
+    {
+      "name": "Mall",
+      "pageSourceFile": "src/main/ets/pages/MallView.ets",
+      "buildFunction": "MallBuilder",
+      "data": {
+        "description": "this is Mall"
+      }
+    },
+    {
+      "name": "CommodityDetail",
+      "pageSourceFile": "src/main/ets/pages/CommodityDetail.ets",
+      "buildFunction": "CommodityDetailBuilder",
+      "data": {
+        "description": "this is HomeView"
+      }
+    },
+    {
+      "name": "CommodityReserve",
+      "pageSourceFile": "src/main/ets/pages/CommodityReserve.ets",
+      "buildFunction": "CommodityReserveBuilder",
+      "data": {
+        "description": "this is CommodityReserve"
+      }
+    }
+  ]
+}

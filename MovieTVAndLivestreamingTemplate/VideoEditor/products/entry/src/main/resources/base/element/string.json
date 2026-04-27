@@ -1,0 +1,28 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "VideoEdit"
+    },
+    {
+      "name": "video_edit",
+      "value": "视频编辑"
+    },
+    {
+      "name": "video_works",
+      "value": "作品"
+    },
+    {
+      "name": "Reason_Internet",
+      "value": "Use internet for inititating request"
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "string": [
+    {
+      "name": "shortvideo_share",
+      "value": "分享"
+    },
+    {
+      "name": "shortvideo_upgrade_hot",
+      "value": "上升热点"
+    },
+    {
+      "name": "shortvideo_online_people",
+      "value": "98万人在看"
+    },
+    {
+      "name": "shortvideo_focus",
+      "value": "关注"
+    },
+    {
+      "name": "shortvideo_featured",
+      "value": "精选"
+    },
+    {
+      "name": "shortvideo_recommend",
+      "value": "推荐"
+    },
+    {
+      "name": "shortvideo_movie_room",
+      "value": "放映厅"
+    },
+    {
+      "name": "shortvideo_demo_toast_tips",
+      "value": "仅演示，请根据业务需要自行实现"
+    },
+    {
+      "name": "shortvideo_comment_split",
+      "value": " · "
+    },
+    {
+      "name": "shortvideo_fifty_percent",
+      "value": "50%"
+    },
+    {
+      "name": "shortvideo_sixty_percent",
+      "value": "60%"
+    },
+    {
+      "name": "shortvideo_hundred_percent",
+      "value": "100%"
+    },
+    {
+      "name": "shortvideo_upgrade_hot_width",
+      "value": "66%"
+    },
+    {
+      "name": "ohos_id_text_size_headline",
+      "value": "20"
+    },
+    {
+      "name": "ohos_id_text_font_family_medium",
+      "value": "medium"
+    },
+    {
+      "name": "ohos_id_text_size_body1",
+      "value": "14"
+    },
+    {
+      "name": "ohos_id_text_size_body2",
+      "value": "14"
+    },
+    {
+      "name": "ohos_id_text_size_body3",
+      "value": "12"
+    },
+    {
+      "name": "ohos_id_text_size_caption",
+      "value": "10"
+    },
+    {
+      "name": "ohos_id_corner_radius_default_l",
+      "value": "16"
+    },
+    {
+      "name": "ohos_id_corner_radius_default_m",
+      "value": "12"
+    },
+    {
+      "name": "ohos_id_corner_radius_subtab",
+      "value": "4"
+    },
+    {
+      "name": "ohos_id_card_margin_start",
+      "value": "12"
+    },
+    {
+      "name": "ohos_id_card_padding_start",
+      "value": "12"
+    },
+    {
+      "name": "ohos_id_elements_margin_vertical_m",
+      "value": "8"
+    },
+    {
+      "name": "ohos_id_elements_margin_vertical_l",
+      "value": "16"
+    },
+    {
+      "name": "ohos_global_state_dialog_sixty_percent",
+      "value": "60%"
+    },
+    {
+      "name": "ohos_global_state_dialog_hundred_percent",
+      "value": "100%"
+    },
+    {
+      "name": "agcit_huawei_live_streaming",
+      "value": "1.0.1"
+    }
+  ]
+}

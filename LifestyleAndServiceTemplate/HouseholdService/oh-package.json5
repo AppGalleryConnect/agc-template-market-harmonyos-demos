@@ -1,0 +1,15 @@
+{
+  "modelVersion": "6.0.0",
+  "description": "Please describe the basic information.",
+  "dependencies": {
+    "@ohos/axios": "^2.2.6",
+    "@hw-agconnect/ui-dialog": "^1.0.0",
+    "@hw-agconnect/util-log": "^1.0.0",
+    "@hw-agconnect/ui-toast": "^1.0.0",
+    "@hw-agconnect/axios-mock-adapter": "^1.0.0"
+  },
+  "devDependencies": {
+    "@ohos/hypium": "1.0.19"
+  },
+  "dynamicDependencies": {}
+}

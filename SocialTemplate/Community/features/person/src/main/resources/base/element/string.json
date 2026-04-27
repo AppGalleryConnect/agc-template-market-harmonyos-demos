@@ -1,0 +1,36 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "示例Demo"
+    },
+    {
+      "name": "app_description",
+      "value": "示例Demo详细描述"
+    },
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "phone_number",
+      "value": "123****789"
+    },
+    {
+      "name": "qrcode",
+      "value": "二维码"
+    },
+    {
+      "name": "qrcode_desc",
+      "value": "扫一扫上面的二维码图案，加我为好友"
+    },
+    {
+      "name": "blacklist_management",
+      "value": "黑名单管理"
+    },
+    {
+      "name": "delete",
+      "value": "移除"
+    }
+  ]
+}

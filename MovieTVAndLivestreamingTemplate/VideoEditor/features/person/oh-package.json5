@@ -1,0 +1,25 @@
+{
+  "name": "person",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "common": "file:../../commons/common",
+    "oh_router": "file:../../commons/oh_router",
+    "feedback": "file:../../components/feedback",
+    "check_app_update": "file:../../components/check_app_update",
+    "collect_personal_info": "file:../../components/collect_personal_info",
+    "vip_center": "file:../../components/vip_center",
+    "@tencent/wechat_open_sdk": "1.0.16",
+    "aggregated_login": "file:../../components/aggregated_login",
+    "video_common": "file:../../components/video_common"
+  },
+  "type": "feature",
+  "usage": "个人中心模块：用于展示用户个人信息、设置和账户管理功能",
+  "zhName": "个人中心",
+  "tabPage": "MinePage",
+  "tabImage": "screenshot/person.jpeg",
+  "tabOrder": 2
+}

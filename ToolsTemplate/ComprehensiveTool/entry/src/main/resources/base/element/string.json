@@ -1,0 +1,36 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "综合工具"
+    },
+    {
+      "name": "calculator_label",
+      "value": "计算器"
+    },
+    {
+      "name": "almanac_label",
+      "value": "黄历"
+    },
+    {
+      "name": "wooden_label",
+      "value": "敲木鱼"
+    },
+    {
+      "name": "recognition_label",
+      "value": "图文识别"
+    },
+    {
+      "name": "agcit_huawei_tools",
+      "value": "1.0.0"
+    }
+  ]
+}

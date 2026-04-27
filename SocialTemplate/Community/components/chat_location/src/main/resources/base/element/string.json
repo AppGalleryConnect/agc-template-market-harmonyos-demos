@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "chat_location_reason",
+      "value": "社交交友发送位置消息场景，需要使用您的定位权限"
+    },
+    {
+      "name": "agcit_huawei_community_chat_location",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_community_chat_location",
+      "value": "serviceComponent"
+    }
+  ]
+}

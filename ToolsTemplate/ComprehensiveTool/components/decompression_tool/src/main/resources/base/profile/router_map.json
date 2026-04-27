@@ -1,0 +1,9 @@
+{
+  "routerMap": [
+    {
+      "name": "DecompressionToolPage",
+      "pageSourceFile": "src/main/ets/pages/DecompressionToolPage.ets",
+      "buildFunction": "DecompressionToolPageBuilder"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "internet_speed_measure",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@hw-agconnect/util-log": "^1.0.0",
+    "@ohos/mpchart": "^3.0.22"
+  }
+}

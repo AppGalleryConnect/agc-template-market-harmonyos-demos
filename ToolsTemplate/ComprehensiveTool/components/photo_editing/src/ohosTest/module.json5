@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "photo_editing_test",
+    "type": "feature",
+    "deviceTypes": [
+      "default"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false
+  }
+}

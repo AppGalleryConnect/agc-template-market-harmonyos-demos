@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "infrared_permission_reason",
+      "value": "This application requires infrared permissions to be enabled."
+    },
+    {
+      "name": "agcittype_huawei_remote_control",
+      "value": "serviceComponent"
+    },
+    {
+      "name": "agcit_huawei_remote_control",
+      "value": "1.0.3"
+    }
+  ]
+}

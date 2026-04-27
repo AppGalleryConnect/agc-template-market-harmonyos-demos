@@ -1,0 +1,236 @@
+import { CardData } from 'message_manager';
+
+export function getMsgData(): CardData[] {
+  return [
+    new CardData('心率异常',
+      '血氧饱和度降至88%，严重缺氧风险！请立即吸氧（如有设备），保持呼吸通畅，尽快联系急救人员！',
+      '9分钟前',
+      undefined,
+      undefined,
+      undefined,
+      $r('app.media.health_heart_rate_icon'),
+      '#FFE84026'),
+    new CardData('血压异常',
+      '收缩压≥180mmHg或舒张压≥110mmHg，高血压危象风险！请立即平躺休息，避免活动，拨打120急救电话！',
+      '9分钟前',
+      undefined,
+      undefined,
+      undefined,
+      $r('app.media.health_blood_pre_icon'),
+      '#FFE84026'),
+    new CardData('高血糖预警',
+      '餐后2小时血糖12.8mmol/L，连续2次测量均偏高。请避免高糖、高油食物，遵医嘱调整用药，记录今日饮食供医生参考。',
+      '9分钟前',
+      undefined,
+      undefined,
+      undefined,
+      $r('app.media.health_blood_sugar_icon'),
+      '#FFED6F21'),
+    new CardData('喝水提醒',
+      '忙了这么久，别忘记给自己倒杯水，润润喉，也放松放松。',
+      '9分钟前',
+      undefined,
+      undefined,
+      undefined,
+      $r('app.media.health_water_clock_icon'),
+      '#FF000000'),
+    new CardData('用药提醒',
+      '该吃药啦！今日19:00需服用【降压药】，1片/1次，饭后30分钟服用，记得搭配一杯温水～。',
+      '9分钟前',
+      undefined,
+      undefined,
+      undefined,
+      $r('app.media.health_medication_reminder_icon'),
+      '#FF000000'),
+    new CardData('睡眠提醒',
+      '根据世界卫生组织建议，成年人每晚应保证7 - 9小时睡眠 ，以维持良好的身心健康。' +
+        '现在距离您的最佳入睡时间仅剩15分钟，请关闭电子设备，调整卧室光线，准备进入睡眠状态 ，祝您拥有优质睡眠。',
+      '9分钟前',
+      undefined,
+      undefined,
+      undefined,
+      $r('app.media.health_sleep_icon'),
+      '#FF000000')
+  ]
+}
+
+export const personalInfoCollection: string =
+  '<html lang="zh-CN" id="container"><head>\n    ' +
+    '<meta charset="UTF-8">\n    ' +
+    '<meta name="viewport" content="width=device-width, initial-scale=1.0">\n   ' +
+    ' <title>个人信息收集清单</title>\n    ' +
+    '<style type="text/tailwindcss">\n        ' +
+    '@layer utilities {\n            ' +
+    '.content-auto {\n               ' +
+    ' content-visibility: auto;\n           ' +
+    ' }\n            .scrollbar-hide {\n                ' +
+    '-ms-overflow-style: none;\n               ' +
+    ' scrollbar-width: none;\n            }\n            ' +
+    '.scrollbar-hide::-webkit-scrollbar {\n                ' +
+    'display: none;\n            }\n            ' +
+    '.text-balance {\n                ' +
+    'text-wrap: balance;\n            }\n        }\n    ' +
+    '</style>\n</head>\n<body class="font-inter bg-gray-50 text-gray-800 min-h-screen flex flex-col">\n    ' +
+    '<header class="bg-white shadow-sm sticky top-0 z-10 transition-all duration-300">\n        ' +
+    '<div class="container mx-auto px-4 py-4 flex justify-between items-center">\n            ' +
+    '<div class="flex items-center space-x-2">\n                ' +
+    '<i class="fa fa-file-text-o text-primary text-2xl"></i>\n                            ' +
+    '</div>\n        </div>\n    </header>\n\n    ' +
+    '<main class="flex-grow container mx-auto px-4 py-8">\n        ' +
+    '<div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg">\n      ' +
+    '      <div class="p-6 md:p-8">\n                <div class="mb-8">\n                ' +
+    '    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-gray-900 mb-4 text-balance">服务条款</h2>\n    ' +
+    '                <p class="text-gray-600">请仔细阅读以下条款，使用我们的服务即表示您同意这些条款。</p>\n        ' +
+    '        </div>\n\n                <div class="space-y-8">\n                  ' +
+    '  <section id="section1" class="scroll-mt-20">\n                     ' +
+    '   <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">\n             ' +
+    '               <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3">1</span>\n     ' +
+    '                       服务概述\n                        </h3>\n              ' +
+    '          <p class="text-gray-600 leading-relaxed mb-4">\n                   ' +
+    '         我们通过网站及移动应用（以下统称"服务"）为用户提供信息、工具和服务。这些服务可能包括但不限于内容浏览、社交互动、交易服务和个性化推荐。\n                       ' +
+    ' </p>\n                        <p class="text-gray-600 leading-relaxed">\n                            ' +
+    '我们保留随时修改或停止服务的权利，而无需事先通知您。我们不会对您或任何第三方因服务的修改、暂停或终止而遭受的任何损失承担责任。\n                        ' +
+    '</p>\n                    </section>\n\n                    <section id="section2" class="scroll-mt-20">\n                        ' +
+    '<h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">\n                            ' +
+    '<span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3">2</span>\n                            ' +
+    '用户账号\n                        </h3>\n                        <p class="text-gray-600 leading-relaxed mb-4">\n                            ' +
+    '使用我们的服务可能需要您创建一个账号。您同意提供准确、完整和最新的个人信息，并维护和及时更新这些信息。\n                        </p>\n                       ' +
+    ' <p class="text-gray-600 leading-relaxed">\n                            ' +
+    '您对您账号下发生的所有活动负责。如果您发现任何未经授权使用您账号的情况，您应立即通知我们。您不得将您的账号转让给任何第三方。\n                       ' +
+    ' </p>\n                    </section>\n\n                    <section id="section3" class="scroll-mt-20">\n                       ' +
+    ' <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">\n                           ' +
+    ' <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3">3</span>\n                          ' +
+    '  隐私政策\n                        </h3>\n                        <p class="text-gray-600 leading-relaxed mb-4">\n               ' +
+    '             我们重视您的隐私，并根据我们的隐私政策收集、使用和保护您的个人信息。使用我们的服务即表示您同意我们按照该隐私政策处理您的信息。\n         ' +
+    '               </p>\n                        <p class="text-gray-600 leading-relaxed">\n                       ' +
+    '     我们可能会更新我们的隐私政策，建议您定期查看。继续使用我们的服务即表示您同意这些更新。\n                        </p>\n         ' +
+    '           </section>\n\n                    <section id="section4" class="scroll-mt-20">\n                      ' +
+    '  <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">\n                       ' +
+    '     <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3">4</span>\n           ' +
+    '                 内容使用\n                        </h3>\n                        <p class="text-gray-600 leading-relaxed mb-4">\n      ' +
+    '                      我们服务中提供的内容（包括但不限于文本、图形、图像、视频、音频）受版权、商标和其他知识产权法律的保护。\n               ' +
+    '         </p>\n                        <p class="text-gray-600 leading-relaxed">\n                        ' +
+    '    您可以为个人非商业用途查看和使用这些内容，但未经我们明确书面许可，不得复制、修改、分发、传输或创建衍生作品。\n                ' +
+    '        </p>\n                    </section>\n\n                    <section id="section5" class="scroll-mt-20">\n         ' +
+    '               <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">\n                      ' +
+    '      <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3">5</span>\n            ' +
+    '                用户行为\n                        </h3>\n                        <p class="text-gray-600 leading-relaxed mb-4">\n        ' +
+    '                    您同意不利用我们的服务从事非法活动，或促进、鼓励任何非法活动。您不得干扰或破坏服务的正常运行，或试图访问未授权的系统或数据。\n     ' +
+    '                   </p>\n                        <p class="text-gray-600 leading-relaxed">\n                        ' +
+    '    您不得在服务中发布或传播垃圾邮件、病毒、恶意软件或任何其他有害内容。您不得收集或存储其他用户的个人信息。\n                    ' +
+    '    </p>\n                    </section>\n\n                    <section id="section6" class="scroll-mt-20">\n      ' +
+    '                  <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">\n                        ' +
+    '    <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3">6</span>\n             ' +
+    '               免责声明\n                        </h3>\n                        <p class="text-gray-600 leading-relaxed mb-4">\n                ' +
+    '            我们的服务按"原样"提供，不附带任何形式的明示或暗示保证，包括但不限于适销性、特定用途适用性和不侵权的保证。\n            ' +
+    '            </p>\n                        <p class="text-gray-600 leading-relaxed">\n                          ' +
+    '  在适用法律允许的最大范围内，我们不对因使用或无法使用服务而导致的任何直接、间接、偶然、特殊、惩罚性或后果性损害承担责任。\n          ' +
+    '              </p>\n                    </section>\n\n                    <section id="section7" class="scroll-mt-20">\n    ' +
+    '                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">\n                       ' +
+    '     <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3">7</span>\n           ' +
+    '                 法律适用与争议解决\n                        </h3>\n                       ' +
+    ' <p class="text-gray-600 leading-relaxed mb-4">\n                         ' +
+    '   本协议受[具体司法管辖区]法律管辖。因本协议引起的或与本协议有关的任何争议，应通过双方友好协商解决；协商不成的，任何一方均有权将争议提交[具体仲裁机构或法院]解决。\n        ' +
+    '                </p>\n                        <p class="text-gray-600 leading-relaxed">\n                     ' +
+    '       如果本协议的任何条款被认定为无效或不可执行，该条款应被删除或修改，而其余条款应继续有效。\n                        </p>\n     ' +
+    '               </section>\n\n                    <section id="section8" class="scroll-mt-20">\n                   ' +
+    '     <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">\n                        ' +
+    '    <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3">8</span>\n       ' +
+    '                     协议更新\n                        </h3>\n                    ' +
+    '    <p class="text-gray-600 leading-relaxed mb-4">\n                           ' +
+    ' 我们可能会不时更新本服务条款。当我们进行重大更改时，我们将通过在我们的网站上发布新的服务条款通知您，并且在某些情况下，我们可能会通过电子邮件或其他通信方式通知您。\n     ' +
+    '                   </p>\n                        <p class="text-gray-600 leading-relaxed">\n                       ' +
+    '     您继续使用我们的服务即表示您接受这些更新。我们鼓励您定期查看本服务条款。\n                        </p>\n                  ' +
+    '  </section>\n                </div>\n            </div>\n        </div>\n    </main>\n\n\n    </body></html>'
+
+
+export const thirdPartyInfo: string =
+  '<html lang="zh-CN" id="container"><head>\n    <meta charset="UTF-8">\n    ' +
+    '<meta name="viewport" content="width=device-width, initial-scale=1.0">\n    ' +
+    '<title>第三方信息共享清单</title>\n    <style type="text/tailwindcss">\n       ' +
+    ' @layer utilities {\n            .content-auto {\n                ' +
+    'content-visibility: auto;\n            }\n            .scrollbar-hide {\n ' +
+    '               -ms-overflow-style: none;\n                scrollbar-width: none;\n ' +
+    '           }\n            .scrollbar-hide::-webkit-scrollbar {\n                ' +
+    'display: none;\n            }\n            .text-balance {\n                ' +
+    'text-wrap: balance;\n            }\n        }\n    </style>\n</head>\n' +
+    '<body class="font-inter bg-gray-50 text-gray-800 min-h-screen flex flex-col">\n' +
+    '    <header class="bg-white shadow-sm sticky top-0 z-10 transition-all duration-300">\n' +
+    '        <div class="container mx-auto px-4 py-4 flex justify-between items-center">\n ' +
+    '           <div class="flex items-center space-x-2">\n                ' +
+    '<i class="fa fa-file-text-o text-primary text-2xl"></i>\n                         ' +
+    '</div>\n        </div>\n    </header>\n\n    <main class="flex-grow container mx-auto px-4 py-8">\n' +
+    '        <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg">\n' +
+    '            <div class="p-6 md:p-8">\n                <div class="mb-8">\n                    ' +
+    '<h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-gray-900 mb-4 text-balance">服务条款</h2>\n' +
+    '                    <p class="text-gray-600">请仔细阅读以下条款，使用我们的服务即表示您同意这些条款。</p>\n' +
+    '                </div>\n\n                <div class="space-y-8">\n                    ' +
+    '<section id="section1" class="scroll-mt-20">\n                        ' +
+    '<h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">\n                            ' +
+    '<span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3">1</span>\n' +
+    '                            服务概述\n                        </h3>\n                        ' +
+    '<p class="text-gray-600 leading-relaxed mb-4">\n                            ' +
+    '我们通过网站及移动应用（以下统称"服务"）为用户提供信息、工具和服务。这些服务可能包括但不限于内容浏览、社交互动、交易服务和个性化推荐。\n' +
+    '                        </p>\n                        <p class="text-gray-600 leading-relaxed">\n' +
+    '                            我们保留随时修改或停止服务的权利，而无需事先通知您。我们不会对您或任何第三方因服务的修改、暂停或终止而遭受的任何损失承担责任。\n' +
+    '                        </p>\n                    </section>\n\n                    ' +
+    '<section id="section2" class="scroll-mt-20">\n                        ' +
+    '<h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">\n                            ' +
+    '<span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3">2</span>\n' +
+    '                            用户账号\n                        </h3>\n                       ' +
+    ' <p class="text-gray-600 leading-relaxed mb-4">\n                            ' +
+    '使用我们的服务可能需要您创建一个账号。您同意提供准确、完整和最新的个人信息，并维护和及时更新这些信息。\n' +
+    '                        </p>\n                        <p class="text-gray-600 leading-relaxed">\n' +
+    '                            您对您账号下发生的所有活动负责。如果您发现任何未经授权使用您账号的情况，您应立即通知我们。您不得将您的账号转让给任何第三方。\n' +
+    '                        </p>\n                    </section>\n\n                    ' +
+    '<section id="section3" class="scroll-mt-20">\n                        ' +
+    '<h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">\n                            ' +
+    '<span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3">3</span>\n' +
+    '                            隐私政策\n                        </h3>\n                        ' +
+    '<p class="text-gray-600 leading-relaxed mb-4">\n                            ' +
+    '我们重视您的隐私，并根据我们的隐私政策收集、使用和保护您的个人信息。使用我们的服务即表示您同意我们按照该隐私政策处理您的信息。\n' +
+    '                        </p>\n                        <p class="text-gray-600 leading-relaxed">\n' +
+    '                            我们可能会更新我们的隐私政策，建议您定期查看。继续使用我们的服务即表示您同意这些更新。\n' +
+    '                        </p>\n                    </section>\n\n                    ' +
+    '<section id="section4" class="scroll-mt-20">\n                        ' +
+    '<h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">\n' +
+    '                            <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3">4</span>\n' +
+    '                            内容使用\n                        </h3>\n                        ' +
+    '<p class="text-gray-600 leading-relaxed mb-4">\n                            ' +
+    '我们服务中提供的内容（包括但不限于文本、图形、图像、视频、音频）受版权、商标和其他知识产权法律的保护。\n' +
+    '                        </p>\n                        <p class="text-gray-600 leading-relaxed">\n ' +
+    '                           您可以为个人非商业用途查看和使用这些内容，但未经我们明确书面许可，不得复制、修改、分发、传输或创建衍生作品。\n ' +
+    '                       </p>\n                    </section>\n\n                    ' +
+    '<section id="section5" class="scroll-mt-20">\n                        ' +
+    '<h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">\n ' +
+    '                           <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3">5</span>\n' +
+    '                            用户行为\n                        </h3>\n                        ' +
+    '<p class="text-gray-600 leading-relaxed mb-4">\n                            ' +
+    '您同意不利用我们的服务从事非法活动，或促进、鼓励任何非法活动。您不得干扰或破坏服务的正常运行，或试图访问未授权的系统或数据。\n' +
+    '                        </p>\n                        <p class="text-gray-600 leading-relaxed">\n' +
+    '                            您不得在服务中发布或传播垃圾邮件、病毒、恶意软件或任何其他有害内容。您不得收集或存储其他用户的个人信息。\n' +
+    '                        </p>\n                    </section>\n\n                   ' +
+    ' <section id="section6" class="scroll-mt-20">\n                        ' +
+    '<h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">\n ' +
+    '                           <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3">6</span>\n ' +
+    '                           免责声明\n                        </h3>\n                        ' +
+    '<p class="text-gray-600 leading-relaxed mb-4">\n                            ' +
+    '我们的服务按"原样"提供，不附带任何形式的明示或暗示保证，包括但不限于适销性、特定用途适用性和不侵权的保证。\n ' +
+    '                       </p>\n                        <p class="text-gray-600 leading-relaxed">\n ' +
+    '                           在适用法律允许的最大范围内，我们不对因使用或无法使用服务而导致的任何直接、间接、偶然、特殊、惩罚性或后果性损害承担责任。\n' +
+    '                        </p>\n                    </section>\n\n                    <section id="section7" class="scroll-mt-20">\n ' +
+    '                       <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">\n                       ' +
+    '     <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3">7</span>\n             ' +
+    '               法律适用与争议解决\n                        </h3>\n                        ' +
+    '<p class="text-gray-600 leading-relaxed mb-4">\n                            ' +
+    '本协议受[具体司法管辖区]法律管辖。因本协议引起的或与本协议有关的任何争议，应通过双方友好协商解决；协商不成的，任何一方均有权将争议提交[具体仲裁机构或法院]解决。\n' +
+    '                        </p>\n                        <p class="text-gray-600 leading-relaxed">\n ' +
+    '                           如果本协议的任何条款被认定为无效或不可执行，该条款应被删除或修改，而其余条款应继续有效。\n              ' +
+    '          </p>\n                    </section>\n\n                    <section id="section8" class="scroll-mt-20">\n ' +
+    '                       <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">\n                      ' +
+    '      <span class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-3">8</span>\n            ' +
+    '                协议更新\n                        </h3>\n                        <p class="text-gray-600 leading-relaxed mb-4">\n ' +
+    '                           我们可能会不时更新本服务条款。当我们进行重大更改时，我们将通过在我们的网站上发布新的服务条款通知您，并且在某些情况下，我们可能会通过电子邮件或其他通信方式通知您。\n ' +
+    '                       </p>\n                        <p class="text-gray-600 leading-relaxed">\n                   ' +
+    '         您继续使用我们的服务即表示您接受这些更新。我们鼓励您定期查看本服务条款。\n                        </p>\n                ' +
+    '    </section>\n                </div>\n            </div>\n        </div>\n    </main>\n\n\n    </body></html>'

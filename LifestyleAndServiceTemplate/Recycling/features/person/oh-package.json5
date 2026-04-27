@@ -1,0 +1,29 @@
+{
+  "name": "person",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "type": "feature",
+  "usage": "我的模块：提供用户登录、个人信息管理、我的订单、订单详情、地址管理、银行卡管理、设置等功能。包含华为账号登录、其他登录方式、用户隐私协议、个人资料编辑、订单列表、流程步骤线、物流时间轴、隐私设置、版本检测、关于我们、退出登录等核心功能。",
+  "zhName": "我的",
+  "tabPage": "MinePage",
+  "tabImage": "screenshots/minepage.jpeg",
+  "tabOrder": 1,
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "common": "file:../../commons/common",
+    "oh_router": "file:../../commons/oh_router",
+    "feedback": "file:../../components/feedback",
+    "aggregated_login": "file:../../components/aggregated_login",
+    "collect_personal_info": "file:../../components/collect_personal_info",
+    "check_app_update": "file:../../components/check_app_update",
+    "city_select": "file:../../components/city_select",
+    "@tencent/wechat_open_sdk": "1.0.16",
+    "address_management": "file:../../components/address_management",
+    "module_time_line": "file:../../components/module_time_line",
+    "link_category": "file:../../components/link_category",
+    "recyclingservice_process_step": "file:../../components/recyclingservice_process_step",
+    "valuation_information": "file:../../components/valuation_information"
+  }
+}

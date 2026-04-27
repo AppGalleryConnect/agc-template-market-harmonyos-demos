@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "almanac",
+    "type": "har",
+    "routerMap": "$profile:route_map",
+    "deviceTypes": [
+      "phone",
+    ]
+  }
+}

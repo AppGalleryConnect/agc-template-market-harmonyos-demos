@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "camera_request",
+      "value": "此工具需要申请相机权限"
+    },
+    {
+      "name": "agcit_huawei_photo_editing",
+      "value": "1.0.4"
+    },
+    {
+      "name": "agcittype_huawei_photo_editing",
+      "value": "serviceComponent"
+    }
+  ]
+}

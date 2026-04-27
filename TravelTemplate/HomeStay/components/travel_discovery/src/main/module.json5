@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "travel_discovery",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+    ]
+  }
+}

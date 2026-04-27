@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "module_filter_list",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

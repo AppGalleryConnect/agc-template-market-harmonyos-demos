@@ -1,0 +1,12 @@
+{
+  "string": [
+    {
+      "name": "agcit_huawei_internet_speed_measure",
+      "value": "1.0.1"
+    },
+    {
+      "name": "agcittype_huawei_internet_speed_measure",
+      "value": "serviceComponent"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "cloud_operation_item",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

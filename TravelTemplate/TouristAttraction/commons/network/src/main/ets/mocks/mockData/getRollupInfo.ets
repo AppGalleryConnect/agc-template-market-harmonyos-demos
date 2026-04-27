@@ -1,0 +1,106 @@
+import { Constant } from 'common';
+import { BaseResponse } from '../../types/ResponseTypes';
+import { AtmosphereType, GetHomeInfoResp, WeatherType } from '../../types/responseTypes/GetHomeRollUpInfoResp';
+import { MockResourceEnum } from '../MockResourceEnum';
+
+export const homeRollupInfoMock: BaseResponse<GetHomeInfoResp> = {
+  code: 0,
+  data: {
+    labels: ['免费开放', '自然景观', '4A景区'],
+    detailImages: [Constant.CLOUD_STORAGE_URL + MockResourceEnum.SWIPER],
+    currentDate: new Date(),
+    weatherId: WeatherType.SUNNY,
+    temperature: 2,
+    atmosphereId: AtmosphereType.GOOD,
+    currentVisitors: 324,
+    maxVisitors: 2000,
+    currentDayVisitors: 1117,
+    maxInstantVisitors: 1000,
+    openTime: '08:30~17:30',
+    ticketTime: '08:30~17:30',
+    rescuePhone: '12345678911',
+    complaintPhone: '12345678911',
+    hotAttractions: [{
+      labels: ['文化建筑', '异域风情'],
+      detailImages: [Constant.CLOUD_STORAGE_URL + MockResourceEnum.HEIDELBERG],
+      attractionId: 0,
+      name: '海德尔堡',
+      banner: Constant.CLOUD_STORAGE_URL + MockResourceEnum.HEIDELBERG_B,
+      icon: Constant.CLOUD_STORAGE_URL + MockResourceEnum.HEIDELBERG_L,
+      isHot: 1,
+      latitude: 22.883272,
+      longitude: 113.889091,
+      audio: Constant.CLOUD_STORAGE_URL + MockResourceEnum.AUDIO,
+      location: '松山湖欧洲小镇L区',
+      introduction: 'L区建筑以海德堡建筑风格为主，红褐色古城堡是海德堡城的标志，大多为白墙红瓦的老城建筑。设计参考了在人文科学上闻名、并在德国具有最悠久历史的海德堡大学，以红砂岩外墙和传统街区构成建筑群，布置在小山丘上细致而雄伟的城堡与由网格状道路构成的街区形成了鲜明的对比。',
+    },
+      {
+        labels: ['文化建筑', '欧美浪漫'],
+        detailImages: [Constant.CLOUD_STORAGE_URL + MockResourceEnum.BURGUNDY],
+        attractionId: 1,
+        name: '勃艮第',
+        banner: Constant.CLOUD_STORAGE_URL + MockResourceEnum.BURGUNDY_B,
+        icon: Constant.CLOUD_STORAGE_URL + MockResourceEnum.BURGUNDY_I,
+        isHot: 0,
+        latitude: 22.880878379924344,
+        longitude: 113.88852986984118,
+        audio: Constant.CLOUD_STORAGE_URL + MockResourceEnum.AUDIO,
+        location: '松山湖欧洲小镇L区',
+        introduction: 'J区借鉴了弗里堡的中世纪古城风格，哥特式建筑赋予了这座古城无与伦比的风格与魅力，以白墙红瓦的淡色系建筑为主。根据用地起伏、靠近松山湖水域的地理位置特点，结合瑞士具有历史性的古城和修道院建筑特色，通过棕红色瓦斜坡屋顶和绿色砂岩外墙等特征，打造了面向湖畔的斜面风景。',
+      }],
+    hotNotes: [
+      {
+        noteId: 0,
+        name: '美丽的海德尔堡',
+        banner: Constant.CLOUD_STORAGE_URL + MockResourceEnum.HEIDELBERG_B,
+      },
+      {
+        noteId: 1,
+        name: '松山湖小火车乘坐体验',
+        banner: Constant.CLOUD_STORAGE_URL + MockResourceEnum.HEIDELBERG,
+      },
+      {
+        noteId: 2,
+        name: '美丽的北京',
+        banner: Constant.CLOUD_STORAGE_URL + MockResourceEnum.HEIDELBERG_B,
+      },
+      {
+        noteId: 3,
+        name: '美丽的上海',
+        banner: Constant.CLOUD_STORAGE_URL + MockResourceEnum.SWIPER,
+      },
+      {
+        noteId: 4,
+        name: '美丽的深圳',
+        banner: Constant.CLOUD_STORAGE_URL + MockResourceEnum.HEIDELBERG_B,
+      },
+      {
+        noteId: 5,
+        name: '美丽的新疆',
+        banner: Constant.CLOUD_STORAGE_URL + MockResourceEnum.SWIPER,
+      },
+    ],
+    name: '华为欧洲小镇',
+    location: '中国广东省东莞市松山湖科技产业园区环湖路99号',
+    longitude: 113.886642,
+    latitude: 22.878538,
+    banner: Constant.CLOUD_STORAGE_URL + MockResourceEnum.SWIPER,
+    introduction:
+    '位于东莞松山湖溪流背坡村的欧洲小镇，占地1900多亩，分12区，按牛津、温德米尔、卢森堡、布鲁日、弗里堡、勃艮第、维罗纳、巴黎、格拉纳达、博洛尼亚、海德尔堡、克伦诺夫等12个欧洲小镇或经典建筑建造',
+    consultPhone: '12345678911',
+    parks: [{
+      parkId: 0,
+      name: '松山湖东门停车场',
+      spaces: 200,
+      longitude: 113.88852986984118,
+      latitude: 22.880878379924344,
+    },
+      {
+        parkId: 1,
+        name: '松山湖南门停车场',
+        spaces: 100,
+        longitude: 113.88852986984118,
+        latitude: 22.880878379924344,
+      }],
+  },
+};

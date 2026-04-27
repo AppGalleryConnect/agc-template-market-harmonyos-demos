@@ -1,0 +1,14 @@
+{
+  "name": "oh_router",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "common": "file:../common"
+  },
+  "type": "common",
+  "usage": "路由管理层：提供统一的页面路由管理能力，包括页面跳转（PhoneRouterControl）、页面栈管理（PhoneRouterManager）、路由拦截（PhoneNavPathIntercept）、页面配置（OHPageConfig）、页面容器（OHPage、OHPageBody）等核心功能，支持页面参数传递、页面返回回调、页面生命周期管理等，提供统一的Navigation路由方案",
+  "zhName": "路由管理层"
+}

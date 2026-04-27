@@ -1,0 +1,32 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "press_say",
+      "value": "按住说话"
+    },
+    {
+      "name": "not_microphone_power",
+      "value": "无麦克风权限,请在设置中打开"
+    },
+    {
+      "name": "voice_timeout",
+      "value": "录音时间到"
+    },
+    {
+      "name": "send",
+      "value": "发送"
+    },
+    {
+      "name": "agcit_huawei_community_chat_input",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_community_chat_input",
+      "value": "serviceComponent"
+    }
+  ]
+}

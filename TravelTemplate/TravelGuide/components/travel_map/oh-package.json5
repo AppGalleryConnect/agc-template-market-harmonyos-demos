@@ -1,0 +1,12 @@
+{
+  "name": "travel_map",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {},
+  "type": "component",
+  "usage": "地图（定位选点）组件，提供地图展示能力，并支持地图定位和选点定制功能。",
+  "zhName": "地图组件"
+}

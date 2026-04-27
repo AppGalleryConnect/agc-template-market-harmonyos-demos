@@ -1,0 +1,24 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "Bmi_calculatorAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "Bmi_calculatorAbility_label",
+      "value": "label"
+    },
+    {
+      "name": "agcit_huawei_bmi_calculator",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_bmi_calculator",
+      "value": "serviceComponent"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "string": [
+    {
+      "name": "operation_download",
+      "value": "下载"
+    },
+    {
+      "name": "operation_delete",
+      "value": "删除"
+    },
+    {
+      "name": "operation_share",
+      "value": "分享"
+    },
+    {
+      "name": "operation_rename",
+      "value": "重命名"
+    },
+    {
+      "name": "operation_move_file",
+      "value": "移动文件"
+    },
+    {
+      "name": "operation_privatespace_moveout",
+      "value": "移出隐私空间"
+    },
+    {
+      "name": "operation_privatespace_movein",
+      "value": "移入隐私空间"
+    },
+    {
+      "name": "cancel",
+      "value": "取消"
+    },
+    {
+      "name": "sure",
+      "value": "确定"
+    },
+    {
+      "name": "operation_collect",
+      "value": "收藏"
+    }
+  ]
+}

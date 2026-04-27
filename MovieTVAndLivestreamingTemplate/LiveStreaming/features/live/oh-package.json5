@@ -1,0 +1,22 @@
+{
+  "name": "@agctemplate/live",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "packageType": "InterfaceHar",
+  "dependencies": {
+    "@agctemplate/router_module": "1.0.0",
+    "@agctemplate/resources": "1.0.0",
+    "@agctemplate/widgets": "1.0.0",
+    "@agctemplate/server": "1.0.0",
+    "@agctemplate/video_swiper": "1.0.0",
+    "live_interaction": "../../components/live_interaction",
+    "@agctemplate/detail": "1.0.0",
+    "@agctemplate/utils": "1.0.0",
+    "@agctemplate/aggregated_payment": "1.0.0",
+    "module_auth": "1.0.0",
+    "module_base": "1.0.0"
+  }
+}

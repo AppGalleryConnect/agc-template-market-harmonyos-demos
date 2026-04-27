@@ -1,0 +1,39 @@
+{
+  "routerMap": [
+    {
+      "name": "RecorderHomePage",
+      "pageSourceFile": "src/main/ets/pages/RecorderHomePage.ets",
+      "buildFunction": "RecorderHomePageBuilder"
+    },
+    {
+      "name": "ListPage",
+      "pageSourceFile": "src/main/ets/pages/ListPage.ets",
+      "buildFunction": "ListPageBuilder"
+    },
+    {
+      "name": "ConvertPage",
+      "pageSourceFile": "src/main/ets/pages/ConvertPage.ets",
+      "buildFunction": "ConvertPageBuilder"
+    },
+    {
+      "name": "FormatPage",
+      "pageSourceFile": "src/main/ets/pages/FormatPage.ets",
+      "buildFunction": "FormatPageBuilder"
+    },
+    {
+      "name": "OperationPage",
+      "pageSourceFile": "src/main/ets/pages/OperationPage.ets",
+      "buildFunction": "OperationPageBuilder"
+    },
+    {
+      "name": "RecordPage",
+      "pageSourceFile": "src/main/ets/pages/RecordPage.ets",
+      "buildFunction": "RecordPageBuilder"
+    },
+    {
+      "name": "AudioManagePage",
+      "pageSourceFile": "src/main/ets/pages/AudioManagePage.ets",
+      "buildFunction": "AudioManagePageBuilder"
+    }
+  ]
+}

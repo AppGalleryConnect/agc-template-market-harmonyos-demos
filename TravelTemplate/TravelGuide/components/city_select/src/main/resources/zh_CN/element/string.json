@@ -1,0 +1,12 @@
+{
+  "string": [
+    {
+      "name": "apply_location_reason",
+      "value": "用于获取您所在的城市位置，以便提供相应服务。"
+    },
+    {
+      "name": "input_city_name",
+      "value": "请输入城市名称"
+    }
+  ]
+}

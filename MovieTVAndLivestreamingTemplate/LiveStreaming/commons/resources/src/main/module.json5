@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "resources",
+    "type": "shared",
+    "deviceTypes": [
+      "phone"
+    ],
+    "installationFree":true,
+    'deliveryWithInstall': true
+  }
+}

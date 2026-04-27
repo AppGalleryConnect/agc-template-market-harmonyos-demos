@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "error",
+      "value": "错误"
+    },
+    {
+      "name": "agcit_huawei_calculator_module_standard_calculator",
+      "value": "1.0.2"
+    },
+    {
+      "name": "agcittype_huawei_calculator_module_standard_calculator",
+      "value": "serviceComponent"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "modelVersion": "5.0.5",
+  "description": "音频编辑应用模板,提供音频剪辑、调速、调节、合成、提取、格式转换等核心功能",
+  "template": {
+    "domain": "音频编辑",
+    "name": "音频编辑应用模板",
+    "usage": "本模板为音频编辑类应用提供了完整的开发框架,包含音频编辑、作品管理和个人中心三大核心模块。支持音频剪辑、调速、调节、合成、提取、格式转换、降噪等功能,提供多种音频格式互转能力。内置VIP会员体系和作品管理功能,适用于快速构建专业的音频编辑类应用。",
+    "scene": "template,generate",
+    "sdk": [],
+    "color": {
+      "themeFilePath": "",
+      "mainThemeName": "",
+      "secondThemeName": "",
+      "themeFileContent": ""
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@ohos/hypium": "1.0.21"
+  }
+}

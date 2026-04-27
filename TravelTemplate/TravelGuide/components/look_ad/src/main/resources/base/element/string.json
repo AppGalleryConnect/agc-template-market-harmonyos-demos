@@ -1,0 +1,24 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "completed",
+      "value": "已完成"
+    },
+    {
+      "name": "reason",
+      "value": "获得oaid"
+    },
+    {
+      "name": "agcit_huawei_look_ad",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_look_ad",
+      "value": "serviceComponent"
+    }
+  ]
+}

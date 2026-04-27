@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "clouddisk_file",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

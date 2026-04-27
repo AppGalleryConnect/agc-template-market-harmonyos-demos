@@ -1,0 +1,124 @@
+{
+  "string": [
+    {
+      "name": "module_name",
+      "value": "设备"
+    },
+    {
+      "name": "pair_help_title",
+      "value": "查看帮助"
+    },
+    {
+      "name": "pair_help_offline_tip",
+      "value": "若设备设备出现离线提示，可能是由于："
+    },
+    {
+      "name": "pair_help_offline",
+      "value": "1. 为开启设备蓝牙 \n2. 距离较远 \n3. 设备被重置"
+    },
+    {
+      "name": "pair_help_again_tip",
+      "value": "如无法恢复，请尝试以下操作重置设备："
+    },
+    {
+      "name": "pair_help_again",
+      "value": "1. 请长按键10秒 \n2. 点击重新链接"
+    },
+    {
+      "name": "pair_help_again_connect",
+      "value": "重新链接"
+    },
+    {
+      "name": "scanning_device_title",
+      "value": "添加设备"
+    },
+    {
+      "name": "scanning_device_scan_tip",
+      "value": "正在寻找设备..."
+    },
+    {
+      "name": "scanning_device_find_tip",
+      "value": "已经发现设备"
+    },
+    {
+      "name": "scanning_device_tip",
+      "value": "请保证设备手表和手机蓝牙为打开状态"
+    },
+    {
+      "name": "scanning_device_connect_btn",
+      "value": "连接"
+    },
+    {
+      "name": "scanning_device_connecting_btn",
+      "value": "连接中"
+    },
+    {
+      "name": "device_info_unbind_btn",
+      "value": "解绑设备"
+    },
+    {
+      "name": "device_info_unbind_tip",
+      "value": "解绑设备后，设备将不再与“运动健康”进行通讯，是否继续？"
+    },
+    {
+      "name": "device_cancel",
+      "value": "取消"
+    },
+    {
+      "name": "device_unbind",
+      "value": "解绑"
+    },
+    {
+      "name": "access_bluetooth",
+      "value": "健康管理需要开启蓝牙权限"
+    },
+    {
+      "name": "device_info_current_battery_per",
+      "value": "%"
+    },
+    {
+      "name": "device_info_current_battery",
+      "value": "当前电量"
+    },
+    {
+      "name": "device_info_charge_cycles",
+      "value": "次"
+    },
+    {
+      "name": "device_info_charge_cycles_title",
+      "value": "本月充电次数"
+    },
+    {
+      "name": "device_pair_status_connected",
+      "value": "已配对"
+    },
+    {
+      "name": "device_pair_status_not_connected",
+      "value": "未配对"
+    },
+    {
+      "name": "device_pair_status_reconnect",
+      "value": "重新连接"
+    },
+    {
+      "name": "device_pair_status_connect_success",
+      "value": "配对成功"
+    },
+    {
+      "name": "device_pair_status_connect_fail",
+      "value": "配对失败"
+    },
+    {
+      "name": "device_bluetooth_dialog_title",
+      "value": "蓝牙权限获取"
+    },
+    {
+      "name": "device_bluetooth_dialog_message",
+      "value": "应用无蓝牙权限，前往应用中心设置"
+    },
+    {
+      "name": "device_bluetooth_dialog_confirm",
+      "value": "确认"
+    }
+  ]
+}

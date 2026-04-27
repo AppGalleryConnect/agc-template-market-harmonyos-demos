@@ -1,0 +1,31 @@
+<!--
+  - Copyright (c) 2025 Huawei Device Co., Ltd.
+  - Licensed under the Apache License, Version 2.0 (the "License");
+  - you may not use this file except in compliance with the License.
+  - You may obtain a copy of the License at
+  -
+  -     http://www.apache.org/licenses/LICENSE-2.0
+  -
+  - Unless required by applicable law or agreed to in writing, software
+  - distributed under the License is distributed on an "AS IS" BASIS,
+  - WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  - See the License for the specific language governing permissions and
+  - limitations under the License.
+  -->
+
+<svg width="40.000000" height="40.000000" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs/>
+	<rect id=".close btn" rx="20.000000" width="40.000000" height="40.000000" fill="#000000" fill-opacity="0.047059"/>
+	<path id="path1" d="M11 19.99C11 18.58 10.99 17.18 11 15.77C10.99 15.09 11.08 14.41 11.24 13.75C11.62 12.36 12.52 11.53 13.92 11.21C14.62 11.06 15.33 10.98 16.04 11C18.74 11 21.44 11 24.14 11C24.82 10.99 25.49 11.07 26.16 11.23C27.59 11.58 28.46 12.49 28.78 13.92C28.93 14.6 29 15.29 28.99 15.98C28.99 18.71 28.99 21.43 28.99 24.15C29 24.83 28.92 25.5 28.76 26.16C28.41 27.6 27.5 28.45 26.07 28.78C25.37 28.93 24.65 29 23.94 28.99C21.25 28.99 18.57 28.99 15.88 28.99C15.2 29 14.51 28.92 13.85 28.76C12.4 28.41 11.54 27.5 11.21 26.06C11.04 25.33 11 24.6 11 23.86C11 22.57 11 21.28 11 19.99Z" fill="#FFFFFF" fill-opacity="0" fill-rule="evenodd"/>
+	<circle id="path2" cx="20.001953" cy="20.001221" r="9.000000" fill="#FFFFFF" fill-opacity="0"/>
+	<path id="path" d="M12 13.03L11.97 13.03C11.68 12.74 11.68 12.27 11.97 11.97C12.27 11.68 12.74 11.68 13.03 11.97L13.03 12L12 13.03ZM27.99 26.95L28.02 26.95C28.31 27.25 28.31 27.72 28.02 28.02C27.72 28.31 27.25 28.31 26.96 28.02L26.96 27.99L27.99 26.95Z" fill="#000000" fill-opacity="0" fill-rule="nonzero"/>
+	<path id="path" d="M12.5 12.5L27.49 27.49" stroke="#191919" stroke-opacity="1.000000" stroke-width="1.500000" stroke-linejoin="round" stroke-linecap="round"/>
+	<path id="path" d="M13.03 27.99L13.03 28.02C12.74 28.31 12.27 28.31 11.97 28.02C11.68 27.72 11.68 27.25 11.97 26.95L12 26.95L13.03 27.99ZM26.96 12L26.96 11.97C27.25 11.68 27.72 11.68 28.02 11.97C28.31 12.27 28.31 12.74 28.02 13.03L27.99 13.03L26.96 12Z" fill="#000000" fill-opacity="0" fill-rule="nonzero"/>
+	<path id="path" d="M12.5 27.49L27.49 12.5" stroke="#191919" stroke-opacity="1.000000" stroke-width="1.500000" stroke-linejoin="round" stroke-linecap="round"/>
+	<path id="path4" d="M27.75 12.77L20.53 20L27.75 27.22C27.9 27.37 27.9 27.6 27.75 27.75C27.61 27.9 27.37 27.9 27.22 27.75L20 20.52L12.77 27.75C12.62 27.9 12.38 27.9 12.24 27.75C12.09 27.6 12.09 27.37 12.24 27.22L19.46 20L12.24 12.77C12.09 12.62 12.09 12.38 12.24 12.24C12.38 12.09 12.62 12.09 12.77 12.24L20 19.46L27.22 12.24C27.37 12.09 27.61 12.09 27.75 12.24C27.9 12.38 27.9 12.62 27.75 12.77Z" fill="#FFFFFF" fill-opacity="0" fill-rule="evenodd"/>
+	<path id="path4" d="M20.53 20L27.75 27.22C27.9 27.37 27.9 27.6 27.75 27.75C27.61 27.9 27.37 27.9 27.22 27.75L20 20.52L12.77 27.75C12.62 27.9 12.38 27.9 12.24 27.75C12.09 27.6 12.09 27.37 12.24 27.22L19.46 20L12.24 12.77C12.09 12.62 12.09 12.38 12.24 12.24C12.38 12.09 12.62 12.09 12.77 12.24L20 19.46L27.22 12.24C27.37 12.09 27.61 12.09 27.75 12.24C27.9 12.38 27.9 12.62 27.75 12.77L20.53 20Z" fill="#000000" fill-opacity="0" fill-rule="nonzero"/>
+	<path id="path4" d="M27.75 27.22C27.9 27.37 27.9 27.6 27.75 27.75C27.61 27.9 27.37 27.9 27.22 27.75L20 20.52L12.77 27.75C12.62 27.9 12.38 27.9 12.24 27.75C12.09 27.6 12.09 27.37 12.24 27.22L19.46 20L12.24 12.77C12.09 12.62 12.09 12.38 12.24 12.24C12.38 12.09 12.62 12.09 12.77 12.24L20 19.46L27.22 12.24C27.37 12.09 27.61 12.09 27.75 12.24C27.9 12.38 27.9 12.62 27.75 12.77L20.53 20L27.75 27.22Z" stroke="#FFFFFF" stroke-opacity="0" stroke-width="1.500000"/>
+</svg>

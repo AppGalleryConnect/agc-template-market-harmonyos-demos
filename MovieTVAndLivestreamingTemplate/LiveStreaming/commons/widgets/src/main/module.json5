@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "widgets",
+    "type": "shared",
+    "deviceTypes": [
+      "phone"
+    ],
+    "installationFree":true,
+    'deliveryWithInstall': true
+  }
+}

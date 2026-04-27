@@ -1,0 +1,32 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "agcit_huawei_video_swiper",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_video_swiper",
+      "value": "serviceComponent"
+    },
+    {
+      "name": "refresh",
+      "value": "继续下拉刷新"
+    },
+    {
+      "name": "load",
+      "value": "松手加载"
+    },
+    {
+      "name": "loading",
+      "value": "加载中"
+    },
+    {
+      "name": "reason_background",
+      "value": "后台播放视频"
+    }
+  ]
+}

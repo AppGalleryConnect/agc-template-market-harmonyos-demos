@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "date_calculation",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet",
+    ]
+  }
+}

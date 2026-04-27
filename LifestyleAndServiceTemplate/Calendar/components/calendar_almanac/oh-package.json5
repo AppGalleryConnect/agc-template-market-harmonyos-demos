@@ -1,0 +1,13 @@
+{
+  "name": "calendar_almanac",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "dayjs": "^1.11.13",
+    "lunar": "^1.0.0",
+    "base_apis": "file:../base_apis",
+  }
+}

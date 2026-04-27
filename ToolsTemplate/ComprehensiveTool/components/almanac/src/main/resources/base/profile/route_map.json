@@ -1,0 +1,20 @@
+{
+  "routerMap": [
+    {
+      "name": "Vernacular",
+      "pageSourceFile": "src/main/ets/components/Vernacular.ets",
+      "buildFunction": "VernacularBuilder",
+      "data": {
+        "description" : "this is vernacular"
+      }
+    },
+    {
+      "name": "AlmanacView",
+      "pageSourceFile": "src/main/ets/pages/AlmanacView.ets",
+      "buildFunction": "AlmanacViewBuilder",
+      "data": {
+        "description" : "this is AlmanacView"
+      }
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "check_app_update",
+  "version": "1.0.2",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {},
+  "type": "component",
+  "usage": "应用更新检查组件，提供版本检查、更新提示对话框和应用商店跳转功能，支持自定义更新参数和对话框样式",
+  "zhName": "应用更新检查组件"
+}

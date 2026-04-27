@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "chat_window",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

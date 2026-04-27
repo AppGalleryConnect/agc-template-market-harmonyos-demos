@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "IM_setUp",
+      "value": "群聊设置"
+    },
+    {
+      "name": "agcit_huawei_community_chat_window",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_community_chat_window",
+      "value": "serviceComponent"
+    }
+  ]
+}

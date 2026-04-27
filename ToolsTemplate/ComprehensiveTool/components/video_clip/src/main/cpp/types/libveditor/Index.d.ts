@@ -1,0 +1,24 @@
+type Point = {x: number, y: number};
+
+export const SetVideo: (fileUri: string, fd:number) => number; // 0正常添加视频，-1添加异常。
+export const SetBgAudio: (fileUri: string, fd:number) => void;
+export const AddImage: (fileUri: string, isPath:boolean) => {imageId:string, height:number, width:number};
+export const RemoveImage: (imageId: string) => void;
+export const UnsetBgAudio: () => void;
+export const SetTrim: (trimIn:number, trimOut:number) => void;
+export const InitEditor: () => void;
+export const DestroyEditor: () => void;
+export const GetDuration: () => number;
+export const GetOriginalDuration: () => number;
+export const MoveImage: (imageId: string, positionX: number, positionY: number) => void;
+export const ScaleImage: (imageId: string, scale: number) => void;
+export const RotateImage: (imageId: string, rotate: number) => void;
+export const PushImageTop: (imageId: string) => void;
+export const Export: (path: string, onProgress: CallableFunction, onEnd: CallableFunction) => void;
+export const Play: () => Promise<void>;
+export const Pause: () => Promise<void>;
+export const Stop: () => Promise<void>;
+export const PlayFromStart: () => Promise<void>;
+export const MuteVideo: (isMuted: boolean) => void;
+export const SetCanvasSize: (height: number, width: number) => void; // 设置xComponent（画布）大小用于计算视口
+export const GetDrawableArea: () => [Point, Point, Point, Point] | undefined; // 左上角开始顺时针返回视口四个点坐标

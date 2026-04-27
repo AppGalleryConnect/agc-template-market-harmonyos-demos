@@ -1,0 +1,19 @@
+{
+  "routerMap": [
+    {
+      "name": "ExpressPage",
+      "pageSourceFile": "src/main/ets/pages/ExpressPage.ets",
+      "buildFunction": "ExpressPageBuilder"
+    },
+    {
+      "name": "ServicePointPage",
+      "pageSourceFile": "src/main/ets/pages/ServicePointPage.ets",
+      "buildFunction": "ServicePointPageBuilder"
+    },
+    {
+      "name": "GoodsPage",
+      "pageSourceFile": "src/main/ets/pages/GoodsPage.ets",
+      "buildFunction": "GoodsPageBuilder"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "name": "homepage",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "type": "feature",
+  "usage": "首页模块：提供商品分类展示、回收估价流程、订单列表、订单详情、上门信息修改等功能。包含商品列表、估价流程、上门信息、提交订单、订单列表和修改订单信息等核心功能。",
+  "zhName": "首页",
+  "tabPage": "MainPage",
+  "tabImage": "screenshots/homepage.jpeg",
+  "tabOrder": 0,
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "oh_router": "file:../../commons/oh_router",
+    "common": "file:../../commons/common",
+    "module_filter_list": "file:../../components/module_filter_list",
+    "person": "file:../person",
+    "category_list": "file:../../components/category_list",
+    "calendar_select": "file:../../components/calendar_select",
+    "link_category": "file:../../components/link_category",
+    "valuation_information": "file:../../components/valuation_information",
+    "module_time_select": "file:../../components/module_time_select",
+    "address_management": "file:../../components/address_management"
+  }
+}

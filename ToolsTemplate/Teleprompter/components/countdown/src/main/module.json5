@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "countdown",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

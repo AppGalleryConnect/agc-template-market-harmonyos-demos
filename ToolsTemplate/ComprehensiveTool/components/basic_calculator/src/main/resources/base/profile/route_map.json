@@ -1,0 +1,20 @@
+{
+  "routerMap": [
+    {
+      "name": "HistoryResult",
+      "pageSourceFile": "src/main/ets/pages/HistoryResult.ets",
+      "buildFunction": "HistoryResultBuilder",
+      "data": {
+        "description": "this is HistoryResult"
+      }
+    },
+    {
+      "name": "HomePage",
+      "pageSourceFile": "src/main/ets/pages/HomePage.ets",
+      "buildFunction": "HomePageBuilder",
+      "data": {
+        "description": "this is HomePage"
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "agcit_huawei_common_cityselect",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_common_cityselect",
+      "value": "serviceComponent"
+    },
+    {
+      "name": "apply_location_reason",
+      "value": "Used to obtain your city location to provide relevant services."
+    },
+    {
+      "name": "input_city_name",
+      "value": "请输入城市名称"
+    }
+  ]
+}

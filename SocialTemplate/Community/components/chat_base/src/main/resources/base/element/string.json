@@ -1,0 +1,12 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "image_download_failed",
+      "value": "图片下载失败"
+    }
+  ]
+}

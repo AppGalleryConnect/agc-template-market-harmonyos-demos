@@ -1,0 +1,44 @@
+{
+  "string": [
+    {
+      "name": "apply_read_calendar_reason",
+      "value": "申请读取日程权限"
+    },
+    {
+      "name": "apply_write_calendar_reason",
+      "value": "申请写入日程权限"
+    },
+    {
+      "name": "toast_schedule_cannot_cancel",
+      "value": "日程提醒暂不支持取消"
+    },
+    {
+      "name": "toast_schedule_added",
+      "value": "已添加至日程"
+    },
+    {
+      "name": "toast_schedule_added_fail",
+      "value": "添加失败"
+    },
+    {
+      "name": "toast_subscription_cannot_cancel",
+      "value": "订阅暂不支持取消"
+    },
+    {
+      "name": "toast_subscription_added",
+      "value": "已成功订阅"
+    },
+    {
+      "name": "shared_desc",
+      "value": "description"
+    },
+    {
+      "name": "agcit_40717667622022212647",
+      "value": "@ohos-agcit/tourist-attraction/1.0.0"
+    },
+    {
+      "name": "agcit_huawei_tourist_attraction",
+      "value": "1.0.1"
+    }
+  ]
+}

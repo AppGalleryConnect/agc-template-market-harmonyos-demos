@@ -1,0 +1,128 @@
+{
+  "color": [
+    {
+      "name": "system_theme_color",
+      "value": "#94B982"
+    },
+    {
+      "name": "system_theme_color2",
+      "value": "#F2992C"
+    },
+    {
+      "name": "system_color_background_auxiliary",
+      "value": "#f1f3f5"
+    },
+    {
+      "name": "system_color_background_white",
+      "value": "#ffffff"
+    },
+    {
+      "name": "system_color_background_transparent",
+      "value": "#00FFFFFF"
+    },
+    {
+      "name": "system_color_background_theme",
+      "value": "#33FE4F35"
+    },
+    {
+      "name": "system_color_background_grey_level1",
+      "value": "#33000000"
+    },
+    {
+      "name": "system_color_background_grey_level2",
+      "value": "#0D000000"
+    },
+    {
+      "name": "system_color_background_shadow",
+      "value": "#1A000000"
+    },
+    {
+      "name": "system_color_grey",
+      "value": "#f7f7f7"
+    },
+    {
+      "name": "system_color_divider",
+      "value": "#f1f3f5"
+    },
+    {
+      "name": "font_color_level1",
+      "value": "#E6000000"
+    },
+    {
+      "name": "font_color_level2",
+      "value": "#99000000"
+    },
+    {
+      "name": "font_color_level3",
+      "value": "#9e9e9e"
+    },
+    {
+      "name": "font_color_link",
+      "value": "#0A59F7"
+    },
+    {
+      "name": "font_color_info",
+      "value": "#F2992C"
+    },
+    {
+      "name": "font_color_level1_invert",
+      "value": "#ffffff"
+    },
+    {
+      "name": "font_color_level2_invert",
+      "value": "#99ffffff"
+    },
+    {
+      "name": "font_color_level3_invert",
+      "value": "#61ffffff"
+    },
+    {
+      "name": "icon_color_level1",
+      "value": "#191919"
+    },
+    {
+      "name": "icon_color_level2",
+      "value": "#99000000"
+    },
+    {
+      "name": "icon_color_level3",
+      "value": "#9e9e9e"
+    },
+    {
+      "name": "icon_color_level4",
+      "value": "#cccccc"
+    },
+    {
+      "name": "icon_color_highlight",
+      "value": "#007dff"
+    },
+    {
+      "name": "icon_color_warning",
+      "value": "#E84026"
+    },
+    {
+      "name": "icon_color_success",
+      "value": "#64BB5C"
+    },
+    {
+      "name": "icon_color_level1_invert",
+      "value": "#ffffff"
+    },
+    {
+      "name": "icon_color_level2_invert",
+      "value": "#99ffffff"
+    },
+    {
+      "name": "icon_color_level3_invert",
+      "value": "#61ffffff"
+    },
+    {
+      "name": "button_color_background",
+      "value": "#3394B982"
+    },
+    {
+      "name": "button_color_yellow",
+      "value": "#F2992C"
+    }
+  ]
+}

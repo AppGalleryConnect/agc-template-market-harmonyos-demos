@@ -1,0 +1,24 @@
+<svg width="24.000000" height="24.000000" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs>
+		<clipPath id="clip96_8196">
+			<rect width="24.000000" height="24.000000" fill="white" fill-opacity="0"/>
+		</clipPath>
+		<linearGradient x1="8.666502" y1="2.000001" x2="10.666505" y2="6.000000" id="paint_linear_96_8194_0" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#86CF86" stop-opacity="0.000000"/>
+			<stop offset="1.000000" stop-color="#5ACD5A"/>
+		</linearGradient>
+		<linearGradient x1="13.166504" y1="7.000000" x2="6.666504" y2="21.500000" id="paint_linear_96_8195_0" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#FFC100"/>
+			<stop offset="1.000000" stop-color="#FF9900"/>
+		</linearGradient>
+	</defs>
+	<rect width="24.000000" height="24.000000" fill="#83CE26" fill-opacity="0"/>
+	<g clip-path="url(#clip96_8196)">
+		<path d="M14.52 10.47C14.51 10.31 14.31 6.56 17.41 4.93C17.43 4.92 17.46 4.91 17.48 4.89C17.5 4.87 17.52 4.85 17.54 4.82C17.56 4.8 17.58 4.77 17.6 4.75C17.61 4.72 17.62 4.69 17.63 4.66C17.64 4.63 17.65 4.6 17.66 4.57C17.66 4.53 17.66 4.5 17.66 4.47C17.66 4.44 17.66 4.41 17.65 4.37C17.64 4.34 17.63 4.31 17.62 4.28C17.61 4.25 17.6 4.22 17.58 4.2C17.56 4.17 17.54 4.15 17.52 4.13C17.5 4.1 17.48 4.08 17.46 4.07C17.43 4.05 17.41 4.04 17.38 4.02C17.35 4.01 17.33 4.01 17.3 4C17.27 4 17.24 3.99 17.21 4C17.19 4 17.16 4 17.13 4.01C17.1 4.02 17.08 4.03 17.05 4.04C13.4 5.96 13.66 10.5 13.67 10.55C13.67 10.61 13.69 10.67 13.71 10.73C13.74 10.79 13.77 10.84 13.82 10.88C13.86 10.92 13.91 10.95 13.96 10.97C14.02 10.99 14.07 11 14.13 10.99C14.18 10.99 14.24 10.97 14.29 10.94C14.34 10.91 14.38 10.87 14.42 10.83C14.45 10.78 14.48 10.72 14.5 10.66C14.52 10.6 14.52 10.54 14.52 10.47Z" fill="#6E6E96" fill-opacity="1.000000" fill-rule="nonzero"/>
+		<path d="M2.66 6.66C2.66 6.66 5.58 9.34 9.17 7.11C12.76 4.87 12.86 4.62 14.58 7.48L14.66 6.39C14.66 6.39 12.66 1.41 9.43 2.05C6.11 2.72 5.84 6.32 2.66 6.66Z" fill="url(#paint_linear_96_8194_0)" fill-opacity="1.000000" fill-rule="nonzero"/>
+		<circle cx="11.666504" cy="15.000000" r="8.000000" fill="url(#paint_linear_96_8195_0)" fill-opacity="1.000000"/>
+	</g>
+</svg>

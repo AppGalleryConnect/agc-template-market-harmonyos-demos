@@ -1,0 +1,224 @@
+{
+  "string": [
+    {
+      "name": "health_module_name",
+      "value": "健康"
+    },
+    {
+      "name": "person_info_input_name",
+      "value": "设置个人信息"
+    },
+    {
+      "name": "person_info_input_next_name",
+      "value": "个人信息录入"
+    },
+    {
+      "name": "health_Activity_heat",
+      "value": "活动热量"
+    },
+    {
+      "name": "health_Activity_heat_unit",
+      "value": "/500 千卡"
+    },
+    {
+      "name": "health_exercise_duration",
+      "value": "锻炼时长"
+    },
+    {
+      "name": "health_exercise_duration_unit",
+      "value": "/60 分钟"
+    },
+    {
+      "name": "health_travel_distance",
+      "value": "运动距离"
+    },
+    {
+      "name": "health_travel_distance_unit",
+      "value": "/5km"
+    },
+    {
+      "name": "health_step_count",
+      "value": "今日步数"
+    },
+    {
+      "name": "health_step_count_unit",
+      "value": "/6000步"
+    },
+    {
+      "name": "health_knowledge_title",
+      "value": "健康知识"
+    },
+    {
+      "name": "health_all_title",
+      "value": "全部"
+    },
+    {
+      "name": "health_eat_name",
+      "value": "健康饮食"
+    },
+    {
+      "name": "health_intermittent_fasting",
+      "value": "轻断食"
+    },
+    {
+      "name": "health_date_input_name",
+      "value": "健康数据"
+    },
+    {
+      "name": "health_today_exercise_time",
+      "value": "今日运动(分钟)"
+    },
+    {
+      "name": "health_today_exercise_consumption",
+      "value": "今日消耗(千卡)"
+    },
+    {
+      "name": "health_today_status",
+      "value": "今天身体状态"
+    },
+    {
+      "name": "health_bmi_title",
+      "value": "BMI"
+    },
+    {
+      "name": "health_bmi_type_underweight",
+      "value": "偏瘦"
+    },
+    {
+      "name": "health_bmi_type_normal",
+      "value": "正常"
+    },
+    {
+      "name": "health_bmi_type_overweight",
+      "value": "偏胖"
+    },
+    {
+      "name": "health_bmi_type_obesity",
+      "value": "肥胖"
+    },
+    {
+      "name": "health_bmi_type_bodyFatPercentage",
+      "value": "实际体脂率"
+    },
+    {
+      "name": "health_bmi_type_fatWeight",
+      "value": "实际脂肪重量"
+    },
+    {
+      "name": "health_bmi_weight",
+      "value": "体重"
+    },
+    {
+      "name": "health_bmi_weight_placeholder",
+      "value": "0公斤"
+    },
+    {
+      "name": "health_bmi_waistCircumference",
+      "value": "腰围"
+    },
+    {
+      "name": "health_bmi_waistCircumference_placeholder",
+      "value": "0厘米"
+    },
+    {
+      "name": "health_bmi_hipCircumference",
+      "value": "臀围"
+    },
+    {
+      "name": "health_bmi_hipCircumference_placeholder",
+      "value": "0厘米"
+    },
+    {
+      "name": "health_bmi_bloodSugar",
+      "value": "血糖"
+    },
+    {
+      "name": "health_bmi_bloodSugar_placeholder",
+      "value": "0mmol/L"
+    },
+    {
+      "name": "health_bmi_bloodPressure",
+      "value": "血压"
+    },
+    {
+      "name": "health_bmi_bloodPressure_placeholder",
+      "value": "0 mmHg"
+    },
+    {
+      "name": "health_bmi_bloodPressureSystolic",
+      "value": "收缩压"
+    },
+    {
+      "name": "health_bmi_bloodPressureSystolic_placeholder",
+      "value": "0 mmHg"
+    },
+    {
+      "name": "health_bmi_bloodPressureDiastolic",
+      "value": "舒张压"
+    },
+    {
+      "name": "health_bmi_bloodPressureDiastolic_placeholder",
+      "value": "0 mmHg"
+    },
+    {
+      "name": "health_bmi_heartRate",
+      "value": "心率"
+    },
+    {
+      "name": "health_bmi_heartRate_placeholder",
+      "value": "0次/分"
+    },
+    {
+      "name": "health_knowledge_list_title",
+      "value": "健康知识"
+    },
+    {
+      "name": "health_bmi_kilogram",
+      "value": "公斤"
+    },
+    {
+      "name": "health_bmi_current_fat_per",
+      "value": "%"
+    },
+    {
+      "name": "health_dialog_cancel",
+      "value": "取消"
+    },
+    {
+      "name": "health_dialog_confirm",
+      "value": "确认"
+    },
+    {
+      "name": "health_dialog_height_title",
+      "value": "身高"
+    },
+    {
+      "name": "health_dialog_date_title",
+      "value": "出生年月"
+    },
+    {
+      "name": "health_sex_man",
+      "value": "男"
+    },
+    {
+      "name": "health_sex_woman",
+      "value": "女"
+    },
+    {
+      "name": "health_info_hours",
+      "value": "时"
+    },
+    {
+      "name": "health_info_minute",
+      "value": "分"
+    },
+    {
+      "name": "health_report_status",
+      "value": "良好"
+    },
+    {
+      "name": "health_report_status_desc",
+      "value": "今天身体状态"
+    }
+  ]
+}

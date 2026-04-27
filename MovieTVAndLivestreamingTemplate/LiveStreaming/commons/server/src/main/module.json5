@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "server",
+    "type": "shared",
+    "deviceTypes": [
+      "phone"
+    ],
+    "installationFree":true,
+    'deliveryWithInstall': true
+  }
+}

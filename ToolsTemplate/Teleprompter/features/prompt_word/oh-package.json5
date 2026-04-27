@@ -1,0 +1,20 @@
+{
+  "name": "prompt_word",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "common": "file:../../commons/common",
+    "oh_router": "file:../../commons/OHRouter",
+    "teleprompter": "file:../../components/teleprompter",
+    "countdown": "file:../../components/countdown"
+  },
+  "type": "feature",
+  "usage": "提词器功能模块：支持创建和管理提词文本，提供文档导入（txt格式）、拍照OCR识别文字导入功能，支持提词板模式和悬浮模式的文字滚动提示，适用于直播、演讲、视频录制等场景。核心功能包括新建提词、编辑提词、删除提词、批量管理、开始提词（提词板模式/悬浮模式）",
+  "zhName": "提词器",
+  "tabPage": "PromptWordPage",
+  "tabImage": "screenshots/prompt_word.png",
+  "tabOrder": 0,
+}

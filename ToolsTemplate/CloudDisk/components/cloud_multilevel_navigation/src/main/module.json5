@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "cloud_multilevel_navigation",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ],
+    "routerMap": "$profile:route_map"
+  }
+}

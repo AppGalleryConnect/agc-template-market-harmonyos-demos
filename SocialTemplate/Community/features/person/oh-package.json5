@@ -1,0 +1,27 @@
+{
+  "name": "person",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "feature",
+  "usage": "个人模块包含：用户信息展示与编辑、消息提醒设置、收藏、意见反馈、设置、黑名单管理、二维码等入口，支持登录状态判断与跳转；关键依赖包括 common（用户信息/断点）、oh_router（页面跳转）、instant_messaging（数据与接口封装）。",
+  "zhName": "个人模块",
+  "tabPage": "MinePage",
+  "tabImage": "screenshot/person_page.png",
+  "tabOrder": 2,
+  "dependencies": {
+    "common": "file:../../commons/common",
+    "instant_messaging": "file:../../sdk/instant_messaging",
+    "oh_router": "file:../../commons/oh_router",
+    "feedback": "file:../../components/feedback",
+    "aggregated_login": "file:../../components/aggregated_login",
+    "collect_personal_info": "file:../../components/collect_personal_info",
+    "check_app_update": "file:../../components/check_app_update",
+    "@tencent/wechat_open_sdk": "1.0.16",
+    "chat_history_collection": "file:../../components/chat_history_collection",
+    "chat_base": "file:../../components/chat_base",
+    "message": "file:../message"
+  }
+}

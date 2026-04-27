@@ -1,0 +1,22 @@
+{
+  "name": "health",
+  "version": "1.0.1",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "common": "file:../../commons/common",
+    "oh_router": "file:../../commons/OHRouter",
+    "person": "file:../person",
+    "data_dashboard": "file:../../components/data_dashboard",
+    "device": "file:../../features/device",
+    "@ohos/mpchart": "3.0.25"
+  },
+  "type": "feature",
+  "usage": "健康数据监控模块，包含运动数据追踪、BMI与体脂率计算、血糖监测、心率监测、血压监测、睡眠监测、健康报告生成、健康历史记录、周报告、月报告、健康知识资讯",
+  "zhName": "健康管理",
+  "tabPage": "HealthPage",
+  "tabImage": "screenshot/health.jpg",
+  "tabOrder": 0
+}

@@ -1,0 +1,36 @@
+<svg width="19.000000" height="19.000000" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs>
+		<linearGradient x1="2.689844" y1="0.963542" x2="14.373735" y2="12.763296" id="paint_linear_99_1950_0" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#FFF4B6"/>
+			<stop offset="0.549624" stop-color="#FFCA6E"/>
+			<stop offset="1.000000" stop-color="#F69564"/>
+		</linearGradient>
+		<linearGradient x1="9.623377" y1="17.000000" x2="9.623377" y2="3.000000" id="paint_linear_99_1950_1" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#C8C8C8"/>
+			<stop offset="1.000000" stop-color="#979797"/>
+		</linearGradient>
+	</defs>
+	<mask id="mask99_1950" mask-type="alpha" maskUnits="userSpaceOnUse" x="1.103897" y="3.000000" width="17.038956" height="14.000000">
+		<g style="mix-blend-mode:luminosity">
+			<path d="M3.17 3.64L1.18 8.36C1.02 8.74 1.11 9.19 1.41 9.48L8.87 16.69C9.28 17.1 9.95 17.1 10.37 16.69L17.82 9.48C18.13 9.19 18.22 8.74 18.06 8.36L16.07 3.64C15.9 3.25 15.51 3 15.08 3L4.16 3C3.72 3 3.34 3.25 3.17 3.64Z" fill="url(#paint_linear_99_1950_0)" fill-opacity="1.000000" fill-rule="evenodd"/>
+			<path d="" fill="url(#paint_linear_99_1950_1)" fill-opacity="0" fill-rule="evenodd"/>
+		</g>
+	</mask>
+	<g style="mix-blend-mode:luminosity">
+		<path d="M3.17 3.64L1.18 8.36C1.02 8.74 1.11 9.19 1.41 9.48L8.87 16.69C9.28 17.1 9.95 17.1 10.37 16.69L17.82 9.48C18.13 9.19 18.22 8.74 18.06 8.36L16.07 3.64C15.9 3.25 15.51 3 15.08 3L4.16 3C3.72 3 3.34 3.25 3.17 3.64Z" fill="url(#paint_linear_99_1950_0)" fill-opacity="1.000000" fill-rule="evenodd"/>
+		<path d="" fill="url(#paint_linear_99_1950_1)" fill-opacity="0" fill-rule="evenodd"/>
+	</g>
+	<g mask="url(#mask99_1950)">
+		<path d="M11.64 7.27C12.03 6.9 12.66 6.9 13.05 7.27C13.44 7.64 13.44 8.22 13.07 8.6L13.05 8.62L10.32 11.21C9.94 11.57 9.32 11.58 8.93 11.23L8.91 11.21L6.18 8.62C5.79 8.24 5.79 7.64 6.18 7.27C6.57 6.91 7.18 6.9 7.57 7.25L7.59 7.27L9.62 9.2L11.64 7.27Z" fill="#86553A" fill-opacity="1.000000" fill-rule="evenodd"/>
+		<path d="" fill="#979797" fill-opacity="0" fill-rule="evenodd"/>
+	</g>
+	<g mask="url(#mask99_1950)">
+		<g style="mix-blend-mode:hue">
+			<rect x="1.103897" y="2.000000" width="17.038960" height="16.000000" fill="#D8D8D8" fill-opacity="1.000000"/>
+			<rect x="1.541397" y="2.437500" width="16.163960" height="15.125000" stroke="#979797" stroke-opacity="0" stroke-width="0.875000"/>
+		</g>
+	</g>
+</svg>

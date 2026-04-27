@@ -1,0 +1,14 @@
+{
+  "name": "money_track",
+  "version": "1.0.3",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@hw-agconnect/util-log": "^1.0.0",
+    "dayjs": "^1.11.13",
+    "@ohos/mpchart": "3.0.22",
+    "lunar": "^1.0.0"
+  }
+}

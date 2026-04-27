@@ -1,0 +1,30 @@
+{
+  "name": "homepage",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "oh_router": "file:../../commons/oh_router",
+    "common": "file:../../commons/common",
+    "search": "file:../../components/search",
+    "city_select": "file:../../components/city_select",
+    "look_ad": "file:../../components/look_ad",
+    "@hw-agconnect/ui-calendar-picker": "2.0.0",
+    "module_filter_list": "file:../../components/module_filter_list",
+    "category_list": "file:../../components/category_list",
+    "common_travel_guide": "file:../../components/common_travel_guide",
+    "aggregated_share": "file:../../components/aggregated_share",
+    "aggregated_payment": "file:../../components/aggregated_payment",
+    "travel_planning": "file:../../components/travel_planning",
+    "travel_map": "file:../../components/travel_map",
+    "module_auth": "file:../../components/module_auth"
+  },
+  "type": "feature",
+  "usage": "首页模块，提供旅游攻略搜索、分类导航（酒店、机票、火车票、旅游、景点）、旅游热点展示、口碑榜、帖子瀑布流浏览等功能。支持城市指南、景点详情、酒店预订、机票预订、火车票预订、旅游产品预订等完整业务流程。",
+  "zhName": "首页",
+  "tabPage": "MainPage",
+  "tabImage": "screenshots/homepage.jpg",
+  "tabOrder": 0
+}

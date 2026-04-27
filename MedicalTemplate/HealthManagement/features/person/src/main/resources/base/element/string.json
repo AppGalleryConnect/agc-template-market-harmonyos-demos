@@ -1,0 +1,228 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "示例Demo"
+    },
+    {
+      "name": "app_description",
+      "value": "示例Demo详细描述"
+    },
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "phone_number",
+      "value": "123****789"
+    },
+    {
+      "name": "person_info_title",
+      "value": "个人信息"
+    },
+    {
+      "name": "person_info_avatar_url",
+      "value": "头像"
+    },
+    {
+      "name": "person_info_avatar_default_url",
+      "value": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/news-hnp2d/avatar%2Favatar_12.jpg"
+    },
+    {
+      "name": "person_info_nickname",
+      "value": "昵称"
+    },
+    {
+      "name": "person_info_content_empty_tip",
+      "value": "内容为空，请输入后保存"
+    },
+    {
+      "name": "person_info_sex",
+      "value": "性别"
+    },
+    {
+      "name": "person_info_sex_man",
+      "value": "男"
+    },
+    {
+      "name": "person_info_sex_woman",
+      "value": "女"
+    },
+    {
+      "name": "person_info_sex_confidentiality",
+      "value": "保密"
+    },
+    {
+      "name": "person_info_height",
+      "value": "身高"
+    },
+    {
+      "name": "person_info_input_error_tip",
+      "value": "请输入正确数据，不要包含其他字符"
+    },
+    {
+      "name": "person_info_weight",
+      "value": "体重"
+    },
+    {
+      "name": "person_info_birthday",
+      "value": "出生日期"
+    },
+    {
+      "name": "person_info_phone_name",
+      "value": "手机号码"
+    },
+    {
+      "name": "person_info_default_phone",
+      "value": "100**2222"
+    },
+    {
+      "name": "person_info_email",
+      "value": "邮箱"
+    },
+    {
+      "name": "person_info_personal_profile",
+      "value": "个人简介"
+    },
+    {
+      "name": "person_info_personal_profile_placeholder",
+      "value": "简单介绍一下自己吧~~"
+    },
+    {
+      "name": "person_fold_point",
+      "value": "... "
+    },
+    {
+      "name": "person_fold_show",
+      "value": "展开"
+    },
+    {
+      "name": "person_fold_close",
+      "value": "合上"
+    },
+    {
+      "name": "person_about_title",
+      "value": "关于"
+    },
+    {
+      "name": "person_about_app_name",
+      "value": "App名称"
+    },
+    {
+      "name": "person_about_version_info",
+      "value": "版本信息"
+    },
+    {
+      "name": "person_about_version",
+      "value": "10.15.1"
+    },
+    {
+      "name": "person_about_wait_update",
+      "value": "待更新"
+    },
+    {
+      "name": "person_about_new_version",
+      "value": "已是最新版本"
+    },
+    {
+      "name": "person_about_service_call",
+      "value": "客服电话"
+    },
+    {
+      "name": "person_about_service_phone",
+      "value": "900800"
+    },
+    {
+      "name": "person_about_copyright_number",
+      "value": "苏ICP备17040376号-135A"
+    },
+    {
+      "name": "person_about_copyright",
+      "value": "华为xx 版权所有 © 2019-2023"
+    },
+    {
+      "name": "person_about_technology",
+      "value": "技术支持：xxxxxxxx"
+    },
+    {
+      "name": "person_owner_title",
+      "value": "个人信息"
+    },
+    {
+      "name": "person_confirm",
+      "value": "确定"
+    },
+    {
+      "name": "person_cancel",
+      "value": "取消"
+    },
+    {
+      "name": "person_message_title",
+      "value": "消息中心"
+    },
+    {
+      "name": "person_mine_call_service",
+      "value": "联系客服"
+    },
+    {
+      "name": "person_mine_title",
+      "value": "我的"
+    },
+    {
+      "name": "person_mine_normal_function",
+      "value": "常用服务"
+    },
+    {
+      "name": "person_third_party_list_title",
+      "value": "第三方信息共享清单"
+    },
+    {
+      "name": "person_privacy_settings_title",
+      "value": "隐私设置"
+    },
+    {
+      "name": "person_privacy_policy_title",
+      "value": "隐私政策"
+    },
+    {
+      "name": "person_setting_title",
+      "value": "设置"
+    },
+    {
+      "name": "person_setting_logout",
+      "value": "退出登录"
+    },
+    {
+      "name": "person_setting_logout_success",
+      "value": "退出成功"
+    },
+    {
+      "name": "person_setting_not_login",
+      "value": "您还未登录"
+    },
+    {
+      "name": "person_setting_sure_clean",
+      "value": "请确认是否清除缓存"
+    },
+    {
+      "name": "person_setting_clean_success",
+      "value": "缓存清除成功"
+    },
+    {
+      "name": "person_setting_clean_fail",
+      "value": "缓存清除失败，请重试"
+    },
+    {
+      "name": "person_delete",
+      "value": "删除"
+    },
+    {
+      "name": "person_service_agreement_title",
+      "value": "用户服务协议"
+    },
+    {
+      "name": "person_personal_information_collection_title",
+      "value": "个人信息收集清单"
+    }
+  ]
+}

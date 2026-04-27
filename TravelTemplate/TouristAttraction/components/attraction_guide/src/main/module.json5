@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "attraction_guide",
+    "type": "har",
+    "deviceTypes": [
+      "default"
+    ]
+  }
+}

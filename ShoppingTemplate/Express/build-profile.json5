@@ -1,0 +1,89 @@
+{
+  "app": {
+/*
+        :todo 补充手动签名
+        */
+    "signingConfigs": [],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "targetSdkVersion": "6.0.2(22)",
+        "compatibleSdkVersion": "5.0.5(17)",
+        "runtimeOS": "HarmonyOS",
+        "buildOption": {
+          "strictMode": {
+            "caseSensitiveCheck": true,
+            "useNormalizedOHMUrl": true
+          }
+        }
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug"
+      },
+      {
+        "name": "release"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./products/entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "module_address",
+      "srcPath": "./components/module_address"
+    },
+    {
+      "name": "module_base",
+      "srcPath": "./components/module_base"
+    },
+    {
+      "name": "lib_foundation",
+      "srcPath": "./commons/lib_foundation"
+    },
+    {
+      "name": "business_home",
+      "srcPath": "./features/business_home"
+    },
+    {
+      "name": "business_order",
+      "srcPath": "./features/business_order"
+    },
+    {
+      "name": "business_mine",
+      "srcPath": "./features/business_mine"
+    },
+    {
+      "name": "module_template",
+      "srcPath": "./components/module_template"
+    },
+    {
+      "name": "module_city",
+      "srcPath": "./components/module_city"
+    },
+    {
+      "name": "module_auth",
+      "srcPath": "./components/module_auth"
+    },
+    {
+      "name": "module_address_card",
+      "srcPath": "./components/module_address_card"
+    },
+    {
+      "name": "membership",
+      "srcPath": "./components/membership"
+    }
+  ]
+}

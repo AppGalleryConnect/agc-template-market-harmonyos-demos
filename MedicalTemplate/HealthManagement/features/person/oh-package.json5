@@ -1,0 +1,23 @@
+{
+  "name": "person",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "common": "file:../../commons/common",
+    "oh_router": "file:../../commons/OHRouter",
+    "feedback": "file:../../components/feedback",
+    "check_app_update": "file:../../components/check_app_update",
+    "aggregated_login": "file:../../components/aggregated_login",
+    "collect_personal_info": "file:../../components/collect_personal_info",
+    "message_manager": "file:../../components/message_manager"
+  },
+  "type": "feature",
+  "usage": "个人信息管理模块，支持用户信息编辑、隐私设置、反馈建议和应用更新等功能",
+  "zhName": "个人中心",
+  "tabPage": "MinePage",
+  "tabImage": "screenshot/person.jpg",
+  "tabOrder": 2
+}

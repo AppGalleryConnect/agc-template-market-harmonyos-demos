@@ -1,0 +1,14 @@
+{
+  "name": "baidu_translate",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@nutpi/axios": "1.0.4"
+  },
+  "type": "component",
+  "usage": "百度翻译SDK封装，提供文本翻译、图片翻译、文档翻译等API调用功能。支持多语言互译、自动语言检测、翻译结果缓存等功能。",
+  "zhName": "百度翻译SDK"
+}

@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "module_template",
+    "type": "har",
+    "routerMap": "$profile:route_map",
+    "deviceTypes": [
+      "default",
+    ]
+  }
+}

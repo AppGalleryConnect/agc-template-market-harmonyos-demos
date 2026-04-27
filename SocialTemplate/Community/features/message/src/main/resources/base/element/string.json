@@ -1,0 +1,72 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "message_main_title",
+      "value": "消息"
+    },
+    {
+      "name": "delete_group_chat",
+      "value": "退出群聊"
+    },
+    {
+      "name": "chat_settings",
+      "value": "聊天设置"
+    },
+    {
+      "name": "send_a_message",
+      "value": "发送消息"
+    },
+    {
+      "name": "special_concern",
+      "value": "特别关心提示"
+    },
+    {
+      "name": "add_good_friend",
+      "value": "添加好友"
+    },
+    {
+      "name": "permissionsReason",
+      "value": "社交交友需要使用相机权限来扫码、拍照"
+    },
+    {
+      "name": "microphone_reason",
+      "value": "社交交友需要使用麦克风权限来录音"
+    },
+    {
+      "name": "download_failed",
+      "value": "文件下载失败"
+    },
+    {
+      "name": "group_rule",
+      "value": "1. 管理员可协助群主管理群聊，拥有发布群名、群头像、群简介、群公告、移除群成员等能力。\n2. 只有群主具备设置管理员、解散群聊的能力。\n3. 最多可设置了3个管理员。"
+    },
+    {
+      "name": "add_group_rule",
+      "value": "添加管理员"
+    },
+    {
+      "name": "delete_group_rule",
+      "value": "删除管理员"
+    },
+    {
+      "name": "disband_group",
+      "value": "解散群聊"
+    },
+    {
+      "name": "add_group_member",
+      "value": "添加群成员"
+    },
+    {
+      "name": "delete_group_member",
+      "value": "移除群成员"
+    },
+    {
+      "name": "back_ground_image",
+      "value": "预制聊天背景"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "tourist_management",
+    "type": "har",
+    "deviceTypes": [
+      "default"
+    ],
+    "routerMap": "$profile:router_map"
+  }
+}

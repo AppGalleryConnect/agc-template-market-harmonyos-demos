@@ -1,0 +1,212 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "app_tracking_reason",
+      "value": "申请匿名设备标识符"
+    },
+    {
+      "name": "home_banner_title",
+      "value": "自由画"
+    },
+    {
+      "name": "home_banner_description",
+      "value": "快来试试"
+    },
+    {
+      "name": "home_sketchbook",
+      "value": "我的画本"
+    },
+    {
+      "name": "menu_item_brush",
+      "value": "画笔"
+    },
+    {
+      "name": "menu_item_color",
+      "value": "颜色"
+    },
+    {
+      "name": "menu_item_eraser",
+      "value": "橡皮擦"
+    },
+    {
+      "name": "menu_item_shape",
+      "value": "图形"
+    },
+    {
+      "name": "menu_item_background",
+      "value": "背景"
+    },
+    {
+      "name": "brush_ballpoint",
+      "value": "圆笔"
+    },
+    {
+      "name": "brush_pencil",
+      "value": "铅笔"
+    },
+    {
+      "name": "brush_fountain",
+      "value": "钢笔"
+    },
+    {
+      "name": "brush_marker",
+      "value": "马克笔"
+    },
+    {
+      "name": "brush_pixel",
+      "value": "像素笔"
+    },
+    {
+      "name": "brush_charcoal",
+      "value": "碳笔"
+    },
+    {
+      "name": "brush_crayon",
+      "value": "蜡笔"
+    },
+    {
+      "name": "brush_watercolor",
+      "value": "水彩笔"
+    },
+    {
+      "name": "shape_circle",
+      "value": "圆形"
+    },
+    {
+      "name": "shape_rectangle",
+      "value": "矩形"
+    },
+    {
+      "name": "shape_line",
+      "value": "直线"
+    },
+    {
+      "name": "recent_colors",
+      "value": "最近使用"
+    },
+    {
+      "name": "regular_colors",
+      "value": "常规颜色"
+    },
+    {
+      "name": "custom_colors",
+      "value": "自定义颜色"
+    },
+    {
+      "name": "background_album",
+      "value": "相册"
+    },
+    {
+      "name": "background_solid_color",
+      "value": "纯色"
+    },
+    {
+      "name": "background_gradient",
+      "value": "渐变"
+    },
+    {
+      "name": "button_select_from_album",
+      "value": "从相册选择"
+    },
+    {
+      "name": "slider_brush_size",
+      "value": "笔刷大小"
+    },
+    {
+      "name": "slider_eraser_size",
+      "value": "橡皮擦大小"
+    },
+    {
+      "name": "slider_shape_stroke_size",
+      "value": "图形描边大小"
+    },
+    {
+      "name": "dialog_cancel",
+      "value": "取消"
+    },
+    {
+      "name": "dialog_confirm",
+      "value": "确认"
+    },
+    {
+      "name": "dialog_title_tip",
+      "value": "保存画本"
+    },
+    {
+      "name": "dialog_title_warm_tip",
+      "value": "温馨提示"
+    },
+    {
+      "name": "dialog_message_unsaved_drawing",
+      "value": "当前绘画未保存，请确认是否退出"
+    },
+    {
+      "name": "dialog_message_clear_canvas",
+      "value": "是否确认清空画布"
+    },
+    {
+      "name": "dialog_message_no_changes",
+      "value": "画布暂无改动内容"
+    },
+    {
+      "name": "input_placeholder_name",
+      "value": "请输入名称"
+    },
+    {
+      "name": "image_crop",
+      "value": "裁剪"
+    },
+    {
+      "name": "my_sketchbook",
+      "value": "我的画本"
+    },
+    {
+      "name": "management",
+      "value": "管理"
+    },
+    {
+      "name": "cancel_management",
+      "value": "取消管理"
+    },
+    {
+      "name": "continue_editing",
+      "value": "继续编辑"
+    },
+    {
+      "name": "save_album",
+      "value": "保存相册"
+    },
+    {
+      "name": "save",
+      "value": "保存"
+    },
+    {
+      "name": "update_name",
+      "value": "重命名"
+    },
+    {
+      "name": "delete",
+      "value": "删除"
+    },
+    {
+      "name": "all_selected",
+      "value": "全选"
+    },
+    {
+      "name": "input_new_placeholder_name",
+      "value": "请输入新的绘画名称"
+    },
+    {
+      "name": "confirm_delete_picture_book",
+      "value": "确定要删除绘本吗？"
+    },
+    {
+      "name": "confirm_delete_all_picture_books",
+      "value": "确定要删除全部绘本吗？"
+    }
+  ]
+}

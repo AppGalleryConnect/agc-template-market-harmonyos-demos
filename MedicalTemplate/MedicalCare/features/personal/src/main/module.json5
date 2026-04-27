@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "personal",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ],
+    "routerMap": "$profile:router_map_personal"
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "string": [
+    {
+      "name": "space_xxs",
+      "value": "2vp"
+    },
+    {
+      "name": "space_xs",
+      "value": "4vp"
+    },
+    {
+      "name": "space_s",
+      "value": "8vp"
+    },
+    {
+      "name": "space_m",
+      "value": "12vp"
+    },
+    {
+      "name": "space_l",
+      "value": "16vp"
+    },
+    {
+      "name": "space_xl",
+      "value": "24vp"
+    },
+    {
+      "name": "space_xxl",
+      "value": "44vp"
+    },
+    {
+      "name": "border_radius_4",
+      "value": "4vp"
+    },
+    {
+      "name": "border_radius_8",
+      "value": "8vp"
+    },
+    {
+      "name": "border_radius_16",
+      "value": "16vp"
+    },
+    {
+      "name": "border_radius_24",
+      "value": "24vp"
+    },
+    {
+      "name": "border_radius_32",
+      "value": "32vp"
+    },
+    {
+      "name": "border_radius_capsule",
+      "value": "99vp"
+    },
+    {
+      "name": "width_percent_15",
+      "value": "15%"
+    },
+    {
+      "name": "width_percent_25",
+      "value": "25%"
+    },
+    {
+      "name": "width_percent_40",
+      "value": "40%"
+    },
+    {
+      "name": "width_percent_half",
+      "value": "50%"
+    },
+    {
+      "name": "width_percent_75",
+      "value": "75%"
+    },
+    {
+      "name": "width_percent_full",
+      "value": "100%"
+    },
+    {
+      "name": "height_percent_25",
+      "value": "25%"
+    },
+    {
+      "name": "height_percent_half",
+      "value": "50%"
+    },
+    {
+      "name": "height_percent_75",
+      "value": "75%"
+    },
+    {
+      "name": "height_percent_full",
+      "value": "100%"
+    }
+  ]
+}

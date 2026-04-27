@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "agcit_huawei_teleprompter",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_teleprompter",
+      "value": "serviceComponent"
+    },
+    {
+      "name": "agcitkid_huawei_teleprompter",
+      "value": "agcit_huawei_teleprompter_countdown/1.0.0"
+    }
+  ]
+}

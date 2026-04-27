@@ -1,0 +1,12 @@
+{
+  "name": "module_time_line",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "type": "component",
+  "usage": "时间轴组件，提供订单物流时间轴展示与进度节点功能。支持时间节点展示、进度状态显示、时间线样式定制等功能。",
+  "zhName": "时间轴组件",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {}
+}

@@ -1,0 +1,276 @@
+{
+  "string": [
+    {
+      "name": "home",
+      "value": "首页"
+    },
+    {
+      "name": "mine",
+      "value": "我的"
+    },
+    {
+      "name": "mine_common_service",
+      "value": "常用服务"
+    },
+    {
+      "name": "mine_not_login",
+      "value": "未关联"
+    },
+    {
+      "name": "userId",
+      "value": "ID：%s"
+    },
+    {
+      "name": "to_link",
+      "value": "关联账号"
+    },
+    {
+      "name": "personal_info",
+      "value": "个人信息"
+    },
+    {
+      "name": "avatar",
+      "value": "头像"
+    },
+    {
+      "name": "nick_name",
+      "value": "昵称"
+    },
+    {
+      "name": "phone_number",
+      "value": "手机号"
+    },
+    {
+      "name": "unlink",
+      "value": "解除关联"
+    },
+    {
+      "name": "my_favor",
+      "value": "我的追剧"
+    },
+    {
+      "name": "my_record",
+      "value": "观看记录"
+    },
+    {
+      "name": "commit_comment",
+      "value": "发表评论"
+    },
+    {
+      "name": "demo_toast_tips",
+      "value": "仅演示，请根据业务需要自行实现"
+    },
+    {
+      "name": "continue_watch",
+      "value": "继续观看"
+    },
+    {
+      "name": "play_settting",
+      "value": "播放设置"
+    },
+    {
+      "name": "drama_desc",
+      "value": "共%1$s集 %2$s"
+    },
+    {
+      "name": "danmaku_setting",
+      "value": "弹幕设置"
+    },
+    {
+      "name": "play_speed_setting",
+      "value": "播放速度"
+    },
+    {
+      "name": "clear_screen_switch",
+      "value": "清屏开关"
+    },
+    {
+      "name": "danmaku_switch",
+      "value": "弹幕开关"
+    },
+    {
+      "name": "publish",
+      "value": "发布"
+    },
+    {
+      "name": "comment_placeholder",
+      "value": "请友善发布评论"
+    },
+    {
+      "name": "comment_count",
+      "value": "%s条评论"
+    },
+    {
+      "name": "comment_tip",
+      "value": "请先关联账号"
+    },
+    {
+      "name": "search_placeholder",
+      "value": "输入搜索直播"
+    },
+    {
+      "name": "billboard_title",
+      "value": "排行榜"
+    },
+    {
+      "name": "billboard_category_all",
+      "value": "全部"
+    },
+    {
+      "name": "drama_search_title",
+      "value": "搜索"
+    },
+    {
+      "name": "drama_search_result_title",
+      "value": "搜索结果"
+    },
+    {
+      "name": "drama_search_result_clear_btn",
+      "value": "清空"
+    },
+    {
+      "name": "search_history_title",
+      "value": "搜索历史"
+    },
+    {
+      "name": "billboard_category_thumb_up",
+      "value": "必看榜"
+    },
+    {
+      "name": "hot_recommend",
+      "value": "热门推荐"
+    },
+    {
+      "name": "cover_episode",
+      "value": "共%s集"
+    },
+    {
+      "name": "cover_episode_info",
+      "value": "%s集全"
+    },
+    {
+      "name": "cover_state_end",
+      "value": "已完结"
+    },
+    {
+      "name": "cover_state_update",
+      "value": "连载中"
+    },
+    {
+      "name": "cover_update_info",
+      "value": "更新至%s集"
+    },
+    {
+      "name": "play",
+      "value": "播放"
+    },
+    {
+      "name": "synopsis_desc",
+      "value": "剧情简介"
+    },
+    {
+      "name": "related_recommned",
+      "value": "相关推荐"
+    },
+    {
+      "name": "tips_net_err",
+      "value": "网络欠佳, 点击重试"
+    },
+    {
+      "name": "refresh",
+      "value": "刷新"
+    },
+    {
+      "name": "log_failed",
+      "value": "关联账号失败"
+    },
+    {
+      "name": "time_now",
+      "value": "刚刚"
+    },
+    {
+      "name": "login_tip",
+      "value": "请先关联账号"
+    },
+    {
+      "name": "phone_tip",
+      "value": "暂时无法修改手机号"
+    },
+    {
+      "name": "search_null",
+      "value": "未搜索到结果"
+    },
+    {
+      "name": "loading",
+      "value": "加载中..."
+    },
+    {
+      "name": "modify_avatar",
+      "value": "修改头像"
+    },
+    {
+      "name": "modify_name",
+      "value": "修改昵称"
+    },
+    {
+      "name": "confirm",
+      "value": "确定"
+    },
+    {
+      "name": "cancel",
+      "value": "取消"
+    },
+    {
+      "name": "modify_info",
+      "value": "修改个人信息"
+    },
+    {
+      "name": "receive",
+      "value": "领取"
+    },
+    {
+      "name": "completed",
+      "value": "已完成"
+    },
+    {
+      "name": "checked_in",
+      "value": "已签到"
+    },
+    {
+      "name": "check_in",
+      "value": "签到"
+    },
+    {
+      "name": "reward_center",
+      "value": "福利中心"
+    },
+    {
+      "name": "daily_tasks",
+      "value": "日常任务"
+    },
+    {
+      "name": "ta_fans",
+      "value": "TA的粉丝"
+    },
+    {
+      "name": "my_fans",
+      "value": "我的粉丝"
+    },
+    {
+      "name": "ta_following",
+      "value": "TA的关注"
+    },
+    {
+      "name": "my_following",
+      "value": "我的关注"
+    },
+    {
+      "name": "agcit_huawei_live_streaming_live_interaction",
+      "value": "1.0.1"
+    },
+    {
+      "name": "agcittype_huawei_live_streaming_live_interaction",
+      "value": "serviceComponent"
+    }
+  ]
+}

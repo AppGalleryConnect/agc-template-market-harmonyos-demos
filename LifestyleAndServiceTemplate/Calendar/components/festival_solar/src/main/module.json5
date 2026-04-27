@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "festival_solar",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet",
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "selected_file_number",
+      "value": "已选中%s个文件"
+    },
+    {
+      "name": "allselected",
+      "value": "全选"
+    },
+    {
+      "name": "cancel_allselected",
+      "value": "取消全选"
+    }
+  ]
+}

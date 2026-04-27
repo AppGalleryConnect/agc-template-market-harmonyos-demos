@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "TouristAttractionTemplate"
+    },
+    {
+      "name": "agcit_huawei_tourist_attraction",
+      "value": "1.0.3"
+    },
+    {
+      "name": "agcittype_huawei_tourist_attraction",
+      "value": "industryTemplate"
+    },
+    {
+      "name": "agcitkid_huawei_tourist_attraction",
+      "value": "agcit_huawei_tourist_attraction_attraction_announcement/1.0.1,agcit_huawei_tourist_attraction_attraction_guide/1.0.2,agcit_huawei_tourist_attraction_attraction_live/1.0.1,agcit_huawei_tourist_attraction_catering_accommodation/1.0.1,agcit_huawei_tourist_attraction_service_hotline/1.0.0,agcit_huawei_tourist_attraction_tourist_management/1.0.2,agcit_huawei_home_stay_travel_discovery/1.0.4"
+    }
+  ]
+}

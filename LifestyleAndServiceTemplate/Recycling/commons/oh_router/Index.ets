@@ -1,0 +1,5 @@
+export { phoneRouterControl } from './src/main/ets/router/phoneImpl/PhoneRouterManager'
+export { OHPageConfig } from './src/main/ets/ohpage/config/OHPageConfig'
+export { OHPage } from './src/main/ets/ohpage/view/OHPage'
+export { NavPageInfo } from './src/main/ets/router/interface/RouterPageInfo'
+export { RouterPopInfo } from './src/main/ets/router/interface/RouterPopInfo'

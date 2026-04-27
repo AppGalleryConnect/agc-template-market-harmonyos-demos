@@ -1,0 +1,68 @@
+{
+  "routerMap": [
+    {
+      "name": "NfcHome",
+      "pageSourceFile": "src/main/ets/pages/NfcHome.ets",
+      "buildFunction": "NfcHomeBuilder",
+      "data": {
+        "description": "this is NfcHome"
+      }
+    },
+    {
+      "name": "CardMyPage",
+      "pageSourceFile": "src/main/ets/pages/CardMyPage.ets",
+      "buildFunction": "CardMyPageBuilder",
+      "data": {
+        "description": "this is CardMyPage"
+      }
+    },
+    {
+      "name": "ActionPage",
+      "pageSourceFile": "src/main/ets/pages/ActionPage.ets",
+      "buildFunction": "ActionPageBuilder",
+      "data": {
+        "description": "this is ActionPage"
+      }
+    },
+    {
+      "name": "TutorialPage",
+      "pageSourceFile": "src/main/ets/pages/TutorialPage.ets",
+      "buildFunction": "TutorialPageBuilder",
+      "data": {
+        "description": "this is TutorialPage"
+      }
+    },
+    {
+      "name": "ResultPage",
+      "pageSourceFile": "src/main/ets/pages/ResultPage.ets",
+      "buildFunction": "ResultPageBuilder",
+      "data": {
+        "description": "this is ResultPage"
+      }
+    },
+    {
+      "name": "DetailPage",
+      "pageSourceFile": "src/main/ets/pages/DetailPage.ets",
+      "buildFunction": "DetailPageBuilder",
+      "data": {
+        "description": "this is DetailPage"
+      }
+    },
+    {
+      "name": "SectorDetailPage",
+      "pageSourceFile": "src/main/ets/pages/SectorDetailPage.ets",
+      "buildFunction": "SectorDetailPageBuilder",
+      "data": {
+        "description": "this is SectorDetailPage"
+      }
+    },
+    {
+      "name": "CloneCardPage",
+      "pageSourceFile": "src/main/ets/pages/CloneCardPage.ets",
+      "buildFunction": "CloneCardPageBuilder",
+      "data": {
+        "description": "this is CloneCardPage"
+      }
+    }
+  ]
+}

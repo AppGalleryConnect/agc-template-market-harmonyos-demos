@@ -1,0 +1,11 @@
+{
+  "name": "aggregated_login",
+  "version": "1.0.2",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@tencent/wechat_open_sdk": "1.0.14",
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "routerMap": [
+    {
+      "name": "vernacular",
+      "pageSourceFile": "src/main/ets/components/Vernacular.ets",
+      "buildFunction": "VernacularBuilder",
+      "data": {
+        "description" : "this is vernacular"
+      }
+    }
+  ]
+}

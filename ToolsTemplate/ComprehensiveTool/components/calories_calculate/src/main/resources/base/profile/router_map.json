@@ -1,0 +1,28 @@
+{
+  "routerMap": [
+    {
+      "name": "DietPlanPage",
+      "pageSourceFile": "src/main/ets/pages/DietPlanPage.ets",
+      "buildFunction": "DietPlanPageBuilder",
+      "data": {
+        "description": "this is DietPlanPage"
+      }
+    },
+    {
+      "name": "SearchFoodPage",
+      "pageSourceFile": "src/main/ets/pages/SearchFoodPage.ets",
+      "buildFunction": "SearchFoodPageBuilder",
+      "data": {
+        "description": "this is SearchFoodPageBuilder"
+      }
+    },
+    {
+      "name": "CaloriesPage",
+      "pageSourceFile": "src/main/ets/pages/CaloriesPage.ets",
+      "buildFunction": "CaloriesPageBuilder",
+      "data": {
+        "description": "this is CaloriesPageBuilder"
+      }
+    }
+  ]
+}

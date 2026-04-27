@@ -1,0 +1,60 @@
+{
+  "routerMap": [
+    {
+      "name": "AppointmentEntryPage",
+      "pageSourceFile": "src/main/ets/components/AppointmentEntryPage.ets",
+      "buildFunction": "AppointmentEntryPageBuilder",
+      "data": {
+        "description": "AppointmentEntryPage"
+      }
+    },
+    {
+      "name": "AppointmentMainPage",
+      "pageSourceFile": "src/main/ets/components/AppointmentMainPage.ets",
+      "buildFunction": "AppointmentMainPageBuilder",
+      "data": {
+        "description": "AppointmentMainPage"
+      }
+    },
+    {
+      "name": "DepartmentAppointmentPage",
+      "pageSourceFile": "src/main/ets/components/DepartmentAppointmentPage.ets",
+      "buildFunction": "DepartmentAppointmentPageBuilder",
+      "data": {
+        "description": "DepartmentAppointmentPage"
+      }
+    },
+    {
+      "name": "DoctorInfoPage",
+      "pageSourceFile": "src/main/ets/components/DoctorInfoPage.ets",
+      "buildFunction": "DoctorInfoPageBuilder",
+      "data": {
+        "description": "DoctorInfoPage"
+      }
+    },
+    {
+      "name": "AppointmentInfoConfirmPage",
+      "pageSourceFile": "src/main/ets/components/AppointmentInfoConfirmPage.ets",
+      "buildFunction": "AppointmentInfoConfirmPageBuilder",
+      "data": {
+        "description": "AppointmentInfoConfirmPage"
+      }
+    },
+    {
+      "name": "AppointmentOrderPage",
+      "pageSourceFile": "src/main/ets/components/AppointmentOrderPage.ets",
+      "buildFunction": "AppointmentOrderPageBuilder",
+      "data": {
+        "description": "AppointmentOrderPage"
+      }
+    },
+    {
+      "name": "AppointmentOrderListPage",
+      "pageSourceFile": "src/main/ets/components/AppointmentOrderListPage.ets",
+      "buildFunction": "AppointmentOrderListPageBuilder",
+      "data": {
+        "description": "AppointmentOrderListPage"
+      }
+    }
+  ]
+}

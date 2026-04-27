@@ -1,0 +1,28 @@
+{
+  "color": [
+    {
+      "name": "start_window_background",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "theme_color",
+      "value": "#0A59F7"
+    },
+    {
+      "name": "paint_color",
+      "value": "#D8D8D8"
+    },
+    {
+      "name": "linear_start",
+      "value": "#000A59F7"
+    },
+    {
+      "name": "linear_end",
+      "value": "#F70A59F7"
+    },
+    {
+      "name": "number_color",
+      "value": "#0D000000"
+    }
+  ]
+}

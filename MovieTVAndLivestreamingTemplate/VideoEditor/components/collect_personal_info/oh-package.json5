@@ -1,0 +1,12 @@
+{
+  "name": "collect_personal_info",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "component",
+  "usage": "个人信息组件",
+  "zhName": "个人信息组件",
+  "dependencies": {}
+}

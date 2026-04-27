@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "agcit_huawei_express_template_module_auth",
+      "value": "1.0.1"
+    },
+    {
+      "name": "agcittype_huawei_express_template_module_auth",
+      "value": "serviceComponent"
+    },
+    {
+      "name": "agcitkid_huawei_express_template_module_auth",
+      "value": "agcit_huawei_express_template_module_base/1.0.1"
+    }
+  ]
+}

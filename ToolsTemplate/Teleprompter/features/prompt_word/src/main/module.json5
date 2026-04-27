@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "prompt_word",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet",
+      "2in1"
+    ]
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "color": [
+    {
+      "name": "start_window_background",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "order_item_detail_font_color",
+      "value": "#333333"
+    },
+    {
+      "name": "common_bg_color",
+      "value": "#F5F6FA"
+    },
+    {
+      "name": "order_item_font_color",
+      "value": "#000000"
+    },
+    {
+      "name": "keyword_type_font_color",
+      "value": "#007DFF"
+    }
+  ]
+}

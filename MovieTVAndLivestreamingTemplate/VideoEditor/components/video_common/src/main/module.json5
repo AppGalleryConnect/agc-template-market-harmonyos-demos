@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "video_common",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "routerMap": [
+    {
+      "name": "StepCountPage",
+      "pageSourceFile": "src/main/ets/pages/StepCountPage.ets",
+      "buildFunction": "StepCountPageBuilder"
+    },
+    {
+      "name": "StepHistoryPage",
+      "pageSourceFile": "src/main/ets/pages/StepHistoryPage.ets",
+      "buildFunction": "StepHistoryPageBuilder"
+    },
+    {
+      "name": "BloodPressurePage",
+      "pageSourceFile": "src/main/ets/pages/BloodPressurePage.ets",
+      "buildFunction": "BloodPressurePageBuilder"
+    },
+    {
+      "name": "BloodGlucosePage",
+      "pageSourceFile": "src/main/ets/pages/BloodGlucosePage.ets",
+      "buildFunction": "BloodGlucosePageBuilder"
+    },
+    {
+      "name": "HeartRatePage",
+      "pageSourceFile": "src/main/ets/pages/HeartRatePage.ets",
+      "buildFunction": "HeartRatePageBuilder"
+    },
+    {
+      "name": "SleepPage",
+      "pageSourceFile": "src/main/ets/pages/SleepPage.ets",
+      "buildFunction": "SleepPageBuilder"
+    },
+    {
+      "name": "BloodPressureHistoryPage",
+      "pageSourceFile": "src/main/ets/pages/BloodPressureHistoryPage.ets",
+      "buildFunction": "BloodPressureHistoryPageBuilder"
+    },
+    {
+      "name": "BloodGlucoseHistoryPage",
+      "pageSourceFile": "src/main/ets/pages/BloodGlucoseHistoryPage.ets",
+      "buildFunction": "BloodGlucoseHistoryPageBuilder"
+    },
+    {
+      "name": "HeartRateHistoryPage",
+      "pageSourceFile": "src/main/ets/pages/HeartRateHistoryPage.ets",
+      "buildFunction": "HeartRateHistoryPageBuilder"
+    },
+    {
+      "name": "SleepHistoryPage",
+      "pageSourceFile": "src/main/ets/pages/SleepHistoryPage.ets",
+      "buildFunction": "SleepHistoryPageBuilder"
+    },
+    {
+      "name": "SleepDetailPage",
+      "pageSourceFile": "src/main/ets/pages/SleepDetailPage.ets",
+      "buildFunction": "SleepDetailPageBuilder"
+    },
+    {
+      "name": "HeartRateDetailPage",
+      "pageSourceFile": "src/main/ets/pages/HeartRateDetailPage.ets",
+      "buildFunction": "HeartRateDetailPageBuilder"
+    }
+  ]
+}
+

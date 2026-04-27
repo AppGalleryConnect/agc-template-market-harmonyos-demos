@@ -1,0 +1,12 @@
+{
+  "routerMap": [
+    {
+      "name": "ExchangeRateCalculatorPage",
+      "pageSourceFile": "src/main/ets/pages/ExchangeRateCalculatorPage.ets",
+      "buildFunction": "ExchangeRateCalculatorPageBuilder",
+      "data": {
+        "description": "this is ExchangeRateCalculatorPage"
+      }
+    }
+  ]
+}

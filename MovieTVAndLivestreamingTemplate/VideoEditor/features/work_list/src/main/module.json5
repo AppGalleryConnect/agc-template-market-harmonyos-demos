@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "work_list",
+    "type": "har",
+    "deviceTypes": [
+      "default"
+    ]
+  }
+}

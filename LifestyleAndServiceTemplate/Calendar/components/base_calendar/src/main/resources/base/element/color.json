@@ -1,0 +1,28 @@
+{
+  "color": [
+    {
+      "name": "color_1",
+      "value": "#ff0000"
+    },
+    {
+      "name": "font_color_black",
+      "value": "#000000"
+    },
+    {
+      "name": "font_color_white",
+      "value": "#ffffff"
+    },
+    {
+      "name": "background_color_light",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "font_color_red",
+      "value": "#FFE94949"
+    },
+    {
+      "name": "font_color_grey",
+      "value": "#FF626262"
+    }
+  ]
+}

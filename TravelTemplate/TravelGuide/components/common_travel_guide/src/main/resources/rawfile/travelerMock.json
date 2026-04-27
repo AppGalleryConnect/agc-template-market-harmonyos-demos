@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "张三",
+    "idNumber": "",
+    "phone": ""
+  },
+  {
+    "id": 2,
+    "name": "李四",
+    "idNumber": "",
+    "phone": ""
+  },
+  {
+    "id": 3,
+    "name": "王五",
+    "idNumber": "",
+    "phone": ""
+  }
+]

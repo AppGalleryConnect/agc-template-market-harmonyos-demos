@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "apply_camera_reason",
+      "value": "本应用需要使用相机权限"
+    },
+    {
+      "name": "agcit_huawei_image_recognition",
+      "value": "1.0.1"
+    },
+    {
+      "name": "agcittype_huawei_image_recognition",
+      "value": "serviceComponent"
+    }
+  ]
+}

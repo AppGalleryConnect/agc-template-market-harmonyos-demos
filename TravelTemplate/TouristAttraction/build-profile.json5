@@ -1,0 +1,186 @@
+{
+  "app": {
+    "signingConfigs": [],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "targetSdkVersion": "6.0.2(22)",
+        "compatibleSdkVersion": "5.0.5(17)",
+        "runtimeOS": "HarmonyOS",
+        "buildOption": {
+          "strictMode": {
+            "caseSensitiveCheck": true,
+            "useNormalizedOHMUrl": true
+          }
+        }
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug"
+      },
+      {
+        "name": "release"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "phone",
+      "srcPath": "./products/phone",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "guide",
+      "srcPath": "./features/guide",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "mine",
+      "srcPath": "./features/mine",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "types",
+      "srcPath": "./commons/types",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "uicomponents",
+      "srcPath": "./commons/uicomponents",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "order",
+      "srcPath": "./features/order",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "network",
+      "srcPath": "./commons/network",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ticket",
+      "srcPath": "./features/ticket",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "common",
+      "srcPath": "./commons/common",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "home",
+      "srcPath": "./features/home",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "service_hotline",
+      "srcPath": "./components/service_hotline"
+    },
+    {
+      "name": "tourist_management",
+      "srcPath": "./components/tourist_management"
+    },
+    {
+      "name": "attraction_guide",
+      "srcPath": "./components/attraction_guide"
+    },
+    {
+      "name": "module_base",
+      "srcPath": "./components/module_base"
+    },
+    {
+      "name": "catering_accommodation",
+      "srcPath": "./components/catering_accommodation"
+    },
+    {
+      "name": "attraction_note",
+      "srcPath": "./components/attraction_note"
+    },
+    {
+      "name": "attraction_live",
+      "srcPath": "./components/attraction_live"
+    },
+    {
+      "name": "attraction_announcement",
+      "srcPath": "./components/attraction_announcement"
+    },
+    {
+      "name": "atomicservice_login",
+      "srcPath": "./components/atomicservice_login"
+    }
+  ]
+}

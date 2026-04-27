@@ -1,0 +1,24 @@
+{
+  "routerMap": [
+    {
+      "name": "DiaryPage",
+      "pageSourceFile": "src/main/ets/pages/DiaryPage.ets",
+      "buildFunction": "DiaryPageBuilder"
+    },
+    {
+      "name": "DiaryEditorPage",
+      "pageSourceFile": "src/main/ets/pages/DiaryEditorPage.ets",
+      "buildFunction": "DiaryEditorPageBuilder"
+    },
+    {
+      "name": "PrivacyDiaryPassword",
+      "pageSourceFile": "src/main/ets/pages/PrivacyDiaryPassword.ets",
+      "buildFunction": "PrivacyDiaryPasswordBuilder"
+    },
+    {
+      "name": "AutoSaveSetting",
+      "pageSourceFile": "src/main/ets/pages/AutoSaveSetting.ets",
+      "buildFunction": "AutoSaveSettingBuilder"
+    }
+  ]
+}

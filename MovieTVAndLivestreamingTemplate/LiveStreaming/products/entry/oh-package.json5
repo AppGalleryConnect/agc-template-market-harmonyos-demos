@@ -1,0 +1,25 @@
+{
+  "name": "entry",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "",
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "@agctemplate/common": "1.0.0",
+    "@agctemplate/utils": "1.0.0",
+    "@agctemplate/resources": "1.0.0",
+    "@agctemplate/widgets": "1.0.0",
+    "@agctemplate/home": "1.0.0",
+    "@agctemplate/live": "1.0.0",
+    "@agctemplate/mine": "1.0.0",
+    "@agctemplate/detail": "1.0.0",
+    "@agctemplate/router_module": "1.0.0",
+    "@agctemplate/feed_back": "1.0.0",
+    "@agctemplate/module_login": "1.0.0",
+    "module_share": "../../components/module_share",
+    "live_interaction": "../../components/live_interaction",
+    "module_auth": "1.0.0"
+  }
+}
+

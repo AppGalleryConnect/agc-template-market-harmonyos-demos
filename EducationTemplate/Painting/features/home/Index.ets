@@ -1,0 +1,1 @@
+export { HomeDrawingPageBuilder } from './src/main/ets/views/HomeDrawingPage'

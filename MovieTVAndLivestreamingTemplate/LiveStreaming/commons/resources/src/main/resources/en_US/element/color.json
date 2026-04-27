@@ -1,0 +1,68 @@
+{
+  "color": [
+    {
+      "name": "orange",
+      "value": "#EC6E45"
+    },
+    {
+      "name": "normal_font_color",
+      "value": "#99000000"
+    },
+    {
+      "name": "bold_font_color",
+      "value": "#E6000000"
+    },
+    {
+      "name": "high_light_font_color",
+      "value": "#FFF17F31"
+    },
+    {
+      "name": "common_background_color",
+      "value": "#FFF1F3F5"
+    },
+    {
+      "name": "normal_background_color",
+      "value": "#FFFFFFFF"
+    },
+    {
+      "name": "transparent_background_color",
+      "value": "#00000000"
+    },
+    {
+      "name": "component_background_color",
+      "value": "#0D000000"
+    },
+    {
+      "name": "category_background",
+      "value": "#0D000000"
+    },
+    {
+      "name": "category_text",
+      "value": "#E6000000"
+    },
+    {
+      "name": "category_selected_background",
+      "value": "#FFEC6E45"
+    },
+    {
+      "name": "category_selected_text",
+      "value": "#FFFFFFFF"
+    },
+    {
+      "name": "billboard_rank_top",
+      "value": "#F7CE00"
+    },
+    {
+      "name": "billboard_rank_next",
+      "value": "#F9A01E"
+    },
+    {
+      "name": "billboard_rank_third",
+      "value": "#ED6F21"
+    },
+    {
+      "name": "billboard_rank_other",
+      "value": "#848D89"
+    }
+  ]
+}

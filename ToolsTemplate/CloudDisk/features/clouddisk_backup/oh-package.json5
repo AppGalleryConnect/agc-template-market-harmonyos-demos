@@ -1,0 +1,19 @@
+{
+  "name": "clouddisk_backup",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "feature",
+  "usage": "备份模块：提供自动备份相册和使用流量备份的功能，用户可以设置备份选项并查看备份状态",
+  "zhName": "备份",
+  "tabPage": "Backup",
+  "tabImage": "screenshot/backup.jpg",
+  "tabOrder": 1,
+  "dependencies": {
+    "oh_router": "file:../../commons/OHRouter",
+    "common": "file:../../commons/common",
+    "clouddisk_backup_status": "file:../../components/clouddisk_backup_status"
+  }
+}

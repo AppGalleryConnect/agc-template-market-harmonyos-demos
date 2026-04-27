@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "data_dashboard_module_name",
+      "value": "数据看板"
+    },
+    {
+      "name": "agcit_huawei_health_data_dashboard",
+      "value": "1.0.1"
+    },
+    {
+      "name": "agcittype_huawei_health_data_dashboard",
+      "value": "serviceComponent"
+    }
+  ]
+}

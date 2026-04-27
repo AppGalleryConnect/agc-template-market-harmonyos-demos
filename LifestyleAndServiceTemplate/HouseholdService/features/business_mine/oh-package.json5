@@ -1,0 +1,19 @@
+{
+  "name": "business_mine",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@hw-agconnect/util-log": "^1.0.0",
+    "address_management": "file:../../components/address_management",
+    "atomicservice_login": "file:../../components/atomicservice_login",
+    "collect_personal_info": "file:../../components/collect_personal_info",
+    "dial_panel": "file:../../components/dial_panel",
+    "lib_foundation": "file:../../commons/lib_foundation",
+    "module_base": "file:../../components/module_base",
+    "module_form": "file:../../components/module_form",
+    "module_transition": "file:../../components/module_transition",
+  }
+}

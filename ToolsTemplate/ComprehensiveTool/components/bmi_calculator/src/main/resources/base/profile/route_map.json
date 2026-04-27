@@ -1,0 +1,20 @@
+{
+  "routerMap": [
+    {
+      "name": "BmiHome",
+      "pageSourceFile": "src/main/ets/pages/BmiHome.ets",
+      "buildFunction": "BmiHomeBuilder",
+      "data": {
+        "description": "this is BmiHome"
+      }
+    },
+    {
+      "name": "BmiResultPage",
+      "pageSourceFile": "src/main/ets/pages/ResultPage.ets",
+      "buildFunction": "ResultPageBuilder",
+      "data": {
+        "description": "this is BmiResultPage"
+      }
+    }
+  ]
+}

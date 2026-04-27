@@ -1,0 +1,20 @@
+{
+  "routerMap": [
+    {
+      "name": "CommonWebPage",
+      "pageSourceFile": "src/main/ets/components/CommonWebPage.ets",
+      "buildFunction": "CommonWebPageBuilder",
+      "data": {
+        "description": "CommonWebPage"
+      }
+    },
+    {
+      "name": "MapPage",
+      "pageSourceFile": "src/main/ets/components/MapPage.ets",
+      "buildFunction": "MapPageBuilder",
+      "data": {
+        "description": "MapPage"
+      }
+    }
+  ]
+}

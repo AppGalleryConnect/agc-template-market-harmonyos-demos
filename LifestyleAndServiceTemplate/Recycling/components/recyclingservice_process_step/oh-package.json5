@@ -1,0 +1,12 @@
+{
+  "name": "recyclingservice_process_step",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "type": "component",
+  "usage": "流程步骤线组件，提供回收服务流程步骤展示功能。支持步骤进度展示、当前步骤高亮、步骤状态显示等功能。",
+  "zhName": "流程步骤线组件",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {}
+}

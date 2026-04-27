@@ -1,0 +1,20 @@
+{
+  "name": "address_book",
+  "version": "1.0.0",
+  "description": "通讯录功能模块，提供联系人分组展示、字母索引快速定位、我的群列表浏览与跳转能力。",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "feature",
+  "usage": "通讯录模块包含：联系人分组（我创建的群聊/我管理的群/我加入的群）、好友分组列表（按字母分组）、字母索引器快速跳转、我的群列表页面。关键依赖：instant_messaging（数据模型）、oh_router（页面跳转）、common（断点、状态栏高度）。页面结构示例：顶部渐变背景栏与导航标题；中部列表包含置顶功能项与好友分组；右侧叠加字母索引器；底部保留安全区高度。",
+  "zhName": "通讯录功能模块",
+  "tabPage": "AddressBookPage",
+  "tabImage": "screenshot/contact_page.png",
+  "tabOrder": 1,
+  "dependencies": {
+    "common": "file:../../commons/common",
+    "oh_router": "file:../../commons/oh_router",
+    "chat_base": "file:../../components/chat_base",
+    "instant_messaging": "file:../../sdk/instant_messaging"
+  }
+}

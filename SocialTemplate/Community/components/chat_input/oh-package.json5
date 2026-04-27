@@ -1,0 +1,15 @@
+{
+  "name": "chat_input",
+  "version": "1.0.0",
+  "description": "聊天输入组件包，提供文本、语音、表情、照片/视频与位置选择能力。",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "component",
+  "usage": "聊天输入组件，面向即时通讯场景，支持文本输入、长按语音识别、表情选择、照片/视频选择与位置选择。关键数据结构：ChatInputSendMessageModel（消息载体：文本/图片/视频/语音/位置）、MoreTypeItem（更多类型项）。关键枚举：ChatTypeEnum（消息类型）、InputShowMode（输入展示模式：DEFAULT/EMOJI/FILE）。包含 if 逻辑：isVoiceMode 切换文本输入与长按语音，showMode 切换 Tabs（表情/文件）。布局特征：顶部输入行（左侧语音/键盘切换，中间 Stack 文本输入与长按说话覆盖，右侧表情与更多），底部 Tabs（两页：表情与文件选择），底部对齐并随键盘/底部安全区变化自适应。",
+  "zhName": "聊天输入组件",
+  "dependencies": {
+    "chat_base": "file:../chat_base",
+    "chat_location": "file:../chat_location"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "entry",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "",
+  "author": "",
+  "license": "",
+  "type": "entry",
+  "usage": "入口模块",
+  "zhName": "入口",
+  "dependencies": {
+    "common": "file:../../commons/common",
+    "person": "file:../../features/person",
+    "oh_router": "file:../../commons/OHRouter",
+    "check_app_update": "file:../../components/check_app_update",
+    "clouddisk_file": "file:../../features/clouddisk_file",
+    "clouddisk_homepage": "file:../../features/clouddisk_homepage",
+    "clouddisk_backup": "file:../../features/clouddisk_backup",
+    "@hw-agconnect/auth": "1.0.5",
+    "collect_personal_info": "file:../../components/collect_personal_info"
+  }
+}
+

@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "video_edit",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ],
+    "routerMap": "$profile:route_map"
+  }
+}

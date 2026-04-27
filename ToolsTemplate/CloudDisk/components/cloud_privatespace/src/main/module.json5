@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "cloud_privatespace",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ],
+    "routerMap": "$profile:route_map"
+  }
+}

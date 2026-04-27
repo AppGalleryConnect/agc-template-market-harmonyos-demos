@@ -1,0 +1,13 @@
+export { MainPage } from './src/main/ets/view/MainPage';
+export { SearchPageBuilder } from './src/main/ets/view/SearchPage';
+export { SearchHotelPageBuilder } from './src/main/ets/view/SearchHotelPage';
+export { AttractionPageBuilder } from './src/main/ets/view/AttractionPage';
+export { TravelHotspotPageBuilder } from './src/main/ets/view/TravelHotspotPage';
+export { ReputationPageBuilder } from './src/main/ets/view/ReputationPage';
+export { AttractionDetailPageBuilder } from './src/main/ets/view/AttractionDetailPage';
+export { PostDetailPageBuilder } from './src/main/ets/view/PostDetailPage';
+export { CitySelectPageBuilder } from './src/main/ets/view/CitySelectPage'
+export { CityGuidePageBuilder } from './src/main/ets/view/CityGuidePage';
+export { TicketPendingPaymentPageBuilder } from './src/main/ets/view/TicketPendingPaymentPage';
+export { CarPendingPaymentPageBuilder } from './src/main/ets/view/CarPendingPaymentPage';
+export { PlanePendingPaymentPageBuilder } from './src/main/ets/view/PlanePendingPaymentPage';

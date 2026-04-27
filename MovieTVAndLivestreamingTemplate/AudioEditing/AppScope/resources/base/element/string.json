@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "音频编辑"
+    },
+    {
+      "name": "agcit_huawei_audioedit_service",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_audioedit_service",
+      "value": "industryTemplate"
+    },
+    {
+      "name": "agcitkid_huawei_audioedit_service",
+      "value": "agcit_huawei_audioedit_audio_adjust_speed/1.0.0,agcit_huawei_audioedit_audio_adjust_tone/1.0.0,agcit_huawei_audioedit_audio_crop/1.0.0,agcit_huawei_audioedit_audio_extraction/1.0.0,agcit_huawei_audioedit_audio_format_conversion/1.0.0,agcit_huawei_calendar_vip_center/1.0.3,agcit_huawei_common_login/1.0.0,agcit_huawei_enterprise_recruitment_check_app_update/1.0.2,agcit_huawei_common_collect_personal_info/1.0.0"
+    }
+  ]
+}

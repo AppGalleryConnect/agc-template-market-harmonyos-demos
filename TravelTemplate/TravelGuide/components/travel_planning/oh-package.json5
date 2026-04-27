@@ -1,0 +1,14 @@
+{
+  "name": "travel_planning",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "city_select": "file:../city_select"
+  },
+  "type": "component",
+  "usage": "线路规划组件，提供旅游路线规划功能，支持用户选择出发地、目的地和游玩天数，并根据选择智能推荐旅游路线。",
+  "zhName": "线路规划组件"
+}

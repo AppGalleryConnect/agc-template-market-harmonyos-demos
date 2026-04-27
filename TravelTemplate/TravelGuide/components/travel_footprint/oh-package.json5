@@ -1,0 +1,12 @@
+{
+  "name": "travel_footprint",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {},
+  "type": "component",
+  "usage": "旅行足迹组件，提供展示用户旅行足迹的功能，支持列表按年份分组展示城市足迹卡片，并在地图上高亮可视化去过的城市区域。",
+  "zhName": "旅行足迹组件"
+}

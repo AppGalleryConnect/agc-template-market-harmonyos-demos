@@ -1,0 +1,9 @@
+{
+  "routerMap": [
+    {
+      "name": "FinancialPage",
+      "pageSourceFile": "src/main/ets/pages/FinancialPage.ets",
+      "buildFunction": "FinancialPageBuilder"
+    }
+  ]
+}

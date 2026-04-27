@@ -1,0 +1,20 @@
+{
+  "name": "entry",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "",
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "@hw-agconnect/util-log": "1.0.0",
+    "common": 'file:../../commons/common',
+    'perpetual': 'file:../../features/perpetual',
+    'almanac': 'file:../../features/almanac',
+    'mine': 'file:../../features/mine',
+    'base_apis': "file:../../components/base_apis",
+    'router_module': 'file:../../commons/router_module',
+  },
+  "devDependencies": {
+  },
+  "dynamicDependencies": {}
+}

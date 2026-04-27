@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "date_calculate",
+    "type": "har",
+    "deviceTypes": [
+      "phone",
+    ],
+    "routerMap": "$profile:route_map",
+    "installationFree": true
+  }
+}

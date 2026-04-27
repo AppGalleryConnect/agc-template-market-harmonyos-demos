@@ -1,0 +1,14 @@
+{
+  "name": "oh_router",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "type": "common",
+  "usage": "路由管理组件，提供页面导航和路由跳转功能",
+  "zhName": "路由管理组件",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "common": "file:../common"
+  }
+}

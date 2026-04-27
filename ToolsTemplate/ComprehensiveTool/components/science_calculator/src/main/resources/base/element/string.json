@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "error",
+      "value": "错误"
+    },
+    {
+      "name": "agcit_huawei_science_calculator",
+      "value": "1.0.3"
+    },
+    {
+      "name": "agcittype_huawei_science_calculator",
+      "value": "serviceComponent"
+    }
+  ]
+}

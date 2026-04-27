@@ -1,0 +1,12 @@
+{
+  "color": [
+    {
+      "name": "page_background",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "list_background",
+      "value": "#FFFFFF"
+    }
+  ]
+}

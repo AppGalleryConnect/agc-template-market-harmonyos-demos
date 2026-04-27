@@ -1,0 +1,15 @@
+{
+  "name": "data_dashboard",
+  "version": "1.0.1",
+  "description": "数据看板组件，用于展示各类健康数据统计和可视化图表",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "component",
+  "usage": "健康数据可视化功能，支持步数、心率、血压、血糖、睡眠等数据的图表展示和历史记录查看",
+  "zhName": "数据看板组件",
+  "dependencies": {
+    "@ohos/mpchart": "3.0.25"
+  }
+}
+

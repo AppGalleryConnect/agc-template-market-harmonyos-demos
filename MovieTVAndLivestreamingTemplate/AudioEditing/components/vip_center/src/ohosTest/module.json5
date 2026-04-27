@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "vip_center_test",
+    "type": "feature",
+    "deviceTypes": [
+      "phone"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false
+  }
+}

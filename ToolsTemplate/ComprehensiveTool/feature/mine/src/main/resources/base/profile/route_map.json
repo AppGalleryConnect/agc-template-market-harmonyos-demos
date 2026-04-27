@@ -1,0 +1,68 @@
+{
+  "routerMap": [
+    {
+      "name": "PrivacyPolicyPage",
+      "pageSourceFile": "src/main/ets/pages/PrivacyPolicyPage.ets",
+      "buildFunction": "PrivacyPolicyPageBuilder",
+      "data": {
+        "description": "this is PrivacyPolicyPage"
+      }
+    },
+    {
+      "name": "TermsOfServicePage",
+      "pageSourceFile": "src/main/ets/pages/TermsOfServicePage.ets",
+      "buildFunction": "TermsOfServicePageBuilder",
+      "data": {
+        "description": "this is TermsOfServicePage"
+      }
+    },
+    {
+      "name": "Mine",
+      "pageSourceFile": "src/main/ets/pages/Mine.ets",
+      "buildFunction": "MineBuilder",
+      "data": {
+        "description": "this is Mine"
+      }
+    },
+    {
+      "name": "LoginPage",
+      "pageSourceFile": "src/main/ets/pages/LoginPage.ets",
+      "buildFunction": "LoginPageBuilder",
+      "data": {
+        "description": "this is LoginPage"
+      }
+    },
+    {
+      "name": "ProfilePage",
+      "pageSourceFile": "src/main/ets/pages/ProfilePage.ets",
+      "buildFunction": "ProfilePageBuilder",
+      "data": {
+        "description": "this is ProfilePage"
+      }
+    },
+    {
+      "name": "SettingPage",
+      "pageSourceFile": "src/main/ets/pages/SettingPage.ets",
+      "buildFunction": "SettingPageBuilder",
+      "data": {
+        "description": "this is SettingPage"
+      }
+    },
+    {
+      "name": "MemberShipSubscribe",
+      "pageSourceFile": "src/main/ets/pages/MemberShipSubscribe.ets",
+      "buildFunction": "MemberShipSubscribeBuilder",
+      "data": {
+        "description": "this is MemberShipSubscribe"
+      }
+    },
+    {
+      "name": "AboutPage",
+      "pageSourceFile": "src/main/ets/pages/AboutPage.ets",
+      "buildFunction": "AboutPageBuilder",
+      "data": {
+        "description": "this is AboutPage"
+      }
+    }
+  ]
+}

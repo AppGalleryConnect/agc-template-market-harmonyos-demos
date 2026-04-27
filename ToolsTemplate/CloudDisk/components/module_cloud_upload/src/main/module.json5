@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "module_cloud_upload",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "module": {
+    "name": "traffic_restriction",
+    "type": "har",
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.LOCATION",
+        "reason": "$string:location_reason",
+        "usedScene": {
+          "abilities": [
+            "FormAbility"
+          ],
+          "when": "always"
+        }
+      },
+      {
+        "name": "ohos.permission.APPROXIMATELY_LOCATION",
+        "reason": "$string:location_reason",
+        "usedScene": {
+          "abilities": [
+            "FormAbility"
+          ],
+          "when": "always"
+        }
+      }
+    ],
+    "deviceTypes": [
+      "default",
+      "tablet",
+    ]
+  }
+}

@@ -1,0 +1,29 @@
+<!--
+  - Copyright (c) 2025 Huawei Device Co., Ltd.
+  - Licensed under the Apache License, Version 2.0 (the "License");
+  - you may not use this file except in compliance with the License.
+  - You may obtain a copy of the License at
+  -
+  -     http://www.apache.org/licenses/LICENSE-2.0
+  -
+  - Unless required by applicable law or agreed to in writing, software
+  - distributed under the License is distributed on an "AS IS" BASIS,
+  - WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  - See the License for the specific language governing permissions and
+  - limitations under the License.
+  -->
+
+<svg width="12.000000" height="24.000000" viewBox="0 0 12 24" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs>
+		<clipPath id="clip61_4886">
+			<rect id="ic_public_spinner_small.svg" width="12.000000" height="24.000000" fill="white" fill-opacity="0"/>
+		</clipPath>
+	</defs>
+	<g clip-path="url(#clip61_4886)">
+		<path id="path-1" d="M3.2 10L8.79 10C9.18 10 9.5 10.31 9.5 10.71C9.5 10.87 9.44 11.03 9.34 11.16L6.54 14.73C6.3 15.04 5.86 15.08 5.56 14.84C5.52 14.81 5.48 14.77 5.45 14.73L2.65 11.16C2.41 10.85 2.46 10.4 2.76 10.15C2.88 10.05 3.04 10 3.2 10Z" fill="#000000" fill-opacity="1.000000" fill-rule="nonzero"/>
+		<path id="path-1" d="M8.79 10C9.18 10 9.5 10.31 9.5 10.71C9.5 10.87 9.44 11.03 9.34 11.16L6.54 14.73C6.3 15.04 5.86 15.08 5.56 14.84C5.52 14.81 5.48 14.77 5.45 14.73L2.65 11.16C2.41 10.85 2.46 10.4 2.76 10.15C2.88 10.05 3.04 10 3.2 10L8.79 10Z" stroke="#000000" stroke-opacity="0" stroke-width="1.000000"/>
+	</g>
+</svg>

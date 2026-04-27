@@ -1,0 +1,1 @@
+export { AttractionGuide } from './src/main/ets/components/AttractionGuide';

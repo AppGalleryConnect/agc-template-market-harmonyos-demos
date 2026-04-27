@@ -1,0 +1,34 @@
+{
+  "routerMap": [
+    {
+      "name": "BulletDisplay",
+      "pageSourceFile": "src/main/ets/pages/BulletDisplay.ets",
+      "buildFunction": "BulletDisplayBuilder"
+    },
+    {
+      "name": "Bullet",
+      "pageSourceFile": "src/main/ets/pages/Bullet.ets",
+      "buildFunction": "BulletBuilder"
+    },
+    {
+      "name": "GlowStickDisplay",
+      "pageSourceFile": "src/main/ets/pages/GlowStickDisplay.ets",
+      "buildFunction": "GlowStickDisplayBuilder"
+    },
+    {
+      "name": "GlowStick",
+      "pageSourceFile": "src/main/ets/pages/GlowStick.ets",
+      "buildFunction": "GlowStickBuilder"
+    },
+    {
+      "name": "History",
+      "pageSourceFile": "src/main/ets/pages/History.ets",
+      "buildFunction": "HistoryBuilder"
+    },
+    {
+      "name": "BulletPage",
+      "pageSourceFile": "src/main/ets/pages/BulletPage.ets",
+      "buildFunction": "BulletPageBuilder"
+    }
+  ]
+}

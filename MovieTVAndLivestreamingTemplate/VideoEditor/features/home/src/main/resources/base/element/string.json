@@ -1,0 +1,164 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "Start_create",
+      "value": "开始创作"
+    },
+    {
+      "name": "Cut",
+      "value": "剪辑"
+    },
+    {
+      "name": "Template",
+      "value": "模板"
+    },
+    {
+      "name": "Text_image",
+      "value": "图文"
+    },
+    {
+      "name": "Script",
+      "value": "脚本"
+    },
+    {
+      "name": "Recently_deleted",
+      "value": "最近删除"
+    },
+    {
+      "name": "Main_page",
+      "value": "首页"
+    },
+    {
+      "name": "Message",
+      "value": "消息"
+    },
+    {
+      "name": "Mine",
+      "value": "我的"
+    },
+    {
+      "name": "edit",
+      "value": "编辑"
+    },
+    {
+      "name": "save",
+      "value": "导出"
+    },
+    {
+      "name": "cut",
+      "value": "剪辑"
+    },
+    {
+      "name": "pip",
+      "value": "画中画"
+    },
+    {
+      "name": "video_frame_extraction",
+      "value": "视频抽帧"
+    },
+    {
+      "name": "autocue",
+      "value": "提词器"
+    },
+    {
+      "name": "add_subtitles",
+      "value": "添加字幕"
+    },
+    {
+      "name": "just_example",
+      "value": "该处仅做展示。"
+    },
+    {
+      "name": "save_success",
+      "value": "保存成功"
+    },
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "label"
+    },
+    {
+      "name": "home",
+      "value": "首页"
+    },
+    {
+      "name": "template",
+      "value": "模板"
+    },
+    {
+      "name": "message",
+      "value": "消息"
+    },
+    {
+      "name": "mine",
+      "value": "我的"
+    },
+    {
+      "name": "image_text",
+      "value": "图文"
+    },
+    {
+      "name": "script",
+      "value": "脚本"
+    },
+    {
+      "name": "delete_recently",
+      "value": "最近删除"
+    },
+    {
+      "name": "collect",
+      "value": "收藏"
+    },
+    {
+      "name": "picture_in_picture",
+      "value": "画中画"
+    },
+    {
+      "name": "record",
+      "value": "录音"
+    },
+    {
+      "name": "split",
+      "value": "分割"
+    },
+    {
+      "name": "add_picture_in_picture",
+      "value": "新增画中画"
+    },
+    {
+      "name": "set_video_cover",
+      "value": "设置为封面"
+    },
+    {
+      "name": "save_album",
+      "value": "保存至相册"
+    },
+    {
+      "name": "set_cover",
+      "value": "设置封面"
+    },
+    {
+      "name": "turn_off_sound",
+      "value": "关闭原声"
+    },
+    {
+      "name": "turn_on_sound",
+      "value": "开启原声"
+    },
+    {
+      "name": "delete",
+      "value": "删除"
+    }
+  ]
+}

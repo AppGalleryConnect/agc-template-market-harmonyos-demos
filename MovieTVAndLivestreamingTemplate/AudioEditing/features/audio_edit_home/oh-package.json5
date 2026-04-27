@@ -1,0 +1,30 @@
+{
+  "name": "audio_edit_home",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "audio_adjust_speed": "file:../../components/audio_adjust_speed",
+    "audio_adjust_tone": "file:../../components/audio_adjust_tone",
+    "audio_crop": "file:../../components/audio_crop/",
+    "audio_format_conversion": "file:../../components/audio_format_conversion",
+    "audio_extraction": "file:../../components/audio_extraction",
+    "audio_synthesis": "file:../../components/audio_synthesis",
+    "audio_worker": "file:../../components/audio_worker",
+    "audio_common": "file:../../components/audio_common",
+    "common_view": "file:../../components/common_view",
+    "@ohos/mp4parser": "2.0.6",
+    "common": "file:../../commons/common",
+    "oh_router": "file:../../commons/oh_router",
+    "vip_center": "file:../../components/vip_center",
+    "person": "file:../../features/person"
+  },
+  "type": "feature",
+  "usage": "音频编辑模块，支持音频剪辑、调速、调节、合成、提取、格式转换、降噪等功能，提供VIP权益管理",
+  "zhName": "音频编辑",
+  "tabPage": "AutioEditHomePage",
+  "tabImage": "screenshots/audioEditHome.jpg",
+  "tabOrder": 0
+}

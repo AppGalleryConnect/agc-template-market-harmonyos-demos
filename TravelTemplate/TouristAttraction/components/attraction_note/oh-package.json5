@@ -1,0 +1,14 @@
+{
+  "name": "attraction_note",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    '@ohos/axios': 'latest',
+    '@ohos/pulltorefresh': '2.1.0',
+    "module_base": "file:../module_base",
+    "@hw-agconnect/util-log": "^1.0.0"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "module_address_card",
+    "type": "har",
+    "deviceTypes": [
+      "default"
+    ]
+  }
+}

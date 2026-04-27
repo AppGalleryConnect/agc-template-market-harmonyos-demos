@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "apply_microphone_reason",
+      "value": "录音需要获取麦克风权限"
+    },
+    {
+      "name": "agcit_huawei_translator",
+      "value": "1.0.3"
+    },
+    {
+      "name": "agcittype_huawei_translator",
+      "value": "serviceComponent"
+    }
+  ]
+}

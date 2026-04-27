@@ -1,0 +1,14 @@
+{
+  "name": "chat_location",
+  "version": "1.0.0",
+  "description": "发送位置组件提供了选择地理位置的功能和查看地理位置的功能",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "component",
+  "usage": "提供了选择地理位置的功能和查看地理位置的功能",
+  "zhName": "发送位置组件",
+  "dependencies": {
+    "chat_base": "file:../chat_base"
+  }
+}

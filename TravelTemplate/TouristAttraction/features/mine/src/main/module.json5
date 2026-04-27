@@ -1,0 +1,13 @@
+{
+  "module": {
+    "name": "mine",
+    "type": "shared",
+    "deliveryWithInstall": true,
+    "description": "$string:shared_desc",
+    "deviceTypes": [
+      "phone",
+    ],
+    "installationFree": true,
+    "routerMap": "$profile:router_map"
+  }
+}

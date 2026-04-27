@@ -1,0 +1,16 @@
+{
+  "name": "shop",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "packageType": "InterfaceHar",
+  "dependencies": {
+    "network": "file:../../common/network",
+    "type": "file:../../common/type",
+    "util": "file:../../common/util",
+    "constant": "file:../../common/constant",
+    "component": "file:../../common/component"
+  }
+}

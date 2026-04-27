@@ -1,0 +1,16 @@
+{
+  "color": [
+    {
+      "name": "common_red",
+      "value": "#E84026"
+    },
+    {
+      "name": "common_grey",
+      "value": "#565656"
+    },
+    {
+      "name": "grey_20",
+      "value": "#CCCCCC"
+    }
+  ]
+}

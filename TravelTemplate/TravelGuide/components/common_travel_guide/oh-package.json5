@@ -1,0 +1,16 @@
+{
+  "name": "common_travel_guide",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "common": "file:../../commons/common",
+    "oh_router": "file:../../commons/oh_router",
+    "module_auth": "file:../../components/module_auth"
+  },
+  "type": "component",
+  "usage": "通用旅游指南组件，提供旅游指南相关功能，支持旅游攻略展示和导航。",
+  "zhName": "通用旅游指南组件"
+}

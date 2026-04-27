@@ -1,0 +1,8 @@
+export enum PageStateKind {
+  LOADING,
+  LOADING_FAIL,
+  NO_RESULT,
+  NETWORK_ERROR,
+  CONTENT,
+  EMPTY_PAGE,
+}

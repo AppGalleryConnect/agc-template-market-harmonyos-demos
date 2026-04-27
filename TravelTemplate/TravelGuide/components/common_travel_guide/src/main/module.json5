@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "common_travel_guide",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

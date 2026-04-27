@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "service_hotline",
+    "type": "har",
+    "deviceTypes": [
+      "default"
+    ]
+  }
+}

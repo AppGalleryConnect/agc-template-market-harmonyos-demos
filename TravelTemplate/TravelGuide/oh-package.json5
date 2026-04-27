@@ -1,0 +1,23 @@
+{
+  "modelVersion": "5.0.5",
+  "description": "Please describe the basic information.",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@ohos/hypium": "1.0.21"
+  },
+  "dynamicDependencies": {},
+  "template": {
+    "domain": "旅游",
+    "name": "旅游攻略模板",
+    "usage": "本模板为旅游类应用提供了常用功能的开发样例，模板主要分首页、行程、消息和个人中心四大模块。首页支持旅游攻略搜索、分类导航、热点展示、帖子瀑布流浏览；行程提供行程列表展示、详情查看、旅行足迹入口功能；消息提供订单出行的消息列表展示、系统通知、开启推送服务等功能；个人中心提供用户信息管理、登录/注册、订单管理、收藏管理、发布帖子、VIP服务、意见反馈、设置等功能。本模板已集成华为账号、微信登录、消息管理、应用更新检查、意见反馈、实名认证等服务，采用模块化架构设计，支持多设备适配。",
+    "scene": "template,generate",
+    "sdk": [],
+    "color": {
+      "themeFilePath": "",
+      "mainThemeName": "",
+      "secondThemeName": "",
+      "themeFileContent": ""
+    }
+  }
+}

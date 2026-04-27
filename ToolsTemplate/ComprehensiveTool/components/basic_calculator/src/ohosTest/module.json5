@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "basic_calculator_test",
+    "type": "feature",
+    "deviceTypes": [
+      "default"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": true
+  }
+}

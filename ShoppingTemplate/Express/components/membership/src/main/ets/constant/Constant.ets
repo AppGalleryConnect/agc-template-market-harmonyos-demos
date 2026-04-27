@@ -1,0 +1,1 @@
+export const DEFAULT_LOGIN_SHEET_HEIGHT: number = 622;

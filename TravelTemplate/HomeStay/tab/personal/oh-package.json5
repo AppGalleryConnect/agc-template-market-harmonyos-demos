@@ -1,0 +1,17 @@
+{
+  "name": "personal",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "packageType": "InterfaceHar",
+  "dependencies": {
+    "calendar_select": "file:../../components/calendar_select",
+    "util": "file:../../common/util",
+    "network": "file:../../common/network",
+    "constant": "file:../../common/constant",
+    "type": "file:../../common/type",
+    "component": "file:../../common/component"
+  }
+}

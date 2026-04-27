@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "module_form_test",
+    "type": "feature",
+    "deviceTypes": [
+      "default"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": true
+  }
+}

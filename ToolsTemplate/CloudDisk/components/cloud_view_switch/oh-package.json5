@@ -1,0 +1,15 @@
+{
+  "name": "cloud_view_switch",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "cloud_file_base": "file:../cloud_file_base",
+    "cloud_operation_item": "file:../cloud_operation_item"
+  },
+  "type": "component",
+  "usage": "视图切换组件：提供文件列表与网格视图切换、类型筛选与排序入口，复用基础文件组件进行渲染。",
+  "zhName": "云盘视图切换组件"
+}

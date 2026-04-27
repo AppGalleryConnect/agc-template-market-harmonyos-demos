@@ -1,0 +1,10 @@
+{
+  "name": "chat_base",
+  "version": "1.0.0",
+  "description": "需要发布的模块",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+  }
+}

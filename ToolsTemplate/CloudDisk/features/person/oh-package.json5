@@ -1,0 +1,32 @@
+{
+  "name": "person",
+  "version": "1.0.1",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "feature",
+  "usage": "个人中心模块：提供用户个人信息管理、收藏、下载、分享、回收站、设置、意见反馈等功能",
+  "zhName": "我的",
+  "tabPage": "MinePage",
+  "tabImage": "screenshot/person.jpg",
+  "tabOrder": 3,
+  "dependencies": {
+    "common": "file:../../commons/common",
+    "oh_router": "file:../../commons/OHRouter",
+    "check_app_update": "file:../../components/check_app_update",
+    "base_apis": "file:../../components/base_apis",
+    "feedback": "file:../../components/feedback",
+    "aggregated_login": "file:../../components/aggregated_login",
+    "@tencent/wechat_open_sdk": "1.0.7",
+    "clouddisk_file_select": "file:../../components/clouddisk_file_select",
+    "clouddisk_file_operation": "file:../../components/clouddisk_file_operation",
+    "collect_personal_info": "file:../../components/collect_personal_info",
+    "module_share": "file:../../components/module_share",
+    "clouddisk_file": "file:../clouddisk_file",
+    "module_cloud_upload": "file:../../components/module_cloud_upload",
+    "clouddisk_file_detail": "file:../../components/clouddisk_file_detail",
+    "cloud_file_base": "file:../../components/cloud_file_base",
+    "cloud_share": "file:../../components/cloud_share"
+  }
+}

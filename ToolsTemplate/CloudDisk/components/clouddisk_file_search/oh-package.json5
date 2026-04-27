@@ -1,0 +1,12 @@
+{
+  "name": "clouddisk_file_search",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "component",
+  "usage": "云盘文件搜索组件：提供文件搜索功能，支持关键词搜索、搜索历史和模糊匹配",
+  "zhName": "云盘文件搜索组件",
+  "dependencies": {}
+}

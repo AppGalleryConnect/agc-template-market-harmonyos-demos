@@ -1,0 +1,24 @@
+{
+  "name": "person",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "common": "file:../../commons/common",
+    "oh_router": "file:../../commons/oh_router",
+    "feedback": "file:../../components/feedback",
+    "aggregated_login": "file:../../components/aggregated_login",
+    "collect_personal_info": "file:../../components/collect_personal_info",
+    "check_app_update": "file:../../components/check_app_update",
+    "@tencent/wechat_open_sdk": "1.0.16",
+    "@hw-agconnect/ui-calendar-picker": "2.0.0"
+  },
+  "type": "feature",
+  "usage": "个人中心模块：提供用户登录（华为账号一键登录、微信登录）、个人信息管理、意见反馈、应用更新检查、隐私设置、清除缓存、关于我们、退出登录等完整的个人中心功能",
+  "zhName": "我的",
+  "tabPage": "MinePage",
+  "tabImage": "screenshots/person.jpg",
+  "tabOrder": 1
+}

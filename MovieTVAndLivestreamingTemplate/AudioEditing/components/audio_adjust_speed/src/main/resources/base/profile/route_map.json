@@ -1,0 +1,9 @@
+{
+  "routerMap": [
+    {
+      "name": "AudioAdjustSpeedPage",
+      "pageSourceFile": "src/main/ets/pages/AudioAdjustSpeedPage.ets",
+      "buildFunction": "AudioAdjustSpeedPageBuilder"
+    }
+  ]
+}

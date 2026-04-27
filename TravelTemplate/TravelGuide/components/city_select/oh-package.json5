@@ -1,0 +1,12 @@
+{
+  "name": "city_select",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {},
+  "type": "component",
+  "usage": "通用城市选择组件，选择城市的功能，长按城市按钮将显示城市全称。",
+  "zhName": "通用城市选择组件"
+}

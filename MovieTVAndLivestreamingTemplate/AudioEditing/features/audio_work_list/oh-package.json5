@@ -1,0 +1,20 @@
+{
+  "name": "audio_work_list",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "common_view": "file:../../components/common_view",
+    "audio_common": "file:../../components/audio_common",
+    "common": "file:../../commons/common",
+    "oh_router": "file:../../commons/oh_router"
+  },
+  "type": "feature",
+  "usage": "作品管理模块，支持已编辑音频作品的查看、播放、编辑、删除和保存到相册等功能",
+  "zhName": "作品列表",
+  "tabPage": "WorkListPage",
+  "tabImage": "screenshots/audioWorkList.jpg",
+  "tabOrder": 1
+}

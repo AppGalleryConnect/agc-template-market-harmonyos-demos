@@ -1,0 +1,9 @@
+{
+  "routerMap": [
+    {
+      "name": "KinshipPage",
+      "pageSourceFile": "src/main/ets/pages/KinshipPage.ets",
+      "buildFunction": "KinshipPageBuilder"
+    }
+  ]
+}

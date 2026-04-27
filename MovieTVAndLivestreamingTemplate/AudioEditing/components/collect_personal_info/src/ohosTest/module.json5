@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "collect_personal_info_test",
+    "type": "feature",
+    "deviceTypes": [
+      "phone"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false
+  }
+}

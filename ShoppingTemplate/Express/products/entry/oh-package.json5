@@ -1,0 +1,16 @@
+{
+  "name": "entry",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "",
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "lib_foundation": "file:../../commons/lib_foundation",
+    "module_base": "file:../../components/module_base",
+    "business_home": 'file:../../features/business_home',
+    'business_order': 'file:../../features/business_order',
+    'business_mine': 'file:../../features/business_mine'
+  }
+}
+

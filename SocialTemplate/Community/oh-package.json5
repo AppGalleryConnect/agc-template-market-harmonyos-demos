@@ -1,0 +1,22 @@
+{
+  "modelVersion": "5.0.5",
+  "description": "Please describe the basic information.",
+  "template": {
+    "domain": "社交交友",
+    "name": "社交交友通用模板",
+    "usage": "本模板为社交交友类应用提供常用功能的开发样例，涵盖消息、通讯录、个人中心等模块，可作为通用工程起点。",
+    "scene": "template,generate",
+    "sdk": [],
+    "color": {
+      "themeFilePath": "",
+      "mainThemeName": "",
+      "secondThemeName": "",
+      "themeFileContent": ""
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@ohos/hypium": "1.0.21"
+  },
+  "dynamicDependencies": {}
+}

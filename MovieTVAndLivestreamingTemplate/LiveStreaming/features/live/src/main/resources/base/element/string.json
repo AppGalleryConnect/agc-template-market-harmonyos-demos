@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "shared_desc",
+      "value": "description"
+    },
+    {
+      "name": "start_live",
+      "value": "开始直播"
+    },
+    {
+      "name": "reason",
+      "value": "用于视频直播"
+    },
+    {
+      "name": "agcit_huawei_live_streaming",
+      "value": "1.0.1"
+    }
+  ]
+}

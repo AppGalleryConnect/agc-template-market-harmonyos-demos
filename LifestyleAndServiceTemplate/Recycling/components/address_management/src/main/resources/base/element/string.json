@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "read_pasteboard_reason",
+      "value": "Apply for read pasteboard"
+    },
+    {
+      "name": "agcit_huawei_common_address_management",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_common_address_management",
+      "value": "serviceComponent"
+    }
+  ]
+}

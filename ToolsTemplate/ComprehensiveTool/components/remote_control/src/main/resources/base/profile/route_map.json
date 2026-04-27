@@ -1,0 +1,24 @@
+{
+  "routerMap": [
+    {
+      "name": "RemotePage",
+      "pageSourceFile": "src/main/ets/pages/RemotePage.ets",
+      "buildFunction": "RemotePageBuilder"
+    },
+    {
+      "name": "BrandPage",
+      "pageSourceFile": "src/main/ets/pages/BrandPage.ets",
+      "buildFunction": "BrandPageBuilder"
+    },
+    {
+      "name": "UserGuidePage",
+      "pageSourceFile": "src/main/ets/pages/UserGuidePage.ets",
+      "buildFunction": "UserGuidePageBuilder"
+    },
+    {
+      "name": "ControllerPage",
+      "pageSourceFile": "src/main/ets/pages/ControllerPage.ets",
+      "buildFunction": "ControllerPageBuilder"
+    }
+  ]
+}

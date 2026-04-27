@@ -1,0 +1,24 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "示例Demo"
+    },
+    {
+      "name": "app_description",
+      "value": "示例Demo详细描述"
+    },
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "phone_number",
+      "value": "123****789"
+    },
+    {
+      "name": "camera_reason",
+      "value": "获取相机权限"
+    }
+  ]
+}

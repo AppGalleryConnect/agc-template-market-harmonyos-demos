@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "agcit_huawei_home_decoration_module_filter_list",
+      "value": "1.0.1"
+    },
+    {
+      "name": "agcittype_huawei_home_decoration_module_filter_list",
+      "value": "serviceComponent"
+    }
+  ]
+}

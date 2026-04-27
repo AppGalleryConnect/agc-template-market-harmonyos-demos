@@ -1,0 +1,22 @@
+{
+  "name": "journey",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "common": "file:../../commons/common",
+    "oh_router": "file:../../commons/oh_router",
+    "person": "file:../../features/person",
+    "common_travel_guide": "file:../../components/common_travel_guide",
+    "travel_footprint": "file:../../components/travel_footprint",
+    "homepage": "file:../../features/homepage"
+  },
+  "type": "feature",
+  "usage": "行程模块，提供行程列表展示、行程详情查看、旅行足迹入口功能。支持按状态分类展示行程（待出行、进行中、已完成），提供城市足迹地图可视化展示和添加足迹功能。",
+  "zhName": "行程",
+  "tabPage": "MyJourneyPage",
+  "tabImage": "screenshots/journey.jpg",
+  "tabOrder": 1
+}

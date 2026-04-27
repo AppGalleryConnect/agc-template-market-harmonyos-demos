@@ -1,0 +1,19 @@
+{
+  "routerMap": [
+    {
+      "name": "TranslatorPage",
+      "pageSourceFile": "src/main/ets/pages/TranslatorPage.ets",
+      "buildFunction": "TranslatorPageBuilder"
+    },
+    {
+      "name": "VideoTranPage",
+      "pageSourceFile": "src/main/ets/pages/VideoTranPage.ets",
+      "buildFunction": "VideoTranPageBuilder"
+    },
+    {
+      "name": "HistoryPage",
+      "pageSourceFile": "src/main/ets/pages/HistoryPage.ets",
+      "buildFunction": "HistoryPageBuilder"
+    }
+  ]
+}

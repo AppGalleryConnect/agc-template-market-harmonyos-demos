@@ -1,0 +1,19 @@
+{
+  "name": "message",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "common": "file:../../commons/common",
+    "oh_router": "file:../../commons/oh_router",
+    "common_travel_guide": "file:../../components/common_travel_guide"
+  },
+  "type": "feature",
+  "usage": "消息模块，提供订单出行消息列表展示、系统通知、开启推送服务等功能。支持消息分类展示（订单出行、系统通知），消息已读/未读状态管理。",
+  "zhName": "消息",
+  "tabPage": "MessagePage",
+  "tabImage": "screenshots/message.jpg",
+  "tabOrder": 2
+}

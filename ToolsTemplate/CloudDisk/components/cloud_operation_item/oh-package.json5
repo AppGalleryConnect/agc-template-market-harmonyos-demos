@@ -1,0 +1,12 @@
+{
+  "name": "cloud_operation_item",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {},
+  "type": "component",
+  "usage": "文件操作项组件：提供批量/单项操作入口（如重命名、删除、移动等），结合视图组件作为底部操作栏显示。",
+  "zhName": "云盘操作项组件"
+}

@@ -1,0 +1,80 @@
+{
+  "float": [
+    {
+      "name": "font_size",
+      "value": "14fp"
+    },
+    {
+      "name": "margin_bottom",
+      "value": "20vp"
+    },
+    {
+      "name": "back_width",
+      "value": "32vp"
+    },
+    {
+      "name": "image_width",
+      "value": "40vp"
+    },
+    {
+      "name": "border_radius",
+      "value": "16vp"
+    },
+    {
+      "name": "border_radius_m",
+      "value": "12vp"
+    },
+    {
+      "name": "margin_top",
+      "value": "10vp"
+    },
+    {
+      "name": "font_size_m",
+      "value": "10fp"
+    },
+    {
+      "name": "font_size_l",
+      "value": "12fp"
+    },
+    {
+      "name": "brash_width",
+      "value": "58vp"
+    },
+    {
+      "name": "brash_height",
+      "value": "59vp"
+    },
+    {
+      "name": "padding_left",
+      "value": "18vp"
+    },
+    {
+      "name": "title_bottom",
+      "value": "12vp"
+    },
+    {
+      "name": "paint_width",
+      "value": "72vp"
+    },
+    {
+      "name": "paint_height",
+      "value": "52vp"
+    },
+    {
+      "name": "slider_width",
+      "value": "242vp"
+    },
+    {
+      "name": "number",
+      "value": "47vp"
+    },
+    {
+      "name": "bottom",
+      "value": "5vp"
+    },
+    {
+      "name": "height",
+      "value": "550vp"
+    }
+  ]
+}

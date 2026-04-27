@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "notification",
+    "type": "har",
+    "routerMap": "$profile:router_map_notification",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ]
+  }
+}

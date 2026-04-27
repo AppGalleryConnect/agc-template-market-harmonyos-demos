@@ -1,0 +1,34 @@
+{
+  "routerMap": [
+    {
+      "name": "RecognitionHomePage",
+      "pageSourceFile": "src/main/ets/pages/RecognitionHomePage.ets",
+      "buildFunction": "RecognitionHomePageBuilder"
+    },
+    {
+      "name": "TextResultPage",
+      "pageSourceFile": "src/main/ets/pages/TextResultPage.ets",
+      "buildFunction": "TextResultPageBuilder"
+    },
+    {
+      "name": "PdfResultPage",
+      "pageSourceFile": "src/main/ets/pages/PdfResultPage.ets",
+      "buildFunction": "PdfResultPageBuilder"
+    },
+    {
+      "name": "DocScanPage",
+      "pageSourceFile": "src/main/ets/pages/DocScanPage.ets",
+      "buildFunction": "DocScanPageBuilder"
+    },
+    {
+      "name": "CardRecognitionPage",
+      "pageSourceFile": "src/main/ets/pages/CardRecognitionPage.ets",
+      "buildFunction": "CardRecognitionPageBuilder"
+    },
+    {
+      "name": "CameraPage",
+      "pageSourceFile": "src/main/ets/pages/CameraPage.ets",
+      "buildFunction": "CameraPageBuilder"
+    }
+  ]
+}

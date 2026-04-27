@@ -1,0 +1,15 @@
+{
+  "name": "audio_adjust_tone",
+  "version": "1.0.0",
+  "description": "音频调节组件，用于调整音频的音调和音色",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "component",
+  "usage": "音频调节功能，支持音频音调、音色、音量等参数的调整，提供多种音效预设",
+  "zhName": "音频调节组件",
+  "dependencies": {
+    "audio_common": "file:../audio_common",
+    "audio_worker": "file:../audio_worker"
+  }
+}

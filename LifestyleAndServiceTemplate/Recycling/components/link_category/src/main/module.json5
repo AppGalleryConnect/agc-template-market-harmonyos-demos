@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "link_category",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

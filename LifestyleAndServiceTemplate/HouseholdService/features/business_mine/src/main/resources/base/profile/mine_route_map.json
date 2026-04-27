@@ -1,0 +1,29 @@
+{
+  "routerMap": [
+    {
+      "name": "EditPersonal",
+      "pageSourceFile": "src/main/ets/pages/EditPersonal.ets",
+      "buildFunction": "EditPersonalBuilder"
+    },
+    {
+      "name": "CommonService",
+      "pageSourceFile": "src/main/ets/pages/CommonService.ets",
+      "buildFunction": "CommonServiceBuilder"
+    },
+    {
+      "name": "OfficialWeb",
+      "pageSourceFile": "src/main/ets/pages/OfficialWeb.ets",
+      "buildFunction": "OfficialWebBuilder"
+    },
+    {
+      "name": "MyOrderDetail",
+      "pageSourceFile": "src/main/ets/pages/MyOrderDetail.ets",
+      "buildFunction": "MyOrderDetailBuilder"
+    },
+    {
+      "name": "MyOrderList",
+      "pageSourceFile": "src/main/ets/pages/MyOrderList.ets",
+      "buildFunction": "MyOrderListBuilder"
+    }
+  ]
+}

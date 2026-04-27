@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "voice_input",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

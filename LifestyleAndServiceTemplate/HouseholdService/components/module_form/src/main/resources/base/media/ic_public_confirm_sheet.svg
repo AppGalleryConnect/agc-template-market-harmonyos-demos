@@ -1,0 +1,25 @@
+<!--
+  - Copyright (c) 2025 Huawei Device Co., Ltd.
+  - Licensed under the Apache License, Version 2.0 (the "License");
+  - you may not use this file except in compliance with the License.
+  - You may obtain a copy of the License at
+  -
+  -     http://www.apache.org/licenses/LICENSE-2.0
+  -
+  - Unless required by applicable law or agreed to in writing, software
+  - distributed under the License is distributed on an "AS IS" BASIS,
+  - WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  - See the License for the specific language governing permissions and
+  - limitations under the License.
+  -->
+
+<svg width="40.000000" height="40.000000" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs/>
+	<rect id=".close btn" rx="20.000000" width="40.000000" height="40.000000" fill="#000000" fill-opacity="0.047059"/>
+	<g opacity="0.000000"/>
+	<path id="path4" d="M28.46 13.49L28.46 13.46C28.76 13.17 29.23 13.17 29.53 13.46C29.82 13.76 29.82 14.23 29.53 14.53L29.5 14.53L28.46 13.49ZM10.49 19.93L10.46 19.93C10.17 19.63 10.17 19.16 10.46 18.87C10.76 18.57 11.23 18.57 11.53 18.87L11.53 18.89L10.49 19.93Z" fill="#000000" fill-opacity="0" fill-rule="nonzero"/>
+	<path id="path4" d="M29 14L17.29 25.7L11 19.4" stroke="#191919" stroke-opacity="1.000000" stroke-width="1.500000" stroke-linejoin="round" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,19 @@
+{
+  "routerMap": [
+    {
+      "name": "CredentialsPage",
+      "pageSourceFile": "src/main/ets/pages/CredentialsPage.ets",
+      "buildFunction": "CredentialsPageBuilder"
+    },
+    {
+      "name": "SavePhotoPage",
+      "pageSourceFile": "src/main/ets/pages/SavePhotoPage.ets",
+      "buildFunction": "SavePhotoPageBuilder"
+    },
+    {
+      "name": "PhotoEditPage",
+      "pageSourceFile": "src/main/ets/pages/PhotoEditPage.ets",
+      "buildFunction": "PhotoEditPageBuilder"
+    }
+  ]
+}

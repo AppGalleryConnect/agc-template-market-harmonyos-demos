@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "audio_work_list_test",
+    "type": "feature",
+    "deviceTypes": [
+      "phone"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false
+  }
+}

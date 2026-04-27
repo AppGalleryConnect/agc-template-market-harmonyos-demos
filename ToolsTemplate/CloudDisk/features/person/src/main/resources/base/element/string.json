@@ -1,0 +1,172 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "示例Demo"
+    },
+    {
+      "name": "app_description",
+      "value": "示例Demo详细描述"
+    },
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "phone_number",
+      "value": "123****789"
+    },
+    {
+      "name": "safe_Account",
+      "value": "账号与安全"
+    },
+    {
+      "name": "device_manage",
+      "value": "设备管理"
+    },
+    {
+      "name": "download_update",
+      "value": "移动网络下上传/下载"
+    },
+    {
+      "name": "clear_cache",
+      "value": "清除缓存"
+    },
+    {
+      "name": "version_update",
+      "value": "版本更新"
+    },
+    {
+      "name": "about_app",
+      "value": "关于应用"
+    },
+    {
+      "name": "private_setting",
+      "value": "隐私设置"
+    },
+    {
+      "name": "setting",
+      "value": "设置"
+    },
+    {
+      "name": "change_success",
+      "value": "修改成功"
+    },
+    {
+      "name": "secret_not_same",
+      "value": "新密码和确认密码不一致，请检查后重试！"
+    },
+    {
+      "name": "old_secret_not_correct",
+      "value": "原密码不正确，请检查后重试！"
+    },
+    {
+      "name": "old_secret",
+      "value": "原密码"
+    },
+    {
+      "name": "input_old_secret",
+      "value": "请输入原密码"
+    },
+    {
+      "name": "new_secret",
+      "value": "新密码"
+    },
+    {
+      "name": "input_new_secret",
+      "value": "请输入新密码"
+    },
+    {
+      "name": "sure_secret",
+      "value": "确认密码"
+    },
+    {
+      "name": "sure_new_secret",
+      "value": "请确认新密码"
+    },
+    {
+      "name": "private_space_secret",
+      "value": "隐私空间密码"
+    },
+    {
+      "name": "yes_is_no_private_space_secret",
+      "value": "是否开启隐私空间"
+    },
+    {
+      "name": "yes_private_space_secret",
+      "value": "开启隐私空间"
+    },
+    {
+      "name": "change_private_space_secret",
+      "value": "修改隐私空间密码"
+    },
+    {
+      "name": "not_save_secret",
+      "value": "密码尚未保存"
+    },
+    {
+      "name": "sure_exit",
+      "value": "确认退出？"
+    },
+    {
+      "name": "success_exit",
+      "value": "退出成功"
+    },
+    {
+      "name": "not_login",
+      "value": "您还未登录"
+    },
+    {
+      "name": "latest_version",
+      "value": "已是最新版本"
+    },
+    {
+      "name": "exit_login",
+      "value": "退出登录"
+    },
+    {
+      "name": "recycle_bin",
+      "value": "回收站"
+    },
+    {
+      "name": "not_vip_tip_recyclebin",
+      "value": "默认已删除的文件保存7天，充会员可延长保存时间"
+    },
+    {
+      "name": "current_device",
+      "value": "当前设备"
+    },
+    {
+      "name": "login_quantity_prompt",
+      "value": "以下是所有登录设备，限制最多10个不同设备登录"
+    },
+    {
+      "name": "login_device_management",
+      "value": "登录设备管理"
+    },
+    {
+      "name": "device",
+      "value": "设备"
+    },
+    {
+      "name": "delete_device",
+      "value": "移除设备"
+    },
+    {
+      "name": "phone_network_title",
+      "value": "确定开启移动网络吗？"
+    },
+    {
+      "name": "phone_network_message",
+      "value": "开启后可能会产生流量费用，开启后不再提示"
+    },
+    {
+      "name": "cancel",
+      "value": "取消"
+    },
+    {
+      "name": "sure",
+      "value": "确认"
+    }
+  ]
+}

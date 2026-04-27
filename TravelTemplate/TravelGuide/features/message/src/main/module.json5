@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "message",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "video_common",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "common",
+  "usage": "视频公共层，提供视频播放、状态管理和数据模型等基础功能",
+  "zhName": "视频公共层",
+  "dependencies": {}
+}

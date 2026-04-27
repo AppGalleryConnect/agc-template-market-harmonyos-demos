@@ -1,0 +1,12 @@
+{
+  "routerMap": [
+    {
+      "name": "ToolManagement",
+      "pageSourceFile": "src/main/ets/pages/ToolManagement.ets",
+      "buildFunction": "ToolManagementBuilder",
+      "data": {
+        "description": "this is ToolManagement"
+      }
+    }
+  ]
+}

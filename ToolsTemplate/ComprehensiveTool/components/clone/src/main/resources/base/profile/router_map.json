@@ -1,0 +1,29 @@
+{
+  "routerMap": [
+    {
+      "name": "ClonePage",
+      "pageSourceFile": "src/main/ets/pages/ClonePage.ets",
+      "buildFunction": "ClonePageBuilder"
+    },
+    {
+      "name": "ReceiverPage",
+      "pageSourceFile": "src/main/ets/pages/ReceiverPage.ets",
+      "buildFunction": "ReceiverPageBuilder"
+    },
+    {
+      "name": "FileUploadPage",
+      "pageSourceFile": "src/main/ets/pages/FileUploadPage.ets",
+      "buildFunction": "FileUploadPageBuilder"
+    },
+    {
+      "name": "AirdropPage",
+      "pageSourceFile": "src/main/ets/pages/AirdropPage.ets",
+      "buildFunction": "AirdropPageBuilder"
+    },
+    {
+      "name": "FileReceiverPage",
+      "pageSourceFile": "src/main/ets/pages/FileReceiverPage.ets",
+      "buildFunction": "FileReceiverPageBuilder"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "audio_common",
+  "version": "1.0.0",
+  "description": "音频公共组件，提供音频处理的公共工具和基础功能",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "component",
+  "usage": "音频公共功能模块，提供音频文件读写、格式解析、权限管理等基础功能",
+  "zhName": "音频公共组件",
+  "dependencies": {
+    "@ohos/mp4parser": "2.0.6",
+    "audio_worker": "file:../audio_worker"
+  }
+}

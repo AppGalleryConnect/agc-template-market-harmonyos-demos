@@ -1,0 +1,1 @@
+export { IncomeCalculator } from './src/main/ets/components/IncomeCalculator'

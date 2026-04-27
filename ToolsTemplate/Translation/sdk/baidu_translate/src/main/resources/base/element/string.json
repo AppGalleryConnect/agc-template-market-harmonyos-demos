@@ -1,0 +1,24 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "baidu_translate_api_url",
+      "value": "https://fanyi-api.baidu.com/api/trans/vip/translate"
+    },
+    {
+      "name": "baidu_image_translate_api_url",
+      "value": "https://fanyi-api.baidu.com/api/trans/sdk/picture"
+    },
+    {
+      "name": "baidu_document_translate_api_url",
+      "value": "https://fanyi-api.baidu.com/transapi/doctrans/createjob/trans"
+    },
+    {
+      "name": "baidu_document_query_api_url",
+      "value": "https://fanyi-api.baidu.com/transapi/doctrans/query/trans"
+    }
+  ]
+}

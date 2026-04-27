@@ -1,0 +1,12 @@
+{
+  "name": "voice_input",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {},
+  "type": "component",
+  "usage": "语音输入组件，提供语音识别转文字功能。支持实时语音识别、音量波形显示、识别结果展示和清除等功能。用于翻译应用的语音输入场景。",
+  "zhName": "语音输入组件"
+}

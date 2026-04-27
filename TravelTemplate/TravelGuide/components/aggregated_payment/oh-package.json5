@@ -1,0 +1,15 @@
+{
+  "name": "aggregated_payment",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@tencent/wechat_open_sdk": "1.0.16",
+    "@cashier_alipay/cashiersdk": "./libs/swallow_alipay_sdk"
+  },
+  "type": "component",
+  "usage": "通用支付组件，提供多方的支付能力，支持微信支付、支付宝支付等多种支付方式。",
+  "zhName": "通用支付组件"
+}

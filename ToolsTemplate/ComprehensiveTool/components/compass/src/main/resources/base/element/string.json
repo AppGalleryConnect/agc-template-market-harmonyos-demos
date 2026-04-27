@@ -1,0 +1,60 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "Compass"
+    },
+    {
+      "name": "degree",
+      "value": "%d°"
+    },
+    {
+      "name": "N",
+      "value": "北"
+    },
+    {
+      "name": "EN",
+      "value": "东北"
+    },
+    {
+      "name": "E",
+      "value": "东"
+    },
+    {
+      "name": "ES",
+      "value": "东南"
+    },
+    {
+      "name": "S",
+      "value": "南"
+    },
+    {
+      "name": "WS",
+      "value": "西南"
+    },
+    {
+      "name": "W",
+      "value": "西"
+    },
+    {
+      "name": "WN",
+      "value": "西北"
+    },
+    {
+      "name": "agcit_huawei_compass",
+      "value": "1.0.3"
+    },
+    {
+      "name": "agcittype_huawei_compass",
+      "value": "serviceComponent"
+    }
+  ]
+}

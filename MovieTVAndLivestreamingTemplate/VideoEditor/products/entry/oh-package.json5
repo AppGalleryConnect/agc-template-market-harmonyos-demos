@@ -1,0 +1,23 @@
+{
+  "name": "entry",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "",
+  "author": "",
+  "license": "",
+  "type": "entry",
+  "usage": "入口模块",
+  "zhName": "入口",
+  "dependencies": {
+    "oh_router": "file:../../commons/oh_router",
+    "common": "file:../../commons/common",
+    "video_common": "file:../../components/video_common",
+    "person": "file:../../features/person",
+    "home": "file:../../features/home",
+    "work_list": "file:../../features/work_list",
+    "check_app_update": "file:../../components/check_app_update",
+    "collect_personal_info": "file:../../components/collect_personal_info",
+    "@ohos/mp4parser": "2.0.6"
+  }
+}
+

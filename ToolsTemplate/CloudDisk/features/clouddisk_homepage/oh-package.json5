@@ -1,0 +1,26 @@
+{
+  "name": "clouddisk_homepage",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "feature",
+  "usage": "首页模块：展示文件分类列表，提供文件搜索、下载、删除、分享、重命名、移动、收藏等操作功能",
+  "zhName": "首页",
+  "tabPage": "MainPage",
+  "tabImage": "screenshot/homepage.jpg",
+  "tabOrder": 0,
+  "dependencies": {
+    "oh_router": "file:../../commons/OHRouter",
+    "common": "file:../../commons/common",
+    "clouddisk_file": "file:../clouddisk_file",
+    "clouddisk_file_operation": "file:../../components/clouddisk_file_operation",
+    "clouddisk_file_select": "file:../../components/clouddisk_file_select",
+    "clouddisk_file_search": "file:../../components/clouddisk_file_search",
+    "clouddisk_file_detail": "file:../../components/clouddisk_file_detail",
+    "look_ad": "file:../../components/look_ad",
+    "module_cloud_upload": "file:../../components/module_cloud_upload",
+    "collect_personal_info": "file:../../components/collect_personal_info"
+  }
+}

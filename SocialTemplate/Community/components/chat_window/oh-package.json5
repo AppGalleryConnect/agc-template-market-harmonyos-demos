@@ -1,0 +1,14 @@
+{
+  "name": "chat_window",
+  "version": "1.0.0",
+  "description": "聊天窗口组件提供了展示文本消息、表情消息、图片消息、视频消息、语音消息、地理位置消息的功能",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "component",
+  "usage": "提供了展示文本消息、表情消息、图片消息、视频消息、语音消息、地理位置消息的功能",
+  "zhName": "聊天窗口组件",
+  "dependencies": {
+    "chat_base": "file:../chat_base"
+  }
+}

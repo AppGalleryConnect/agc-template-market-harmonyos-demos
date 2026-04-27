@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "travel_map",
+    "type": "har",
+    "deviceTypes": [
+      "default"
+    ]
+  }
+}

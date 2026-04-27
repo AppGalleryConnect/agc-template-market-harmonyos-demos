@@ -1,0 +1,12 @@
+{
+  "string": [
+    {
+      "name": "agcittype_huawei_picture_watermark",
+      "value": "serviceComponent"
+    },
+    {
+      "name": "agcit_huawei_picture_watermark",
+      "value": "1.0.2"
+    }
+  ]
+}

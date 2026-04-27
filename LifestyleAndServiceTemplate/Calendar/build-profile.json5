@@ -1,0 +1,106 @@
+{
+  "app": {
+    "signingConfigs": [],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "compatibleSdkVersion": "5.0.5(17)",
+        "runtimeOS": "HarmonyOS",
+        "targetSdkVersion": "6.0.2(22)",
+        "buildOption": {
+          "strictMode": {
+            "caseSensitiveCheck": true,
+            "useNormalizedOHMUrl": true
+          }
+        }
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug"
+      },
+      {
+        "name": "release"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./product/entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "common",
+      "srcPath": "./commons/common"
+    },
+    {
+      "name": "perpetual",
+      "srcPath": "./features/perpetual"
+    },
+    {
+      "name": "almanac",
+      "srcPath": "./features/almanac"
+    },
+    {
+      "name": "mine",
+      "srcPath": "./features/mine"
+    },
+    {
+      "name": "base_apis",
+      "srcPath": "./components/base_apis"
+    },
+    {
+      "name": "base_calendar",
+      "srcPath": "./components/base_calendar"
+    },
+    {
+      "name": "membership",
+      "srcPath": "./components/membership"
+    },
+    {
+      "name": "yiji_query",
+      "srcPath": "./components/yiji_query"
+    },
+    {
+      "name": "date_calculation",
+      "srcPath": "./components/date_calculation"
+    },
+    {
+      "name": "calendar_almanac",
+      "srcPath": "./components/calendar_almanac"
+    },
+    {
+      "name": "festival_solar",
+      "srcPath": "./components/festival_solar"
+    },
+    {
+      "name": "login_info",
+      "srcPath": "./components/login_info"
+    },
+    {
+      "name": "calendar_events",
+      "srcPath": "./components/calendar_events"
+    },
+    {
+      "name": "router_module",
+      "srcPath": "./commons/router_module"
+    },
+    {
+      "name": "traffic_restriction",
+      "srcPath": "./components/traffic_restriction"
+    },
+    {
+      "name": "today_history",
+      "srcPath": "./components/today_history"
+    }
+  ]
+}

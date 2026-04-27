@@ -1,0 +1,92 @@
+{
+  "string": [
+    {
+      "name": "myclouddisk",
+      "value": "我的云盘"
+    },
+    {
+      "name": "dialog_cancel",
+      "value": "取消"
+    },
+    {
+      "name": "dialog_sure_open",
+      "value": "确认开启"
+    },
+    {
+      "name": "open_private_space_message",
+      "value": "您还没有开启隐私空间，是否开启？"
+    },
+    {
+      "name": "password_setting",
+      "value": "密码设置"
+    },
+    {
+      "name": "please_input_password",
+      "value": "请输入密码"
+    },
+    {
+      "name": "please_sure_password",
+      "value": "请确认密码"
+    },
+    {
+      "name": "password_tip",
+      "value": "密码为8-12位的数字、字母、符号组合"
+    },
+    {
+      "name": "password_sure",
+      "value": "确认"
+    },
+    {
+      "name": "password_not_same",
+      "value": "两次密码输入不一致"
+    },
+    {
+      "name": "password_not_limit",
+      "value": "请输入8-12位的数字、字母、符号组合"
+    },
+    {
+      "name": "private_space",
+      "value": "隐私空间"
+    },
+    {
+      "name": "private_space_move_tip",
+      "value": "是否将文件移入隐私空间，移入后，将无法在云盘列表查看，若已分享，将取消分享"
+    },
+    {
+      "name": "move_file",
+      "value": "移动文件"
+    },
+    {
+      "name": "move_here",
+      "value": "移动到此"
+    },
+    {
+      "name": "downloading",
+      "value": "正在下载..."
+    },
+    {
+      "name": "download_complete",
+      "value": "下载完成"
+    },
+    {
+      "name": "upgrade_open_private_space",
+      "value": "升级会员开启隐私空间"
+    },
+    {
+      "name": "goto_upgrade",
+      "value": "去升级"
+    },
+    {
+      "name": "delete_file_title",
+      "value": "确认删除文件？"
+    },
+    {
+      "name": "delete_file_message",
+      "value": "文件会移动至回收站，默认保存七天"
+    },
+    {
+      "name": "delete_success",
+      "value": "文件已经移动到回收站"
+    }
+  ]
+}

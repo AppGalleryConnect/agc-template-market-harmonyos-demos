@@ -1,0 +1,12 @@
+{
+  "name": "common",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {},
+  "type": "common",
+  "usage": "通用基础层：提供应用开发所需的基础能力和工具类，包括日志工具（TCLogger）、全局上下文管理（GlobalContext）、路由管理（TCRouter、RouterMap）、数据持久化（PreferenceUtil、CacheUtil）、时间处理（TimeUtil、TimerUtil）、权限管理（PermissionUtil）、文件操作（FileSelect、DownloadFileUtil）、单位转换（UnitConverter）、窗口工具（WindowUtils）、事件通知（EmitterUtil）等核心工具类，以及通用UI组件（CommonHeader、ProtocolWebView）和基础数据模型（UserInfo、DisplayModel、BaseViewModel）",
+  "zhName": "通用基础层"
+}

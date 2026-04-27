@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "offline_video_download",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

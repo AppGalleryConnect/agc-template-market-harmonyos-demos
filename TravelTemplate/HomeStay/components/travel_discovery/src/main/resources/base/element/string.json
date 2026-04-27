@@ -1,0 +1,108 @@
+{
+  "string": [
+    {
+      "name": "agcic_72935861410526710813",
+      "value": "@ohos-agcic/travel-discovery/1.0.0"
+    },
+    {
+      "name": "water_flow_title",
+      "value": "游记"
+    },
+    {
+      "name": "bar_total",
+      "value": "全部"
+    },
+    {
+      "name": "bar_new",
+      "value": "最新"
+    },
+    {
+      "name": "bar_hot",
+      "value": "最热"
+    },
+    {
+      "name": "btn_search",
+      "value": "搜索"
+    },
+    {
+      "name": "search_input_placeholder",
+      "value": "搜索..."
+    },
+    {
+      "name": "search_history",
+      "value": "历史记录"
+    },
+    {
+      "name": "total_comment_desc",
+      "value": "共 %s 条评论"
+    },
+    {
+      "name": "comment_history_end",
+      "value": "我也是有底线的！"
+    },
+    {
+      "name": "comment_placeholder",
+      "value": "评论..."
+    },
+    {
+      "name": "comment_success_msg",
+      "value": "评论成功，待审核通过后展示"
+    },
+    {
+      "name": "comment_null_msg",
+      "value": "评论内容不可为空！"
+    },
+    {
+      "name": "comment_user_name_default",
+      "value": "华为用户"
+    },
+    {
+      "name": "comment_history_empty",
+      "value": "暂无搜索记录"
+    },
+    {
+      "name": "pull_load_text",
+      "value": "上拉刷新"
+    },
+    {
+      "name": "pull_load_release",
+      "value": "放开刷新"
+    },
+    {
+      "name": "pull_loading",
+      "value": "加载中"
+    },
+    {
+      "name": "refresh_success",
+      "value": "刷新成功"
+    },
+    {
+      "name": "load_success",
+      "value": "加载完成"
+    },
+    {
+      "name": "search_list_empty",
+      "value": "暂无内容"
+    },
+    {
+      "name": "refresh_fail",
+      "value": "刷新失败"
+    },
+    {
+      "name": "load_fail",
+      "value": "加载失败"
+    },
+    {
+      "name": "query_fail",
+      "value": "请求失败，请联网重试"
+    },
+    {
+      "name": "agcit_huawei_home_stay_travel_discovery",
+      "value": "1.0.2"
+    },
+    {
+      "name": "agcittype_huawei_home_stay_travel_discovery",
+      "value": "serviceComponent"
+    }
+  ]
+}

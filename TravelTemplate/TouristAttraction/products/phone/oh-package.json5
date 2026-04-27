@@ -1,0 +1,21 @@
+{
+  "name": "phone",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "",
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "@hw-agconnect/ui-base": "^1.0.0",
+    "guide": "file:../../features/guide",
+    "home": "file:../../features/home",
+    "mine": "file:../../features/mine",
+    "common": "file:../../commons/common",
+    "order": "file:../../features/order",
+    "ticket": "file:../../features/ticket",
+    "types": "file:../../commons/types",
+    "attraction_announcement": "file:../../components/attraction_announcement",
+    "network": "file:../../commons/network",
+    "module_base": "file:../../components/module_base"
+  }
+}

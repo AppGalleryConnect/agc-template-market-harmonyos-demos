@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "cloud_file_base",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

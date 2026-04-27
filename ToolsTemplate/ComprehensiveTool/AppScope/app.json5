@@ -1,0 +1,11 @@
+{
+  "app": {
+// todo: 请配置您应用的包名
+    "bundleName": "zhyy.1.xxxxxx",
+    "vendor": "example",
+    "versionCode": 1000000,
+    "versionName": "1.0.10",
+    "icon": "$media:layered_image",
+    "label": "$string:app_name"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "routerMap": [
+    {
+      "name": "BillDetailPage",
+      "pageSourceFile": "src/main/ets/views/BillDetailPage.ets",
+      "buildFunction": "billDetailPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "MoneyTrackPage",
+      "pageSourceFile": "src/main/ets/views/HomeView.ets",
+      "buildFunction": "buildHomeView",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "BillByResourcePage",
+      "pageSourceFile": "src/main/ets/views/BillByResourceView.ets",
+      "buildFunction": "billByResourcePageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "CommonConfirmDialog",
+      "pageSourceFile": "src/main/ets/dialogs/CommonConfirmDialog.ets",
+      "buildFunction": "commonConfirmDialogBuilder",
+      "data": {
+        "description": ""
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "LiveStreaming"
+    },
+    {
+      "name": "agcit_huawei_live_streaming",
+      "value": "1.0.1"
+    },
+    {
+      "name": "agcittype_huawei_live_streaming",
+      "value": "industryTemplate"
+    },
+    {
+      "name": "agcitkid_huawei_live_streaming",
+      "value": "agcit_huawei_live_streaming_live_interaction/1.0.1,agcit_huawei_common_dial_panel/1.0.0"
+    }
+  ]
+}

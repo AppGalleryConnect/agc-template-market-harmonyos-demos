@@ -1,0 +1,15 @@
+{
+  "name": "module_cloud_upload",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "component",
+  "usage": "云上传模块组件：提供文件云端上传功能，支持多种文件格式的上传和进度管理",
+  "zhName": "云上传模块组件",
+  "dependencies": {
+    "common": "file:../../commons/common",
+    "@hw-agconnect/auth": "1.0.5"
+  }
+}

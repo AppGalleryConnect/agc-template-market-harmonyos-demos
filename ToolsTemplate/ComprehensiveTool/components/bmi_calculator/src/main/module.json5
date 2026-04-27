@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "bmi_calculator",
+    "type": "har",
+    "routerMap": "$profile:route_map",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

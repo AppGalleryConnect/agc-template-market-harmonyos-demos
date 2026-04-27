@@ -1,0 +1,12 @@
+{
+  "routerMap": [
+    {
+      "name": "DateCalculatorPage",
+      "pageSourceFile": "src/main/ets/pages/DateCalculatorPage.ets",
+      "buildFunction": "DateCalculatorPageBuilder",
+      "data": {
+        "description": "this is DateCalculatorPage"
+      }
+    }
+  ]
+}

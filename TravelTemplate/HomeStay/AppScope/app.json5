@@ -1,0 +1,11 @@
+{
+  "app": {
+// todo 替换为您创建的应用的包名
+    "bundleName": "mszs.1.xxxxxx",
+    "vendor": "example",
+    "versionCode": 1000000,
+    "versionName": "1.0.6",
+    "icon": "$media:icon",
+    "label": "$string:app_name"
+  }
+}

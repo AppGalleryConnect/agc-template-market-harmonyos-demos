@@ -1,0 +1,14 @@
+{
+  "name": "common",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@hw-agconnect/util-log": "1.0.0",
+    'base_apis': "file:../../components/base_apis",
+    "login_info": "file:../../components/login_info",
+    'router_module': 'file:../router_module'
+  }
+}

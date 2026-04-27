@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "addressbook_main_title",
+      "value": "联系人"
+    },
+    {
+      "name": "address_book_empty_text",
+      "value": "暂无内容"
+    }
+  ]
+}

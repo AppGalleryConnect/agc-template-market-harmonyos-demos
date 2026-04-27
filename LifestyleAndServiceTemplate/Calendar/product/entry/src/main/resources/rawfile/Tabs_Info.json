@@ -1,0 +1,17 @@
+[
+  {
+    "title": "万年历",
+    "icon": "app.media.ic_calendar",
+    "iconSel": "app.media.calendar"
+  },
+  {
+    "title": "黄历",
+    "icon": "app.media.ic_almanac",
+    "iconSel": "app.media.nice_day"
+  },
+  {
+    "title": "我的",
+    "icon": "app.media.mine_active",
+    "iconSel": "app.media.mine"
+  }
+]

@@ -1,0 +1,12 @@
+export enum ErrorCode {
+  // 账号未登录
+  ERROR_CODE_LOGIN_OUT = 1001502001,
+  // 该账号不支持一键登录，如海外账号
+  ERROR_CODE_NOT_SUPPORTED = 1001500003,
+  // 网络错误
+  ERROR_CODE_NETWORK_ERROR = 1001502005,
+  // 用户未同意用户协议
+  ERROR_CODE_AGREEMENT_STATUS_NOT_ACCEPTED = 1005300001,
+  // 参数错误
+  ERROR_CODE_PARAMETER_ERROR = 401
+}

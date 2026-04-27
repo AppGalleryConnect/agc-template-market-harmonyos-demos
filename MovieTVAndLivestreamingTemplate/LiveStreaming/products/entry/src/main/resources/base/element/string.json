@@ -1,0 +1,48 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "直播模板"
+    },
+    {
+      "name": "EntryFormAbility_desc",
+      "value": "直播模板"
+    },
+    {
+      "name": "EntryFormAbility_label",
+      "value": "直播模板"
+    },
+    {
+      "name": "LiveCard_desc",
+      "value": "看直播必备神器"
+    },
+    {
+      "name": "LiveCard_display_name",
+      "value": "直播模板"
+    },
+    {
+      "name": "title_immersive",
+      "value": "看直播必备神器"
+    },
+    {
+      "name": "detail_immersive",
+      "value": "海量热门直播随心看"
+    },
+    {
+      "name": "agcit_huawei_live_streaming",
+      "value": "1.0.1"
+    },
+    {
+      "name": "reason",
+      "value": "用于视频直播"
+    }
+  ]
+}

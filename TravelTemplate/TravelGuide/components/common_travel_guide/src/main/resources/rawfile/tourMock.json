@@ -1,0 +1,1968 @@
+[
+  {
+    "id": 1001,
+    "title": "丽江+大理市4日3晚拼小团",
+    "subTitle": "新升级 雪山喜爱的纳西古村落【玉湖村&白沙古镇】风华雪月大理游【洱海旅拍】",
+    "province": "云南",
+    "cities": [
+      "丽江市",
+      "大理白族自治区"
+    ],
+    "days": 4,
+    "nights": 3,
+    "groupType": "跟团游",
+    "rating": 4.8,
+    "reviewCount": 1264,
+    "priceFrom": 1327,
+    "originalPrice": 2100,
+    "image": "app.media.tour_01",
+    "tags": [
+      "玉龙雪山",
+      "洱海旅拍",
+      "白沙古镇",
+      "大理古城"
+    ],
+    "highlights": [
+      "精致小团，节省等待时间",
+      "玉龙雪山含进山与索道（含票）",
+      "洱海旅拍1次，送底片电子版",
+      "全程精选舒适酒店，含早"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "第1天 全国各地——西双版纳接机(专车接送，让您入住出行无忧)",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_01",
+            "activity": "济南至西双版纳飞机"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐、午餐自理，晚餐包含"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_03",
+            "activity": "景洪4钻酒店：西双版纳景洪俊都福朋喜来登酒店 或其他酒店"
+          }
+        ],
+        "meals": {
+          "breakfast": false,
+          "lunch": false,
+          "dinner": true
+        },
+        "hotel": "丽江古城舒适型酒店"
+      },
+      {
+        "day": 2,
+        "title": "第2天野象谷（邂逅野象、大象表演、蝴蝶园、兰花园）—原始森林公园（孔雀放飞、僾伲山寨、沟谷雨林）一入住酒店",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "野象谷｜兰花园｜原始森林公园｜沟谷雨林"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐、午餐包含，晚餐自理"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_03",
+            "activity": "景洪4钻酒店：西双版纳景洪俊都福朋喜来登酒店 或其他酒店"
+          }
+        ],
+        "meals": {
+          "breakfast": true,
+          "lunch": true,
+          "dinner": false
+        },
+        "hotel": "丽江舒适型酒店"
+      },
+      {
+        "day": 3,
+        "title": "第3天 AAAAA 中科植物园（植物王国）—曼听公园（打卡皇室后花园）总佛寺—入住酒店",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "中科植物园｜曼听公园｜总佛寺"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐包含，午餐、晚餐自理"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_03",
+            "activity": "景洪4钻酒店：西双版纳景洪俊都福朋喜来登酒店 或其他酒店"
+          }
+        ],
+        "meals": {
+          "breakfast": true,
+          "lunch": false,
+          "dinner": false
+        },
+        "hotel": "大理舒适型酒店"
+      },
+      {
+        "day": 4,
+        "title": "第4天傣族文化村落（走进神秘的人间净土）—勐泐大佛寺一入住酒店",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "傣族文化村落｜勐泐大佛寺"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐包含，午餐、晚餐自理"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_03",
+            "activity": "景洪4钻酒店：西双版纳景洪俊都福朋喜来登酒店 或其他酒店"
+          }
+        ],
+        "meals": {
+          "breakfast": true,
+          "lunch": false,
+          "dinner": false
+        },
+        "hotel": "无"
+      }
+    ],
+    "fees": {
+      "include": [
+        "全程车费/司导服务费",
+        "行程所列门票（玉龙雪山进山及索道）",
+        "3晚舒适酒店含早",
+        "旅行社责任险"
+      ],
+      "exclude": [
+        "个人消费及单房差",
+        "不含自愿选择性项目",
+        "往返大交通"
+      ]
+    },
+    "bookingNotes": [
+      "儿童标准与占床规则以最终确认单为准",
+      "遇不可抗力可能调整顺序，不减少景点",
+      "请随身携带有效证件"
+    ],
+    "gifts": [
+      "洱海旅拍",
+      "氧气罐1个/人（雪山日）"
+    ],
+    "nearbyAttractions": [
+      {
+        "name": "玉龙雪山",
+        "rating": 4.9,
+        "distance": "25km",
+        "image": "app.media.hotel_04"
+      },
+      {
+        "name": "蓝月谷",
+        "rating": 4.7,
+        "distance": "22km",
+        "image": "app.media.hotel_05"
+      }
+    ]
+  },
+  {
+    "id": 1002,
+    "title": "丽江+香格里拉5日4晚深度游",
+    "subTitle": "梅里雪山日照金山 · 普达措国家公园 · 纳西藏文化体验",
+    "province": "云南",
+    "cities": [
+      "丽江市",
+      "香格里拉"
+    ],
+    "days": 5,
+    "nights": 4,
+    "groupType": "跟团游",
+    "rating": 4.9,
+    "reviewCount": 2031,
+    "priceFrom": 1880,
+    "originalPrice": 2599,
+    "image": "app.media.tour_02",
+    "tags": [
+      "梅里雪山",
+      "普达措",
+      "藏式民俗"
+    ],
+    "highlights": [
+      "梅里雪山观景台观日照金山",
+      "普达措环湖徒步",
+      "含香格里拉特色晚宴"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "抵达丽江集合",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "古城自由行"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐、午餐自理，晚餐包含"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_03",
+            "activity": "丽江酒店"
+          }
+        ],
+        "meals": {
+          "breakfast": false,
+          "lunch": false,
+          "dinner": true
+        },
+        "hotel": "丽江酒店"
+      },
+      {
+        "day": 2,
+        "title": "虎跳峡-香格里拉",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "徒步虎跳峡"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐、午餐包含，晚餐自理"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_03",
+            "activity": "香格里拉酒店"
+          }
+        ],
+        "meals": {
+          "breakfast": true,
+          "lunch": true,
+          "dinner": false
+        },
+        "hotel": "香格里拉酒店"
+      },
+      {
+        "day": 3,
+        "title": "普达措国家公园",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "普达措国家公园环湖步道"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐包含，午餐、晚餐自理"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_03",
+            "activity": "香格里拉酒店"
+          }
+        ],
+        "meals": {
+          "breakfast": true,
+          "lunch": false,
+          "dinner": false
+        },
+        "hotel": "香格里拉酒店"
+      },
+      {
+        "day": 4,
+        "title": "松赞林寺-返回丽江",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "松赞林寺参观"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐、午餐包含，晚餐自理"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_03",
+            "activity": "丽江酒店"
+          }
+        ],
+        "meals": {
+          "breakfast": true,
+          "lunch": true,
+          "dinner": false
+        },
+        "hotel": "丽江酒店"
+      },
+      {
+        "day": 5,
+        "title": "丽江送机",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "自由活动"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐包含，午餐、晚餐自理"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_01",
+            "activity": "丽江送机"
+          }
+        ],
+        "meals": {
+          "breakfast": true,
+          "lunch": false,
+          "dinner": false
+        },
+        "hotel": "无"
+      }
+    ],
+    "fees": {
+      "include": [
+        "门票与环保车",
+        "司机/向导服务费",
+        "4晚酒店含早"
+      ],
+      "exclude": [
+        "自费项目",
+        "单房差",
+        "个人消费"
+      ]
+    },
+    "bookingNotes": [
+      "高海拔地区，建议备防高反药品"
+    ],
+    "gifts": [
+      "藏式迎宾哈达"
+    ],
+    "nearbyAttractions": [
+      {
+        "name": "虎跳峡",
+        "rating": 4.6,
+        "distance": "85km",
+        "image": "app.media.hotel_03"
+      },
+      {
+        "name": "松赞林寺",
+        "rating": 4.7,
+        "distance": "5km",
+        "image": "app.media.hotel_06"
+      }
+    ]
+  },
+  {
+    "id": 1003,
+    "title": "昆明-大理-丽江6日5晚经典环线",
+    "subTitle": "石林世界地质公园 · 洱海环湖 · 玉龙雪山 · 三城联游",
+    "province": "云南",
+    "cities": [
+      "昆明市",
+      "大理白族自治区",
+      "丽江市"
+    ],
+    "days": 6,
+    "nights": 5,
+    "groupType": "跟团游",
+    "rating": 4.7,
+    "reviewCount": 1689,
+    "priceFrom": 2399,
+    "originalPrice": 2999,
+    "image": "app.media.tour_03",
+    "tags": [
+      "石林",
+      "洱海",
+      "雪山"
+    ],
+    "highlights": [
+      "一价全含热门门票",
+      "环线不走回头路",
+      "含两晚海景房"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "抵达昆明",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "抵达昆明"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐、午餐自理，晚餐包含"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_03",
+            "activity": "昆明酒店"
+          }
+        ],
+        "meals": {
+          "breakfast": false,
+          "lunch": false,
+          "dinner": true
+        },
+        "hotel": "昆明酒店"
+      },
+      {
+        "day": 2,
+        "title": "石林风景区",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "石林风景区漫游"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐、午餐包含，晚餐自理"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_03",
+            "activity": "昆明酒店"
+          }
+        ],
+        "meals": {
+          "breakfast": true,
+          "lunch": true,
+          "dinner": false
+        },
+        "hotel": "昆明酒店"
+      },
+      {
+        "day": 3,
+        "title": "昆明-大理",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "大理古城打卡"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐包含，午餐、晚餐自理"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_03",
+            "activity": "大理海景房"
+          }
+        ],
+        "meals": {
+          "breakfast": true,
+          "lunch": false,
+          "dinner": false
+        },
+        "hotel": "大理海景房"
+      },
+      {
+        "day": 4,
+        "title": "洱海环湖",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "洱海环湖网红点打卡"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐、午餐包含，晚餐自理"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_03",
+            "activity": "大理酒店"
+          }
+        ],
+        "meals": {
+          "breakfast": true,
+          "lunch": true,
+          "dinner": false
+        },
+        "hotel": "大理酒店"
+      },
+      {
+        "day": 5,
+        "title": "大理-丽江-玉龙雪山",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "蓝月谷｜雪山索道"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐、午餐包含，晚餐自理"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_03",
+            "activity": "丽江酒店"
+          }
+        ],
+        "meals": {
+          "breakfast": true,
+          "lunch": true,
+          "dinner": false
+        },
+        "hotel": "丽江酒店"
+      },
+      {
+        "day": 6,
+        "title": "丽江返程",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "自由活动"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐包含，午餐、晚餐自理"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_01",
+            "activity": "丽江送机/送站"
+          }
+        ],
+        "meals": {
+          "breakfast": true,
+          "lunch": false,
+          "dinner": false
+        },
+        "hotel": "无"
+      }
+    ],
+    "fees": {
+      "include": [
+        "景点首道门票",
+        "交通及司导费"
+      ],
+      "exclude": [
+        "单房差",
+        "个人消费"
+      ]
+    },
+    "bookingNotes": [
+      "行程顺序可能因交通调整"
+    ],
+    "gifts": [
+      "旅拍底片10张"
+    ],
+    "nearbyAttractions": [
+      {
+        "name": "大理古城",
+        "rating": 4.6,
+        "distance": "2km",
+        "image": "app.media.hotel_02"
+      }
+    ]
+  },
+  {
+    "id": 1004,
+    "title": "西双版纳5日4晚热带雨林亲子拼团",
+    "subTitle": "野象谷观象 · 原始森林公园 · 橄榄坝傣族园 · 夜游澜沧江 · 拼团",
+    "province": "云南",
+    "cities": [
+      "丽江市"
+    ],
+    "days": 5,
+    "nights": 4,
+    "groupType": "跟团游",
+    "rating": 4.6,
+    "reviewCount": 986,
+    "priceFrom": 1999,
+    "originalPrice": 2380,
+    "image": "app.media.tour_04",
+    "tags": [
+      "野象谷",
+      "雨林",
+      "傣族园"
+    ],
+    "highlights": [
+      "专业亲子领队",
+      "入住热带园林酒店",
+      "含特色泼水晚会"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "到达景洪集合",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "到达景洪集合"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐、午餐自理，晚餐包含"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_03",
+            "activity": "版纳度假酒店"
+          }
+        ],
+        "meals": {
+          "breakfast": false,
+          "lunch": false,
+          "dinner": true
+        },
+        "hotel": "版纳度假酒店"
+      },
+      {
+        "day": 2,
+        "title": "野象谷探险",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "野象谷探险｜观象科普｜高架步道"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐、午餐包含，晚餐自理"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_03",
+            "activity": "版纳度假酒店"
+          }
+        ],
+        "meals": {
+          "breakfast": true,
+          "lunch": true,
+          "dinner": false
+        },
+        "hotel": "版纳度假酒店"
+      },
+      {
+        "day": 3,
+        "title": "原始森林公园",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "原始森林公园｜树冠走廊｜热带雨林体验"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐包含，午餐、晚餐自理"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_03",
+            "activity": "版纳度假酒店"
+          }
+        ],
+        "meals": {
+          "breakfast": true,
+          "lunch": false,
+          "dinner": false
+        },
+        "hotel": "版纳度假酒店"
+      },
+      {
+        "day": 4,
+        "title": "橄榄坝傣族园-泼水晚会",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "橄榄坝傣族园｜民俗体验｜泼水晚会｜夜游澜沧江"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐、午餐包含，晚餐自理"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_03",
+            "activity": "版纳度假酒店"
+          }
+        ],
+        "meals": {
+          "breakfast": true,
+          "lunch": true,
+          "dinner": false
+        },
+        "hotel": "版纳度假酒店"
+      },
+      {
+        "day": 5,
+        "title": "返程",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐包含，午餐、晚餐自理"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_01",
+            "activity": "景洪送机"
+          }
+        ],
+        "meals": {
+          "breakfast": true,
+          "lunch": false,
+          "dinner": false
+        },
+        "hotel": "无"
+      }
+    ],
+    "fees": {
+      "include": [
+        "门票及讲解",
+        "交通与司导",
+        "4晚酒店早"
+      ],
+      "exclude": [
+        "自费项目",
+        "个人消费"
+      ]
+    },
+    "bookingNotes": [
+      "防蚊措施与防晒用品请自备"
+    ],
+    "gifts": [
+      "傣族迎宾手工花环"
+    ],
+    "nearbyAttractions": [
+      {
+        "name": "告庄西双景",
+        "rating": 4.5,
+        "distance": "3km",
+        "image": "app.media.hotel_06"
+      }
+    ]
+  },
+  {
+    "id": 1005,
+    "title": "大理3日2晚周末轻奢拼团",
+    "subTitle": "洱海双廊-北环线网红打卡 · 高端拼团私享",
+    "province": "云南",
+    "cities": [
+      "大理白族自治区",
+      "丽江市"
+    ],
+    "days": 3,
+    "nights": 2,
+    "groupType": "跟团游",
+    "rating": 4.7,
+    "reviewCount": 745,
+    "priceFrom": 998,
+    "originalPrice": 1399,
+    "image": "app.media.tour_05",
+    "tags": [
+      "双廊",
+      "海景房",
+      "旅拍"
+    ],
+    "highlights": [
+      "2晚海景房",
+      "旅拍体验",
+      "全程精品交通"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "抵达大理-双廊",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "入住海景房｜双廊古镇"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐、午餐自理，晚餐包含"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_03",
+            "activity": "海景精品酒店"
+          }
+        ],
+        "meals": {
+          "breakfast": false,
+          "lunch": false,
+          "dinner": true
+        },
+        "hotel": "海景精品酒店"
+      },
+      {
+        "day": 2,
+        "title": "洱海北环线旅拍",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "洱海北环线旅拍｜网红点旅拍｜品尝特色美食"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐、午餐包含，晚餐自理"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_03",
+            "activity": "海景精品酒店"
+          }
+        ],
+        "meals": {
+          "breakfast": true,
+          "lunch": true,
+          "dinner": false
+        },
+        "hotel": "海景精品酒店"
+      },
+      {
+        "day": 3,
+        "title": "返程",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "自由活动"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐包含，午餐、晚餐自理"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_01",
+            "activity": "大理送机"
+          }
+        ],
+        "meals": {
+          "breakfast": true,
+          "lunch": false,
+          "dinner": false
+        },
+        "hotel": "无"
+      }
+    ],
+    "fees": {
+      "include": [
+        "旅拍摄影师与底片",
+        "交通与司导",
+        "海景房含早"
+      ],
+      "exclude": [
+        "单房差",
+        "个人消费"
+      ]
+    },
+    "bookingNotes": [
+      "如遇天气影响旅拍改期或改为室内取景"
+    ],
+    "gifts": [
+      "旅拍电子相册"
+    ],
+    "nearbyAttractions": [
+      {
+        "name": "洱海公园",
+        "rating": 4.6,
+        "distance": "1km",
+        "image": "app.media.hotel_01"
+      }
+    ]
+  },
+  {
+    "id": 1006,
+    "title": "大理3日2晚周末轻奢拼团",
+    "subTitle": "洱海双廊-北环线网红打卡 · 高端拼团私享",
+    "province": "云南",
+    "cities": [
+      "大理白族自治区",
+      "丽江市"
+    ],
+    "days": 3,
+    "nights": 2,
+    "groupType": "跟团游",
+    "rating": 4.7,
+    "reviewCount": 745,
+    "priceFrom": 998,
+    "originalPrice": 1399,
+    "image": "app.media.tour_06",
+    "tags": [
+      "双廊",
+      "海景房",
+      "旅拍"
+    ],
+    "highlights": [
+      "2晚海景房",
+      "旅拍体验",
+      "全程精品交通"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "抵达大理-双廊",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "入住海景房｜双廊古镇"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐、午餐自理，晚餐包含"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_03",
+            "activity": "海景精品酒店"
+          }
+        ],
+        "meals": {
+          "breakfast": false,
+          "lunch": false,
+          "dinner": true
+        },
+        "hotel": "海景精品酒店"
+      },
+      {
+        "day": 2,
+        "title": "洱海北环线旅拍",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "洱海北环线旅拍｜网红点旅拍｜品尝特色美食"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐、午餐包含，晚餐自理"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_03",
+            "activity": "海景精品酒店"
+          }
+        ],
+        "meals": {
+          "breakfast": true,
+          "lunch": true,
+          "dinner": false
+        },
+        "hotel": "海景精品酒店"
+      },
+      {
+        "day": 3,
+        "title": "返程",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "自由活动"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐包含，午餐、晚餐自理"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_01",
+            "activity": "大理送机"
+          }
+        ],
+        "meals": {
+          "breakfast": true,
+          "lunch": false,
+          "dinner": false
+        },
+        "hotel": "无"
+      }
+    ],
+    "fees": {
+      "include": [
+        "旅拍摄影师与底片",
+        "交通与司导",
+        "海景房含早"
+      ],
+      "exclude": [
+        "单房差",
+        "个人消费"
+      ]
+    },
+    "bookingNotes": [
+      "如遇天气影响旅拍改期或改为室内取景"
+    ],
+    "gifts": [
+      "旅拍电子相册"
+    ],
+    "nearbyAttractions": [
+      {
+        "name": "洱海公园",
+        "rating": 4.6,
+        "distance": "1km",
+        "image": "app.media.hotel_01"
+      }
+    ]
+  },
+  {
+    "id": 1007,
+    "title": "大理3日2晚周末轻奢拼团",
+    "subTitle": "洱海双廊-北环线网红打卡 · 高端拼团私享",
+    "province": "云南",
+    "cities": [
+      "大理白族自治区",
+      "丽江市"
+    ],
+    "days": 3,
+    "nights": 2,
+    "groupType": "跟团游",
+    "rating": 4.7,
+    "reviewCount": 745,
+    "priceFrom": 998,
+    "originalPrice": 1399,
+    "image": "app.media.tour_07",
+    "tags": [
+      "双廊",
+      "海景房",
+      "旅拍"
+    ],
+    "highlights": [
+      "2晚海景房",
+      "旅拍体验",
+      "全程精品交通"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "抵达大理-双廊",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "入住海景房｜双廊古镇"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐、午餐自理，晚餐包含"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_03",
+            "activity": "海景精品酒店"
+          }
+        ],
+        "meals": {
+          "breakfast": false,
+          "lunch": false,
+          "dinner": true
+        },
+        "hotel": "海景精品酒店"
+      },
+      {
+        "day": 2,
+        "title": "洱海北环线旅拍",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "洱海北环线旅拍｜网红点旅拍｜品尝特色美食"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐、午餐包含，晚餐自理"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_03",
+            "activity": "海景精品酒店"
+          }
+        ],
+        "meals": {
+          "breakfast": true,
+          "lunch": true,
+          "dinner": false
+        },
+        "hotel": "海景精品酒店"
+      },
+      {
+        "day": 3,
+        "title": "返程",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "自由活动"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐包含，午餐、晚餐自理"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_01",
+            "activity": "大理送机"
+          }
+        ],
+        "meals": {
+          "breakfast": true,
+          "lunch": false,
+          "dinner": false
+        },
+        "hotel": "无"
+      }
+    ],
+    "fees": {
+      "include": [
+        "旅拍摄影师与底片",
+        "交通与司导",
+        "海景房含早"
+      ],
+      "exclude": [
+        "单房差",
+        "个人消费"
+      ]
+    },
+    "bookingNotes": [
+      "如遇天气影响旅拍改期或改为室内取景"
+    ],
+    "gifts": [
+      "旅拍电子相册"
+    ],
+    "nearbyAttractions": [
+      {
+        "name": "洱海公园",
+        "rating": 4.6,
+        "distance": "1km",
+        "image": "app.media.hotel_01"
+      }
+    ]
+  },
+  {
+    "id": 1008,
+    "title": "大理3日2晚周末轻奢拼团",
+    "subTitle": "洱海双廊-北环线网红打卡 · 高端拼团私享",
+    "province": "云南",
+    "cities": [
+      "大理白族自治区",
+      "丽江市"
+    ],
+    "days": 3,
+    "nights": 2,
+    "groupType": "跟团游",
+    "rating": 4.7,
+    "reviewCount": 745,
+    "priceFrom": 998,
+    "originalPrice": 1399,
+    "image": "app.media.tour_08",
+    "tags": [
+      "双廊",
+      "海景房",
+      "旅拍"
+    ],
+    "highlights": [
+      "2晚海景房",
+      "旅拍体验",
+      "全程精品交通"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "抵达大理-双廊",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "入住海景房｜双廊古镇"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐、午餐自理，晚餐包含"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_03",
+            "activity": "海景精品酒店"
+          }
+        ],
+        "meals": {
+          "breakfast": false,
+          "lunch": false,
+          "dinner": true
+        },
+        "hotel": "海景精品酒店"
+      },
+      {
+        "day": 2,
+        "title": "洱海北环线旅拍",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "洱海北环线旅拍｜网红点旅拍｜品尝特色美食"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐、午餐包含，晚餐自理"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_03",
+            "activity": "海景精品酒店"
+          }
+        ],
+        "meals": {
+          "breakfast": true,
+          "lunch": true,
+          "dinner": false
+        },
+        "hotel": "海景精品酒店"
+      },
+      {
+        "day": 3,
+        "title": "返程",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "自由活动"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐包含，午餐、晚餐自理"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_01",
+            "activity": "大理送机"
+          }
+        ],
+        "meals": {
+          "breakfast": true,
+          "lunch": false,
+          "dinner": false
+        },
+        "hotel": "无"
+      }
+    ],
+    "fees": {
+      "include": [
+        "旅拍摄影师与底片",
+        "交通与司导",
+        "海景房含早"
+      ],
+      "exclude": [
+        "单房差",
+        "个人消费"
+      ]
+    },
+    "bookingNotes": [
+      "如遇天气影响旅拍改期或改为室内取景"
+    ],
+    "gifts": [
+      "旅拍电子相册"
+    ],
+    "nearbyAttractions": [
+      {
+        "name": "洱海公园",
+        "rating": 4.6,
+        "distance": "1km",
+        "image": "app.media.hotel_01"
+      }
+    ]
+  },
+  {
+    "id": 1009,
+    "title": "大理3日2晚周末轻奢拼团",
+    "subTitle": "洱海双廊-北环线网红打卡 · 高端拼团私享",
+    "province": "云南",
+    "cities": [
+      "大理白族自治区",
+      "丽江市"
+    ],
+    "days": 3,
+    "nights": 2,
+    "groupType": "跟团游",
+    "rating": 4.7,
+    "reviewCount": 745,
+    "priceFrom": 998,
+    "originalPrice": 1399,
+    "image": "app.media.tour_09",
+    "tags": [
+      "双廊",
+      "海景房",
+      "旅拍"
+    ],
+    "highlights": [
+      "2晚海景房",
+      "旅拍体验",
+      "全程精品交通"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "抵达大理-双廊",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "入住海景房｜双廊古镇"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐、午餐自理，晚餐包含"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_03",
+            "activity": "海景精品酒店"
+          }
+        ],
+        "meals": {
+          "breakfast": false,
+          "lunch": false,
+          "dinner": true
+        },
+        "hotel": "海景精品酒店"
+      },
+      {
+        "day": 2,
+        "title": "洱海北环线旅拍",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "洱海北环线旅拍｜网红点旅拍｜品尝特色美食"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐、午餐包含，晚餐自理"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_03",
+            "activity": "海景精品酒店"
+          }
+        ],
+        "meals": {
+          "breakfast": true,
+          "lunch": true,
+          "dinner": false
+        },
+        "hotel": "海景精品酒店"
+      },
+      {
+        "day": 3,
+        "title": "返程",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "自由活动"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐包含，午餐、晚餐自理"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_01",
+            "activity": "大理送机"
+          }
+        ],
+        "meals": {
+          "breakfast": true,
+          "lunch": false,
+          "dinner": false
+        },
+        "hotel": "无"
+      }
+    ],
+    "fees": {
+      "include": [
+        "旅拍摄影师与底片",
+        "交通与司导",
+        "海景房含早"
+      ],
+      "exclude": [
+        "单房差",
+        "个人消费"
+      ]
+    },
+    "bookingNotes": [
+      "如遇天气影响旅拍改期或改为室内取景"
+    ],
+    "gifts": [
+      "旅拍电子相册"
+    ],
+    "nearbyAttractions": [
+      {
+        "name": "洱海公园",
+        "rating": 4.6,
+        "distance": "1km",
+        "image": "app.media.hotel_01"
+      }
+    ]
+  },
+  {
+    "id": 1010,
+    "title": "苏州2日1晚·定制游",
+    "subTitle": "拙政园·虎丘·平江路·定制游",
+    "province": "江苏",
+    "cities": [
+      "苏州市"
+    ],
+    "days": 2,
+    "nights": 1,
+    "groupType": "定制游",
+    "rating": 4.7,
+    "reviewCount": 512,
+    "priceFrom": 899,
+    "originalPrice": 1299,
+    "image": "app.media.tour_01",
+    "tags": [
+      "拙政园",
+      "虎丘",
+      "平江路"
+    ],
+    "highlights": [
+      "深度园林讲解",
+      "古城漫游",
+      "可选夜游金鸡湖"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "拙政园-虎丘-平江路",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "拙政园｜虎丘｜平江路古街漫游"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐、午餐自理，晚餐包含"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_03",
+            "activity": "苏州精品酒店"
+          }
+        ],
+        "meals": {
+          "breakfast": false,
+          "lunch": false,
+          "dinner": true
+        },
+        "hotel": "苏州精品酒店"
+      },
+      {
+        "day": 2,
+        "title": "金鸡湖-诚品书店-返程",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "金鸡湖打卡｜诚品书店自由逛"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐、午餐包含，晚餐自理"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_01",
+            "activity": "苏州送站"
+          }
+        ],
+        "meals": {
+          "breakfast": true,
+          "lunch": true,
+          "dinner": false
+        },
+        "hotel": "无"
+      }
+    ],
+    "fees": {
+      "include": [
+        "门票与讲解",
+        "交通与司导",
+        "1晚酒店含早"
+      ],
+      "exclude": [
+        "自费项目",
+        "单房差",
+        "个人消费"
+      ]
+    },
+    "bookingNotes": [
+      "节假日园林限流需配合行程调整"
+    ],
+    "gifts": [
+      "苏式糕点伴手礼"
+    ],
+    "nearbyAttractions": [
+      {
+        "name": "狮子林",
+        "rating": 4.6,
+        "distance": "2km",
+        "image": "app.media.hotel_01"
+      },
+      {
+        "name": "金鸡湖",
+        "rating": 4.5,
+        "distance": "8km",
+        "image": "app.media.hotel_06"
+      }
+    ]
+  },
+  {
+    "id": 1011,
+    "title": "南京2日1晚·定制游",
+    "subTitle": "中山陵·夫子庙秦淮河·南京城墙·定制游",
+    "province": "江苏",
+    "cities": [
+      "南京市"
+    ],
+    "days": 2,
+    "nights": 1,
+    "groupType": "定制游",
+    "rating": 4.8,
+    "reviewCount": 689,
+    "priceFrom": 980,
+    "originalPrice": 1499,
+    "image": "app.media.hotel_03",
+    "tags": [
+      "中山陵",
+      "夫子庙",
+      "秦淮河",
+      "城墙"
+    ],
+    "highlights": [
+      "民国风情与古都遗址串游",
+      "秦淮夜游",
+      "可定制讲解路线"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "中山陵-明孝陵-南京城墙",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "中山陵｜明孝陵｜南京城墙步道"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐、午餐自理，晚餐包含"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_03",
+            "activity": "南京城区舒适酒店"
+          }
+        ],
+        "meals": {
+          "breakfast": false,
+          "lunch": false,
+          "dinner": true
+        },
+        "hotel": "南京城区舒适酒店"
+      },
+      {
+        "day": 2,
+        "title": "夫子庙-秦淮河-老门东-返程",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "夫子庙老街｜秦淮河风光｜老门东历史街区"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐、午餐包含，晚餐自理"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_01",
+            "activity": "南京送站/送机"
+          }
+        ],
+        "meals": {
+          "breakfast": true,
+          "lunch": true,
+          "dinner": false
+        },
+        "hotel": "无"
+      }
+    ],
+    "fees": {
+      "include": [
+        "门票与讲解",
+        "交通与司导",
+        "1晚酒店含早"
+      ],
+      "exclude": [
+        "自费项目",
+        "单房差",
+        "个人消费"
+      ]
+    },
+    "bookingNotes": [
+      "节假日客流量大，部分景点需预约"
+    ],
+    "gifts": [
+      "秦淮小吃礼盒"
+    ],
+    "nearbyAttractions": [
+      {
+        "name": "鸡鸣寺",
+        "rating": 4.5,
+        "distance": "3km",
+        "image": "app.media.hotel_04"
+      }
+    ]
+  },
+  {
+    "id": 1012,
+    "title": "北京3日2晚·定制游",
+    "subTitle": "故宫·长城·颐和园·天坛·定制游",
+    "province": "北京",
+    "cities": [
+      "北京市"
+    ],
+    "days": 3,
+    "nights": 2,
+    "groupType": "定制游",
+    "rating": 4.9,
+    "reviewCount": 2035,
+    "priceFrom": 1880,
+    "originalPrice": 2680,
+    "image": "app.media.tour_02",
+    "tags": [
+      "故宫",
+      "长城",
+      "颐和园",
+      "天坛"
+    ],
+    "highlights": [
+      "故宫深度讲解",
+      "徒步长城经典段",
+      "皇家园林溯源"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "故宫-天安门-王府井",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "故宫深度讲解｜天安门广场｜王府井步行街"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐、午餐自理，晚餐包含"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_03",
+            "activity": "北京四环内舒适酒店"
+          }
+        ],
+        "meals": {
+          "breakfast": false,
+          "lunch": false,
+          "dinner": true
+        },
+        "hotel": "北京四环内舒适酒店"
+      },
+      {
+        "day": 2,
+        "title": "长城-颐和园",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "八达岭/慕田峪长城（择一）｜颐和园漫游"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐、午餐包含，晚餐自理"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_03",
+            "activity": "北京四环内舒适酒店"
+          }
+        ],
+        "meals": {
+          "breakfast": true,
+          "lunch": true,
+          "dinner": false
+        },
+        "hotel": "北京四环内舒适酒店"
+      },
+      {
+        "day": 3,
+        "title": "天坛-什刹海-南锣鼓巷-返程",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "天坛祈年殿｜什刹海风光｜南锣鼓巷胡同漫游"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐包含，午餐、晚餐自理"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_01",
+            "activity": "北京送机/送站"
+          }
+        ],
+        "meals": {
+          "breakfast": true,
+          "lunch": false,
+          "dinner": false
+        },
+        "hotel": "无"
+      }
+    ],
+    "fees": {
+      "include": [
+        "门票与讲解",
+        "交通与司导",
+        "2晚酒店含早"
+      ],
+      "exclude": [
+        "自费项目",
+        "单房差",
+        "个人消费"
+      ]
+    },
+    "bookingNotes": [
+      "部分景点需预约，旺季可能限流"
+    ],
+    "gifts": [
+      "京味小吃礼盒"
+    ],
+    "nearbyAttractions": [
+      {
+        "name": "什刹海",
+        "rating": 4.6,
+        "distance": "4km",
+        "image": "app.media.hotel_06"
+      }
+    ]
+  },
+  {
+    "id": 1013,
+    "title": "北京2日1晚·定制游",
+    "subTitle": "故宫·天坛·簋街夜游·定制游",
+    "province": "北京",
+    "cities": [
+      "北京市"
+    ],
+    "days": 2,
+    "nights": 1,
+    "groupType": "定制游",
+    "rating": 4.8,
+    "reviewCount": 1120,
+    "priceFrom": 1280,
+    "originalPrice": 1899,
+    "image": "app.media.tour_01",
+    "tags": [
+      "故宫",
+      "天坛",
+      "簋街"
+    ],
+    "highlights": [
+      "深度宫廷文化讲解",
+      "传统美食夜游",
+      "灵活可定制时段"
+    ],
+    "itinerary": [
+      {
+        "day": 1,
+        "title": "故宫-王府井-簋街夜游",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "故宫深度讲解｜王府井步行街｜簋街夜游美食"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐、午餐自理，晚餐包含"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_03",
+            "activity": "北京市区舒适酒店"
+          }
+        ],
+        "meals": {
+          "breakfast": false,
+          "lunch": false,
+          "dinner": true
+        },
+        "hotel": "北京市区舒适酒店"
+      },
+      {
+        "day": 2,
+        "title": "天坛-南锣鼓巷-返程",
+        "activities": [
+          {
+            "icon": "app.media.icon_itinerary_plan_04",
+            "activity": "08:30 开始活动，19:01住宿休息"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_05",
+            "activity": "天坛公园｜南锣鼓巷胡同文化"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_02",
+            "activity": "早餐、午餐包含，晚餐自理"
+          },
+          {
+            "icon": "app.media.icon_itinerary_plan_01",
+            "activity": "北京送站/送机"
+          }
+        ],
+        "meals": {
+          "breakfast": true,
+          "lunch": true,
+          "dinner": false
+        },
+        "hotel": "无"
+      }
+    ],
+    "fees": {
+      "include": [
+        "门票与讲解",
+        "交通与司导",
+        "1晚酒店含早"
+      ],
+      "exclude": [
+        "自费项目",
+        "单房差",
+        "个人消费"
+      ]
+    },
+    "bookingNotes": [
+      "旺季需提前预约故宫入场"
+    ],
+    "gifts": [
+      "故宫文创小礼品"
+    ],
+    "nearbyAttractions": [
+      {
+        "name": "北海公园",
+        "rating": 4.6,
+        "distance": "3km",
+        "image": "app.media.tour_01"
+      }
+    ]
+  }
+]

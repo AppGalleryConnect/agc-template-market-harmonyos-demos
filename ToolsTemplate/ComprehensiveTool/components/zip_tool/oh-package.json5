@@ -1,0 +1,16 @@
+{
+  "name": "zip_tool",
+  "version": "1.0.5",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@hw-agconnect/util-log": "^1.0.0",
+    "@ohos/oh7zip": "^1.0.1",
+    "@hw-agconnect/ui-toast": "^1.0.0",
+    "module_base": "file:../module_base",
+    "membership": "file:../membership",
+    "aggregated_login": "file:../aggregated_login"
+  }
+}

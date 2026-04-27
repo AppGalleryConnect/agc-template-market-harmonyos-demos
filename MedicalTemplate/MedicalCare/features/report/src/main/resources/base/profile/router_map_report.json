@@ -1,0 +1,12 @@
+{
+  "routerMap": [
+    {
+      "name": "ReportQueryPage",
+      "pageSourceFile": "src/main/ets/components/ReportQueryPage.ets",
+      "buildFunction": "ReportQueryPageBuilder",
+      "data": {
+        "description": "ReportQueryPage"
+      }
+    }
+  ]
+}

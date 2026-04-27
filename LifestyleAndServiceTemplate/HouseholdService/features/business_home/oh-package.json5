@@ -1,0 +1,19 @@
+{
+  "name": "business_home",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "address_management": "file:../../components/address_management",
+    "city_select": "file:../../components/city_select",
+    "dial_panel": "file:../../components/dial_panel",
+    "lib_foundation": "file:../../commons/lib_foundation",
+    "module_base": "file:../../components/module_base",
+    "module_form": "file:../../components/module_form",
+    "module_time_select": "file:../../components/module_time_select",
+    "module_transition": "file:../../components/module_transition",
+    "search": "file:../../components/search"
+  }
+}

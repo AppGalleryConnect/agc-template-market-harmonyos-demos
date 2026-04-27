@@ -1,0 +1,12 @@
+{
+  "name": "common",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "type": "common",
+  "usage": "通用基础层，提供基础类（BaseViewModel、GlobalContext、Logger等）、通用常量（Constants、RouterMap等）、数据模型（UserInfo、FileInfo等）、通用服务、通用UI组件（Header、WebView等）、通用工具方法（权限、缓存、文件、时间等工具类）。",
+  "zhName": "通用基础层",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {}
+}

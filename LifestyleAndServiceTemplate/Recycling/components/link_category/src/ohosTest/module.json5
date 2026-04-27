@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "link_category_test",
+    "type": "feature",
+    "deviceTypes": [
+      "phone"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false
+  }
+}

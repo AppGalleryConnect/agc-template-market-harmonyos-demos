@@ -1,0 +1,20 @@
+<svg width="40.000000" height="40.000000" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs>
+		<clipPath id="clip519_5629">
+			<rect id="square_dashed" width="24.000000" height="24.000000" transform="translate(8.000000 8.000000)" fill="white" fill-opacity="0"/>
+		</clipPath>
+		<clipPath id="clip461_13120">
+			<rect id="plus" width="24.000000" height="24.000000" transform="translate(8.000000 8.000000)" fill="white" fill-opacity="0"/>
+		</clipPath>
+	</defs>
+	<rect id="尺寸=40" rx="20.000000" width="40.000000" height="40.000000" fill="#000000" fill-opacity="0.047059"/>
+	<g clip-path="url(#clip461_13120)">
+		<g opacity="0.000000">
+			<rect id="rect" x="8.000000" y="8.000000" width="24.000000" height="24.000000" fill="#000000" fill-opacity="1.000000"/>
+		</g>
+		<path id="path" d="M20.74 19.25L20.74 11C20.74 10.79 20.66 10.61 20.52 10.46C20.38 10.32 20.2 10.25 20 10.25C19.79 10.25 19.61 10.32 19.46 10.46C19.33 10.61 19.25 10.79 19.25 11L19.25 19.25L11 19.25C10.79 19.25 10.61 19.32 10.46 19.46C10.33 19.61 10.25 19.79 10.25 20C10.25 20.2 10.33 20.38 10.46 20.52C10.61 20.66 10.79 20.73 11 20.73L19.25 20.73L19.25 29C19.25 29.2 19.33 29.38 19.46 29.52C19.61 29.66 19.79 29.73 20 29.73C20.2 29.73 20.38 29.66 20.52 29.52C20.66 29.38 20.74 29.2 20.74 29L20.74 20.73L29 20.73C29.2 20.73 29.38 20.66 29.52 20.52C29.66 20.38 29.74 20.2 29.74 20C29.74 19.79 29.66 19.61 29.52 19.46C29.38 19.32 29.2 19.25 29 19.25L20.74 19.25Z" fill="#000000" fill-opacity="0.898039" fill-rule="nonzero"/>
+	</g>
+</svg>

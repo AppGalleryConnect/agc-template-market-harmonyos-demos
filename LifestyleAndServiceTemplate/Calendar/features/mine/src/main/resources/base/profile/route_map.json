@@ -1,0 +1,20 @@
+{
+  "routerMap": [
+    {
+      "name": "SettingLevel",
+      "pageSourceFile": "src/main/ets/components/SettingLevel.ets",
+      "buildFunction": "SettingLevelBuilder",
+      "data": {
+        "description": "this is SettingLevel"
+      }
+    },
+    {
+      "name": "VipOpenCenter",
+      "pageSourceFile": "src/main/ets/components/VipOpenCenter.ets",
+      "buildFunction": "VipOpenCenterBuilder",
+      "data": {
+        "description": "this is VipOpenCenter"
+      }
+    }
+  ]
+}

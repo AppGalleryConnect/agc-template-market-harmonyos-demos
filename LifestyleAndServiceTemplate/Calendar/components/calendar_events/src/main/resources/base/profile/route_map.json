@@ -1,0 +1,36 @@
+{
+  "routerMap": [
+    {
+      "name": "CalendarEventDetails",
+      "pageSourceFile": "src/main/ets/components/CalendarEventList.ets",
+      "buildFunction": "CalendarEventDetailsBuilder",
+      "data": {
+        "description" : "this is CalendarEventDetails"
+      }
+    },
+    {
+      "name": "ScheduleDetails",
+      "pageSourceFile": "src/main/ets/components/eventList/ScheduleDetails.ets",
+      "buildFunction": "ScheduleDetailsBuilder",
+      "data": {
+        "description" : "this is ScheduleDetails"
+      }
+    },
+    {
+      "name": "BirthdayRememberDetails",
+      "pageSourceFile": "src/main/ets/components/eventList/BirthdayRememberDetails.ets",
+      "buildFunction": "BirthdayRememberDetailsBuilder",
+      "data": {
+        "description" : "this is BirthdayRememberDetails"
+      }
+    },
+    {
+      "name": "TodoDetails",
+      "pageSourceFile": "src/main/ets/components/eventList/TodoDetails.ets",
+      "buildFunction": "TodoDetailsBuilder",
+      "data": {
+        "description" : "this is TodoDetails"
+      }
+    }
+  ]
+}

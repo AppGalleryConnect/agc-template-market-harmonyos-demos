@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "apply_microphone_reason",
+      "value": "吉他调音需要麦克风权限"
+    },
+    {
+      "name": "agcit_huawei_guitar_tuning",
+      "value": "1.0.2"
+    },
+    {
+      "name": "agcittype_huawei_guitar_tuning",
+      "value": "serviceComponent"
+    }
+  ]
+}

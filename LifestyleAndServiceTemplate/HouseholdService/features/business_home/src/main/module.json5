@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "business_home",
+    "type": "shared",
+    "deliveryWithInstall": true,
+    "routerMap": "$profile:home_route_map",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

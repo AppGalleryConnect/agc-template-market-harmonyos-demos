@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "personal_notes",
+    "type": "har",
+    "routerMap": "$profile:route_map",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

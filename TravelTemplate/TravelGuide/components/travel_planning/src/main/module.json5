@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "travel_planning",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

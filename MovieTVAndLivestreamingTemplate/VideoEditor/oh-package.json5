@@ -1,0 +1,21 @@
+{
+  "modelVersion": "5.0.5",
+  "description": "Please describe the basic information.",
+  "dependencies": {},
+  "devDependencies": {
+    "@ohos/hypium": "1.0.21"
+  },
+  "template": {
+    "domain": "视频",
+    "name": "视频编辑模板",
+    "usage": "本模板为视频编辑应用，提供了常用功能的开发样例",
+    "scene": "template,generate",
+    "sdk": [],
+    "color": {
+      "themeFilePath": "",
+      "mainThemeName": "",
+      "secondThemeName": "",
+      "themeFileContent": ""
+    }
+  }
+}

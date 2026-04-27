@@ -1,0 +1,42 @@
+export enum ALL_CARD_TAB {
+  TAB_INDEX_DOOR = 0,
+  TAB_INDEX_BUS = 1,
+  TAB_INDEX_BANK = 2
+}
+
+export enum PAGE_TYPES {
+  PAGE_TYPE_MY = 1,
+  PAGE_TYPE_HISTORY = 2,
+  PAGE_TYPE_CLONE = 3,
+  PAGE_TYPE_READ = 4
+}
+
+export enum RTYPE {
+  RTYPE_NOT_FOUND = 0,
+  RTYPE_READ_FAIL = 1,
+  RTYPE_CLONE_FAIL = 2,
+  RTYPE_CLONE_SUCCESS = 3,
+  RTYPE_FORMAT_FAIL = 4,
+  RTYPE_FORMAT_SUCCESS = 5,
+  RTYPE_FEEDBACK_SUCCESS = 6
+}
+
+export enum Operation {
+  Read, Write, Increment, DecTransRest, ReadKeyA, ReadKeyB, ReadAC,
+  WriteKeyA, WriteKeyB, WriteAC
+}
+
+export enum NFC_TYPE {
+  NFC_TYPE_DOOR = 0,
+  NFC_TYPE_BUS = 1,
+  NFC_TYPE_ELEVATOR = 2,
+  NFC_TYPE_BANK = 3,
+  NFC_TYPE_BIKE = 4
+}
+
+export enum ACTION_TYPE {
+  ACTION_READ = 0,
+  ACTION_CLONE = 1,
+  ACTION_FORMAT = 2,
+  ACTION_CHECK_SUPPORT_CLONE = 3
+}

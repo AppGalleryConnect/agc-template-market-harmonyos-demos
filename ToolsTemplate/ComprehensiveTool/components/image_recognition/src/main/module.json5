@@ -1,0 +1,19 @@
+{
+  "module": {
+    "name": "image_recognition",
+    "type": "har",
+    "routerMap":"$profile:route_map" ,
+    "deviceTypes": [
+      "phone"
+    ],
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.CAMERA",
+        "reason": "$string:apply_camera_reason",
+        "usedScene": {
+          "when": "inuse"
+        }
+      }
+    ]
+  }
+}

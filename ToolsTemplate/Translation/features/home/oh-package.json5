@@ -1,0 +1,23 @@
+{
+  "name": "home",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "choose_language": "file:../../components/choose_language",
+    "common": "file:../../commons/common",
+    "oh_router": "file:../../commons/oh_router",
+    "person": "file:../person",
+    "text_reader": "file:../../components/text_reader",
+    "voice_input": "file:../../components/voice_input",
+    "baidu_translate": "file:../../sdk/baidu_translate"
+  },
+  "type": "feature",
+  "usage": "翻译功能模块，包含文本翻译、语音翻译、拍照翻译、文档翻译、多语言支持、翻译历史记录、语言切换、VIP语言解锁",
+  "zhName": "翻译",
+  "tabPage": "TranslateHomePage",
+  "tabImage": "screenshot/translate/TranslateHomePage.jpg",
+  "tabOrder": 0
+}

@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "decompression_tool",
+    "type": "har",
+    "routerMap": '$profile:router_map',
+    "deviceTypes": [
+      "default"
+    ]
+  }
+}

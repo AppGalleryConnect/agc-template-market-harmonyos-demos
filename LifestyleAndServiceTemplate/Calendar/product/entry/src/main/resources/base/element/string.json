@@ -1,0 +1,100 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "日历模板"
+    },
+    {
+      "name": "EntryFormAbility_desc",
+      "value": "form_description"
+    },
+    {
+      "name": "EntryFormAbility_label",
+      "value": "form_label"
+    },
+    {
+      "name": "calendarWidget_desc",
+      "value": "This is a service widget."
+    },
+    {
+      "name": "calendarWidget_display_name",
+      "value": "calendar"
+    },
+    {
+      "name": "widget_desc",
+      "value": "这是一个日历模板卡片服务"
+    },
+    {
+      "name": "widget_display_name",
+      "value": "日历模板卡片"
+    },
+    {
+      "name": "safe_desc1_str1",
+      "value": "本应用需"
+    },
+    {
+      "name": "safe_desc1_str2",
+      "value": "联网"
+    },
+    {
+      "name": "safe_desc1_str3",
+      "value": "调用"
+    },
+    {
+      "name": "safe_desc1_str4",
+      "value": "日历读写、精确位置"
+    },
+    {
+      "name": "safe_desc1_str5",
+      "value": "权限、使用XX信息、提供XX服务。同时为了提开体用体验，将基于你的”同意\"开启增值服务。有关个人信息处理的详情可参阅关于"
+    },
+    {
+      "name": "safe_desc1_str6",
+      "value": "日历模板隐私的声明"
+    },
+    {
+      "name": "safe_desc1_str7",
+      "value": "、权限使用说明。"
+    },
+    {
+      "name": "safe_desc2",
+      "value": "请仔细阅读以上声明。点击\"同意\"，即表示您同意XX用户协议、开启增值服务功能。"
+    },
+    {
+      "name": "welcome_to_use",
+      "value": "欢迎使用"
+    },
+    {
+      "name": "service_desc",
+      "value": "阅读最新的鸿蒙资讯与技术文章"
+    },
+    {
+      "name": "privacy_statement",
+      "value": "隐私声明"
+    },
+    {
+      "name": "PhoneFormAbility_desc",
+      "value": "热门发现"
+    },
+    {
+      "name": "button_agree",
+      "value": "同意"
+    },
+    {
+      "name": "button_cancel",
+      "value": "取消"
+    },
+    {
+      "name": "tracking_consent",
+      "value": "获取开放匿名设备标识符（Open Anonymous Device Identifier, OAID）"
+    }
+  ]
+}

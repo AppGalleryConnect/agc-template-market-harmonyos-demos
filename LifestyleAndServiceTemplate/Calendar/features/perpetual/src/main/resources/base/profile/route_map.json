@@ -1,0 +1,36 @@
+{
+  "routerMap": [
+    {
+      "name": "FestivalDetails",
+      "pageSourceFile": "src/main/ets/components/festivalSolarCard/FestivalDetails.ets",
+      "buildFunction": "FestivalDetailsBuilder",
+      "data": {
+        "description" : "this is FestivalDetails"
+      }
+    },
+    {
+      "name": "QueryJiDayTools",
+      "pageSourceFile": "src/main/ets/components/calendarTools/QueryJiDayTools.ets",
+      "buildFunction": "QueryJiDayToolsBuilder",
+      "data": {
+        "description" : "this is QueryJiDay"
+      }
+    },
+    {
+      "name": "DateCalculationTools",
+      "pageSourceFile": "src/main/ets/components/calendarTools/DateCalculationTools.ets",
+      "buildFunction": "DateCalculationToolsBuilder",
+      "data": {
+        "description" : "this is DateCalculation"
+      }
+    },
+    {
+      "name": "FestivalSolarTools",
+      "pageSourceFile": "src/main/ets/components/calendarTools/FestivalSolarTools.ets",
+      "buildFunction": "FestivalSolarToolsBuilder",
+      "data": {
+        "description" : "this is FestivalSolarTools"
+      }
+    }
+  ]
+}

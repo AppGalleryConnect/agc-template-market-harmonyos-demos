@@ -1,0 +1,40 @@
+{
+  "color": [
+    {
+      "name": "keyword_type_font_color",
+      "value": "#007DFF"
+    },
+    {
+      "name": "common_bg_color",
+      "value": "#F5F6FA"
+    },
+    {
+      "name": "old_price_font_color",
+      "value": "#AAAAAA"
+    },
+    {
+      "name": "toggle_unselect_font_color",
+      "value": "#000000"
+    },
+    {
+      "name": "toggle_select_font_color",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "toggle_unselect_bg_color",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "toggle_select_bg_color",
+      "value": "#007DFF"
+    },
+    {
+      "name": "view_more_font_color",
+      "value": "#999999"
+    },
+    {
+      "name": "location_bg_font_color",
+      "value": "#F6F6F6"
+    }
+  ]
+}

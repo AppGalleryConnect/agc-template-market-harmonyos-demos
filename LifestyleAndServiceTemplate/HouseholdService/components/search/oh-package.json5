@@ -1,0 +1,12 @@
+{
+  "name": "search",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@hw-agconnect/ui-toast": "^1.0.0",
+    "@hw-agconnect/util-log": "^1.0.0"
+  }
+}

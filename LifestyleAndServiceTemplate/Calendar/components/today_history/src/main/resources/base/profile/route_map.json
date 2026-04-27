@@ -1,0 +1,12 @@
+{
+  "routerMap": [
+    {
+      "name": "HistoryMore",
+      "pageSourceFile": "src/main/ets/components/HistoryMore.ets",
+      "buildFunction": "HistoryMoreBuilder",
+      "data": {
+        "description": "this is HistoryMore"
+      }
+    }
+  ]
+}

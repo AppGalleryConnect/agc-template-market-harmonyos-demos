@@ -1,0 +1,15 @@
+{
+  "name": "cloud_share",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "cloud_file_base": "file:../cloud_file_base",
+    "cloud_operation_item": "file:../cloud_operation_item"
+  },
+  "type": "component",
+  "usage": "分享组件：提供我的分享、分享详情与分享列表视图，支持取消/复制/再次分享等操作，依赖基础文件与操作项组件。",
+  "zhName": "云盘分享组件"
+}

@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "service_hotline_test",
+    "type": "feature",
+    "deviceTypes": [
+      "default"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": true
+  }
+}

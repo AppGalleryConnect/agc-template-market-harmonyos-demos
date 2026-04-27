@@ -1,0 +1,60 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "usefull_time",
+      "value": "有效期"
+    },
+    {
+      "name": "share_link_auto_code",
+      "value": "分享链接自动填充提取码"
+    },
+    {
+      "name": "random_code",
+      "value": "随机生成提取码"
+    },
+    {
+      "name": "set_code",
+      "value": "提取码设置"
+    },
+    {
+      "name": "random_create_code",
+      "value": "系统随机生成提取码"
+    },
+    {
+      "name": "define_code",
+      "value": "自定义提取码"
+    },
+    {
+      "name": "input_code",
+      "value": "请设置提取码"
+    },
+    {
+      "name": "sure",
+      "value": "确定"
+    },
+    {
+      "name": "set_usefull_time",
+      "value": "有效期设置"
+    },
+    {
+      "name": "seven_day",
+      "value": "7 天内有效"
+    },
+    {
+      "name": "forty_day",
+      "value": "14 天内有效"
+    },
+    {
+      "name": "one_month",
+      "value": "30 天内有效"
+    },
+    {
+      "name": "for_every",
+      "value": "永久有效"
+    }
+  ]
+}

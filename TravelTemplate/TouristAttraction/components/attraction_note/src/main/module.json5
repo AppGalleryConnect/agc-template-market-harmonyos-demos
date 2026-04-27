@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "attraction_note",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+    ],
+    "routerMap": "$profile:router_map"
+  }
+}

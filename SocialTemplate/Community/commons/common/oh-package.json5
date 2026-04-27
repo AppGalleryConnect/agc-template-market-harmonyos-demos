@@ -1,0 +1,12 @@
+{
+  "name": "common",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "chat_base": "file:../../components/chat_base",
+    "instant_messaging": "file:../../sdk/instant_messaging"
+  }
+}

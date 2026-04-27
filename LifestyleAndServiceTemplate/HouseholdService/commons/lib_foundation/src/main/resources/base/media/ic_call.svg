@@ -1,0 +1,22 @@
+<!--
+  - Copyright (c) 2025 Huawei Device Co., Ltd.
+  - Licensed under the Apache License, Version 2.0 (the "License");
+  - you may not use this file except in compliance with the License.
+  - You may obtain a copy of the License at
+  -
+  -     http://www.apache.org/licenses/LICENSE-2.0
+  -
+  - Unless required by applicable law or agreed to in writing, software
+  - distributed under the License is distributed on an "AS IS" BASIS,
+  - WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  - See the License for the specific language governing permissions and
+  - limitations under the License.
+  -->
+
+<svg width="24.000000" height="24.002441" viewBox="0 0 24 24.0024" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs/>
+	<path id="path" d="M18.31 24C17.87 24 17.46 23.93 17.09 23.79C16.62 23.67 12.55 22.45 7.05 16.94C1.71 11.61 0.37 7.41 0.23 6.91C-0.02 6.29 -0.07 5.52 0.09 4.77C0.25 4.01 0.61 3.32 1.1 2.83L3.17 0.75C3.66 0.26 4.29 0 4.94 0C5.7 0 6.41 0.36 6.9 0.99L9.94 4.91C10.46 5.57 10.52 6.64 10.09 7.36L8.6 9.82C8.74 10.29 9.23 11.44 10.85 13.16C12.66 14.88 13.79 15.3 14.16 15.4L16.63 13.91C16.93 13.73 17.32 13.63 17.73 13.63C18.24 13.63 18.74 13.78 19.08 14.05L23 17.09C23.6 17.55 23.95 18.19 23.99 18.9C24.04 19.61 23.77 20.29 23.24 20.82L21.17 22.89C20.49 23.58 19.39 24 18.31 24ZM4.94 1.31C4.64 1.31 4.34 1.44 4.1 1.68L2.02 3.75C1.39 4.39 1.12 5.65 1.45 6.45L1.45 6.45L1.48 6.52L1.48 6.52C1.49 6.56 2.69 10.73 7.97 16.01C13.43 21.47 17.41 22.52 17.45 22.53L17.45 22.53L17.52 22.55C17.75 22.64 18.02 22.68 18.31 22.68C19.05 22.68 19.81 22.4 20.24 21.97L22.32 19.89C22.57 19.63 22.71 19.31 22.69 18.98C22.66 18.66 22.49 18.35 22.2 18.13L18.28 15.08C18.16 14.99 17.95 14.93 17.73 14.93C17.57 14.93 17.41 14.97 17.31 15.03L14.47 16.74L14.28 16.74C14.12 16.74 12.64 16.65 9.93 14.09L9.93 14.08C7.47 11.49 7.27 9.94 7.25 9.77L7.23 9.55L8.96 6.69C9.12 6.43 9.09 5.95 8.91 5.71L5.87 1.79C5.62 1.48 5.29 1.31 4.94 1.31Z" fill="#272636" fill-opacity="1.000000" fill-rule="nonzero"/>
+</svg>

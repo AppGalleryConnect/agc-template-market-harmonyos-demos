@@ -1,0 +1,21 @@
+{
+  "modelVersion": "5.0.5",
+  "description": "Please describe the basic information.",
+  "template": {
+    "domain": "健康医疗",
+    "name": "健康管理模板",
+    "usage": "本模板为健康管理类应用提供了完整的开发框架，包含健康数据监测、智能设备连接和个人信息管理三大核心模块",
+    "scene": "template,generate",
+    "sdk": [],
+    "color": {
+      "themeFilePath": "",
+      "mainThemeName": "",
+      "secondThemeName": "",
+      "themeFileContent": ""
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@ohos/hypium": "1.0.21"
+  }
+}

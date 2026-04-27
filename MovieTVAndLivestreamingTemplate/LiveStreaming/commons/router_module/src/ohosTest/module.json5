@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "router_module_test",
+    "type": "feature",
+    "deviceTypes": [
+      "phone"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false
+  }
+}

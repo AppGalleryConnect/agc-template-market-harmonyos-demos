@@ -1,0 +1,12 @@
+{
+  "name": "travel_invoice",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {},
+  "type": "component",
+  "usage": "发票编辑组件，提供发票管理的相关功能，支持发票列表展示、添加新发票、编辑现有发票、删除发票等能力。",
+  "zhName": "发票编辑组件"
+}

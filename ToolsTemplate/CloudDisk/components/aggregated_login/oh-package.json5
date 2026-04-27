@@ -1,0 +1,14 @@
+{
+  "name": "aggregated_login",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "component",
+  "usage": "聚合登录组件：提供华为账号登录和微信登录功能，支持多种登录方式的统一管理",
+  "zhName": "聚合登录组件",
+  "dependencies": {
+    "@tencent/wechat_open_sdk": "1.0.7"
+  }
+}

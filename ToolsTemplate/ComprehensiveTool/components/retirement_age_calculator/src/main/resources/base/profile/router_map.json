@@ -1,0 +1,9 @@
+{
+  "routerMap": [
+    {
+      "name": "RetirementAgePage",
+      "pageSourceFile": "src/main/ets/pages/RetirementAgePage.ets",
+      "buildFunction": "RetirementAgePageBuilder"
+    }
+  ]
+}

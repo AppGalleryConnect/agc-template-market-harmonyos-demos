@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "module_share",
+    "type": "har",
+    "deviceTypes": [
+      "default"
+    ]
+  }
+}

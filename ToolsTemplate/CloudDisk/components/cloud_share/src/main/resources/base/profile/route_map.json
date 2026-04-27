@@ -1,0 +1,14 @@
+{
+  "routerMap": [
+    {
+      "name": "MySharePage",
+      "pageSourceFile": "src/main/ets/page/MySharePage.ets",
+      "buildFunction": "MySharePageBuilder"
+    },
+    {
+      "name": "ShareDetailPage",
+      "pageSourceFile": "src/main/ets/page/ShareDetailPage.ets",
+      "buildFunction": "ShareDetailPageBuilder"
+    }
+  ]
+}

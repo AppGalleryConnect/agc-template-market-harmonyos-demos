@@ -1,0 +1,24 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "TouristAttraction"
+    },
+    {
+      "name": "agcit_40717667622022212647",
+      "value": "@ohos-agcit/tourist-attraction/1.0.0"
+    },
+    {
+      "name": "agcit_huawei_tourist_attraction",
+      "value": "1.0.1"
+    }
+  ]
+}

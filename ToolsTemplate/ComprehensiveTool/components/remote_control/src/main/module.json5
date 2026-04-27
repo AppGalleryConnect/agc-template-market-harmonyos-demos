@@ -1,0 +1,16 @@
+{
+  "module": {
+    "name": "remote_control",
+    "type": "har",
+    "routerMap": "$profile:route_map",
+    "deviceTypes": [
+      "phone"
+    ],
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.MANAGE_INPUT_INFRARED_EMITTER",
+        "reason": "$string:infrared_permission_reason",
+      }
+    ]
+  }
+}

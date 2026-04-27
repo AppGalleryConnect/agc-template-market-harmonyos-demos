@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "健康管理"
+    },
+    {
+      "name": "agcit_huawei_health_service",
+      "value": "1.0.1"
+    },
+    {
+      "name": "agcittype_huawei_health_service",
+      "value": "industryTemplate"
+    },
+    {
+      "name": "agcitkid_huawei_health_service",
+      "value": "agcit_huawei_common_login/1.0.0,agcit_huawei_enterprise_recruitment_check_app_update/1.0.2,agcit_huawei_common_collect_personal_info/1.0.0,agcit_huawei_common_feedback/1.0.0,agcit_huawei_enterprise_recruitment_message_manager/1.0.1,agcit_huawei_health_data_dashboard/1.0.1"
+    }
+  ]
+}

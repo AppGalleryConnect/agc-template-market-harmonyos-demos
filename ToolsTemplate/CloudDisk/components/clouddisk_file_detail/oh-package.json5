@@ -1,0 +1,16 @@
+{
+  "name": "clouddisk_file_detail",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "component",
+  "usage": "云盘文件详情组件：提供文件详细信息展示功能，支持文件预览、属性查看和操作",
+  "zhName": "云盘文件详情组件",
+  "dependencies": {
+    "cloud_file_base": "file:../cloud_file_base",
+    "cloud_operation_item": "file:../cloud_operation_item",
+    "module_cloud_upload": "file:../module_cloud_upload"
+  }
+}

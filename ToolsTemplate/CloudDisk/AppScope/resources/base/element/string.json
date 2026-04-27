@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "云盘"
+    },
+    {
+      "name": "agcit_huawei_clouddisk_service",
+      "value": "1.0.2"
+    },
+    {
+      "name": "agcittype_huawei_clouddisk_service",
+      "value": "industryTemplate"
+    },
+    {
+      "name": "agcitkid_huawei_clouddisk_service",
+      "value": "agcit_huawei_common_login/1.0.0,agcit_huawei_enterprise_recruitment_check_app_update/1.0.2,agcit_huawei_common_collect_personal_info/1.0.0,agcit_huawei_common_feedback/1.0.0,agcit_huawei_look_ad/1.0.0,agcit_huawei_calendar_vip_center/1.0.3"
+    }
+  ]
+}

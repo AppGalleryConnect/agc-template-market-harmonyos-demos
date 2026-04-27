@@ -1,0 +1,108 @@
+{
+  "routerMap": [
+    {
+      "name": "About",
+      "pageSourceFile": "src/main/ets/pages/About.ets",
+      "buildFunction": "AboutBuilder",
+      "data": {
+        "description": "this is About"
+      }
+    },
+    {
+      "name": "Personal",
+      "pageSourceFile": "src/main/ets/pages/Personal.ets",
+      "buildFunction": "PersonalBuilder",
+      "data": {
+        "description": "this is Personal"
+      }
+    },
+    {
+      "name": "PersonalInfo",
+      "pageSourceFile": "src/main/ets/pages/PersonalInfo.ets",
+      "buildFunction": "PersonalInfoBuilder",
+      "data": {
+        "description": "this is PersonalInfo"
+      }
+    },
+    {
+      "name": "Complaint",
+      "pageSourceFile": "src/main/ets/pages/Complaint.ets",
+      "buildFunction": "ComplaintBuilder",
+      "data": {
+        "description": "this is Complaint"
+      }
+    },
+    {
+      "name": "Customer",
+      "pageSourceFile": "src/main/ets/pages/Customer.ets",
+      "buildFunction": "CustomerBuilder",
+      "data": {
+        "description": "this is Customer"
+      }
+    },
+    {
+      "name": "OrderList",
+      "pageSourceFile": "src/main/ets/pages/OrderList.ets",
+      "buildFunction": "OrderListBuilder",
+      "data": {
+        "description": "this is OrderList"
+      }
+    },
+    {
+      "name": "RoomOrderDetail",
+      "pageSourceFile": "src/main/ets/pages/RoomOrderDetail.ets",
+      "buildFunction": "RoomOrderDetailBuilder",
+      "data": {
+        "description": "this is RoomOrderDetail"
+      }
+    },
+    {
+      "name": "CommodityOrderDetail",
+      "pageSourceFile": "src/main/ets/pages/CommodityOrderDetail.ets",
+      "buildFunction": "CommodityOrderDetailBuilder",
+      "data": {
+        "description": "this is RoomOrderDetail"
+      }
+    },
+    {
+      "name": "Guests",
+      "pageSourceFile": "src/main/ets/pages/Guests.ets",
+      "buildFunction": "GuestsBuilder",
+      "data": {
+        "description": "this is Guests"
+      }
+    },
+    {
+      "name": "AddGuest",
+      "pageSourceFile": "src/main/ets/pages/AddGuest.ets",
+      "buildFunction": "AddGuestBuilder",
+      "data": {
+        "description": "this is Guests"
+      }
+    },
+    {
+      "name": "QuickLoginPage",
+      "pageSourceFile": "src/main/ets/pages/QuickLoginPage.ets",
+      "buildFunction": "QuickLoginPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "PrivacyPolicyPage",
+      "pageSourceFile": "src/main/ets/pages/PrivacyPolicyPage.ets",
+      "buildFunction": "PrivacyPolicyPageBuilder",
+      "data": {
+        "description": ""
+      }
+    },
+    {
+      "name": "TermsOfServicePage",
+      "pageSourceFile": "src/main/ets/pages/TermsOfServicePage.ets",
+      "buildFunction": "TermsOfServicePageBuilder",
+      "data": {
+        "description": ""
+      }
+    }
+  ]
+}

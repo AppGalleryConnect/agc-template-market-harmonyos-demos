@@ -1,0 +1,9 @@
+{
+  "routerMap": [
+    {
+      "name": "RealNameAuthPage",
+      "pageSourceFile": "src/main/ets/pages/RealNameAuthPage.ets",
+      "buildFunction": "RealNameAuthPageBuilder"
+    }
+  ]
+}

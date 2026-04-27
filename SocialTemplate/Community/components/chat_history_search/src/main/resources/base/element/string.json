@@ -1,0 +1,36 @@
+{
+  "string": [
+    {
+      "name": "search",
+      "value": "搜索"
+    },
+    {
+      "name": "search_history",
+      "value": "最近搜索"
+    },
+    {
+      "name": "search_chat_recorde",
+      "value": "聊天记录"
+    },
+    {
+      "name": "search_chat_collect",
+      "value": "收藏"
+    },
+    {
+      "name": "search_chat_contact",
+      "value": "联系人"
+    },
+    {
+      "name": "search_empty_text",
+      "value": "暂无内容"
+    },
+    {
+      "name": "search_with_date",
+      "value": "日期查找"
+    },
+    {
+      "name": "search_date_title",
+      "value": "按日期查找"
+    }
+  ]
+}

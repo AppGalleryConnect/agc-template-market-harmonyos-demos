@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "module_time_line",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "audio_crop",
+  "version": "1.0.0",
+  "description": "音频剪辑组件，用于裁剪和编辑音频文件",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "component",
+  "usage": "音频剪辑功能，支持音频的裁剪、分割、合并等操作，提供可视化的波形编辑界面",
+  "zhName": "音频剪辑组件",
+  "dependencies": {
+    "audio_common": "file:../audio_common",
+    "audio_worker": "file:../audio_worker",
+    "@ohos/mp4parser": "2.0.6"
+  }
+}

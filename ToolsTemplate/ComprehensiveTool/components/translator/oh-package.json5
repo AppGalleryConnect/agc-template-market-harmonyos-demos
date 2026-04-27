@@ -1,0 +1,15 @@
+{
+  "name": "translator",
+  "version": "1.0.1",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@hw-agconnect/util-log": "^1.0.0",
+    "@ohos/crypto-js": "2.0.1",
+    "@ohos/axios": "^2.2.4",
+    "@ohos/mp4parser": "^2.0.6",
+    "@hw-agconnect/ui-toast": "^1.0.0"
+  }
+}

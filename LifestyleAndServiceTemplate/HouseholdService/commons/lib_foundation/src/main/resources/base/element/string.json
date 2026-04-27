@@ -1,0 +1,44 @@
+{
+  "string": [
+    {
+      "name": "hwid_no_internet_connect",
+      "value": "网络未连接，请检查网络设置。"
+    },
+    {
+      "name": "hwid_text_button_known",
+      "value": "知道了"
+    },
+    {
+      "name": "btn_common_know",
+      "value": "我知道了"
+    },
+    {
+      "name": "btn_common_cancel",
+      "value": "取消"
+    },
+    {
+      "name": "cancel_relate_phone_no",
+      "value": "暂不取消"
+    },
+    {
+      "name": "rebind_phone_other",
+      "value": "使用其他号码"
+    },
+    {
+      "name": "need_login_in_setting",
+      "value": "请先前往设置，登录华为账号~"
+    },
+    {
+      "name": "login_in_error",
+      "value": "华为账号登录异常，请稍后重试~"
+    },
+    {
+      "name": "good_card_appoint_btn",
+      "value": "预约"
+    },
+    {
+      "name": "book_good_btn",
+      "value": "立即预约"
+    }
+  ]
+}

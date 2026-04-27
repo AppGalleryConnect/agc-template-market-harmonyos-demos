@@ -1,0 +1,23 @@
+{
+  "name": "home",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "oh_router": "file:../../commons/oh_router",
+    "common": "file:../../commons/common",
+    "video_common": "file:../../components/video_common",
+    "@ohos/mp4parser": "2.0.6",
+    "offline_video_download": 'file:../../components/offline_video_download',
+    "@keke/color-picker": "1.0.4",
+    "video_edit": "file:../../components/video_edit"
+  },
+  "type": "feature",
+  "usage": "视频编辑工具模块：提供视频剪辑、特效处理和格式转换等功能",
+  "zhName": "视频编辑",
+  "tabPage": "VideoEditHomePage",
+  "tabImage": "screenshot/home.jpeg",
+  "tabOrder": 0
+}

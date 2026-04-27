@@ -1,0 +1,21 @@
+{
+  "name": "entry",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "",
+  "author": "",
+  "license": "",
+  "type": "entry",
+  "usage": "入口模块",
+  "zhName": "入口",
+  "dependencies": {
+    "common": "file:../../commons/common",
+    "instant_messaging": "file:../../sdk/instant_messaging",
+    "person": "file:../../features/person",
+    "message": "file:../../features/message",
+    "address_book": "file:../../features/address_book",
+    "oh_router": "file:../../commons/oh_router",
+    "chat_window": "file:../../components/chat_window"
+  }
+}
+

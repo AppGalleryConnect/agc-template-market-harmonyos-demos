@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "audio_format_conversion",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

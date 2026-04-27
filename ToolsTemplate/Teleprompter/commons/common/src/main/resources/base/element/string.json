@@ -1,0 +1,24 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "search_placeholder",
+      "value": "搜索提示词"
+    },
+    {
+      "name": "prompt_word",
+      "value": "提词器"
+    },
+    {
+      "name": "person",
+      "value": "我的"
+    },
+    {
+      "name": "delete_message_prompt",
+      "value": "是否删除%s消息 ？"
+    }
+  ]
+}

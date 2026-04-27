@@ -1,0 +1,15 @@
+{
+  "name": "audio_adjust_speed",
+  "version": "1.0.0",
+  "description": "音频调速组件，用于调整音频播放速度",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "component",
+  "usage": "音频调速功能，支持音频播放速度调整，可设置0.5x到2.0x的播放速度",
+  "zhName": "音频调速组件",
+  "dependencies": {
+    "audio_common": "file:../audio_common",
+    "audio_worker": "file:../audio_worker"
+  }
+}

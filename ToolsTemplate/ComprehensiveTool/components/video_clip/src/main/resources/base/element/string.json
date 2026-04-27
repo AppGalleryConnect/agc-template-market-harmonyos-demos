@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "media_request_reason",
+      "value": "是否允许视频剪辑工具使用媒体写入权限"
+    },
+    {
+      "name": "network_request_reason",
+      "value": "是否允许网络权限"
+    },
+    {
+      "name": "agcit_huawei_video_clip",
+      "value": "1.0.6"
+    },
+    {
+      "name": "agcittype_huawei_video_clip",
+      "value": "serviceComponent"
+    }
+  ]
+}

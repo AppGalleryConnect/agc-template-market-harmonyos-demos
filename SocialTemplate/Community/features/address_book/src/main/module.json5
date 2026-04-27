@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "address_book",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "util",
+    "type": "har",
+    "description": "$string:shared_desc",
+    "deviceTypes": [
+      "phone",
+    ],
+    "installationFree": false,
+  }
+}

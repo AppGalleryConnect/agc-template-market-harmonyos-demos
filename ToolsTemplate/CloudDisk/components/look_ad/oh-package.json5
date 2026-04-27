@@ -1,0 +1,12 @@
+{
+  "name": "look_ad",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "component",
+  "usage": "看广告组件：提供激励广告展示和奖励领取功能，支持广告加载、播放和奖励发放",
+  "zhName": "看广告组件",
+  "dependencies": {}
+}

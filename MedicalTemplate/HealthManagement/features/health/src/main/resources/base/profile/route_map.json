@@ -1,0 +1,36 @@
+{
+  "routerMap": [
+    {
+      "name": "HealthReportPage",
+      "pageSourceFile": "src/main/ets/views/HealthReportPage.ets",
+      "buildFunction": "HealthReportPageBuilder"
+    },
+    {
+      "name": "HealthReportEmptyPage",
+      "pageSourceFile": "src/main/ets/views/HealthReportEmptyPage.ets",
+      "buildFunction": "HealthReportEmptyPageBuilder"
+    },
+    {
+      "name": "HealthHistoryPage",
+      "pageSourceFile": "src/main/ets/views/HealthHistoryPage.ets",
+      "buildFunction": "HealthHistoryPageBuilder"
+    },
+    {
+      "name": "HealthHistoryDetailPage",
+      "pageSourceFile": "src/main/ets/views/HealthHistoryDetailPage.ets",
+      "buildFunction": "HealthHistoryDetailPageBuilder"
+    },
+    {
+      "name": "WeeklyReportPage",
+      "pageSourceFile": "src/main/ets/views/WeeklyReportPage.ets",
+      "buildFunction": "WeeklyReportPageBuilder"
+    },
+    {
+      "name": "MonthlyReportPage",
+      "pageSourceFile": "src/main/ets/views/MonthlyReportPage.ets",
+      "buildFunction": "MonthlyReportPageBuilder"
+    }
+  ]
+}
+
+

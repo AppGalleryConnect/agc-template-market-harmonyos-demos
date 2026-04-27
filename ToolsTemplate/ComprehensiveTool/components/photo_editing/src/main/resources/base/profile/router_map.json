@@ -1,0 +1,34 @@
+{
+  "routerMap": [
+    {
+      "name": "FilteredCamera",
+      "pageSourceFile": "src/main/ets/pages/FilteredCamera.ets",
+      "buildFunction": "FilteredCameraBuilder"
+    },
+    {
+      "name": "PhotoEditing",
+      "pageSourceFile": "src/main/ets/pages/PhotoEditing.ets",
+      "buildFunction": "PhotoEditingBuilder"
+    },
+    {
+      "name": "CollagePage",
+      "pageSourceFile": "src/main/ets/pages/CollagePage.ets",
+      "buildFunction": "CollagePageBuilder"
+    },
+    {
+      "name": "PhotoFramePage",
+      "pageSourceFile": "src/main/ets/pages/PhotoFramePage.ets",
+      "buildFunction": "PhotoFramePageBuilder"
+    },
+    {
+      "name": "PictureBeautification",
+      "pageSourceFile": "src/main/ets/pages/PictureBeautification.ets",
+      "buildFunction": "PictureBeautificationBuilder"
+    },
+    {
+      "name": "ImageDownload",
+      "pageSourceFile": "src/main/ets/pages/ImageDownload.ets",
+      "buildFunction": "ImageDownloadBuilder"
+    }
+  ]
+}

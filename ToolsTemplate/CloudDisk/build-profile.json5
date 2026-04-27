@@ -1,0 +1,150 @@
+{
+  "app": {
+    "signingConfigs": [],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "targetSdkVersion": "5.0.5(17)",
+        "compatibleSdkVersion": "5.0.3(15)",
+        "runtimeOS": "HarmonyOS",
+        "buildOption": {
+          "strictMode": {
+            "caseSensitiveCheck": true,
+            "useNormalizedOHMUrl": true
+          }
+        }
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug"
+      },
+      {
+        "name": "release"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./products/entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "common",
+      "srcPath": "./commons/common"
+    },
+    {
+      "name": "person",
+      "srcPath": "./features/person"
+    },
+    {
+      "name": "aggregated_login",
+      "srcPath": "./components/aggregated_login"
+    },
+    {
+      "name": "OHRouter",
+      "srcPath": "./commons/OHRouter"
+    },
+    {
+      "name": "check_app_update",
+      "srcPath": "./components/check_app_update"
+    },
+    {
+      "name": "clouddisk_homepage",
+      "srcPath": "./features/clouddisk_homepage"
+    },
+    {
+      "name": "clouddisk_backup",
+      "srcPath": "./features/clouddisk_backup"
+    },
+    {
+      "name": "clouddisk_file",
+      "srcPath": "./features/clouddisk_file"
+    },
+    {
+      "name": "module_share",
+      "srcPath": "./components/module_share"
+    },
+    {
+      "name": "clouddisk_file_operation",
+      "srcPath": "./components/clouddisk_file_operation"
+    },
+    {
+      "name": "feedback",
+      "srcPath": "./components/feedback"
+    },
+    {
+      "name": "clouddisk_file_select",
+      "srcPath": "./components/clouddisk_file_select"
+    },
+    {
+      "name": "clouddisk_file_search",
+      "srcPath": "./components/clouddisk_file_search"
+    },
+    {
+      "name": "module_cloud_upload",
+      "srcPath": "./components/module_cloud_upload"
+    },
+    {
+      "name": "collect_personal_info",
+      "srcPath": "./components/collect_personal_info"
+    },
+    {
+      "name": "clouddisk_file_detail",
+      "srcPath": "./components/clouddisk_file_detail"
+    },
+    {
+      "name": "clouddisk_backup_status",
+      "srcPath": "./components/clouddisk_backup_status"
+    },
+    {
+      "name": "look_ad",
+      "srcPath": "./components/look_ad"
+    },
+    {
+      "name": "vip_center",
+      "srcPath": "./components/vip_center"
+    },
+    {
+      "name": "base_apis",
+      "srcPath": "./components/base_apis"
+    },
+    {
+      "name": "aggregated_payment",
+      "srcPath": "./components/aggregated_payment"
+    },
+    {
+      "name": "cloud_operation_item",
+      "srcPath": "./components/cloud_operation_item"
+    },
+    {
+      "name": "cloud_file_base",
+      "srcPath": "./components/cloud_file_base"
+    },
+    {
+      "name": "cloud_view_switch",
+      "srcPath": "./components/cloud_view_switch"
+    },
+    {
+      "name": "cloud_multilevel_navigation",
+      "srcPath": "./components/cloud_multilevel_navigation"
+    },
+    {
+      "name": "cloud_privatespace",
+      "srcPath": "./components/cloud_privatespace"
+    },
+    {
+      "name": "cloud_share",
+      "srcPath": "./components/cloud_share"
+    }
+  ]
+}

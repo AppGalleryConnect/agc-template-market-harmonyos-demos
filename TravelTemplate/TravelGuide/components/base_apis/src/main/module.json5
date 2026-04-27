@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "base_apis",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "video1_url",
+      "value": "https://consumer.huawei.com/content/dam/huawei-cbg-site/cn/mkt/plp/new-phones/video/pocket-series.mp4"
+    },
+    {
+      "name": "video2_url",
+      "value": "https://consumer.huawei.com/content/dam/huawei-cbg-site/cn/mkt/harmonyos-6/1024/videos/ai/more-ai-video.mp4"
+    },
+    {
+      "name": "agcit_huawei_offline_video_download",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_offline_video_download",
+      "value": "serviceComponent"
+    }
+  ]
+}

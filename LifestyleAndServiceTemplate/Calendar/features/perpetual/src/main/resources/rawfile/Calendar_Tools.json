@@ -1,0 +1,17 @@
+[
+  {
+    "id": "query",
+    "name": "吉日查询",
+    "icon": "app.media.ic_jiri_check"
+  },
+  {
+    "id": "calculation",
+    "name": "日期计算",
+    "icon": "app.media.date_calculation"
+  },
+  {
+    "id": "festival",
+    "name": "节日节气",
+    "icon": "app.media.festival_solar"
+  }
+]

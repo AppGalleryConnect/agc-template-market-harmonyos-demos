@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "audio_adjust_speed",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

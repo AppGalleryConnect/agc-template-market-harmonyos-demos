@@ -1,0 +1,30 @@
+[
+  {
+    "title": "系统设置",
+    "classifieds": [
+      {
+        "id": "theme",
+        "name": "主题切换",
+        "currentValue": "赤色"
+      },
+      {
+        "id": "weekday",
+        "name": "周首日",
+        "currentValue": "周一"
+      }
+    ]
+  },
+  {
+    "title": "数据与隐私",
+    "classifieds": [
+      {
+        "id": "privacy",
+        "name": "隐私协议"
+      },
+      {
+        "id": "terms",
+        "name": "用户协议"
+      }
+    ]
+  }
+]

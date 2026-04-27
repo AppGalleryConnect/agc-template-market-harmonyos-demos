@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "oh_router",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

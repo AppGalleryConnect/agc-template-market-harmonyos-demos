@@ -1,0 +1,16 @@
+{
+  "module": {
+    "name": "membership",
+    "type": "har",
+    "routerMap": "$profile:route_map",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ],
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.INTERNET"
+      },
+    ]
+  }
+}

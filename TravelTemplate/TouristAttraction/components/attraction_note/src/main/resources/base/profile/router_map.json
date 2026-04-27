@@ -1,0 +1,36 @@
+{
+  "routerMap": [
+    {
+      "name": "PageGround",
+      "pageSourceFile": "src/main/ets/pages/PageWaterFlow.ets",
+      "buildFunction": "PageGroundBuilder",
+      "data": {
+        "description": "this is PageGround"
+      }
+    },
+    {
+      "name": "PageSearch",
+      "pageSourceFile": "src/main/ets/pages/PageSearch.ets",
+      "buildFunction": "PageSearchBuilder",
+      "data": {
+        "description": "this is PageSearch"
+      }
+    },
+    {
+      "name": "PageDetail",
+      "pageSourceFile": "src/main/ets/pages/PageDetail.ets",
+      "buildFunction": "PageDetailBuilder",
+      "data": {
+        "description": "this is PageDetail"
+      }
+    },
+    {
+      "name": "RoutePageDetail",
+      "pageSourceFile": "src/main/ets/pages/RoutePageDetail.ets",
+      "buildFunction": "RoutePageDetailBuilder",
+      "data": {
+        "description": "this is RoutePageDetail"
+      }
+    }
+  ]
+}

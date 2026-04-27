@@ -1,0 +1,16 @@
+{
+  "modelVersion": "5.0.5",
+  "description": "Please describe the basic information.",
+  "template": {
+    "domain": "教育",
+    "name": "翻译应用模板",
+    "usage": "本模板为翻译类应用提供了完整的开发框架，包含文本翻译、语音翻译、图片翻译和文档翻译四大核心模块，支持多语言互译、VIP会员体系和翻译历史管理",
+    "scene": "template,generate",
+    "sdk": []
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@ohos/hypium": "1.0.21"
+  },
+  "dynamicDependencies": {}
+}

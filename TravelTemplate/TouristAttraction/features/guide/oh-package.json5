@@ -1,0 +1,16 @@
+{
+  "name": "guide",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "types": "file:../../commons/types",
+    "common": "file:../../commons/common",
+    "attraction_announcement": "file:../../components/attraction_announcement",
+    "attraction_guide": "file:../../components/attraction_guide",
+    "network": "file:../../commons/network",
+    "uicomponents": "file:../../commons/uicomponents"
+  }
+}

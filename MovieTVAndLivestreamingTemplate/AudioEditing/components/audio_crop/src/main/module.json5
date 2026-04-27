@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "audio_crop",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

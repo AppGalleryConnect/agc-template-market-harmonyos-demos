@@ -1,0 +1,16 @@
+{
+  "float": [
+    {
+      "name": "shortvideo_avatar_borderRadius",
+      "value": "4"
+    },
+    {
+      "name": "shortvideo_fabulous_opacity",
+      "value": "0.7"
+    },
+    {
+      "name": "page_text_font_size",
+      "value": "50fp"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "calendar_select",
+    "type": "har",
+    "deviceTypes": [
+      "default"
+    ]
+  }
+}

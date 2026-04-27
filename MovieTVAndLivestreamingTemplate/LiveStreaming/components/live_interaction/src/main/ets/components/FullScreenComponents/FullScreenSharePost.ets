@@ -1,0 +1,116 @@
+import { Screenshot } from 'module_share/src/main/ets/ComponentScreenshot/Screenshot'
+
+@ComponentV2
+export struct FullScreenSharePost {
+  @Event setHide: () => void
+  @Event closeAll: () => void
+
+  build() {
+    Row() {
+      Column() {
+        Screenshot()
+      }
+      .height('100%')
+      .layoutWeight(1)
+      .onClick(() => {
+        this.closeAll()
+      })
+
+      Column() {
+        Row() {
+          Image($r('app.media.back'))
+            .width(40)
+            .height(40)
+            .borderRadius(20)
+            .margin({ left: 24 })
+            .onClick(() => {
+              this.setHide()
+            })
+          Text('分享')
+            .height(27)
+            .fontSize(20)
+            .fontWeight(700)
+            .fontColor('#fff')
+            .margin({ left: 8 })
+        }
+        .width('100%')
+        .height(56)
+        .margin({ top: 22 })
+
+        Row() {
+          Column() {
+            Image($r('app.media.wechat'))
+              .width(48)
+              .height(48)
+              .borderRadius(8)
+            Text('微信')
+              .height(16)
+              .fontSize(12)
+              .fontColor('#fff')
+              .fontWeight(400)
+              .margin({ top: 8 })
+          }
+          .width(68)
+          .height(88)
+          .margin({ left: 24, right: 9 })
+
+          Column() {
+            Image($r('app.media.friend_circle'))
+              .width(48)
+              .height(48)
+              .borderRadius(8)
+            Text('朋友圈')
+              .height(16)
+              .fontSize(12)
+              .fontColor('#fff')
+              .fontWeight(400)
+              .margin({ top: 8, right: 9 })
+          }
+          .width(68)
+          .height(88)
+          .margin({ right: 9 })
+
+          Column() {
+            Image($r('app.media.qq'))
+              .width(48)
+              .height(48)
+              .borderRadius(8)
+            Text('QQ')
+              .height(16)
+              .fontSize(12)
+              .fontColor('#fff')
+              .fontWeight(400)
+              .margin({ top: 8, right: 9 })
+          }
+          .width(68)
+          .height(88)
+          .margin({ right: 9 })
+
+          Column() {
+            Image($r('app.media.save_white'))
+              .width(48)
+              .height(48)
+              .borderRadius(8)
+            Text('保存图片')
+              .height(16)
+              .fontSize(12)
+              .fontColor('#fff')
+              .fontWeight(400)
+              .margin({ top: 8 })
+          }
+          .width(68)
+          .height(88)
+        }
+        .width('100%')
+        .height(88)
+        .margin({ top: 8 })
+      }
+      .width(368)
+      .height('100%')
+      .backgroundColor($r('app.color.normal_font_color'))
+      .backgroundBlurStyle(BlurStyle.BACKGROUND_THIN)
+    }
+    .width('100%')
+    .height('100%')
+  }
+}

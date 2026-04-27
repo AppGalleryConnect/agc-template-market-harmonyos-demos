@@ -1,0 +1,11 @@
+{
+  "app": {
+// todo 修改包名
+    "bundleName": "healthmanagement.1.xxxxxx",
+    "vendor": "example",
+    "versionCode": 1000001,
+    "versionName": "1.0.1",
+    "icon": "$media:layered_image",
+    "label": "$string:app_name"
+  }
+}

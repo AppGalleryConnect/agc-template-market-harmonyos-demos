@@ -1,0 +1,28 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "mock_account_title",
+      "value": "选择模拟账户"
+    },
+    {
+      "name": "dialog_cancel",
+      "value": "取消"
+    },
+    {
+      "name": "dialog_confirm",
+      "value": "确定"
+    },
+    {
+      "name": "complete",
+      "value": "完成"
+    },
+    {
+      "name": "vibrate",
+      "value": "社交交友收到消息震动场景，需要使用您的震动权限"
+    }
+  ]
+}

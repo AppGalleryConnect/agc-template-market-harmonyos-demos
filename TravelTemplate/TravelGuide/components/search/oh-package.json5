@@ -1,0 +1,12 @@
+{
+  "name": "search",
+  "version": "1.0.3",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {},
+  "type": "component",
+  "usage": "搜索组件，提供搜索功能，支持搜索历史记录、热门搜索推荐等功能。",
+  "zhName": "搜索组件"
+}

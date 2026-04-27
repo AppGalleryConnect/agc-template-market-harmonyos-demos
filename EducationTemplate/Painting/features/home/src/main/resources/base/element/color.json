@@ -1,0 +1,20 @@
+{
+  "color": [
+    {
+      "name": "mask_black",
+      "value": "#E6000000"
+    },
+    {
+      "name": "banner_button_background",
+      "value": "#99FFFFFF"
+    },
+    {
+      "name": "home_sketchbook_column",
+      "value": "#08000000"
+    },
+    {
+      "name": "theme_color",
+      "value": "#FFED6F21"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "routerMap": [
+    {
+      "name": "AddInvoiceComp",
+      "pageSourceFile": "src/main/ets/components/AddInvoiceComp.ets",
+      "buildFunction": "AddInvoiceCompBuilder"
+    }
+  ]
+}

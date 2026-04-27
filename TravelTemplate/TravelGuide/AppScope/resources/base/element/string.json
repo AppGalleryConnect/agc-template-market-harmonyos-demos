@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "旅游攻略"
+    },
+    {
+      "name": "agcit_huawei_travel_guide_service",
+      "value": "1.0.1"
+    },
+    {
+      "name": "agcittype_huawei_travel_guide_service",
+      "value": "industryTemplate"
+    },
+    {
+      "name": "agcitkid_huawei_travel_guide_service",
+      "value": "agcit_huawei_common_login/1.0.0,agcit_huawei_common_payment/1.0.0,agcit_huawei_common_share/1.0.0,agcit_huawei_common_category/1.0.0,agcit_huawei_enterprise_recruitment_check_app_update/1.0.2,agcit_huawei_common_cityselect/1.0.0,agcit_huawei_common_collect_personal_info/1.0.0,agcit_huawei_look_ad/1.0.0,agcit_huawei_express_template_module_auth/1.0.0,agcit_huawei_home_decoration_module_filter_list/1.0.1,agcit_huawei_travel_footprint/1.0.0,agcit_huawei_travel_invoice/1.0.0,agcit_huawei_home_stay_travel_map/1.0.3,agcit_huawei_travel_planning/1.0.0"
+    }
+  ]
+}

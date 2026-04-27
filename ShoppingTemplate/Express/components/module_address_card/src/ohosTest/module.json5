@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "module_address_card_test",
+    "type": "feature",
+    "deviceTypes": [
+      "default"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false
+  }
+}

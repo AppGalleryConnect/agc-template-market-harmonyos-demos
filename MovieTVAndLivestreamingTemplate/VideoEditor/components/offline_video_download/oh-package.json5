@@ -1,0 +1,15 @@
+{
+  "name": "offline_video_download",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "component",
+  "usage": "离线视频下载组件",
+  "zhName": "离线视频下载组件",
+  "dependencies": {
+    "video_common": "file:../video_common",
+    "@ohos/video-cache": "1.0.6"
+  }
+}

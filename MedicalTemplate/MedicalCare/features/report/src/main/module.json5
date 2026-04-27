@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "report",
+    "type": "har",
+    "routerMap": "$profile:router_map_report",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ]
+  }
+}

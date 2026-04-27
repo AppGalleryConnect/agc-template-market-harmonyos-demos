@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="4px" height="4px" viewBox="0 0 8 4" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>路径</title>
+    <g id="1210最新修改" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="行程足迹" transform="translate(-332.000000, -563.000000)" fill-rule="nonzero" stroke="#FFFFFF">
+            <path d="M334.5,562.5 L337.450853,565.384036 C337.516382,565.448081 337.516382,565.551919 337.450853,565.615964 L334.5,568.5" id="路径" transform="translate(336.000000, 565.500000) scale(1, -1) rotate(90.000000) translate(-336.000000, -565.500000) "></path>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,12 @@
+{
+  "name": "cloud_file_base",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {},
+  "type": "component",
+  "usage": "文件基础组件库：提供文件信息模型、列表单元、网格项、选择逻辑等通用能力，供云盘各业务页面复用。",
+  "zhName": "云盘文件基础组件"
+}

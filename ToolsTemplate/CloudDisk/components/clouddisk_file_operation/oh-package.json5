@@ -1,0 +1,17 @@
+{
+  "name": "clouddisk_file_operation",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "component",
+  "usage": "云盘文件操作组件：提供文件操作功能，包括下载、删除、分享、重命名、移动、收藏等操作",
+  "zhName": "云盘文件操作组件",
+  "dependencies": {
+    "common": "file:../../commons/common",
+    "module_share":"file:../../components/module_share",
+    "module_cloud_upload": "file:../module_cloud_upload",
+    "clouddisk_file_select": "file:../../components/clouddisk_file_select"
+  }
+}

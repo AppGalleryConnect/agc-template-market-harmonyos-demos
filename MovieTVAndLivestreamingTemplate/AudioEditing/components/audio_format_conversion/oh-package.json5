@@ -1,0 +1,16 @@
+{
+  "name": "audio_format_conversion",
+  "version": "1.0.0",
+  "description": "音频格式转换组件，用于实现不同音频格式之间的转换",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "component",
+  "usage": "音频格式转换功能，支持Mp3、Wav、Aac、M4a等多种音频格式互转",
+  "zhName": "音频格式转换组件",
+  "dependencies": {
+    "@ohos/mp4parser": "2.0.6",
+    "audio_common": "file:../audio_common",
+    "audio_worker": "file:../audio_worker"
+  }
+}

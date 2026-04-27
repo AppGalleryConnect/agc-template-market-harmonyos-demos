@@ -1,0 +1,12 @@
+{
+  "name": "audio_worker",
+  "version": "1.0.0",
+  "description": "音频工作线程组件，用于处理音频的异步任务",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "component",
+  "usage": "音频工作线程模块，提供音频处理的异步任务调度和执行，避免阻塞主线程",
+  "zhName": "音频工作线程组件",
+  "dependencies": {}
+}

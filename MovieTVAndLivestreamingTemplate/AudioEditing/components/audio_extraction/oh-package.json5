@@ -1,0 +1,16 @@
+{
+  "name": "audio_extraction",
+  "version": "1.0.0",
+  "description": "音频提取组件，用于从视频文件中提取音频轨道",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "component",
+  "usage": "音频提取功能，支持从Mp4、Mov等视频文件中提取音频轨道，支持VIP权限控制",
+  "zhName": "音频提取组件",
+  "dependencies": {
+    "audio_common": "file:../audio_common",
+    "audio_worker": "file:../audio_worker",
+    "@ohos/mp4parser": "2.0.6"
+  }
+}

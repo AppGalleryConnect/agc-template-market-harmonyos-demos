@@ -1,0 +1,20 @@
+<svg viewBox="0 0 12 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="12.000000" height="24.000000" fill="none" customFrame="#000000" mask="url(#mask_0)">
+	<defs>
+		<filter id="pixso_custom_mask_type_outline">
+			<feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0 " />
+		</filter>
+		<clipPath id="clipPath_0">
+			<rect width="12.000000" height="24.000000" x="0.000000" y="0.000000" fill="rgb(255,255,255)" />
+		</clipPath>
+	</defs>
+	<mask id="mask_0" width="6.742640" height="12.813077" x="2.999756" y="5.593506" maskUnits="userSpaceOnUse">
+		<g filter="url(#pixso_custom_mask_type_outline)">
+			<path id="路径" d="M4.24802 5.78263L4.28009 5.8129L9.22983 10.7626C9.89901 11.4318 9.91295 12.5081 9.27166 13.1943L9.22983 13.2375L4.28009 18.1873C4.15121 18.3161 3.98711 18.3883 3.81878 18.4038L3.77279 18.4066L3.72673 18.4066C3.54253 18.401 3.36001 18.3279 3.21943 18.1873C2.93699 17.9048 2.92691 17.4532 3.18917 17.1587L3.21943 17.1266L7.81562 12.5304C8.09805 12.248 8.10814 11.7963 7.84588 11.5018L7.81562 11.4697L3.21943 6.87356C2.92653 6.58066 2.92653 6.10579 3.21943 5.8129C3.36064 5.67168 3.54416 5.59855 3.72919 5.59351L3.77546 5.59366C3.94504 5.59944 4.11304 5.66243 4.24802 5.78263Z" fill="rgb(255,255,255)" fill-rule="evenodd" />
+		</g>
+	</mask>
+	<rect id="Public/ic_public_arrow_right" width="12.000000" height="24.000000" x="0.000000" y="0.000000" />
+	<g id="Symbol/color-light/colorPrimary" customFrame="url(#clipPath_0)">
+		<rect id="Symbol/color-light/colorPrimary" width="12.000000" height="24.000000" x="0.000000" y="0.000000" />
+		<rect id="color/#000000" width="12.000000" height="24.000000" x="0.000000" y="0.000000" fill="rgb(0,0,0)" fill-opacity="0.200000003" />
+	</g>
+</svg>

@@ -1,0 +1,12 @@
+{
+  "name": "valuation_information",
+  "version": "1.0.0",
+  "description": "Valuation information component",
+  "main": "Index.ets",
+  "type": "component",
+  "usage": "回收估价表单组件，提供构建手机/电脑回收估价页面功能。支持商品信息填写、估价计算、客服咨询弹窗等功能。",
+  "zhName": "回收估价表单组件",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {}
+}

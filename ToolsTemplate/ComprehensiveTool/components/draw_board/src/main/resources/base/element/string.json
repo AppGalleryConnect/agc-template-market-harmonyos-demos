@@ -1,0 +1,140 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "canvas",
+      "value": "画布"
+    },
+    {
+      "name": "confirm",
+      "value": "确定"
+    },
+    {
+      "name": "custom",
+      "value": "自定义"
+    },
+    {
+      "name": "paint",
+      "value": "画笔"
+    },
+    {
+      "name": "brash",
+      "value": "笔刷"
+    },
+    {
+      "name": "eraser",
+      "value": "橡皮擦大小"
+    },
+    {
+      "name": "shape",
+      "value": "形状"
+    },
+    {
+      "name": "backgroundSelect",
+      "value": "选择背景图片"
+    },
+    {
+      "name": "backgroundColorSelect",
+      "value": "选择背景颜色"
+    },
+    {
+      "name": "ballpoint",
+      "value": "圆珠笔"
+    },
+    {
+      "name": "marker",
+      "value": "马克笔"
+    },
+    {
+      "name": "pencil",
+      "value": "铅笔"
+    },
+    {
+      "name": "fountain_pen",
+      "value": "钢笔"
+    },
+    {
+      "name": "color",
+      "value": "颜色"
+    },
+    {
+      "name": "opacity",
+      "value": "不透明度"
+    },
+    {
+      "name": "thicknesses",
+      "value": "粗细"
+    },
+    {
+      "name": "rubber",
+      "value": "橡皮擦"
+    },
+    {
+      "name": "redo",
+      "value": "撤回"
+    },
+    {
+      "name": "undo",
+      "value": "重做"
+    },
+    {
+      "name": "clear",
+      "value": "清空"
+    },
+    {
+      "name": "download",
+      "value": "保存"
+    },
+    {
+      "name": "large",
+      "value": "大"
+    },
+    {
+      "name": "small",
+      "value": "小"
+    },
+    {
+      "name": "five_star",
+      "value": "五角星"
+    },
+    {
+      "name": "circle",
+      "value": "圆形"
+    },
+    {
+      "name": "rectangle",
+      "value": "矩形"
+    },
+    {
+      "name": "triangle",
+      "value": "三角形"
+    },
+    {
+      "name": "save_tips1",
+      "value": "已保存至相册!"
+    },
+    {
+      "name": "rectilinear",
+      "value": "直线"
+    },
+    {
+      "name": "arrow",
+      "value": "箭头"
+    },
+    {
+      "name": "agcit_huawei_draw_board",
+      "value": "1.0.1"
+    },
+    {
+      "name": "agcittype_huawei_draw_board",
+      "value": "serviceComponent"
+    }
+  ]
+}

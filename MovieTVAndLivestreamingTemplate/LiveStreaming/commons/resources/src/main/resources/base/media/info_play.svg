@@ -1,0 +1,16 @@
+<svg width="16.000000" height="16.000000" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs>
+		<clipPath id="clip19_945">
+			<rect width="16.000000" height="16.000000" fill="white" fill-opacity="0"/>
+		</clipPath>
+	</defs>
+	<g clip-path="url(#clip19_945)">
+		<g opacity="0.000000">
+			<rect width="16.000000" height="16.000000" fill="#000000" fill-opacity="1.000000"/>
+		</g>
+		<path d="M4.51 1.57C4.25 1.41 3.97 1.34 3.68 1.34C3.23 1.34 2.84 1.5 2.51 1.82C2.18 2.13 2.02 2.53 2.02 3.01L2.02 12.98C2.02 13.46 2.18 13.86 2.51 14.18C2.84 14.5 3.23 14.66 3.68 14.66C3.97 14.66 4.25 14.58 4.51 14.43L13.14 9.44C13.41 9.28 13.62 9.07 13.77 8.82C13.91 8.56 13.98 8.28 13.98 8C13.98 7.71 13.91 7.44 13.77 7.18C13.62 6.92 13.41 6.71 13.14 6.56L4.51 1.57Z" fill="#191919" fill-opacity="1.000000" fill-rule="nonzero"/>
+	</g>
+</svg>

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "festival",
+    "name": "公众节日"
+  },
+  {
+    "id": "solar",
+    "name": "节气"
+  },
+  {
+    "id": "holidays",
+    "name": "节假日"
+  }
+]

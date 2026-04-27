@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "setting_up",
+      "value": "备份设置"
+    },
+    {
+      "name": "camera_permission_reason",
+      "value": "需要相机权限来进行拍照和录像功能"
+    }
+  ]
+}

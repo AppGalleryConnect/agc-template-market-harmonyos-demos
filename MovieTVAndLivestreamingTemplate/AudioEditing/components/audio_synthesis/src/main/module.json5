@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "audio_synthesis",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

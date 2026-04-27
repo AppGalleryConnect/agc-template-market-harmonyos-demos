@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "money_track",
+    "type": "har",
+    "routerMap": "$profile:router_map",
+    "deviceTypes": [
+      "default"
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "entry",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "",
+  "author": "",
+  "license": "",
+  "type": "entry",
+  "usage": "入口模块",
+  "zhName": "入口",
+  "dependencies": {
+    "common": "file:../../commons/common",
+    "person": "file:../../features/person",
+    "device": "file:../../features/device",
+    "health": "file:../../features/health",
+    "oh_router": "file:../../commons/OHRouter",
+    "aggregated_login": "file:../../components/aggregated_login"
+  }
+}
+

@@ -1,0 +1,434 @@
+[
+  {
+    "date": "今天",
+    "dateCode": "12-15",
+    "price": "500",
+    "dataArray": [
+      {
+        "startDate": "07:30",
+        "endDate": "10:00",
+        "startLocation": "北京西",
+        "endLocation": "上海虹桥",
+        "duration": "2时30分",
+        "trainNumber": "G35",
+        "firstClass": "有座",
+        "secondClass": "有座",
+        "businessClass": "抢",
+        "noSeat": "4张",
+        "price": "599"
+      },
+      {
+        "startDate": "07:30",
+        "endDate": "10:00",
+        "startLocation": "北京西",
+        "endLocation": "上海虹桥",
+        "duration": "2时30分",
+        "trainNumber": "G35",
+        "firstClass": "有座",
+        "secondClass": "有座",
+        "businessClass": "抢",
+        "noSeat": "4张",
+        "price": "599"
+      },
+      {
+        "startDate": "07:30",
+        "endDate": "10:00",
+        "startLocation": "北京西",
+        "endLocation": "上海虹桥",
+        "duration": "2时30分",
+        "trainNumber": "G35",
+        "firstClass": "有座",
+        "secondClass": "有座",
+        "businessClass": "抢",
+        "noSeat": "4张",
+        "price": "599"
+      },
+      {
+        "startDate": "07:30",
+        "endDate": "10:00",
+        "startLocation": "北京西",
+        "endLocation": "上海虹桥",
+        "duration": "2时30分",
+        "trainNumber": "G35",
+        "firstClass": "有座",
+        "secondClass": "有座",
+        "businessClass": "抢",
+        "noSeat": "4张",
+        "price": "599"
+      },
+      {
+        "startDate": "07:30",
+        "endDate": "10:00",
+        "startLocation": "北京西",
+        "endLocation": "上海虹桥",
+        "duration": "2时30分",
+        "trainNumber": "G35",
+        "firstClass": "有座",
+        "secondClass": "有座",
+        "businessClass": "抢",
+        "noSeat": "4张",
+        "price": "599"
+      }
+    ]
+  },
+  {
+    "date": "明天",
+    "dateCode": "12-16",
+    "price": "500",
+    "dataArray": [
+      {
+        "startDate": "07:30",
+        "endDate": "10:00",
+        "startLocation": "北京西",
+        "endLocation": "上海虹桥",
+        "duration": "2时30分",
+        "trainNumber": "G35",
+        "firstClass": "有座",
+        "secondClass": "有座",
+        "businessClass": "抢",
+        "noSeat": "4张",
+        "price": "599"
+      },
+      {
+        "startDate": "07:30",
+        "endDate": "10:00",
+        "startLocation": "北京西",
+        "endLocation": "上海虹桥",
+        "duration": "2时30分",
+        "trainNumber": "G35",
+        "firstClass": "有座",
+        "secondClass": "有座",
+        "businessClass": "抢",
+        "noSeat": "4张",
+        "price": "599"
+      },
+      {
+        "startDate": "07:30",
+        "endDate": "10:00",
+        "startLocation": "北京西",
+        "endLocation": "上海虹桥",
+        "duration": "2时30分",
+        "trainNumber": "G35",
+        "firstClass": "有座",
+        "secondClass": "有座",
+        "businessClass": "抢",
+        "noSeat": "4张",
+        "price": "599"
+      },
+      {
+        "startDate": "07:30",
+        "endDate": "10:00",
+        "startLocation": "北京西",
+        "endLocation": "上海虹桥",
+        "duration": "2时30分",
+        "trainNumber": "G35",
+        "firstClass": "有座",
+        "secondClass": "有座",
+        "businessClass": "抢",
+        "noSeat": "4张",
+        "price": "599"
+      },
+      {
+        "startDate": "07:30",
+        "endDate": "10:00",
+        "startLocation": "北京西",
+        "endLocation": "上海虹桥",
+        "duration": "2时30分",
+        "trainNumber": "G35",
+        "firstClass": "有座",
+        "secondClass": "有座",
+        "businessClass": "抢",
+        "noSeat": "4张",
+        "price": "599"
+      }
+    ]
+  },
+  {
+    "date": "后天",
+    "dateCode": "12-17",
+    "price": "500",
+    "dataArray": [
+      {
+        "startDate": "07:30",
+        "endDate": "10:00",
+        "startLocation": "北京西",
+        "endLocation": "上海虹桥",
+        "duration": "2时30分",
+        "trainNumber": "G35",
+        "firstClass": "有座",
+        "secondClass": "有座",
+        "businessClass": "抢",
+        "noSeat": "4张",
+        "price": "599"
+      },
+      {
+        "startDate": "07:30",
+        "endDate": "10:00",
+        "startLocation": "北京西",
+        "endLocation": "上海虹桥",
+        "duration": "2时30分",
+        "trainNumber": "G35",
+        "firstClass": "有座",
+        "secondClass": "有座",
+        "businessClass": "抢",
+        "noSeat": "4张",
+        "price": "599"
+      },
+      {
+        "startDate": "07:30",
+        "endDate": "10:00",
+        "startLocation": "北京西",
+        "endLocation": "上海虹桥",
+        "duration": "2时30分",
+        "trainNumber": "G35",
+        "firstClass": "有座",
+        "secondClass": "有座",
+        "businessClass": "抢",
+        "noSeat": "4张",
+        "price": "599"
+      },
+      {
+        "startDate": "07:30",
+        "endDate": "10:00",
+        "startLocation": "北京西",
+        "endLocation": "上海虹桥",
+        "duration": "2时30分",
+        "trainNumber": "G35",
+        "firstClass": "有座",
+        "secondClass": "有座",
+        "businessClass": "抢",
+        "noSeat": "4张",
+        "price": "599"
+      },
+      {
+        "startDate": "07:30",
+        "endDate": "10:00",
+        "startLocation": "北京西",
+        "endLocation": "上海虹桥",
+        "duration": "2时30分",
+        "trainNumber": "G35",
+        "firstClass": "有座",
+        "secondClass": "有座",
+        "businessClass": "抢",
+        "noSeat": "4张",
+        "price": "599"
+      }
+    ]
+  },
+  {
+    "date": "周四",
+    "dateCode": "12-18",
+    "price": "500",
+    "dataArray": [
+      {
+        "startDate": "07:30",
+        "endDate": "10:00",
+        "startLocation": "北京西",
+        "endLocation": "上海虹桥",
+        "duration": "2时30分",
+        "trainNumber": "G35",
+        "firstClass": "有座",
+        "secondClass": "有座",
+        "businessClass": "抢",
+        "noSeat": "4张",
+        "price": "599"
+      },
+      {
+        "startDate": "07:30",
+        "endDate": "10:00",
+        "startLocation": "北京西",
+        "endLocation": "上海虹桥",
+        "duration": "2时30分",
+        "trainNumber": "G35",
+        "firstClass": "有座",
+        "secondClass": "有座",
+        "businessClass": "抢",
+        "noSeat": "4张",
+        "price": "599"
+      },
+      {
+        "startDate": "07:30",
+        "endDate": "10:00",
+        "startLocation": "北京西",
+        "endLocation": "上海虹桥",
+        "duration": "2时30分",
+        "trainNumber": "G35",
+        "firstClass": "有座",
+        "secondClass": "有座",
+        "businessClass": "抢",
+        "noSeat": "4张",
+        "price": "599"
+      },
+      {
+        "startDate": "07:30",
+        "endDate": "10:00",
+        "startLocation": "北京西",
+        "endLocation": "上海虹桥",
+        "duration": "2时30分",
+        "trainNumber": "G35",
+        "firstClass": "有座",
+        "secondClass": "有座",
+        "businessClass": "抢",
+        "noSeat": "4张",
+        "price": "599"
+      },
+      {
+        "startDate": "07:30",
+        "endDate": "10:00",
+        "startLocation": "北京西",
+        "endLocation": "上海虹桥",
+        "duration": "2时30分",
+        "trainNumber": "G35",
+        "firstClass": "有座",
+        "secondClass": "有座",
+        "businessClass": "抢",
+        "noSeat": "4张",
+        "price": "599"
+      }
+    ]
+  },
+  {
+    "date": "周五",
+    "dateCode": "12-19",
+    "price": "500",
+    "dataArray": [
+      {
+        "startDate": "07:30",
+        "endDate": "10:00",
+        "startLocation": "北京西",
+        "endLocation": "上海虹桥",
+        "duration": "2时30分",
+        "trainNumber": "G35",
+        "firstClass": "有座",
+        "secondClass": "有座",
+        "businessClass": "抢",
+        "noSeat": "4张",
+        "price": "599"
+      },
+      {
+        "startDate": "07:30",
+        "endDate": "10:00",
+        "startLocation": "北京西",
+        "endLocation": "上海虹桥",
+        "duration": "2时30分",
+        "trainNumber": "G35",
+        "firstClass": "有座",
+        "secondClass": "有座",
+        "businessClass": "抢",
+        "noSeat": "4张",
+        "price": "599"
+      },
+      {
+        "startDate": "07:30",
+        "endDate": "10:00",
+        "startLocation": "北京西",
+        "endLocation": "上海虹桥",
+        "duration": "2时30分",
+        "trainNumber": "G35",
+        "firstClass": "有座",
+        "secondClass": "有座",
+        "businessClass": "抢",
+        "noSeat": "4张",
+        "price": "599"
+      },
+      {
+        "startDate": "07:30",
+        "endDate": "10:00",
+        "startLocation": "北京西",
+        "endLocation": "上海虹桥",
+        "duration": "2时30分",
+        "trainNumber": "G35",
+        "firstClass": "有座",
+        "secondClass": "有座",
+        "businessClass": "抢",
+        "noSeat": "4张",
+        "price": "599"
+      },
+      {
+        "startDate": "07:30",
+        "endDate": "10:00",
+        "startLocation": "北京西",
+        "endLocation": "上海虹桥",
+        "duration": "2时30分",
+        "trainNumber": "G35",
+        "firstClass": "有座",
+        "secondClass": "有座",
+        "businessClass": "抢",
+        "noSeat": "4张",
+        "price": "599"
+      }
+    ]
+  },
+  {
+    "date": "周六",
+    "dateCode": "12-20",
+    "price": "500",
+    "dataArray": [
+      {
+        "startDate": "07:30",
+        "endDate": "10:00",
+        "startLocation": "北京西",
+        "endLocation": "上海虹桥",
+        "duration": "2时30分",
+        "trainNumber": "G35",
+        "firstClass": "有座",
+        "secondClass": "有座",
+        "businessClass": "抢",
+        "noSeat": "4张",
+        "price": "599"
+      },
+      {
+        "startDate": "07:30",
+        "endDate": "10:00",
+        "startLocation": "北京西",
+        "endLocation": "上海虹桥",
+        "duration": "2时30分",
+        "trainNumber": "G35",
+        "firstClass": "有座",
+        "secondClass": "有座",
+        "businessClass": "抢",
+        "noSeat": "4张",
+        "price": "599"
+      },
+      {
+        "startDate": "07:30",
+        "endDate": "10:00",
+        "startLocation": "北京西",
+        "endLocation": "上海虹桥",
+        "duration": "2时30分",
+        "trainNumber": "G35",
+        "firstClass": "有座",
+        "secondClass": "有座",
+        "businessClass": "抢",
+        "noSeat": "4张",
+        "price": "599"
+      },
+      {
+        "startDate": "07:30",
+        "endDate": "10:00",
+        "startLocation": "北京西",
+        "endLocation": "上海虹桥",
+        "duration": "2时30分",
+        "trainNumber": "G35",
+        "firstClass": "有座",
+        "secondClass": "有座",
+        "businessClass": "抢",
+        "noSeat": "4张",
+        "price": "599"
+      },
+      {
+        "startDate": "07:30",
+        "endDate": "10:00",
+        "startLocation": "北京西",
+        "endLocation": "上海虹桥",
+        "duration": "2时30分",
+        "trainNumber": "G35",
+        "firstClass": "有座",
+        "secondClass": "有座",
+        "businessClass": "抢",
+        "noSeat": "4张",
+        "price": "599"
+      }
+    ]
+  }
+]

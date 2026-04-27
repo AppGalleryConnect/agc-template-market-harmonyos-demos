@@ -1,0 +1,30 @@
+<svg width="48.000000" height="48.000000" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs>
+		<clipPath id="clip8_1603">
+			<rect id="ic_public_doc_clock" width="36.000000" height="36.000000" transform="translate(6.000000 6.000000)" fill="white" fill-opacity="0"/>
+		</clipPath>
+		<clipPath id="clip5_1674">
+			<rect id="icon_privacy_notes" rx="8.000000" width="48.000000" height="48.000000" fill="white" fill-opacity="0"/>
+		</clipPath>
+	</defs>
+	<rect id="icon_privacy_notes" rx="8.000000" width="48.000000" height="48.000000" fill="#FFBA40" fill-opacity="1.000000"/>
+	<g clip-path="url(#clip5_1674)">
+		<g clip-path="url(#clip8_1603)">
+			<mask id="mask8_1611" mask-type="alpha" maskUnits="userSpaceOnUse" x="6.000000" y="6.000000" width="36.001068" height="36.000610">
+				<path id="path-1" d="M42 6L42 27.88C40.22 24.75 36.85 22.65 33 22.65C27.28 22.65 22.65 27.28 22.65 33C22.65 36.85 24.75 40.22 27.88 42L6 42L6 6L42 6ZM42 38.11L42 42L38.11 42C39.73 41.07 41.07 39.73 42 38.11Z" fill="#FFFFFF" fill-opacity="1.000000" fill-rule="nonzero"/>
+			</mask>
+			<g mask="url(#mask8_1611)">
+				<path id="path5" d="M14.5 7L32.5 7C34.98 7 37 9.05 37 11.59L37 36.4C37 38.94 34.98 41 32.5 41L14.5 41C12.01 41 10 38.94 10 36.4L10 11.59C10 9.05 12.01 7 14.5 7Z" fill="#FFFFFF" fill-opacity="1.000000" fill-rule="evenodd"/>
+			</g>
+			<path id="path6" d="M15.77 14.85L15.75 14.87C15.19 14.87 14.75 14.43 14.75 13.87C14.75 13.31 15.19 12.87 15.75 12.87L15.77 12.89L15.77 14.85ZM30.73 12.89L30.75 12.87C31.3 12.87 31.74 13.31 31.74 13.87C31.74 14.43 31.3 14.87 30.75 14.87L30.73 14.85L30.73 12.89ZM15.77 22.35L15.75 22.37C15.19 22.37 14.75 21.93 14.75 21.37C14.75 20.81 15.19 20.37 15.75 20.37L15.77 20.39L15.77 22.35ZM24.73 20.39L24.75 20.37C25.3 20.37 25.74 20.81 25.74 21.37C25.74 21.93 25.3 22.37 24.75 22.37L24.73 22.35L24.73 20.39Z" fill="#000000" fill-opacity="0" fill-rule="nonzero"/>
+			<path id="path6" d="M15.75 13.87L30.75 13.87M15.75 21.37L24.75 21.37" stroke="#FFBA40" stroke-opacity="1.000000" stroke-width="1.995000" stroke-linejoin="round" stroke-linecap="round"/>
+			<circle id="path7" cx="33.000000" cy="33.000000" r="9.000000" fill="#FFFFFF" fill-opacity="0.600000"/>
+			<path id="path4" d="M29.03 28.42L32.63 27.06C32.87 26.97 33.12 26.97 33.36 27.06L36.96 28.42C37.58 28.66 38 29.26 38 29.94L38 33.47C38 35.25 37.03 36.89 35.5 37.72L33.24 38.93C33.09 39.02 32.9 39.02 32.75 38.93L30.5 37.72C28.96 36.89 28 35.25 28 33.47L28 29.94C28 29.26 28.41 28.66 29.03 28.42Z" fill="#FFBA40" fill-opacity="1.000000" fill-rule="evenodd"/>
+			<path id="path5" d="M29.65 33.19L29.62 33.19C29.44 32.98 29.45 32.67 29.66 32.48C29.87 32.29 30.18 32.31 30.37 32.51L30.36 32.54L29.65 33.19ZM35.63 30.69L35.62 30.66C35.81 30.45 36.12 30.44 36.33 30.62C36.54 30.81 36.55 31.12 36.37 31.33L36.34 31.33L35.63 30.69Z" fill="#000000" fill-opacity="0" fill-rule="nonzero"/>
+			<path id="path5" d="M30 32.85L31.79 34.83C31.99 35.04 32.31 35.05 32.51 34.85L36 31" stroke="#FFFFFF" stroke-opacity="1.000000" stroke-width="1.000000" stroke-linejoin="round" stroke-linecap="round"/>
+		</g>
+	</g>
+</svg>

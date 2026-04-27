@@ -1,0 +1,20 @@
+{
+  "color": [
+    {
+      "name": "view_more_bg_color",
+      "value": "#F5F6FA"
+    },
+    {
+      "name": "keyword_type_font_color",
+      "value": "#007DFF"
+    },
+    {
+      "name": "normal_bg_color",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "mid_bg_color",
+      "value": "#B5DBFF"
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "strarray": [
+    {
+      "name": "sex",
+      "value": [
+        {
+          "value": "男"
+        },
+        {
+          "value": "女"
+        }
+      ]
+    },
+    {
+      "name": "id_card_type",
+      "value": [
+        {
+          "value": "身份证"
+        },
+        {
+          "value": "护照"
+        },
+        {
+          "value": "港澳通行证"
+        }
+      ]
+    },
+    {
+      "name": "country",
+      "value": [
+        {
+          "value": "中国"
+        },
+        {
+          "value": "港澳台"
+        },
+        {
+          "value": "新加坡"
+        }
+      ]
+    },
+    {
+      "name": "city",
+      "value": [
+        {
+          "value": "北京市"
+        },
+        {
+          "value": "上海市"
+        },
+        {
+          "value": "广州市"
+        },
+        {
+          "value": "深圳市"
+        },
+        {
+          "value": "其他"
+        }
+      ]
+    },
+    {
+      "name": "insurance_type",
+      "value": [
+        {
+          "value": "城镇职工医保"
+        },
+        {
+          "value": "城乡居民医保"
+        },
+        {
+          "value": "自费"
+        }
+      ]
+    }
+  ]
+}

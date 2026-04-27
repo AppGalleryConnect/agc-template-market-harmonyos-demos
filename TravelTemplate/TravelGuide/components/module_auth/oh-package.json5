@@ -1,0 +1,16 @@
+{
+  "name": "module_auth",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "module_base": "file:../module_base",
+    "oh_router": "file:../../commons/oh_router",
+    "common": "file:../../commons/common"
+  },
+  "type": "component",
+  "usage": "实名认证组件，提供实名认证的功能，支持身份证信息采集和验证。",
+  "zhName": "实名认证组件"
+}

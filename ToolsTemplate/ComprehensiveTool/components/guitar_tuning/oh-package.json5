@@ -1,0 +1,14 @@
+{
+  "name": "guitar_tuning",
+  "version": "1.0.2",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@hw-agconnect/util-log": "^1.0.0",
+    "module_base": "file:../module_base",
+    "membership": "file:../membership",
+    "aggregated_login": "file:../aggregated_login"
+  }
+}

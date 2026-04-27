@@ -1,0 +1,1 @@
+export { AudioAdjustTone } from './src/main/ets/pages/AudioAdjustTonePage';

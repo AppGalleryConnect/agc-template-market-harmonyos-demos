@@ -1,0 +1,11 @@
+{
+  "name": "clone",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@hw-agconnect/util-log": "^1.0.0",
+    "@hw-agconnect/ui-toast": "^1.0.0"
+  }
+}

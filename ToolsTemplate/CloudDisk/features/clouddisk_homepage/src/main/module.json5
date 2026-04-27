@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "clouddisk_homepage",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

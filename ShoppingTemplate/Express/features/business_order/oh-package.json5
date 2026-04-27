@@ -1,0 +1,14 @@
+{
+  "name": "business_order",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "lib_foundation": "file:../../commons/lib_foundation",
+    "module_base": "file:../../components/module_base",
+    "module_address": "file:../../components/module_address",
+    "module_address_card": "file:../../components/module_address_card"
+  }
+}

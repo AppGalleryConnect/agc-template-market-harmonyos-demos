@@ -1,0 +1,9 @@
+{
+  "routerMap": [
+    {
+      "name": "TuningPage",
+      "pageSourceFile": "src/main/ets/pages/TuningPage.ets",
+      "buildFunction": "TuningPageBuilder"
+    }
+  ]
+}

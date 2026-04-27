@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "choose_language",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "modelVersion": "5.0.5",
+  "description": "Please describe the basic information.",
+  "template": {
+    "domain": "云存储",
+    "name": "云盘模版",
+    "usage": "本模板为云存储类应用提供了完整的开发样例，模板主要分为首页、备份、文件管理和个人中心四大模块，支持文件上传下载、自动备份、文件分类管理、用户登录等核心功能",
+    "scene": "template,generate",
+    "sdk": [],
+    "color": {
+      "themeFilePath": "",
+      "mainThemeName": "",
+      "secondThemeName": "",
+      "themeFileContent": ""
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@ohos/hypium": "1.0.21"
+  }
+}

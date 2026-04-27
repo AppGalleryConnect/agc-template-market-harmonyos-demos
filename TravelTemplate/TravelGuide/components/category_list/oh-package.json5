@@ -1,0 +1,12 @@
+{
+  "name": "category_list",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {},
+  "type": "component",
+  "usage": "通用分类列表组件，提供了以宫格或者列表形式分类展示信息的功能。",
+  "zhName": "通用分类列表组件"
+}

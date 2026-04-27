@@ -1,0 +1,18 @@
+{
+  "name": "device",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "common": "file:../../commons/common",
+    "oh_router": "file:../../commons/OHRouter"
+  },
+  "type": "feature",
+  "usage": "智能设备连接模块，支持蓝牙设备扫描、配对、连接和设备信息管理",
+  "zhName": "设备管理",
+  "tabPage": "DevicePage",
+  "tabImage": "screenshot/device.jpg",
+  "tabOrder": 1
+}

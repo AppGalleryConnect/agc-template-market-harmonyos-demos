@@ -1,0 +1,36 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "search_placeholder",
+      "value": "搜索提示词"
+    },
+    {
+      "name": "home",
+      "value": "首页"
+    },
+    {
+      "name": "bookshelf",
+      "value": "书架"
+    },
+    {
+      "name": "book_case",
+      "value": "书城"
+    },
+    {
+      "name": "book_sort",
+      "value": "分类"
+    },
+    {
+      "name": "person",
+      "value": "我的"
+    },
+    {
+      "name": "delete_message_prompt",
+      "value": "是否删除%s消息 ？"
+    }
+  ]
+}

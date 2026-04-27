@@ -1,0 +1,20 @@
+{
+  "color": [
+    {
+      "name": "common_theme_color",
+      "value": "#0A59F7"
+    },
+    {
+      "name": "common_theme_color_90",
+      "value": "#2269F7"
+    },
+    {
+      "name": "common_theme_color_5",
+      "value": "#F2F6FE"
+    },
+    {
+      "name": "common_grey",
+      "value": "#565656"
+    }
+  ]
+}

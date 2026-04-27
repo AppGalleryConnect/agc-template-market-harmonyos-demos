@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "travel_invoice",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ],
+    "routerMap": "$profile:route_map"
+  }
+}

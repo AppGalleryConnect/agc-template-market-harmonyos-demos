@@ -1,0 +1,24 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "location_reason",
+      "value": "应用需要获取用户的地理位置，以便提供与位置相关的服务，例如地图导航、获取当前地理位置等"
+    },
+    {
+      "name": "calendar_reason",
+      "value": "应用可能需要向用户的日历中添加、修改或删除日程事件，以便帮助用户更好地管理时间"
+    },
+    {
+      "name": "agcit_huawei_calendar_calendar_events",
+      "value": "1.0.2"
+    },
+    {
+      "name": "agcittype_huawei_calendar_calendar_events",
+      "value": "serviceComponent"
+    }
+  ]
+}

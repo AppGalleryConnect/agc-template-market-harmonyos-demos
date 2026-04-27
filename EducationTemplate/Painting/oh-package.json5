@@ -1,0 +1,23 @@
+{
+  "modelVersion": "5.0.5",
+  "description": "Please describe the basic information.",
+  "dependencies": {},
+  "devDependencies": {
+    "@ohos/hypium": "1.0.21",
+    "painting_color_selector": "file:./components/painting_color_selector"
+  },
+  "dynamicDependencies": {},
+  "template": {
+    "domain": "绘画",
+    "name": "绘画应用模板",
+    "usage": "绘画类应用模板，提供画板创建编辑、多种画笔工具、颜色选择器、背景设置、图层管理等绘画功能，集成华为账号和微信登录、个人信息管理、意见反馈、应用更新等服务",
+    "scene": "template,generate",
+    "sdk": [],
+    "color": {
+      "themeFilePath": "",
+      "mainThemeName": "",
+      "secondThemeName": "",
+      "themeFileContent": ""
+    }
+  }
+}

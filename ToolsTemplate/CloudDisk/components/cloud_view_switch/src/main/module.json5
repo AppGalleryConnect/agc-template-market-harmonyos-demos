@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "cloud_view_switch",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

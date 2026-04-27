@@ -1,0 +1,13 @@
+{
+  "module": {
+    "name": "diary",
+    "type": "har",
+    "routerMap": "$profile:route_map",
+    "deviceTypes": [
+      "phone"
+    ],
+    "requestPermissions": [{
+      "name": "ohos.permission.PRIVACY_WINDOW"
+    }]
+  }
+}

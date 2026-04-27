@@ -1,0 +1,12 @@
+{
+  "name": "module_base",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {},
+  "type": "component",
+  "usage": "基础能力组件，提供基础UI组件和工具方法，为其他组件提供底层支持。",
+  "zhName": "基础能力组件"
+}

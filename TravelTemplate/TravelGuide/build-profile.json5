@@ -1,0 +1,138 @@
+{
+  "app": {
+    "signingConfigs": [],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "targetSdkVersion": "5.0.5(17)",
+        "compatibleSdkVersion": "5.0.3(15)",
+        "runtimeOS": "HarmonyOS",
+        "buildOption": {
+          "strictMode": {
+            "caseSensitiveCheck": true,
+            "useNormalizedOHMUrl": true
+          }
+        }
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug"
+      },
+      {
+        "name": "release"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./products/entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "common",
+      "srcPath": "./commons/common"
+    },
+    {
+      "name": "homepage",
+      "srcPath": "./features/homepage"
+    },
+    {
+      "name": "person",
+      "srcPath": "./features/person"
+    },
+    {
+      "name": "aggregated_login",
+      "srcPath": "./components/aggregated_login"
+    },
+    {
+      "name": "oh_router",
+      "srcPath": "./commons/oh_router"
+    },
+    {
+      "name": "city_select",
+      "srcPath": "./components/city_select"
+    },
+    {
+      "name": "check_app_update",
+      "srcPath": "./components/check_app_update"
+    },
+    {
+      "name": "aggregated_payment",
+      "srcPath": "./components/aggregated_payment"
+    },
+    {
+      "name": "collect_personal_info",
+      "srcPath": "./components/collect_personal_info"
+    },
+    {
+      "name": "base_apis",
+      "srcPath": "./components/base_apis"
+    },
+    {
+      "name": "look_ad",
+      "srcPath": "./components/look_ad"
+    },
+    {
+      "name": "module_auth",
+      "srcPath": "./components/module_auth"
+    },
+    {
+      "name": "module_base",
+      "srcPath": "./components/module_base"
+    },
+    {
+      "name": "aggregated_share",
+      "srcPath": "./components/aggregated_share"
+    },
+    {
+      "name": "search",
+      "srcPath": "./components/search"
+    },
+    {
+      "name": "message",
+      "srcPath": "./features/message"
+    },
+    {
+      "name": "module_filter_list",
+      "srcPath": "./components/module_filter_list"
+    },
+    {
+      "name": "category_list",
+      "srcPath": "./components/category_list"
+    },
+    {
+      "name": "travel_invoice",
+      "srcPath": "./components/travel_invoice"
+    },
+    {
+      "name": "journey",
+      "srcPath": "./features/journey"
+    },
+    {
+      "name": "common_travel_guide",
+      "srcPath": "./components/common_travel_guide"
+    },
+    {
+      "name": "travel_footprint",
+      "srcPath": "./components/travel_footprint"
+    },
+    {
+      "name": "travel_planning",
+      "srcPath": "./components/travel_planning"
+    },
+    {
+      "name": "travel_map",
+      "srcPath": "./components/travel_map"
+    }
+  ]
+}

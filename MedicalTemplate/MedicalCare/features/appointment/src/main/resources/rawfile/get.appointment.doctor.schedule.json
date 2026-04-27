@@ -1,0 +1,183 @@
+[
+  {
+    "dayOfWeek": "周一",
+    "year": "2025",
+    "month": "02",
+    "day": "01",
+    "remainingAppointments": 100,
+    "availableSlots": [
+      {
+        "startTime": "08:00",
+        "endTime": "08:30",
+        "remainingAppointments": 5
+      },
+      {
+        "startTime": "08:30",
+        "endTime": "09:00",
+        "remainingAppointments": 5,
+        "price": 100
+      },
+      {
+        "startTime": "09:00",
+        "endTime": "09:30",
+        "remainingAppointments": 5,
+        "price": 100
+      },
+      {
+        "startTime": "09:30",
+        "endTime": "10:00",
+        "remainingAppointments": 0,
+        "price": 100
+      },
+      {
+        "startTime": "10:00",
+        "endTime": "10:30",
+        "remainingAppointments": 5,
+        "price": 100
+      },
+      {
+        "startTime": "10:30",
+        "endTime": "11:00",
+        "remainingAppointments": 5,
+        "price": 100
+      },
+      {
+        "startTime": "11:00",
+        "endTime": "11:30",
+        "remainingAppointments": 5,
+        "price": 100
+      },
+      {
+        "startTime": "11:30",
+        "endTime": "12:00",
+        "remainingAppointments": 0,
+        "price": 100
+      },
+      {
+        "startTime": "13:30",
+        "endTime": "14:00",
+        "remainingAppointments": 5,
+        "price": 100
+      },
+      {
+        "startTime": "14:00",
+        "endTime": "14:30",
+        "remainingAppointments": 5,
+        "price": 100
+      },
+      {
+        "startTime": "14:30",
+        "endTime": "15:00",
+        "remainingAppointments": 5,
+        "price": 100
+      },
+      {
+        "startTime": "15:00",
+        "endTime": "15:30",
+        "remainingAppointments": 5,
+        "price": 100
+      },
+      {
+        "startTime": "15:30",
+        "endTime": "16:00",
+        "remainingAppointments": 5,
+        "price": 100
+      },
+      {
+        "startTime": "16:00",
+        "endTime": "16:30",
+        "remainingAppointments": 0,
+        "price": 100
+      },
+      {
+        "startTime": "16:30",
+        "endTime": "17:00",
+        "remainingAppointments": 5,
+        "price": 100
+      }
+    ]
+  },
+  {
+    "dayOfWeek": "周二",
+    "year": "2025",
+    "month": "02",
+    "day": "02",
+    "remainingAppointments": 5,
+    "availableSlots": [
+      {
+        "startTime": "08:00",
+        "endTime": "08:30",
+        "remainingAppointments": 5,
+        "price": 100
+      }
+    ]
+  },
+  {
+    "dayOfWeek": "周三",
+    "year": "2025",
+    "month": "02",
+    "day": "03",
+    "remainingAppointments": 5,
+    "availableSlots": [
+      {
+        "startTime": "08:00",
+        "endTime": "08:30",
+        "remainingAppointments": 5,
+        "price": 100
+      }
+    ]
+  },
+  {
+    "dayOfWeek": "周四",
+    "year": "2025",
+    "month": "02",
+    "day": "04",
+    "remainingAppointments": 5,
+    "availableSlots": [
+      {
+        "startTime": "08:00",
+        "endTime": "08:30",
+        "remainingAppointments": 5,
+        "price": 100
+      }
+    ]
+  },
+  {
+    "dayOfWeek": "周五",
+    "year": "2025",
+    "month": "02",
+    "day": "05",
+    "remainingAppointments": 5,
+    "availableSlots": [
+      {
+        "startTime": "08:00",
+        "endTime": "08:30",
+        "remainingAppointments": 5,
+        "price": 100
+      }
+    ]
+  },
+  {
+    "dayOfWeek": "周六",
+    "year": "2025",
+    "month": "02",
+    "day": "06",
+    "remainingAppointments": 0,
+    "availableSlots": []
+  },
+  {
+    "dayOfWeek": "周日",
+    "year": "2025",
+    "month": "02",
+    "day": "07",
+    "remainingAppointments": 5,
+    "availableSlots": [
+      {
+        "startTime": "08:00",
+        "endTime": "08:30",
+        "remainingAppointments": 5,
+        "price": 100
+      }
+    ]
+  }
+]

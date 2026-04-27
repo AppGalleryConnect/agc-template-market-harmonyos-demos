@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "mortgage_calculator",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ],
+    "routerMap": "$profile:route_map"
+  }
+}

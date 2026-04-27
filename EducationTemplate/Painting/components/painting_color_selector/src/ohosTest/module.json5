@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "painting_color_selector_test",
+    "type": "feature",
+    "deviceTypes": [
+      "default"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false
+  }
+}

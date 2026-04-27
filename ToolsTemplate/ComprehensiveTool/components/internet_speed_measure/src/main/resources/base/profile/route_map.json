@@ -1,0 +1,12 @@
+{
+  "routerMap": [
+    {
+      "name": "InternetSpeed",
+      "pageSourceFile": "src/main/ets/pages/MeasurePage.ets",
+      "buildFunction": "measurePageBuilder",
+      "data": {
+        "description": "this is MeasurePage"
+      }
+    }
+  ]
+}

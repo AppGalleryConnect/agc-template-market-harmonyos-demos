@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "翻译"
+    },
+    {
+      "name": "microphone_reason",
+      "value": "用于语音翻译功能，需要录制您的语音进行识别"
+    }
+  ]
+}

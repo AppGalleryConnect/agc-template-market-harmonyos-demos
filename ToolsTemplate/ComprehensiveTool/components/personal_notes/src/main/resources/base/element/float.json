@@ -1,0 +1,12 @@
+{
+  "float": [
+    {
+      "name": "page_text_font_size",
+      "value": "50fp"
+    },
+    {
+      "name": "rich_editor_block_size",
+      "value": "20vp"
+    }
+  ]
+}

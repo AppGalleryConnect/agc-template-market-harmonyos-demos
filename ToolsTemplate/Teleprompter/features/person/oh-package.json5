@@ -1,0 +1,24 @@
+{
+  "name": "person",
+  "version": "1.0.1",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "common": "file:../../commons/common",
+    "oh_router": "file:../../commons/OHRouter",
+    "feedback": "file:../../components/feedback",
+    "check_app_update": "file:../../components/check_app_update",
+    "message_manager": "file:../../components/message_manager",
+    "collect_personal_info": "file:../../components/collect_personal_info",
+    "@tencent/wechat_open_sdk": "1.0.7",
+    "aggregated_login": "file:../../components/aggregated_login"
+  },
+  "type": "feature",
+  "usage": "个人中心模块：提供用户个人信息管理、账号登录、消息通知、意见反馈、应用设置等功能。支持华为账号和微信登录，个人资料编辑，隐私设置管理，应用版本更新检查等核心个人中心功能。",
+  "zhName": "个人中心",
+  "tabPage": "MinePage",
+  "tabImage": "screenshots/person.png",
+  "tabOrder": 1
+}

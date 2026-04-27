@@ -1,0 +1,32 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "社交交友"
+    },
+    {
+      "name": "message_tab_title",
+      "value": "消息"
+    },
+    {
+      "name": "address_book_tab_title",
+      "value": "通讯录"
+    },
+    {
+      "name": "person_tab_title",
+      "value": "我的"
+    },
+    {
+      "name": "apply_location_reason",
+      "value": "社交交友发送位置消息场景，需要使用您的定位权限"
+    }
+  ]
+}

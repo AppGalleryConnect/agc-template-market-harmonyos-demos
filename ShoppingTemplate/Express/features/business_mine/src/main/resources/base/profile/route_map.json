@@ -1,0 +1,44 @@
+{
+  "routerMap": [
+    {
+      "name": "QuickLoginPage",
+      "pageSourceFile": "src/main/ets/pages/QuickLoginPage.ets",
+      "buildFunction": "QuickLoginPageBuilder"
+    },
+    {
+      "name": "EditNamePage",
+      "pageSourceFile": "src/main/ets/pages/EditNamePage.ets",
+      "buildFunction": "EditNamePageBuilder"
+    },
+    {
+      "name": "EditPhonePage",
+      "pageSourceFile": "src/main/ets/pages/EditPhonePage.ets",
+      "buildFunction": "EditPhonePageBuilder"
+    },
+    {
+      "name": "PersonalInformationPage",
+      "pageSourceFile": "src/main/ets/pages/PersonalInformationPage.ets",
+      "buildFunction": "PersonalInformationPageBuilder"
+    },
+    {
+      "name": "PrivacyPage",
+      "pageSourceFile": "src/main/ets/pages/PrivacyPage.ets",
+      "buildFunction": "PrivacyPageBuilder"
+    },
+    {
+      "name": "SettingPage",
+      "pageSourceFile": "src/main/ets/pages/SettingPage.ets",
+      "buildFunction": "SettingPageBuilder"
+    },
+    {
+      "name": "VipPage",
+      "pageSourceFile": "src/main/ets/pages/VipPage.ets",
+      "buildFunction": "VipPageBuilder"
+    },
+    {
+      "name": "PurchasePage",
+      "pageSourceFile": "src/main/ets/pages/PurchasePage.ets",
+      "buildFunction": "PurchasePageBuilder"
+    }
+  ]
+}

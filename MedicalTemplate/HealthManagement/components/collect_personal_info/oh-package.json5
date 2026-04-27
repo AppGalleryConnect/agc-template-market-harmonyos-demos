@@ -1,0 +1,12 @@
+{
+  "name": "collect_personal_info",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {},
+  "type": "component",
+  "usage": "个人信息收集组件，提供个人信息表单填写、编辑和展示功能，支持头像选择、日期选择、文本输入等多种表单控件，适配手机、平板和折叠屏设备",
+  "zhName": "个人信息收集组件"
+}

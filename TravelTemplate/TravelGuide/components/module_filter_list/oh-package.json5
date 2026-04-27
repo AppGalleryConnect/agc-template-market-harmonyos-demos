@@ -1,0 +1,12 @@
+{
+  "name": "module_filter_list",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {},
+  "type": "component",
+  "usage": "列表筛选组件，提供列表筛选组件，支持条件筛选和列表展示。",
+  "zhName": "列表筛选组件"
+}

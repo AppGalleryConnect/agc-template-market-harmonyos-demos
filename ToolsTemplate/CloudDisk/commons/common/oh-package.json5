@@ -1,0 +1,12 @@
+{
+  "name": "common",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "component",
+  "usage": "通用基础组件库，提供常用的工具类、常量定义、数据模型、工具函数等基础功能",
+  "zhName": "通用基础组件库",
+  "dependencies": {}
+}

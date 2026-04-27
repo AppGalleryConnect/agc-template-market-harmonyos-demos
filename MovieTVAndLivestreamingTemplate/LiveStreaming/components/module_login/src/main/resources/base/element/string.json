@@ -1,0 +1,32 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "scope_not_supported",
+      "value": "The scopes or permissions are not supported."
+    },
+    {
+      "name": "app_not_required_scopes_or_permissions",
+      "value": "The app does not have the required scopes or permissions."
+    },
+    {
+      "name": "service_error",
+      "value": "Service or network error. Please try again later."
+    },
+    {
+      "name": "not_login_in",
+      "value": "You have not logged in with your Huawei ID. Please try again."
+    },
+    {
+      "name": "agcit_huawei_home_decoration_module_login",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_home_decoration_module_login",
+      "value": "serviceComponent"
+    }
+  ]
+}

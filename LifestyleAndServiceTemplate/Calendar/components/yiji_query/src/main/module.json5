@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "yiji_query",
+    "routerMap": "$profile:route_map",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet",
+    ]
+  }
+}

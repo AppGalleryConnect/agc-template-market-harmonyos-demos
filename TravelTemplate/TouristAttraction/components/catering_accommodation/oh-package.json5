@@ -1,0 +1,12 @@
+{
+  "name": "catering_accommodation",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "module_base": "file:../module_base",
+    "@hw-agconnect/util-log": "^1.0.0"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "routerMap": [
+    {
+      "name": "SafePage",
+      "pageSourceFile": "src/main/ets/pages/SafePage.ets",
+      "buildFunction": "SafePageBuilder"
+    },
+    {
+      "name": "AgreePrivacyPage",
+      "pageSourceFile": "src/main/ets/pages/AgreeDialogPage.ets",
+      "buildFunction": "AgreePrivacyPageBuilder"
+    },
+    {
+      "name": "MainEntry",
+      "pageSourceFile": "src/main/ets/pages/MainEntry.ets",
+      "buildFunction": "MainEntryBuilder"
+    }
+  ]
+}

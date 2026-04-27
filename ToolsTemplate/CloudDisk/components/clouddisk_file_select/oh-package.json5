@@ -1,0 +1,15 @@
+{
+  "name": "clouddisk_file_select",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "component",
+  "usage": "云盘文件选择组件：提供文件选择功能，支持单选、多选和批量操作",
+  "zhName": "云盘文件选择组件",
+  "dependencies": {
+    "common": "file:../../commons/common",
+    "cloud_file_base": "file:../cloud_file_base"
+  }
+}

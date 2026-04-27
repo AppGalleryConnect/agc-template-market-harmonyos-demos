@@ -1,0 +1,224 @@
+{
+  "integer": [
+    {
+      "name": "shortvideo_search_icon_width",
+      "value": 20
+    },
+    {
+      "name": "shortvideo_search_icon_height",
+      "value": 20
+    },
+    {
+      "name": "shortvideo_tab_font_size",
+      "value": 16
+    },
+    {
+      "name": "shortvideo_tab_divider_width",
+      "value": 30
+    },
+    {
+      "name": "shortvideo_tab_divider_width_0",
+      "value": 0
+    },
+    {
+      "name": "shortvideo_stroke_width",
+      "value": 2
+    },
+    {
+      "name": "shortvideo_divider_margin_top",
+      "value": 5
+    },
+    {
+      "name": "shortvideo_tab_padding_top",
+      "value": 15
+    },
+    {
+      "name": "shortvideo_add_icon_width",
+      "value": 20
+    },
+    {
+      "name": "shortvideo_add_icon_height",
+      "value": 20
+    },
+    {
+      "name": "shortvideo_tab_list_height",
+      "value": 50
+    },
+    {
+      "name": "shortvideo_avatar_size",
+      "value": 30
+    },
+    {
+      "name": "shortvideo_concern_size",
+      "value": 20
+    },
+    {
+      "name": "shortvideo_concern_border_radius",
+      "value": 10
+    },
+    {
+      "name": "shortvideo_concern_margin_bottom",
+      "value": -8
+    },
+    {
+      "name": "shortvideo_concern_height",
+      "value": -8
+    },
+    {
+      "name": "shortvideo_avatar_height",
+      "value": 100
+    },
+    {
+      "name": "shortvideo_avatar_padding_bottom",
+      "value": 30
+    },
+    {
+      "name": "shortvideo_fabulous_height",
+      "value": 24
+    },
+    {
+      "name": "shortvideo_fabulous_width",
+      "value": 24
+    },
+    {
+      "name": "shortvideo_fabulous_margin_bottom",
+      "value": 5
+    },
+    {
+      "name": "shortvideo_fabulous_font_size",
+      "value": 10
+    },
+    {
+      "name": "shortvideo_all_fabulous_height",
+      "value": 60
+    },
+    {
+      "name": "shortvideo_share_height",
+      "value": 24
+    },
+    {
+      "name": "shortvideo_share_width",
+      "value": 24
+    },
+    {
+      "name": "shortvideo_share_all_width",
+      "value": 50
+    },
+    {
+      "name": "shortvideo_side_margin_top",
+      "value": 220
+    },
+    {
+      "name": "shortvideo_side_width",
+      "value": 60
+    },
+    {
+      "name": "shortvideo_name_font_size",
+      "value": 18
+    },
+    {
+      "name": "shortvideo_name_margin_bottom",
+      "value": 8
+    },
+    {
+      "name": "shortvideo_new_font_size",
+      "value": 14
+    },
+    {
+      "name": "shortvideo_time_font_size",
+      "value": 10
+    },
+    {
+      "name": "shortvideo_name_padding_left",
+      "value": 10
+    },
+    {
+      "name": "shortvideo_stack_padding",
+      "value": 0
+    },
+    {
+      "name": "shortvideo_video_des_margin_bottom",
+      "value": 36
+    },
+    {
+      "name": "shortvideo_upgrade_icon_size",
+      "value": 14
+    },
+    {
+      "name": "shortvideo_upgrade_text_font_size",
+      "value": 14
+    },
+    {
+      "name": "shortvideo_mus_font_size",
+      "value": 12
+    },
+    {
+      "name": "shortvideo_mus_height",
+      "value": 20
+    },
+    {
+      "name": "shortvideo_upgrade_margin",
+      "value": 4
+    },
+    {
+      "name": "shortvideo_upgrade_height",
+      "value": 36
+    },
+    {
+      "name": "shortvideo_upgrade_padding",
+      "value": 12
+    },
+    {
+      "name": "shortvideo_play_icon_size",
+      "value": 80
+    },
+    {
+      "name": "shortvideo_comment_avatar_size",
+      "value": 30
+    },
+    {
+      "name": "shortvideo_comment_avatar_border_radius",
+      "value": 15
+    },
+    {
+      "name": "shortvideo_comment_name_font_size",
+      "value": 12
+    },
+    {
+      "name": "shortvideo_comment_content_number_5",
+      "value": 5
+    },
+    {
+      "name": "shortvideo_comment_content_font_size",
+      "value": 15
+    },
+    {
+      "name": "shortvideo_comment_number_10",
+      "value": 12
+    },
+    {
+      "name": "shortvideo_comment_number_12",
+      "value": 12
+    },
+    {
+      "name": "shortvideo_comment_number_20",
+      "value": 20
+    },
+    {
+      "name": "ohos_global_state_dialog_number_10",
+      "value": 10
+    },
+    {
+      "name": "ohos_global_state_dialog_close_button_image_size",
+      "value": 20
+    },
+    {
+      "name": "ohos_global_state_dialog_close_button_size",
+      "value": 25
+    },
+    {
+      "name": "ohos_global_state_dialog_close_button_margin_left",
+      "value": 300
+    }
+  ]
+}

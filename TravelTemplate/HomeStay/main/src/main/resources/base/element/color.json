@@ -1,0 +1,16 @@
+{
+  "color": [
+    {
+      "name": "keyword_type_font_color",
+      "value": "#007DFF"
+    },
+    {
+      "name": "text_normal_color",
+      "value": "#6B6B6B"
+    },
+    {
+      "name": "start_window_background",
+      "value": "#FFFFFF"
+    }
+  ]
+}

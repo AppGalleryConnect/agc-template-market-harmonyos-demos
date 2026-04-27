@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "综合工具"
+    },
+    {
+      "name": "agcit_huawei_tools",
+      "value": "1.0.10"
+    },
+    {
+      "name": "agcittype_huawei_tools",
+      "value": "industryTemplate"
+    },
+    {
+      "name": "agcitkid_huawei_tools",
+      "value": "agcit_huawei_calendar_calendar_almanac/1.0.2,agcit_huawei_calendar_date_calculation/1.0.2,agcit_huawei_calculator_module_standard_calculator/1.0.2,agcit_huawei_recipes_calorie_calculation/1.0.4,agcit_huawei_exchange_rate_calculator/1.0.2,agcit_huawei_individual_income_tax_calculator/1.0.1,agcit_huawei_mortgage_calculator/1.0.2,agcit_huawei_remote_control/1.0.3,agcit_huawei_science_calculator/1.0.3,agcit_huawei_calendar_calendar_events/1.0.3,agcit_huawei_money_track_tool/1.0.3,agcit_huawei_mobile_nfc/1.0.2,agcit_huawei_notes_tool/1.0.0,agcit_huawei_picture_watermark/1.0.2,agcit_huawei_decompression_tool/1.0.2,agcit_huawei_simple_recorder/1.0.4,agcit_huawei_zip_tool/1.0.5,agcit_huawei_bmi_calculator/1.0.0,agcit_huawei_compass/1.0.3,agcit_huawei_diary/1.0.3,agcit_huawei_internet_speed_measure/1.0.1,agcit_huawei_draw_board/1.0.1,agcit_huawei_photo_editing/1.0.4,agcit_huawei_guitar_tuning/1.0.2,agcit_huawei_video_clip/1.0.6,agcit_huawei_clone/1.0.3,agcit_huawei_handheld_bullet/1.0.2,agcit_huawei_image_recognition/1.0.1,agcit_huawei_financial_calculator/1.0.2,agcit_huawei_pension_calculator/1.0.2,agcit_huawei_kinship_calculator/1.0.2,agcit_huawei_retirement_age_calculator/1.0.0,agcit_huawei_credentials_photo/1.0.1,agcit_huawei_ar_measure/1.0.3,agcit_huawei_translator/1.0.3,agcit_huawei_cast_tool/1.0.1,agcit_huawei_common_login/1.0.2,agcit_huawei_common_collect_personal_info/1.0.1,agcit_huawei_common_feedback/1.0.1"
+    }
+  ]
+}

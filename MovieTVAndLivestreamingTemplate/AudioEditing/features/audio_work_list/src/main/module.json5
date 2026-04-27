@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "audio_work_list",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

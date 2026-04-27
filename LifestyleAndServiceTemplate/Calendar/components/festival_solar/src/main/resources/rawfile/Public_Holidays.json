@@ -1,0 +1,48 @@
+[
+  {
+    "day": "01月01日",
+    "name": "元旦",
+    "holiday": "1月1日",
+    "totalRest": 1,
+    "weekDay": "周三"
+  },
+  {
+    "day": "01月29日",
+    "name": "春节",
+    "holiday": "1月28日-2月4日",
+    "totalRest": 8,
+    "weekDay": "周三",
+    "adjustWorkDays": "1月26日(星期日)、2月8日(星期六)上班"
+  },
+  {
+    "day": "04月04日",
+    "name": "清明节",
+    "holiday": "4月4日-4月6日",
+    "totalRest": 3,
+    "weekDay": "周五",
+    "adjustWorkDays": "9月28日(星期日)、10月11日(星期六)上班"
+  },
+  {
+    "day": "05月01日",
+    "name": "劳动节",
+    "holiday": "5月1日-5月5日",
+    "totalRest": 5,
+    "weekDay": "周四",
+    "adjustWorkDays": "4月27日(星期日)上班"
+  },
+  {
+    "day": "05月31日",
+    "name": "端午节",
+    "holiday": "5月31日-6月2日",
+    "totalRest": 3,
+    "weekDay": "周五"
+  },
+  {
+    "day": "10月01日",
+    "name": "国庆节、中秋节",
+    "holiday": "10月1日-10月8日",
+    "totalRest": 8,
+    "weekDay": "周四",
+    "adjustWorkDays": "9月28日(星期日)、10月11日(星期六)上班"
+  }
+]

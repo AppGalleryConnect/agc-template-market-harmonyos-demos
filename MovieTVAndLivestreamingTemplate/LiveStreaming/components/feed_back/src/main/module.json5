@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "feed_back",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

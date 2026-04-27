@@ -1,0 +1,24 @@
+{
+  "string": [
+    {
+      "name": "apply_wifi_info_reason",
+      "value": "本应用需获取wifi信息"
+    },
+    {
+      "name": "apply_read_video",
+      "value": "本应用需要读取视频文件"
+    },
+    {
+      "name": "apply_reason_background",
+      "value": "防止应用在后台投屏时被冻结"
+    },
+    {
+      "name": "agcit_huawei_cast_tool",
+      "value": "1.0.1"
+    },
+    {
+      "name": "agcittype_huawei_cast_tool",
+      "value": "serviceComponent"
+    }
+  ]
+}

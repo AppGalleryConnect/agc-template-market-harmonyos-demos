@@ -1,0 +1,24 @@
+{
+  "name": "message",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "feature",
+  "usage": "消息模块包含：会话列表展示、消息搜索、创建群聊、添加好友入口，支持跳转至聊天页面并监听会话变化；关键依赖包括 instant_messaging（IM 能力封装）、oh_router（页面跳转）、common（断点/事件总线）。",
+  "zhName": "消息模块",
+  "tabPage": "MessageListPage",
+  "tabImage": "screenshot/message_page.png",
+  "tabOrder": 0,
+  "dependencies": {
+    "chat_window": "file:../../components/chat_window",
+    "chat_input": "file:../../components/chat_input",
+    "chat_location": "file:../../components/chat_location",
+    "common": "file:../../commons/common",
+    "instant_messaging": "file:../../sdk/instant_messaging",
+    "oh_router": "file:../../commons/oh_router",
+    "chat_history_collection": "file:../../components/chat_history_collection",
+    "chat_history_search": "file:../../components/chat_history_search"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "travel_footprint",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "shortcuts": [
+    {
+      "shortcutId": "id_calculator",
+      "label": "$string:calculator_label",
+      "icon": "$media:shortcuts_calculator",
+      "wants": [
+        {
+          "bundleName": "zhyy.1.1",
+          "moduleName": "entry",
+          "abilityName": "EntryAbility",
+          "parameters": {
+            "shortCutKey": "HomePage"
+          }
+        }
+      ]
+    },
+    {
+      "shortcutId": "id_almanac",
+      "label": "$string:almanac_label",
+      "icon": "$media:shortcuts_almanac",
+      "wants": [
+        {
+          "bundleName": "zhyy.1.1",
+          "moduleName": "entry",
+          "abilityName": "EntryAbility",
+          "parameters": {
+            "shortCutKey": "AlmanacView"
+          }
+        }
+      ]
+    },
+    {
+      "shortcutId": "id_wooden",
+      "label": "$string:wooden_label",
+      "icon": "$media:shortcuts_wooden",
+      "wants": [
+        {
+          "bundleName": "zhyy.1.1",
+          "moduleName": "entry",
+          "abilityName": "EntryAbility",
+          "parameters": {
+            "shortCutKey": "DecompressionToolPage"
+          }
+        }
+      ]
+    },
+    {
+      "shortcutId": "id_recognition",
+      "label": "$string:recognition_label",
+      "icon": "$media:shortcuts_recognition",
+      "wants": [
+        {
+          "bundleName": "zhyy.1.1",
+          "moduleName": "entry",
+          "abilityName": "EntryAbility",
+          "parameters": {
+            "shortCutKey": "RecognitionHomePage"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "@agctemplate/server",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ts",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@agctemplate/utils": "1.0.0",
+    "@agctemplate/common": "1.0.0"
+  }
+}

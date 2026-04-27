@@ -1,0 +1,26 @@
+{
+  "modelVersion": "6.0.2",
+  "description": "Please describe the basic information.",
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "overrides": {
+    "@agctemplate/utils": "file:./commons/utils",
+    "@agctemplate/common": "file:./commons/common",
+    "@agctemplate/server": "file:./commons/server",
+    "@agctemplate/resources": "file:./commons/resources",
+    "@agctemplate/widgets": "file:./commons/widgets",
+    "@agctemplate/home": "file:./features/home",
+    "@agctemplate/live": "file:./features/live",
+    "@agctemplate/mine": "file:./features/mine",
+    "@agctemplate/detail": "file:./features/detail",
+    "@agctemplate/video_swiper": "file:./components/video_swiper",
+    "@agctemplate/router_module": "file:./commons/router_module",
+    "@agctemplate/feed_back":  "file:./components/feed_back",
+    "@agctemplate/module_login":  "file:./components/module_login",
+    "@agctemplate/aggregated_payment":  "file:./components/aggregated_payment",
+    "module_auth": "file:./components/module_auth",
+    "module_base": "file:./components/module_base"
+  }
+}

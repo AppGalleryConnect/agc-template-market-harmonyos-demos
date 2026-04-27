@@ -1,0 +1,16 @@
+{
+  "name": "aggregated_login",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "component",
+  "usage": "通用登录组件，提供华为账号一键登录及其他方式登录（微信、手机号登录）功能。支持全屏登录和半模态登录两种展示方式，包含隐私协议确认、登录状态管理、多种登录渠道切换等完整登录流程。适用于需要快速集成登录功能的应用场景。",
+  "zhName": "通用登录组件",
+  "dependencies": {
+    "@tencent/wechat_open_sdk": "1.0.7",
+    "common": "file:../../commons/common",
+    "oh_router": "file:../../commons/OHRouter"
+  }
+}

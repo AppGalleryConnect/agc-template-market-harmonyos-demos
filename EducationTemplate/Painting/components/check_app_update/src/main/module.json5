@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "check_app_update",
+    "type": "har",
+    "deviceTypes": [
+      "default"
+    ]
+  }
+}

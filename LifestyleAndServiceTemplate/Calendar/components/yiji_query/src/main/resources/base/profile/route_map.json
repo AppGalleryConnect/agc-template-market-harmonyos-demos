@@ -1,0 +1,12 @@
+{
+  "routerMap": [
+    {
+      "name": "JiDayDetail",
+      "pageSourceFile": "src/main/ets/components/yiJiQuery/JiDayDetail.ets",
+      "buildFunction": "JiDayDetailBuilder",
+      "data": {
+        "description" : "this is JiDayDetail"
+      }
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "check_app_update_test",
+    "type": "feature",
+    "deviceTypes": [
+      "phone"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "module_base",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@ohos/axios": "^2.2.4",
+    "membership": '../membership',
+    "aggregated_login": '../aggregated_login',
+    "@hw-agconnect/axios-mock-adapter": "^1.0.0",
+    "@hw-agconnect/util-log": "^1.0.0"
+  }
+}

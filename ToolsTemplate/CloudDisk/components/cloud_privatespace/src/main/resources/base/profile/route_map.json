@@ -1,0 +1,9 @@
+{
+  "routerMap": [
+    {
+      "name": "PrivatespacePage",
+      "pageSourceFile": "src/main/ets/components/PrivatespacePage.ets",
+      "buildFunction": "PrivatespacePageBuilder"
+    }
+  ]
+}

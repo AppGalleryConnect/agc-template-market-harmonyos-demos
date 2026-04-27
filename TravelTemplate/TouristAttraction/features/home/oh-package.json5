@@ -1,0 +1,20 @@
+{
+  "name": "home",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "types": "file:../../commons/types",
+    "uicomponents": "file:../../commons/uicomponents",
+    "common": "file:../../commons/common",
+    "attraction_announcement": "file:../../components/attraction_announcement",
+    "ticket": "file:../ticket",
+    "network": "file:../../commons/network",
+    "attraction_live": "file:../../components/attraction_live",
+    "catering_accommodation": "file:../../components/catering_accommodation",
+    "module_base": "file:../../components/module_base",
+    "attraction_note": "file:../../components/attraction_note",
+  }
+}

@@ -1,0 +1,26 @@
+<svg width="50.000000" height="52.003174" viewBox="0 0 50 52.0032" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs>
+		<filter id="filter_70_8424_dd" x="0.000000" y="0.000000" width="50.000000" height="50.000000" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+			<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+			<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+			<feOffset dx="0" dy="4"/>
+			<feGaussianBlur stdDeviation="3"/>
+			<feComposite in2="hardAlpha" operator="out" k2="-1" k3="1"/>
+			<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"/>
+			<feBlend mode="normal" in2="BackgroundImageFix" result="effect_dropShadow_1"/>
+			<feBlend mode="normal" in="SourceGraphic" in2="effect_dropShadow_1" result="shape"/>
+		</filter>
+		<linearGradient x1="24.999023" y1="4.003174" x2="24.999023" y2="52.003174" id="paint_linear_48_5788_0" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#F3F3F3" stop-opacity="0.000000"/>
+			<stop offset="1.000000" stop-color="#F3F3F3"/>
+		</linearGradient>
+	</defs>
+	<circle id="椭圆 22" cx="24.999023" cy="28.003174" r="24.000000" fill="url(#paint_linear_48_5788_0)" fill-opacity="1.000000"/>
+	<g filter="url(#filter_70_8424_dd)">
+		<rect id="矩形 129" x="9.000000" y="5.000000" width="32.000000" height="32.000000" fill="#C4C4C4" fill-opacity="0"/>
+		<path id="path-1" d="M35.43 6.5C35.74 6.5 36 6.74 36 7.04L36 34.41C36 35.01 35.49 35.5 34.86 35.5L34.11 35.5C33.48 35.5 32.97 35.01 32.97 34.41L32.97 23.22L29.76 23.22C28.51 23.22 27.5 22.25 27.5 21.05L27.5 14.12C27.5 9.91 30.13 6.51 34.86 6.51C34.93 6.5 35.01 6.5 35.08 6.5L35.43 6.5ZM18.5 7C19.1 7 19.59 7.48 19.59 8.08L19.59 16.02C19.59 16.62 20.09 17.1 20.7 17.1C21.3 17.1 21.79 16.62 21.79 16.02L21.79 8.44C21.79 7.84 22.29 7.36 22.9 7.36C23.5 7.36 24 7.84 24 8.44L24 16.37C24 18.86 22.29 20.96 19.96 21.59L19.96 34.05C19.96 34.85 19.3 35.5 18.5 35.5C17.69 35.5 17.03 34.85 17.03 34.05L17.03 21.59C14.7 20.96 13 18.86 13 16.37L13 8.44C13 7.84 13.49 7.36 14.09 7.36C14.7 7.36 15.2 7.84 15.2 8.44L15.2 16.02C15.2 16.62 15.69 17.1 16.29 17.1C16.9 17.1 17.4 16.62 17.4 16.02L17.4 8.08C17.4 7.48 17.89 7 18.5 7Z" fill="#000000" fill-opacity="1.000000" fill-rule="nonzero"/>
+	</g>
+</svg>

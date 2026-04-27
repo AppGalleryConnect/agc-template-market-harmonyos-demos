@@ -1,0 +1,18 @@
+{
+  "module": {
+    "name": "feedback",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ],
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.VIBRATE"
+      },
+      {
+        "name": "ohos.permission.INTERNET"
+      }
+    ],
+    "routerMap": "$profile:route_map"
+  }
+}

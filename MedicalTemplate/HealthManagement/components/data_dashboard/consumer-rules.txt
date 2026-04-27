@@ -1,0 +1,2 @@
+# consumer rules for data_dashboard module
+

@@ -1,0 +1,19 @@
+{
+  "routerMap": [
+    {
+      "name": "PersonalNotesPage",
+      "pageSourceFile": "src/main/ets/pages/PersonalNotesPage.ets",
+      "buildFunction": "PersonalNotesPageBuilder"
+    },
+    {
+      "name": "EditNotePage",
+      "pageSourceFile": "src/main/ets/pages/EditNotePage.ets",
+      "buildFunction": "EditNotePageBuilder"
+    },
+    {
+      "name": "EditCategoryPage",
+      "pageSourceFile": "src/main/ets/pages/EditCategoryPage.ets",
+      "buildFunction": "EditCategoryPageBuilder"
+    }
+  ]
+}

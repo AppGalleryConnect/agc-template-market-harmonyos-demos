@@ -1,0 +1,30 @@
+{
+  "module": {
+    "name": "cast_tool",
+    "type": "har",
+    "deviceTypes": [
+      "default"
+    ],
+    "routerMap": '$profile:route_map',
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.GET_WIFI_INFO",
+        "reason": "$string:apply_wifi_info_reason",
+      },
+      {
+        "name": "ohos.permission.READ_IMAGEVIDEO",
+        "reason": "$string:apply_read_video",
+        "usedScene": {
+          "when": "always"
+        }
+      },
+      {
+        "name": "ohos.permission.KEEP_BACKGROUND_RUNNING",
+        "reason": "$string:apply_reason_background",
+        "usedScene": {
+          "when": "always"
+        }
+      }
+    ]
+  }
+}

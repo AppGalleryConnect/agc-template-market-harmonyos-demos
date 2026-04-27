@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "agcit_huawei_enterprise_recruitment_check_app_update",
+      "value": "1.0.2"
+    },
+    {
+      "name": "agcittype_huawei_enterprise_recruitment_check_app_update",
+      "value": "serviceComponent"
+    }
+  ]
+}

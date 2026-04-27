@@ -1,0 +1,15 @@
+{
+  "name": "cloud_privatespace",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "cloud_file_base": "file:../cloud_file_base",
+    "cloud_operation_item": "file:../cloud_operation_item"
+  },
+  "type": "component",
+  "usage": "隐私空间组件：提供隐私空间入口页与文件展示，屏蔽选择逻辑中的隐私空间项，结合操作项组件实现底部操作。",
+  "zhName": "云盘隐私空间组件"
+}

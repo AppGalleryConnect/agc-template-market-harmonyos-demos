@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "audio_extraction",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

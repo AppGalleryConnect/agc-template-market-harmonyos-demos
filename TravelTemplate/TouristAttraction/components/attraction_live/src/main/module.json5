@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "attraction_live",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+    ]
+  }
+}

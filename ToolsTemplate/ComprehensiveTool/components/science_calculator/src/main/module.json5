@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "science_calculator",
+    "type": "har",
+    "routerMap": "$profile:route_map",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

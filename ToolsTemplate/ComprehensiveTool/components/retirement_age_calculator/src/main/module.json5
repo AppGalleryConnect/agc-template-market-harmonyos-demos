@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "retirement_age_calculator",
+    "type": "har",
+    "routerMap": '$profile:router_map',
+    "deviceTypes": [
+      "default"
+    ]
+  }
+}

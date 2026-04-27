@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "chat_base",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

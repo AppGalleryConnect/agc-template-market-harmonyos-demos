@@ -1,0 +1,16 @@
+{
+  "name": "video_edit",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "component",
+  "usage": "视频编辑组件：提供视频剪辑、画中画、字幕编辑、提词器等视频编辑功能",
+  "zhName": "视频编辑组件",
+  "dependencies": {
+    "@ohos/mp4parser": "2.0.6",
+    "@keke/color-picker": "1.0.4",
+    "video_common": "file:../video_common"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "aggregated_share",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "dayjs": "1.11.13",
+    "@tencent/wechat_open_sdk": "1.0.16",
+    "@tencent/qq-open-sdk": "1.0.3",
+    "core": "file:./libs/weibo_open_sdk"
+  },
+  "devDependencies": {},
+  "dynamicDependencies": {},
+  "type": "component",
+  "usage": "通用分享组件，提供分享到微信好友、朋友圈、QQ、微博等，支持碰一碰分享、生成海报、系统分享等功能。",
+  "zhName": "通用分享组件"
+}

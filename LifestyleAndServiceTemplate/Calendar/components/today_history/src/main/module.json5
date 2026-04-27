@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "today_history",
+    "routerMap": "$profile:route_map",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet",
+    ]
+  }
+}

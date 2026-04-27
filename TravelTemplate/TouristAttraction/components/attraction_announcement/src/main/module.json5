@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "attraction_announcement",
+    "type": "har",
+    "deviceTypes": [
+      "default"
+    ]
+  }
+}

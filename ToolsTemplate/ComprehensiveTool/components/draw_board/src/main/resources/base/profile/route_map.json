@@ -1,0 +1,20 @@
+{
+  "routerMap": [
+    {
+      "name": "DrawBoard",
+      "pageSourceFile": "src/main/ets/views/DrawBoard.ets",
+      "buildFunction": "drawBoardBuilder",
+      "data": {
+        "description": "this is DrawBoard"
+      }
+    },
+    {
+      "name": "CanvasSaveList",
+      "pageSourceFile": "src/main/ets/components/CanvasSaveList.ets",
+      "buildFunction": "CanvasSaveListBuilder",
+      "data": {
+        "description": "this is CanvasSaveList"
+      }
+    }
+  ]
+}

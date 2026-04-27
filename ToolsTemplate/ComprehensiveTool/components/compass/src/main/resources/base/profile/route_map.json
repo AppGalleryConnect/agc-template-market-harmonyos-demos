@@ -1,0 +1,12 @@
+{
+  "routerMap": [
+    {
+      "name": "CompassPage",
+      "pageSourceFile": "src/main/ets/pages/CompassPage.ets",
+      "buildFunction": "CompassPageBuilder",
+      "data": {
+        "description": "this is CompassPage"
+      }
+    }
+  ]
+}

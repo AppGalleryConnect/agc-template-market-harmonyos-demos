@@ -1,0 +1,152 @@
+[
+  {
+    "id": 1,
+    "name": "张伟民",
+    "title": "主任医师",
+    "picUrl": "http://example.com/images/zhangweimin.jpg",
+    "appointmentType": "专家号",
+    "remainingAppointments": 10,
+    "price": 100,
+    "departmentId": "1-4-2",
+    "departmentName": "脑血管病门诊",
+    "description": "擅长： 脑梗死、脑出血、短暂性脑缺血发作（TIA）、颅内动脉狭窄、动脉粥样硬化等脑血管疾病的诊断、治疗和预防；尤其擅长脑血管病的介入治疗，如急性脑梗死动脉取栓、颅内外动脉狭窄支架植入术、动脉瘤栓塞术等；对头晕、头痛、肢体麻木无力等神经系统常见症状的鉴别诊断具有丰富经验。\n\n简介： 张伟民，主任医师，医学博士，XX医院神经内科/脑血管病中心副主任。从事神经内科临床工作20余年，专注于脑血管疾病的诊疗与研究，具有扎实的理论基础和丰富的临床经验。曾在北京协和医院神经内科进修学习，掌握国内外先进的脑血管病诊疗技术。在《中华神经科杂志》、《Neurology》等国内外核心期刊发表论文10余篇，参与国家自然科学基金项目2项。多次参加国内外学术会议并作大会发言。以精湛的医术、严谨的态度和高度的责任心，为广大脑血管病患者提供优质的医疗服务。",
+    "availableSlots": [
+      {
+        "startTime": "08:00",
+        "endTime": "08:30",
+        "remainingAppointments": 5
+      },
+      {
+        "startTime": "08:30",
+        "endTime": "09:00",
+        "remainingAppointments": 5,
+        "price": 100
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "李晓华",
+    "title": "主治医师",
+    "picUrl": "http://example.com/images/lixiaohua.jpg",
+    "appointmentType": "专家号",
+    "remainingAppointments": 10,
+    "price": 50,
+    "departmentId": "1-4-2",
+    "departmentName": "脑血管病门诊",
+    "description": "暂无介绍",
+    "availableSlots": [
+      {
+        "startTime": "08:00",
+        "endTime": "08:30",
+        "remainingAppointments": 5
+      },
+      {
+        "startTime": "08:30",
+        "endTime": "09:00",
+        "remainingAppointments": 5,
+        "price": 100
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "王建国",
+    "title": "副主任医师",
+    "picUrl": "http://example.com/images/wangjianguo.jpg",
+    "appointmentType": "专家号",
+    "remainingAppointments": 2,
+    "price": 80,
+    "departmentId": "1-4-2",
+    "departmentName": "脑血管病门诊",
+    "description": "暂无介绍",
+    "availableSlots": [
+      {
+        "startTime": "08:00",
+        "endTime": "08:30",
+        "remainingAppointments": 1
+      },
+      {
+        "startTime": "08:30",
+        "endTime": "09:00",
+        "remainingAppointments": 1,
+        "price": 100
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "刘芳",
+    "title": "住院医师",
+    "picUrl": "http://example.com/images/liufang.jpg",
+    "appointmentType": "专家号",
+    "remainingAppointments": 20,
+    "price": 30,
+    "departmentId": "1-4-2",
+    "departmentName": "脑血管病门诊",
+    "description": "暂无介绍",
+    "availableSlots": [
+      {
+        "startTime": "08:00",
+        "endTime": "08:30",
+        "remainingAppointments": 10
+      },
+      {
+        "startTime": "08:30",
+        "endTime": "09:00",
+        "remainingAppointments": 10,
+        "price": 100
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "陈玉兰",
+    "title": "主任医师",
+    "picUrl": "https://example.com/images/chenyulan.png",
+    "appointmentType": "专家号",
+    "remainingAppointments": 0,
+    "price": 120,
+    "departmentId": "1-4-2",
+    "departmentName": "脑血管病门诊",
+    "description": "暂无介绍",
+    "availableSlots": [
+      {
+        "startTime": "08:00",
+        "endTime": "08:30",
+        "remainingAppointments": 0
+      },
+      {
+        "startTime": "08:30",
+        "endTime": "09:00",
+        "remainingAppointments": 0,
+        "price": 100
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "周明",
+    "title": "主任医师",
+    "picUrl": "https://example.com/images/chenyulan.png",
+    "appointmentType": "专家号",
+    "remainingAppointments": 0,
+    "price": 120,
+    "departmentId": "1-4-2",
+    "departmentName": "脑血管病门诊",
+    "description": "暂无介绍",
+    "availableSlots": [
+      {
+        "startTime": "08:00",
+        "endTime": "08:30",
+        "remainingAppointments": 0
+      },
+      {
+        "startTime": "08:30",
+        "endTime": "09:00",
+        "remainingAppointments": 0,
+        "price": 100
+      }
+    ]
+  }
+]

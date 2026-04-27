@@ -1,0 +1,19 @@
+{
+  "name": "home",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "common": "file:../../commons/common",
+    "oh_router": "file:../../commons/oh_router",
+    "painting_color_selector": "file:../../components/painting_color_selector"
+  },
+  "type": "feature",
+  "usage": "绘画模块：提供画板创建、编辑、保存、管理等核心功能，支持多种画笔工具、颜色选择器、颜色取样、颜色历史记录、背景设置、图层管理、撤销重做、清空画布等完整的绘画功能，同时支持画作保存和图片裁剪功能",
+  "zhName": "绘画",
+  "tabPage": "HomeDrawingPage",
+  "tabImage": "screenshots/home.jpg",
+  "tabOrder": 0
+}

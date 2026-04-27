@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "financial_calculator",
+    "type": "har",
+    "routerMap": '$profile:router_map',
+    "deviceTypes": [
+      "default"
+    ]
+  }
+}

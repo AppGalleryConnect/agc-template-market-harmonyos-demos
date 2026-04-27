@@ -1,0 +1,86 @@
+{
+  "app": {
+    "signingConfigs": [],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "targetSdkVersion": "5.0.5(17)",
+        "compatibleSdkVersion": "5.0.3(15)",
+        "runtimeOS": "HarmonyOS",
+        "buildOption": {
+          "strictMode": {
+            "caseSensitiveCheck": true,
+            "useNormalizedOHMUrl": true
+          }
+        }
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug"
+      },
+      {
+        "name": "release"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./products/entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "common",
+      "srcPath": "./commons/common"
+    },
+    {
+      "name": "person",
+      "srcPath": "./features/person"
+    },
+    {
+      "name": "device",
+      "srcPath": "./features/device"
+    },
+    {
+      "name": "health",
+      "srcPath": "./features/health"
+    },
+    {
+      "name": "aggregated_login",
+      "srcPath": "./components/aggregated_login"
+    },
+    {
+      "name": "OHRouter",
+      "srcPath": "./commons/OHRouter"
+    },
+    {
+      "name": "check_app_update",
+      "srcPath": "./components/check_app_update"
+    },
+    {
+      "name": "feedback",
+      "srcPath": "./components/feedback"
+    },
+    {
+      "name": "collect_personal_info",
+      "srcPath": "./components/collect_personal_info"
+    },
+    {
+      "name": "message_manager",
+      "srcPath": "./components/message_manager"
+    },
+    {
+      "name": "data_dashboard",
+      "srcPath": "./components/data_dashboard"
+    }
+  ]
+}

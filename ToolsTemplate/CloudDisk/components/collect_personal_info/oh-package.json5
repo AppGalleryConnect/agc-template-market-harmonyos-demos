@@ -1,0 +1,16 @@
+{
+  "name": "collect_personal_info",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "component",
+  "usage": "个人信息收集组件：提供用户个人信息收集和管理功能，支持隐私协议展示和用户授权",
+  "zhName": "个人信息收集组件",
+  "dependencies": {
+    "common": "file:../../commons/common",
+    "oh_router": "file:../../commons/OHRouter",
+    "vip_center": "file:../vip_center"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "draw_board",
+    "type": "har",
+    "routerMap": "$profile:route_map",
+    "deviceTypes": [
+      "phone",
+    ]
+  }
+}

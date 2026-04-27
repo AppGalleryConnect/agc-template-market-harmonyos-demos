@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "agcit_huawei_home_stay_travel_map",
+      "value": "1.0.3"
+    },
+    {
+      "name": "agcittype_huawei_home_stay_travel_map",
+      "value": "serviceComponent"
+    }
+  ]
+}

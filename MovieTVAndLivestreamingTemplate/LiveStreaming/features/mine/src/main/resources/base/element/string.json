@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "delete_message_prompt",
+      "value": "是否删除%s消息 ？"
+    },
+    {
+      "name": "agcit_huawei_live_streaming",
+      "value": "1.0.1"
+    }
+  ]
+}

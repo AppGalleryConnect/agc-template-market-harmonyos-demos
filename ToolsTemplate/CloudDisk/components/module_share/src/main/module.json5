@@ -1,0 +1,14 @@
+{
+  "module": {
+    "name": "module_share",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ],
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.INTERNET",
+      },
+    ]
+  }
+}

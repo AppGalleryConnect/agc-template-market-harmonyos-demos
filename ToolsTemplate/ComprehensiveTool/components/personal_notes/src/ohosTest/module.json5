@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "personal_notes_test",
+    "type": "feature",
+    "deviceTypes": [
+      "default"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false
+  }
+}

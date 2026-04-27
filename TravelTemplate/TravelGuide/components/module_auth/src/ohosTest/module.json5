@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "module_auth_test",
+    "type": "feature",
+    "deviceTypes": [
+      "phone"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false
+  }
+}

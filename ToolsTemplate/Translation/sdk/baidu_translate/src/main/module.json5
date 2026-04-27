@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "baidu_translate",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

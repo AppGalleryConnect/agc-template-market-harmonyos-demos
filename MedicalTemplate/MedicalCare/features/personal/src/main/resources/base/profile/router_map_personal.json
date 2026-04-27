@@ -1,0 +1,12 @@
+{
+  "routerMap": [
+    {
+      "name": "PersonalPage",
+      "pageSourceFile": "src/main/ets/components/PersonalPage.ets",
+      "buildFunction": "PersonalPageBuilder",
+      "data": {
+        "description": "PersonalPage"
+      }
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "module": {
+    "name": "common_view",
+    "type": "har",
+    "deviceTypes": [
+      "phone"
+    ]
+  }
+}

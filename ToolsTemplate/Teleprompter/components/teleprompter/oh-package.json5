@@ -1,0 +1,14 @@
+{
+  "name": "teleprompter",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "countdown": "file:../countdown"
+  },
+  "type": "component",
+  "usage": "提词器核心组件：提供文字自动滚动提示功能，支持背景颜色、字体颜色、字体大小、滚动速度（语速）等多项配置。核心功能包括文字自动滚动、手动暂停/继续、重新开始、横屏模式、文字翻转、滚动速度调节等，适用于直播、演讲、视频录制等场景",
+  "zhName": "提词器组件"
+}

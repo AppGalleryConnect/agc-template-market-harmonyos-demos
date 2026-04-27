@@ -1,0 +1,17 @@
+{
+  "name": "mine",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@hw-agconnect/util-log": "1.0.0",
+    'common': 'file:../../commons/common',
+    'base_apis': "file:../../components/base_apis",
+    'login_info': "file:../../components/login_info",
+    'calendar_events': 'file:../../components/calendar_events',
+    'router_module': 'file:../../commons/router_module',
+    "membership": "file:../../components/membership"
+  }
+}

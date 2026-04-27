@@ -1,0 +1,12 @@
+{
+  "float": [
+    {
+      "name": "order_status_room_name_font_size",
+      "value": "16vp"
+    },
+    {
+      "name": "order_status_room_font_size",
+      "value": "12vp"
+    }
+  ]
+}

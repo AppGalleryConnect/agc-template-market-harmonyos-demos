@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "styles",
+    "type": "shared",
+    "deviceTypes": [
+      "phone"
+    ],
+    "installationFree":true,
+    'deliveryWithInstall': true
+  }
+}

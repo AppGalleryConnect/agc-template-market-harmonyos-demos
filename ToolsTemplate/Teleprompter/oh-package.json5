@@ -1,0 +1,21 @@
+{
+  "modelVersion": "5.0.5",
+  "description": "Please describe the basic information.",
+  "dependencies": {},
+  "devDependencies": {
+    "@ohos/hypium": "1.0.21"
+  },
+  "template": {
+    "domain": "工具",
+    "name": "提词器应用模版",
+    "usage": "本模版为提词器应用提供了完整的开发样例，核心功能包括提词文本的创建与管理、文档导入、拍照OCR识别文字导入、提词板模式和悬浮模式的文字滚动提示，适用于直播、演讲、视频录制等场景。",
+    "scene": "template,generate",
+    "sdk": [],
+    "color": {
+      "themeFilePath": "",
+      "mainThemeName": "",
+      "secondThemeName": "",
+      "themeFileContent": ""
+    }
+  }
+}

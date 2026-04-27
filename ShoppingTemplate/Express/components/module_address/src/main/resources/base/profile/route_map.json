@@ -1,0 +1,14 @@
+{
+  "routerMap": [
+    {
+      "name": "AddressManagePage",
+      "pageSourceFile": "src/main/ets/pages/AddressManagePage.ets",
+      "buildFunction": "buildAddressManagePage"
+    },
+    {
+      "name": "AddressEditPage",
+      "pageSourceFile": "src/main/ets/pages/AddressEditPage.ets",
+      "buildFunction": "buildAddressEditPage"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "module_share",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "component",
+  "usage": "分享模块组件：提供文件和内容分享功能，支持微信、QQ等第三方平台分享",
+  "zhName": "分享模块组件",
+  "dependencies": {
+    "dayjs": "1.11.13",
+    "@tencent/wechat_open_sdk": "1.0.14",
+    "@tencent/qq-open-sdk": "1.0.3",
+    "common": "file:../../commons/common",
+    "cloud_file_base": "file:../cloud_file_base",
+    "clouddisk_file_select" : "file:../clouddisk_file_select"
+  },
+  "devDependencies": {},
+  "dynamicDependencies": {}
+}

@@ -1,0 +1,19 @@
+{
+  "routerMap": [
+    {
+      "name": "AggregatedLoginPage",
+      "pageSourceFile": "src/main/ets/views/AggregatedLoginPage.ets",
+      "buildFunction": "AggregatedLoginPageBuilder"
+    },
+    {
+      "name": "OtherLoginPage",
+      "pageSourceFile": "src/main/ets/components/OtherLoginPage.ets",
+      "buildFunction": "OtherLoginPageBuilder"
+    },
+    {
+      "name": "ProtocolWebView",
+      "pageSourceFile": "src/main/ets/views/ProtocolWebView.ets",
+      "buildFunction": "ProtocolWebViewBuilder"
+    }
+  ]
+}

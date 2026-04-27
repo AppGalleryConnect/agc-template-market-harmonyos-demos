@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "income_calculator",
+    "type": "har",
+    "routerMap": "$profile:router_map",
+    "deviceTypes": [
+      "phone",
+    ]
+  }
+}

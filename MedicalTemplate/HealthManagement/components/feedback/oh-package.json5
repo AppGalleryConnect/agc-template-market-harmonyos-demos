@@ -1,0 +1,17 @@
+{
+  "name": "feedback",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "component",
+  "usage": "用户反馈功能，支持问题描述、图片上传、反馈提交和历史记录查看",
+  "zhName": "用户反馈组件",
+  "dependencies": {
+    "@ohos/axios": "2.2.6",
+    "@hw-agconnect/axios-mock-adapter": "1.0.0",
+    "common": "file:../../commons/common",
+    "oh_router": "file:../../commons/OHRouter"
+  }
+}

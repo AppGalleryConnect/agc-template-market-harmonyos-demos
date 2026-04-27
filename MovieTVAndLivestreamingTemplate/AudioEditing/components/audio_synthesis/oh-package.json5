@@ -1,0 +1,17 @@
+{
+  "name": "audio_synthesis",
+  "version": "1.0.0",
+  "description": "音频合成组件，用于将多个音频文件合成为一个文件",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "component",
+  "usage": "音频合成功能，支持多个音频文件的拼接合成，可调整合成顺序和间隔时间",
+  "zhName": "音频合成组件",
+  "dependencies": {
+    "audio_common": "file:../audio_common",
+    "audio_worker": "file:../audio_worker",
+    "common_view": "file:../common_view",
+    "@ohos/mp4parser": "2.0.6"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "painting_color_selector",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@keke/color-picker": "1.0.4"
+  },
+  "type": "component",
+  "usage": "绘画颜色选择器组件：提供专业的颜色选择功能，支持HSB颜色模型（色相、饱和度、亮度独立调节）、透明度调节、颜色吸取工具（可从画布实时取色）、实时颜色预览和RGB值显示，适用于绘画、设计等场景",
+  "zhName": "绘画颜色选择器组件"
+}

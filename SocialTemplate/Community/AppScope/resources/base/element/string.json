@@ -1,0 +1,20 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "社交交友"
+    },
+    {
+      "name": "agcit_huawei_community_service",
+      "value": "1.0.1"
+    },
+    {
+      "name": "agcittype_huawei_community_service",
+      "value": "industryTemplate"
+    },
+    {
+      "name": "agcitkid_huawei_community_service",
+      "value": "agcit_huawei_community_chat_input/1.0.0,agcit_huawei_community_chat_location/1.0.0,agcit_huawei_community_chat_window/1.0.0,agcit_huawei_common_login/1.0.0,agcit_huawei_enterprise_recruitment_check_app_update/1.0.2,agcit_huawei_common_collect_personal_info/1.0.0,agcit_huawei_common_feedback/1.0.0"
+    }
+  ]
+}

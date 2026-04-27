@@ -1,0 +1,12 @@
+{
+  "routerMap": [
+    {
+      "name": "ServiceAgreement",
+      "pageSourceFile": "src/main/ets/components/ServiceAgreement.ets",
+      "buildFunction": "ServiceAgreementBuilder",
+      "data": {
+        "description": "this is ServiceAgreement"
+      }
+    }
+  ]
+}

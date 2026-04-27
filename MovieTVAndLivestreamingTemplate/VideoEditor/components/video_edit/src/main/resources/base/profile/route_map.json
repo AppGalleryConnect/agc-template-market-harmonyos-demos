@@ -1,0 +1,36 @@
+{
+  "routerMap": [
+    {
+      "name": "VideoEditDetailPage",
+      "pageSourceFile": "src/main/ets/view/VideoEditDetailPage.ets",
+      "buildFunction": "VideoEditDetailPageBuilder",
+      "data": {
+        "description" : "this is VideoEditDetailPage"
+      }
+    },
+    {
+      "name": "ExportVideoPage",
+      "pageSourceFile": "src/main/ets/view/ExportVideoPage.ets",
+      "buildFunction": "ExportVideoPageBuilder",
+      "data": {
+        "description" : "this is ExportVideoPage"
+      }
+    },
+    {
+      "name": "CreateSubtitlesPage",
+      "pageSourceFile": "src/main/ets/view/CreateSubtitlesPage.ets",
+      "buildFunction": "CreateSubtitlesPageBuilder",
+      "data": {
+        "description" : "this is CreateSubtitlesPage"
+      }
+    },
+    {
+      "name": "EditSubtitlesPage",
+      "pageSourceFile": "src/main/ets/view/EditSubtitlesPage.ets",
+      "buildFunction": "EditSubtitlesPageBuilder",
+      "data": {
+        "description" : "this is EditSubtitlesPage"
+      }
+    }
+  ]
+}

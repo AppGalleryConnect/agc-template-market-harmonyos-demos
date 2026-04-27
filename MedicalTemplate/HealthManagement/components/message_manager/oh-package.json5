@@ -1,0 +1,12 @@
+{
+  "name": "message_manager",
+  "version": "1.0.1",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {},
+  "type": "component",
+  "usage": "消息管理功能，支持文章展示、消息列表、话题卡片和详情查看",
+  "zhName": "消息管理组件"
+}

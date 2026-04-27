@@ -1,0 +1,12 @@
+{
+  "name": "choose_language",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {},
+  "type": "component",
+  "usage": "语言选择组件，提供翻译源语言和目标语言的选择功能。支持常用语言列表、VIP语言标识、语言切换、自动检测语言等功能。包含语言选择页面、语言列表项、VIP升级弹窗等子组件。",
+  "zhName": "语言选择组件"
+}

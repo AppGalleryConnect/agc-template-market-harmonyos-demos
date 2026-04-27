@@ -1,0 +1,52 @@
+{
+  "routerMap": [
+    {
+      "name": "EditPersonalInfo",
+      "pageSourceFile": "src/main/ets/pages/EditPersonalInfo.ets",
+      "buildFunction": "EditPersonalInfoBuilder",
+      "data": {
+        "description": "this is Attractions"
+      }
+    },
+    {
+      "name": "Hotlines",
+      "pageSourceFile": "src/main/ets/pages/Hotlines.ets",
+      "buildFunction": "HotlinesBuilder",
+      "data": {
+        "description": "this is Attractions"
+      }
+    },
+    {
+      "name": "TouristPage",
+      "pageSourceFile": "src/main/ets/pages/TouristPage.ets",
+      "buildFunction": "TouristPageBuilder",
+      "data": {
+        "description": "this is Attractions"
+      }
+    },
+    {
+      "name": "TouristsPage",
+      "pageSourceFile": "src/main/ets/pages/TouristsPage.ets",
+      "buildFunction": "TouristListBuilder",
+      "data": {
+        "description": "this is Attractions"
+      }
+    },
+    {
+      "name": "Address",
+      "pageSourceFile": "src/main/ets/pages/Address.ets",
+      "buildFunction": "AddressBuilder",
+      "data": {
+        "description": "this is Address"
+      }
+    },
+    {
+      "name": "Addresses",
+      "pageSourceFile": "src/main/ets/pages/Addresses.ets",
+      "buildFunction": "AddressesBuilder",
+      "data": {
+        "description": "this is Addresses"
+      }
+    }
+  ]
+}

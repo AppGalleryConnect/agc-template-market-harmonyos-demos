@@ -1,0 +1,13 @@
+{
+  "name": "clouddisk_backup_status",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "type": "component",
+  "usage": "云盘备份状态组件：提供备份状态展示和控制功能，支持备份进度显示、暂停、继续和查看相册",
+  "zhName": "云盘备份状态组件",
+  "dependencies": {
+  }
+}
