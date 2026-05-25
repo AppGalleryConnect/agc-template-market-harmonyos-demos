@@ -130,7 +130,7 @@ export struct PlayerComponent {
       console.error(`Failed to get last window. error: ${JSON.stringify(e)}`)
     }
     this.isLayoutFullScreen = true
-    this.setR(this.isLayoutFullScreen ? 2 : 1)
+    this.setR(this.isLayoutFullScreen ? 10 : 1)
     this.setFullScreen(this.isLayoutFullScreen)
     try {
       emitter.on('playerPause', (event: emitter.EventData) => {
@@ -281,7 +281,7 @@ export struct PlayerComponent {
             isLayoutFullScreen: this.isLayoutFullScreen,
             fullScreen: (isLayoutFullScreen: boolean) => {
               this.isLayoutFullScreen = isLayoutFullScreen
-              this.setR(this.isLayoutFullScreen ? 2 : 1)
+              this.setR(this.isLayoutFullScreen ? 10 : 1)
               this.setFullScreen(this.isLayoutFullScreen)
             },
             selectionEvent: (item: MovieItem) => {

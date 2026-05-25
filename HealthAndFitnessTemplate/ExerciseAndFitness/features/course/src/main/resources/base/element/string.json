@@ -3,22 +3,22 @@
     {
       "name": "page_show",
       "value": "page from package",
-      "attr":{
-        "translatable":false
+      "attr": {
+        "translatable": false
       }
     },
     {
       "name": "agcit_huawei_exercise_and_fitness",
-      "value": "1.0.0",
-      "attr":{
-        "translatable":false
+      "value": "1.0.2",
+      "attr": {
+        "translatable": false
       }
     },
     {
       "name": "calendar_reason",
       "value": "应用可能需要向用户的日历中添加、修改或删除日程事件，以便帮助用户更好地管理时间",
-      "attr":{
-        "translatable":false
+      "attr": {
+        "translatable": false
       }
     }
   ]

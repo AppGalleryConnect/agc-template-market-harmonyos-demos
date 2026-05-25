@@ -13,12 +13,19 @@
 
 本模板中提供了多种组件，您可以按需选择合适的组件进行使用，所有组件存放在工程根目录的components下。
 
-| 组件                        | 描述           | 使用指导                                         |
-|---------------------------|--------------|----------------------------------------------|
-| 阅读器工具栏组件（reader_tool_bar） | 支持在阅读器工具展示常用功能，例如目录选择、字体、字号、行间距、背景设置等。 | [使用指导](components/reader_tool_bar/README.md) |
-| 滑动卡片组件（swiper_card）       | 展示可滑动图片组。    | [使用指导](components/swiper_card/README.md)     |
-| 推送组件（custom_push）         | 本组件提供了推送组件功能。 | [使用指导](components/custom_push/README.md)        |
-| 激励广告组件（incentive_ad）      | 展示激励广告的相关功能。 | [使用指导](components/incentive_ad/README.md)    |
+| 组件                            | 描述                                           | 使用指导                                       |
+|-------------------------------|----------------------------------------------|--------------------------------------------|
+| 广告组件（aggregated_ads）          | 提供了华为广告平台展示开屏广告的能力。                          | [使用指导](./components/aggregated_ads/README.md)|
+| 通用分享组件（aggregated_share）      | 支持分享到微信好友、朋友圈、QQ、微博等方式，支持碰一碰分享、生成海报、系统分享等功能  | [使用指导](components/aggregated_share/README.md)    |
+| 推送组件（custom_push）             | 本组件提供了推送组件功能。                                | [使用指导](components/custom_push/README.md)      |
+| 通用客服组件（customer_service_chat） | 提供了原生的聊天交互界面，支持完整的客服对话功能，包括文字、表情、图片、地址等基础交互。 | [使用指导](components/customer_service_chat/README.md)  |
+| 通用拨号组件（dial_panel）               | 提供拨号能力的组件                                    | [使用指导](components/dial_panel/README.md)        |
+| 通用图片预览组件（image_preview）   | 提供了图片预览相关功能                                  | [使用指导](components/image_preview/README.md)|
+| 激励广告组件（incentive_ad）      | 展示激励广告的相关功能。                                 | [使用指导](components/incentive_ad/README.md)  |
+| 通用会员组件（membership）        | 支持应用内支付实现会员开通的能力                             | [使用指导](components/membership/README.md)|
+| 申请权限许可组件（module_privacy_agreement） | 可以在应用首启需要用户同意隐私政策和其他协议时使用。                   | [使用指导](components/module_privacy_agreement/README.md)   |
+| 阅读器工具栏组件（reader_tool_bar）     | 支持在阅读器工具展示常用功能，例如目录选择、字体、字号、行间距、背景设置等。       | [使用指导](components/reader_tool_bar/README.md) |
+| 滑动卡片组件（swiper_card）           | 展示可滑动图片组。                                    | [使用指导](components/swiper_card/README.md)   |
 
 本模板为电子书类应用提供了常用功能实现案例，涵盖了从书籍获取、阅读体验到个性化管理的核心环节，模板主要分阅读、书架、书城、分类和我的五大模块：
 
@@ -263,7 +270,7 @@ BookRead
 * DevEco Studio版本：DevEco Studio 6.0.2 Release及以上
 * HarmonyOS SDK版本：HarmonyOS 6.0.2 Release SDK及以上
 * 设备类型：华为手机（包括双折叠和阔折叠）、平板
-* HarmonyOS版本：HarmonyOS 5.0.5(17)及以上
+* HarmonyOS版本：HarmonyOS 6.0.0(20)及以上
 
 ### 权限
 

@@ -4,6 +4,7 @@ import {
   BreakpointSystem,
   BreakpointTypeEnum,
   Constants,
+  FontModel,
   GetUserInfoRsp,
   NavHeaderBar,
   ReturnButton,
@@ -12,11 +13,13 @@ import {
 import { AvatarIcon, SelectAvatarCard } from '../comp/SelectAvatarCard';
 import { emitter } from '@kit.BasicServicesKit';
 import { UserInfo } from 'base_common';
+import { AppStorageV2 } from '@kit.ArkUI';
 
 @ComponentV2
 export struct PrivacyPage {
   @Local windowTopHeight: number = AppStorage.get('windowTopHeight') as number || 38.77;
   @Local curBreakpoint: BreakpointStorage = BreakpointSystem.currentBreakpoint
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
 
   build() {
     NavDestination() {
@@ -60,11 +63,11 @@ export struct PrivacyPage {
   privacyOptionView(text: string, url: string) {
     Row() {
       Text(text)
-        .fontSize(16)
+        .fontSize(this.fontModel.getFg(16))
         .height(21)
         .width(Constants.FULL_SIZE)
       Image($r('app.media.ic_arrow_right'))
-        .width(7)
+        .width(12)
         .height(14)
         .objectFit(ImageFit.Contain)
     }

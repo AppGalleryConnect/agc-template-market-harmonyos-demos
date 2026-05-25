@@ -2,6 +2,7 @@ import { preferences } from '@kit.ArkData';
 import { common } from '@kit.AbilityKit';
 import { BusinessError } from '@kit.BasicServicesKit';
 import { Logger } from './Logger';
+import { hilog } from '@kit.PerformanceAnalysisKit';
 
 export class PreferConstant {
   //意见反馈记录
@@ -82,9 +83,9 @@ export class PreferenceUtil {
       // 删除
       this.dataPreferences?.deleteSync(key);
       this.dataPreferences?.flush();
-      console.log('testTag', '删除Preferences[${key} = ${value}]成功');
+      hilog.info(0x0000, 'PreferenceUtil', `删除Preferences key=${key} 成功`);
     } catch (e) {
-      console.log('testTag', '删除Preferences[${key} = ${value}]失败' + JSON.stringify(e));
+      hilog.error(0x0000, 'PreferenceUtil', `删除Preferences key=${key} 失败: ${JSON.stringify(e)}`);
     }
   }
 
@@ -113,7 +114,7 @@ export class PreferenceUtil {
       this.dataPreferences.clearSync();
       this.dataPreferences?.flush();
     } catch (e) {
-      console.log('testTag', 'clear失败' + JSON.stringify(e));
+      hilog.error(0x0000, 'PreferenceUtil', `clear失败: ${JSON.stringify(e)}`);
     }
   }
 }

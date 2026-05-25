@@ -1,6 +1,9 @@
 import { window } from '@kit.ArkUI';
 import { kWechatBundleName } from '@tencent/wechat_open_sdk';
 import { CommonConstants } from '../common/Constants';
+import { Logger } from '../common/Logger';
+
+const TAG = 'ShareConfigModel';
 
 @ObservedV2
 export class ShareConfigModel {
@@ -26,7 +29,7 @@ export class ShareConfigModel {
         this.windowBottomPadding = px2vp(area.bottomRect.height);
       })
     } catch (error) {
-      console.log(error)
+      Logger.error(TAG, String(error))
     }
 
   }
@@ -50,7 +53,7 @@ export class ShareConfigModel {
         currentWindow.on('avoidAreaChange', this.setWindowBottomPadding);
       })
     } catch (error) {
-      console.log(error)
+      Logger.error(TAG, String(error))
     }
   }
 
@@ -63,7 +66,7 @@ export class ShareConfigModel {
         currentWindow.off('avoidAreaChange', this.setWindowBottomPadding);
       })
     } catch (error) {
-      console.log(JSON.stringify(error))
+      Logger.error(TAG, JSON.stringify(error))
     }
   }
 
@@ -76,7 +79,7 @@ export class ShareConfigModel {
         currentWindow.setWindowLayoutFullScreen(this.isLayoutFullScreen);
       })
     } catch (error) {
-      console.log(JSON.stringify(error))
+      Logger.error(TAG, JSON.stringify(error))
     }
   }
 }

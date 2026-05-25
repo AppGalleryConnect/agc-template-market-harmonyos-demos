@@ -9,6 +9,7 @@ import {
   TCRouter
 } from 'common';
 import { AppStorageV2, LengthMetrics } from '@kit.ArkUI';
+import { fp2pxUtil } from 'base_common';
 
 @ObservedV2
 class GenderSelectItem {
@@ -69,7 +70,6 @@ export struct PreferencePage {
           Column({ space: 12 }) {
             Row() {
               Text('请选择想看的频道：')
-                .width(180)
                 .height(27)
                 .fontWeight(500)
                 .fontSize(20)
@@ -89,7 +89,6 @@ export struct PreferencePage {
 
             Row() {
               Text('请选择想看的频道：')
-                .width(180)
                 .height(27)
                 .fontWeight(500)
                 .fontSize(20)
@@ -164,7 +163,6 @@ export struct PreferencePage {
         Row() {
           Text('清空')
             .fontSize(14)
-            .width(28)
             .height(19)
             .textAlign(TextAlign.Center)
             .fontColor(this.isGenderSelected === false && this.selectedTypeNum === 0 ? $r('sys.color.font_tertiary') :
@@ -268,7 +266,7 @@ export struct PreferencePage {
         ListItem() {
           Row() {
             Text(item.type)
-              .fontSize(12)
+              .fontSize(fp2pxUtil(12))
               .fontWeight('medium')
               .fontColor(item.selected ? $r('app.color.pure_white') : $r('sys.color.font_primary'))
               .textAlign(TextAlign.Center)

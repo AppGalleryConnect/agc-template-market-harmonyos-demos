@@ -44,6 +44,16 @@ export class Note {
    */
   handwriteFileName: string = '';
 
+  /**
+   * 笔记类型：普通笔记 | 录音笔记
+   */
+  @Trace noteType: 'normal' | 'recording' = 'normal';
+
+  /**
+   * 录音笔记的音频文件路径（仅录音笔记有效）
+   */
+  @Trace audioUri: string = '';
+
   constructor(styledString: MutableStyledString, title?: string, categoryId?: string) {
     this.styledString = styledString;
     this.serializedStyledString = '';

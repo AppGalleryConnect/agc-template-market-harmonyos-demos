@@ -51,3 +51,15 @@ export * from './src/main/ets/utils/DialogUtil'
 export * from './src/main/ets/utils/BreakpointSystem'
 
 export { TabInfo } from './src/main/ets/model/TabInfo'
+
+export { FontModel } from './src/main/ets/model/FontModel'
+
+export { MinorsMode } from './src/main/ets/model/MinorsModel'
+
+export { MinorsProtectionUtils } from './src/main/ets/utils/minorsProtectionUtils'
+
+export { WantUtils } from './src/main/ets/utils/WantUtils'
+
+export { ImmersiveListener } from './src/main/ets/listener/ImmersiveListener'
+
+export { AppLinkingRouter } from './src/main/ets/model/AppLinkingModel'

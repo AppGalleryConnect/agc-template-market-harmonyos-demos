@@ -64,7 +64,7 @@ export struct MineView {
       Image($r('app.media.right_triangle'))
         .width(16)
         .height(16)
-        .fillColor('rgba(0,0,0,0.9)')
+        .fillColor($r('sys.color.icon_primary'))
     }
     .width('100%')
     .justifyContent(FlexAlign.Start)
@@ -83,13 +83,13 @@ export struct MineView {
           .fontSize(14)
           .fontFamily('鸿蒙黑体')
           .fontWeight(FontWeight.Medium)
-          .fontColor('rgba(0,0,0,0.9)')
+          .fontColor($r('sys.color.font_primary'))
           .maxFontScale(1)
         Text(String(this.didCount))
           .fontSize(24)
           .fontFamily('鸿蒙黑体')
           .fontWeight(FontWeight.Medium)
-          .fontColor('rgba(0,0,0,0.9)')
+          .fontColor($r('sys.color.font_primary'))
           .height(32)
           .textAlign(TextAlign.Center)
           .maxFontScale(1)
@@ -97,14 +97,14 @@ export struct MineView {
           .fontSize(12)
           .fontFamily('鸿蒙黑体')
           .fontWeight(FontWeight.Regular)
-          .fontColor('rgba(0,0,0,0.6)')
+          .fontColor($r('sys.color.font_secondary'))
           .maxFontScale(1)
       }
       .width(78)
       .height(99)
       .borderRadius(8)
       .padding(12)
-      .backgroundColor('rgba(0,0,0,0.05)')
+      .backgroundColor($r('sys.color.comp_background_secondary'))
       .justifyContent(FlexAlign.Start)
       .alignItems(HorizontalAlign.Center)
 
@@ -114,13 +114,13 @@ export struct MineView {
           .fontSize(14)
           .fontFamily('鸿蒙黑体')
           .fontWeight(FontWeight.Medium)
-          .fontColor('rgba(0,0,0,0.9)')
+          .fontColor($r('sys.color.font_primary'))
           .maxFontScale(1)
         Text(String(this.averageScore))
           .fontSize(24)
           .fontFamily('鸿蒙黑体')
           .fontWeight(FontWeight.Medium)
-          .fontColor('rgba(0,0,0,0.9)')
+          .fontColor($r('sys.color.font_primary'))
           .height(32)
           .textAlign(TextAlign.Center)
           .maxFontScale(1)
@@ -128,14 +128,14 @@ export struct MineView {
           .fontSize(12)
           .fontFamily('鸿蒙黑体')
           .fontWeight(FontWeight.Regular)
-          .fontColor('rgba(0,0,0,0.6)')
+          .fontColor($r('sys.color.font_secondary'))
           .maxFontScale(1)
       }
       .width(122)
       .height(99)
       .borderRadius(8)
       .padding(12)
-      .backgroundColor('rgba(0,0,0,0.05)')
+      .backgroundColor($r('sys.color.comp_background_secondary'))
       .justifyContent(FlexAlign.Start)
       .alignItems(HorizontalAlign.Center)
     }
@@ -177,7 +177,7 @@ export struct MineView {
         Image($r('app.media.ic_right_arrow_lined'))
           .width(7)
           .height(14)
-          .fillColor('rgba(0,0,0,0.2)')
+          .fillColor($r('app.color.icon_secondary'))
           .margin({ right: 12 })
       }
       .width(CommonConstants.FULL_PERCENT)
@@ -203,7 +203,7 @@ export struct MineView {
       Image($r('app.media.ic_right_arrow_lined'))
         .width(7)
         .height(14)
-        .fillColor('rgba(0,0,0,0.2)')
+        .fillColor($r('app.color.icon_secondary'))
         .margin({ right: 12 })
     }
     .width(CommonConstants.FULL_PERCENT)
@@ -257,7 +257,7 @@ export struct MineView {
 
                     Text(AccountUtil.getUserInfo().phone)
                       .fontFamily('HarmonyHeiTi')
-                      .fontColor('#000000')
+                      .fontColor($r('app.color.font_primary'))
                       .fontSize(12)
                       .fontWeight(400)
                       .lineHeight(16)
@@ -275,7 +275,7 @@ export struct MineView {
                 Image($r('app.media.ic_right_arrow_lined'))
                   .width(7)
                   .height(18)
-                  .fillColor('rgba(0,0,0,0.2)')
+                  .fillColor($r('app.color.icon_secondary'))
               }
 
             }
@@ -323,7 +323,7 @@ export struct MineView {
             .width('100%')
           }
           .width(CommonConstants.FULL_PERCENT)
-          .backgroundColor(Color.White)
+          .backgroundColor($r('sys.color.comp_background_primary'))
           .borderRadius(16)
           .margin({ top: 5 })
           .padding(12)
@@ -336,7 +336,7 @@ export struct MineView {
           }
           .width(CommonConstants.FULL_PERCENT)
           .borderRadius(16)
-          .backgroundColor(Color.White)
+          .backgroundColor($r('sys.color.comp_background_primary'))
           .margin({ top: 12 })
           .padding(12)
 
@@ -363,10 +363,10 @@ export struct MineView {
               }
             })
           }
-          .backgroundColor(Color.White)
+          .backgroundColor($r('sys.color.comp_background_primary'))
           .divider({
             strokeWidth:0.5,
-            color:'#ddd',
+            color:$r('sys.color.comp_divider'),
             startMargin:12,
             endMargin:12
           })
@@ -386,7 +386,7 @@ export struct MineView {
     }
     .width(CommonConstants.FULL_WIDTH)
     .height(CommonConstants.FULL_HEIGHT)
-    .backgroundColor('#F1F3F5')
+    .backgroundColor($r('sys.color.background_secondary'))
 
   }
 
@@ -396,7 +396,7 @@ export struct MineView {
       Text($r('app.string.mine'))
         .fontSize(24)
         .fontWeight(FontWeight.Medium)
-        .fontColor('rgba(0,0,0,0.9)')
+        .fontColor($r('sys.color.font_primary'))
         .maxFontScale(1)
     }
     .width(CommonConstants.FULL_PERCENT)

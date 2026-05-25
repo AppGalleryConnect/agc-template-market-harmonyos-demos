@@ -4,6 +4,7 @@ import {
   BreakpointSystem,
   BreakpointTypeEnum,
   Constants,
+  FontModel,
   NavHeaderBar,
   TaskCoins,
   TaskList
@@ -11,6 +12,7 @@ import {
 import { emitter } from '@kit.BasicServicesKit';
 import { SignComp } from '../comp/SignComp'
 import { AppStorageV2 } from '@kit.ArkUI';
+import { fp2pxUtil } from 'base_common';
 
 class TimeCoins {
   coin: number = 0;
@@ -29,6 +31,7 @@ export struct WelfareCenter {
   @Consumer('index') index: number = 0;
   @Local taskT: TaskList = AppStorageV2.connect(TaskList, 'TaskList', () => new TaskList())!
   @Local curBreakpoint: BreakpointStorage = BreakpointSystem.currentBreakpoint
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
   private stages: Array<TimeCoins> = [
     { coin: 50, time: 12, isReceive: 0 },
     { coin: 100, time: 37, isReceive: 0 },
@@ -71,17 +74,17 @@ export struct WelfareCenter {
   showBookCoins() {
     Column() {
       Text('我的书币')
-        .fontSize(12)
+        .fontSize(this.fontModel.getFg(12))
 
       Text(this.bookCoins.toString())
-        .fontSize(38)
+        .fontSize(this.fontModel.getFg(38))
         .height(51)
         .fontWeight(FontWeight.Bold)
         .fontColor($r('sys.color.font_primary'))
         .margin({ top: 4, bottom: 4 })
 
       Text('金币明细>金币规则')
-        .fontSize(12)
+        .fontSize(this.fontModel.getFg(12))
         .fontColor($r('sys.color.mask_secondary'))
     }
     .margin({ top: 18, bottom: 18 })
@@ -116,7 +119,7 @@ export struct WelfareCenter {
                   .height(12)
                   .width(12)
                 Text(item.coin.toString())
-                  .fontSize(10)
+                  .fontSize(this.fontModel.getFg(10))
               }
               .opacity((this.userInfo?.totalReading || 0) >= item.time ? 1 : 0.4)
               .padding({
@@ -148,7 +151,7 @@ export struct WelfareCenter {
                 Span(item.time.toString())
                 Span('分钟')
               }
-              .fontSize(12)
+              .fontSize(this.fontModel.getFg(12))
               .fontColor($r('sys.color.font_secondary'))
               .opacity((this.userInfo?.totalReading || 0) >= item.time ? 1 : 0.4)
             }
@@ -175,7 +178,7 @@ export struct WelfareCenter {
   getTaskCoins() {
     Column() {
       Text('做任务 赚金币')
-        .fontSize(16)
+        .fontSize(this.fontModel.getFg(16))
         .fontWeight(FontWeight.Medium)
         .width(Constants.FULL_SIZE)
         .margin({ bottom: 16 })
@@ -184,19 +187,19 @@ export struct WelfareCenter {
           Column() {
             Row() {
               Text(item.title)
-                .fontSize(12)
+                .fontSize(this.fontModel.getFg(12))
               Text() {
                 Span('+')
                 Span(item?.coins?.toString())
               }
-              .fontSize(12)
+              .fontSize(this.fontModel.getFg(12))
               .fontColor('#ED6F21')
             }
             .margin({ bottom: 4 })
 
             Row() {
               Text(item.description)
-                .fontSize(12)
+                .fontSize(this.fontModel.getFg(12))
               if ((item?.allFinish || 1) > 1) {
                 Text() {
                   Span('(')
@@ -205,7 +208,7 @@ export struct WelfareCenter {
                   Span(item.allFinish?.toString())
                   Span(')')
                 }
-                .fontSize(12)
+                .fontSize(this.fontModel.getFg(12))
               }
             }
           }
@@ -213,7 +216,7 @@ export struct WelfareCenter {
 
           Button(item.finished < item.allFinish ? item.buttonOn : item.buttonOff,
             { stateEffect: item.finished < item.allFinish ? true : false })
-            .fontSize($r('sys.float.Body_S'))
+            .fontSize(fp2pxUtil(12))
             .height(30)
             .padding({ left: 15, right: 15 })
             .fontColor($r('sys.color.font_on_primary'))
@@ -222,7 +225,6 @@ export struct WelfareCenter {
             .onClick(() => {
               if (item.event) {
                 item.event(item);
-                console.log(`itemmmmmmmm======${item.finished}`)
               }
             })
         }

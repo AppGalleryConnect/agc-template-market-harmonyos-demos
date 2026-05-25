@@ -1,4 +1,7 @@
 import { VipRechargeItem } from '../utils/VipRechargeItem';
+import { Logger } from 'external_interactions';
+
+const TAG: string = '[module_recharge BasicDataSource]';
 
 export class BasicDataSource implements IDataSource {
   private listeners: DataChangeListener[] = [];
@@ -14,7 +17,7 @@ export class BasicDataSource implements IDataSource {
 
   registerDataChangeListener(listener: DataChangeListener): void {
     if (this.listeners.indexOf(listener) < 0) {
-      console.info('create listener')
+      Logger.info(TAG, 'create listener')
       this.listeners.push(listener)
     }
   }
@@ -22,7 +25,7 @@ export class BasicDataSource implements IDataSource {
   unregisterDataChangeListener(listener: DataChangeListener): void {
     const pos = this.listeners.indexOf(listener);
     if (pos >= 0) {
-      console.info('delete listener')
+      Logger.info(TAG, 'delete listener')
       this.listeners.splice(pos, 1)
     }
   }

@@ -1,5 +1,5 @@
 import { ComponentContent, promptAction } from '@kit.ArkUI';
-import { common } from '@kit.AbilityKit';
+import { BusinessError } from '@kit.BasicServicesKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 
 const logTag = 'PopViewUtils';
@@ -93,7 +93,10 @@ export class PopViewUtils {
           }
         },
       };
-      prompt.openCustomDialog(componentContent, customOptions);
+      prompt.openCustomDialog(componentContent, customOptions).catch((error: BusinessError) => {
+        hilog.error(domainId, logTag,
+          `PoPViewUtils dialog open failed. Code is ${error.code}, message is ${error.message}`);
+      });
       let infoList = PopViewUtils.shareInstance().infoList;
       let info: PopViewModel = {
         com: componentContent,
@@ -115,7 +118,10 @@ export class PopViewUtils {
         PopViewUtils.shareInstance().infoList = PopViewUtils.shareInstance().infoList.filter((model) => {
           return model.com !== info.com;
         });
-        prompt.closeCustomDialog(info.com);
+        prompt.closeCustomDialog(info.com).catch((error: BusinessError) => {
+          hilog.error(domainId, logTag,
+            `PoPViewUtils dialog close failed. Code is ${error.code}, message is ${error.message}`);
+        });
         hilog.info(domainId, logTag, 'dialog close');
       }
     }
@@ -131,7 +137,10 @@ export class PopViewUtils {
       } else {
         componentContent = new ComponentContent(PopViewUtils.uiContext, contentView as WrappedBuilder<[]>);
       }
-      PopViewUtils.uiContext.openBindSheet(componentContent, options);
+      PopViewUtils.uiContext.openBindSheet(componentContent, options).catch((error: BusinessError) => {
+        hilog.error(domainId, logTag,
+          `PoPViewUtils sheet open failed. Code is ${error.code}, message is ${error.message}`);
+      });
       let sheetList = PopViewUtils.shareInstance().sheetList;
       let info: PopViewModel = {
         com: componentContent,
@@ -152,7 +161,10 @@ export class PopViewUtils {
         PopViewUtils.shareInstance().sheetList = PopViewUtils.shareInstance().sheetList.filter((model) => {
           return model.com !== info.com;
         });
-        PopViewUtils.uiContext.closeBindSheet(info.com);
+        PopViewUtils.uiContext.closeBindSheet(info.com).catch((error: BusinessError) => {
+          hilog.error(domainId, logTag,
+            `PoPViewUtils sheet close failed. Code is ${error.code}, message is ${error.message}`);
+        });
         hilog.info(domainId, logTag, 'sheet close');
       }
     }

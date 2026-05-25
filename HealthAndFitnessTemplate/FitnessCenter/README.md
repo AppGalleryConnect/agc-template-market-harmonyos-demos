@@ -81,6 +81,8 @@
       │    │    └─ 已取消
       │    ├─ 预约记录列表
       │    └─ 预约记录详情
+      ├─ 课程
+      │    └─ 已购课程列表
       ├─ 我的订单
       │    ├─ 状态分类
       │    │    ├─ 全部
@@ -106,16 +108,20 @@ FitnessCenter
 │               │     ClassConstant.ets                           // 类常量
 │               │     GridRowColSetting.ets                       // 行列设置
 │               │     EmitterConstant.ets                         // 数据通信常量
+│               │     CommonConstants.ets                         // 视图模型通用常量
 │               │      
 │               ├─model
+│               │     BaseViewModel.ets                           // UI动态观测模型基类
 │               │     MockModel.ets                               // 公共数据模型，包含模板用到的所有数据类
 │               │     BreakpointModel.ets                         // 断点模型
 │               │     BreakpointUtils.ets                         // 断点类
+│               │     TabModel.ets                                // 应用Tab模型
 │               │      
-│               └─Service
-│                     DateUtil.ets                                // 日期时间工具
-│                     MockService.ets                             // 模拟数据服务类
-│
+│               ├─Service
+│               │     DateUtil.ets                                // 日期时间工具
+│               │     MockService.ets                             // 模拟数据服务类
+│               │      
+│               └─utils                                           // 通用方法
 │
 ├─components
 │  ├─atomicservice_login                                         // 通用元服务关联账号组件
@@ -207,6 +213,7 @@ FitnessCenter
 │  │            │    StoreSelect.ets                           // 门店选择
 │  │            │
 │  │            ├─course
+│  │            │    UserCourses.ets                           // 已购课程列表页
 │  │            │    CourseDetail.ets                          // 课程详情页
 │  │            │    ShowAllCourse.ets                         // 本店所有课程列表页
 │  │            │         
@@ -227,13 +234,16 @@ FitnessCenter
 │                │      
 │                └─pages
 │                       MineInfoPage.ets                          // 个人信息页
-           	            SettingPage.ets                           // 设置页面
+│          	            SettingPage.ets                           // 设置页面
 │                      
 └─products
    └─phone
        └─src
            └─main
               └─ets
+           	     ├─common
+          	     │      TabConstants.ets                          // 应用Tab常量
+           	     │      
            	     ├─entryability
           	     │      EntryAbility.ets                          // 应用主窗口
            	     │      
@@ -249,17 +259,24 @@ FitnessCenter
            	     │      SettingPage.ets                           // 设置页面
            	     │      SportDetail.ets                           // 运动详情页
            	     │
-           	     └─phoneformability
-           	            PhoneFormAbility.ets                      // 服务卡片窗口
+           	     ├─phoneformability
+           	     │      PhoneFormAbility.ets                      // 服务卡片窗口
+           	     │      
+           	     ├─viewmodels                                     // 视图模型
+           	     │      
+           	     └─widget
+           	            WidgetCard.ets                            // 服务卡片页面入口
+           	            WidgetMidCard.ets                         // 2*4服务卡片页面
+           	            WidgetSmallCard.ets                       // 2*2服务卡片页面
 ```
 
 ## 约束与限制
 
 ### 环境
-* DevEco Studio版本：DevEco Studio 6.0.1 Release及以上
-* HarmonyOS SDK版本：HarmonyOS 6.0.1 Release及以上
-* 设备类型：华为手机（包括双折叠和阔折叠）
-* 系统版本：HarmonyOS 5.0.1及以上
+* DevEco Studio版本：DevEco Studio 6.0.2 Release及以上
+* HarmonyOS SDK版本：HarmonyOS 6.0.2 Release SDK及以上
+* 设备类型：华为手机（包括双折叠和阔折叠）、平板
+* 系统版本：HarmonyOS 5.0.5(17)及以上
 
 ### 权限
 * 网络权限：ohos.permission.INTERNET

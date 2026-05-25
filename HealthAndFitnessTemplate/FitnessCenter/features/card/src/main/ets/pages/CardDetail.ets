@@ -1,16 +1,28 @@
 import {
   BookJumpSearch,
-  CardInfo, ConsumeType, CourseDetailModel, DateUtil,
+  BreakpointModel,
+  BreakpointNameEnum,
+  CardInfo,
+  ConsumeType,
+  CourseDetailModel,
+  DateUtil,
   EmitterConstant,
-  MockService, UserCard } from 'external_interactions';
+  MockService,
+  UserCard,
+  GridSettingInfo,
+  ScreenPropStorage,
+  JumpLogin,
+  LoginState,
+  Logger} from 'external_interactions';
 import { AppStorageV2 } from '@kit.ArkUI';
 import { TitleBar } from 'module_recharge/src/main/ets/components/TitleBar';
-import { ScreenPropStorage , JumpLogin, LoginState} from 'external_interactions'
 import window from '@ohos.window';
 import common from '@ohos.app.ability.common';
 import { display } from '@kit.ArkUI';
 import { DialPanel } from 'dial_panel';
 import { BusinessError, emitter } from '@kit.BasicServicesKit';
+
+const TAG = '[CardDetail]';
 
 @ComponentV2
 export struct CardDetail {
@@ -31,6 +43,8 @@ export struct CardDetail {
   @Local windowHeight: number = 0;
   @Local orientation: window.Orientation = window.Orientation.PORTRAIT;
   private context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  @Local breakPointModel: BreakpointModel = AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
+
   @Monitor('screenPropStorage.topRectHeight', 'screenPropStorage.bottomRectHeight')
   onScreenPropStorage(mon: IMonitor) {
     this.topRectHeight = this.screenPropStorage.topRectHeight;
@@ -64,16 +78,17 @@ export struct CardDetail {
     try {
       this.windowWidth = this.getUIContext().px2vp(display.getDefaultDisplaySync().width)
     } catch (error) {
-      console.log(`get display class false ${JSON.stringify(error)}`);
+      Logger.info(TAG, `get display class false ${JSON.stringify(error)}`);
     }
   }
+
   registerWindowChangeListener() {
     try {
       // 获取窗口实例
       window.getLastWindow(this.context).then((win: window.Window) => {
         // 监听窗口尺寸变化
         win.on('windowSizeChange', (data: window.Size) => {
-          console.log('Window size changed:', data.width, data.height);
+          Logger.info(TAG, `Window size changed: ${JSON.stringify(data.width)}, ${JSON.stringify(data.height)}`);
           this.windowWidth = this.getUIContext().px2vp(data.width);
         });
 
@@ -83,6 +98,26 @@ export struct CardDetail {
     }
   }
 
+  @Computed
+  get gridSetting() {
+    const gridSettingInfo: GridSettingInfo  = {
+      template: '1fr',
+      colGap: 12,
+      rowGap: 16,
+    }
+    if ([BreakpointNameEnum.LG, BreakpointNameEnum.XL].includes((this.breakPointModel.currentBreakpoint))) {
+      gridSettingInfo.template = '1fr 1fr'
+    }
+    return gridSettingInfo
+  }
+
+  getImageWidth() {
+    if ([BreakpointNameEnum.LG, BreakpointNameEnum.XL].includes((this.breakPointModel.currentBreakpoint))) {
+      return this.windowWidth/2
+    }
+    return this.windowWidth
+  }
+
   @Builder
   cardBasicInfoBuilder() {
     Column() {
@@ -90,7 +125,7 @@ export struct CardDetail {
         Column(){
           Stack(){
             Image($r(this.cardInfo.advImage))
-              .width(this.windowWidth - 42)
+              .width(this.getImageWidth() - 42)
               .borderRadius(16)
               .padding({left: 5, right: 5})
             Row() {
@@ -355,13 +390,23 @@ export struct CardDetail {
           }
         })
         .margin({ left: 16, right: 16 })
+
         Scroll() {
           Column({ space: 16 }) {
-            this.cardBasicInfoBuilder()
-
-              this.courseShowBuilder()
-
-            this.useInstructionBuilder()
+            Grid() {
+              GridItem() {
+                this.cardBasicInfoBuilder()
+              }
+              GridItem() {
+                Column({ space: 12 }) {
+                  this.courseShowBuilder()
+                  this.useInstructionBuilder()
+                }
+              }
+            }
+            .columnsTemplate(this.gridSetting.template)
+            .columnsGap(this.gridSetting.colGap)
+            .rowsGap(this.gridSetting.rowGap)
           }
           .margin({ left: 16, right: 16 })
           .justifyContent(FlexAlign.Start)
@@ -395,13 +440,14 @@ export struct CardDetail {
                 .open();
             })
           }
-          .justifyContent(FlexAlign.Center)
+          .margin({ left: 24 })
           .width('20%')
           .height('60%')
 
           Button('立即购买', { type: ButtonType.Capsule, stateEffect: true })
             .width('70%')
             .height('60%')
+            .margin({ right: 24 })
             .fontColor($r('sys.color.comp_background_list_card'))
             .fontWeight(FontWeight.Medium)
             .fontSize($r('sys.float.Body_M'))
@@ -417,21 +463,20 @@ export struct CardDetail {
                   try {
                     emitter.emit(EmitterConstant.CLICK_BOOK_DETAIL)
                   } catch (e) {
-                    console.error(`emitter emit failed. error: ${JSON.stringify(e)}`)
+                    Logger.error(TAG, `emitter emit failed. error: ${JSON.stringify(e)}`)
                   }
                   this.bookJumpSearchStorage.bookJumpSearch = this.courseDetail.courseName
                 }
               }
             })
         }
-        .justifyContent(FlexAlign.Center)
+        .justifyContent(FlexAlign.SpaceBetween)
         .alignItems(VerticalAlign.Center)
         .height(75)
         .width('100%')
         .padding({ bottom: 10 })
         .backgroundColor(Color.White)
       }
-      .height('100%')
     }
     .hideTitleBar(true)
     .onReady((ctx: NavDestinationContext) => {

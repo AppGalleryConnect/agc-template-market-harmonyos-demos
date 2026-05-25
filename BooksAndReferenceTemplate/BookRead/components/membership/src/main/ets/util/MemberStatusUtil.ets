@@ -1,12 +1,55 @@
 import { iap } from '@kit.IAPKit';
 import { common } from '@kit.AbilityKit';
 import { BusinessError } from '@kit.BasicServicesKit';
-import { hilog } from '@kit.PerformanceAnalysisKit';
-import { MemberList } from '../model/Index';
+import { UtilLog } from '@hw-agconnect/util-log';
+import {
+  MemberList,
+  PurchaseData,
+  PurchaseOrderPayload,
+  SubGroupStatusPayload,
+  SubscriptionStatus,
+} from '../model/Index';
+import { JWSUtil } from './JWSUtil';
 
 export class MemberStatusUtil {
+  static getSubGroupStatusPayload(purchaseData: string) {
+    let data = JSON.parse(purchaseData) as PurchaseData;
+    const jwsSubscriptionStatus = data.jwsSubscriptionStatus;
+    if (!jwsSubscriptionStatus) {
+      return undefined;
+    }
+    const subscriptionStatus: string = JWSUtil.decodeJwsObj(jwsSubscriptionStatus);
+    if (!subscriptionStatus) {
+      return undefined;
+    }
+    // 需自定义SubGroupStatusPayload类，包含的信息请参见SubGroupStatusPayload
+    const subGroupStatusPayload: SubGroupStatusPayload = JSON.parse(subscriptionStatus);
+    return subGroupStatusPayload;
+  }
+
+  static getLastSubscriptionStatus(purchaseData: string): SubscriptionStatus | undefined {
+    let subGroupStatusPayload = MemberStatusUtil.getSubGroupStatusPayload(purchaseData);
+    const lastSubscriptionStatus = subGroupStatusPayload?.lastSubscriptionStatus;
+
+    return lastSubscriptionStatus;
+  }
+
+  static getLastPurchaseOrder(purchaseData: string): PurchaseOrderPayload | undefined {
+    let data = JSON.parse(purchaseData) as PurchaseData;
+    const jwsPurchaseOrder = data.jwsPurchaseOrder;
+    if (!jwsPurchaseOrder) {
+      return undefined;
+    }
+    const purchaseOrder: string = JWSUtil.decodeJwsObj(jwsPurchaseOrder);
+    if (!purchaseOrder) {
+      return undefined;
+    }
+    const purchaseOrderPayload: PurchaseOrderPayload = JSON.parse(purchaseOrder) as PurchaseOrderPayload;
+
+    return purchaseOrderPayload;
+  }
+
   static queryPurchase(uiContext: common.UIAbilityContext): Promise<MemberList> {
-    // 查询是否有当前用户的会员购买记录
     let memberList: MemberList = new MemberList();
     let autoRenewParam: iap.QueryPurchasesParameter = {
       productType: iap?.ProductType.AUTORENEWABLE,
@@ -31,7 +74,7 @@ export class MemberStatusUtil {
       nonRenewPromise = iap?.queryPurchases(uiContext, nonRenewParam);
       nonConsumePromise = iap?.queryPurchases(uiContext, nonConsumeParam);
     } catch (e) {
-      hilog.error(0xFF00, 'MemberShip',`query purchase failed with error ${JSON.stringify(e)}`);
+      UtilLog.error(`query purchase failed with error ${JSON.stringify(e)}`);
     }
 
     return Promise.all([autoRenewPromise, nonRenewPromise, nonConsumePromise]).then((res) => {
@@ -43,7 +86,7 @@ export class MemberStatusUtil {
       memberList.nonConsumeList = nonConsumePurchasedList;
       return memberList;
     }).catch((err: BusinessError) => {
-      hilog.error(0xFF00, 'MemberShip',
+      UtilLog.error(0xFF00, 'MemberShip',
         `Failed to query purchase record. Code is ${err.code}, message is ${err.message}`);
       return memberList;
     });

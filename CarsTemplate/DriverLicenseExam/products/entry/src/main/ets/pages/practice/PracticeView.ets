@@ -42,7 +42,7 @@ export struct PracticeView {
     }
     .title(this.navTitle)
     .menus(this.toolBar())
-    .backgroundColor('#F1F3F5')
+    .backgroundColor($r('sys.color.background_secondary'))
     .padding({
       top: this.getUIContext().px2vp(AppStorage.get('topRectHeight') || 0),
     })
@@ -80,7 +80,7 @@ export struct PracticeView {
   @Builder
   navTitle() {
     Text(this.title)
-      .fontColor('#E5000000')
+      .fontColor($r('sys.color.font_primary'))
       .fontSize(this.getUIContext().px2fp(64))
       .fontWeight(FontWeight.Bold)
       .height(CommonConstants.FULL_HEIGHT)
@@ -109,7 +109,7 @@ export struct PracticeView {
     .bindSheet($$this.isShowSetting, showSettingSheet(), {
       height: 200,
       title: { title: '设置' },
-      backgroundColor: Color.White,
+      backgroundColor: $r('sys.color.comp_background_primary'),
     });
   }
 }

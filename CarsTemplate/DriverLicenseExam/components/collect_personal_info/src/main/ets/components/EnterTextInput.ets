@@ -58,7 +58,7 @@ export struct EnterTextInput {
             .type(this.inputType)
             .fontSize(this.valueFg)
             .fontColor($r('sys.color.font_primary'))
-            .backgroundColor($r('sys.color.background_primary'))
+            .backgroundColor($r('sys.color.comp_background_tertiary'))
             .cancelButton({
               style: this.isKeyboardPopUp ? CancelButtonStyle.INPUT : CancelButtonStyle.INVISIBLE,
               icon: { size: 24 },

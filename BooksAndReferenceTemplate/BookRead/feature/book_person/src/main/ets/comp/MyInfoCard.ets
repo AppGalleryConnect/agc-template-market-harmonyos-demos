@@ -1,8 +1,11 @@
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { BusinessError, emitter } from '@kit.BasicServicesKit';
-import { Constants, TCRouter, UserInfoModel, UserInfoUtil } from 'common';
-import { UserInfo } from 'base_common';
+import { Constants,
+  FontModel,
+  MinorsMode, MinorsProtectionUtils, TCRouter, UserInfoModel, UserInfoUtil } from 'common';
+import { UserInfo,fp2pxUtil } from 'base_common';
 import { AvatarIcon, SelectAvatarCard } from './SelectAvatarCard';
+import { AppStorageV2 } from '@kit.ArkUI';
 
 @ComponentV2
 export struct MyInfoCard {
@@ -14,6 +17,9 @@ export struct MyInfoCard {
   @Local level: number = 1
   @Local levelString: string = 'LV0'
   @Local userInfoModel: UserInfoModel = UserInfoUtil.getUserInfoModel();
+  @Local minorsMode: MinorsMode =
+    AppStorageV2.connect(MinorsMode, 'isMinorsMode', () => new MinorsMode(MinorsProtectionUtils.getMinorsMode()))!
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
 
   aboutToAppear(): void {
     // 初始化用户信息
@@ -39,7 +45,6 @@ export struct MyInfoCard {
     const userInfoFromStorage: UserInfo = AppStorage.get('userInfo') as UserInfo;
     if (userInfoFromStorage) {
       this.userInfoModel.updateFromUserInfo(userInfoFromStorage);
-      console.log('userInfo' + JSON.stringify(this.userInfoModel))
       this.isLogin = true;
       this.userName = this.userInfoModel.nickName || '';
       this.userTel = this.userInfoModel.telephone || '';
@@ -94,16 +99,15 @@ export struct MyInfoCard {
     Stack() {
       Row() {
         Row({ space: 4 }) {
-          Text('超10万+精品图书畅读').fontSize(14)
-          Image($r('app.media.arrow_right')).width(12)
+          Text('超10万+精品图书畅读󰃙').fontSize(this.fontModel.getFg(14))
         }
         .alignItems(VerticalAlign.Top)
 
         Button($r('app.string.member_center'), { controlSize: ControlSize.SMALL })
-          .fontSize($r('sys.float.Body_M'))
+          .fontSize(fp2pxUtil(14))
           .fontWeight(FontWeight.Medium)
-          .fontColor($r('sys.color.font_on_primary'))
-          .backgroundColor('#E84026')
+          .fontColor($r('sys.color.font_primary'))
+          .backgroundColor('#D3B685')
           .onClick(() => {
             if (!this.isLogin) {
               this.showLoginPrompt();
@@ -150,10 +154,15 @@ export struct MyInfoCard {
           Column() {
             Row({ space: 4 }) {
               Text(this.userName)
-                .fontSize(24)
+                .fontSize(this.fontModel.getFg(24))
                 .fontWeight(500)
                 .height(32)
                 .textAlign(TextAlign.Start)
+                .textOverflow({ overflow: TextOverflow.Ellipsis })
+                .maxLines(1)
+                .constraintSize({
+                  maxWidth: '70%'
+                })
             }
             .height(32)
             .width(Constants.FULL_SIZE)
@@ -162,7 +171,7 @@ export struct MyInfoCard {
               Image($r('app.media.ic_public_mobile_phone'))
                 .height(16)
               Text(this.userTel)
-                .fontSize(12)
+                .fontSize(this.fontModel.getFg(12))
             }
             .height(32)
             .width(Constants.FULL_SIZE)
@@ -174,7 +183,7 @@ export struct MyInfoCard {
         } else {
           Row() {
             Text('去登录')
-              .fontSize(24)
+              .fontSize(this.fontModel.getFg(24))
               .fontWeight(500)
               .height(32)
               .width(Constants.FULL_SIZE)
@@ -191,9 +200,11 @@ export struct MyInfoCard {
       .width('100%')
       .justifyContent(FlexAlign.Start)
 
-      this.membershipBuilder()
+      if (!this.minorsMode.isMinorsMode){
+        this.membershipBuilder()
+      }
     }
-    .height(150)
+    .height(this.minorsMode.isMinorsMode ? 90 : 150)
     .justifyContent(FlexAlign.SpaceBetween)
     .backgroundColor($r('sys.color.comp_background_list_card'))
     .borderRadius(16)

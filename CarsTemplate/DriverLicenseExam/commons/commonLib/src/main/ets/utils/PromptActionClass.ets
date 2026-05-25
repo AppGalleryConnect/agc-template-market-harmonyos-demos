@@ -1,6 +1,7 @@
 import { BusinessError } from '@kit.BasicServicesKit';
 import { ComponentContent, promptAction } from '@kit.ArkUI';
 import { UIContext } from '@ohos.arkui.UIContext';
+import { LogUtil } from './LogUtil';
 
 export class PromptActionClass {
   static ctx: UIContext;
@@ -23,12 +24,12 @@ export class PromptActionClass {
     if (PromptActionClass.contentNode !== null) {
       PromptActionClass.ctx.getPromptAction().openCustomDialog(PromptActionClass.contentNode, PromptActionClass.options)
         .then(() => {
-          console.info('OpenCustomDialog complete.')
+          LogUtil.info('OpenCustomDialog complete.')
         })
         .catch((error: BusinessError) => {
           let message = (error as BusinessError).message;
           let code = (error as BusinessError).code;
-          console.error(`OpenCustomDialog args error code is ${code}, message is ${message}`);
+          LogUtil.error(`OpenCustomDialog args error code is ${code}, message is ${message}`);
         })
     }
   }
@@ -37,12 +38,12 @@ export class PromptActionClass {
     if (PromptActionClass.contentNode !== null) {
       PromptActionClass.ctx.getPromptAction().closeCustomDialog(PromptActionClass.contentNode)
         .then(() => {
-          console.info('CloseCustomDialog complete.')
+          LogUtil.info('CloseCustomDialog complete.')
         })
         .catch((error: BusinessError) => {
           let message = (error as BusinessError).message;
           let code = (error as BusinessError).code;
-          console.error(`CloseCustomDialog args error code is ${code}, message is ${message}`);
+          LogUtil.error(`CloseCustomDialog args error code is ${code}, message is ${message}`);
         })
     }
   }
@@ -51,12 +52,12 @@ export class PromptActionClass {
     if (PromptActionClass.contentNode !== null) {
       PromptActionClass.ctx.getPromptAction().updateCustomDialog(PromptActionClass.contentNode, options)
         .then(() => {
-          console.info('UpdateCustomDialog complete.')
+          LogUtil.info('UpdateCustomDialog complete.')
         })
         .catch((error: BusinessError) => {
           let message = (error as BusinessError).message;
           let code = (error as BusinessError).code;
-          console.error(`UpdateCustomDialog args error code is ${code}, message is ${message}`);
+          LogUtil.error(`UpdateCustomDialog args error code is ${code}, message is ${message}`);
         })
     }
   }

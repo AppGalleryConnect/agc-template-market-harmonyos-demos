@@ -6,7 +6,7 @@
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
-    "@cashier_alipay/cashiersdk": "^15.8.29",
-    "@tencent/wechat_open_sdk": "^1.0.7"
+    "@cashier_alipay/cashiersdk": "15.8.29",
+    "@tencent/wechat_open_sdk": "1.0.7"
   }
 }

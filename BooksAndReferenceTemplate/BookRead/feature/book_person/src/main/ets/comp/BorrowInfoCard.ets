@@ -5,11 +5,18 @@ import { BorrowInfo, BorrowStatus, Constants, StatusInfo, TCRouter, TimeUtils } 
 export struct BorrowInfoCard {
   @Param @Require info: BorrowInfo;
   private context: Context = this.getUIContext().getHostContext() as Context;
-
+  private resourceManager = this.context.resourceManager;
   aboutToAppear(): void {
     this.info.statusInfo = new StatusInfo(this.info.status);
   }
-
+  private getString(name: string) {
+    try {
+      return this.resourceManager.getStringByNameSync(name);
+    } catch (error) {
+      console.error('BorrowInfoCard', ` getString error = ${JSON.stringify(error)}`)
+      return name;
+    }
+  }
   build() {
     Column() {
       Column() {
@@ -30,8 +37,7 @@ export struct BorrowInfoCard {
       }
 
       Row() {
-        Text(`${this.context.resourceManager
-          .getStringByNameSync('borrow_time')}: ${TimeUtils.timestamp2YMD(this.info.borrowBegin)}`)
+        Text(`${this.getString('borrow_time')}: ${TimeUtils.timestamp2YMD(this.info.borrowBegin)}`)
           .fontSize($r('sys.float.Body_L'))
           .fontColor($r('sys.color.font_primary'))
       }
@@ -40,8 +46,7 @@ export struct BorrowInfoCard {
       .padding({ top: 8, bottom: 8 })
 
       Row() {
-        Text(`${this.context.resourceManager
-          .getStringByNameSync('borrow_deadline')}: ${TimeUtils.timestamp2YMD(this.info.borrowBegin)}-${TimeUtils.timestamp2YMD(this.info.borrowDeadline)}`)
+        Text(`${this.getString('borrow_deadline')}: ${TimeUtils.timestamp2YMD(this.info.borrowBegin)}-${TimeUtils.timestamp2YMD(this.info.borrowDeadline)}`)
           .fontSize($r('sys.float.Body_L'))
           .fontColor($r('sys.color.font_primary'))
       }
@@ -50,8 +55,7 @@ export struct BorrowInfoCard {
 
       if (this.info.status === BorrowStatus.RETURNED) {
         Row() {
-          Text(`${this.context.resourceManager
-            .getStringByNameSync('borrow_return_time')}: ${TimeUtils.timestamp2YMD(this.info.borrowEnd)}`)
+          Text(`${this.getString('borrow_return_time')}: ${TimeUtils.timestamp2YMD(this.info.borrowEnd)}`)
             .fontSize($r('sys.float.Body_L'))
             .fontColor($r('sys.color.font_primary'))
         }
@@ -60,7 +64,7 @@ export struct BorrowInfoCard {
       }
 
       Row() {
-        Text(`${this.context.resourceManager.getStringByNameSync('borrow_count')}: ${this.info.borrowNum}`)
+        Text(`${this.getString('borrow_count')}: ${this.info.borrowNum}`)
           .fontSize($r('sys.float.Body_L'))
           .fontColor($r('sys.color.font_primary'))
       }

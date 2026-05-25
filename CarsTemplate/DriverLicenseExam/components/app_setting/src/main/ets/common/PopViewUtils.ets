@@ -5,8 +5,13 @@ enum PopViewShowType {
   OPEN
 }
 
-async function getUIContext() {
-  return (await (getContext() as common.UIAbilityContext).windowStage.getMainWindow()).getUIContext();
+async function getUIContext(): Promise<UIContext | undefined> {
+  try {
+    const mainWindow = await (getContext() as common.UIAbilityContext).windowStage.getMainWindow();
+    return mainWindow.getUIContext();
+  } catch (_e) {
+    return undefined;
+  }
 }
 
 interface PopViewModel {
@@ -19,7 +24,7 @@ interface PopViewModel {
  */
 export class PopViewUtils {
   private static popShare: PopViewUtils;
-  private static uiContext: UIContext;
+  private static uiContext: UIContext | undefined;
   private infoList: PopViewModel[] = [];
   private sheetList: PopViewModel[] = [];
 

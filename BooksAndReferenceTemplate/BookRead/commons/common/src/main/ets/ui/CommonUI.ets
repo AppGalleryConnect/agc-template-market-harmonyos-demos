@@ -1,7 +1,28 @@
 import { Constants } from '../constant/Constants'
 import { TCRouter } from '../comp/TCRouter'
-import { BreakpointStorage, BreakpointSystem, BreakpointTypeEnum, DialogParams, TSearch } from '../../../../Index';
-import { SymbolGlyphModifier } from '@kit.ArkUI';
+import {
+  AppLinkingRouter,
+  BookApi,
+  BookInfo,
+  BreakpointStorage,
+  BreakpointSystem,
+  BreakpointTypeEnum,
+  DialogParams,
+  GetBookApiRsp,
+  GroupBook,
+  TSearch
+} from '../../../../Index';
+import { AppStorageV2, LengthMetrics, SymbolGlyphModifier } from '@kit.ArkUI';
+import { common } from '@kit.AbilityKit';
+import { fileUri, picker } from '@kit.CoreFileKit';
+import { fileIo as fs } from '@kit.CoreFileKit';
+import { bookParser } from '@kit.ReaderKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+import { image } from '@kit.ImageKit';
+import { scanBarcode, scanCore } from '@kit.ScanKit';
+import { url } from '@kit.ArkTS';
+import { Logger } from '@hw-agconnect/ui-base';
+import { UserInfo, fp2pxUtil } from 'base_common';
 
 function getFreeText(isFree?: string): string | null {
   switch (isFree) {
@@ -30,24 +51,49 @@ function getFreeColor(isFree?: string): string | null {
 }
 
 @Builder
-export function BookCover(image?: PixelMap | ResourceStr | DrawableDescriptor, isFree?: string) {
+export function BookCover(image?: PixelMap | ResourceStr | DrawableDescriptor, height: number = 144,
+  width: number = 104, isFree?: string) {
   Stack({ alignContent: Alignment.TopEnd }) {
-    Image($r(image?.toString()))
-      .height(144)
-      .width(104)
+    Image(typeof image === 'string' ? $r(image) : image)
+      .height(height)
+      .width(width)
       .objectFit(ImageFit.Auto)
       .borderRadius(10)
+      .draggable(false)
     Column() {
       Text(getFreeText(isFree))
         .fontSize(10)
         .fontColor(Color.White)
         .textAlign(TextAlign.Center)
-        .height(20)
-        .width(35)
+        .height(16)
+        .width(32)
         .backgroundColor(getFreeColor(isFree))
         .borderRadius(10)
     }
     .padding(8)
+  }
+}
+
+@Builder
+export function BookCoverSM(image?: PixelMap | ResourceStr | DrawableDescriptor, isFree?: string) {
+  Stack({ alignContent: Alignment.TopEnd }) {
+    Image(typeof image === 'string' ? $r(image) : image)
+      .height(90)
+      .width(68)
+      .objectFit(ImageFit.Cover)
+      .borderRadius(8)
+      .draggable(false)
+    Column() {
+      Text(getFreeText(isFree))
+        .fontSize(10)
+        .fontColor(Color.White)
+        .textAlign(TextAlign.Center)
+        .height(16)
+        .width(36)
+        .backgroundColor(getFreeColor(isFree))
+        .borderRadius(14)
+    }
+    .padding(4)
   }
 }
 
@@ -79,12 +125,13 @@ export function BookLikeCover(image?: PixelMap | ResourceStr | DrawableDescripto
 export function BookGroupCover(image?: PixelMap | ResourceStr | DrawableDescriptor) {
 
   Stack() {
-    Image($r(image?.toString()))
+    Image(typeof image === 'string' ? $r(image) : image)
       .width('100%')
       .height('100%')
       .objectFit(ImageFit.Auto)
       .borderRadius(5)
       .backgroundColor(Color.White)
+      .draggable(false)
 
   }
 }
@@ -103,6 +150,7 @@ export struct ReturnButton {
   }
 }
 
+const TAG = '[CommonUI]';
 
 @ComponentV2
 export struct NavHeaderBar {
@@ -119,10 +167,16 @@ export struct NavHeaderBar {
   @Param isSearch: boolean = false;
   // 书架页title
   @Param isShelf: boolean = false;
+  @Param isRecord: boolean = false;
   windowTopHeight: number = AppStorage.get('windowTopHeight') as number || 38.77
   @Consumer('isGrid') isGrid: boolean = true;
   @Consumer('isDeleteShelf') isDeleteShelf: boolean = false;
+  @Consumer('isDeleteRecord') isDeleteRecord: boolean = false;
   @Local isShown: boolean = false;
+  @Event quit: () => void = () => {
+  }
+  @Event refreshData: () => void = () => {
+  }
   @Event gridSheet: () => void = () => {
     this.isGrid = true;
     this.isShown = false;
@@ -131,7 +185,58 @@ export struct NavHeaderBar {
     this.isGrid = false;
     this.isShown = false;
   }
-  @Event trashSheet: () => void = () => {
+  @Event inputBook: () => void = () => {
+    let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+    // 保存书籍到应用沙箱
+    let documentPicker = new picker.DocumentViewPicker(context);
+    const documentSelectOptions = new picker.DocumentSelectOptions();
+    documentSelectOptions.fileSuffixFilters = ['图书|.epub'];
+    documentSelectOptions.maxSelectNumber = 1;
+    documentPicker.select(documentSelectOptions).then(async (documentSelectResult: string[]) => {
+      const srcPath: string = new fileUri.FileUri(documentSelectResult[0]).path
+      let pathDir = (this.getUIContext().getHostContext() as Context).filesDir
+      let destPath: string =
+        pathDir + Constants.FILE_SPLIT + Date.now() + Constants.EPUB_FILE_SUFFIX;
+      let file: fs.File = null!;
+      try {
+        file = fs.openSync(destPath, fs.OpenMode.CREATE);
+        fs.copyFileSync(srcPath, destPath)
+      } catch (e) {
+      } finally {
+        fs.closeSync(file);
+      }
+      // 解析书籍信息并加入书架
+      let defaultHandler = await bookParser.getDefaultHandler(destPath);
+      let bookInfo = defaultHandler.getBookInfo();
+      if (bookInfo) {
+        const favRsp = await BookApi.getBooksShelfGroup('favBooks', Constants.API_GET_BOOK_FAVOURITE_PATH, '');
+        let favBooks: GroupBook[] = favRsp.books;
+        let temp: GroupBook = new GroupBook()
+        let book = new BookInfo()
+        temp.isSelect = false;
+        temp.groupName = ''
+        temp.bookName = bookInfo.bookTitle || '';
+        book.id = Date.now().toString()
+        book.name = bookInfo.bookTitle || '';
+        book.author = bookInfo?.bookCreator || '';
+        book.isDownload = true
+        book.localPath = destPath
+        let buffer = defaultHandler.getResourceContent(-1, bookInfo.bookCoverImage);
+        let imageSource: image.ImageSource = image.createImageSource(buffer);
+        book.coverUrl = await imageSource.createPixelMap();
+        temp.singleBook = book
+        favBooks.push(temp);
+        AppStorage.set('favBooks', favBooks);
+        imageSource.release();
+      }
+      this.refreshData()
+    }).catch((err: BusinessError) => {
+      console.error(`Invoke documentViewPicker.select failed, code is ${err.code}, message is ${err.message}`);
+    });
+
+
+  }
+  @Event bulkManage: () => void = () => {
     if (this.isDeleteShelf === false) {
       this.isDeleteShelf = true;
     } else {
@@ -139,32 +244,112 @@ export struct NavHeaderBar {
     }
     this.isShown = false;
   }
+  @Event recordManage: () => void = () => {
+    if (this.isDeleteRecord === false) {
+      this.isDeleteRecord = true;
+    } else {
+      this.isDeleteRecord = false;
+    }
+  }
+  @Event scan: () => void = () => {
+    // 定义扫码参数options
+    let options: scanBarcode.ScanOptions = {
+      scanTypes: [scanCore.ScanType.ALL],
+      enableMultiMode: true,
+      enableAlbum: true
+    };
+    try {
+      // 可调用getHostContext接口获取当前页面关联的Context
+      scanBarcode.startScanForResult(this.getUIContext().getHostContext(), options,
+        (error: BusinessError, result: scanBarcode.ScanResult) => {
+          if (error) {
+            console.error('[Scan CPSample]',
+              `Failed to get ScanResult by callback with options. Code: ${error.code}, message: ${error.message}`);
+            return;
+          }
+          // 解析码值结果跳转应用服务页
+          this.handleAppLinking(result.originalValue)
+          console.info('[Scan CPSample]',
+            `Succeeded in getting ScanResult by callback with options, result is ${JSON.stringify(result)}`);
+        })
+    } catch (error) {
+      console.error('[Scan CPSample]',
+        `Failed to start the scanning service. Code:${error.code}, message: ${error.message}`);
+    }
+  }
   @Local gridIconModifier: SymbolGlyphModifier = new SymbolGlyphModifier($r('sys.symbol.square_grid_2x2'));
+  @Local textIconModifier: SymbolGlyphModifier = new SymbolGlyphModifier($r('sys.symbol.arrow_right_folder_circle'))
+  @Local mngIconModifier: SymbolGlyphModifier = new SymbolGlyphModifier($r('sys.symbol.square_and_pencil'))
+  @Local scanIconModifier: SymbolGlyphModifier = new SymbolGlyphModifier($r('sys.symbol.line_viewfinder'))
   @Local listIconModifier: SymbolGlyphModifier = new SymbolGlyphModifier($r('sys.symbol.list_square'));
-  @Local trashIconModifier: SymbolGlyphModifier = new SymbolGlyphModifier($r('sys.symbol.trash'));
   @Local curBreakpoint: BreakpointStorage = BreakpointSystem.currentBreakpoint
+  @BuilderParam editBuilder?: () => void;
+
+  async handleAppLinking(uri: string) {
+    /**
+     * 处理扫码中获取传入的链接信息
+     * 例如传入的url为：https://linking.xiaobingtang.cn/BookRead?id=1
+     */
+    if (uri) {
+      try {
+        const urlObject = url.URL.parseURL(uri);
+        const bookId = urlObject.params.get('id');
+        if (urlObject.pathname.includes('BookRead') && bookId) {
+          let bookinfo: BookInfo | null = null;
+          const rsp: GetBookApiRsp = await BookApi.getBookList();
+          const books = rsp.books;
+          for (let index = 0; index < books.length; index++) {
+            if (books[index].id === bookId) {
+              bookinfo = books[index];
+              break;
+            }
+          }
+          TCRouter.push(Constants.READ_KIT_ROUTER, bookinfo);
+        }
+        Logger.info(TAG, `Success to handle applinking want. pathname: ${urlObject.pathname}, bookId: ${bookId}`)
+      } catch (e) {
+        Logger.error(TAG, `Failed to handle applinking want. uri: ${uri}, Code: ${e.code}, message: ${e.message}`);
+      }
+    }
+  }
 
   @Builder
   selectMenu() {
     Menu() {
-      MenuItemGroup({ header: '书籍管理' }) {
+      MenuItemGroup({ header: '书架管理' }) {
         MenuItem({
-          symbolStartIcon: this.gridIconModifier,
-          content: '宫格模式',
-          builder: this.gridSheet
+          symbolStartIcon: this.isGrid ? this.gridIconModifier : this.listIconModifier,
+          content: this.isGrid ? '宫格模式' : '列表模式',
+          builder: this.isGrid ? this.listSheet : this.gridSheet
         })
+          .contentFont({ size: fp2pxUtil(16) })
         MenuItem({
-          symbolStartIcon: this.listIconModifier,
-          content: '列表模式',
-          builder: this.listSheet
+          symbolStartIcon: this.textIconModifier,
+          content: '导入文本',
+          builder: this.inputBook
         })
+          .contentFont({ size: fp2pxUtil(16) })
         MenuItem({
-          symbolStartIcon: this.trashIconModifier,
-          content: '删除',
-          builder: this.trashSheet
+          symbolStartIcon: this.mngIconModifier,
+          content: '批量管理',
+          builder: this.bulkManage
         })
+          .contentFont({ size: fp2pxUtil(16) })
+        MenuItem({
+          symbolStartIcon: this.scanIconModifier,
+          content: '扫一扫',
+          builder: this.scan
+        })
+          .contentFont({ size: fp2pxUtil(16) })
       }
     }
+    .menuItemDivider({
+      strokeWidth: LengthMetrics.px(1),
+      color: $r('sys.color.comp_divider'),
+      startMargin: LengthMetrics.vp(44),
+      endMargin: LengthMetrics.vp(16),
+      mode: DividerMode.FLOATING_ABOVE_MENU
+    })
     .width(224)
   }
 
@@ -177,13 +362,17 @@ export struct NavHeaderBar {
               .width(40)
               .height(40)
               .onClick(() => {
-                TCRouter.pop();
+                if (this.isDeleteShelf) {
+                  this.quit();
+                } else {
+                  TCRouter.pop();
+                }
               })
               .margin({ right: 12 })
           }
           Text(this.title)
             .fontColor($r('sys.color.font_primary'))
-            .fontSize(this.isMainPage ? $r('sys.float.Title_M') : $r('sys.float.Title_S'))
+            .fontSize(this.isMainPage ? fp2pxUtil(24) : fp2pxUtil(20))
             .fontWeight(FontWeight.Medium)
         }
 
@@ -192,9 +381,10 @@ export struct NavHeaderBar {
             TSearch({ widthLength: '100%' })
               .margin({ left: 24, right: 8 })
               .layoutWeight(1)
-            SymbolGlyph($r('sys.symbol.clock'))
+            SymbolGlyph($r('sys.symbol.magnifyingglass'))
               .fontSize($r('sys.float.Title_M'))
               .fontColor([$r('sys.color.icon_primary')])
+              .margin({ right: 8 })
               .width(40)
               .height(40)
               .borderRadius(1000)
@@ -209,7 +399,7 @@ export struct NavHeaderBar {
           .layoutWeight(this.curBreakpoint.value === BreakpointTypeEnum.SM ? 1 : 0)
           .width(this.curBreakpoint.value === BreakpointTypeEnum.SM ? 'auto' : '50%')
         }
-        if (this.isShelf) {
+        if (this.isShelf && !this.isDeleteShelf) {
           Row() {
             SymbolGlyph($r('sys.symbol.magnifyingglass'))
               .fontSize($r('sys.float.Title_M'))
@@ -223,7 +413,7 @@ export struct NavHeaderBar {
               .onClick(() => {
                 TCRouter.push(Constants.SEARCH_ROUTE);
               })
-            SymbolGlyph($r('sys.symbol.bookshelf'))
+            SymbolGlyph($r('sys.symbol.dot_grid_2x2'))
               .fontSize($r('sys.float.Title_M'))
               .fontColor([$r('sys.color.icon_primary')])
               .width(40)
@@ -240,6 +430,28 @@ export struct NavHeaderBar {
                 }
               })
 
+          }
+        }
+        if (this.editBuilder) {
+          Row() {
+            this.editBuilder()
+          }
+        }
+
+        if (this.isRecord) {
+          Row() {
+            SymbolGlyph(this.isDeleteRecord ? $r('sys.symbol.square_and_pencil_fill') :
+              $r('sys.symbol.square_and_pencil'))
+              .fontSize(fp2pxUtil(24))
+              .fontColor(this.isDeleteRecord ? [$r('sys.color.multi_color_08')] : [$r('sys.color.icon_primary')])
+              .width(40)
+              .height(40)
+              .borderRadius(1000)
+              .padding(8)
+              .backgroundColor($r('sys.color.comp_background_tertiary'))
+              .onClick(() => {
+                this.recordManage();
+              })
           }
         }
       }
@@ -264,7 +476,6 @@ export struct NavHeaderBar {
  * */
 @Builder
 export function dialogView(params: DialogParams) {
-
   Column() {
     Column() {
       Text(params.title)
@@ -343,4 +554,84 @@ export function dialogView(params: DialogParams) {
   .backgroundColor($r('sys.color.comp_background_tertiary'))
   .backgroundBlurStyle(BlurStyle.COMPONENT_ULTRA_THICK)
   .borderRadius(16);
+}
+
+@ComponentV2
+export struct AddToBookShelf {
+  @Param @Require book: BookInfo
+  @Local isAddSuccess: boolean = false;
+  @Local isLogin: boolean = false;
+
+  async aboutToAppear(): Promise<void> {
+    this.isLogin = AppStorage.get<UserInfo>('userInfo') !== undefined;
+    const rsp = await BookApi.getBooksShelfGroup('favBooks', Constants.API_GET_BOOK_FAVOURITE_PATH, '');
+    let books: GroupBook[] = rsp.books;
+    books.forEach((book) => {
+      if (book.singleBook?.id === this.book.id && this.isLogin) {
+        this.isAddSuccess = true;
+        return;
+      }
+    });
+  }
+
+  async addBook2Shelf(isAdd: boolean, toast: ResourceStr) {
+    const favRsp = await BookApi.getBooksShelfGroup('favBooks', Constants.API_GET_BOOK_FAVOURITE_PATH, '');
+    const hisRsp = await BookApi.getBooksShelfList('favBooks', Constants.API_GET_BOOK_FAVOURITE_PATH, '')
+    let favBooks: GroupBook[] = favRsp.books;
+    let hisBooks: BookInfo[] = hisRsp.books
+    if (isAdd) {
+      let temp: GroupBook = new GroupBook()
+      temp.isSelect = false;
+      temp.groupName = this.book.groupName
+      temp.bookName = this.book.name
+      temp.singleBook = this.book
+      favBooks.push(temp);
+      AppStorage.set('favBooks', favBooks);
+      this.isAddSuccess = true;
+    } else {
+      let index = hisBooks.findIndex(book => this.book.id === book.id)
+      let fIndex = favBooks.findIndex(book => this.book.id === book.singleBook?.id)
+      for (let i = 0; i < favBooks.length; i++) {
+        let tmp = favBooks[i].groupBooks?.findIndex(book => this.book.id === book.id) || 0
+        if (tmp !== -1) {
+          this.isAddSuccess = false;
+          favBooks[i].groupBooks?.splice(tmp, 1)
+        }
+      }
+      if (index !== -1) {
+        hisBooks.splice(index, 1);
+        this.isAddSuccess = false;
+      }
+      if (fIndex !== -1) {
+        favBooks.splice(fIndex, 1);
+        this.isAddSuccess = false;
+      }
+      AppStorage.set('favBooks', favBooks);
+      AppStorage.set('historyBooks', hisBooks)
+    }
+    this.getUIContext().getPromptAction().showToast({
+      message: toast,
+      duration: 2000
+    });
+  }
+
+  build() {
+    Row() {
+      SymbolGlyph($r('sys.symbol.bookshelf_badge_plus'))
+        .fontSize(24)
+        .opacity(this.isAddSuccess ? 0.4 : 1)
+        .enabled(!this.isAddSuccess)
+        .onClick(async () => {
+          const userInfo = AppStorage.get<UserInfo>('userInfo');
+          if (userInfo === undefined) {
+            TCRouter.push(Constants.LOGIN_ROUTE);
+          } else if (!this.isAddSuccess) {
+            await this.addBook2Shelf(true, $r('app.string.add_shelf_success'));
+          } else if (this.isAddSuccess) {
+            //   再次点击从书架删除
+            await this.addBook2Shelf(false, $r('app.string.del_shelf_success'));
+          }
+        })
+    }
+  }
 }

@@ -6,7 +6,7 @@
     },
     {
       "name": "agcit_huawei_book_read",
-      "value": "2.1.3"
+      "value": "2.1.4"
     },
     {
       "name": "agcittype_huawei_book_read",
@@ -14,7 +14,7 @@
     },
     {
       "name": "agcitkid_huawei_book_read",
-      "value": "agcit_huawei_book_read_reader_tool_bar/1.0.4,agcit_huawei_book_read_swiper_card/1.0.3,agcit_huawei_book_read_incentive_ad/1.0.3,agcit_huawei_book_read_custom_push/1.0.3"
+      "value": "agcit_huawei_book_read_reader_tool_bar/1.0.4,agcit_huawei_book_read_swiper_card/1.0.3,agcit_huawei_book_read_incentive_ad/1.0.3,agcit_huawei_book_read_custom_push/1.0.3,agcit_huawei_recipes_aggregated_ads/1.0.3,agcit_huawei_common_share/1.0.1,agcit_huawei_common_customer_service_chat/1.0.0,agcit_huawei_common_dial_panel/1.0.1,agcit_huawei_common_image_preview/1.0.0,agcit_huawei_common_membership/1.0.3,agcit_huawei_common_privacy_agreement/1.0.1"
     }
   ]
 }

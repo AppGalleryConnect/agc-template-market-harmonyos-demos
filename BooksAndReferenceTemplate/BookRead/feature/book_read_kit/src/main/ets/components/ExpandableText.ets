@@ -1,6 +1,8 @@
 import curves from '@ohos.curves';
 import { BusinessError } from '@ohos.base';
 import display from '@ohos.display';
+import { FontModel } from 'common';
+import { AppStorageV2 } from '@kit.ArkUI';
 
 @ComponentV2
 export struct ExpandableText {
@@ -13,22 +15,20 @@ export struct ExpandableText {
   @Local lines: number = 4;
   @Local collapseText: string = '展开';
   @Local isExpandable: boolean = false;
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
 
   aboutToAppear() {
     const estimatedCharsPerLine = 20;
     const maxDisplayableChars = estimatedCharsPerLine * this.lines;
 
     this.isExpandable = this.content.length > maxDisplayableChars;
-    
-    console.log(`[ExpandableText] 文本字符数：${this.content.length}, 4行最大字符数：${maxDisplayableChars}, 是否需要展开：${this.isExpandable}`);
-
     this.performPreciseMeasurement();
   }
 
   private performPreciseMeasurement() {
     const textWidth = this.getUIContext().getMeasureUtils().measureText({
       textContent: this.content,
-      fontSize: this.fontSize
+      fontSize: this.fontModel.getFg(this.fontSize)
     });
     
     display.getAllDisplays().then((data: Array<display.Display>) => {
@@ -50,7 +50,7 @@ export struct ExpandableText {
       if (this.isExpandable) {
         Column() {
           Text(this.content)
-            .fontSize(this.fontSize)
+            .fontSize(this.fontModel.getFg(this.fontSize))
             .lineHeight(this.lineHeight)
             .fontColor(this.fontColor)
             .maxLines(this.lines)
@@ -59,7 +59,7 @@ export struct ExpandableText {
 
           Row() {
             Text(this.collapseText)
-              .fontSize(14)
+              .fontSize(this.fontModel.getFg(14))
               .fontColor($r('sys.color.ohos_id_color_text_hint'))
               .fontWeight(FontWeight.Medium)
               .padding({ top: 8, bottom: 4 })
@@ -89,7 +89,7 @@ export struct ExpandableText {
         .alignItems(HorizontalAlign.Start)
       } else {
         Text(this.content)
-          .fontSize(this.fontSize)
+          .fontSize(this.fontModel.getFg(this.fontSize))
           .lineHeight(this.lineHeight)
           .fontColor(this.fontColor)
           .width('100%')

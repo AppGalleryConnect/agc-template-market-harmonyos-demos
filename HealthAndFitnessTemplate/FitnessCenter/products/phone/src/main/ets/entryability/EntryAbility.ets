@@ -3,37 +3,96 @@ import { abilityAccessCtrl, AbilityConstant,
   Permissions, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { AppStorageV2, window } from '@kit.ArkUI';
-import { BusinessError } from '@kit.BasicServicesKit';
+import { BusinessError, emitter } from '@kit.BasicServicesKit';
+import {
+  BookingInfo,
+  BookingRecordInfo,
+  BookState,
+  CardInfo,
+  ConsumeType,
+  CourseBookingInfo,
+  CourseDetailModel,
+  DateUtil,
+  MockService,
+  UserCard,
+  getCalendarPermission,
+  EmitterConstant,
+  LoginState,
+  WindowUtil,
+  Logger
+} from 'external_interactions';
 import { ScreenPropStorage } from 'external_interactions'
 import { FileUtils } from 'feedback';
+import { formBindingData, FormExtensionAbility, formInfo, formProvider } from '@kit.FormKit';
+
+const TAG: string = '[EntryAbility]';
 
 export default class EntryAbility extends UIAbility {
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
-    hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onCreate');
+    Logger.info(TAG, 'Ability onCreate');
+  }
+
+  onNewWant(want: Want, launchParam: AbilityConstant.LaunchParam): void {
+    const navPathStack =  AppStorage.get('navPathStack') as NavPathStack;
+    if(want?.parameters?.params) {
+      let formId = want.parameters[formInfo.FormParam.IDENTITY_KEY] as string
+      const loginStateStorage: LoginState = AppStorageV2.connect(LoginState, 'LoginState', () => new LoginState())!;
+      if (!loginStateStorage.loginState) {
+        this.context.eventHub.emit('showToastEvent', { message: '请先关联账号' });
+        navPathStack.clear(false);
+        try {
+          emitter.emit(EmitterConstant.CLICK_BOOK_DETAIL)
+        } catch (e) {
+          Logger.error(TAG, `emitter emit failed. error: ${JSON.stringify(e)}`)
+        }
+        return;
+      }
+      try {
+        let params: Record<string, Object> = JSON.parse(want.parameters.params as string);
+        let targetPage: string = params.targetPage as string;
+        let currentName: string[] = navPathStack.getAllPathName()
+        if(currentName[currentName.length - 1] === 'course/BookingDetail') {
+          navPathStack.clear()
+        }
+        if (targetPage === 'course/ShowAllCourse' && MockService.userCourseList.length > 0) {
+          targetPage = 'course/UserCourses';
+        }
+        if (targetPage !== currentName[currentName.length - 1] ) {
+          navPathStack.pushPath({ name: targetPage });
+        }
+      } catch (e) {
+        Logger.error(TAG, `get form params failed. code: ${e.code}, message: ${e.message}`)
+      }
+    }
   }
 
   onDestroy(): void {
-    hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onDestroy');
+    Logger.info(TAG, 'Ability onDestroy');
   }
 
   onWindowStageCreate(windowStage: window.WindowStage): void {
     // Main window is created, set main page for this ability
-    hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onWindowStageCreate');
-
-    windowStage.loadContent('pages/Index', (err) => {
-      if (err.code) {
-        hilog.error(0x0000, 'testTag', 'Failed to load the content. Cause: %{public}s', JSON.stringify(err) ?? '');
-        return;
-      }
-      hilog.info(0x0000, 'testTag', 'Succeeded in loading the content.');
-    });
+    Logger.info(TAG, 'Ability onWindowStageCreate');
+    try {
+      windowStage.loadContent('pages/Index', (err) => {
+        if (err.code) {
+          Logger.error(TAG, 'Failed to load the content. Cause: %{public}s', JSON.stringify(err) ?? '');
+          return;
+        }
+        Logger.info(TAG, 'Succeeded in loading the content.');
+        // 初始化全局使用的uiContext
+        WindowUtil.init(windowClass.getUIContext());
+      });
+    } catch (e) {
+      Logger.error(TAG, 'Failed to load the content. Cause: %{public}s', JSON.stringify(e) ?? '');
+    }
     FileUtils.init(this.context);
     let windowClass: window.Window = windowStage.getMainWindowSync(); // 获取应用主窗口
     let isLayoutFullScreen = true;
     windowClass.setWindowLayoutFullScreen(isLayoutFullScreen).then(() => {
-      console.info('Succeeded in setting the window layout to full-screen mode.');
+      Logger.info(TAG, 'Succeeded in setting the window layout to full-screen mode.');
     }).catch((err: BusinessError) => {
-      console.error('Failed to set the window layout to full-screen mode. Cause:' + JSON.stringify(err));
+      Logger.error(TAG, 'Failed to set the window layout to full-screen mode. Cause:' + JSON.stringify(err));
     });
 
     let type = window.AvoidAreaType.TYPE_NAVIGATION_INDICATOR; // 导航条避让
@@ -52,16 +111,16 @@ export default class EntryAbility extends UIAbility {
 
   onWindowStageDestroy(): void {
     // Main window is destroyed, release UI related resources
-    hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onWindowStageDestroy');
+    Logger.info(TAG, 'Ability onWindowStageDestroy');
   }
 
   onForeground(): void {
     // Ability has brought to foreground
-    hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onForeground');
+    Logger.info(TAG, 'Ability onForeground');
   }
 
   onBackground(): void {
     // Ability has back to background
-    hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onBackground');
+    Logger.info(TAG, 'Ability onBackground');
   }
 }

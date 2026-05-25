@@ -1,7 +1,5 @@
-import { AppUtil, NotificationBasicOptions, NotificationUtil, WantUtil } from '@ohos_agcit/notes_utils';
+import { AppUtil, NotificationUtil, WantUtil } from '@ohos_agcit/notes_utils';
 import { SettingController } from '../controller/SettingController';
-import { promptAction } from '@kit.ArkUI';
-import { BusinessError } from '@kit.BasicServicesKit';
 import { setAutoColorMode, setDarkColorMode, setLightColorMode, ThemeController } from '../controller/ThemeController';
 import { ConfigurationConstant } from '@kit.AbilityKit';
 import { rightArrow } from 'login';
@@ -67,6 +65,18 @@ export struct SingleToggle {
 export struct NoticeToggle {
   settingController: SettingController = SettingController.instance
   @Param @Once @Require text: string;
+  @Local isNoticeGrant: boolean = false;
+
+  aboutToAppear(): void {
+    // 进入设置页时刷新一次系统通知权限，保证与系统设置一致
+    NotificationUtil.isNotificationEnabled().then((grant: boolean) => {
+      this.isNoticeGrant = grant;
+      this.settingController.isNoticeGrant = grant;
+    }).catch((_e: Error) => {
+      this.isNoticeGrant = false;
+      this.settingController.isNoticeGrant = false;
+    });
+  }
 
   build() {
     Row() {
@@ -74,29 +84,16 @@ export struct NoticeToggle {
         .textExtend()
         .fontColor($r('sys.color.font_primary'));
       Blank();
-      if (this.settingController.isNoticeGrant === false){
-        Text('已关闭')
-          .fontSize(14)
-          .fontColor($r('sys.color.font_tertiary'))
-          .onClick(() => {
-            // 清空桌面角标
-            NotificationUtil.clearBadge();
-            // 未授权点击，跳转到通知设置页面
-            WantUtil.toSetting('application_info_entry');
-          })
-      } else {
-        Toggle({
-          type: ToggleType.Switch,
-          isOn: this.settingController.noticeToggle,
-        })
-          .onClick(() => {
-            this.settingController.noticeToggle = !this.settingController.noticeToggle;
-            if (this.settingController.noticeToggle === true) {
-              this.settingController.noticeToggle = true;
-              this.send();
-            }
-          });
-      }
+      Toggle({
+        type: ToggleType.Switch,
+        // 只绑定“系统通知权限”状态：与首次安装弹窗、系统设置保持同步
+        isOn: this.isNoticeGrant,
+      })
+        .onClick(() => {
+          // 点击开关：统一跳转系统通知设置页，让用户直接调整系统权限
+          NotificationUtil.clearBadge();
+          WantUtil.toSetting('application_info_entry');
+        });
 
     }
     .borderRadius(16)
@@ -107,29 +104,6 @@ export struct NoticeToggle {
       left: 12,
       right: 12
     })
-  }
-
-  send(){
-    NotificationUtil.getDefaultWantAgent().then(wantAgent => {
-      let id = NotificationUtil.generateNotificationId(); //通知id
-      let basicOptions: NotificationBasicOptions = {
-        id: id,
-        title: '笔记模板',
-        text: '笔记模板发送了一条消息',
-        wantAgent: wantAgent
-      }
-      NotificationUtil.publishBasic(basicOptions).then((id) => {
-        // promptAction.showToast({
-        //   message: `通知发送成功，id: ${id}`
-        // })
-      }).catch((err: BusinessError) => {
-        this.getUIContext().getPromptAction().showToast({
-          message: `通知发送失败，${err.message}`
-        })
-      });
-    })
-
-
   }
 }
 

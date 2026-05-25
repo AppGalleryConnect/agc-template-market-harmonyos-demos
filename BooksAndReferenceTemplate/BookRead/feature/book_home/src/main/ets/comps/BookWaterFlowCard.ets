@@ -11,7 +11,7 @@ export struct BookWaterFlowCard {
     Column() {
       Column() {
         Column() {
-          BookCover(info.coverUrl, info.isFree)
+          BookCover(info.coverUrl, 144, 104, info.isFree)
         }.padding({ top: 20 })
       }
       .backgroundColor($r('app.color.common_background'))

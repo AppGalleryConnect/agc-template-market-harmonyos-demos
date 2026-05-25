@@ -1,4 +1,8 @@
 import { buffer, util } from '@kit.ArkTS';
+import { hilog } from '@kit.PerformanceAnalysisKit';
+
+const STRING_UTIL_TAG: string = 'StringUtil';
+const STRING_UTIL_DOMAIN: number = 0x0000;
 
 export class StringUtil {
   /**
@@ -180,9 +184,14 @@ export class StringUtil {
    * @returns Uint8Array
    */
   public static strToUint8Array(src: string, encoding: buffer.BufferEncoding = 'utf-8'): Uint8Array {
-    const textEncoder = new util.TextEncoder(encoding);
-    const result = textEncoder.encodeInto(src);
-    return result;
+    try {
+      const textEncoder = new util.TextEncoder(encoding);
+      const result = textEncoder.encodeInto(src);
+      return result;
+    } catch (e) {
+      hilog.error(STRING_UTIL_DOMAIN, STRING_UTIL_TAG, 'strToUint8Array failed: %{public}s', JSON.stringify(e));
+      return new Uint8Array(0);
+    }
   }
 
   /**
@@ -206,7 +215,8 @@ export class StringUtil {
     try {
       return new Uint8Array(buffer.from(hexStr, 'hex').buffer);
     } catch (e) {
-      console.error('strToHex invalid hex string:', hexStr, e);
+      hilog.error(STRING_UTIL_DOMAIN, STRING_UTIL_TAG, 'strToHex invalid hex: %{public}s err:%{public}s', hexStr,
+        JSON.stringify(e));
       return new Uint8Array();
     }
   }
@@ -220,7 +230,7 @@ export class StringUtil {
     try {
       return buffer.from(arr).toString('hex');
     } catch (err) {
-      console.error(`hexToStr失败: ${(err as Error).message}`);
+      hilog.error(STRING_UTIL_DOMAIN, STRING_UTIL_TAG, 'hexToStr failed: %{public}s', (err as Error).message);
       return '';
     }
   }
@@ -263,7 +273,7 @@ export class StringUtil {
       const buf = buffer.from(src, encoding);
       return buf.buffer;
     } catch (err) {
-      console.error(`strToBuffer失败: ${(err as Error).message}`);
+      hilog.error(STRING_UTIL_DOMAIN, STRING_UTIL_TAG, 'strToBuffer failed: %{public}s', (err as Error).message);
       return new ArrayBuffer(0);
     }
   }
@@ -278,7 +288,7 @@ export class StringUtil {
       const buf = buffer.from(src);
       return buf.toString(encoding);
     } catch (error) {
-      console.error('bufferToStr error:', JSON.stringify(error));
+      hilog.error(STRING_UTIL_DOMAIN, STRING_UTIL_TAG, 'bufferToStr error: %{public}s', JSON.stringify(error));
       return '';
     }
   }

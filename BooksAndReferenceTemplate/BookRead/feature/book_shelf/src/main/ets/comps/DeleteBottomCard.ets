@@ -2,45 +2,112 @@ import { Constants } from 'common';
 
 @ComponentV2
 export struct DeleteBottomCard {
+  @Param isShelf: boolean = true
+  @Param isGroupManage: boolean = false
+  @Consumer('isSelectAll') isSelectAll: boolean = false;
+  @Event selectAll: (select: boolean) => void = () => {
+  };
+  @Event changeGroup: () => void = () => {
+  };
   @Event delete: () => void = () => {
   };
+  @Event download: () => void = () => {
+  };
+  @Event pin: () => void = () => {
+  };
+
   build() {
     Row() {
-      Column({ space: 5 }) {
-        Image($r('app.media.ic_public_trash'))
-          .height(24)
-          .width(24)
-          .margin({ top: 5 })
-        Row() {
-          Text($r('app.string.delete'))
-        }
-      }
-      .onClick(() => {
-        this.getUIContext().getPromptAction().showDialog({
-          title: $r('app.string.delete_book_flag'),
-          message: $r('app.string.q_delete_book_flag'),
-          buttons: [
-            {
-              text: $r('app.string.cancel'),
-              color: $r('app.color.button_color')
-            },
-            {
-              text: $r('app.string.delete'),
-              color: $r('app.color.button_color')
-            }
-          ]
-        }, (err, data) => {
-          if(data.index === 1){
-            this.delete();
-            this.getUIContext().getPromptAction().showToast({ message: $r('app.string.delete_book_success') })
+      Row() {
+        Column({ space: 5 }) {
+          SymbolGlyph($r('sys.symbol.checkmark_square_on_square'))
+            .fontSize(24)
+            .fontColor(this.isSelectAll ? [$r('sys.color.multi_color_08')] : [$r('sys.color.icon_primary')])
+          Row() {
+            Text($r('app.string.select_all'))
+              .fontSize(10)
+              .fontColor(this.isSelectAll ? $r('sys.color.multi_color_08') : $r('sys.color.font_primary'))
           }
+        }
+        .justifyContent(FlexAlign.Center)
+        .size({ height: 56, width: 56 })
+        .onClick(() => {
+          this.selectAll(this.isSelectAll)
+          this.isSelectAll = !this.isSelectAll
         })
-      })
-      .height(70)
-    } .height(70)
+
+        if (this.isShelf) {
+          Column({ space: 5 }) {
+            SymbolGlyph($r('sys.symbol.arrow_right_folder_circle'))
+              .fontColor([$r('sys.color.icon_primary')])
+              .fontSize(24)
+            Row() {
+              Text($r('app.string.change_group'))
+                .fontSize(10)
+            }
+          }
+          .justifyContent(FlexAlign.Center)
+          .size({ height: 56, width: 56 })
+          .onClick(() => {
+            this.changeGroup();
+            this.isSelectAll = false;
+          })
+
+          Column({ space: 5 }) {
+            SymbolGlyph($r('sys.symbol.download'))
+              .fontColor([$r('sys.color.icon_primary')])
+              .fontSize(24)
+            Row() {
+              Text($r('app.string.download'))
+                .fontSize(10)
+            }
+          }
+          .justifyContent(FlexAlign.Center)
+          .size({ height: 56, width: 56 })
+          .onClick(() => {
+            this.download()
+          })
+
+          if (!this.isGroupManage) {
+            Column({ space: 5 }) {
+              SymbolGlyph($r('sys.symbol.arrowshape_up_to_line'))
+                .fontColor([$r('sys.color.icon_primary')])
+                .fontSize(24)
+              Row() {
+                Text($r('app.string.pin'))
+                  .fontSize(10)
+              }
+            }
+            .justifyContent(FlexAlign.Center)
+            .size({ height: 56, width: 56 })
+            .onClick(() => {
+              this.pin()
+            })
+          }
+        }
+
+        Column({ space: 5 }) {
+          SymbolGlyph($r('sys.symbol.trash'))
+            .fontColor([$r('sys.color.icon_primary')])
+            .fontSize(24)
+          Row() {
+            Text($r('app.string.delete'))
+              .fontSize(10)
+          }
+        }
+        .justifyContent(FlexAlign.Center)
+        .size({ height: 56, width: 56 })
+        .onClick(() => {
+          this.delete();
+        })
+      }
+      .width(this.isGroupManage ? 248 : this.isShelf ? 304 : 136)
+      .borderRadius(28)
+      .backgroundColor($r('sys.color.comp_background_list_card'))
+      .justifyContent(FlexAlign.Center)
+      .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])
+    }
     .width(Constants.FULL_SIZE)
-    .backgroundColor(Color.White)
     .justifyContent(FlexAlign.Center)
-    .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])
   }
 }

@@ -9,15 +9,25 @@ import {
   DateUtil,
   MockService,
   UserCard,
-  getCalendarPermission
+  getCalendarPermission,
+  UserCourse,
+  BreakpointNameEnum,
+  BreakpointModel,
+  BookingRestQuotaUpdate,
+  AccountUpdate,
+  EmitterConstant,
+  GridSettingInfo,
+  CardManager,
+  Logger
 } from 'external_interactions';
-import { BookingRestQuotaUpdate , AccountUpdate, EmitterConstant } from 'external_interactions'
 import { AppStorageV2 } from '@kit.ArkUI';
 import { BusinessError, emitter} from '@kit.BasicServicesKit';
 import { calendarManager } from '@kit.CalendarKit';
 import { SystemSceneUtils } from '../utils/SystemSceneUtils';
 import { serviceNotification } from '@kit.PushKit';
 import { common } from '@kit.AbilityKit';
+
+const TAG: string = '[RecordContent]';
 
 @ComponentV2
 export struct RecordContent {
@@ -29,10 +39,31 @@ export struct RecordContent {
   @Local accountUpdateStorage : AccountUpdate = AppStorageV2.connect(AccountUpdate, 'AccountUpdate', () =>new AccountUpdate())!
   @Local accountUpdate: boolean = this.accountUpdateStorage.accountUpdate;
   @Local updateUI: boolean = false
+  @Local breakPointModel: BreakpointModel = AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
+
   aboutToAppear(): void {
     this.bookRecordList = MockService.getBookingListByState(this.bookState)
     SystemSceneUtils.init(this.getUIContext());
   }
+
+  @Computed
+  get gridSetting() {
+    const gridSettingInfo: GridSettingInfo  = {
+      template: '1fr',
+      colGap: 12,
+      rowGap: 12,
+    }
+    if ([BreakpointNameEnum.MD].includes((this.breakPointModel.currentBreakpoint))) {
+      gridSettingInfo.template = '1fr 1fr'
+      gridSettingInfo.colGap = 16
+    }
+    if ([BreakpointNameEnum.LG, BreakpointNameEnum.XL].includes((this.breakPointModel.currentBreakpoint))) {
+      gridSettingInfo.template = '1fr 1fr 1fr'
+      gridSettingInfo.colGap = 16
+    }
+    return gridSettingInfo
+  }
+
   build() {
     Column() {
       Column() {
@@ -50,22 +81,24 @@ export struct RecordContent {
       .alignItems(HorizontalAlign.Center)
       .visibility(this.bookRecordList.length > 0 ? Visibility.None : Visibility.Visible)
 
-      List({ space: 20 }) {
+      WaterFlow() {
         ForEach(this.bookRecordList, (item: BookingRecordInfo) => {
-          ListItem() {
             RecordItem({ bookingRecordInfo: item, pathStack: this.pathStack , handleCancel: ()=>{
               this.bookRecordList = MockService.getBookingListByState(this.bookState)
             }})
-          }
         }, (item: BookState) => JSON.stringify(item))
       }
+      .columnsTemplate(this.gridSetting.template)
+      .columnsGap(this.gridSetting.colGap)
+      .rowsGap(this.gridSetting.rowGap)
       .margin({ left: 16, right: 16 })
       .height('100%')
       .scrollBar(BarState.Off)
+      .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: true })
     }
     .width('100%')
     .backgroundColor($r('app.color.main_background_color'))
-    .margin({ top: 16, bottom: 16 })
+    .margin({ top: 16 })
   }
   @Monitor('currentTabIndex', 'accountUpdateStorage.accountUpdate')
   tabIndexChange() {
@@ -108,14 +141,14 @@ struct RecordItem {
       this.courseBookingInfo?.timeEnd).getTime(),
     };
     calendarMgr?.getCalendar().then((data: calendarManager.Calendar) => {
-      console.info(`Succeeded in getting calendar, data -> ${JSON.stringify(data)}`);
+      Logger.info(TAG, `Succeeded in getting calendar, data -> ${JSON.stringify(data)}`);
       data.addEvent(event).then((data: number) => {
-        console.info(`Succeeded in adding event, id -> ${data}`);
+        Logger.info(TAG, `Succeeded in adding event, id -> ${JSON.stringify(data)}`);
       }).catch((err: BusinessError) => {
-        console.error(`Failed to addEvent. Code: ${err.code}, message: ${err.message}`);
+        Logger.error(TAG, `Failed to addEvent. Code: ${err.code}, message: ${err.message}`);
       });
     }).catch((err: BusinessError) => {
-      console.error(`Failed to get calendar. Code: ${err.code}, message: ${err.message}`);
+      Logger.error(TAG, `Failed to get calendar. Code: ${err.code}, message: ${err.message}`);
     });
   }
 
@@ -142,7 +175,7 @@ struct RecordItem {
       .height(18)
 
       Divider()
-        .margin({ top: 16, bottom: 16 })
+        .margin({ top: 12, bottom: 12 })
 
       Row() {
         Image($r(this.courseDetailInfo?.advImage))
@@ -180,35 +213,55 @@ struct RecordItem {
 
       Column() {
         Divider()
-          .margin({ top: 16, bottom: 16 })
+          .margin({ top: 12, bottom: 12 })
         Row() {
           Text('取消预约')
             .fontSize($r('sys.float.Body_M'))
             .fontColor($r('sys.color.font_primary'))
             .fontWeight(FontWeight.Medium)
             .onClick(() => {
-              this.bookingRecordInfo.bookState = BookState.CANCELED;
-              this.bookingRestQuotaUpdate = !this.bookingRestQuotaUpdate
-              if (!this.bookingRecordInfo.userCardId) {
-                AppStorage.setOrCreate<boolean>(this.courseDetailInfo?.id, true)
-              }
-              this.updateMockData()
-              this.accountUpdateStorage.accountUpdate = !this.accountUpdateStorage.accountUpdate
-              try {
-                emitter.emit(EmitterConstant.REFRESH_DATA)
-              } catch (e) {
-                console.error(`emitter emit failed. error: ${JSON.stringify(e)}`)
-              }
-              try {
-                emitter.emit(EmitterConstant.CANCEL_BOOK)
-              } catch (e) {
-                console.error(`emitter emit failed. error: ${JSON.stringify(e)}`)
-              }
+              this.getUIContext().showAlertDialog({
+                message: '是否确认取消预约',
+                textStyle: {
+                  fontColor: $r('sys.float.Body_L'),
+                  fontWeight: FontWeight.Regular
+                },
+                autoCancel: false,
+                width: 328,
+                height: 146,
+                primaryButton: {
+                  value: '取消',
+                  fontColor: $r('sys.color.font_secondary'),
+                  action: () => {}
+                },
+                secondaryButton: {
+                  value: '确认取消',
+                  action: () => {
+                    this.bookingRecordInfo.bookState = BookState.CANCELED;
+                    this.bookingRestQuotaUpdate = !this.bookingRestQuotaUpdate
+                    if (!this.bookingRecordInfo.userCardId) {
+                      AppStorage.setOrCreate<boolean>(this.courseDetailInfo?.id, true)
+                    }
+                    this.updateMockData()
+                    CardManager.get().updateCard()
+                    this.accountUpdateStorage.accountUpdate = !this.accountUpdateStorage.accountUpdate
+                    try {
+                      emitter.emit(EmitterConstant.REFRESH_DATA)
+                    } catch (e) {
+                      Logger.error(TAG, `emitter emit failed. error: ${JSON.stringify(e)}`)
+                    }
+                    try {
+                      emitter.emit(EmitterConstant.CANCEL_BOOK)
+                    } catch (e) {
+                      Logger.error(TAG, `emitter emit failed. error: ${JSON.stringify(e)}`)
+                    }
+                  }
+                }
+              })
             })
 
           Divider()
             .vertical(true)
-            .margin({ left: 20, right: 20 })
 
           Text('订阅通知')
             .fontColor('#FF9019')
@@ -220,7 +273,6 @@ struct RecordItem {
 
           Divider()
             .vertical(true)
-            .margin({ left: 20, right: 20 })
 
           Text('添加至日程')
             .fontColor('#FF9019')
@@ -241,15 +293,12 @@ struct RecordItem {
               }
             })
         }
-        .height(20)
+        .height(24)
         .width('100%')
-        .justifyContent(FlexAlign.SpaceBetween)
+        .justifyContent(FlexAlign.SpaceEvenly)
       }
-      .alignItems(HorizontalAlign.End)
-      .height(70)
       .width('100%')
       .visibility(this.bookingRecordInfo.bookState === BookState.TO_BE_USE ? Visibility.Visible : Visibility.None)
-
     }
     .width('100%')
     .borderRadius(16)
@@ -304,16 +353,26 @@ struct RecordItem {
   }
 
   updateMockData() {
+    let userCourseIndex = MockService.userCourseList.findIndex(
+      (item: UserCourse) => item.bookingRecordId === this.bookingRecordInfo.id)
+    if (userCourseIndex !== -1) {
+      MockService.userCourseList[userCourseIndex].courseState = false
+      MockService.userCourseList[userCourseIndex].courseBookingId = ''
+      MockService.userCourseList[userCourseIndex].bookingRecordId = ''
+      MockService.dataPreferences.putSync('userCourse', JSON.stringify(MockService.userCourseList));
+    }
     MockService.getCourseBookingById(this.courseBookingInfo!.id).restQuota += this.bookingRecordInfo.personNum;
     MockService.dataPreferences.putSync('courseBooking', JSON.stringify(MockService.courseBookingList))
     MockService.getBookingRecordById(this.bookingRecordInfo.id).bookState = BookState.CANCELED
     MockService.dataPreferences.putSync('booking', JSON.stringify(MockService.bookingList))
     if (this.bookingRecordInfo.userCardId) {
       let userCard: UserCard = MockService.getUserCardById(this.bookingRecordInfo.userCardId)
-      let cardInfo: CardInfo = MockService.getCardById(userCard.cardId)
-      if (cardInfo.consumeType === ConsumeType.TIMES) {
-        MockService.getUserCardById(this.bookingRecordInfo.userCardId).restQuota += this.bookingRecordInfo.personNum;
-        MockService.dataPreferences.putSync('userCard', JSON.stringify(MockService.userCardList))
+      if (userCard) {
+        let cardInfo: CardInfo = MockService.getCardById(userCard.cardId)
+        if (cardInfo.consumeType === ConsumeType.TIMES) {
+          MockService.getUserCardById(this.bookingRecordInfo.userCardId).restQuota += this.bookingRecordInfo.personNum;
+          MockService.dataPreferences.putSync('userCard', JSON.stringify(MockService.userCardList))
+        }
       }
     }
     this.accountUpdate = !this.accountUpdate

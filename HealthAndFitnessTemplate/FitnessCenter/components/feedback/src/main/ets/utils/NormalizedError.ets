@@ -1,4 +1,6 @@
+import { Logger } from 'external_interactions';
 
+const TAG: string = '[NormalizedError]';
 
 export class NormalizedError extends Error {
 
@@ -34,7 +36,7 @@ export class NormalizedError extends Error {
 
   public static logAndThrow(cause: ESObject): never {
     const err: NormalizedError = NormalizedError.from(cause);
-    console.error(err.toLogLine());
+    Logger.error(TAG, `${JSON.stringify(err.toLogLine())}`);
     throw err;
   }
 

@@ -185,7 +185,11 @@ class Toast {
     if (Toast._instance === null || Toast._instance.loadingDialog === null) {
       return
     }
-    await Toast._instance.promptAction?.closeCustomDialog(Toast._instance.loadingDialog)
+    try {
+      await Toast._instance.promptAction?.closeCustomDialog(Toast._instance.loadingDialog)
+    } catch (error) {
+      console.error('Toast', ` closeCustomDialog error = ${JSON.stringify(error)}`)
+    }
     Toast._instance.loadingDialog?.dispose()
   }
 
@@ -204,7 +208,11 @@ class Toast {
         return
       }
       Toast._instance.loadingDialogArray?.forEach(async (item: ComponentContent<ToastOption>) => {
-        await Toast._instance.promptAction?.closeCustomDialog(item)
+        try {
+          await Toast._instance.promptAction?.closeCustomDialog(item)
+        } catch (error) {
+          console.error('Toast', ` Toast instance error = ${JSON.stringify(error)}`)
+        }
         item?.dispose()
       })
     }, 1)

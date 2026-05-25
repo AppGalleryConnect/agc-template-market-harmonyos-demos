@@ -1,4 +1,5 @@
 import { CalendarItem, CalendarUtils } from './Calendar';
+import { VIDEO_URL } from 'lib_common'
 
 @CustomDialog
 export struct addDialog {
@@ -161,139 +162,205 @@ export struct CustomButton {
   }
 }
 
-@Builder
-export function explain(title: string) {
-  Column() {
-    Row() {
-      Text(title)
-        .fontWeight(FontWeight.Medium)
-        .fontSize(18)
-      Text('10分钟')
-        .fontWeight(FontWeight.Medium)
-        .fontSize($r('sys.float.Body_M'))
-        .fontColor('rgba(0, 0, 0, 0.6)')
-    }
-    .width('100%')
-    .height(24)
-    .margin({ bottom: 12 })
-    .justifyContent(FlexAlign.Start)
+@ComponentV2
+export struct explain {
+  @Param title: string = '';
+  @Param isVideo: boolean = false;
+  @Local isPaused: boolean = true;
+  @Local durationTime: string = '';
+  controller: VideoController = new VideoController();
 
-    Scroll() {
-      Row({ space: 12 }) {
-        Image($r('app.media.explain1'))
-          .width(90)
-          .height(184)
-          .backgroundColor($r('sys.color.comp_background_tertiary'))
-        Image($r('app.media.explain2'))
-          .width(90)
-          .height(184)
-          .backgroundColor($r('sys.color.comp_background_tertiary'))
-        Image($r('app.media.explain3'))
-          .width(90)
-          .height(184)
-          .backgroundColor($r('sys.color.comp_background_tertiary'))
-        Image($r('app.media.explain4'))
-          .width(90)
-          .height(184)
-          .backgroundColor($r('sys.color.comp_background_tertiary'))
+  build() {
+    Column() {
+      Row() {
+        Text(this.title)
+          .fontWeight(FontWeight.Medium)
+          .fontSize(18)
+          .margin({ right: 8 })
+        Text('10分钟')
+          .fontWeight(FontWeight.Medium)
+          .fontSize($r('sys.float.Body_M'))
+          .fontColor('rgba(0, 0, 0, 0.6)')
       }
-    }
-    .scrollBar(BarState.Off)
-    .scrollable(ScrollDirection.Horizontal)
-    .edgeEffect(EdgeEffect.Spring)
-    .width('100%')  // 设置滚动区域宽度
+      .width('100%')
+      .height(24)
+      .margin({ bottom: 12 })
+      .justifyContent(FlexAlign.Start)
 
-    Column() {
-      Text('动作讲解')
-        .fontWeight(FontWeight.Medium)
-        .fontSize(18)
+      if (this.isVideo) {
+        Column() {
+          Stack({ alignContent: Alignment.Center }) {
+            Video({
+              src: VIDEO_URL,
+              controller: this.controller,
+              posterOptions: {
+                showFirstFrame: true  // 首帧送显
+              }
+            })
+              .controls(false)  // 隐藏状态栏
+              .loop(true)
+              .onPrepared((e) => {
+                this.durationTime = this.formatTime(e.duration); // 格式化为"00:00"
+              })
+
+            Image($r('app.media.ic_paused'))
+              .visibility(this.isPaused ? Visibility.Visible : Visibility.None)
+              .width(48)
+              .height(48)
+
+            RelativeContainer() {
+              Text(this.durationTime)
+                .width(34)
+                .fontSize(10)
+                .fontColor($r('sys.color.font_on_primary'))
+                .padding(4)
+                .borderRadius(4)
+                .backgroundColor('rgba(0, 0, 0, 0.4)')
+                .offset({ bottom: 8, right: 12 })
+                .alignRules({
+                  bottom: { anchor: '__container__', align: VerticalAlign.Bottom },
+                  right: { anchor: '__container__', align: HorizontalAlign.End },
+                })
+            }
+          }
+          .width('100%')
+          .onClick(() => {
+            this.isPaused = !this.isPaused;
+            if (this.isPaused) {
+              this.controller.pause();
+            } else {
+              this.controller.start();
+            }
+          })
+        }
+        .borderRadius(16)
+        .width('100%')
+        .height(184)
+        .clip(true)
+      } else {
+        Scroll() {
+          Row({ space: 12 }) {
+            Image($r('app.media.explain1'))
+              .width(90)
+              .height(184)
+              .backgroundColor($r('sys.color.comp_background_tertiary'))
+            Image($r('app.media.explain2'))
+              .width(90)
+              .height(184)
+              .backgroundColor($r('sys.color.comp_background_tertiary'))
+            Image($r('app.media.explain3'))
+              .width(90)
+              .height(184)
+              .backgroundColor($r('sys.color.comp_background_tertiary'))
+            Image($r('app.media.explain4'))
+              .width(90)
+              .height(184)
+              .backgroundColor($r('sys.color.comp_background_tertiary'))
+          }
+        }
+        .scrollBar(BarState.Off)
+        .scrollable(ScrollDirection.Horizontal)
+        .edgeEffect(EdgeEffect.Spring)
+        .width('100%')  // 设置滚动区域宽度
+      }
+
+      Column() {
+        Text('动作讲解')
+          .fontWeight(FontWeight.Medium)
+          .fontSize(18)
+      }
+      .width('100%')
+      .height(24)
+      .margin({ top: 12, bottom: 12 })
+      .alignItems(HorizontalAlign.Start)
+
+      Column() {
+        Text('·保持头部中立位，目视前方，避免低头或仰头造成颈椎压力。')
+          .fontWeight(FontWeight.Medium)
+          .fontSize($r('sys.float.Body_M'))
+          .fontColor('rgba(0, 0, 0, 0.6)')
+          .textAlign(TextAlign.Start)
+
+        Text('·收紧核心肌群，肩胛骨微收，手臂自然屈曲90°前后摆动，减少躯干晃动。')
+          .fontWeight(FontWeight.Medium)
+          .fontSize($r('sys.float.Body_M'))
+          .fontColor('rgba(0, 0, 0, 0.6)')
+          .textAlign(TextAlign.Start)
+
+        Text('·全脚掌滚动式着地（脚跟→前掌），步频建议保持180步/分钟以减少关节冲击。')
+          .fontWeight(FontWeight.Medium)
+          .fontSize($r('sys.float.Body_M'))
+          .fontColor('rgba(0, 0, 0, 0.6)')
+          .textAlign(TextAlign.Start)
+      }
+      .width('100%')
+      .alignItems(HorizontalAlign.Start)
+
+      Column() {
+        Text('训练要点')
+          .fontWeight(FontWeight.Medium)
+          .fontSize(18)
+      }
+      .height(24)
+      .width('100%')
+      .margin({ top: 12, bottom: 12 })
+      .alignItems(HorizontalAlign.Start)
+
+      Column() {
+        Text('·在使用跑步机前，充分活动关节，如踝关节、膝关节、髋关节等，拉伸腿部、腰部肌肉，高抬腿过程中避免激烈跳动，以热身为主，能减少运动损伤。')
+          .fontWeight(FontWeight.Medium)
+          .fontSize($r('sys.float.Body_M'))
+          .fontColor('rgba(0, 0, 0, 0.6)')
+          .textAlign(TextAlign.Start)
+      }
+      .width('100%')
+      .alignItems(HorizontalAlign.Start)
+
+      Column() {
+        Text('常见错误')
+          .fontWeight(FontWeight.Medium)
+          .fontSize(18)
+      }
+      .height(24)
+      .width('100%')
+      .margin({ top: 12, bottom: 12 })
+      .alignItems(HorizontalAlign.Start)
+
+      Column() {
+        Text('·心率上升速度太快导致呼吸紊乱；')
+          .fontWeight(FontWeight.Medium)
+          .fontSize($r('sys.float.Body_M'))
+          .fontColor('rgba(0, 0, 0, 0.6)')
+          .textAlign(TextAlign.Start)
+        Text('·落地脚踝不稳导致受伤风险提高；')
+          .fontWeight(FontWeight.Medium)
+          .fontSize($r('sys.float.Body_M'))
+          .fontColor('rgba(0, 0, 0, 0.6)')
+          .textAlign(TextAlign.Start)
+        Text('·开合跳没有收紧腹部导致肠胃不适；')
+          .fontWeight(FontWeight.Medium)
+          .fontSize($r('sys.float.Body_M'))
+          .fontColor('rgba(0, 0, 0, 0.6)')
+          .textAlign(TextAlign.Start)
+        Text('·快跑阶段没有控制时速。')
+          .fontWeight(FontWeight.Medium)
+          .fontSize($r('sys.float.Body_M'))
+          .fontColor('rgba(0, 0, 0, 0.6)')
+          .textAlign(TextAlign.Start)
+      }
+      .width('100%')
+      .alignItems(HorizontalAlign.Start)
     }
+    .margin({ top: 50 })
+    .padding({ left: 16, right: 16 })
     .width('100%')
-    .height(24)
-    .margin({ top: 12, bottom: 12 })
-    .alignItems(HorizontalAlign.Start)
-
-    Column() {
-      Text('·保持头部中立位，目视前方，避免低头或仰头造成颈椎压力。')
-        .fontWeight(FontWeight.Medium)
-        .fontSize($r('sys.float.Body_M'))
-        .fontColor('rgba(0, 0, 0, 0.6)')
-        .textAlign(TextAlign.Start)
-
-      Text('·收紧核心肌群，肩胛骨微收，手臂自然屈曲90°前后摆动，减少躯干晃动。')
-        .fontWeight(FontWeight.Medium)
-        .fontSize($r('sys.float.Body_M'))
-        .fontColor('rgba(0, 0, 0, 0.6)')
-        .textAlign(TextAlign.Start)
-
-      Text('·全脚掌滚动式着地（脚跟→前掌），步频建议保持180步/分钟以减少关节冲击。')
-        .fontWeight(FontWeight.Medium)
-        .fontSize($r('sys.float.Body_M'))
-        .fontColor('rgba(0, 0, 0, 0.6)')
-        .textAlign(TextAlign.Start)
-    }
-    .width('100%')
-    .alignItems(HorizontalAlign.Start)
-
-    Column() {
-      Text('训练要点')
-        .fontWeight(FontWeight.Medium)
-        .fontSize(18)
-    }
-    .height(24)
-    .width('100%')
-    .margin({ top: 12, bottom: 12 })
-    .alignItems(HorizontalAlign.Start)
-
-    Column() {
-      Text('·在使用跑步机前，充分活动关节，如踝关节、膝关节、髋关节等，拉伸腿部、腰部肌肉，高抬腿过程中避免激烈跳动，以热身为主，能减少运动损伤。')
-        .fontWeight(FontWeight.Medium)
-        .fontSize($r('sys.float.Body_M'))
-        .fontColor('rgba(0, 0, 0, 0.6)')
-        .textAlign(TextAlign.Start)
-    }
-    .width('100%')
-    .alignItems(HorizontalAlign.Start)
-
-    Column() {
-      Text('常见错误')
-        .fontWeight(FontWeight.Medium)
-        .fontSize(18)
-    }
-    .height(24)
-    .width('100%')
-    .margin({ top: 12, bottom: 12 })
-    .alignItems(HorizontalAlign.Start)
-
-    Column() {
-      Text('·心率上升速度太快导致呼吸紊乱；')
-        .fontWeight(FontWeight.Medium)
-        .fontSize($r('sys.float.Body_M'))
-        .fontColor('rgba(0, 0, 0, 0.6)')
-        .textAlign(TextAlign.Start)
-      Text('·落地脚踝不稳导致受伤风险提高；')
-        .fontWeight(FontWeight.Medium)
-        .fontSize($r('sys.float.Body_M'))
-        .fontColor('rgba(0, 0, 0, 0.6)')
-        .textAlign(TextAlign.Start)
-      Text('·开合跳没有收紧腹部导致肠胃不适；')
-        .fontWeight(FontWeight.Medium)
-        .fontSize($r('sys.float.Body_M'))
-        .fontColor('rgba(0, 0, 0, 0.6)')
-        .textAlign(TextAlign.Start)
-      Text('·快跑阶段没有控制时速。')
-        .fontWeight(FontWeight.Medium)
-        .fontSize($r('sys.float.Body_M'))
-        .fontColor('rgba(0, 0, 0, 0.6)')
-        .textAlign(TextAlign.Start)
-    }
-    .width('100%')
-    .alignItems(HorizontalAlign.Start)
   }
-  .margin({ top: 68 })
-  .padding({ left: 16, right: 16 })
-  .width('100%')
-  .height('100%')
+
+  private formatTime(total: number): string {
+    const minutes = Math.floor(total / 60).toString().padStart(2, '0');
+    const seconds = Math.floor(total % 60).toString().padStart(2, '0');
+    return `${minutes}:${seconds}`;
+  }
 }
 
 @Builder
@@ -303,6 +370,7 @@ export function explainVIP(title: string) {
       Text(title)
         .fontSize(18)
         .fontWeight(FontWeight.Medium)
+        .margin({ right: 8 })
       Text('10分钟')
         .fontWeight(FontWeight.Medium)
         .fontSize($r('sys.float.Body_M'))
@@ -419,8 +487,7 @@ export function explainVIP(title: string) {
     .alignItems(HorizontalAlign.Start)
   }
   .width('100%')
-  .height('100%')
-  .margin({ top: 68 })
+  .margin({ top: 50 })
   .padding({ left: 16, right: 16 })
   .blur(10)
 }
@@ -438,7 +505,7 @@ export struct CustomFilterButton {
     Button(this.label)
       .width(80)
       .height(28)
-      .margin({ right: 8, bottom: 12 })
+      .margin({ right: 4, bottom: 12 })
       .borderRadius(14)
       .fontSize($r('sys.float.Body_S'))
       .fontColor(this.isOn ? Color.White : this.foreColor)
@@ -605,7 +672,8 @@ export struct PlanDialog {
   @Local dateList: Date[] = [];
   @Local today: number = new Date().getDate()
   @Param planList: number[] = [];
-  @Param clickedStates: boolean[] = [false, false, false, false, false, false, false]
+  @Param clickedStates: boolean[] = [false, false, false, false, false, false, false];
+  @Param courseId: string = '';
 
   buildDateList(): Date[] {
     let dateSelectList: Date[] = [];
@@ -632,6 +700,14 @@ export struct PlanDialog {
     return dateSelectList;
   }
 
+  isPassedDay(selectDay: Date): boolean{
+    let today: Date = new Date()
+    if(selectDay.getMonth() < today.getMonth() || selectDay.getDate() < today.getDate()){
+      return true
+    }
+    return false
+  }
+
   aboutToAppear(): void {
     this.dateList = this.buildDateList();
   }
@@ -648,338 +724,117 @@ export struct PlanDialog {
           .textAlign(TextAlign.Start)
 
         Row({ space: 8 }) {
-          if (this.today > this.dateList[0].getDate() && this.month === this.dateList[0].getMonth()) {
+          ForEach([0, 1, 2, 3, 4], (index: number) => {
             Column() {
-              Text(this.weekNameList[this.dateList[0].getDay()])
+              Text(this.weekNameList[this.dateList[index].getDay()])
                 .fontWeight(FontWeight.Medium)
                 .fontSize($r('sys.float.Body_L'))
-                .fontColor('rgba(0, 0, 0, 0.4)')
+                .fontColor(
+                  this.isPassedDay(this.dateList[index])
+                    ? 'rgba(0,0,0,0.4)'
+                    : this.clickedStates[index] ? Color.White : 'rgba(0,0,0,0.9)'
+                )
                 .margin({ top: 4, bottom: 2 })
-              Text((this.dateList[0].getMonth() + 1 < 10 ? '0' + (this.dateList[0].getMonth() + 1) :
-                this.dateList[0].getMonth() + 1 + '') + '.' +
-                (this.dateList[0].getDate() < 10 ? '0' + this.dateList[0].getDate() : this.dateList[0].getDate() + ''))
-                .fontColor('rgba(0, 0, 0, 0.4)')
-                .fontWeight(FontWeight.Medium)
-                .fontSize($r('sys.float.Body_S'))
-            }
-            .width('18%')
-            .height(47)
-            .borderRadius(8)
-            .backgroundColor(Color.White)
-          } else {
-            Column() {
-              Text(this.weekNameList[this.dateList[0].getDay()])
-                .fontWeight(FontWeight.Medium)
-                .fontSize($r('sys.float.Body_L'))
-                .fontColor(this.clickedStates[0] ? Color.White : 'rgba(0, 0, 0, 0.9)')
-                .margin({ top: 4, bottom: 2 })
-              Text((this.dateList[0].getMonth() + 1 < 10 ? '0' + (this.dateList[0].getMonth() + 1) :
-                this.dateList[0].getMonth() + 1 + '') + '.' +
-                (this.dateList[0].getDate() < 10 ? '0' + this.dateList[0].getDate() : this.dateList[0].getDate() + ''))
-                .fontColor(this.clickedStates[0] ? Color.White : 'rgba(0, 0, 0, 0.9)')
-                .fontWeight(FontWeight.Medium)
-                .fontSize($r('sys.float.Body_S'))
-            }
-            .width('18%')
-            .height(47)
-            .borderRadius(8)
-            .backgroundColor(this.clickedStates[0] ? $r('app.color.app_theme') : Color.White)
-            .onClick(() => {
-              this.clickedStates[0] = !this.clickedStates[0]
-              if (this.planList.includes(this.dateList[0].getDate())) {
-                const index = this.planList.findIndex(item => item === this.dateList[0].getDate());
-                this.planList.splice(index, 1);
-              } else {
-                this.planList.push(this.dateList[0].getDate());
-              }
-            })
-          }
 
-          if (this.today > this.dateList[1].getDate() && this.month === this.dateList[1].getMonth()) {
-            Column() {
-              Text(this.weekNameList[this.dateList[1].getDay()])
-                .fontWeight(FontWeight.Medium)
-                .fontSize($r('sys.float.Body_L'))
-                .fontColor('rgba(0, 0, 0, 0.4)')
-                .margin({ top: 4, bottom: 2 })
-              Text((this.dateList[1].getMonth() + 1 < 10 ? '0' + (this.dateList[1].getMonth() + 1) :
-                this.dateList[1].getMonth() + 1 + '') + '.' +
-                (this.dateList[1].getDate() < 10 ? '0' + this.dateList[1].getDate() : this.dateList[1].getDate() + ''))
-                .fontColor('rgba(0, 0, 0, 0.4)')
-                .fontWeight(FontWeight.Medium)
-                .fontSize($r('sys.float.Body_S'))
-            }
-            .width('18%')
-            .height(47)
-            .borderRadius(8)
-            .backgroundColor(Color.White)
-          } else {
-            Column() {
-              Text(this.weekNameList[this.dateList[1].getDay()])
-                .fontWeight(FontWeight.Medium)
-                .fontSize($r('sys.float.Body_L'))
-                .fontColor(this.clickedStates[1] ? Color.White : 'rgba(0, 0, 0, 0.9)')
-                .margin({ top: 4, bottom: 2 })
-              Text((this.dateList[1].getMonth() + 1 < 10 ? '0' + (this.dateList[1].getMonth() + 1) :
-                this.dateList[1].getMonth() + 1 + '') + '.' +
-                (this.dateList[1].getDate() < 10 ? '0' + this.dateList[1].getDate() : this.dateList[1].getDate() + ''))
-                .fontColor(this.clickedStates[1] ? Color.White : 'rgba(0, 0, 0, 0.9)')
+              Text(
+                (this.dateList[index].getMonth() + 1 < 10
+                  ? '0' + (this.dateList[index].getMonth() + 1)
+                  : this.dateList[index].getMonth() + 1 + '') + '.' +
+                  (this.dateList[index].getDate() < 10
+                    ? '0' + this.dateList[index].getDate()
+                    : this.dateList[index].getDate() + '')
+              )
+                .fontColor(
+                  this.isPassedDay(this.dateList[index])
+                    ? 'rgba(0,0,0,0.4)'
+                    : this.clickedStates[index] ? Color.White : 'rgba(0,0,0,0.9)'
+                )
                 .fontWeight(FontWeight.Medium)
                 .fontSize($r('sys.float.Body_S'))
             }
             .width('18%')
             .height(47)
             .borderRadius(8)
-            .backgroundColor(this.clickedStates[1] ? $r('app.color.app_theme') : Color.White)
+            .backgroundColor(
+              this.isPassedDay(this.dateList[index])
+                ? Color.White
+                : this.clickedStates[index] ? $r('app.color.app_theme') : Color.White
+            )
             .onClick(() => {
-              this.clickedStates[1] = !this.clickedStates[1]
-              if (this.planList.includes(this.dateList[1].getDate())) {
-                const index = this.planList.findIndex(item => item === this.dateList[1].getDate());
-                this.planList.splice(index, 1);
-              } else {
-                this.planList.push(this.dateList[1].getDate());
+              if (!this.isPassedDay(this.dateList[index])) {
+                this.clickedStates[index] = !this.clickedStates[index]
+                const dateValue = this.dateList[index].getDate()
+                const planIndex = this.planList.findIndex(item => item === dateValue)
+                if (this.clickedStates[index]) {  // true: 添加
+                  if (!this.planList.includes(dateValue)) {
+                    this.planList.push(dateValue);
+                  }
+                } else {  // false: 删除
+                  if (planIndex !== -1) {
+                    this.planList.splice(planIndex, 1);
+                  }
+                }
               }
             })
-          }
-
-          if (this.today > this.dateList[2].getDate() && this.month === this.dateList[2].getMonth()) {
-            Column() {
-              Text(this.weekNameList[this.dateList[2].getDay()])
-                .fontWeight(FontWeight.Medium)
-                .fontSize($r('sys.float.Body_L'))
-                .fontColor('rgba(0, 0, 0, 0.4)')
-                .margin({ top: 4, bottom: 2 })
-              Text((this.dateList[2].getMonth() + 1 < 10 ? '0' + (this.dateList[2].getMonth() + 1) :
-                this.dateList[2].getMonth() + 1 + '') + '.' +
-                (this.dateList[2].getDate() < 10 ? '0' + this.dateList[2].getDate() : this.dateList[2].getDate() + ''))
-                .fontColor('rgba(0, 0, 0, 0.4)')
-                .fontWeight(FontWeight.Medium)
-                .fontSize($r('sys.float.Body_S'))
-            }
-            .width('18%')
-            .height(47)
-            .borderRadius(8)
-            .backgroundColor(Color.White)
-          } else {
-            Column() {
-              Text(this.weekNameList[this.dateList[2].getDay()])
-                .fontWeight(FontWeight.Medium)
-                .fontSize($r('sys.float.Body_L'))
-                .fontColor(this.clickedStates[2] ? Color.White : 'rgba(0, 0, 0, 0.9)')
-                .margin({ top: 4, bottom: 2 })
-              Text((this.dateList[2].getMonth() + 1 < 10 ? '0' + (this.dateList[2].getMonth() + 1) :
-                this.dateList[2].getMonth() + 1 + '') + '.' +
-                (this.dateList[2].getDate() < 10 ? '0' + this.dateList[2].getDate() : this.dateList[2].getDate() + ''))
-                .fontColor(this.clickedStates[2] ? Color.White : 'rgba(0, 0, 0, 0.9)')
-                .fontWeight(FontWeight.Medium)
-                .fontSize($r('sys.float.Body_S'))
-            }
-            .width('18%')
-            .height(47)
-            .borderRadius(8)
-            .backgroundColor(this.clickedStates[2] ? $r('app.color.app_theme') : Color.White)
-            .onClick(() => {
-              this.clickedStates[2] = !this.clickedStates[2]
-              if (this.planList.includes(this.dateList[2].getDate())) {
-                const index = this.planList.findIndex(item => item === this.dateList[2].getDate());
-                this.planList.splice(index, 1);
-              } else {
-                this.planList.push(this.dateList[2].getDate());
-              }
-            })
-          }
-
-          if (this.today > this.dateList[3].getDate() && this.month === this.dateList[3].getMonth()) {
-            Column() {
-              Text(this.weekNameList[this.dateList[3].getDay()])
-                .fontWeight(FontWeight.Medium)
-                .fontSize($r('sys.float.Body_L'))
-                .fontColor('rgba(0, 0, 0, 0.4)')
-                .margin({ top: 4, bottom: 2 })
-              Text((this.dateList[3].getMonth() + 1 < 10 ? '0' + (this.dateList[3].getMonth() + 1) :
-                this.dateList[3].getMonth() + 1 + '') + '.' +
-                (this.dateList[3].getDate() < 10 ? '0' + this.dateList[3].getDate() : this.dateList[3].getDate() + ''))
-                .fontColor('rgba(0, 0, 0, 0.4)')
-                .fontWeight(FontWeight.Medium)
-                .fontSize($r('sys.float.Body_S'))
-            }
-            .width('18%')
-            .height(47)
-            .borderRadius(8)
-            .backgroundColor(Color.White)
-          } else {
-            Column() {
-              Text(this.weekNameList[this.dateList[3].getDay()])
-                .fontWeight(FontWeight.Medium)
-                .fontSize($r('sys.float.Body_L'))
-                .fontColor(this.clickedStates[3] ? Color.White : 'rgba(0, 0, 0, 0.9)')
-                .margin({ top: 4, bottom: 2 })
-              Text((this.dateList[3].getMonth() + 1 < 10 ? '0' + (this.dateList[3].getMonth() + 1) :
-                this.dateList[3].getMonth() + 1 + '') + '.' +
-                (this.dateList[3].getDate() < 10 ? '0' + this.dateList[3].getDate() : this.dateList[3].getDate() + ''))
-                .fontColor(this.clickedStates[3] ? Color.White : 'rgba(0, 0, 0, 0.9)')
-                .fontWeight(FontWeight.Medium)
-                .fontSize($r('sys.float.Body_S'))
-            }
-            .width('18%')
-            .height(47)
-            .borderRadius(8)
-            .backgroundColor(this.clickedStates[3] ? $r('app.color.app_theme') : Color.White)
-            .onClick(() => {
-              this.clickedStates[3] = !this.clickedStates[3]
-              if (this.planList.includes(this.dateList[3].getDate())) {
-                const index = this.planList.findIndex(item => item === this.dateList[3].getDate());
-                this.planList.splice(index, 1);
-              } else {
-                this.planList.push(this.dateList[3].getDate());
-              }
-            })
-          }
-
-          if (this.today > this.dateList[4].getDate() && this.month === this.dateList[4].getMonth()) {
-            Column() {
-              Text(this.weekNameList[this.dateList[4].getDay()])
-                .fontWeight(FontWeight.Medium)
-                .fontSize($r('sys.float.Body_L'))
-                .fontColor('rgba(0, 0, 0, 0.4)')
-                .margin({ top: 4, bottom: 2 })
-              Text((this.dateList[4].getMonth() + 1 < 10 ? '0' + (this.dateList[4].getMonth() + 1) :
-                this.dateList[4].getMonth() + 1 + '') + '.' +
-                (this.dateList[4].getDate() < 10 ? '0' + this.dateList[4].getDate() : this.dateList[4].getDate() + ''))
-                .fontColor('rgba(0, 0, 0, 0.4)')
-                .fontWeight(FontWeight.Medium)
-                .fontSize($r('sys.float.Body_S'))
-            }
-            .width('18%')
-            .height(47)
-            .borderRadius(8)
-            .backgroundColor(Color.White)
-          } else {
-            Column() {
-              Text(this.weekNameList[this.dateList[4].getDay()])
-                .fontWeight(FontWeight.Medium)
-                .fontSize($r('sys.float.Body_L'))
-                .fontColor(this.clickedStates[4] ? Color.White : 'rgba(0, 0, 0, 0.9)')
-                .margin({ top: 4, bottom: 2 })
-              Text((this.dateList[4].getMonth() + 1 < 10 ? '0' + (this.dateList[4].getMonth() + 1) :
-                this.dateList[4].getMonth() + 1 + '') + '.' +
-                (this.dateList[4].getDate() < 10 ? '0' + this.dateList[4].getDate() : this.dateList[4].getDate() + ''))
-                .fontColor(this.clickedStates[4] ? Color.White : 'rgba(0, 0, 0, 0.9)')
-                .fontWeight(FontWeight.Medium)
-                .fontSize($r('sys.float.Body_S'))
-            }
-            .width('18%')
-            .height(47)
-            .borderRadius(8)
-            .backgroundColor(this.clickedStates[4] ? $r('app.color.app_theme') : Color.White)
-            .onClick(() => {
-              this.clickedStates[4] = !this.clickedStates[4]
-              if (this.planList.includes(this.dateList[4].getDate())) {
-                const index = this.planList.findIndex(item => item === this.dateList[4].getDate());
-                this.planList.splice(index, 1);
-              } else {
-                this.planList.push(this.dateList[4].getDate());
-              }
-            })
-          }
+          })
         }
         .justifyContent(FlexAlign.Center)
         .margin({ bottom: 12 })
 
         Row({ space: 8 }) {
-          if (this.today > this.dateList[5].getDate() && this.month === this.dateList[5].getMonth()) {
+          ForEach([5, 6], (index: number) => {
             Column() {
-              Text(this.weekNameList[this.dateList[5].getDay()])
+              Text(this.weekNameList[this.dateList[index].getDay()])
                 .fontWeight(FontWeight.Medium)
                 .fontSize($r('sys.float.Body_L'))
-                .fontColor('rgba(0, 0, 0, 0.4)')
+                .fontColor(
+                  this.isPassedDay(this.dateList[index])
+                    ? 'rgba(0,0,0,0.4)'
+                    : this.clickedStates[index] ? Color.White : 'rgba(0,0,0,0.9)'
+                )
                 .margin({ top: 4, bottom: 2 })
-              Text((this.dateList[5].getMonth() + 1 < 10 ? '0' + (this.dateList[5].getMonth() + 1) :
-                this.dateList[5].getMonth() + 1 + '') + '.' +
-                (this.dateList[5].getDate() < 10 ? '0' + this.dateList[5].getDate() : this.dateList[5].getDate() + ''))
-                .fontColor('rgba(0, 0, 0, 0.4)')
-                .fontWeight(FontWeight.Medium)
-                .fontSize($r('sys.float.Body_S'))
-            }
-            .width('18%')
-            .height(47)
-            .borderRadius(8)
-            .backgroundColor(Color.White)
-          } else {
-            Column() {
-              Text(this.weekNameList[this.dateList[5].getDay()])
-                .fontWeight(FontWeight.Medium)
-                .fontSize($r('sys.float.Body_L'))
-                .fontColor(this.clickedStates[5] ? Color.White : 'rgba(0, 0, 0, 0.9)')
-                .margin({ top: 4, bottom: 2 })
-              Text((this.dateList[5].getMonth() + 1 < 10 ? '0' + (this.dateList[5].getMonth() + 1) :
-                this.dateList[5].getMonth() + 1 + '') + '.' +
-                (this.dateList[5].getDate() < 10 ? '0' + this.dateList[5].getDate() : this.dateList[5].getDate() + ''))
-                .fontColor(this.clickedStates[5] ? Color.White : 'rgba(0, 0, 0, 0.9)')
-                .fontWeight(FontWeight.Medium)
-                .fontSize($r('sys.float.Body_S'))
-            }
-            .width('18%')
-            .height(47)
-            .borderRadius(8)
-            .backgroundColor(this.clickedStates[5] ? $r('app.color.app_theme') : Color.White)
-            .onClick(() => {
-              this.clickedStates[5] = !this.clickedStates[5]
-              if (this.planList.includes(this.dateList[5].getDate())) {
-                const index = this.planList.findIndex(item => item === this.dateList[5].getDate());
-                this.planList.splice(index, 1);
-              } else {
-                this.planList.push(this.dateList[5].getDate());
-              }
-            })
-          }
 
-          if (this.today > this.dateList[6].getDate() && this.month === this.dateList[6].getMonth()) {
-            Column() {
-              Text(this.weekNameList[this.dateList[6].getDay()])
-                .fontWeight(FontWeight.Medium)
-                .fontSize($r('sys.float.Body_L'))
-                .fontColor('rgba(0, 0, 0, 0.4)')
-                .margin({ top: 4, bottom: 2 })
-              Text((this.dateList[6].getMonth() + 1 < 10 ? '0' + (this.dateList[6].getMonth() + 1) :
-                this.dateList[6].getMonth() + 1 + '') + '.' +
-                (this.dateList[6].getDate() < 10 ? '0' + this.dateList[6].getDate() : this.dateList[6].getDate() + ''))
-                .fontColor('rgba(0, 0, 0, 0.4)')
-                .fontWeight(FontWeight.Medium)
-                .fontSize($r('sys.float.Body_S'))
-            }
-            .width('18%')
-            .height(47)
-            .borderRadius(8)
-            .backgroundColor(Color.White)
-          } else {
-            Column() {
-              Text(this.weekNameList[this.dateList[6].getDay()])
-                .fontWeight(FontWeight.Medium)
-                .fontSize($r('sys.float.Body_L'))
-                .fontColor(this.clickedStates[6] ? Color.White : 'rgba(0, 0, 0, 0.9)')
-                .margin({ top: 4, bottom: 2 })
-              Text((this.dateList[6].getMonth() + 1 < 10 ? '0' + (this.dateList[6].getMonth() + 1) :
-                this.dateList[6].getMonth() + 1 + '') + '.' +
-                (this.dateList[6].getDate() < 10 ? '0' + this.dateList[6].getDate() : this.dateList[6].getDate() + ''))
-                .fontColor(this.clickedStates[6] ? Color.White : 'rgba(0, 0, 0, 0.9)')
+              Text(
+                (this.dateList[index].getMonth() + 1 < 10
+                  ? '0' + (this.dateList[index].getMonth() + 1)
+                  : this.dateList[index].getMonth() + 1 + '') + '.' +
+                  (this.dateList[index].getDate() < 10
+                    ? '0' + this.dateList[index].getDate()
+                    : this.dateList[index].getDate() + '')
+              )
+                .fontColor(
+                  this.isPassedDay(this.dateList[index])
+                    ? 'rgba(0,0,0,0.4)'
+                    : this.clickedStates[index] ? Color.White : 'rgba(0,0,0,0.9)'
+                )
                 .fontWeight(FontWeight.Medium)
                 .fontSize($r('sys.float.Body_S'))
             }
             .width('18%')
             .height(47)
             .borderRadius(8)
-            .backgroundColor(this.clickedStates[6] ? $r('app.color.app_theme') : Color.White)
+            .backgroundColor(
+              this.isPassedDay(this.dateList[index])
+                ? Color.White
+                : this.clickedStates[index] ? $r('app.color.app_theme') : Color.White
+            )
             .onClick(() => {
-              this.clickedStates[6] = !this.clickedStates[6]
-              if (this.planList.includes(this.dateList[6].getDate())) {
-                const index = this.planList.findIndex(item => item === this.dateList[6].getDate());
-                this.planList.splice(index, 1);
-              } else {
-                this.planList.push(this.dateList[6].getDate());
+              if (!this.isPassedDay(this.dateList[index])) {
+                this.clickedStates[index] = !this.clickedStates[index]
+                const dateValue = this.dateList[index].getDate()
+                const planIndex = this.planList.findIndex(item => item === dateValue)
+                if (this.clickedStates[index]) {  // true: 添加
+                  if (!this.planList.includes(dateValue)) {
+                    this.planList.push(dateValue);
+                  }
+                } else {  // false: 删除
+                  if (planIndex !== -1) {
+                    this.planList.splice(planIndex, 1);
+                  }
+                }
               }
             })
-          }
+          })
         }
         .justifyContent(FlexAlign.Center)
       }

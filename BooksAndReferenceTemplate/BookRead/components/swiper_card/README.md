@@ -44,6 +44,10 @@
      {
        "name": "swiper_card",
        "srcPath": "./xxx/swiper_card"
+     },
+     {
+        "name": "base_common",
+        "srcPath": "./xxx/base_common",
      }
    ]
    ```
@@ -51,7 +55,8 @@
    ```typescript
    // xxx为组件存放的目录名称
      "dependencies": {
-     "swiper_card": "file:./xxx/swiper_card"
+     "swiper_card": "file:./xxx/swiper_card",
+     "base_common": "file:./xxx/base_common"
    }
    ```
 

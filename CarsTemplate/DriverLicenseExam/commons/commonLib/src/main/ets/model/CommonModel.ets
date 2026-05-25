@@ -5,6 +5,7 @@ import { RouterModule } from '../utils/RouterModule'
 
 import { Permissions } from '@kit.AbilityKit';
 import { geoLocationManager } from '@kit.LocationKit';
+import { Logger } from '../utils/Logger';
 
 const TAG: string = 'CommonModel';
 
@@ -45,13 +46,13 @@ export class CommonModel {
 
             let reverseGeocodeRequest:geoLocationManager.ReverseGeoCodeRequest = {'latitude': location.latitude, 'longitude':  location.longitude, 'maxItems': 1}
             const res = await geoLocationManager.getAddressesFromLocation(reverseGeocodeRequest);
-            console.log('[location]',JSON.stringify(res))
+            Logger.info(TAG, '[location]', JSON.stringify(res))
             if (res && res.length > 0) {
               addressParam = res[0].locality || '';
             }
         }
       } catch (e) {
-        console.log(e);
+        Logger.error(TAG, JSON.stringify(e));
       }
     }
 

@@ -17,9 +17,8 @@ export function checkUpdate(context: common.UIAbilityContext): Promise<number> {
         resolve(checkResult.updateAvailable);
       })
       .catch((error: BusinessError) => {
-        console.error(
-          `checkAppUpdate failed, code: ${error.code}, message: ${error.message}`,
-        );
+        hilog.error(0x0000, 'AppUpdate',
+          `checkAppUpdate failed, code: ${error.code}, message: ${error.message}`);
         resolve(0);
       });
   });
@@ -57,7 +56,7 @@ export async function checkUpdateAndShowDialog(context: UIContext) {
       context.getPromptAction().showToast({ message: '已经是最新版本' });
     }
   } catch (error) {
-    console.error(`检查更新失败: ${(error as BusinessError).message}`);
+    hilog.error(0x0000, 'AppUpdate', `检查更新失败: ${(error as BusinessError).message}`);
   }
 }
 
@@ -73,7 +72,8 @@ export function pullUpAppGallery(context: common.UIAbilityContext) {
       context.openLink(link);
     })
     .catch((error: BusinessError) => {
-      console.error(`getBundleInfoForSelf failed, code: ${error.code}, message: ${error.message}`);
+      hilog.error(0x0000, 'AppUpdate',
+        `getBundleInfoForSelf failed, code: ${error.code}, message: ${error.message}`);
     });
 }
 

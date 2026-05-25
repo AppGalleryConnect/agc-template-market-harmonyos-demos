@@ -49,6 +49,10 @@ export class SettingAboutVM extends BaseViewModel {
       entities: ['entity.system.browsable'],
       uri: 'https://beian.miit.gov.cn/#/home',
     }
-    context.startAbility(want);
+    try {
+      context.startAbility(want);
+    } catch (e) {
+      console.error('startAbility failed')
+    }
   }
 }

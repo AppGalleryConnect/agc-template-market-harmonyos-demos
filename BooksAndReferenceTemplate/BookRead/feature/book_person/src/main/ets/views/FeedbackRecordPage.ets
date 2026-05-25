@@ -1,7 +1,8 @@
 import { Constants, FeedbackItem, FeedbackItemType, ReturnButton, FeedbackRecord, NavHeaderBar,
   BreakpointTypeEnum,
   BreakpointSystem,
-  BreakpointStorage} from 'common';
+  BreakpointStorage,
+  FontModel} from 'common';
 import { AppStorageV2 } from '@kit.ArkUI';
 
 @Entry
@@ -12,6 +13,7 @@ export struct FeedbackRecordPage {
   @Local feedbackRecord: FeedbackRecord =
     AppStorageV2.connect(FeedbackRecord, 'feedbackRecord', () => new FeedbackRecord())!
   @Local curBreakpoint: BreakpointStorage = BreakpointSystem.currentBreakpoint
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
   async initData() {
     this.feedbackList = this.feedbackRecord.feedbackList
   }
@@ -39,7 +41,7 @@ export struct FeedbackRecordPage {
                   .fillColor('#CCCCCC')
 
                 Text('暂无反馈记录')
-                  .fontSize(16)
+                  .fontSize(this.fontModel.getFg(16))
                   .fontColor($r('sys.color.font_secondary'))
               }
               .justifyContent(FlexAlign.Center)
@@ -50,18 +52,18 @@ export struct FeedbackRecordPage {
                 Column({ space: 12 }) {
 
                   Text('2025.06.06 周五 13:30:26')
-                    .fontSize($r('sys.float.Body_S'))
+                    .fontSize(this.fontModel.getFg(12))
                     .fontWeight(FontWeight.Medium)
                     .fontColor($r('sys.color.font_primary'))
 
                   Column() {
                     Text('问题描述')
-                      .fontSize($r('sys.float.Body_L'))
+                      .fontSize(this.fontModel.getFg(16))
                       .fontWeight(FontWeight.Medium)
                       .margin({ top: 12, bottom: 8 })
 
                     Text(item.description)
-                      .fontSize($r('sys.float.Body_S'))
+                      .fontSize(this.fontModel.getFg(12))
                       .fontWeight(FontWeight.Regular)
                       .fontColor($r('sys.color.font_secondary'))
                   }
@@ -70,7 +72,7 @@ export struct FeedbackRecordPage {
 
                   Column() {
                     Text('问题截图')
-                      .fontSize($r('sys.float.Body_L'))
+                      .fontSize(this.fontModel.getFg(16))
                       .fontWeight(FontWeight.Medium)
                       .margin({ top: 12, bottom: 8 })
                     Scroll(){

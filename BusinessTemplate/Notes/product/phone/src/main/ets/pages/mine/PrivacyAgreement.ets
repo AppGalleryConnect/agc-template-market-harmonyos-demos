@@ -14,10 +14,32 @@ export struct PrivacyAgreement {
 
   build() {
     NavDestination() {
-      Web({ src: this.privacyAgreementPath, controller: this.controller })
-        .verticalScrollBarAccess(false)
-        .fileAccess(false)
-        .geolocationAccess(false)
+      Column() {
+        Row() {
+          SymbolGlyph($r('sys.symbol.arrow_left'))
+            .fontSize(20)
+            .fontColor([$r('sys.color.font_primary')])
+            .onClick(() => {
+              this.appPathStack.pop();
+            });
+          Blank();
+        }
+        .width('100%')
+        .height(44)
+        .alignItems(VerticalAlign.Center)
+        .padding({ left: 12, right: 12, top: 12, bottom: 8 })
+        .backgroundColor($r('sys.color.background_secondary'));
+
+        Web({ src: this.privacyAgreementPath, controller: this.controller })
+          .layoutWeight(1)
+          .width('100%')
+          .verticalScrollBarAccess(false)
+          .fileAccess(false)
+          .geolocationAccess(false);
+      }
+      .width('100%')
+      .height('100%')
+      .backgroundColor($r('sys.color.background_secondary'));
     }
     .hideTitleBar(true)
     .onReady((cxt: NavDestinationContext) => {

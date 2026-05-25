@@ -29,9 +29,9 @@ import { City } from './Model';
 const TAG: string = '[CitySelect]'
 const DOMAIN: number = 0xFF00
 
-export const getLocationCity = (): Promise<City | undefined> => {
+export const getLocationCity = (context: common.UIAbilityContext): Promise<City | undefined> => {
   return new Promise((resolve) => {
-    applyLocationPermission().then((isGranted) => {
+    applyLocationPermission(context).then((isGranted) => {
       if (isGranted) {
         getCurrentCityInfo().then((city) => {
           resolve(city);
@@ -52,28 +52,32 @@ let isApplyLocPermAgain = false;
 export function setApplyLocPermAgain(data: boolean) {
   isApplyLocPermAgain = data;
 }
-const applyLocationPermission = async (): Promise<boolean> => {
+const applyLocationPermission = async (context: common.UIAbilityContext): Promise<boolean> => {
   const permission: Permissions = 'ohos.permission.APPROXIMATELY_LOCATION';
   const isGrantedAppLo = await checkPermissionGrant(permission);
   if (isGrantedAppLo) {
     return true;
   }
-  const context = getContext() as common.UIAbilityContext
   // 向用户申请
   const atManager = abilityAccessCtrl.createAtManager();
-  return atManager.requestPermissionsFromUser(context, [permission])
-    .then(async (result: PermissionRequestResult) => {
-      if (result.authResults.every(v => v === 0)) {
-        return true;
-      }
-      // 二次向用户申请
-      if (isApplyLocPermAgain) {
-        const resp = await atManager.requestPermissionOnSetting(context, [permission]);
-        return resp.every(v => v === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED);
-      }
-      isApplyLocPermAgain = true;
-      return false;
-    });
+  try {
+    return atManager.requestPermissionsFromUser(context, [permission])
+      .then(async (result: PermissionRequestResult) => {
+        if (result.authResults.every(v => v === 0)) {
+          return true;
+        }
+        // 二次向用户申请
+        if (isApplyLocPermAgain) {
+          const resp = await atManager.requestPermissionOnSetting(context, [permission]);
+          return resp.every(v => v === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED);
+        }
+        isApplyLocPermAgain = true;
+        return false;
+      });
+  } catch (err) {
+    hilog.error(DOMAIN, TAG, `Failed to get location permission. Code is ${err.code}, message is ${err.message}`);
+    return false;
+  }
 }
 
 /**

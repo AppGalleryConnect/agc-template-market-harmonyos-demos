@@ -14,8 +14,11 @@
  */
 
 import { preferences } from '@kit.ArkData';
+import { BusinessError } from '@kit.BasicServicesKit';
+import { hilog } from '@kit.PerformanceAnalysisKit';
 
 const TAG: string = 'PreferencesUtil';
+const DOMAIN: number = 0x0000;
 const MY_STORE: string = 'myStore';
 
 export class PreferencesUtil {
@@ -38,11 +41,16 @@ export class PreferencesUtil {
   }
 
   preferencesFlush(preferences: preferences.Preferences) {
-    preferences.flush((err) => {
-      if (err) {
-        console.error(TAG, `Failed to flush. Code:${err.code}, message:${err.message}`);
-      }
-    })
+    try {
+      preferences.flush((err: BusinessError | undefined) => {
+        if (err !== undefined) {
+          hilog.error(DOMAIN, TAG, 'Failed to flush. Code:%{public}d, message:%{public}s', err.code, err.message);
+        }
+      });
+    } catch (e) {
+      const err = e as BusinessError;
+      hilog.error(DOMAIN, TAG, 'flush threw. Code:%{public}d, message:%{public}s', err.code, err.message);
+    }
   }
 
   preferencesPut(preferences: preferences.Preferences, key: string, value: preferences.ValueType): void {
@@ -53,7 +61,7 @@ export class PreferencesUtil {
   // 获取数据
   getPreferencesValue(preferences: preferences.Preferences, key: string): preferences.ValueType {
     if (preferences === null) {
-      console.error(TAG, `preferences is null`);
+      hilog.error(DOMAIN, TAG, 'preferences is null');
       return '';
     }
     return preferences.getSync(key, '');
@@ -61,7 +69,7 @@ export class PreferencesUtil {
   //判断是否包含key
   hasPreferencesKey(preferences: preferences.Preferences, key: string): boolean {
     if (preferences === null) {
-      console.error(TAG, `preferences is null`);
+      hilog.error(DOMAIN, TAG, 'preferences is null');
       return false;
     }
     return preferences.hasSync(key);
@@ -76,7 +84,7 @@ export class PreferencesUtil {
 
   getFormIds(preferences: preferences.Preferences): Array<string> {
     if (preferences === null) {
-      console.error(TAG, `preferences is null`);
+      hilog.error(DOMAIN, TAG, 'preferences is null');
       return [];
     }
     return preferences.getSync('formIdList', ['']) as Array<string>;
@@ -95,7 +103,8 @@ export class PreferencesUtil {
       }
       this.preferencesFlush(preferences);
     } catch (error) {
-      console.error(TAG, `Failed to check the key 'formIds'. Code:${error.code}, message:${error.message}`);
+      const err = error as BusinessError;
+      hilog.error(DOMAIN, TAG, 'addFormId failed. Code:%{public}d, message:%{public}s', err.code, err.message);
     }
   }
 
@@ -103,7 +112,7 @@ export class PreferencesUtil {
     try {
       let preferences = this.getPreferences(context);
       if (preferences === null) {
-        console.error(TAG, `preferences is null`);
+        hilog.error(DOMAIN, TAG, 'preferences is null');
         return;
       }
       if (preferences.hasSync('formIdList')) {
@@ -119,7 +128,8 @@ export class PreferencesUtil {
         this.preferencesFlush(preferences);
       }
     } catch (error) {
-      console.error(TAG, `Failed to get preferences. Code:${error.code}, message:${error.message}`);
+      const err = error as BusinessError;
+      hilog.error(DOMAIN, TAG, 'removeFormId failed. Code:%{public}d, message:%{public}s', err.code, err.message);
     }
   }
 }

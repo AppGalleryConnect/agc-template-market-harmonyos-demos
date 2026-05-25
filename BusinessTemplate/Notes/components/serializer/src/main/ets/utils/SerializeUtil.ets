@@ -5,6 +5,7 @@ import { fileIo as fs } from '@kit.CoreFileKit';
 import { util } from '@kit.ArkTS';
 import { SerializedMutableStyledString, SerializedStyleOptions } from '../types/Types';
 import { BusinessError } from '@kit.BasicServicesKit';
+import { hilog } from '@kit.PerformanceAnalysisKit';
 
 export class SerializeUtil {
   static async serialize(styledString: MutableStyledString, uiContext: UIContext): Promise<string> {
@@ -99,7 +100,8 @@ export class SerializeUtil {
           fs.close(fd);
         }
       }).catch((error: BusinessError) => {
-      console.error(`Failed to pack the image.code ${error.code},message is ${error.message}`);
+      hilog.error(0x0000, 'SerializeUtil',
+        `Failed to pack the image.code ${error.code},message is ${error.message}`);
     });
   }
 }

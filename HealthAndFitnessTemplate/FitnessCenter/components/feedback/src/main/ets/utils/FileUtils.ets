@@ -1,8 +1,10 @@
 import { common, contextConstant } from '@kit.AbilityKit';
 import { fileUri, fileIo as fs } from '@kit.CoreFileKit';
-
 import { NormalizedError } from './NormalizedError';
 import { BytesUtils } from './BytesUtils';
+import { Logger } from 'external_interactions';
+
+const TAG: string = '[FileUtils]';
 
 export class FileUtils {
 
@@ -129,7 +131,7 @@ export class FileUtils {
       try {
         fs.closeSync(file);
       } catch (e) {
-        console.error(NormalizedError.from(e).toLogLine());
+        Logger.error(TAG, `${JSON.stringify(NormalizedError.from(e).toLogLine())}`);
       }
     }
   }

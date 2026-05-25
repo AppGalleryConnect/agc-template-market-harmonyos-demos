@@ -14,10 +14,14 @@ export class SignUtils {
         let signer = cryptoFramework.createSign('RSA2048|PKCS1|SHA256');
         signer.init(pubPair.priKey).then(async () => {
           let input: cryptoFramework.DataBlob = { data: stringToUint8ArrayWithEncoder(content) };
-          let signature = await signer.sign(input);
-          let result = await new util.Base64Helper().encode(signature.data);
-          hilog.debug(0, 'SignUtils', `SignUtils result resolve`);
-          resolve(uint8ArrayToStringWithDecoder(result));
+          try {
+            let signature = await signer.sign(input);
+            let result = await new util.Base64Helper().encode(signature.data);
+            hilog.debug(0, 'SignUtils', `SignUtils result resolve`);
+            resolve(uint8ArrayToStringWithDecoder(result));
+          } catch (error) {
+            console.error('SignUtils', ` signature error = ${JSON.stringify(error)}`)
+          }
         }).catch((error: BusinessError) => {
           hilog.debug(0, 'SignUtils', `SignUtils result reject error ${error.message} code ${error.code}`);
           reject(error.message);

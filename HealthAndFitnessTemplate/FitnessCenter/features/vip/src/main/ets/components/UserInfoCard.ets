@@ -1,4 +1,4 @@
-import { MockService } from 'external_interactions';
+import { Logger, MockService } from 'external_interactions';
 import { qrCodeDialog } from './QrCodeDialog';
 import { CustomContentDialog } from '@kit.ArkUI';
 import { authentication } from '@kit.AccountKit';
@@ -7,6 +7,8 @@ import { BusinessError } from '@kit.BasicServicesKit';
 import { LoginState ,GlobalBalance, AccountUpdate, EmitterConstant} from 'external_interactions'
 import { AppStorageV2 } from '@kit.ArkUI';
 import { emitter } from '@kit.BasicServicesKit';
+
+const TAG = '[UserInfoCard]';
 
 @ComponentV2
 export struct UserInfoCard {
@@ -73,7 +75,7 @@ export struct UserInfoCard {
         this.refreshUserInfo()
       })
     } catch (e) {
-      console.error(`emitter on failed. error: ${JSON.stringify(e)}`)
+      Logger.error(TAG, `emitter on failed. error: ${JSON.stringify(e)}`)
     }
     this.refreshUserInfo();
   }
@@ -82,7 +84,7 @@ export struct UserInfoCard {
     try {
       emitter.off(EmitterConstant.CANCEL_BOOK)
     } catch (e) {
-      console.error(`emitter off failed. error: ${JSON.stringify(e)}`)
+      Logger.error(TAG, `emitter off failed. error: ${JSON.stringify(e)}`)
     }
   }
 
@@ -212,7 +214,7 @@ export struct UserInfoCard {
     } catch (error) {
       // Mock逻辑，不管是否有证书权限，都直接关联
       this.updateLogin()
-      console.error(`Failed to authorize. errCode: ${error.code}, errMessage: ${error.message}`);
+      Logger.error(TAG, `Failed to authorize. errCode: ${error.code}, errMessage: ${error.message}`);
     }
   }
 
@@ -227,18 +229,18 @@ export struct UserInfoCard {
           let cancelAuthorizationResponse = data as authentication.CancelAuthorizationResponse;
           let state: string = cancelAuthorizationResponse.state!;
           if (cancelRequest.state !== state) {
-            console.error('Failed to cancel. The state is different');
+            Logger.error(TAG, 'Failed to cancel. The state is different');
             return;
           }
           this.getPhone()
         })
         .catch((err: BusinessError) => {
           this.getPhone()
-          console.error(`Failed to authorize. errCode: ${err.code}, errMessage: ${err.message}`);
+          Logger.error(TAG, `Failed to authorize. errCode: ${err.code}, errMessage: ${err.message}`);
         })
     } catch (err) {
       this.getPhone()
-      console.error(`Failed to authorize. errCode: ${err.code}, errMessage: ${err.message}`);
+      Logger.error(TAG, `Failed to authorize. errCode: ${err.code}, errMessage: ${err.message}`);
     }
   }
 

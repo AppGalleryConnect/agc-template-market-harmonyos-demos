@@ -39,7 +39,6 @@ export class MyCourseParam {
     if (!MyCourseParam.singleton) {
       MyCourseParam.singleton = new MyCourseParam();
     }
-    ;
     return MyCourseParam.singleton;
   }
 

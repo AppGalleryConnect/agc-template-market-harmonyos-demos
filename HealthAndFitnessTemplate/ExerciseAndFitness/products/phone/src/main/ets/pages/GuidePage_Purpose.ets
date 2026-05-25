@@ -20,6 +20,7 @@ struct GuidePage {
   @Local clickedStates: boolean[] = [false, false, false, false, false]
   @Local purpose: string[] = []
   @Local breakPointModel: BreakpointModel = AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
+  @Local imageWidth: string = '70%'
 
   purposeList: purposeInfo[] = [
     {
@@ -35,7 +36,7 @@ struct GuidePage {
       cover: $r('app.media.purpose3')
     },
     {
-      desc: '增强身体素质',
+      desc: '增强身体',
       cover: $r('app.media.purpose4')
     },
     {
@@ -56,8 +57,8 @@ struct GuidePage {
           Column() {
             Stack() {
               Image(purposeItem.cover)
-                .width(240)
-                .height(80)
+                .width(this.imageWidth)
+                .height('12%')
                 .borderRadius(16) // 可选：设置圆角
                 .border({
                   width: {
@@ -72,8 +73,13 @@ struct GuidePage {
               Column() {
                 Text(purposeItem.desc)  // 主标题
                   .fontSize($r('sys.float.Body_L'))
-                  .width(72)
-                  .position({ left: 144, top: 29 })
+                  .fontWeight(FontWeight.Bold)
+                  .width(108)
+                  .height(24)
+                  .offset({
+                    x: 72,
+                    y: 0
+                  })
                   .fontColor('rgba(237, 111, 33, 1)')
               }
             }
@@ -89,20 +95,23 @@ struct GuidePage {
             .width('100%')
           }
           .justifyContent(FlexAlign.Center)
+          .margin({ top: 8 })
         }
         .width('100%')
       })
     }
     .lanes(this.listLanes)
     .width('100%')
-    .margin({ top: 12 })
+    .margin({ top: 8 })
   }
 
   @Computed
   get listLanes() {
     if ([BreakpointNameEnum.SM].includes(this.breakPointModel.currentBreakpoint)) {
+      this.imageWidth = '70%'
       return 1;
     }
+    this.imageWidth = '90%'
     return 2;
   }
 

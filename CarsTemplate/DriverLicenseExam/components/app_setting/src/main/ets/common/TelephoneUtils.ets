@@ -20,7 +20,7 @@ export class TelephoneUtils {
           }
         });
       } catch (error) {
-        console.log(JSON.stringify(error))
+        Logger.error(TAG, JSON.stringify(error))
       }
 
     } else {

@@ -1,4 +1,8 @@
 import { window } from '@kit.ArkUI';
+import { hilog } from '@kit.PerformanceAnalysisKit';
+
+const DOMAIN: number = 0xFF00;
+const TAG: string = 'CollectPersonalInfo';
 
 @ObservedV2
 export class WindowModel {
@@ -13,7 +17,7 @@ export class WindowModel {
         this.windowBottomPadding = px2vp(area.bottomRect.height);
       })
     } catch (error) {
-      console.log(JSON.stringify(error))
+      hilog.error(DOMAIN, TAG, '%{public}s', JSON.stringify(error))
     }
 
   }
@@ -28,7 +32,7 @@ export class WindowModel {
         currentWindow.on('avoidAreaChange', this.getWindowBottomPadding);
       })
     } catch (error) {
-      console.log(JSON.stringify(error))
+      hilog.error(DOMAIN, TAG, '%{public}s', JSON.stringify(error))
     }
   }
 
@@ -41,7 +45,7 @@ export class WindowModel {
         currentWindow.off('avoidAreaChange', this.getWindowBottomPadding);
       })
     } catch (error) {
-      console.log(JSON.stringify(error))
+      hilog.error(DOMAIN, TAG, '%{public}s', JSON.stringify(error))
     }
   }
 
@@ -56,7 +60,7 @@ export class WindowModel {
         currentWindow.on('keyboardHeightChange', callback);
       })
     } catch (error) {
-      console.log(JSON.stringify(error))
+      hilog.error(DOMAIN, TAG, '%{public}s', JSON.stringify(error))
     }
 
   }
@@ -70,7 +74,7 @@ export class WindowModel {
         currentWindow.off('keyboardHeightChange', callback);
       })
     } catch (error) {
-      console.log(JSON.stringify(error))
+      hilog.error(DOMAIN, TAG, '%{public}s', JSON.stringify(error))
     }
   }
 }

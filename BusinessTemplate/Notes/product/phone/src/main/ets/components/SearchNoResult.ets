@@ -3,6 +3,8 @@ import { AppStorageV2 } from '@kit.ArkUI';
 
 @ComponentV2
 export struct SearchNoResult {
+  /** 平板侧栏等场景：与列表左对齐 */
+  @Param alignStart: boolean = false;
   @Local globalInfo: GlobalInfoModel =
     AppStorageV2.connect<GlobalInfoModel>(GlobalInfoModel, () => new GlobalInfoModel())!;
   build() {
@@ -27,7 +29,7 @@ export struct SearchNoResult {
         right: $r('sys.float.padding_level16'),
       },
     }).getValue(this.globalInfo.currentBreakpoint))
-    .justifyContent(FlexAlign.Center)
-    .alignItems(HorizontalAlign.Center);
+    .justifyContent(this.alignStart ? FlexAlign.Start : FlexAlign.Center)
+    .alignItems(this.alignStart ? HorizontalAlign.Start : HorizontalAlign.Center);
   }
 }

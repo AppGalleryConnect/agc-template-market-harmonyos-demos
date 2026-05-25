@@ -69,11 +69,15 @@ class BreakpointSystem {
           this._windowClass = win;
           WindowUtils.setWindowWidth(win.getWindowProperties().windowRect.width)
           WindowUtils.setWindowHeight(win.getWindowProperties().windowRect.height)
-          this._windowClass.on('windowSizeChange', () => {
-            this.updateBreakpoint();
-            WindowUtils.setWindowWidth(win.getWindowProperties().windowRect.width)
-            WindowUtils.setWindowHeight(win.getWindowProperties().windowRect.height)
-          });
+          try {
+            this._windowClass.on('windowSizeChange', () => {
+              this.updateBreakpoint();
+              WindowUtils.setWindowWidth(win.getWindowProperties().windowRect.width)
+              WindowUtils.setWindowHeight(win.getWindowProperties().windowRect.height)
+            });
+          } catch (error) {
+            console.error('BreakpointSystem', `windowClass on error = ${JSON.stringify(error)}`)
+          }
         })
         .catch((err: BusinessError) => {
           hilog.error(0x0000,TAG, 'get last window failed. error: ' + JSON.stringify(err))
@@ -83,9 +87,13 @@ class BreakpointSystem {
 
   public unregister() {
     if (this._windowClass) {
-      this._windowClass.off('windowSizeChange', () => {
-        this.updateBreakpoint();
-      });
+      try {
+        this._windowClass.off('windowSizeChange', () => {
+          this.updateBreakpoint();
+        });
+      } catch (e) {
+        hilog.error(0x0000, TAG, `unregister failed: ${e}`);
+      }
     }
   }
 

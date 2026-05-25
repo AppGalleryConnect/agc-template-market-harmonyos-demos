@@ -15,6 +15,8 @@ import {
   ColorModeClass,
   Constants,
   EpubUtils,
+  GlobalContext,
+  ImmersiveListener,
   ReadSet,
   TCRouter,
   WindowUtils
@@ -56,6 +58,8 @@ export struct ReaderPage {
   private swipeThreshold: number = 50;
   private swipeStartX: number = 0;
   private hasTriggeredSwipe: boolean = false;
+  private lastPageOffset: number = -1;
+  private isOnClick: boolean = false;
   windowTopHeight: number = AppStorage.get('windowTopHeight') as number
   bottomRectHeight: number = AppStorage.get('bottomRectHeight') as number
   textClockController: TextClockController = new TextClockController();
@@ -82,6 +86,22 @@ export struct ReaderPage {
     }
   }
 
+  @Monitor('pageData')
+  onPageDataChange() {
+    const index = this.pageData?.resourceIndex;
+    if (index === undefined || index === null) {
+      this.book!.readProgress = '未读';
+      return;
+    }
+    const total = this.spineList.length;
+    if (index + 1 === total) {
+      this.book!.readProgress = '已读完';
+    } else {
+      this.book!.readProgress =
+        `已读${(((index + 1) / total) * 100).toFixed(2)}%`;
+    }
+  }
+
   onWindowsAppear(): void {
     WindowUtils.onWindowSizeChange(() => {
       this.readerSetting.viewPortWidth = WindowUtils.getWindowWidth()
@@ -90,6 +110,24 @@ export struct ReaderPage {
         this.readerComponentController.setPageConfig(this.readerSetting)
       }
     })
+  }
+
+  aboutToAppear(): void {
+    const p = TCRouter.getParams<BookInfo>(Constants.READ_KIT_ROUTER);
+    if (p) {
+      this.book = p;
+      ReviewDataUtil.setCurrentBookInfo(this.book);
+      // let context = GlobalContext.getContext();
+      // let resourceDir = context.resourceDir
+      // let fileName: string = (this.book.coverUrl as string).split('.').pop()!
+      // let bookResourceDir = resourceDir + '/' + fileName + '.png';
+      ImmersiveListener.immersiveListening(this.book, '')
+    }
+    this.onWindowsAppear()
+  }
+
+  aboutToDisappear(): void {
+    ImmersiveListener.immersiveDisablingListening()
   }
 
   @Builder
@@ -203,9 +241,11 @@ export struct ReaderPage {
   async loadBook() {
     this.userInfo = AppStorage.get<UserInfo>('userInfo');
     this.startTime = systemDateTime.getTime(false)
-    // mock同一本书
-    this.book!.localPath = await EpubUtils.loadEpubFileFromNetwork('mock', this.book!.epubUrl,
-      (this.getUIContext().getHostContext() as Context).cacheDir)
+
+    if (!this.book?.isDownload) {
+      this.book!.localPath =
+        await EpubUtils.loadEpubFileFromNetwork(this.book!, (this.getUIContext().getHostContext() as Context).cacheDir)
+    }
     const hisRsp = await BookApi.getBooksShelfList('historyBooks', Constants.API_GET_BOOK_HISTORY_PATH, '');
     let books = hisRsp.books;
     let index = books.findIndex(book => book.id === this.book!.id)
@@ -227,11 +267,11 @@ export struct ReaderPage {
     this.catalogItemList = this.bookParserHandler.getCatalogList() || [];
     // 获取书脊内容列表
     this.spineList = this.bookParserHandler.getSpineList();
+    if (AppStorage.has(this.book?.id)) {
+      this.pageData = AppStorage.get(this.book?.id) as readerCore.PageDataInfo
+    }
     if (this.book?.isFree! === '2') {
       this.lockedStatus = AppStorageV2.connect(Array, 'lockedStatus', () => []) as boolean[]
-      if (AppStorage.has('paidPageData')) {
-        this.pageData = AppStorage.get('paidPageData') as readerCore.PageDataInfo
-      }
       // mock付费章节
       if (this.lockedStatus.length === 0) {
         this.lockedStatus.push(false)
@@ -245,115 +285,128 @@ export struct ReaderPage {
         this.lockedStatus = Array(this.catalogItemList.length).fill(false)
       }
     } else {
-      if (AppStorage.has('freePageData')) {
-        this.pageData = AppStorage.get('freePageData') as readerCore.PageDataInfo
-      }
       for (let i = 0; i < this.catalogItemList.length; i++) {
         this.lockedStatus.push(false)
       }
     }
-    this.readerComponentController.on('resourceRequest', this.resourceRequest);
-    this.readerComponentController.on('pageShow', (data: readerCore.PageDataInfo): void => {
-      hilog.info(0x0000, 'testTag', 'pageshow: data is: ' + JSON.stringify(data));
-      if (data.state === readerCore.PageState.PAGE_ON_SHOW) {
-        this.isLoading = false;
-        let spineItem = this.spineList[data.resourceIndex]
-        let catalogItem = this.catalogItemList.filter(item => item.resourceFile === spineItem.href)
-        this.curChapterId = catalogItem[0].catalogId
-        this.pageData = data;
-        if (this.lockedStatus[this.curChapterId]) {
-          if (this.userInfo!.continuousBuy && this.userInfo!.bookCoins > this.price) {
-            // 自动购买
-            this.updateBookCoinsAndSave(this.price)
-            this.lockedStatus[this.curChapterId] = false
-          } else {
-            if (!this.isShowBuySheet) {
-              this.isShowBuySheet = true
-              baseActionSheet.show({
-                id: 'buyChapter',
-                title: { title: '购买' },
-                height: SheetSize.FIT_CONTENT,
-                preferType: SheetType.CENTER,
-                customContent: () => {
-                  this.buildBuyChapter(this.curChapterId)
-                },
-                onWillDismiss: (dismissSheetAction: DismissSheetAction) => {
-                  this.isShowBuySheet = false
-                  if (this.lockedStatus[this.curChapterId]) {
-                    this.readerComponentController.startPlay(this.pageData!.resourceIndex, this.pageData!.startDomPos)
-                    dismissSheetAction.dismiss();
+    try {
+      this.readerComponentController.on('resourceRequest', this.resourceRequest);
+      this.readerComponentController.on('pageShow', (data: readerCore.PageDataInfo): void => {
+        hilog.info(0x0000, 'testTag', 'pageshow: data is: ' + JSON.stringify(data));
+        if (data.state === readerCore.PageState.PAGE_ON_SHOW) {
+          this.isLoading = false;
+          let spineItem = this.spineList[data.resourceIndex]
+          let catalogItem = this.catalogItemList.filter(item => item.resourceFile === spineItem.href)
+          this.curChapterId = catalogItem[0].catalogId
+          this.pageData = data;
+          if (this.lockedStatus[this.curChapterId]) {
+            if (this.userInfo!.continuousBuy && this.userInfo!.bookCoins > this.price) {
+              // 自动购买
+              this.updateBookCoinsAndSave(this.price)
+              this.lockedStatus[this.curChapterId] = false
+            } else {
+              if (!this.isShowBuySheet) {
+                this.isShowBuySheet = true
+                baseActionSheet.show({
+                  id: 'buyChapter',
+                  title: { title: '购买' },
+                  height: SheetSize.FIT_CONTENT,
+                  preferType: SheetType.CENTER,
+                  customContent: () => {
+                    this.buildBuyChapter(this.curChapterId)
+                  },
+                  onWillDismiss: (dismissSheetAction: DismissSheetAction) => {
+                    this.isShowBuySheet = false
+                    if (this.lockedStatus[this.curChapterId]) {
+                      this.readerComponentController.startPlay(this.pageData!.resourceIndex, this.pageData!.startDomPos)
+                      dismissSheetAction.dismiss();
+                    }
                   }
-                }
-              })
+                })
+              }
             }
+          } else {
+            this.pageData = data
           }
-        } else {
-          this.pageData = data
+        } else if (data.state === readerCore.PageState.OPEN_BOOK_FAIL) {
+          hilog.info(0x0000, 'testTag', '检测到PAGE_OUT_OF_RANGE状态，跳转到精彩书评页面');
+          this.handleSwipeToReview();
         }
-      } else if (data.state === readerCore.PageState.OPEN_BOOK_FAIL) {
-        hilog.info(0x0000, 'testTag', '检测到PAGE_OUT_OF_RANGE状态，跳转到精彩书评页面');
-        this.handleSwipeToReview();
-      }
-    });
+      });
+    } catch (error) {
+      console.error('ReaderPage', ` readerComponentController error = ${JSON.stringify(error)}`)
+    }
     this.hasTriggeredReviewNavigation = false;
     hilog.info(0x0000, 'testTag', '阅读器预处理完成，重置跳转标志位');
     this.registerPageShowListener();
   }
 
   private registerPageShowListener(): void {
-    this.readerComponentController.off('pageShow');
-    this.readerComponentController.off('resourceRequest');
-    hilog.info(0x0000, 'testTag', '重新注册阅读器事件监听器');
-
-    this.readerComponentController.on('resourceRequest', this.resourceRequest);
-    this.readerComponentController.on('pageShow', (data: readerCore.PageDataInfo): void => {
-      hilog.info(0x0000, 'testTag', 'pageshow: data is: ' + JSON.stringify(data));
-
-      if (data.state === readerCore.PageState.PAGE_ON_SHOW) {
-        this.isLoading = false;
-        let spineItem = this.spineList[data.resourceIndex]
-        let catalogItem = this.catalogItemList.filter(item => item.resourceFile === spineItem.href)
-        if (catalogItem.length > 0) {
-          this.curChapterId = catalogItem[0].catalogId
-        }
-
-        // 更新最后一页状态
-        this.updateLastPageStatus(data);
-
-        if (this.lockedStatus[this.curChapterId]) {
-          if (this.userInfo!.continuousBuy && this.userInfo!.bookCoins > this.price) {
-            // 自动购买
-            this.updateBookCoinsAndSave(this.price)
-            this.lockedStatus[this.curChapterId] = false
+    try {
+      this.readerComponentController.off('pageShow');
+      this.readerComponentController.off('resourceRequest');
+      hilog.info(0x0000, 'testTag', '重新注册阅读器事件监听器');
+      this.readerComponentController.on('resourceRequest', this.resourceRequest);
+      this.readerComponentController.on('pageShow', (data: readerCore.PageDataInfo): void => {
+        hilog.info(0x0000, 'testTag', 'pageshow: data is: ' + JSON.stringify(data));
+        if (data.state === readerCore.PageState.PAGE_ON_SHOW) {
+          console.info(`testTag isonclick:${this.isOnClick}`)
+          if (data.pageOffset === this.lastPageOffset && data.pageOffset !== 0 && !this.isOnClick) {
+            this.lastPageOffset++;
+            hilog.info(0x0000, 'testTag', '检测到OPEN_BOOK_FAIL状态，判断是否为最后一页');
+            this.handlePageOutOfRange(data);
           } else {
-            if (!this.isShowBuySheet) {
-              this.isShowBuySheet = true
-              baseActionSheet.show({
-                id: 'buyChapter',
-                title: { title: '购买' },
-                height: SheetSize.FIT_CONTENT,
-                preferType: SheetType.CENTER,
-                customContent: () => {
-                  this.buildBuyChapter(this.curChapterId)
-                },
-                onWillDismiss: (dismissSheetAction: DismissSheetAction) => {
-                  this.isShowBuySheet = false
-                  if (this.lockedStatus[this.curChapterId]) {
-                    this.readerComponentController.startPlay(this.pageData!.resourceIndex, this.pageData!.startDomPos)
-                    dismissSheetAction.dismiss();
-                  }
+            this.lastPageOffset = data.pageOffset
+            this.isLoading = false;
+            let spineItem = this.spineList[data.resourceIndex]
+            let catalogItem = this.catalogItemList.filter(item => item.resourceFile === spineItem.href)
+            if (catalogItem.length > 0) {
+              this.curChapterId = catalogItem[0].catalogId
+            }
+
+            // 更新最后一页状态
+            this.updateLastPageStatus(data);
+
+            if (this.lockedStatus[this.curChapterId]) {
+              if (this.userInfo!.continuousBuy && this.userInfo!.bookCoins > this.price) {
+                // 自动购买
+                this.updateBookCoinsAndSave(this.price)
+                this.lockedStatus[this.curChapterId] = false
+              } else {
+                if (!this.isShowBuySheet) {
+                  this.isShowBuySheet = true
+                  baseActionSheet.show({
+                    id: 'buyChapter',
+                    title: { title: '购买' },
+                    height: SheetSize.FIT_CONTENT,
+                    preferType: SheetType.CENTER,
+                    customContent: () => {
+                      this.buildBuyChapter(this.curChapterId)
+                    },
+                    onWillDismiss: (dismissSheetAction: DismissSheetAction) => {
+                      this.isShowBuySheet = false
+                      if (this.lockedStatus[this.curChapterId]) {
+                        this.readerComponentController.startPlay(this.pageData!.resourceIndex,
+                          this.pageData!.startDomPos)
+                        dismissSheetAction.dismiss();
+                      }
+                    }
+                  })
                 }
-              })
+              }
+            } else {
+              this.pageData = data
             }
           }
-        } else {
-          this.pageData = data
+        } else if (data.state === readerCore.PageState.OPEN_BOOK_FAIL) {
+          this.lastPageOffset++;
+          hilog.info(0x0000, 'testTag', '检测到OPEN_BOOK_FAIL状态，判断是否为最后一页');
+          this.handlePageOutOfRange(data);
         }
-      } else if (data.state === readerCore.PageState.OPEN_BOOK_FAIL) {
-        hilog.info(0x0000, 'testTag', '检测到OPEN_BOOK_FAIL状态，判断是否为最后一页');
-        this.handlePageOutOfRange(data);
-      }
-    });
+      });
+    } catch (e) {
+      console.error('Failed to readerComponentController. Cause: ' + JSON.stringify(e));
+    }
   }
 
   private updateLastPageStatus(data: readerCore.PageDataInfo): void {
@@ -417,39 +470,49 @@ export struct ReaderPage {
   }
 
   onWillHide(): void {
-    if (this.book?.isFree! === '2') {
-      AppStorage.setOrCreate('paidPageData', this.pageData)
-    } else {
-      AppStorage.setOrCreate('freePageData', this.pageData)
-    }
-    this.readSet.readerSetting = this.readerSetting
-    this.endTime = systemDateTime.getTime(false)
-    this.userInfo!.totalReading += Math.ceil((this.endTime - this.startTime) / 60000)
-    AppStorage.set('userInfo', this.userInfo)
-    this.readerComponentController.off('resourceRequest');
-    this.readerComponentController.off('pageShow');
+    try {
+      // 删除缓存中的书籍
+      EpubUtils.clearEpubFile(this.book!, (this.getUIContext().getHostContext() as Context).cacheDir, 'cache')
+      AppStorage.setOrCreate(this.book?.id, this.pageData)
+      this.readSet.readerSetting = this.readerSetting
+      this.endTime = systemDateTime.getTime(false)
+      this.userInfo!.totalReading += Math.ceil((this.endTime - this.startTime) / 60000)
+      AppStorage.set('userInfo', this.userInfo)
+      this.readerComponentController.off('resourceRequest');
+      this.readerComponentController.off('pageShow');
 
-    // 如果是跳转到精彩书评页面，则不释放阅读器实例
-    if (!this.isNavigatingToReview) {
-      // 退出需要释放阅读器实例
-      this.readerComponentController.releaseBook();
+      // 如果是跳转到精彩书评页面，则不释放阅读器实例
+      if (!this.isNavigatingToReview) {
+        // 退出需要释放阅读器实例
+        this.readerComponentController.releaseBook();
+      }
+      this.notFullScreen()
+      // 退出页面需要注销监听
+      WindowUtils.onWindowSizeOff()
+      // 重新注册外层监听
+      const uiContext = this.getUIContext()
+      BreakpointSystem.register(uiContext)
+    } catch (error) {
+      console.error('ReaderPage', ` readerComponentController error = ${JSON.stringify(error)}`)
     }
-    this.notFullScreen()
-    // 退出页面需要注销监听
-    WindowUtils.onWindowSizeOff()
-    // 重新注册外层监听
-    const uiContext = this.getUIContext()
-    BreakpointSystem.register(uiContext)
   }
 
   setFullScreen() {
     if (this.userInfo?.fullScreen) {
-      this.windowClass.setWindowSystemBarEnable([]);
+      try {
+        this.windowClass.setWindowSystemBarEnable([]);
+      } catch (e) {
+        console.error('Failed to window setFullScreen. Cause: ' + JSON.stringify(e));
+      }
     }
   }
 
   notFullScreen() {
-    this.windowClass.setWindowSystemBarEnable(['status', 'navigation']);
+    try {
+      this.windowClass.setWindowSystemBarEnable(['status', 'navigation']);
+    } catch (e) {
+      console.error('Failed to window notFullScreen. Cause: ' + JSON.stringify(e));
+    }
   }
 
   onAccept() {
@@ -494,7 +557,9 @@ export struct ReaderPage {
 
       Swiper() {
 
-        BookCoverCard({ book: this.book })
+        if (!AppStorage.has(this.book?.id)) {
+          BookCoverCard({ book: this.book })
+        }
 
         Stack() {
           ReadPageComponent({
@@ -505,6 +570,7 @@ export struct ReaderPage {
           })
             .onClick(() => {
               this.showController = !this.showController
+              this.isOnClick = this.showController
               if (this.showController) {
                 this.notFullScreen()
               } else {
@@ -547,6 +613,7 @@ export struct ReaderPage {
               .hitTestBehavior(HitTestMode.Block)
               .onClick(() => {
                 this.showController = false;
+                this.isOnClick = this.showController;
               })
 
               ReaderToolBar({
@@ -598,12 +665,12 @@ export struct ReaderPage {
     }
     .hideTitleBar(true)
     .onWillAppear(async () => {
-      const p = TCRouter.getParams<BookInfo>(Constants.READ_KIT_ROUTER);
-      if (p) {
-        this.book = p
-        ReviewDataUtil.setCurrentBookInfo(this.book);
-      }
-      this.onWindowsAppear()
+      // const p = TCRouter.getParams<BookInfo>(Constants.READ_KIT_ROUTER);
+      // if (p) {
+      //   this.book = p;
+      //   ReviewDataUtil.setCurrentBookInfo(this.book);
+      // }
+      // this.onWindowsAppear()
     })
     .onWillShow(async () => {
       if (this.isNavigatingToReview) {

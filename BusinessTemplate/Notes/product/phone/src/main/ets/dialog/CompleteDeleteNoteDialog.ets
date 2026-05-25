@@ -22,7 +22,7 @@ export struct CompleteDeleteNoteDialog {
 
   build() {
     NavDestination() {
-      Stack({ alignContent: Alignment.Bottom }) {
+      Stack({ alignContent: Alignment.Center }) {
         Column({ space: 18 }) {
           Text('彻底删除')
             .fontSize(20)
@@ -68,9 +68,6 @@ export struct CompleteDeleteNoteDialog {
         .borderRadius(32)
         .height(139)
         .width('92%')
-        .margin({
-          bottom: 32
-        })
       }
       .height('100%')
       .width('100%')

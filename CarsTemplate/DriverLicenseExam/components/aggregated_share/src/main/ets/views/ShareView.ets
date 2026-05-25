@@ -63,7 +63,7 @@ export struct ShareView {
         this.sharePosterShow = true;
       }))
     } catch (err) {
-      console.log(err)
+      Logger.error(TAG, JSON.stringify(err))
     }
   }
 

@@ -177,7 +177,7 @@ export struct HomePage {
     .padding({ top: 24, bottom: 8 })
     .width('100%')
 
-    HotCourse()
+    HotCourse({ isShowTop: true })
   }
 
   @Builder
@@ -202,7 +202,7 @@ export struct HomePage {
     .padding({ top: 24, bottom: 8 })
     .width('100%')
 
-    AdvancedCourse()
+    AdvancedCourse({ isShowTop: true })
   }
 
   build() {

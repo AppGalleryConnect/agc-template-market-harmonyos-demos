@@ -7,6 +7,10 @@ export class SystemBarOperation {
   public static setWindowSystemBarProp(properties: window.SystemBarProperties) {
     const windowStage = AppStorage.get('windowStage') as window.WindowStage;
     const windowClass = windowStage.getMainWindowSync()
-    windowClass.setWindowSystemBarProperties(properties)
+    try {
+      windowClass.setWindowSystemBarProperties(properties)
+    } catch (e) {
+      console.error('setWindowSystemBarProperties failed')
+    }
   }
 }

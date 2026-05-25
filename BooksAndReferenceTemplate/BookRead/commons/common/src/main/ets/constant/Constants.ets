@@ -5,6 +5,10 @@ export class Constants {
   public static readonly EPUB_FILE_SUFFIX = '.epub';
   public static readonly ZIP_FILE_SUFFIX = '.zip';
   public static readonly FULL_SIZE = '100%';
+  public static readonly ABOUT_HALF_SIZE = '47%';
+  public static readonly LAUNCH_AD_ROUTER = 'launch_ad';
+  public static readonly PRIVACY_AGREEMENT_ROUTER = 'privacy_agreement';
+  public static readonly CUSTOMER_SERVICE_CHAT_ROUTER = 'customer_service_chat';
   public static readonly HOME_ROUTER = 'home';
   public static readonly READ_ROUTER = 'read';
   public static readonly READ_KIT_ROUTER = 'read_kit';
@@ -18,10 +22,13 @@ export class Constants {
   public static readonly BORROW_ROUTE = 'borrow_card';
   public static readonly SETTING_ROUTE = 'settings';
   public static readonly ACCOUNT_ROUTE = 'account';
+  public static readonly MINORS_MODE_ROUTE = 'minors_mode';
+  public static readonly READ_RECORD_ROUTE = 'read_record';
   public static readonly FAVOURITE_ROUTE = 'favourite';
   public static readonly BORROW_DETAIL_ROUTE = 'detail';
   public static readonly ABOUT_ROUTE = 'about';
   public static readonly PRIVACY_ROUTE = 'privacy';
+  public static readonly FONT_ROUTE = 'font';
   public static readonly PRIVACY_POLICY_ROUTE = 'privacy_policy';
   public static readonly SPEECH_ROUTE = 'speech'
   public static readonly PERSON_ROUTE = 'person';
@@ -45,6 +52,8 @@ export class Constants {
   public static readonly WRITE_COMMENT_ROUTE = 'write_comment';
   public static readonly WONDERFUL_REVIEW_ROUTE = 'wonderful_review';
   public static readonly MY_EVALUATION_ROUTE = 'my_evaluation';
+  public static readonly READ_HISTORY_ROUTE = 'read_history';
+  public static readonly MY_DOWNLOAD_ROUTE = 'my_download';
   public static readonly HTTP_GET = 'GET';
   public static readonly HTTP_POST = 'POST';
   public static readonly HTTP_PUT = 'PUT';
@@ -52,6 +61,7 @@ export class Constants {
   public static readonly MODE_FLAG: string = 'release';
   public static readonly API_GET_BOOK_PATH: string = '/book/list';
   public static readonly API_GET_BOOK_RECOMMEND_PATH: string = '/book/recommend';
+  public static readonly API_GET_BOOK_CHILD_PATH: string = '/book/child';
   public static readonly API_GET_HOT_BOOK_RANK_LIST_PATH: string = '/book/hotRankList';
   public static readonly API_GET_BOOK_FAVOURITE_PATH: string = '/book/favourite';
   public static readonly API_GET_BOOK_BORROW_PATH: string = '/book/borrow';

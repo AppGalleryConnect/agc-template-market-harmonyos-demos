@@ -9,11 +9,13 @@ import {
   GroupBookCheckCard,
   DialogUtil,
   DialogParams,
-  dialogView
+  dialogView,
+  EpubUtils
 } from 'common';
 import { SearchResultCard } from 'book_home';
 import { ManageGroupBottomCard } from '../comps/ManageGroupBottomCard';
-import { SymbolGlyphModifier } from '@kit.ArkUI'
+import { SymbolGlyphModifier, PromptAction } from '@kit.ArkUI'
+import { DeleteBottomCard } from '../comps/DeleteBottomCard';
 
 let customDialogId: number = 0
 
@@ -25,6 +27,7 @@ export interface CategoryInfo {
 @ComponentV2
 export struct BookGroupContent {
   @Provider('isDeleteGroup') isDeleteGroup: boolean = false;
+  @Provider('isSelectAll') isSelectAll: boolean = false;
   @Local bookGroup: GroupBook | undefined = undefined;
   @Local fBooks: BookInfo[] = [];
   @Local manageBooksSet: Set<string> = new Set();
@@ -81,6 +84,26 @@ export struct BookGroupContent {
       }))
   };
 
+  disbandGroup() {
+    this.groupBooks.forEach((item: GroupBook, index: number) => {
+      if (item.groupName === this.bookGroup?.groupName) {
+        this.num = this.groupBooks.indexOf(item);
+      }
+    })
+    this.groupBooks.splice(this.num, 1)
+    this.fBooks.forEach((item: BookInfo, index: number) => {
+      let groupBook: GroupBook = new GroupBook()
+      groupBook.bookName = item.name
+      groupBook.isSelect = false;
+      groupBook.groupName = ''
+      groupBook.singleBook = item
+      groupBook.isDownload = item.isDownload
+      this.groupBooks.push(groupBook)
+    })
+    DialogUtil.close()
+    TCRouter.pop();
+  }
+
   // 解散弹窗
   disbandDialog() {
     DialogUtil.openDialog(this.wBuilder, new DialogParams(
@@ -89,22 +112,7 @@ export struct BookGroupContent {
         DialogUtil.close()
       },
       () => {
-        this.groupBooks.forEach((item: GroupBook, index: number) => {
-          if (item.groupName === this.bookGroup?.groupName) {
-            this.num = this.groupBooks.indexOf(item);
-          }
-        })
-        this.groupBooks.splice(this.num, 1)
-        this.fBooks.forEach((item: BookInfo, index: number) => {
-          let groupBook: GroupBook = new GroupBook()
-          groupBook.bookName = item.name
-          groupBook.isSelect = false;
-          groupBook.groupName = ''
-          groupBook.singleBook = item
-          this.groupBooks.push(groupBook)
-        })
-        DialogUtil.close()
-        TCRouter.pop();
+        this.disbandGroup();
       }))
   };
 
@@ -208,23 +216,24 @@ export struct BookGroupContent {
               }
             }
 
-            if (this.isDeleteGroup) {
-              // 管理分组时的全选按钮
-              Image(this.fBooks.length === this.manageBooksSet.size ? $r('app.media.icon_select_all') :
-                $r('app.media.icon_select_all_off'))
-                .height(40)
-                .width(40)
-                .margin({ top: 16 + this.windowTopHeight })
-                .onClick(() => {
-                  if (this.fBooks.length === this.manageBooksSet.size) {
-                    this.manageBooksSet.clear()
-                  } else {
-                    for (let i = 0; i < this.fBooks.length; i++) {
-                      this.manageBooksSet.add(this.fBooks[i].name as string);
-                    }
-                  }
-                })
-            } else {
+            // if (this.isDeleteGroup) {
+            // 管理分组时的全选按钮
+            // Image(this.fBooks.length === this.manageBooksSet.size ? $r('app.media.icon_select_all') :
+            //   $r('app.media.icon_select_all_off'))
+            //   .height(40)
+            //   .width(40)
+            //   .margin({ top: 16 + this.windowTopHeight })
+            //   .onClick(() => {
+            //     if (this.fBooks.length === this.manageBooksSet.size) {
+            //       this.manageBooksSet.clear()
+            //     } else {
+            //       for (let i = 0; i < this.fBooks.length; i++) {
+            //         this.manageBooksSet.add(this.fBooks[i].name as string);
+            //       }
+            //     }
+            //   })
+            // } else
+            if (!this.isDeleteGroup) {
               SymbolGlyph($r('sys.symbol.dot_grid_2x2'))
                 .fontSize($r('sys.float.Title_M'))
                 .fontColor([$r('sys.color.icon_primary')])
@@ -252,6 +261,7 @@ export struct BookGroupContent {
               ListItem() {
                 if (this.isDeleteGroup) {
                   GroupBookCheckCard({
+                    isDownload: item.isDownload,
                     info: item,
                     isSelect: this.manageBooksSet.has(item.name),
                     changeSelect: (val: boolean) => {
@@ -259,6 +269,9 @@ export struct BookGroupContent {
                         this.manageBooksSet.add(item.name);
                       } else {
                         this.manageBooksSet.delete(item.name);
+                      }
+                      if (this.manageBooksSet.size === this.fBooks.length) {
+                        this.isSelectAll = true;
                       }
                     },
                     manageGroupEvent: (book: BookInfo, isShowM: boolean) => {
@@ -282,52 +295,92 @@ export struct BookGroupContent {
           .layoutWeight(1)
 
           if (this.isDeleteGroup) {
-            ManageGroupBottomCard({
-              isIconLight: this.manageBooksSet.size !== 0,
-              delete: () => { //删除
+            DeleteBottomCard({
+              isGroupManage: true,
+              selectAll: () => {
+                if (this.fBooks.length === this.manageBooksSet.size) {
+                  this.manageBooksSet.clear()
+                } else {
+                  for (let i = 0; i < this.fBooks.length; i++) {
+                    this.manageBooksSet.add(this.fBooks[i].name as string);
+                  }
+                }
+              },
+              changeGroup: () => {
+                if (this.manageBooksSet.size !== 0) {
+                  this.isShowBind = true;
+                }
+              },
+              download: () => {
+                this.manageBooksSet.forEach(async (bookName: string) => {
+                  let index = this.fBooks.findIndex(book => book.name === bookName);
+                  if (index !== -1) {
+                    this.fBooks[index].localPath = await EpubUtils.loadEpubFileFromNetwork(this.fBooks[index],
+                      (this.getUIContext().getHostContext() as Context).filesDir);
+                    this.fBooks[index].isDownload = true;
+                  }
+                })
+                this.isDeleteGroup = false;
+                this.manageBooksSet = new Set();
+                this.isSelectAll = false;
+              },
+              delete: () => {
                 let promptAction = this.getUIContext().getPromptAction();
                 if (this.manageBooksSet.size !== 0) {
                   promptAction.showDialog({
-                    title: $r('app.string.delete_book_flag'),
-                    message: $r('app.string.q_delete_book_flag'),
+                    title: `是否删除${this.manageBooksSet.size}本书籍？`,
+                    message: '将在同账号其他设备的书架同步删除',
                     buttons: [
                       {
                         text: $r('app.string.cancel'),
-                        color: $r('app.color.button_color')
+                        color: $r('sys.color.font_primary')
                       },
                       {
                         text: $r('app.string.delete'),
-                        color: $r('app.color.button_color')
+                        color: $r('sys.color.warning')
                       }
                     ]
                   }, (err, data) => {
                     if (data.index === 1) {
                       this.deleteBookFromGroup(this.fBooks)
+                      if (this.fBooks.length === 0) {
+                        this.disbandGroup();
+                      }
                       promptAction.showToast({ message: $r('app.string.delete_book_success') })
+                      this.manageBooksSet = new Set();
+                      this.isSelectAll = false;
                     }
                   })
-                }
-              },
-              groupChange: () => { //移至分组事件
-                if (this.manageBooksSet.size !== 0) {
-                  this.isShowBind = true;
+                } else {
+                  let promptAction: PromptAction = this.getUIContext().getPromptAction();
+                  try {
+                    promptAction.showToast({
+                      message: '未选择',
+                      duration: 2000
+                    });
+                  } catch (error) {
+                    let message = (error as BusinessError).message;
+                    let code = (error as BusinessError).code;
+                    console.error(`showToast args error code is ${code}, message is ${message}`);
+                  }
                 }
               }
-            }).margin({ bottom: 20 }).position({ bottom: 0 })
+            })
+              .margin({ bottom: 28 })
           }
         }
         .width(Constants.FULL_SIZE)
         .height(Constants.FULL_SIZE)
         .alignItems(HorizontalAlign.Start)
+        .backgroundColor($r('sys.color.comp_background_tertiary'))
         .bindSheet($$this.isShowBind, this.newGroupEdit(), {
           detents: [SheetSize.MEDIUM, SheetSize.LARGE, 800],
           height: this.isShowBind ? SheetSize.FIT_CONTENT : SheetSize.MEDIUM,
           preferType: SheetType.BOTTOM,
-          title: { title: this.bookGroup?.groupName },
+          title: { title: $r('app.string.change_group') },
           onWillDismiss: () => {
             this.isShowBind = false;
           }
-
         })
       }
     }
@@ -413,7 +466,11 @@ export struct BookGroupContent {
               groupBookNow.groupBooks?.push(this.fBooks[i])
               let tmp = this.bookGroup?.groupBooks?.findIndex(book => this.fBooks[i].id === book.id) || 0
               this.bookGroup?.groupBooks?.splice(tmp, 1)
+              i--;
             }
+          }
+          if (this.fBooks.length === 0) {
+            this.disbandGroup();
           }
           this.isShowBind = false;
           this.isDeleteGroup = false;

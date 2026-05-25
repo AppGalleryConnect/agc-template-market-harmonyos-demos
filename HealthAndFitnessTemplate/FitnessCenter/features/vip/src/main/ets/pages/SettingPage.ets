@@ -1,4 +1,4 @@
-import { LoginState, ScreenPropStorage } from 'external_interactions';
+import { GridRowColSetting, LoginState, ScreenPropStorage } from 'external_interactions';
 import { TitleBar } from 'module_recharge/src/main/ets/components/TitleBar';
 import { AppStorageV2 } from '@kit.ArkUI';
 
@@ -24,25 +24,32 @@ export struct SettingPage {
       })
         .margin({ left: 16, right: 16 })
 
-      Row() {
-        Text('个人信息')
-          .fontSize(16)
-          .margin({ left: 12 })
+      GridRow(GridRowColSetting.DEFAULT_GRID_ROW_OPTIONS) {
+        GridCol({
+          span: GridRowColSetting.DEFAULT_CENTER_COL_SPAN,
+          offset: GridRowColSetting.DEFAULT_CENTER_COL_OFFSET,
+        }) {
+          Row() {
+            Text('个人信息')
+              .fontSize(16)
+              .margin({ left: 12 })
 
-        Image($r('app.media.right_arrow'))
-          .width(16)
-          .height(16)
-          .fillColor($r('sys.color.icon_primary'))
-          .margin({ right: 12 })
+            Image($r('app.media.right_arrow'))
+              .width(16)
+              .height(16)
+              .fillColor($r('sys.color.icon_primary'))
+              .margin({ right: 12 })
+          }
+          .justifyContent(FlexAlign.SpaceBetween)
+          .width('90%')
+          .height(56)
+          .borderRadius(20)
+          .backgroundColor(Color.White)
+          .onClick(() => {
+            this.pathStack.pushPath({ name: 'vip/MineInfoPage', param: this.loginState })
+          })
+        }
       }
-      .justifyContent(FlexAlign.SpaceBetween)
-      .width('90%')
-      .height(56)
-      .borderRadius(20)
-      .backgroundColor(Color.White)
-      .onClick(() => {
-        this.pathStack.pushPath({ name: 'vip/MineInfoPage', param: this.loginState })
-      })
     }
     .hideTitleBar(true)
     .backgroundColor($r('sys.color.background_secondary'))

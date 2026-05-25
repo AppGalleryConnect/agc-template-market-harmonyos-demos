@@ -2,6 +2,8 @@ import { AlignmentInfo } from '../model/AlignmentInfo';
 import { image } from '@kit.ImageKit';
 import { fileIo } from '@kit.CoreFileKit';
 import { PickerUtil } from '../utils/PickerUtil';
+import { camera, cameraPicker } from '@kit.CameraKit';
+import hilog from '@ohos.hilog';
 import { COLOR_LIST } from '../common/Constants';
 import { ChangeRecord } from '../model/ChangeRecord';
 import { display, LengthMetrics } from '@kit.ArkUI';
@@ -327,6 +329,7 @@ export class RichEditorController {
   initState() {
     this.currentBold = false;
     this.currentItalics = false;
+    this.isHandwriteMode = false;
     this.currentShadow = false;
     this.currentDecoration = TextDecorationType.None;
     this.showToolBarIndex = 0;
@@ -378,6 +381,103 @@ export class RichEditorController {
     );
   }
 
+  insertScannedUris(uiContext: UIContext, uris: string[], maxWidthVp?: number): ScanInsertResult {
+    const result: ScanInsertResult = {
+      insertedImageCount: 0,
+      pdfCount: 0,
+      unsupportedCount: 0
+    };
+    if (!uris || uris.length === 0) {
+      return result;
+    }
+
+    let richEditorStyledString: MutableStyledString = this.controller.getStyledString();
+    let currentOffset = this.controller.getCaretOffset();
+    let currentImageCount = this.getImageCount();
+
+    for (let uri of uris) {
+      if (!uri) {
+        continue;
+      }
+
+      // 当前富文本仅支持图片附件；PDF 仅保留在系统中
+      if (this.isPdfUri(uri)) {
+        result.pdfCount++;
+        continue;
+      }
+
+      if (currentImageCount >= RichEditorController.MAX_IMAGE_COUNT) {
+        result.unsupportedCount++;
+        continue;
+      }
+
+      try {
+        const stat = fileIo.statSync(uri);
+        if (stat && stat.size > RichEditorController.MAX_IMAGE_SIZE_BYTES) {
+          result.unsupportedCount++;
+          continue;
+        }
+      } catch (err) {
+        hilog.error(0x0001, 'RichEditor', `获取图片大小失败: ${JSON.stringify(err)}`);
+        result.unsupportedCount++;
+        continue;
+      }
+
+      let pixelMap: image.PixelMap;
+      try {
+        pixelMap = RichEditorController.loadImage(uri);
+      } catch (err) {
+        result.unsupportedCount++;
+        continue;
+      }
+
+      const info = pixelMap.getImageInfoSync();
+      // 统一使用 vp 计算尺寸，避免 px/vp 混用导致在分栏/竖屏下溢出被裁切
+      let widthVp = uiContext.px2vp(info.size.width);
+      let heightVp = uiContext.px2vp(info.size.height);
+      const baseWidthVp = typeof maxWidthVp === 'number' && maxWidthVp > 0
+        ? maxWidthVp
+        : uiContext.px2vp(display.getDefaultDisplaySync().width);
+      const displayWidthVp = baseWidthVp * 0.9;
+      // 仅在图片过宽时按编辑区缩放；较小图片保持原尺寸
+      if (widthVp > displayWidthVp) {
+        const ratio = displayWidthVp / widthVp;
+        widthVp = displayWidthVp;
+        heightVp = heightVp * ratio;
+      }
+
+      let imageStyledString = new MutableStyledString(new ImageAttachment({
+        value: pixelMap,
+        objectFit: ImageFit.Auto,
+        size: { width: widthVp, height: heightVp },
+      }));
+      richEditorStyledString.insertStyledString(currentOffset, imageStyledString);
+      richEditorStyledString.insertString(currentOffset + 1, '\n');
+      currentOffset += 2;
+      currentImageCount++;
+      result.insertedImageCount++;
+    }
+
+    this.controller.setStyledString(richEditorStyledString);
+    this.controller.setCaretOffset(currentOffset);
+    return result;
+  }
+
+  private isPdfUri(uri: string): boolean {
+    const lower = uri.toLowerCase();
+    return lower.endsWith('.pdf') || lower.indexOf('.pdf?') > -1 || lower.indexOf('.pdf#') > -1;
+  }
+
+  private insertImagesFromUris(uiContext: UIContext, uris: string[], maxWidthVp?: number): void {
+    const insertResult = this.insertScannedUris(uiContext, uris, maxWidthVp);
+    if (insertResult.insertedImageCount <= 0 && uris && uris.length > 0) {
+      uiContext.getPromptAction().showToast({
+        message: `最多只能插入${RichEditorController.MAX_IMAGE_COUNT}张图片`,
+        duration: 1500
+      });
+    }
+  }
+
   private getImageCount(): number {
     const styledString = this.controller.getStyledString();
     const content = styledString.getString();
@@ -395,9 +495,87 @@ export class RichEditorController {
   }
 
   /**
+   * 当编辑区宽度变化（如横竖屏切换/分栏变化）时，将已插入的图片附件按当前宽度重新自适应：
+   * - 变窄：必要时缩小，避免右侧溢出
+   * - 变宽：在不超过图片原始尺寸的前提下恢复放大
+   */
+  reflowImagesToFitWidth(uiContext: UIContext, maxWidthVp: number): void {
+    if (!uiContext || !(maxWidthVp > 0)) {
+      return;
+    }
+    const styledString: MutableStyledString = this.controller.getStyledString();
+    const content = styledString.getString();
+    if (!content || content.length === 0) {
+      return;
+    }
+
+    const displayWidthVp = maxWidthVp * 0.9;
+    const styles: Array<SpanStyle> = styledString.getStyles(0, content.length);
+    let changed = false;
+
+    for (const style of styles) {
+      if (style.styledKey !== StyledStringKey.IMAGE) {
+        continue;
+      }
+
+      const s: ImageSpanStyle = style as ImageSpanStyle;
+      const start: number = s.start;
+      const length: number = s.length;
+      const attachment: ImageAttachment = s.styledValue;
+      if (!(length > 0) || !attachment || !attachment.size) {
+        continue;
+      }
+
+      // 以图片原始像素尺寸为基准，重算到 vp，确保变宽时可以恢复到原始大小
+      const pixelMap = attachment.value as PixelMap;
+      if (!pixelMap) {
+        continue;
+      }
+      const info = pixelMap.getImageInfoSync();
+      const origW = uiContext.px2vp(info.size.width);
+      const origH = uiContext.px2vp(info.size.height);
+      if (!(origW > 0) || !(origH > 0)) {
+        continue;
+      }
+
+      const targetW = Math.min(origW, displayWidthVp);
+      const ratio = targetW / origW;
+      const newW = targetW;
+      const newH = origH * ratio;
+
+      const currentW = attachment.size.width as number | undefined;
+      const currentH = attachment.size.height as number | undefined;
+      if (typeof currentW === 'number' && typeof currentH === 'number') {
+        // 尽量避免无意义的重复 setStyledString 导致光标闪烁
+        if (Math.abs(currentW - newW) < 0.5 && Math.abs(currentH - newH) < 0.5) {
+          continue;
+        }
+      }
+
+      const newAttachment = new ImageAttachment({
+        value: attachment.value,
+        objectFit: attachment.objectFit,
+        size: { width: newW, height: newH },
+      });
+
+      styledString.setStyle({
+        start,
+        length,
+        styledKey: StyledStringKey.IMAGE,
+        styledValue: newAttachment,
+      });
+      changed = true;
+    }
+
+    if (changed) {
+      this.controller.setStyledString(styledString);
+    }
+  }
+
+  /**
    * 选择图片
    */
-  selectImage(uiContext: UIContext) {
+  selectImage(uiContext: UIContext, maxWidthVp?: number) {
     const currentImageCount = this.getImageCount();
     if (currentImageCount >= RichEditorController.MAX_IMAGE_COUNT) {
       uiContext.getPromptAction().showToast({
@@ -410,68 +588,49 @@ export class RichEditorController {
     PickerUtil.selectPhoto({
       maxSelectNumber: 1,
     }).then((uris) => {
-      console.info('select photo successfully, uri: ' + uris);
-      if (!uris || uris.length === 0) {
-        return;
-      }
-      let imageUri = uris[0];
+      hilog.info(0x0001, 'RichEditor', 'select photo successfully, uris: %{public}s', JSON.stringify(uris));
+      this.insertImagesFromUris(uiContext, uris, maxWidthVp);
+    });
+  }
 
-      try {
-        const stat = fileIo.statSync(imageUri);
-        if (stat && stat.size > RichEditorController.MAX_IMAGE_SIZE_BYTES) {
-          uiContext.getPromptAction().showToast({
-            message: '单张图片大小不能超过20MB',
-            duration: 1500
-          });
+  /**
+   * 拍照：系统相机拍照后，将照片插入当前光标位置
+   */
+  takePhoto(uiContext: UIContext, maxWidthVp?: number) {
+    const ctx = uiContext.getHostContext() as common.UIAbilityContext;
+    if (!ctx) {
+      hilog.error(0x0001, 'RichEditor', 'takePhoto: UIAbilityContext is null');
+      return;
+    }
+
+    const mediaTypes: Array<cameraPicker.PickerMediaType> = [cameraPicker.PickerMediaType.PHOTO];
+    const profile: cameraPicker.PickerProfile = {
+      cameraPosition: camera.CameraPosition.CAMERA_POSITION_UNSPECIFIED,
+    };
+
+    cameraPicker.pick(ctx, mediaTypes, profile)
+      .then((result: cameraPicker.PickerResult) => {
+        if (!result || result.resultCode !== 0 ||
+          !result.resultUri || result.mediaType !== cameraPicker.PickerMediaType.PHOTO) {
           return;
         }
-      } catch (err) {
-        console.error('获取图片大小失败', err);
-      }
+        hilog.info(0x0001, 'RichEditor', 'take photo successfully, uri: %{public}s', result.resultUri);
+        this.insertImagesFromUris(uiContext, [result.resultUri], maxWidthVp);
+      }).catch((error: BusinessError) => {
+        hilog.error(0x0001, 'RichEditor', 'take photo failed, code: %{public}d, message: %{public}s',
+          error.code, error.message);
+      });
+  }
 
-      const imageCountAfterInsert = this.getImageCount() + 1;
-      if (imageCountAfterInsert > RichEditorController.MAX_IMAGE_COUNT) {
-        uiContext.getPromptAction().showToast({
-          message: `图片数量不能超过${RichEditorController.MAX_IMAGE_COUNT}张`,
-          duration: 1500
-        });
-        return;
-      }
-
-      // 获取图片信息
-      let pixelMap: image.PixelMap = RichEditorController.loadImage(imageUri);
-      let info = pixelMap.getImageInfoSync();
-      let width = info.size.width;
-      let height = info.size.height;
-
-      // 宽度超过最大尺寸时，等比例缩放 占屏幕的90%
-      let displayWidth = uiContext.px2vp(display.getDefaultDisplaySync().width) * 0.9;
-      if (width > displayWidth) {
-        width = displayWidth;
-        height = width / info.size.width * height;
-      }
-
-      // 创建图片富文本对象
-      let imageStyledString = new MutableStyledString(new ImageAttachment({
-        value: pixelMap,
-        objectFit: ImageFit.Auto,
-        size: { width: width, height: height },
-      }));
-      // 获取当前的富文本内容
-      let richEditorStyledString: MutableStyledString = this.controller.getStyledString();
-
-      // 获取当前光标位置
-      let currentOffset = this.controller.getCaretOffset();
-
-      // 在光标位置插入图片
-      richEditorStyledString.insertStyledString(currentOffset, imageStyledString);
-
-      // 添加图片后自动向下插入一行
-      richEditorStyledString.insertString(currentOffset + 1, '\n');
-
-      // 使插入图片后的属性字符串展示在组件上
-      this.controller.setStyledString(richEditorStyledString);
-      this.controller.setCaretOffset(currentOffset + 2);
+  /**
+   * 从相册选择图片（支持多选，按选择顺序插入）
+   */
+  selectImages(uiContext: UIContext, maxWidthVp?: number) {
+    PickerUtil.selectPhoto({
+      isPhotoTakingSupported: false
+    }).then((uris) => {
+      hilog.info(0x0001, 'RichEditor', 'select images successfully, uris: %{public}s', JSON.stringify(uris));
+      this.insertImagesFromUris(uiContext, uris, maxWidthVp);
     });
   }
 
@@ -482,7 +641,7 @@ export class RichEditorController {
       imageSource = image.createImageSource(fileSource.fd);
     } catch (err) {
       let error = err as BusinessError;
-      console.error(`创建ImageSource失败 ~ code: ${error.code} -·- message: ${error.message}`);
+      hilog.error(0x0001, 'RichEditor', `创建ImageSource失败 ~ code: ${error.code} -·- message: ${error.message}`);
       throw new Error(`创建ImageSource失败: ${error.message}`);
     }
     return imageSource.createPixelMapSync();
@@ -492,4 +651,16 @@ export class RichEditorController {
 interface Range {
   start: number;
   end: number;
+}
+
+interface ScanInsertResult {
+  insertedImageCount: number;
+  pdfCount: number;
+  unsupportedCount: number;
+}
+
+interface ImageSpanStyle extends SpanStyle {
+  start: number;
+  length: number;
+  styledValue: ImageAttachment;
 }

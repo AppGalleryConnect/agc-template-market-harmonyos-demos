@@ -6,19 +6,17 @@
     <title>个人信息收集清单</title>
     <style>
         :root {
-         --bg-color: #f5f5f5;
-         --content-bg: #fff;
-         --card-color: #ffffff;
-         --font-color: #333;
-         --effective-color: #888;
+         --collection-bg-color: #f5f5f5;
+         --collection-content-bg: #fff;
+         --collection-font-color: #333;
+         --collection-effective-color: #888;
         }
         @media (prefers-color-scheme: dark) {
           :root {
-            --bg-color: #e5e5e5;
-            --content-bg: #000;
-            --card-color: #191919;
-            --font-color: #fff;
-            --effective-color: #eee;
+            --collection-bg-color: #e5e5e5;
+            --collection-content-bg: #000;
+            --collection-font-color: #fff;
+            --collection-effective-color: #eee;
           }
         }
        * {
@@ -29,8 +27,8 @@
 
        body {
            font-family: "HarmonyOS Sans", "Helvetica Neue", Arial, sans-serif;
-           background: var(--bg-color);
-           color: var(--font-color);
+           background: var(--collection-bg-color);
+           color: var(--collection-font-color);
            line-height: 1.6;
            padding: 0;
            margin: 0;
@@ -51,7 +49,7 @@
        h1 {
            font-size: 24px;
            margin-bottom: 10px;
-           color: var(--font-color);
+           color: var(--collection-font-color);
        }
 
        .content {

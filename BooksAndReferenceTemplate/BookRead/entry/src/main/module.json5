@@ -18,9 +18,9 @@
         "description": "$string:EntryAbility_desc",
         "icon": "$media:layered_image",
         "label": "$string:EntryAbility_label",
+        "exported": true,
         "startWindowIcon": "$media:startIcon",
         "startWindowBackground": "$color:start_window_background",
-        "exported": true,
         "supportWindowMode": [
           "fullscreen"
         ],
@@ -30,47 +30,72 @@
               "entity.system.home"
             ],
             "actions": [
-              "action.system.home"
+              "ohos.want.action.home"
             ]
           },
           {
+            "entities": [
+              "entity.system.browsable"
+            ],
             "actions": [
-              "com.test.action"
-            ]
+              "ohos.want.action.viewData"
+            ],
+            "uris": [
+              {
+                "scheme": "https",
+                "host": "linking.xiaobingtang.cn"
+              }
+            ],
+            "domainVerify": true
           }
         ],
         "launchType": "singleton"
       }
     ],
     "metadata": [
+// 接收QQ回调数据
       {
+// todo 填写业务申请的QQ互联AppId，如果填错会导致QQ无法回调
         "name": "client_id",
-// todo 替换client_id值,
         "value": "******"
+      },
+      {
+        "name": "minors_mode",
+        "value": "1"
       }
     ],
     "extensionAbilities": [
       {
         "name": "EntryBackupAbility",
         "srcEntry": "./ets/entrybackupability/EntryBackupAbility.ets",
+// 从5.1.1(19)开始，须配置为"ohos.want.action.home"。对于5.1.0(18)及之前版本，请配置为"action.system.home"。
         "type": "backup",
         "exported": false,
         "metadata": [
           {
             "name": "ohos.extension.backup",
+// entities必须包含"entity.system.browsable"
             "resource": "$profile:backup_config"
           }
         ]
+// actions必须包含"ohos.want.action.viewData"
       }
     ],
     "requestPermissions": [
       {
+// scheme须配置为https
         "name": "ohos.permission.INTERNET",
+// host须配置为关联的网址域名
         "reason": "$string:app_name",
+// path可选，表示域名服务器上的目录或文件路径，例如linking.xiaobingtang.cn/path1中的path1
+// 如果应用只能处理部分特定的path，则此处应该配置应用所支持的path，避免出现应用不能处理的path链接也被引流到应用中的问题
+//"path": "path1"
         "usedScene": {
           "abilities": [
+// domainVerify须设置为true
             "FormAbility"
           ],
+// 若有其他跳转能力，如推送消息跳转、NFC跳转，可新增一个skill对象，防止与App Linking业务冲突
           "when": "always"
         }
       },
@@ -78,6 +103,7 @@
         "name": "ohos.permission.GET_NETWORK_INFO",
         "reason": "$string:app_name",
         "usedScene": {
+// todo 替换client_id值,
           "abilities": [
             "FormAbility"
           ],
@@ -94,6 +120,12 @@
           "when": "inuse"
         }
       }
+    ],
+    "querySchemes": [
+      "weixin",
+      "wxopensdk",
+      "qqopenapi",
+      "https"
     ]
   }
 }

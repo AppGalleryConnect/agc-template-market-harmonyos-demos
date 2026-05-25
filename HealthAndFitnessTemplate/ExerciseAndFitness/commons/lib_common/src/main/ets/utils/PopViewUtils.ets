@@ -9,8 +9,14 @@ enum PopViewShowType {
 }
 
 async function getUIContext() {
-  let context = AppStorageV2.connect(UIContext, 'uiContext', () => new UIContext());
-  return (await (context!.getHostContext() as common.UIAbilityContext).windowStage.getMainWindow()).getUIContext();
+  try {
+    let context = AppStorageV2.connect(UIContext, 'uiContext', () => new UIContext());
+    let window = await (context!.getHostContext() as common.UIAbilityContext).windowStage.getMainWindow();
+    return window.getUIContext();
+  } catch (err) {
+    console.error('Failed to getUIContext:', err);
+    return null;
+  }
 }
 
 interface PopViewModel {
@@ -23,7 +29,7 @@ interface PopViewModel {
  */
 export class PopViewUtils {
   private static popShare: PopViewUtils;
-  private static uiContext: UIContext;
+  private static uiContext: UIContext | null;
   private infoList: PopViewModel[] = [];
   private sheetList: PopViewModel[] = [];
 
@@ -59,7 +65,11 @@ export class PopViewUtils {
           }
         },
       };
-      prompt.openCustomDialog(componentContent, customOptions);
+      try {
+        prompt.openCustomDialog(componentContent, customOptions);
+      } catch (e) {
+        console.error('openCustomDialog failed')
+      }
       let infoList = PopViewUtils.shareInstance().infoList;
       let info: PopViewModel = {
         com: componentContent,
@@ -84,7 +94,11 @@ export class PopViewUtils {
         PopViewUtils.shareInstance().infoList = PopViewUtils.shareInstance().infoList.filter((model) => {
           return model.com !== info.com;
         })
-        prompt.closeCustomDialog(info.com);
+        try {
+          prompt.closeCustomDialog(info.com);
+        } catch (e) {
+          console.error('closeCustomDialog failed')
+        }
         Logger.info(TAG, 'dialog close');
       }
     }

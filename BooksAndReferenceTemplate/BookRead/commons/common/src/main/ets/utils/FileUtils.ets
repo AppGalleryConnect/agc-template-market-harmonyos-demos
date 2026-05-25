@@ -6,6 +6,7 @@ import { util } from '@kit.ArkTS';
 import { rcp } from '@kit.RemoteCommunicationKit';
 import { GlobalContext } from '../comp/GlobalContext';
 import { TCLogger } from '../comp/TCLogger';
+import { BookInfo } from '../model/Book';
 
 const ZIP_OPTIONS: zlib.Options = {
   level: zlib.CompressLevel.COMPRESS_LEVEL_DEFAULT_COMPRESSION
@@ -65,7 +66,7 @@ export class FileUtils {
     return retStr;
   }
 
-  public static async downloadFile(url: string, localPath: string) {
+  public static async downloadFile(book: BookInfo, localPath: string) {
     // 创建下载目录
     if (!fileIo.accessSync(localPath)) {
       fileIo.openSync(localPath, fileIo.OpenMode.CREATE);
@@ -78,13 +79,34 @@ export class FileUtils {
 
     const fd = fileIo.openSync(localPath, fileIo.OpenMode.READ_WRITE);
     try {
+      // 监听下载进度
+      const customHttpEventsHandler: rcp.HttpEventsHandler = {
+        onDownloadProgress: (totalSize: number, transferredSize: number) => {
+          const formatSize = (bytes: number): string => {
+            if (bytes >= 1024 * 1024) {
+              return (bytes / 1024 / 1024).toFixed(2) + ' MB';
+            } else {
+              return (bytes / 1024).toFixed(2) + ' KB';
+            }
+          };
+          book.usageMemory = formatSize(totalSize);
+          book.downloadProgress = (transferredSize/totalSize)*100
+          if (book.downloadProgress === 100 && localPath.includes('files')) {
+            book.isDownload = true
+          }
+        }
+      }
+      const tracingConfig: rcp.TracingConfiguration = {
+        httpEventsHandler: customHttpEventsHandler
+      }
       // 创建一个HTTP会话，其中请求配置包括传输超时设置和安全配置（配置可自定义）
       const session = rcp.createSession({
         requestConfiguration: {
           transfer: { timeout: { connectMs: 10000, transferMs: 10000, inactivityMs: 10000 } },
+          tracing: tracingConfig
         }
       });
-      const rsp: rcp.Response = await session.downloadToFile(url, downloadToFile);
+      const rsp: rcp.Response = await session.downloadToFile(book.epubUrl, downloadToFile);
       fileIo.closeSync(fd);
       TCLogger.info(`Succeeded in getting the response ${rsp}`)
     } catch (error) {

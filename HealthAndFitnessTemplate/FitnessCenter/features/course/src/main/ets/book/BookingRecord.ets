@@ -47,7 +47,6 @@ export struct BookingRecord {
           .tabBar(this.tabBarBuilder(item, index))
         }, (item: BookState) => JSON.stringify(item))
       }
-
       .barHeight(50)
       .barMode(BarMode.Fixed)
       .layoutWeight(1)
@@ -60,6 +59,7 @@ export struct BookingRecord {
       this.pathStack = ctx?.pathStack
     })
     .backgroundColor($r('app.color.main_background_color'))
-    .padding({ top: this.getUIContext().px2vp(this.topRectHeight) })
+    .padding({ top: this.getUIContext().px2vp(this.topRectHeight),
+      bottom: this.getUIContext().px2vp(this.bottomRectHeight) })
   }
 }

@@ -74,12 +74,12 @@ struct GuidePage {
             bottom: 24,
           })
         Column() {
-          Flex({ wrap: FlexWrap.Wrap, justifyContent: FlexAlign.Start }) {
+          Flex({ wrap: FlexWrap.Wrap, justifyContent: FlexAlign.SpaceBetween }) {
             ForEach(this.injuryList, (item: string, index) => {
               Button(item)
-                .width(104)
+                .width('32%')
                 .height(28)
-                .margin({ right: 12, bottom: 12 })
+                .margin({ bottom: 12 })
                 .fontSize($r('sys.float.Body_M'))
                 .fontColor(this.clickedStates[index] ? $r('sys.color.font_on_primary') : 'rgba(0, 0, 0, 0.9)')
                 .borderRadius(14)

@@ -29,7 +29,7 @@ export struct SingleBtn {
         .textAlign(TextAlign.Center)
         .constraintSize({ minWidth: 44 })
     }
-    .backgroundColor($r('app.color.grey_5'))
+    .backgroundColor($r('sys.color.comp_background_primary'))
     .padding({
       top: 4,
       bottom: 4,

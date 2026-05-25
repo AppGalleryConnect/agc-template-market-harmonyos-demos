@@ -16,6 +16,7 @@ struct FilterPage {
   vm: CoursePageVM = new CoursePageVM();
   @Local filter: string[] = AppStorage.get('FilterList') as string[]
   @Local filterList: CollectionModel[] = []
+  scroller: Scroller = new Scroller()
 
   async aboutToAppear() {
     this.filter = AppStorage.get('FilterList') as string[]
@@ -138,6 +139,10 @@ struct FilterPage {
           .padding({ left: 16, right: 16 })
         }), (item: CollectionModel, index: number) => item.id + index)
       }
+      .scrollBar(BarState.Off)
+      .width('100%')
+      .backgroundColor(Color.White)
+      .borderRadius(16)
       // 无数据时显示
       Text('课程筛选结果为空。')
         .fontSize($r('sys.float.Body_S'))
@@ -154,11 +159,20 @@ struct FilterPage {
           title: '筛选课程',
         })
 
-        Column() {
-          this.FilterCourse()
+        Scroll(this.scroller){
+          Column() {
+            this.FilterCourse()
+          }
+          .height('100%')
+          .margin({ left: 16, right: 16 })
         }
-        .height('100%')
-        .margin({ left: 16, right: 16 })
+        .layoutWeight(1)
+        .align(Alignment.Top)
+        .scrollBar(BarState.Off)
+        .scrollable(ScrollDirection.Vertical)
+        .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: true })
+        .margin({ bottom: 30 })
+        .width('100%')
       }
       .height('100%')
       .backgroundColor($r('app.color.course_background'))

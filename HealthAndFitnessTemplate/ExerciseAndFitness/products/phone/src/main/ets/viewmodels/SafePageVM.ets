@@ -29,6 +29,10 @@ export class SafePageVM extends BaseViewModel {
   }
 
   quitApp(context: common.UIAbilityContext) {
-    context.getApplicationContext().killAllProcesses();
+    try {
+      context.getApplicationContext().killAllProcesses();
+    } catch (e) {
+      console.error('killAllProcesses failed. Cause' + JSON.stringify(e))
+    }
   }
 }

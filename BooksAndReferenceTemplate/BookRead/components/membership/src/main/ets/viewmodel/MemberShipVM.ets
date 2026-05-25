@@ -1,29 +1,30 @@
 import { iap } from '@kit.IAPKit';
 import { common } from '@kit.AbilityKit';
-import { hilog } from '@kit.PerformanceAnalysisKit';
+import { UtilLog } from '@hw-agconnect/util-log';
 import { BusinessError } from '@kit.BasicServicesKit';
-import { LevelMode, window } from '@kit.ArkUI';
+import { display, LevelMode, window } from '@kit.ArkUI';
 import {
+  LoginApiController,
   MemberList,
   MemberParams,
   ProductInfo,
-  PurchaseData,
   PurchaseOrderPayload,
-  SubGroupStatusPayload,
-  SubscriptionStatus,
+  UserStatus,
 } from '../model/Index';
-import { JWSUtil } from '../util/JWSUtil';
 import { FinishStatus } from '../constant/Enum';
 import { MemberStatusUtil } from '../util/MemberStatusUtil';
 
 @ObservedV2
 export class MemberShipVM {
   private static _instance: MemberShipVM;
+  @Trace foldStatus: display.FoldStatus = display.FoldStatus.FOLD_STATUS_UNKNOWN;
+  @Trace rotation: number = 0;
   @Trace isRenewMember: boolean = false;
   @Trace expiresTime: number = 0;
   @Trace groupId: string = '';
   @Trace memberParams: MemberParams = new MemberParams();
   @Trace renewProductId: string = '';
+  @Trace autoRenewProductId: string = '';
   @Trace nonRenewProductId: string = '';
   @Trace loading: boolean = false;
   @Trace isShow: boolean = false;
@@ -34,11 +35,15 @@ export class MemberShipVM {
   @Trace selectedProductIndex: number = 0;
   @Trace isMemberPrivacyChecked: boolean = false;
   @Trace pathStack: NavPathStack = new NavPathStack();
+  @Trace userStatus: UserStatus = new UserStatus();
+  @Trace lastPurchaseProductExpireTime: string = '';
   subscribeCallBack: (params: MemberParams) => Promise<void> = () => new Promise(() => {
   });
-  queryExpireTime: (productId: string, time?: number) => Promise<void> = () => new Promise(() => {
+  queryExpireTime: (productId: string, time?: number) => Promise<string> = () => new Promise(() => {
   });
   ownedMemberCallBack: (list: MemberList) => Promise<void> = () => new Promise(() => {
+  });
+  loginApiController: LoginApiController = new LoginApiController(() => new UserStatus(), () => {
   });
   @Trace uiContext?: UIContext;
 
@@ -50,16 +55,18 @@ export class MemberShipVM {
   }
 
   setEvent(subscribeCallBack: (params: MemberParams) => Promise<void>,
-    queryExpireTime: (productId: string, time?: number) => Promise<void>,
-    ownedMemberCallBack: (list: MemberList) => Promise<void>) {
+    queryExpireTime: (productId: string, time?: number) => Promise<string>,
+    ownedMemberCallBack: (list: MemberList) => Promise<void>, loginApiController: LoginApiController) {
     this.queryExpireTime = queryExpireTime;
     this.subscribeCallBack = subscribeCallBack;
     this.ownedMemberCallBack = ownedMemberCallBack;
+    this.loginApiController = loginApiController;
   }
 
-  buyProduct(id: string, type: iap.ProductType) {
+  buyProduct(id: string, type: iap.ProductType, name: string) {
     this.memberParams.productId = id;
     this.memberParams.type = type;
+    this.memberParams.name = name;
     try {
       const createPurchaseParam: iap.PurchaseParameter = {
         productId: id,
@@ -81,52 +88,32 @@ export class MemberShipVM {
           this.memberParams.errCode = err.code;
           this.memberParams.errMsg = err.message;
           this.subscribeCallBack(this.memberParams);
-          hilog.error(0xFF00, 'MemberShip',
+          UtilLog.error(0xFF00, 'MemberShip',
             `Failed to create purchase. Code is ${err.code}, message is ${err.message}`);
           if (err.code === iap.IAPErrorCode.PRODUCT_OWNED) {
             this.queryPurchase();
           }
         });
     } catch (e) {
-      hilog.error(0xFF00, 'MemberShip', `Failed to buy products. Code is ${e.code}, message is ${e.message}`);
+      UtilLog.error(0xFF00, 'MemberShip', `Failed to buy products. Code is ${e.code}, message is ${e.message}`);
     }
   }
 
-  getLastSubscriptionStatus(purchaseData: string): SubscriptionStatus | undefined {
-    let data = JSON.parse(purchaseData) as PurchaseData;
-    const jwsSubscriptionStatus = data.jwsSubscriptionStatus;
-    if (!jwsSubscriptionStatus) {
-      return undefined;
+  handleAutoRenewProductId(subPayload: string) {
+    let subGroupStatusPayload = MemberStatusUtil.getSubGroupStatusPayload(subPayload);
+    let lastSubscriptionStatus = subGroupStatusPayload?.lastSubscriptionStatus;
+    if (!lastSubscriptionStatus || lastSubscriptionStatus.status !== '1') {
+      return;
     }
-    const subscriptionStatus: string = JWSUtil.decodeJwsObj(jwsSubscriptionStatus);
-    if (!subscriptionStatus) {
-      return undefined;
+    const purchaseOrderPayload = lastSubscriptionStatus.lastPurchaseOrder;
+    if (purchaseOrderPayload === undefined) {
+      return;
     }
-    // 需自定义SubGroupStatusPayload类，包含的信息请参见SubGroupStatusPayload
-    const subGroupStatusPayload: SubGroupStatusPayload = JSON.parse(subscriptionStatus);
-    this.groupId = subGroupStatusPayload.subGroupId;
-    const lastSubscriptionStatus = subGroupStatusPayload.lastSubscriptionStatus;
-
-    return lastSubscriptionStatus;
-  }
-
-  getLastPurchaseOrder(purchaseData: string): PurchaseOrderPayload | undefined {
-    let data = JSON.parse(purchaseData) as PurchaseData;
-    const jwsPurchaseOrder = data.jwsPurchaseOrder;
-    if (!jwsPurchaseOrder) {
-      return undefined;
-    }
-    const purchaseOrder: string = JWSUtil.decodeJwsObj(jwsPurchaseOrder);
-    if (!purchaseOrder) {
-      return undefined;
-    }
-    const purchaseOrderPayload: PurchaseOrderPayload = JSON.parse(purchaseOrder) as PurchaseOrderPayload;
-
-    return purchaseOrderPayload;
+    this.autoRenewProductId = purchaseOrderPayload.productId;
   }
 
   handleProductId(purchaseData: string) {
-    let purchaseOrderPayload = this.getLastPurchaseOrder(purchaseData);
+    let purchaseOrderPayload = MemberStatusUtil.getLastPurchaseOrder(purchaseData);
     let purchaseTime = 0;
     if (purchaseOrderPayload) {
       this.nonRenewProductId = purchaseOrderPayload?.productId;
@@ -134,12 +121,14 @@ export class MemberShipVM {
       purchaseTime = purchaseOrderPayload.purchaseTime;
     }
     // 请求获取到期时间
-    this.queryExpireTime(this.nonRenewProductId, purchaseTime);
+    this.queryExpireTime(this.nonRenewProductId, purchaseTime).then((expireTime) => {
+      this.lastPurchaseProductExpireTime = expireTime;
+    });
   }
 
   dealPurchaseData(purchaseData: string) {
     // You are advised to send purchaseData to the app server for signature verification.
-    let purchaseOrderPayload = this.getLastPurchaseOrder(purchaseData);
+    let purchaseOrderPayload = MemberStatusUtil.getLastPurchaseOrder(purchaseData);
     // todo: 处理发货
     // ...
     // 发货成功后向IAP Kit发送finishPurchase请求，确认发货，完成购买
@@ -151,7 +140,9 @@ export class MemberShipVM {
   dealSubscribeData(purchaseData: string) {
     try {
       // You are advised to send purchaseData to the app server for signature verification.
-      let lastSubscriptionStatus = this.getLastSubscriptionStatus(purchaseData);
+      let subGroupStatusPayload = MemberStatusUtil.getSubGroupStatusPayload(purchaseData);
+      this.groupId = subGroupStatusPayload?.subGroupId ?? '';
+      let lastSubscriptionStatus = subGroupStatusPayload?.lastSubscriptionStatus;
       if (!lastSubscriptionStatus || lastSubscriptionStatus.status !== '1') {
         return;
       }
@@ -164,19 +155,19 @@ export class MemberShipVM {
       // 发货成功后向IAP Kit发送finishPurchase请求，确认发货，完成购买
       this.finishPurchase(purchaseOrderPayload);
     } catch (e) {
-      hilog.error(0xFF00, 'MemberShip', `Failed to deal purchase data. Code is ${e.code}, message is ${e.message}`);
+      UtilLog.error(0xFF00, 'MemberShip', `Failed to deal purchase data. Code is ${e.code}, message is ${e.message}`);
     }
   }
 
   getExpiresTime(purchaseData: string) {
     try {
-      let lastSubscriptionStatus = this.getLastSubscriptionStatus(purchaseData);
+      let lastSubscriptionStatus = MemberStatusUtil.getLastSubscriptionStatus(purchaseData);
       if (lastSubscriptionStatus?.renewalInfo) {
         this.renewProductId = lastSubscriptionStatus?.renewalInfo.productId ?? '';
         this.expiresTime = lastSubscriptionStatus?.expiresTime ?? 0;
       }
     } catch (e) {
-      hilog.error(0xFF00, 'MemberShip', `Failed to get renewal time. Code is ${e.code}, message is ${e.message}`);
+      UtilLog.error(0xFF00, 'MemberShip', `Failed to get renewal time. Code is ${e.code}, message is ${e.message}`);
     }
   }
 
@@ -184,15 +175,15 @@ export class MemberShipVM {
     uiContext.getPromptAction().openCustomDialog(node, {
       levelMode: LevelMode.OVERLAY,
       onWillDismiss: (dismissDialogAction: DismissDialogAction) => {
-        hilog.info(0xFF00, 'MemberShip', JSON.stringify(dismissDialogAction.reason));
+        UtilLog.info(0xFF00, 'MemberShip', JSON.stringify(dismissDialogAction.reason));
       },
     }).then(() => {
-      hilog.info(0xFF00, 'TAG', 'OpenCustomDialog completed');
+      UtilLog.info(0xFF00, 'MemberShip', 'OpenCustomDialog completed');
     })
       .catch((error: BusinessError) => {
         let message = (error as BusinessError).message;
         let code = (error as BusinessError).code;
-        hilog.info(0xFF00, 'TAG', `OpenCustomDialog args error code is ${code}, message is ${message}`);
+        UtilLog.info(0xFF00, 'MemberShip', `OpenCustomDialog args error code is ${code}, message is ${message}`);
       });
   }
 
@@ -208,6 +199,7 @@ export class MemberShipVM {
     iap.finishPurchase(this.uiContext?.getHostContext() as common.UIAbilityContext, finishPurchaseParam).then(() => {
       this.memberParams.status = FinishStatus.FINISHED;
       this.memberParams.purchaseTime = Date.now();
+      this.userStatus.memberStatus.type = this.memberParams.type;
       this.subscribeCallBack(this.memberParams);
       if (this.memberParams.type === iap?.ProductType.NONCONSUMABLE) {
         iap.isSandboxActivated(this.uiContext?.getHostContext()).then((res) => {
@@ -220,9 +212,9 @@ export class MemberShipVM {
       }
       // 购买完成刷新页面
       this.queryPurchase();
-      hilog.info(0xFF00, 'MemberShip', `Succeeded in finishing purchase.`);
+      UtilLog.info(0xFF00, 'MemberShip', `Succeeded in finishing purchase.`);
     }).catch((err: BusinessError) => {
-      hilog.error(0xFF00, 'MemberShip', `Failed to buy products. Code is ${err.code}, message is ${err.message}`);
+      UtilLog.error(0xFF00, 'MemberShip', `Failed to buy products. Code is ${err.code}, message is ${err.message}`);
     });
   }
 
@@ -239,7 +231,7 @@ export class MemberShipVM {
   }
 
   queryProducts(productsInfo: ProductInfo[]) {
-    this.productInfoList = []
+    this.productInfoList = [];
     try {
       this.loading = true;
       const renewProductParam: iap.QueryProductsParameter = {
@@ -278,7 +270,8 @@ export class MemberShipVM {
             message: `查询会员商品失败，错误码为${err.code}，请排查后重试~`,
             duration: 1000,
           });
-          hilog.error(0xFF00, 'MemberShip', `Failed to query products. Code is ${err.code}, message is ${err.message}`);
+          UtilLog.error(0xFF00, 'MemberShip',
+            `Failed to query products. Code is ${err.code}, message is ${err.message}`);
         });
     } catch {
       this.loading = false;
@@ -312,6 +305,11 @@ export class MemberShipVM {
     } else {
       this.isRenewMember = false;
     }
+    if (this.autoRenewPurchasedList?.length) {
+      // 展示最近一次的购买记录
+      this.handleAutoRenewProductId(this.nonAutoRenewPurchasedList[0]);
+    }
+
     if (this.nonAutoRenewPurchasedList?.length) {
       // 展示最近一次的购买记录
       this.handleProductId(this.nonAutoRenewPurchasedList[0]);
@@ -337,7 +335,7 @@ export class MemberShipVM {
       const height = avoidArea.bottomRect.height;
       return this.uiContext?.px2vp(height) ?? 28;
     } catch (e) {
-      hilog.error(0xFF00, 'MemberShip', `Failed to get avoid height. Code is ${e.code}, message is ${e.message}`);
+      UtilLog.error(0xFF00, 'MemberShip', `Failed to get avoid height. Code is ${e.code}, message is ${e.message}`);
       return 28;
     }
   }
@@ -347,10 +345,33 @@ export class MemberShipVM {
       windowScreenMode: iap.WindowScreenMode.DIALOG_BOX,
     };
     iap.showManagedSubscriptions(uIAbilityContext, uiWindowParameter, this.groupId).then(() => {
-      hilog.info(0xFF00, 'MemberShip', `Succeeded in showing subscription page.`);
+      UtilLog.info(0xFF00, 'MemberShip', `Succeeded in showing subscription page.`);
     }).catch((err: BusinessError) => {
-      hilog.error(0xFF00, 'MemberShip',
+      UtilLog.error(0xFF00, 'MemberShip',
         `Failed to show subscription page. Code is ${err.code}, message is ${err.message}`);
     });
+  }
+
+  listenFoldChange() {
+    try {
+      display.on('foldStatusChange', (data: display.FoldStatus) => {
+        this.foldStatus = data;
+      });
+    } catch (e) {
+      UtilLog.error(0xFF00, 'MemberShip',
+        `Failed to listen fold status change. Code is ${e.code}, message is ${e.message}`);
+    }
+  }
+
+  listenScreenRotate() {
+    try {
+      display.on('change', async () => {
+        // 获取当前旋转角度
+        this.rotation = display.getDefaultDisplaySync().rotation;
+      });
+    } catch (e) {
+      UtilLog.error(0xFF00, 'MemberShip',
+        `Failed to listen screen rotate change. Code is ${e.code}, message is ${e.message}`);
+    }
   }
 }

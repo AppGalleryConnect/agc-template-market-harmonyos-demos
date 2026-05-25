@@ -1,6 +1,9 @@
 <svg width="12" height="24" viewBox="0 0 12 24"
 	 xmlns="http://www.w3.org/2000/svg"
 	 xmlns:xlink="http://www.w3.org/1999/xlink">
+  <metadata>
+    <agcit_code>agcit_huawei_fitness_center</agcit_code>
+  </metadata>
 	<defs>
 		<path d="M4.248 5.783l.032.03 4.95 4.95c.67.669.683 1.745.042 2.431l-.042.043-4.95 4.95a.747.747 0 0 1-.461.217l-.046.003h-.046a.75.75 0 0 1-.538-1.248l.03-.032 4.597-4.597a.75.75 0 0 0 .03-1.028l-.03-.032L3.22 6.873a.75.75 0 0 1 .51-1.28h.046c.17.006.337.07.472.19z" id="a"/>
 	</defs>

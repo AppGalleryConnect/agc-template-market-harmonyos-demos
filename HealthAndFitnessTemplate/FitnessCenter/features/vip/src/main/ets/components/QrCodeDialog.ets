@@ -1,6 +1,8 @@
 import { display } from '@kit.ArkUI';
 import { mediaquery, UIContext } from '@kit.ArkUI';
 import {window} from '@kit.ArkUI'
+import { Logger } from 'external_interactions';
+
 @ComponentV2
 export struct qrCodeDialog {
   controller?: CustomDialogController;
@@ -24,7 +26,7 @@ export struct qrCodeDialog {
         this.computeWid()
       })
     } catch (e) {
-      console.error(`Failed to get last window. error: ${JSON.stringify(e)}`)
+      Logger.error('[qrCodeDialog]', `Failed to get last window. error: ${JSON.stringify(e)}`)
     }
     this.computeWid()
   }
@@ -62,6 +64,7 @@ export struct qrCodeDialog {
     .onReady((ctx: NavDestinationContext) => {
       this.pathStack = ctx?.pathStack
     })
+    .backgroundColor('rgba(0,0,0,0.2)')
     .mode(NavDestinationMode.DIALOG)
     .hideTitleBar(true)
     .width('100%')

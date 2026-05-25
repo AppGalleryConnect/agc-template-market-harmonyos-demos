@@ -317,6 +317,10 @@
       "value": "确定"
     },
     {
+      "name": "select_all",
+      "value": "全选"
+    },
+    {
       "name": "delete",
       "value": "删除"
     },
@@ -351,6 +355,22 @@
     {
       "name": "today_read",
       "value": "今日阅读"
+    },
+    {
+      "name": "today_listen",
+      "value": "今日听书"
+    },
+    {
+      "name": "checked_in",
+      "value": "已签到"
+    },
+    {
+      "name": "day",
+      "value": "天"
+    },
+    {
+      "name": "go_earn_more_coins",
+      "value": "去赚更多金币 "
     },
     {
       "name": "no_login_out",
@@ -393,6 +413,70 @@
       "value": "阅读记录"
     },
     {
+      "name": "my_download",
+      "value": "我的下载"
+    },
+    {
+      "name": "read_status_read",
+      "value": "已读"
+    },
+    {
+      "name": "read_status_unread",
+      "value": "未读"
+    },
+    {
+      "name": "delete_confirmation_message",
+      "value": "是否删除%1$d条记录？"
+    },
+    {
+      "name": "book_downloaded_count",
+      "value": "已下载%1$d本"
+    },
+    {
+      "name": "book_total_count",
+      "value": "共%1$d本"
+    },
+    {
+      "name": "book_read_to",
+      "value": "读至"
+    },
+    {
+      "name": "no_introduction",
+      "value": "暂无简介"
+    },
+    {
+      "name": "recent_seven_days",
+      "value": "最近七天"
+    },
+    {
+      "name": "balance_deduction_remaining_payment",
+      "value": "抵扣余额还需支付"
+    },
+    {
+      "name": "product_amount",
+      "value": "商品金额"
+    },
+    {
+      "name": "read_coin",
+      "value": "%1$d阅读币"
+    },
+    {
+      "name": "voucher_coupon",
+      "value": "%1$d抵扣券"
+    },
+    {
+      "name": "balance_deduction",
+      "value": "余额抵扣"
+    },
+    {
+      "name": "purchase_book_unlimited_reading",
+      "value": "购买本书 长期畅读"
+    },
+    {
+      "name": "membership_promo_message",
+      "value": "%1$d元开通会员免费读"
+    },
+    {
       "name": "my_evaluation",
       "value": "我的评价"
     },
@@ -419,6 +503,30 @@
     {
       "name": "girls_channel",
       "value": "女生频道"
+    },
+    {
+      "name": "children_literature",
+      "value": "少儿文学"
+    },
+    {
+      "name": "science_nature",
+      "value": "科学自然"
+    },
+    {
+      "name": "poetry_prose",
+      "value": "诗词歌赋"
+    },
+    {
+      "name": "masterpiece_historical",
+      "value": "史学巨作"
+    },
+    {
+      "name": "literary_classics",
+      "value": "文学经典"
+    },
+    {
+      "name": "revolutionary_spirit",
+      "value": "革命精神"
     },
     {
       "name": "free_channel",
@@ -581,6 +689,30 @@
       "value": "福利中心"
     },
     {
+      "name": "download",
+      "value": "下载"
+    },
+    {
+      "name": "rename",
+      "value": "重命名"
+    },
+    {
+      "name": "delete_group",
+      "value": "删除分组"
+    },
+    {
+      "name": "disband_group",
+      "value": "解散分组"
+    },
+    {
+      "name": "pin",
+      "value": "置顶"
+    },
+    {
+      "name": "not_pin",
+      "value": "取消置顶"
+    },
+    {
       "name": "share",
       "value": "分享"
     },
@@ -646,7 +778,7 @@
     },
     {
       "name": "agcit_huawei_book_read",
-      "value": "2.1.3"
+      "value": "2.1.4"
     }
   ]
 }

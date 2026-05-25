@@ -1,8 +1,19 @@
 import { BusinessError, emitter } from '@kit.BasicServicesKit';
 import { fileIo, storageStatistics } from '@kit.CoreFileKit';
 import { Logger } from '@hw-agconnect/ui-base';
-import { BreakpointStorage, BreakpointSystem, BreakpointTypeEnum, Constants, NavHeaderBar, TCRouter } from 'common';
-import { UserInfo } from 'base_common';
+import {
+  BreakpointStorage,
+  BreakpointSystem,
+  BreakpointTypeEnum,
+  Constants,
+  FontModel,
+  MinorsMode,
+  MinorsProtectionUtils,
+  NavHeaderBar,
+  TCRouter
+} from 'common';
+import { UserInfo, fp2pxUtil } from 'base_common';
+import { AppStorageV2 } from '@kit.ArkUI';
 
 @ComponentV2
 export struct SettingPage {
@@ -10,9 +21,14 @@ export struct SettingPage {
   @Local userInfo: UserInfo | undefined = undefined;
   @Local appCache: number = 10.33;
   @Local curBreakpoint: BreakpointStorage = BreakpointSystem.currentBreakpoint
+  @Local minorsMode: MinorsMode =
+    AppStorageV2.connect(MinorsMode, 'isMinorsMode', () => new MinorsMode(MinorsProtectionUtils.getMinorsMode()))!
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
+  bottomRectHeight: number = AppStorage.get('bottomRectHeight') as number || 38.77
 
   async aboutToAppear(): Promise<void> {
     this.userInfo = AppStorage.get('userInfo') as UserInfo;
+    this.getCache();
     try {
       emitter.on(Constants.LOGIN_CHANGE, () => {
         this.userInfo = AppStorage.get('userInfo') as UserInfo;
@@ -22,12 +38,12 @@ export struct SettingPage {
     }
   }
 
-  async onPageShow(): Promise<void>  {
+  async onPageShow(): Promise<void> {
   }
 
   build() {
     NavDestination() {
-      Stack({ alignContent: Alignment.TopStart }) {
+      Stack({ alignContent: Alignment.Bottom }) {
         Column() {
           NavHeaderBar({
             title: '设置',
@@ -35,22 +51,101 @@ export struct SettingPage {
             hasBgColor: true,
             isMainPage: false,
           })
-          Column() {
+          Scroll() {
             Column({ space: 12 }) {
-              this.settingOptionView('个人信息',Constants.ACCOUNT_ROUTE)
-              this.settingOptionView('阅读设置',Constants.READ_SETTING_ROUTE)
-              this.settingOptionView('隐私设置',Constants.PRIVACY_ROUTE)
+              Column() {
+                this.settingOptionView('个人信息', Constants.ACCOUNT_ROUTE);
+                this.settingOptionView('隐私设置', Constants.PRIVACY_ROUTE)
+              }
+              .width(Constants.FULL_WIDTH)
+              .borderRadius(20)
+              .backgroundColor($r('sys.color.comp_background_list_card'))
 
-              Row(){
-                Text('清理缓存')
-                  .fontSize(16)
-                  .height(21)
-                  .width(100)
-                Row({space:6.6}){
-                  Text(this.appCache+'M')
-                    .fontSize(16)
-                    .fontWeight(400)
+              Column() {
+                this.settingOptionView('阅读设置', Constants.READ_SETTING_ROUTE)
+                // 自动下载
+                Row() {
+                  Text('清理缓存')
+                    .fontSize(this.fontModel.getFg(16))
+                    .height(21)
+                    .width(100)
+                  Row({ space: 6.6 }) {
+                    Text(this.appCache + 'M')
+                      .fontSize(this.fontModel.getFg(16))
+                      .fontWeight(400)
+                      .fontColor($r('sys.color.font_secondary'))
+                    Image($r('app.media.ic_arrow_right'))
+                      .width(8)
+                      .height(14)
+                      .objectFit(ImageFit.Contain)
+                  }
+
+                }
+                .width(Constants.FULL_SIZE)
+                .height(61)
+                .borderRadius(16)
+                .justifyContent(FlexAlign.SpaceBetween)
+                .padding({
+                  left: 18,
+                  top: 20,
+                  bottom: 20,
+                  right: 18
+                })
+                .onClick(() => {
+                  this.getUIContext().showAlertDialog(
+                    {
+                      title: '温馨提示',
+                      message: '您确定清除所有缓存？离线内容及图片均会被清除。',
+                      autoCancel: true,
+                      buttons: [
+                        {
+                          value: '取消',
+                          action: () => {
+                            console.info('Button-clicking callback');
+                          }
+                        },
+                        {
+                          value: '确定',
+                          action: () => {
+                            this.clearCache()
+                            this.getCache()
+                          }
+                        }]
+                    }
+                  );
+                })
+              }
+              .width(Constants.FULL_WIDTH)
+              .borderRadius(20)
+              .backgroundColor($r('sys.color.comp_background_list_card'))
+
+              // 显示模式 字体大小
+
+              Column() {
+                this.settingOptionView('字体大小', Constants.FONT_ROUTE)
+              }
+              .borderRadius(16)
+              .backgroundColor($r('sys.color.comp_background_list_card'))
+
+              Row() {
+                Column() {
+                  Text('青少年模式')
+                    .fontWeight(500)
+                    .fontSize(this.fontModel.getFg(16))
+                  Text('帮助青少年合理使用应用，引导孩子浏览合适内容')
+                    .fontSize(fp2pxUtil(14))
                     .fontColor($r('sys.color.font_secondary'))
+                }
+                .width(224)
+                .height('100%')
+                .justifyContent(FlexAlign.Center)
+                .alignItems(HorizontalAlign.Start)
+
+                Row({ space: 6.6 }) {
+                  Text(this.minorsMode.isMinorsMode ? '已开启' : '未开启')
+                    .fontSize(this.fontModel.getFg(16))
+                    .fontColor($r('sys.color.font_secondary'))
+
                   Image($r('app.media.ic_arrow_right'))
                     .width(8)
                     .height(14)
@@ -59,39 +154,51 @@ export struct SettingPage {
 
               }
               .width(Constants.FULL_SIZE)
-              .height(61)
+              .height(80)
               .backgroundColor($r('sys.color.comp_background_list_card'))
               .borderRadius(16)
               .justifyContent(FlexAlign.SpaceBetween)
               .padding({
-                left:18,
-                top:20,
-                bottom:20,
-                right:18
+                left: 18,
+                right: 18
               })
               .onClick(() => {
-                this.clearCache()
-                this.getCache()
+                TCRouter.pushByLogin(Constants.MINORS_MODE_ROUTE)
               })
 
-              this.settingOptionView('关于',Constants.ABOUT_ROUTE)
+              Column() {
+                Text('更多')
+                  .fontSize(this.fontModel.getFg(14))
+                  .fontWeight(FontWeight.Medium)
+                  .fontColor($r('sys.color.font_secondary'))
+                  .width('100%')
+                  .padding({ left: 12, top: 16, bottom: 8 })
+
+                Column(){
+                  this.settingOptionView('关于', Constants.ABOUT_ROUTE, $r('app.string.agcit_huawei_book_read'))
+                }
+                .borderRadius(16)
+                .backgroundColor($r('sys.color.comp_background_list_card'))
+              }
             }
             .width(this.curBreakpoint.value === BreakpointTypeEnum.LG ? '70%' : Constants.FULL_SIZE)
-
-            if (this.userInfo?.isLogin){
-              this.loginOut()
-            }
+            .padding({
+              left: 12,
+              right: 12,
+              top: 20,
+              bottom: this.bottomRectHeight + (this.userInfo?.isLogin? 60 :0)
+            })
           }
           .layoutWeight(1)
-          .justifyContent(FlexAlign.SpaceBetween)
-          .padding({
-            left: 12,
-            right: 12,
-            top: 20,
-            bottom: 50
-          })
+          .scrollBar(BarState.Off)
+          .edgeEffect(EdgeEffect.Spring)
+          .align(Alignment.Top)
         }
         .width(Constants.FULL_SIZE)
+
+        if (this.userInfo?.isLogin) {
+          this.loginOut()
+        }
       }
       .width(Constants.FULL_SIZE)
       .height(Constants.FULL_SIZE)
@@ -101,19 +208,21 @@ export struct SettingPage {
   }
 
   @Builder
-  settingOptionView(text:string, url:string, extraText?:string){
-    Row(){
+  settingOptionView(text: string, url: string, extraText?: ResourceStr) {
+    Row() {
       Text(text)
-        .fontSize(16)
+        .fontColor($r('sys.color.font_primary'))
+        .fontWeight(FontWeight.Medium)
+        .fontSize(this.fontModel.getFg(16))
         .height(21)
         .width(100)
 
-      Row({space:6.6}){
-        if(extraText){
+      Row({ space: 6.6 }) {
+        if (extraText) {
           Text(extraText)
-            .fontSize(16)
-            .fontWeight(400)
-            .fontColor('#99000000')
+            .fontSize(this.fontModel.getFg(16))
+            .fontWeight(FontWeight.Regular)
+            .fontColor($r('sys.color.font_secondary'))
         }
         Image($r('app.media.ic_arrow_right'))
           .width(8)
@@ -124,17 +233,16 @@ export struct SettingPage {
     }
     .width(Constants.FULL_SIZE)
     .height(61)
-    .backgroundColor($r('sys.color.comp_background_list_card'))
     .borderRadius(16)
     .justifyContent(FlexAlign.SpaceBetween)
     .padding({
-      left:18,
-      top:20,
-      bottom:20,
-      right:18
+      left: 18,
+      top: 20,
+      bottom: 20,
+      right: 18
     })
     .onClick(() => {
-      if (url === Constants.ACCOUNT_ROUTE || url === Constants.READ_SETTING_ROUTE)  {
+      if (url === Constants.ACCOUNT_ROUTE || url === Constants.READ_SETTING_ROUTE) {
         TCRouter.pushByLogin(url)
       } else {
         TCRouter.push(url);
@@ -155,10 +263,11 @@ export struct SettingPage {
           bottom: 9,
           left: 16
         })
-        .backgroundColor('#E84026')
-        .fontColor($r('sys.color.font_on_primary'))
-        .fontSize($r('sys.float.Body_L'))
+        .backgroundColor($r('sys.color.comp_background_tertiary'))
+        .fontColor($r('sys.color.font_primary'))
+        .fontSize(this.fontModel.getFg(16))
         .align(Alignment.Bottom)
+        .margin({ bottom: 10 + this.bottomRectHeight })
         .onClick(() => {
           const promptAction = this.getUIContext().getPromptAction();
           if (!this.userInfo?.isLogin) {

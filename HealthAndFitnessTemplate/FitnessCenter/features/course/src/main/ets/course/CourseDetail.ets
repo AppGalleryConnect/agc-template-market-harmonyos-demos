@@ -1,11 +1,19 @@
-import { CardInfo, ConsumeType, CourseDetailModel, DateUtil,
+import {
+  BreakpointModel,
+  BreakpointNameEnum,
+  CardInfo, ConsumeType, CourseDetailModel, DateUtil,
   JumpLogin,
   LoginState,
   MockService,
   OrderState,
-  UserCard } from 'external_interactions';
+  UserCard,
+  GridSettingInfo,
+  ScreenPropStorage,
+  AccountUpdate,
+  BookJumpSearch,
+  EmitterConstant,
+  Logger} from 'external_interactions';
 import { TitleBar } from 'module_recharge/src/main/ets/components/TitleBar';
-import { ScreenPropStorage , AccountUpdate, BookJumpSearch, EmitterConstant} from 'external_interactions'
 import { AppStorageV2 } from '@kit.ArkUI';
 import { emitter } from '@kit.BasicServicesKit';
 import window from '@ohos.window';
@@ -14,6 +22,8 @@ import { display } from '@kit.ArkUI';
 import { DialPanel } from 'dial_panel';
 import { BusinessError } from '@kit.BasicServicesKit';
 import { JSON } from '@kit.ArkTS';
+
+const TAG: string = '[CourseDetail]';
 
 @ComponentV2
 export struct CourseDetail {
@@ -37,6 +47,7 @@ export struct CourseDetail {
   @Local selectedCardIndex: number = -1;
   @Local selectedCard: CardInfo = new CardInfo('', 0, '', '', '', '', [], '', '', 1, 0, 0, 0 )
   private context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  @Local breakPointModel: BreakpointModel = AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
 
   private uiContext: UIContext = this.getUIContext();
 
@@ -60,29 +71,42 @@ export struct CourseDetail {
     this.uiContext.getPromptAction().showToast({ message: msg });
   }
 
+  isMDorLGorXL() {
+    return [BreakpointNameEnum.MD, BreakpointNameEnum.LG, BreakpointNameEnum.XL].includes(
+      this.breakPointModel.currentBreakpoint)
+  }
+
+  isLGorXL() {
+    return [BreakpointNameEnum.LG, BreakpointNameEnum.XL].includes(this.breakPointModel.currentBreakpoint)
+  }
+
   @Builder
   courseBasicBuilder() {
     if (this.courseDetail) {
       Column() {
         Image($r(this.courseDetail.advImage))
           .width('100%')
-          .height(132)
-          .borderRadius(8)
-          .margin({ bottom: 16 })
-        Text(this.courseDetail.courseName)
-          .textAlign(TextAlign.Start)
-          .fontSize(14)
-          .fontColor('#333333')
-          .fontWeight(FontWeight.Medium)
-          .width('100%')
-          .margin({ bottom: 16 })
-        Text('¥' + this.courseDetail.price.toString())
-          .textAlign(TextAlign.Start)
-          .fontSize(14)
-          .fontColor('#333333')
-          .fontWeight(FontWeight.Medium)
-          .width('100%')
+          .height(this.isMDorLGorXL() ? 248 : 132)
+          .borderRadius(16)
+          .margin({ bottom: this.isLGorXL() ? 100 : 16 })
+        Column() {
+          Text(this.courseDetail.courseName)
+            .textAlign(TextAlign.Start)
+            .fontSize(14)
+            .fontColor('#333333')
+            .fontWeight(FontWeight.Medium)
+            .width('100%')
+            .margin({ bottom: 16 })
+          Text('¥' + this.courseDetail.price.toString())
+            .textAlign(TextAlign.Start)
+            .fontSize(14)
+            .fontColor('#333333')
+            .fontWeight(FontWeight.Medium)
+            .width('100%')
+        }
       }
+      .justifyContent(FlexAlign.End)
+      .height(this.isLGorXL() ? '100%' : '')
       .width('100%')
       .borderRadius(16)
       .backgroundColor($r('sys.color.comp_background_list_card'))
@@ -269,7 +293,7 @@ export struct CourseDetail {
     try {
       this.windowWidth = this.getUIContext().px2vp(display.getDefaultDisplaySync().width)
     } catch (error) {
-      console.log(`get display class false ${JSON.stringify(error)}`);
+      Logger.info(TAG, `get display class false ${JSON.stringify(error)}`);
     }
   }
 
@@ -277,7 +301,7 @@ export struct CourseDetail {
     try {
       window.getLastWindow(this.context).then((win: window.Window) => {
         win.on('windowSizeChange', (data: window.Size) => {
-          console.log('Window size changed:', data.width, data.height);
+          Logger.info(TAG, `Window size changed: ${JSON.stringify(data.width)}, ${JSON.stringify(data.height)}`);
           this.windowWidth = this.getUIContext().px2vp(data.width);
         });
 
@@ -285,6 +309,19 @@ export struct CourseDetail {
     } finally {
 
     }
+  }
+
+  @Computed
+  get gridSetting() {
+    const gridSettingInfo: GridSettingInfo  = {
+      template: '1fr',
+      colGap: 12,
+      rowGap: 16,
+    }
+    if (this.isLGorXL()) {
+      gridSettingInfo.template = '1fr 1fr'
+    }
+    return gridSettingInfo
   }
 
   build() {
@@ -295,27 +332,35 @@ export struct CourseDetail {
         }
       })
         .margin({ left: 16, right: 16 })
-      Stack() {
-        Scroll() {
-          Column({ space: 16 }) {
-            // 课程图片轮播，价格展示
-            this.courseBasicBuilder()
-            // 展示卡项
-            this.cardShowBuilder()
-            // 服务详情
-            this.serviceDetailBuilder()
+
+      Scroll() {
+        Column({ space: 16 }) {
+          Grid() {
+            GridItem() {
+              // 课程图片轮播，价格展示
+              this.courseBasicBuilder()
+            }
+            GridItem() {
+              Column({ space: 12 }) {
+                // 展示卡项
+                this.cardShowBuilder()
+                // 服务详情
+                this.serviceDetailBuilder()
+              }
+            }
           }
-          .width('100%')
-          .justifyContent(FlexAlign.Start)
-          .margin({ top: 0 })
+          .columnsTemplate(this.gridSetting.template)
+          .columnsGap(this.gridSetting.colGap)
+          .rowsGap(this.gridSetting.rowGap)
         }
-        .scrollBar(BarState.Off)
-        .margin({ left: 16, right: 16 })
+        .justifyContent(FlexAlign.Start)
+        .margin({ left: 16, right: 16, bottom: 16 })
       }
       .width('100%')
-      .height('100%')
       .layoutWeight(1)
-      .alignContent(Alignment.Top)
+      .scrollBar(BarState.Off)
+      .align(Alignment.Top)
+      .edgeEffect(EdgeEffect.Spring)
 
       // 下方咨询和跳转预约
       Row() {
@@ -339,13 +384,15 @@ export struct CourseDetail {
               .setAutoClosePanel(false) // 成功跳转后不自动关闭模态窗
               .open();
           })
-        }.justifyContent(FlexAlign.Center)
+        }
+        .margin({ left: 24 })
         .width('20%')
         .height('60%')
 
         Button(this.hasBuyCard ? '立即预约' : '立即购买', { type: ButtonType.Capsule, stateEffect: true })
           .width('70%')
           .height('60%')
+          .margin({ right: 24 })
           .fontColor($r('sys.color.comp_background_list_card'))
           .fontWeight(FontWeight.Medium)
           .fontSize($r('sys.float.Body_M'))
@@ -360,15 +407,16 @@ export struct CourseDetail {
                 try {
                   emitter.emit(EmitterConstant.CLICK_BOOK_DETAIL)
                 } catch (e) {
-                  console.error(`emitter emit failed. error: ${JSON.stringify(e)}`)
+                  Logger.error(TAG, `emitter emit failed. error: ${JSON.stringify(e)}`)
                 }
                 this.bookJumpSearchStorage.bookJumpSearch = this.courseDetail.courseName
               }
             } else {
               if (this.loginStateStorage.loginState) {
+                // todo 同步编辑倒计时时间
                 let list = MockService.getOrderListByState(OrderState.TO_BE_PAY)?.filter(item =>
                 MockService.getCourseById(item.bookingId!)?.courseName === this.selectedCard?.name &&
-                Date.now() - DateUtil.parseDateString(item.createTime).getTime() < 20 * 60 * 1000) // todo 同步编辑倒计时时间
+                Date.now() - DateUtil.parseDateString(item.createTime).getTime() < 20 * 60 * 1000)
                 if (list.length !== 0) {
                   this.pathStack.pushPath({ name: 'card/orderDetail', param: list[0] })
                   this.getUIContext().getPromptAction().showToast({ message: '请支付已存在的订单' })
@@ -393,7 +441,7 @@ export struct CourseDetail {
                   try {
                     emitter.emit(EmitterConstant.CLICK_BOOK_DETAIL)
                   } catch (e) {
-                    console.error(`emitter emit failed. error: ${JSON.stringify(e)}`)
+                    Logger.error(TAG, `emitter emit failed. error: ${JSON.stringify(e)}`)
                   }
                   this.bookJumpSearchStorage.bookJumpSearch = this.courseDetail.courseName
                 }
@@ -401,13 +449,12 @@ export struct CourseDetail {
             }
           })
       }
-      .justifyContent(FlexAlign.Center)
+      .justifyContent(FlexAlign.SpaceBetween)
       .alignItems(VerticalAlign.Center)
       .height(75)
       .width('100%')
       .padding({ bottom: 10 })
       .backgroundColor(Color.White)
-
     }
     .hideTitleBar(true)
     .onReady((ctx: NavDestinationContext) => {
@@ -434,6 +481,7 @@ export struct CourseDetail {
         this.userCardList.push(item)
       }
     })
+    // 用户未购卡项但已购课程，依然可以预约
     if (AppStorage.get(this.courseDetail?.id)) {
       this.hasBuyCard = true
     }

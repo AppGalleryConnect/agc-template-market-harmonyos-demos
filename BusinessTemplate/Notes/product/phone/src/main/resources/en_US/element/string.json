@@ -10,7 +10,7 @@
     },
     {
       "name": "EntryAbility_label",
-      "value": "Content Publisher"
+      "value": "Notes"
     },
     {
       "name": "avatar",
@@ -126,7 +126,7 @@
     },
     {
       "name": "agcit_huawei_notes",
-      "value": "1.0.4"
+      "value": "1.0.5"
     }
   ]
 }

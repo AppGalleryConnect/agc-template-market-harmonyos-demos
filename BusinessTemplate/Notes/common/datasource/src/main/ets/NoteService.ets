@@ -6,6 +6,7 @@ import { hilog } from '@kit.PerformanceAnalysisKit';
 import { preferences } from '@kit.ArkData';
 import { formBindingData, formInfo, formProvider } from '@kit.FormKit';
 import { PreferencesUtil } from './PreferencesUtil';
+import { BusinessError } from '@kit.BasicServicesKit';
 
 @ObservedV2
 export class NoteService {
@@ -143,16 +144,18 @@ export class NoteService {
           ''}, 第二条标题=${cardData.firstNoteTitle ?? ''}`);
 
       formProvider.getPublishedRunningFormInfos().then((data: formInfo.RunningFormInfo[]) => {
-        console.info(`formProvider getPublishedRunningFormInfos, data: ${JSON.stringify(data)}`);
+        hilog.info(this.domainId, this.logTag,
+          `formProvider getPublishedRunningFormInfos, data: ${JSON.stringify(data)}`);
 
         data.forEach((form) => {
           let formId = form.formId
           formProvider.updateForm(formId, formData)
-            .then(() => console.info('更新成功'))
-            .catch((err:ESObject) => console.error('更新失败', err));
+            .then(() => hilog.info(this.domainId, this.logTag, '更新成功'))
+            .catch((err: ESObject) => hilog.error(this.domainId, this.logTag, `更新失败: ${JSON.stringify(err)}`));
         })
       }).catch((error: BusinessError) => {
-        console.error(`promise error, code: ${error.code}, message: ${error.message})`);
+        hilog.error(this.domainId, this.logTag,
+          `promise error, code: ${error.code}, message: ${error.message}`);
       });
     } catch (error) {
       hilog.warn(this.domainId, this.logTag, `updateFormCards: ${JSON.stringify(error)}`);
@@ -275,7 +278,7 @@ export class NoteService {
    */
   public getNoteList(id?: string, sortType?: SortEnum, keyWord: string = ''): Note[] {
     let notes: Note[] = this.search(keyWord);
-    console.log('---', JSON.stringify(notes));
+    hilog.debug(this.domainId, this.logTag, `getNoteList notes: ${JSON.stringify(notes)}`);
     if (id !== undefined && id !== '-1') {
       notes = notes.filter((item) => item.categoryId === id);
     }
@@ -323,7 +326,7 @@ export class NoteService {
    * @returns
    */
   public search(keyword: string): Note[] {
-    console.log('-----', this.notes);
+    hilog.debug(this.domainId, this.logTag, `search notes count: ${this.notes.length}`);
     if (!keyword) {
       return this.notes; // 空关键词返回所有笔记
     }
@@ -419,6 +422,9 @@ export class NoteService {
     note.createTime = serializedNote.createTime;
     note.updateTime = serializedNote.updateTime;
     note.description = serializedNote.description;
+     // 新增字段向下兼容：未保存过的新字段时使用默认值
+     note.noteType = (serializedNote as ESObject).noteType ?? 'normal';
+     note.audioUri = (serializedNote as ESObject).audioUri ?? '';
     return note;
   }
 }

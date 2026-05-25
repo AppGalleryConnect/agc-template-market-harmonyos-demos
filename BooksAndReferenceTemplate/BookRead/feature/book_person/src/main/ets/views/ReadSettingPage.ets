@@ -4,11 +4,13 @@ import {
   BreakpointSystem,
   BreakpointTypeEnum,
   Constants,
+  FontModel,
   NavHeaderBar,
   ReturnButton,
   TCRouter
 } from 'common';
-import { baseActionSheet, UserInfo } from 'base_common';
+import { baseActionSheet, UserInfo, fp2pxUtil } from 'base_common';
+import { AppStorageV2 } from '@kit.ArkUI';
 
 @ComponentV2
 export struct ReadSettingPage {
@@ -18,6 +20,7 @@ export struct ReadSettingPage {
   @Local reminderTime: number = this.userInfo.reminderTime
   @Local optionTime: number = this.userInfo.reminderTime
   @Local curBreakpoint: BreakpointStorage = BreakpointSystem.currentBreakpoint
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
 
   build() {
     NavDestination() {
@@ -33,7 +36,7 @@ export struct ReadSettingPage {
             Column() {
               Row() {
                 Text('全屏阅读')
-                  .fontSize(16)
+                  .fontSize(this.fontModel.getFg(16))
                   .height(21)
                   .width(191)
                 Toggle({ type: ToggleType.Switch, isOn: this.userInfo.fullScreen })
@@ -54,7 +57,7 @@ export struct ReadSettingPage {
 
               Row() {
                 Text('不显示时间')
-                  .fontSize(16)
+                  .fontSize(this.fontModel.getFg(16))
                   .height(21)
                   .width(191)
                 Toggle({ type: ToggleType.Switch, isOn: this.userInfo.noTimeBattery })
@@ -80,7 +83,7 @@ export struct ReadSettingPage {
 
             Row() {
               Text('自动购买下一章')
-                .fontSize(16)
+                .fontSize(this.fontModel.getFg(16))
                 .height(21)
                 .width(191)
               Toggle({ type: ToggleType.Switch, isOn: this.userInfo.continuousBuy })
@@ -97,12 +100,12 @@ export struct ReadSettingPage {
 
             Row() {
               Text('休息时间提醒')
-                .fontSize(16)
+                .fontSize(this.fontModel.getFg(16))
                 .height(21)
                 .width(191)
               Row({ space: 6.6 }) {
                 Text(this.reminderTime === 0 ? '关闭' : this.reminderTime + '分钟')
-                  .fontSize(16)
+                  .fontSize(this.fontModel.getFg(16))
                   .fontColor($r('sys.color.font_primary'))
                 Image($r('app.media.ic_arrow_right'))
                   .width(7)
@@ -164,7 +167,7 @@ export struct ReadSettingPage {
       Row() {
         Row({ space: 8 }) {
           SymbolGlyph($r('sys.symbol.xmark'))
-            .fontSize($r('sys.float.Title_M'))
+            .fontSize(fp2pxUtil(24))
             .fontColor([$r('sys.color.icon_primary')])
             .width(40)
             .height(40)
@@ -177,12 +180,12 @@ export struct ReadSettingPage {
             })
 
           Text('休息时间提醒')
-            .fontSize(20)
+            .fontSize(this.fontModel.getFg(20))
             .fontWeight(FontWeight.Bold)
         }
 
         SymbolGlyph($r('sys.symbol.checkmark'))
-          .fontSize($r('sys.float.Title_M'))
+          .fontSize(fp2pxUtil(24))
           .fontColor([$r('sys.color.icon_primary')])
           .width(40)
           .height(40)
@@ -234,7 +237,7 @@ export struct ReadSettingPage {
         })
 
       Text(tempTime === 0 ? '关闭' : tempTime + '分钟')
-        .fontSize(16)
+        .fontSize(this.fontModel.getFg(16))
         .fontWeight(FontWeight.Medium)
         .textAlign(TextAlign.Start)
     }

@@ -1,40 +1,28 @@
-import { uniformTypeDescriptor as utd } from '@kit.ArkData';
-import { systemShare } from '@kit.ShareKit';
-import { fileUri, fileIo as fs } from '@kit.CoreFileKit';
+import { fileIo as fs } from '@kit.CoreFileKit';
 import { BusinessError } from '@kit.BasicServicesKit';
 import { common } from '@kit.AbilityKit';
 import { Logger } from '@hw-agconnect/ui-base';
-import { BookInfo } from 'common';
+import { BookInfo, FontModel } from 'common';
 import { hilog } from '@kit.PerformanceAnalysisKit';
+import { SharePicker } from 'aggregated_share';
+import { AppStorageV2 } from '@kit.ArkUI';
 
 @ComponentV2
 export struct ShareBookCard {
   @Param @Require book: BookInfo;
   @Param isShelf?: boolean = false;
   @Param shareImage?: ResourceStr = $r('app.media.ic_share')
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
   setShareData() {
-    const contextFaker: Context = this.getUIContext().getHostContext() as Context;
-    let bookUri = `${this.book.id}.png`
-    let filePath = contextFaker.filesDir + `/${bookUri}`;
-
-    let utdTypeId = utd.getUniformDataTypeByFilenameExtension('.png', utd.UniformDataType.IMAGE);
-
-    let shareData: systemShare.SharedData = new systemShare.SharedData({
-      utd: utdTypeId,
-      uri: fileUri.getUriFromPath(filePath),
-      title: 'Picture Title',
-      description: 'Picture Description',
+    const picker: SharePicker = new SharePicker({
+      title: this.book.name,
+      coverUrl: typeof this.book.coverUrl === 'string' ? $r(this.book.coverUrl) : this.book.coverUrl,
+      thumbUrl: $r('app.media.startIcon'),
+      landingPageUrl: `https://linking.xiaobingtang.cn/BookRead?id=${this.book.id}`,
     });
 
-    let controller: systemShare.ShareController = new systemShare.ShareController(shareData);
-    let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
-    controller.show(context, {
-      selectionMode: systemShare.SelectionMode.SINGLE,
-      previewMode: systemShare.SharePreviewMode.DETAIL,
-    }).then(() => {
-      Logger.info('ShareController show success.');
-    }).catch((error: BusinessError) => {
-      Logger.error(`ShareController show error. code: ${error.code}, message: ${error.message}`);
+    picker.show({
+      autoClose: true,
     });
   }
 
@@ -66,7 +54,7 @@ export struct ShareBookCard {
           .margin({ top: 5 })
 
         Text($r('app.string.share'))
-          .fontSize($r('sys.float.Caption_L'))
+          .fontSize(this.fontModel.getFg(12))
           .fontColor($r('sys.color.font_primary'))
           .fontWeight(FontWeight.Regular)
       }

@@ -1,11 +1,16 @@
 import { AppStorageV2, window } from '@kit.ArkUI';
 import {
   Course1,
-  COURSE_DATA1, MyCourseParam,
+  COURSE_DATA1,
+  MyCourseParam,
   RouterMap,
   RouterModule,
   UserInfo,
-  WindowSize
+  WindowSize,
+  CourseDataModel,
+  ExerciseRecord,
+  ExerciseDays,
+  COURSE_CONTENT
 } from 'lib_common';
 import { MovieItem, PlayerComponent, PlayerVM } from 'module_player';
 import { CommentModel, CourseCatalogModel, CourseModel, ConvertTool } from 'lib_common';
@@ -36,48 +41,14 @@ export struct CoursePlayer {
   @Local learnProgress: number = 0;
   @Local param: MyCourseParam = MyCourseParam.instance()
   @Local windowSize: WindowSize = AppStorageV2.connect(WindowSize, () => new WindowSize())!
+  @Local courseDataModel: CourseDataModel = AppStorageV2.connect(CourseDataModel, () => new CourseDataModel())!;
   private scroller: ListScroller = new ListScroller();
   private movieItems: MovieItem[] = [];
 
   async aboutToAppear() {
     let course: Course1 = COURSE_DATA1[0]
-    switch (this.courseId) {
-      case '0001':
-        course = COURSE_DATA1[0];
-        break;
-      case '0002':
-        course = COURSE_DATA1[1];
-        break;
-      case '0003':
-        course = COURSE_DATA1[2];
-        break;
-      case '0004':
-        course = COURSE_DATA1[3];
-        break;
-      case '0005':
-        course = COURSE_DATA1[4];
-        break;
-      case '0006':
-        course = COURSE_DATA1[5];
-        break;
-      case '0007':
-        course = COURSE_DATA1[6];
-        break;
-      case '0008':
-        course = COURSE_DATA1[7];
-        break;
-      case '0009':
-        course = COURSE_DATA1[8];
-        break;
-      case '0010':
-        course = COURSE_DATA1[9];
-        break;
-      case '0011':
-        course = COURSE_DATA1[10];
-        break;
-      default:
-        break;
-    }
+    let index: number = Number(this.courseId) - 1
+    course = COURSE_DATA1[index]
     let courseModel = ConvertTool.convertCourseModel(course) as CourseModel
     if (courseModel) {
       this.courseDetail = courseModel
@@ -138,9 +109,39 @@ export struct CoursePlayer {
     if (learnProgress >= this.courseDetail.courseCatalog.length * 100) {
       this.courseDetail.isStudyEnd = true
     } else {
+      // 一个视频播放完进度为: (1 / 6) * 100 向下取整，从COURSE_DATA1获得的课程章节均为6个
       this.courseDetail.learnProgress = Math.floor(learnProgress / (this.courseDetail.courseCatalog.length * 100) * 100)
     }
     this.param.isLearn = true
+    this.courseDataModel.courseProgress.set(this.courseId , this.courseDetail.learnProgress)
+    if (this.courseDetail.learnProgress >= Math.floor((1/this.courseDetail.courseCatalog.length) * 100)) {
+      this.updateExerciseRecord()
+    }
+  }
+
+  updateExerciseRecord() {
+    let index: number = Number(this.courseId) - 1
+    let label: string = COURSE_DATA1[index].label
+    let courseList: string[] = AppStorage.get(String(new Date().getDate())) ?? []
+    if (courseList.includes(this.courseId)) {
+      AppStorage.setOrCreate<boolean>(label, true);
+    }
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = (today.getMonth() + 1).toString().padStart(2, '0');
+    const day = today.getDate().toString().padStart(2, '0');
+    let exerciseRecord: ExerciseRecord =
+      AppStorageV2.connect(ExerciseRecord, String(`${year}-${month}-${day}`), () => new ExerciseRecord())!;
+    if (exerciseRecord.duration === 0) {
+      let totalDays: ExerciseDays = AppStorageV2.connect(ExerciseDays, 'totalDays', () => new ExerciseDays())!;
+      totalDays.totalDays += 1;
+    }
+    exerciseRecord.duration += Number(COURSE_CONTENT[index].duration);
+    exerciseRecord.energy += Number(COURSE_CONTENT[index].energy);
+    let totalRecord: ExerciseRecord =
+      AppStorageV2.connect(ExerciseRecord, 'totalRecord', () => new ExerciseRecord())!;
+    totalRecord.duration += Number(COURSE_CONTENT[index].duration);
+    totalRecord.energy += Number(COURSE_CONTENT[index].energy);
   }
 
   @Builder
@@ -201,6 +202,7 @@ export struct CoursePlayer {
     .hideTitleBar(true)
     .onReady((context: NavDestinationContext) => {
       this.courseId = context.pathInfo?.param as string
+      this.aboutToAppear()
     })
   }
 }

@@ -77,6 +77,8 @@ export struct ShowAllCourse {
         }
         .margin({ bottom: 50 })
       }
+      .align(Alignment.Top)
+      .layoutWeight(1)
       .margin({ left: 16, right: 16 })
       .scrollBar(BarState.Off)
       .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: true })

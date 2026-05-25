@@ -1,5 +1,8 @@
 import { abilityAccessCtrl, common, PermissionRequestResult, Permissions } from '@kit.AbilityKit';
 import { BusinessError } from '@kit.BasicServicesKit';
+import { Logger } from './Logger';
+
+const TAG = '[CalendarUtil]';
 
 export function getCalendarPermission(context: common.UIAbilityContext): Promise<string> {
   const permissions: Permissions[] = ['ohos.permission.READ_CALENDAR', 'ohos.permission.WRITE_CALENDAR'];
@@ -13,7 +16,7 @@ export function getCalendarPermission(context: common.UIAbilityContext): Promise
       }
     }).catch((error: BusinessError) => {
       reject('failed')
-      console.error(`get Permission error, error. Code: ${error.code}, message: ${error.message}`);
+      Logger.error(TAG, `get Permission error, error. Code: ${error.code}, message: ${error.message}`);
     })
   })
 }

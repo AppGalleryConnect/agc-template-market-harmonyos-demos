@@ -1,6 +1,7 @@
 import { BusinessError } from '@kit.BasicServicesKit';
 import { ComponentContent, promptAction } from '@kit.ArkUI';
 import { UIContext } from '@ohos.arkui.UIContext';
+import { hilog } from '@kit.PerformanceAnalysisKit';
 
 export class DialogUtil {
   static ctx: UIContext;
@@ -26,12 +27,12 @@ export class DialogUtil {
     if (DialogUtil.contentNode !== null) {
       DialogUtil.ctx.getPromptAction().openCustomDialog(DialogUtil.contentNode, DialogUtil.options)
         .then(() => {
-          console.info('OpenCustomDialog complete.')
+          hilog.info(0x0000, 'DialogUtil', 'OpenCustomDialog complete.');
         })
         .catch((error: BusinessError) => {
           let message = (error as BusinessError).message;
           let code = (error as BusinessError).code;
-          console.error(`OpenCustomDialog args error code is ${code}, message is ${message}`);
+          hilog.error(0x0000, 'DialogUtil', `OpenCustomDialog args error code is ${code}, message is ${message}`);
         })
     }
   }
@@ -40,12 +41,12 @@ export class DialogUtil {
     if (DialogUtil.contentNode !== null) {
       DialogUtil.ctx.getPromptAction().closeCustomDialog(DialogUtil.contentNode)
         .then(() => {
-          console.info('CloseCustomDialog complete.')
+          hilog.info(0x0000, 'DialogUtil', 'CloseCustomDialog complete.');
         })
         .catch((error: BusinessError) => {
           let message = (error as BusinessError).message;
           let code = (error as BusinessError).code;
-          console.error(`CloseCustomDialog args error code is ${code}, message is ${message}`);
+          hilog.error(0x0000, 'DialogUtil', `CloseCustomDialog args error code is ${code}, message is ${message}`);
         })
     }
   }
@@ -54,12 +55,12 @@ export class DialogUtil {
     if (DialogUtil.contentNode !== null) {
       DialogUtil.ctx.getPromptAction().updateCustomDialog(DialogUtil.contentNode, options)
         .then(() => {
-          console.info('UpdateCustomDialog complete.')
+          hilog.info(0x0000, 'DialogUtil', 'UpdateCustomDialog complete.');
         })
         .catch((error: BusinessError) => {
           let message = (error as BusinessError).message;
           let code = (error as BusinessError).code;
-          console.error(`UpdateCustomDialog args error code is ${code}, message is ${message}`);
+          hilog.error(0x0000, 'DialogUtil', `UpdateCustomDialog args error code is ${code}, message is ${message}`);
         })
     }
   }

@@ -12,7 +12,9 @@ export function HotCoursePageBuilder() {
 
 @ComponentV2
 export struct HotCourse {
-  @Param detailList: Course[] = HOT_COURSE_DATA
+  @Param isShowTop: boolean = false
+  @Param detailList: Course[] = this.isShowTop ?
+    HOT_COURSE_DATA.slice(0, Math.min(4, HOT_COURSE_DATA.length)) : HOT_COURSE_DATA
   @Local breakPointModel: BreakpointModel = AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
 
   @Computed
@@ -45,7 +47,7 @@ export struct HotCourse {
                 .margin({ bottom:2 })
               Row() {
                 Text(`难度：${item.difficultyLevel}`)
-                  .fontWeight(FontWeight.Medium)
+                  .fontWeight(FontWeight.Regular)
                   .fontSize($r('sys.float.Body_S'))
                   .fontColor('rgba(0, 0, 0, 0.4)')
                   .margin({ right: 12 })
@@ -54,7 +56,7 @@ export struct HotCourse {
                   .height(12)
                   .margin({ right: 2 })
                 Text(NumberUtil.getHourAndMinuteFormat(item.courseDuration))
-                  .fontWeight(FontWeight.Medium)
+                  .fontWeight(FontWeight.Regular)
                   .fontSize($r('sys.float.Body_S'))
                   .fontColor('rgba(0, 0, 0, 0.4)')
               }
@@ -105,7 +107,7 @@ struct HotCoursePage {
         .align(Alignment.Top)
         .scrollBar(BarState.Off)
         .scrollable(ScrollDirection.Vertical)
-        .edgeEffect(EdgeEffect.Spring)
+        .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: true })
         .margin({ bottom: 30 })
         .width('100%')
       }

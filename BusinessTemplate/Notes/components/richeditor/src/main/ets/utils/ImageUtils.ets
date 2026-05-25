@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 import { image } from '@kit.ImageKit';
+import { hilog } from '@kit.PerformanceAnalysisKit';
 
 export class ImageUtils {
   /**
@@ -24,37 +25,40 @@ export class ImageUtils {
    * @returns {image.PositionArea} Picture buffer area
    */
   // [Start get_snapshot_area]
-  static async getSnapshotArea(uiContext: UIContext, pixelMap: PixelMap, scrollYOffsets: number[], listWidth: number,
+  static async getSnapshotArea(_uiContext: UIContext, pixelMap: PixelMap, scrollYOffsets: number[], _listWidth: number,
     listHeight: number): Promise<image.PositionArea> {
-    // Gets the number of bytes per line of image pixels.
-    let stride = pixelMap.getBytesNumberPerRow();
-    // Get the total number of bytes of image pixels.
-    let bytesNumber = pixelMap.getPixelBytesNumber();
-    let buffer: ArrayBuffer = new ArrayBuffer(bytesNumber);
-    // 	Region size, read based on region.   PositionArea represents the data within the specified area of the image.
-    let len = scrollYOffsets.length;
+    const len = scrollYOffsets.length;
 
-    // // Except for the first screenshot, you don't need to crop it, and you need to crop the new parts
-    if (scrollYOffsets.length >= 2) {
-      // Realistic roll distance
-      let realScrollHeight = scrollYOffsets[len-1] - scrollYOffsets[len-2];
-      if (listHeight - realScrollHeight > 0) {
-        let cropRegion: image.Region = {
-          x: 0,
-          y: uiContext.vp2px(listHeight - realScrollHeight),
-          size: {
-            height: uiContext.vp2px(realScrollHeight),
-            width: uiContext.vp2px(listWidth),
-          },
-        };
-        // Crop roll area
-        await pixelMap.crop(cropRegion);
+    if (len >= 2 && listHeight > 0) {
+      const imgBefore = pixelMap.getImageInfoSync();
+      const snapW = imgBefore.size.width;
+      const snapH = imgBefore.size.height;
+      if (snapH > 0 && snapW > 0) {
+        const realScrollHeightVp = scrollYOffsets[len - 1] - scrollYOffsets[len - 2];
+        if (listHeight - realScrollHeightVp > 0) {
+          const realScrollPx = Math.min(snapH, Math.max(1, Math.round((realScrollHeightVp / listHeight) * snapH)));
+          const cropY = Math.max(0, snapH - realScrollPx);
+          const cropH = Math.min(realScrollPx, snapH - cropY);
+          if (cropH > 0 && cropY < snapH) {
+            const cropRegion: image.Region = {
+              x: 0,
+              y: cropY,
+              size: {
+                height: cropH,
+                width: snapW,
+              },
+            };
+            await pixelMap.crop(cropRegion);
+          }
+        }
       }
     }
 
-    let imgInfo = pixelMap.getImageInfoSync();
-    // Region size, read based on region. PositionArea represents the data within the specified area of the image.
-    let area: image.PositionArea = {
+    const stride = pixelMap.getBytesNumberPerRow();
+    const bytesNumber = pixelMap.getPixelBytesNumber();
+    const buffer: ArrayBuffer = new ArrayBuffer(bytesNumber);
+    const imgInfo = pixelMap.getImageInfoSync();
+    const area: image.PositionArea = {
       pixels: buffer,
       offset: 0,
       stride: stride,
@@ -67,7 +71,6 @@ export class ImageUtils {
         y: 0,
       },
     };
-    // Write data to a specified area
     pixelMap.readPixelsSync(area);
     return area;
   }
@@ -83,15 +86,33 @@ export class ImageUtils {
    * @returns {PixelMap} Long image after merge
    */
   // [Start merge_image]
-  static async mergeImage(uiContext: UIContext, areaArray: image.PositionArea[], lastOffsetY: number, listWidth: number,
-    listHeight: number): Promise<PixelMap> {
-    // Create a long screenshot PixelMap
-    let opts: image.InitializationOptions = {
+
+  static async mergeImage(_uiContext: UIContext, areaArray: image.PositionArea[], _lastOffsetY: number,
+    _listWidth: number, _listHeight: number): Promise<PixelMap> {
+    if (!areaArray || areaArray.length === 0) {
+      throw new Error('mergeImage: areaArray 为空');
+    }
+    let outW = 0;
+    let sumH = 0;
+    for (let i = 0; i < areaArray.length; i++) {
+      const ra = areaArray[i];
+      const w = ra.region.size.width;
+      const h = ra.region.size.height;
+      if (w > outW) {
+        outW = w;
+      }
+      sumH += h;
+    }
+    if (outW <= 0 || sumH <= 0) {
+      throw new Error(`mergeImage: 无效输出尺寸 width=${outW} height=${sumH}`);
+    }
+
+    const opts: image.InitializationOptions = {
       editable: true,
       pixelFormat: 4,
       size: {
-        width: uiContext.vp2px(listWidth),
-        height: uiContext.vp2px(lastOffsetY + listHeight),
+        width: outW,
+        height: sumH,
       },
     };
 
@@ -99,15 +120,17 @@ export class ImageUtils {
     try {
       longPixelMap = image.createPixelMapSync(opts);
     } catch (err) {
-      console.error(`createPixelMapSync失败: ${(err as Error).message}`);
+      hilog.error(0x0000, 'ImageUtils', `createPixelMapSync失败: ${(err as Error).message}`);
       throw new Error(`创建长截图失败: ${(err as Error).message}`);
     }
+    if (longPixelMap === null) {
+      throw new Error('创建长截图失败');
+    }
 
-    let imgPosition: number = 0;
-
+    let imgPosition = 0;
     for (let i = 0; i < areaArray.length; i++) {
-      let readArea = areaArray[i];
-      let area: image.PositionArea = {
+      const readArea = areaArray[i];
+      const area: image.PositionArea = {
         pixels: readArea.pixels,
         offset: 0,
         stride: readArea.stride,

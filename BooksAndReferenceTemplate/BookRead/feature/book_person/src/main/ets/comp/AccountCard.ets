@@ -1,13 +1,16 @@
-import { BreakpointStorage, BreakpointSystem, BreakpointTypeEnum, Constants, TCRouter } from 'common';
+import { BreakpointStorage, BreakpointSystem, BreakpointTypeEnum, Constants,
+  FontModel, TCRouter } from 'common';
 import { BusinessError, emitter } from '@kit.BasicServicesKit';
-import { UserInfo } from 'base_common';
+import { UserInfo, fp2pxUtil } from 'base_common';
+import { AppStorageV2 } from '@kit.ArkUI';
 
 @ComponentV2
 export struct AccountCard {
   @Local bookCoins: number = 0;
   @Local isLogin: boolean = false;
   @Local userInfoFromStorage: UserInfo = AppStorage.get('userInfo') as UserInfo;
-  @Local curBreakpoint: BreakpointStorage = BreakpointSystem.currentBreakpoint
+  @Local curBreakpoint: BreakpointStorage = BreakpointSystem.currentBreakpoint;
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
 
   aboutToAppear(): void {
     this.loadUserInfo();
@@ -92,7 +95,7 @@ export struct AccountCard {
     Column({ space: 12 }) {
       Row() {
         Text('我的账户')
-          .fontSize(18)
+          .fontSize(this.fontModel.getFg(18))
           .fontWeight(FontWeight.Medium)
           .fontColor($r('sys.color.font_primary'))
       }
@@ -105,37 +108,47 @@ export struct AccountCard {
       Row() {
         Column({ space: 4 }) {
           Text(this.bookCoins.toString())
-            .fontSize(24)
+            .fontSize(this.fontModel.getFg(24))
             .fontWeight(FontWeight.Bold)
             .fontColor($r('sys.color.font_primary'))
           Text('书币')
-            .fontSize(14)
+            .fontSize(this.fontModel.getFg(14))
             .fontColor($r('sys.color.font_secondary'))
         }
         .width(72)
         .alignItems(HorizontalAlign.Center)
 
-        Column() {
+        Row({ space: 8 }) {
+          Button('赚书币')
+            .width(72)
+            .height(28)
+            .fontSize(fp2pxUtil(14))
+            .fontWeight(FontWeight.Medium)
+            .fontColor($r('sys.color.font_on_primary'))
+            .backgroundColor($r('sys.color.multi_color_08'))
+            .padding({
+              top: 4,
+              bottom: 4,
+              left: 8,
+              right: 8
+            })
+            .onClick(() => {
+              TCRouter.pushByLogin(Constants.WELFARE_CENTER);
+            })
+
           Button('充值')
             .width(72)
             .height(28)
-            .fontSize($r('sys.float.Body_M'))
+            .fontSize(fp2pxUtil(14))
             .fontWeight(FontWeight.Medium)
             .fontColor($r('sys.color.font_on_primary'))
-            .backgroundColor('#E8402A')
-            .borderRadius(14)
+            .backgroundColor($r('sys.color.multi_color_08'))
             .onClick(() => {
-              if (!this.isLogin) {
-                this.showLoginPrompt();
-              } else {
-                // 跳转到充值页面
-                TCRouter.push(Constants.RECHARGE_ROUTE);
-              }
+              TCRouter.pushByLogin(Constants.RECHARGE_ROUTE);
             })
         }
         .height(44)
-        .justifyContent(FlexAlign.End)
-
+        .alignItems(VerticalAlign.Bottom)
       }
       .width(Constants.FULL_SIZE)
       .justifyContent(FlexAlign.SpaceBetween)

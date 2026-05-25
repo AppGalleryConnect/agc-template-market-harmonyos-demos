@@ -1,8 +1,9 @@
-import { CommonConstants, Record } from 'lib_common';
+import { CommonConstants, Record, ExerciseRecord } from 'lib_common';
 import { RecordPageVM } from '../viewmodels/RecordPageVM';
 import { MOCK_BAR_CHART_LIST } from '../preview/Mockdata';
 import { BarItem, DayBarChart, MonthBarChart, WeekBarChart, YearBarChart } from 'module_chart';
 import { NavHeaderBar } from 'lib_widget';
+import { AppStorageV2, TabSegmentButtonV2 , SegmentButtonV2Items, ColorMetrics } from '@kit.ArkUI';
 
 @Builder
 export function RecordPageBuilder() {
@@ -12,13 +13,18 @@ export function RecordPageBuilder() {
 @ComponentV2
 struct RecordPage {
   vm: RecordPageVM = new RecordPageVM();
-  private textItems: string[] = ['周', '月', '年']
+  @Local textItems: SegmentButtonV2Items = new SegmentButtonV2Items([
+    { text: '周' },
+    { text: '月' },
+    { text: '年' },
+  ]);
   @Local monthNames: string[] = [
     '1月', '2月', '3月', '4月', '5月', '6月',
     '7月', '8月', '9月', '10月', '11月', '12月'
   ];
   @Local textSelectedIndex: number = 0;
   @Local weekdayList: string[] = []
+  @Local showWeekDates: string[] = [];
   @Local monthDayList: string[] = []
   @Local weekRecord: BarItem[] = []
   @Local monthRecord: BarItem[] = []
@@ -47,7 +53,7 @@ struct RecordPage {
     for (let i = 0; i < 7; i++) {
       let nextDate: string = this.weekdayList[i]
       let date: string = this.formatDateToWeekDay(nextDate)
-      let record: Record = AppStorage.get(nextDate) ?? this.defaultRecord
+      let record: ExerciseRecord = AppStorageV2.connect(ExerciseRecord, nextDate, () => new ExerciseRecord())!
       if (record.duration !== 0) {
         this.weekDays++
         this.weekDuration += record.duration
@@ -64,7 +70,7 @@ struct RecordPage {
     let monthRecord: BarItem[] = []
     for (let i = 0; i < this.monthDayList.length; i++) {
       let date: string = this.monthDayList[i]
-      let record: Record = AppStorage.get(date) ?? this.defaultRecord
+      let record: ExerciseRecord = AppStorageV2.connect(ExerciseRecord, date, () => new ExerciseRecord())!
       if (record.duration !== 0) {
         this.monthDays++
         this.monthDuration += record.duration
@@ -101,7 +107,7 @@ struct RecordPage {
     let currentDate = new Date(firstDay);
     while (currentDate <= lastDay) {
       const dateStr = this.formatDate(currentDate);
-      let record: Record = AppStorage.get(dateStr) ?? this.defaultRecord
+      let record: ExerciseRecord = AppStorageV2.connect(ExerciseRecord, dateStr, () => new ExerciseRecord())!
       if (record.duration !== 0) {
         this.yearDays++
       }
@@ -133,9 +139,12 @@ struct RecordPage {
       const nextDate = new Date(monday);
       nextDate.setDate(monday.getDate() + i);
       const year = nextDate.getFullYear();
-      const month = (nextDate.getMonth() + 1).toString().padStart(2, '0');
-      const day = nextDate.getDate().toString().padStart(2, '0');
-      weekdayList.push(String(`${year}-${month}-${day}`));
+      const month = (nextDate.getMonth() + 1).toString();
+      const day = nextDate.getDate().toString();
+      if (i === 0 || i === 6) {
+        this.showWeekDates.push(String(`${month}月${day}日`))
+      }
+      weekdayList.push(String(`${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`));
     }
     return weekdayList;
   }
@@ -181,16 +190,11 @@ struct RecordPage {
         Column() {
           VCard() {
             Row({ space: 10 }) {
-              ForEach(this.textItems, (item: string, index: number) => {
-                Button(item)
-                  .width('30%')
-                  .type(ButtonType.Capsule)
-                  .backgroundColor(this.textSelectedIndex === index ? $r('app.color.app_theme') :
-                    'rgba(0, 0, 0, 0.05)')
-                  .fontColor(this.textSelectedIndex === index ? Color.White : $r('sys.color.font_on_primary'))
-                  .onClick(() => {
-                    this.textSelectedIndex = index
-                  })
+              TabSegmentButtonV2({
+                items: this.textItems,
+                selectedIndex: this.textSelectedIndex!!,
+                itemSelectedBackgroundColor: ColorMetrics.resourceColor($r('app.color.app_theme')),
+                itemSelectedFontColor: ColorMetrics.resourceColor($r('sys.color.font_on_primary')),
               })
             }
           }
@@ -283,7 +287,7 @@ struct RecordPage {
         Image($r('app.media.ic_chart_left'))
           .width(24)
           .height(24)
-        Text(`${this.weekdayList[0]}~${this.weekdayList[6]}`)
+        Text(`${this.showWeekDates[0]} - ${this.showWeekDates[1]}`)
           .fontWeight(FontWeight.Medium)
           .fontSize($r('sys.float.Body_L'))
         Image($r('app.media.ic_chart_right'))
@@ -356,7 +360,7 @@ struct RecordPage {
         Image($r('app.media.ic_chart_left'))
           .width(24)
           .height(24)
-        Text(String(new Date().getFullYear()))
+        Text(`${String(new Date().getFullYear())}年`)
           .fontWeight(FontWeight.Medium)
           .fontSize($r('sys.float.Body_L'))
         Image($r('app.media.ic_chart_right'))
@@ -429,7 +433,7 @@ struct RecordPage {
         Image($r('app.media.ic_chart_left'))
           .width(24)
           .height(24)
-        Text(String(new Date().getMonth() + 1))
+        Text(`${String(new Date().getMonth() + 1)}月`)
           .fontWeight(FontWeight.Medium)
           .fontSize($r('sys.float.Body_L'))
         Image($r('app.media.ic_chart_right'))

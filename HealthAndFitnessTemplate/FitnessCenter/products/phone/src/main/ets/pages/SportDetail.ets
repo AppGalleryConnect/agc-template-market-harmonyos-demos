@@ -1,14 +1,25 @@
-import { CardInfo, CourseDetailModel, MockService, SportType } from 'external_interactions';
+import {
+  BreakpointModel,
+  BreakpointNameEnum, CardInfo, CourseDetailModel,
+  GridSettingInfo,
+  MockService, SportType } from 'external_interactions';
 import { JSON } from '@kit.ArkTS';
 import { CardGrid } from 'card';
 import { CourseGrid } from 'course'
 import { TitleBar } from 'module_recharge/src/main/ets/components/TitleBar';
 import { ScreenPropStorage , AccountUpdate} from 'external_interactions'
-import { AppStorageV2 } from '@kit.ArkUI';
+import { AppStorageV2, display } from '@kit.ArkUI';
+
+interface SwiperSettingInfo {
+  displayCount: number;
+  nextMargin: number;
+  itemSpace: number;
+  gridShowNum: number;
+}
+
 @ComponentV2
 export struct SportDetail {
   @Local screenPropStorage : ScreenPropStorage = AppStorageV2.connect(ScreenPropStorage, 'ScreenPropStorage', () =>new ScreenPropStorage())!
-
   @Local topRectHeight: number = this.screenPropStorage.topRectHeight;
   @Local bottomRectHeight: number = this.screenPropStorage.bottomRectHeight;
   @Param @Once pathStack: NavPathStack = new NavPathStack();
@@ -16,6 +27,57 @@ export struct SportDetail {
   courseList: CourseDetailModel[] = []
   cardList: CardInfo[] = []
   @Local currentIndex: number = 0
+  @Local breakPointModel: BreakpointModel = AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
+
+  @Computed
+  get swiperInfo() {
+    // 获取当前屏幕旋转角度（0-3 分别对应 0°、90°、180°、270°）
+    let rotation: number = display.getDefaultDisplaySync().rotation;
+    const swiperInfo: SwiperSettingInfo  = {
+      displayCount: 1,
+      nextMargin: 16,
+      itemSpace: 8,
+      gridShowNum: 4
+    }
+    if (BreakpointNameEnum.MD === this.breakPointModel.currentBreakpoint) {
+      swiperInfo.displayCount = 2
+      swiperInfo.nextMargin = 24
+      swiperInfo.itemSpace = 12
+      swiperInfo.gridShowNum = 8
+    }
+    if ([BreakpointNameEnum.LG, BreakpointNameEnum.XL].includes((this.breakPointModel.currentBreakpoint))) {
+      if (rotation === 1 || rotation === 3) {
+        swiperInfo.displayCount = 3
+        swiperInfo.nextMargin = 32
+        swiperInfo.itemSpace = 16
+        swiperInfo.gridShowNum = 12
+      }
+    }
+    return swiperInfo;
+  }
+
+  @Computed
+  get gridSetting() {
+    // 获取当前屏幕旋转角度（0-3 分别对应 0°、90°、180°、270°）
+    let rotation: number = display.getDefaultDisplaySync().rotation;
+    const gridSettingInfo: GridSettingInfo  = {
+      template: '1fr 1fr',
+      colGap: 8,
+      rowGap: 8,
+    }
+    if (BreakpointNameEnum.MD === this.breakPointModel.currentBreakpoint) {
+      gridSettingInfo.template = '1fr 1fr 1fr 1fr'
+      gridSettingInfo.colGap = 12
+    }
+    if ([BreakpointNameEnum.LG, BreakpointNameEnum.XL].includes((this.breakPointModel.currentBreakpoint))) {
+      if (rotation === 1 || rotation === 3) {
+        gridSettingInfo.template = '1fr 1fr 1fr 1fr 1fr 1fr'
+        gridSettingInfo.colGap = 16
+        gridSettingInfo.rowGap = 16
+      }
+    }
+    return gridSettingInfo
+  }
 
   @Builder
   sportsAdvBuilder() {
@@ -25,6 +87,7 @@ export struct SportDetail {
         Image($r(item))
           .width('100%')
           .height('100%')
+          .borderRadius(16)
       }, (item: string) => item)
     }
     .loop(true)
@@ -34,6 +97,9 @@ export struct SportDetail {
     .borderRadius(16)
     .curve(Curve.Smooth)
     .indicator(false) // 关闭默认指示器
+    .displayCount(this.swiperInfo.displayCount)
+    .nextMargin(this.swiperInfo.nextMargin)
+    .itemSpace(this.swiperInfo.itemSpace)
     .onChange((index) => {
       this.currentIndex = index // 同步当前索引
     })
@@ -83,7 +149,7 @@ export struct SportDetail {
       .width('100%')
 
       Grid() {
-        ForEach(this.cardList, (item: CardInfo) => {
+        ForEach(this.cardList.slice(0, this.swiperInfo.gridShowNum), (item: CardInfo) => {
           GridItem() {
             CardGrid({cardInfo: item, onBackClick:()=>{
               this.pathStack.pushPath({name: 'card/cardDetail', param: item})
@@ -92,9 +158,9 @@ export struct SportDetail {
         }, (item: string) => JSON.stringify(item))
       }
       .width('100%')
-      .columnsTemplate('1fr 1fr')
-      .columnsGap(8)
-      .rowsGap(8)
+      .columnsTemplate(this.gridSetting.template)
+      .columnsGap(this.gridSetting.colGap)
+      .rowsGap(this.gridSetting.rowGap)
     }
     .width('100%')
     .margin({ bottom: 15 })
@@ -127,7 +193,7 @@ export struct SportDetail {
       .justifyContent(FlexAlign.SpaceBetween)
 
       Grid() {
-        ForEach(this.courseList, (item: CourseDetailModel) => {
+        ForEach(this.courseList.slice(0, this.swiperInfo.gridShowNum), (item: CourseDetailModel) => {
           GridItem() {
             CourseGrid({courseDetail: item, onBackClick:()=>{
               this.pathStack.pushPath({ name: 'course/CourseDetail', param: item })
@@ -136,9 +202,9 @@ export struct SportDetail {
         }, (item: CourseDetailModel) => JSON.stringify(item))
       }
       .width('100%')
-      .columnsTemplate('1fr 1fr')
-      .columnsGap(8)
-      .rowsGap(8)
+      .columnsTemplate(this.gridSetting.template)
+      .columnsGap(this.gridSetting.colGap)
+      .rowsGap(this.gridSetting.rowGap)
     }
     .width('100%')
     .margin({ bottom: 15 })

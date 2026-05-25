@@ -1,9 +1,35 @@
-import { CourseDetailModel } from 'external_interactions'
+import { CourseDetailModel, BreakpointNameEnum, BreakpointModel, GridSettingInfo } from 'external_interactions'
+import { AppStorageV2, display } from '@kit.ArkUI';
 
 @ComponentV2
 export struct CourseContent{
   @Param courseList : CourseDetailModel[] = []
   @Param @Once onBackClick : (msg : string) => void = () => {};
+  @Local breakPointModel: BreakpointModel = AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
+
+  @Computed
+  get gridSetting() {
+    // 获取当前屏幕旋转角度（0-3 分别对应 0°、90°、180°、270°）
+    let rotation: number = display.getDefaultDisplaySync().rotation;
+    const gridSettingInfo: GridSettingInfo  = {
+      template: '1fr 1fr',
+      colGap: 8,
+      rowGap: 8,
+    }
+    if (BreakpointNameEnum.MD === this.breakPointModel.currentBreakpoint) {
+      gridSettingInfo.template = '1fr 1fr 1fr 1fr'
+      gridSettingInfo.colGap = 12
+    }
+    if ([BreakpointNameEnum.LG, BreakpointNameEnum.XL].includes((this.breakPointModel.currentBreakpoint))) {
+      if (rotation === 1 || rotation === 3) {
+        gridSettingInfo.template = '1fr 1fr 1fr 1fr 1fr 1fr'
+        gridSettingInfo.colGap = 16
+        gridSettingInfo.rowGap = 16
+      }
+    }
+    return gridSettingInfo
+  }
+
   @Builder
   courseBuilder(){
     Grid() {
@@ -16,10 +42,11 @@ export struct CourseContent{
       }, (item: CourseDetailModel) => JSON.stringify(item))
     }
     .width('100%')
-    .columnsTemplate('1fr 1fr')
-    .columnsGap(8)
-    .rowsGap(8)
+    .columnsTemplate(this.gridSetting.template)
+    .columnsGap(this.gridSetting.colGap)
+    .rowsGap(this.gridSetting.rowGap)
   }
+
   build() {
     Column(){
       Row(){

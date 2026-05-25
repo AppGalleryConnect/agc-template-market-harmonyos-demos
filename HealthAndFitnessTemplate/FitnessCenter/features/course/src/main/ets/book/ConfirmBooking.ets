@@ -1,6 +1,6 @@
 import { calendarManager } from '@kit.CalendarKit';
 import { BusinessError, emitter} from '@kit.BasicServicesKit';
-import { BookJumpSearch, EmitterConstant } from 'external_interactions'
+import { BookJumpSearch, EmitterConstant, Logger } from 'external_interactions'
 import {
   BookingInfo,
   BookState,
@@ -18,6 +18,9 @@ import { TitleBar } from 'module_recharge/src/main/ets/components/TitleBar';
 import { ScreenPropStorage , BookingRestQuotaUpdate, AccountUpdate, GlobalBalance, ClearPath} from 'external_interactions'
 import { AppStorageV2 } from '@kit.ArkUI';
 import  EventData  from '@ohos.events.emitter';
+
+const TAG: string = '[ConfirmBooking]';
+
 @ComponentV2
 export struct ConfirmBooking {
   @Param @Once bookingInfo: BookingInfo = {} as BookingInfo;
@@ -249,7 +252,7 @@ export struct ConfirmBooking {
                 try {
                   emitter.emit(EmitterConstant.CONFIRM_DATA, data)
                 } catch (e) {
-                  console.error(`emitter emit failed. error: ${JSON.stringify(e)}`)
+                  Logger.error(TAG, `emitter emit failed. error: ${JSON.stringify(e)}`)
                 }
                 this.pathStack.pushPath({ name: 'course/BookingDetail', param: this.bookingInfo})
                 this.updateMockData()
@@ -311,14 +314,14 @@ export struct ConfirmBooking {
       this.bookingInfo.courseBookingInfo.timeEnd).getTime(),
     };
     calendarMgr?.getCalendar().then((data: calendarManager.Calendar) => {
-      console.info(`Succeeded in getting calendar, data -> ${JSON.stringify(data)}`);
+      Logger.info(TAG, `Succeeded in getting calendar, data -> ${JSON.stringify(data)}`);
       data.addEvent(event).then((data: number) => {
-        console.info(`Succeeded in adding event, id -> ${data}`);
+        Logger.info(TAG, `Succeeded in adding event, id -> ${JSON.stringify(data)}`);
       }).catch((err: BusinessError) => {
-        console.error(`Failed to addEvent. Code: ${err.code}, message: ${err.message}`);
+        Logger.error(TAG, `Failed to addEvent. Code: ${err.code}, message: ${err.message}`);
       });
     }).catch((err: BusinessError) => {
-      console.error(`Failed to get calendar. Code: ${err.code}, message: ${err.message}`);
+      Logger.error(TAG, `Failed to get calendar. Code: ${err.code}, message: ${err.message}`);
     });
   }
 

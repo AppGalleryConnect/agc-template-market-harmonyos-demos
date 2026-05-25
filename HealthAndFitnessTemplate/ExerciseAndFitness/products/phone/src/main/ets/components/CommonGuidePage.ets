@@ -103,7 +103,7 @@ export struct CommonGuidePage {
           }
         }
       }
-      .margin({ top: 32 })
+      .margin({ top: 16 })
       .padding({
         left: this.vm.breakPointModel.pagePadding,
         right: this.vm.breakPointModel.pagePadding,

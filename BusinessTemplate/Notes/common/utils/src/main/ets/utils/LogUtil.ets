@@ -107,14 +107,14 @@ export class LogUtil {
         let str = JSON.stringify(obj, null, 2)
         let arr: string[] = str.split('\n')
         for (let index = 0; index < arr.length; index++) {
-          console.debug(arr[index])
+          hilog.debug(LOGGER_DOMAIN, LOGGER_TAG, '%{public}s', arr[index]);
         }
       } else {
         obj = JSON.parse(obj)
         let str = JSON.stringify(obj, null, 2)
         let arr = str.split('\n')
         for (let index = 0; index < arr.length; index++) {
-          console.debug(arr[index])
+          hilog.debug(LOGGER_DOMAIN, LOGGER_TAG, '%{public}s', arr[index]);
         }
       }
     } catch (err) {

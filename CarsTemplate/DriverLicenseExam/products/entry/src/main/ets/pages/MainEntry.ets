@@ -2,7 +2,7 @@ import { TAB_LIST } from '../constants/Constants';
 import { HomeView } from './home/HomeView';
 import { MineView } from './mine/MineView';
 import { TabListItem } from '../types/Types';
-import { CommonModel, CommonConstants, PreferencesUtil } from '@ohos_agcit/driver_license_exam_commonlib';
+import { CommonModel, CommonConstants, PreferencesUtil, Logger } from '@ohos_agcit/driver_license_exam_commonlib';
 import { GuideService } from '@ohos_agcit/driver_license_exam_guide';
 import { ExamService } from '@ohos_agcit/driver_license_exam_datasource'
 import { notificationManager } from '@kit.NotificationKit';
@@ -57,8 +57,8 @@ struct MainEntry {
 
     formIds.forEach((id:string) => {
       formProvider.updateForm(id, formInfo)
-        .then(() => console.info('更新成功'))
-        .catch((err:ESObject) => console.error('更新失败', err));
+        .then(() => Logger.info('MainEntry', '更新成功'))
+        .catch((err: ESObject) => Logger.error('MainEntry', '更新失败: %{public}s', JSON.stringify(err) ?? ''));
     })
   }
 
@@ -112,12 +112,11 @@ struct MainEntry {
             this.vm.curIndex = index;
           });
         }
-        .backgroundColor(Color.White)
+        .backgroundColor($r('sys.color.background_secondary'))
         .padding({
           bottom: this.getUIContext().px2vp(this.bottomRectHeight)
         })
       }
-
       .hideTitleBar(true)
       .hideToolBar(true)
       .hideBackButton(true)
@@ -141,7 +140,7 @@ struct MainEntry {
         .height(24);
       Text(item.label)
         .fontColor(this.vm.curIndex === index ? $r('app.color.icon_color_highlight') :
-          'rgba(0,0,0,0.6)')
+          $r('sys.color.font_secondary'))
         .fontSize($r('app.string.font_size_10'))
         .margin({ top: $r('app.string.margin_xs') });
 

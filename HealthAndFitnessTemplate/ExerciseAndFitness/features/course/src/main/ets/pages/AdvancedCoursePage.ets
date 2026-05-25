@@ -18,6 +18,9 @@ interface GridSettingInfo {
 
 @ComponentV2
 export struct AdvancedCourse {
+  @Param isShowTop: boolean = false
+  @Param detailList: Course[] = this.isShowTop ?
+    ADVANCED_COURSE_DATA.slice(0, Math.min(6, ADVANCED_COURSE_DATA.length)) : ADVANCED_COURSE_DATA
   @Local breakPointModel: BreakpointModel = AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
 
   @Computed
@@ -45,7 +48,7 @@ export struct AdvancedCourse {
 
   build() {
     Grid() {
-      ForEach(ADVANCED_COURSE_DATA, (item: Course) => {
+      ForEach(this.detailList, (item: Course) => {
         GridItem() {
           Row() {
             Column() {
@@ -91,8 +94,12 @@ export struct AdvancedCourse {
           .width('100%')
           .justifyContent(FlexAlign.Center)
         }
+        .borderRadius(4)
       })
     }
+    .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])
+    .edgeEffect(this.isShowTop ? EdgeEffect.None : EdgeEffect.Spring )
+    .scrollBar(BarState.Off)
     .columnsTemplate(this.gridSetting.template)
     .columnsGap(this.gridSetting.colGap)
     .rowsGap(this.gridSetting.rowGap)
@@ -102,6 +109,7 @@ export struct AdvancedCourse {
 @ComponentV2
 struct AdvancedCoursePage {
   vm: AdvancedCoursePageVM = new AdvancedCoursePageVM();
+  scroller: Scroller = new Scroller()
 
   build() {
     NavDestination() {
@@ -110,12 +118,21 @@ struct AdvancedCoursePage {
           title: '进阶课程',
         })
 
-        Column() {
-          AdvancedCourse()
+        Scroll(this.scroller){
+          Column() {
+            AdvancedCourse()
+          }
+          .height('100%')
+          .margin({ left: 16, right: 16 })
         }
-        .margin({ left: 16, right: 16 })
+        .layoutWeight(1)
+        .align(Alignment.Top)
+        .scrollBar(BarState.Off)
+        .scrollable(ScrollDirection.Vertical)
+        .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: true })
+        .margin({ bottom: 30 })
+        .width('100%')
       }
-      .height('100%')
       .width('100%')
       .backgroundColor($r('app.color.course_background'))
     }

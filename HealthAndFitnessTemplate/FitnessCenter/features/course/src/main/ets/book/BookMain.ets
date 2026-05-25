@@ -1,5 +1,7 @@
 import {
   BookingInfo,
+  BreakpointModel,
+  BreakpointNameEnum,
   CoachCourseInfo,
   CourseBookingInfo,
   CourseDetailModel,
@@ -7,14 +9,18 @@ import {
   MockService,
   SportType,
   TeachType,
-  UserCard
+  UserCard,
+  GridSettingInfo,
+  Logger
 } from 'external_interactions';
-import { promptAction, SymbolGlyphModifier } from '@kit.ArkUI';
+import { display, promptAction, SymbolGlyphModifier } from '@kit.ArkUI';
 import { ScreenPropStorage , BookingRestQuotaUpdate, JumpLogin, LoginState, BookJumpSearch} from 'external_interactions'
 import { AppStorageV2 } from '@kit.ArkUI';
 import { emitter } from '@kit.BasicServicesKit';
 import { EmitterConstant } from 'external_interactions'
 import  EventData  from '@ohos.events.emitter';
+
+const TAG = '[BookMain]';
 
 @ComponentV2
 export struct BookMain {
@@ -40,6 +46,7 @@ export struct BookMain {
   @Local update: boolean = false
   @Local currentCity: string = AppStorage.get('currentCity') ?? '北京'
   @Local currentStore: string = AppStorage.get('currentStore') ?? '全市门店'
+  @Local breakPointModel: BreakpointModel = AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
 
   aboutToAppear(): void {
     AppStorage.setOrCreate<string>('currentCity', '北京')
@@ -49,7 +56,7 @@ export struct BookMain {
         this.initData()
       })
     } catch (e) {
-      console.error(`emitter on failed. error: ${JSON.stringify(e)}`)
+      Logger.error(TAG, `emitter on failed. error: ${JSON.stringify(e)}`)
     }
     try {
       emitter.on('currentCity', (data: EventData.EventData) => {
@@ -60,7 +67,7 @@ export struct BookMain {
         }
       })
     } catch (e) {
-      console.error(`emitter on failed. error: ${JSON.stringify(e)}`)
+      Logger.error(TAG, `emitter on failed. error: ${JSON.stringify(e)}`)
     }
     this.getUIContext().getHostContext()?.eventHub.on('currentStore', (currentStore: string) => {
       this.currentStore = currentStore
@@ -71,7 +78,7 @@ export struct BookMain {
     try {
       emitter.off('currentCity')
     } catch (e) {
-      console.error(`emitter off failed. error: ${JSON.stringify(e)}`)
+      Logger.error(TAG, `emitter off failed. error: ${JSON.stringify(e)}`)
     }
     this.getUIContext().getHostContext()?.eventHub.off('currentStore')
   }
@@ -90,6 +97,7 @@ export struct BookMain {
     }
     return dateSelectList;
   }
+
   @Monitor('bookingRestQuotaUpdateStorage.bookingRestQuotaUpdate')
   getCourseList() {
     if (this.teachTypeIndex === 0) {
@@ -103,6 +111,46 @@ export struct BookMain {
     }
   }
 
+  @Computed
+  get dateWidth() {
+    if ([BreakpointNameEnum.SM, BreakpointNameEnum.MD].includes(this.breakPointModel.currentBreakpoint)) {
+      return 0;
+    }
+    return 16;
+  }
+
+  @Computed
+  get gridSetting() {
+    // 获取当前屏幕旋转角度（0-3 分别对应 0°、90°、180°、270°）
+    let rotation: number = display.getDefaultDisplaySync().rotation;
+    const gridSettingInfo: GridSettingInfo  = {
+      template: '1fr',
+      colGap: 8,
+      rowGap: 8,
+    }
+    if ([BreakpointNameEnum.LG, BreakpointNameEnum.XL].includes((this.breakPointModel.currentBreakpoint))) {
+      if (rotation === 1 || rotation === 3) {
+        gridSettingInfo.template = '1fr 1fr 1fr'
+        if (this.teachTypeIndex === 0) {
+          if(this.courseBookingInfoList.length < 2) {
+            gridSettingInfo.template = '1fr'
+          } else if(this.courseBookingInfoList.length < 3) {
+            gridSettingInfo.template = '1fr 1fr'
+          }
+        } else {
+          if(this.coachCourseInfoList.length < 2) {
+            gridSettingInfo.template = '1fr'
+          } else if(this.coachCourseInfoList.length < 3) {
+            gridSettingInfo.template = '1fr 1fr'
+          }
+        }
+        gridSettingInfo.colGap = 12
+        gridSettingInfo.rowGap = 12
+      }
+    }
+    return gridSettingInfo
+  }
+
   getSportsType() {
     let typeList: SportType[] = [{
       name: '全部',
@@ -112,9 +160,10 @@ export struct BookMain {
     }];
     this.sportTypeList = typeList.concat(MockService.sportTypeList)
   }
+
   build() {
     Column() {
-      // 标题
+      // 城市
       Column() {
         Row() {
           Text(this.currentCity)
@@ -129,20 +178,12 @@ export struct BookMain {
         .borderRadius(20)
         .backgroundColor($r('sys.color.background_tertiary'))
         .margin({ left: 16, right: 16 })
-        .padding({
-          top: 8,
-          bottom: 8,
-          left: 16,
-          right: 8
-        })
+        .padding({ top: 8, bottom: 8, left: 16, right: 8 })
         .onClick(() => {
           this.pathStack.pushPath({ name: 'CitySelect' })
         })
       }
-      .margin({
-        top: 8,
-        bottom: 8
-      })
+      .margin({ top: 8, bottom: 8 })
       .height(40)
       .width('100%')
       .alignItems(HorizontalAlign.Start)
@@ -152,25 +193,26 @@ export struct BookMain {
         .borderRadius(20)
         .backgroundColor('#E5E7E8')
         .placeholderColor($r('sys.color.font_tertiary'))
-        .placeholderFont({ size: $r('sys.float.Body_M'), weight: FontWeight.Regular })
+        .placeholderFont({ size: $r('sys.float.Body_L'), weight: FontWeight.Regular })
         .cancelButton({
           style: CancelButtonStyle.INPUT,
           icon: new SymbolGlyphModifier($r('sys.symbol.xmark_circle')).fontColor([Color.Gray]).outlineColor(Color.Gray)
         })
-        .margin({ bottom: 15, left: 16, right: 16 })
+        .margin({ bottom: 16, left: 16, right: 16 })
         .onChange(() => {
           this.getCourseList()
         })
 
       // 课程运动类型标签
-      List({ space: 16 }) {
+      List({ space: 8 }) {
         ForEach(this.sportTypeList, (item: SportType, index: number) => {
           ListItem() {
             Button(item.name, { type: ButtonType.Capsule, stateEffect: true })
-              .backgroundColor(this.sportTypeIndex === index ? '#FF9019' : '#E5E7E8')
-              .fontSize($r('sys.float.Body_M'))
-              .fontColor(this.sportTypeIndex === index ? Color.White : Color.Black)
-              .width(75)
+              .backgroundColor(this.sportTypeIndex === index ? '#FF9019' : $r('sys.color.comp_background_tertiary'))
+              .fontSize($r('sys.float.Body_L'))
+              .fontColor(
+                this.sportTypeIndex === index ? $r('sys.color.font_on_primary') : $r('sys.color.font_secondary')
+              )
               .height(40)
               .onClick(() => {
                 this.sportTypeIndex = index;
@@ -182,56 +224,56 @@ export struct BookMain {
       .listDirection(Axis.Horizontal)
       .scrollBar(BarState.Off)
       .height(40)
-      .margin({ bottom: 15, left: 16, right: 16 })
+      .padding({ left: 16, right: 16 })
+      .margin({ bottom: 16 })
+      .width('100%')
+      .alignListItem(ListItemAlign.Start)
 
       Column() {
+        // 门店
         Column() {
           Row() {
             Text(this.currentCity !== '北京' && this.currentCity !== '北京市' && this.currentCity !== '南京' &&
               this.currentCity !== '南京市' ? '全市门店' : this.currentStore)
-              .fontSize(14)
+              .fontSize($r('sys.float.Body_L'))
               .width(this.currentStore.length * 16)
-              .fontWeight(FontWeight.Medium)
-
+              .fontWeight(FontWeight.Regular)
             Image($r('app.media.Arrow_bottom_filled'))
               .width(24)
           }
           .borderRadius(20)
           .backgroundColor($r('sys.color.background_tertiary'))
-          .padding({
-            top: 2,
-            bottom: 2,
-            left: 8
-          })
+          .padding({ top: 2, bottom: 2, left: 8 })
+          .margin({ left: 16 })
         }
-        .margin({
-          top: 8,
-          bottom: 8
-        })
+        .margin({ top: 8, bottom: 8 })
         .height(28)
-        .width('95%')
+        .width('100%')
         .alignItems(HorizontalAlign.Start)
         .justifyContent(FlexAlign.Start)
         .onClick(() => {
           this.pathStack.pushPath({ name: 'course/StoreSelect', param: this.currentCity })
         })
+
         // 授课类型
-        Row({ space: 20 }) {
+        Row({ space: 16 }) {
           ForEach(this.teachTypeList, (teachType: string, index: number) => {
-            Text(teachType)
-              .height('100%')
-              .fontSize(14)
-              .fontWeight(this.teachTypeIndex === index ? FontWeight.Bold : FontWeight.Regular)
-              .border({
-                width: { bottom: this.teachTypeIndex === index ? 3 : 0 },
-                color: '#000000'
-              })
-              .onClick(() => {
-                if (this.teachTypeIndex !== index) {
-                  this.teachTypeIndex = index;
-                  this.getCourseList();
-                }
-              })
+            Column() {
+              Text(teachType)
+                .height('100%')
+                .fontSize($r('sys.float.Body_L'))
+                .fontWeight(this.teachTypeIndex === index ? FontWeight.Bold : FontWeight.Regular)
+                .border({
+                  width: { bottom: this.teachTypeIndex === index ? 3 : 0 },
+                  color: '#000000'
+                })
+            }.width(56)
+            .onClick(() => {
+              if (this.teachTypeIndex !== index) {
+                this.teachTypeIndex = index;
+                this.getCourseList();
+              }
+            })
           }, (item: string) => item)
         }
         .justifyContent(FlexAlign.Start)
@@ -244,25 +286,23 @@ export struct BookMain {
 
         // 日期选择
         Row() {
-          List({ space: 10, scroller: this.listScroller }) {
             ForEach(this.dateList, (item: Date, index: number) => {
-              ListItem() {
                 Column() {
                   Text(this.weekNameList[item.getDay()])
-                    .fontSize(14)
+                    .fontSize($r('sys.float.Body_M'))
                     .fontColor(index === this.dateSelectIndex ? '#FFFFFF' :
                       '#333333')
                   Text((item.getMonth() + 1 < 10 ? '0' + (item.getMonth() + 1) :
                     item.getMonth() + 1 + '') + '.' +
                     (item.getDate() < 10 ? '0' + item.getDate() : item.getDate() + ''))
-                    .fontSize(12)
+                    .fontSize($r('sys.float.Caption_M'))
                     .fontColor(index === this.dateSelectIndex ? '#FFFFFF' :
                       '#333333')
                 }
                 .backgroundColor(index === this.dateSelectIndex ? '#FF9019' :
                   '#FFFFFF')
                 .height(40)
-                .width(40)
+                .width('13%')
                 .padding(2)
                 .justifyContent(FlexAlign.SpaceAround)
                 .borderRadius(8)
@@ -270,29 +310,25 @@ export struct BookMain {
                   this.dateSelectIndex = index;
                   this.getCourseList()
                 })
-              }
             }, (item: Date) => DateUtil.formatDate(item))
-          }
-          .listDirection(Axis.Horizontal)
-          .alignListItem(ListItemAlign.Center)
-          .scrollBar(BarState.Off)
-          .width('100%')
-          .height('100%')
-        }.justifyContent(FlexAlign.SpaceBetween)
+        }.justifyContent(FlexAlign.Center)
         .height(60)
-        .margin({ left: 16, right: 16 })
+        .width('100%')
       }
+      .width(`calc(100% - ${2 * this.dateWidth}vp)`)
       .height(140)
-      .width('100%')
       .backgroundColor($r('sys.color.comp_background_list_card'))
+
       // 课程列表
-      List({ space: 16 }) {
+      Grid() {
         if (this.teachTypeIndex === 0) {
           if (this.courseBookingInfoList.length === 0) {
-            NoCourse()
+            GridItem() {
+              NoCourse()
+            }
           } else {
             ForEach(this.courseBookingInfoList, (item: CourseBookingInfo, index: number) => {
-              ListItem() {
+              GridItem() {
                 CourseInfoItem({ item: item, cardIndex: this.cardIndex, pathStack: this.pathStack,
                   handleItemQuotaChange: (remaining: number)=>{
                   item.restQuota = remaining
@@ -303,20 +339,26 @@ export struct BookMain {
           }
         } else {
           if (this.coachCourseInfoList.length === 0) {
-            NoCourse()
+            GridItem() {
+              NoCourse()
+            }
           } else {
             ForEach(this.coachCourseInfoList, (item: CoachCourseInfo) => {
-              ListItem() {
+              GridItem() {
                 coachListCollapse({ coachCourseInfo: item, cardIndex: this.cardIndex, pathStack: this.pathStack })
               }
             }, (item: CoachCourseInfo) => JSON.stringify(item))
           }
         }
       }
-      .scrollBar(BarState.Off)
-      .height('60%')
-      .margin({ top: 12, left: 16, right: 16 })
+      .columnsTemplate(this.gridSetting.template)
+      .columnsGap(this.gridSetting.colGap)
+      .rowsGap(this.gridSetting.rowGap)
+      .margin({ left: 16, right: 16 })
+      .padding({ top: 12, bottom: 12 })
       .layoutWeight(1)
+      .scrollBar(BarState.Off)
+      .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: false })
     }
     .justifyContent(FlexAlign.Start)
     .backgroundColor($r('app.color.main_background_color'))
@@ -463,7 +505,7 @@ struct CourseInfoItem {
         }
       })
     } catch (e) {
-      console.error(`emitter on failed. error: ${JSON.stringify(e)}`)
+      Logger.error(TAG, `emitter on failed. error: ${JSON.stringify(e)}`)
     }
   }
 
@@ -471,7 +513,7 @@ struct CourseInfoItem {
     try {
       emitter.off(EmitterConstant.CONFIRM_DATA)
     } catch (e) {
-      console.error(`emitter off failed. error: ${JSON.stringify(e)}`)
+      Logger.error(TAG, `emitter off failed. error: ${JSON.stringify(e)}`)
     }
   }
 
@@ -574,7 +616,7 @@ struct CourseInfoItem {
                     try {
                       emitter.emit(EmitterConstant.CLICK_BOOK_DETAIL)
                     } catch (e) {
-                      console.error(`emitter emit failed. error: ${JSON.stringify(e)}`)
+                      Logger.error(TAG, `emitter emit failed. error: ${JSON.stringify(e)}`)
                     }
                     this.bookJumpSearchStorage.bookJumpSearch = this.courseDetail.courseName
                   }

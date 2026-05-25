@@ -1,11 +1,14 @@
 import { AppStorageV2, CircleShape } from '@kit.ArkUI';
-import { BreakpointModel, BreakpointNameEnum, CommonConstants, Record } from 'lib_common';
+import { BreakpointModel,
+  BreakpointNameEnum,
+  CommonConstants,
+  Record,
+  ExerciseRecord,
+  ExerciseDays } from 'lib_common';
 import { NavHeaderBar } from 'lib_widget';
 import { mineGridList } from '../constants/Constants';
 import { MineGridItem } from '../types/Types';
 import { MineViewModel } from '../viewmodels/MineVM';
-import { emitter } from '@kit.BasicServicesKit';
-import  EventData  from '@ohos.events.emitter';
 
 @Builder
 export function MinePageBuilder() {
@@ -20,64 +23,18 @@ interface GridSettingInfo {
 
 @ComponentV2
 struct MinePage {
+  today = new Date();
+  year: number = this.today.getFullYear();
+  month: string = (this.today.getMonth() + 1).toString().padStart(2, '0');
+  day: string = this.today.getDate().toString().padStart(2, '0');
+  @Local todayExerciseRecord: ExerciseRecord =
+    AppStorageV2.connect(ExerciseRecord, String(`${this.year}-${this.month}-${this.day}`), () => new ExerciseRecord())!
+  @Local totalExerciseRecord: ExerciseRecord =
+    AppStorageV2.connect(ExerciseRecord, 'totalRecord', () => new ExerciseRecord())!
+  @Local totalDays: ExerciseDays = AppStorageV2.connect(ExerciseDays, 'totalDays', () => new ExerciseDays())!
   @Local vm: MineViewModel = new MineViewModel();
-  @Local todayRecord: Record = { duration: 0, energy: 0 }
   @Local totalRecord: Record = { duration: 0, energy: 0 }
-  @Local totalDays: number = 0
   @Local breakPointModel: BreakpointModel = AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
-
-  aboutToAppear() {
-    try {
-      emitter.on('todayRecord', (data: EventData.EventData) => {
-        if(data.data){
-          let todayRecord: Record = data.data.todayRecord
-          this.todayRecord = todayRecord
-        }
-      })
-    } catch (e) {
-      console.error(`emitter on failed. error: ${JSON.stringify(e)}`)
-    }
-    this.calculateYearToDateSum()
-  }
-
-  aboutToDisappear(): void {
-    try {
-      emitter.off('todayRecord')
-    } catch (e) {
-      console.error(`emitter off failed. error: ${JSON.stringify(e)}`)
-    }
-  }
-
-  private getDateRangeFromStartOfYear(): string[] {
-    const dates: string[] = [];
-    const now = new Date();
-    const startOfYear = new Date(now.getFullYear(), 0, 1); // 今年1月1日
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()); // 今天，去除时分秒
-
-    let currentDate = new Date(startOfYear);
-    while (currentDate < today) {
-      const year = currentDate.getFullYear();
-      const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // 月份从0开始，需+1
-      const day = String(currentDate.getDate()).padStart(2, '0');
-      dates.push(`${year}-${month}-${day}`);
-      currentDate.setDate(currentDate.getDate() + 1); // 增加一天
-    }
-    return dates;
-  }
-
-  private calculateYearToDateSum() {
-    const dateKeys = this.getDateRangeFromStartOfYear();
-    dateKeys.forEach(dateKey => {
-      // 从 AppStorage 获取数据，若不存在则使用默认值 0
-      const dailyData: Record | undefined = AppStorage.get<Record>(dateKey);
-      if (dailyData !== undefined) {
-        this.totalDays++
-        this.totalRecord.duration += dailyData.duration;
-        this.totalRecord.energy += dailyData.energy;
-      }
-      // 如果 AppStorage 中不存在该日期键，或值非数字，则不计入（相当于加0）
-    });
-  }
 
   @Computed
   get gridSetting() {
@@ -309,8 +266,8 @@ struct MinePage {
     Column() {
       Row() {
         Image($r('app.media.ic_today'))
-          .width(16)
-          .margin({ right: 8 })
+          .width(20)
+          .margin({ right: 4 })
           .draggable(false)
         Text('今日运动')
           .width(64)
@@ -327,7 +284,7 @@ struct MinePage {
       Row() {
         Column() {
           Row() {
-            Text(String(this.todayRecord.duration))
+            Text(String(this.todayExerciseRecord.duration))
               .fontSize(18 * this.vm.settingInfo.fontSizeRatio)
               .fontColor($r('sys.color.font_primary'))
               .fontWeight(FontWeight.Medium)
@@ -347,7 +304,7 @@ struct MinePage {
 
         Column() {
           Row() {
-            Text(String(this.todayRecord.energy))
+            Text(String(this.todayExerciseRecord.energy))
               .fontSize(18 * this.vm.settingInfo.fontSizeRatio)
               .fontColor($r('sys.color.font_primary'))
               .fontWeight(FontWeight.Medium)
@@ -381,7 +338,7 @@ struct MinePage {
         Row() {
           Image($r('app.media.ic_record'))
             .width(16)
-            .margin({ right: 8 })
+            .margin({ right: 8 ,left: 4})
             .draggable(false)
           Text('运动记录')
             .fontSize(16 * this.vm.settingInfo.fontSizeRatio)
@@ -406,7 +363,7 @@ struct MinePage {
       Row() {
         Column() {
           Row() {
-            Text(String(this.totalRecord.duration + this.todayRecord.duration))
+            Text(String(this.totalExerciseRecord.duration))
               .fontSize(18 * this.vm.settingInfo.fontSizeRatio)
               .fontColor($r('sys.color.font_primary'))
               .fontWeight(FontWeight.Medium)
@@ -427,7 +384,7 @@ struct MinePage {
 
         Column() {
           Row() {
-            Text(String(this.totalRecord.energy + this.todayRecord.energy))
+            Text(String(this.totalExerciseRecord.energy))
               .fontSize(18 * this.vm.settingInfo.fontSizeRatio)
               .fontColor($r('sys.color.font_primary'))
               .fontWeight(FontWeight.Medium)
@@ -448,7 +405,7 @@ struct MinePage {
 
         Column() {
           Row() {
-            Text(this.todayRecord.duration !== 0 ? String(this.totalDays + 1) : String(this.totalDays))
+            Text(String(this.totalDays.totalDays))
               .fontSize(18 * this.vm.settingInfo.fontSizeRatio)
               .fontColor($r('sys.color.font_primary'))
               .fontWeight(FontWeight.Medium)

@@ -24,6 +24,7 @@ export struct PrivacyAgreement {
     .margin({
       top: this.getUIContext().px2vp(this.topRectHeight)
     })
+    .backgroundColor($r('sys.color.background_secondary'))
     .onReady((cxt: NavDestinationContext) => {
       let param = cxt.pathInfo.param as Record<string, Object>;
       if (ObjectUtil.isNotNull(param)) {

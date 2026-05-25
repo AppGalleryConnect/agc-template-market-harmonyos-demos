@@ -17,6 +17,7 @@ import notificationManager from '@ohos.notificationManager';
 import common from '@ohos.app.ability.common';
 import wantAgent from '@ohos.app.ability.wantAgent';
 import { WantAgent } from '@ohos.wantAgent';
+import { hilog } from '@kit.PerformanceAnalysisKit';
 import {
   NotificationBasicOptions,
   NotificationLongTextOptions,
@@ -56,7 +57,7 @@ export class NotificationUtil {
     try {
       return await notificationManager.isNotificationEnabled(); //查询通知是否授权。
     } catch (error) {
-      console.error('查询通知授权状态失败, error:', error);
+      hilog.error(0x0000, 'NotificationUtil', `查询通知授权状态失败: ${JSON.stringify(error)}`);
       throw new Error(NotificationUtil.getErrorMsg(error.code, '查询通知授权状态失败'));
     }
   }
@@ -68,7 +69,7 @@ export class NotificationUtil {
     try {
       return notificationManager.isNotificationEnabledSync(); //查询通知是否授权。
     } catch (error) {
-      console.error('同步查询通知授权状态失败, error:', error);
+      hilog.error(0x0000, 'NotificationUtil', `同步查询通知授权状态失败: ${JSON.stringify(error)}`);
       throw new Error(NotificationUtil.getErrorMsg(error.code, '同步查询通知授权状态失败'));
     }
   }
@@ -95,7 +96,7 @@ export class NotificationUtil {
         return true;
       }
     } catch (error) {
-      console.error('授权通知失败, error:', error);
+      hilog.error(0x0000, 'NotificationUtil', `授权通知失败: ${JSON.stringify(error)}`);
       callBack?.(false);
       return false;
     }
@@ -111,7 +112,8 @@ export class NotificationUtil {
     try {
       return await notificationManager.isSupportTemplate(templateName);
     } catch (error) {
-      console.error(`查询模板是否存在失败, templateName: ${templateName}, error:`, error);
+      hilog.error(0x0000, 'NotificationUtil',
+        `查询模板是否存在失败, templateName: ${templateName}: ${JSON.stringify(error)}`);
       throw new Error(NotificationUtil.getErrorMsg(error.code, '查询模板是否存在失败'));
     }
   }
@@ -125,7 +127,7 @@ export class NotificationUtil {
     try {
       return await notificationManager.isDistributedEnabled();
     } catch (error) {
-      console.error('查询分布式通知支持状态失败, error:', error);
+      hilog.error(0x0000, 'NotificationUtil', `查询分布式通知支持状态失败: ${JSON.stringify(error)}`);
       throw new Error(NotificationUtil.getErrorMsg(error.code, '查询分布式通知支持状态失败'));
     }
   }
@@ -158,7 +160,7 @@ export class NotificationUtil {
       await notificationManager.publish(notificationRequest); //发送通知
       return notificationId;
     } catch (error) {
-      console.error('发布普通文本通知失败, error:', error);
+      hilog.error(0x0000, 'NotificationUtil', `发布普通文本通知失败: ${JSON.stringify(error)}`);
       throw new Error(NotificationUtil.getErrorMsg(error.code, '发布普通文本通知失败'));
     }
   }
@@ -195,7 +197,7 @@ export class NotificationUtil {
       await notificationManager.publish(notificationRequest); //发送通知
       return notificationId;
     } catch (error) {
-      console.error('发布长文本通知失败, error:', error);
+      hilog.error(0x0000, 'NotificationUtil', `发布长文本通知失败: ${JSON.stringify(error)}`);
       throw new Error(NotificationUtil.getErrorMsg(error.code, '发布长文本通知失败'));
     }
   }
@@ -232,7 +234,7 @@ export class NotificationUtil {
       await notificationManager.publish(notificationRequest); //发送通知
       return notificationId;
     } catch (error) {
-      console.error('发布多行文本通知失败, error:', error);
+      hilog.error(0x0000, 'NotificationUtil', `发布多行文本通知失败: ${JSON.stringify(error)}`);
       throw new Error(NotificationUtil.getErrorMsg(error.code, '发布多行文本通知失败'));
     }
   }
@@ -269,7 +271,7 @@ export class NotificationUtil {
       await notificationManager.publish(notificationRequest); //发送通知
       return notificationId;
     } catch (error) {
-      console.error('发布图片通知失败, error:', error);
+      hilog.error(0x0000, 'NotificationUtil', `发布图片通知失败: ${JSON.stringify(error)}`);
       throw new Error(NotificationUtil.getErrorMsg(error.code, '发布图片通知失败'));
     }
   }
@@ -307,7 +309,7 @@ export class NotificationUtil {
       await notificationManager.publish(notificationRequest); //发送通知
       return notificationId;
     } catch (error) {
-      console.error('发布模板通知失败, error:', error);
+      hilog.error(0x0000, 'NotificationUtil', `发布模板通知失败: ${JSON.stringify(error)}`);
       throw new Error(NotificationUtil.getErrorMsg(error.code, '发布模板通知失败'));
     }
   }
@@ -323,7 +325,8 @@ export class NotificationUtil {
     try {
       return await notificationManager.cancel(id, label);
     } catch (error) {
-      console.error(`取消通知失败, id: ${id}, label: ${label}, error:`, error);
+      hilog.error(0x0000, 'NotificationUtil',
+        `取消通知失败, id: ${id}, label: ${label}: ${JSON.stringify(error)}`);
       throw new Error(NotificationUtil.getErrorMsg(error.code, `取消通知失败`));
     }
   }
@@ -337,7 +340,8 @@ export class NotificationUtil {
     try {
       return await notificationManager.cancelGroup(groupName);
     } catch (error) {
-      console.error(`取消通知组失败, groupName: ${groupName}, error:`, error);
+      hilog.error(0x0000, 'NotificationUtil',
+        `取消通知组失败, groupName: ${groupName}: ${JSON.stringify(error)}`);
       throw new Error(NotificationUtil.getErrorMsg(error.code, `取消通知组失败`));
     }
   }
@@ -350,7 +354,7 @@ export class NotificationUtil {
     try {
       return await notificationManager.cancelAll();
     } catch (error) {
-      console.error('取消所有通知失败, error:', error);
+      hilog.error(0x0000, 'NotificationUtil', `取消所有通知失败: ${JSON.stringify(error)}`);
       throw new Error(NotificationUtil.getErrorMsg(error.code, '取消所有通知失败'));
     }
   }
@@ -363,7 +367,8 @@ export class NotificationUtil {
     try {
       return await notificationManager.setBadgeNumber(badgeNumber);
     } catch (error) {
-      console.error(`设置角标失败, badgeNumber: ${badgeNumber}, error:`, error);
+      hilog.error(0x0000, 'NotificationUtil',
+        `设置角标失败, badgeNumber: ${badgeNumber}: ${JSON.stringify(error)}`);
       throw new Error(NotificationUtil.getErrorMsg(error.code, `设置角标失败`));
     }
   }
@@ -375,7 +380,7 @@ export class NotificationUtil {
     try {
       return await notificationManager.setBadgeNumber(0);
     } catch (error) {
-      console.error('清空角标失败, error:', error);
+      hilog.error(0x0000, 'NotificationUtil', `清空角标失败: ${JSON.stringify(error)}`);
       throw new Error(NotificationUtil.getErrorMsg(error.code, '清空角标失败'));
     }
   }
@@ -388,7 +393,7 @@ export class NotificationUtil {
     try {
       return await notificationManager.getActiveNotificationCount();
     } catch (error) {
-      console.error('获取活跃通知数量失败, error:', error);
+      hilog.error(0x0000, 'NotificationUtil', `获取活跃通知数量失败: ${JSON.stringify(error)}`);
       throw new Error(NotificationUtil.getErrorMsg(error.code, '获取活跃通知数量失败'));
     }
   }
@@ -402,7 +407,7 @@ export class NotificationUtil {
       let count = await NotificationUtil.getActiveNotificationCount();
       return await notificationManager.setBadgeNumber(count); //设置角标
     } catch (error) {
-      console.error('根据通知数量设置角标失败, error:', error);
+      hilog.error(0x0000, 'NotificationUtil', `根据通知数量设置角标失败: ${JSON.stringify(error)}`);
       throw new Error(NotificationUtil.getErrorMsg(error.code, '根据通知数量设置角标失败'));
     }
   }
@@ -415,7 +420,7 @@ export class NotificationUtil {
     try {
       return await notificationManager.getActiveNotifications();
     } catch (error) {
-      console.error('获取活跃通知列表失败, error:', error);
+      hilog.error(0x0000, 'NotificationUtil', `获取活跃通知列表失败: ${JSON.stringify(error)}`);
       throw new Error(NotificationUtil.getErrorMsg(error.code, '获取活跃通知列表失败'));
     }
   }
@@ -429,7 +434,8 @@ export class NotificationUtil {
     try {
       return await notificationManager.addSlot(type);
     } catch (error) {
-      console.error(`添加通知渠道失败, type: ${type}, error:`, error);
+      hilog.error(0x0000, 'NotificationUtil',
+        `添加通知渠道失败, type: ${type}: ${JSON.stringify(error)}`);
       throw new Error(NotificationUtil.getErrorMsg(error.code, '添加通知渠道失败'));
     }
   }
@@ -442,7 +448,8 @@ export class NotificationUtil {
     try {
       return await notificationManager.getSlot(type);
     } catch (error) {
-      console.error(`获取通知渠道失败, type: ${type}, error:`, error);
+      hilog.error(0x0000, 'NotificationUtil',
+        `获取通知渠道失败, type: ${type}: ${JSON.stringify(error)}`);
       throw new Error(NotificationUtil.getErrorMsg(error.code, '获取通知渠道失败'));
     }
   }
@@ -455,7 +462,7 @@ export class NotificationUtil {
     try {
       return await notificationManager.getSlots();
     } catch (error) {
-      console.error('获取所有通知渠道失败, error:', error);
+      hilog.error(0x0000, 'NotificationUtil', `获取所有通知渠道失败: ${JSON.stringify(error)}`);
       throw new Error(NotificationUtil.getErrorMsg(error.code, '获取所有通知渠道失败'));
     }
   }
@@ -470,7 +477,8 @@ export class NotificationUtil {
     try {
       return await notificationManager.removeSlot(type);
     } catch (error) {
-      console.error(`删除通知渠道失败, type: ${type}, error:`, error);
+      hilog.error(0x0000, 'NotificationUtil',
+        `删除通知渠道失败, type: ${type}: ${JSON.stringify(error)}`);
       throw new Error(NotificationUtil.getErrorMsg(error.code, '删除通知渠道失败'));
     }
   }
@@ -483,7 +491,7 @@ export class NotificationUtil {
     try {
       return await notificationManager.removeAllSlots();
     } catch (error) {
-      console.error('删除所有通知渠道失败, error:', error);
+      hilog.error(0x0000, 'NotificationUtil', `删除所有通知渠道失败: ${JSON.stringify(error)}`);
       throw new Error(NotificationUtil.getErrorMsg(error.code, '删除所有通知渠道失败'));
     }
   }
@@ -522,7 +530,7 @@ export class NotificationUtil {
       };
       return await wantAgent.getWantAgent(wantAgentInfo);
     } catch (error) {
-      console.error('创建WantAgent失败, error:', error);
+      hilog.error(0x0000, 'NotificationUtil', `创建WantAgent失败: ${JSON.stringify(error)}`);
       throw new Error(`创建WantAgent失败: ${error.message}`);
     }
   }

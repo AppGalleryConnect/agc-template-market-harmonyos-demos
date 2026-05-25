@@ -1,4 +1,5 @@
 import { buffer, util } from '@kit.ArkTS';
+import { LogUtil } from './LogUtil';
 
 export class StringUtil {
   /**
@@ -172,8 +173,11 @@ export class StringUtil {
    */
   public static strToUint8Array(src: string, encoding: buffer.BufferEncoding = 'utf-8'): Uint8Array {
     const textEncoder = new util.TextEncoder(encoding);
-    const result = textEncoder.encodeInto(src);
-    return result;
+    try {
+      return textEncoder.encodeInto(src);
+    } catch (_e) {
+      return new Uint8Array();
+    }
   }
 
   /**
@@ -197,7 +201,7 @@ export class StringUtil {
     try {
       return new Uint8Array(buffer.from(hexStr, 'hex').buffer);
     } catch (err) {
-      console.log(JSON.stringify(err));
+      LogUtil.error(JSON.stringify(err));
       return new Uint8Array();
     }
   }
@@ -211,7 +215,7 @@ export class StringUtil {
     try {
       return buffer.from(arr).toString('hex');
     } catch (err) {
-      console.log(JSON.stringify(err))
+      LogUtil.error(JSON.stringify(err))
       return ''
     }
   }
@@ -254,7 +258,7 @@ export class StringUtil {
       const buf = buffer.from(src, encoding);
       return buf.buffer;
     } catch (err) {
-      console.log(err);
+      LogUtil.error(String(err));
       return new ArrayBuffer(0)
     }
   }
@@ -270,7 +274,7 @@ export class StringUtil {
       const result = buf.toString(encoding);
       return result;
     } catch (err) {
-      console.log(JSON.stringify(err))
+      LogUtil.error(JSON.stringify(err))
       return '';
     }
 

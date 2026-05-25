@@ -9,13 +9,18 @@ import {
   OrderInfo,
   MockService,
   OrderState,
-  EmitterConstant
-} from 'external_interactions'
+  EmitterConstant,
+  BreakpointModel,
+  BreakpointNameEnum,
+  ScreenPropStorage,
+  AccountUpdate,
+  Logger} from 'external_interactions'
 import { RechargeRouteParam } from 'module_recharge';
-import { ScreenPropStorage , AccountUpdate} from 'external_interactions'
 import { AppStorageV2 } from '@kit.ArkUI';
 import { emitter } from '@kit.BasicServicesKit';
 import  EventData  from '@ohos.events.emitter';
+
+const TAG = '[OrderContent]';
 
 @ComponentV2
 export struct OrderContent {
@@ -27,6 +32,7 @@ export struct OrderContent {
   @Local accountUpdateStorage : AccountUpdate = AppStorageV2.connect(AccountUpdate, 'AccountUpdate', () =>new AccountUpdate())!
   @Local accountUpdate: boolean = this.accountUpdateStorage.accountUpdate;
   @Local loading: boolean = false
+  @Local breakPointModel: BreakpointModel = AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
 
   aboutToAppear(): void {
     this.orderList = MockService.getOrderListByState(this.orderState)
@@ -36,7 +42,7 @@ export struct OrderContent {
         this.orderList = MockService.getOrderListByState(this.orderState)
       })
     } catch (e) {
-      console.error(`emitter on failed. error: ${JSON.stringify(e)}`)
+      Logger.error(TAG, `emitter on failed. error: ${JSON.stringify(e)}`)
     }
   }
 
@@ -55,8 +61,19 @@ export struct OrderContent {
     try {
       emitter.off(EmitterConstant.ORDER_COMPLETE)
     } catch (e) {
-      console.error(`emitter off failed. error: ${JSON.stringify(e)}`)
+      Logger.error(TAG, `emitter off failed. error: ${JSON.stringify(e)}`)
     }
+  }
+
+  @Computed
+  get listLanes() {
+    if ([BreakpointNameEnum.SM].includes(this.breakPointModel.currentBreakpoint as BreakpointNameEnum)) {
+      return 1;
+    }
+    if ([BreakpointNameEnum.MD].includes(this.breakPointModel.currentBreakpoint as BreakpointNameEnum)) {
+      return 2;
+    }
+    return 3;
   }
 
   build() {
@@ -77,13 +94,14 @@ export struct OrderContent {
       .visibility(this.orderList.length > 0 ? Visibility.None : Visibility.Visible)
 
       Refresh({ refreshing: $$this.loading }) {
-        List({ space: 20 }) {
+        List({ space: 12 }) {
           ForEach(this.orderList, (item: OrderInfo) => {
             ListItem() {
               RecordItem({ orderInfo: item, pathStack: this.pathStack })
             }
           }, (item: OrderInfo) => JSON.stringify(item))
         }
+        .lanes(this.listLanes, 16)
         .margin({ left: 16, right: 16 })
         .height('100%')
         .scrollBar(BarState.Off)
@@ -95,7 +113,7 @@ export struct OrderContent {
     }
     .width('100%')
     .backgroundColor($r('app.color.main_background_color'))
-    .margin({ top: 16, bottom: 16 })
+    .margin({ top: 16 })
   }
 
   @Monitor('currentTabIndex', 'accountUpdateStorage.accountUpdate')
@@ -143,7 +161,7 @@ struct RecordItem {
         }
       })
     } catch (e) {
-      console.error(`emitter on failed. error: ${JSON.stringify(e)}`)
+      Logger.error(TAG, `emitter on failed. error: ${JSON.stringify(e)}`)
     }
     try {
       emitter.on('autoCancel', (data: EventData.EventData) => {
@@ -154,7 +172,7 @@ struct RecordItem {
         }
       })
     } catch (e) {
-      console.error(`emitter on failed. error: ${JSON.stringify(e)}`)
+      Logger.error(TAG, `emitter on failed. error: ${JSON.stringify(e)}`)
     }
   }
 
@@ -162,12 +180,12 @@ struct RecordItem {
     try {
       emitter.off('paySuccess')
     } catch (e) {
-      console.error(`emitter off failed. error: ${JSON.stringify(e)}`)
+      Logger.error(TAG, `emitter off failed. error: ${JSON.stringify(e)}`)
     }
     try {
       emitter.off('autoCancel')
     } catch (e) {
-      console.error(`emitter off failed. error: ${JSON.stringify(e)}`)
+      Logger.error(TAG, `emitter off failed. error: ${JSON.stringify(e)}`)
     }
   }
 
@@ -186,7 +204,7 @@ struct RecordItem {
       .height(18)
 
       Divider()
-        .margin({ top: 16, bottom: 16 })
+        .margin({ top: 12, bottom: 12 })
 
       if (this.orderInfo.orderType === OrderType.CARD) {
         Row() {
@@ -263,7 +281,7 @@ struct RecordItem {
         .margin({ top: 8 })
 
       Divider()
-        .margin({ top: 16, bottom: 16 })
+        .margin({ top: 12, bottom: 12 })
       Row() {
         Text('订单金额：¥' + this.orderInfo.price * this.orderInfo.number)
           .fontSize(14)
@@ -297,7 +315,7 @@ struct RecordItem {
               try {
                 emitter.emit(EmitterConstant.ORDER_COMPLETE)
               } catch (e) {
-                console.error(`emitter emit failed. error: ${JSON.stringify(e)}`)
+                Logger.error(TAG, `emitter emit failed. error: ${JSON.stringify(e)}`)
               }
             } else {
               this.getUIContext().getPromptAction().showToast({ message: '余额不足' })

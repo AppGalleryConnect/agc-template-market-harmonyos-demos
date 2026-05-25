@@ -6,13 +6,15 @@ import {
   NavHeaderBar,
   BreakpointTypeEnum,
   BreakpointSystem,
-  BreakpointStorage
+  BreakpointStorage,
+  FontModel
 } from 'common';
 import { image } from '@kit.ImageKit';
 import { fileSelect } from '../comp/FileSelect';
 import { AppStorageV2 } from '@kit.ArkUI';
 import { Logger } from '@hw-agconnect/ui-base';
 import { inputMethod } from '@kit.IMEKit';
+import { fp2pxUtil } from 'base_common';
 
 @ComponentV2
 export struct FeedbackPage {
@@ -30,6 +32,7 @@ export struct FeedbackPage {
   @Local stageImageUris: Array<string> = [];
   @Local curBreakpoint: BreakpointStorage = BreakpointSystem.currentBreakpoint
   private imageUris: Array<string> = [];
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
 
   build() {
     NavDestination() {
@@ -44,11 +47,11 @@ export struct FeedbackPage {
           Column({ space: 12 }) {
             Row() {
               Text('问题描述')
-                .fontSize(14)
+                .fontSize(this.fontModel.getFg(14))
                 .fontWeight(FontWeight.Regular)
                 .textAlign(TextAlign.Start)
               Text(`${this.issueCharNum}/${this.maxIssueCharNum}`)
-                .fontSize(14)
+                .fontSize(this.fontModel.getFg(14))
                 .fontWeight(FontWeight.Regular)
                 .fontColor($r('sys.color.font_secondary'))
                 .textAlign(TextAlign.End)
@@ -66,14 +69,17 @@ export struct FeedbackPage {
                 this.feedbackItem.description = value
                 this.issueCharNum = value.length
               })
+              .onTouch((event:TouchEvent) => {
+                event.stopPropagation()
+              })
 
             Row() {
               Text('问题截图（选填）')
-                .fontSize(14)
+                .fontSize(this.fontModel.getFg(14))
                 .fontWeight(FontWeight.Regular)
                 .textAlign(TextAlign.Start)
               Text(`${this.feedbackItem.stageImageUris.length}/${this.maxPhotoNum}`)
-                .fontSize(14)
+                .fontSize(this.fontModel.getFg(14))
                 .fontWeight(FontWeight.Regular)
                 .fontColor($r('sys.color.font_secondary'))
                 .textAlign(TextAlign.End)
@@ -99,10 +105,9 @@ export struct FeedbackPage {
                         .margin({ right: 5, top: 5 })
                         .onClick(() => {
                           this.stageImageUris.splice(index, 1)
-                          this.imageUris.splice(index, 1)
                         })
                     }
-                  }, (item: string) => `item+${new Date().toString()}`)
+                  }, (item: string) => item + new Date().toString())
                   if (this.stageImageUris.length < 4) {
                     Row() {
                       Image($r('app.media.ic_public_plus')).size({ height: 22, width: 22 })
@@ -128,11 +133,11 @@ export struct FeedbackPage {
 
             Row() {
               Text('联系方式（选填）')
-                .fontSize(14)
+                .fontSize(this.fontModel.getFg(14))
                 .fontWeight(FontWeight.Regular)
                 .textAlign(TextAlign.Start)
               Text(`${this.phoneCharNum}/${this.maxPhoneCharNum}`)
-                .fontSize(14)
+                .fontSize(this.fontModel.getFg(14))
                 .fontWeight(FontWeight.Regular)
                 .fontColor($r('sys.color.font_secondary'))
                 .textAlign(TextAlign.End)
@@ -150,6 +155,9 @@ export struct FeedbackPage {
                 this.feedbackItem.phone = value
                 this.phoneCharNum = value.length
               })
+              .onTouch((event:TouchEvent) => {
+                event.stopPropagation()
+              })
           }
           .width(this.curBreakpoint.value === BreakpointTypeEnum.LG ? '70%' : Constants.FULL_SIZE)
 
@@ -157,14 +165,19 @@ export struct FeedbackPage {
             .borderRadius(20)
             .fontColor($r('sys.color.font_on_primary'))
             .backgroundColor('#E84026')
-            .fontSize($r('sys.float.Body_L'))
+            .fontSize(fp2pxUtil(16))
             .fontWeight(FontWeight.Medium)
             .width(304)
             .height(40)
             .margin({ bottom: 40 })
             .onClick(async () => {
-              this.feedbackRecord.feedbackList.push(this.feedbackItem)
-              TCRouter.pop()
+              if (this.feedbackItem.description.length!==0) {
+                this.feedbackRecord.feedbackList.push(this.feedbackItem)
+                TCRouter.pop()
+              } else {
+                const promptAction = this.getUIContext().getPromptAction();
+                promptAction.showToast({ message: '请输入问题描述' })
+              }
             })
         }
         .width(Constants.FULL_SIZE)
@@ -176,7 +189,11 @@ export struct FeedbackPage {
           top: 16
         })
         .onTouch(() => {
-          inputMethod.getController().stopInputSession();
+          try {
+            inputMethod.getController().stopInputSession();
+          } catch (error) {
+            console.error('FeedbackPage', ` inputMethod error = ${JSON.stringify(error)}`)
+          }
         })
       }
       .width(Constants.FULL_SIZE)
@@ -190,11 +207,11 @@ export struct FeedbackPage {
   titleView(title: string, maxCharNum: number, currentCharNum: number) {
     Row() {
       Text(title)
-        .fontSize(14)
+        .fontSize(this.fontModel.getFg(14))
         .fontWeight(FontWeight.Regular)
         .textAlign(TextAlign.Start)
       Text(`${currentCharNum}/${maxCharNum}`)
-        .fontSize(14)
+        .fontSize(this.fontModel.getFg(14))
         .fontWeight(FontWeight.Regular)
         .fontColor('#99000000')
         .textAlign(TextAlign.End)

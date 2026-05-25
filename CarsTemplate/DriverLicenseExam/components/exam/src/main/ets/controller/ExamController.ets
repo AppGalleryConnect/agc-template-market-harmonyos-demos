@@ -44,9 +44,7 @@ export class ExamController {
     try {
       displayClass = display.getDefaultDisplaySync();
       pxVal = fp * (displayClass.densityDPI / 160);
-    } catch (err) {
-      let error = err as BusinessError;
-    }
+    } catch (err) {}
     return pxVal + pxStr;
   }
 }

@@ -1,13 +1,19 @@
-import { BreakpointStorage, BreakpointSystem, BreakpointTypeEnum, Constants, NavHeaderBar, TCRouter } from 'common';
+import { BreakpointStorage, BreakpointSystem, BreakpointTypeEnum, Constants,
+  FontModel,
+  NavHeaderBar, TCRouter } from 'common';
 import { ReviewInfo } from '../model/ReviewModels';
 import { ReviewDataUtil } from '../utils/ReviewDataUtil';
 import { ExpandableText } from '../components/ExpandableText';
 import { emitter } from '@kit.BasicServicesKit';
+import { AppStorageV2 } from '@kit.ArkUI';
 
 @ComponentV2
 export struct MyReviewPage {
   @Local myReviewList: ReviewInfo[] = [];
   @Local curBreakpoint: BreakpointStorage = BreakpointSystem.currentBreakpoint
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
+  windowTopHeight: number = AppStorage.get('windowTopHeight') as number || 38.77
+
   aboutToAppear(): void {
     // 初始化评论系统，确保用户信息同步
     ReviewDataUtil.initialize();
@@ -68,7 +74,7 @@ export struct MyReviewPage {
         Text(this.formatDateToChinese(review.createTime))
           .fontFamily('HarmonyHeiTi')
           .fontWeight(500)
-          .fontSize(16)
+          .fontSize(this.fontModel.getFg(16))
           .lineHeight(21)
           .letterSpacing(0)
           .textAlign(TextAlign.Start)
@@ -106,7 +112,7 @@ export struct MyReviewPage {
           Image(review.bookInfo.coverUrl)
             .width(68)
             .height(90)
-            .borderRadius(0)
+            .borderRadius(8)
             .objectFit(ImageFit.Cover)
             .margin({ right: 12 })
 
@@ -116,7 +122,7 @@ export struct MyReviewPage {
             Text(review.bookInfo.name)
               .fontFamily('HarmonyHeiTi')
               .fontWeight(500)
-              .fontSize(16)
+              .fontSize(this.fontModel.getFg(16))
               .lineHeight(21)
               .letterSpacing(0)
               .textAlign(TextAlign.Start)
@@ -129,7 +135,7 @@ export struct MyReviewPage {
             Text(review.bookInfo.category)
               .fontFamily('HarmonyHeiTi')
               .fontWeight(400)
-              .fontSize(12)
+              .fontSize(this.fontModel.getFg(12))
               .lineHeight(16)
               .letterSpacing(0)
               .textAlign(TextAlign.Start)
@@ -141,36 +147,27 @@ export struct MyReviewPage {
         .width('100%')
         .alignItems(VerticalAlign.Top)
       }
-
-      // 分割线（最后一项不显示）
-      if (index < this.myReviewList.length - 1) {
-        Divider()
-          .margin({ top: 16, bottom: 20 })
-      } else {
-        // 最后一项增加额外的底部间距
-        Blank()
-          .height(20)
-      }
     }
+    .backgroundColor($r('sys.color.comp_background_list_card'))
+    .borderRadius(16)
+    .padding(12)
     .width('100%')
     .alignItems(HorizontalAlign.Start)
-    .padding({ left: 16, right: 16, top: 20 })
+    .padding({
+      left: 16,
+      right: 16,
+      top: 16,
+      bottom: 24
+    })
   }
 
   build() {
     NavDestination() {
       Column() {
-        NavHeaderBar({
-          title: $r('app.string.my_evaluation'),
-          hasBackButton: true,
-          hasBgColor: false,
-          isMainPage: true,
-        })
-
         if (this.myReviewList.length > 0) {
           // 有评价数据时显示列表
           Scroll() {
-            Column() {
+            Column({ space: 16 }) {
               ForEach(this.myReviewList, (review: ReviewInfo, index: number) => {
                 this.buildMyReviewItem(review, index);
               }, (review: ReviewInfo) => review.id)
@@ -186,12 +183,12 @@ export struct MyReviewPage {
         } else {
           Column() {
             Text('暂无评价记录')
-              .fontSize(16)
+              .fontSize(this.fontModel.getFg(16))
               .fontColor($r('sys.color.ohos_id_color_text_hint'))
               .margin({ bottom: 8 })
 
             Text('去看看有什么好书吧~')
-              .fontSize(14)
+              .fontSize(this.fontModel.getFg(14))
               .fontColor($r('sys.color.ohos_id_color_text_hint'))
           }
           .layoutWeight(1)
@@ -199,10 +196,12 @@ export struct MyReviewPage {
           .alignItems(HorizontalAlign.Center)
         }
       }
+      .padding({ left: 16, right: 16 })
       .width('100%')
       .height('100%')
-      .backgroundColor($r('sys.color.ohos_id_color_sub_background'))
     }
-    .hideTitleBar(true)
+    .title($r('app.string.my_evaluation'))
+    .padding({ top: this.windowTopHeight })
+    .backgroundColor($r('sys.color.ohos_id_color_sub_background'))
   }
 } 

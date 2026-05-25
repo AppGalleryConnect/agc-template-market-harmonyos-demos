@@ -17,6 +17,11 @@
 @ObservedV2
 export class GlobalInfoModel {
   @Trace currentBreakpoint: BreakpointTypeEnum = BreakpointTypeEnum.MD;
+  /**
+   * 当前窗口宽度（vp）。用于平板/折叠屏等场景下做稳定的比例布局计算。
+   * 由 EntryAbility 在 windowSizeChange 时持续刷新。
+   */
+  @Trace screenWidthVp: number = 0;
 }
 
 

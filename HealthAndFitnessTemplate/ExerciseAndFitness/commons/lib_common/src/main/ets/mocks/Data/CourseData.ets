@@ -77,6 +77,7 @@ export const COURSE_CONTENT: CourseContent[] = [
     difficulty: '高级',
     energy: '120',
     duration: '70',
+    isVideos: [true, true, false, true, false],
   },
   {
     id: '0002',
@@ -86,6 +87,7 @@ export const COURSE_CONTENT: CourseContent[] = [
     difficulty: '中级',
     energy: '120',
     duration: '70',
+    isVideos: [true, true, false, true, false, true],
   },
   {
     id: '0003',
@@ -95,6 +97,7 @@ export const COURSE_CONTENT: CourseContent[] = [
     difficulty: '初级',
     energy: '120',
     duration: '60',
+    isVideos: [true, true, false, true, false, true],
   },
   {
     id: '0004',
@@ -104,6 +107,7 @@ export const COURSE_CONTENT: CourseContent[] = [
     difficulty: '中级',
     energy: '120',
     duration: '120',
+    isVideos: [true, true, false, true, false, true],
   },
   {
     id: '0005',
@@ -113,6 +117,7 @@ export const COURSE_CONTENT: CourseContent[] = [
     difficulty: '零基础',
     energy: '120',
     duration: '120',
+    isVideos: [true, true, false, true, false],
   },
   {
     id: '0006',
@@ -122,6 +127,7 @@ export const COURSE_CONTENT: CourseContent[] = [
     difficulty: '高级',
     energy: '120',
     duration: '120',
+    isVideos: [true, true, false],
   },
   {
     id: '0007',
@@ -131,6 +137,7 @@ export const COURSE_CONTENT: CourseContent[] = [
     difficulty: '零基础',
     energy: '120',
     duration: '120',
+    isVideos: [true, true, false, true, false, true],
   },
   {
     id: '0008',
@@ -140,6 +147,7 @@ export const COURSE_CONTENT: CourseContent[] = [
     difficulty: '零基础',
     energy: '120',
     duration: '40',
+    isVideos: [true, true, false, true, false, true],
   },
   {
     id: '0009',
@@ -149,6 +157,7 @@ export const COURSE_CONTENT: CourseContent[] = [
     difficulty: '初级',
     energy: '120',
     duration: '80',
+    isVideos: [true, true, false, true, false],
   },
   {
     id: '0010',
@@ -158,6 +167,7 @@ export const COURSE_CONTENT: CourseContent[] = [
     difficulty: '高级',
     energy: '120',
     duration: '120',
+    isVideos: [true, true, false, true, false],
   },
   {
     id: '0011',
@@ -167,6 +177,7 @@ export const COURSE_CONTENT: CourseContent[] = [
     difficulty: '高级',
     energy: '120',
     duration: '120',
+    isVideos: [true, true, false, true, false],
   }
 ]
 

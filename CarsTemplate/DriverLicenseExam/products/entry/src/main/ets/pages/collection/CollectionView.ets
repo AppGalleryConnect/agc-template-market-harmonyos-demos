@@ -30,7 +30,7 @@ struct CollectionView {
   cardStyle() {
     .width(CommonConstants.FULL_WIDTH)
     .borderRadius(16)
-    .backgroundColor(Color.White)
+    .backgroundColor($r('sys.color.comp_background_primary'))
     .padding(12)
   }
 
@@ -79,9 +79,9 @@ struct CollectionView {
           Text('错题本')
             .width(86)
             .height(36)
-            .fontColor(this.typeStatus === WRONG_COLLECT.WRONG?Color.White:'rgba(0,0,0,0.9)')
+            .fontColor(this.typeStatus === WRONG_COLLECT.WRONG?Color.White:$r('sys.color.font_primary'))
             .fontSize(14)
-            .backgroundColor(this.typeStatus === WRONG_COLLECT.WRONG?'#64BB5C':'#E6E8E9')
+            .backgroundColor(this.typeStatus === WRONG_COLLECT.WRONG?'#64BB5C':$r('sys.color.comp_background_secondary'))
             .borderRadius(16)
             .textAlign(TextAlign.Center)
             .maxFontScale(1)
@@ -94,9 +94,9 @@ struct CollectionView {
           Text('收藏题目')
             .width(86)
             .height(36)
-            .fontColor(this.typeStatus === WRONG_COLLECT.COLLECT?Color.White:'rgba(0,0,0,0.9)')
+            .fontColor(this.typeStatus === WRONG_COLLECT.COLLECT?Color.White:$r('sys.color.font_primary'))
             .fontSize(14)
-            .backgroundColor(this.typeStatus === WRONG_COLLECT.COLLECT?'#64BB5C':'#E6E8E9')
+            .backgroundColor(this.typeStatus === WRONG_COLLECT.COLLECT?'#64BB5C':$r('sys.color.comp_background_secondary'))
             .borderRadius(16)
             .textAlign(TextAlign.Center)
             .maxFontScale(1)
@@ -110,7 +110,7 @@ struct CollectionView {
         Column() {
           Text(this.typeStatus === WRONG_COLLECT.WRONG?'错题统计':'收藏统计')
             .fontSize(14)
-            .fontColor('rgba(0,0,0,0.9)')
+            .fontColor($r('sys.color.font_primary'))
             .width(CommonConstants.FULL_WIDTH)
             .textAlign(TextAlign.Start)
             .maxFontScale(1)
@@ -122,13 +122,13 @@ struct CollectionView {
             Row() {
               Text(this.typeStatus === WRONG_COLLECT.WRONG?'错题总数':'收藏总数')
                 .fontSize(14)
-                .fontColor('rgba(0,0,0,0.9)')
+                .fontColor($r('sys.color.font_primary'))
                 .maxFontScale(1)
 
               Row() {
                 Text(String(this.totalCount))
                   .fontSize(24)
-                  .fontColor('#64BB5C')
+                  .fontColor('#5BA854')
                   .fontWeight(FontWeight.Bold)
                   .maxFontScale(1)
                   .margin({
@@ -167,7 +167,7 @@ struct CollectionView {
             .width(CommonConstants.FULL_WIDTH)
             .textAlign(TextAlign.Start)
             .fontSize(14)
-            .fontColor('rgba(0,0,0,0.9)')
+            .fontColor($r('sys.color.font_primary'))
             .maxFontScale(1)
             .margin({
               bottom:8
@@ -195,14 +195,14 @@ struct CollectionView {
 
                         Text(item.title)
                           .fontSize(14)
-                          .fontColor('rgba(0,0,0,0.9)')
+                          .fontColor($r('sys.color.font_primary'))
                           .maxFontScale(1)
                       }
 
                       Row() {
                         Text(String(item.examManger.total))
                           .fontSize(14)
-                          .fontColor('rgba(0,0,0,0.6)')
+                          .fontColor($r('sys.color.font_secondary'))
                           .maxFontScale(1)
                           .margin({
                             right: 4
@@ -236,7 +236,7 @@ struct CollectionView {
               .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: true })
               .divider({
                 strokeWidth:1,
-                color:'rgba(0,0,0,0.2)'
+                color:$r('sys.color.comp_divider')
               })
             }
             .cardStyle()
@@ -262,6 +262,6 @@ struct CollectionView {
       top:this.getUIContext().px2vp(this.topRectHeight),
       bottom: this.getUIContext().px2vp(this.bottomRectHeight)
     })
-    .backgroundColor('#F1F3F5')
+    .backgroundColor($r('sys.color.background_secondary'))
   }
 }

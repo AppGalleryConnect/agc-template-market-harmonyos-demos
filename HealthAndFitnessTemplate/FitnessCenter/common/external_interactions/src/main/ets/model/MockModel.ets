@@ -109,6 +109,14 @@ export interface UserCard {
   buyTime: string;
 }
 
+export interface UserCourse {
+  id: string;
+  courseId: string;
+  courseBookingId: string;
+  courseState: boolean;
+  bookingRecordId: string;
+}
+
 export interface BookingRecordInfo {
   id: string;
   createTime: string;

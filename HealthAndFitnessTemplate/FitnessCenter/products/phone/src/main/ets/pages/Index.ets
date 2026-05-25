@@ -1,17 +1,21 @@
 import { BookMain } from 'course';
-import { MockService, EmitterConstant, BreakpointUtils } from 'external_interactions';
+import { MockService, EmitterConstant, BreakpointUtils, PreferenceUtil, AppPrivacyUtils } from 'external_interactions';
 import { Home } from './Home';
 import { Mine } from './Mine';
 import { AppStorageV2 } from '@kit.ArkUI';
-import { ScreenPropStorage , JumpLogin, LoginState, BookJumpSearch} from 'external_interactions'
+import { ScreenPropStorage , JumpLogin, LoginState, BookJumpSearch, Logger} from 'external_interactions'
 import { emitter } from '@kit.BasicServicesKit';
 import { common } from '@kit.AbilityKit';
+import { IndexPageViewModel } from '../viewmodels/IndexVM';
+
+const TAG = '[Index]';
 
 @Entry
 @ComponentV2
 struct Index {
+  @Local vm: IndexPageViewModel = new IndexPageViewModel();
   @Local currentIndex: number = 0
-  pathStack: NavPathStack = new NavPathStack()
+  pathStack: NavPathStack = AppStorageV2.connect(NavPathStack, () => new NavPathStack())!;
   tabController: TabsController = new TabsController()
   @Local screenPropStorage : ScreenPropStorage = AppStorageV2.connect(ScreenPropStorage, 'ScreenPropStorage', () =>new ScreenPropStorage())!
   @Local jumpLoginStorage : JumpLogin = AppStorageV2.connect(JumpLogin, 'JumpLogin', () =>new JumpLogin())!
@@ -20,10 +24,27 @@ struct Index {
   @Local jumpLogin: boolean = this.jumpLoginStorage.jumpLogin
   @Local loginStateStorage : LoginState = AppStorageV2.connect(LoginState, 'LoginState', () =>new LoginState())!
   breakpoint: BreakpointUtils | null = null;
+  @Local privacyImpl: AppPrivacyUtils = AppPrivacyUtils.instance;
+  @Provider() isVideoFullscreen: boolean = false;
+
+  @Monitor('isVideoFullscreen')
+  onChangeBreakpointRegister() {
+    if (!this.isVideoFullscreen) {
+      this.breakpoint?.register()
+    } else {
+      this.breakpoint?.unRegister()
+    }
+  }
+
+  @Monitor('currentIndex')
+  onChangeTabIndex() {
+    this.vm.tabModel.selectedIndex = this.currentIndex;
+  }
 
   aboutToAppear(): void {
-    MockService.init(this.getUIContext().getHostContext() as common.UIAbilityContext);
-    this.breakpoint = new BreakpointUtils(this.getUIContext().getMediaQuery());
+    AppStorage.setOrCreate('navPathStack', this.pathStack); // 全局存储
+    MockService.init(this.getUIContext().getHostContext()!);
+    this.breakpoint = AppStorageV2.connect(BreakpointUtils, 'breakpoint', () =>new BreakpointUtils(this.getUIContext().getMediaQuery()))!;
     this.breakpoint?.register()
     try {
       emitter.on(EmitterConstant.CLICK_BOOK_DETAIL, () =>{
@@ -34,11 +55,17 @@ struct Index {
         }
       })
     } catch (e) {
-      console.error(`emitter on failed. error: ${JSON.stringify(e)}`)
+      Logger.error(TAG, `emitter on failed. error: ${JSON.stringify(e)}`)
+    }
+    this.privacyImpl.subscribe();
+    if (!this.privacyImpl.agreeFlag) {
+      // 未同意隐私协议，不进入首页
+      return;
     }
   }
 
   aboutToDisappear(): void {
+    this.privacyImpl.unSubscribe();
     this.breakpoint?.unRegister();
   }
 
@@ -59,7 +86,7 @@ struct Index {
 
   build() {
     Navigation(this.pathStack) {
-      Tabs({ barPosition: BarPosition.End, index: $$this.currentIndex, controller: this.tabController }) {
+      Tabs({ index: $$this.currentIndex, controller: this.tabController }) {
         TabContent() {
           // 首页
           Home({ pathStack: this.pathStack })
@@ -78,8 +105,12 @@ struct Index {
         }
         .tabBar(this.tabBarBuilder('我的', $r('app.media.mine'), 2))
       }
-      .barHeight(70)
+      .barWidth(this.vm.tabWidth)
+      .barHeight(this.vm.tabHeight)
+      .vertical(this.vm.tabModel.isTabVertical)
+      .barPosition(this.vm.barPosition)
       .scrollable(false)
+      .divider(this.vm.showDivider)
       .width('100%')
       .height('100%')
       .margin({ left: 10, right: 10 })

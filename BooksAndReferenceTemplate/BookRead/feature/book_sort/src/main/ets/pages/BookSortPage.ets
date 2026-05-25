@@ -7,8 +7,11 @@ import {
   BookCategoryItem,
   BreakpointStorage,
   BreakpointSystem,
-  BreakpointTypeEnum
+  BreakpointTypeEnum,
+  FontModel
 } from 'common';
+import { AppStorageV2 } from '@kit.ArkUI';
+import { fp2pxUtil } from 'base_common';
 
 @Builder
 export function BookSortPageBuilder() {
@@ -24,6 +27,7 @@ export struct BookSortPage {
   private categoryList: Array<BookCategory> = [];
   private navTitleScroller: Scroller = new Scroller();
   private bookListScroller: Scroller = new Scroller();
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
 
   async aboutToAppear(): Promise<void> {
     this.categoryChannel.push($r('app.string.boys_channel'));
@@ -44,15 +48,15 @@ export struct BookSortPage {
         ListItem() {
           Row() {
             Text(item)
-              .fontSize($r('sys.float.Body_L'))
+              .fontSize(fp2pxUtil(16))
               .fontColor(this.currentSortIndex === index ? $r('sys.color.ohos_id_color_background') :
                 $r('sys.color.font_primary'))
               .fontWeight(FontWeight.Medium)
           }
-          .height(40)
-          .width(92)
+          .height(36)
+          .width(96)
           .justifyContent(FlexAlign.Center)
-          .backgroundColor(this.currentSortIndex === index ? $r('sys.color.comp_foreground_primary') :
+          .backgroundColor(this.currentSortIndex === index ? $r('sys.color.multi_color_08') :
             $r('sys.color.comp_background_tertiary'))
           .borderRadius(20)
           .onClick(async () => {
@@ -70,13 +74,13 @@ export struct BookSortPage {
   goodsHeaderBuilder(headerName: string) {
     Row() {
       Text(headerName)
-        .fontSize(16)
+        .fontSize(this.fontModel.getFg(16))
         .fontWeight(500)
     }
     .width('100%')
     .height(56)
     .padding({ left: 8 })
-    .backgroundColor($r('sys.color.ohos_id_color_background'))
+    .backgroundColor($r('sys.color.background_primary'))
   }
 
   listChange(index: number, isGoods: boolean) {
@@ -101,7 +105,7 @@ export struct BookSortPage {
                 Text(item.categoryName)
                   .width('100%')
                   .height(56)
-                  .fontSize(this.currentTitleId === index ? 16 : 14)
+                  .fontSize(this.currentTitleId === index ? this.fontModel.getFg(16) : this.fontModel.getFg(14))
                   .textAlign(TextAlign.Center)
                   .fontColor(this.currentTitleId === index ? $r('sys.color.ohos_id_color_text_primary_contrary') :
                     ($r('sys.color.font_primary')))
@@ -125,7 +129,7 @@ export struct BookSortPage {
         .height('100%')
         .edgeEffect(EdgeEffect.Spring)
         .scrollBar(BarState.Off)
-        .backgroundColor($r('sys.color.ohos_id_color_sub_background'))
+        .backgroundColor($r('sys.color.comp_background_secondary'))
         .padding({ top: 12 })
 
         List({ scroller: this.bookListScroller }) {

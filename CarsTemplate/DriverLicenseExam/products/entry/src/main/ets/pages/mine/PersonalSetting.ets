@@ -1,5 +1,5 @@
 import { AppStorageV2, CustomContentDialog, window } from '@kit.ArkUI';
-import { AccountUtil, CommonModel } from '@ohos_agcit/driver_license_exam_commonlib';
+import { AccountUtil, CommonModel, PreferencesUtil } from '@ohos_agcit/driver_license_exam_commonlib';
 import { CommonConstants } from '@ohos_agcit/driver_license_exam_guide';
 import {
   AboutModel,
@@ -12,7 +12,7 @@ import {
   IFontModel,
 } from 'app_setting'
 import { checkUpdateAndShowDialog } from 'check_app_update';
-import { common } from '@kit.AbilityKit';
+import { common, ConfigurationConstant } from '@kit.AbilityKit';
 import { FontModel } from 'app_setting'
 import { ExamController} from 'exam'
 
@@ -65,6 +65,23 @@ struct PersonalSetting {
           },
         } as IFontModel),
       new SettingItem()
+        .setSupportedType(SupportedSetting.LIGHT_DARK_MODE)
+        .setSelectIndex(AppStorage.get('lightDarkMode') as number)
+        .setOnChange((isOn) => {
+          let value  = 0;
+          if (isOn === ConfigurationConstant.ColorMode.COLOR_MODE_NOT_SET) {
+            value = 0
+          } else if (isOn === ConfigurationConstant.ColorMode.COLOR_MODE_LIGHT) {
+            value = 1
+          } else if (isOn === ConfigurationConstant.ColorMode.COLOR_MODE_DARK) {
+            value = 2
+          }
+          const preferencesUtil = PreferencesUtil.getInstance();
+          const preference = preferencesUtil.getPreferences(this.getUIContext().getHostContext() as Context)
+          preferencesUtil.preferencesPut(preference, 'lightDarkMode', value);
+          AppStorage.setOrCreate('lightDarkMode', value)
+        }),
+      new SettingItem()
         .setSupportedType(SupportedSetting.PUSH_SWITCH)
         .setOnChange((isOn) => {
           // 获取推送开关情况：isOn as boolean
@@ -108,7 +125,7 @@ struct PersonalSetting {
       .width('100%')
       .height('100%')
     }
-    .backgroundColor('#F1F3F5')
+    .backgroundColor($r('sys.color.background_secondary'))
     .title('设置')
     .padding({
       top: this.getUIContext().px2vp(this.topRectHeight) + 10,

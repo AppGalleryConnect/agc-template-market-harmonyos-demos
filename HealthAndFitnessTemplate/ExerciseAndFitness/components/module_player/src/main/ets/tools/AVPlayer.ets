@@ -1,7 +1,7 @@
 import { audio } from '@kit.AudioKit';
 import { media } from '@kit.MediaKit';
-import { COURSE_CONTENT, COURSE_DATA1, Record } from 'lib_common';
-import { UIContext } from '@kit.ArkUI';
+import { COURSE_CONTENT, COURSE_DATA1, Record, ExerciseRecord, ExerciseDays } from 'lib_common';
+import { UIContext, AppStorageV2, App  } from '@kit.ArkUI';
 import { emitter } from '@kit.BasicServicesKit';
 
 // AVPlayer的状态机
@@ -55,32 +55,7 @@ export class AVPlayer {
         value: '确定',
         fontColor: Color.White,        // 字体颜色
         backgroundColor: $r('app.color.app_theme'),    // 背景颜色
-        action: () => {
-          let index: number = Number(this.courseId) - 1
-          let label: string = COURSE_DATA1[index].label
-          let courseList: string[] = AppStorage.get(String(new Date().getDate())) ?? []
-          if (courseList.includes(this.courseId)) {
-            AppStorage.setOrCreate<boolean>(label, true);
-          }
-          const defaultRecord: Record = { duration: 0, energy: 0 };
-          const today = new Date();
-          const year = today.getFullYear();
-          const month = (today.getMonth() + 1).toString().padStart(2, '0');
-          const day = today.getDate().toString().padStart(2, '0');
-          let record: Record = AppStorage.get(String(`${year}-${month}-${day}`)) ?? defaultRecord
-          record.duration += Number(COURSE_CONTENT[index].duration)
-          record.energy += Number(COURSE_CONTENT[index].energy)
-          AppStorage.setOrCreate<Record>(String(`${year}-${month}-${day}`),
-            { duration: record.duration, energy: record.energy })
-          let eventData: emitter.EventData = {
-            data: { 'todayRecord': record }
-          }
-          try {
-            emitter.emit('todayRecord', eventData)
-          } catch (e) {
-            console.error(`emitter emit todayRecord failed. error: ${JSON.stringify(e)}`)
-          }
-        }
+        action: () => { }
       }
     });
   }
@@ -106,19 +81,31 @@ export class AVPlayer {
 
   getPlay() {
     if (this.avPlayer) {
-      this.avPlayer.play();
+      try {
+        this.avPlayer.play();
+      } catch (e) {
+        console.error('avPlayer play failed')
+      }
     }
   }
 
   getPause() {
     if (this.avPlayer) {
-      this.avPlayer.pause();
+      try {
+        this.avPlayer.pause();
+      } catch (e) {
+        console.error('avPlayer pause failed')
+      }
     }
   }
 
   getStop() {
     if (this.avPlayer) {
-      this.avPlayer.stop();
+      try {
+        this.avPlayer.stop();
+      } catch (e) {
+        console.error('avPlayer stop failed')
+      }
     }
   }
 
@@ -157,7 +144,11 @@ export class AVPlayer {
       this.isPlaying = false
       this.isLoading = true
       this.isResetPause = false;
-      await this.avPlayer.reset()
+      try {
+        await this.avPlayer.reset()
+      } catch (e) {
+        console.error('reset failed')
+      }
       this.totalDuration = 0
       this.seekTime = seekTime
       this.avPlayer.url = url
@@ -189,7 +180,11 @@ export class AVPlayer {
       this.isLoading = false;
       this.isLoadError = false;
       this.isResetPause = false;
-      await this.avPlayer.release();
+      try {
+        await this.avPlayer.release();
+      } catch (e) {
+        console.error('avPlayer release failed')
+      }
     }
   }
 
@@ -255,7 +250,11 @@ export class AVPlayer {
         case AVPlayerState.INITIALIZED:
           if (this.surfaceID) {
             this.setSurfaceId(this.surfaceID); // 设置显示画面，当播放的资源为纯音频时无需设置
-            this.avPlayer.prepare(); // 进入准备状态
+            try {
+              this.avPlayer.prepare();
+            } catch (e) {
+              console.error('avPlayer prepare failed')
+            }
           }
           break;
         // 已准备状态
@@ -266,10 +265,18 @@ export class AVPlayer {
           this.avPlayer.seek(this.currentTime, 2);
           if (this.isResetPause) {
             this.isPlaying = false;
-            this.avPlayer.pause()
+            try {
+              this.avPlayer.pause();
+            } catch (e) {
+              console.error('avPlayer play failed')
+            }
           }else {
             this.isPlaying = true;
-            this.avPlayer.play();
+            try {
+              this.avPlayer.play();
+            } catch (e) {
+              console.error('avPlayer play failed')
+            }
           }
           this.changeSpeed(media.PlaybackSpeed.SPEED_FORWARD_1_00_X)
           this.isLoadError = false;

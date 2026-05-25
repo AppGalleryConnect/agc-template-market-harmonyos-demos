@@ -17,6 +17,7 @@ import { i18n } from '@kit.LocalizationKit';
 import { PersistenceV2, Type } from '@kit.ArkUI';
 import { City, CityAlphaGroup } from '../common/Model';
 import { getLocationCity } from '../common/Location';
+import { common } from '@kit.AbilityKit';
 
 @ObservedV2
 export class CitySelectViewModel {
@@ -82,9 +83,9 @@ export class CitySelectViewModel {
     }
   }
 
-  async getLocationCity() {
+  async getLocationCity(context: common.UIAbilityContext) {
     this.isLoading = true;
-    const city = await getLocationCity();
+    const city = await getLocationCity(context);
     if (city) {
       this.persistenceData.currentCity = city;
     }

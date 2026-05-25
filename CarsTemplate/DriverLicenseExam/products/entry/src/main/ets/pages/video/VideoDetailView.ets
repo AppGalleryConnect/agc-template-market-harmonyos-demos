@@ -86,17 +86,17 @@ struct VideoDetailView {
             Column({space:24}) {
               Text(this.videoParam.simpleDescription)
                 .fontSize(this.examController.getFg(18))
-                .fontColor('rgba(0,0,0,0.9)')
+                .fontColor($r('sys.color.font_primary'))
                 .fontWeight(FontWeight.Bold)
                 .width(CommonConstants.FULL_WIDTH)
               Text(this.videoParam.description)
                 .fontSize(this.examController.getFg(14))
-                .fontColor('rgba(0,0,0,0.9)')
+                .fontColor($r('sys.color.font_primary'))
                 .lineHeight(this.examController.getFg(21))
                 .width(CommonConstants.FULL_WIDTH)
               Text(this.videoParam.copyrightNotice)
                 .fontSize(this.examController.getFg(14))
-                .fontColor('rgba(0,0,0,0.6)')
+                .fontColor($r('sys.color.font_secondary'))
                 .width(CommonConstants.FULL_WIDTH)
             }
             .padding({
@@ -115,9 +115,9 @@ struct VideoDetailView {
       top:this.getUIContext().px2vp(this.topRectHeight),
       bottom: this.getUIContext().px2vp(this.bottomRectHeight)
     })
-    .title('视频详情')
+    .title('视频讲解')
     .menus(this.share)
-    .backgroundColor('#F1F3F5')
+    .backgroundColor($r('sys.color.background_secondary'))
     .onReady(() => {
       const preIndex = this.vm.navStack.size() - 1;
       const param: Video = this.vm.navStack.getParamByIndex(preIndex) as Video;

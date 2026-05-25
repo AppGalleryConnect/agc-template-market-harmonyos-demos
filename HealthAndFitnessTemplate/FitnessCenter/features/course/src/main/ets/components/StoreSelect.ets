@@ -1,10 +1,8 @@
 import {
   CoachCourseInfo,
-  CourseBookingInfo,
-  MockService,
+  CourseBookingInfo, Logger, MockService,
   SportType
 } from 'external_interactions';
-import { SymbolGlyphModifier } from '@kit.ArkUI';
 import { ScreenPropStorage , BookingRestQuotaUpdate, BookJumpSearch} from 'external_interactions'
 import { AppStorageV2 } from '@kit.ArkUI';
 import { emitter } from '@kit.BasicServicesKit';
@@ -13,6 +11,8 @@ import { TitleBar } from 'module_recharge/src/main/ets/components/TitleBar';
 import { CategoryItem, CategoryList, LayoutType, StoreItem } from 'category_list';
 import { storeData2, storeData1 } from './StoreData';
 import { PresentationType, SearchItem, SearchView, SearchViewController } from 'search';
+
+const TAG: string = '[StoreSelect]';
 
 @ComponentV2
 export struct StoreSelectPage {
@@ -54,7 +54,7 @@ export struct StoreSelectPage {
         this.initData()
       })
     } catch (e) {
-      console.error(`emitter on failed. error: ${JSON.stringify(e)}`)
+      Logger.error(TAG, `emitter on failed. error: ${JSON.stringify(e)}`)
     }
     this.getUIContext().getHostContext()?.eventHub.on('currentCity', (currentCity: string) => {
       this.currentCity = currentCity
@@ -192,7 +192,7 @@ export struct StoreSelectPage {
         })
           .width('95%')
         // 搜索框
-        Row({ space: 10 }) {
+        Row() {
           SearchView({
             presentationType: this.breakpoint === 'sm' ? PresentationType.SEARCH_ICON : PresentationType.SEARCH_BOX,
             entranceText: ['搜索门店...'],
@@ -209,7 +209,6 @@ export struct StoreSelectPage {
           })
         }
         .width('95%')
-        .margin({ left: 16, right: 16 })
         .justifyContent(FlexAlign.Center)
 
         RelativeContainer() {

@@ -64,7 +64,7 @@ export struct SearchComponent {
         Blank();
         Text('搜索')
           .fontSize(14)
-          .fontColor('rgba(0,0,0,0.90)')
+          .fontColor($r('app.color.base_font_color'))
           .onClick(() => {
             if (this.searchCondition === undefined ||
               this.searchCondition === '') {

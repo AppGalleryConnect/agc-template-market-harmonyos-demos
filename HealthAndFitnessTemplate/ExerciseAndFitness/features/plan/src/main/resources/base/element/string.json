@@ -3,15 +3,15 @@
     {
       "name": "page_show",
       "value": "page from package",
-      "attr":{
-        "translatable":false
+      "attr": {
+        "translatable": false
       }
     },
     {
       "name": "agcit_huawei_exercise_and_fitness",
-      "value": "1.0.0",
-      "attr":{
-        "translatable":false
+      "value": "1.0.2",
+      "attr": {
+        "translatable": false
       }
     }
   ]

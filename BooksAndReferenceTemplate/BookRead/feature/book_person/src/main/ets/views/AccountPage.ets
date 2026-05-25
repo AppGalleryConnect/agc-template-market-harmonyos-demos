@@ -6,12 +6,14 @@ import {
   BreakpointSystem,
   BreakpointTypeEnum,
   Constants,
+  FontModel,
   GetUserInfoRsp,
   NavHeaderBar,
   ReturnButton,
   TCRouter
 } from 'common';
 import { AvatarIcon, SelectAvatarCard } from '../comp/SelectAvatarCard';
+import { AppStorageV2 } from '@kit.ArkUI';
 
 @ComponentV2
 export struct AccountPage {
@@ -26,6 +28,7 @@ export struct AccountPage {
   @Local isModifyTelephone: boolean = false;
   @Local windowTopHeight: number = AppStorage.get('windowTopHeight') as number || 38.77;
   @Local curBreakpoint: BreakpointStorage = BreakpointSystem.currentBreakpoint
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
 
   async aboutToAppear(): Promise<void> {
     this.userInfo = AppStorage.get('userInfo') as UserInfo;
@@ -84,7 +87,7 @@ export struct AccountPage {
   avatarCard() {
     Row() {
       Text($r('app.string.avatar'))
-        .fontSize($r('sys.float.Body_L'))
+        .fontSize(this.fontModel.getFg(16))
         .fontColor($r('sys.color.font_primary'))
         .height(20)
       Row({ space: 4 }) {
@@ -115,13 +118,18 @@ export struct AccountPage {
   nickNameCard() {
     Row() {
       Text($r('app.string.nick_name'))
-        .fontSize($r('sys.float.Body_L'))
+        .fontSize(this.fontModel.getFg(16))
         .fontColor($r('sys.color.font_primary'))
         .height(20)
 
       Row({ space: 4 }) {
         Text(this.nickName)
           .height(20)
+          .textOverflow({ overflow: TextOverflow.Ellipsis })
+          .maxLines(1)
+          .constraintSize({
+            maxWidth: '50%'
+          })
         Image($r('app.media.ic_modify_name'))
           .width(24)
           .height(24)
@@ -158,12 +166,12 @@ export struct AccountPage {
   phoneCard() {
     Row() {
       Text($r('app.string.telephone'))
-        .fontSize($r('sys.float.Body_L'))
+        .fontSize(this.fontModel.getFg(16))
         .fontColor($r('sys.color.font_primary'))
         .height(20)
       Row({ space: 4 }) {
         Text(this.telephone)
-          .fontSize($r('sys.float.Body_L'))
+          .fontSize(this.fontModel.getFg(16))
           .fontColor($r('sys.color.font_secondary'))
           .height(20)
         Image($r('app.media.ic_arrow_right'))
@@ -190,7 +198,7 @@ export struct AccountPage {
   loginOut() {
     Row() {
       Text($r('app.string.loginOut'))
-        .fontSize($r('sys.float.Body_L'))
+        .fontSize(this.fontModel.getFg(16))
         .fontColor($r('sys.color.font_primary'))
         .height(20)
       Image($r('app.media.ic_arrow_right'))

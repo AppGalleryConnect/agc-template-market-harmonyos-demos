@@ -2,6 +2,7 @@ import { serviceNotification } from '@kit.PushKit';
 import { abilityAccessCtrl, PermissionRequestResult, Permissions, bundleManager } from '@kit.AbilityKit';
 import { calendarManager } from '@kit.CalendarKit';
 import { BusinessError } from '@kit.BasicServicesKit';
+import { Logger } from 'external_interactions';
 
 const TAG = '[SystemSceneUtils]';
 
@@ -39,7 +40,7 @@ export class SystemSceneUtils {
       tokenId = bundleInfo.appInfo.accessTokenId;
     } catch (error) {
       const err: BusinessError = error as BusinessError;
-      console.error(TAG, `Failed to get bundle info for self. Code is ${err.code}, message is ${err.message}`)
+      Logger.error(TAG, `Failed to get bundle info for self. Code is ${err.code}, message is ${err.message}`)
     }
 
     // 校验应用是否被授予权限
@@ -47,7 +48,7 @@ export class SystemSceneUtils {
       grantStatus = await atManager.checkAccessToken(tokenId, permission);
     } catch (error) {
       const err: BusinessError = error as BusinessError;
-      console.error(TAG, `Failed to check access token. Code is ${err.code}, message is ${err.message}`)
+      Logger.error(TAG, `Failed to check access token. Code is ${err.code}, message is ${err.message}`)
     }
 
     return grantStatus === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED;
@@ -68,29 +69,34 @@ export class SystemSceneUtils {
     const isGrantedWrite = await SystemSceneUtils.checkPermissionGrant(permissions[1]);
 
     if (isGrantedRead && isGrantedWrite) {
-      console.info(TAG, 'already granted calendar permission')
+      Logger.info(TAG, 'already granted calendar permission')
       return calendarManager.getCalendarManager(mContext);
     }
 
     const atManager = abilityAccessCtrl.createAtManager();
 
-    return atManager.requestPermissionsFromUser(mContext, permissions).then(async (result: PermissionRequestResult) => {
-      console.info(TAG, `get Permission success, result: ${JSON.stringify(result)}`)
-      if (result.authResults.every(v => v === 0)) {
-        return calendarManager.getCalendarManager(mContext);
-      }
-      // 首次拒绝后，二次弹窗申请
-      if (result.dialogShownResults?.some(v => !v)) {
-        const arr: Array<abilityAccessCtrl.GrantStatus> =
-          await atManager.requestPermissionOnSetting(mContext, permissions);
-        if (arr.every(v => v === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED)) {
-          return calendarManager.getCalendarManager(mContext);
-        }
-        return null;
-      }
-
+    try {
+      return atManager.requestPermissionsFromUser(mContext, permissions).then(
+        async (result: PermissionRequestResult) => {
+          Logger.info(TAG, `get Permission success, result: ${JSON.stringify(result)}`)
+          if (result.authResults.every(v => v === 0)) {
+            return calendarManager.getCalendarManager(mContext);
+          }
+          // 首次拒绝后，二次弹窗申请
+          if (result.dialogShownResults?.some(v => !v)) {
+            const arr: Array<abilityAccessCtrl.GrantStatus> =
+              await atManager.requestPermissionOnSetting(mContext, permissions);
+            if (arr.every(v => v === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED)) {
+              return calendarManager.getCalendarManager(mContext);
+            }
+            return null;
+          }
+          return null;
+        })
+    } catch (e) {
+      Logger.error(TAG, `get Calendar Permission failed, error: ${JSON.stringify(e)}`)
       return null;
-    })
+    }
   }
 
   /**
@@ -104,10 +110,10 @@ export class SystemSceneUtils {
       const type: serviceNotification.SubscribeNotificationType =
         serviceNotification.SubscribeNotificationType.SUBSCRIBE_WITH_HUAWEI_ID;
       const res = await serviceNotification.requestSubscribeNotification(SystemSceneUtils.context, entityIds, type);
-      console.info(TAG, 'Succeeded in requesting serviceNotification: %{public}s' + JSON.stringify(res));
+      Logger.info(TAG, `Succeeded in requesting serviceNotification: ${JSON.stringify(res)}`);
       return res!;
     } catch (err) {
-      console.error(TAG, 'Failed to request serviceNotification: ' + JSON.stringify(err as BusinessError));
+      Logger.error(TAG, `Failed to request serviceNotification: ${JSON.stringify(err as BusinessError)}`);
       return null;
     }
   }

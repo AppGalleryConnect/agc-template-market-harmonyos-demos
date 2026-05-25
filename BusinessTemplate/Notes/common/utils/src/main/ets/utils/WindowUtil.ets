@@ -22,19 +22,24 @@ const TAG: string = '[WindowUtil]';
 
 export class WindowUtil {
   public static registerBreakPoint(windowStage: window.WindowStage) {
-    windowStage.getMainWindow((err: BusinessError, data: window.Window) => {
-      if (err.code) {
-        LogUtil.error(TAG, `Failed to get main window: ${err.message}`);
-        return;
-      }
-      try {
-        BreakpointSystem.getInstance().updateWidthBp(windowStage, data);
-        data.on('windowSizeChange', () => WindowUtil.onWindowSizeChange(windowStage, data));
-      } catch (e) {
-        const error = e as BusinessError;
-        LogUtil.error(TAG, `getWindowAvoidArea failed. code: ${error.code}, message: ${error.message}`);
-      }
-    });
+    try {
+      windowStage.getMainWindow((err: BusinessError | undefined, data: window.Window) => {
+        if (err !== undefined) {
+          LogUtil.error(TAG, `Failed to get main window: ${err.message}`);
+          return;
+        }
+        try {
+          BreakpointSystem.getInstance().updateWidthBp(windowStage, data);
+          data.on('windowSizeChange', () => WindowUtil.onWindowSizeChange(windowStage, data));
+        } catch (e) {
+          const error = e as BusinessError;
+          LogUtil.error(TAG, `registerBreakPoint inner failed. code: ${error.code}, message: ${error.message}`);
+        }
+      });
+    } catch (e) {
+      const error = e as BusinessError;
+      LogUtil.error(TAG, `getMainWindow threw. code: ${error.code}, message: ${error.message}`);
+    }
   }
 
   public static onWindowSizeChange(windowStage: window.WindowStage, window: window.Window) {

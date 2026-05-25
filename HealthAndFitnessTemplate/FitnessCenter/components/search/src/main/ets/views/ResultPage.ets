@@ -10,6 +10,9 @@ import { SearchResult } from '../components/SearchResult';
 import { STORE_SEARCH_RESULTS1, STORE_SEARCH_RESULTS2 } from '../https/MockData';
 import { SearchItem, SearchSource, StoreInfo } from '../types/Type';
 import { SearchViewModel } from '../viewmodel/SearchViewModel';
+import { Logger } from 'external_interactions';
+
+const TAG: string = '[ResultPage]';
 
 @Builder
 export function ResultPageBuilder() {
@@ -186,7 +189,7 @@ export struct ResultPage {
                     this.vm.closePop();
                   },
                   onStateChange: (event) => {
-                    console.log('onStateChange========' + event.isVisible);
+                    Logger.info(TAG, `onStateChange======== ${JSON.stringify(event.isVisible)}`);
                   },
                 })
             }

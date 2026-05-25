@@ -1,21 +1,21 @@
-import { Constants, TCRouter } from 'common'
+import { Constants, FontModel, TCRouter } from 'common'
+import { AppStorageV2 } from '@kit.ArkUI';
 
 @ComponentV2
 export struct ActivityCard {
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
   build() {
     Row() {
       Row(){
         Row(){
           Column({space: 2}){
             Text($r('app.string.welfare_center'))
-              .width(64)
               .height(21)
-              .fontSize(16)
+              .fontSize(this.fontModel.getFg(16))
               .fontWeight(FontWeight.Medium)
             Text($r('app.string.welfare_description'))
-              .width(70)
               .height(14)
-              .fontSize(10)
+              .fontSize(this.fontModel.getFg(10))
               .fontWeight(FontWeight.Regular)
           }
           .alignItems(HorizontalAlign.Start)
@@ -31,14 +31,12 @@ export struct ActivityCard {
         Row(){
           Column({space: 2}){
             Text($r('app.string.activity_center'))
-              .width(64)
               .height(21)
-              .fontSize(16)
+              .fontSize(this.fontModel.getFg(16))
               .fontWeight(FontWeight.Medium)
             Text($r('app.string.activity_description'))
-              .width(70)
               .height(14)
-              .fontSize(10)
+              .fontSize(this.fontModel.getFg(10))
               .fontWeight(FontWeight.Regular)
           }
           .alignItems(HorizontalAlign.Start)

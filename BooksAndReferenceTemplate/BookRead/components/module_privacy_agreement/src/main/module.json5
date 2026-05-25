@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "module_privacy_agreement",
+    "type": "har",
+    "routerMap": "$profile:route_map",
+    "deviceTypes": [
+      "default"
+    ]
+  }
+}

@@ -35,8 +35,10 @@ export struct SearchFilterContent {
           ListItem() {
             Row() {
               Button(item, { type: ButtonType.Capsule, stateEffect: true })
-                .fontColor(this.selectIndex === index ? '#FFFFFF' : 'rgba(0, 0, 0, 0.9)')
-                .backgroundColor(this.selectIndex === index ? '#FF9019' : 'rgba(0, 0, 0, 0.05)')
+                .fontColor(
+                  this.selectIndex === index ? $r('sys.color.font_on_primary') : $r('sys.color.font_secondary')
+                )
+                .backgroundColor(this.selectIndex === index ? '#FF9019' : $r('sys.color.comp_background_tertiary'))
                 .fontSize($r('sys.float.Body_M'))
                 .fontWeight(this.selectIndex === index ? FontWeight.Bold : FontWeight.Regular)
             }

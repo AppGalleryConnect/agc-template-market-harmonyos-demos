@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "dial_panel",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ]
+  }
+}

@@ -18,7 +18,7 @@ export function checkUpdate(context: common.UIAbilityContext): Promise<number> {
           resolve(checkResult.updateAvailable);
         });
     } catch (err) {
-      console.log(err)
+      hilog.error(0, 'AppUpdateUtil', `checkUpdate failed: ${JSON.stringify(err)}`)
     }
   });
 }
@@ -55,7 +55,7 @@ export async function checkUpdateAndShowDialog(context: UIContext) {
       context.getPromptAction().showToast({ message: '已是最新版本'});
     }
   } catch (error) {
-    console.error(`检查更新失败: ${(error as BusinessError).message}`);
+    hilog.error(0, 'AppUpdateUtil', `检查更新失败: ${(error as BusinessError).message}`);
   }
 }
 
@@ -72,7 +72,7 @@ export function pullUpAppGallery(context: common.UIAbilityContext) {
       context.openLink(link);
     });
   } catch (err) {
-    console.log(JSON.stringify(err))
+    hilog.error(0, 'AppUpdateUtil', `pullUpAppGallery failed: ${JSON.stringify(err)}`)
   }
 }
 

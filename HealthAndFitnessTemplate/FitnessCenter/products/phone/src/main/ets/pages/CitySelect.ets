@@ -1,6 +1,9 @@
 import { CITY_LIST_SAMPLE, CitySelect, HOT_CITY_LIST_SAMPLE, CitySelectController, City } from 'city_select';
 import { emitter } from '@kit.BasicServicesKit';
 import  EventData  from '@ohos.events.emitter';
+import { Logger } from 'external_interactions';
+
+const TAG = '[CitySelect]';
 
 @ComponentV2
 export struct CitySelectPage {
@@ -31,7 +34,7 @@ export struct CitySelectPage {
             try {
               emitter.emit('currentCity', data)
             } catch (e) {
-              console.error(`emitter emit failed. error: ${JSON.stringify(e)}`)
+              Logger.error(TAG, `emitter emit failed. error: ${JSON.stringify(e)}`)
             }
             this.pathStack.pop()
           }),

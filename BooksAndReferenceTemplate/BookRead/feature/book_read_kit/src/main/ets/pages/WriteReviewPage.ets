@@ -86,10 +86,10 @@ export struct WriteReviewPage {
           .fontColor(this.vm.currentFilter === ReviewFilterType.ALL ?
             $r('sys.color.ohos_id_color_background') : $r('sys.color.font_primary'))
       }
-      .width(60)
-      .height(32)
+      .width(72)
+      .height(28)
       .backgroundColor(this.vm.currentFilter === ReviewFilterType.ALL ?
-        $r('sys.color.comp_foreground_primary') : $r('sys.color.comp_background_tertiary'))
+        $r('sys.color.multi_color_08') : $r('sys.color.comp_background_tertiary'))
       .borderRadius(16)
       .justifyContent(FlexAlign.Center)
       .onClick(() => {
@@ -106,10 +106,10 @@ export struct WriteReviewPage {
           .width(12)
           .height(12)
       }
-      .width(70)
-      .height(32)
+      .width(72)
+      .height(28)
       .backgroundColor(this.vm.currentFilter === ReviewFilterType.LATEST ?
-        $r('sys.color.comp_foreground_primary') : $r('sys.color.comp_background_tertiary'))
+        $r('sys.color.multi_color_08') : $r('sys.color.comp_background_tertiary'))
       .borderRadius(16)
       .justifyContent(FlexAlign.Center)
       .onClick(() => {

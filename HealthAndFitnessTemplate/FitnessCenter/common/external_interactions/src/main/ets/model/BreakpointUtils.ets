@@ -2,8 +2,9 @@ import mediaQuery from '@ohos.mediaquery';
 import { AppStorageV2, MediaQuery } from '@kit.ArkUI';
 import { BreakpointNameEnum, BreakpointValueEnum } from '../constant/GridRowColSetting';
 import { BreakpointModel } from '../model/BreakpointModel';
+import { Logger } from '../utils/Logger';
 
-const TAG = 'BreakpointUtils';
+const TAG = '[BreakpointUtils]';
 
 /**
  * 断点类
@@ -30,7 +31,7 @@ export class BreakpointUtils {
   }
 
   private updateBreakpoint: (value: string) => void = (value: string) => {
-    console.info(TAG, `updateBreakpoint: ${value}`);
+    Logger.info(TAG, `updateBreakpoint: ${value}`);
     this.breakpointModel.currentBreakpoint = value as BreakpointNameEnum;
   }
   private smFunc: (result: mediaQuery.MediaQueryResult) => void = (result) => {
@@ -55,7 +56,7 @@ export class BreakpointUtils {
   }
 
   register() {
-    console.info(TAG, 'register breakpoint listener.');
+    Logger.info(TAG, 'register breakpoint listener.');
     this.smListen.on('change', this.smFunc);
     this.mdListen.on('change', this.mdFunc);
     this.lgListen.on('change', this.lgFunc);
@@ -63,7 +64,7 @@ export class BreakpointUtils {
   }
 
   unRegister() {
-    console.info(TAG, 'unregister breakpoint listener.');
+    Logger.info(TAG, 'unregister breakpoint listener.');
     this.smListen.off('change', this.smFunc);
     this.mdListen.off('change', this.mdFunc);
     this.lgListen.off('change', this.lgFunc);

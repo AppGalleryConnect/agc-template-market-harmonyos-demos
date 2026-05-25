@@ -172,8 +172,15 @@ export class GesturesShareService {
     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
   private base64Encode(str: string): string {
-    const encoder = new util.TextEncoder();
-    const bytes = encoder.encodeInto(str);
+    let bytes: Uint8Array;
+    try {
+      const encoder = new util.TextEncoder();
+      bytes = encoder.encodeInto(str);
+    } catch (e) {
+      const err = e as BusinessError;
+      hilog.error(0x0000, 'GesturesShare', `base64Encode encodeInto failed: ${err.code} ${err.message}`);
+      return '';
+    }
     let result = '';
     for (let i = 0; i < bytes.length; i += 3) {
       const b0 = bytes[i];

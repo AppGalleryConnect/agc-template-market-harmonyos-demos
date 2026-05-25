@@ -1,5 +1,8 @@
 import { TipsDialog } from '@kit.ArkUI';
 import { notificationManager } from '@kit.NotificationKit';
+import { FontModel, fp2pxUtil } from 'base_common';
+import { AppStorageV2 } from '@kit.ArkUI';
+import { common } from '@kit.AbilityKit';
 
 @Observed
 class PushDataImp implements PushData {
@@ -25,7 +28,9 @@ export struct PushKit {
   windowTopHeight: number = AppStorage.get('windowTopHeight') as number || 38.77;
   i: number = 1
   @Local pushData: Array<PushDataImp> = []
-  @Param curBreakpoint:string = 'sm'
+  @Param curBreakpoint: string = 'sm'
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel,
+    () => new FontModel(this.getUIContext().getHostContext() as common.UIAbilityContext))!;
   dialogControllerImage: CustomDialogController = new CustomDialogController({
     builder: TipsDialog({
       title: '温馨提示',
@@ -73,7 +78,7 @@ export struct PushKit {
   build() {
     Column() {
       Row() {
-        Row(){
+        Row() {
           Image($r('app.media.ic_back'))
             .height('40vp')
             .width('40vp')
@@ -83,7 +88,7 @@ export struct PushKit {
             })
 
           Text('系统消息')
-            .fontSize(20)
+            .fontSize(fp2pxUtil(20))
             .fontWeight(FontWeight.Bold)
         }
 
@@ -111,12 +116,12 @@ export struct PushKit {
 
                 Column() {
                   Row() {
-                    Text('系统消息').fontWeight(400)
+                    Text('系统消息').fontWeight(400).fontSize(this.fontModel.getFg(16))
                   }
                   .height(22)
 
                   Row() {
-                    Text(item.time).fontSize(12).fontColor($r('sys.color.font_tertiary')                              )
+                    Text(item.time).fontSize(this.fontModel.getFg(12)).fontColor($r('sys.color.font_tertiary'))
                     if (!item.read) {
                       Image($r('app.media.red_dot')).width(8).height(8).margin({ left: 4 })
                     }
@@ -135,7 +140,7 @@ export struct PushKit {
 
               Row() {
                 Text(item.pushContent)
-                  .fontSize(16)
+                  .fontSize(this.fontModel.getFg(16))
                   .fontWeight(400)
                   .maxLines(3)
                   .textOverflow({ overflow: TextOverflow.Ellipsis })
@@ -161,7 +166,7 @@ export struct PushKit {
       }
       .edgeEffect(EdgeEffect.Spring)
       .scrollBar(BarState.Off)
-      .width(this.curBreakpoint === 'lg'?'70%':'100%')
+      .width(this.curBreakpoint === 'lg' ? '70%' : '100%')
     }
     .margin({ top: this.windowTopHeight })
     .padding({ bottom: 32 + this.windowTopHeight, left: 12, right: 12 })

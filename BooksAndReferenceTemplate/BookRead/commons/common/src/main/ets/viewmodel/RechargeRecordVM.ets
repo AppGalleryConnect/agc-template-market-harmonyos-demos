@@ -54,8 +54,14 @@ export class RechargeRecordVM {
   // 生成订单号
   static generateOrderId(): string {
     const timestamp = Date.now();
-    const random = Decimal.random().d[0].toString()
-    return `RC${timestamp}${random}`;
+    let random: string;
+    try {
+      random = Decimal.random().d[0].toString();
+    } catch (e) {
+      console.error('RechargeRecordVM', `generateOrderId random failed: ${e}`);
+      random = '0';
+    }
+    return random;
   }
 
   // 格式化日期时间

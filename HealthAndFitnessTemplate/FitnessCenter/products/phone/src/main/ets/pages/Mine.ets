@@ -1,6 +1,15 @@
 import { RechargeRouteParam } from 'module_recharge'
-import { MockService, UserCard } from 'external_interactions';
-import { ScreenPropStorage , AccountUpdate, LoginState, GlobalBalance} from 'external_interactions'
+import { MockService,
+  UserCard,
+  BreakpointNameEnum,
+  BreakpointModel,
+  GridSettingInfo,
+  ScreenPropStorage,
+  AccountUpdate,
+  LoginState,
+  GlobalBalance,
+  CardManager,
+  Logger} from 'external_interactions';
 import { AppStorageV2 } from '@kit.ArkUI';
 import { MineVM } from '../viewmodels/MineVM';
 import { AtomicserviceLogin, ApiController, UserInfo } from 'atomicservice_login';
@@ -21,6 +30,7 @@ export struct Mine {
   @Local update: boolean = false
   @Local cardNumber: string = '';
   vm: MineVM = MineVM.instance;
+  @Local breakPointModel: BreakpointModel = AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
 
   aboutToAppear(): void {
     this.refreshUserInfo()
@@ -53,6 +63,28 @@ export struct Mine {
       this.loginStateStorage.loginState ?
         MockService.userCardList.filter
         ((item) => MockService.userCardCanUse(item)).length : 0
+  }
+
+  @Computed
+  get gridSetting() {
+    const gridSettingInfo: GridSettingInfo  = {
+      template: '1fr',
+      colGap: 12,
+      rowGap: 12,
+    }
+    if ([BreakpointNameEnum.LG, BreakpointNameEnum.XL].includes((this.breakPointModel.currentBreakpoint))) {
+      gridSettingInfo.template = '1fr 1fr'
+      gridSettingInfo.colGap = 16
+    }
+    return gridSettingInfo
+  }
+
+  @Computed
+  get listLanes() {
+    if ([BreakpointNameEnum.SM].includes(this.breakPointModel.currentBreakpoint as BreakpointNameEnum)) {
+      return 1;
+    }
+    return 2;
   }
 
   unBindPhone = async (): Promise<void> => {
@@ -118,181 +150,226 @@ export struct Mine {
         right: 16
       })
 
-      Stack() {
         Scroll() {
           Column({ space: 16 }) {
-            Column() {
-              AtomicserviceLogin({
-                userInfo: this.userInfo,
-                isLink: this.isLink,
-                controller: this.controller,
-                bindPhone: (code: string | undefined) => {
-                  this.isLink = true
-                  this.userInfo.userName = '大王'
-                  this.userInfo.avatar = $r('app.media.avatar_login')  // todo 替换为开发者需要的资源
-                  MockService.saveAccountInfo(this.userInfo.userName, '', '', '', this.userInfo.avatar);
-                  this.getUIContext().getPromptAction().showToast({message: '请通过临时关联账号凭证获取真实手机号'})
-                },
-                onGetPhoneError: (err) => {
-                  if (err.code === 1001502014) {
-                    this.getUIContext().getPromptAction().showToast({message: '元服务未获取phone权限或用户授权，此为模拟关联。'})
-                    this.isLink = true
-                    this.loginStateStorage.loginState = true
-                    this.userInfo.phoneNumber = '130****0000'
-                    this.userInfo.userName = '大王'
-                    this.userInfo.avatar = $r('app.media.avatar_login')  // todo 替换为开发者需要的资源
-                    MockService.saveAccountInfo(this.userInfo.userName, this.userInfo.phoneNumber, '', '',
-                      this.userInfo.avatar);
-                  }
-                },
-                unBindPhone: this.unBindPhone,
-              })
-            }
-            .backgroundColor(Color.White)
-            .borderRadius(16)
-
-            Row() {
-              Row() {
-                Text('卡号: ' + (this.loginStateStorage.loginState ? '0897' : '无'))
-                  .fontSize(18)
-                  .margin({ left: 12, right: 12 })
-
-                Image($r('app.media.qr_icon'))
-                  .width(24)
-                  .height(24)
-                  .visibility(this.loginStateStorage.loginState ? Visibility.Visible : Visibility.None)
-                  .onClick(() => {
-                    if (this.loginStateStorage.loginState) {
-                      this.pathStack.pushPath({name: 'userInfo/qrCode'})
-                    }
-                  })
-              }
-
-              Column() {
-                Button() {
-                  Row() {
-                    Text('前往充值')
-                      .fontColor($r('sys.color.font_on_primary'))
-                      .fontSize($r('sys.float.Body_M'))
-                      .fontWeight(FontWeight.Medium)
-                  }
-                  .onClick(() => {
-                    if(this.loginStateStorage.loginState === false){
-                      this.getUIContext().getPromptAction().showToast({ message: '请先关联账号' })
-                    } else {
-                      this.pathStack.pushPath({
-                        name: 'vip/VipRecharge',
-                        param: {
-                          balance: MockService.account.balance,
-                          handleBack: (balance: number) => {
-                            MockService.account.balance = balance;
-                            MockService.dataPreferences.putSync('account', JSON.stringify(MockService.account));
-                            MockService.dataPreferences.flush();
-                            this.globalBalance.globalBalance = balance
-                            this.accountUpdateStorage.accountUpdate = !this.accountUpdateStorage.accountUpdate
-                            this.update = !this.update
-                          }
-                        } as RechargeRouteParam
-                      });
-                    }
+            // 登录 & vip
+            Grid() {
+              GridItem() {
+                Column() {
+                  AtomicserviceLogin({
+                    userInfo: this.userInfo,
+                    isLink: this.isLink,
+                    controller: this.controller,
+                    bindPhone: (code: string | undefined) => {
+                      this.isLink = true
+                      this.userInfo.userName = '大王'
+                      this.userInfo.avatar = $r('app.media.avatar_login')  // todo 替换为开发者需要的资源
+                      MockService.saveAccountInfo(this.userInfo.userName, '', '', '', this.userInfo.avatar);
+                      this.getUIContext().getPromptAction().showToast({message: '请通过临时关联账号凭证获取真实手机号'})
+                    },
+                    onGetPhoneError: (err) => {
+                      if (err.code) {
+                        Logger.info('MockLogin', `GetPhoneError. error code: ${JSON.stringify(err.code)}`)
+                        this.getUIContext().getPromptAction().showToast({message: '元服务未获取phone权限或用户授权，此为模拟关联。'})
+                        this.isLink = true
+                        this.loginStateStorage.loginState = true
+                        this.userInfo.phoneNumber = '130****0000'
+                        this.userInfo.userName = '大王'
+                        this.userInfo.avatar = $r('app.media.avatar_login')  // todo 替换为开发者需要的资源
+                        MockService.saveAccountInfo(this.userInfo.userName, this.userInfo.phoneNumber, '', '',
+                          this.userInfo.avatar);
+                        CardManager.get().updateCard()
+                      }
+                    },
+                    unBindPhone: this.unBindPhone,
                   })
                 }
-                .width(72)
-                .height(28)
+                .backgroundColor(Color.White)
                 .borderRadius(16)
-                .backgroundColor('#FF9019')
               }
-              .margin({ right: 12 })
+
+              GridItem() {
+                Row() {
+                  Row() {
+                    Text('卡号: ' + (this.loginStateStorage.loginState ? '0897' : '无'))
+                      .fontSize(18)
+                      .margin({ left: 12, right: 12 })
+
+                    Image($r('app.media.qr_icon'))
+                      .width(24)
+                      .height(24)
+                      .visibility(this.loginStateStorage.loginState ? Visibility.Visible : Visibility.None)
+                      .onClick(() => {
+                        if (this.loginStateStorage.loginState) {
+                          this.pathStack.pushPath({name: 'userInfo/qrCode'})
+                        }
+                      })
+                  }
+
+                  Column() {
+                    Button() {
+                      Row() {
+                        Text('前往充值')
+                          .fontColor($r('sys.color.font_on_primary'))
+                          .fontSize($r('sys.float.Body_M'))
+                          .fontWeight(FontWeight.Medium)
+                      }
+                      .onClick(() => {
+                        if(this.loginStateStorage.loginState === false){
+                          this.getUIContext().getPromptAction().showToast({ message: '请先关联账号' })
+                        } else {
+                          this.pathStack.pushPath({
+                            name: 'vip/VipRecharge',
+                            param: {
+                              balance: MockService.account.balance,
+                              handleBack: (balance: number) => {
+                                MockService.account.balance = balance;
+                                MockService.dataPreferences.putSync('account', JSON.stringify(MockService.account));
+                                MockService.dataPreferences.flush();
+                                this.globalBalance.globalBalance = balance
+                                this.accountUpdateStorage.accountUpdate = !this.accountUpdateStorage.accountUpdate
+                                this.update = !this.update
+                              }
+                            } as RechargeRouteParam
+                          });
+                        }
+                      })
+                    }
+                    .width(72)
+                    .height(28)
+                    .borderRadius($r('sys.float.corner_radius_level8'))
+                    .backgroundColor('#FF9019')
+                  }
+                  .margin({ right: 12 })
+                }
+                .width('100%')
+                .height(80)
+                .borderRadius(16)
+                .backgroundImage(this.vm.gridCount === 2 ? $r('app.media.vip_background') :
+                  $r('app.media.vip_large_background'))
+                .backgroundImageSize(ImageSize.FILL)
+                .justifyContent(FlexAlign.SpaceBetween)
+              }
             }
-            .width('100%')
-            .height(80)
-            .borderRadius(16)
-            .backgroundImage(this.vm.gridCount === 2 ? $r('app.media.vip_background') :
-              $r('app.media.vip_large_background'))
-            .backgroundImageSize(ImageSize.FILL)
-            .justifyContent(FlexAlign.SpaceBetween)
+            .columnsTemplate(this.gridSetting.template)
+            .columnsGap(this.gridSetting.colGap)
+            .rowsGap(this.gridSetting.rowGap)
 
             Column() {
-              CardItem({
-                img: $r('app.media.creditcard'),
-                label: '我的卡项',
-                onClickEvent: () => {
-                  if (this.loginStateStorage.loginState) {
-                    this.pathStack.pushPath({ name: 'card/userCards' })
-                  } else {
-                    this.getUIContext().getPromptAction().showToast({ message: '请先关联账号' })
-                  }
+              List() {
+                ListItem() {
+                  CardItem({
+                    img: $r('app.media.creditcard'),
+                    label: '我的卡项',
+                    onClickEvent: () => {
+                      if (this.loginStateStorage.loginState) {
+                        this.pathStack.pushPath({ name: 'card/userCards' })
+                      } else {
+                        this.getUIContext().getPromptAction().showToast({ message: '请先关联账号' })
+                      }
+                    }
+                  })
                 }
-              })
-              Divider().margin({ left: 28, top: 6, bottom: 6 })
-
-              CardItem({
-                img: $r('app.media.arrow_counterclockwise_clock'),
-                label: '预约记录',
-                onClickEvent: () => {
-                  if (this.loginStateStorage.loginState) {
-                    this.pathStack.pushPath({name: 'course/BookingRecord'})
-                  } else {
-                    this.getUIContext().getPromptAction().showToast({ message: '请先关联账号' })
-                  }
+                ListItem() {
+                  CardItem({
+                    img: $r('app.media.arrow_counterclockwise_clock'),
+                    label: '预约记录',
+                    onClickEvent: () => {
+                      if (this.loginStateStorage.loginState) {
+                        this.pathStack.pushPath({name: 'course/BookingRecord'})
+                      } else {
+                        this.getUIContext().getPromptAction().showToast({ message: '请先关联账号' })
+                      }
+                    }
+                  })
                 }
-              })
-              Divider().margin({ left: 28, top: 6, bottom: 6 })
-
-              CardItem({
-                img: $r('app.media.text_clipboard'),
-                label: '我的订单',
-                onClickEvent: () => {
-                  if (this.loginStateStorage.loginState) {
-                    this.pathStack.pushPath({name: 'card/order'})
-                  } else {
-                    this.getUIContext().getPromptAction().showToast({ message: '请先关联账号' })
-                  }
+                ListItem() {
+                  CardItem({
+                    img: $r('app.media.course'),
+                    label: '我的课程',
+                    onClickEvent: () => {
+                      if (this.loginStateStorage.loginState) {
+                        this.pathStack.pushPath({name: 'course/UserCourses'})
+                      } else {
+                        this.getUIContext().getPromptAction().showToast({ message: '请先关联账号' })
+                      }
+                    }
+                  })
                 }
+                ListItem() {
+                  CardItem({
+                    img: $r('app.media.text_clipboard'),
+                    label: '我的订单',
+                    onClickEvent: () => {
+                      if (this.loginStateStorage.loginState) {
+                        this.pathStack.pushPath({name: 'card/order'})
+                      } else {
+                        this.getUIContext().getPromptAction().showToast({ message: '请先关联账号' })
+                      }
+                    }
+                  })
+                }
+              }
+              .lanes(this.listLanes)
+              .divider({
+                strokeWidth: '1px',
+                color: $r('sys.color.comp_divider'),
+                startMargin: 28,
+                endMargin: 28,
               })
             }
             .borderRadius(20)
             .backgroundColor(Color.White)
 
             Column() {
-              CardItem({
-                img: $r('app.media.doc_plaintext_and_pencil'),
-                label: '意见反馈',
-                onClickEvent: () => {
-                  if (this.loginStateStorage.loginState) {
-                    this.pathStack.pushPath({name: 'FeedbackSubmitPage'})
-                  } else {
-                    this.getUIContext().getPromptAction().showToast({ message: '请先关联账号' })
-                  }
+              List() {
+                ListItem() {
+                  CardItem({
+                    img: $r('app.media.doc_plaintext_and_pencil'),
+                    label: '意见反馈',
+                    onClickEvent: () => {
+                      if (this.loginStateStorage.loginState) {
+                        this.pathStack.pushPath({name: 'FeedbackSubmitPage'})
+                      } else {
+                        this.getUIContext().getPromptAction().showToast({ message: '请先关联账号' })
+                      }
+                    }
+                  })
                 }
-              })
-              Divider().margin({ left: 28, top: 6, bottom: 6 })
 
-              CardItem({
-                img: $r('app.media.gearshape'),
-                label: '设置',
-                onClickEvent: () => {
-                  if (this.loginStateStorage.loginState) {
-                    this.pathStack.pushPath({ name: 'SettingPage', param: this.pathStack })
-                  } else {
-                    this.getUIContext().getPromptAction().showToast({ message: '请先关联账号' })
-                  }
+                ListItem() {
+                  CardItem({
+                    img: $r('app.media.gearshape'),
+                    label: '设置',
+                    onClickEvent: () => {
+                      if (this.loginStateStorage.loginState) {
+                        this.pathStack.pushPath({ name: 'SettingPage', param: this.pathStack })
+                      } else {
+                        this.getUIContext().getPromptAction().showToast({ message: '请先关联账号' })
+                      }
+                    }
+                  })
                 }
+              }
+              .lanes(this.listLanes)
+              .divider({
+                strokeWidth: '1px',
+                color: $r('sys.color.comp_divider'),
+                startMargin: 28,
+                endMargin: 28,
               })
             }
             .borderRadius(20)
             .backgroundColor(Color.White)
           }
         }
+        .layoutWeight(1)
+        .align(Alignment.Top)
+        .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: true })
         .scrollBar(BarState.Off)
         .margin({ left: 16, right: 16 })
-      }
-      .layoutWeight(1)
-      .alignContent(Alignment.Top)
     }
-    .padding(
-      { top: this.getUIContext().px2vp(this.screenPropStorage.topRectHeight),
-      bottom: this.getUIContext().px2vp(this.screenPropStorage.bottomRectHeight) })
+    .padding({ top: this.getUIContext().px2vp(this.screenPropStorage.topRectHeight) })
     .height('100%')
     .width('100%')
     .backgroundColor($r('app.color.main_background_color'))

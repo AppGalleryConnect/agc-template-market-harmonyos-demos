@@ -1,4 +1,5 @@
-import { BookingInfo, BookState, DateUtil, getCalendarPermission } from 'external_interactions';
+import { BookingInfo, BookState, DateUtil, getCalendarPermission, GridRowColSetting,
+  Logger } from 'external_interactions';
 import { TitleBar } from 'module_recharge/src/main/ets/components/TitleBar';
 import { ScreenPropStorage , AccountUpdate, ClearPath} from 'external_interactions'
 import { AppStorageV2 } from '@kit.ArkUI';
@@ -7,6 +8,8 @@ import { BusinessError } from '@kit.BasicServicesKit';
 import { serviceNotification } from '@kit.PushKit';
 import { SystemSceneUtils } from '../utils/SystemSceneUtils';
 import { abilityAccessCtrl, common, PermissionRequestResult, Permissions } from '@kit.AbilityKit';
+
+const TAG = '[BookingDetail]'
 
 @ComponentV2
 export struct BookingDetail {
@@ -62,14 +65,14 @@ export struct BookingDetail {
       this.bookingInfo.courseBookingInfo.timeEnd).getTime(),
     };
     calendarMgr?.getCalendar().then((data: calendarManager.Calendar) => {
-      console.info(`Succeeded in getting calendar, data -> ${JSON.stringify(data)}`);
+      Logger.info(TAG, `Succeeded in getting calendar, data -> ${JSON.stringify(data)}`);
       data.addEvent(event).then((data: number) => {
-        console.info(`Succeeded in adding event, id -> ${data}`);
+        Logger.info(TAG, `Succeeded in adding event, id -> ${JSON.stringify(data)}`);
       }).catch((err: BusinessError) => {
-        console.error(`Failed to addEvent. Code: ${err.code}, message: ${err.message}`);
+        Logger.error(TAG, `Failed to addEvent. Code: ${err.code}, message: ${err.message}`);
       });
     }).catch((err: BusinessError) => {
-      console.error(`Failed to get calendar. Code: ${err.code}, message: ${err.message}`);
+      Logger.error(TAG, `Failed to get calendar. Code: ${err.code}, message: ${err.message}`);
     });
   }
 
@@ -82,113 +85,126 @@ export struct BookingDetail {
 
   build() {
     NavDestination() {
-      Stack() {
-        Scroll() {
-          Column({ space: 16 }) {
-            TitleBar({ title: '预约详情', onBackClick: () => {
-              if (this.clearPath) {
-                this.pathStack.clear()
-                this.clearPath = false
-              } else {
-                this.pathStack.pop()
-              }}
-            })
-            // 预约二维码
-            Row() {
-              Column() {
-                Row() {
-                  Text('恭喜！预约成功！')
-                    .fontSize(14)
-                    .fontWeight(FontWeight.Bold)
-                }
-                .justifyContent(FlexAlign.Center)
-                .width('100%')
+      Column() {
+        TitleBar({ title: '预约详情', onBackClick: () => {
+          if (this.clearPath) {
+            this.pathStack.clear()
+            this.clearPath = false
+          } else {
+            this.pathStack.pop()
+          }}
+        })
+          .margin({ left: 16, right: 16 })
 
-                Image($r('app.media.qrCode'))
-                  .width(143)
-                  .height(143)
-                  .margin({ top: 16 })
-              }.justifyContent(FlexAlign.SpaceEvenly)
-              .width('50%')
-            }
-            .justifyContent(FlexAlign.Center)
-            .width('100%')
-            .padding(16)
-            .borderRadius(16)
-            .backgroundColor($r('sys.color.comp_background_list_card'))
-            .visibility(this.bookingInfo.bookState === BookState.TO_BE_USE ? Visibility.Visible : Visibility.None)
+        GridRow(GridRowColSetting.DEFAULT_GRID_ROW_OPTIONS) {
+          GridCol({
+            span: GridRowColSetting.DEFAULT_CENTER_COL_SPAN,
+            offset: GridRowColSetting.DEFAULT_CENTER_COL_OFFSET,
+          }) {
+            Stack() {
+              Scroll() {
+                Column({ space: 16 }) {
+                  // 预约二维码
+                  Row() {
+                    Column() {
+                      Row() {
+                        Text('恭喜！预约成功！')
+                          .fontSize(14)
+                          .fontWeight(FontWeight.Bold)
+                      }
+                      .justifyContent(FlexAlign.Center)
+                      .width('100%')
 
-            Text('预约信息')
-              .textAlign(TextAlign.Start)
-              .fontSize(14)
-              .width('100%')
-              .fontWeight(FontWeight.Bold)
-            // 预约信息
-            Column() {
-              this.rowBuilder('预约课程', this.bookingInfo.courseDetail.courseName)
-              Divider()
-              this.rowBuilder('预约门店', AppStorage.get('currentStore') ?? '全市门店')
-              this.rowBuilder('预约时间', DateUtil.formatDate(this.bookingDate, '.', 'short') +
-                ' ' + this.bookingInfo.courseBookingInfo.timeStart + '~' + this.bookingInfo.courseBookingInfo.timeEnd)
-              this.rowBuilder('预约人', this.bookingInfo.name)
-              this.rowBuilder('预约人数', this.bookingInfo.personNum.toString())
-              this.rowBuilder('手机号码', this.bookingInfo.phone)
-              this.rowBuilder('备注',
-                (this.bookingInfo.remark === undefined || this.bookingInfo.remark.length === 0) ? '无' :
-                this.bookingInfo.remark)
-            }
-            .justifyContent(FlexAlign.Center)
-            .width('100%')
-            .padding(16)
-            .borderRadius(16)
-            .backgroundColor($r('sys.color.comp_background_list_card'))
-
-            Row() {
-              Button('订阅通知', { type: ButtonType.Capsule, stateEffect: true })
-                .width('45%')
-                .height(40)
-                .fontColor($r('sys.color.comp_background_list_card'))
-                .fontWeight(FontWeight.Medium)
-                .fontSize($r('sys.float.Body_M'))
-                .backgroundColor('#FF9019')
-                .borderRadius(8)
-                .onClick(() => {
-                  this.onSubscribeClick()
-                })
-
-              Button('添加至日程', { type: ButtonType.Capsule, stateEffect: true })
-                .width('45%')
-                .height(40)
-                .fontColor($r('sys.color.comp_background_list_card'))
-                .fontWeight(FontWeight.Medium)
-                .fontSize($r('sys.float.Body_M'))
-                .backgroundColor('#FF9019')
-                .borderRadius(8)
-                .onClick(async () => {
-                  let permission =
-                    await getCalendarPermission(this.getUIContext().getHostContext() as common.UIAbilityContext)
-
-                  if (permission === 'success') {
-                    this.calendarMgr =
-                      calendarManager.getCalendarManager(this.getUIContext()
-                        .getHostContext() as common.UIAbilityContext);
-
-                    this.addCalendarEvent()
-                    this.getUIContext().getPromptAction().showToast({ message: '已添加到系统日历' })
-                  } else {
-                    this.getUIContext().getPromptAction().showToast({message: '没有日历权限，请去设置页面授权'});
+                      Image($r('app.media.qrCode'))
+                        .width(143)
+                        .height(143)
+                        .margin({ top: 16 })
+                    }.justifyContent(FlexAlign.SpaceEvenly)
+                    .width('50%')
                   }
-                })
+                  .justifyContent(FlexAlign.Center)
+                  .width('100%')
+                  .padding(16)
+                  .borderRadius(16)
+                  .backgroundColor($r('sys.color.comp_background_list_card'))
+                  .visibility(this.bookingInfo.bookState === BookState.TO_BE_USE ? Visibility.Visible : Visibility.None)
+
+                  Text('预约信息')
+                    .textAlign(TextAlign.Start)
+                    .fontSize(14)
+                    .width('100%')
+                    .fontWeight(FontWeight.Bold)
+                  // 预约信息
+                  Column() {
+                    this.rowBuilder('预约课程', this.bookingInfo.courseDetail.courseName)
+                    Divider()
+                    this.rowBuilder('预约门店', AppStorage.get('currentStore') ?? '全市门店')
+                    this.rowBuilder('预约时间', DateUtil.formatDate(this.bookingDate, '.', 'short') +
+                      ' ' + this.bookingInfo.courseBookingInfo.timeStart + '~' + this.bookingInfo.courseBookingInfo.timeEnd)
+                    this.rowBuilder('预约人', this.bookingInfo.name)
+                    this.rowBuilder('预约人数', this.bookingInfo.personNum.toString())
+                    this.rowBuilder('手机号码', this.bookingInfo.phone)
+                    this.rowBuilder('备注',
+                      (this.bookingInfo.remark === undefined || this.bookingInfo.remark.length === 0) ? '无' :
+                        this.bookingInfo.remark)
+                  }
+                  .justifyContent(FlexAlign.Center)
+                  .width('100%')
+                  .padding(16)
+                  .borderRadius(16)
+                  .backgroundColor($r('sys.color.comp_background_list_card'))
+
+                  Row() {
+                    Button('订阅通知', { type: ButtonType.Capsule, stateEffect: true })
+                      .width('45%')
+                      .height(40)
+                      .fontColor($r('sys.color.comp_background_list_card'))
+                      .fontWeight(FontWeight.Medium)
+                      .fontSize($r('sys.float.Body_M'))
+                      .backgroundColor('#FF9019')
+                      .borderRadius(8)
+                      .onClick(() => {
+                        this.onSubscribeClick()
+                      })
+
+                    Button('添加至日程', { type: ButtonType.Capsule, stateEffect: true })
+                      .width('45%')
+                      .height(40)
+                      .fontColor($r('sys.color.comp_background_list_card'))
+                      .fontWeight(FontWeight.Medium)
+                      .fontSize($r('sys.float.Body_M'))
+                      .backgroundColor('#FF9019')
+                      .borderRadius(8)
+                      .onClick(async () => {
+                        let permission =
+                          await getCalendarPermission(this.getUIContext().getHostContext() as common.UIAbilityContext)
+
+                        if (permission === 'success') {
+                          this.calendarMgr =
+                            calendarManager.getCalendarManager(this.getUIContext()
+                              .getHostContext() as common.UIAbilityContext);
+
+                          this.addCalendarEvent()
+                          this.getUIContext().getPromptAction().showToast({ message: '已添加到系统日历' })
+                        } else {
+                          this.getUIContext().getPromptAction().showToast({message: '没有日历权限，请去设置页面授权'});
+                        }
+                      })
+                  }
+                  .visibility(this.bookingInfo.bookState === BookState.TO_BE_USE ? Visibility.Visible : Visibility.None)
+                  .width('100%')
+                  .height(40)
+                  .justifyContent(FlexAlign.SpaceBetween)
+                }
+              }.margin({ left: 16, right: 16 })
             }
-            .visibility(this.bookingInfo.bookState === BookState.TO_BE_USE ? Visibility.Visible : Visibility.None)
-            .width('100%')
-            .height(40)
-            .justifyContent(FlexAlign.SpaceBetween)
+            .layoutWeight(1)
+            .alignContent(Alignment.Top)
           }
-        }.margin({ left: 16, right: 16 })
+        }
       }
-      .layoutWeight(1)
-      .alignContent(Alignment.Top)
+      .width('100%')
+      .height('100%')
     }
     .hideTitleBar(true)
     .onReady((ctx: NavDestinationContext) => {

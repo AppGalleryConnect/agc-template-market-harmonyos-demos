@@ -101,7 +101,7 @@ export struct HomeView {
       Column({space:12}) {
         Text('考场必考项目讲解')
           .fontSize(16)
-          .fontColor('rgba(0,0,0,0.9)')
+          .fontColor($r('sys.color.font_primary'))
           .width(CommonConstants.FULL_WIDTH)
           .maxFontScale(1)
         List({space:12}) {
@@ -132,7 +132,7 @@ export struct HomeView {
                 })
                 Text(item.name)
                   .fontSize(14)
-                  .fontColor('rgba(0,0,0,0.6)')
+                  .fontColor($r('sys.color.font_secondary'))
                   .width(CommonConstants.FULL_WIDTH)
                   .maxFontScale(1)
               }
@@ -145,7 +145,7 @@ export struct HomeView {
         .scrollBar(BarState.Off)
 
       }
-      .backgroundColor(Color.White)
+      .backgroundColor($r('sys.color.comp_background_primary'))
       .borderRadius(16)
       .height(164)
       .width(CommonConstants.FULL_WIDTH)
@@ -204,7 +204,7 @@ export struct HomeView {
         Row() {
           Text('练习进度')
             .fontSize(10)
-            .fontColor('rgba(0,0,0,0.6)')
+            .fontColor($r('sys.color.font_secondary'))
             .maxFontScale(1)
 
           Stack({ alignContent: Alignment.Center }) {
@@ -220,7 +220,7 @@ export struct HomeView {
 
           Text(`${this.didCount}/${this.totalCount}`)
             .fontSize(10)
-            .fontColor('rgba(0,0,0,0.6)')
+            .fontColor($r('sys.color.font_secondary'))
             .maxFontScale(1)
         }
         .width(CommonConstants.FULL_WIDTH)
@@ -229,7 +229,7 @@ export struct HomeView {
       .padding(12)
       .height(98)
       .borderRadius(16)
-      .backgroundColor(Color.White)
+      .backgroundColor($r('sys.color.comp_background_primary'))
       .justifyContent(FlexAlign.SpaceAround)
 
       Column() {
@@ -277,7 +277,7 @@ export struct HomeView {
       .height(66)
       .padding(12)
       .borderRadius(16)
-      .backgroundColor(Color.White)
+      .backgroundColor($r('sys.color.comp_background_primary'))
       .justifyContent(FlexAlign.Center)
       .alignItems(HorizontalAlign.Center)
 
@@ -291,7 +291,7 @@ export struct HomeView {
           Text('专项练习')
             .fontSize(14)
             .lineHeight(19)
-            .fontColor('rgba(0,0,0,0.9)')
+            .fontColor($r('sys.color.font_primary'))
             .maxFontScale(1)
         }
         .justifyContent(FlexAlign.Center)
@@ -309,7 +309,7 @@ export struct HomeView {
           Text('视频课程')
             .fontSize(14)
             .lineHeight(19)
-            .fontColor('rgba(0,0,0,0.9)')
+            .fontColor($r('sys.color.font_primary'))
             .maxFontScale(1)
         }
         .justifyContent(FlexAlign.Center)
@@ -326,7 +326,7 @@ export struct HomeView {
           Text('错题收藏')
             .fontSize(14)
             .lineHeight(19)
-            .fontColor('rgba(0,0,0,0.9)')
+            .fontColor($r('sys.color.font_primary'))
             .maxFontScale(1)
         }
         .justifyContent(FlexAlign.Center)
@@ -337,7 +337,7 @@ export struct HomeView {
       .width(CommonConstants.FULL_WIDTH)
       .padding(12)
       .borderRadius(16)
-      .backgroundColor(Color.White)
+      .backgroundColor($r('sys.color.comp_background_primary'))
       .justifyContent(FlexAlign.SpaceEvenly)
       .alignItems(VerticalAlign.Center)
     }
@@ -350,8 +350,8 @@ export struct HomeView {
       ForEach(KEMUTAB_LIST, (item:KEMUTabListItem, index:number) => {
         Column() {
           Text(item.label)
-            .fontColor(this.currentTab === index ? $r('app.color.tab_color_highlight') :
-              'rgba(0,0,0,0.6)')
+            .fontColor(this.currentTab === index ? $r('sys.color.font_primary') :
+              $r('sys.color.font_secondary'))
             .fontSize(14)
             .fontWeight(this.currentTab === index ? FontWeight.Bold : FontWeight.Normal)
             .margin({ top: 4, bottom: 4 })
@@ -388,7 +388,7 @@ export struct HomeView {
       Text($r('app.string.homepage'))
         .fontSize(24)
         .fontWeight(FontWeight.Medium)
-        .fontColor('rgba(0,0,0,0.9)')
+        .fontColor($r('sys.color.font_primary'))
         .maxFontScale(1)
     }
     .width(CommonConstants.FULL_PERCENT)
@@ -412,7 +412,7 @@ export struct HomeView {
             Row() {
               Text(this.guideService.getGuideData().city)
                 .fontSize(14)
-                .fontColor('rgba(0,0,0,0.9)')
+                .fontColor($r('sys.color.font_primary'))
                 .fontWeight(FontWeight.Medium)
                 .margin({
                   right:4
@@ -431,11 +431,11 @@ export struct HomeView {
 
             // 搜索框
             Row({ space: 8 }) {
-              Image($r('app.media.ic_glass')).width(16);
-              Text('请输入关键字搜索').fontSize(14).fontColor('#999999')
-                .maxFontScale(1)
-            }
-            .backgroundColor('#0D000000')
+              Image($r('app.media.ic_glass')).width(16).fillColor($r('sys.color.icon_primary'));
+          Text('请输入关键字搜索').fontSize(14).fontColor($r('sys.color.font_secondary'))
+            .maxFontScale(1)
+ }
+                       .backgroundColor($r('app.color.search_background'))
             .height(40)
             .layoutWeight(1)
             .margin({ right: 12 })
@@ -447,7 +447,7 @@ export struct HomeView {
           }
           .width(CommonConstants.FULL_WIDTH)
           .height(64)
-          .backgroundColor('#FFFFFF')
+          .backgroundColor($r('sys.color.background_primary'))
           .borderRadius(16)
 
           this.tab()
@@ -481,6 +481,6 @@ export struct HomeView {
     .width(CommonConstants.FULL_WIDTH)
     .height(CommonConstants.FULL_HEIGHT)
     .alignContent(Alignment.Top)
-    .backgroundColor('#F1F3F5')
+    .backgroundColor($r('sys.color.background_secondary'))
   }
 }

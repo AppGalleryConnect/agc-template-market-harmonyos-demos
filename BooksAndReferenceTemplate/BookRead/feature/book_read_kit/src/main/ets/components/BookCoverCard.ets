@@ -7,10 +7,12 @@ import {
   GroupBook,
   BreakpointStorage,
   BreakpointSystem,
-  BreakpointTypeEnum
+  BreakpointTypeEnum,
+  FontModel
 } from 'common';
 import { ReviewDataUtil } from '../utils/ReviewDataUtil';
 import { ReviewInfo } from '../model/ReviewModels';
+import { AppStorageV2 } from '@kit.ArkUI';
 
 @ComponentV2
 export struct BookCoverCard {
@@ -18,6 +20,7 @@ export struct BookCoverCard {
   @Local isAddSuccess: boolean = false;
   @Local wonderfulReviews: ReviewInfo[] = [];
   @Local curBreakpoint: BreakpointStorage = BreakpointSystem.currentBreakpoint
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
 
   async aboutToAppear(): Promise<void> {
     const rsp = await BookApi.getBooksShelfGroup('favBooks', Constants.API_GET_BOOK_FAVOURITE_PATH, '');
@@ -93,14 +96,14 @@ export struct BookCoverCard {
     Column() {
       Row() {
         Stack() {
-          Image($r(this.book.coverUrl?.toString()))
+          Image(typeof this.book.coverUrl === 'string' ? $r(this.book.coverUrl) : this.book.coverUrl)
             .width(104)
             .height(144)
             .objectFit(ImageFit.Cover)
             .borderRadius(8)
 
           Text(this.getFreeText(this.book.isFree))
-            .fontSize(10)
+            .fontSize(this.fontModel.getFg(10))
             .fontColor(Color.White)
             .textAlign(TextAlign.Center)
             .height(20)
@@ -113,7 +116,7 @@ export struct BookCoverCard {
 
         Column() {
           Text(this.book.name)
-            .fontSize(14)
+            .fontSize(this.fontModel.getFg(14))
             .lineHeight(19)
             .fontFamily('HarmonyHeiTi')
             .fontWeight(FontWeight.Medium)
@@ -125,7 +128,7 @@ export struct BookCoverCard {
 
           Row({ space: 4 }) {
             Text(this.book.author + ' ' + '著')
-              .fontSize(12)
+              .fontSize(this.fontModel.getFg(12))
               .fontColor($r('sys.color.font_secondary'))
               .maxLines(1)
               .textOverflow({ overflow: TextOverflow.Ellipsis })
@@ -136,7 +139,7 @@ export struct BookCoverCard {
 
           Row({ space: 4 }) {
             Text(this.getStatusText(this.book.status))
-              .fontSize(12)
+              .fontSize(this.fontModel.getFg(12))
               .fontColor($r('sys.color.font_secondary'))
               .maxLines(1)
               .textOverflow({ overflow: TextOverflow.Ellipsis })
@@ -155,50 +158,48 @@ export struct BookCoverCard {
         Column({ space: 5 }) {
           Row() {
             Text(this.book.rate)
-              .fontSize(16)
+              .fontSize(this.fontModel.getFg(16))
               .fontColor($r('sys.color.font_primary'))
             Text(' ')
             Text($r('app.string.rating_point'))
-              .fontSize(12)
+              .fontSize(this.fontModel.getFg(12))
               .fontColor($r('sys.color.font_secondary'))
           }
 
           Text($r('app.string.rating'))
-            .fontSize(12)
+            .fontSize(this.fontModel.getFg(12))
             .fontColor($r('sys.color.font_secondary'))
         }
 
         Column({ space: 5 }) {
           Row() {
             Text(this.book.count)
-              .fontSize(16)
+              .fontSize(this.fontModel.getFg(16))
               .fontColor($r('sys.color.font_primary'))
             Text(' ')
             Text($r('app.string.ten_thousand_words'))
-              .fontSize(12)
+              .fontSize(this.fontModel.getFg(12))
               .fontColor($r('sys.color.font_secondary'))
           }
 
           Text($r('app.string.publishing_house'))
-            .fontSize(12)
+            .fontSize(this.fontModel.getFg(12))
             .fontColor($r('sys.color.font_secondary'))
         }
 
         Column({ space: 5 }) {
           Row() {
             Text(this.book.popular)
-              .fontSize(16)
+              .fontSize(this.fontModel.getFg(16))
               .fontColor($r('sys.color.font_primary'))
             Text(' ')
-              .fontSize(12)
-              .fontColor($r('sys.color.font_secondary'))
             Text($r('app.string.ten_thousand'))
-              .fontSize(12)
+              .fontSize(this.fontModel.getFg(12))
               .fontColor($r('sys.color.font_secondary'))
           }
 
           Text($r('app.string.popular'))
-            .fontSize(12)
+            .fontSize(this.fontModel.getFg(12))
             .fontColor($r('sys.color.font_secondary'))
         }
       }
@@ -207,7 +208,6 @@ export struct BookCoverCard {
       .margin({ top: 24 })
     }
     .width('100%')
-    .height(233)
     .backgroundColor($r('sys.color.comp_background_list_card'))
     .borderRadius(16)
     .padding(16)
@@ -218,7 +218,7 @@ export struct BookCoverCard {
   buildBookDescriptionCard() {
     Column() {
       Text($r('app.string.briefly'))
-        .fontSize(16)
+        .fontSize(this.fontModel.getFg(16))
         .lineHeight(21)
         .fontFamily('HarmonyHeiTi')
         .fontWeight(FontWeight.Medium)
@@ -232,18 +232,19 @@ export struct BookCoverCard {
         .margin({ bottom: 12 })
 
       Text(this.book.description || $r('app.string.no_briefly'))
-        .fontSize(12)
+        .fontSize(this.fontModel.getFg(12))
         .lineHeight(20)
         .fontColor($r('sys.color.font_primary'))
         .maxLines(3)
         .textOverflow({ overflow: TextOverflow.Ellipsis })
         .width('100%')
+        .margin({ bottom: 12 })
 
       Blank()
       // 书籍类别标签
       Row() {
         Text(this.book.category || $r('app.string.no_classify'))
-          .fontSize(14)
+          .fontSize(this.fontModel.getFg(14))
           .fontFamily('HarmonyHeiTi')
           .fontWeight(400)
           .letterSpacing(0)
@@ -258,7 +259,7 @@ export struct BookCoverCard {
       .justifyContent(FlexAlign.Center)
     }
     .width('100%')
-    .height(this.curBreakpoint.value === BreakpointTypeEnum.SM ? 161 : 233)
+    .height(this.curBreakpoint.value === BreakpointTypeEnum.SM ? 'auto' : 233)
     .justifyContent(FlexAlign.SpaceBetween)
     .backgroundColor($r('sys.color.comp_background_list_card'))
     .borderRadius(16)
@@ -272,7 +273,7 @@ export struct BookCoverCard {
     Column() {
       Row() {
         Text($r('app.string.wonderful_book_reviews'))
-          .fontSize(16)
+          .fontSize(this.fontModel.getFg(16))
           .lineHeight(21)
           .fontFamily('HarmonyHeiTi')
           .fontWeight(FontWeight.Medium)
@@ -282,7 +283,7 @@ export struct BookCoverCard {
 
         Row({ space: 4 }) {
           Text($r('app.string.more_book_reviews'))
-            .fontSize(12)
+            .fontSize(this.fontModel.getFg(12))
             .fontColor($r('sys.color.font_secondary'))
 
           Image($r('app.media.ic_public_right_arrow'))
@@ -312,7 +313,7 @@ export struct BookCoverCard {
                   .margin({ right: 12 })
 
                 Text(review.content.toString())
-                  .fontSize(12)
+                  .fontSize(this.fontModel.getFg(12))
                   .lineHeight(18)
                   .fontColor($r('sys.color.font_primary'))
                   .maxLines(2)
@@ -338,7 +339,7 @@ export struct BookCoverCard {
       } else {
         Column() {
           Text('暂无评论')
-            .fontSize(14)
+            .fontSize(this.fontModel.getFg(14))
             .fontColor($r('sys.color.font_secondary'))
             .layoutWeight(1)
             .textAlign(TextAlign.Center)
@@ -395,7 +396,7 @@ export struct BookCoverCard {
       .align(Alignment.Top)
 
       Text($r('app.string.start_reading'))
-        .fontSize(14)
+        .fontSize(this.fontModel.getFg(14))
         .fontColor($r('sys.color.font_secondary'))
         .margin({ top: 12, bottom: 24 })
         .textAlign(TextAlign.Center)

@@ -6,6 +6,8 @@ import {
   CourseDetailModel,
   DateUtil,
   EmitterConstant,
+  GridRowColSetting,
+  Logger,
   MockService,
   OrderInfo,
   OrderState,
@@ -17,6 +19,8 @@ import { AppStorageV2 } from '@kit.ArkUI';
 import { RechargeRouteParam } from 'module_recharge';
 import { emitter, pasteboard } from '@kit.BasicServicesKit';
 import  EventData  from '@ohos.events.emitter';
+
+const TAG = '[OrderDetail]';
 
 @ComponentV2
 export struct OrderDetail {
@@ -90,7 +94,7 @@ export struct OrderDetail {
   // 倒计时结束处理
   handleCountdownEnd() {
     // 这里可以处理订单自动取消的逻辑
-    console.log('订单自动取消')
+    Logger.info(TAG, 'Order cancel automatically.')
     // 可以更新订单状态或触发其他业务逻辑
     this.orderState = OrderState.CANCELED
     let mockOrder = MockService.getOrderById(this.orderInfo.id!)
@@ -107,237 +111,250 @@ export struct OrderDetail {
     try {
       emitter.emit('autoCancel', data)
     } catch (e) {
-      console.error(`emitter emit failed. error: ${JSON.stringify(e)}`)
+      Logger.error(TAG, `emitter emit failed. error: ${JSON.stringify(e)}`)
     }
   }
 
   build() {
     NavDestination() {
-      TitleBar({ title: '订单详情',  onBackClick:()=>{this.pathStack.pop()}})
-        .margin({ left: 16, right: 16 })
-      Stack() {
-        Scroll() {
-          Column() {
+      Column() {
+        TitleBar({ title: '订单详情',  onBackClick:()=>{this.pathStack.pop()}})
+          .margin({ left: 16, right: 16 })
+
+        GridRow(GridRowColSetting.DEFAULT_GRID_ROW_OPTIONS) {
+          GridCol({
+            span: GridRowColSetting.DEFAULT_CENTER_COL_SPAN,
+            offset: GridRowColSetting.DEFAULT_CENTER_COL_OFFSET,
+          }) {
             Column() {
-              Text(this.orderState === OrderState.COMPLETED ? '已完成' :
-                (this.orderState === OrderState.TO_BE_PAY ? '待支付...' : '已取消'))
-                .fontSize(24)
-                .textAlign(TextAlign.Start)
-                .width('100%')
-                .margin({ bottom: 8, left: 8 })
+              Scroll() {
+                Column() {
+                  Column() {
+                    Text(this.orderState === OrderState.COMPLETED ? '已完成' :
+                      (this.orderState === OrderState.TO_BE_PAY ? '待支付...' : '已取消'))
+                      .fontSize(24)
+                      .textAlign(TextAlign.Start)
+                      .width('100%')
+                      .margin({ bottom: 8, left: 8 })
 
-              Text('订单将在 ') {
-                Span(this.countdownTime)
-                  .fontColor($r('sys.color.warning'))
-                Span(' 后自动取消')
-              }
-                .fontSize(14)
-                .textAlign(TextAlign.Start)
-                .width('100%')
-                .margin({ bottom: 16, left: 8 })
-                .visibility(this.orderState === OrderState.TO_BE_PAY ? Visibility.Visible : Visibility.None)
-              // 消费信息
-              Column({ space: 16 }) {
-                Text('订单时间：' + DateUtil.formatDate(DateUtil.parseDateString(this.orderInfo.createTime),
-                  '.', 'short', 'medium'))
-                  .fontWeight(FontWeight.Bold)
-                  .fontSize(14)
-
-                Divider()
-
-                Row() {
-                  Image($r((this.orderInfo.orderType === OrderType.CARD && this.orderInfo.cardId?.length !== 0)
-                    ? this.cardDetailInfo?.advImage : this.courseDetailInfo?.advImage))
-                    .width(80)
-                    .height(80)
-                    .borderRadius(8)
-                  Text(this.orderInfo.orderType === OrderType.CARD && this.orderInfo.cardId?.length !== 0
-                    ? this.cardDetailInfo?.shortName : this.courseDetailInfo?.courseName)
+                    Text('订单将在 ') {
+                      Span(this.countdownTime)
+                        .fontColor($r('sys.color.warning'))
+                      Span(' 后自动取消')
+                    }
                     .fontSize(14)
-                    .fontWeight(FontWeight.Bold)
-                    .margin({ left: 16, top: 5 })
-                }
-                .alignItems(VerticalAlign.Top)
+                    .textAlign(TextAlign.Start)
+                    .width('100%')
+                    .margin({ bottom: 16, left: 8 })
+                    .visibility(this.orderState === OrderState.TO_BE_PAY ? Visibility.Visible : Visibility.None)
+                    // 消费信息
+                    Column({ space: 16 }) {
+                      Text('订单时间：' + DateUtil.formatDate(DateUtil.parseDateString(this.orderInfo.createTime),
+                        '.', 'short', 'medium'))
+                        .fontWeight(FontWeight.Bold)
+                        .fontSize(14)
+
+                      Divider()
+
+                      Row() {
+                        Image($r((this.orderInfo.orderType === OrderType.CARD && this.orderInfo.cardId?.length !== 0)
+                          ? this.cardDetailInfo?.advImage : this.courseDetailInfo?.advImage))
+                          .width(80)
+                          .height(80)
+                          .borderRadius(8)
+                        Text(this.orderInfo.orderType === OrderType.CARD && this.orderInfo.cardId?.length !== 0
+                          ? this.cardDetailInfo?.shortName : this.courseDetailInfo?.courseName)
+                          .fontSize(14)
+                          .fontWeight(FontWeight.Bold)
+                          .margin({ left: 16, top: 5 })
+                      }
+                      .alignItems(VerticalAlign.Top)
 
 
-                Row() {
-                  Text('数量')
-                    .fontSize(14)
-                  Text(this.orderInfo.number.toString())
-                    .fontSize(14)
-                }
-                .width('100%')
-                .justifyContent(FlexAlign.SpaceBetween)
+                      Row() {
+                        Text('数量')
+                          .fontSize(14)
+                        Text(this.orderInfo.number.toString())
+                          .fontSize(14)
+                      }
+                      .width('100%')
+                      .justifyContent(FlexAlign.SpaceBetween)
 
-                Divider()
+                      Divider()
 
-                Row() {
-                  Text('合计')
-                    .fontSize(14)
-                  Text('¥' + this.orderInfo.price * this.orderInfo.number)
-                }
-                .width('100%')
-                .justifyContent(FlexAlign.SpaceBetween)
+                      Row() {
+                        Text('合计')
+                          .fontSize(14)
+                        Text('¥' + this.orderInfo.price * this.orderInfo.number)
+                      }
+                      .width('100%')
+                      .justifyContent(FlexAlign.SpaceBetween)
 
-                Row() {
-                  Text('实际支付')
-                    .fontSize(14)
-                  Text('¥' + this.orderInfo.price * this.orderInfo.number)
-                }
-                .width('100%')
-                .justifyContent(FlexAlign.SpaceBetween)
-                .visibility(this.orderState === OrderState.COMPLETED ? Visibility.Visible : Visibility.None)
-              }
-              .alignItems(HorizontalAlign.Start)
-              .width('100%')
-              .borderRadius(16)
-              .backgroundColor($r('sys.color.comp_background_list_card'))
-              .padding(16)
-              .margin({ bottom: 16 })
+                      Row() {
+                        Text('实际支付')
+                          .fontSize(14)
+                        Text('¥' + this.orderInfo.price * this.orderInfo.number)
+                      }
+                      .width('100%')
+                      .justifyContent(FlexAlign.SpaceBetween)
+                      .visibility(this.orderState === OrderState.COMPLETED ? Visibility.Visible : Visibility.None)
+                    }
+                    .alignItems(HorizontalAlign.Start)
+                    .width('100%')
+                    .borderRadius(16)
+                    .backgroundColor($r('sys.color.comp_background_list_card'))
+                    .padding(16)
+                    .margin({ bottom: 16 })
 
-              // 订单信息
-              Column({ space: 16 }) {
-                Text('订单信息')
-                  .fontWeight(FontWeight.Bold)
-                  .fontSize(14)
+                    // 订单信息
+                    Column({ space: 16 }) {
+                      Text('订单信息')
+                        .fontWeight(FontWeight.Bold)
+                        .fontSize(14)
 
-                Divider()
+                      Divider()
 
-                Row() {
-                  Row() {
-                    Text('订单编号')
-                      .fontSize(14)
-                      .margin({ right: 16 })
-                    Text(this.orderInfo.id)
-                      .fontSize(14)
+                      Row() {
+                        Row() {
+                          Text('订单编号')
+                            .fontSize(14)
+                            .margin({ right: 16 })
+                          Text(this.orderInfo.id)
+                            .fontSize(14)
+                        }
+
+                        Image($r('app.media.icon_copy'))
+                          .width(16)
+                          .onClick(() => {
+                            copyText(this.orderInfo.id)
+                          })
+                      }
+                      .width('100%')
+                      .justifyContent(FlexAlign.SpaceBetween)
+
+                      if (this.orderInfo.payTime) {
+                        Row() {
+                          Text('支付时间')
+                            .fontSize(14)
+                            .margin({ right: 16 })
+                          Text(DateUtil.formatDate(DateUtil.parseDateString(this.orderInfo.payTime!), '.', 'short', 'medium'))
+                            .fontSize(14)
+                        }
+                        .width('100%')
+                      }
+                    }
+                    .alignItems(HorizontalAlign.Start)
+                    .width('100%')
+                    .borderRadius(16)
+                    .backgroundColor($r('sys.color.comp_background_list_card'))
+                    .padding(16)
+                    .margin({ bottom: 16 })
                   }
-
-                  Image($r('app.media.icon_copy'))
-                    .width(16)
-                    .onClick(() => {
-                      copyText(this.orderInfo.id)
-                    })
+                  .layoutWeight(1)
                 }
-                .width('100%')
-                .justifyContent(FlexAlign.SpaceBetween)
+              }
+              .layoutWeight(1)
+              .padding({ left: 16, right: 16 })
+              .scrollBar(BarState.Off)
+              .edgeEffect(EdgeEffect.Spring)
 
-                if (this.orderInfo.payTime) {
-                  Row() {
-                    Text('支付时间')
-                      .fontSize(14)
-                      .margin({ right: 16 })
-                    Text(DateUtil.formatDate(DateUtil.parseDateString(this.orderInfo.payTime!), '.', 'short', 'medium'))
-                      .fontSize(14)
-                  }
+              Row() {
+                Button('立即预约', { type: ButtonType.Capsule, stateEffect: true })
+                  .width('90%')
+                  .height(40)
+                  .fontColor($r('sys.color.comp_background_list_card'))
+                  .fontWeight(FontWeight.Medium)
+                  .fontSize($r('sys.float.Body_M'))
+                  .backgroundColor('#FF9019')
+                  .borderRadius(8)
+                  .onClick(() => {
+                    // 单击立即预约，清空路由栈，回到Index.ets页，通过全局状态存储，跳到 预约 页
+                    this.pathStack.clear(false)
+                    // todo
+                    if (this.courseDetailInfo) {
+                      try {
+                        emitter.emit(EmitterConstant.CLICK_BOOK_DETAIL)
+                      } catch (e) {
+                        Logger.error(TAG, `emitter emit failed. error: ${JSON.stringify(e)}`)
+                      }
+                      this.bookJumpSearchStorage.bookJumpSearch = this.courseDetailInfo.courseName
+                    }
+                    if (this.cardDetailInfo) {
+                      try {
+                        emitter.emit(EmitterConstant.CLICK_BOOK_DETAIL)
+                      } catch (e) {
+                        Logger.error(TAG, `emitter emit failed. error: ${JSON.stringify(e)}`)
+                      }
+                      this.bookJumpSearchStorage.bookJumpSearch =
+                        MockService.getCourseById(this.cardDetailInfo.avaiCourse).courseName
+                    }
+                  })
+              }
+              .margin({ left: 12, right: 12, bottom: 50 })
+              .visibility(this.orderInfo.orderState !== OrderState.COMPLETED ? Visibility.None :
+                (AppStorage.get(this.orderInfo?.bookingId) ? Visibility.Visible : Visibility.None))
+
+              Row() {
+                Text('立即支付')
                   .width('100%')
-                }
+                  .textAlign(TextAlign.Center)
+                  .fontColor($r('sys.color.comp_background_list_card'))
+                  .fontWeight(FontWeight.Medium)
+                  .fontSize(16)
               }
-              .alignItems(HorizontalAlign.Start)
-              .width('100%')
-              .borderRadius(16)
-              .backgroundColor($r('sys.color.comp_background_list_card'))
-              .padding(16)
-              .margin({ bottom: 16 })
-            }
-            .layoutWeight(1)
-
-            Row() {
-              Button('立即预约', { type: ButtonType.Capsule, stateEffect: true })
-                .width('90%')
-                .height(40)
-                .fontColor($r('sys.color.comp_background_list_card'))
-                .fontWeight(FontWeight.Medium)
-                .fontSize($r('sys.float.Body_M'))
-                .backgroundColor('#FF9019')
-                .borderRadius(8)
-                .onClick(() => {
-                  // 单击立即预约，清空路由栈，回到Index.ets页，通过全局状态存储，跳到 预约 页
-                  this.pathStack.clear(false)
-                  // todo
-                  if (this.courseDetailInfo) {
-                    try {
-                      emitter.emit(EmitterConstant.CLICK_BOOK_DETAIL)
-                    } catch (e) {
-                      console.error(`emitter emit failed. error: ${JSON.stringify(e)}`)
-                    }
-                    this.bookJumpSearchStorage.bookJumpSearch = this.courseDetailInfo.courseName
+              .height(40)
+              .margin({ left: 12, right: 12, bottom: 50 })
+              .backgroundColor('#FF9019')
+              .borderRadius(20)
+              .visibility(this.orderState === OrderState.TO_BE_PAY ? Visibility.Visible : Visibility.None)
+              .onClick(() => {
+                if (MockService.account.balance >= this.orderInfo.price) {
+                  MockService.account.balance -= this.orderInfo.price
+                  MockService.dataPreferences.putSync('account', JSON.stringify(MockService.account))
+                  MockService.dataPreferences.flush()
+                  if (this.orderInfo.cardId?.length === 0) {
+                    AppStorage.setOrCreate<boolean>(this.orderInfo.bookingId, true)
                   }
-                  if (this.cardDetailInfo) {
-                    try {
-                      emitter.emit(EmitterConstant.CLICK_BOOK_DETAIL)
-                    } catch (e) {
-                      console.error(`emitter emit failed. error: ${JSON.stringify(e)}`)
+                  let data: EventData.EventData = {
+                    data: {
+                      'id' : this.orderInfo.id
                     }
-                    this.bookJumpSearchStorage.bookJumpSearch =
-                      MockService.getCourseById(this.cardDetailInfo.avaiCourse).courseName
+                  } as EventData.EventData
+                  try {
+                    emitter.emit('paySuccess', data)
+                  } catch (e) {
+                    Logger.error(TAG, `emitter emit failed. error: ${JSON.stringify(e)}`)
                   }
-                })
-            }
-            .visibility(this.orderInfo.orderState !== OrderState.COMPLETED ? Visibility.None :
-              (AppStorage.get(this.orderInfo?.bookingId) ? Visibility.Visible : Visibility.None))
-
-            Row() {
-              Text('立即支付')
-                .width('100%')
-                .textAlign(TextAlign.Center)
-                .fontColor($r('sys.color.comp_background_list_card'))
-                .fontWeight(FontWeight.Medium)
-                .fontSize(16)
-            }
-            .height(40)
-            .margin({ left: 12, right: 12 })
-            .backgroundColor('#FF9019')
-            .borderRadius(20)
-            .visibility(this.orderState === OrderState.TO_BE_PAY ? Visibility.Visible : Visibility.None)
-            .onClick(() => {
-              if (MockService.account.balance >= this.orderInfo.price) {
-                MockService.account.balance -= this.orderInfo.price
-                MockService.dataPreferences.putSync('account', JSON.stringify(MockService.account))
-                MockService.dataPreferences.flush()
-                if (this.orderInfo.cardId?.length === 0) {
-                  AppStorage.setOrCreate<boolean>(this.orderInfo.bookingId, true)
-                }
-                let data: EventData.EventData = {
-                  data: {
-                    'id' : this.orderInfo.id
+                  this.orderInfo.orderState = OrderState.COMPLETED
+                  this.orderState = OrderState.COMPLETED
+                  this.orderInfo.payTime = DateUtil.formatDate(new Date(), '-', undefined, 'medium')
+                  let mockOrder = MockService.getOrderById(this.orderInfo.id)
+                  mockOrder.orderState = OrderState.COMPLETED
+                  mockOrder.payTime = this.orderInfo.payTime
+                  MockService.dataPreferences.putSync('order', JSON.stringify(MockService.orderList))
+                  MockService.dataPreferences.flush()
+                  if (this.orderInfo.orderType === OrderType.CARD && this.orderInfo.cardId?.length !== 0) {
+                    MockService.addUserCard(this.cardDetailInfo!.id, this.cardDetailInfo!.quota)
                   }
-                } as EventData.EventData
-                try {
-                  emitter.emit('paySuccess', data)
-                } catch (e) {
-                  console.error(`emitter emit failed. error: ${JSON.stringify(e)}`)
+                  this.accountUpdate = !this.accountUpdate
+                } else {
+                  this.getUIContext().getPromptAction().showToast({ message: '余额不足' })
+                  this.pathStack.pushPath({ name: 'vip/VipRecharge',
+                    param: {
+                      balance: MockService.account.balance,
+                      handleBack:(balance: number)=>{
+                        MockService.account.balance = balance;
+                        AppStorage.set('globalBalance', balance)
+                      }
+                    } as RechargeRouteParam} )
                 }
-                this.orderInfo.orderState = OrderState.COMPLETED
-                this.orderState = OrderState.COMPLETED
-                this.orderInfo.payTime = DateUtil.formatDate(new Date(), '-', undefined, 'medium')
-                let mockOrder = MockService.getOrderById(this.orderInfo.id)
-                mockOrder.orderState = OrderState.COMPLETED
-                mockOrder.payTime = this.orderInfo.payTime
-                MockService.dataPreferences.putSync('order', JSON.stringify(MockService.orderList))
-                MockService.dataPreferences.flush()
-                if (this.orderInfo.orderType === OrderType.CARD && this.orderInfo.cardId?.length !== 0) {
-                  MockService.addUserCard(this.cardDetailInfo!.id, this.cardDetailInfo!.quota)
-                }
-                this.accountUpdate = !this.accountUpdate
-              } else {
-                this.getUIContext().getPromptAction().showToast({ message: '余额不足' })
-                this.pathStack.pushPath({ name: 'vip/VipRecharge',
-                  param: {
-                    balance: MockService.account.balance,
-                    handleBack:(balance: number)=>{
-                      MockService.account.balance = balance;
-                      AppStorage.set('globalBalance', balance)
-                    }
-                  } as RechargeRouteParam} )
-              }
-            })
+              })
+            }
           }
         }
-        .margin({ left: 16, right: 16 })
-        .scrollBar(BarState.Off)
       }
-      .layoutWeight(1)
-      .alignContent(Alignment.Top)
+      .width('100%')
+      .height('100%')
     }
     .hideTitleBar(true)
     .onReady((ctx: NavDestinationContext) => {
@@ -387,6 +404,6 @@ function copyText(text: string) {
       }
     })
   } catch (e) {
-    console.error(`Failed to createData. error: ${JSON.stringify(e)}`)
+    Logger.error(TAG, `Failed to createData. error: ${JSON.stringify(e)}`)
   }
 }

@@ -1,3 +1,7 @@
+import { Logger } from 'external_interactions';
+
+const TAG = '[search BasicDataSource]'
+
 export class BasicDataSource<T> implements IDataSource {
   private listeners: DataChangeListener[] = [];
   private originDataArray: T[] = [];
@@ -42,7 +46,7 @@ export class BasicDataSource<T> implements IDataSource {
 
   registerDataChangeListener(listener: DataChangeListener): void {
     if (this.listeners.indexOf(listener) < 0) {
-      console.info('add listener');
+      Logger.info(TAG, 'add listener');
       this.listeners.push(listener);
     }
   }
@@ -50,7 +54,7 @@ export class BasicDataSource<T> implements IDataSource {
   unregisterDataChangeListener(listener: DataChangeListener): void {
     const pos = this.listeners.indexOf(listener);
     if (pos >= 0) {
-      console.info('remove listener');
+      Logger.info(TAG, 'remove listener');
       this.listeners.splice(pos, 1);
     }
   }

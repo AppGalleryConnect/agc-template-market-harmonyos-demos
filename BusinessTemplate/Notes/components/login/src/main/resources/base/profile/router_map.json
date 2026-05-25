@@ -4,11 +4,6 @@
       "name": "QuickLoginPage",
       "pageSourceFile": "src/main/ets/pages/QuickLoginPage.ets",
       "buildFunction": "QuickLoginPageBuilder"
-    },
-    {
-      "name": "UserInfoPage",
-      "pageSourceFile": "src/main/ets/pages/UserInfoPage.ets",
-      "buildFunction": "UserInfoBuilder"
     }
   ]
 }

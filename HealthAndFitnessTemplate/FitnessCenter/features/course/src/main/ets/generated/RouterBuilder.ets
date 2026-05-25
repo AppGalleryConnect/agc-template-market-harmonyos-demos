@@ -5,6 +5,12 @@ import { BookingRecord } from '../book/BookingRecord'
 import { ConfirmBooking } from '../book/ConfirmBooking'
 import { StoreSelectPage } from '../components/StoreSelect'
 import { ShowAllCourse } from '../course/ShowAllCourse'
+import { UserCourses } from '../course/UserCourses'
+
+@Builder
+export function UserCoursesBuilder() {
+  UserCourses();
+}
 
 @Builder
 export function CourseDetailBuilder() {

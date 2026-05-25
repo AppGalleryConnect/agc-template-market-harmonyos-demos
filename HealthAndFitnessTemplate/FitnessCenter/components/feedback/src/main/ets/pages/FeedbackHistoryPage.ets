@@ -2,6 +2,8 @@ import { FeedbackRecordDTO } from '../models/FeedbackRecordDTO';
 import { FeedbackRecordVM } from '../viewmodels/FeedbackRecordVM';
 import { BreakpointType } from '../common/CustomTypes';
 import { Api } from '../http/Api';
+import { ScreenPropStorage } from 'external_interactions';
+import { AppStorageV2 } from '@kit.ArkUI';
 
 @ComponentV2
 struct FeedbackHistoryPage {
@@ -24,6 +26,9 @@ struct FeedbackHistoryPage {
   private imagesGap: number = 8;
 
   private readonly TITLE_BAR_HEIGHT: number = 66;
+  @Local screenPropStorage : ScreenPropStorage = AppStorageV2.connect(ScreenPropStorage, 'ScreenPropStorage', () =>new ScreenPropStorage())!
+  @Local topRectHeight: number = this.screenPropStorage.topRectHeight;
+  @Local bottomRectHeight: number = this.screenPropStorage.bottomRectHeight;
 
   public aboutToAppear(): void {
     Api.listFeedbacks()
@@ -95,6 +100,7 @@ struct FeedbackHistoryPage {
             }
           }
         }
+        .layoutWeight(1)
         .onBreakpointChange((breakpoints: string) => {
           if (breakpoints === BreakpointType.XS || breakpoints === BreakpointType.SM) {
             this.templateForGrid = '1fr '.repeat(4);
@@ -114,6 +120,7 @@ struct FeedbackHistoryPage {
       .width('100%')
       .height('100%')
       .backgroundColor($r('sys.color.background_secondary'))
+      .padding({ bottom: this.getUIContext().px2vp(this.bottomRectHeight) })
       .expandSafeArea([SafeAreaType.SYSTEM, SafeAreaType.CUTOUT], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])
     }
     .hideTitleBar(true)

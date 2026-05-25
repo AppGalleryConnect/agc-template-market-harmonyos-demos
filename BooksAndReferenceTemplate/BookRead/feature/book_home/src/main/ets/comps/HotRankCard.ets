@@ -1,6 +1,6 @@
-import { BookInfo, Constants, rankListInfo, TCRouter } from 'common';
-import { LengthMetrics } from '@kit.ArkUI';
-
+import { BookInfo, Constants, FontModel, getFreeColor, getFreeText, rankListInfo, TCRouter } from 'common';
+import { AppStorageV2, LengthMetrics } from '@kit.ArkUI';
+import { fp2pxUtil } from 'base_common';
 
 /**
  * 搜索页面热搜榜card
@@ -102,6 +102,11 @@ export struct HotRankCard {
 @ComponentV2
 export struct SearchResultCard {
   @Param info: BookInfo | undefined = undefined;
+  @Local readProgress: string = '';
+
+  aboutToAppear(): void {
+    this.readProgress = this.info?.readProgress!;
+  }
 
   build() {
     Flex({
@@ -110,7 +115,7 @@ export struct SearchResultCard {
       justifyContent: FlexAlign.SpaceBetween,
       space: { main: LengthMetrics.vp(12) }
     }) {
-      BookCover(this.info?.coverUrl);
+      BookCover(this.info?.coverUrl, this.info?.isFree);
 
       Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.SpaceAround }) {
         Column() {
@@ -138,18 +143,15 @@ export struct SearchResultCard {
 
         Column() {
           Row() {
-            Text(this.info?.category)
+            if (this.info?.isDownload) {
+              //下载完成标志
+              Image($r('app.media.download_finish'))
+                .height(16)
+                .width(16)
+            }
+            Text(this.readProgress)
               .fontSize($r('sys.float.Body_S'))
               .fontColor($r('sys.color.font_secondary'))
-              .fontWeight(FontWeight.Regular).textAlign(TextAlign.Start)
-
-            Text(this.info?.count)
-              .fontSize(12)
-              .textAlign(TextAlign.Start)
-              .padding({ left: 10 })
-              .fontSize($r('sys.float.Body_S'))
-              .fontColor($r('sys.color.font_secondary'))
-              .fontWeight(FontWeight.Regular)
           }.width('100%').justifyContent(FlexAlign.Start)
 
         }
@@ -157,7 +159,144 @@ export struct SearchResultCard {
       }
       .layoutWeight(1)
     }
-    .height(150)
+    .height(122)
+    .width(Constants.FULL_SIZE)
+    .borderRadius(16)
+    .padding({left: 12, right: 12, top: 16, bottom: 16})
+    .backgroundColor($r('sys.color.comp_background_list_card'))
+    .onClick(() => {
+      if (this.info) {
+        TCRouter.pushByLogin(Constants.READ_KIT_ROUTER, this.info);
+      }
+    })
+    .onVisibleAreaChange([0.0], (isExpanding: boolean, currentRatio: number) => {
+      if (isExpanding && currentRatio >= 0.0) {
+        this.readProgress = this.info?.readProgress!
+      }
+    })
+  }
+}
+
+/**
+ * 阅读记录
+ */
+@ComponentV2
+export struct ReadRecordCard {
+  @Param info: BookInfo | undefined = undefined;
+  @Param isSelectAll: boolean = false;
+  @Consumer('isDeleteRecord') isDeleteRecord: boolean = false;
+  @Event onDelete: (value: boolean) => void = () => {
+  }
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
+
+  build() {
+    Flex({
+      direction: FlexDirection.Row,
+      alignItems: ItemAlign.Center,
+      justifyContent: FlexAlign.SpaceBetween,
+      space: { main: LengthMetrics.vp(12) }
+    }) {
+      if (this.isDeleteRecord) {
+        Column() {
+          Checkbox({ name: 'delete', group: 'deleteGroup' })
+            .select(this.isSelectAll || this.info?.isSelect)
+            .selectedColor($r('app.color.slider_selected_color'))
+            .unselectedColor($r('sys.color.icon_tertiary'))
+            .shape(CheckBoxShape.CIRCLE)
+            .onChange((value: boolean) => {
+              this.onDelete(value);
+            })
+        }
+        .height(90)
+        .justifyContent(FlexAlign.Center)
+      }
+
+      Image(typeof this.info?.coverUrl === 'string' ? $r(this.info.coverUrl) : this.info?.coverUrl)
+        .height(90)
+        .width(68)
+        .objectFit(ImageFit.Cover)
+        .borderRadius(8)
+        .draggable(false)
+
+      Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.SpaceBetween }) {
+        Row() {
+          Text(this.info?.name)
+            .width(`calc(100% - ${40}vp)`)
+            .maxLines(1)
+            .textOverflow({ overflow: TextOverflow.Ellipsis })
+            .fontSize(this.fontModel.getFg(14))
+            .fontColor($r('sys.color.font_primary'))
+            .fontWeight(FontWeight.Medium);
+          Row() {
+            Text(`${this.info?.rate}` + '分')
+              .fontSize(this.fontModel.getFg(16))
+              .fontColor($r('sys.color.font_primary')).fontWeight(FontWeight.Medium);
+          }
+        }
+        .width(Constants.FULL_SIZE)
+        .justifyContent(FlexAlign.SpaceBetween)
+
+        Column({ space: 4 }) {
+          Text(this.info?.description)
+            .maxLines(1)
+            .textOverflow({ overflow: TextOverflow.Ellipsis })
+            .fontSize(this.fontModel.getFg(12))
+            .fontColor($r('sys.color.font_secondary'))
+            .fontWeight(FontWeight.Regular)
+            .alignSelf(ItemAlign.Start)
+
+          Row() {
+            Text(this.info?.category)
+              .fontSize(this.fontModel.getFg(12))
+              .fontColor($r('sys.color.font_secondary'))
+              .fontWeight(FontWeight.Regular).textAlign(TextAlign.Start)
+
+            Text(`${this.info?.count}万字`)
+              .fontSize(this.fontModel.getFg(12))
+              .textAlign(TextAlign.Start)
+              .padding({ left: 2 })
+              .fontColor($r('sys.color.font_secondary'))
+              .fontWeight(FontWeight.Regular)
+          }.width('100%').justifyContent(FlexAlign.Start)
+        }
+
+
+        Row() {
+          Text('读至')
+            .fontSize(this.fontModel.getFg(12))
+            .fontColor($r('sys.color.font_secondary'))
+            .fontWeight(FontWeight.Regular).textAlign(TextAlign.Start)
+
+          Text(this.info?.count)
+            .fontSize(this.fontModel.getFg(12))
+            .textAlign(TextAlign.Start)
+            .padding({ left: 2 })
+            .fontColor($r('sys.color.font_secondary'))
+            .fontWeight(FontWeight.Regular)
+        }.width('100%').justifyContent(FlexAlign.Start)
+      }
+      .height(90)
+      .layoutWeight(1)
+
+      Column() {
+        SymbolGlyph($r('sys.symbol.bookshelf_badge_plus'))
+          .fontSize(fp2pxUtil(24))
+          .fontColor(true ? [$r('sys.color.icon_primary')] : [$r('sys.color.icon_secondary')])
+          .onClick(() => {
+
+          })
+      }
+      .height(90)
+      .justifyContent(FlexAlign.End)
+    }
+    .backgroundColor($r('sys.color.comp_background_list_card'))
+    .borderRadius(16)
+    .padding({
+      left: 12,
+      right: 12,
+      top: 16,
+      bottom: 16
+    })
     .width(Constants.FULL_SIZE)
     .onClick(() => {
       if (this.info) {
@@ -168,12 +307,24 @@ export struct SearchResultCard {
 }
 
 @Builder
-export function BookCover(image?: PixelMap | ResourceStr | DrawableDescriptor) {
-  Stack() {
-    Image($r(image?.toString()))
-      .height(144)
-      .width(104)
-      .objectFit(ImageFit.Auto)
-      .borderRadius(10)
+export function BookCover(image?: PixelMap | ResourceStr | DrawableDescriptor, isFree?: string) {
+  Stack({ alignContent: Alignment.TopEnd }) {
+    Image(typeof image === 'string' ? $r(image) : image)
+      .height(90)
+      .width(68)
+      .objectFit(ImageFit.Cover)
+      .borderRadius(8)
+      .draggable(false)
+    Column() {
+      Text(getFreeText(isFree))
+        .fontSize(10)
+        .fontColor(Color.White)
+        .textAlign(TextAlign.Center)
+        .height(16)
+        .width(36)
+        .backgroundColor(getFreeColor(isFree))
+        .borderRadius(14)
+    }
+    .padding(4)
   }
 }

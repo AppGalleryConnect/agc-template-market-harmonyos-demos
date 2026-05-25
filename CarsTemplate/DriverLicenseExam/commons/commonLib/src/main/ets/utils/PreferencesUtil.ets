@@ -39,11 +39,15 @@ export class PreferencesUtil {
   }
 
   preferencesFlush(preferences: preferences.Preferences) {
-    preferences.flush((err) => {
-      if (err) {
-        Logger.error(TAG, `Failed to flush. Code:${err.code}, message:${err.message}`);
-      }
-    })
+    try {
+      preferences.flush((err) => {
+        if (err) {
+          Logger.error(TAG, `Failed to flush. Code:${err.code}, message:${err.message}`);
+        }
+      })
+    } catch (e) {
+      Logger.error(TAG, `Failed to call preferences.flush: ${JSON.stringify(e)}`);
+    }
   }
 
   preferencesPut(preferences: preferences.Preferences, key: string, value: preferences.ValueType): void {

@@ -1,6 +1,7 @@
 import {
   BreakpointModel,
   BreakpointNameEnum,
+  UserInfoModel,
   Course1, CourseContent, COURSE_CONTENT, COURSE_DATA1, RouterMap, RouterUtils } from 'lib_common';
 import { NavHeaderBar } from 'lib_widget';
 import { CoursePageVM } from '../viewmodels/CoursePageVM';
@@ -10,7 +11,8 @@ import { emitter } from '@kit.BasicServicesKit';
 import { calendarManager } from '@kit.CalendarKit';
 import { abilityAccessCtrl, common, PermissionRequestResult, Permissions } from '@kit.AbilityKit';
 import { BusinessError } from '@kit.BasicServicesKit';
-import { AppStorageV2, promptAction } from '@kit.ArkUI';
+import { AppStorageV2, promptAction , PersistenceV2 } from '@kit.ArkUI';
+import { LoginSheetUtils } from 'lib_account';
 
 @Builder
 export function CourseDetailPageBuilder() {
@@ -49,6 +51,7 @@ struct CourseDetailPage {
   @Local calendarMgr: calendarManager.CalendarManager | null = null;
   @Local titleList: string[] = []
   @Local breakPointModel: BreakpointModel = AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
+  @Local userInfoModel: UserInfoModel = PersistenceV2.connect(UserInfoModel, () => new UserInfoModel())!;
 
   buildDateList(): string[] {
     let planDateList: string[] = [];
@@ -70,6 +73,13 @@ struct CourseDetailPage {
     this.titleList = this.courseContent.contentCategory
     this.vm.addHistory(this.label)
     this.courseDateList = this.buildDateList()
+    this.courseDateList.forEach((date: string , index: number) => {
+      let coursePlan: string[] = (AppStorage.get(date) ?? []) as string[]
+      if(coursePlan.includes(this.courseId)){
+        this.clickedStates[index] = true
+        this.planList.push(Number(date))
+      }
+    })
 
     // 3.创建日历账户
     this.calendarMgr?.createCalendar(this.calendarAccount).then((data: calendarManager.Calendar) => {
@@ -154,7 +164,7 @@ struct CourseDetailPage {
   @Builder
   addPlanDialogBuilder() {
     Column() {
-      PlanDialog({ planList: this.planList, clickedStates: this.clickedStates })
+      PlanDialog({ planList: this.planList, clickedStates: this.clickedStates , courseId: this.courseId })
 
       Row() {
         Text('保存计划')
@@ -171,8 +181,15 @@ struct CourseDetailPage {
         let courseList: string[][] = []
         this.courseDateList.forEach((date: string) => {
           let coursePlan: string[] = (AppStorage.get(date) ?? []) as string[]
-          if (!coursePlan.includes(this.courseId) && this.planList.includes(Number(date))) {
-            coursePlan = [...coursePlan, this.courseId];
+          if (this.planList.includes(Number(date))) {
+            if (!coursePlan.includes(this.courseId)) {
+              coursePlan = [...coursePlan, this.courseId]; // 添加课程ID
+            }
+          } else {
+            const courseIndex = coursePlan.indexOf(this.courseId);
+            if (courseIndex !== -1) {
+              coursePlan.splice(courseIndex, 1); // 从数组中移除课程ID
+            }
           }
           AppStorage.setOrCreate<string[]>(date, coursePlan)
           courseList.push(coursePlan)
@@ -238,19 +255,23 @@ struct CourseDetailPage {
 
                 let calendar: calendarManager.Calendar | undefined = undefined;
 
-                this.calendarMgr?.getCalendar((err: BusinessError, data:calendarManager.Calendar) => {
-                  if (err) {
-                    console.error(`Failed to get calendar. Code: ${err.code}, message: ${err.message}`);
-                  } else {
-                    console.info(`Succeeded in getting calendar, data -> ${JSON.stringify(data)}`);
-                    calendar = data;
-                    calendar.addEvent(event).then((data: number) => {
-                      console.info(`Succeeded in adding event, id -> ${data}`);
-                    }).catch((err: BusinessError) => {
-                      console.error(`Failed to addEvent. Code: ${err.code}, message: ${err.message}`);
-                    });
-                  }
-                });
+                try {
+                  this.calendarMgr?.getCalendar((err: BusinessError, data:calendarManager.Calendar) => {
+                    if (err) {
+                      console.error(`Failed to get calendar. Code: ${err.code}, message: ${err.message}`);
+                    } else {
+                      console.info(`Succeeded in getting calendar, data -> ${JSON.stringify(data)}`);
+                      calendar = data;
+                      calendar.addEvent(event).then((data: number) => {
+                        console.info(`Succeeded in adding event, id -> ${data}`);
+                      }).catch((err: BusinessError) => {
+                        console.error(`Failed to addEvent. Code: ${err.code}, message: ${err.message}`);
+                      });
+                    }
+                  });
+                } catch (e) {
+                  console.error('getCalendar failed')
+                }
               }
             }
 
@@ -270,46 +291,44 @@ struct CourseDetailPage {
   explainBuilder(index: number, titleList: string[]) {
     Column() {
       Scroll() {
-        explain(titleList[index])
+        explain({
+          title: titleList[index],
+          isVideo: this.courseContent.isVideos[index],
+        })
       }
       .scrollBar(BarState.Off)
+      .edgeEffect(EdgeEffect.Spring)
+      .layoutWeight(1) // 占据剩余空间，让底部按钮固定
 
-      Column() {
-        Row({ space: 16 }) {
-          Image(index === 0 ? $r('app.media.explain_left') : $r('app.media.ic_left_on'))
-            .width(40)
-            .onClick(() => {
-              this.isShowExplain[index] = false;
-              this.isShowExplain[index-1] = true;
-            })
-          Text('我已了解')
-            .width(216)
-            .height(40)
-            .fontColor(Color.White)
-            .borderRadius(24)
-            .textAlign(TextAlign.Center)
-            .padding({ left: 24, right: 24, top: 8, bottom: 8 })
-            .backgroundColor($r('app.color.app_theme'))
-            .onClick(() => {
-              this.isShowExplain[index] = false;
-            })
-          Image(index !== titleList.length - 1 ? $r('app.media.explain_right') : $r('app.media.ic_right_off'))
-            .width(40)
-            .onClick(() => {
-              this.isShowExplain[index] = false;
-              this.isShowExplain[index+1] = true;
-            })
-        }
-        .width('100%')
-        .justifyContent(FlexAlign.Center)
+      Row({ space: 16 }) {
+        Image(index === 0 ? $r('app.media.explain_left') : $r('app.media.ic_left_on'))
+          .width(40)
+          .onClick(() => {
+            this.isShowExplain[index] = false;
+            this.isShowExplain[index-1] = true;
+          })
+        Text('我已了解')
+          .width(216)
+          .height(40)
+          .fontColor(Color.White)
+          .borderRadius(24)
+          .textAlign(TextAlign.Center)
+          .padding({ left: 24, right: 24, top: 8, bottom: 8 })
+          .backgroundColor($r('app.color.app_theme'))
+          .onClick(() => {
+            this.isShowExplain[index] = false;
+          })
+        Image(index !== titleList.length - 1 ? $r('app.media.explain_right') : $r('app.media.ic_right_off'))
+          .width(40)
+          .onClick(() => {
+            this.isShowExplain[index] = false;
+            this.isShowExplain[index+1] = true;
+          })
       }
-      .justifyContent(FlexAlign.Center)
-      .alignItems(HorizontalAlign.Center)
+      .margin({ bottom: 28 })
       .width('100%')
       .height(64)
-      .padding({ top: 12, bottom: 12 })
-      .position({ y: '85%' }) // 关键定位属性
-      .alignSelf(ItemAlign.Center)
+      .justifyContent(FlexAlign.Center)
     }
     .backgroundColor('rgba(255, 255, 255, 0.9)')
     .width('100%')
@@ -322,6 +341,9 @@ struct CourseDetailPage {
       Scroll() {
         explainVIP(titleList[index])
       }
+      .scrollBar(BarState.Off)
+      .edgeEffect(EdgeEffect.Spring)
+      .layoutWeight(1) // 占据剩余空间，让底部按钮固定
 
       Column() {
         Row() {
@@ -337,8 +359,7 @@ struct CourseDetailPage {
       }
       .alignItems(HorizontalAlign.Center)
       .padding({ left: 16, right: 16, top: 9, bottom: 9 })
-      .margin({ left: 16, right: 16 })
-      .position({ y: '85%' }) // 关键定位属性
+      .margin({ left: 16, right: 16 , bottom: 28 })
       .backgroundColor($r('app.color.app_theme'))
       .borderRadius(20)
       .justifyContent(FlexAlign.Center)
@@ -385,21 +406,25 @@ struct CourseDetailPage {
 
       Column() {
         Text(this.course.courseTitle)
-          .fontWeight(FontWeight.Medium)
+          .fontWeight(FontWeight.Bold)
           .fontSize(18)
         Text(`难度：${this.courseContent.difficulty}`)
-          .fontWeight(FontWeight.Medium)
+          .fontWeight(FontWeight.Regular)
           .fontSize($r('sys.float.Body_M'))
           .margin({ top: 12, bottom: 12 })
         Text(`预计时长：${this.courseContent.duration}分钟`)
-          .fontWeight(FontWeight.Medium)
+          .fontWeight(FontWeight.Regular)
           .fontSize($r('sys.float.Body_M'))
-        Text('课程介绍')
+          .margin({ bottom: 12 })
+        Text(`预计消耗热量：${this.courseContent.energy} (kcal)`)
+          .fontWeight(FontWeight.Regular)
+          .fontSize($r('sys.float.Body_M'))
+        Text('练习建议')
           .fontWeight(FontWeight.Medium)
           .fontSize($r('sys.float.Body_M'))
           .margin({ top: 25, bottom: 4 })
         Text(this.course.description)
-          .fontWeight(FontWeight.Medium)
+          .fontWeight(FontWeight.Regular)
           .fontColor('rgba(0, 0, 0, 0.6)')
           .fontSize($r('sys.float.Body_M'))
         Text('注意事项')
@@ -409,7 +434,7 @@ struct CourseDetailPage {
         Column() {
           ForEach(this.courseContent.careAbout, (item: string) => {
             Text(item)
-              .fontWeight(FontWeight.Medium)
+              .fontWeight(FontWeight.Regular)
               .fontColor('rgba(0, 0, 0, 0.6)')
               .fontSize($r('sys.float.Body_M'))
               .margin({ bottom: 8 })
@@ -472,27 +497,33 @@ struct CourseDetailPage {
                 .fontSize($r('sys.float.Body_M'))
             }
 
-            Text('查看讲解')
-              .fontColor(Color.White)
-              .backgroundColor($r('app.color.app_theme'))
-              .width(80)
-              .height(28)
-              .borderRadius(14)
-              .textAlign(TextAlign.Center)
-              .onClick(() => {
-                this.isShowExplain[index] = true;
-              })
-              .bindSheet(this.isShowExplain[index], (!this.vm.isVIP() && this.isVIPCourse()) ?
-                this.explainVIPBuilder(index, this.titleList) : this.explainBuilder(index, this.titleList), {
-                height: '90%',
-                dragBar: false,
-                showClose: true,
-                preferType: SheetType.CENTER,
-                backgroundColor: '#fff',
-                onDisappear: () => {
-                  this.isShowExplain[index] = false;
-                }
-              })
+            Row({ space: 4 }){
+              Image(this.courseContent.isVideos[index] ? $r('app.media.video_fill'): $r('app.media.picture_fill'))
+                .width(16)
+                .height(16)
+              Text('学习')
+                .fontColor(Color.White)
+                .textAlign(TextAlign.End)
+            }
+            .justifyContent(FlexAlign.Center)
+            .backgroundColor($r('app.color.app_theme'))
+            .width(80)
+            .height(28)
+            .borderRadius(14)
+            .onClick(() => {
+              this.isShowExplain[index] = true;
+            })
+            .bindSheet(this.isShowExplain[index], (!this.vm.isVIP() && this.isVIPCourse()) ?
+              this.explainVIPBuilder(index, this.titleList) : this.explainBuilder(index, this.titleList), {
+              height: '90%',
+              dragBar: false,
+              showClose: true,
+              preferType: SheetType.CENTER,
+              backgroundColor: '#fff',
+              onDisappear: () => {
+                this.isShowExplain[index] = false;
+              }
+            })
           }
           .width('100%')
           .padding({ top: 12, bottom: 12 })
@@ -567,12 +598,12 @@ struct CourseDetailPage {
             Row() {
               Row() {
                 Column() {
-                  Image(this.planList.includes(new Date().getDate()) ? $r('app.media.ic_plan_on')
+                  Image(this.planList.length > 0 ? $r('app.media.ic_plan_on')
                     : $r('app.media.ic_plan_off'))
                     .width(24)
                     .height(24)
                     .margin({ bottom: 2 })
-                  Text(this.planList.includes(new Date().getDate()) ? '已加计划' : '加计划')
+                  Text(this.planList.length > 0 ? '已加计划' : '加计划')
                     .width(54)
                     .fontWeight(FontWeight.Medium)
                     .fontSize(10)
@@ -584,7 +615,11 @@ struct CourseDetailPage {
                 .height(48)
                 .padding({ top: 4, left: 12, right: 12, bottom: 4 })
                 .onClick(() => {
-                  this.isShowAddPlanDialog = true;
+                  if(!this.userInfoModel.isLogin){
+                    LoginSheetUtils.open()
+                  }else{
+                    this.isShowAddPlanDialog = true;
+                  }
                 })
                 .bindSheet($$this.isShowAddPlanDialog, this.addPlanDialogBuilder(), {
                   height: '40%',
@@ -616,7 +651,11 @@ struct CourseDetailPage {
                 .height(48)
                 .padding({ top: 4, left: 8, right: 12, bottom: 4 })
                 .onClick(() => {
-                  this.isShowAddDateDialog = true;
+                  if(!this.userInfoModel.isLogin){
+                    LoginSheetUtils.open()
+                  }else{
+                    this.isShowAddDateDialog = true;
+                  }
                 })
                 .bindSheet($$this.isShowAddDateDialog, this.addDateDialogBuilder(), {
                   height: '70%',
@@ -631,14 +670,11 @@ struct CourseDetailPage {
                 })
               }
               Row() {
-                Text('准备好了吗？')
+                Text('开始训练')
                   .fontColor(Color.White)
                   .fontWeight(FontWeight.Medium)
                   .fontSize($r('sys.float.Body_L'))
                   .margin({ right: 4 })
-                Image($r('app.media.icon_go'))
-                  .width(24)
-                  .height(24)
               }
               .justifyContent(FlexAlign.Center)
               .padding({ left: 16, right: 16, top: 9, bottom: 9 })
@@ -668,54 +704,9 @@ struct CourseDetailPage {
     .hideTitleBar(true)
     .onReady((context: NavDestinationContext) => {
       this.courseId = context.pathInfo?.param as string
-      switch (this.courseId) {
-        case '0001':
-          this.course = COURSE_DATA1[0];
-          this.courseContent = COURSE_CONTENT[0]
-          break;
-        case '0002':
-          this.course = COURSE_DATA1[1];
-          this.courseContent = COURSE_CONTENT[1]
-          break;
-        case '0003':
-          this.course = COURSE_DATA1[2];
-          this.courseContent = COURSE_CONTENT[2]
-          break;
-        case '0004':
-          this.course = COURSE_DATA1[3];
-          this.courseContent = COURSE_CONTENT[3]
-          break;
-        case '0005':
-          this.course = COURSE_DATA1[4];
-          this.courseContent = COURSE_CONTENT[4]
-          break;
-        case '0006':
-          this.course = COURSE_DATA1[5];
-          this.courseContent = COURSE_CONTENT[5]
-          break;
-        case '0007':
-          this.course = COURSE_DATA1[6];
-          this.courseContent = COURSE_CONTENT[6]
-          break;
-        case '0008':
-          this.course = COURSE_DATA1[7];
-          this.courseContent = COURSE_CONTENT[7]
-          break;
-        case '0009':
-          this.course = COURSE_DATA1[8];
-          this.courseContent = COURSE_CONTENT[8]
-          break;
-        case '0010':
-          this.course = COURSE_DATA1[9];
-          this.courseContent = COURSE_CONTENT[9]
-          break;
-        case '0011':
-          this.course = COURSE_DATA1[10];
-          this.courseContent = COURSE_CONTENT[10]
-          break;
-        default:
-          break;
-      }
+      let index: number = Number(this.courseId) - 1
+      this.course = COURSE_DATA1[index]
+      this.courseContent = COURSE_CONTENT[index]
       this.label = this.course.courseTitle
       this.aboutToAppear()
     })

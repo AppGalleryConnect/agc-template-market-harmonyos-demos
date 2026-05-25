@@ -165,7 +165,7 @@ export struct UICitySelect {
               Divider()
             }
             .alignItems(HorizontalAlign.Start)
-            .backgroundColor(Color.White)
+            .backgroundColor($r('sys.color.background_secondary'))
           }, (v: string) => v)
         }
       }
@@ -174,7 +174,7 @@ export struct UICitySelect {
     .scrollBar(BarState.Off)
     .align(Alignment.Top)
     .height('calc(100% - 66vp)')
-    .backgroundColor(Color.White)
+    .backgroundColor($r('sys.color.background_secondary'))
 
   }
 
@@ -266,7 +266,7 @@ export struct UICitySelect {
 
   @Builder
   ListDivider() {
-    Row().width('100%').height(8).backgroundColor($r('app.color.common_page_bg'))
+    Row().width('100%').height(8).backgroundColor($r('sys.color.background_secondary'))
   }
 
   @Builder

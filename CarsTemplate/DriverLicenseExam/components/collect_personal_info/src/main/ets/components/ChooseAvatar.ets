@@ -37,7 +37,7 @@ export struct ChooseAvatar {
             .type(ButtonType.Normal)
             .backgroundImage(this.url)
             .backgroundImageSize(ImageSize.Cover)
-            .backgroundColor('transparent')
+            .backgroundColor('rgba(0,0,0,0)')
             .width(this.avatarH)
             .height(this.avatarH)
             .borderRadius(Constants.HALF_PERCENT),

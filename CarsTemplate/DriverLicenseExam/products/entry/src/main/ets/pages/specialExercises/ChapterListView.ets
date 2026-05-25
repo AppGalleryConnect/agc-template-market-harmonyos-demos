@@ -41,7 +41,7 @@ struct ChapterListView {
 
                 Text(item.title)
                   .fontSize(14)
-                  .fontColor('rgba(0,0,0,0.9)')
+                  .fontColor($r('sys.color.font_primary'))
                   .maxFontScale(1)
               }
               .width(CommonConstants.FULL_WIDTH)
@@ -61,7 +61,7 @@ struct ChapterListView {
                     .color($r('sys.color.comp_background_emphasize'))
                   Text(`${item.examManger.correctNumber}/${item.examManger.total}`)
                     .fontSize(10)
-                    .fontColor('rgba(0,0,0,0.6)')
+                    .fontColor($r('sys.color.font_secondary'))
                     .margin({
                       left: 8,
                       right: 16
@@ -69,7 +69,7 @@ struct ChapterListView {
                     .maxFontScale(1)
                   Text(`正确率 ${item.calAccuracyRate()}%`)
                     .fontSize(10)
-                    .fontColor('rgba(0,0,0,0.6)')
+                    .fontColor($r('sys.color.font_secondary'))
                     .maxFontScale(1)
                 }
                 .layoutWeight(1)
@@ -117,12 +117,12 @@ struct ChapterListView {
       })
       .divider({
         strokeWidth:1,
-        color:'rgba(0,0,0,0.2)'
+        color:$r('sys.color.comp_divider')
       })
       .scrollBar(BarState.Off)
     }
     .title('章节练习')
-    .backgroundColor('#F1F3F5')
+    .backgroundColor($r('sys.color.background_secondary'))
     .padding({
       top:this.getUIContext().px2vp(this.topRectHeight),
       bottom: this.getUIContext().px2vp(this.bottomRectHeight)

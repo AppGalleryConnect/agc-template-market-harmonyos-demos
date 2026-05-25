@@ -2,8 +2,12 @@ import { CustomContentDialog } from '@kit.ArkUI';
 import { call } from '@kit.TelephonyKit';
 import { baseActionSheet } from 'base_common';
 import { UserInfo } from 'base_common';
-import { BreakpointStorage, BreakpointSystem, BreakpointTypeEnum, Constants, NavHeaderBar, TCRouter } from 'common';
+import { BreakpointStorage, BreakpointSystem, BreakpointTypeEnum, Constants,
+  FontModel,
+  NavHeaderBar, TCRouter } from 'common';
 import { AvatarIcon } from '../comp/SelectAvatarCard';
+import { AppStorageV2 } from '@kit.ArkUI';
+import { fp2pxUtil } from 'base_common';
 
 
 @ComponentV2
@@ -16,6 +20,7 @@ export struct AboutPage {
   @Local isLatestVersion: boolean = false
   @Local updateProgress: number = 0
   @Local curBreakpoint: BreakpointStorage = BreakpointSystem.currentBreakpoint
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
   timerId?: number
   updateDialogController: CustomDialogController = new CustomDialogController({
     builder: CustomContentDialog({
@@ -205,7 +210,7 @@ export struct AboutPage {
         Column(){
           Row({space:8}) {
             Text('版本信息')
-              .fontSize(16)
+              .fontSize(this.fontModel.getFg(16))
               .fontWeight(FontWeight.Normal)
               .height(22)
               .textAlign(TextAlign.Start)
@@ -218,8 +223,8 @@ export struct AboutPage {
           }
           .width(100)
           .justifyContent(FlexAlign.Start)
-          Text('1.0.00.000')
-            .fontSize(12)
+          Text($r('app.string.agcit_huawei_book_read'))
+            .fontSize(this.fontModel.getFg(12))
             .fontWeight(FontWeight.Normal)
             .width(100)
             .height(16)
@@ -228,9 +233,8 @@ export struct AboutPage {
         }
         Row({space:4}){
           Text(this.isLatestVersion? '检查更新': '待更新')
-            .width(48)
             .height(16)
-            .fontSize(12)
+            .fontSize(this.fontModel.getFg(12))
             .fontWeight(FontWeight.Normal)
             .textAlign(TextAlign.End)
             .fontColor($r('sys.color.font_secondary'))
@@ -265,13 +269,13 @@ export struct AboutPage {
       Row(){
         Column(){
           Text('客服电话')
-            .fontSize(16)
+            .fontSize(this.fontModel.getFg(16))
             .fontWeight(FontWeight.Normal)
             .width(100)
             .height(22)
             .textAlign(TextAlign.Start)
           Text('000000')
-            .fontSize(12)
+            .fontSize(this.fontModel.getFg(12))
             .fontWeight(FontWeight.Normal)
             .width(100)
             .height(16)
@@ -313,7 +317,7 @@ export struct AboutPage {
         .height(0.5)
       Row(){
         Text('个人信息收集清单')
-          .fontSize(16)
+          .fontSize(this.fontModel.getFg(16))
           .fontWeight(FontWeight.Normal)
           .height(22)
           .textAlign(TextAlign.Start)
@@ -343,7 +347,7 @@ export struct AboutPage {
         .height(0.5)
       Row(){
         Text('第三方共享信息清单')
-          .fontSize(16)
+          .fontSize(this.fontModel.getFg(16))
           .fontWeight(FontWeight.Normal)
           .height(22)
           .textAlign(TextAlign.Start)
@@ -399,7 +403,7 @@ export struct AboutPage {
             Text('阅读模板')
               .width(328)
               .height(21)
-              .fontSize(16)
+              .fontSize(fp2pxUtil(16))
               .fontWeight(500)
               .textAlign(TextAlign.Center)
           }
@@ -408,13 +412,13 @@ export struct AboutPage {
 
         Column(){
           Text('XXXX备xxxxxxxx号-xxxx')
-            .fontSize(12)
+            .fontSize(fp2pxUtil(12))
             .fontColor('#0A59F7')
           Text('xxxx 版权所有 © xxxx-xxxx')
-            .fontSize(12)
+            .fontSize(fp2pxUtil(12))
             .fontColor($r('sys.color.font_secondary'))
           Text('技术支持：xxxxxxxx')
-            .fontSize(12)
+            .fontSize(fp2pxUtil(12))
             .fontColor($r('sys.color.font_secondary'))
         }
       }

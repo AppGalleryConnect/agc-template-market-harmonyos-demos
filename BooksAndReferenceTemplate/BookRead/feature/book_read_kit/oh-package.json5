@@ -8,6 +8,7 @@
   "dependencies": {
     "common": "file:../../commons/common",
     "reader_tool_bar": "file:../../components/reader_tool_bar",
-    "base_common": "file:../../components/base_common"
+    "base_common": "file:../../components/base_common",
+    "aggregated_share": "file:../../components/aggregated_share"
   }
 }

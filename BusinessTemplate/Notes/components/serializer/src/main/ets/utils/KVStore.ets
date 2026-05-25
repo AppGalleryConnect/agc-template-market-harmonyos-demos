@@ -50,38 +50,68 @@ export class KVStore {
     };
 
 
-    return new Promise((resolve) => {
-      this.kvManager?.getKVStore<distributedKVStore.SingleKVStore>(`${securityLevel}${JSON.stringify(encrypt)}`,
-        options,
-        (err, store: distributedKVStore.SingleKVStore) => {
-          if (err) {
-            hilog.error(0x0000, 'KVStore', `Failed to get KVStore: Code:${err.code},message:${err.message}`);
-            return;
-          }
-          hilog.info(0x0000, 'KVStore', 'Succeeded in getting KVStore.');
-          resolve(store)
-        })
-    })
+    return new Promise((resolve, reject) => {
+      if (this.kvManager === undefined) {
+        hilog.error(0x0000, 'KVStore', 'createKVStore: kvManager is undefined');
+        reject(new Error('kvManager is undefined'));
+        return;
+      }
+      try {
+        this.kvManager.getKVStore<distributedKVStore.SingleKVStore>(`${securityLevel}${JSON.stringify(encrypt)}`,
+          options,
+          (err, store: distributedKVStore.SingleKVStore) => {
+            if (err) {
+              hilog.error(0x0000, 'KVStore', `Failed to get KVStore: Code:${err.code},message:${err.message}`);
+              reject(err);
+              return;
+            }
+            hilog.info(0x0000, 'KVStore', 'Succeeded in getting KVStore.');
+            resolve(store);
+          });
+      } catch (error) {
+        const err = error as BusinessError;
+        hilog.error(0x0000, 'KVStore', `getKVStore threw: Code:${err.code},message:${err.message}`);
+        reject(err);
+      }
+    });
   }
 
   async put(key: string, value: Uint8Array | string | number | boolean) {
-    this.kvStore!.put(key, value, (err) => {
-      if (err !== undefined) {
-        hilog.error(0x0000, 'KVStore', `Failed to put data. Code:${err.code},message:${err.message}`);
-        return;
-      }
-      hilog.info(0x0000, 'KVStore', 'Succeeded in putting data.');
-    });
+    if (!this.kvStore) {
+      hilog.error(0x0000, 'KVStore', 'put: kvStore is undefined');
+      return;
+    }
+    try {
+      this.kvStore.put(key, value, (err) => {
+        if (err !== undefined) {
+          hilog.error(0x0000, 'KVStore', `Failed to put data. Code:${err.code},message:${err.message}`);
+          return;
+        }
+        hilog.info(0x0000, 'KVStore', 'Succeeded in putting data.');
+      });
+    } catch (error) {
+      const err = error as BusinessError;
+      hilog.error(0x0000, 'KVStore', `put threw. Code:${err.code},message:${err.message}`);
+    }
   }
 
   delete(key: string) {
-    this.kvStore!.delete(key, (err) => {
-      if (err !== undefined) {
-        hilog.error(0x0000, 'KVStore', `Failed to delete data. Code:${err.code},message:${err.message}`);
-        return;
-      }
-      hilog.info(0x0000, 'KVStore', 'Succeeded in deleting data.');
-    });
+    if (!this.kvStore) {
+      hilog.error(0x0000, 'KVStore', 'delete: kvStore is undefined');
+      return;
+    }
+    try {
+      this.kvStore.delete(key, (err) => {
+        if (err !== undefined) {
+          hilog.error(0x0000, 'KVStore', `Failed to delete data. Code:${err.code},message:${err.message}`);
+          return;
+        }
+        hilog.info(0x0000, 'KVStore', 'Succeeded in deleting data.');
+      });
+    } catch (error) {
+      const err = error as BusinessError;
+      hilog.error(0x0000, 'KVStore', `delete threw. Code:${err.code},message:${err.message}`);
+    }
   }
 
   async get(key: string): Promise<KVStoreType | undefined> {

@@ -17,7 +17,6 @@ import {
   bundleManager,
   common,
   Context,
-  PermissionRequestResult,
   Permissions
 } from '@kit.AbilityKit';
 import { BusinessError } from '@kit.BasicServicesKit';
@@ -134,21 +133,24 @@ export class SystemSceneUtils {
     if (!SystemSceneUtils.context) {
       SystemSceneUtils.context = getContext() as common.UIAbilityContext;
     }
-    // 向用户申请
     const atManager = abilityAccessCtrl.createAtManager();
-    return atManager.requestPermissionsFromUser(SystemSceneUtils.context, permissions)
-      .then(async (result: PermissionRequestResult) => {
-        if (result.authResults.every(v => v === 0)) {
-          return true;
-        }
-        // 二次向用户申请
-        if (SystemSceneUtils.isApplyLocPermAgain) {
-          const resp = await atManager.requestPermissionOnSetting(SystemSceneUtils.context, permissions);
-          return resp.every(v => v === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED);
-        }
-        SystemSceneUtils.isApplyLocPermAgain = true;
-        return false;
-      });
+    try {
+      const result =
+        await atManager.requestPermissionsFromUser(SystemSceneUtils.context, permissions);
+      if (result.authResults.every(v => v === 0)) {
+        return true;
+      }
+      if (SystemSceneUtils.isApplyLocPermAgain) {
+        const resp = await atManager.requestPermissionOnSetting(SystemSceneUtils.context, permissions);
+        return resp.every(v => v === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED);
+      }
+      SystemSceneUtils.isApplyLocPermAgain = true;
+      return false;
+    } catch (error) {
+      const err: BusinessError = error as BusinessError;
+      Logger.error(`Failed to request location permissions. Code is ${err.code}, message is ${err.message}`);
+      return false;
+    }
   }
 
   /**

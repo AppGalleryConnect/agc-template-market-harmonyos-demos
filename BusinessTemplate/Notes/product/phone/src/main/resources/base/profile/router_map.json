@@ -8,10 +8,20 @@
       "name": "EditCategory",
       "pageSourceFile": "src/main/ets/pages/EditCategory.ets",
       "buildFunction": "EditCategoryBuilder"
-    },{
+    },    {
       "name": "MineView",
       "pageSourceFile": "src/main/ets/pages/mine/MineView.ets",
       "buildFunction": "MineViewBuilder"
+    },
+    {
+      "name": "MineViewHost",
+      "pageSourceFile": "src/main/ets/pages/mine/MineViewHost.ets",
+      "buildFunction": "MineViewHostBuilder"
+    },
+    {
+      "name": "UserInfoPage",
+      "pageSourceFile": "src/main/ets/pages/mine/UserInfoPageHost.ets",
+      "buildFunction": "UserInfoPageBuilder"
     },
     {
       "name": "Trash",

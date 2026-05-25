@@ -2,7 +2,7 @@ import { HotCourse } from 'course';
 import { RouterMap, RouterUtils, DateUtil, CommonConstants, Course1, COURSE_DATA1,
   COURSE_CONTENT, CourseContent,
   BreakpointNameEnum,
-  BreakpointModel} from 'lib_common';
+  BreakpointModel , CourseDataModel} from 'lib_common';
 import { NavHeaderBar } from 'lib_widget';
 import { AppStorageV2, display } from '@kit.ArkUI';
 import { preferences } from '@kit.ArkData';
@@ -38,6 +38,7 @@ export struct PlanPage {
   @Local days: number = 0
   @Local energy: number = 0
   @Local breakPointModel: BreakpointModel = AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
+  @Local courseDataModel: CourseDataModel = AppStorageV2.connect(CourseDataModel, () => new CourseDataModel())!;
   private listScroller: ListScroller = new ListScroller();
   private month: number = new Date().getMonth();
 
@@ -114,6 +115,14 @@ export struct PlanPage {
     this.coursePlan = this.buildPlanList()
   }
 
+  isPassedDay(selectDay: Date): boolean{
+    let today: Date = new Date()
+    if(selectDay.getMonth() < today.getMonth() || selectDay.getDate() < today.getDate()){
+      return true
+    }
+    return false
+  }
+
   @Computed
   get dateWidth() {
     if ([BreakpointNameEnum.SM, BreakpointNameEnum.MD].includes(this.breakPointModel.currentBreakpoint)) {
@@ -133,10 +142,18 @@ export struct PlanPage {
     }
     if (BreakpointNameEnum.MD === this.breakPointModel.currentBreakpoint) {
       gridSettingInfo.template = '1fr 1fr'
+      if(this.coursePlan.length < 2){
+        gridSettingInfo.template = '1fr'
+      }
     }
     if ([BreakpointNameEnum.LG, BreakpointNameEnum.XL].includes((this.breakPointModel.currentBreakpoint))) {
       if (rotation === 1 || rotation === 3) {
         gridSettingInfo.template = '1fr 1fr 1fr'
+        if(this.coursePlan.length < 2){
+          gridSettingInfo.template = '1fr'
+        }else if(this.coursePlan.length < 3){
+          gridSettingInfo.template = '1fr 1fr'
+        }
         gridSettingInfo.colGap = 24
         gridSettingInfo.rowGap = 11
       }
@@ -211,7 +228,7 @@ export struct PlanPage {
   @Computed
   get buttonWidth() {
     if ([BreakpointNameEnum.SM].includes(this.breakPointModel.currentBreakpoint)) {
-      return 216;
+      return 304;
     }
     return 448;
   }
@@ -233,59 +250,70 @@ export struct PlanPage {
       Grid() {
         ForEach(plan.coursePlan, (course: Course1, index: number) => {
           GridItem() {
-            Row() {
-              Image(course.cover)
-                .width(96)
-                .height(54)
-                .borderRadius(8)
-                .margin({ top: 19, right: 12 })
-              Column() {
-                Row() {
-                  Image(this.dateList[this.dateSelectIndex].getDate() === new Date().getDate() &&
-                  AppStorage.get(course.label) ? $r('app.media.ic_finish') : $r('app.media.ic_unfinish'))
-                    .margin({ right: 2 })
-                    .width(12)
-                    .height(12)
-                  Text(this.dateList[this.dateSelectIndex].getDate() === new Date().getDate() &&
-                  AppStorage.get(course.label) ? '课程已完成' : '课程未完成')
-                    .fontWeight(FontWeight.Medium)
-                    .fontSize($r('sys.float.Body_S'))
-                    .fontColor('rgba(0, 0, 0, 0.4)')
-                }
-                .width('100%')
-                .padding({ right: 12 })
-                .justifyContent(FlexAlign.End)
-                Text(course.courseTitle)
-                  .fontSize($r('sys.float.Body_L'))
-                  .margin({ bottom:2 })
+            Column() {
+              // 完成标签
+              Row() {
+                Image(
+                  this.dateList[this.dateSelectIndex].getDate() === new Date().getDate() &&
+                    (this.courseDataModel.courseProgress.get(course.id) ?? 0) > 15 ?
+                    $r('app.media.ic_finish') :$r('app.media.ic_unfinish')
+                )
+                  .margin({ right: 4 })
+                  .width(16)
+                  .height(16)
+                Text(
+                  this.dateList[this.dateSelectIndex].getDate() === new Date().getDate() &&
+                    (this.courseDataModel.courseProgress.get(course.id) ?? 0) > 15 ?
+                    '课程已完成' : '课程未完成')
                   .fontWeight(FontWeight.Medium)
-                Row() {
-                  Text(`难度：${this.courseContent[index].difficulty}`)
-                    .fontSize($r('sys.float.Body_S'))
-                    .fontColor('rgba(0, 0, 0, 0.4)')
-                    .margin({ right: 12 })
-                    .fontWeight(FontWeight.Medium)
-                  Image($r('app.media.ic_time'))
-                    .margin({ right: 2 })
-                    .width(12)
-                    .height(12)
-                  Text(`${this.courseContent[index].duration}分钟`)
-                    .fontWeight(FontWeight.Medium)
-                    .fontSize($r('sys.float.Body_S'))
-                    .fontColor('rgba(0, 0, 0, 0.4)')
-                }
-                Text(`预计消耗热量：${this.courseContent[index].energy}kcal`)
                   .fontSize($r('sys.float.Body_S'))
                   .fontColor('rgba(0, 0, 0, 0.4)')
-                  .margin({ right: 12 })
-                  .fontWeight(FontWeight.Medium)
               }
-              .width('66%')
-              .padding({ top: 16, bottom: 16 })
-              .alignItems(HorizontalAlign.Start)
+              .width('100%')
+              .justifyContent(FlexAlign.End)
+
+              // 左图右文核心内容
+              Row(){
+                Image(course.cover)
+                  .width(80)
+                  .height(80)
+                  .borderRadius(8)
+                  .margin({ right: 12 })
+
+                Column({ space: 8 }) {
+                  Text(course.courseTitle)
+                    .fontSize($r('sys.float.Body_L'))
+                    .margin({ top: 4 })
+                    .fontWeight(FontWeight.Medium)
+                  Row() {
+                    Text(`难度：${this.courseContent[index].difficulty}`)
+                      .fontSize($r('sys.float.Body_S'))
+                      .fontColor('rgba(0, 0, 0, 0.6)')
+                      .fontWeight(FontWeight.Regular)
+                      .margin({ right: 12 })
+                    Image($r('app.media.ic_time'))
+                      .margin({ right: 4 })
+                      .width(12)
+                      .height(12)
+                    Text(`${this.courseContent[index].duration}分钟`)
+                      .fontWeight(FontWeight.Regular)
+                      .fontSize($r('sys.float.Body_S'))
+                      .fontColor('rgba(0, 0, 0, 0.6)')
+                  }
+                  Text(`预计消耗热量：${this.courseContent[index].energy}kcal`)
+                    .fontSize($r('sys.float.Body_S'))
+                    .fontColor('rgba(0, 0, 0, 0.6)')
+                    .fontWeight(FontWeight.Regular)
+                }
+                .width('70%')
+                .alignItems(HorizontalAlign.Start)
+              }
+              .width('100%')
+              .margin({ top: 12 })
             }
-            .justifyContent(FlexAlign.SpaceBetween)
+            .alignItems(HorizontalAlign.Center)
             .width('100%')
+            .margin({ bottom: 12 })
             .onClick(() => RouterUtils.pushPathByName(RouterMap.COURSE_DETAIL_PAGE, course.id))
           }
         })
@@ -294,106 +322,105 @@ export struct PlanPage {
       .columnsGap(this.gridSetting.colGap)
       .rowsGap(this.gridSetting.rowGap)
 
-      if (this.dateList[this.dateSelectIndex].getDate() < new Date().getDate() &&
-        this.dateList[this.dateSelectIndex].getMonth() === new Date().getMonth()) {
-        Row() {
-          Image($r('app.media.addplan'))
-            .margin({ top: 4, bottom: 4, right: 2 })
-            .width(16)
-            .height(16)
-          Text('添加计划')
-            .width(64)
-            .height(21)
-            .fontSize($r('sys.float.Body_L'))
-            .fontWeight(FontWeight.Regular)
-            .fontColor('rgba(0, 0, 0, 0.4)')
-            .margin({ top: 1.5, bottom: 1.5 })
+      if (this.isPassedDay(this.dateList[this.dateSelectIndex])) {
+        Button(){
+          Row() {
+            SymbolGlyph($r('sys.symbol.plus_circle_fill'))
+              .width(16)
+              .height(16)
+              .margin({ top: 4, bottom: 4, right: 8 })
+              .fontColor([$r('sys.color.icon_on_primary')])
+            Text('添加计划')
+              .width(64)
+              .height(21)
+              .fontSize($r('sys.float.Body_L'))
+              .fontWeight(FontWeight.Regular)
+              .fontColor($r('sys.color.font_on_primary'))
+              .margin({ top: 1.5, bottom: 1.5 })
+          }
+          .justifyContent(FlexAlign.Center)
         }
         .width(this.buttonWidth)
         .height(40)
-        .padding({ top: 8, left: 24, right: 24, bottom: 8 })
         .borderRadius(24)
         .backgroundColor($r('app.color.app_theme'))
-        .justifyContent(FlexAlign.Center)
+        .padding({ top: 8, left: 24, right: 24, bottom: 8 })
+        .opacity(0.4)
       } else {
-        Row() {
-          Image($r('app.media.addplan'))
-            .margin({ top: 4, bottom: 4, right: 2 })
-            .width(16)
-            .height(16)
-          Text('添加计划')
-            .width(64)
-            .height(21)
-            .fontSize($r('sys.float.Body_L'))
-            .fontWeight(FontWeight.Regular)
-            .fontColor(Color.White)
-            .margin({ top: 1.5, bottom: 1.5 })
+        Button(){
+          Row() {
+            SymbolGlyph($r('sys.symbol.plus_circle_fill'))
+              .width(16)
+              .height(16)
+              .margin({ top: 4, bottom: 4, right: 8 })
+              .fontColor([$r('sys.color.icon_on_primary')])
+            Text('添加计划')
+              .fontSize($r('sys.float.Body_L'))
+              .width(64)
+              .height(21)
+              .fontWeight(FontWeight.Regular)
+              .fontColor($r('sys.color.font_on_primary'))
+              .margin({ top: 1.5, bottom: 1.5 })
+          }
+          .justifyContent(FlexAlign.Center)
         }
+        .onClick(() => RouterUtils.pushPathByName(RouterMap.COURSE_PAGE_PLAN))
+        .backgroundColor($r('app.color.app_theme'))
+        .padding({ top: 8, left: 24, right: 24, bottom: 8 })
         .width(this.buttonWidth)
         .height(40)
-        .onClick(() => RouterUtils.pushPathByName(RouterMap.COURSE_PAGE_PLAN))
-        .padding({ top: 8, left: 24, right: 24, bottom: 8 })
         .borderRadius(24)
-        .backgroundColor($r('app.color.app_theme'))
-        .justifyContent(FlexAlign.Center)
       }
     }
     .width('100%')
     .padding(12)
     .borderRadius(16)
-    .backgroundColor(Color.White)
+    .backgroundColor($r('sys.color.font_on_primary'))
   }
 
   @Builder
   noCoursebuild() {
     Column() {
-      Image($r('app.media.noplan'))
-        .width(120)
-        .height(120)
+      if (this.isPassedDay(this.dateList[this.dateSelectIndex])) {
+        Image($r('app.media.plandateout'))
+          .width(120)
+          .height(120)
 
-      Text('暂无计划，赶快去添加吧~')
-        .fontSize($r('sys.float.Body_M'))
-        .fontWeight(FontWeight.Regular)
-        .fontColor('rgba(0, 0, 0, 0.6)')
-        .margin({ top: 8, bottom: 8 })
+        Text('当前日期已过期, 不可添加')
+          .fontSize($r('sys.float.Body_M'))
+          .fontWeight(FontWeight.Regular)
+          .fontColor('rgba(0, 0, 0, 0.6)')
+          .margin({ top: 16, bottom: 8 })
 
-      if (this.dateList[this.dateSelectIndex].getDate() < new Date().getDate() &&
-        this.dateList[this.dateSelectIndex].getMonth() === new Date().getMonth()) {
-        Row() {
-          Image($r('app.media.addplan'))
-            .width(16)
-            .height(16)
-            .margin({ top: 4, bottom: 4, right: 2 })
-          Text('添加计划')
-            .width(64)
-            .height(21)
-            .fontColor('rgba(0, 0, 0, 0.4)')
-            .fontSize($r('sys.float.Body_L'))
-            .fontWeight(FontWeight.Regular)
-            .margin({ top: 1.5, bottom: 1.5 })
-        }
-        .width(this.buttonWidth)
-        .height(40)
-        .borderRadius(24)
-        .justifyContent(FlexAlign.Center)
-        .backgroundColor($r('app.color.app_theme'))
-        .padding({ top: 8, left: 24, right: 24, bottom: 8 })
       } else {
-        Row() {
-          Image($r('app.media.addplan'))
-            .width(16)
-            .height(16)
-            .margin({ top: 4, bottom: 4, right: 2 })
-          Text('添加计划')
-            .fontSize($r('sys.float.Body_L'))
-            .width(64)
-            .height(21)
-            .fontWeight(FontWeight.Regular)
-            .fontColor(Color.White)
-            .margin({ top: 1.5, bottom: 1.5 })
+        Image($r('app.media.noplan'))
+          .width(120)
+          .height(120)
+
+        Text('暂无计划，赶快去添加吧~')
+          .fontSize($r('sys.float.Body_M'))
+          .fontWeight(FontWeight.Regular)
+          .fontColor('rgba(0, 0, 0, 0.6)')
+          .margin({ top: 8, bottom: 8 })
+
+        Button(){
+          Row() {
+            SymbolGlyph($r('sys.symbol.plus_circle_fill'))
+              .width(16)
+              .height(16)
+              .margin({ top: 4, bottom: 4, right: 8 })
+              .fontColor([$r('sys.color.icon_on_primary')])
+            Text('添加计划')
+              .fontSize($r('sys.float.Body_L'))
+              .width(64)
+              .height(21)
+              .fontWeight(FontWeight.Regular)
+              .fontColor($r('sys.color.font_on_primary'))
+              .margin({ top: 1.5, bottom: 1.5 })
+          }
+          .justifyContent(FlexAlign.Center)
         }
         .onClick(() => RouterUtils.pushPathByName(RouterMap.COURSE_PAGE_PLAN))
-        .justifyContent(FlexAlign.Center)
         .backgroundColor($r('app.color.app_theme'))
         .padding({ top: 8, left: 24, right: 24, bottom: 8 })
         .width(this.buttonWidth)
@@ -401,7 +428,7 @@ export struct PlanPage {
         .borderRadius(24)
       }
     }
-    .backgroundColor(Color.White)
+    .backgroundColor($r('sys.color.font_on_primary'))
     .borderRadius(16)
     .padding(12)
     .width('100%')
@@ -430,10 +457,12 @@ export struct PlanPage {
           Row() {
             Text(String(this.loss))
               .fontSize(18)
+              .fontWeight(FontWeight.Bold)
+              .fontColor('rgba(0,0,0,0.9)')
             Text('（kg）')
               .fontSize($r('sys.float.Body_S'))
               .fontWeight(FontWeight.Regular)
-              .fontColor('#999999')
+              .fontColor('rgba(0,0,0,0.6)')
           }
           .height(24)
           .margin({ bottom: 8 })
@@ -441,7 +470,7 @@ export struct PlanPage {
           Text('预计减重')
             .fontSize($r('sys.float.Body_S'))
             .fontWeight(FontWeight.Regular)
-            .fontColor('#999999')
+            .fontColor('rgba(0,0,0,0.6)')
         }
         .justifyContent(FlexAlign.Center)
         .layoutWeight(1)
@@ -450,11 +479,13 @@ export struct PlanPage {
         Column() {
           Row() {
             Text(this.target > 0 ? String(this.target) : '---')
+              .fontWeight(FontWeight.Bold)
+              .fontColor('rgba(0,0,0,0.9)')
               .fontSize(18)
             Text('（kg）')
               .fontSize($r('sys.float.Body_S'))
               .fontWeight(FontWeight.Regular)
-              .fontColor('#999999')
+              .fontColor('rgba(0,0,0,0.6)')
           }
           .height(24)
           .margin({ bottom: 8 })
@@ -462,7 +493,7 @@ export struct PlanPage {
           Text('目标体重')
             .fontSize($r('sys.float.Body_S'))
             .fontWeight(FontWeight.Regular)
-            .fontColor('#999999')
+            .fontColor('rgba(0,0,0,0.6)')
         }
         .justifyContent(FlexAlign.Center)
         .layoutWeight(1)
@@ -471,6 +502,8 @@ export struct PlanPage {
         Column() {
           Row() {
             Text(String(this.days))
+              .fontWeight(FontWeight.Bold)
+              .fontColor('rgba(0,0,0,0.9)')
               .fontSize(18)
           }
           .height(24)
@@ -479,7 +512,7 @@ export struct PlanPage {
           Text('训练天数')
             .fontSize($r('sys.float.Body_S'))
             .fontWeight(FontWeight.Regular)
-            .fontColor('#999999')
+            .fontColor('rgba(0,0,0,0.6)')
         }
         .justifyContent(FlexAlign.Center)
         .layoutWeight(1)
@@ -488,11 +521,13 @@ export struct PlanPage {
         Column() {
           Row() {
             Text(String(this.energy))
+              .fontWeight(FontWeight.Bold)
+              .fontColor('rgba(0,0,0,0.9)')
               .fontSize(18)
             Text('（kcal）')
               .fontSize($r('sys.float.Body_S'))
               .fontWeight(FontWeight.Regular)
-              .fontColor('#999999')
+              .fontColor('rgba(0,0,0,0.6)')
           }
           .height(24)
           .margin({ bottom: 8 })
@@ -500,7 +535,7 @@ export struct PlanPage {
           Text('消耗热量')
             .fontSize($r('sys.float.Body_S'))
             .fontWeight(FontWeight.Regular)
-            .fontColor('#999999')
+            .fontColor('rgba(0,0,0,0.6)')
         }
         .justifyContent(FlexAlign.Center)
         .layoutWeight(1)
@@ -538,7 +573,7 @@ export struct PlanPage {
     .padding({ top: 24, bottom: 8 })
 
     Column() {
-      HotCourse()
+      HotCourse({ isShowTop: true })
     }
     .margin({ bottom: 20 })
   }

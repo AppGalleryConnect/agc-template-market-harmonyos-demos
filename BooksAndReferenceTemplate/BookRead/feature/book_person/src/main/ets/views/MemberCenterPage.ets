@@ -10,7 +10,7 @@ import { iap } from '@kit.IAPKit';
 export struct MemberCenterPage {
   vm: MemberCenterVM = new MemberCenterVM();
   private promptAction = this.getUIContext().getPromptAction();
-
+  @Local lastPurchaseProductExpireTime: string = '';
   aboutToAppear(): void {
     this.vm.getMemberPackages();
   }
@@ -35,14 +35,15 @@ export struct MemberCenterPage {
     }
   };
   ownedMemberEvent = async (list: MemberList): Promise<void> => {
-    if (list.renewList.length || list.nonRenewList.length) {
+    if (list.renewList?.length || list.nonRenewList?.length || list.nonConsumeList?.length) {
       this.getUIContext().getPromptAction().showToast({ message: `您已拥有会员` });
     }
   };
-  queryExpireTime = (productId: string, time?: number): Promise<void> => {
+  queryExpireTime = (productId: string, time?: number): Promise<string> => {
     // 请求开发者服务器获取非周期订阅商品到期时间（涉及商品id、购买次数）
-    return new Promise(() => {
-      this.vm.lastPurchaseProductExpireTime = 'xxxx-xx-xx';
+    return new Promise((resolve, reject) => {
+      this.lastPurchaseProductExpireTime = 'xxxx-xx-xx';
+      resolve(this.lastPurchaseProductExpireTime)
     });
   };
 
@@ -62,10 +63,11 @@ export struct MemberCenterPage {
         MemberShipPage({
           routerModule: TCRouter.getStack(),
           themeColor: '#E39331',
+          // todo: 请先在resources目录下的base/element/color.json和dark/element/color.json文件中定义深浅模式下的不同渐变色值
           linearColors: [['#FFFFFF', 0.0], ['#F8E6CE', 0.5], ['#E39331', 1.0]],
-          btnFontColor: '#fff',
+          btnFontColor: $r('sys.color.font_on_primary'),
           isSheet: false,
-          lastPurchaseProductExpireTime: this.vm.lastPurchaseProductExpireTime,
+          lastPurchaseProductExpireTime: this.lastPurchaseProductExpireTime,
           productsInfo: PRODUCTS_INFO,
           privacyContent: PRIVACY_CONTENT,
           subscribeCallBack: this.subscribeEvent,

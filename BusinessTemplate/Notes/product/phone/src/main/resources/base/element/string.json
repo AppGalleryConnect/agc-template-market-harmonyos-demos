@@ -10,7 +10,7 @@
     },
     {
       "name": "EntryAbility_label",
-      "value": "Content Publisher"
+      "value": "笔记"
     },
     {
       "name": "avatar",
@@ -130,7 +130,7 @@
     },
     {
       "name": "agcit_huawei_notes",
-      "value": "1.0.4"
+      "value": "1.0.5"
     },
     {
       "name": "noteCardAbility_desc",
@@ -147,6 +147,10 @@
     {
       "name": "notecard_display_name",
       "value": "notecard"
+    },
+    {
+      "name": "mic_permission_reason",
+      "value": "用于录音笔记功能"
     }
   ]
 }

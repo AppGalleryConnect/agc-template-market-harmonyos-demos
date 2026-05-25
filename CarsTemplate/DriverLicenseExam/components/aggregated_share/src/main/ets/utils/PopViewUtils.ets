@@ -10,8 +10,13 @@ interface PopViewModel {
   popType: PopViewShowType;
 }
 
-async function getUIContext() {
-  return (await (getContext() as common.UIAbilityContext).windowStage.getMainWindow()).getUIContext();
+async function getUIContext(): Promise<UIContext | undefined> {
+  try {
+    const mainWindow = await (getContext() as common.UIAbilityContext).windowStage.getMainWindow();
+    return mainWindow.getUIContext();
+  } catch (_e) {
+    return undefined;
+  }
 }
 
 /**
@@ -19,7 +24,7 @@ async function getUIContext() {
  */
 export class PopViewUtils {
   private static popShare: PopViewUtils;
-  private static uiContext: UIContext;
+  private static uiContext: UIContext | undefined;
   private sheetList: PopViewModel[] = [];
 
   private static shareInstance(): PopViewUtils {

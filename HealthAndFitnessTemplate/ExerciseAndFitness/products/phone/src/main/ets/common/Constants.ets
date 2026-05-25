@@ -3,7 +3,8 @@ import { RouterMap } from 'lib_common';
 export interface TabBarItem {
   id: TabBarType;
   title: ResourceStr;
-  activeIcon: ResourceStr;
+  activeIcon: Resource;
+  defaultIcon: Resource;
 }
 
 export enum TabBarType {
@@ -17,22 +18,26 @@ export const TABS_INFO: TabBarItem[] = [
   {
     id: TabBarType.HOME,
     title: '首页',
-    activeIcon: $r('app.media.ic_tab_home'),
+    activeIcon: $r('sys.symbol.house_fill'),
+    defaultIcon: $r('sys.symbol.house'),
   },
   {
     id: TabBarType.COURSE,
     title: '课程',
-    activeIcon: $r('app.media.ic_tab_course'),
+    activeIcon: $r('sys.symbol.resolution_video_fill'),
+    defaultIcon: $r('sys.symbol.resolution_video'),
   },
   {
     id: TabBarType.PLAN,
     title: '计划',
-    activeIcon: $r('app.media.ic_tab_plan'),
+    activeIcon: $r('sys.symbol.doc_text_badge_checkmark_fill'),
+    defaultIcon: $r('sys.symbol.doc_text_badge_checkmark'),
   },
   {
     id: TabBarType.MINE,
     title: '我的',
-    activeIcon: $r('app.media.ic_tab_mine'),
+    activeIcon: $r('sys.symbol.person_fill'),
+    defaultIcon: $r('sys.symbol.person'),
   },
 ]
 
@@ -44,7 +49,8 @@ export const REQUIRE_LOGIN_PAGE_LIST: RouterMap[] = [
   RouterMap.FEEDBACK_PAGE,
   RouterMap.MINE_HISTORY_PAGE,
   RouterMap.VIP_PAGE,
-  RouterMap.RECORD_PAGE
+  RouterMap.RECORD_PAGE,
+  RouterMap.COURSE_PAGE_PLAN
 ];
 
 export const agreePrivacyKey: string = 'isAgreePrivacy';

@@ -270,7 +270,8 @@ export class ReviewDataUtil {
         content: '这本书的内容很丰富，涵盖了很多有趣的知识点。作者的写作风格很独特，读起来很有意思。整体来说是一本不错的书籍，值得花时间阅读。',
         rating: 4,
         createTime: '2024-12-28',
-        isVip: false,
+        isVip: true,
+        vipLevel: 'LV3',
         isExpanded: false,
         bookInfo: {
           id: 'book3',
@@ -306,7 +307,8 @@ export class ReviewDataUtil {
         content: '剧情设置很新颖，作者的想象力很丰富。虽然有些地方感觉节奏稍快，但总体来说是一本不错的作品。期待作者的下一部作品能够更加完善。文字功底扎实，故事结构完整。',
         rating: 4,
         createTime: '2024-01-14',
-        isVip: false,
+        isVip: true,
+        vipLevel: 'LV1',
         isExpanded: false,
         bookInfo: {
           id: 'book2',
@@ -411,7 +413,8 @@ export class ReviewDataUtil {
         content: '小羊肖恩我超级喜欢，有一定的可读性，推荐大家多看看，反复品味。',
         rating: 3,
         createTime: '2024-01-08',
-        isVip: false,
+        isVip: true,
+        vipLevel: 'LV4',
         isExpanded: false,
         bookInfo: {
           id: 'book2',

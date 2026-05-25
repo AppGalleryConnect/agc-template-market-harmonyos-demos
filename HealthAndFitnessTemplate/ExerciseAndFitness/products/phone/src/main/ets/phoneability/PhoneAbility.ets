@@ -52,17 +52,21 @@ export default class PhoneAbility extends UIAbility {
 
   handleWindowStageCreateOrRestore(windowStage: window.WindowStage) {
     WindowUtils.setWinConfig(windowStage);
-    windowStage.loadContent('pages/Index', (err) => {
-      if (err.code) {
-        Logger.error(TAG, 'Failed to load the content. Cause: ' + JSON.stringify(err));
-        return;
-      }
-      Logger.info(TAG, 'Succeeded in loading the content.');
-      AppUtils.setAppTheme();
-      AppUtils.setColorMode(this.context);
-      BundleUtils.getBundleInfo(this.context);
-      LoneTakeAnimationsTransition.init(windowStage);
-    });
+    try {
+      windowStage.loadContent('pages/Index', (err) => {
+        if (err.code) {
+          Logger.error(TAG, 'Failed to load the content. Cause: ' + JSON.stringify(err));
+          return;
+        }
+        Logger.info(TAG, 'Succeeded in loading the content.');
+        AppUtils.setAppTheme();
+        AppUtils.setColorMode(this.context);
+        BundleUtils.getBundleInfo(this.context);
+        LoneTakeAnimationsTransition.init(windowStage);
+      });
+    } catch (e) {
+      console.error(`Failed to loadContent. error: ${JSON.stringify(e)}`)
+    }
   }
 
   setNeedLoadContent(value: boolean) {

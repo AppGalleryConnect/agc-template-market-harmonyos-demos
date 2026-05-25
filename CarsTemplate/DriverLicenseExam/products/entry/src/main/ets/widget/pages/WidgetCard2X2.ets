@@ -45,21 +45,19 @@ struct WidgetCard {
          .height(20)
          .margin({right:8})
          .borderRadius(4)
-       Text('驾考')
-         .fontSize('12vp')
-         .fontColor('#000000')
-         .fontWeight(400)
-     }
+Text('驾考')
+          .fontSize('12vp')
+          .fontColor($r('app.color.item_title_font'))
+          .fontWeight(400)     }
      .width(this.fullWidthPercent)
       .justifyContent(FlexAlign.Start)
      Row() {
-       Text(`当前进度-${this.currentProgress}`)
-         .fontFamily('HarmonyHeiTi')
-         .fontColor('#000000')
-         .fontSize('14vp')
-         .fontWeight(500)
-         .lineHeight('19vp')
-     }
+Text(`当前进度-${this.currentProgress}`)
+          .fontFamily('HarmonyHeiTi')
+          .fontColor($r('app.color.item_title_font'))
+          .fontSize('14vp')
+          .fontWeight(500)
+          .lineHeight('19vp')     }
      .width(this.fullWidthPercent)
      Row() {
        Column() {
@@ -67,13 +65,12 @@ struct WidgetCard {
            .width(32)
            .height(32)
            .margin({bottom:4})
-         Text('模拟考试')
-           .fontFamily('HarmonyHeiTi')
-           .fontColor('#000000')
-           .fontSize('12vp')
-           .fontWeight(500)
-           .lineHeight('16vp')
-       }
+Text('模拟考试')
+            .fontFamily('HarmonyHeiTi')
+            .fontColor($r('app.color.item_title_font'))
+            .fontSize('12vp')
+            .fontWeight(500)
+            .lineHeight('16vp')       }
        .width('50%')
        .alignItems(HorizontalAlign.Center)
        .onClick(() => {
@@ -90,13 +87,12 @@ struct WidgetCard {
            .width(32)
            .height(32)
            .margin({bottom:4})
-         Text('顺序练习')
-           .fontFamily('HarmonyHeiTi')
-           .fontColor('#000000')
-           .fontSize('12vp')
-           .fontWeight(500)
-           .lineHeight('16vp')
-       }
+Text('顺序练习')
+            .fontFamily('HarmonyHeiTi')
+            .fontColor($r('app.color.item_title_font'))
+            .fontSize('12vp')
+            .fontWeight(500)
+            .lineHeight('16vp')       }
        .width('50%')
        .alignItems(HorizontalAlign.Center)
        .onClick(() => {

@@ -1,4 +1,4 @@
-# 会员组件快速入门
+# 通用会员组件快速入门
 
 ## 目录
 
@@ -49,9 +49,11 @@
 - 网络权限：ohos.permission.INTERNET
 
 ### 限制
+
 本组件中的会员开通功能不支持模拟器
 
 ### 注意事项
+
 - 由于真实支付需依赖应用及其关联的会员商品上架，故建议在接入华为应用内支付调测过程中，您可以使用[沙盒测试](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/iap-sandbox)对订单进行虚拟支付。
 - 由于在沙盒场景下，已发货状态的非消耗型商品订单信息将不返回，开发者须将应用上架后在真实支付环境下进行调测开发。
 - 如需对接真实支付场景，您需将应用及其关联的商品上架后方可测试。
@@ -110,7 +112,7 @@
 
 4. （可选）用户购买商品后，IAP服务器会在订单（消耗型/非消耗型商品）和订阅场景的某些关键事件发生时发送通知至开发者配置的订单/订阅通知接收地址，您可以根据关键事件的通知进行服务端的开发，详情请参考[激活服务和配置事件通知](https://developer.huawei.com/consumer/cn/doc/app/parameters-0000001931995692)。
 
-5. 配置商品信息，详情请参考[配置商品信息](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/iap-config-product)。
+5. 配置会员商品信息，详情请参考[配置商品信息](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/iap-config-product)。
 
 6. 调用组件，详细参数配置说明参见[API参考](#API参考)。
 
@@ -153,19 +155,21 @@ MemberShipPage(options: ProductsInfoOptions)
 
 ### ProductsInfoOptions对象说明
 
-| 参数名             | 类型                                                                                                                                                                         | 是否必填 | 说明                                                    |
-|:----------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----|:------------------------------------------------------|
-| routerModule         | [NavPathStack](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-navigation#navpathstack10)                                            | 否    | 页面登录时需要传入当前组件所在路由栈 ，半模态登录时不需要传入参数                     |
-| themeColor      | [ResourceColor](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-types#resourcecolor)                                                                  | 否    | 会员页面主题色                                               |
-| linearColors      | Array<[ResourceColor,number]>                                                                                                                                              | 否    | 会员页面背景渐变色数组                                           |
-| btnFontColor      | [ResourceColor](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-types#resourcecolor)                                                                                                                                            | 否    | 会员组件按钮字体颜色                                            |
-| isSheet         | boolean                                                                                                                                                                    | 是    | 会员组件使用状态，设置true为以半模态使用会员组件，设置false为以页面使用会员组件，默认为false |
-| productsInfo            | [ProductInfo](#ProductInfo对象说明)[]                                                                                                                                          | 是    | 购买的会员商品的详细信息。                                         |
-| privacyContent      | string                                                                                                                                                                     | 是    | 会员服务协议内容                                              |
-| lastPurchaseProductExpireTime    | string                                                                                                                                                                     | 是    | 购买非周期订阅商品的到期时间，一般由开发者服务器返回。                           |
-| subscribeCallBack       | (params: [MemberParams](#MemberParams对象说明)) => Promise<void>                                                                                                               | 是    | 购买会员商品结果回调函数                                          |
-| queryExpireTime   | (productId: string, time?: number) => Promise<void>                                                                                                                        | 是    | 购买非周期订阅商品后从开发者服务器查询商品到期时间                             |
-| ownedMemberCallBack   | (list: [MemberList](#MemberList对象说明)) => Promise<void>                                                                                                                     | 是    | 查询用户开通的会员种类列表，沙盒场景下，已发货状态的非消耗型商品订单信息不返回               |
+| 参数名             | 类型                                                                                                                              | 是否必填 | 说明                                                    |
+|:----------------|:--------------------------------------------------------------------------------------------------------------------------------|:-----|:------------------------------------------------------|
+| routerModule         | [NavPathStack](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-basic-components-navigation#navpathstack10) | 否    | 页面登录时需要传入当前组件所在路由栈 ，半模态登录时不需要传入参数                     |
+| themeColor      | [ResourceColor](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-types#resourcecolor)                       | 否    | 会员页面主题色                                               |
+| linearColors      | Array<[ResourceColor,number]>                                                                                                   | 否    | 会员页面背景渐变色数组                                           |
+| btnFontColor      | [ResourceColor](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-types#resourcecolor)                       | 否    | 会员组件按钮字体颜色                                            |
+| isSheet         | boolean                                                                                                                         | 是    | 会员组件使用状态，设置true为以半模态使用会员组件，设置false为以页面使用会员组件，默认为false |
+| productsInfo            | [ProductInfo](#ProductInfo对象说明)[]                                                                                               | 是    | 购买的会员商品的详细信息。                                         |
+| privacyContent      | string                                                                                                                          | 是    | 会员服务协议内容                                              |
+| lastPurchaseProductExpireTime    | string                                                                                                                          | 是    | 购买非周期订阅商品的到期时间，一般由开发者服务器返回。                           |
+| subscribeCallBack       | (params: [MemberParams](#MemberParams对象说明)) => Promise<void>                                                                    | 是    | 购买会员商品结果回调函数                                          |
+| queryExpireTime   | (productId: string, time?: number) => Promise<string>                                                                           | 是    | 购买非周期订阅商品后从开发者服务器查询商品到期时间                             |
+| ownedMemberCallBack   | (list: [MemberList](#MemberList对象说明)) => Promise<void>                                                                          | 是    | 查询用户开通的会员种类列表，沙盒场景下，已发货状态的非消耗型商品订单信息不返回               |
+| loginApiController   | LoginApiController                                                                          | 否    | 拉起会员弹窗时查询用户登录状态的回调管理类                                 |
+| isLinkLoginStatus   | boolean                                                                          | 否    | 打开会员弹窗时是否需要查询用户登录状态                                   |
 
 ### ProductInfo对象说明
 
@@ -185,8 +189,10 @@ MemberShipPage(options: ProductsInfoOptions)
 | type         | [iap.ProductType](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/iap-iap#section59035422210) | 是    | 商品类型          |
 | status       | [FinishStatus](#FinishStatus枚举说明)                                                                               | 是    | 商品开通状态        |
 | purchaseTime | number                                                                                                          | 是    | 商品购买时间戳，单位：ms |
-| errCode      | number                                                                                                          | 否    | 商品购买错误码       |
+| expireTime | string                                                                                                          | 是    | 商品购买时间戳，单位：ms |
+| errCode      | number                                                                                                          | 否    | 商品到期时间        |
 | errMsg       | string                                                                                                          | 否    | 商品购买错误信息      |
+| name         | string                                                                                                          | 否    | 商品名称          |
 
 ### MemberShipPrivilege对象说明
 
@@ -210,6 +216,18 @@ MemberShipPage(options: ProductsInfoOptions)
 |:-------|:----|:-----|
 | FINISHED | '1' | 开通完成 |
 | UNFINISHED | '2' | 开通失败 |
+
+### LoginApiController对象说明
+| 名称          | 类型                                                                                             | 是否必填     | 说明         |
+|:------------|:-----------------------------------------------------------------------------------------------|:---------|:-----------|
+| queryLoginUserStatus | (uiContext: UIContext) => Promise<[UserStatus](#UserStatus对象说明)> = () => new Promise(() => {}) | 是                                                                         | 查询用户登录状态 |
+| handleLogin     | (uiContext: UIContext, callback: (isLoginSuccess: boolean) => void) => void                    | 否        | 处理华为账号登录逻辑 |
+
+### UserStatus对象说明
+| 名称           | 类型                | 是否必填 | 说明                 |
+|:-------------|:------------------|:-----|:-------------------|
+| isLogin           | boolean           | 是    | 是否已登录              |
+| memberStatus         | [MemberParams](#MemberParams对象说明) | 是    | 当前用户已购买/订阅会员商品详情信息 |
 
 ## 示例代码
 
@@ -235,10 +253,11 @@ export struct MemberShipSample1 {
       this.getUIContext().getPromptAction().showToast({ message: `您已拥有会员` });
     }
   };
-  queryExpireTime = (productId: string, time?: number): Promise<void> => {
+  queryExpireTime = (productId: string, time?: number): Promise<string> => {
     // 请求开发者服务器获取非周期订阅商品到期时间（涉及商品id、购买次数）
-    return new Promise(() => {
+    return new Promise((resolve, reject) => {
       this.lastPurchaseProductExpireTime = 'xxxx-xx-xx';
+      resolve(this.lastPurchaseProductExpireTime)
     });
   };
 
@@ -257,7 +276,8 @@ export struct MemberShipSample1 {
       MemberShipPage({
         routerModule: this.navPathStack,
         themeColor: $r('sys.color.background_emphasize'),
-        linearColors: [['#E5EDF5', 0.0], ['#0A59F7', 1.0]],
+        // todo: 请先在resources目录下的base/element/color.json和dark/element/color.json文件中定义深浅模式下的不同渐变色值
+        linearColors: [[$r('app.color.linear_start'), 0.0], [$r('app.color.linear_end'), 1.0]],
         btnFontColor: $r('sys.color.font_on_primary'),
         isSheet: false,
         lastPurchaseProductExpireTime: this.lastPurchaseProductExpireTime,
@@ -492,15 +512,28 @@ import {
   ProductsInfoOptions,
   MemberStatusUtil,
   MemberList,
+  LoginApiController,
+  UserStatus,
 } from 'membership';
 
-@Entry
 @ComponentV2
 export struct MemberShipSample2 {
   @Local lastPurchaseProductExpireTime: string = '';
+
+  queryLoginUserStatus() {
+    // 查询登录状态逻辑
+    let userStatus = new UserStatus();
+    // todo: 登录状态查询逻辑
+    return userStatus;
+  }
+
+  handleLogin(uiContext: UIContext) {
+    // todo: 登录弹窗拉起逻辑
+  }
+
   subscribeEvent = async (params: MemberParams): Promise<void> => {
     this.getUIContext().getPromptAction().showToast({ message: '会员订阅成功' });
-    if (params.type === iap?.ProductType.NONRENEWABLE && params.status === FinishStatus.FINISHED) {
+    if (params.type === iap.ProductType.NONRENEWABLE && params.status === FinishStatus.FINISHED) {
       this.queryExpireTime(params.productId, params.purchaseTime);
     }
   };
@@ -509,16 +542,18 @@ export struct MemberShipSample2 {
       this.getUIContext().getPromptAction().showToast({ message: `您已拥有会员` });
     }
   };
-  queryExpireTime = (productId: string, time?: number): Promise<void> => {
+  queryExpireTime = (productId: string, time?: number): Promise<string> => {
     // 请求开发者服务器获取非周期订阅商品到期时间（涉及商品id、购买次数）
-    return new Promise(() => {
-      this.lastPurchaseProductExpireTime = 'xxxx-xx-xx';
+    return new Promise((resolve, reject) => {
+      this.productsInfo.lastPurchaseProductExpireTime = '1016-xx-xx';
+      resolve(this.productsInfo.lastPurchaseProductExpireTime);
     });
   };
   productsInfo: ProductsInfoOptions = {
     isSheet: true,
     themeColor: $r('sys.color.background_emphasize'),
-    linearColors: [['#FFFFFF', 0.0], ['#E5EDF5', 0.5], ['#0A59F7', 1.0]],
+    // todo: 请先在resources目录下的base/element/color.json和dark/element/color.json文件中定义深浅模式下的不同渐变色值
+    linearColors: [[$r('app.color.linear_start'), 0.0], [$r('app.color.linear_end'), 1.0]],
     btnFontColor: $r('sys.color.font_on_primary'),
     // todo: 替换为您配置的商品ID及对应的权益
     productsInfo: [{
@@ -670,6 +705,8 @@ export struct MemberShipSample2 {
     subscribeCallBack: this.subscribeEvent,
     queryExpireTime: this.queryExpireTime,
     ownedMemberCallBack: this.ownedMemberEvent,
+    loginApiController: new LoginApiController(this.queryLoginUserStatus, this.handleLogin),
+    isLinkLoginStatus: false,
   };
 
   queryMemberStatus() {

@@ -1,4 +1,3 @@
-import { promptAction } from '@kit.ArkUI';
 import { BookingInfo,
   BookingRestQuotaUpdate,
   BookState,
@@ -10,12 +9,21 @@ import { BookingInfo,
   MockService,
   OrderState,
   OrderType,
-  UserCard } from 'external_interactions';
+  UserCard,
+  UserCourse,
+  BreakpointNameEnum,
+  BreakpointModel,
+  GridSettingInfo,
+  ScreenPropStorage,
+  AccountUpdate,
+  CardManager,
+  Logger} from 'external_interactions';
 import { TitleBar } from 'module_recharge/src/main/ets/components/TitleBar';
-import { ScreenPropStorage , AccountUpdate} from 'external_interactions'
-import { AppStorageV2 } from '@kit.ArkUI';
+import { AppStorageV2, UIContext, KeyboardAvoidMode } from '@kit.ArkUI';
 import  EventData  from '@ohos.events.emitter';
 import emitter from '@ohos.events.emitter';
+
+const TAG: string = 'AddBooking';
 
 @ComponentV2
 export struct AddBooking {
@@ -44,14 +52,43 @@ export struct AddBooking {
   @Local bookingRestQuotaUpdate: boolean = this.bookingRestQuotaUpdateStorage.bookingRestQuotaUpdate
   @Local accountUpdateStorage : AccountUpdate = AppStorageV2.connect(AccountUpdate, 'AccountUpdate', () =>new AccountUpdate())!
   @Local accountUpdate: boolean = this.accountUpdateStorage.accountUpdate
+  @Local breakPointModel: BreakpointModel = AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
+  private uiContext: UIContext = this.getUIContext();
+  private cacheKeyboardAvoidMode: KeyboardAvoidMode = KeyboardAvoidMode.OFFSET;
+
+  public aboutToAppear(): void {
+    this.cacheKeyboardAvoidMode = this.uiContext.getKeyboardAvoidMode();
+  }
+
+  isMDorLGorXL() {
+    return [BreakpointNameEnum.MD, BreakpointNameEnum.LG, BreakpointNameEnum.XL].includes(
+      this.breakPointModel.currentBreakpoint)
+  }
+
+  isLGorXL() {
+    return [BreakpointNameEnum.LG, BreakpointNameEnum.XL].includes((this.breakPointModel.currentBreakpoint))
+  }
+
+  @Computed
+  get gridSetting() {
+    const gridSettingInfo: GridSettingInfo  = {
+      template: '1fr',
+      colGap: 12,
+      rowGap: 16,
+    }
+    if (this.isLGorXL()) {
+      gridSettingInfo.template = '1fr 1fr'
+    }
+    return gridSettingInfo
+  }
 
   @Builder
   courseInfoBuilder() {
     Column() {
       Image($r(this.courseDetail?.advImage))
-        .width(312)
-        .height(135)
-        .margin({ bottom: 10 })
+        .width('100%')
+        .height(this.isMDorLGorXL() ? 248 : 132)
+        .margin({ top: this.isLGorXL() ? 110 : 0, bottom: this.isLGorXL() ? 110 : 12 })
         .borderRadius(12)
       Column() {
         Text(this.courseDetail?.courseName)
@@ -61,12 +98,10 @@ export struct AddBooking {
       .justifyContent(FlexAlign.Start)
       .alignItems(HorizontalAlign.Start)
       .width('100%')
-      .margin({ left: 16 })
     }
+    .justifyContent(FlexAlign.End)
     .padding({ left: 12, right: 12, top: 16, bottom: 16 })
-    .margin({ left: 12, right: 12 })
     .width('100%')
-    .height(195)
     .borderRadius(20)
     .backgroundColor(Color.White)
   }
@@ -366,6 +401,7 @@ export struct AddBooking {
       .width('100%')
       .height(74)
     }
+    .clip(true)
     .borderRadius(16)
     .backgroundColor($r('sys.color.comp_background_list_card'))
     .width('100%')
@@ -376,32 +412,42 @@ export struct AddBooking {
     NavDestination() {
       TitleBar({ title: '新增预约', onBackClick:()=>{this.pathStack.pop()} })
         .margin({ left: 16, right: 16 })
-      Stack() {
-        Scroll() {
-          Column({ space: 16 }) {
-            // 课程
-            this.courseInfoBuilder()
 
-            // 预约时间
-            this.bookingTimeBuilder()
+      Scroll() {
+        Column({ space: 16 }) {
+          Grid() {
+            GridItem() {
+              // 课程
+              this.courseInfoBuilder()
+            }
+            GridItem() {
+              Column({ space: 12 }) {
+                // 预约时间
+                this.bookingTimeBuilder()
 
-            // 预约人信息
-            this.bookingPersonInfo()
+                // 预约人信息
+                this.bookingPersonInfo()
 
-            // 卡项信息
-            this.cardListInfo()
+                // 卡项信息
+                this.cardListInfo()
 
-            // 备注
-            this.remarkBuilder()
+                // 备注
+                this.remarkBuilder()
+              }
+            }
           }
-          .width('100%')
+          .columnsTemplate(this.gridSetting.template)
+          .columnsGap(this.gridSetting.colGap)
+          .rowsGap(this.gridSetting.rowGap)
         }
-        .margin({ left: 16, right: 16 })
-        .scrollBar(BarState.Off)
+        .margin({ left: 16, right: 16, bottom: 16 })
+        .justifyContent(FlexAlign.Start)
       }
-      .margin({ bottom: 16 })
+      .width('100%')
       .layoutWeight(1)
-      .alignContent(Alignment.Top)
+      .scrollBar(BarState.Off)
+      .align(Alignment.Top)
+      .edgeEffect(EdgeEffect.Spring)
 
       // 下方咨询和跳转预约
       Row() {
@@ -451,19 +497,33 @@ export struct AddBooking {
               try {
                 emitter.emit(EmitterConstant.CONFIRM_DATA, data)
               } catch (e) {
-                console.error(`emitter emit failed. error: ${JSON.stringify(e)}`)
+                Logger.error(TAG, `emitter emit failed. error: ${JSON.stringify(e)}`)
               }
               if (this.selectedCard.id !== '') {
                 this.updateMockData(bookingInfo)
               } else {
-                AppStorage.setOrCreate<boolean>(this.courseDetail?.id, false)
-                MockService.createBookingRecord(bookingInfo.courseBookingInfo.id, BookState.TO_BE_USE,
-                  bookingInfo.phone, bookingInfo.name, bookingInfo.personNum, bookingInfo.remark,
+                // 未选择卡项，使用已购买的单次课程
+                let bookingRecord = MockService.createBookingRecord(bookingInfo.courseBookingInfo.id,
+                  BookState.TO_BE_USE, bookingInfo.phone, bookingInfo.name, bookingInfo.personNum, bookingInfo.remark,
                   bookingInfo.courseBookingInfo.date)
                 MockService.getCourseBookingById(bookingInfo.courseBookingInfo.id).restQuota -= bookingInfo.personNum;
+                let userCourseIndex = MockService.userCourseList.findIndex(
+                  (item: UserCourse) => item.courseId === this.courseDetail?.id && !item.courseState)
+                if (userCourseIndex !== -1) {
+                  MockService.userCourseList[userCourseIndex].courseState = true
+                  MockService.userCourseList[userCourseIndex].courseBookingId = bookingInfo.courseBookingInfo.id
+                  MockService.userCourseList[userCourseIndex].bookingRecordId = bookingRecord.id
+                  MockService.dataPreferences.putSync('userCourse', JSON.stringify(MockService.userCourseList));
+                }
+                // 查看是否还存在已购买未预约的单次课程
+                if (MockService.userCourseList.findIndex(
+                  (item: UserCourse) => item.courseId === this.courseDetail?.id && !item.courseState) === -1) {
+                  AppStorage.setOrCreate<boolean>(this.courseDetail?.id, false)
+                }
                 MockService.dataPreferences.putSync('courseBooking', JSON.stringify(MockService.courseBookingList))
                 MockService.dataPreferences.flush()
               }
+              CardManager.get().updateCard()
               this.pathStack.pushPath({ name: 'course/BookingDetail', param: bookingInfo })
             }
           })
@@ -475,6 +535,8 @@ export struct AddBooking {
       .padding({ bottom: 10 })
       .backgroundColor(Color.White)
     }
+    .onShown(() => this.uiContext.setKeyboardAvoidMode(KeyboardAvoidMode.RESIZE))
+    .onWillDisappear(() => this.uiContext.setKeyboardAvoidMode(this.cacheKeyboardAvoidMode))
     .hideTitleBar(true)
     .onReady((ctx: NavDestinationContext) => {
       this.pathStack = ctx.pathStack
@@ -532,6 +594,8 @@ export struct AddBooking {
       bookingInfo.courseBookingInfo.date, this.userCardList[this.selectedCardIndex].id)
     MockService.getCourseBookingById(bookingInfo.courseBookingInfo.id).restQuota -= bookingInfo.personNum;
     MockService.dataPreferences.putSync('courseBooking', JSON.stringify(MockService.courseBookingList))
+    MockService.lastUsedCardId = this.userCardList[this.selectedCardIndex].cardId
+    MockService.dataPreferences.putSync('lastUsedCardId', MockService.lastUsedCardId)
     MockService.dataPreferences.flush()
   }
 }

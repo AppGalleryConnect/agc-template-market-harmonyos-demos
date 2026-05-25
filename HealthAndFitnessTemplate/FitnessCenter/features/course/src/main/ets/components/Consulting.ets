@@ -1,5 +1,8 @@
 import { call } from '@kit.TelephonyKit';
 import { BusinessError } from '@kit.BasicServicesKit';
+import { Logger } from 'external_interactions';
+
+const TAG = '[Consulting]';
 
 @ComponentV2
 export struct Consulting {
@@ -34,13 +37,13 @@ export struct Consulting {
         try {
           call.makeCall(this.phone, (err: BusinessError) => {
             if (err) {
-              console.error(`makeCall fail, err->${JSON.stringify(err)}`);
+              Logger.error(TAG, `makeCall fail, err->${JSON.stringify(err)}`);
             } else {
-              console.log(`makeCall success`);
+              Logger.info(TAG, `makeCall success`);
             }
           });
         } catch (e) {
-          console.error(`call makeCall failed. error: ${JSON.stringify(e)}`)
+          Logger.error(TAG, `call makeCall failed. error: ${JSON.stringify(e)}`)
         }
       })
 

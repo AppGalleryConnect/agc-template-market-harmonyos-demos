@@ -75,7 +75,7 @@ class ActionSheetParams extends ActionSheetOption {
     this.height = option.height || SheetSize.FIT_CONTENT
     this.detents = option.detents
     this.backgroundColor = option.backgroundColor
-    this.blurStyle = option.blurStyle || BlurStyle.Thin
+    this.blurStyle = option.blurStyle || BlurStyle.NONE
     this.title = option.title
     this.showClose = option.showClose
     this.preferType = option.preferType || SheetType.BOTTOM
@@ -118,7 +118,7 @@ class ActionSheet {
     let sheetOption: SheetOptions = {
       height: params.height,
       preferType: params.preferType,
-      backgroundColor: params.backgroundColor ? params.backgroundColor : ($r('sys.color.background_primary')),
+      backgroundColor: params.backgroundColor ? params.backgroundColor : ($r('sys.color.ohos_dialog_text_alert_transparent')),
       showClose: params.showClose,
       blurStyle: params.blurStyle
     }
@@ -161,11 +161,16 @@ class ActionSheet {
   }
 
   private getUniKey(): string {
-    let key = Decimal.random().d[0].toString(36).substring(2, 9)
-    if (this.contentNodeMap.has(key)) {
-      return this.getUniKey()
+    try {
+      let key = Decimal.random().d[0].toString(36).substring(2, 9)
+      if (this.contentNodeMap.has(key)) {
+        return this.getUniKey()
+      }
+      return key
+    } catch (e) {
+      console.error('ActionSheet', `getUniKey failed: ${e}`);
+      return Date.now().toString(36);
     }
-    return key
   }
 
   private getLastKey(): string {

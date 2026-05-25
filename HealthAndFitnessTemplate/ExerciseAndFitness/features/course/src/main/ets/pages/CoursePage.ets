@@ -48,51 +48,49 @@ export struct CoursePage {
   @Builder
   CourseFilterDialogBuilder() {
     Column() {
-      Column() {
-        Scroll() {
-          Column() {
-            CourseFilterDialog({ filter: filter })
-
-            Row() {
-              Text('筛选课程')
-                .fontColor(Color.White)
-                .fontWeight(FontWeight.Medium)
-                .fontSize($r('sys.float.Body_L'))
-            }
-            .justifyContent(FlexAlign.Center)
-            .margin({ top: 10 })
-            .padding({ left: 16, right: 16, top: 9, bottom: 9 })
-            .width('100%')
-            .height(40)
-            .borderRadius(20)
-            .backgroundColor($r('app.color.app_theme'))
-            .onClick(() => {
-              if (filter.length === 0) {
-                AppStorage.setOrCreate<String[]>('FilterList', [])
-                this.isShowCourseFilterDialog = false;
-                this.isShowCourseFilterDialogOnTop = false;
-              } else {
-                this.isShowCourseFilterDialog = false;
-                this.isShowCourseFilterDialogOnTop = false;
-                AppStorage.setOrCreate<String[]>('FilterList', filter)
-                RouterUtils.pushPathByName(RouterMap.FILTER_PAGE)
-              }
-            })
-          }
-          .width('100%')
+      // 可滚动的内容区域
+      Scroll() {
+        Column() {
+          CourseFilterDialog({ filter: filter })
         }
-        .scrollBar(BarState.Off)
-        .edgeEffect(EdgeEffect.Spring)
+        .width('100%')
       }
-      .height('100%')
-      .padding({
-        left: 16,
-        right: 16,
-        bottom: 18
+      .scrollBar(BarState.Off)
+      .edgeEffect(EdgeEffect.Spring)
+      .layoutWeight(1) // 占据剩余空间，让底部按钮固定
+
+      // 固定在底部的按钮
+      Row() {
+        Text('筛选课程')
+          .fontColor(Color.White)
+          .fontWeight(FontWeight.Medium)
+          .fontSize($r('sys.float.Body_L'))
+      }
+      .justifyContent(FlexAlign.Center)
+      .margin({ top: 10 })
+      .padding({ left: 16, right: 16, top: 9, bottom: 9 })
+      .width('100%')
+      .height(40)
+      .borderRadius(20)
+      .backgroundColor($r('app.color.app_theme'))
+      .onClick(() => {
+        if (filter.length === 0) {
+          AppStorage.setOrCreate<String[]>('FilterList', [])
+          this.isShowCourseFilterDialog = false;
+          this.isShowCourseFilterDialogOnTop = false;
+        } else {
+          this.isShowCourseFilterDialog = false;
+          this.isShowCourseFilterDialogOnTop = false;
+          AppStorage.setOrCreate<String[]>('FilterList', filter)
+          RouterUtils.pushPathByName(RouterMap.FILTER_PAGE)
+        }
       })
     }
+    .height('100%')
     .padding({
-      bottom: 30
+      left: 16,
+      right: 16,
+      bottom: 18
     })
     .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])
   }
@@ -118,7 +116,7 @@ export struct CoursePage {
     .width('100%')
     .padding({ top: 24, bottom: 8 })
 
-    HotCourse()
+    HotCourse({ isShowTop: true })
   }
 
   @Builder
@@ -143,7 +141,7 @@ export struct CoursePage {
     .width('100%')
     .padding({ top: 24, bottom: 8 })
 
-    AdvancedCourse()
+    AdvancedCourse({ isShowTop: true })
   }
 
   @Builder
@@ -155,7 +153,7 @@ export struct CoursePage {
           .width(16)
         Text('搜索')
           .fontSize($r('sys.float.Body_L'))
-          .fontColor($r('sys.color.dialog_outer_border_color'))
+          .fontColor('rgba(0, 0, 0, 0.6)')
           .lineHeight(21)
       }
       .backgroundColor('#0d000000')
@@ -212,7 +210,7 @@ export struct CoursePage {
         Text('搜索')
           .lineHeight(21)
           .fontSize($r('sys.float.Body_L'))
-          .fontColor($r('sys.color.dialog_outer_border_color'))
+          .fontColor('rgba(0, 0, 0, 0.6)')
       }
       .margin({
         right: 8

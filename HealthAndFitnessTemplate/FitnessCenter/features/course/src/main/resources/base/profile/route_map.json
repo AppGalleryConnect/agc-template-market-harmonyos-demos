@@ -34,6 +34,11 @@
       "name": "course/ShowAllCourse",
       "pageSourceFile": "src/main/ets/generated/RouterBuilder.ets",
       "buildFunction": "ShowAllCourseBuilder"
+    },
+    {
+      "name": "course/UserCourses",
+      "pageSourceFile": "src/main/ets/generated/RouterBuilder.ets",
+      "buildFunction": "UserCoursesBuilder"
     }
   ]
 }

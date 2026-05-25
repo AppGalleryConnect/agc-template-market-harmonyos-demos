@@ -36,6 +36,7 @@ export interface CourseContent {
   difficulty: string;
   energy: string
   duration: string;
+  isVideos: boolean[];
 }
 
 export interface CommonContent {

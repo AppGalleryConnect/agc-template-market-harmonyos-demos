@@ -1,4 +1,4 @@
-import { BookApi, BookInfo, Constants, GroupBook, TCRouter } from 'common';
+import { BookApi, BookInfo, Constants, EpubUtils, GroupBook, TCRouter } from 'common';
 import { ShareBookCard } from './ShareBookCard';
 import { uniformTypeDescriptor as utd } from '@kit.ArkData';
 import { systemShare } from '@kit.ShareKit';
@@ -13,6 +13,7 @@ export struct ReaderTopCard {
   @Param @Require book: BookInfo
   @Local isAddSuccess: boolean = false;
   @Local isLogin: boolean = false;
+  @Local isDownload: boolean = false;
   @Consumer('nightMode') nightMode: boolean = AppStorage.get<boolean>('bookNightMode') ?? false;
   windowTopHeight: number = AppStorage.get('windowTopHeight') as number || 38.77;
 
@@ -45,10 +46,23 @@ export struct ReaderTopCard {
     this.isLogin = AppStorage.get<UserInfo>('userInfo') !== undefined;
     const rsp = await BookApi.getBooksShelfGroup('favBooks', Constants.API_GET_BOOK_FAVOURITE_PATH, '');
     let books: GroupBook[] = rsp.books;
+    let fIndex = books.findIndex(book => this.book.id === book.singleBook?.id);
+    if (fIndex === -1) {
+      this.isDownload = this.book.isDownload || false;
+    } else {
+      this.isDownload = books[fIndex].isDownload || false;
+    }
     books.forEach((book) => {
-      if (book.singleBook?.id === this.book.id && this.isLogin) {
-        this.isAddSuccess = true;
-        return;
+      if (book.groupBooks?.length! > 0) {
+        if (book.groupBooks?.some(item => item.id === this.book.id)) {
+          this.isAddSuccess = true;
+          return;
+        }
+      } else {
+        if (book.singleBook?.id === this.book.id && this.isLogin) {
+          this.isAddSuccess = true;
+          return;
+        }
       }
     });
   }
@@ -64,6 +78,7 @@ export struct ReaderTopCard {
       temp.groupName = this.book.groupName
       temp.bookName = this.book.name
       temp.singleBook = this.book
+      temp.isDownload = this.book.isDownload
       favBooks.push(temp);
       AppStorage.set('favBooks', favBooks);
       this.isAddSuccess = true;
@@ -105,6 +120,37 @@ export struct ReaderTopCard {
 
 
       Row({ space: 8 }) {
+        Image(this.isDownload ? $r('app.media.icon_down_gray') : $r('app.media.icon_down'))
+          .width(35)
+          .height(35)
+          .onClick(async () => {
+            if (!this.isDownload) {
+              this.isDownload = !this.isDownload;
+              const favRsp = await BookApi.getBooksShelfGroup('favBooks', Constants.API_GET_BOOK_FAVOURITE_PATH, '');
+              let favBooks: GroupBook[] = favRsp.books;
+              let fIndex = favBooks.findIndex(book => this.book.id === book.singleBook?.id);
+              if (fIndex !== -1) {
+                favBooks[fIndex].singleBook!.localPath =
+                  await EpubUtils.loadEpubFileFromNetwork(favBooks[fIndex].singleBook!,
+                    (this.getUIContext().getHostContext() as Context).filesDir);
+                favBooks[fIndex].isDownload = this.isDownload;
+                AppStorage.set('favBooks', favBooks);
+              } else {
+                this.book.localPath = await EpubUtils.loadEpubFileFromNetwork(this.book,
+                  (this.getUIContext().getHostContext() as Context).filesDir);
+                this.book.isDownload = this.isDownload
+
+                let downloadBooks: GroupBook[] = AppStorage.get('downloadBooks') || [];
+                let dbook: GroupBook = new GroupBook()
+                dbook.bookName = this.book.name;
+                dbook.singleBook = this.book;
+                dbook.isDownload = true;
+                downloadBooks.push(dbook)
+                AppStorage.setOrCreate('downloadBooks', downloadBooks)
+              }
+            }
+          })
+
         Image(this.isAddSuccess ?
           (this.nightMode ? $r('app.media.ic_add_book_shelf_success_dark') :
             $r('app.media.ic_add_book_shelf_success')) :

@@ -38,6 +38,12 @@ export class MathUtil {
       const aHasName = a.groupName !== '';
       const bHasName = b.groupName !== '';
 
+      if (a.isPin && !b.isPin) {
+        return -1;
+      }else if (!a.isPin && b.isPin) {
+        return 1;
+      }
+
       if (aHasName && !bHasName) {
         return -1;
       } else if (!aHasName && bHasName) {

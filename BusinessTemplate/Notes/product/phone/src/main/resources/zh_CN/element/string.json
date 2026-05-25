@@ -10,7 +10,7 @@
     },
     {
       "name": "EntryAbility_label",
-      "value": "笔记模板"
+      "value": "笔记"
     },
     {
       "name": "notecard_desc",
@@ -138,7 +138,7 @@
     },
     {
       "name": "agcit_huawei_notes",
-      "value": "1.0.4"
+      "value": "1.0.5"
     }
   ]
 }

@@ -26,6 +26,7 @@ import { util } from '@kit.ArkTS';
 import { ContinueUtils } from 'continue';
 import GlobalContext from '../utils/ContextConfig';
 import { systemShare } from '@kit.ShareKit';
+import { GlobalInfoModel } from '@ohos_agcit/notes_utils';
 
 
 interface SharedRecordWithContent extends systemShare.SharedRecord {
@@ -232,10 +233,15 @@ export default class EntryAbility extends UIAbility {
 
     AppStorage.setOrCreate('screenHeight', windowStage.getMainWindowSync().getUIContext().px2vp(size.height));
     AppStorage.setOrCreate('screenWidth', windowStage.getMainWindowSync().getUIContext().px2vp(size.width));
+    // ComponentV2 页面通过 GlobalInfoModel 响应窗口宽度变化
+    const globalInfo: GlobalInfoModel =
+      AppStorageV2.connect<GlobalInfoModel>(GlobalInfoModel, () => new GlobalInfoModel())!;
+    globalInfo.screenWidthVp = windowStage.getMainWindowSync().getUIContext().px2vp(size.width);
 
     windowClass.on('windowSizeChange', data => {
       AppStorage.setOrCreate('screenHeight', windowStage.getMainWindowSync().getUIContext().px2vp(data.height));
       AppStorage.setOrCreate('screenWidth', windowStage.getMainWindowSync().getUIContext().px2vp(data.width));
+      globalInfo.screenWidthVp = windowStage.getMainWindowSync().getUIContext().px2vp(data.width);
     });
   }
 
@@ -251,9 +257,10 @@ export default class EntryAbility extends UIAbility {
 
     // 隐藏底部导航栏
     windowClass.setSpecificSystemBarEnabled('navigationIndicator', false).then(() => {
-      console.info('Succeeded in setting the navigation indicator to be invisible.');
+      hilog.info(0x0000, 'EntryAbility', 'Succeeded in setting the navigation indicator to be invisible.');
     }).catch((err: BusinessError) => {
-      console.error(`Failed to set the navigation indicator to be invisible. Code is ${err.code}, message is ${err.message}`);
+      hilog.error(0x0000, 'EntryAbility',
+        `Failed to set the navigation indicator to be invisible. Code is ${err.code}, message is ${err.message}`);
     });
     this.loadSplashPage(windowStage);
   }
@@ -262,34 +269,54 @@ export default class EntryAbility extends UIAbility {
    * 加载首页
    */
   private loadIndexPage(windowStage: window.WindowStage): void {
-    windowStage.loadContent('pages/Index', (err) => {
-      this.initWindow(windowStage);
-      windowStage.getMainWindowSync().getUIContext().getKeyboardAvoidMode();
-      windowStage.getMainWindowSync().getUIContext().setKeyboardAvoidMode(KeyboardAvoidMode.RESIZE);
-
-      if (err.code) {
-        hilog.error(0x0000, 'testTag', 'Failed to load the content. Cause: %{public}s', JSON.stringify(err) ?? '');
-        return;
-      }
-      hilog.info(0x0000, 'testTag', 'Succeeded in loading the content.');
-    });
+    try {
+      windowStage.loadContent('pages/Index', (err: BusinessError | undefined) => {
+        if (err !== undefined) {
+          hilog.error(0x0000, 'testTag', 'Failed to load the content. Cause: %{public}s', JSON.stringify(err));
+          return;
+        }
+        try {
+          this.initWindow(windowStage);
+          windowStage.getMainWindowSync().getUIContext().getKeyboardAvoidMode();
+          windowStage.getMainWindowSync().getUIContext().setKeyboardAvoidMode(KeyboardAvoidMode.RESIZE);
+        } catch (e) {
+          const inner = e as BusinessError;
+          hilog.error(0x0000, 'testTag', 'initWindow after Index load failed: %{public}s',
+            `${inner.code} ${inner.message}`);
+        }
+        hilog.info(0x0000, 'testTag', 'Succeeded in loading the content.');
+      });
+    } catch (e) {
+      const err = e as BusinessError;
+      hilog.error(0x0000, 'testTag', 'loadContent(Index) threw: %{public}s', `${err.code} ${err.message}`);
+    }
   }
 
   /**
    * 加载启动页（开屏广告页）
    */
   private loadSplashPage(windowStage: window.WindowStage): void {
-    windowStage.loadContent('pages/SplashPage', (err) => {
-      this.initWindow(windowStage);
-      windowStage.getMainWindowSync().getUIContext().getKeyboardAvoidMode();
-      windowStage.getMainWindowSync().getUIContext().setKeyboardAvoidMode(KeyboardAvoidMode.RESIZE);
-
-      if (err.code) {
-        hilog.error(0x0000, 'testTag', 'Failed to load the splash content. Cause: %{public}s', JSON.stringify(err) ?? '');
-        return;
-      }
-      hilog.info(0x0000, 'testTag', 'Succeeded in loading the splash content.');
-    });
+    try {
+      windowStage.loadContent('pages/SplashPage', (err: BusinessError | undefined) => {
+        if (err !== undefined) {
+          hilog.error(0x0000, 'testTag', 'Failed to load the splash content. Cause: %{public}s', JSON.stringify(err));
+          return;
+        }
+        try {
+          this.initWindow(windowStage);
+          windowStage.getMainWindowSync().getUIContext().getKeyboardAvoidMode();
+          windowStage.getMainWindowSync().getUIContext().setKeyboardAvoidMode(KeyboardAvoidMode.RESIZE);
+        } catch (e) {
+          const inner = e as BusinessError;
+          hilog.error(0x0000, 'testTag', 'initWindow after Splash load failed: %{public}s',
+            `${inner.code} ${inner.message}`);
+        }
+        hilog.info(0x0000, 'testTag', 'Succeeded in loading the splash content.');
+      });
+    } catch (e) {
+      const err = e as BusinessError;
+      hilog.error(0x0000, 'testTag', 'loadContent(Splash) threw: %{public}s', `${err.code} ${err.message}`);
+    }
   }
 
   onWindowStageDestroy(): void {

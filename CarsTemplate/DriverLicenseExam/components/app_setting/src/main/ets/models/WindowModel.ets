@@ -1,6 +1,9 @@
 import { AppStorageV2, window } from '@kit.ArkUI';
 import { GridRowColSetting } from '../common/GridRowColSetting';
 import { BreakpointModel } from './BreakpointModel';
+import { Logger } from '../common/Logger';
+
+const TAG = '[WindowModel]';
 
 /**
  * 窗口持久化
@@ -60,7 +63,7 @@ export class CustomWindowModel {
         this.avoidBottomPadding = px2vp(area.bottomRect.height);
       })
     } catch (error) {
-      console.log(JSON.stringify(error))
+      Logger.error(TAG, JSON.stringify(error))
     }
 
   }
@@ -75,7 +78,7 @@ export class CustomWindowModel {
         currentWindow.on('avoidAreaChange', this.getAvoidBottomPadding);
       })
     }  catch (error) {
-      console.log(JSON.stringify(error))
+      Logger.error(TAG, JSON.stringify(error))
     }
   }
 
@@ -88,7 +91,7 @@ export class CustomWindowModel {
         currentWindow.off('avoidAreaChange', this.getAvoidBottomPadding);
       })
     } catch (error) {
-      console.log(JSON.stringify(error))
+      Logger.error(TAG, JSON.stringify(error))
     }
   }
 }

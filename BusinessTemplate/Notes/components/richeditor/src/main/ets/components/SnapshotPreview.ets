@@ -15,8 +15,9 @@
 import { BusinessError } from '@kit.BasicServicesKit';
 import { fileIo } from '@kit.CoreFileKit';
 import { image } from '@kit.ImageKit';
-import { promptAction } from '@kit.ArkUI';
+import { promptAction, window } from '@kit.ArkUI';
 import { photoAccessHelper } from '@kit.MediaLibraryKit';
+import { hilog } from '@kit.PerformanceAnalysisKit';
 
 
 
@@ -27,6 +28,11 @@ import { fileUri } from '@kit.CoreFileKit';
 import { PopupUtils } from '../utils/PopupUtils';
 
 const TAG: string = '[SnapshotPreview]';
+
+interface SnapshotViewportInsets {
+  insetTopVp: number;
+  insetBottomVp: number;
+}
 
 /**
  * Long screenshot preview pop-up component
@@ -60,19 +66,56 @@ export struct SnapshotPreview {
   @Local screenHeight: number = AppStorage.get('screenHeight') || 0;
 
   aboutToAppear(): void {
-    const h = this.screenHeight;
-    const w = this.screenWidth;
-    console.log(`${this.screenHeight}`)
+    this.refreshScreenFromWindow();
+  }
+
+  private refreshScreenFromWindow(): SnapshotViewportInsets {
+    let insetTopVp = 0;
+    let insetBottomVp = 0;
+    try {
+      const host = this.getUIContext().getHostContext() as common.UIAbilityContext;
+      const win = host?.windowStage?.getMainWindowSync();
+      if (win) {
+        const rect = win.getWindowProperties().windowRect;
+        this.screenWidth = this.getUIContext().px2vp(rect.width);
+        this.screenHeight = this.getUIContext().px2vp(rect.height);
+        const sys = win.getWindowAvoidArea(window.AvoidAreaType.TYPE_SYSTEM);
+        insetTopVp = this.getUIContext().px2vp(sys.topRect.height);
+        insetBottomVp = this.getUIContext().px2vp(sys.bottomRect.height);
+      }
+    } catch (_e) {
+    }
+    const w = AppStorage.get<number>('screenWidth');
+    const h = AppStorage.get<number>('screenHeight');
+    if (typeof w === 'number' && w > 0) {
+      this.screenWidth = w;
+    }
+    if (typeof h === 'number' && h > 0) {
+      this.screenHeight = h;
+    }
+    const result: SnapshotViewportInsets = { insetTopVp: insetTopVp, insetBottomVp: insetBottomVp };
+    return result;
+  }
+
+  private calcLargePreviewPosition(): Position {
+    const viewportInsets: SnapshotViewportInsets = this.refreshScreenFromWindow();
+    this.snapPopupHeight = 580;
+    this.snapPopupWidth = this.screenWidth - 32;
+    return PopupUtils.calcPopupCenterInSafeArea(
+      this.screenWidth,
+      this.screenHeight,
+      this.snapPopupWidth,
+      this.snapPopupHeight,
+      viewportInsets.insetTopVp,
+      viewportInsets.insetBottomVp,
+    );
   }
 
   @Monitor('screenWidth')
-  onDisplayWidthChange(displayWidth: number): void {
+  onDisplayWidthChange(_displayWidth: number): void {
     if (this.isLargePreview) {
-      this.snapPopupHeight = 580;
-      this.snapPopupWidth = this.screenWidth - 32;
-      const snapPopupPosition =
-        PopupUtils.calcPopupCenter(this.screenWidth, this.screenHeight, this.snapPopupWidth, this.snapPopupHeight);
-      this.changeSnapPopupPosition(snapPopupPosition)
+      const snapPopupPosition = this.calcLargePreviewPosition();
+      this.changeSnapPopupPosition(snapPopupPosition);
     }
   }
 
@@ -102,34 +145,45 @@ export struct SnapshotPreview {
   // [Start save_snapshot]
   async saveSnapshot(result: SaveButtonOnClickResult): Promise<void> {
     if (result === SaveButtonOnClickResult.SUCCESS) {
-      const helper = photoAccessHelper.getPhotoAccessHelper(this.context);
-      const uri = await helper.createAsset(photoAccessHelper.PhotoType.IMAGE, 'png');
-      // Open the file with a URI to write content continuously
-      const file = await fileIo.open(uri, fileIo.OpenMode.READ_WRITE | fileIo.OpenMode.CREATE);
-      const imagePackerApi: image.ImagePacker = image.createImagePacker();
-      const packOpts: image.PackingOption = {
-        format: 'image/png',
-        quality: 100,
-      };
-      imagePackerApi.packToData(this.mergedImage, packOpts).then(async (data) => {
-        fileIo.writeSync(file.fd, data);
-        fileIo.closeSync(file.fd);
-        this.getUIContext().getPromptAction().showToast({
-          message: '已保存至相册',
-          duration: 1800
-        })
-        const imgName = `${Date.now()}.png`;
-        const img =
-          fileIo.openSync(this.context.filesDir + `/${imgName}`, fileIo.OpenMode.READ_WRITE | fileIo.OpenMode.CREATE);
-        await fileIo.write(img.fd, data)
-        // 关闭文档
-        await fileIo.close(img.fd)
+      try {
+        const helper = photoAccessHelper.getPhotoAccessHelper(this.context);
+        const uri = await helper.createAsset(photoAccessHelper.PhotoType.IMAGE, 'png');
+        // Open the file with a URI to write content continuously
+        const file = await fileIo.open(uri, fileIo.OpenMode.READ_WRITE | fileIo.OpenMode.CREATE);
+        const imagePackerApi: image.ImagePacker = image.createImagePacker();
+        const packOpts: image.PackingOption = {
+          format: 'image/png',
+          quality: 100,
+        };
+        imagePackerApi.packToData(this.mergedImage, packOpts).then(async (data) => {
+          fileIo.writeSync(file.fd, data);
+          fileIo.closeSync(file.fd);
+          this.getUIContext().getPromptAction().showToast({
+            message: '已保存至相册',
+            duration: 1800
+          })
+          const imgName = `${Date.now()}.png`;
+          const img =
+            fileIo.openSync(this.context.filesDir + `/${imgName}`, fileIo.OpenMode.READ_WRITE | fileIo.OpenMode.CREATE);
+          await fileIo.write(img.fd, data)
+          // 关闭文档
+          await fileIo.close(img.fd)
 
-        this.setShareData(imgName)
-      }).catch((error: BusinessError) => {
-
-      });
-
+          this.setShareData(imgName)
+        }).catch((error: BusinessError) => {
+          hilog.error(0x0000, TAG, `packToData failed: ${error.code} ${error.message}`);
+        });
+      } catch (e) {
+        const err = e as BusinessError;
+        hilog.error(0x0000, TAG, `saveSnapshot failed: ${err.code} ${err.message}`);
+        try {
+          this.getUIContext().getPromptAction().showToast({
+            message: '保存失败',
+            duration: 1800,
+          });
+        } catch (_t) {
+        }
+      }
     }
     this.closeSnapPopup();
   }
@@ -154,9 +208,9 @@ export struct SnapshotPreview {
       selectionMode: systemShare.SelectionMode.SINGLE,
       previewMode: systemShare.SharePreviewMode.DETAIL,
     }).then(() => {
-      console.info('ShareController show success.');
+      hilog.info(0x0000, TAG, 'ShareController show success.');
     }).catch((error: BusinessError) => {
-      console.error(`ShareController show error. code: ${error.code}, message: ${error.message}`);
+      hilog.error(0x0000, TAG, `ShareController show error. code: ${error.code}, message: ${error.message}`);
     });
   }
 
@@ -204,8 +258,9 @@ export struct SnapshotPreview {
               this.changeSnapPopupPosition( this.snapPopupPosition)
             })
           } else {
-            const snapPopupPosition = PopupUtils.calcPopupBottomLeft(this.screenWidth, this.screenHeight)
-            this.changeSnapPopupPosition(snapPopupPosition)
+            const snapPopupPosition =
+              PopupUtils.calcPopupBottomLeft(this.screenHeight, this.snapPopupHeight);
+            this.changeSnapPopupPosition(snapPopupPosition);
           }
         })
     )
@@ -240,7 +295,7 @@ export struct SnapshotPreview {
       right: this.isLargePreview ? 24 : 0
     })
     .onClick(() => {
-      // Click to enlarge the preview window and display it flat and centered
+      // Click to enlarge the preview窗口：在安全内容区内水平垂直居中
       if (!this.isLargePreview) {
         this.getUIContext().animateTo({
           duration: 500,
@@ -249,12 +304,8 @@ export struct SnapshotPreview {
             this.changeIsLargePreview(true);
           }
         }, () => {
-          this.snapPopupWidth = this.screenWidth - 32;
-          this.snapPopupHeight = 580;
-          const snapPopupPosition =
-            PopupUtils.calcPopupCenter(this.screenWidth, this.screenHeight, this.snapPopupWidth,
-              this.snapPopupHeight)
-          this.changeSnapPopupPosition(snapPopupPosition)
+          const snapPopupPosition = this.calcLargePreviewPosition();
+          this.changeSnapPopupPosition(snapPopupPosition);
         })
       }
     })

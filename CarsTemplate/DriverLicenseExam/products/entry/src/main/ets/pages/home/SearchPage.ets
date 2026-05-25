@@ -51,7 +51,7 @@ struct SearchPage {
   hotSearch() {
     Column() {
       Row() {
-        Text('热门搜索').fontSize(16).fontColor('rgba(0,0,0,0.90)');
+        Text('热门搜索').fontSize(16).fontColor($r('sys.color.font_primary'));
       }.justifyContent(FlexAlign.SpaceBetween).margin({ bottom: 17 }).width('100%');
 
       Flex({ wrap: FlexWrap.Wrap, space: { main: LengthMetrics.vp(8), cross: LengthMetrics.vp(8) } }) {
@@ -73,7 +73,7 @@ struct SearchPage {
   historySearch() {
     Column() {
       Row() {
-        Text('搜索历史').fontSize(16).fontColor('rgba(0,0,0,0.90)');
+        Text('搜索历史').fontSize(16).fontColor($r('sys.color.font_primary'));
 
         Blank();
 
@@ -95,7 +95,7 @@ struct SearchPage {
 
                 Text(item)
                   .fontSize(14)
-                  .fontColor('rgba(0,0,0,0.60)')
+                  .fontColor($r('sys.color.font_secondary'))
                   .maxLines(1)
                   .textOverflow({ overflow: TextOverflow.Ellipsis })
                   .padding({
@@ -108,7 +108,7 @@ struct SearchPage {
                 Row() {
                   SymbolGlyph($r('sys.symbol.xmark'))
                     .fontSize(16)
-                    .fontColor(['rgba(0,0,0,0.60)'])
+                    .fontColor([$r('sys.color.font_secondary')])
                     .onClick(() => {
                       this.searchController.historySearch.splice(index, 1);
                     });
@@ -158,13 +158,14 @@ struct SearchPage {
 
         Text('暂时没有搜索到您要找的内容呢')
           .fontSize(14)
-          .fontColor('rgba(0,0,0,0.40)')
+          .fontColor($r('sys.color.font_secondary'))
       } else {
         Scroll() {
           Column() {
             Text('搜索结果')
               .fontSize(16)
               .fontWeight(FontWeight.Bold)
+              .fontColor($r('sys.color.font_primary'))
               .alignSelf(ItemAlign.Start)
               .padding({
                 top: 16,
@@ -232,8 +233,8 @@ function labelBaseStyle() {
   })
   .fontSize(14)
   .borderRadius(15)
-  .fontColor('rgba(0,0,0,0.60)')
-  .backgroundColor('#F8F8F8')
+  .fontColor($r('sys.color.font_secondary'))
+  .backgroundColor($r('sys.color.comp_background_secondary'))
   .focusable(true)
   .focusOnTouch(true);
 }

@@ -61,7 +61,7 @@ struct SpecialExercisesView {
 
   @Styles
   cardStyle() {
-    .backgroundColor(Color.White)
+    .backgroundColor($r('sys.color.comp_background_primary'))
     .borderRadius(16)
     .padding(12)
   }
@@ -70,13 +70,13 @@ struct SpecialExercisesView {
     Row() {
       Text(classifyTitle)
         .fontSize(12)
-        .fontColor('rgba(0,0,0,0.9)')
+        .fontColor($r('sys.color.font_primary'))
         .fontWeight(FontWeight.Medium)
         .maxFontScale(1)
       Row() {
         Text(String(number))
           .fontSize(10)
-          .fontColor('rgba(0,0,0,0.6)')
+          .fontColor($r('sys.color.font_secondary'))
           .maxFontScale(1)
         Image($r('app.media.ic_right_arrow_lined'))
           .height(12)
@@ -85,7 +85,7 @@ struct SpecialExercisesView {
     }
     .width(94)
     .height(40)
-    .backgroundColor('rgba(0,0,0,0.05)')
+    .backgroundColor($r('sys.color.comp_background_secondary'))
     .borderRadius(8)
     .justifyContent(FlexAlign.SpaceBetween)
     .alignItems(VerticalAlign.Center)
@@ -115,28 +115,29 @@ struct SpecialExercisesView {
   build() {
     NavDestination() {
       Scroll() {
-        Column({space:12}) {
+        Column({ space: 12 }) {
           Row() {
             Row() {
               Image($r('app.media.list'))
                 .width(16)
                 .height(16)
                 .margin({
-                  right:8
+                  right: 8
                 })
-              Text( $r('app.string.exercises_by_chapter'))
+              Text($r('app.string.exercises_by_chapter'))
                 .fontSize(14)
-                .fontColor('rgba(0,0,0,0.9)')
+                .fontColor($r('sys.color.font_primary'))
                 .fontWeight(FontWeight.Medium)
                 .maxFontScale(1)
             }
+
             Row() {
               Text(`共${this.chapterCount}章`)
                 .fontSize(14)
-                .fontColor('rgba(0,0,0,0.4)')
+                .fontColor($r('sys.color.font_secondary'))
                 .maxFontScale(1)
                 .margin({
-                  right:8
+                  right: 8
                 })
               Image($r('app.media.ic_right_arrow_lined'))
                 .height(12)
@@ -159,21 +160,22 @@ struct SpecialExercisesView {
                 .width(16)
                 .height(16)
                 .margin({
-                  right:8
+                  right: 8
                 })
-              Text( $r('app.string.exercises_by_random'))
+              Text($r('app.string.exercises_by_random'))
                 .fontSize(14)
-                .fontColor('rgba(0,0,0,0.9)')
+                .fontColor($r('sys.color.font_primary'))
                 .fontWeight(FontWeight.Medium)
                 .maxFontScale(1)
             }
+
             Row() {
               Text(String(this.totalCount))
                 .fontSize(14)
-                .fontColor('rgba(0,0,0,0.4)')
+                .fontColor($r('sys.color.font_secondary'))
                 .maxFontScale(1)
                 .margin({
-                  right:8
+                  right: 8
                 })
               Image($r('app.media.ic_right_arrow_lined'))
                 .height(12)
@@ -186,8 +188,8 @@ struct SpecialExercisesView {
           .alignItems(VerticalAlign.Center)
           .cardStyle()
           .onClick(() => {
-            const param:ROUTE_PARAM = {
-              title:'随机练习',
+            const param: ROUTE_PARAM = {
+              title: '随机练习',
               type: EXAM_MANAGER_TYPE.random
             }
             this.vm.navStack.pushPathByName('practiceView', param)
@@ -196,13 +198,13 @@ struct SpecialExercisesView {
           Column() {
             Text($r('app.string.by_degree_of_difficulty'))
               .fontSize(14)
-              .fontColor('rgba(0,0,0,0.9)')
+              .fontColor($r('sys.color.font_primary'))
               .fontWeight(FontWeight.Medium)
               .maxFontScale(1)
-            Flex({wrap: FlexWrap.Wrap}) {
-              ForEach(CLASSIFY_DATA, (item:CLASSIFY_BY_TYPE) => {
+            Flex({ wrap: FlexWrap.Wrap }) {
+              ForEach(CLASSIFY_DATA, (item: CLASSIFY_BY_TYPE) => {
                 this.classifyQuestion(item.name, item.quantity, item.type)
-              }, (item:CLASSIFY_BY_TYPE) => {
+              }, (item: CLASSIFY_BY_TYPE) => {
                 try {
                   return JSON.stringify(item.name)
                 } catch (err) {
@@ -218,13 +220,13 @@ struct SpecialExercisesView {
           Column() {
             Text($r('app.string.by_question_type'))
               .fontSize(14)
-              .fontColor('rgba(0,0,0,0.9)')
+              .fontColor($r('sys.color.font_primary'))
               .fontWeight(FontWeight.Medium)
               .maxFontScale(1)
-            Flex({wrap: FlexWrap.Wrap}) {
-              ForEach(DATA_BY_QUESTION_TYPE, (item:CLASSIFY_BY_TYPE) => {
+            Flex({ wrap: FlexWrap.Wrap }) {
+              ForEach(DATA_BY_QUESTION_TYPE, (item: CLASSIFY_BY_TYPE) => {
                 this.classifyQuestion(item.name, item.quantity, item.type)
-              }, (item:CLASSIFY_BY_TYPE)=> {
+              }, (item: CLASSIFY_BY_TYPE) => {
                 try {
                   return JSON.stringify(item.name)
                 } catch (err) {
@@ -238,7 +240,7 @@ struct SpecialExercisesView {
           .cardStyle()
         }
         .padding({
-          top:20,
+          top: 20,
           left: 16,
           right: 16,
           bottom: 20
@@ -247,7 +249,7 @@ struct SpecialExercisesView {
       .scrollBar(BarState.Off)
     }
     .title('专项练习')
-    .backgroundColor('#F1F3F5')
+    .backgroundColor($r('sys.color.background_secondary'))
     .padding({
       top:this.getUIContext().px2vp(this.topRectHeight),
       bottom: this.getUIContext().px2vp(this.bottomRectHeight)

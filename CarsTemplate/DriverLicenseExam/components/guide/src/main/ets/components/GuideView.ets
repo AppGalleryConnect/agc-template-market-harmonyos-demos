@@ -21,7 +21,7 @@ export struct GuideView {
   titleView(title: Resource) {
     Text(title)
       .width(CommonConstants.FULL_WIDTH)
-      .fontColor('rgba(0,0,0,0.9)')
+      .fontColor($r('sys.color.font_primary'))
       .fontSize(14)
       .maxFontScale(1)
       .margin({
@@ -34,10 +34,10 @@ export struct GuideView {
   selectButton(buttonName: Resource, id:DRIVE_STAGE) {
     Text(buttonName)
       .layoutWeight(1)
-      .backgroundColor(id === this.activeId?'#64BB5C':'#E6E8E9')
+      .backgroundColor(id === this.activeId?'#64BB5C':$r('sys.color.comp_background_primary'))
       .height(36)
       .borderRadius(16)
-      .fontColor(id === this.activeId?'#fff':'rgba(0,0,0,0.9)')
+      .fontColor(id === this.activeId?$r('sys.color.font_on_primary'):$r('sys.color.font_secondary'))
       .fontSize(14)
       .textAlign(TextAlign.Center)
       .maxFontScale(1)
@@ -59,13 +59,13 @@ export struct GuideView {
           })
         Text(this.guideService.getGuideData().city || $r('app.string.please_select_city'))
           .fontSize(14)
-          .fontColor('rgba(0,0,0,0.9)')
+          .fontColor($r('sys.color.font_primary'))
           .maxFontScale(1)
       }
       Row() {
         Text($r('app.string.go_select'))
           .fontSize(12)
-          .fontColor('rgba(0,0,0,0.6)')
+          .fontColor($r('sys.color.font_secondary'))
           .margin({
             right:4
           })
@@ -78,7 +78,7 @@ export struct GuideView {
     .width(CommonConstants.FULL_WIDTH)
     .height(40)
     .justifyContent(FlexAlign.SpaceBetween)
-    .backgroundColor(Color.White)
+    .backgroundColor($r('sys.color.comp_background_primary'))
     .borderRadius(16)
     .padding({
       left: 12,
@@ -101,7 +101,7 @@ export struct GuideView {
               .height(32)
               .width(CommonConstants.FULL_WIDTH)
               .fontSize(24)
-              .fontColor('rgba(0,0,0,0.9)')
+              .fontColor($r('sys.color.font_primary'))
               .maxFontScale(1)
               .margin({
                 top: this.getUIContext().px2vp(this.topRectHeight) + 12
@@ -126,12 +126,12 @@ export struct GuideView {
 
                     Row() {
                       Text(item.name)
-                        .fontColor('rgba(0,0,0,0.9)')
+                        .fontColor($r('sys.color.font_primary'))
                         .fontSize(12)
                         .maxFontScale(1)
 
                       Text(item.description)
-                        .fontColor('rgba(0,0,0,0.6)')
+                        .fontColor($r('sys.color.font_secondary'))
                         .fontSize(12)
                         .maxFontScale(1)
                         .margin({
@@ -139,8 +139,10 @@ export struct GuideView {
                         })
                     }
                   }
+                  .borderRadius(20)
                   .width(CommonConstants.FULL_WIDTH)
                   .height(CommonConstants.FULL_HEIGHT)
+                  .backgroundColor($r('sys.color.comp_background_primary'))
                   .onClick(() => {
                     this.guideService.updateLicenseType(item.value)
                   })
@@ -168,7 +170,7 @@ export struct GuideView {
 
                     Text(item.name)
                       .fontSize(12)
-                      .fontColor('rgba(0,0,0,0.9)')
+                      .fontColor($r('sys.color.font_primary'))
                       .maxFontScale(1)
                       .margin({
                         bottom:4
@@ -177,10 +179,12 @@ export struct GuideView {
                     Text(item.description)
                       .fontSize(12)
                       .maxFontScale(1)
-                      .fontColor('rgba(0,0,0,0.6)')
+                      .fontColor($r('sys.color.font_secondary'))
                   }
+                  .borderRadius(20)
                   .width(CommonConstants.FULL_WIDTH)
                   .height(CommonConstants.FULL_HEIGHT)
+                  .backgroundColor($r('sys.color.comp_background_primary'))
                   .onClick(() => {
                     this.guideService.updateLicenseType(item.value)
                   })
@@ -229,6 +233,6 @@ export struct GuideView {
     .height(CommonConstants.FULL_WIDTH)
     .width(CommonConstants.FULL_WIDTH)
     .alignContent(Alignment.Top)
-    .backgroundColor('#F1F3F5')
+    .backgroundColor($r('sys.color.background_secondary'))
   }
 }

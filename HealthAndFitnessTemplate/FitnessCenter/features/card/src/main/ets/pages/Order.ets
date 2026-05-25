@@ -16,6 +16,7 @@ export struct Order {
   @Local bottomRectHeight: number = this.screenPropStorage.bottomRectHeight;
   @Param @Once pathStack: NavPathStack = new NavPathStack()
   @Local currentTabIndex: number = 0;
+
   @Builder
   tabBarBuilder(orderState: OrderState, index: number) {
     Text(MockService.getOrderStateString(orderState))
@@ -62,7 +63,8 @@ export struct Order {
       this.pathStack = ctx?.pathStack
     })
     .backgroundColor($r('app.color.main_background_color'))
-    .padding({ top: this.getUIContext().px2vp(this.topRectHeight) })
+    .padding({ top: this.getUIContext().px2vp(this.topRectHeight),
+      bottom: this.getUIContext().px2vp(this.bottomRectHeight) })
   }
 }
 

@@ -6,14 +6,21 @@ export struct BorrowDetailInfoPage {
   @Local borrowInfo: BorrowInfo | undefined = undefined;
   @Local time: DHMS | undefined = undefined;
   private context: Context = this.getUIContext().getHostContext() as Context;
-
+  private resourceManager = this.context.resourceManager;
   aboutToAppear(): void {
     this.borrowInfo = TCRouter.getParams<BorrowInfo>(Constants.BORROW_DETAIL_ROUTE);
     if (this.borrowInfo && this.borrowInfo.status !== BorrowStatus.RETURNED) {
       this.time = new DHMS(this.borrowInfo?.borrowDeadline, this.borrowInfo?.borrowBegin);
     }
   }
-
+  private getString(name: string) {
+    try {
+      return this.resourceManager.getStringByNameSync(name);
+    } catch (error) {
+      console.error('BorrowInfoCard', ` getString error = ${JSON.stringify(error)}`)
+      return name;
+    }
+  }
   @Builder
   borrowTimeCard(info: BorrowInfo) {
     Column() {
@@ -76,8 +83,7 @@ export struct BorrowDetailInfoPage {
       .justifyContent(FlexAlign.Center)
 
       Row() {
-        Text(`${this.context.resourceManager
-          .getStringByNameSync('borrow_time')}: ${TimeUtils.timestamp2YMD(info.borrowBegin)}`)
+        Text(`${this.getString('borrow_time')}: ${TimeUtils.timestamp2YMD(info.borrowBegin)}`)
           .fontSize($r('sys.float.Body_L'))
           .fontColor($r('sys.color.font_primary'))
       }
@@ -87,8 +93,7 @@ export struct BorrowDetailInfoPage {
 
       if (info.status === BorrowStatus.RETURNED) {
         Row() {
-          Text(`${this.context.resourceManager
-            .getStringByNameSync('borrow_return_time')}: ${TimeUtils.timestamp2YMD(info.borrowEnd)}`)
+          Text(`${this.getString('borrow_return_time')}: ${TimeUtils.timestamp2YMD(info.borrowEnd)}`)
             .fontSize($r('sys.float.Body_L'))
             .fontColor($r('sys.color.font_primary'))
         }
@@ -139,7 +144,7 @@ export struct BorrowDetailInfoPage {
                 top: 10,
                 bottom: 10,
               })
-            Text(`${this.context.resourceManager.getStringByNameSync('author')}: ${book.author}`)
+            Text(`${this.getString('author')}: ${book.author}`)
               .fontSize($r('sys.float.Body_L'))
               .fontColor($r('sys.color.font_secondary'))
               .padding({

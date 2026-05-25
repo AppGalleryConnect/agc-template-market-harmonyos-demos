@@ -32,24 +32,30 @@ export class PermissionUtil {
     if (!PermissionUtil._context) {
       PermissionUtil._context = PermissionUtil._context as common.UIAbilityContext;
     }
-    // 向用户申请授权
-    const data = await PermissionUtil._atManager.requestPermissionsFromUser(PermissionUtil._context, needAuthorized)
-    let grantStatus: number[] = data.authResults;
-    let length: number = grantStatus.length;
-    const needAuthorizedAgain: Permissions[] = [];
-    for (let i = 0; i < length; i++) {
-      if (grantStatus[i] === PermissionStatus.GRANTED) {
-        Logger.info(TAG, 'request permission success::' + needAuthorized[i]);
-      } else if (grantStatus[i] === PermissionStatus.DENIED) {
-        permissive = false;
-        needAuthorizedAgain.push(needAuthorized[i])
-      } else {
-        permissive = false;
-        Logger.info(TAG, 'request permission failed:: user denied');
+    try {
+      const data = await PermissionUtil._atManager.requestPermissionsFromUser(PermissionUtil._context, needAuthorized);
+      let grantStatus: number[] = data.authResults;
+      let length: number = grantStatus.length;
+      const needAuthorizedAgain: Permissions[] = [];
+      for (let i = 0; i < length; i++) {
+        if (grantStatus[i] === PermissionStatus.GRANTED) {
+          Logger.info(TAG, 'request permission success::' + needAuthorized[i]);
+        } else if (grantStatus[i] === PermissionStatus.DENIED) {
+          permissive = false;
+          needAuthorizedAgain.push(needAuthorized[i])
+        } else {
+          permissive = false;
+          Logger.info(TAG, 'request permission failed:: user denied');
+        }
       }
+      PermissionUtil._requestPermissionsOnSetting(needAuthorizedAgain);
+      return permissive;
+    } catch (error) {
+      const err: BusinessError = error as BusinessError;
+      Logger.error(TAG,
+        `Failed to request permissions from user. Code is ${err.code}, message is ${err.message}`);
+      return false;
     }
-    PermissionUtil._requestPermissionsOnSetting(needAuthorizedAgain);
-    return permissive;
   }
 
   // 用户首次拒绝后二次申请授权

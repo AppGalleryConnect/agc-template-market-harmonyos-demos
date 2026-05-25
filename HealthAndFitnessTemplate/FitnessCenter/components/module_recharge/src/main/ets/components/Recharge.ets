@@ -1,12 +1,15 @@
-import { MockService } from 'external_interactions';
+import { GridRowColSetting, Logger, MockService } from 'external_interactions';
 import { VipRechargeItem } from '../utils/VipRechargeItem';
 import { VipRechargeDataSource } from '../utils/VipRechargeDataSource';
 import { promptAction } from '@kit.ArkUI';
 import { RechargeConfig } from '../constant/Constant'
 import { RechargeRouteParam } from '../constant/Constant'
 import { TitleBar } from './TitleBar';
+
+const TAG: string = '[Recharge]';
+
 @ComponentV2
-export struct  Recharge {
+export struct Recharge {
   @Local topRectHeight: number = 100;
   @Local bottomRectHeight: number = 0;
   @Local stackAnimated: boolean = true
@@ -236,217 +239,229 @@ export struct  Recharge {
         }
       })
         .margin({ left: 16, right: 16 })
-      Stack() {
-        Scroll() {
-          Column({ space: 16 }) {
-            Row() {
-              Image($r('app.media.ic_vipIcon'))
-                .width(44)
-                .height(38)
-              Text('会员余额：' + this.balance + '元')
-                .fontSize(14)
-                .margin({ left: 16 })
-                .fontWeight(FontWeight.Bold)
-            }
-            .width('100%')
-            .borderRadius(16)
-            .backgroundColor($r('sys.color.comp_background_list_card'))
-            .padding(16)
 
-            Column() {
-              Text('充值金额')
-                .fontWeight(FontWeight.Bold)
-                .fontSize(14)
-                .alignSelf(ItemAlign.Start)
-              Row() {
-                Image($r('app.media.chevron_left'))
-                  .width(13)
-                  .height(13)
-                  .onClick(() => {
-                    this.swiperController.showPrevious()
-                  })
-                Swiper(this.swiperController) {
-                  LazyForEach(this.data, (item: VipRechargeItem, index: number) => {
-                    ListItem() {
-                      Column() {
-                        Text(item.getPayNumber() + '元')
-                          .fontSize(14)
-                          .fontWeight(FontWeight.Bold)
-                        Text('立赠' + item.getDiscounts())
-                          .fontSize(14)
-                          .fontWeight(FontWeight.Bold)
-                      }
-                      .justifyContent(FlexAlign.SpaceAround)
-                      .width(item.getPayNumber() >= 5000 ? 70 : 62)
-                      .height(80)
-                      .border(this.selectedIndex === index ? { width: 1, color: '#ED6F21', radius: 4 } : { width: 0 })
-                      .backgroundImage($r('app.media.ic_recharge_bg'))
-                      .backgroundImageSize({ width: '90%', height: '90%' })
-                      .backgroundImagePosition(Alignment.Center)
-                      .onClick(() => {
-                        this.selectedIndex = index;
-                        this.pay = item.getPayNumber();
-                        this.fromCard = true;
-                      })
-                    }
-                  })
-                }
-                .cachedCount(3)
-                .autoPlay(false)
-                .loop(false)
-                .itemSpace(0)
-                .displayCount(3)
-                .effectMode(EdgeEffect.Spring)
-                .indicator(false)
-                .onChange((index: number) => {
-                  console.info('onChange current index' + index.toString())
-                  this.swiperController.changeIndex(index)
-                })
-                .onGestureSwipe(() => {
-                  this.swiperReset = false;
-                })
-                .onAnimationStart((index: number, targetIndex: number) => {
-                  if (index !== targetIndex) {
-                    this.swiperReset = true;
+      GridRow(GridRowColSetting.DEFAULT_GRID_ROW_OPTIONS) {
+        GridCol({
+          span: GridRowColSetting.DEFAULT_CENTER_COL_SPAN,
+          offset: GridRowColSetting.DEFAULT_CENTER_COL_OFFSET,
+        }) {
+          Column() {
+            Stack() {
+              Scroll() {
+                Column({ space: 16 }) {
+                  Row() {
+                    Image($r('app.media.ic_vipIcon'))
+                      .width(44)
+                      .height(38)
+                    Text('会员余额：' + this.balance + '元')
+                      .fontSize(14)
+                      .margin({ left: 16 })
+                      .fontWeight(FontWeight.Bold)
                   }
-                })
-                .curve(Curve.Smooth)
-                .layoutWeight(1)
+                  .width('100%')
+                  .borderRadius(16)
+                  .backgroundColor($r('sys.color.comp_background_list_card'))
+                  .padding(16)
 
-                Image($r('app.media.chevron_right'))
-                  .width(13)
-                  .height(13)
-                  .onClick(() => {
-                    this.swiperController.showNext()
-                  })
-              }
-              .width('100%')
-              .height(80)
-              .margin({ top: 16, bottom: 20 })
-              .justifyContent(FlexAlign.SpaceBetween)
-              Row() {
-                Image($r('app.media.ic_rmb'))
-                  .height(32)
-                  .width(15)
-                  .objectFit(ImageFit.Auto)
-                TextInput({ placeholder: '请输入充值金额', text: this.pay === 0 ? '' : this.pay.toString() })
-                  .type(InputType.Number)
-                  .placeholderFont({ size: $r('sys.float.Body_L') })
-                  .placeholderColor($r('sys.color.font_secondary'))
-                  .width('60%')
-                  .fontSize(14)
-                  .fontWeight(FontWeight.Regular)
-                  .backgroundColor(Color.White)
-                  .maxLength(4)
-                  .onChange((value) => {
-                    if (value) {
-                      let numValue = Number.parseInt(value);
-                      if (numValue > 5000) {
-                        this.pay = 5000;
-                      } else {
-                        this.pay = numValue;
+                  Column() {
+                    Text('充值金额')
+                      .fontWeight(FontWeight.Bold)
+                      .fontSize(14)
+                      .alignSelf(ItemAlign.Start)
+                    Row() {
+                      Image($r('app.media.chevron_left'))
+                        .width(13)
+                        .height(13)
+                        .onClick(() => {
+                          this.swiperController.showPrevious()
+                        })
+                      Swiper(this.swiperController) {
+                        LazyForEach(this.data, (item: VipRechargeItem, index: number) => {
+                          ListItem() {
+                            Column() {
+                              Text(item.getPayNumber() + '元')
+                                .fontSize(14)
+                                .fontWeight(FontWeight.Bold)
+                              Text('立赠' + item.getDiscounts())
+                                .fontSize(14)
+                                .fontWeight(FontWeight.Bold)
+                            }
+                            .justifyContent(FlexAlign.SpaceAround)
+                            .width(item.getPayNumber() >= 5000 ? 70 : 62)
+                            .height(80)
+                            .border(this.selectedIndex === index ? { width: 1, color: '#ED6F21', radius: 4 } : { width: 0 })
+                            .backgroundImage($r('app.media.ic_recharge_bg'))
+                            .backgroundImageSize({ width: '90%', height: '90%' })
+                            .backgroundImagePosition(Alignment.Center)
+                            .onClick(() => {
+                              this.selectedIndex = index;
+                              this.pay = item.getPayNumber();
+                              this.fromCard = true;
+                            })
+                          }
+                        })
                       }
-                    } else {
-                      this.pay = 0;
+                      .cachedCount(3)
+                      .autoPlay(false)
+                      .loop(false)
+                      .itemSpace(0)
+                      .displayCount(3)
+                      .effectMode(EdgeEffect.Spring)
+                      .indicator(false)
+                      .onChange((index: number) => {
+                        Logger.info(TAG, `onChange current index: ${JSON.stringify(index)}`)
+                        this.swiperController.changeIndex(index)
+                      })
+                      .onGestureSwipe(() => {
+                        this.swiperReset = false;
+                      })
+                      .onAnimationStart((index: number, targetIndex: number) => {
+                        if (index !== targetIndex) {
+                          this.swiperReset = true;
+                        }
+                      })
+                      .curve(Curve.Smooth)
+                      .layoutWeight(1)
+
+                      Image($r('app.media.chevron_right'))
+                        .width(13)
+                        .height(13)
+                        .onClick(() => {
+                          this.swiperController.showNext()
+                        })
                     }
-                  })
-                  .onWillInsert((info: InsertValue) => {
-                    let numValue = Number.parseInt(this.pay + info.insertValue)
-                    if (numValue > 5000) {
-                      this.pay = 5000;
-                      this.getUIContext().getPromptAction().showToast({ message: '单次充值不超过5000元' })
+                    .width('100%')
+                    .height(80)
+                    .margin({ top: 16, bottom: 20 })
+                    .justifyContent(FlexAlign.SpaceBetween)
+                    Row() {
+                      Image($r('app.media.ic_rmb'))
+                        .height(32)
+                        .width(15)
+                        .objectFit(ImageFit.Auto)
+                      TextInput({ placeholder: '请输入充值金额', text: this.pay === 0 ? '' : this.pay.toString() })
+                        .type(InputType.Number)
+                        .placeholderFont({ size: $r('sys.float.Body_L') })
+                        .placeholderColor($r('sys.color.font_secondary'))
+                        .width('60%')
+                        .fontSize(14)
+                        .fontWeight(FontWeight.Regular)
+                        .backgroundColor(Color.White)
+                        .maxLength(4)
+                        .onChange((value) => {
+                          if (value) {
+                            let numValue = Number.parseInt(value);
+                            if (numValue > 5000) {
+                              this.pay = 5000;
+                            } else {
+                              this.pay = numValue;
+                            }
+                          } else {
+                            this.pay = 0;
+                          }
+                        })
+                        .onWillInsert((info: InsertValue) => {
+                          let numValue = Number.parseInt(this.pay + info.insertValue)
+                          if (numValue > 5000) {
+                            this.pay = 5000;
+                            this.getUIContext().getPromptAction().showToast({ message: '单次充值不超过5000元' })
+                          }
+                          return true;
+                        })
                     }
-                    return true;
-                  })
+                    .alignItems(VerticalAlign.Center)
+                    .width('100%')
+                    Divider()
+                    Row() {
+                      Text('支付' + this.pay + '元')
+                        .fontSize(14)
+                      Text('实际到账' + (this.fromCard ? this.getTotalMoneyFromCard() : this.getTotalMoney()) + '元')
+                        .fontSize(14)
+                    }
+                    .width('100%')
+                    .justifyContent(FlexAlign.SpaceBetween)
+                    .visibility(this.pay > 0 ? Visibility.Visible : Visibility.None)
+                    .margin({ top: 16 })
+                  }
+                  .width('100%')
+                  .borderRadius(16)
+                  .backgroundColor($r('sys.color.comp_background_list_card'))
+                  .padding(16)
+
+                  Row() {
+                    Row() {
+                      Image($r('app.media.HUAWEI_pay'))
+                        .width(48)
+                        .height(48)
+                      Text('华为支付')
+                        .fontSize(16)
+                        .margin({ left: 16 })
+                        .fontWeight(FontWeight.Bold)
+                    }
+
+                    Checkbox({ name: 'HUAWEI_pay' })
+                      .select(this.pay > 0)
+                  }
+                  .justifyContent(FlexAlign.SpaceBetween)
+                  .width('100%')
+                  .borderRadius(20)
+                  .backgroundColor($r('sys.color.comp_background_list_card'))
+                  .padding(12)
+                }
               }
-              .alignItems(VerticalAlign.Center)
-              .width('100%')
-              Divider()
-              Row() {
-                Text('支付' + this.pay + '元')
-                  .fontSize(14)
-                Text('实际到账' + (this.fromCard ? this.getTotalMoneyFromCard() : this.getTotalMoney()) + '元')
-                  .fontSize(14)
-              }
-              .width('100%')
-              .justifyContent(FlexAlign.SpaceBetween)
-              .visibility(this.pay > 0 ? Visibility.Visible : Visibility.None)
-              .margin({ top: 16 })
+              .scrollBar(BarState.Off)
+              .margin({ left: 16, right: 16 })
             }
-            .width('100%')
-            .borderRadius(16)
-            .backgroundColor($r('sys.color.comp_background_list_card'))
-            .padding(16)
+            .layoutWeight(1)
+            .alignContent(Alignment.Top)
 
             Row() {
-              Row() {
-                Image($r('app.media.HUAWEI_pay'))
-                  .width(48)
-                  .height(48)
-                Text('华为支付')
-                  .fontSize(16)
-                  .margin({ left: 16 })
-                  .fontWeight(FontWeight.Bold)
-              }
-
-              Checkbox({ name: 'HUAWEI_pay' })
-                .select(this.pay > 0)
+              Text('需支付：' + this.pay + '元')
+                .fontSize(14)
+                .fontWeight(FontWeight.Bold)
+                .width('40%')
+                .height('60%')
+                .textAlign(TextAlign.Start)
+                .margin({ left: 16 })
+              Button('确认充值')
+                .width('50%')
+                .height('60%')
+                .fontColor($r('sys.color.comp_background_list_card'))
+                .fontWeight(FontWeight.Medium)
+                .fontSize($r('sys.float.Body_M'))
+                .backgroundColor('#FF9019')
+                .onClick(() => {
+                  this.confirm = this.pay > 0
+                })
+                .bindSheet($$this.confirm, this.huaweiIAP(), {
+                  preferType: SheetType.CENTER,
+                  title: this.sheetTitleBuilder(),
+                  height: SheetSize.FIT_CONTENT,
+                  showClose: true,
+                  enableOutsideInteractive: false,
+                  backgroundColor: $r('sys.color.background_primary'),
+                  blurStyle: BlurStyle.COMPONENT_THICK,
+                  onWillDismiss: ((action: DismissSheetAction) => {
+                    // exit event listener
+                    // 传入一个回调函数 ， 成功充值后，调用父组件的回调函数更新用户余额
+                    if (this.pay > 0) {
+                      this.confirm = false
+                    } else {
+                      this.getUIContext().getPromptAction().showToast({ message: '请输入金额' })
+                    }
+                  }),
+                })
             }
-            .justifyContent(FlexAlign.SpaceBetween)
+            .justifyContent(FlexAlign.Center)
+            .alignItems(VerticalAlign.Center)
+            .height(75)
             .width('100%')
-            .borderRadius(20)
-            .backgroundColor($r('sys.color.comp_background_list_card'))
-            .padding(12)
+            .padding({ bottom: 10 })
+            // .backgroundColor(Color.White)
+            .margin({ bottom: 60 })
           }
         }
-        .scrollBar(BarState.Off)
-        .margin({ left: 16, right: 16 })
       }
-      .layoutWeight(1)
-      .alignContent(Alignment.Top)
-
-      Row() {
-        Text('需支付：' + this.pay + '元')
-          .fontSize(14)
-          .fontWeight(FontWeight.Bold)
-          .width('40%')
-          .height('60%')
-          .textAlign(TextAlign.Start)
-          .margin({ left: 16 })
-        Button('确认充值')
-          .width('50%')
-          .height('60%')
-          .fontColor($r('sys.color.comp_background_list_card'))
-          .fontWeight(FontWeight.Medium)
-          .fontSize($r('sys.float.Body_M'))
-          .backgroundColor('#FF9019')
-          .onClick(() => {
-            this.confirm = this.pay > 0
-          })
-          .bindSheet($$this.confirm, this.huaweiIAP(), {
-            title: this.sheetTitleBuilder(),
-            height: SheetSize.FIT_CONTENT,
-            showClose: true,
-            enableOutsideInteractive: false,
-            backgroundColor: $r('sys.color.background_primary'),
-            blurStyle: BlurStyle.COMPONENT_THICK,
-            onWillDismiss: ((action: DismissSheetAction) => {
-              // exit event listener
-              // 传入一个回调函数 ， 成功充值后，调用父组件的回调函数更新用户余额
-              if (this.pay > 0) {
-                this.confirm = false
-              } else {
-                this.getUIContext().getPromptAction().showToast({ message: '请输入金额' })
-              }
-            }),
-          })
-      }
-      .justifyContent(FlexAlign.Center)
-      .alignItems(VerticalAlign.Center)
-      .height(75)
-      .width('100%')
-      .padding({ bottom: 10 })
-      .backgroundColor(Color.White)
     }
     .hideTitleBar(true)
     .onReady((ctx: NavDestinationContext) => {

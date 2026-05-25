@@ -177,7 +177,7 @@ struct FeedbackHistoryPage {
     .padding(12)
     .margin({ top: 12 })
     .borderRadius(16)
-    .backgroundColor($r('sys.color.background_primary'))
+    .backgroundColor($r('sys.color.comp_background_primary'))
     .alignItems(HorizontalAlign.Start)
   }
 

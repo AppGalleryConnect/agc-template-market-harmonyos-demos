@@ -16,6 +16,9 @@ import {
   StoreInfo
 } from '../types/Type';
 import { SearchViewModel } from '../viewmodel/SearchViewModel';
+import { Logger } from 'external_interactions';
+
+const TAG: string = '[SearchView]';
 
 @ComponentV2
 export struct SearchView {
@@ -146,7 +149,7 @@ export struct SearchView {
           this.vm.pushResultPage(this.uiContext, value, SearchSource.USER_INPUT);
         },
       })
-        .width('95%')
+        .width('100%')
         .bindPopup(this.vm.showPopup, {
           builder: this.searchWindowBuilder(),
           width: GridRowColSetting.DIALOG_MAX_WIDTH,
@@ -156,7 +159,7 @@ export struct SearchView {
           mask: false,
           autoCancel: false,
           onStateChange: (event) => {
-            console.log('onStateChange========' + event.isVisible);
+            Logger.info(TAG, `onStateChange======== ${JSON.stringify(event.isVisible)}`);
           },
           onWillDismiss: () => {
             this.vm.closePop();

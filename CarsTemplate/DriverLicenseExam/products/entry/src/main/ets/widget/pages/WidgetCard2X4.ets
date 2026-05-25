@@ -50,7 +50,7 @@ struct WidgetCard {
     bottom: 4,
   })
   .borderRadius(14)
-  .backgroundColor('#64bb5c')
+  .backgroundColor($r('app.color.theme_green'))
 }
 
   build() {
@@ -61,38 +61,35 @@ struct WidgetCard {
           .height(20)
           .margin({right:8})
           .borderRadius(4)
-        Text('驾考')
-          .fontSize('12vp')
-          .fontColor('#000000')
-          .fontWeight(400)
-      }
+Text('驾考')
+           .fontSize('12vp')
+           .fontColor($r('app.color.item_title_font'))
+           .fontWeight(400)      }
       .width(this.fullWidthPercent)
       .justifyContent(FlexAlign.Start)
       Row() {
-        Text(`当前进度-${this.currentProgress}`)
-          .fontFamily('HarmonyHeiTi')
-          .fontColor('#000000')
-          .fontSize('14vp')
-          .fontWeight(500)
-          .lineHeight('19vp')
-      }
+Text(`当前进度-${this.currentProgress}`)
+           .fontFamily('HarmonyHeiTi')
+           .fontColor($r('app.color.item_title_font'))
+           .fontSize('14vp')
+           .fontWeight(500)
+           .lineHeight('19vp')      }
       .width(this.fullWidthPercent)
 
       Row() {
-        Text('顺序练习')
-          .fontFamily('HarmonyHeiTi')
-          .fontColor('#000000')
-          .fontSize('14vp')
-          .fontWeight(500)
-          .lineHeight('19vp')
-          .margin({right:12})
-        Text(`练习进度: ${this.didCount}/${this.totalCount}`)
-          .fontFamily('HarmonyHeiTi')
-          .fontColor('#000000')
-          .fontSize('12vp')
-          .fontWeight(400)
-          .lineHeight('16vp')
-      }
+Text('顺序练习')
+           .fontFamily('HarmonyHeiTi')
+           .fontColor($r('app.color.item_title_font'))
+           .fontSize('14vp')
+           .fontWeight(500)
+.lineHeight('19vp')
+           .margin({right:12})
+         Text(`练习进度: ${this.didCount}/${this.totalCount}`)
+           .fontFamily('HarmonyHeiTi')
+           .fontColor($r('app.color.font_secondary'))
+           .fontSize('12vp')
+           .fontWeight(400)
+           .lineHeight('16vp')      }
       .width(this.fullWidthPercent)
       .justifyContent(FlexAlign.Start)
 
@@ -100,7 +97,7 @@ struct WidgetCard {
         Text('模拟考试')
           .btnStyle()
           .fontFamily('HarmonyHeiTi')
-          .fontColor('#FFFFFF')
+          .fontColor($r('app.color.start_window_background'))
           .fontSize('14vp')
           .fontWeight(500)
           .lineHeight('19vp')
@@ -118,7 +115,7 @@ struct WidgetCard {
         Text('去练习')
           .btnStyle()
           .fontFamily('HarmonyHeiTi')
-          .fontColor('#FFFFFF')
+          .fontColor($r('app.color.start_window_background'))
           .fontSize('14vp')
           .fontWeight(500)
           .lineHeight('19vp')

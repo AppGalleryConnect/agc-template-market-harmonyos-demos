@@ -11,6 +11,22 @@
     {
       "name": "item_title_font",
       "value": "#E6000000"
+    },
+    {
+      "name": "icon_primary",
+      "value": "#000000"
+    },
+    {
+      "name": "icon_secondary",
+      "value": "#666666"
+    },
+    {
+      "name": "font_secondary",
+      "value": "#333333"
+    },
+    {
+      "name": "search_background",
+      "value": "#0D000000"
     }
   ]
 }

@@ -1,4 +1,7 @@
 import { SubCategoryItem } from '../types/Index';
+import { Logger } from 'external_interactions';
+
+const TAG: string = '[category_list BasicDataSource]';
 
 export class BasicDataSource implements IDataSource {
   private listeners: DataChangeListener[] = [];
@@ -44,7 +47,7 @@ export class BasicDataSource implements IDataSource {
 
   registerDataChangeListener(listener: DataChangeListener): void {
     if (this.listeners.indexOf(listener) < 0) {
-      console.info('add listener');
+      Logger.info(TAG, 'add listener');
       this.listeners.push(listener);
     }
   }
@@ -52,7 +55,7 @@ export class BasicDataSource implements IDataSource {
   unregisterDataChangeListener(listener: DataChangeListener): void {
     const pos = this.listeners.indexOf(listener);
     if (pos >= 0) {
-      console.info('remove listener');
+      Logger.info(TAG, 'remove listener');
       this.listeners.splice(pos, 1);
     }
   }

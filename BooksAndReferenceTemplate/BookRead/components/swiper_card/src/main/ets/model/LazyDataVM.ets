@@ -82,8 +82,7 @@ export class LazyDataVM<T> extends LazyDataSource<T> {
     this.notifyDataAdd(this.dataArray.length - 1);
   }
   public pushArrayData(newData: ObservedArray<T>): void {
-    this.clear();
-    this.dataArray.push(...newData);
+    this.dataArray = [...newData];
     this.notifyDataReload();
   }
   public pushAll(data: T[]): void {

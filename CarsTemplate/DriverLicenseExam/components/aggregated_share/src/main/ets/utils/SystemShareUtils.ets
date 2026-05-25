@@ -151,7 +151,7 @@ export class SystemShareUtils {
       systemPasteboard.setData(pasteboardData);
       promptAction.showToast({ message: '复制成功' });
     } catch (err) {
-      console.log(JSON.stringify(err))
+      Logger.error(TAG, JSON.stringify(err))
     }
   }
 }

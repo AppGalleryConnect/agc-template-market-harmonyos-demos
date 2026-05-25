@@ -325,9 +325,14 @@ export struct ReaderToolBar {
         .trackColor(this.nightMode ? $r('app.color.10per_ffffff') : $r('app.color.10per_000000'))
         .selectedColor($r('app.color.slider_selected_color'))
         .onChange((value: number) => {
-          this.autoLight = false
-          this.screenLight = value;
-          this.windowClass.setWindowBrightness(this.screenLight);
+          try {
+            this.autoLight = false
+            this.screenLight = value;
+            this.windowClass.setWindowBrightness(this.screenLight);
+          } catch (error) {
+            console.error('ReaderToolBar', ` setWindowBrightness error = ${JSON.stringify(error)}`)
+          }
+
         })
         .layoutWeight(1)
 
@@ -336,7 +341,6 @@ export struct ReaderToolBar {
         .width(20)
     }
     .width('100%')
-    .padding({ left: 18, right: 18 })
     .justifyContent(FlexAlign.SpaceBetween)
     .height(50)
   }
@@ -390,7 +394,7 @@ export struct ReaderToolBar {
                   .textOverflow({ overflow: TextOverflow.Ellipsis })
                   .maxLines(1)
 
-                Image(this.nightMode ? $r('app.media.ic_public_locked_dark') : $r('app.media.ic_public_locked'))
+                Image(this.nightMode ? $r('app.media.ic_public_locked_dark') : $r('app.media.ic_public_lock'))
                   .height(24)
                   .width(24)
               }
@@ -426,14 +430,19 @@ export struct ReaderToolBar {
       .backgroundColor(color)
       .borderRadius(14)
       .onClick(() => {
-        this.context.resourceManager.getColor(color.id).then((value) => {
-          // 转成16进制
-          let colorStr = '#' + value.toString(16).substring(2)
-          this.readerSetting.fontColor = 'rgba(0,0,0,0.90)'
-          this.readerSetting.themeColor = colorStr
-          this.readerComponentController.setPageConfig(this.readerSetting)
-          this.selectState.colorSelectedIndex = index;
-        })
+        try {
+          this.context.resourceManager.getColor(color.id).then((value) => {
+            // 转成16进制
+            let colorStr = '#' + value.toString(16).substring(2)
+            this.readerSetting.fontColor = 'rgba(0,0,0,0.90)'
+            this.readerSetting.themeColor = colorStr
+            this.readerComponentController.setPageConfig(this.readerSetting)
+            this.selectState.colorSelectedIndex = index;
+          })
+        } catch (e) {
+          console.error('Failed to getColor. Cause: ' + JSON.stringify(e));
+        }
+
       })
       .borderColor($r('sys.color.ohos_fa_handup'))
       .borderWidth(this.selectState.colorSelectedIndex === index ? 0.1 : 0)
@@ -449,20 +458,23 @@ export struct ReaderToolBar {
         Text('系统亮度')
           .fontColor(this.nightMode ? $r('app.color.90per_ffffff') : $r('app.color.60per_182431'))
         Toggle({ type: ToggleType.Switch, isOn: $$this.autoLight })
+          .selectedColor($r('sys.color.multi_color_08'))
           .onChange((isOn) => {
-            if (isOn) {
-              this.windowClass.setWindowBrightness(-1)
-            } else {
-              this.windowClass.setWindowBrightness(this.screenLight);
+            try {
+              this.windowClass.setWindowBrightness(isOn ? -1 : this.screenLight);
+            }  catch (error) {
+              console.error('ReaderToolBar', ` windowClass setWindowBrightness error = ${JSON.stringify(error)}`)
             }
           })
       }
+      .width('100%')
+      .justifyContent(FlexAlign.Start)
 
     }
     .justifyContent(FlexAlign.SpaceBetween)
     .width('100%')
-    .padding({ top: 10, left: 18, right: 18 })
-    .height(130)
+    .padding({ top: 10, bottom: 16, left: 18, right: 18 })
+    .height(116)
   }
 
   build() {
@@ -498,7 +510,9 @@ export struct ReaderToolBar {
         })
 
         Column({ space: 2 }) {
-          Image(this.nightMode ? $r('app.media.ic_light_dark') : $r('app.media.ic_light'))
+          Image(this.nightMode ?
+            (this.isShowLight ? $r('app.media.ic_ict_activate_on_dark') : $r('app.media.ic_light_dark')) :
+            (this.isShowLight ? $r('app.media.ic_ict_activate_on') : $r('app.media.ic_light')))
             .width(24)
             .height(24)
 
@@ -534,7 +548,9 @@ export struct ReaderToolBar {
         })
 
         Column({ space: 2 }) {
-          Image(this.nightMode ? $r('app.media.book_setting_dark') : $r('app.media.book_setting'))
+          Image(this.nightMode ?
+            (this.isShowSetTool ? $r('app.media.icon_setting_on_dark') : $r('app.media.book_setting_dark')) :
+            this.isShowSetTool ? $r('app.media.icon_setting_on') : $r('app.media.book_setting'))
             .width(24)
             .height(24)
 

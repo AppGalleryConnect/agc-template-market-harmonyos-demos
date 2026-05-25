@@ -1,4 +1,10 @@
-import { COLOR_LIST, HIGHLIGHT_COLOR_FILTER, ORIGIN_COLOR_FILTER, RICH_ID } from '../common/Constants';
+import {
+  BLACK_ICON_COLOR_FILTER,
+  COLOR_LIST,
+  HIGHLIGHT_COLOR_FILTER,
+  ORIGIN_COLOR_FILTER,
+  RICH_ID
+} from '../common/Constants';
 import { AlignmentInfo } from '../model/AlignmentInfo';
 import { RichEditorController } from '../controller/RichEditorController';
 import { SnapShotController } from '../controller/SnapShotController';
@@ -6,6 +12,8 @@ import { SnapshotPreview } from './SnapshotPreview';
 import { LengthMetrics } from '@kit.ArkUI';
 import { HandwriteController, HandwriteComponent, PenHspInfo, PenType } from '@kit.Penkit';
 import common from '@ohos.app.ability.common';
+import { DocumentScanner, DocumentScannerConfig, DocType, SaveOption } from '@kit.VisionKit';
+import { hilog } from '@kit.PerformanceAnalysisKit';
 
 @ComponentV2
 export struct RichEditorArea {
@@ -16,6 +24,9 @@ export struct RichEditorArea {
   @Param @Once @Require noteTitle: string;
   @Param @Once @Require noteContent: MutableStyledString;
   @Param @Once @Require noteId: string;
+  /** 点击底部“录音”工具按钮 */
+  @Event tapRecord: () => void = () => {
+  };
   @Event titleChange: (title: string) => void = () => {
   };
 
@@ -23,10 +34,12 @@ export struct RichEditorArea {
   private readonly MAX_TEXT_LENGTH: number = 20000;
 
   // 手写相关状态
-  @Local isHandwriteMode: boolean = false;
   @Local penWidth: number = 5;
   @Local penColor: ResourceColor = Color.Black;
   ballpointPenWidth: number = 6;
+
+  // 文档扫描
+  @Local showDocScanner: boolean = false;
 
   /** 由外部传入时与编辑页共用同一控制器，便于保存笔记时一并保存画布 */
   @Param handwriteController: HandwriteController = new HandwriteController();
@@ -46,10 +59,10 @@ export struct RichEditorArea {
     }
     try {
       await this.handwriteController.save(this.handwritePath);
-      console.info(`手写内容已保存到: ${this.handwritePath}`);
+      hilog.info(0x0000, 'RichEditorArea', `手写内容已保存到: ${this.handwritePath}`);
       this.setHandwriteDirty(false);
     } catch (error) {
-      console.error('保存手写内容失败:', error);
+      hilog.error(0x0000, 'RichEditorArea', `保存手写内容失败: ${JSON.stringify(error)}`);
     }
   }
 
@@ -61,17 +74,21 @@ export struct RichEditorArea {
     try {
       if (this.handwritePath) {
         await this.handwriteController.load(this.handwritePath);
-        console.info(`手写内容已从 ${this.handwritePath} 加载`);
+        hilog.info(0x0000, 'RichEditorArea', `手写内容已从 ${this.handwritePath} 加载`);
       }
       this.setHandwriteDirty(false);
     } catch (error) {
-      console.info('无手写历史记录或文件不存在，将创建新手写数据');
+      hilog.info(0x0000, 'RichEditorArea', '无手写历史记录或文件不存在，将创建新手写数据');
       this.setHandwriteDirty(false);
     }
   }
 
   private setHandwriteDirty(dirty: boolean): void {
     if (this.isHandwriteDirty === dirty) {
+      if (dirty) {
+        AppStorage.setOrCreate('handwrite_dirty_note_id', this.noteId);
+        AppStorage.setOrCreate('handwrite_dirty', true);
+      }
       return;
     }
     this.isHandwriteDirty = dirty;
@@ -257,28 +274,44 @@ export struct RichEditorArea {
               new TextShadowStyle({ radius: 0 }));
         });
 
-      Image(this.isHandwriteMode ? $r('app.media.ic_keyboard') : $r('app.media.ic_handwrite'))
+      Image(this.richEditorController.isHandwriteMode ? $r('app.media.ic_keyboard') : $r('app.media.ic_handwrite'))
         .width(24)
         .height(24)
-        .colorFilter(this.isHandwriteMode ? HIGHLIGHT_COLOR_FILTER : ORIGIN_COLOR_FILTER)
+        .colorFilter(this.richEditorController.isHandwriteMode ? HIGHLIGHT_COLOR_FILTER : ORIGIN_COLOR_FILTER)
         .onClick(async () => {
+          // 展示态（右上角为“更多”三点）时，点击画笔：直接切到编辑态 + 开启手写模式
+          if (this.richEditorController.showMoreFunction && !this.richEditorController.isHandwriteMode) {
+            this.richEditorController.showMoreFunction = false;
+            this.handwritePath = this.hostContext.filesDir + '/' + `handwrite_${this.noteId}`;
+            this.richEditorController.isHandwriteMode = true;
+            return;
+          }
+
+          // 编辑态下原有的“手写 <-> 键盘”切换逻辑
           this.richEditorController.showMoreFunction = false;
-          if (this.isHandwriteMode) {
+          if (this.richEditorController.isHandwriteMode) {
             await this.saveHandwriteData();
             this.showToast('手写内容已保存');
-            this.isHandwriteMode = false;
+            this.richEditorController.isHandwriteMode = false;
             this.richEditorController.showToolBarIndex = 0;
           } else {
             this.handwritePath = this.hostContext.filesDir + '/' + `handwrite_${this.noteId}`;
-            this.isHandwriteMode = true;
+            this.richEditorController.isHandwriteMode = true;
           }
         });
 
-      // 选择图片图标
       SymbolGlyph($r('sys.symbol.picture_fill'))
         .fontSize(24)
+        .bindMenu(this.imageOptionsMenu, {
+          placement: Placement.Top,
+          offset: { x: 0, y: -8 }
+        });
+
+      Image($r('app.media.ic_tap_record'))
+        .width(24)
+        .height(24)
         .onClick(() => {
-          this.richEditorController.selectImage(this.getUIContext());
+          this.tapRecord();
         });
 
       // 清除所有文本图标
@@ -297,6 +330,73 @@ export struct RichEditorArea {
     .backgroundColor('#EDEFF5');
   }
 
+  @Builder
+  private imageOptionsMenu() {
+    Column() {
+      Row() {
+        Image($r('app.media.ic_pic_camera'))
+          .width(24)
+          .height(24)
+          .colorFilter(BLACK_ICON_COLOR_FILTER)
+          .margin({ left: 12, right: 8 });
+        Text('拍照')
+          .fontSize(14)
+          .fontColor('#000000')
+          .layoutWeight(1);
+      }
+      .width('100%')
+      .height(48)
+      .padding({ right: 12 })
+      .alignItems(VerticalAlign.Center)
+      .onClick(() => {
+        const wVp = this.snapShotController.listComponentWidth || 0;
+        this.richEditorController.takePhoto(this.uiContext, wVp);
+      });
+      Divider().width('100%').height(0.5).color($r('sys.color.comp_divider'));
+      Row() {
+        Image($r('app.media.ic_pic_picture'))
+          .width(24)
+          .height(24)
+          .colorFilter(BLACK_ICON_COLOR_FILTER)
+          .margin({ left: 12, right: 8 });
+        Text('选择图片')
+          .fontSize(14)
+          .fontColor('#000000')
+          .layoutWeight(1);
+      }
+      .width('100%')
+      .height(48)
+      .padding({ right: 12 })
+      .alignItems(VerticalAlign.Center)
+      .onClick(() => {
+        const wVp = this.snapShotController.listComponentWidth || 0;
+        this.richEditorController.selectImages(this.uiContext, wVp);
+      });
+      Divider().width('100%').height(0.5).color($r('sys.color.comp_divider'));
+      Row() {
+        Image($r('app.media.ic_line_viewfinder'))
+          .width(24)
+          .height(24)
+          .colorFilter(BLACK_ICON_COLOR_FILTER)
+          .margin({ left: 12, right: 8 });
+        Text('文档扫描')
+          .fontSize(14)
+          .fontColor('#000000')
+          .layoutWeight(1);
+      }
+      .width('100%')
+      .height(48)
+      .padding({ right: 12 })
+      .alignItems(VerticalAlign.Center)
+      .onClick(() => {
+        this.showDocScanner = true;
+      });
+    }
+    .width(200)
+    .backgroundColor($r('app.color.bg_more_function'))
+    .margin({ top: 4, bottom: 4 });
+  }
+
   // 显示提示
   private showToast(message: string): void {
     this.uiContext.getPromptAction().showToast({
@@ -304,6 +404,54 @@ export struct RichEditorArea {
       alignment: Alignment.Center,
       duration: 1500
     });
+  }
+
+  // 文档扫描组件（结果保存到系统，相册/文件中可见）
+  private buildDocScannerConfig(): DocumentScannerConfig {
+    const scannerConfig: DocumentScannerConfig = new DocumentScannerConfig();
+    scannerConfig.supportType = [DocType.DOC];
+    scannerConfig.saveOptions = [SaveOption.JPG, SaveOption.PDF];
+    return scannerConfig;
+  }
+
+  @Builder
+  docScannerLayer() {
+    if (this.showDocScanner) {
+      Column() {
+        DocumentScanner({
+          scannerConfig: this.buildDocScannerConfig(),
+          onResult: (_code: number, saveOption: SaveOption, uris: Array<string>) => {
+            this.showDocScanner = false;
+            if (!uris || uris.length === 0) {
+              this.showToast('文档扫描已取消');
+              return;
+            }
+
+            const wVp = this.snapShotController.listComponentWidth || 0;
+            const result = this.richEditorController.insertScannedUris(this.uiContext, uris, wVp);
+            if (saveOption === SaveOption.PDF && result.insertedImageCount === 0 && result.pdfCount > 0) {
+              this.showToast('已保存为PDF，当前富文本不支持PDF内嵌');
+              return;
+            }
+            if (result.insertedImageCount > 0 && result.pdfCount > 0) {
+              this.showToast('图片已插入笔记，PDF已保存到系统');
+              return;
+            }
+            if (result.insertedImageCount > 0) {
+              this.showToast('文档图片已插入笔记');
+              return;
+            }
+            if (result.pdfCount > 0) {
+              this.showToast('当前富文本不支持PDF内嵌，PDF已保存到系统');
+              return;
+            }
+            this.showToast('扫描结果未能插入笔记');
+          }
+        })
+      }
+      .width('100%')
+      .height('100%');
+    }
   }
 
   @Builder
@@ -315,8 +463,8 @@ export struct RichEditorArea {
         snapPopupPosition: this.snapShotController.snapPopupPosition,
         isLargePreview: this.snapShotController.isLargePreview,
         isShowPreview: this.snapShotController.isShowPreview,
-        changeMergedImage: (mergedImage) => {
-          this.snapShotController.mergedImage = this.snapShotController.mergedImage;
+        changeMergedImage: (mergedImage: PixelMap | undefined) => {
+          this.snapShotController.mergedImage = mergedImage;
         },
         changeSnapPopupPosition: (snapPopupPosition) => {
           this.snapShotController.snapPopupPosition = snapPopupPosition;
@@ -357,6 +505,9 @@ export struct RichEditorArea {
     },
     onDidChange: (rangeBefore, rangeAfter) => {
       this.richEditorController.onDidChange(rangeAfter.start, rangeAfter.end);
+      // 平板/PC 嵌入编辑器：标记当前笔记未保存（供切换笔记/返回二次确认使用）
+      AppStorage.setOrCreate('notes_embed_dirty_note_id', this.noteId);
+      AppStorage.setOrCreate('notes_embed_dirty', true);
       const styledString = this.richEditorController.controller.getStyledString();
       const content = styledString.getString();
       if (content.length > this.MAX_TEXT_LENGTH) {
@@ -395,6 +546,9 @@ export struct RichEditorArea {
                 .onChange((value: string) => {
                   this.noteTitle = value;
                   this.titleChange(value);
+                  // 标题变更同样视为未保存
+                  AppStorage.setOrCreate('notes_embed_dirty_note_id', this.noteId);
+                  AppStorage.setOrCreate('notes_embed_dirty', true);
                 })
                 .margin({ top: 12 })
                 .onClick(() => {
@@ -465,8 +619,8 @@ export struct RichEditorArea {
                 })
                 .onClick(() => {
                   // 手写模式下不允许编辑笔记，这里点击时直接退出手写模式
-                  if (this.isHandwriteMode) {
-                    this.isHandwriteMode = false;
+                  if (this.richEditorController.isHandwriteMode) {
+                    this.richEditorController.isHandwriteMode = false;
                   }
                 })
             }
@@ -481,13 +635,20 @@ export struct RichEditorArea {
             this.snapShotController.listComponentWidth = newValue.width as number;
             this.snapShotController.listComponentHeight = newValue.height as number;
             this.snapShotController.scrollHeight = newValue.height as number;
+
+            // 编辑区宽度变化（横竖屏/分栏）：重算图片附件尺寸，变窄会缩小，变宽会恢复到原始大小（不超过编辑区）
+            const oldW = oldValue.width as number;
+            const newW = newValue.width as number;
+            if (typeof oldW === 'number' && typeof newW === 'number' && newW > 0 && oldW > 0 && newW !== oldW) {
+              this.richEditorController.reflowImagesToFitWidth(this.uiContext, newW);
+            }
           })
           .onDidScroll(() => {
             this.snapShotController.curYOffset = this.snapShotController.scroller.currentOffset().yOffset;
           });
         }
         .layoutWeight(1)
-        .zIndex(this.isHandwriteMode ? 0 : 1)
+        .zIndex(this.richEditorController.isHandwriteMode ? 0 : 1)
 
         // 手写层：编辑模式下在底层仅展示；手写模式下在上层可画画
         HandwriteComponent({
@@ -504,9 +665,10 @@ export struct RichEditorArea {
           .backgroundColor(Color.Transparent)
           .width('100%')
           .height('100%')
-          .zIndex(this.isHandwriteMode ? 1 : 0)
+          .zIndex(this.richEditorController.isHandwriteMode && !this.richEditorController.showMoreFunction ? 1 : 0)
           .onTouch((event) => {
-            if (!this.isHandwriteMode) {
+            // 仅在编辑态 + 手写模式下才标记画布已修改
+            if (!this.richEditorController.isHandwriteMode || this.richEditorController.showMoreFunction) {
               return;
             }
             this.setHandwriteDirty(true);
@@ -515,7 +677,7 @@ export struct RichEditorArea {
       .layoutWeight(1)
 
       // 底部工具栏
-      if (this.isHandwriteMode) {
+      if (this.richEditorController.isHandwriteMode) {
         // 手写笔模式：只显示当前工具栏（含切回键盘按钮），不能编辑文本
         this.toolBar();
       } else {
@@ -527,6 +689,9 @@ export struct RichEditorArea {
         }
         this.toolBar();
       }
+
+      // 文档扫描覆盖层（在当前页顶层全屏展示）
+      this.docScannerLayer();
     }
     .width('100%')
     .height('100%')

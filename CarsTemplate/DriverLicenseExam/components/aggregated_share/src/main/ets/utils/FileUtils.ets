@@ -141,7 +141,7 @@ export async function compressImage(buf: ArrayBuffer): Promise<ArrayBuffer> {
         resolve(data);
       })
     } catch (err) {
-      console.log(JSON.stringify(err))
+      Logger.error(TAG, JSON.stringify(err))
     }
   })
 }

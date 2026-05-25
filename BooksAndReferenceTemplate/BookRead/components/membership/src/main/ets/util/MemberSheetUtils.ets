@@ -1,6 +1,7 @@
 import { DEFAULT_LOGIN_SHEET_HEIGHT } from '../constant/Constant';
-import { MemberList, MemberParams, ProductInfo } from '../model/Index';
+import { LoginApiController, MemberList, MemberParams, ProductInfo, UserStatus } from '../model/Index';
 import { PopViewUtils } from './PopViewUtils';
+import { common } from '@kit.AbilityKit';
 
 @Builder
 function memberSheetBuilder(params: ProductsInfoOptions) {
@@ -34,17 +35,20 @@ export class ProductsInfoOptions {
     ResourceColor,
     number
   ]> = [['#FFFFFF', 0.0], ['#E5EDF5', 0.5], ['#0A59F7', 1.0]];
-  themeColor: ResourceStr = $r('sys.color.background_emphasize');
-  btnFontColor: ResourceStr = $r('sys.color.font_on_primary');
+  themeColor: ResourceColor = $r('sys.color.background_emphasize');
+  btnFontColor: ResourceColor = $r('sys.color.font_on_primary');
   lastPurchaseProductExpireTime: string = '';
   productsInfo: ProductInfo[] = [];
   privacyContent: string = '';
   subscribeCallBack: (params: MemberParams) => Promise<void> = () => new Promise(() => {
   });
-  queryExpireTime: (productId: string, time?: number) => Promise<void> = () => new Promise(() => {
+  queryExpireTime: (productId: string, time?: number) => Promise<string> = () => new Promise(() => {
   });
   ownedMemberCallBack: (list: MemberList) => Promise<void> = () => new Promise(() => {
   });
+  loginApiController?: LoginApiController = new LoginApiController(() => new UserStatus(), () => {
+  });
+  isLinkLoginStatus?: boolean = false;
 }
 
 export class MemberSheetUtils {
@@ -52,9 +56,17 @@ export class MemberSheetUtils {
     PopViewUtils.showSheet(wrapBuilder(memberSheetBuilder), uiContext, {
       title: { title: '开通会员' },
       showClose: true,
+      enableHoverMode: true,
+      hoverModeArea: HoverModeAreaType.BOTTOM_SCREEN,
       height: DEFAULT_LOGIN_SHEET_HEIGHT,
-      backgroundColor: $r('sys.color.background_secondary'),
       preferType: SheetType.CENTER,
+      onHeightDidChange: (he: number) => {
+        (uiContext.getHostContext() as common.UIAbilityContext).eventHub.emit('SheetHeightChange', he);
+      },
+      onWillDismiss: (dismissSheetAction: DismissSheetAction) => {
+        (uiContext.getHostContext() as common.UIAbilityContext).eventHub.off('SheetHeightChange');
+        dismissSheetAction.dismiss();
+      },
     }, params);
   }
 

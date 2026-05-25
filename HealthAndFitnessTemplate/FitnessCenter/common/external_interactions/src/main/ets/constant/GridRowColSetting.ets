@@ -9,6 +9,15 @@ export interface BreakpointTypeOptions<T> {
 }
 
 /**
+ * 一多适配Grid模型
+ */
+export interface GridSettingInfo {
+  template: string;
+  colGap: number;
+  rowGap: number;
+}
+
+/**
  * 业务options类
  */
 export class BreakpointType<T> {

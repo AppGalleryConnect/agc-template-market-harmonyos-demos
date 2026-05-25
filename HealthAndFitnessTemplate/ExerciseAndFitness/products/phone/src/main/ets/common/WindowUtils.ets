@@ -14,7 +14,11 @@ export class WindowUtils {
   public static async setWinConfig(windowStage: window.WindowStage) {
     AppStorage.setOrCreate('windowStage', windowStage);
     let windowClass: window.Window = windowStage.getMainWindowSync();
-    await windowClass.setWindowLayoutFullScreen(true);
+    try {
+      await windowClass.setWindowLayoutFullScreen(true);
+    } catch (e) {
+      Logger.error(TAG, 'Failed to setWindowLayoutFullScreen. Cause: ' + JSON.stringify(e));
+    }
     WindowUtils.setAvoidArea(windowClass);
     WindowUtils.onAvoidAreaChange(windowStage);
     WindowUtils.setWindowSize(windowStage);

@@ -188,7 +188,9 @@ export struct Trash {
                 .bindSheet($$this.openSortSheet, this.sortSheet(), {
                   width: '100%',
                   height: 200,
-                  showClose: false
+                  showClose: false,
+                  preferType: 0,
+                  enableOutsideInteractive: false,
                 });
             }
             .justifyContent(FlexAlign.End)
@@ -202,6 +204,8 @@ export struct Trash {
             this.showNoteList();
           }
         }
+        .width('100%')
+        .height('100%')
       }
       .padding(new BreakpointType<Padding>({
         sm: {
@@ -278,6 +282,9 @@ export struct Trash {
           })
         }, (item: Note) => item.id);
       }
+      .width('100%')
+      .layoutWeight(1)
+      .padding({ bottom: 16 })
       .scrollBar(BarState.Off);
     }
   }

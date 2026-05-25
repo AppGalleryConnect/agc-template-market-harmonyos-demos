@@ -25,6 +25,8 @@ export struct Exam {
   @Local currentIndex: number = 0;
   // 模拟考试-暂停考试/继续考试
   @Local isStop: boolean = false;
+  // 仅渲染当前题附近页面，降低超大题库切换开销
+  private readonly renderWindowSize: number = 2;
 
   @Monitor('examController.isShowMockExamDialog')
   mockExamDialogChange() {
@@ -69,23 +71,27 @@ export struct Exam {
       Swiper(examController.swiperController) {
         ForEach(this.examManager.examDetails, (item: ExamDetail, examIndex: number) => {
           Column({ space: 12 }) {
-            SelectComponent({
-              item: item,
-              index: examIndex,
-              currentIndex: this.currentIndex - 1,
-              // 如果想退出考试重新进入后将已做题回显，打开这个参数
-              // isReDisplay: item.selected.length !== 0,
-              changeCorrectNum: (isAdd: boolean) => {
-                isAdd ? this.examManager.correctNumber++ : this.examManager.correctNumber--;
-              },
-              changeErrorNum: (isAdd: boolean) => {
-                isAdd ? this.examManager.errorNumber++ : this.examManager.errorNumber--;
-              },
-            });
+            if (this.shouldRenderQuestion(examIndex)) {
+              SelectComponent({
+                item: item,
+                // 如果想退出考试重新进入后将已做题回显，打开这个参数
+                // isReDisplay: item.selected.length !== 0,
+                changeCorrectNum: (isAdd: boolean) => {
+                  isAdd ? this.examManager.correctNumber++ : this.examManager.correctNumber--;
+                },
+                changeErrorNum: (isAdd: boolean) => {
+                  isAdd ? this.examManager.errorNumber++ : this.examManager.errorNumber--;
+                },
+              });
+            } else {
+              Blank()
+                .width('100%')
+                .height('100%');
+            }
           };
-        }, (item: ExamDetail) => {
+        }, (item: ExamDetail, index: number) => {
           try {
-            return JSON.stringify(item.id)
+            return JSON.stringify(index)
           } catch (err) {
             return ''
           }
@@ -109,7 +115,12 @@ export struct Exam {
     }
     .width('100%')
     .height('100%')
-    .backgroundColor('#F1F3F5');
+    .backgroundColor($r('sys.color.background_secondary'));
+  }
+
+  private shouldRenderQuestion(index: number): boolean {
+    const current = this.currentIndex - 1;
+    return Math.abs(index - current) <= this.renderWindowSize;
   }
 
   @Builder
@@ -205,7 +216,7 @@ export struct Exam {
 
         Text('确认退出')
           .dialogChooseStyle()
-          .fontColor('rgba(0,0,0,0.40)')
+          .fontColor($r('sys.color.font_secondary'))
           .maxFontScale(1)
           .onClick(() => {
             this.examExitDialog.close()
@@ -276,7 +287,7 @@ export struct Exam {
 
         Text('我知道了')
           .dialogChooseStyle()
-          .fontColor('rgba(0,0,0,0.40)')
+          .fontColor($r('sys.color.font_secondary'))
           .maxFontScale(1)
           .onClick(() => {
             this.isStop = false;
@@ -310,7 +321,7 @@ export struct Exam {
         .height(16)
         .margin({
           right: '1%',
-        });
+        })
 
       Text(String(this.examManager.correctNumber))
         .maxFontScale(1)
@@ -321,7 +332,7 @@ export struct Exam {
         .margin({
           left: '3%',
           right: '1%',
-        });
+        })
 
       Text(String(this.examManager.errorNumber))
         .maxFontScale(1)
@@ -335,7 +346,8 @@ export struct Exam {
           .height(16)
           .margin({
             right: '1%',
-          });
+          })
+          .fillColor($r('sys.color.icon_primary'));
         Text(`${this.currentIndex}/${this.examManager.total}`)
           .maxFontScale(1)
       }
@@ -347,7 +359,7 @@ export struct Exam {
         width: '100%',
         preferType: SheetType.CENTER,
         title: { title: '答题卡' },
-        backgroundColor: Color.White,
+        backgroundColor: $r('sys.color.comp_background_primary'),
       });
 
       Blank();
@@ -360,12 +372,12 @@ export struct Exam {
           .height(24)
           .margin({
             right: '1%',
-          });
+          })
 
-        Text('收藏')
-          .fontSize(12)
-          .fontColor('rgba(0,0,0,0.90)')
-          .maxFontScale(1)
+      Text('收藏')
+        .fontSize(12)
+        .fontColor($r('sys.color.font_primary'))
+        .maxFontScale(1)
       }
       .onClick(() => {
         this.examManager.examDetails[this.currentIndex-1].isCollect =
@@ -375,7 +387,8 @@ export struct Exam {
       Row() {
         Image($r('app.media.bell'))
           .width(16)
-          .height(16);
+          .height(16)
+          .fillColor($r('sys.color.icon_primary'));
         Text('交卷')
           .fontColor(Color.White)
           .fontSize(12)
@@ -396,7 +409,7 @@ export struct Exam {
       })
       .visibility(this.examManager.timeLimit === 0 ? Visibility.None : Visibility.Visible);
     }
-    .backgroundColor(Color.White)
+    .backgroundColor($r('sys.color.background_secondary'))
     .width('100%')
     .height(76)
     .alignItems(VerticalAlign.Top)
@@ -429,7 +442,7 @@ export struct Exam {
               .backgroundColor(this.getBgColorByIsCorrect(item.isCorrect));
 
               Text(String(index + 1))
-                .fontColor(item.isCorrect === undefined ? 'rgba(0,0,0,0.90)' : Color.White);
+                .fontColor(item.isCorrect === undefined ? $r('sys.color.font_primary') : Color.White);
             };
           }
           .onClick(() => {
@@ -486,9 +499,9 @@ export struct Exam {
    * @param isCorrect
    * @returns
    */
-  getBgColorByIsCorrect(isCorrect: boolean | undefined): string {
+  getBgColorByIsCorrect(isCorrect: boolean | undefined): ResourceColor {
     if (isCorrect === undefined) {
-      return '#F1F3F5';
+      return $r('sys.color.comp_background_tertiary');
     }
     return isCorrect ? '#64BB5C' : ' #E84026';
   }
@@ -499,7 +512,8 @@ export struct Exam {
   @Builder
   clearRecords() {
     Row() {
-      Text('确定要清空当前操作记录吗');
+        Text('确定要清空当前操作记录吗')
+          .fontColor($r('sys.color.font_primary'));
     }
     .justifyContent(FlexAlign.Center)
     .width('100%');
@@ -554,7 +568,7 @@ export function showSettingSheet() {
       Text('答对自动下一题')
         .fontSize(16)
         .maxFontScale(1)
-        .fontColor('rgba(0,0,0,0.90)');
+        .fontColor($r('sys.color.font_primary'));
       Blank();
       Toggle({ type: ToggleType.Switch, isOn: examController.showNext })
         .selectedColor($r('sys.color.comp_background_emphasize'))
@@ -575,7 +589,7 @@ export function showSettingSheet() {
       Text('字体大小')
         .fontSize(10)
         .maxFontScale(1)
-        .fontColor('rgba(0,0,0,0.90)');
+        .fontColor($r('sys.color.font_primary'));
       Blank();
       Row() {
         Slider({
@@ -585,9 +599,9 @@ export function showSettingSheet() {
           step: 2, //步长
           style: SliderStyle.OutSet,
         })
-          .stepColor('rgba(0,0,0,0.40)')
-          .trackColor('rgba(0,0,0,0.20)')
-          .selectedColor('rgba(0,0,0,0.20)')
+          .stepColor($r('sys.color.font_secondary'))
+          .trackColor($r('sys.color.comp_background_secondary'))
+          .selectedColor($r('sys.color.comp_background_emphasize'))
           .showSteps(true)
           .blockStyle({ type: SliderBlockType.IMAGE, image: $r('app.media.font_setting') })
           .blockSize({ width: 16, height: 16 })
@@ -602,13 +616,14 @@ export function showSettingSheet() {
       Text('字体大小')
         .fontSize(16)
         .maxFontScale(1)
-        .fontColor('rgba(0,0,0,0.90)');
+        .fontColor($r('sys.color.font_primary'));
     }
     .width('100%');
   }
   .height('100%')
   .padding({
-    left:20,
-    right:20
+    left :20,
+    right: 20
   })
+  .backgroundColor($r('sys.color.comp_background_primary'))
 }

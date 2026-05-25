@@ -6,6 +6,7 @@
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
-    "@hw-agconnect/ui-base": "^1.0.1"
+    "@hw-agconnect/ui-base": "^1.0.1",
+    'base_common': 'file:../base_common'
   }
 }

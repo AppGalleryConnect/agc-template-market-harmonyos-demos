@@ -330,7 +330,7 @@ struct VideoListView {
                   Row() {
                     Text(item.simpleDescription)
                       .fontSize(16)
-                      .fontColor('rgba(0,0,0,0.9)')
+                      .fontColor($r('sys.color.font_primary'))
                       .fontWeight(FontWeight.Medium)
                       .textOverflow({
                         overflow:TextOverflow.Ellipsis
@@ -349,7 +349,7 @@ struct VideoListView {
 
                   Text(item.description)
                     .fontSize(14)
-                    .fontColor('rgba(0,0,0,0.6)')
+                    .fontColor($r('sys.color.font_secondary'))
                     .fontWeight(FontWeight.Regular)
                     .maxFontScale(1)
                     .textOverflow({
@@ -362,7 +362,7 @@ struct VideoListView {
               }
               .height(106)
               .width(CommonConstants.FULL_WIDTH)
-              .backgroundColor(Color.White)
+              .backgroundColor($r('sys.color.background_primary'))
               .borderRadius(16)
               .padding(12)
               .onClick(() => {
@@ -396,6 +396,6 @@ struct VideoListView {
       top:this.getUIContext().px2vp(this.topRectHeight),
       bottom: this.getUIContext().px2vp(this.bottomRectHeight)
     })
-    .backgroundColor('#F1F3F5')
+    .backgroundColor($r('sys.color.background_secondary'))
   }
 }

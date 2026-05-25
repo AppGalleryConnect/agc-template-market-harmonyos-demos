@@ -73,8 +73,8 @@ export struct SettingPage {
           rightArrow()
         }
         .borderRadius(16)
-        .height(46)
-        .backgroundColor(Color.White)
+        .minHeight(46)
+        .backgroundColor($r('app.color.comp_background_list_card'))
         .width(CommonConstants.FULL_PERCENT)
         .onClick(() => {
           const params: Record<string, Object> = { 'protocolUrl': this.getProtocolUrl(PRIVACY_URL) };
@@ -92,8 +92,8 @@ export struct SettingPage {
           rightArrow()
         }
         .borderRadius(16)
-        .height(46)
-        .backgroundColor(Color.White)
+        .minHeight(46)
+        .backgroundColor($r('app.color.comp_background_list_card'))
         .width(CommonConstants.FULL_PERCENT)
         .onClick(() => {
           this.vm.navStack.pushPathByName('SecretSetting', undefined);
@@ -110,8 +110,8 @@ export struct SettingPage {
           rightArrow()
         }
         .borderRadius(16)
-        .height(46)
-        .backgroundColor(Color.White)
+        .minHeight(46)
+        .backgroundColor($r('app.color.comp_background_list_card'))
         .width(CommonConstants.FULL_PERCENT)
         .onClick(() => {
           this.logOutDialogController.open();
@@ -155,5 +155,5 @@ function textExtend() {
   .fontFamily('鸿蒙黑体')
   .fontWeight(FontWeight.Medium)
   .opacity(0.9)
-  .fontColor($r('sys.color.black'));
+  .fontColor($r('app.color.font_secondary'));
 }

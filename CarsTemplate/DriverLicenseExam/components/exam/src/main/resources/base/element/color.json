@@ -3,6 +3,14 @@
     {
       "name": "toggle_selected_color",
       "value": "#64BB5C"
+    },
+    {
+      "name": "bt_bg_color",
+      "value": "#66000000"
+    },
+    {
+      "name": "default_submit_answer",
+      "value": "#1A000000"
     }
   ]
 }

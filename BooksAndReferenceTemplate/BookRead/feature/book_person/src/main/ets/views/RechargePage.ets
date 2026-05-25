@@ -32,7 +32,6 @@ export struct RechargePage {
     } catch (e) {
       console.error('Failed to emitter emit login change. Cause: ' + JSON.stringify(e));
     }
-
   }
 
   build() {

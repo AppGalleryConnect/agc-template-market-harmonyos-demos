@@ -46,15 +46,15 @@
     },
     {
       "name": "agcit_huawei_fitness_center",
-      "value": "1.0.0"
+      "value": "1.0.3"
     },
     {
       "name": "widget_desc",
-      "value": "This is a service widget."
+      "value": "健身房卡片"
     },
     {
       "name": "widget_display_name",
-      "value": "widget"
+      "value": "健身房卡片"
     }
   ]
 }

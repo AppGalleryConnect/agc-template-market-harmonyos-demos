@@ -45,7 +45,7 @@ export class FileUtils {
         return bundleStats.cacheSize;
       });
     } catch (err) {
-      console.log(JSON.stringify(err));
+      Logger.error(TAG, JSON.stringify(err));
       return Promise.resolve(0)
     }
   }
@@ -80,7 +80,7 @@ export class FileUtils {
       context.area = contextConstant.AreaMode.EL2;
       return paths;
     } catch (err) {
-      console.log(JSON.stringify(err))
+      Logger.error(TAG, JSON.stringify(err))
       return []
     }
   }

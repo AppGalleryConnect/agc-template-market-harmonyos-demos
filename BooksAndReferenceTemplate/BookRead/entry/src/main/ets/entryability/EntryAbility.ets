@@ -1,12 +1,14 @@
 import { AbilityConstant, ConfigurationConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
-import { BookApi, ColorModeClass, Constants, GlobalContext, TCRouter, UserInfoUtil, WindowUtils } from 'common';
+import { BookApi, ColorModeClass, Constants, GlobalContext, TCRouter, UserInfoUtil,
+  WantUtils,
+  WindowUtils } from 'common';
 import { BusinessError } from '@kit.BasicServicesKit';
 import { pushService } from '@kit.PushKit';
-import { notificationManager } from '@kit.NotificationKit';
 import { Configuration } from '@ohos.app.ability.Configuration';
 import { AppStorageV2 } from '@kit.ArkUI';
+import { ShareService } from 'aggregated_share';
 
 interface PushData {
   pushContent: string
@@ -18,9 +20,17 @@ const DOMAIN_NUMBER: number = 0xFF00;
 
 export default class EntryAbility extends UIAbility {
   private isDark: boolean = false;
+  // 实例化分享服务
+  private shareServiceImpl: ShareService =
+    ShareService.create()
+    // todo 填写微信开放平台配置的应用AppID
+      .initWX('wxc92d9d6570127a32')
+      // todo 填写QQ互联平台配置的应用AppID
+      .initQQ(102061317);
 
   async onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): Promise<void> {
 
+    WantUtils.handleAppLinkingWant(want); //AppLinking跳转
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onCreate');
     // this.context.getApplicationContext().setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_LIGHT);
     GlobalContext.initContext(this.context);
@@ -53,10 +63,12 @@ export default class EntryAbility extends UIAbility {
     let currentColorMode = this.context.config.colorMode;
     this.isDark = currentColorMode === ConfigurationConstant.ColorMode.COLOR_MODE_DARK;
     AppStorage.setOrCreate<boolean>('currentColorMode', this.isDark)
+    this.shareServiceImpl.handleWant(want, this.context);
   }
 
   onNewWant(want: Want, launchParam: AbilityConstant.LaunchParam): void {
-
+    WantUtils.handleAppLinkingWant(want); //AppLinking跳转
+    this.shareServiceImpl.handleWant(want, this.context);
     if (want.action === 'com.test.action') {
       AppStorage.setOrCreate('takeMessage', 1)
       AppStorage.setOrCreate('coldBoot', 1)
@@ -116,21 +128,21 @@ export default class EntryAbility extends UIAbility {
     }
     // Main window is created, set main page for this ability
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onWindowStageCreate');
-    windowStage.loadContent('pages/Index', (err) => {
-      if (err.code) {
-        hilog.error(0x0000, 'testTag', 'Failed to load the content. Cause: %{public}s', JSON.stringify(err) ?? '');
-        return;
-      }
-      WindowUtils.init(windowStage.getMainWindowSync());
-      AppStorage.setOrCreate('uiContext', windowStage.getMainWindowSync().getUIContext());
-      hilog.info(0x0000, 'testTag', 'Succeeded in loading the content.');
-      notificationManager.requestEnableNotification(this.context).then(() => {
-        hilog.info(0x0000, 'testTag', `[ANS] requestEnableNotification success`);
-      }).catch((err: BusinessError) => {
-        hilog.error(0x0000, 'testTag',
-          `[ANS] requestEnableNotification failed, code is ${err.code}, message is ${err.message}`);
+    try {
+      windowStage.loadContent('pages/Index', (err) => {
+        if (err.code) {
+          hilog.error(0x0000, 'testTag', 'Failed to load the content. Cause: %{public}s', JSON.stringify(err) ?? '');
+          return;
+        }
+        WindowUtils.init(windowStage.getMainWindowSync());
+        AppStorage.setOrCreate('uiContext', windowStage.getMainWindowSync().getUIContext());
+        hilog.info(0x0000, 'testTag', 'Succeeded in loading the content.');
       });
-    });
+    } catch (e) {
+      hilog.error(DOMAIN_NUMBER, 'testTag',
+        `Failed to enable the windowStage loadContent. Cause: ${JSON.stringify(e)}`);
+    }
+
   }
 
   onConfigurationUpdate(newConfig: Configuration): void {

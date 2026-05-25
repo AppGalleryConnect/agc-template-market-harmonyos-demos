@@ -35,4 +35,21 @@ export class IndexData {
       component: wrapBuilder(PersonPageBuilder)
     },
   ]
+
+  public static MINOR_TAB: TabInfo[] = [
+    {
+      index: Constants.TAB_INDEX_ZERO,
+      label: '书城',
+      activeIcon: $r('sys.symbol.book_pages'),
+      defaultIcon: $r('app.media.icon_book_mall_off'),
+      component: wrapBuilder(BookListPageBuilder)
+    },
+    {
+      index: Constants.TAB_INDEX_ONE,
+      label: '我的',
+      activeIcon: $r('sys.symbol.person'),
+      defaultIcon: $r('app.media.person_tab'),
+      component: wrapBuilder(PersonPageBuilder)
+    }
+  ]
 }

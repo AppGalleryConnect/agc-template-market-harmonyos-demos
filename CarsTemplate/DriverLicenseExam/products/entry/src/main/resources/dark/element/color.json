@@ -1,0 +1,108 @@
+{
+  "color": [
+    {
+      "name": "start_window_background",
+      "value": "#000000"
+    },
+    {
+      "name": "theme_green",
+      "value": "#64bb5c"
+    },
+    {
+      "name": "item_title_font",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "page_bg",
+      "value": "#202224"
+    },
+    {
+      "name": "text_primary",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "text_secondary",
+      "value": "#CCCCCC"
+    },
+    {
+      "name": "background_primary",
+      "value": "#2C2E30"
+    },
+    {
+      "name": "background_secondary",
+      "value": "#1A1C1E"
+    },
+    {
+      "name": "comp_background_primary",
+      "value": "#3A3C3E"
+    },
+    {
+      "name": "comp_background_secondary",
+      "value": "#2C2E30"
+    },
+    {
+      "name": "comp_background_list_card",
+      "value": "#3A3C3E"
+    },
+    {
+      "name": "comp_background_emphasize",
+      "value": "#64BB5C"
+    },
+    {
+      "name": "comp_background_tertiary",
+      "value": "#2C2E30"
+    },
+    {
+      "name": "comp_divider",
+      "value": "#4A4C4E"
+    },
+    {
+      "name": "icon_primary",
+      "value": "#666666"
+    },
+    {
+      "name": "icon_secondary",
+      "value": "#CCCCCC"
+    },
+    {
+      "name": "font_primary",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "font_secondary",
+      "value": "#CCCCCC"
+    },
+    {
+      "name": "font_fourth",
+      "value": "#999999"
+    },
+    {
+      "name": "font_on_primary",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "warning",
+      "value": "#FF6B6B"
+    },
+    {
+      "name": "brand",
+      "value": "#64BB5C"
+    },
+    {
+      "name": "bt_bg_color",
+      "value": "#202224"
+    },
+    {
+      "name": "default_submit_answer",
+      "value": "#202224"
+    },
+    {
+      "name": "base_font_color",
+      "value":"#fff"
+    },
+    {
+      "name": "search_background",
+      "value": "#202224"
+    }
+  ]
+}

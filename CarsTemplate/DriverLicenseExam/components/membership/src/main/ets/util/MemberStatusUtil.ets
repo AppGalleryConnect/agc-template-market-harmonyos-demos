@@ -39,7 +39,7 @@ export class MemberStatusUtil {
         return memberList;
       });
     } catch (error) {
-      console.log(error)
+      hilog.error(0xFF00, 'MemberShip', `queryPurchase failed: ${JSON.stringify(error)}`)
       return new Promise(resolve => {
         resolve(memberList)
       })

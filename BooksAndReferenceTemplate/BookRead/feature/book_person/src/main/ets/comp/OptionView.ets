@@ -1,15 +1,17 @@
-import { Constants, TCRouter } from 'common'
+import { Constants, FontModel, TCRouter } from 'common'
+import { AppStorageV2 } from '@kit.ArkUI';
 
 @ComponentV2
 export struct OptionView {
   @Param text:string=''
   @Param url?:string=''
   @Param additionalText?:string=''
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
 
   build() {
       Row(){
         Text(this.text)
-          .fontSize(16)
+          .fontSize(this.fontModel.getFg(16))
           .height(21)
           .width(100)
         Image($r('app.media.ic_arrow_right'))

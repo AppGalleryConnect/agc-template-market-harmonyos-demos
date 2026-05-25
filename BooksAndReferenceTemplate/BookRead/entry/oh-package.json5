@@ -16,7 +16,8 @@
     "reader_tool_bar": "file:../components/reader_tool_bar",
     "swiper_card": "file:../components/swiper_card",
     "aggregated_payment": "file:../components/aggregated_payment",
-    "custom_push": "file:../components/custom_push"
+    "custom_push": "file:../components/custom_push",
+    "aggregated_share": "file:../components/aggregated_share"
   }
 }
 

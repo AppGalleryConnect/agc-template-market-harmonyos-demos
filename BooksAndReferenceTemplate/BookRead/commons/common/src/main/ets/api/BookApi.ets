@@ -55,6 +55,11 @@ export class BookApi {
     return rsp;
   }
 
+  public static async getChildBookList(): Promise<GetBookApiRsp> {
+    const rsp: GetBookApiRsp = await BookApi.INVOKE.get<GetBookApiRsp>(Constants.API_GET_BOOK_CHILD_PATH);
+    return rsp;
+  }
+
   public static async getBorrowList(userId: string): Promise<GetBookBorrowRsp> {
     let rsp: GetBookBorrowRsp = await BookApi.INVOKE.get<GetBookBorrowRsp>(Constants.API_GET_BOOK_BORROW_PATH);
     return rsp;

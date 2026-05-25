@@ -230,12 +230,14 @@ Notes
 ### 环境
 - DevEco Studio版本：DevEco Studio 6.0.2 Release及以上
 - HarmonyOS SDK版本：HarmonyOS 6.0.2 Release SDK及以上
-- 设备类型：华为手机（包括双折叠和阔折叠）
+- 设备类型：华为手机（包括双折叠和阔折叠）、华为平板、华为PC
 - 系统版本：HarmonyOS 6.0.0(20)及以上
 ### 权限
-- 网络权限：ohos.permission.INTERNET
-- 获取网络信息: ohos.permission.GET_NETWORK_INFO
-- 身份认证权限: ohos.permission.ACCESS_BIOMETRIC
+- 网络访问：ohos.permission.INTERNET（访问网络，如登录、检查更新等）
+- 获取网络状态：ohos.permission.GET_NETWORK_INFO（读取网络连接/类型等状态）
+- 麦克风权限：ohos.permission.MICROPHONE（录音相关能力，用户态动态授权）
+- 用户认证权限：ohos.permission.ACCESS_BIOMETRIC
+
 ### 调试
 - 本模板不支持模拟器调试，请使用真机进行调试
 

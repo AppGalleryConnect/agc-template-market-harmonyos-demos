@@ -47,6 +47,10 @@
      {
        "name": "custom_push",
        "srcPath": "./xxx/custom_push"
+     },
+     {
+        "name": "base_common",
+        "srcPath": "./xxx/base_common",
      }
    ]
    ```
@@ -55,6 +59,7 @@
    // xxx为组件存放的目录名称
     "dependencies": {
      "custom_push": "file:./xxx/custom_push",
+     "base_common": "file:./xxx/base_common"
    }
    ```
    

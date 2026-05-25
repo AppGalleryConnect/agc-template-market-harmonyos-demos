@@ -1,6 +1,7 @@
 import { MinePageCommonService } from '../constants/MineUiConstants';
 import { call } from '@kit.TelephonyKit';
 import { BusinessError } from '@kit.BasicServicesKit';
+import { hilog } from '@kit.PerformanceAnalysisKit';
 
 @ComponentV2
 export struct MineItem {
@@ -70,9 +71,17 @@ export struct ContactItem {
       this.openSheet = !this.openSheet
     })
     .bindSheet($$this.openSheet, this.contactBuilder(), {
-      title: {title: '联系客服' },
-      height: 280,
-      width: '100%'
+      title: { title: '联系客服' },
+      // 大屏默认会居中/跟手弹窗；与手机一致改为底部半模态，且高度收紧
+      preferType: SheetType.BOTTOM,
+      height: SheetSize.FIT_CONTENT,
+      width: '100%',
+      radius: {
+        topLeft: 32,
+        topRight: 32,
+        bottomLeft: 32,
+        bottomRight: 32,
+      },
     })
   }
 
@@ -105,7 +114,7 @@ export struct ContactItem {
         try {
           call.makeCall('000000', (err: BusinessError) => {
             if (!err) {
-              console.log('make call success.');
+              hilog.info(0x0000, 'MineItem', 'make call success.');
             } else {
               let errMsg: string;
               try {
@@ -113,12 +122,12 @@ export struct ContactItem {
               } catch (e) {
                 errMsg = 'unknown error';
               }
-              console.log('make call fail, err is:' + errMsg);
+              hilog.info(0x0000, 'MineItem', `make call fail, err is:${errMsg}`);
             }
           });
         } catch (error) {
           const e = error as BusinessError;
-          console.log('make call throw error, code:' + e.code + ', message:' + e.message);
+          hilog.error(0x0000, 'MineItem', `make call throw error, code:${e.code}, message:${e.message}`);
         }
       })
 

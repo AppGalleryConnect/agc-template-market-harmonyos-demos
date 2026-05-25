@@ -18,6 +18,7 @@ import { LogUtil } from './LogUtil';
 import { BusinessError } from '@ohos.base';
 import { KeyboardAvoidMode, window } from '@kit.ArkUI';
 import { common } from '@kit.AbilityKit';
+import { hilog } from '@kit.PerformanceAnalysisKit';
 
 /**
  * TODO App相关工具类(使用该工具前请在UIAbility的onCreate方法中调用AppUtil的init方法初始化)
@@ -132,7 +133,12 @@ export class AppUtil {
    */
   static async setPreferredOrientation(orientation: window.Orientation,
     windowClass: window.Window = AppUtil.getMainWindow()): Promise<void> {
-    return windowClass.setPreferredOrientation(orientation);
+    try {
+      await windowClass.setPreferredOrientation(orientation);
+    } catch (err) {
+      const error = err as BusinessError;
+      LogUtil.error(`AppUtil-setPreferredOrientation-异常 ~ code: ${error.code} -·- message: ${error.message}`);
+    }
   }
 
 
@@ -143,7 +149,12 @@ export class AppUtil {
    */
   static async setWindowBrightness(brightness: number,
     windowClass: window.Window = AppUtil.getMainWindow()): Promise<void> {
-    return windowClass.setWindowBrightness(brightness);
+    try {
+      await windowClass.setWindowBrightness(brightness);
+    } catch (err) {
+      const error = err as BusinessError;
+      LogUtil.error(`AppUtil-setWindowBrightness-异常 ~ code: ${error.code} -·- message: ${error.message}`);
+    }
   }
 
 
@@ -154,7 +165,12 @@ export class AppUtil {
    */
   static async setWindowKeepScreenOn(isKeepScreenOn: boolean,
     windowClass: window.Window = AppUtil.getMainWindow()): Promise<void> {
-    return windowClass.setWindowKeepScreenOn(isKeepScreenOn);
+    try {
+      await windowClass.setWindowKeepScreenOn(isKeepScreenOn);
+    } catch (err) {
+      const error = err as BusinessError;
+      LogUtil.error(`AppUtil-setWindowKeepScreenOn-异常 ~ code: ${error.code} -·- message: ${error.message}`);
+    }
   }
 
 
@@ -179,7 +195,12 @@ export class AppUtil {
    */
   static async setWindowFocusable(isFocusable: boolean,
     windowClass: window.Window = AppUtil.getMainWindow()): Promise<void> {
-    return windowClass.setWindowFocusable(isFocusable);
+    try {
+      await windowClass.setWindowFocusable(isFocusable);
+    } catch (err) {
+      const error = err as BusinessError;
+      LogUtil.error(`AppUtil-setWindowFocusable-异常 ~ code: ${error.code} -·- message: ${error.message}`);
+    }
   }
 
   /**
@@ -189,7 +210,12 @@ export class AppUtil {
    */
   static async setWindowTouchable(isTouchable: boolean,
     windowClass: window.Window = AppUtil.getMainWindow()): Promise<void> {
-    return windowClass.setWindowTouchable(isTouchable);
+    try {
+      await windowClass.setWindowTouchable(isTouchable);
+    } catch (err) {
+      const error = err as BusinessError;
+      LogUtil.error(`AppUtil-setWindowTouchable-异常 ~ code: ${error.code} -·- message: ${error.message}`);
+    }
   }
 
 
@@ -234,7 +260,7 @@ export class AppUtil {
       return await bundleManager.getBundleInfoForSelf(bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION);
     } catch (err) {
       let error = err as BusinessError;
-      console.error(`AppUtil-getBundleInfo-异常 ~ code: ${error.code} -·- message: ${error.message}`);
+      hilog.error(0x0000, 'AppUtil', `AppUtil-getBundleInfo-异常 ~ code: ${error.code} -·- message: ${error.message}`);
       throw new Error(`获取BundleInfo失败: ${error.message}`);
     }
   }
@@ -247,7 +273,7 @@ export class AppUtil {
       return bundleManager.getBundleInfoForSelfSync(bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION);
     } catch (err) {
       let error = err as BusinessError;
-      console.error(`AppUtil-getBundleInfoSync-异常 ~ code: ${error.code} -·- message: ${error.message}`);
+      hilog.error(0x0000, 'AppUtil', `AppUtil-getBundleInfoSync-异常 ~ code: ${error.code} -·- message: ${error.message}`);
       throw new Error(`同步获取BundleInfo失败: ${error.message}`);
     }
   }
@@ -303,7 +329,17 @@ export class AppUtil {
    * 主动退出整个应用；调用该方法后，任务中心的任务默认不会清理，如需清理，需要配置removeMissionAfterTerminate为true。
    */
   static exit() {
-    AppUtil.getContext().terminateSelf();
-    AppUtil.getContext().getApplicationContext().killAllProcesses();
+    try {
+      AppUtil.getContext().terminateSelf();
+    } catch (e) {
+      const err = e as BusinessError;
+      LogUtil.error(`AppUtil-exit-terminateSelf-异常 ~ code: ${err.code} -·- message: ${err.message}`);
+    }
+    try {
+      AppUtil.getContext().getApplicationContext().killAllProcesses();
+    } catch (e) {
+      const err = e as BusinessError;
+      LogUtil.error(`AppUtil-exit-killAllProcesses-异常 ~ code: ${err.code} -·- message: ${err.message}`);
+    }
   }
 }

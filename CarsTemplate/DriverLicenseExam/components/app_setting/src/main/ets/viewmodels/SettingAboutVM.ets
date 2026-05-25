@@ -1,8 +1,12 @@
 import { common, Want, bundleManager } from '@kit.AbilityKit';
+import { BusinessError } from '@kit.BasicServicesKit';
 import { LayeredDrawableDescriptor, promptAction } from '@kit.ArkUI';
 import { AppGalleryUtils } from '../common/AppGalleryUtils';
 import { TelephoneUtils } from '../common/TelephoneUtils';
 import { BaseViewModel } from '../models/BaseViewModel';
+import { Logger } from '../common/Logger';
+
+const TAG = '[SettingAboutVM]';
 
 @ObservedV2
 export class SettingAboutVM extends BaseViewModel {
@@ -38,7 +42,7 @@ export class SettingAboutVM extends BaseViewModel {
         this.appIcon = resource.getMediaContentBase64Sync(bundleInfo.appInfo.iconId);
       }
     } catch (err) {
-      console.log(JSON.stringify(err))
+      Logger.error(TAG, JSON.stringify(err))
     }
   }
 
@@ -69,6 +73,11 @@ export class SettingAboutVM extends BaseViewModel {
       entities: ['entity.system.browsable'],
       uri: '',
     }
-    context.startAbility(want);
+    try {
+      context.startAbility(want);
+    } catch (err) {
+      const e = err as BusinessError;
+      promptAction.showToast({ message: `无法打开链接: ${e.message}` });
+    }
   }
 }

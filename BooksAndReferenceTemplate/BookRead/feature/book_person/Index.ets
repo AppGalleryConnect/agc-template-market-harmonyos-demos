@@ -47,3 +47,19 @@ export { MemberCenterPage } from './src/main/ets/views/MemberCenterPage';
 export { MemberAgreementPage } from './src/main/ets/views/MemberAgreementPage';
 
 export { MembershipCard } from './src/main/ets/comp/MembershipCard';
+
+export { MinorsModePage } from './src/main/ets/views/MinorsModePage'
+
+export { ReadRecordPage } from './src/main/ets/views/ReadRecordPage'
+
+export { ReadHistoryBuilder } from './src/main/ets/views/ReadHistoryPage'
+
+export { MyDownloadPageBuilder } from './src/main/ets/views/MyDownloadPage'
+
+export { SettingFont } from './src/main/ets/views/SettingFont'
+
+export { LaunchAdPage } from './src/main/ets/views/LaunchAdPage'
+
+export { PrivacyAgreementPage } from './src/main/ets/views/PrivacyAgreementPage'
+
+export { CustomerServiceChatPage } from './src/main/ets/views/CustomerServiceChatPage'

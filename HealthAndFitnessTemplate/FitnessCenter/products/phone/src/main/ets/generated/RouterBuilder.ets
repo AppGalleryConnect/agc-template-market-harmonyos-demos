@@ -1,7 +1,6 @@
 import { ClubEnvironmentDetail } from '../pages/ClubEnvironmentDetail';
 import { CitySelectPage } from '../pages/CitySelect';
 import { SportDetail } from '../pages/SportDetail';
-import { SettingPage } from '../pages/SettingPage';
 
 @Builder
 export function SportDetailBuilder() {
@@ -16,10 +15,5 @@ export function ClubEnvironmentDetailBuilder() {
 @Builder
 export function CitySelectBuilder() {
   CitySelectPage();
-}
-
-@Builder
-export function SettingPageBuilder() {
-  SettingPage();
 }
 

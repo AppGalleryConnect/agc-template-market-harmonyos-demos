@@ -1,4 +1,4 @@
-import { MockService } from 'external_interactions';
+import { GridRowColSetting, MockService } from 'external_interactions';
 import { photoAccessHelper } from '@kit.MediaLibraryKit';
 import { CustomContentDialog } from '@kit.ArkUI';
 import { TitleBar } from 'module_recharge/src/main/ets/components/TitleBar';
@@ -83,107 +83,116 @@ export struct MineInfoPage {
         }
       })
         .margin({ left: 16, right: 16 })
-      Stack() {
-        Scroll() {
-          Column() {
-            Row() {
-              Text('头像')
-                .fontWeight(FontWeight.Medium)
-                .fontSize(16)
-              Row() {
-                Image(this.avatar ? this.avatar : $r('app.media.avatar_no_login'))
-                  .width(40)
-                  .height(40)
-                  .borderRadius(36)
-                  .margin({ right: 9 })
-                Image($r('app.media.chevron_right'))
-                  .width(18)
-                  .height(18)
-                  .fillColor(Color.Gray)
-              }.onClick(() => {
-                this.choose()
-              })
-            }
-            .width('100%')
-            .border({ radius: 16 })
-            .padding(12)
-            .backgroundColor(Color.White)
-            .justifyContent(FlexAlign.SpaceBetween)
-            .margin({ bottom: 12 })
 
-            Column() {
-              Row() {
-                Text('昵称')
-                  .fontWeight(FontWeight.Medium)
-                  .fontSize(16)
+      GridRow(GridRowColSetting.DEFAULT_GRID_ROW_OPTIONS) {
+        GridCol({
+          span: GridRowColSetting.DEFAULT_CENTER_COL_SPAN,
+          offset: GridRowColSetting.DEFAULT_CENTER_COL_OFFSET,
+        }) {
+          Stack() {
+            Scroll() {
+              Column() {
                 Row() {
-                  Text(this.nickname ? this.nickname : '华为用户')
-                    .fontWeight(FontWeight.Regular)
-                    .fontSize(14)
-                    .margin({ right: 9 })
-                  Image($r('app.media.chevron_right'))
-                    .width(18)
-                    .height(18)
-                    .fillColor(Color.Gray)
+                  Text('头像')
+                    .fontWeight(FontWeight.Medium)
+                    .fontSize(16)
+                  Row() {
+                    Image(this.avatar ? this.avatar : $r('app.media.avatar_no_login'))
+                      .width(40)
+                      .height(40)
+                      .borderRadius(36)
+                      .margin({ right: 9 })
+                    Image($r('app.media.chevron_right'))
+                      .width(18)
+                      .height(18)
+                      .fillColor(Color.Gray)
+                  }.onClick(() => {
+                    this.choose()
+                  })
                 }
-              }
-              .height(21)
-              .width('100%')
-              .justifyContent(FlexAlign.SpaceBetween)
-              .alignItems(VerticalAlign.Center)
-              .onClick(() => {
-                this.inputType = 1
-                this.inputValue = this.nickname ? this.nickname : '华为用户'
-                this.dialogController.open()
-              })
+                .width('100%')
+                .border({ radius: 16 })
+                .padding(12)
+                .backgroundColor(Color.White)
+                .justifyContent(FlexAlign.SpaceBetween)
+                .margin({ bottom: 12 })
 
-              Divider()
-                .height(1)
-                .margin({ top: 18, bottom: 18 })
+                Column() {
+                  Row() {
+                    Text('昵称')
+                      .fontWeight(FontWeight.Medium)
+                      .fontSize(16)
+                    Row() {
+                      Text(this.nickname ? this.nickname : '华为用户')
+                        .fontWeight(FontWeight.Regular)
+                        .fontSize(14)
+                        .margin({ right: 9 })
+                      Image($r('app.media.chevron_right'))
+                        .width(18)
+                        .height(18)
+                        .fillColor(Color.Gray)
+                    }
+                  }
+                  .height(21)
+                  .width('100%')
+                  .justifyContent(FlexAlign.SpaceBetween)
+                  .alignItems(VerticalAlign.Center)
+                  .onClick(() => {
+                    this.inputType = 1
+                    this.inputValue = this.nickname ? this.nickname : '华为用户'
+                    this.dialogController.open()
+                  })
 
-              Row() {
-                Text('电话')
-                  .fontWeight(FontWeight.Medium)
-                  .fontSize(16)
-                Row() {
-                  Text(this.phone)
-                    .fontWeight(FontWeight.Regular)
-                    .fontSize(14)
-                    .margin({ right: 9 })
-                  Image($r('app.media.chevron_right'))
-                    .width(18)
-                    .height(18)
-                    .fillColor(Color.Gray)
+                  Divider()
+                    .height(1)
+                    .margin({ top: 18, bottom: 18 })
+
+                  Row() {
+                    Text('电话')
+                      .fontWeight(FontWeight.Medium)
+                      .fontSize(16)
+                    Row() {
+                      Text(this.phone)
+                        .fontWeight(FontWeight.Regular)
+                        .fontSize(14)
+                        .margin({ right: 9 })
+                      Image($r('app.media.chevron_right'))
+                        .width(18)
+                        .height(18)
+                        .fillColor(Color.Gray)
+                    }
+                  }
+                  .height(21)
+                  .width('100%')
+                  .justifyContent(FlexAlign.SpaceBetween)
+                  .onClick(() => {
+                    this.inputType = 2
+                    this.inputValue = this.phone
+                    this.dialogController.open()
+                  })
                 }
+                .border({ radius: 16 })
+                .padding({
+                  left: 12,
+                  right: 12,
+                  top: 19,
+                  bottom: 19
+                })
+                .height(116)
+                .width('100%')
+                .backgroundColor(Color.White)
               }
-              .height(21)
               .width('100%')
-              .justifyContent(FlexAlign.SpaceBetween)
-              .onClick(() => {
-                this.inputType = 2
-                this.inputValue = this.phone
-                this.dialogController.open()
-              })
+              .height('100%')
             }
-            .border({ radius: 16 })
-            .padding({
-              left: 12,
-              right: 12,
-              top: 19,
-              bottom: 19
-            })
-            .height(116)
-            .width('100%')
-            .backgroundColor(Color.White)
+            .scrollBar(BarState.Off)
+            .margin({ left: 16, right: 16 })
+            .edgeEffect(EdgeEffect.Spring)
           }
-          .width('100%')
-          .height('100%')
+          .layoutWeight(1)
+          .alignContent(Alignment.Top)
         }
-        .scrollBar(BarState.Off)
-        .margin({ left: 16, right: 16 })
       }
-      .layoutWeight(1)
-      .alignContent(Alignment.Top)
     }
     .hideTitleBar(true)
     .hideToolBar(true)

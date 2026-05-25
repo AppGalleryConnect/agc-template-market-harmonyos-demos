@@ -14,7 +14,9 @@
  */
 
 import { AppUtil } from './AppUtil';
-import { Want } from '@kit.AbilityKit';
+import { LogUtil } from './LogUtil';
+import { BusinessError } from '@ohos.base';
+import { common, Want } from '@kit.AbilityKit';
 
 /**
  * TODO Want工具类
@@ -54,7 +56,7 @@ export class WantUtil {
   //应用与元服务
   static readonly URI_APPLICATION_AND_SERVICE: string = 'application_and_service_settings';
   //应用和元服务-某个具体应用的应用信息，需传递want.parameters.pushParams为具体应用的包名
-  static readonly URI_APPLICATION_INFO: string = 'application_info_entry'
+  static readonly URI_APPLICATION_INFO: string = 'application_info_entry';
   //应用与服务-应用管理三级页面
   static readonly URI_APPLICATION_SETTINGS: string = 'application_settings';
 
@@ -110,6 +112,14 @@ export class WantUtil {
   //系统和更新-重置-还原网络设置-还原网络设置确认五级页面
   static readonly URI_RESET_NET_CONFIRM: string = 'reset_net_confirm_settings';
 
+  private static async startAbilitySafe(context: common.UIAbilityContext, want: Want): Promise<void> {
+    try {
+      await context.startAbility(want);
+    } catch (err) {
+      const error = err as BusinessError;
+      LogUtil.error(`WantUtil-startAbility-异常 ~ code: ${error.code} -·- message: ${error.message}`);
+    }
+  }
 
   /**
    * 跳转系统设置页面（配合WantUtil里的URI常量一起使用，可跳转更多的设置页面）
@@ -126,7 +136,7 @@ export class WantUtil {
         bundleName: context.abilityInfo.bundleName, //拉起方应用包名
       }
     }
-    return context.startAbility(want);
+    await WantUtil.startAbilitySafe(context, want);
   }
 
 
@@ -207,7 +217,7 @@ export class WantUtil {
         bundleName: context.abilityInfo.bundleName, //拉起方应用包名
       }
     }
-    return context.startAbility(want);
+    await WantUtil.startAbilitySafe(context, want);
   }
 
 
@@ -221,7 +231,7 @@ export class WantUtil {
       action: 'ohos.want.action.appdetail',
       uri: 'store://appgallery.huawei.com/app/detail?id=' + bundleName,
     };
-    return AppUtil.getContext().startAbility(want);
+    await WantUtil.startAbilitySafe(AppUtil.getContext(), want);
   }
 
 
@@ -233,7 +243,7 @@ export class WantUtil {
       bundleName: 'com.huawei.hmos.filemanager',
       abilityName: 'MainAbility'
     };
-    return AppUtil.getContext().startAbility(want);
+    await WantUtil.startAbilitySafe(AppUtil.getContext(), want);
   }
 
 
@@ -255,6 +265,6 @@ export class WantUtil {
         pageFlag: 'conversation'
       }
     };
-    return AppUtil.getContext().startAbility(want);
+    await WantUtil.startAbilitySafe(AppUtil.getContext(), want);
   }
 }

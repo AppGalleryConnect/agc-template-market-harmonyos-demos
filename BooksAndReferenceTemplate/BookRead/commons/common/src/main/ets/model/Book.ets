@@ -16,6 +16,12 @@ export class BookInfo {
   groupName: string = ''; //分组名字
   groupType: string = ''; //是否在分组中 0不在 1在
   status?: string; // 书籍状态 '0':连载中、'1':已完结
+  usageMemory?: string = '0'
+  isDownload?: boolean = false; // 是否已下载
+  downloadProgress?: number = 0; // 下载进度
+  isSelect?: boolean = false; // 是否被选中
+  readProgress?: string = '未读过' // 阅读进度
+  isBuy?: boolean;
 }
 
 export interface rankListInfo {
@@ -34,7 +40,11 @@ export class GroupBook {
   @Trace groupBooks?: BookInfo[] = [];
   @Trace bookName?: string;
   @Trace singleBook?: BookInfo;
+  @Trace usageMemory?: string = '0'
+  @Trace isDownload?: boolean = false; // 是否已下载
+  @Trace downloading?: boolean = false; // 是否正在下载
   @Trace timestamp: number;
+  @Trace isPin?: boolean = false // 是否置顶
   constructor() {
     this.timestamp = Date.now()
   }

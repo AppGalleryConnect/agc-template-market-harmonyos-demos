@@ -351,7 +351,7 @@ export struct QuickLoginPage {
         bottom: 28,
       })
       .justifyContent(FlexAlign.SpaceBetween)
-      .backgroundColor('#F1F3F5')
+      .backgroundColor($r('sys.color.background_secondary'))
       .width(CommonConstants.FULL_PERCENT)
       .height(CommonConstants.FULL_PERCENT)
       .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP])

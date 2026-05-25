@@ -290,7 +290,7 @@ export class MemberShipVM {
         return iap.queryProducts(this.uiContext?.getHostContext() as common.UIAbilityContext, params);
       }
     } catch (err) {
-      console.log(JSON.stringify(err))
+      hilog.error(0xFF00, 'MemberShip', `queryProducts failed: ${JSON.stringify(err)}`)
     }
     return undefined;
   }

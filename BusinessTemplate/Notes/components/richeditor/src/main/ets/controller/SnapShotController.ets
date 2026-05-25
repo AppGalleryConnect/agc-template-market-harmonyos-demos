@@ -1,9 +1,9 @@
-import { componentSnapshot } from '@kit.ArkUI';
 import { image } from '@kit.ImageKit';
+import { common } from '@kit.AbilityKit';
 import { CommonUtils } from '../utils/CommonUtils';
 import { ImageUtils } from '../utils/ImageUtils';
 import { PopupUtils } from '../utils/PopupUtils';
-
+import { hilog } from '@kit.PerformanceAnalysisKit';
 
 @ObservedV2
 export class SnapShotController {
@@ -32,15 +32,70 @@ export class SnapShotController {
     this.uiContext = uiContext;
   }
 
+
+  private syncViewportSize(): void {
+    try {
+      const host = this.uiContext.getHostContext();
+      if (host) {
+        const ctx = host as common.UIAbilityContext;
+        const stage = ctx.windowStage;
+        if (stage) {
+          const win = stage.getMainWindowSync();
+          const rect = win.getWindowProperties().windowRect;
+          this.screenWidth = this.uiContext.px2vp(rect.width);
+          this.screenHeight = this.uiContext.px2vp(rect.height);
+        }
+      }
+    } catch (_e) {
+    }
+    const w = AppStorage.get<number>('screenWidth');
+    const h = AppStorage.get<number>('screenHeight');
+    if (typeof w === 'number' && w > 0) {
+      this.screenWidth = w;
+    }
+    if (typeof h === 'number' && h > 0) {
+      this.screenHeight = h;
+    }
+    if (this.screenWidth <= 0) {
+      this.screenWidth = 360;
+    }
+    if (this.screenHeight <= 0) {
+      this.screenHeight = 780;
+    }
+  }
+
+  private async getSnapshotPixelMap(): Promise<PixelMap> {
+    try {
+      const pixelMap = await this.uiContext.getComponentSnapshot().get(this.snapShotId, {
+        waitUntilRenderFinished: true,
+      });
+      if (!pixelMap) {
+        throw new Error('getComponentSnapshot 返回空图');
+      }
+      return pixelMap;
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : `${e}`;
+      try {
+        this.uiContext.getPromptAction().showToast({
+          message: `截图失败：${msg}`,
+          alignment: Alignment.Center,
+          duration: 2000,
+        });
+      } catch (_ignore) {
+      }
+      throw (e instanceof Error ? e : new Error(msg));
+    }
+  }
+
   onceSnapshot = async () => {
     try {
       this.showScrollBar = BarState.Off;
       await this.beforeSnapshot();
       await this.snapAndMerge();
       await this.afterSnapshot();
-      this.afterGeneratorImage();
+      await this.afterGeneratorImage();
     } catch (error) {
-      console.error('截图失败, error:', error);
+      hilog.error(0x0000, 'SnapShot', `截图失败: ${JSON.stringify(error)}`);
       // 恢复UI状态
       this.componentMaskImage = undefined;
       this.scrollYOffsets.length = 0;
@@ -54,9 +109,10 @@ export class SnapShotController {
 
   async beforeSnapshot() {
     try {
+      this.syncViewportSize();
       this.yOffsetBefore = this.curYOffset;
       // Take a screenshot of the loaded List component as a cover image for the List component
-      this.componentMaskImage = await componentSnapshot.get(this.snapShotId);
+      this.componentMaskImage = await this.getSnapshotPixelMap();
       if (!this.componentMaskImage) {
         throw new Error('获取组件截图失败');
       }
@@ -65,15 +121,13 @@ export class SnapShotController {
         xOffset: 0,
         yOffset: 0,
         animation: {
-          duration: 200,
+          duration: 0,
+          curve: Curve.Linear,
         },
       });
-      this.snapPopupPosition = PopupUtils.calcPopupCenter(this.screenWidth, this.screenHeight, 100, 200);
-      this.isShowPreview = true;
-      // Delay ensures that the scroll has reached the top
-      await CommonUtils.sleep(200);
+      await CommonUtils.sleep(80);
     } catch (error) {
-      console.error('截图前置处理失败, error:', error);
+      hilog.error(0x0000, 'SnapShot', `截图前置处理失败: ${JSON.stringify(error)}`);
       throw new Error(`截图前置处理失败: ${error.message}`);
     }
   }
@@ -82,9 +136,21 @@ export class SnapShotController {
     try {
       this.scrollYOffsets.push(this.curYOffset);
       // Call the component screenshot interface to obtain the current screenshot
-      const pixelMap = await componentSnapshot.get(this.snapShotId);
+      const pixelMap = await this.getSnapshotPixelMap();
       if (!pixelMap) {
         throw new Error('获取组件截图失败');
+      }
+
+      // 嵌入分栏时 onAreaChange 可能尚未给出尺寸，list 为 0 会导致滚动步长与裁剪比例错误
+      if (this.listComponentWidth <= 0 || this.listComponentHeight <= 0) {
+        const fi = pixelMap.getImageInfoSync();
+        const fiW = fi.size.width;
+        const fiH = fi.size.height;
+        if (fiW > 0 && fiH > 0) {
+          this.listComponentWidth = Math.max(1, Math.round(this.uiContext.px2vp(fiW)));
+          this.listComponentHeight = Math.max(1, Math.round(this.uiContext.px2vp(fiH)));
+          this.scrollHeight = this.listComponentHeight;
+        }
       }
 
       // Gets the number of bytes per line of image pixels.
@@ -103,9 +169,12 @@ export class SnapShotController {
           await ImageUtils.mergeImage(this.uiContext, this.areaArray,
             this.scrollYOffsets[this.scrollYOffsets.length - 1],
             this.listComponentWidth, this.listComponentHeight);
+        this.syncViewportSize();
+        this.snapPopupPosition = PopupUtils.calcPopupBottomLeft(this.screenHeight, 200);
+        this.isShowPreview = true;
       }
     } catch (error) {
-      console.error('截图合并处理失败, error:', error);
+      hilog.error(0x0000, 'SnapShot', `截图合并处理失败: ${JSON.stringify(error)}`);
       throw new Error(`截图合并处理失败: ${error.message}`);
     }
   }
@@ -121,7 +190,7 @@ export class SnapShotController {
       });
       await CommonUtils.sleep(200);
     } catch (error) {
-      console.error('截图后置处理失败, error:', error);
+      hilog.error(0x0000, 'SnapShot', `截图后置处理失败: ${JSON.stringify(error)}`);
       throw new Error(`截图后置处理失败: ${error.message}`);
     }
   }
@@ -130,13 +199,14 @@ export class SnapShotController {
     try {
       // Delay for transition animation
       await CommonUtils.sleep(200);
+      this.syncViewportSize();
       this.snapPopupPosition = PopupUtils.calcPopupBottomLeft(this.screenHeight, 200);
       this.componentMaskImage = undefined;
       this.scrollYOffsets.length = 0;
       this.areaArray.length = 0;
       this.showScrollBar = BarState.On;
     } catch (error) {
-      console.error('截图后生成图片处理失败, error:', error);
+      hilog.error(0x0000, 'SnapShot', `截图后生成图片处理失败: ${JSON.stringify(error)}`);
       // 这里不需要再抛出，因为这是最后的清理步骤
       this.componentMaskImage = undefined;
       this.scrollYOffsets.length = 0;
@@ -157,7 +227,7 @@ export class SnapShotController {
       this.showScrollBar = BarState.On;
       this.snapPopupPosition = { x: 0, y: 0 };
     } catch (error) {
-      console.error('重置控制器失败, error:', error);
+      hilog.error(0x0000, 'SnapShot', `重置控制器失败: ${JSON.stringify(error)}`);
     }
   }
 
@@ -167,7 +237,7 @@ export class SnapShotController {
       await this.onceSnapshot();
       return true;
     } catch (error) {
-      console.error('安全执行截图失败, error:', error);
+      hilog.error(0x0000, 'SnapShot', `安全执行截图失败: ${JSON.stringify(error)}`);
       onError?.(error as Error);
       this.reset();
       return false;

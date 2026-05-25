@@ -229,10 +229,12 @@ export struct SearchPage {
         .padding({ left: '16vp', right: '16vp' })
         .width('100%')
         .height('100%')
+        .backgroundColor($r('sys.color.comp_background_tertiary'))
       }
       .width(Constants.FULL_SIZE)
       .height(Constants.FULL_SIZE)
     }
+    .backgroundColor($r('sys.color.background_secondary'))
     .hideTitleBar(true)
   }
 

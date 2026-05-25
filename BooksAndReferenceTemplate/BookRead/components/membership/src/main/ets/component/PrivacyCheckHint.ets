@@ -7,5 +7,9 @@ export function privacyCheckHint(param: HintParam) {
     Text('我知道了').fontWeight(FontWeight.Medium).fontColor($r('sys.color.font_emphasize')).onClick(() => {
       param.uiContext.getPromptAction().closeCustomDialog(param.node);
     });
-  }.width('90%').padding(16).backgroundColor($r('sys.color.comp_background_primary')).borderRadius(32);
+  }
+  .width(!param.isExpand ? 328 : 400)
+  .padding(16)
+  .backgroundColor($r('sys.color.comp_background_primary'))
+  .borderRadius(32);
 }

@@ -11,11 +11,12 @@ export struct CustomTabBar {
 
   build() {
     Column({ space: CommonConstants.SPACE_XS }) {
-      Image(this.item.activeIcon)
-        .width($r('app.float.normal_img_size'))
-        .draggable(false)
-        .fillColor(this.getTabColor(this.item.id))
-        .objectFit(ImageFit.Contain)
+      Text(){
+        SymbolSpan(this.selectedIndex === this.item.id ? this.item.activeIcon : this.item.defaultIcon)
+      }
+      .fontSize($r('app.float.normal_img_size'))
+      .fontColor(this.getTabColor(this.item.id))
+
       Text(this.item.title)
         .fontSize(10 * this.fontSizeRatio)
         .fontColor(this.getTabColor(this.item.id))

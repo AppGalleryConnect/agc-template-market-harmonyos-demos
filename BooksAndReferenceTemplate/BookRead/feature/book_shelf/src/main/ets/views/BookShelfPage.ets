@@ -1,4 +1,3 @@
-import { SearchResultCard } from 'book_home';
 import {
   BookApi,
   BookInfo,
@@ -10,7 +9,6 @@ import {
   MathUtil,
   NavHeaderBar,
   TCRouter,
-  BookLittleCardHome,
   GroupListCard,
   dialogView,
   DialogParams,
@@ -18,12 +16,18 @@ import {
   bookShelfCard,
   BreakpointStorage,
   BreakpointSystem,
-  BreakpointTypeEnum
+  BreakpointTypeEnum,
+  EpubUtils,
+  AppLinkingRouter,
+  GetBookApiRsp,
+  FontModel
 } from 'common';
 import { DeleteBottomCard } from '../comps/DeleteBottomCard';
-import { UserInfo } from 'base_common';
+import { UserInfo, fp2pxUtil } from 'base_common';
 import { HashMap } from '@kit.ArkTS';
 import { ShareBookCard } from 'book_read_kit'
+import { AppStorageV2, PromptAction } from '@kit.ArkUI';
+import { BusinessError } from '@kit.BasicServicesKit';
 
 @Builder
 export function BookShelfPageBuilder() {
@@ -39,9 +43,10 @@ export struct BookShelfPage {
   @Local isEdit: boolean | undefined = false;
   @Consumer('isHistory') isHistory: boolean = false;
   @Local test: string[] = [];
-  @Provider('isDeleteShelf') isDeleteShelf: boolean = false;
+  @Consumer('isDeleteShelf') isDeleteShelf: boolean = false;
   @Local isShowManage: boolean = false;
   @Local isNewGroup: boolean = false;
+  @Local isGroupManage: boolean = false;
   @Local isShowBind: boolean = false;
   @Local selectGroup: boolean = false;
   @Local deleteBooks: Set<string> = new Set();
@@ -58,6 +63,11 @@ export struct BookShelfPage {
   @Local changeItem: DialogParams = new DialogParams('新建分组', '', true, '取消', '确认', () => {
   }, () => {
   })
+  @Local signIn: number = AppStorage.get('signIn') || 0;
+  @Local appLinkRouter: AppLinkingRouter = AppStorageV2.connect(AppLinkingRouter, () => new AppLinkingRouter())!;
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
+  @Local bookIndex: number = 0
+  @Local moveToGroupName: string = ''
 
   // 删除弹窗
   deleteDialog() {
@@ -109,41 +119,67 @@ export struct BookShelfPage {
     return true
   }
 
-  async aboutToAppear(): Promise<void> {
-    const params = TCRouter.getParams<boolean>(Constants.SHELF_ROUTER);
-    this.isHistory = params === undefined ? false : params;
-    const favRsp = await BookApi.getBooksShelfGroup('favBooks', Constants.API_GET_BOOK_FAVOURITE_PATH, '');
-    const hisRsp = await BookApi.getBooksShelfList('historyBooks', Constants.API_GET_BOOK_HISTORY_PATH, '');
-    const likeRsp = await BookApi.getBooksShelfList('likeBooks', Constants.API_GET_BOOK_LIKE_PATH, '');
-    const userRsp = await BookApi.getUserInfo('');
-    this.isDeleteShelf = false
-    this.favBooks = favRsp.books;
-    this.historyBooks = hisRsp.books;
-    this.likeBooks = likeRsp.books;
+  @Monitor('appLinkRouter.id')
+  onAppLinkingClick() {
+    this.checkAppLinkingScene();
   }
 
-  deleteBookList(bookType: string, bookList: BookInfo[]) {
-    let tmp: BookInfo[] = [];
-    for (let i = 0; i < bookList.length; i++) {
-      if (!this.deleteBooks.has(bookList[i].name)) {
-        tmp.push(bookList[i]);
+  async checkAppLinkingScene() {
+    if (this.appLinkRouter.id && this.appLinkRouter.bookId) {
+      let bookInfo: BookInfo | null = null;
+      const rsp: GetBookApiRsp = await BookApi.getBookList();
+      const books = rsp.books;
+      for (let index = 0; index < books.length; index++) {
+        if (books[index].id === this.appLinkRouter.bookId) {
+          bookInfo = books[index];
+          break;
+        }
       }
+      TCRouter.pushByLogin(Constants.READ_KIT_ROUTER, bookInfo);
+      this.appLinkRouter.id = 0;
     }
+  }
 
-    bookList.length = tmp.length;
-    for (let i = 0; i < tmp.length; i++) {
-      bookList[i] = tmp[i];
-    }
+  async aboutToAppear(): Promise<void> {
+    this.isDeleteShelf = false
+    this.refreshData()
+    this.checkAppLinkingScene();
+  }
 
-    AppStorage.set(bookType, tmp);
-    this.isDeleteShelf = false;
+  async refreshData() {
+    const favRsp = await BookApi.getBooksShelfGroup('favBooks', Constants.API_GET_BOOK_FAVOURITE_PATH, '');
+    const likeRsp = await BookApi.getBooksShelfList('likeBooks', Constants.API_GET_BOOK_LIKE_PATH, '');
+    const userRsp = await BookApi.getUserInfo('');
+    this.favBooks = favRsp.books;
+    this.likeBooks = likeRsp.books;
+    this.userInfo = userRsp.user;
+    this.signIn = AppStorage.get('signIn') || 0;
+    //添加今日阅读和听书时间的刷新
+  }
+
+  clearSelect() {
+    this.favBooks.forEach((item: GroupBook) => {
+      item.isSelect = false;
+    })
   }
 
   deleteBookListGroup(bookType: string, bookListGroup: GroupBook[]) {
     let tmp: GroupBook[] = [];
     for (let i = 0; i < bookListGroup.length; i++) {
-      if (!this.deleteBooksGroup.has(bookListGroup[i].bookName as string)) {
+      if (!this.deleteBooksGroup.has(bookListGroup[i].bookName as string) &&
+        !this.deleteBooksGroup.has(bookListGroup[i].groupName as string)) {
         tmp.push(bookListGroup[i]);
+      } else {
+        if (bookListGroup[i].bookName) {
+          bookListGroup[i].singleBook!.isDownload = false
+          EpubUtils.clearEpubFile(bookListGroup[i].singleBook!,
+            (this.getUIContext().getHostContext() as Context).filesDir, 'files')
+        } else {
+          bookListGroup[i].groupBooks?.forEach((book: BookInfo) => {
+            book.isDownload = false
+            EpubUtils.clearEpubFile(book, (this.getUIContext().getHostContext() as Context).filesDir, 'files')
+          })
+        }
       }
     }
 
@@ -153,7 +189,7 @@ export struct BookShelfPage {
     }
 
     AppStorage.set(bookType, tmp);
-    this.isDeleteShelf = false;
+    this.deleteBooksGroup = new Set();
   }
 
   // 该分组加入当前书籍 name为当前选择的组名
@@ -161,61 +197,162 @@ export struct BookShelfPage {
     for (let i = 0; i < this.favBooks.length; i++) {
       if (this.favBooks[i].groupName === name) {
         this.favBooks[i].isSelect = false;
-        this.favBooks[i].groupBooks?.push(this.bookManage.singleBook as BookInfo)
+        for (let j = 0; j < this.favBooks.length; j++) {
+          if (this.favBooks[j].isSelect && this.favBooks[j].singleBook &&
+            !this.favBooks[i].groupBooks?.some(book => book.id === this.favBooks[j].singleBook?.id)) {
+            this.favBooks[i].groupBooks?.push(this.favBooks[j].singleBook as BookInfo)
+          }
+        }
+        break;
       }
     }
     MathUtil.sortFav(this.favBooks)
     // 修改组数据 删除掉
-    let k = 0;
     for (let i = 0; i < this.favBooks.length; i++) {
-      if (this.favBooks[i].singleBook === this.bookManage.singleBook) {
-        k = i;
+      if (this.favBooks[i].isSelect && this.favBooks[i].singleBook) {
+        this.favBooks.splice(i, 1);
+        i--;
       }
     }
-    this.favBooks.splice(k, 1)
     AppStorage.set('favBooks', this.favBooks)
   }
 
   @Builder
   readingInfo() {
-    Column({ space: 20 }) {
+    Column({ space: 8 }) {
       Row({ space: 5 }) {
         Image($r('app.media.icon_read'))
-          .height(24)
-          .width(24)
+          .height(16)
+          .width(16)
         Text($r('app.string.today_read'))
-          .fontSize($r('sys.float.Body_L'))
+          .fontSize(this.fontModel.getFg(12))
           .fontColor($r('app.color.90per_000000'))
-          .margin({ left: 10 })
+          .margin({ left: 3 })
         Text(`${this.userInfo ? this.userInfo.totalReading : 0}`)
-          .fontSize($r('sys.float.Body_L'))
+          .fontSize(this.fontModel.getFg(12))
           .fontColor($r('app.color.free_color'))
         Text($r('app.string.minute'))
-          .fontSize($r('sys.float.Body_L'))
+          .fontSize(this.fontModel.getFg(12))
+          .fontColor($r('app.color.90per_000000'))
+      }
+      .alignSelf(ItemAlign.Start)
+
+      Row({ space: 5 }) {
+        Image($r('app.media.icon_listen'))
+          .height(16)
+          .width(16)
+        Text($r('app.string.today_listen'))
+          .fontSize(this.fontModel.getFg(12))
+          .fontColor($r('app.color.90per_000000'))
+          .margin({ left: 3 })
+        Text(`${this.userInfo ? this.userInfo.totalListening : 0}`)
+          .fontSize(this.fontModel.getFg(12))
+          .fontColor($r('app.color.free_color'))
+        Text($r('app.string.minute'))
+          .fontSize(this.fontModel.getFg(12))
           .fontColor($r('app.color.90per_000000'))
       }
       .alignSelf(ItemAlign.Start)
     }
-    .width(Constants.FULL_SIZE)
-    .justifyContent(FlexAlign.SpaceBetween)
+    .width(Constants.ABOUT_HALF_SIZE)
+    .height(64)
+    .justifyContent(FlexAlign.Center)
     .backgroundColor($r('sys.color.comp_background_list_card'))
     .backgroundImage($r('app.media.reading_info_bg'))
-    .backgroundImageSize({ width: '100%' })
+    .backgroundImageSize({ width: '100%', height: '100%' })
     .borderRadius(16)
     .padding({
-      left: 16,
-      right: 16,
-      top: 20,
-      bottom: 20,
+      left: 12
     })
     .margin({
       top: 30
     })
   }
 
+  @Builder
+  signInfo() {
+    Column({ space: 4 }) {
+      Row({ space: 5 }) {
+        Text($r('app.string.checked_in'))
+          .fontSize(this.fontModel.getFg(12))
+          .fontColor($r('app.color.90per_000000'))
+        Text(this.signIn.toString())
+          .fontSize(this.fontModel.getFg(12))
+          .fontColor('#ED6F21')
+        Text($r('app.string.day'))
+          .fontSize(this.fontModel.getFg(12))
+          .fontColor($r('app.color.90per_000000'))
+      }
+      .alignSelf(ItemAlign.Start)
+
+      Row() {
+        Text() {
+          Span($r('app.string.go_earn_more_coins'))
+            .fontSize(this.fontModel.getFg(10))
+          SymbolSpan($r('sys.symbol.chevron_right'))
+            .fontSize(this.fontModel.getFg(12))
+        }
+        .lineHeight(13)
+        .fontColor('#ED6F21')
+      }
+      .alignSelf(ItemAlign.Start)
+    }
+    .onClick(() => {
+      TCRouter.pushByLogin(Constants.WELFARE_CENTER);
+    })
+    .width(Constants.ABOUT_HALF_SIZE)
+    .height(64)
+    .justifyContent(FlexAlign.Center)
+    .backgroundColor($r('sys.color.comp_background_list_card'))
+    .backgroundImage($r('app.media.sign_info_bg'))
+    .backgroundImageSize({ width: '100%', height: '100%' })
+    .borderRadius(16)
+    .padding({
+      left: 12
+    })
+    .margin({
+      top: 30
+    })
+  }
+
+  findIndex(name: string, isGroup: boolean): number {
+    for (let i = 0; i < this.favBooks.length; i++) {
+      if ((this.favBooks[i].groupName === name && isGroup) || (this.favBooks[i].bookName === name && !isGroup)) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  manageEvent(book: BookInfo, isShowM: boolean) {
+    this.isShowManage = isShowM;
+    this.isShowBind = isShowM;
+    this.isNewGroup = false;
+    this.bookManage.isSelect = true;
+    this.bookManage.groupName = book.groupName;
+    this.bookManage.iconString = '';
+    this.bookManage.bookName = book.name;
+    this.bookManage.singleBook = book;
+    this.bookIndex = this.findIndex(book.name, false)
+    this.favBooks[this.bookIndex].isSelect = true;
+    this.isGroupManage = false;
+  }
+
+  manageGroupEvent(books: GroupBook, isShowM: boolean) {
+    this.isShowManage = isShowM;
+    this.isShowBind = isShowM;
+    this.isNewGroup = false;
+    this.bookManage.isSelect = true;
+    this.bookManage.groupName = books.groupName;
+    this.bookManage.iconString = '';
+    this.bookManage.groupBooks = books.groupBooks;
+    this.isGroupManage = true;
+    this.bookIndex = this.findIndex(books.groupName!, true)
+  }
+
   // 宫格模式
   @Builder
-  bookShelfGrid(infos: GroupBook[], isHistory: boolean) {
+  bookShelfGrid() {
     Column() {
       Grid(this.scroller) {
         ForEach(this.favBooks, (info: GroupBook) => {
@@ -223,151 +360,81 @@ export struct BookShelfPage {
             Stack({ alignContent: Alignment.BottomEnd }) {
               if (info.groupName === '' || info.groupName === undefined) {
                 BookLittleCard({
-                  info: info.singleBook, manageEvent: (book: BookInfo, isShowM: boolean) => {
-                    this.isShowManage = isShowM;
-                    this.isShowBind = isShowM;
-                    this.isNewGroup = false;
-                    this.bookManage.isSelect = false;
-                    this.bookManage.groupName = book.groupName
-                    this.bookManage.iconString = '';
-                    this.bookManage.bookName = book.name;
-                    this.bookManage.singleBook = book
+                  info: info.singleBook,
+                  isDownload: info.isDownload,
+                  downloading: info.downloading,
+                  isPin: info.isPin,
+                  downloadProgress: info.singleBook?.downloadProgress,
+                  manageEvent: (book: BookInfo, isShowM: boolean) => {
+                    this.manageEvent(book, isShowM)
                   }
                 })
                   .gesture(GestureGroup(GestureMode.Parallel, LongPressGesture()
                     .onAction((event: GestureEvent) => {
                       // 针对书架列表
-                      this.isDeleteShelf = true;
+                      this.manageEvent(info.singleBook!, true)
                     })
                   ))
-
-                if (this.isDeleteShelf) {
-                  Checkbox({ name: 'delete', group: 'deleteGroup' })
-                    .selectedColor($r('app.color.slider_selected_color'))
-                    .unselectedColor($r('sys.color.icon_tertiary'))
-                    .select(false)
-                    .shape(CheckBoxShape.CIRCLE)
-                    .onChange((value: boolean) => {
-                      if (value) {
-                        this.deleteBooksGroup.add(info.singleBook?.name as string);
-                      } else {
-                        this.deleteBooksGroup.delete(info.singleBook?.name as string);
-                      }
-                    })
-                    .margin({ bottom: 12, right: 12 })
-                }
               } else {
-                BookGroupCard({ info: info })
-                  .gesture(GestureGroup(GestureMode.Parallel,
-                    LongPressGesture()
-                      .onAction((event: GestureEvent) => {
-                        // 针对书架列表
-                        this.isDeleteShelf = true;
-                      })
+                BookGroupCard({ info: info, isPin: info.isPin })
+                  .gesture(GestureGroup(GestureMode.Parallel, LongPressGesture()
+                    .onAction((event: GestureEvent) => {
+                      // 针对书本分组
+                      this.manageGroupEvent(info, true)
+                    })
                   ))
                   .onClick(() => {
                     TCRouter.push(Constants.GROUP_ROUTE, { group: info, groups: this.favBooks })
                   })
               }
-            }
-          }
-          .width(this.curBreakpoint.value === BreakpointTypeEnum.SM ? 113 : 164)
-        }, (item: GroupBook, index: number) => {
-          return item.timestamp.toString()
-        })
 
-        GridItem() {
-          Column() {
-            Image($r('app.media.ic_public_plus'))
-              .height(40)
-              .width(40)
-            Text($r('app.string.go_and_go_home'))
-              .width(104)
-              .fontColor($r('sys.color.font_secondary'))
-              .fontSize($r('sys.float.Body_M'))
-              .textAlign(TextAlign.Center)
-              .padding({ top: 8 })
-          }
-        }
-        .borderRadius(10)
-        .width(this.curBreakpoint.value === BreakpointTypeEnum.SM ? 104 : 164)
-        .height(this.curBreakpoint.value === BreakpointTypeEnum.SM ? 144 : 214)
-        .backgroundColor($r('sys.color.comp_background_list_card'))
-        .onClick(() => {
-          this.currentIndexTab = 1;
-          this.tabsController.changeIndex(1)
-        })
-      }
-      .scrollBar(BarState.Off)
-      .enableScrollInteraction(true)
-      .columnsGap(5)
-      .rowsGap(8)
-      .edgeEffect(EdgeEffect.Spring)
-      .width(Constants.FULL_SIZE)
-    }
-    .padding({ bottom: 15 })
-  }
-
-  // 宫格模式-历史
-  @Builder
-  bookShelfGridHistory(infos: BookInfo[], isHistory: boolean) {
-    Column() {
-      Grid(this.scroller) {
-        ForEach(infos, (info: BookInfo) => {
-          GridItem() {
-            Stack({ alignContent: Alignment.BottomEnd }) {
-              BookLittleCardHome({
-                info: info
-              })
-                .gesture(GestureGroup(GestureMode.Parallel, LongPressGesture()
-                  .onAction((event: GestureEvent) => {
-                    // 针对书架列表
-                    this.isDeleteShelf = true;
-                  })
-                ))
               if (this.isDeleteShelf) {
                 Checkbox({ name: 'delete', group: 'deleteGroup' })
-                  .select(false)
                   .selectedColor($r('app.color.slider_selected_color'))
                   .unselectedColor($r('sys.color.icon_tertiary'))
+                  .select(info.isSelect)
                   .shape(CheckBoxShape.CIRCLE)
                   .onChange((value: boolean) => {
                     if (value) {
-                      this.deleteBooks.add(info.name as string);
+                      this.deleteBooksGroup.add(info.singleBook?.name || info.groupName!);
+                      info.isSelect = true;
                     } else {
-                      this.deleteBooks.delete(info.name as string);
+                      this.deleteBooksGroup.delete(info.singleBook?.name || info.groupName!);
+                      info.isSelect = false;
                     }
                   })
-                  .margin({ bottom: 12, right: 12 })
+                  .margin({ bottom: 42, right: 6 })
               }
             }
           }
           .width(this.curBreakpoint.value === BreakpointTypeEnum.SM ? 113 : 164)
-        }, (item: BookInfo, index: number) => {
+        }, (item: GroupBook, index: number) => {
           return MathUtil.generateRandomNumber(16).toString();
         })
 
-        GridItem() {
-          Column() {
-            Image($r('app.media.ic_public_plus'))
-              .width(40)
-              .height(40)
-            Text($r('app.string.go_and_go_home'))
-              .width(104)
-              .fontSize($r('sys.float.Body_M'))
-              .fontColor($r('sys.color.font_secondary'))
-              .textAlign(TextAlign.Center)
-              .padding({ top: 8 })
+        if (!this.isDeleteShelf) {
+          GridItem() {
+            Column() {
+              Image($r('app.media.ic_public_plus'))
+                .height(40)
+                .width(40)
+              Text($r('app.string.go_and_go_home'))
+                .width(104)
+                .fontColor($r('sys.color.font_secondary'))
+                .fontSize(this.fontModel.getFg(14))
+                .textAlign(TextAlign.Center)
+                .padding({ top: 8 })
+            }
           }
+          .borderRadius(10)
+          .width(this.curBreakpoint.value === BreakpointTypeEnum.SM ? 104 : 164)
+          .height(this.curBreakpoint.value === BreakpointTypeEnum.SM ? 144 : 214)
+          .backgroundColor($r('sys.color.comp_background_list_card'))
+          .onClick(() => {
+            this.currentIndexTab = 1;
+            this.tabsController.changeIndex(1)
+          })
         }
-        .borderRadius(10)
-        .width(this.curBreakpoint.value === BreakpointTypeEnum.SM ? 104 : 164)
-        .height(this.curBreakpoint.value === BreakpointTypeEnum.SM ? 144 : 214)
-        .backgroundColor($r('sys.color.comp_background_list_card'))
-        .onClick(() => {
-          this.currentIndexTab = 1;
-          this.tabsController.changeIndex(1)
-        })
       }
       .scrollBar(BarState.Off)
       .enableScrollInteraction(true)
@@ -386,82 +453,175 @@ export struct BookShelfPage {
       this.newGroup();
     } else {
       Column() {
-        Row() {
+        if (!this.isGroupManage) {
           Row() {
-            Image($r(this.bookManage?.singleBook?.coverUrl?.toString()))
-              .height(120)
-              .width(90)
-              .objectFit(ImageFit.Auto)
-              .borderRadius(10)
-            Column() {
-              Text(this.bookManage?.bookName)
-                .fontSize($r('sys.float.Body_M'))
-                .fontColor($r('sys.color.font_primary'))
-                .fontWeight(FontWeight.Medium)
-                .textOverflow({ overflow: TextOverflow.Ellipsis })
-                .maxLines(1)
-                .width(104)
-                .textAlign(TextAlign.Start)
-                .padding({ top: 5 })
-              Row() {
+            Row() {
+              Image(typeof this.bookManage.singleBook!.coverUrl === 'string' ?
+                $r(this.bookManage.singleBook!.coverUrl) :
+                this.bookManage.singleBook!.coverUrl)
+                .height(120)
+                .width(90)
+                .objectFit(ImageFit.Cover)
+                .borderRadius(10)
+              Column() {
+                Text(this.bookManage?.bookName)
+                  .fontSize(this.fontModel.getFg(14))
+                  .fontColor($r('sys.color.font_primary'))
+                  .fontWeight(FontWeight.Medium)
+                  .textOverflow({ overflow: TextOverflow.Ellipsis })
+                  .maxLines(1)
+                  .width(104)
+                  .textAlign(TextAlign.Start)
+                  .padding({ top: 5 })
                 Row() {
-                  Text(this.bookManage?.singleBook?.rate)
-                    .fontSize(12)
-                    .fontColor($r('sys.color.font_secondary'))
-                  Text(this.bookManage?.singleBook?.category)
-                    .fontSize(12)
-                    .fontColor($r('sys.color.font_secondary'))
-                }
-              }.padding({ top: 10 })
-            }
-            .alignItems(HorizontalAlign.Start)
-            .padding({ left: 16, right: 12 })
-          }.alignItems(VerticalAlign.Top)
+                  Row() {
+                    Text(this.bookManage?.singleBook?.rate)
+                      .fontSize(this.fontModel.getFg(12))
+                      .fontColor($r('sys.color.font_secondary'))
+                    Text(this.bookManage?.singleBook?.category)
+                      .fontSize(this.fontModel.getFg(12))
+                      .fontColor($r('sys.color.font_secondary'))
+                  }
+                }.padding({ top: 10 })
+              }
+              .alignItems(HorizontalAlign.Start)
+              .padding({ left: 16, right: 12 })
+            }.alignItems(VerticalAlign.Top)
 
-          Row() {
-            Button('阅读')
-              .width(60)
-              .height(25)
-              .backgroundColor($r('sys.color.multi_color_08'))
-              .margin({ right: 10 })
-              .onClick(() => {
-                TCRouter.pushByLogin(Constants.READ_KIT_ROUTER, this.bookManage.singleBook);
-                this.isShowBind = false;
-              })
-          }.alignItems(VerticalAlign.Bottom)
-          .justifyContent(FlexAlign.End)
-          .height('100%')
+            Row() {
+              Button('阅读')
+                .width(60)
+                .height(25)
+                .backgroundColor($r('sys.color.multi_color_08'))
+                .margin({ right: 10 })
+                .onClick(() => {
+                  TCRouter.pushByLogin(Constants.READ_KIT_ROUTER, this.bookManage.singleBook);
+                  this.isShowBind = false;
+                })
+            }.alignItems(VerticalAlign.Bottom)
+            .justifyContent(FlexAlign.End)
+            .height('100%')
 
+          }
+          .justifyContent(FlexAlign.SpaceBetween)
+          .width('100%').height(120).margin({ right: 10 })
         }
-        .justifyContent(FlexAlign.SpaceBetween)
-        .width('100%').height(120).margin({ right: 10 })
-
 
         Row() {
-          Column() {
-            ShareBookCard({ book: this.bookManage?.singleBook, isShelf: true })
-          }
-          .height(70)
-
           Column({ space: 5 }) {
-            Image($r('app.media.ic_public_folder'))
-              .height(24)
-              .width(24)
+            SymbolGlyph(this.favBooks[this.bookIndex].isPin ? $r('sys.symbol.arrowshape_up_to_line_slash') :
+              $r('sys.symbol.arrowshape_up_to_line'))
+              .fontSize(fp2pxUtil(24))
+              .fontColor([$r('sys.color.icon_primary')])
               .margin({ top: 5 })
             Row() {
-              Text($r('app.string.change_group'))
+              Text(this.favBooks[this.bookIndex].isPin ? $r('app.string.not_pin') : $r('app.string.pin'))
                 .fontColor($r('sys.color.font_primary'))
-                .fontSize($r('sys.float.Caption_L'))
+                .fontSize(this.fontModel.getFg(12))
                 .fontWeight(FontWeight.Regular)
             }
           }
           .onClick(() => {
-            this.isShowManage = false;
-            this.isNewGroup = true;
-            this.isShowBind = true;
+            this.isShowBind = !this.isShowBind;
+            this.favBooks[this.bookIndex].isPin = !this.favBooks[this.bookIndex].isPin;
+            this.favBooks[this.bookIndex].timestamp = Date.now();
+            if (this.favBooks[this.bookIndex].isPin) {
+              let tmp = this.favBooks[this.bookIndex];
+              this.favBooks.splice(this.bookIndex, 1);
+              this.favBooks.unshift(tmp);
+            } else {
+              let tmp = this.favBooks[this.bookIndex];
+              this.favBooks.splice(this.bookIndex, 1);
+              this.favBooks.push(tmp);
+            }
+            MathUtil.sortFav(this.favBooks);
+            this.clearSelect();
           })
           .height(70)
 
+          if (this.isGroupManage) {
+            Column({ space: 5 }) {
+              SymbolGlyph($r('sys.symbol.highlighter_line'))
+                .fontSize(fp2pxUtil(24))
+                .margin({ top: 5 })
+              Row() {
+                Text($r('app.string.rename'))
+                  .fontColor($r('sys.color.font_primary'))
+                  .fontSize(this.fontModel.getFg(12))
+                  .fontWeight(FontWeight.Regular)
+              }
+            }
+            .onClick(() => {
+              this.renameDialog();
+              this.clearSelect();
+            })
+            .height(70)
+
+            Column({ space: 5 }) {
+              SymbolGlyph($r('sys.symbol.folder_badge_ellipsis'))
+                .fontSize(fp2pxUtil(24))
+                .margin({ top: 5 })
+              Row() {
+                Text($r('app.string.disband_group'))
+                  .fontColor($r('sys.color.font_primary'))
+                  .fontSize(this.fontModel.getFg(12))
+                  .fontWeight(FontWeight.Regular)
+              }
+            }
+            .onClick(() => {
+              this.disbandGroupDialog(false);
+            })
+            .height(70)
+          } else {
+            Column({ space: 5 }) {
+              SymbolGlyph($r('sys.symbol.download'))
+                .fontSize(fp2pxUtil(24))
+                .fontColor([$r('sys.color.icon_primary')])
+                .margin({ top: 5 })
+              Row() {
+                Text($r('app.string.download'))
+                  .fontColor($r('sys.color.font_primary'))
+                  .fontSize(this.fontModel.getFg(12))
+                  .fontWeight(FontWeight.Regular)
+              }
+            }
+            .onClick(async () => {
+              this.isShowBind = !this.isShowBind;
+              let index = this.findIndex(this.bookManage.bookName!, false)
+              this.favBooks[index].downloading = true;
+              this.favBooks[index].singleBook!.localPath =
+                await EpubUtils.loadEpubFileFromNetwork(this.favBooks[index].singleBook!,
+                  (this.getUIContext().getHostContext() as Context).filesDir);
+              this.favBooks[index].isDownload = true;
+              this.favBooks[index].downloading = false;
+              this.clearSelect();
+            })
+            .height(70)
+
+            Column() {
+              ShareBookCard({ book: this.bookManage?.singleBook, isShelf: true })
+            }
+            .height(70)
+
+            Column({ space: 5 }) {
+              Image($r('app.media.ic_public_folder'))
+                .height(24)
+                .width(24)
+                .margin({ top: 5 })
+              Row() {
+                Text($r('app.string.change_group'))
+                  .fontColor($r('sys.color.font_primary'))
+                  .fontSize(this.fontModel.getFg(12))
+                  .fontWeight(FontWeight.Regular)
+              }
+            }
+            .onClick(() => {
+              this.isShowManage = false;
+              this.isNewGroup = true;
+              this.isShowBind = true;
+            })
+            .height(70)
+          }
 
           Column({ space: 5 }) {
             Image($r('app.media.ic_delete_book'))
@@ -469,13 +629,18 @@ export struct BookShelfPage {
               .height(24)
               .margin({ top: 5 })
             Row() {
-              Text($r('app.string.delete'))
-                .fontSize($r('sys.float.Caption_L'))
+              Text(this.isGroupManage ? $r('app.string.delete_group') : $r('app.string.delete'))
+                .fontSize(this.fontModel.getFg(12))
                 .fontColor($r('sys.color.multi_color_08'))
                 .fontWeight(FontWeight.Regular)
             }
           }.onClick(() => {
-            this.deleteDialog()
+            this.isShowBind = false;
+            if (this.isGroupManage) {
+              this.disbandGroupDialog(true);
+            } else {
+              this.deleteDialog()
+            }
           })
           .height(70)
 
@@ -487,17 +652,24 @@ export struct BookShelfPage {
         Column() {
           Row() {
             Text($r('app.string.book_like'))
-              .fontSize($r('sys.float.Body_M'))
+              .fontSize(this.fontModel.getFg(14))
               .fontColor($r('sys.color.font_primary'))
               .fontWeight(FontWeight.Medium)
             Row() {
               Text($r('app.string.go_book_shop'))
-                .fontSize($r('sys.float.Caption_L'))
+                .fontSize(this.fontModel.getFg(12))
                 .fontColor($r('sys.color.font_secondary'))
               Image($r('app.media.arrow_right'))
                 .height(16)
                 .width(16).padding({ left: '6vp' })
             }.justifyContent(FlexAlign.SpaceBetween).padding({ right: '12vp' })
+            .onClick(() => {
+              this.clearSelect();
+              this.isShowManage = false;
+              this.isNewGroup = false;
+              this.isShowBind = false;
+              this.currentIndexTab = 1;
+            })
           }.justifyContent(FlexAlign.SpaceBetween).width('100%')
           .padding({ left: 10, top: 10 })
 
@@ -542,17 +714,68 @@ export struct BookShelfPage {
     }
   }
 
+  // 重命名弹窗
+  renameDialog() {
+    DialogUtil.openDialog(this.wBuilder, new DialogParams(
+      '修改组名', '', true, '取消', '确认',
+      () => { // 取消
+        DialogUtil.close()
+      },
+      (text?: string) => { // 分组
+        let index = this.findIndex(this.bookManage.groupName!, true)
+        this.bookManage.groupName = text;
+        this.favBooks[index].groupName = text;
+        DialogUtil.close()
+      }))
+  };
+
+  // 解散弹窗
+  disbandGroupDialog(isDelete: boolean) {
+    DialogUtil.openDialog(this.wBuilder, new DialogParams(
+      isDelete ? '是否删除此分组' : '是否解散此分组',
+      isDelete ? '删除分组后，组内书籍会被删除，将自动移出书架。' : '解散分组后，组内书籍不会被删除，将自动移入书架。', false,
+      '取消', '确认',
+      () => {
+        DialogUtil.close()
+      },
+      () => {
+        let num = 0;
+        this.favBooks.forEach((item: GroupBook) => {
+          if (item.groupName === this.bookManage?.groupName) {
+            num = this.favBooks.indexOf(item);
+          }
+        })
+        console.info(`长度${this.favBooks[num].groupBooks!.length}`)
+        if (!isDelete) {
+          this.favBooks[num].groupBooks!.forEach((item: BookInfo) => {
+            let groupBook: GroupBook = new GroupBook()
+            groupBook.bookName = item.name
+            groupBook.isSelect = false;
+            groupBook.groupName = ''
+            groupBook.singleBook = item
+            this.favBooks.push(groupBook)
+          })
+        }
+        this.favBooks.splice(num, 1)
+        DialogUtil.close()
+        this.isShowManage = false;
+        this.isShowBind = false;
+        this.isGroupManage = false;
+      }))
+  };
+
   @Builder
   newGroup() {
     Column() {
       Column() {
         Row() {
           Row() {
-            Image($r('app.media.ic_public_plus'))
-              .height(15)
-              .width(15).padding({ right: '6vp' })
+            SymbolGlyph($r('sys.symbol.plus'))
+              .fontSize(this.fontModel.getFg(12))
+              .fontColor([$r('sys.color.multi_color_08')])
+              .padding({ right: 6 })
             Text($r('app.string.new_group'))
-              .fontSize($r('sys.float.Caption_L'))
+              .fontSize(this.fontModel.getFg(12))
               .fontColor($r('sys.color.multi_color_08'))
               .fontWeight(FontWeight.Regular)
           }
@@ -577,11 +800,11 @@ export struct BookShelfPage {
                       .margin({ left: 14 })
                       .onChange((isChecked: boolean) => {
                         if (isChecked) {
-                          item.isSelect = isChecked
+                          this.moveToGroupName = item.groupName!
                         }
                       })
                     Text(item.groupName)
-                      .fontSize($r('sys.float.Body_L'))
+                      .fontSize(this.fontModel.getFg(16))
                       .fontWeight(FontWeight.Medium)
                       .fontColor($r('sys.color.font_primary'))
                       .margin({ left: 10 })
@@ -590,13 +813,13 @@ export struct BookShelfPage {
 
                   if (item.groupBooks?.length) {
                     Text('共' + item.groupBooks?.length + '本')
-                      .fontSize($r('sys.float.Caption_L'))
+                      .fontSize(this.fontModel.getFg(12))
                       .fontWeight(FontWeight.Regular)
                       .fontColor($r('sys.color.font_secondary'))
                       .height('100%')
                   } else {
                     Text('共' + 0 + '本')
-                      .fontSize($r('sys.float.Caption_L'))
+                      .fontSize(this.fontModel.getFg(12))
                       .fontWeight(FontWeight.Regular)
                       .fontColor($r('sys.color.comp_background_list_card'))
                       .height('100%')
@@ -626,12 +849,19 @@ export struct BookShelfPage {
         .borderRadius(20)
         .backgroundColor($r('sys.color.multi_color_08'))
         .onClick(() => {
-          for (let i = 0; i < this.favBooks.length; i++) {
-            if (this.favBooks[i].isSelect) {
-              this.addGroupList(this.favBooks[i].groupName as string)
-              this.isShowBind = false;
+          if (this.moveToGroupName) {
+            this.addGroupList(this.moveToGroupName as string)
+          }
+          for (let index = 0; index < this.favBooks.length; index++) {
+            if (!this.favBooks[index].singleBook && !this.favBooks[index].groupBooks?.length) {
+              this.favBooks.splice(index, 1);
+              index--;
             }
           }
+          AppStorage.set('favBooks', this.favBooks)
+          this.isShowBind = false;
+          this.deleteBooksGroup = new Set();
+          this.clearSelect();
         })
     }
     .height('90%')
@@ -641,166 +871,99 @@ export struct BookShelfPage {
 
   // 列表模式
   @Builder
-  bookShelfList(infos: GroupBook[] | undefined, isHistory: boolean) {
+  bookShelfList() {
     Scroll(this.scroller) {
-      Column() {
+      Column({ space: 8 }) {
         ForEach(this.favBooks, (info: GroupBook) => {
-          Stack({ alignContent: Alignment.BottomEnd }) {
+          Stack({ alignContent: Alignment.Start }) {
             if (info.groupName === '') {
               bookShelfCard({
-                info: info.singleBook, manageEvent: (book: BookInfo, isShowM: boolean) => {
-                  this.isShowManage = isShowM;
-                  this.isShowBind = isShowM;
-                  this.isNewGroup = false;
-                  this.bookManage.isSelect = false;
-                  this.bookManage.groupName = book.groupName
-                  this.bookManage.iconString = '';
-                  this.bookManage.bookName = book.name;
-                  this.bookManage.singleBook = book
+                info: info.singleBook, isPin: info.isPin, manageEvent: (book: BookInfo, isShowM: boolean) => {
+                  this.manageEvent(book, isShowM)
                 }
               })
+                .margin({ left: this.isDeleteShelf ? 36 : 0 })
+                .width(this.isDeleteShelf ? `calc('100%' - 36vp)` : '100%')
                 .gesture(GestureGroup(GestureMode.Parallel, LongPressGesture()
                   .onAction((event: GestureEvent) => {
                     // 针对书架列表
-                    this.isDeleteShelf = true;
+                    this.manageEvent(info.singleBook!, true)
                   })
                 ))
-              if (this.isDeleteShelf) {
-                Checkbox({ name: 'delete', group: 'deleteGroup' })
-                  .select(false)
-                  .unselectedColor($r('sys.color.icon_tertiary'))
-                  .selectedColor($r('app.color.slider_selected_color'))
-                  .shape(CheckBoxShape.CIRCLE)
-                  .onChange((value: boolean) => {
-                    if (value) {
+                .onClick(() => {
+                  if (this.isDeleteShelf) {
+                    const newValue = !info.isSelect;
+                    if (newValue) {
                       this.deleteBooksGroup.add(info.singleBook?.name as string);
                     } else {
                       this.deleteBooksGroup.delete(info.singleBook?.name as string);
                     }
-                  })
-                  .margin({ bottom: 12, right: 12 })
-              }
-
+                    info.isSelect = newValue;
+                  } else {
+                    TCRouter.pushByLogin(Constants.READ_KIT_ROUTER, info.singleBook);
+                  }
+                })
             } else {
-              GroupListCard({ info: info })
-                .gesture(GestureGroup(GestureMode.Parallel,
-                  LongPressGesture()
-                    .onAction((event: GestureEvent) => {
-                      // 针对书架列表
-                      this.isDeleteShelf = true;
-                    })
-                ))
+              GroupListCard({ info: info, isPin: info.isPin })
+                .margin({ left: this.isDeleteShelf ? 36 : 0 })
                 .onClick(() => {
-                  TCRouter.push(Constants.GROUP_ROUTE, { group: info, groups: this.favBooks }) //////
+                  TCRouter.push(Constants.GROUP_ROUTE, { group: info, groups: this.favBooks })
                 })
             }
-          }
-        }, (item: GroupBook, index: number) => {
-          return MathUtil.generateRandomNumber(16).toString();
-        })
-
-        Column() {
-          Column() {
-            Image($r('app.media.ic_public_plus'))
-              .width(40)
-              .height(40)
-            Text($r('app.string.go_and_go_home'))
-              .width(104)
-              .fontSize($r('sys.float.Body_M'))
-              .fontColor($r('sys.color.font_secondary'))
-              .textAlign(TextAlign.Center)
-              .padding({ top: 8 })
-          }
-          .justifyContent(FlexAlign.Center)
-          .borderRadius(10)
-          .width(104)
-          .height(144)
-          .backgroundColor($r('sys.color.comp_background_list_card'))
-          .margin({ top: 10 })
-          .onClick(() => {
-            this.currentIndexTab = 1;
-            this.tabsController.changeIndex(1)
-          })
-        }
-        .width(Constants.FULL_SIZE)
-        .alignItems(HorizontalAlign.Start)
-      }
-      .padding({ top: '20vp' })
-      .padding({ bottom: 15 })
-      .layoutWeight(1)
-      .alignItems(HorizontalAlign.Start)
-      .justifyContent(FlexAlign.Start)
-    }
-    .align(Alignment.Top)
-    .width('100%')
-    .layoutWeight(1)
-    .scrollBar(BarState.Off)
-    .edgeEffect(EdgeEffect.Spring)
-  }
-
-  // 列表模式-浏览历史
-  @Builder
-  bookShelfListHistory(infos: BookInfo[] | undefined, isHistory: boolean) {
-    Scroll(this.scroller) {
-      Column() {
-        ForEach(infos, (info: BookInfo) => {
-          Stack({ alignContent: Alignment.BottomEnd }) {
-            SearchResultCard({ info: info })
-              .gesture(GestureGroup(GestureMode.Parallel,
-                LongPressGesture()
-                  .onAction((event: GestureEvent) => {
-                    // 针对书架列表
-                    this.isDeleteShelf = true;
-                  })
-              ))
             if (this.isDeleteShelf) {
               Checkbox({ name: 'delete', group: 'deleteGroup' })
-                .select(false)
-                .selectedColor($r('app.color.slider_selected_color'))
+                .select(info.isSelect)
                 .unselectedColor($r('sys.color.icon_tertiary'))
+                .selectedColor($r('app.color.slider_selected_color'))
                 .shape(CheckBoxShape.CIRCLE)
                 .onChange((value: boolean) => {
                   if (value) {
-                    this.deleteBooks.add(info.name);
+                    this.deleteBooksGroup.add(info.singleBook?.name as string);
+                    info.isSelect = true;
                   } else {
-                    this.deleteBooks.delete(info.name);
+                    this.deleteBooksGroup.delete(info.singleBook?.name as string);
+                    info.isSelect = false;
                   }
                 })
-                .margin({ bottom: 12, right: 12 })
+                .margin({ left: 12 })
             }
           }
-        }, (item: BookInfo, index: number) => {
-          return MathUtil.generateRandomNumber(16).toString();
-        })
-
-        Column() {
-          Column() {
-            Image($r('app.media.ic_public_plus'))
-              .width(40)
-              .height(40)
-            Text($r('app.string.go_and_go_home'))
-              .width(104)
-              .fontSize($r('sys.float.Body_M'))
-              .fontColor($r('sys.color.font_secondary'))
-              .textAlign(TextAlign.Center)
-              .padding({ top: 8 })
-          }
-          .justifyContent(FlexAlign.Center)
-          .borderRadius(10)
-          .width(104)
-          .height(144)
+          .width(Constants.FULL_SIZE)
           .backgroundColor($r('sys.color.comp_background_list_card'))
-          .margin({ top: 10 })
-          .onClick(() => {
-            this.currentIndexTab = 1;
-            this.tabsController.changeIndex(1)
-          })
+          .borderRadius(16)
+        }, (item: GroupBook) => item.singleBook?.id + '_' + item.singleBook?.name)
+
+        if (!this.isDeleteShelf) {
+          Column() {
+            Column() {
+              Image($r('app.media.ic_public_plus'))
+                .width(40)
+                .height(40)
+              Text($r('app.string.go_and_go_home'))
+                .width(104)
+                .fontSize(this.fontModel.getFg(14))
+                .fontColor($r('sys.color.font_secondary'))
+                .textAlign(TextAlign.Center)
+                .padding({ top: 8 })
+            }
+            .justifyContent(FlexAlign.Center)
+            .borderRadius(10)
+            .width(68)
+            .height(90)
+            .backgroundColor($r('sys.color.comp_background_list_card'))
+            .margin({ top: 10 })
+            .onClick(() => {
+              this.currentIndexTab = 1;
+              this.tabsController.changeIndex(1)
+            })
+          }
+          .width(Constants.FULL_SIZE)
+          .alignItems(HorizontalAlign.Start)
         }
-        .width(Constants.FULL_SIZE)
-        .alignItems(HorizontalAlign.Start)
       }
       .padding({ top: '20vp' })
       .padding({ bottom: 15 })
+      .width(Constants.FULL_SIZE)
       .layoutWeight(1)
       .alignItems(HorizontalAlign.Start)
       .justifyContent(FlexAlign.Start)
@@ -810,83 +973,56 @@ export struct BookShelfPage {
     .layoutWeight(1)
     .scrollBar(BarState.Off)
     .edgeEffect(EdgeEffect.Spring)
-  }
-
-  @Builder
-  shelfHeader() {
-    Column() {
-      Row({ space: 10 }) {
-        Row() {
-          Text($r('app.string.book_list'))
-            .fontSize(20)
-            .fontColor(this.isHistory ? $r('sys.color.font_secondary') : $r('sys.color.font_primary'))
-          Text(`(${this.favBooks?.length || 0})`)
-            .fontSize(15)
-            .fontColor(this.isHistory ? $r('sys.color.font_secondary') : $r('sys.color.font_primary'))
-        }
-        .onClick(() => {
-          this.isHistory = false;
-          this.isDeleteShelf = false;
-        })
-
-        Text('|')
-        Row() {
-          Text($r('app.string.history'))
-            .fontSize(20)
-            .fontColor(this.isHistory ? $r('sys.color.font_primary') : $r('sys.color.font_secondary'))
-          Text(`(${this.historyBooks?.length || 0})`)
-            .fontSize(15)
-            .fontColor(this.isHistory ? $r('sys.color.font_primary') : $r('sys.color.font_secondary'))
-        }
-        .onClick(() => {
-          this.isHistory = true;
-          this.isDeleteShelf = false
-        })
-      }
-      .alignSelf(ItemAlign.Start)
-      .width(Constants.FULL_SIZE)
-      .padding({
-        left: 12,
-        right: 16,
-        top: 24,
-        bottom: 10,
-      })
-    }.alignItems(HorizontalAlign.Start)
   }
 
   build() {
     Stack({ alignContent: Alignment.BottomStart }) {
       Column() {
         NavHeaderBar({
-          title: $r('app.string.book_shelf'),
-          hasBackButton: false,
+          title: !this.isDeleteShelf ? $r('app.string.book_shelf') :
+            this.deleteBooksGroup.size === 0 ? '未选择' : `已选择${this.deleteBooksGroup.size}项`,
+          hasBackButton: this.isDeleteShelf,
           hasBgColor: false,
           isMainPage: true,
           isShelf: true,
+          quit: () => {
+            this.isDeleteShelf = false;
+            this.deleteBooksGroup = new Set();
+            this.clearSelect();
+            this.isShowManage = false;
+            this.isNewGroup = false;
+            this.isShowBind = false;
+            this.isGroupManage = false;
+          },
+          refreshData: async () => {
+            this.refreshData()
+          }
         })
 
         Column() {
-          this.readingInfo();
-          this.shelfHeader();
+          if (!this.isDeleteShelf) {
+            Row() {
+              this.readingInfo();
+              this.signInfo();
+            }
+            .padding({ bottom: 12 })
+            .width('100%')
+            .justifyContent(FlexAlign.SpaceBetween)
+          }
+
           Scroll() {
             Column() {
               if (this.isGrid) {
-                if (this.isHistory) {
-                  this.bookShelfGridHistory(this.historyBooks, this.isHistory);
-                } else {
-                  this.bookShelfGrid(this.favBooks, this.isHistory);
-                }
+                this.bookShelfGrid();
               } else {
-                if (this.isHistory) {
-                  this.bookShelfListHistory(this.historyBooks, this.isHistory);
-                } else {
-                  this.bookShelfList(this.favBooks, this.isHistory);
-                }
+                this.bookShelfList();
               }
             }
           }
           .align(Alignment.Top)
-          .layoutWeight(1).scrollBar(BarState.Off).edgeEffect(EdgeEffect.Spring)
+          .layoutWeight(1)
+          .scrollBar(BarState.Off)
+          .edgeEffect(EdgeEffect.Spring)
         }
         .layoutWeight(1)
         .alignItems(HorizontalAlign.Start)
@@ -896,36 +1032,134 @@ export struct BookShelfPage {
           right: 12,
         })
       }
-      .onClick(() => {
-        if (this.isDeleteShelf) {
-          this.isDeleteShelf = false;
-        }
-      })
       .bindSheet($$this.isShowBind, this.manageBook(), {
         detents: [SheetSize.MEDIUM, SheetSize.LARGE, 800],
         height: this.isShowManage ? SheetSize.FIT_CONTENT : SheetSize.MEDIUM,
         preferType: SheetType.BOTTOM,
-        title: { title: this.isShowManage ? $r('app.string.manage_book') : $r('app.string.change_group') },
+        title: {
+          title: this.isShowManage ? (this.isGroupManage ? this.bookManage.groupName : $r('app.string.manage_book')) :
+            $r('app.string.change_group'),
+          subtitle: this.isGroupManage ? `共${this.bookManage.groupBooks?.length}本` : ''
+        },
         onWillDismiss: () => {
+          for (let index = 0; index < this.favBooks.length; index++) {
+            if (!this.favBooks[index].singleBook && !this.favBooks[index].groupBooks?.length) {
+              this.favBooks.splice(index, 1);
+              index--;
+            }
+          }
+          AppStorage.set('favBooks', this.favBooks)
+          this.deleteBooksGroup = new Set();
+          this.clearSelect();
           this.isShowManage = false;
-          this.isNewGroup = false;
           this.isShowBind = false;
         }
       })
 
       if (this.isDeleteShelf) {
         DeleteBottomCard({
-          delete: () => {
-            let bookType = this.isHistory ? 'historyBooks' : 'favBooks';
-            if (bookType === 'historyBooks') {
-              this.deleteBookList(bookType, this.historyBooks)
+          selectAll: (isSelectAll: boolean) => {
+            if (isSelectAll) {
+              this.favBooks.forEach((info: GroupBook) => {
+                info.isSelect = false
+              })
             } else {
-              this.deleteBookListGroup(bookType, this.favBooks)
+              this.favBooks.forEach((info: GroupBook) => {
+                info.isSelect = true
+              })
+            }
+          },
+          changeGroup: () => {
+            if (this.deleteBooksGroup.size < 1) {
+              let promptAction: PromptAction = this.getUIContext().getPromptAction();
+              try {
+                promptAction.showToast({
+                  message: '未选择',
+                  duration: 2000
+                });
+              } catch (error) {
+                let message = (error as BusinessError).message;
+                let code = (error as BusinessError).code;
+                console.error(`showToast args error code is ${code}, message is ${message}`);
+              }
+            } else {
+              this.moveToGroupName = '';
+              this.isShowManage = false;
+              this.isNewGroup = true;
+              this.isShowBind = true;
+            }
+          },
+          download: () => {
+            this.deleteBooksGroup.forEach(async (bookName: string) => {
+              let index = this.findIndex(bookName, false)
+              if (index !== -1) {
+                this.favBooks[index].downloading = true;
+                this.favBooks[index].singleBook!.localPath =
+                  await EpubUtils.loadEpubFileFromNetwork(this.favBooks[index].singleBook!,
+                    (this.getUIContext().getHostContext() as Context).filesDir);
+                this.favBooks[index].isDownload = true;
+                this.favBooks[index].downloading = false;
+              }
+            })
+          },
+          pin: () => {
+            this.deleteBooksGroup.forEach((groupName: string) => {
+              let index = this.findIndex(groupName, false)
+              if (index === -1) {
+                index = this.findIndex(groupName, true)
+              }
+              this.favBooks[index].isPin = true;
+              this.favBooks[index].timestamp = Date.now();
+              let tmp = this.favBooks[index];
+              this.favBooks.splice(index, 1);
+              this.favBooks.unshift(tmp);
+            })
+            MathUtil.sortFav(this.favBooks);
+          },
+          delete: () => {
+            if (this.deleteBooksGroup.size < 1) {
+              let promptAction: PromptAction = this.getUIContext().getPromptAction();
+              try {
+                promptAction.showToast({
+                  message: '未选择',
+                  duration: 2000
+                });
+              } catch (error) {
+                let message = (error as BusinessError).message;
+                let code = (error as BusinessError).code;
+                console.error(`showToast args error code is ${code}, message is ${message}`);
+              }
+            } else {
+              this.getUIContext().getPromptAction().showDialog({
+                title: $r('app.string.delete_book_flag'),
+                message: $r('app.string.q_delete_book_flag'),
+                buttons: [
+                  {
+                    text: $r('app.string.cancel'),
+                    color: $r('app.color.button_color')
+                  },
+                  {
+                    text: $r('app.string.delete'),
+                    color: $r('app.color.button_color')
+                  }
+                ]
+              }, (err, data) => {
+                if (data.index === 1) {
+                  this.deleteBookListGroup('favBooks', this.favBooks)
+                  this.getUIContext().getPromptAction().showToast({ message: $r('app.string.delete_book_success') })
+                }
+              })
             }
           }
         })
+          .margin({ bottom: 10 })
       }
     }
+    .onVisibleAreaChange([0.0], (isExpanding: boolean, currentRatio: number) => {
+      if (isExpanding && currentRatio >= 0.0) {
+        this.refreshData()
+      }
+    })
     .width(Constants.FULL_SIZE)
     .height(Constants.FULL_SIZE)
     .backgroundColor($r('sys.color.background_secondary'))

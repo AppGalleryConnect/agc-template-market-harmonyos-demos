@@ -1,6 +1,9 @@
 import { Logger } from '@hw-agconnect/ui-base';
 import { BookInfo } from '../model/Book';
+import { FontModel } from 'base_common';
 import { LazyDataVM } from '../model/LazyDataVM';
+import { AppStorageV2 } from '@kit.ArkUI';
+import { common } from '@kit.AbilityKit';
 
 @ComponentV2
 export struct TUISwiper {
@@ -61,6 +64,8 @@ export struct TUISwiper {
   @Event onImageClick: (index: number) => void = () => {
 
   }
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel,
+    () => new FontModel(this.getUIContext().getHostContext() as common.UIAbilityContext))!;
 
   // 根据切换模式初始化,宽高限制
   initDataByIsCovered(): void {
@@ -71,10 +76,10 @@ export struct TUISwiper {
     this.currentIndex = 0
     // 获取当前容器宽度相对360vp的比率
     this.containerRatio = this.containerWidth / 360
-    if (this.containerWidth <= 450) {
+    if (this.containerWidth <= 500) {
       this.count = 3
       this.midCount = 1
-    } else if (this.containerWidth <= 740) {
+    } else if (this.containerWidth <= 850) {
       this.count = 5
       this.midCount = 2
     } else {
@@ -166,7 +171,7 @@ export struct TUISwiper {
       Column({ space: 8 }) {
         Text(this.bookList.getData(this.midBook).name)
           .padding({ top: 3 })
-          .fontSize($r('sys.float.Body_L'))
+          .fontSize(this.fontModel.getFg(16))
           .fontColor($r('sys.color.font_primary'))
           .fontWeight(FontWeight.Medium)
         Row() {
@@ -175,13 +180,14 @@ export struct TUISwiper {
             .width(20)
             .padding({ right: 8 })
           Text(`${this.bookList.getData(this.midBook)?.rate} ${this.bookList.getData(this.midBook)?.category}` +
-            `|${this.bookList.getData(this.midBook)?.author}`)
-            .fontSize($r('sys.float.Body_M'))
+            ` | ${this.bookList.getData(this.midBook)?.author}`)
+            .fontSize(this.fontModel.getFg(14))
             .fontColor($r('sys.color.font_secondary'))
         }
       }
       .padding({ top: 12, bottom: 12 })
     }
+    .backgroundColor($r('sys.color.background_primary'))
     .size({ width: '100%' }).onAreaChange((oldValue: Area, newValue: Area) => {
       // 根据外层容器撑满
       if (this.containerWidth !== newValue.width as number) {

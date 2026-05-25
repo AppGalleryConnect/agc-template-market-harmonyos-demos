@@ -63,7 +63,7 @@ struct Personal {
           personalInfo: this.personalInfo,
           apiInfo: this.apiInfo,
           onChange: (type: DataType, data: PersonalInfo) => {
-            console.log('personal info change, all data: ' + JSON.stringify(data));
+            Logger.info('PersonalInfo', 'personal info change, all data: %{public}s', JSON.stringify(data));
           }
         })
       }
@@ -77,7 +77,7 @@ struct Personal {
       left: '4%',
       right: '4%'
     })
-    .backgroundColor('#F1F3F5')
+    .backgroundColor($r('sys.color.background_secondary'))
     .title('个人信息')
     .padding({
       top: this.getUIContext().px2vp(this.topRectHeight) + 10,

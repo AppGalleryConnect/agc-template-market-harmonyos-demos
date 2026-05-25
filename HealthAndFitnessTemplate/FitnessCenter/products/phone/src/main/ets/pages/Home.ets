@@ -1,11 +1,23 @@
-import { CardInfo, CourseDetailModel, MockService, SportType } from 'external_interactions';
+import { CardInfo, CourseDetailModel, MockService, SportType, VIDEO_URL,
+  BreakpointNameEnum, BreakpointModel, GridSettingInfo, Logger } from 'external_interactions';
 import { window } from '@kit.ArkUI';
 import { CardContent } from 'card'
 import { CourseContent } from 'course'
 import { ScreenPropStorage, AccountUpdate } from 'external_interactions'
-import { AppStorageV2 } from '@kit.ArkUI';
+import { AppStorageV2, display } from '@kit.ArkUI';
 import { emitter } from '@kit.BasicServicesKit';
 import  EventData  from '@ohos.events.emitter';
+
+const TAG = '[Home]'
+
+interface SwiperSettingInfo {
+  displayCount: number;
+  nextMargin: number;
+  itemSpace: number;
+  gridShowNum: number;
+  sportTypeShowNum: number;
+  environmentImageShowNum: number;
+}
 
 @ComponentV2
 export struct Home {
@@ -15,13 +27,71 @@ export struct Home {
   scroller: Scroller = new Scroller()
   controller: VideoController = new VideoController()
   @Param @Once pathStack: NavPathStack = new NavPathStack()
-  courseList: CourseDetailModel[] = MockService.getHomeCourseList()
-  cardList: CardInfo[] = MockService.getHomeCardList()
+  courseList: CourseDetailModel[] = MockService.courseList
+  cardList: CardInfo[] = MockService.cardList
   private swiperController: SwiperController = new SwiperController()
   cardIdMap: Map<string, CardInfo> = MockService.cardIdMap
   courseIdMap: Map<string, CourseDetailModel> = MockService.courseIdMap
   @Local currentIndex: number = 0
   @Local currentCity: string = '北京'
+  @Local breakPointModel: BreakpointModel = AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
+  @Consumer() isVideoFullscreen: boolean = false;
+  @Local environmentImages: string[] = ['app.media.material5', 'app.media.material11'];
+
+  @Computed
+  get swiperInfo() {
+    // 获取当前屏幕旋转角度（0-3 分别对应 0°、90°、180°、270°）
+    let rotation: number = display.getDefaultDisplaySync().rotation;
+    const swiperInfo: SwiperSettingInfo  = {
+      displayCount: 1,
+      nextMargin: 16,
+      itemSpace: 8,
+      gridShowNum: 4,
+      sportTypeShowNum: 4,
+      environmentImageShowNum: 0
+    }
+    if (BreakpointNameEnum.MD === this.breakPointModel.currentBreakpoint) {
+      swiperInfo.displayCount = 2
+      swiperInfo.nextMargin = 24
+      swiperInfo.itemSpace = 12
+      swiperInfo.gridShowNum = 8
+      swiperInfo.environmentImageShowNum = 1
+    }
+    if ([BreakpointNameEnum.LG, BreakpointNameEnum.XL].includes(this.breakPointModel.currentBreakpoint)) {
+      if (rotation === 1 || rotation === 3) {
+        swiperInfo.displayCount = 3
+        swiperInfo.nextMargin = 32
+        swiperInfo.itemSpace = 16
+        swiperInfo.gridShowNum = 12
+        swiperInfo.sportTypeShowNum = 8
+        swiperInfo.environmentImageShowNum = 2
+      }
+    }
+    return swiperInfo;
+  }
+
+  @Computed
+  get gridSetting() {
+    let rotation: number = display.getDefaultDisplaySync().rotation;
+    const gridSettingInfo: GridSettingInfo  = {
+      template: '1fr',
+      colGap: 8,
+      rowGap: 8,
+    }
+    if (BreakpointNameEnum.MD === this.breakPointModel.currentBreakpoint) {
+      gridSettingInfo.template = '1fr 1fr'
+      gridSettingInfo.colGap = 12
+      gridSettingInfo.rowGap = 12
+    }
+    if ([BreakpointNameEnum.LG, BreakpointNameEnum.XL].includes((this.breakPointModel.currentBreakpoint))) {
+      if (rotation === 1 || rotation === 3) {
+        gridSettingInfo.template = '1fr 1fr 1fr'
+        gridSettingInfo.colGap = 16
+        gridSettingInfo.rowGap = 16
+      }
+    }
+    return gridSettingInfo
+  }
 
   aboutToAppear(): void {
     try {
@@ -32,7 +102,7 @@ export struct Home {
         }
       })
     } catch (e) {
-      console.error(`emitter on failed. error: ${JSON.stringify(e)}`)
+      Logger.error(TAG, `emitter on failed. error: ${JSON.stringify(e)}`)
     }
   }
 
@@ -40,7 +110,7 @@ export struct Home {
     try {
       emitter.off('currentCity')
     } catch (e) {
-      console.error(`emitter off failed. error: ${JSON.stringify(e)}`)
+      Logger.error(TAG, `emitter off failed. error: ${JSON.stringify(e)}`)
     }
   }
 
@@ -51,6 +121,7 @@ export struct Home {
         Image($r(item))
           .width('100%')
           .height('100%')
+          .borderRadius(16)
       }, (item: string) => item)
     }
     .loop(true)
@@ -60,6 +131,9 @@ export struct Home {
     .borderRadius(16)
     .curve(Curve.Smooth)
     .indicator(false) // 关闭默认指示器
+    .displayCount(this.swiperInfo.displayCount)
+    .nextMargin(this.swiperInfo.nextMargin)
+    .itemSpace(this.swiperInfo.itemSpace)
     .onChange((index) => {
       this.currentIndex = index // 同步当前索引
     })
@@ -106,11 +180,11 @@ export struct Home {
           }.width('25%')
         }, (item: SportType) => JSON.stringify(item))
       }
-      .width('70%')
+      .width('80%')
       .autoPlay(false)
       .loop(false)
       .itemSpace(0)
-      .displayCount(4)
+      .displayCount(this.swiperInfo.sportTypeShowNum)
       .effectMode(EdgeEffect.Spring)
       .indicator(false)
       .duration(200)
@@ -164,7 +238,7 @@ export struct Home {
       .justifyContent(FlexAlign.SpaceBetween)
 
       CardContent({
-        cardList: this.cardList,
+        cardList: this.cardList.slice(0, this.swiperInfo.gridShowNum),
         onChildClick: (id: string) => {
           this.pathStack.pushPath({ name: 'card/cardDetail', param: this.cardIdMap.get(id) })
         }
@@ -201,7 +275,7 @@ export struct Home {
       .justifyContent(FlexAlign.SpaceBetween)
 
       CourseContent({
-        courseList: this.courseList,
+        courseList: this.courseList.slice(0, this.swiperInfo.gridShowNum),
         onBackClick:(msg: string) => {
           this.pathStack.pushPath(
             {
@@ -216,6 +290,36 @@ export struct Home {
     .width('100%')
     .margin({ bottom: 12 })
     .padding({ bottom: 10 })
+  }
+
+  @Builder
+  clubEnvironmentVideo() {
+    Column() {
+      Video({
+        src: VIDEO_URL,
+        previewUri: $r('app.media.material9'),
+        controller: this.controller,
+        currentProgressRate: PlaybackSpeed.Speed_Forward_1_00_X
+      })
+        .width('100%')
+        .height(BreakpointNameEnum.MD === this.breakPointModel.currentBreakpoint ? 192 : '25%')
+        .borderRadius(this.swiperInfo.itemSpace)
+        .onFullscreenChange(async (event) => {
+          // 改变设备横竖屏状态
+          try {
+            let lastWindow = await window.getLastWindow(this.getUIContext().getHostContext()!)
+            lastWindow.setPreferredOrientation(event.fullscreen ? window.Orientation.LANDSCAPE :
+              window.Orientation.UNSPECIFIED)
+          } catch (e) {
+            Logger.error(TAG, `Failed to get last window. error: ${JSON.stringify(e)}`)
+          }
+          this.isVideoFullscreen = event.fullscreen;
+        })
+      Text('了解俱乐部的详情')
+        .width('100%')
+        .padding({ top: 10, bottom: 10 })
+        .fontSize(12)
+    }
   }
 
   @Builder
@@ -243,29 +347,22 @@ export struct Home {
       .width('100%')
       .justifyContent(FlexAlign.SpaceBetween)
 
-      Video({
-        src: $r('app.media.club'),
-        previewUri: $r('app.media.material9'),
-        controller: this.controller,
-        currentProgressRate: PlaybackSpeed.Speed_Forward_1_00_X
-      })
-        .width('100%')
-        .height('25%')
-        .borderRadius(8)
-        .onFullscreenChange(async (event) => {
-          // 改变设备横竖屏状态
-          try {
-            let lastWindow = await window.getLastWindow(this.getUIContext().getHostContext()!)
-            lastWindow.setPreferredOrientation(event.fullscreen ? window.Orientation.LANDSCAPE :
-              window.Orientation.PORTRAIT)
-          } catch (e) {
-            console.error(`Failed to get last window. error: ${JSON.stringify(e)}`)
+      Grid() {
+        GridItem() {
+          this.clubEnvironmentVideo()
+        }
+        ForEach(this.environmentImages.slice(0, this.swiperInfo.environmentImageShowNum), (item: string) => {
+          GridItem() {
+            Image($r(item))
+              .width('100%')
+              .height(BreakpointNameEnum.MD === this.breakPointModel.currentBreakpoint ? 192 : '25%')
+              .borderRadius(this.gridSetting.colGap)
           }
-        })
-      Text('了解俱乐部的详情')
-        .width('100%')
-        .padding({ top: 10, bottom: 10 })
-        .fontSize(12)
+        }, (item: string) => JSON.stringify(item))
+      }
+      .columnsTemplate(this.gridSetting.template)
+      .columnsGap(this.gridSetting.colGap)
+      .rowsGap(this.gridSetting.rowGap)
     }
     .width('100%')
     .margin({ bottom: 15 })

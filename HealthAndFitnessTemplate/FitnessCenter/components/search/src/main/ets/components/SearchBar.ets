@@ -1,5 +1,8 @@
 import { SymbolGlyphModifier } from '@kit.ArkUI';
+import { Logger } from 'external_interactions';
 import { SearchViewModel } from '../viewmodel/SearchViewModel';
+
+const TAG = '[SearchBar]'
 
 @ComponentV2
 export struct SearchBar {
@@ -73,7 +76,7 @@ export struct SearchBar {
               }
             }
           } catch (error) {
-            console.error('Error in onEditChange:')
+            Logger.error(TAG, 'Error in onEditChange:')
           }
         })
     }

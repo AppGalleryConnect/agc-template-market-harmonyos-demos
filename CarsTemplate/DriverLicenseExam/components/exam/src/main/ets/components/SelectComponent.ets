@@ -16,9 +16,6 @@ export struct SelectComponent {
   @Param @Require changeCorrectNum: (isAdd: boolean) => void;
   @Param @Require changeErrorNum: (isAdd: boolean) => void;
   @Local checkBoxImage: boolean = false;
-  videoController:VideoController = new VideoController();
-  @Param @Require index:number;
-  @Param @Require currentIndex: number;
 
   @Monitor('examController.renderView')
   renderViewChange(){
@@ -28,13 +25,6 @@ export struct SelectComponent {
     }
     this.ansIndexList = [];
     this.selectIndexList = [];
-  }
-
-  @Monitor('currentIndex')
-  currentIndexChange() {
-    if (this.index !== this.currentIndex) {
-      this.videoController.pause();
-    }
   }
 
   // 如果想退出考试重新进入后将已做题回显，打开这个方法
@@ -89,7 +79,7 @@ export struct SelectComponent {
     .height(this.examController.getFg(this.examController.fontSize + 14))
     .justifyContent(FlexAlign.Center)
     .borderRadius(8)
-    .backgroundColor('rgba(0,0,0,0.40)')
+    .backgroundColor($r('app.color.bt_bg_color'))
     .alignSelf(ItemAlign.Start);
   }
 
@@ -97,7 +87,9 @@ export struct SelectComponent {
   question(){
     Text(this.item.question)
       .fontSize(this.examController.getFg(this.examController.fontSize))
-      .fontColor('rgba(0,0,0,0.90)')
+      .fontColor($r('sys.color.font_primary'))
+      .width('100%')
+      .lineHeight(this.examController.getFg(this.examController.fontSize + 6))
       .alignSelf(ItemAlign.Start)
       .padding({
         bottom: 15,
@@ -124,12 +116,15 @@ export struct SelectComponent {
 
           Text(String.fromCharCode(optionIndex + 65) + ': ')
             .fontSize(this.examController.getFg(this.examController.fontSize))
-            .fontColor('rgba(0,0,0,0.90)');
+            .fontColor($r('sys.color.font_primary'));
           Text(option)
             .fontSize(this.examController.getFg(this.examController.fontSize))
-            .fontColor('rgba(0,0,0,0.90)');
+            .fontColor($r('sys.color.font_primary'))
+            .layoutWeight(1)
+            .maxLines(10);
         }
         .width('100%')
+        .alignItems(VerticalAlign.Top)
         .justifyContent(FlexAlign.Start)
         .onClick(() => {
           if (this.showAnswer) {
@@ -149,7 +144,7 @@ export struct SelectComponent {
       }, (option: string) => option)
 
       Button('提交答案')
-        .backgroundColor(this.item.selected.length > 1 ? ' #64BB5C ' : 'rgba(0,0,0,0.10)')
+        .backgroundColor(this.item.selected.length > 1 ? ' #64BB5C ' : $r('app.color.default_submit_answer'))
         .height(40)
         .width('86%')
         .margin({
@@ -180,14 +175,17 @@ export struct SelectComponent {
             $r('app.media.no_select'))
               .width(this.examController.getFg(this.examController.fontSize + 6))
               .height(this.examController.getFg(this.examController.fontSize + 6));
-            Text(String.fromCharCode(optionIndex + 65) + ': ')
-              .fontSize(this.examController.getFg(this.examController.fontSize))
-              .fontColor('rgba(0,0,0,0.90)');
-            Text(option)
-              .fontSize(this.examController.getFg(this.examController.fontSize))
-              .fontColor('rgba(0,0,0,0.90)');
+          Text(String.fromCharCode(optionIndex + 65) + ': ')
+            .fontSize(this.examController.getFg(this.examController.fontSize))
+            .fontColor($r('sys.color.font_primary'));
+          Text(option)
+            .fontSize(this.examController.getFg(this.examController.fontSize))
+            .fontColor($r('sys.color.font_primary'))
+            .layoutWeight(1)
+            .maxLines(10);
           }
           .width('100%')
+          .alignItems(VerticalAlign.Top)
           .justifyContent(FlexAlign.Start)
           .onClick(() => {
             this.showAnswer = true;
@@ -211,50 +209,35 @@ export struct SelectComponent {
 
   @Builder
   answer() {
-    Row() {
-      Text('答案:  ')
-        .fontSize(this.examController.getFg(this.examController.fontSize - 2))
-        .fontColor('rgba(0,0,0,0.90)')
-        .padding({
-          left: 12,
-        });
+    Column() {
+      Text() {
+        Span('答案: ')
+          .fontColor($r('sys.color.font_primary'));
+        Span(this.ansIndexList.sort().map(i => String.fromCharCode(i + 65)).join(''))
+          .fontColor('#64BB5C')
+          .fontWeight(FontWeight.Bold);
 
-      ForEach(this.ansIndexList.sort(), (item: number) => {
-        Text(String.fromCharCode(item + 65))
-          .fontSize(this.examController.getFg(this.examController.fontSize - 2))
-          .fontWeight(FontWeight.Bold)
-          .fontColor('#64BB5C');
-      }, (item: number) => {
-        try {
-          return JSON.stringify(item)
-        } catch (err) {
-          return ''
-        }
-      })
-
-      if (this.item.isCorrect === false) {
-        Text('      您的选择:  ')
-          .fontSize(this.examController.getFg(this.examController.fontSize - 2))
-          .fontColor('rgba(0,0,0,0.90)');
-
-        ForEach(this.selectIndexList.sort(), (item: number) => {
-          Text(String.fromCharCode(item + 65))
-            .fontSize(this.examController.getFg(this.examController.fontSize - 2))
+        if (this.item.isCorrect === false) {
+          Span('    您的选择: ')
+            .fontColor($r('sys.color.font_primary'));
+          Span(this.selectIndexList.sort().map(i => String.fromCharCode(i + 65)).join(''))
             .fontColor('#E84026')
             .fontWeight(FontWeight.Bold);
-        }, (item: number) => {
-          try {
-            return JSON.stringify(item)
-          } catch (err) {
-            return ''
-          }
-        })
+        }
       }
+      .fontSize(this.examController.getFg(this.examController.fontSize - 2))
+      .lineHeight(this.examController.getFg(this.examController.fontSize + 6))
+      .width('100%');
     }
-    .height(28)
     .width('100%')
     .borderRadius(8)
-    .backgroundColor('rgba(0,0,0,0.05)');
+    .backgroundColor($r('sys.color.comp_background_tertiary'))
+    .padding({
+      left: 12,
+      right: 12,
+      top: 6,
+      bottom: 6,
+    });
   }
 
   @Builder
@@ -263,12 +246,12 @@ export struct SelectComponent {
       this.analysisTitle('题目解析');
       Text(this.item.analysis)
         .fontSize(this.examController.getFg(this.examController.fontSize))
-        .fontColor('rgba(0,0,0,0.90)')
+        .fontColor($r('sys.color.font_primary'))
         .lineHeight(this.examController.getFg(this.examController.fontSize + 4));
     }
     .width('100%')
     .alignItems(HorizontalAlign.Start)
-    .backgroundColor(Color.White)
+    .backgroundColor($r('sys.color.comp_background_primary'))
     .borderRadius(16)
     .padding({
       top: 12,
@@ -285,7 +268,6 @@ export struct SelectComponent {
 
       Video({
         src: this.item.videoExplainUrl,
-        controller: this.videoController
       })
         .width('100%')
         .height(160)
@@ -293,7 +275,7 @@ export struct SelectComponent {
     }
     .width('100%')
     .borderRadius(16)
-    .backgroundColor(Color.White)
+    .backgroundColor($r('sys.color.comp_background_primary'))
     .alignItems(HorizontalAlign.Start)
     .padding({
       top: 12,
@@ -312,7 +294,7 @@ export struct SelectComponent {
 
       Text(titleName)
         .fontSize(this.examController.getFg(this.examController.fontSize - 2))
-        .fontColor('rgba(0,0,0,0.90)')
+        .fontColor($r('sys.color.font_primary'))
         .padding({
           left: '2%',
         });

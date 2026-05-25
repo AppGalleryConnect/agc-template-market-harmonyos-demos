@@ -1,5 +1,9 @@
+import { hilog } from '@kit.PerformanceAnalysisKit';
 import { LICENSE_TYPE } from '../model/model'
 import { GuideService } from '../model/GuideService'
+
+const DOMAIN: number = 0xFF00;
+const TAG: string = 'SelectCard';
 
 const GROUP = 'radioGroup';
 
@@ -29,7 +33,7 @@ export struct SelectCard {
           .height(20)
           .width(20)
           .onChange((isChecked: boolean) => {
-            console.log('Radio1 status is ' + isChecked)
+            hilog.info(DOMAIN, TAG, 'Radio status is %{public}s', String(isChecked))
           })
           .alignRules({
             top: {'anchor':'__container__', 'align': VerticalAlign.Top},
@@ -42,11 +46,11 @@ export struct SelectCard {
       }
 
     }
-    .backgroundColor(Color.White)
+    .backgroundColor($r('sys.color.comp_background_primary'))
     .borderRadius(20)
     .border({
       width: 2,
-      color: this.hasSelect()?'#64BB5C':'#fff'
+      color: this.hasSelect()?'#64BB5C':$r('sys.color.comp_background_primary')
     })
     .height(102)
     .width(this.contentWidth || undefined)

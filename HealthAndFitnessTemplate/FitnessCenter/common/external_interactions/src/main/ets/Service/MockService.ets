@@ -1,5 +1,5 @@
 import { util } from '@kit.ArkTS';
-import { CardInfo, CourseDetailModel, DateUtil, SportTypeEnum } from '../../../../Index';
+import { CardInfo, CourseDetailModel, DateUtil, Logger, SportTypeEnum } from '../../../../Index';
 import {
   Account,
   BookingRecordInfo,
@@ -12,16 +12,20 @@ import {
   OrderType,
   SportType,
   TeachType,
-  UserCard
+  UserCard,
+  UserCourse
 } from '../model/MockModel';
 import { cryptoFramework } from '@kit.CryptoArchitectureKit';
 import { preferences } from '@kit.ArkData';
-import { common } from '@kit.AbilityKit';
+
+export const VIDEO_URL = 'https://consumer.huawei.com/content/dam/huawei-cbg-site/cn/mkt/plp/new-phones/video/pocket-series.mp4';
+const TAG: string = '[MockService]';
 
 export class MockService {
   static courseList: CourseDetailModel[] = [];
   static courseIdMap: Map<string, CourseDetailModel> = new Map();
-  static homeSwiperImageList: string[] = ['app.media.material11', 'app.media.material10']
+  static userCourseList: UserCourse[] = [];
+  static homeSwiperImageList: string[] = ['app.media.material11', 'app.media.material10', 'app.media.material4', 'app.media.material2']
   static sportTypeList: SportType[] = []
   static cardNatureList: string[] = []
   static courseNatureList: string[] = []
@@ -29,6 +33,7 @@ export class MockService {
   static cardIdMap: Map<string, CardInfo> = new Map();
   static userCardList: UserCard[] = []
   static userCardMap: Map<string, UserCard> = new Map();
+  static lastUsedCardId: string = '';
   static courseBookingList: CourseBookingInfo[] = [];
   static courseBookingMap: Map<string, CourseBookingInfo> = new Map();
   static coachMap: Map<string, CoachCourseInfo> = new Map();
@@ -47,7 +52,7 @@ export class MockService {
   };
   static dataPreferences: preferences.Preferences;
 
-  static init(context: common.UIAbilityContext) {
+  static init(context: Context) {
     MockService.dataPreferences = preferences.getPreferencesSync(context, { name: 'myStore' })
     MockService.courseList = MockService.getRawFile<CourseDetailModel[]>(context, 'course.json') as CourseDetailModel[];
     MockService.courseList.forEach((item: CourseDetailModel) => {
@@ -126,15 +131,30 @@ export class MockService {
       })
     }
 
-    AppStorage.setOrCreate('loginState', MockService.dataPreferences.getSync('loginState', false))
-  }
-
-  static getHomeCourseList(): CourseDetailModel[] {
-    let list: CourseDetailModel[] = []
-    for (let i = 0; i < 4; i++) {
-      list.push(MockService.courseList[i])
+    let userCourse = MockService.getPreferences<UserCourse[]>('userCourse')
+    if (userCourse) {
+      MockService.userCourseList = userCourse
     }
-    return list
+
+    // Map需序列化存储
+    try {
+      MockService.dataPreferences.putSync('courseBookingMap',
+        JSON.stringify(Array.from(MockService.courseBookingMap.entries())));
+      MockService.dataPreferences.putSync('booking', JSON.stringify(MockService.bookingList));
+      MockService.dataPreferences.putSync('courses', JSON.stringify(MockService.courseList));
+      MockService.dataPreferences.putSync('userCard', JSON.stringify(MockService.userCardList));
+      MockService.dataPreferences.putSync('cards', JSON.stringify(MockService.cardList));
+      MockService.dataPreferences.putSync('lastUsedCardId', MockService.lastUsedCardId);
+      MockService.dataPreferences.flush();
+    } catch (e) {
+      Logger.error(TAG, `Preferences put failed. error: ${JSON.stringify(e)}`)
+    }
+
+    try {
+      AppStorage.setOrCreate('loginState', MockService.dataPreferences.getSync('loginState', false));
+    } catch (e) {
+      Logger.error(TAG, `Preferences get failed. error: ${JSON.stringify(e)}`)
+    }
   }
 
   static getCourseListBySportType(sportType: SportTypeEnum): CourseDetailModel[] {
@@ -172,14 +192,6 @@ export class MockService {
 
   static getCourseById(courseId: string): CourseDetailModel {
     return MockService.courseIdMap.get(courseId)!
-  }
-
-  static getHomeCardList(): CardInfo[] {
-    let list: CardInfo[] = []
-    for (let i = 0; i < 4; i++) {
-      list.push(MockService.cardList[i])
-    }
-    return list
   }
 
   static getCardListBySportType(sportType: SportTypeEnum): CardInfo[] {
@@ -394,8 +406,12 @@ export class MockService {
     MockService.account.sex = sex
     MockService.account.birthday = birthday
     MockService.account.avatar = avatar
-    MockService.dataPreferences.putSync('account', JSON.stringify(MockService.account))
-    MockService.dataPreferences.flush()
+    try {
+      MockService.dataPreferences.putSync('account', JSON.stringify(MockService.account));
+      MockService.dataPreferences.flush();
+    } catch (e) {
+      Logger.error(TAG, `Preferences put failed. error: ${JSON.stringify(e)}`)
+    }
   }
 
   static createOrder(orderType: OrderType, orderState: OrderState, number: number, price: number, cardId?: string,
@@ -422,8 +438,12 @@ export class MockService {
 
     MockService.orderList.splice(0, 0, order);
     MockService.orderMap.set(order.id, order);
-    MockService.dataPreferences.putSync('order', JSON.stringify(MockService.orderList))
-    MockService.dataPreferences.flush()
+    try {
+      MockService.dataPreferences.putSync('order', JSON.stringify(MockService.orderList));
+      MockService.dataPreferences.flush();
+    }  catch (e) {
+      Logger.error(TAG, `Preferences put failed. error: ${JSON.stringify(e)}`)
+    }
     return order;
   }
 
@@ -444,10 +464,58 @@ export class MockService {
 
     MockService.bookingList.splice(0, 0, bookingRecord);
     MockService.bookingMap.set(bookingRecord.id, bookingRecord);
-    MockService.dataPreferences.putSync('booking', JSON.stringify(MockService.bookingList))
-    MockService.dataPreferences.flush()
+    try {
+      MockService.dataPreferences.putSync('booking', JSON.stringify(MockService.bookingList));
+      MockService.dataPreferences.flush();
+    } catch (e) {
+      Logger.error(TAG, `Preferences put failed. error: ${JSON.stringify(e)}`)
+    }
     return bookingRecord;
   }
+
+  static addUserCourse(courseId: string): UserCourse {
+    let userCourse: UserCourse = {
+      id: MockService.generateDigitString(11),
+      courseId: courseId,
+      courseBookingId: '',
+      courseState: false,
+      bookingRecordId: ''
+    }
+    MockService.userCourseList.push(userCourse);
+    try {
+      MockService.dataPreferences.putSync('userCourse', JSON.stringify(MockService.userCourseList));
+      MockService.dataPreferences.flush();
+    } catch (e) {
+      Logger.error(TAG, `Preferences put failed. error: ${JSON.stringify(e)}`)
+    }
+    return userCourse;
+  }
+
+  static removeUserCourse(id: string): void {
+    const existingCourseIndex = MockService.userCourseList.findIndex(userCourse => userCourse.id === id);
+    if (existingCourseIndex !== -1) {
+      // 退回余额
+      const existingCourse = MockService.userCourseList[existingCourseIndex];
+      const courseDetail = MockService.getCourseById(existingCourse.courseId)
+      const returnPrice = courseDetail.price
+      MockService.account.balance += parseFloat(returnPrice.toFixed(2))
+
+      // 更新映射表，删除课程
+      MockService.userCourseList.splice(existingCourseIndex, 1)
+
+      // 保存到持久化存储
+      try {
+        MockService.dataPreferences.putSync('account', JSON.stringify(MockService.account));
+        MockService.dataPreferences.putSync('userCourse', JSON.stringify(MockService.userCourseList));
+        MockService.dataPreferences.flush();
+      } catch (e) {
+        Logger.error(TAG, `Preferences put failed. error: ${JSON.stringify(e)}`)
+      }
+    } else {
+      Logger.error(TAG, `UserCourse ${id} not exist.`)
+    }
+  }
+
 
   static addUserCard(cardId: string, restQuota: number): UserCard {
     const existingCardIndex = MockService.userCardList.findIndex(card => card.cardId === cardId);
@@ -456,12 +524,17 @@ export class MockService {
       const existingCard = MockService.userCardList[existingCardIndex];
       existingCard.restQuota += restQuota; // 叠加剩余次数
 
-      // 更新映射表
+      // 更新映射表和列表
       MockService.userCardMap.set(existingCard.id, existingCard);
+      MockService.userCardList[existingCardIndex].restQuota = existingCard.restQuota
 
       // 保存到持久化存储
-      MockService.dataPreferences.putSync('userCard', JSON.stringify(MockService.userCardList));
-      MockService.dataPreferences.flush();
+      try {
+        MockService.dataPreferences.putSync('userCard', JSON.stringify(MockService.userCardList));
+        MockService.dataPreferences.flush();
+      } catch (e) {
+        Logger.error(TAG, `Preferences put failed. error: ${JSON.stringify(e)}`)
+      }
 
       return existingCard;
     } else {
@@ -474,9 +547,39 @@ export class MockService {
       }
       MockService.userCardList.push(userCard);
       MockService.userCardMap.set(userCard.id, userCard);
-      MockService.dataPreferences.putSync('userCard', JSON.stringify(MockService.userCardList));
-      MockService.dataPreferences.flush();
+      try {
+        MockService.dataPreferences.putSync('userCard', JSON.stringify(MockService.userCardList));
+        MockService.dataPreferences.flush();
+      } catch (e) {
+        Logger.error(TAG, `Preferences put failed. error: ${JSON.stringify(e)}`)
+      }
       return userCard;
+    }
+  }
+
+  static removeUserCard(cardId: string): void {
+    const existingCardIndex = MockService.userCardList.findIndex(card => card.cardId === cardId);
+    if (existingCardIndex !== -1) {
+      // 退回余额
+      const existingCard = MockService.userCardList[existingCardIndex];
+      const cardInfo = MockService.getCardById(existingCard.cardId)
+      const returnPrice = (existingCard.restQuota / cardInfo.quota) * cardInfo.price
+      MockService.account.balance += parseFloat(returnPrice.toFixed(2))
+
+      // 更新映射表，删除卡项
+      MockService.userCardList.splice(existingCardIndex, 1)
+      MockService.userCardMap.delete(existingCard.id)
+
+      // 保存到持久化存储
+      try {
+        MockService.dataPreferences.putSync('account', JSON.stringify(MockService.account));
+        MockService.dataPreferences.putSync('userCard', JSON.stringify(MockService.userCardList));
+        MockService.dataPreferences.flush();
+      } catch (e) {
+        Logger.error(TAG, `Preferences put failed. error: ${JSON.stringify(e)}`)
+      }
+    } else {
+      Logger.error(TAG, `UserCard ${cardId} not exist.`)
     }
   }
 
@@ -511,17 +614,17 @@ export class MockService {
     if (randData != null) {
       return randData.data.reduce((acc, byte) => acc * 256 + byte, 0); // 将字节转换为整数
     } else {
-      console.error('[Sync]: get rand result fail!');
+      Logger.error(TAG, '[Sync]: get rand result fail!');
     }
     return 0
   }
 
-  static getRawFile<T>(context: common.UIAbilityContext, filePath: string): T | null {
+  static getRawFile<T>(context: Context, filePath: string): T | null {
     if (typeof context.resourceManager.getRawFileContentSync === 'function') {
       const value = context.resourceManager.getRawFileContentSync(filePath);
       return JSON.parse(MockService.bufferToString(value)) as T;
     }
-    console.error('Sync API not available');
+    Logger.error(TAG, 'Sync API not available');
     return null;
   }
 

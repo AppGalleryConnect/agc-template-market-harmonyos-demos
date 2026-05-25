@@ -21,6 +21,7 @@ import { Constants } from '../common/Constant';
 import { CityTagAndIcon } from '../components/CityTagAndIcon';
 import { GridRowColSetting } from '../common/GridRowColSetting';
 import { setApplyLocPermAgain } from '../common/Location';
+import { common } from '@kit.AbilityKit';
 
 @ComponentV2
 export struct CitySelect {
@@ -43,7 +44,8 @@ export struct CitySelect {
       }
       return false;
     }
-    this.citySelectVM.getLocationCity().then(currentCity => {
+    this.citySelectVM.getLocationCity(this.getUIContext().getHostContext() as common.UIAbilityContext)
+      .then(currentCity => {
       if (currentCity) {
         this.handleCurrentCity(currentCity)
       }
@@ -226,7 +228,8 @@ export struct CitySelect {
           }
         }
         .onClick(() => {
-          this.citySelectVM.getLocationCity().then(currentCity => {
+          this.citySelectVM.getLocationCity(this.getUIContext().getHostContext() as common.UIAbilityContext)
+            .then(currentCity => {
             if (currentCity) {
               this.handleCurrentCity(currentCity)
             }

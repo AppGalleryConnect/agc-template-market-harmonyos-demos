@@ -32,7 +32,6 @@ export class AggregatedPaymentVM {
         });
       }
     }).catch((error: BusinessError) => {
-      console.log(error.message);
       uiContext.getPromptAction().showToast({
         message: error.message,
         duration: 2000,

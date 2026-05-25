@@ -4,6 +4,7 @@ import { call } from '@kit.TelephonyKit';
 import { AppStorageV2 } from '@kit.ArkUI';
 import { checkUpdateAndShowDialog } from 'check_app_update';
 import { common } from '@kit.AbilityKit';
+import { hilog } from '@kit.PerformanceAnalysisKit';
 
 /**
  * 关于我们
@@ -49,7 +50,7 @@ export struct AboutUs {
         try {
           call.makeCall('000000', (err: BusinessError) => {
             if (!err) {
-              console.log('make call success.');
+              hilog.info(0x0000, 'AboutUs', 'make call success.');
             } else {
               let errMsg: string;
               try {
@@ -57,12 +58,12 @@ export struct AboutUs {
               } catch (e) {
                 errMsg = 'unknown error';
               }
-              console.log('make call fail, err is:' + errMsg);
+              hilog.info(0x0000, 'AboutUs', `make call fail, err is:${errMsg}`);
             }
           });
         } catch (error) {
           const e = error as BusinessError;
-          console.log('make call throw error, code:' + e.code + ', message:' + e.message);
+          hilog.error(0x0000, 'AboutUs', `make call throw error, code:${e.code}, message:${e.message}`);
         }
       })
 
@@ -212,9 +213,16 @@ export struct AboutUs {
         this.openPhoneSheet = !this.openPhoneSheet
       })
       .bindSheet($$this.openPhoneSheet, this.contactBuilder(), {
-        title: {title: '联系客服' },
-        height: '35%',
-        width: '100%'
+        title: { title: '联系客服' },
+        preferType: SheetType.BOTTOM,
+        height: SheetSize.FIT_CONTENT,
+        width: '100%',
+        radius: {
+          topLeft: 32,
+          topRight: 32,
+          bottomLeft: 32,
+          bottomRight: 32,
+        },
       })
 
       Divider()

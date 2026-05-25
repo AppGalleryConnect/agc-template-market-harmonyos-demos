@@ -5,7 +5,8 @@
     "description": "$string:module_desc",
     "mainElement": "EntryAbility",
     "deviceTypes": [
-      "phone"
+      "phone",
+      "tablet"
     ],
     "deliveryWithInstall": true,
     "installationFree": true,
@@ -79,6 +80,21 @@
 // TODO: 替换Client ID
         "name": "client_id",
         "value": "******"
+      },
+// todo: 本地模拟接入隐私管理服务，上架打包时删除
+      {
+        "name": "appgallery_privacy_hosted",
+        "value": "1"
+      },
+// todo: 本地模拟接入隐私管理服务，上架打包时删除
+      {
+        "name": "appgallery_privacy_link_privacy_statement",
+        "value": "https://www.example.com/"
+      },
+// todo: 本地模拟接入隐私管理服务，上架打包时删除
+      {
+        "name": "appgallery_privacy_link_user_agreement",
+        "value": "https://www.example.com/"
       }
     ]
   }

@@ -70,3 +70,19 @@ export class CommentModel {
   courseTitle: string = ''; // 课程标题
   @Trace isDelete: boolean = false
 }
+
+@ObservedV2
+export class CourseDataModel {
+  @Trace public courseProgress: Map<string, number> = new Map();
+}
+
+@ObservedV2
+export class ExerciseRecord {
+  @Trace duration: number = 0;  // 运动时长(分钟)
+  @Trace energy: number = 0;  // 消耗能量(kcal)
+}
+
+@ObservedV2
+export class ExerciseDays {
+  @Trace totalDays: number = 0;  // 累计训练(天)
+}

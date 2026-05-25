@@ -8,19 +8,25 @@ struct MemberShipView {
 
   build() {
     NavDestination() {
-      MemberShipPage({
-        routerModule: this.routerModule,
-        isSheet: this.params.isSheet,
-        themeColor: this.params.themeColor,
-        linearColors: this.params.linearColors,
-        btnFontColor: this.params.btnFontColor,
-        lastPurchaseProductExpireTime: this.params.lastPurchaseProductExpireTime,
-        productsInfo: this.params.productsInfo,
-        privacyContent: this.params.privacyContent,
-        subscribeCallBack: this.params.subscribeCallBack,
-        queryExpireTime: this.params.queryExpireTime,
-        ownedMemberCallBack: this.params.ownedMemberCallBack,
-      });
+      Scroll() {
+        Column() {
+          MemberShipPage({
+            routerModule: this.routerModule,
+            isSheet: this.params.isSheet,
+            themeColor: this.params.themeColor,
+            linearColors: this.params.linearColors,
+            btnFontColor: this.params.btnFontColor,
+            lastPurchaseProductExpireTime: this.params.lastPurchaseProductExpireTime,
+            productsInfo: this.params.productsInfo,
+            privacyContent: this.params.privacyContent,
+            subscribeCallBack: this.params.subscribeCallBack,
+            queryExpireTime: this.params.queryExpireTime,
+            ownedMemberCallBack: this.params.ownedMemberCallBack,
+            loginApiController: this.params.loginApiController,
+            isLinkLoginStatus: this.params.isLinkLoginStatus,
+          }).layoutWeight(1);
+        }.layoutWeight(1);
+      }.layoutWeight(1);
     }.onReady((context) => {
       // 获取参数
       this.routerModule = context.pathStack;

@@ -10,7 +10,7 @@ export function GuidePageSportsBuilder() {
 @ComponentV2
 export struct CustomButton {
   @Param label: string = ''    // 按钮文本
-  @Param btnWidth: number = 104
+  @Param btnWidth: string = '32%'
   @Param private themeColor: Resource = $r('app.color.app_theme')  // 主题色
   @Param private backColor: Resource = $r('sys.color.comp_background_tertiary')
   @Param private foreColor: string = 'rgba(0, 0, 0, 0.9)'
@@ -20,8 +20,8 @@ export struct CustomButton {
     Button(this.label)
       .width(this.btnWidth)
       .height(28)
-      .margin({ right: 12, bottom: 12 })
-      .fontSize($r('sys.float.Body_M'))
+      .margin({ bottom: 12 })
+      .fontSize($r('sys.float.Body_S'))
       .borderRadius(14)
       .fontColor(this.selected ? Color.White : this.foreColor)
       .backgroundColor(this.selected ? this.themeColor : this.backColor)
@@ -32,7 +32,7 @@ export struct CustomButton {
 export struct CustomButton1 {
   @Local isOn: boolean = false  // 独立状态存储
   @Param label: string = ''    // 按钮文本
-  @Param btnWidth: number = 104
+  @Param btnWidth: string = '32%'
   @Param private themeColor: Resource = $r('app.color.app_theme')  // 主题色
   @Param private backColor: Resource = $r('sys.color.comp_background_tertiary')
   @Param private foreColor: string = 'rgba(0, 0, 0, 0.9)'
@@ -41,8 +41,8 @@ export struct CustomButton1 {
     Button(this.label)
       .width(this.btnWidth)
       .height(28)
-      .margin({ right: 12, bottom: 12 })
-      .fontSize($r('sys.float.Body_M'))
+      .margin({ bottom: 12 })
+      .fontSize($r('sys.float.Body_S'))
       .borderRadius(14)
       .fontColor(this.isOn ? Color.White : this.foreColor)
       .backgroundColor(this.isOn ? this.themeColor : this.backColor)
@@ -67,15 +67,15 @@ struct GuidePage {
   contentBuilder() {
     Column() {
       Text('您喜欢的运动类型')
-        .fontSize($r('sys.float.Body_L'))
-        .fontWeight(FontWeight.Medium)
+        .fontSize($r('sys.float.Subtitle_L'))
+        .fontWeight(FontWeight.Bold)
         .margin({
           top: 40,
           bottom: 24,
         })
 
       Column() {
-        Flex({ wrap: FlexWrap.Wrap, justifyContent: FlexAlign.Start }) {
+        Flex({ wrap: FlexWrap.Wrap, justifyContent: FlexAlign.SpaceBetween }) {
           ForEach(this.sportList, (item: string) => {
             CustomButton1({ label: item })
           })
@@ -86,15 +86,15 @@ struct GuidePage {
     .width('100%')
     Column() {
       Text('您的运动频次')
-        .fontSize($r('sys.float.Body_L'))
-        .fontWeight(FontWeight.Medium)
+        .fontSize($r('sys.float.Subtitle_L'))
+        .fontWeight(FontWeight.Bold)
         .margin({
           top: 40,
           bottom: 24,
         })
 
       Column() {
-        Flex({ wrap: FlexWrap.Wrap, justifyContent: FlexAlign.Start }) {
+        Flex({ wrap: FlexWrap.Wrap, justifyContent: FlexAlign.SpaceBetween }) {
           ForEach(this.frequencyList, (item: string) => {
             CustomButton({ label: item, selected: this.selectedFrequency === item })
               .onClick(() => {
@@ -109,17 +109,17 @@ struct GuidePage {
 
     Column() {
       Text('期望练习难度')
-        .fontSize($r('sys.float.Body_L'))
-        .fontWeight(FontWeight.Medium)
+        .fontSize($r('sys.float.Subtitle_L'))
+        .fontWeight(FontWeight.Bold)
         .margin({
           top: 40,
           bottom: 24,
         })
 
       Column() {
-        Flex({ wrap: FlexWrap.Wrap, justifyContent: FlexAlign.Start }) {
+        Flex({ wrap: FlexWrap.Wrap, justifyContent: FlexAlign.SpaceBetween }) {
           ForEach(this.difficultLevel, (item: string) => {
-            CustomButton1({ label: item, btnWidth: 78 })
+            CustomButton1({ label: item, btnWidth: '23%' })
           })
         }
       }

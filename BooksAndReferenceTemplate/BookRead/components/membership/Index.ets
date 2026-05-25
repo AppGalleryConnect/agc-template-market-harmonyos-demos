@@ -1,6 +1,6 @@
 export { MemberShipPage } from './src/main/ets/pages/MemberShipPage';
 
-export { ProductInfo, MemberParams, MemberList } from './src/main/ets/model/Index';
+export { ProductInfo, MemberParams, MemberList, LoginApiController, UserStatus } from './src/main/ets/model/Index';
 
 export { FinishStatus } from './src/main/ets/constant/Enum';
 
