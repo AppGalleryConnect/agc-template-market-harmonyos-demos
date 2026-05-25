@@ -139,7 +139,7 @@
     <td><a href="./SocialTemplate/SocialDating/README.md" target="_blank">快速开始</a></td>
   </tr>
   <tr>
-    <td rowspan="3"><a href="#工具">工具</a></td>
+    <td rowspan="4"><a href="#工具">工具</a></td>
     <td><a href="#智慧家居应用模板">智慧家居应用模板</a></td>
     <td><a href="./ToolsTemplate//SmartHome/README.md" target="_blank">快速开始</a></td>
   </tr>
