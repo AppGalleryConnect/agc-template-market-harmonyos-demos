@@ -2,6 +2,7 @@ import fs from '@ohos.file.fs';
 import { util } from '@kit.ArkTS';
 import { storageStatistics } from '@kit.CoreFileKit';
 import { Logger } from './Logger';
+import { GlobalContext } from './GlobalContext';
 
 const TAG = '[FileUtils]';
 
@@ -21,7 +22,7 @@ export class FileUtils {
     let file: fs.File | null = null;
     try {
       file = fs.openSync(uri, fs.OpenMode.READ_ONLY);
-      const newPath: string = getContext().filesDir + `/${util.generateRandomUUID(false)}.png`;
+      const newPath: string = GlobalContext.getContext().filesDir + `/${util.generateRandomUUID(false)}.png`;
       fs.copyFileSync(file.fd, newPath);
       return 'file://' + newPath;
     } catch (error) {
@@ -60,13 +61,18 @@ export class FileUtils {
    * 读取缓存大小，单位Byte
    */
   static getCache() {
-    return storageStatistics.getCurrentBundleStats().then((bundleStats: storageStatistics.BundleStats) => {
-      Logger.info(TAG, 'getCurrentBundleStats successfully:' + JSON.stringify(bundleStats));
-      Logger.info(TAG, 'appSize :' + bundleStats.appSize);
-      Logger.info(TAG, 'cacheSize :' + bundleStats.cacheSize);
-      Logger.info(TAG, 'dataSize :' + bundleStats.dataSize);
-      return bundleStats.cacheSize;
-    });
+    try {
+      return storageStatistics.getCurrentBundleStats().then((bundleStats: storageStatistics.BundleStats) => {
+        Logger.info(TAG, 'getCurrentBundleStats successfully:' + JSON.stringify(bundleStats));
+        Logger.info(TAG, 'appSize :' + bundleStats.appSize);
+        Logger.info(TAG, 'cacheSize :' + bundleStats.cacheSize);
+        Logger.info(TAG, 'dataSize :' + bundleStats.dataSize);
+        return bundleStats.cacheSize;
+      });
+    } catch (error) {
+      Logger.error(TAG, 'getCache error: ' + JSON.stringify(error));
+      return Promise.resolve(0);
+    }
   }
 
   /**
@@ -74,7 +80,7 @@ export class FileUtils {
    * @param cacheDir
    */
   static clearCache() {
-    const cacheDir = getContext().cacheDir;
+    const cacheDir = GlobalContext.getContext().cacheDir;
     Logger.info(TAG, 'clear cache dir:' + cacheDir);
     fs.listFile(cacheDir).then((filenames) => {
       for (let i = 0; i < filenames.length; i++) {

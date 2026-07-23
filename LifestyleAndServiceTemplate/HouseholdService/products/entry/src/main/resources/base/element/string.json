@@ -55,6 +55,10 @@
     {
       "name": "title_immersive",
       "value": "家政模板"
+    },
+    {
+      "name": "agcit_huawei_household_service",
+      "value": "1.0.5"
     }
   ]
 }

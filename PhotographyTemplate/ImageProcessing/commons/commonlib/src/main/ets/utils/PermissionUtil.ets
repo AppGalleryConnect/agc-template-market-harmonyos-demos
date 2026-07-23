@@ -9,6 +9,7 @@ import { UtilLog as Logger } from '@hw-agconnect/util-log';
   UNKNOWN = 2,
 }
 
+const TAG: string = '[PermissionUtil]';
 
 export class PermissionUtil {
   private static _atManager: abilityAccessCtrl.AtManager = abilityAccessCtrl.createAtManager();
@@ -26,23 +27,27 @@ export class PermissionUtil {
       return permissive;
     }
     // 向用户申请授权
-    const data = await PermissionUtil._atManager.requestPermissionsFromUser(context, needAuthorized);
-    let grantStatus: number[] = data.authResults;
-    let length: number = grantStatus.length;
+    try {
+      const data = await PermissionUtil._atManager.requestPermissionsFromUser(context, needAuthorized);
+      let grantStatus: number[] = data.authResults;
+      let length: number = grantStatus.length;
 
-    const needAuthorizedAgain: Permissions[] = [];
-    for (let i = 0; i < length; i++) {
-      if (grantStatus[i] === PermissionStatus.GRANTED) {
-        Logger.info('request permission success::' + needAuthorized[i]);
-      } else if (grantStatus[i] === PermissionStatus.DENIED) {
-        needAuthorizedAgain.push(needAuthorized[i]);
-      } else {
-        permissive = false;
-        Logger.info('request permission failed:: user denied');
+      const needAuthorizedAgain: Permissions[] = [];
+      for (let i = 0; i < length; i++) {
+        if (grantStatus[i] === PermissionStatus.GRANTED) {
+          Logger.info(TAG, 'request permission success::' + needAuthorized[i]);
+        } else if (grantStatus[i] === PermissionStatus.DENIED) {
+          needAuthorizedAgain.push(needAuthorized[i]);
+        } else {
+          permissive = false;
+        }
       }
-    }
 
-    await PermissionUtil._requestPermissionsOnSetting(needAuthorizedAgain, context);
+      // 再次申请授权
+      permissive = await PermissionUtil._requestPermissionsOnSetting(needAuthorizedAgain, context);
+    } catch (error) {
+      Logger.error(TAG, `request permission failed. error: ${JSON.stringify(error)}`);
+    }
     return permissive;
   }
 
@@ -56,13 +61,19 @@ export class PermissionUtil {
 
   // 用户首次拒绝后二次申请授权
   private static async _requestPermissionsOnSetting(permissions: Permissions[], context: Context) {
-    PermissionUtil._atManager.requestPermissionOnSetting(context, permissions)
-      .then((data: abilityAccessCtrl.GrantStatus[]) => {
-        Logger.info('request permission on setting success:' + JSON.stringify(data));
-      })
-      .catch((err: BusinessError) => {
-        Logger.error(`Failed to request permissions on setting from user. Code is ${err.code}, message is ${err.message}`);
-      });
+    return new Promise<boolean>((resolve) => {
+      PermissionUtil._atManager.requestPermissionOnSetting(context, permissions)
+        .then((data: abilityAccessCtrl.GrantStatus[]) => {
+          const isAuth = data.every((item) => item === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED);
+          resolve(isAuth);
+          Logger.info(TAG, 'request permission on setting success::' + JSON.stringify(data));
+        })
+        .catch((err: BusinessError) => {
+          resolve(false);
+          Logger.error(TAG,
+            `Failed to request permissions on setting from user. Code is ${err.code}, message is ${err.message}`);
+        });
+    })
   }
 
 

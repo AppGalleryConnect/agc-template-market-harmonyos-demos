@@ -3,6 +3,7 @@ import { ComponentContent, LevelMode, PromptAction, UIContext } from '@kit.ArkUI
 import { CashierPickerContentVM } from './viewmodels/CashierPickerContentVM';
 import { PaymentType } from './common/CustomTypes';
 import { CashierPickerSheet } from './components/CashierPickerSheet';
+import { UtilLog } from '@hw-agconnect/util-log';
 
 export class CashierPicker {
 
@@ -72,7 +73,11 @@ export class CashierPicker {
       this.pickerContent.isOpen = false;
       // DISAPPEAR 动画结束后执行真正关闭
       setTimeout(() => {
-        this.promptAction.closeCustomDialog(this.node).finally(() => this.node = null);
+        this.promptAction.closeCustomDialog(this.node)
+          .finally(() => this.node = null)
+          .catch((error: BusinessError) => {
+          UtilLog.error('closeCustomDialog fail, error: ' + JSON.stringify(error));
+        });
       }, this.pickerContent.durationForDisappear);
     }
   }

@@ -1,5 +1,12 @@
 import { getColor, getMedia, getString } from '@agctemplate/resources';
-import { AppStorageKeys, BreakPoint, BreakPointType, BreakPointValue } from '@agctemplate/widgets';
+import {
+  AppStorageKeys,
+  BreakPoint,
+  BreakPointType,
+  BreakPointValue,
+  FontModel,
+  fp2pxUtil
+} from '@agctemplate/widgets';
 import { AppStorageV2 } from '@kit.ArkUI';
 
 @ComponentV2
@@ -17,6 +24,7 @@ export struct VideoSeries {
   @Event isSelectBack: (isSelect: boolean) => void
   @Local currentBreakpoint: BreakPoint = AppStorageV2.connect(BreakPoint, AppStorageKeys.CURRENT_BREAK_POINT,
     () => new BreakPoint(BreakPointValue.SM))!;
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
 
   @Monitor('isDeleting')
   onChange() {
@@ -47,13 +55,29 @@ export struct VideoSeries {
 
         Stack({ alignContent: Alignment.BottomEnd }) {
           Image(this.cover)
-            .width(new BreakPointType<number>({ sm: 99, md: 159, lg: 189 }).getValue(this.currentBreakpoint.value))
-            .height(new BreakPointType<number>({ sm: 131, md: 210, lg: 249 }).getValue(this.currentBreakpoint.value))
+            .width(new BreakPointType<string | number>({
+              sm: 99,
+              md: 159,
+              lg: 189
+            }).getValue(this.currentBreakpoint.value))
+            .height(new BreakPointType<string | number>({
+              sm: 131,
+              md: 210,
+              lg: 249
+            }).getValue(this.currentBreakpoint.value))
 
           if (this.isDeleting) {
             Row()
-              .width(new BreakPointType<number>({ sm: 99, md: 159, lg: 189 }).getValue(this.currentBreakpoint.value))
-              .height(new BreakPointType<number>({ sm: 131, md: 210, lg: 249 }).getValue(this.currentBreakpoint.value))
+              .width(new BreakPointType<string | number>({
+                sm: 99,
+                md: 159,
+                lg: 189
+              }).getValue(this.currentBreakpoint.value))
+              .height(new BreakPointType<string | number>({
+                sm: 131,
+                md: 210,
+                lg: 249
+              }).getValue(this.currentBreakpoint.value))
               .backgroundColor('#000000')
               .opacity(0.4)
               .borderRadius(14)
@@ -64,41 +88,33 @@ export struct VideoSeries {
           }
 
           if (!this.isLike) {
-            Text(`${this.totalCount}集全`)
-              .fontSize(10)
-              .lineHeight(13)
-              .fontColor($r('sys.color.font_on_primary'))
-              .padding({
-                top: 1,
-                right: 8,
-                bottom: 1,
-                left: 8
-              })
-              .backgroundColor('rgba(0, 0, 0, 0.4)')
-              .borderRadius(14)
-              .offset({
-                x: -2, y: -10
-              })
+            Row() {
+              Text(`${this.totalCount}集全`)
+                .fontSize(fp2pxUtil(10))
+                .fontColor($r('sys.color.font_on_primary'))
+            }
+            .height(15)
+            .padding({
+              right: 8,
+              left: 8,
+            })
+            .backgroundColor('rgba(0, 0, 0, 0.4)')
+            .borderRadius(14)
           } else {
             Row({ space: 2.5 }) {
               Image(getMedia('app.media.thumb_up_white'))
                 .width(9)
               Text(`${this.likeCount}`)
-                .fontSize(10)
-                .lineHeight(13)
+                .fontSize(fp2pxUtil(10))
                 .fontColor($r('sys.color.font_on_primary'))
             }
+            .height(15)
             .padding({
-              top: 1,
               right: 8,
-              bottom: 1,
               left: 8
             })
             .backgroundColor('rgba(0, 0, 0, 0.4)')
             .borderRadius(14)
-            .offset({
-              x: -2, y: -10
-            })
           }
         }
       }
@@ -110,8 +126,8 @@ export struct VideoSeries {
 
       Column() {
         Text(this.title)
-          .fontSize(14)
-          .lineHeight(19)
+          .fontSize(this.fontModel.getFg(14))
+          .lineHeight(this.fontModel.getDesFg(19))
           .fontColor($r('sys.color.font_primary'))
           .maxLines(1)
           .textOverflow({
@@ -120,7 +136,7 @@ export struct VideoSeries {
           .margin({ top: 8 })
 
         Text(getString('app.string.have_watch', `${this.currentEpisode}`))
-          .fontSize(12)
+          .fontSize(fp2pxUtil(12))
           .lineHeight(16)
           .fontColor($r('sys.color.font_tertiary'))
           .maxLines(1)
@@ -134,8 +150,17 @@ export struct VideoSeries {
       .layoutWeight(1)
 
     }
-    .width(new BreakPointType<number>({ sm: 97, md: 159, lg: 189 }).getValue(this.currentBreakpoint.value))
-    .height(new BreakPointType<number>({ sm: 176, md: 255, lg: 294 }).getValue(this.currentBreakpoint.value))
+    .accessibilityGroup(true)
+    .width(new BreakPointType<string | number>({
+      sm: 97,
+      md: 159,
+      lg: 189
+    }).getValue(this.currentBreakpoint.value))
+    .height(new BreakPointType<string | number>({
+      sm: 176,
+      md: 255,
+      lg: 294
+    }).getValue(this.currentBreakpoint.value))
     .margin({ top: 8, bottom: 8 })
   }
 }

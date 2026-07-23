@@ -3,7 +3,8 @@
     "name": "category_list",
     "type": "har",
     "deviceTypes": [
-      "phone"
+      "phone",
+      "tablet"
     ]
   }
 }

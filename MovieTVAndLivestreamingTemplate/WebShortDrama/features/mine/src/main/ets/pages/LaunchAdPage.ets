@@ -48,7 +48,11 @@ struct LaunchAdPage {
     }
     .hideTitleBar(true)
     .onBackPressed(() => {
-      (this.getUIContext().getHostContext() as common.UIAbilityContext).terminateSelf()
+      try {
+        (this.getUIContext().getHostContext() as common.UIAbilityContext).terminateSelf()
+      } catch (e) {
+        console.error(`terminateSelf failed: ${e}`);
+      }
       return true
     })
   }

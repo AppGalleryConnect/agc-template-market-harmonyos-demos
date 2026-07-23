@@ -3,8 +3,9 @@ import { Logger } from '@agctemplate/utils';
 import { CastService } from 'module_cast';
 import { PlayController } from 'video_swiper';
 import { SerialPicker } from './SerialPicker';
-import { promptAction } from '@kit.ArkUI';
 import { Params, PromptActionClass } from './PromptActionClass';
+import { FontModel, fp2pxUtil } from '@agctemplate/widgets';
+import { AppStorageV2, display } from '@kit.ArkUI';
 
 const TAG = '[VideoDesLayer]'
 
@@ -14,14 +15,34 @@ export struct VideoDesLayer {
   @Param @Require dramaInfo: DramaInfo;
   @Local isShowSerialPickerSheet: boolean = false; //是否展示选集
   @Param @Require playController: PlayController
-  @Event isLocked: Function
+  @Event isLocked: Function;
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
+  @Local isHover: boolean = false;
+  private foldStatusChange: Callback<display.FoldStatus> = (data: display.FoldStatus) => {
+    this.getHover();
+  };
+
+  aboutToAppear(): void {
+    this.getHover()
+    try {
+      display.on('foldStatusChange', this.foldStatusChange);
+    } catch (e) {
+    }
+  }
+
+  aboutToDisappear(): void {
+    try {
+      display.off('foldStatusChange', this.foldStatusChange);
+    } catch (e) {
+    }
+  }
 
   build() {
     Row() {
       Text(this.playController.isLocked ? `共${this.dramaInfo.totalCount}集·VIP抢先看` :
         `共${this.dramaInfo.totalCount}集·免费观看`)
         .height(19)
-        .fontSize(14)
+        .fontSize(this.fontModel.getFg(14))
         .fontWeight(400)
         .fontColor('rgba(255, 255, 255, 0.6)')
       Text('选集')
@@ -29,7 +50,7 @@ export struct VideoDesLayer {
         .height(28)
         .borderRadius(14)
         .backgroundColor('rgba(255, 255, 255, 0.4)')
-        .fontSize(14)
+        .fontSize(fp2pxUtil(14))
         .fontColor('#fff')
         .textAlign(TextAlign.Center)
         .onClick(() => {
@@ -65,7 +86,7 @@ export struct VideoDesLayer {
             detents: [SheetSize.MEDIUM, SheetSize.LARGE, 600],
             preferType: SheetType.CENTER,
             showClose: false,
-            backgroundColor: Color.White
+            enableHoverMode: true
           })
     }
     .width('100%')
@@ -87,6 +108,20 @@ export struct VideoDesLayer {
           this.isShowSerialPickerSheet = false
         }
       })
+    }
+  }
+
+  getHover() {
+    try {
+      let orientation: display.Orientation = display.getDefaultDisplaySync().orientation;
+      if (display.getFoldStatus() === display.FoldStatus.FOLD_STATUS_HALF_FOLDED &&
+        (orientation === display.Orientation.LANDSCAPE || orientation === display.Orientation.LANDSCAPE_INVERTED)
+      ) {
+        this.isHover = true;
+      } else {
+        this.isHover = false;
+      }
+    } catch (error) {
     }
   }
 }

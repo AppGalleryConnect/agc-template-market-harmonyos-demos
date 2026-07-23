@@ -1,12 +1,3 @@
 {
-  "routerMap": [
-    {
-      "name": "PaySuccess",
-      "pageSourceFile": "src/main/ets/pages/PaySuccess.ets",
-      "buildFunction": "PaySuccessBuilder",
-      "data": {
-        "description": "this is PaySuccess"
-      }
-    }
-  ]
+  "routerMap": []
 }

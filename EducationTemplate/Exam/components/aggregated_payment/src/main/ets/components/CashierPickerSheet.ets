@@ -3,6 +3,7 @@ import { common } from '@kit.AbilityKit';
 
 import { CashierPickerContentVM } from '../viewmodels/CashierPickerContentVM';
 import { PaymentType, WidthBreakpoint, HeightBreakpoint } from '../common/CustomTypes';
+import { UtilLog } from '@hw-agconnect/util-log';
 
 @ComponentV2
 export struct CashierPickerSheet {
@@ -58,7 +59,11 @@ export struct CashierPickerSheet {
   }
 
   public aboutToDisappear(): void {
-    this.mainWindow?.off('windowSizeChange', this.updateHeightBreakpoint);
+    try {
+      this.mainWindow?.off('windowSizeChange', this.updateHeightBreakpoint);
+    } catch (err) {
+      UtilLog.error(`windowSizeChange failed. Cause code: ${err.code}, message: ${err.message}`);
+    }
   }
 
   public build(): void {

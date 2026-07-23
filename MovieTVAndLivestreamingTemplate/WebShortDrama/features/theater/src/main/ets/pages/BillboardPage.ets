@@ -6,8 +6,6 @@ import { RankList } from '../components/RankList';
 
 @ComponentV2
 struct BillboardPage {
-  @Local aiBarHeight: AiBarHeight = AppStorageV2.connect(AiBarHeight, AppStorageKeys.AI_BAR_HEIGHT,
-    () => new AiBarHeight())!;
   @Local statusBarHeight: StatusBarHeight = AppStorageV2.connect(StatusBarHeight, AppStorageKeys.STATUS_BAR_HEIGHT,
     () => new StatusBarHeight())!;
   @Local dramaList: Array<DramaCoverVM> = []
@@ -36,28 +34,23 @@ struct BillboardPage {
         main: LengthMetrics.vp(8)
       }
     }) {
-      Scroll() {
-        Column() {
-          RankList({
-            dramaList: this.dramaList,
-            scroller: this.scroller,
-            loadNextPage: async () => {
-              let arr = await getRankList(this.selectedCategory, ++this.currentPageNum)
-              this.dramaList = this.dramaList.concat(arr)
-            },
-            isVertical: true
-          })
-        }
-        .width('100%')
-        .padding({ top: 8 })
-        .alignItems(HorizontalAlign.Start)
+      Column() {
+        RankList({
+          dramaList: this.dramaList,
+          scroller: this.scroller,
+          loadNextPage: async () => {
+            let arr = await getRankList(this.selectedCategory, ++this.currentPageNum)
+            this.dramaList = this.dramaList.concat(arr)
+          },
+          isVertical: true
+        })
       }
-      .scrollBar(BarState.Off)
-      .edgeEffect(EdgeEffect.Spring)
+      .width('100%')
+      .padding({ top: 8 })
+      .alignItems(HorizontalAlign.Start)
     }
     .width('100%')
     .height('100%')
-    .backgroundColor('#F1F3F5')
   }
 }
 

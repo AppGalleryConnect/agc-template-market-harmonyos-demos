@@ -44,10 +44,10 @@
 
 ### 环境
 
-- DevEco Studio版本：DevEco Studio 6.0.2 Release及以上
-- HarmonyOS SDK版本：HarmonyOS 6.0.2 Release SDK及以上
+- DevEco Studio版本：DevEco Studio 6.1.1 Release及以上
+- HarmonyOS SDK版本：HarmonyOS 6.1.1 Release SDK及以上
 - 设备类型：华为手机（包括双折叠和阔折叠）、平板
-- 系统版本：HarmonyOS 6.0.1(21)及以上
+- 系统版本：HarmonyOS 6.1.0(23)及以上
 
 ### 权限
 
@@ -356,6 +356,7 @@ setMovingPhotoListener(callbacks: [movingPhotoListener](#movingPhotoListener对�
 ### 示例1（静态图预览）
 
 ```ts
+import { hilog } from '@kit.PerformanceAnalysisKit'
 import { ImagePreview, ImagePreviewOptions, SourceImageModel } from 'module_imagepreview'
 
 @Entry
@@ -405,7 +406,7 @@ struct Index {
           this.index = index
         },
         onLongPress: (index: number) => {
-          console.log(`长按了第${index + 1}个资源`)
+          hilog.info(0x0000, '[ImagePreview]', `长按了第${index + 1}个资源`)
         },
       })
       .setPreviewListener({
@@ -457,6 +458,7 @@ struct Index {
 ```
 ### 示例2（动图预览）
 ```ts
+import { hilog } from '@kit.PerformanceAnalysisKit'
 import { ImagePreview, ImagePreviewOptions, SourceImageModel } from 'module_imagepreview'
 
 @Entry
@@ -481,16 +483,16 @@ struct Index {
     this.options
       .setMovingPhotoListener({
         onPrepared: (item: SourceImageModel, index: number) => {
-          console.log(`动图准备播放----第${index}个资源,资源信息是${item}`)
+          hilog.info(0x0000, '[ImagePreview]',`动图准备播放----第${index}个资源,资源信息是${item}`)
         },
         onStart: (item: SourceImageModel, index: number) => {
-          console.log(`动图开始播放----第${index}个资源,资源信息是${item}`)
+          hilog.info(0x0000, '[ImagePreview]',`动图开始播放----第${index}个资源,资源信息是${item}`)
         },
         onPause: (item: SourceImageModel, index: number) => {
-          console.log(`动图暂停播放----第${index}个资源,资源信息是${item}`)
+          hilog.info(0x0000, '[ImagePreview]',`动图暂停播放----第${index}个资源,资源信息是${item}`)
         },
         onFinish: (item: SourceImageModel, index: number) => {
-          console.log(`动图播放结束----第${index}个资源,资源信息是${item}`)
+          hilog.info(0x0000, '[ImagePreview]',`动图播放结束----第${index}个资源,资源信息是${item}`)
         },
       })
   }

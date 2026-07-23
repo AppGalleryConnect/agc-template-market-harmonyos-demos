@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 import { RouterMap } from 'module_base';
-import { CommonConstants, GridRowColSetting, HomeBaseInfo, RouterModule } from 'lib_foundation';
+import { CommonConstants, GridRowColSetting, HomeBaseInfo, RouterModule, WindowUtils } from 'lib_foundation';
 import { AppStorageV2 } from '@kit.ArkUI';
 import { DialPanel } from 'dial_panel';
 
@@ -120,6 +120,10 @@ export struct CommonService {
     }
     .title('公共服务', {
       paddingStart: { value: GridRowColSetting.getPageMargin(this.breakpoint), unit: 1 }
+    })
+    .padding({
+      top: WindowUtils.windowTopPadding,
+      bottom: WindowUtils.windowBottomPadding,
     })
     .backgroundColor($r('sys.color.background_secondary'))
   }

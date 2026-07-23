@@ -231,7 +231,11 @@ export struct PrivacyUseAlert {
           Row() {
             Button('退出应用')
               .onClick(() => {
-                this.context.terminateSelf()
+                try {
+                  this.context.terminateSelf()
+                } catch (e) {
+                  console.error(`terminateSelf failed: ${e}`);
+                }
               })
               .width(140)
               .height(40)

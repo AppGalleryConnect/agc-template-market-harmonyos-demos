@@ -22,9 +22,15 @@ export class MockApi {
       data: [],
     };
 
-    const filterList = MockApi.list.filter(v => {
+    let filterList = MockApi.list.filter(v => {
       return v.title.includes(data.title ?? '');
     });
+
+    if (data?.type === 'NEW') {
+      filterList = filterList.filter(v => v.tag === 1);
+    } else if (data?.type === 'HOT') {
+      filterList = filterList.filter(v => v.tag === 2);
+    }
 
     if (data.pageNum === 1) {
       resp.data = filterList.slice(0, 10);

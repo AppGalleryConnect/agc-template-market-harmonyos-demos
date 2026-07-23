@@ -5,8 +5,8 @@
       {
         "name": "default",
         "signingConfig": "default",
-        "targetSdkVersion": "5.0.5(17)",
-        "compatibleSdkVersion": "5.0.5(17)",
+        "targetSdkVersion": "6.0.2(22)",
+        "compatibleSdkVersion": "6.0.0(20)",
         "runtimeOS": "HarmonyOS",
         "buildOption": {
           "strictMode": {
@@ -69,6 +69,18 @@
     {
       "name": "module_imagepreview",
       "srcPath": "./components/module_imagepreview"
+    },
+    {
+      "name": "aggregated_login",
+      "srcPath": "./ohos_agcit/agcit_huawei_common_login/aggregated_login"
+    },
+    {
+      "name": "feedback",
+      "srcPath": "./ohos_agcit/agcit_huawei_common_feedback/feedback"
+    },
+    {
+      "name": "copilot",
+      "srcPath": "./components/copilot"
     }
   ]
 }

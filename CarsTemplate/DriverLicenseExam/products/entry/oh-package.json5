@@ -19,6 +19,7 @@
     "aggregated_share": "file:../../components/aggregated_share",
     "membership": "file:../../components/membership",
     "aggregated_ads": "file:../../components/aggregated_ads",
+    "module_transition": "file:../../components/module_transition"
   }
 }
 

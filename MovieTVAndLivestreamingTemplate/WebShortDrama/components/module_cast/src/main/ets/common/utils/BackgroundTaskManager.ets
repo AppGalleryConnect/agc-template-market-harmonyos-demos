@@ -25,14 +25,17 @@ export class BackgroundTaskManager {
       wantAgentFlags: [wantAgent.WantAgentFlags.UPDATE_PRESENT_FLAG]
     };
 
-    wantAgent.getWantAgent(wantAgentInfo).then((wantAgentObj) => {
-      backgroundTaskManager.startBackgroundRunning(context,
-        backgroundTaskManager.BackgroundMode.AUDIO_PLAYBACK, wantAgentObj).then(() => {
-        hilog.info(0x0000, TAG, 'startBackgroundRunning succeeded');
-      }).catch((err: BusinessError) => {
-        hilog.error(0x0000, TAG, `startBackgroundRunning failed, cause:  ${JSON.stringify(err)}`);
+    try {
+      wantAgent.getWantAgent(wantAgentInfo).then((wantAgentObj) => {
+        backgroundTaskManager.startBackgroundRunning(context,
+          backgroundTaskManager.BackgroundMode.AUDIO_PLAYBACK, wantAgentObj).then(() => {
+          hilog.info(0x0000, TAG, 'startBackgroundRunning succeeded');
+        }).catch((err: BusinessError) => {
+          hilog.error(0x0000, TAG, `startBackgroundRunning failed, cause:  ${JSON.stringify(err)}`);
+        });
       });
-    });
+    } catch (e) {
+    }
   }
 
   /**

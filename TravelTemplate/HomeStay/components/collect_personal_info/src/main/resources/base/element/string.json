@@ -1,0 +1,12 @@
+{
+  "string": [
+    {
+      "name": "agcit_huawei_common_collect_personal_info",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_common_collect_personal_info",
+      "value": "serviceComponent"
+    }
+  ]
+}

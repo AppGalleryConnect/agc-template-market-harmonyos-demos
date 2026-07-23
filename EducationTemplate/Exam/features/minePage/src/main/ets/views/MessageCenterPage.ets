@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 
+import { UIDialog } from '@hw-agconnect/ui-dialog';
 import { AppStorageV2 } from '@kit.ArkUI';
 import { BreakpointType, TopBar, RouterModule } from 'commonlib';
 import { MessageItem, NumbObj } from '../viewModel/MessageModel';
@@ -37,8 +38,6 @@ export struct MessageCenterPage {
         if (this.propNumbObj.listArr.length > 0) {
           // 消息列表
           this.MessageItemsBuilder();
-          // 删除按钮
-          this.deleteButtonBuilder();
         } else {
           Text('当前暂无消息通知。')
             .height('100%')
@@ -55,35 +54,27 @@ export struct MessageCenterPage {
     .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM]);
   }
 
-  /**
-   * 删除按钮
-   */
-  @Builder
-  deleteButtonBuilder() {
-    if (this.isSelectDelete) {
-      Row() {
-        Image($r('app.media.icon_delete'))
-          .height($r('app.float.vp_24'))
-          .width($r('app.float.vp_24'));
-        Text('删除')
-          .margin({ left: $r('app.float.vp_8') })
-          .fontSize($r('sys.float.Body_L'))
-          .fontColor($r('sys.color.font_on_primary'))
-          .fontWeight(FontWeight.Medium);
-      }
-      .opacity(this.selectCount > 0 ? 1 : 0.4)
-      .width($r('app.float.vp_312'))
-      .backgroundColor('#4c5dc4')
-      .borderRadius(20)
-      .justifyContent(FlexAlign.Center)
-      .padding({ top: $r('app.float.vp_8'), bottom: $r('app.float.vp_8') })
-      .onClick(() => {
-        if (this.selectCount > 0) {
-          // 删除选中
-          this.deleteSelectData();
-        }
-      });
-    }
+  confirmDialog(confirmCallback: () => void) {
+    UIDialog.open({
+      title: `是否删除${this.selectCount || 1}条记录？`,
+      contentOptions: {
+        content: '将在同账号其他设备的数据中同步删除',
+        contentFontSize: 14,
+        contentFontWeight: 400,
+        contentFontColor: 'rgba(0, 0, 0, 0.9)'
+      },
+      confirmButtonOptions: {
+        button: '删除',
+        buttonFontColor: 'rgba(232, 64, 38, 1)',
+      },
+      cancelButtonOptions: {
+        button: '取消',
+        buttonFontColor: 'rgba(0, 0, 0, 0.9)',
+      },
+      showConfirmButton: true,
+      showCancelButton: true,
+      onConfirm: confirmCallback
+    })
   }
 
   // 移除所选中的
@@ -224,8 +215,11 @@ export struct MessageCenterPage {
         .margin({ left: $r('app.float.vp_12') })
         .height($r('app.float.vp_40'))
         .onClick(() => {
-          this.propNumbObj.listArr.splice(index, 1);
-          this.swiperLeft = false;
+          this.selectCount = 1;
+          this.confirmDialog(() => {
+            this.propNumbObj.listArr.splice(index, 1);
+            this.swiperLeft = false;
+          })
         });
     }.padding($r('app.float.vp_4')).justifyContent(FlexAlign.SpaceEvenly);
   }
@@ -243,31 +237,45 @@ export struct MessageCenterPage {
         title: '消息中心'
       });
       Row() {
+        Image($r('app.media.ic_public_trash'))
+          .margin({ left: $r('app.float.vp_8') })
+          .height($r('app.float.vp_40'))
+          .width($r('app.float.vp_40'))
+          .margin({ left: $r('app.float.vp_8') })
+          .opacity(this.propNumbObj.listArr.length === 0 || this.swiperLeft || !this.selectCount ? 0.4 : 1)
+          .visibility(this.isSelectDelete ? Visibility.Visible : Visibility.Hidden)
+          .onClick(() => {
+            if (this.selectCount > 0) {
+              // 删除选中
+              this.confirmDialog(() => {
+                this.deleteSelectData()
+              })
+            }
+          })
+
+        Image($r('app.media.ic_edit'))
+          .width($r('app.float.vp_40'))
+          .height($r('app.float.vp_40'))
+          .visibility(this.isSelectDelete ? Visibility.None : Visibility.Visible)
+          .onClick(() => {
+            if (!this.swiperLeft && this.propNumbObj.listArr.length > 0) {
+              this.isSelectDelete = !this.isSelectDelete;
+              this.isAll = false;
+              this.selectCount = 0;
+              this.propNumbObj.listArr.forEach((item: MessageItem) => {
+                item.isDelete = false;
+              });
+            }
+          });
+
         Image(this.isAll ? $r('app.media.icon_select_all') : $r('app.media.icon_select_all_off'))
           .onClick(() => {
             this.isAllClick();
           })
           .width($r('app.float.vp_40'))
           .height($r('app.float.vp_40'))
-          .visibility(this.isSelectDelete ? Visibility.Visible : Visibility.Hidden);
-        Image($r('app.media.ic_public_trash'))
-          .margin({ left: $r('app.float.vp_8') })
-          .height($r('app.float.vp_40'))
-          .width($r('app.float.vp_40'))
-          .opacity(this.propNumbObj.listArr.length === 0 || this.swiperLeft ? 0.4 : 1);
+          .visibility(this.isSelectDelete ? Visibility.Visible : Visibility.None);
       }
-      .onClick(() => {
-        if (!this.swiperLeft && this.propNumbObj.listArr.length > 0) {
-          this.isSelectDelete = !this.isSelectDelete;
-          if (!this.isSelectDelete) {
-            this.isAll = false;
-            this.selectCount = 0;
-            this.propNumbObj.listArr.forEach((item: MessageItem) => {
-              item.isDelete = false;
-            });
-          }
-        }
-      });
     }
     .justifyContent(FlexAlign.SpaceBetween)
     .width('100%')

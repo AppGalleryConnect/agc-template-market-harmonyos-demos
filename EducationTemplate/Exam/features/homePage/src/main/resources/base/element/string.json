@@ -34,7 +34,19 @@
     },
     {
       "name": "agcit_huawei_exam_service",
-      "value": "1.0.3"
+      "value": "1.0.4"
+    },
+    {
+      "name": "pdf_url",
+      "value": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/default-bucket-nkths/test.pdf?token=9ef66402-ae35-4ba9-9507-caaf44513015"
+    },
+    {
+      "name": "jpg_url",
+      "value": "https://alliance-communityfile-drcn.dbankcdn.com/FileServer/getFile/cmtyPub/011/111/111/0000000000011111111.20250707154225.93342740352921662496770614398203:50001231000000:2800:E0AFFC3B1CD38C2625529E8DE6632852FCAFC463BA7FA2D024B021A73EEDB745.jpg"
+    },
+    {
+      "name": "word_url",
+      "value": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/default-bucket-nkths/test1.docx?token=22a882b6-6818-4adb-9386-7aad59838806"
     }
   ]
 }

@@ -71,6 +71,10 @@
           "when": "always"
         }
       }
+    ],
+    "querySchemes": [
+      "weixin",
+      "wxopensdk"
     ]
   }
 }

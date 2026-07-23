@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "home",
+      "value": "首页"
+    },
+    {
+      "name": "agcit_huawei_image_processing",
+      "value": "1.0.2"
+    }
+  ]
+}

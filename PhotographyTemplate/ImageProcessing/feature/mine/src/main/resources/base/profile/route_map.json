@@ -1,0 +1,24 @@
+{
+  "routerMap": [
+    {
+      "name": "LoginPage",
+      "pageSourceFile": "src/main/ets/pages/LoginPage.ets",
+      "buildFunction": "LoginPageBuilder"
+    },
+    {
+      "name": "PersonalInfoPage",
+      "pageSourceFile": "src/main/ets/pages/PersonalInfoPage.ets",
+      "buildFunction": "PersonalInfoPageBuilder"
+    },
+    {
+      "name": "SettingPage",
+      "pageSourceFile": "src/main/ets/pages/SettingPage.ets",
+      "buildFunction": "SettingPageBuilder"
+    },
+    {
+      "name": "VipPage",
+      "pageSourceFile": "src/main/ets/pages/VipPage.ets",
+      "buildFunction": "VipPageBuilder"
+    }
+  ]
+}

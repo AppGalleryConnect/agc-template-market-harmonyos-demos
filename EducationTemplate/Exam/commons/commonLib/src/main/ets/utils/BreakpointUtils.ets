@@ -49,7 +49,11 @@ export class BreakpointUtils {
 
   unRegister() {
     UtilLog.info(TAG, 'unregister breakpoint listener.');
-    this.mainWindow?.off('windowSizeChange');
+    try {
+      this.mainWindow?.off('windowSizeChange');
+    } catch (err) {
+      UtilLog.error(`listenSizeChange fail, error code: ${err.code}, error mesage: ${err.message}`);
+    }
   }
 
   transformBreakpointNameEnum(value: number): string {

@@ -10,7 +10,7 @@ function realTimeRow() {
 
 @Extend(Text)
 function weatherInfoText() {
-  .fontSize(10).opacity(0.6);
+  .fontSize($r('sys.float.Caption_L')).fontColor($r('sys.color.font_secondary'));
 }
 
 @ComponentV2
@@ -18,12 +18,6 @@ export struct AttractionLive {
   vm: AttractionLiveVM = AttractionLiveVM.instance;
   @Param @Require attractionLiveInfo: AttractionLiveInfo;
   @Local isShow: boolean = false;
-
-  aboutToAppear(): void {
-    this.vm.longitude = this.attractionLiveInfo.longitude;
-    this.vm.latitude = this.attractionLiveInfo.latitude;
-    this.vm.getParkingSlot();
-  }
 
   @Computed
   get currentMonth() {
@@ -54,12 +48,21 @@ export struct AttractionLive {
     return apparentTemp;
   }
 
+  aboutToAppear(): void {
+    this.vm.longitude = this.attractionLiveInfo.longitude;
+    this.vm.latitude = this.attractionLiveInfo.latitude;
+    this.vm.getParkingSlot();
+  }
+
   @Builder
   TouristRestriction(key: string, value: number) {
-    Column() {
-      Text(`${value}`).fontSize(10);
-      Text(key).opacity(0.4).fontSize(10);
-    }.alignItems(HorizontalAlign.Center);
+    Column({ space: 4 }) {
+      Text(`${value}`)
+        .fontSize($r('sys.float.Body_L'))
+        .fontWeight(FontWeight.Medium)
+        .fontColor($r('sys.color.font_primary'));
+      Text(key).fontSize($r('sys.float.Caption_M')).fontColor($r('sys.color.font_secondary'));
+    }.alignItems(HorizontalAlign.Center).layoutWeight(1);
   }
 
   @Builder
@@ -70,45 +73,68 @@ export struct AttractionLive {
         this.TouristRestriction('当日最大承载量', this.attractionLiveInfo.maxVisitors ?? 0);
         this.TouristRestriction('瞬时最大承载量', this.attractionLiveInfo.maxInstantVisitors ?? 0);
       }
-      .padding(20)
-      .backgroundColor($r('sys.color.font_on_primary'))
+      .padding({
+        top: 16,
+        bottom: 16,
+        left: 12,
+        right: 12,
+      })
+      .backgroundColor($r('sys.color.comp_background_primary'))
       .width(Constant.FULL_PERCENT)
-      .borderRadius(8)
+      .borderRadius(16)
       .justifyContent(FlexAlign.SpaceBetween);
 
-      Column({ space: 20 }) {
+      Column() {
         ForEach(this.vm.parkingSlotList, (item: ParkingSlotInfo) => {
-          Row() {
+          Row({ space: 8 }) {
             Row({ space: 8 }) {
-              Image($r('app.media.parking')).size({ height: 16, width: 16 });
-              Text(item.name).fontSize(10).maxLines(1).textOverflow({ overflow: TextOverflow.Ellipsis });
-              Text(`${(item.distance / 1000).toFixed(2)}km`).fontWeight(500).fontSize(12);
-            }.justifyContent(FlexAlign.Start);
+              Image($r('app.media.parking_fill')).size({ height: 16, width: 16 });
+              Text(`${item.name}：`)
+                .fontSize($r('sys.float.Body_M'))
+                .fontColor($r('sys.color.font_primary'))
+                .maxLines(1)
+                .textOverflow({ overflow: TextOverflow.Ellipsis })
+                .layoutWeight(1);
+              Text(this.vm.getDistance(item.distance))
+                .fontSize($r('sys.float.Body_M'))
+                .fontColor($r('sys.color.font_primary'));
+            }.layoutWeight(1);
 
-            Row({ space: 2 }) {
-              Image($r('app.media.navigation')).size({ height: 16, width: 16 });
-              Text('导航').fontSize(10).opacity(0.4).onClick(() => {
+            Row({ space: 4 }) {
+              SymbolGlyph($r('sys.symbol.location_north_up_right'))
+                .fontSize(16)
+                .width(16)
+                .height(16)
+                .fontColor([$r('sys.color.icon_primary')]);
+              Text('导航').fontSize($r('sys.float.Body_M')).fontColor($r('sys.color.font_primary')).onClick(() => {
                 SystemUtil.routerToPetalMap(item.latitude, item.longitude, item.name,
                   this.getUIContext().getHostContext() as common.UIAbilityContext);
               });
             }.alignItems(VerticalAlign.Center);
-          }.width(Constant.FULL_PERCENT).justifyContent(FlexAlign.SpaceBetween);
+          }.width(Constant.FULL_PERCENT).height(40).justifyContent(FlexAlign.SpaceBetween);
         }, (item: ParkingSlotInfo) => item.name);
-      }.backgroundColor($r('sys.color.font_on_primary')).width(Constant.FULL_PERCENT).borderRadius(8).padding(12);
-    }.backgroundColor('#F1F3F5').padding(16);
+      }
+      .backgroundColor($r('sys.color.comp_background_primary'))
+      .width(Constant.FULL_PERCENT)
+      .borderRadius(16)
+      .padding({
+        top: 8,
+        bottom: 8,
+        left: 12,
+        right: 12,
+      });
+    }.backgroundColor($r('sys.color.background_secondary')).padding({ left: 16, right: 16 });
   }
 
   @Builder
   WeatherInfoBuilder() {
     Row({ space: 8 }) {
       Text(`${this.currentMonth}.${CommonUtil.padWithZeros(this.attractionLiveInfo.currentDate?.getDate())}`)
-        .fontSize(10)
-        .opacity(0.6)
         .weatherInfoText();
       Text('|').weatherInfoText();
       Text(this.attractionLiveInfo.weatherId ?? '未知').weatherInfoText();
       Text(`${this.attractionLiveInfo.temperature}°C`).weatherInfoText();
-      Text(this.attractionLiveInfo.atmosphereId ?? '未知').fontColor('#2B7050').fontSize(10);
+      Text(this.attractionLiveInfo.atmosphereId ?? '未知').weatherInfoText().fontColor('#2B7050');
       Text(`${this.apparentTemp}`).weatherInfoText();
     };
   }
@@ -116,63 +142,87 @@ export struct AttractionLive {
   build() {
     Column({ space: 8 }) {
       Row() {
-        Text(this.attractionLiveInfo.name).fontWeight(500);
+        Text(this.attractionLiveInfo.name)
+          .fontSize($r('sys.float.Subtitle_L'))
+          .fontColor($r('sys.color.font_primary'))
+          .fontWeight(FontWeight.Bold);
         this.WeatherInfoBuilder();
-      }.realTimeRow().margin({ top: 20 });
+      }.realTimeRow();
 
       Column() {
         Row() {
-          Row() {
+          Row({ space: 12 }) {
             Column() {
-              Image($r('app.media.comfort')).size({ width: 14, height: 14 });
-              Text('舒适').fontSize(10).fontColor($r('sys.color.font_on_primary'));
+              Image($r('app.media.comfort')).size({ width: 16, height: 16 });
+              Text('舒适')
+                .fontSize($r('sys.float.Caption_M'))
+                .fontColor($r('sys.color.font_on_primary'))
+                .margin({ top: 2 });
             }.backgroundColor('#64BB5C').borderRadius(8).margin({ right: 12 }).padding(4);
 
-            ForEach(this.attractionLiveInfo.realTimeInfos, (info: RealTimeInfo) => {
-              Column() {
-                Row({ space: 4 }) {
-                  Image(info.icon).size({ width: 14, height: 14 });
-                  Text(`${info.count}${info.item === RealTimeItem.CURRENT_VISITOR ? '人' : '车位'}`)
-                    .fontWeight(500)
-                    .opacity(0.9);
-                };
+            Row({ space: 24 }) {
+              ForEach(this.attractionLiveInfo.realTimeInfos, (info: RealTimeInfo) => {
+                Column({ space: 4 }) {
+                  Row({ space: 4 }) {
+                    Image(info.icon).size({ width: 16, height: 16 });
+                    Text(`${info.count}${info.item === RealTimeItem.CURRENT_VISITOR ? '人' : '车位'}`)
+                      .fontSize($r('sys.float.Body_L'))
+                      .fontWeight(FontWeight.Medium)
+                      .fontColor($r('sys.color.font_primary'));
+                  };
 
-                Text(info.item).fontSize(10).opacity(0.4);
-              }.margin({ right: 24 }).alignItems(HorizontalAlign.Center);
-            }, (info: RealTimeInfo) => info.item);
+                  Text(info.item).fontSize($r('sys.float.Body_S')).fontColor($r('sys.color.font_tertiary'));
+                }.alignItems(HorizontalAlign.Center);
+              }, (info: RealTimeInfo) => info.item);
+            };
+
           };
 
-          Row() {
-            Text('详情').fontSize(14).opacity(0.6);
+          Row({ space: 4 }) {
+            Text('详情').fontSize($r('sys.float.Body_S')).fontColor($r('sys.color.font_tertiary'));
             Image($r('app.media.chevron_right')).size({ width: 12, height: 24 });
-          }.onClick(() => {
-            this.isShow = true;
-          }).bindSheet($$this.isShow, this.RealTimeInfoDetailBuilder(), {
-            height: '40%', title: { title: this.attractionLiveInfo.name ?? '' },
-            preferType: SheetType.CENTER
-          });
+          };
         }.realTimeRow();
 
-        Divider().margin({ top: 14, bottom: 14 });
+        Divider().margin({ top: 12, bottom: 12 });
 
         Row() {
-          Row() {
-            Image($r('app.media.open_time')).size({ width: 14, height: 14 }).margin({ right: 4 });
+          Row({ space: 4 }) {
+            SymbolGlyph($r('sys.symbol.clock_fill'))
+              .fontColor([$r('sys.color.icon_tertiary')])
+              .fontSize(16);
             Text() {
               Span('开放时间：');
               Span(this.attractionLiveInfo.openTime);
-            }.fontSize(10);
+            }.fontSize($r('sys.float.Caption_M')).fontColor($r('sys.color.font_primary'));
           };
 
-          Row() {
-            Image($r('app.media.ticket_time')).size({ width: 14, height: 14 }).margin({ right: 4 });
+          Row({ space: 4 }) {
+            SymbolGlyph($r('sys.symbol.ticket_fill'))
+              .fontColor([$r('sys.color.icon_tertiary')])
+              .fontSize(16);
             Text() {
               Span('售票时间：');
               Span(this.attractionLiveInfo.ticketTime);
-            }.fontSize(10);
+            }.fontSize($r('sys.float.Caption_M')).fontColor($r('sys.color.font_primary'));
           };
         }.realTimeRow();
-      }.backgroundColor($r('sys.color.font_on_primary')).padding(16).borderRadius(8);
-    };
+      }
+      .backgroundColor($r('sys.color.font_on_primary'))
+      .padding({
+        top: 16,
+        bottom: 16,
+        left: 12,
+        right: 12,
+      })
+      .borderRadius(16);
+    }.margin({ top: 24 }).onClick(() => {
+      this.isShow = true;
+    }).bindSheet($$this.isShow, this.RealTimeInfoDetailBuilder(), {
+      height: 321,
+      detents: [321, 322],
+      title: { title: this.attractionLiveInfo.name ?? '' },
+      preferType: SheetType.CENTER,
+    });
   }
 }

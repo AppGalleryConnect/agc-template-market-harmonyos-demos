@@ -11,10 +11,11 @@ export struct CalendarEvent {
   @Local currentIndex: number = 0
   @Param eventList: ToggleItem[] = []
   scroller: Scroller = new Scroller()
+  listScroller: ListScroller = new ListScroller();
 
   build() {
-    List({ scroller: this.scroller }) {
-      ListItem() {
+    Column() {
+      Column() {
         BaseSliderSwitch({
           currentIndex: this.currentIndex,
           toggleList: this.eventList,
@@ -28,14 +29,12 @@ export struct CalendarEvent {
       }
       .margin({ top: 28 })
 
-      ListItem() {
+      Column() {
         Tabs({ index: this.currentIndex }) {
           ForEach(this.eventList, (item: ToggleItem) => {
             TabContent() {
               if (item.id === EVENT_TYPE.SCHEDULE) {
-                CalendarSchedule({
-                  scroller:this.scroller
-                })
+                CalendarSchedule()
               } else if (item.id === EVENT_TYPE.TODO) {
                 CalendarTodo()
               } else if (item.id === EVENT_TYPE.ANNIVERSARIES) {
@@ -53,13 +52,9 @@ export struct CalendarEvent {
         .scrollable(false)
         .barHeight(0)
       }
+      .layoutWeight(1)
     }
-    .scrollBar(BarState.Off)
-    .edgeEffect(EdgeEffect.None)
-    .nestedScroll({
-      scrollForward: NestedScrollMode.PARENT_FIRST,
-      scrollBackward: NestedScrollMode.SELF_FIRST,
-    })
+    .padding({ bottom: 16 })
     .layoutWeight(1)
   }
 }

@@ -25,6 +25,8 @@ export enum ShippingAddressErrorCode {
 }
 
 export interface AddressListPageRouterContext {
+  windowTopPadding: number;
+  windowBottomPadding: number;
   onAddressSelected?: Callback<AddressDTO>;
   updateAddress?: Callback<AddressDTO>;
   deleteAddress?: Callback<AddressDTO>;

@@ -1,5 +1,6 @@
 import { geoLocationManager } from '@kit.LocationKit';
 import { site } from '@kit.MapKit';
+import { UtilLog } from '@hw-agconnect/util-log';
 
 const TAG = '[LocationUtils]';
 
@@ -24,10 +25,10 @@ export class LocationUtils {
         language: 'zh_CN',
       };
       const reverseGeocodeResult = await site.reverseGeocode(reverseGeocodeParams);
-      console.info(TAG, 'reverseGeocodeResult=' + JSON.stringify(reverseGeocodeResult));
+      UtilLog.info(TAG, 'reverseGeocodeResult=' + JSON.stringify(reverseGeocodeResult));
       return reverseGeocodeResult.addressComponent.city ?? { cityName: '' };
     } catch (e) {
-      console.error(TAG, 'getCurrentCityInfo fail, error: ' + JSON.stringify(e));
+      UtilLog.error(TAG, 'getCurrentCityInfo fail, error: ' + JSON.stringify(e));
       // todo 获取异常时，mock返回【南京】
       return { cityName: '南京' };
     }

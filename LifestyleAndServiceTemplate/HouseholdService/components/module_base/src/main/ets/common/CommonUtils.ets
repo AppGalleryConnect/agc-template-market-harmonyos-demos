@@ -46,7 +46,7 @@ export class CommonUtils {
   }
 
   /**
-   * 时间戳转换年月日xxxx-xx-xx
+   * 时间戳转换月日时分xx-xx xx:xx
    * @param datetime
    */
   static formatDate(datetime?: number): string {
@@ -54,7 +54,8 @@ export class CommonUtils {
       return '';
     }
     const date = new Date(datetime);
-    return `${date.getFullYear()}-${CommonUtils.padZero(date.getMonth() + 1)}-${CommonUtils.padZero(date.getDate())}`;
+    return `${CommonUtils.padZero(date.getMonth() +
+      1)}-${CommonUtils.padZero(date.getDate())} ${CommonUtils.padZero(date.getHours())}:${CommonUtils.padZero(date.getMinutes())}`;
   }
 
   /**

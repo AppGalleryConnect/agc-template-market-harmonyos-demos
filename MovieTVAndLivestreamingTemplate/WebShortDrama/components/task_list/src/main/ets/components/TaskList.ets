@@ -15,6 +15,9 @@ export struct TaskList {
     new TaskModel(StrConstants.TREASURE_BOX, 'app.media.award_treasure_box'),
     new TaskModel(StrConstants.SHARE_SHOW, 'app.media.award_share_short_dramas')
   ]
+  @Param isLogin: boolean = true
+  @Event loginFunc: () => void = () => {
+  }
 
   build() {
     TYCard({
@@ -27,7 +30,15 @@ export struct TaskList {
       TaskCard({
         coinIcon: 'app.media.award_coin888',
         isWatchShows: true,
-        button: () => this.button,
+        button: () => {
+          if (this.isLogin) {
+            this.button()
+            return true
+          }else {
+            this.loginFunc()
+            return false
+          }
+        },
         topMargin: 33,
         bottomMargin: 0
       })
@@ -40,7 +51,15 @@ export struct TaskList {
           title: item.title,
           dailyPointLimit: item.subTitle,
           addAward: () => this.onTaskSuccess(this.balance),
-          button: () => this.button,
+          button: () => {
+            if (this.isLogin) {
+              this.button()
+              return true
+            }else {
+              this.loginFunc()
+              return false
+            }
+          },
           topMargin: 32,
           bottomMargin: 0
         })

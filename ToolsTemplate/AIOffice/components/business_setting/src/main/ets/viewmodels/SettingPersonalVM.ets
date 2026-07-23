@@ -1,4 +1,3 @@
-import { promptAction } from '@kit.ArkUI';
 import { BusinessError } from '@kit.BasicServicesKit';
 import {
   BaseViewModel,
@@ -8,6 +7,7 @@ import {
   RouterUtils,
   CommonConstants,
   CommonTipDialog,
+  GlobalContext,
 } from 'lib_common';
 import { MineServiceApi } from 'lib_api';
 import { getAccountErrorMsg, ErrorCode } from 'lib_account';
@@ -42,7 +42,7 @@ export class SettingPersonalVM extends BaseViewModel {
 
   modifyNickName() {
     if (!this.nickName) {
-      promptAction.showToast({ message: '昵称不能为空' });
+      GlobalContext.getUIContext().getPromptAction().showToast({ message: '昵称不能为空' });
       return
     }
     MineServiceApi.modifyPersonalInfo({ authorNickName: this.nickName });
@@ -53,11 +53,11 @@ export class SettingPersonalVM extends BaseViewModel {
 
   modifyContactPhone() {
     if (!this.contactPhone) {
-      promptAction.showToast({ message: '手机号码不能为空' });
+      GlobalContext.getUIContext().getPromptAction().showToast({ message: '手机号码不能为空' });
       return;
     }
     if (!PhoneNumberUtils.isPhoneNumberValid(this.contactPhone)) {
-      promptAction.showToast({ message: '请输入正确的手机号码' });
+      GlobalContext.getUIContext().getPromptAction().showToast({ message: '请输入正确的手机号码' });
       return;
     }
     MineServiceApi.modifyPersonalInfo({ authorPhone: this.contactPhone });

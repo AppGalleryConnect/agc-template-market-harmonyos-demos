@@ -15,21 +15,23 @@
 <img src="./screenshots/CityManage.jpeg" width="300">
 
 ## 约束与限制
+
 ### 环境
 
 * DevEco Studio版本：DevEco Studio 5.0.5 Release及以上
 * HarmonyOS SDK版本：HarmonyOS 5.0.5 Release SDK及以上
-* 设备类型：华为手机（包括双折叠和阔折叠）
+* 设备类型：华为手机（包括双折叠和阔折叠）、平板
 * 系统版本：HarmonyOS 5.0.5(17)及以上
 
 ### 权限
+
 * 获取位置权限：ohos.permission.APPROXIMATELY_LOCATION。
 
 ## 使用
 
 1. 安装组件。
 
-   如果是在DevEvo Studio使用插件集成组件，则无需安装组件，请忽略此步骤。
+   如果是在DevEco Studio使用插件集成组件，则无需安装组件，请忽略此步骤。
 
    如果是从生态市场下载组件，请参考以下步骤安装组件。
 
@@ -77,7 +79,6 @@
     this.stack.pushPathByName(CityPage.MANAGED,null,(popRes) => {},true);
     ```
 
-
 ## API参考
 
 ### 子组件
@@ -86,7 +87,7 @@
 
 ### applyLocationPermission方法说明
 
-CityManager.applyLocationPermission(): Promise<[IPosition](#IPostion对象说明)>
+CityManager.applyLocationPermission(): Promise<[IPosition](#IPosition对象说明)>
 
 获取当前设备的大致位置。
 
@@ -107,7 +108,7 @@ CityManager.applyLocationPermission(): Promise<[IPosition](#IPostion对象说明
 | MANAGED | 城市管理页 |
 | SEARCH  | 城市选择页 |
 
-### IPostion对象说明
+### IPosition对象说明
 
 获取当前设备定位的数据类型，以及PopInfo的result字段实际数据类型。
 
@@ -117,7 +118,6 @@ CityManager.applyLocationPermission(): Promise<[IPosition](#IPostion对象说明
 |------|--------|------|------|
 | name | string | 是    | 位置名称 |
 | code | string | 是    | 位置区码 |
-
 
 ## 示例代码
 

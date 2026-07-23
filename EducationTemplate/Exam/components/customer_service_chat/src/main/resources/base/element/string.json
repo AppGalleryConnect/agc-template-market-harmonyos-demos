@@ -1,0 +1,24 @@
+{
+  "string": [
+    {
+      "name": "chat_location_reason",
+      "value": "客服发送位置消息场景，需要使用您的定位权限"
+    },
+    {
+      "name": "microphone_reason",
+      "value": "语音转文字申请使用麦克风"
+    },
+    {
+      "name": "no_microphone_permission",
+      "value": "麦克风权限已被禁用，为了正常使用功能，请在系统设置中重新开启。"
+    },
+    {
+      "name": "agcit_huawei_common_customer_service_chat",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_common_customer_service_chat",
+      "value": "serviceComponent"
+    }
+  ]
+}

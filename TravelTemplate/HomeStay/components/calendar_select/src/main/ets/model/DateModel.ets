@@ -19,10 +19,13 @@ export class DateModel {
     this.year = year;
   }
 
-  set(day: number, month: number, year: number) {
+  set(day: number, month: number, year: number, week?: number) {
     this.day = day;
     this.month = month;
     this.year = year;
+    if (week !== undefined) {
+      this.week = week;
+    }
   }
 }
 

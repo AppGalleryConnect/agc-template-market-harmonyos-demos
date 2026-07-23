@@ -19,8 +19,8 @@ export const ticketDetailListMock: GetTicketDetailsResp =
     ticketType: [{
       ticketTypeId: 0,
       ticketTypeName: '松山湖景区成人票',
-      originalPrice: 24,
       discountPrice: 24,
+      originalPrice: 24,
       instruction: '【活动期限】：2025年1月1日至2025年2月28日。\n' +
         '【适用人群】：成人限制为身份证、年龄60周岁（含）以下（按生日计算年龄）。\n' +
         '【限购说明】：同一证件在使用期限内同一产品最多预定一张。\n' +
@@ -30,8 +30,8 @@ export const ticketDetailListMock: GetTicketDetailsResp =
       {
         ticketTypeId: 1,
         ticketTypeName: '松山湖景区观光车票',
-        originalPrice: 15,
         discountPrice: 15,
+        originalPrice: 15,
         instruction: '【活动期限】：2025年1月1日至2025年2月28日。\n' +
           '【适用人群】：成人限制为身份证、年龄60周岁（含）以下（按生日计算年龄）。\n' +
           '【限购说明】：同一证件在使用期限内同一产品最多预定一张。\n' +
@@ -41,8 +41,8 @@ export const ticketDetailListMock: GetTicketDetailsResp =
       {
         ticketTypeId: 2,
         ticketTypeName: '松山湖景区成人票',
-        originalPrice: 15,
         discountPrice: 15,
+        originalPrice: 15,
         instruction: '【活动期限】：2025年1月1日至2025年2月28日。\n' +
           '【适用人群】：成人限制为身份证、年龄60周岁（含）以下（按生日计算年龄）。\n' +
           '【限购说明】：同一证件在使用期限内同一产品最多预定一张。\n' +
@@ -52,8 +52,8 @@ export const ticketDetailListMock: GetTicketDetailsResp =
       {
         ticketTypeId: 3,
         ticketTypeName: '松山湖景区儿童票',
-        originalPrice: 15,
         discountPrice: 15,
+        originalPrice: 15,
         instruction: '【活动期限】：2025年1月1日至2025年2月28日。\n' +
           '【适用人群】：成人限制为身份证、年龄60周岁（含）以下（按生日计算年龄）。\n' +
           '【限购说明】：同一证件在使用期限内同一产品最多预定一张。\n' +
@@ -77,8 +77,8 @@ export const ticketDetailListMock: GetTicketDetailsResp =
       ticketType: [{
         ticketTypeId: 0,
         ticketTypeName: '海德尔堡景区成人票',
-        originalPrice: 10,
         discountPrice: 10,
+        originalPrice: 10,
         instruction: '【活动期限】：2025年1月1日至2025年2月28日。\n' +
           '【适用人群】：成人限制为身份证、年龄60周岁（含）以下（按生日计算年龄）。\n' +
           '【限购说明】：同一证件在使用期限内同一产品最多预定一张。\n' +
@@ -88,8 +88,8 @@ export const ticketDetailListMock: GetTicketDetailsResp =
         {
           ticketTypeId: 1,
           ticketTypeName: '海德尔堡景区学生票',
-          originalPrice: 5,
           discountPrice: 5,
+          originalPrice: 5,
           instruction: '【活动期限】：2025年1月1日至2025年2月28日。\n' +
             '【适用人群】：成人限制为身份证、年龄60周岁（含）以下（按生日计算年龄）。\n' +
             '【限购说明】：同一证件在使用期限内同一产品最多预定一张。\n' +

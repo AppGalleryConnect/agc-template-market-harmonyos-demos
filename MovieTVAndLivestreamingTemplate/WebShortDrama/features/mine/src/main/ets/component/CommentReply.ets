@@ -1,7 +1,6 @@
 import { RequestAPI } from '@agctemplate/server';
 import { container } from '@agctemplate/utils';
-import { CommentData } from '../models/messageData';
-import { Reply } from '../models/messageData';
+import { CommentData, Reply } from '@agctemplate/widgets';
 import { MineMessageCard } from './MineMessageCard';
 import { CommentInfo, CommentListRes, LikeInfo } from '@agctemplate/server';
 import { jumpDetailPage, MyMessageStorage } from '@agctemplate/detail';

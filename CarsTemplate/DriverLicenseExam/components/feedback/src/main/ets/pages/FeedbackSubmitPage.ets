@@ -1,10 +1,12 @@
 import { UIContext, KeyboardAvoidMode } from '@kit.ArkUI';
+import { common } from '@kit.AbilityKit';
 
 import { BreakpointType, PageName } from '../common/CustomTypes';
 import { Config } from '../common/Config';
 import { pickImage } from '../utils/PickImageUtils';
 import { FeedbackFormVM } from '../viewmodels/FeedbackFormVM';
 import { Api } from '../http/Api';
+import { AppServiceUtils } from '../utils/AppServiceUtils';
 
 @ComponentV2
 struct FeedbackSubmitPage {
@@ -266,6 +268,7 @@ struct FeedbackSubmitPage {
                   const isSuccess: boolean = await Api.submitFeedback(this.form.toSubmitDTO());
                   if (isSuccess) {
                     this.uiContext.getPromptAction().showToast({ message: '提交成功' });
+                    AppServiceUtils.showCommentDialog(this.getUIContext().getHostContext() as common.UIAbilityContext);
                     this.navPathStack.replacePathByName(PageName.FeedbackHistory, null);
                   } else {
                     this.uiContext.getPromptAction().showToast({ message: '提交失败，请稍后重试' });

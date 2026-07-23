@@ -1,6 +1,11 @@
 {
   "routerMap": [
     {
+      "name": "MinorsModePage",
+      "pageSourceFile": "src/main/ets/pages/MinorsModePage.ets",
+      "buildFunction": "MinorsModePageBuilder"
+    },
+    {
       "name": "MineMainPage",
       "pageSourceFile": "src/main/ets/pages/MineMainPage.ets",
       "buildFunction": "MineMainPageBuilder"
@@ -29,7 +34,8 @@
       "name": "SetUpPage",
       "pageSourceFile": "src/main/ets/pages/SetupPage.ets",
       "buildFunction": "SetUpPageBuilder"
-    },{
+    },
+    {
       "name": "PrivacyAgreementPage",
       "pageSourceFile": "src/main/ets/pages/PrivacyAgreementPage.ets",
       "buildFunction": "PrivacyAgreementBuilder"
@@ -53,7 +59,8 @@
       "name": "VIPCenterPage",
       "pageSourceFile": "src/main/ets/pages/VIPCenterPage.ets",
       "buildFunction": "VIPCenterPageBuilder"
-    },{
+    },
+    {
       "name": "LaunchPage",
       "pageSourceFile": "src/main/ets/pages/LaunchPage.ets",
       "buildFunction": "LaunchPageBuilder"
@@ -77,6 +84,11 @@
       "name": "MineMessagePage",
       "pageSourceFile": "src/main/ets/pages/MineMessagePage.ets",
       "buildFunction": "MineMessagePageBuilder"
+    },
+    {
+      "name": "SettingFontPage",
+      "pageSourceFile": "src/main/ets/pages/SettingFont.ets",
+      "buildFunction": "SettingFontBuilder"
     }
   ]
 }

@@ -3,7 +3,7 @@ export class TouristInfo {
   @Trace id: string = ''
   @Trace name: string = ''
   @Trace phone: string = ''
-  @Trace cardType: number = 0
+  @Trace cardType: number = -1
   @Trace cardNo: string = ''
   @Trace isChecked: boolean = false
 

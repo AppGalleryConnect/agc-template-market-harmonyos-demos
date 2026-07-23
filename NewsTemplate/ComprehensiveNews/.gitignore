@@ -4,6 +4,7 @@
 /.idea
 **/build
 /.hvigor
+/.opencode
 .cxx
 /.clangd
 /.clang-format
@@ -16,5 +17,6 @@ sign
 **/easy_tinymce
 .codemate
 .codeagent
+.opencode
 .code_review
 AGENTS.md

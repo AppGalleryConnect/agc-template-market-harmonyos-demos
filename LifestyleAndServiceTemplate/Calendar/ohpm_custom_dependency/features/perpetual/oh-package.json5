@@ -1,0 +1,20 @@
+{
+  "name": "perpetual",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@hw-agconnect/util-log": "1.0.0",
+    'common': 'file:../../commons/common',
+    'base_apis': "file:../../components/base_apis",
+    'base_calendar': "file:../../components/base_calendar",
+    'yiji_query': 'file:../../components/yiji_query',
+    'date_calculation': 'file:../../components/date_calculation',
+    'festival_solar': "file:../../components/festival_solar",
+    'router_module': 'file:../../commons/router_module',
+    'traffic_restriction': 'file:../../components/traffic_restriction',
+    'today_history': 'file:../../components/today_history'
+  }
+}

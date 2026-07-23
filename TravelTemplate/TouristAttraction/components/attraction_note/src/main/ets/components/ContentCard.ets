@@ -2,11 +2,9 @@
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 import { common } from '@kit.AbilityKit';
-import { CircleShape } from '@kit.ArkUI';
+import { CommonConstant, EventEmitName } from '../constant/Index';
 import { PostCardModel } from '../model/Index';
 import { handleCount, handleImgSrc } from '../utils/Index';
-import { CommonConstant, EventEmitName, StatusFLAG } from '../constant/Index';
-import { cancelLikeTravelogue, likeTravelogue } from '../utils/ApiManage';
 
 @ComponentV2
 export struct ContentCard {
@@ -32,92 +30,104 @@ export struct ContentCard {
     return '';
   }
 
+  getHotNoteTypeName(tag: number): string {
+    if (tag === 1) {
+      return '最新';
+    } else if (tag === 2) {
+      return '最热';
+    } else {
+      return '';
+    }
+  }
+
+  getHotNoteTypeBgColor(tag: number): ResourceStr {
+    if (tag === 1) {
+      return $r('sys.color.mask_tertiary');
+    } else if (tag === 2) {
+      return $r('sys.color.alert');
+    } else {
+      return '';
+    }
+  }
+
   build() {
-    Column({ space: 10 }) {
-      if (this.getImage()) {
-        Image(AppStorage.get(this.JUDGE_NET_TAG) === true ? this.getImage() : $r('app.media.noImage'))
-          .width(CommonConstant.FULL_PERCENT)
-          .objectFit(ImageFit.Contain)
-          .interpolation(ImageInterpolation.High)
-          .borderRadius({ topLeft: 8, topRight: 8 })
-          .autoResize(true)
-          .syncLoad(true);
-      }
-
-      Column({ space: 8 }) {
-        if (this.data.title) {
-          Text(this.data.title)
-            .fontSize(14)
-            .fontColor($r('app.color.grey_level_9'))
-            .fontWeight(500)
-            .lineHeight(20)
-            .maxLines(2)
+    Stack() {
+      Column({ space: 10 }) {
+        if (this.getImage()) {
+          Image(AppStorage.get(this.JUDGE_NET_TAG) === true ? this.getImage() : $r('app.media.noImage'))
             .width(CommonConstant.FULL_PERCENT)
-            .textAlign(TextAlign.Start)
-            .textOverflow({ overflow: TextOverflow.Ellipsis });
-        }
-
-        Row({ space: 4 }) {
-          Image(handleImgSrc(this.getUIContext().getHostContext()!, this.data.publisherAvatar))
-            .width(18)
-            .height(18)
-            .clipShape(new CircleShape({ width: 18, height: 18 }))
+            .objectFit(ImageFit.Contain)
+            .interpolation(ImageInterpolation.High)
+            .borderRadius({ topLeft: 8, topRight: 8 })
             .autoResize(true)
             .syncLoad(true);
-          Text(this.data.publisher)
-            .fontSize(10)
-            .fontColor($r('app.color.grey_level_4'))
-            .fontWeight(400)
-            .lineHeight(14)
-            .maxLines(1)
-            .textOverflow({ overflow: TextOverflow.Ellipsis })
-            .margin({ left: 2, right: 10 })
-            .layoutWeight(1);
-          Blank();
-          Row({ space: 3 }) {
-            Image(this.data.currentUserLikeStatus === StatusFLAG.YES ? $r('app.media.ic_public_like_filled') :
-              $r('app.media.ic_public_like'))
-              .width(12)
-              .height(12)
-              .objectFit(ImageFit.Contain)
-              .autoResize(true)
-              .syncLoad(true);
-            Text(handleCount(this.data.likeNum))
-              .fontSize(10)
-              .fontColor($r('app.color.grey_level_6'))
-              .fontWeight(400)
-              .lineHeight(14);
-          }.onClick(() => {
-            if (this.data.currentUserLikeStatus === StatusFLAG.YES) {
-              cancelLikeTravelogue(this.data.id).then(() => {
-                this.data.currentUserLikeStatus = StatusFLAG.NO;
-                this.data.likeNum -= 1;
-              });
-            } else {
-              likeTravelogue(this.data.id).then(() => {
-                this.data.currentUserLikeStatus = StatusFLAG.YES;
-                this.data.likeNum += 1;
-              });
-            }
-          });
-        }.width(CommonConstant.FULL_PERCENT);
+        }
+
+        Column() {
+          if (this.data.title) {
+            Text(this.data.title)
+              .fontSize($r('sys.float.Body_M'))
+              .fontColor($r('sys.color.font_primary'))
+              .fontWeight(FontWeight.Medium)
+              .maxLines(2)
+              .width(CommonConstant.FULL_PERCENT)
+              .textAlign(TextAlign.Start)
+              .textOverflow({ overflow: TextOverflow.Ellipsis });
+          }
+
+          Row({ space: 8 }) {
+            Text(this.data.location)
+              .fontSize($r('sys.float.Body_S'))
+              .fontColor($r('sys.color.font_secondary'))
+              .maxLines(1)
+              .textOverflow({ overflow: TextOverflow.Ellipsis })
+              .layoutWeight(1);
+            Row({ space: 4 }) {
+              SymbolGlyph($r('sys.symbol.hand_thumbsup'))
+                .width(16)
+                .height(16)
+                .fontSize(16)
+                .fontColor([$r('sys.color.icon_secondary')]);
+              Text(handleCount(this.data.likeNum))
+                .fontSize($r('sys.float.Caption_M'))
+                .fontColor($r('sys.color.font_tertiary'));
+            };
+          }.width(CommonConstant.FULL_PERCENT).justifyContent(FlexAlign.SpaceBetween);
+        }.width(CommonConstant.FULL_PERCENT).padding(8);
       }
       .width(CommonConstant.FULL_PERCENT)
-      .padding({
-        left: 10,
-        right: 20,
-        top: 6,
-        bottom: 6,
+      .backgroundColor($r('sys.color.font_on_primary'))
+      .borderRadius($r('app.float.card_radius'))
+      .onClick(() => {
+        let list = this.mainPathStack.getIndexByName('PageDetail');
+        if (!list.length) {
+          this.mainPathStack.pushPathByName('PageDetail', this.data.id);
+        }
       });
-    }
-    .width(CommonConstant.FULL_PERCENT)
-    .backgroundColor($r('sys.color.font_on_primary'))
-    .borderRadius($r('app.float.card_radius'))
-    .onClick(() => {
-      let list = this.mainPathStack.getIndexByName('PageDetail');
-      if (!list.length) {
-        this.mainPathStack.pushPathByName('PageDetail', this.data.id);
+
+      Row() {
+        Text(this.getHotNoteTypeName(this.data.tag))
+          .fontColor($r('sys.color.font_on_primary'))
+          .fontSize($r('sys.float.Caption_M'));
       }
-    });
+      .width(36)
+      .height(16)
+      .padding({
+        left: 8,
+        top: 1,
+        right: 8,
+        bottom: 1,
+      })
+      .borderRadius({
+        topLeft: 8,
+        topRight: 0,
+        bottomRight: 8,
+        bottomLeft: 0,
+      })
+      .backgroundColor(this.getHotNoteTypeBgColor(this.data.tag))
+      .margin({ left: 2, top: 2 })
+      .visibility(this.data.tag ? Visibility.Visible : Visibility.Hidden);
+    }.align(Alignment.TopStart);
+
   }
 }

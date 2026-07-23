@@ -12,4 +12,6 @@ export class DramaCoverVM {
   tags: string[] = []
   rankId?: number
   isVip?: boolean = false
+  pixelMapImg: PixelMap | undefined = undefined;
+  longTakeTransitionParam?: Object | undefined
 }

@@ -5,7 +5,8 @@
     "description": "$string:module_desc",
     "mainElement": "PhoneAbility",
     "deviceTypes": [
-      "phone"
+      "phone",
+      "tablet"
     ],
     "deliveryWithInstall": true,
     "installationFree": false,
@@ -25,6 +26,7 @@
         "label": "$string:PhoneAbility_label",
         "startWindowIcon": "$media:startIcon",
         "startWindowBackground": "$color:start_window_background",
+        "orientation": "follow_desktop",
         "exported": true,
         "skills": [
           {
@@ -41,7 +43,7 @@
     "metadata": [
       {
         "name": "client_id",
-// todo
+// todo:替换client_id
         "value": "******"
       }
     ],

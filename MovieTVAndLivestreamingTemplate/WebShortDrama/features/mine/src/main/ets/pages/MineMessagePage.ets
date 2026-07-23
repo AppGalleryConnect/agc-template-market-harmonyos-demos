@@ -49,7 +49,7 @@ struct MineMessagePage {
       Column() {
         Header({
           title: getString('app.string.my_message'),
-          rightImageRes: getMedia('app.media.ic_public_trash'),
+          rightImageRes: $r('sys.symbol.clean'),
           rightOnClick: () => {
             //右键删除事件，选择确认,本地mock数据无法删除
             this.deleteDialogController.open()

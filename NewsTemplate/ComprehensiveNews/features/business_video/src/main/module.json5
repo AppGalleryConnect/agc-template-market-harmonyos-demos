@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "business_video",
+    "type": "har",
+    "routerMap": "$profile:route_map",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ]
+  }
+}

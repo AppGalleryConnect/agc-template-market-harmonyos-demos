@@ -1,9 +1,18 @@
 import { getMedia, getString, NAV_PAGE_NAME } from '@agctemplate/resources'
-import { AppStorageKeys, ListItemModel, Mine, MinePageVM, StatusBarHeight, UserInfoModel } from '@agctemplate/widgets'
+import {
+  AppStorageKeys,
+  ListItemModel,
+  Mine,
+  MinePageVM,
+  MinorsMode,
+  MinorsProtectionUtils,
+  StatusBarHeight,
+  UserInfoModel,
+  CommentData
+} from '@agctemplate/widgets'
 import { appRouter, container, PreferConstant, PreferenceUtil } from '@agctemplate/utils';
 import { AppStorageV2 } from '@kit.ArkUI';
 import { CommentInfo, CommentListRes, RequestAPI } from '@agctemplate/server';
-import { CommentData } from '../models/messageData';
 import { DialPanel } from 'dial_panel';
 import { BusinessError } from '@kit.BasicServicesKit';
 
@@ -21,54 +30,36 @@ export struct MineMainPage {
   @Local messageCount: string = ''
   @Local isOpen: boolean = false
   @Consumer('curTabIndex') currentIndex: number = 0;
-  @Local commonServicesContents: Array<ListItemModel> = [
-    new ListItemModel(getString('app.string.my_record'), getMedia('app.media.icon_watched')).setHandle(() => {
-      this.goToPage(NAV_PAGE_NAME.WatchRecordsPage.name)
-    }),
-    new ListItemModel(getString('app.string.my_message'), getMedia('app.media.icon_message'))
-      .setHandle(() => {
-        this.goToPage(NAV_PAGE_NAME.MyMessagePage.name)
-      }),
-    new ListItemModel(getString('app.string.my_like'), getMedia('app.media.icon_like')).setHandle(() => {
-      this.goToPage(NAV_PAGE_NAME.LikesPage.name)
-    }),
-    new ListItemModel(getString('app.string.my_award'), getMedia('app.media.icon_award')).setHandle(() => {
-      this.currentIndex = 2
-    })
-  ]
-  @Local commonServicesContents_2: Array<ListItemModel> = [
-    new ListItemModel(getString('app.string.my_feedback'), getMedia('app.media.icon_feedback')).setHandle(() => {
-      this.goToPage(NAV_PAGE_NAME.FeedbackSubmitPage.name)
-    }),
-    new ListItemModel(getString('app.string.my_customer_service'),
-      getMedia('app.media.icon_customer_service')).setHandle(() => {
-      this.dialPanel
-        .setTitle('联系客服')
-        .setPhoneNumber('12345678901')
-        .setAutoClosePanel(false) // 成功跳转后不自动关闭模态窗
-        .open();
-    }),
-    new ListItemModel(getString('app.string.my_setting'), getMedia('app.media.icon_setting')).setHandle(() => {
-      this.goToPage(NAV_PAGE_NAME.SetUpPage.name)
-    }),
-  ]
+  @Local minorsMode: MinorsMode =
+    AppStorageV2.connect(MinorsMode, 'isMinorsMode', () => new MinorsMode(MinorsProtectionUtils.getMinorsMode()))!
+  @Local commonServicesContents: Array<ListItemModel> = this.initCommonServicesContents()
+  @Local commonServicesContents_2: Array<ListItemModel> = this.initCommonServicesContents_2()
   private uiContext: UIContext = this.getUIContext();
   private dialPanel: DialPanel = new DialPanel(this.uiContext)
     .onMakeCall((e: BusinessError<void>): void => {
       if (e.code) {
-        this.uiContext.getPromptAction().showToast({message:`拨号页面跳转失败 -> code: ${e.code}, msg: ${e.message}`});
+        this.uiContext.getPromptAction()
+          .showToast({ message: `拨号页面跳转失败 -> code: ${e.code}, msg: ${e.message}` });
       }
     })
 
+  @Monitor('minorsMode.isMinorsMode')
+  onModeChange() {
+    this.commonServicesContents = this.initCommonServicesContents()
+    this.commonServicesContents_2 = this.initCommonServicesContents_2()
+  }
+
   @Monitor('vm.userInfo.isPhoneAssociated', 'myMessageList')
   onMyMessageListChange() {
-    if (this.vm.userInfo.isPhoneAssociated) {
-      const tempMessageCount = this.myMessageList.reduce((count, item) => {
-        return count + (item.replyList ? item.replyList.length : 0);
-      }, 0)
-      this.commonServicesContents[1].redDot = tempMessageCount === 0 ? '' : tempMessageCount.toString()
-    } else {
-      this.commonServicesContents[1].redDot = ''
+    if(!this.minorsMode.isMinorsMode){
+      if (this.vm.userInfo.isPhoneAssociated) {
+        const tempMessageCount = this.myMessageList.reduce((count, item) => {
+          return count + (item.replyList ? item.replyList.length : 0);
+        }, 0)
+        this.commonServicesContents[1].redDot = tempMessageCount === 0 ? '' : tempMessageCount.toString()
+      } else {
+        this.commonServicesContents[1].redDot = ''
+      }
     }
   }
 
@@ -142,6 +133,53 @@ export struct MineMainPage {
     } else {
       appRouter.push({ builderName: NAV_PAGE_NAME.LoginPage.name })
     }
+  }
+
+  initCommonServicesContents():Array<ListItemModel>{
+    return this.minorsMode.isMinorsMode ? [
+      new ListItemModel(getString('app.string.my_record'), getMedia('app.media.icon_watched')).setHandle(() => {
+        this.goToPage(NAV_PAGE_NAME.WatchRecordsPage.name)
+      })] : [
+      new ListItemModel(getString('app.string.my_record'), getMedia('app.media.icon_watched')).setHandle(() => {
+        this.goToPage(NAV_PAGE_NAME.WatchRecordsPage.name)
+      }),
+      new ListItemModel(getString('app.string.my_message'), getMedia('app.media.icon_message'))
+        .setHandle(() => {
+          this.goToPage(NAV_PAGE_NAME.MyMessagePage.name)
+        }),
+      new ListItemModel(getString('app.string.my_like'), getMedia('app.media.icon_like')).setHandle(() => {
+        this.goToPage(NAV_PAGE_NAME.LikesPage.name)
+      }),
+      new ListItemModel(getString('app.string.my_award'), getMedia('app.media.icon_award')).setHandle(() => {
+        this.currentIndex = 2
+      })
+    ]
+  }
+
+  initCommonServicesContents_2(): Array<ListItemModel>{
+    return this.minorsMode.isMinorsMode ? [
+      new ListItemModel(getString('app.string.my_feedback'), getMedia('app.media.icon_feedback')).setHandle(() => {
+        this.goToPage(NAV_PAGE_NAME.FeedbackSubmitPage.name)
+      }),
+      new ListItemModel(getString('app.string.my_setting'), getMedia('app.media.icon_setting')).setHandle(() => {
+        this.goToPage(NAV_PAGE_NAME.SetUpPage.name)
+      }),
+    ] : [
+      new ListItemModel(getString('app.string.my_feedback'), getMedia('app.media.icon_feedback')).setHandle(() => {
+        this.goToPage(NAV_PAGE_NAME.FeedbackSubmitPage.name)
+      }),
+      new ListItemModel(getString('app.string.my_customer_service'),
+        getMedia('app.media.icon_customer_service')).setHandle(() => {
+        this.dialPanel
+          .setTitle('联系客服')
+          .setPhoneNumber('12345678901')
+          .setAutoClosePanel(false) // 成功跳转后不自动关闭模态窗
+          .open();
+      }),
+      new ListItemModel(getString('app.string.my_setting'), getMedia('app.media.icon_setting')).setHandle(() => {
+        this.goToPage(NAV_PAGE_NAME.SetUpPage.name)
+      }),
+    ]
   }
 }
 

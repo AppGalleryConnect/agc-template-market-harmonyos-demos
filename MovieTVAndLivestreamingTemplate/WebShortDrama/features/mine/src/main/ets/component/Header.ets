@@ -1,7 +1,5 @@
-
 import { appRouter } from '@agctemplate/utils';
-import { getMedia } from '@agctemplate/resources';
-
+import { fp2pxUtil } from '@agctemplate/widgets';
 
 @ComponentV2
 export struct Header {
@@ -13,23 +11,37 @@ export struct Header {
 
   build() {
     Row() {
-      Image(getMedia('app.media.black_back'))
-        .width(40)
-        .aspectRatio(1)
-        .margin({ left: 16, right: '8vp' })
-        .onClick(() => {
-          appRouter.back(true)
-        })
+      Button({ type: ButtonType.Circle }) {
+        SymbolGlyph($r('sys.symbol.chevron_backward'))
+          .accessibilityText('返回')
+          .fontSize(fp2pxUtil(24))
+          .fontColor([$r('sys.color.icon_primary')])
+      }
+      .width(40)
+      .height(40)
+      .backgroundColor($r('sys.color.comp_background_tertiary'))
+      .margin({ left: 16, right: '8vp' })
+      .onClick(() => {
+        appRouter.back(true)
+      })
+
       Text(this.title).size({ width: 136, height: 27 })
-        .fontSize($r('sys.float.Title_S'))
+        .fontSize(fp2pxUtil(20))
         .fontWeight(this.fontWightParam)
         .fontColor($r('sys.color.font_primary'))
       Blank()
       if (this.rightImageRes) {
-        Image(this.rightImageRes)
-          .size({ width: 40, height: 40 })
-          .margin({ right: 16 })
-          .onClick(this.rightOnClick)
+        Button({ type: ButtonType.Circle }) {
+          SymbolGlyph(this.rightImageRes)
+            .fontSize(fp2pxUtil(24))
+            .fontColor([$r('sys.color.icon_primary')])
+        }
+        .accessibilityText('全部删除')
+        .width(40)
+        .height(40)
+        .backgroundColor($r('sys.color.comp_background_tertiary'))
+        .margin({ right: 16 })
+        .onClick(this.rightOnClick)
       }
     }
     .height(40)

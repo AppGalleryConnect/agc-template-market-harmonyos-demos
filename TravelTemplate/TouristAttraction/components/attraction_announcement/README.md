@@ -12,6 +12,7 @@
 
 本组件提供景点介绍语音播报功能。
 
+
 <img src="screenshots/announce.png" width="300">
 
 ## 约束与限制

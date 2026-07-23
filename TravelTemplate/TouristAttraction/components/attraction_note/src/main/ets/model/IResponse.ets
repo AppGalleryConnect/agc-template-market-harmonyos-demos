@@ -35,12 +35,15 @@ export interface ITravelogue {
   currentUserCollectStatus: StatusFLAG | string;
   travelogueEvaluateList?: IComment[];
   routeId?: number;
+  tag?: number;
+  location?: string;
 }
 
 export interface IAttraction {
   labels: string[]
   detailImages: ResourceStr[]
   attractionId: number
+  ticketId: number
   name: string
   banner: ResourceStr
   icon: ResourceStr

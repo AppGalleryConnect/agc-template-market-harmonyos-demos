@@ -1,7 +1,14 @@
-import { promptAction } from '@kit.ArkUI';
-import { common, ConfigurationConstant } from '@kit.AbilityKit';
+import { ConfigurationConstant } from '@kit.AbilityKit';
 import { notificationManager } from '@kit.NotificationKit';
-import { AppGalleryUtils, BaseViewModel, CommonConfirmDialog, FileUtils, RouterMap, RouterUtils } from 'lib_common';
+import {
+  AppGalleryUtils,
+  BaseViewModel,
+  CommonConfirmDialog,
+  FileUtils,
+  GlobalContext,
+  RouterMap,
+  RouterUtils
+} from 'lib_common';
 import { AccountApi } from 'lib_account';
 import { ISelectOption, SettingItem } from '../types/Types';
 
@@ -43,7 +50,7 @@ export class SettingViewModel extends BaseViewModel {
     onSelect: (option) => {
       this.settingInfo.colorMode = (option as ISelectOption).value as ConfigurationConstant.ColorMode;
       this.colorSettingItem.selectV = this.getColorIndex();
-      getContext().getApplicationContext().setColorMode(this.settingInfo.colorMode);
+      (GlobalContext.getContext() as Context).getApplicationContext().setColorMode(this.settingInfo.colorMode);
     },
   });
   @Trace pushSettingItem = new SettingItem({
@@ -62,7 +69,7 @@ export class SettingViewModel extends BaseViewModel {
         if (this.userInfoModel.isLogin) {
           RouterUtils.pushPathByName(RouterMap.SETTING_PERSONAL);
         } else {
-          promptAction.showToast({ message: '请先登录' });
+          GlobalContext.getUIContext().getPromptAction().showToast({ message: '请先登录' });
         }
       },
     }),
@@ -82,12 +89,12 @@ export class SettingViewModel extends BaseViewModel {
     new SettingItem({
       label: '检测版本',
       onClick: () => {
-        const context = getContext(this) as common.UIAbilityContext;
+        const context = GlobalContext.getContext()
         AppGalleryUtils.checkAppUpdate(context).then((resp: boolean) => {
           if (resp) {
             AppGalleryUtils.showUpdateDialog(context);
           } else {
-            promptAction.showToast({ message: '已是最新版本' });
+            GlobalContext.getUIContext().getPromptAction().showToast({ message: '已是最新版本' });
           }
         })
       },
@@ -99,7 +106,7 @@ export class SettingViewModel extends BaseViewModel {
   ];
 
   requestPushPermission(isOn: boolean) {
-    notificationManager.openNotificationSettings(getContext(this) as common.UIAbilityContext)
+    notificationManager.openNotificationSettings(GlobalContext.getContext())
       .then(() => {
         this.isFocusOnPage = false;
       })
@@ -135,14 +142,14 @@ export class SettingViewModel extends BaseViewModel {
     return 0;
   }
 
-  onCacheConfirmClick(){
+  onCacheConfirmClick() {
     CommonConfirmDialog.show({
-      content:'确定清除缓存吗？',
+      content: '确定清除缓存吗？',
       confirm: () => {
         this.cacheSize = '0';
         this.cacheSettingItem.extraLabel = this.getLocalCacheLabel();
         FileUtils.clearCache();
-        promptAction.showToast({ message: '清除缓存成功' });
+        GlobalContext.getUIContext().getPromptAction().showToast({ message: '清除缓存成功' });
       }
     })
   }
@@ -154,7 +161,7 @@ export class SettingViewModel extends BaseViewModel {
         this.isLoading = true;
         this.accountInstance.signOut()
           .then(() => {
-            promptAction.showToast({ message: '已退出登录' });
+            GlobalContext.getUIContext().getPromptAction().showToast({ message: '已退出登录' });
           })
           .finally(() => {
             this.isLoading = false;

@@ -1,9 +1,16 @@
+import { AppStorageV2 } from '@kit.ArkUI';
 import { BaseTextStyleModifier, CommonConstants, RouterMap, RouterModule } from 'lib_foundation';
-import { MineVM } from '../viewmodels/MineVM';
+import { BreakpointModel } from 'module_weather_core';
 
 @ComponentV2
 export struct MineBot {
-  vm: MineVM = MineVM.instance;
+  @Local breakpointModel: BreakpointModel =
+    AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
+
+  @Computed
+  get listLanes(): number {
+    return this.breakpointModel.isLargeWindow ? 2 : 1;
+  }
 
   build() {
     Column({ space: CommonConstants.SPACE_8 }) {
@@ -22,6 +29,7 @@ export struct MineBot {
         startMargin: 40,
         endMargin: 0,
       })
+      .lanes(this.listLanes, 0)
     }
     .width('100%')
     .backgroundColor($r('sys.color.comp_background_primary'))
@@ -44,10 +52,13 @@ export struct MineBot {
           .layoutWeight(1)
           .margin({ left: CommonConstants.SPACE_16 })
           .attributeModifier(new BaseTextStyleModifier('font_primary/Subtitle_M/Medium'))
-        Image($r('app.media.right_arrow')).width(7).fillColor($r('sys.color.icon_secondary'))
+        SymbolGlyph($r('sys.symbol.chevron_right'))
+          .fontSize($r('app.float.normal_img_size'))
+          .fontColor([$r('sys.color.font_fourth')])
       }
     }
     .height(56)
+    .padding({ right: this.listLanes === 2 ? CommonConstants.SPACE_8 : 0 })
     .onClick(() => {
       RouterModule.push({ url: url });
     })

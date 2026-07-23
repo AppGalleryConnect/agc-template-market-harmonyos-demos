@@ -39,6 +39,10 @@
     {
       "name": "book_good_btn",
       "value": "立即预约"
+    },
+    {
+      "name": "agcit_huawei_household_service",
+      "value": "1.0.5"
     }
   ]
 }

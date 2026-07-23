@@ -26,6 +26,9 @@ export struct VideoPlayerView {
   @Param index: number = 0;
   // swiper中当前的播放索引
   @Param currentIndex: number = 0;
+  @Param firstFlag: boolean = true;
+  @Event $firstFlag: (val: boolean) => void = (val: boolean) => {
+  };
   // 总数
   @Param totalCount: number = 0;
   // 滑动组件控制器
@@ -62,14 +65,18 @@ export struct VideoPlayerView {
   @Consumer() bottomTabHeight: Length | undefined;
   // 路由变化的监听事件
   @Local pipWindowModel: PiPWindowModel = AppStorageV2.connect(PiPWindowModel, () => new PiPWindowModel())!;
+  // 视频是否准备好
+  @Local flag: boolean = false;
   private xComponentController = new XComponentController();
   private vm: SwipePlayerModel = new SwipePlayerModel(this.getUIContext(), this.index)
   // 准备状态监听事件
   private preparedListener = () => {
+    this.flag = true;
     if (this.index === this.currentIndex && this.autoPlay) {
       const isShown = AppStorage.get<boolean>('isShown');
-      if (isShown) {
+      if (isShown && this.firstFlag && this.index === 0) {
         this.vm.avPlayerController.play()
+        this.$firstFlag(false);
       }
     } else {
       // 没有封面图时，取视频的 2ms 的位置帧作为封面
@@ -251,9 +258,38 @@ export struct VideoPlayerView {
       return
     }
     let canPlayStates = [AVPlayerState.PREPARED, AVPlayerState.PAUSED, AVPlayerState.COMPLETED] as media.AVPlayerState[]
-    if (canPlayStates.includes(this.vm.avPlayerController.avPlayer?.state!)) {
-      this.vm.avPlayerController.avPlayer?.setSpeed(1);
-      this.vm.avPlayerController.play();
+
+    if (this.flag) {
+      if (canPlayStates.includes(this.vm.avPlayerController.avPlayer?.state!)) {
+        this.vm.avPlayerController.avPlayer?.setSpeed(1);
+        this.vm.avPlayerController.play();
+      }
+    } else {
+      let countNum = 0;
+      let intervalFlag = setInterval(() => {
+        countNum++;
+        if (this.currentIndex !== this.index) {
+          Logger.info(TAG, `enter indexChange play error, clearIntreval. flag: ${this.flag},
+          curIndex: ${this.currentIndex}, index: ${this.index}.`);
+          clearInterval(intervalFlag);
+        }
+        // 当视频处于prepared状态，并且页面可见时触发播放
+        if (this.flag === true && this.isShown) {
+          countNum = 0;
+          this.vm.avPlayerController.play();
+          clearInterval(intervalFlag);
+        } else {
+          Logger.info(TAG, `enter indexChange play error, clearIntreval. countNum: ${countNum},
+          flag: ${this.flag}, curIndex: ${this.currentIndex}, index: ${this.index}.`);
+          if (countNum > 15) {
+            Logger.info(TAG,
+              `enter indexChange play error, reinit initAVPlayer. countNum: ${countNum},
+              flag: ${this.flag}, curIndex: ${this.currentIndex}, index: ${this.index}.`);
+            countNum = 0;
+            this.vm.initAVPlayer(this.enableAVSession && this.isCurrent);
+          }
+        }
+      }, 100);
     }
   }
 
@@ -317,6 +353,8 @@ export struct VideoPlayerView {
                 .aspectRatio(Number(this.vm.videoWidth) / Number(this.vm.videoHeight))
                 .onLoad(() => {
                   let surfaceId = this.xComponentController.getXComponentSurfaceId();
+                  Logger.info(TAG,
+                    `surfaceID: ${surfaceId}, curIndex: ${this.currentIndex}, index: ${this.index}.`);
                   // 设置视频窗口ID
                   this.vm.setSurfaceId(surfaceId)
                   // 初始化

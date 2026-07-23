@@ -19,7 +19,7 @@ struct WidgetCard {
   @LocalStorageProp('location') location: LocationInfo0 | null = null;
   @LocalStorageProp('realTimeWeather') realTimeWeather: RealTimeWeather0 | null = null;
   @LocalStorageProp('colors') colors: [ResourceColor, number][] =
-      this.isDaytime() ? [['#2E6BE0', 0], ['#92C8FD', 1]] : [['#274668', 0], ['#527EAA', 1]];
+    this.isDaytime() ? [['#2E6BE0', 0], ['#92C8FD', 1]] : [['#274668', 0], ['#527EAA', 1]];
   readonly actionType: string = 'router';
   readonly abilityName: string = 'PhoneAbility';
 
@@ -36,9 +36,15 @@ struct WidgetCard {
           Row({ space: 4 }) {
             Image($r('app.media.widget_location')).width(12).height(14)
             Text(this.location.name)
+              .maxLines(2)
+              .textOverflow({ overflow: TextOverflow.Ellipsis })
+              .layoutWeight(1)
               .fontSize($r('sys.float.Body_M'))
               .fontColor($r('sys.color.font_on_primary'))
               .fontWeight(FontWeight.Medium)
+            if (this.realTimeWeather) {
+              Image($r(`app.media.${this.realTimeWeather.icon}`)).width(18)
+            }
           }
         }
 
@@ -56,13 +62,6 @@ struct WidgetCard {
         'left': { 'anchor': '__container__', 'align': HorizontalAlign.Start },
       })
 
-      if (this.realTimeWeather) {
-        Image($r(`app.media.${this.realTimeWeather.icon}`)).width(18)
-          .alignRules({
-            'top': { 'anchor': '__container__', 'align': VerticalAlign.Top },
-            'right': { 'anchor': '__container__', 'align': HorizontalAlign.End },
-          })
-      }
 
       Column({ space: 2 }) {
         if (this.realTimeWeather) {

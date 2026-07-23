@@ -1,0 +1,12 @@
+{
+  "string": [
+    {
+      "name": "agcit_huawei_common_payment",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_common_payment",
+      "value": "serviceComponent"
+    }
+  ]
+}

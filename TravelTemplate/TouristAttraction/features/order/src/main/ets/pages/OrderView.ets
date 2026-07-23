@@ -1,48 +1,28 @@
-import { common } from '@kit.AbilityKit';
-import { Constant, Logger, SystemUtil } from 'common';
-import { FullLoadingComponent, OrderTypeDialog } from 'uicomponents';
-import { CommodityOrderInfo, TicketOrderInfo } from 'types';
+import { AppStorageV2 } from '@kit.ArkUI';
+import { BreakpointModel, Constant, Logger } from 'common';
 import { GetOrderDetailRequest, https } from 'network';
-import {
-  COMMODITY_ORDER_MODULE_INFO,
-  OrderModuleData,
-  OrderType,
-  TICKET_ORDER_MODULE_INFO,
-} from '../model/OrderModuleInfo';
-import { OrderPageVM } from '../viewmodel/OrderPageVM';
+import { CommodityOrderInfo, TicketOrderInfo } from 'types';
+import { FullLoadingComponent, TitleBar } from 'uicomponents';
 import { OrderEmpty } from '../components/OrderEmpty';
+import { OrderModuleData, OrderType, TICKET_ORDER_MODULE_INFO } from '../model/OrderModuleInfo';
+import { OrderPageVM } from '../viewmodel/OrderPageVM';
 
 @Builder
 export function OrderBuilder() {
   OrderView();
 }
 
-@Extend(Text)
-function itemTitle() {
-  .fontSize(14).fontWeight(500).opacity(0.9);
-}
-
-@Extend(Text)
-function itemContent(opa: number) {
-  .opacity(opa).fontSize(12);
-}
-
 @ComponentV2
 export struct OrderView {
   vm: OrderPageVM = OrderPageVM.instance;
-  @Local orderTabIndex: number = 0;
-  @Local isLoading: boolean = true;
   @Consumer('mainPathStack') mainPathStack: NavPathStack = new NavPathStack();
   @Local windowTopHeight: number = AppStorage.get('windowTopHeight') as number || 38.77;
-  dialogController: CustomDialogController | null = new CustomDialogController({
-    builder: OrderTypeDialog(),
-  });
+  @Local windowBottomHeight: number = AppStorage.get('windowBottomHeight') as number || 28;
+  @Local breakPointModel: BreakpointModel = AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
 
   cancelOrder(info: CommodityOrderInfo | TicketOrderInfo) {
     let param: GetOrderDetailRequest = {
-      category: this.vm.orderType,
-      orderNo: info.orderNo,
-      orderStatus: OrderType.COMPLETED,
+      category: this.vm.orderType, orderNo: info.orderNo, orderStatus: OrderType.COMPLETED,
     };
     https.modifyOrderDetail(param).then((res: ESObject) => {
       if (res.code === 0) {
@@ -54,24 +34,7 @@ export struct OrderView {
 
   payOrder(info: CommodityOrderInfo | TicketOrderInfo) {
     let param: GetOrderDetailRequest = {
-      category: this.vm.orderType,
-      orderNo: info.orderNo,
-      orderStatus: OrderType.TO_USE,
-    };
-    https.modifyOrderDetail(param).then((res: ESObject) => {
-      if (res.code === 0) {
-        this.vm.orderTabIndex = param.orderStatus ?? 0;
-        this.vm.getOrderList();
-      }
-    });
-  }
-
-  updateOrder(info: TicketOrderInfo) {
-    let param: GetOrderDetailRequest = {
-      category: this.vm.orderType,
-      orderNo: info.orderNo,
-      isAddSchedule: info.isAddSchedule,
-      isAddSubscription: info.isAddSubscription,
+      category: this.vm.orderType, orderNo: info.orderNo, orderStatus: OrderType.TO_USE,
     };
     https.modifyOrderDetail(param).then((res: ESObject) => {
       if (res.code === 0) {
@@ -87,64 +50,68 @@ export struct OrderView {
       List({ space: 12 }) {
         ForEach(this.vm.ticketOrderList, (item: TicketOrderInfo) => {
           ListItem() {
-            Column({ space: 16 }) {
+            Column({ space: 12 }) {
               Row() {
                 Row({ space: 8 }) {
-                  Image($r('app.media.ticket')).size({ width: 24, height: 24 });
-                  Text('门票').fontSize(12).opacity(0.9);
+                  Row({ space: 4 }) {
+                    Image($r('app.media.ticket')).size({ width: 24, height: 24 });
+                    Text('门票').fontSize($r('sys.float.Body_S')).fontColor($r('sys.color.font_primary'));
+                  };
+
                   Divider().vertical(true).height(12);
-                  Text(item.orderNo.toString()).fontSize(12).opacity(0.4);
+                  Text(item.orderNo.toString())
+                    .fontSize($r('sys.float.Body_S'))
+                    .fontColor($r('sys.color.font_secondary'));
                 };
 
                 Text(this.vm.getTicketStatus(item).text)
-                  .fontSize(14)
-                  .fontColor(this.vm.getTicketStatus(item).color)
-                  .opacity(this.vm.getTicketStatus(item).opacity);
+                  .fontSize($r('sys.float.Body_M'))
+                  .fontColor(this.vm.getTicketStatus(item).color);
               }.width(Constant.FULL_PERCENT).justifyContent(FlexAlign.SpaceBetween);
 
-              Divider();
-
-              Column({ space: 6 }) {
-                Row() {
-                  Text(item.productName).itemTitle().width(200)
-                    .maxLines(1)
+              Row({ space: 12 }) {
+                Image(item.banner).size({ width: 56, height: 56 }).borderRadius(8);
+                Column({ space: 2 }) {
+                  Text(item.productName)
+                    .fontSize($r('sys.float.Body_L'))
+                    .fontWeight(FontWeight.Medium)
+                    .fontColor($r('sys.color.font_primary'))
                     .textOverflow({ overflow: TextOverflow.Ellipsis });
+                  Text(`可用日期：${item.startTime}至${item.endTime}`)
+                    .fontSize($r('sys.float.Body_S'))
+                    .fontColor($r('sys.color.font_secondary'));
+                  Text(`数量：${item.productPrice}份`)
+                    .fontSize($r('sys.float.Body_S'))
+                    .fontColor($r('sys.color.font_secondary'));
+                }.alignItems(HorizontalAlign.Start).layoutWeight(1);
+              }.width(Constant.FULL_PERCENT);
 
-                  Text(`￥${item.amount}`).itemTitle();
-                }.width(Constant.FULL_PERCENT).justifyContent(FlexAlign.SpaceBetween);
-
-                Text(`可用日期${item.startTime}至${item.endTime}`).itemContent(0.6);
-
-                Row({ space: 20 }) {
-                  Text(`单价: ￥${item.productPrice}`).itemContent(0.6);
-                  Text(`数量：${item.productPrice}`).itemContent(0.6);
-                };
-
-                Row({ space: 20 }) {
-                  Text(`总金额: ¥${item.amount}`).itemContent(0.6);
-                  Text(`优惠：${item.discount}`).itemContent(0.6);
-                  Text(`实付：${item.amount}`).itemContent(0.6);
-                };
-              }.width(Constant.FULL_PERCENT).alignItems(HorizontalAlign.Start);
+              Row({ space: 12 }) {
+                if (item.orderStatus === OrderType.TO_PAY) {
+                  Text(`总价 ¥${item.amount}`)
+                    .fontSize($r('sys.float.Body_S'))
+                    .fontColor($r('sys.color.font_secondary'));
+                  Text(`优惠 ¥${item.discount}`)
+                    .fontSize($r('sys.float.Body_S'))
+                    .fontColor($r('sys.color.font_secondary'));
+                }
+                Text() {
+                  Span('实付').fontSize($r('sys.float.Body_S'));
+                  Span(`¥${item.amount}`).fontSize($r('sys.float.Body_M')).fontWeight(FontWeight.Medium);
+                }.fontColor($r('sys.color.font_primary'));
+              }.width(Constant.FULL_PERCENT).justifyContent(FlexAlign.End);
 
               if (item.orderStatus === OrderType.TO_PAY) {
                 Row({ space: 8 }) {
-                  Button('取消订单')
-                    .height(28)
-                    .fontSize($r('sys.float.Body_S'))
+                  Button('取消订单', { controlSize: ControlSize.SMALL })
                     .fontColor($r('sys.color.font_primary'))
-                    .backgroundColor($r('sys.color.font_on_primary'))
-                    .opacity(0.6)
-                    .border({ width: 1, color: Color.Black, radius: 24 })
+                    .backgroundColor($r('sys.color.comp_background_tertiary'))
                     .onClick(() => {
                       this.cancelOrder(item);
                     });
-                  Button('立即支付')
-                    .height(28)
-                    .fontSize($r('sys.float.Body_S'))
-                    .fontColor('#64BB5C')
-                    .backgroundColor($r('sys.color.font_on_primary'))
-                    .border({ width: 1, color: '#64BB5C', radius: 24 })
+                  Button('去支付', { controlSize: ControlSize.SMALL })
+                    .fontColor($r('sys.color.font_on_primary'))
+                    .backgroundColor($r('sys.color.multi_color_04'))
                     .onClick(() => {
                       this.payOrder(item);
                     });
@@ -153,337 +120,226 @@ export struct OrderView {
                 Row({ space: 8 }) {
                   this.RefundBuilder(item);
                   this.scheduleBuilder(item);
-                  this.pushBuilder(item)
                 }.width(Constant.FULL_PERCENT).justifyContent(FlexAlign.End);
               }
-            }.padding(12).backgroundColor($r('sys.color.font_on_primary')).borderRadius(8).onClick(() => {
-              this.mainPathStack.pushPathByName(this.vm.orderType === 0 ? 'TicketOrderDetail' :
-                'CommodityOrderDetail',
+            }.padding(12).backgroundColor($r('sys.color.comp_background_primary')).borderRadius(16).onClick(() => {
+              this.mainPathStack.pushPathByName(this.vm.orderType === 0 ? 'TicketOrderDetail' : 'CommodityOrderDetail',
                 {
-                  category: this.vm.orderType,
-                  orderNo: item.orderNo,
-                } as GetOrderDetailRequest, (popInfo: ESObject) => {
-                  // 重新加载列表
+                  category: this.vm.orderType, orderNo: item.orderNo,
+                } as GetOrderDetailRequest, (popInfo: ESObject) => { // 重新加载列表
                   this.vm.getOrderList();
                 });
             });
           };
         }, (item: TicketOrderInfo) => item.orderNo);
-      }.align(Alignment.Top).height('90%').edgeEffect(EdgeEffect.Spring);
-
-      Text('已加载全部了').fontSize(14).fontColor('rgba(0, 0, 0, 0.4)');
+      }
+      .contentStartOffset(4)
+      .contentEndOffset(12)
+      .edgeEffect(EdgeEffect.Spring)
+      .scrollBar(BarState.Off)
+      .lanes(this.vm.getOrderLane(), 12)
+      .padding({ left: this.breakPointModel.pagePadding, right: this.breakPointModel.pagePadding })
+      .width('100%')
+      .layoutWeight(1);
     };
   }
 
   @Builder
   RefundBuilder(item: TicketOrderInfo | CommodityOrderInfo) {
     Row() {
-      Button(`${this.vm.orderType === 0 ? '退订' : '申请退款'}`)
-        .height(28)
-        .fontSize($r('sys.float.Body_S'))
+      Button(`${this.vm.orderType === 0 ? '退订' : '申请退款'}`, { controlSize: ControlSize.SMALL })
         .fontColor($r('sys.color.font_primary'))
-        .backgroundColor($r('sys.color.font_on_primary'))
-        .opacity(0.6)
-        .border({ width: 1, color: Color.Black, radius: 24 })
+        .backgroundColor($r('sys.color.comp_background_tertiary'))
         .onClick(() => {
-          this.refundOrder(item);
+          this.vm.refundOrder(item);
         });
-    }
-  }
-
-  @Builder
-  pushBuilder(item: TicketOrderInfo) {
-    Row() {
-      Button(item.isAddSubscription ? '订阅成功' : '订阅')
-        .height(28)
-        .fontSize($r('sys.float.Body_S'))
-        .fontColor(item.isAddSubscription ? $r('sys.color.font_on_primary') : $r('sys.color.font_primary'))
-        .backgroundColor(item.isAddSubscription ? $r('sys.color.multi_color_04') : $r('sys.color.font_on_primary'))
-        .opacity(0.6)
-        .border({ width: 1, color: Color.Black, radius: 24 })
-        .onClick(async () => {
-          if (item.isAddSubscription) {
-            this.getUIContext()
-              .getPromptAction()
-              .showToast({ message: $r('app.string.toast_subscription_cannot_cancel') })
-            return
-          }
-          const res =
-            await SystemUtil.requestSubscribeNotification(this.getUIContext()
-              .getHostContext() as common.UIAbilityContext)
-          if (res) {
-            this.getUIContext().getPromptAction().showToast({ message: $r('app.string.toast_subscription_added') });
-            item.isAddSubscription = true
-            this.updateOrder(item)
-          }
-        });
-    }
+    };
   }
 
   @Builder
   scheduleBuilder(item: TicketOrderInfo) {
     Row() {
-      Button(item.isAddSchedule ? '已添加日程' : '添加日程')
-        .height(28)
-        .fontSize($r('sys.float.Body_S'))
-        .fontColor(item.isAddSchedule ? $r('sys.color.font_on_primary') : $r('sys.color.font_primary'))
-        .backgroundColor(item.isAddSchedule ? $r('sys.color.multi_color_04') : $r('sys.color.font_on_primary'))
-        .opacity(0.6)
-        .border({ width: 1, color: Color.Black, radius: 24 })
+      Button(item.isAddSchedule ? '已添加日程' : '添加日程', { controlSize: ControlSize.SMALL })
+        .fontColor(item.isAddSchedule ? $r('sys.color.font_on_primary') : $r('sys.color.multi_color_04'))
+        .backgroundColor(item.isAddSchedule ? $r('sys.color.multi_color_04') : $r('sys.color.comp_background_tertiary'))
+        .enabled(item.isAddSchedule ? false : true)
         .onClick(async () => {
-          if (item.isAddSchedule) {
-            this.getUIContext().getPromptAction().showToast({ message: $r('app.string.toast_schedule_cannot_cancel') });
-            return;
-          }
-          const timeStamp = new Date(item.startTime).getTime()
-          const isSuccess = await SystemUtil.addEvent(timeStamp, item.productName,
-            this.getUIContext().getHostContext() as common.UIAbilityContext);
-          if (!isSuccess) {
-            this.getUIContext().getPromptAction().showToast({ message: $r('app.string.toast_schedule_added_fail') });
-            return;
-          }
-          this.getUIContext().getPromptAction().showToast({ message: $r('app.string.toast_schedule_added') });
-          item.isAddSchedule = true
-          this.updateOrder(item)
+          this.vm.addSchedule(item, this.getUIContext());
         });
-    }
-  }
-
-  refundOrder(info: TicketOrderInfo | CommodityOrderInfo) {
-    let param: GetOrderDetailRequest = {
-      category: this.vm.orderType,
-      orderNo: info.orderNo,
-      orderStatus: OrderType.REFUNDED,
     };
-    https.modifyOrderDetail(param).then((res: ESObject) => {
-      if (res.code === 0) {
-        this.vm.orderTabIndex = param.orderStatus ?? 0;
-        this.vm.getOrderList();
-      }
-    });
   }
 
   @Builder
   CommodityOrder() {
-    Column({ space: 12 }) {
-      List({ space: 12 }) {
-        ForEach(this.vm.commodityOrderList, (item: CommodityOrderInfo) => {
-          ListItem() {
-            Column({ space: 16 }) {
-              Row() {
-                Row({ space: 8 }) {
+    List({ space: 12 }) {
+      ForEach(this.vm.commodityOrderList, (item: CommodityOrderInfo) => {
+        ListItem() {
+          Column({ space: 12 }) {
+            Row() {
+              Row({ space: 8 }) {
+                Row({ space: 4 }) {
                   Image($r('app.media.mall')).size({ width: 24, height: 24 });
-                  Text('购物').itemContent(0.9);
-                  Divider().vertical(true).height(12);
-                  Text(item.orderNo.toString()).itemContent(0.4);
+                  Text('文创特产').fontSize($r('sys.float.Body_S')).fontColor($r('sys.color.font_primary'));
                 };
 
-                Text(this.vm.getCommodityStatus(item).text)
-                  .fontSize(14)
-                  .fontColor(this.vm.getCommodityStatus(item).color)
-                  .opacity(this.vm.getCommodityStatus(item).opacity);
-              }.width(Constant.FULL_PERCENT).justifyContent(FlexAlign.SpaceBetween);
+                Divider().vertical(true).height(12);
+                Text(item.orderNo.toString())
+                  .fontSize($r('sys.float.Body_S'))
+                  .fontColor($r('sys.color.font_secondary'));
+              };
 
-              Divider();
+              Text(this.vm.getCommodityStatus(item).text)
+                .fontSize($r('sys.float.Body_M'))
+                .fontColor(this.vm.getCommodityStatus(item).color);
+            }.width(Constant.FULL_PERCENT).justifyContent(FlexAlign.SpaceBetween);
 
-              Row() {
-                Row({ space: 8 }) {
-                  Image(item.banner)
-                    .size({ width: 68, height: 68 })
-                    .borderRadius(8);
-                  Column({ space: 2 }) {
-                    Text(item.productName)
-                      .fontWeight(500)
-                      .fontSize(14)
-                      .maxLines(1)
-                      .textOverflow({ overflow: TextOverflow.Ellipsis });
-                    Text(item.spuName).itemContent(0.4);
-                  }.alignItems(HorizontalAlign.Start).justifyContent(FlexAlign.Start);
-                }.width('60%');
-
-                Column() {
-                  Text(`￥${item.originalPrice}`).itemContent(0.6);
-
-                  Text(`${item.disCountPrice}`).itemContent(0.4).decoration({ type: TextDecorationType.LineThrough });
-
-                  Text(`x${item.count}`).itemContent(0.4);
-                }.width(32).alignItems(HorizontalAlign.End).justifyContent(FlexAlign.SpaceBetween);
-              }
-              .width(Constant.FULL_PERCENT)
-              .justifyContent(FlexAlign.SpaceBetween)
-              .alignItems(VerticalAlign.Top);
-
-              Row() {
-                Text(`总价￥${item.amount} 优惠￥${item.discount}`).itemContent(0.4);
-                Text(` 实付`).itemContent(0.4);
-                Text(`￥${item.amount}`).fontSize(14).fontWeight(500);
-              }.width(Constant.FULL_PERCENT).justifyContent(FlexAlign.End);
-
-              if (item.orderStatus === OrderType.TO_PAY) {
-                Row({ space: 8 }) {
-                  Button('取消订单')
-                    .height(28)
-                    .fontSize($r('sys.float.Body_S'))
+            Row() {
+              Image(item.banner).size({ width: 56, height: 56 }).borderRadius(8);
+              Column({ space: 2 }) {
+                Row({ space: 24 }) {
+                  Text(item.productName)
+                    .fontSize($r('sys.float.Body_L'))
+                    .fontWeight(FontWeight.Medium)
                     .fontColor($r('sys.color.font_primary'))
-                    .backgroundColor($r('sys.color.font_on_primary'))
-                    .opacity(0.6)
-                    .border({ width: 1, color: Color.Black, radius: 24 })
-                    .onClick(() => {
-                      this.cancelOrder(item);
-                    });
-                  Button('去支付')
-                    .height(28)
-                    .fontSize($r('sys.float.Body_S'))
-                    .fontColor('#64BB5C')
-                    .backgroundColor($r('sys.color.font_on_primary'))
-                    .border({ width: 1, color: '#64BB5C', radius: 24 })
-                    .onClick(() => {
-                      this.payOrder(item);
-                    });
-                }.width(Constant.FULL_PERCENT).justifyContent(FlexAlign.End);
-              } else if (item.orderStatus === OrderType.TO_USE) {
-                Row() {
-                  this.RefundBuilder(item);
-                }.width(Constant.FULL_PERCENT)
+                    .layoutWeight(1)
+                    .maxLines(1)
+                    .textOverflow({ overflow: TextOverflow.Ellipsis });
+                  Text(`${item.disCountPrice}`)
+                    .fontSize($r('sys.float.Body_M'))
+                    .fontColor($r('sys.color.font_primary'))
+                    .fontWeight(FontWeight.Medium);
+                }.justifyContent(FlexAlign.SpaceBetween);
+
+                if (item.originalPrice) {
+                  Row() {
+                    Text(`${item.originalPrice}`)
+                      .fontSize($r('sys.float.Body_S'))
+                      .fontColor($r('sys.color.font_tertiary'))
+                      .decoration({ type: TextDecorationType.LineThrough });
+                  }.justifyContent(FlexAlign.End);
+                }
+                Text(`规格：${item.spuName}`).fontSize($r('sys.float.Body_S')).fontColor($r('sys.color.font_secondary'));
+              }.layoutWeight(1);
+
+            }.width(Constant.FULL_PERCENT).justifyContent(FlexAlign.SpaceBetween).alignItems(VerticalAlign.Top);
+
+            Row({ space: 12 }) {
+              if ([OrderType.TO_USE, OrderType.REFUNDED].includes(item.orderStatus)) {
+                Text(`总价 ¥${item.amount}`).fontSize($r('sys.float.Body_S')).fontColor($r('sys.color.font_secondary'));
+                Text(`优惠 ¥${item.discount}`)
+                  .fontSize($r('sys.float.Body_S'))
+                  .fontColor($r('sys.color.font_secondary'));
               }
-            }.padding(12).backgroundColor($r('sys.color.font_on_primary')).borderRadius(8).onClick(() => {
-              this.mainPathStack.pushPathByName(this.vm.orderType === 0 ? 'TicketOrderDetail' :
-                'CommodityOrderDetail',
-                {
-                  category: this.vm.orderType,
-                  orderNo: item.orderNo,
-                } as GetOrderDetailRequest, () => {
-                  // 重新加载列表
-                  this.vm.getOrderList();
-                });
+              Text() {
+                Span('实付').fontSize($r('sys.float.Body_S'));
+                Span(`¥${item.amount}`).fontSize($r('sys.float.Body_M')).fontWeight(FontWeight.Medium);
+              }.fontColor($r('sys.color.font_primary'));
+            }.width(Constant.FULL_PERCENT).justifyContent(FlexAlign.End);
+
+            if (item.orderStatus === OrderType.TO_PAY) {
+              Row({ space: 8 }) {
+                Button('取消订单', { controlSize: ControlSize.SMALL })
+                  .fontColor($r('sys.color.font_primary'))
+                  .backgroundColor($r('sys.color.comp_background_tertiary'))
+                  .onClick(() => {
+                    this.cancelOrder(item);
+                  });
+                Button('去支付', { controlSize: ControlSize.SMALL })
+                  .fontColor($r('sys.color.font_on_primary'))
+                  .backgroundColor($r('sys.color.multi_color_04'))
+                  .onClick(() => {
+                    this.payOrder(item);
+                  });
+              }.width(Constant.FULL_PERCENT).justifyContent(FlexAlign.End);
+            } else if (item.orderStatus === OrderType.TO_USE) {
+              Row() {
+                this.RefundBuilder(item);
+              }.width(Constant.FULL_PERCENT);
+            }
+          }.padding(12).backgroundColor($r('sys.color.comp_background_primary')).borderRadius(16).onClick(() => {
+            this.mainPathStack.pushPathByName(this.vm.orderType === 0 ? 'TicketOrderDetail' : 'CommodityOrderDetail', {
+              category: this.vm.orderType, orderNo: item.orderNo,
+            } as GetOrderDetailRequest, () => { // 重新加载列表
+              this.vm.getOrderList();
             });
-          };
-        }, (item: CommodityOrderInfo) => item.orderNo);
-      }.align(Alignment.Top).height('90%').edgeEffect(EdgeEffect.Spring);
-
-      Text('已加载全部了').fontSize(14).fontColor('rgba(0, 0, 0, 0.4)');
-    };
-  }
-
-  @Builder
-  OrderTabBar(targetIndex: number) {
-    Column({ space: 8 }) {
-      Text(this.vm.getTitle(targetIndex))
-        .fontColor(this.vm.orderTabIndex === targetIndex ? '#64BB5C' :
-          Color.Black)
-        .opacity(this.vm.orderTabIndex === targetIndex ? 1 : 0.9);
-
-      if (this.vm.orderTabIndex === targetIndex) {
-        Divider().color('#64BB5C').strokeWidth(3).width(20);
-      }
-    }.onClick(() => {
-      this.vm.orderTabIndex = targetIndex;
-      this.vm.getOrderList();
-    });
-  }
-
-  @Builder
-  OrderTitleBuilder() {
-    Column() {
-      Row() {
-        Text(this.vm.orderType === 0 ? '门票订单' : '购物订单').fontSize(20).fontWeight(600).margin({ right: 8 });
-        Image($r('app.media.order_spin_close')).size({ height: 8, width: 10 });
-      }.alignItems(VerticalAlign.Center).onClick(() => {
-        if (this.dialogController != null) {
-          this.dialogController.open();
-        }
-      });
+          });
+        };
+      }, (item: CommodityOrderInfo) => item.orderNo);
     }
-    .margin({ top: this.windowTopHeight })
-    .padding({ top: 16 });
+    .edgeEffect(EdgeEffect.Spring)
+    .scrollBar(BarState.Off)
+    .contentStartOffset(8)
+    .lanes(this.vm.getOrderLane(), 12)
+    .contentEndOffset(8)
+    .padding({ left: this.breakPointModel.pagePadding, right: this.breakPointModel.pagePadding });
   }
 
   @Builder
   OrderListBuilder() {
-    ForEach(this.vm.orderType === 0 ? TICKET_ORDER_MODULE_INFO : COMMODITY_ORDER_MODULE_INFO,
-      (item: OrderModuleData) => {
-        TabContent() {
-          if (this.vm.isLoading) {
-            FullLoadingComponent();
-          } else {
-            Column() {
-              if (this.vm.orderType === 0) {
-                if (this.vm.ticketOrderList.length === 0) {
-                  OrderEmpty().borderRadius(8).backgroundColor($r('sys.color.font_on_primary'));
-                } else {
-                  this.TicketOrder();
-                }
-              } else {
-                if (this.vm.commodityOrderList.length === 0) {
-                  OrderEmpty().borderRadius(8).backgroundColor($r('sys.color.font_on_primary'));
-                } else {
-                  this.CommodityOrder();
-                }
-              }
-            }
-            .padding(12)
-            .align(Alignment.Top)
-            .height(Constant.FULL_PERCENT);
+    List({ space: 8 }) {
+      ForEach(TICKET_ORDER_MODULE_INFO, (item: OrderModuleData, index: number) => {
+        ListItem() {
+          Row() {
+            Text(item.title)
+              .fontSize($r('sys.float.Subtitle_M'))
+              .fontWeight(FontWeight.Medium)
+              .fontColor(
+                this.vm.orderTabIndex === index ? $r('sys.color.font_on_primary') : $r('sys.color.font_secondary'));
           }
+          .height(36)
+          .padding({ left: 16, right: 16 })
+          .borderRadius(20)
+          .backgroundColor(this.vm.orderTabIndex === index ? $r('sys.color.multi_color_04') :
+            $r('sys.color.comp_background_tertiary'));
+        }.onClick(() => {
+          this.vm.orderTabIndex = index;
+          this.vm.getOrderList();
+        });
+      }, (item: OrderModuleData) => item.title.toString());
+    }
+    .listDirection(Axis.Horizontal)
+    .contentStartOffset(this.breakPointModel.pagePadding)
+    .contentEndOffset(this.breakPointModel.pagePadding)
+    .edgeEffect(EdgeEffect.Spring)
+    .scrollBar(BarState.Off)
+    .height(56)
+    .width('100%');
+
+    if (this.vm.hasData) {
+      Column() {
+        if (this.vm.orderType === 0) {
+          this.TicketOrder();
+        } else {
+          this.CommodityOrder();
         }
-        .tabBar(this.OrderTabBar(item.id))
-        .backgroundColor('#F1F3F5');
-      }, (item: OrderModuleData) => item.id.toString());
+      }.layoutWeight(1);
+    } else {
+      OrderEmpty().layoutWeight(1);
+    }
   }
 
   build() {
     NavDestination() {
-      Column({ space: 12 }) {
-        Stack({ alignContent: Alignment.BottomStart }) {
-          Row() {
-            this.OrderTitleBuilder();
-          }.width(Constant.FULL_PERCENT).justifyContent(FlexAlign.Center);
-
-          Image($r('app.media.left_arrow'))
-            .size({ height: 24, width: 24 })
-            .margin({ left: 12 })
-            .onClick(() => {
-              this.mainPathStack.pop();
-            });
-        }
-
-        Tabs({ index: this.vm.orderTabIndex }) {
+      Column() {
+        TitleBar({
+          isShowBack: true, title: this.vm.orderType === 0 ? '门票订单' : '购物订单', clickEvent: () => {
+            this.mainPathStack.pop();
+          },
+        });
+        if (this.vm.isLoading) {
+          FullLoadingComponent();
+        } else {
           this.OrderListBuilder();
         }
-        .edgeEffect(EdgeEffect.Spring)
-        .barMode(BarMode.Fixed)
-        .animationDuration(0)
-        .onChange((value: number) => {
-          this.vm.orderTabIndex = value;
-          this.vm.getOrderList();
-        });
-      }.onAreaChange(() => {
-        this.vm.getOffsetX();
-        this.dialogController = new CustomDialogController({
-          builder: OrderTypeDialog({
-            changeType: (index) => {
-              this.vm.orderType = index;
-              this.vm.getOrderList();
-            },
-            type: this.vm.orderType,
-          }),
-          width: 96,
-          height: 90,
-          customStyle: false,
-          autoCancel: true,
-          cornerRadius: 8,
-          alignment: DialogAlignment.TopStart,
-          offset: { dx: this.vm.offsetX, dy: 50 },
-          backgroundBlurStyle: BlurStyle.COMPONENT_REGULAR,
-        });
-      });
+      }.padding({ bottom: this.windowBottomHeight }).backgroundColor($r('sys.color.background_secondary'));
     }.hideTitleBar(true).onReady((context: NavDestinationContext) => {
+      this.vm.orderTabIndex = OrderType.ALL;
       let param = context.pathInfo.param as number;
       if (typeof param !== 'undefined') {
         this.vm.isFromMine = true;
         this.vm.orderType = param;
       }
-      this.vm.getOrderList()
+      this.vm.getOrderList();
       Logger.info('order type ' + this.vm.orderType);
     });
   }

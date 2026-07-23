@@ -1,10 +1,6 @@
 {
   "string": [
     {
-      "name": "agcic_72935861410526710813",
-      "value": "@ohos-agcic/travel-discovery/1.0.0"
-    },
-    {
       "name": "water_flow_title",
       "value": "游记"
     },
@@ -34,7 +30,7 @@
     },
     {
       "name": "total_comment_desc",
-      "value": "共 %s 条评论"
+      "value": "评论·%s"
     },
     {
       "name": "comment_history_end",
@@ -98,7 +94,7 @@
     },
     {
       "name": "agcit_huawei_home_stay_travel_discovery",
-      "value": "1.0.4"
+      "value": "1.0.5"
     },
     {
       "name": "agcittype_huawei_home_stay_travel_discovery",

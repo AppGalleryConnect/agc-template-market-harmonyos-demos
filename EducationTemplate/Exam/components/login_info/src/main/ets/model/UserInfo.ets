@@ -21,4 +21,5 @@ export class UserInfo {
   @Trace cellphone: string = '';
   @Trace address: string = '';
   @Trace isLogin: boolean = false;
+  @Trace isMembership: boolean = false;
 }

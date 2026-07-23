@@ -1,3 +1,6 @@
+import { FontModel } from '../model/FontModel'
+import { AppStorageV2 } from '@kit.ArkUI'
+
 @ComponentV2
 export struct TYCard {
   @Param topPadding: number = 16
@@ -11,6 +14,7 @@ export struct TYCard {
   @BuilderParam content: () => void
   @Consumer('leftCount') leftCount: number = 0
   @Consumer('rightCount') rightCount: number = 1
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
 
   @Builder
   renderLeftText() {
@@ -18,7 +22,7 @@ export struct TYCard {
     Text(this.liftTitle)
       .fontWeight(FontWeight.Bold)
       .fontColor($r('sys.color.font_primary'))
-      .fontSize(16)
+      .fontSize(this.fontModel.getFg(16))
 
   }
 
@@ -26,14 +30,14 @@ export struct TYCard {
   renderRightText() {
     Text() {
       Span('已打卡')
-        .fontSize(12)
+        .fontSize(this.fontModel.getFg(12))
         .fontWeight(FontWeight.Regular)
         .fontColor($r('sys.color.font_secondary'))
       Span(this.rightCount + '')
-        .fontSize(12)
+        .fontSize(this.fontModel.getFg(12))
         .fontColor('#EC6E45')
       Span('/'+this.totalday+'天')
-        .fontSize(12)
+        .fontSize(this.fontModel.getFg(12))
         .fontWeight(FontWeight.Regular)
         .fontColor($r('sys.color.font_secondary'))
     }

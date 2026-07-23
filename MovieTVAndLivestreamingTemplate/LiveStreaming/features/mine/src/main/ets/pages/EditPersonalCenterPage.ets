@@ -1,7 +1,7 @@
-import { display, NavDestinationModifier, window } from '@kit.ArkUI';
+import { AppStorageV2, NavDestinationModifier, window } from '@kit.ArkUI';
 import { Header } from '../component/Header';
 import { fileSelect } from '@agctemplate/feed_back';
-import { AccountUtil, BarVM } from '@agctemplate/widgets';
+import { AccountUtil, AppStorageKeys, BarVM, BreakPoint, BreakPointValue } from '@agctemplate/widgets';
 import { UserInfoRow } from '../component/UserInfoRow';
 import { camera } from '@kit.CameraKit';
 import { BusinessError, deviceInfo } from '@kit.BasicServicesKit';
@@ -28,21 +28,10 @@ export struct EditPersonalCenter {
   @Local keyboardHeight: number = 0;
   @Local logoUser: UserInfo = AccountUtil.getUserInfo();
   @Local imageUri: Array<string> = [];
+  @Local breakPoint: BreakPoint = AppStorageV2.connect(BreakPoint, AppStorageKeys.CURRENT_BREAK_POINT,
+    () => new BreakPoint())!;
   private uiContext: UIContext = this.getUIContext();
-  @Local isLandScapeTablet: boolean = display.getDefaultDisplaySync().orientation === display.Orientation.LANDSCAPE ||
-    display.getDefaultDisplaySync().orientation === display.Orientation.LANDSCAPE_INVERTED &&
-      deviceInfo.deviceType === 'tablet'
   navDestinationModifier: NavDestinationModifier = new NavDestinationModifier()
-  callback: Callback<number> = (data: number) => {
-    if (display.getDefaultDisplaySync().orientation === display.Orientation.LANDSCAPE ||
-      display.getDefaultDisplaySync().orientation === display.Orientation.LANDSCAPE_INVERTED &&
-        deviceInfo.deviceType === 'tablet') {
-      this.isLandScapeTablet = true
-    } else {
-      this.isLandScapeTablet = false
-    }
-  }
-
 
   aboutToAppear(): void {
     this.sex = this.logoUser.sex
@@ -58,16 +47,11 @@ export struct EditPersonalCenter {
           this.keyboardHeight = this.uiContext.px2vp(data.area.bottomRect.height);
         })
       })
-      display.on('change', this.callback)
     } catch (e) {
     }
   }
 
   aboutToDisappear(): void {
-    try {
-      display.off('change', this.callback)
-    } catch (e) {
-    }
   }
 
   @Builder
@@ -462,113 +446,118 @@ export struct EditPersonalCenter {
     NavDestination() {
       Column() {
         Header({ title: '个人信息' })
-        Column() {
+        Scroll() {
           Column() {
-            Row() {
-              Text('头像').size({ width: 120, height: 21 })
-              Blank()
+            Column() {
+              Row() {
+                Text('头像').size({ width: 120, height: 21 })
+                Blank()
 
-              Image(this.logoUser.isLogin ?
-                this.logoUser.avatar !== '' ? this.logoUser.avatar : $r('app.media.path2x') :
-                $r('app.media.person'))
-                .size({ width: 40, height: 40 })
-                .borderRadius(40)
+                Image(this.logoUser.isLogin ?
+                  this.logoUser.avatar !== '' ? this.logoUser.avatar : $r('app.media.path2x') :
+                  $r('app.media.person'))
+                  .size({ width: 40, height: 40 })
+                  .borderRadius(40)
 
-              Image($r('app.media.iconRight'))
-                .size({ width: 24, height: 24 })
-            }
-            .size({ width: '100%', height: 56 })
-            .padding({ left: 12, right: 12 })
-            .onClick(() => {
-              this.isShowIcon = true;
-            })
-            .bindSheet($$this.isShowIcon, this.myBuilder(), {
-              detents: [287],
-              preferType: SheetType.CENTER,
-              showClose: false,
-              maskColor: $r('sys.color.mask_fourth'),
-            })
-
-            this.line()
-
-            UserInfoRow({
-              leftTitle: '昵称',
-              rightContent: this.logoUser.name,
-              rightOnClick: () => {
-                this.isShowNick = !this.isShowNick
+                Image($r('app.media.iconRight'))
+                  .size({ width: 24, height: 24 })
               }
-            })
-              .bindSheet($$this.isShowNick, this.myBuilder2(), {
+              .size({ width: '100%', height: 56 })
+              .padding({ left: 12, right: 12 })
+              .onClick(() => {
+                this.isShowIcon = true;
+              })
+              .bindSheet($$this.isShowIcon, this.myBuilder(), {
+                detents: [287],
                 preferType: SheetType.CENTER,
-                height: this.nicknameSheetHeight,
-                backgroundColor: $r('sys.color.background_secondary'),
                 showClose: false,
                 maskColor: $r('sys.color.mask_fourth'),
               })
 
-            this.line()
+              this.line()
 
-            UserInfoRow({
-              leftTitle: '性别',
-              rightContent: this.logoUser.sex,
-              rightOnClick: () => {
-                this.isShowSex = !this.isShowSex
-              }
-            })
-              .bindSheet($$this.isShowSex, this.myBuilder3(), {
-                preferType: SheetType.CENTER,
-                height: this.iconSheetHeight,
-                backgroundColor: $r('sys.color.background_secondary'),
-                showClose: false,
-                maskColor: $r('sys.color.mask_fourth'),
-                onWillDismiss: (dismissSheetAction: DismissSheetAction) => {
-                  this.sex = this.logoUser.sex
-                  dismissSheetAction.dismiss();
+              UserInfoRow({
+                leftTitle: '昵称',
+                rightContent: this.logoUser.name,
+                rightOnClick: () => {
+                  this.isShowNick = !this.isShowNick
                 }
               })
+                .bindSheet($$this.isShowNick, this.myBuilder2(), {
+                  preferType: SheetType.CENTER,
+                  height: this.nicknameSheetHeight,
+                  backgroundColor: $r('sys.color.background_secondary'),
+                  showClose: false,
+                  maskColor: $r('sys.color.mask_fourth'),
+                })
 
-            this.line()
+              this.line()
 
-            UserInfoRow({
-              leftTitle: '个性签名',
-              rightContent: this.logoUser.bio || '暂无简介',
-              rightOnClick: () => {
-                this.isShowBio = !this.isShowBio
-              }
-            })
-              .bindSheet($$this.isShowBio, this.myBuilder4(), {
-                preferType: SheetType.CENTER,
-                height: this.nicknameSheetHeight,
-                backgroundColor: $r('sys.color.background_secondary'),
-                showClose: false,
-                maskColor: $r('sys.color.mask_fourth'),
+              UserInfoRow({
+                leftTitle: '性别',
+                rightContent: this.logoUser.sex,
+                rightOnClick: () => {
+                  this.isShowSex = !this.isShowSex
+                }
               })
-          }
-          .width('100%')
-          .borderRadius(16)
-          .margin({ top: 8 })
-          .borderRadius(16)
-          .backgroundColor($r('sys.color.comp_background_list_card'))
+                .bindSheet($$this.isShowSex, this.myBuilder3(), {
+                  preferType: SheetType.CENTER,
+                  height: this.iconSheetHeight,
+                  backgroundColor: $r('sys.color.background_secondary'),
+                  showClose: false,
+                  maskColor: $r('sys.color.mask_fourth'),
+                  onWillDismiss: (dismissSheetAction: DismissSheetAction) => {
+                    this.sex = this.logoUser.sex
+                    dismissSheetAction.dismiss();
+                  }
+                })
 
-          Row() {
-            Text('手机号').size({ width: 120, height: 21 })
-            Blank()
-            Text(this.logoUser.cellphone)
-              .size({ width: 80, height: 19 })
-              .fontSize($r('sys.float.Body_M'))
-              .fontWeight(FontWeight.Regular)
-              .fontColor($r('sys.color.font_secondary'))
-              .margin({ right: 8 })
+              this.line()
+
+              UserInfoRow({
+                leftTitle: '个性签名',
+                rightContent: this.logoUser.bio || '暂无简介',
+                rightOnClick: () => {
+                  this.isShowBio = !this.isShowBio
+                }
+              })
+                .bindSheet($$this.isShowBio, this.myBuilder4(), {
+                  preferType: SheetType.CENTER,
+                  height: this.nicknameSheetHeight,
+                  backgroundColor: $r('sys.color.background_secondary'),
+                  showClose: false,
+                  maskColor: $r('sys.color.mask_fourth'),
+                })
+            }
+            .width('100%')
+            .borderRadius(16)
+            .margin({ top: 8 })
+            .borderRadius(16)
+            .backgroundColor($r('sys.color.comp_background_list_card'))
+
+            Row() {
+              Text('手机号').size({ width: 120, height: 21 })
+              Blank()
+              Text(this.logoUser.cellphone)
+                .size({ width: 80, height: 19 })
+                .fontSize($r('sys.float.Body_M'))
+                .fontWeight(FontWeight.Regular)
+                .fontColor($r('sys.color.font_secondary'))
+                .margin({ right: 8 })
+            }
+            .size({ width: '100%', height: 56 })
+            .margin({ top: 12 })
+            .backgroundColor($r('sys.color.comp_background_list_card'))
+            .padding(12)
+            .borderRadius(16)
           }
-          .size({ width: '100%', height: 56 })
-          .margin({ top: 12 })
-          .backgroundColor($r('sys.color.comp_background_list_card'))
-          .padding(12)
-          .borderRadius(16)
+          .padding({ left: 16, right: 16 })
+          .width(this.breakPoint.value === BreakPointValue.LG ? '70%' : '100%')
         }
-        .padding({ left: 16, right: 16 })
-        .width(this.isLandScapeTablet ? '70%' : '100%')
         .height('100%')
+        .align(Alignment.TopStart)
+        .edgeEffect(EdgeEffect.Spring)
+        .scrollBar(BarState.Off)
       }
       .alignItems(HorizontalAlign.Center)
       .justifyContent(FlexAlign.Start)

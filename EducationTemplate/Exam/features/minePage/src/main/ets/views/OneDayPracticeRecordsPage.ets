@@ -89,22 +89,38 @@ export struct OneDayPracticeRecordsPage {
                     .fontSize($r('sys.float.Caption_L'));
                 }
                 .height($r('app.float.vp_56'))
-                .width($r('app.float.vp_80'))
+                .width($r('app.float.vp_70'))
                 .backgroundColor($r('sys.color.background_primary'))
                 .borderRadius(12)
                 .justifyContent(FlexAlign.Center);
 
                 Column() {
-                  Text(record.practiceCount ?? '-')
+                  Text(record.totalCount ?? '-')
                     .fontSize($r('sys.float.Body_L'))
                     .fontWeight(FontWeight.Medium)
                     .fontColor($r('sys.color.font_primary'));
-                  Text($r('app.string.practice_count'))
+                  Text('总题数')
                     .fontSize($r('sys.float.Caption_L'))
                     .fontColor($r('sys.color.font_secondary'))
                     .margin({ top: $r('app.float.vp_4') });
                 }
-                .width($r('app.float.vp_80'))
+                .width($r('app.float.vp_70'))
+                .height($r('app.float.vp_56'))
+                .justifyContent(FlexAlign.Center)
+                .backgroundColor($r('sys.color.background_primary'))
+                .borderRadius(12);
+
+                Column() {
+                  Text(record.wrongCount ?? '-')
+                    .fontSize($r('sys.float.Body_L'))
+                    .fontWeight(FontWeight.Medium)
+                    .fontColor($r('sys.color.font_primary'));
+                  Text('错误')
+                    .fontSize($r('sys.float.Caption_L'))
+                    .fontColor($r('sys.color.font_secondary'))
+                    .margin({ top: $r('app.float.vp_4') });
+                }
+                .width($r('app.float.vp_70'))
                 .height($r('app.float.vp_56'))
                 .justifyContent(FlexAlign.Center)
                 .backgroundColor($r('sys.color.background_primary'))
@@ -120,7 +136,7 @@ export struct OneDayPracticeRecordsPage {
                     .fontColor($r('sys.color.font_secondary'))
                     .margin({ top: $r('app.float.vp_4') });
                 }
-                .width($r('app.float.vp_80'))
+                .width($r('app.float.vp_70'))
                 .height($r('app.float.vp_56'))
                 .justifyContent(FlexAlign.Center)
                 .backgroundColor($r('sys.color.background_primary'))
@@ -239,6 +255,8 @@ export struct OneDayPracticeRecordsPage {
           record.practiceDuration = h + ':' + m + ':' + s;
           record.practiceCount = practiceCount.toString();
           record.correctRate = (rightCount / topicCount * 100).toFixed(2) + '%';
+          record.wrongCount = (topicCount - rightCount).toString();
+          record.totalCount = topicCount.toString();
         }
         this.practiceRecordModels.push(record);
       });

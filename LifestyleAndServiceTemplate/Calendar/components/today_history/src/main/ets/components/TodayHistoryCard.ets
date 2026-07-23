@@ -2,8 +2,9 @@ import { TodayHistoryData } from '../model/Model'
 
 @ComponentV2
 export struct TodayHistoryCard {
-  @Param @Require todayHistoryList:TodayHistoryData[]
+  @Param @Require todayHistoryList: TodayHistoryData[]
   @Local todayHistorySizeMap: Map<number, number> = new Map()
+  @Event onCellEvent: () => void = () => {}
 
   aboutToAppear(): void {
     this.todayHistoryList.forEach((item, index) => {
@@ -16,7 +17,7 @@ export struct TodayHistoryCard {
   build() {
     List({ space: 5 }) {
       Repeat(this.todayHistoryList)
-        .key((item) => item.eId)
+        .key((item) => item.title)
         .virtualScroll({ totalCount: this.todayHistoryList.length })
         .each((item: RepeatItem<TodayHistoryData>) => {
           ListItem() {
@@ -54,6 +55,7 @@ export struct TodayHistoryCard {
                 .borderRadius(16)
                 .backgroundColor($r('sys.color.background_secondary'))
               }
+              .onClick(this.onCellEvent)
               .alignItems(HorizontalAlign.Start)
               .padding({ bottom: 14 })
             }

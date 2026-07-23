@@ -35,6 +35,7 @@ export class AttractionModel implements IAttraction {
   labels: string[];
   detailImages: ResourceStr[];
   attractionId: number;
+  ticketId: number;
   name: string;
   banner: ResourceStr;
   icon: ResourceStr;
@@ -49,6 +50,7 @@ export class AttractionModel implements IAttraction {
     this.labels = item?.labels || [];
     this.detailImages = item?.detailImages || [];
     this.attractionId = item?.attractionId || 0;
+    this.ticketId = item?.ticketId ?? 0;
     this.name = item?.name || '';
     this.duration = item?.duration || 0;
     this.banner = item?.banner || '';
@@ -83,6 +85,10 @@ export class PostCardModel implements ITravelogue {
   images: string[] | string = [];
   // 游记内容
   content: string = '';
+  // 游记标签 1:最新  2：最热
+  tag: number = 0;
+  // 景点
+  location: string = '';
   // 点赞数
   @Trace likeNum: number = 0;
   // 收藏数
@@ -113,18 +119,18 @@ export class PostCardModel implements ITravelogue {
     this.currentUserLikeStatus = item?.currentUserLikeStatus || StatusFLAG.NO;
     this.currentUserCollectStatus = item?.currentUserCollectStatus || StatusFLAG.NO;
     this.routeId = item?.routeId || 0;
+    this.tag = item?.tag || 0;
+    this.location = item?.location || '';
   }
 }
 
 @ObservedV2
 export class PostDetailModel extends PostCardModel {
   travelogueEvaluateList: CommentModel[] = [];
-  relatedModules: FindModule[] = [];
 
   constructor(item?: PostDetailModel) {
     super(item);
     this.travelogueEvaluateList = item?.travelogueEvaluateList || [];
-    this.relatedModules = item?.relatedModules || [];
   }
 }
 

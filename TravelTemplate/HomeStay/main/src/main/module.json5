@@ -21,7 +21,7 @@
         ],
         "icon": "$media:layered_image",
         "label": "$string:EntryAbility_label",
-        "startWindowIcon": "$media:startIcon",
+        "startWindowIcon": "$media:icon",
         "startWindowBackground": "$color:start_window_background",
         "exported": true,
         "skills": [
@@ -84,6 +84,11 @@
         "name": "client_id",
         "value": "******"
       }
+    ],
+    "querySchemes": [
+      "weixin",
+      "wxopensdk",
+      "alipays"
     ]
   }
 }

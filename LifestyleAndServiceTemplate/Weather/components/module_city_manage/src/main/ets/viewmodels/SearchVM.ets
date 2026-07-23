@@ -1,5 +1,11 @@
-import { City, IPosition, Province, SearchInfo } from '../types/Types';
+import { AppStorageV2, UIContext } from '@kit.ArkUI';
 import { util } from '@kit.ArkTS';
+import { BusinessError } from '@kit.BasicServicesKit';
+import { BreakpointModel, GridRowColSetting } from 'module_weather_core';
+import { City, IPosition, Province, SearchInfo } from '../types/Types';
+import { Logger } from '../utils/Utils';
+
+const TAG = '[SearchVM]';
 
 @ObservedV2
 export class SearchVM {
@@ -9,6 +15,22 @@ export class SearchVM {
   @Trace curPostion: City = { name: '北京', code: '110100' };
   @Trace show: boolean = false;
   @Trace static popularCityList: City[] = [];
+  @Trace breakpointModel: BreakpointModel =
+    AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
+  readonly searchResultColSpan: GridColColumnOption = {
+    sm: 4,
+    md: 8,
+    lg: 12,
+    xl: 12,
+  };
+  readonly searchResultColOffset: GridColColumnOption = {
+    sm: 0,
+    md: 0,
+    lg: 0,
+    xl: 0,
+  };
+  readonly defaultCenterColSpan: GridColColumnOption = GridRowColSetting.DEFAULT_CENTER_COL_SPAN;
+  readonly defaultCenterColOffset: GridColColumnOption = GridRowColSetting.DEFAULT_CENTER_COL_OFFSET;
   private static _allData: Province[] = [];
   private static _instance: SearchVM;
   itemWidth: number = 0;
@@ -25,6 +47,18 @@ export class SearchVM {
   public resetSearchParams() {
     this.text = '';
     this.show = false;
+  }
+
+  @Computed
+  get pagePadding(): number {
+    return this.breakpointModel.pagePadding;
+  }
+
+  public updateItemWidth(width: number): void {
+    const GAP_COUNT = 3;
+    const COLUMN_COUNT = 4;
+    const GAP_SIZE = 8;
+    this.itemWidth = (width - GAP_SIZE * GAP_COUNT) / COLUMN_COUNT;
   }
 
   public query(s: string, searchData: Province[] = SearchVM._allData) {
@@ -124,18 +158,30 @@ export class SearchVM {
   }
 
   private static _getAllData() {
-    let getJson = getContext().resourceManager.getRawFileContentSync('all.json');
-    let textDecoderOptions: util.TextDecoderOptions = { ignoreBOM: true };
-    let textDecoder = util.TextDecoder.create('utf-8', textDecoderOptions);
-    let result = textDecoder.decodeToString(getJson);
-    SearchVM._allData = JSON.parse(result);
+    let uiContext: UIContext = AppStorage.get('city_manage_uiContext') as UIContext
+    try {
+      let getJson = uiContext.getHostContext()!.resourceManager.getRawFileContentSync('all.json');
+      let textDecoderOptions: util.TextDecoderOptions = { ignoreBOM: true };
+      let textDecoder = util.TextDecoder.create('utf-8', textDecoderOptions);
+      let result = textDecoder.decodeToString(getJson);
+      SearchVM._allData = JSON.parse(result);
+    } catch (error) {
+      const err: BusinessError = error as BusinessError;
+      Logger.error(TAG, `Failed to get all data. Code: ${err.code}, message: ${err.message}`);
+    }
   }
 
   private static _getPopularData() {
-    let getJson = getContext().resourceManager.getRawFileContentSync('popular.json');
-    let textDecoderOptions: util.TextDecoderOptions = { ignoreBOM: true };
-    let textDecoder = util.TextDecoder.create('utf-8', textDecoderOptions);
-    let result = textDecoder.decodeToString(getJson);
-    SearchVM.popularCityList = JSON.parse(result);
+    let uiContext: UIContext = AppStorage.get('city_manage_uiContext') as UIContext
+    try {
+      let getJson = uiContext.getHostContext()!.resourceManager.getRawFileContentSync('popular.json');
+      let textDecoderOptions: util.TextDecoderOptions = { ignoreBOM: true };
+      let textDecoder = util.TextDecoder.create('utf-8', textDecoderOptions);
+      let result = textDecoder.decodeToString(getJson);
+      SearchVM.popularCityList = JSON.parse(result);
+    } catch (error) {
+      const err: BusinessError = error as BusinessError;
+      Logger.error(TAG, `Failed to get popular data. Code: ${err.code}, message: ${err.message}`);
+    }
   }
 }

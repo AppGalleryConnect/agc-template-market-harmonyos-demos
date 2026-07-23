@@ -1,4 +1,5 @@
 import { CommonModel } from '@ohos_agcit/driver_license_exam_commonlib';
+import { RouteCommonParam } from '@ohos_agcit/driver_license_exam_datasource';
 import { GuideView, GuideService } from '@ohos_agcit/driver_license_exam_guide'
 import { Utils } from 'module_city_select'
 @Builder
@@ -23,10 +24,13 @@ export struct GuidePage {
     NavDestination() {
       GuideView({
         goCitySelectPage:() => {
-          this.vm.navStack.pushPathByName('selectCityView', true)
+          const param: RouteCommonParam = {
+            fromPage: 'GuidePage',
+          }
+          this.vm.navStack.replacePathByName('selectCityView', param, true)
         },
         completed:() => {
-          this.vm.navStack.pop();
+          this.vm.navStack.replacePathByName('MainEntry', true)
         }
       })
     }

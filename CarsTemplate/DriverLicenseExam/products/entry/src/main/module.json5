@@ -5,7 +5,8 @@
     "description": "$string:module_desc",
     "mainElement": "EntryAbility",
     "deviceTypes": [
-      "phone"
+      "phone",
+      "tablet"
     ],
     "deliveryWithInstall": true,
     "installationFree": true,
@@ -87,6 +88,11 @@
         "label": "$string:EntryAbility_label",
         "startWindowIcon": "$media:foreground",
         "startWindowBackground": "$color:start_window_background",
+        "orientation": "follow_desktop",
+        "supportWindowMode": [
+          "fullscreen",
+          "floating"
+        ],
         "exported": true,
         "skills": [
           {

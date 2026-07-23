@@ -25,6 +25,7 @@ export struct AgreePrivacyBox {
         .selectedColor(this.themeColor)
         .select(this.vm.isSelected)
         .enabled(this.vm.enableStatus)
+        .accessibilityText('已阅读并同意相关隐私协议')
         .onChange((value: boolean) => {
           hilog.info(0x0001, 'CheckBoxComponent', `agreementChecked: ${value}`);
           this.vm.agreePrivacyChange(value)

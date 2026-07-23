@@ -7,7 +7,7 @@
         "signingConfig": "default",
         "compatibleSdkVersion": "5.0.5(17)",
         "runtimeOS": "HarmonyOS",
-        "targetSdkVersion": "6.0.2(22)",
+        "targetSdkVersion": "6.1.1(24)",
         "buildOption": {
           "strictMode": {
             "caseSensitiveCheck": true,
@@ -65,6 +65,18 @@
     {
       "name": "membership",
       "srcPath": "./components/membership"
+    },
+    {
+      "name": "app_setting",
+      "srcPath": "./components/app_setting"
+    },
+    {
+      "name": "feedback",
+      "srcPath": "./components/feedback"
+    },
+    {
+      "name": "image_preview",
+      "srcPath": "./components/image_preview"
     },
     {
       "name": "yiji_query",

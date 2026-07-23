@@ -23,6 +23,7 @@ import {
   RoomTypeResp,
   TenantResp,
   TravelNoteResp,
+  SurroundingsResp
 } from '../types/ResponceTypes';
 
 export class Mock {
@@ -31,7 +32,7 @@ export class Mock {
       code: 200,
       data: {
         id: 0,
-        appName: '一间民宿(湖州莫干山店)',
+        appName: '原舍望山民宿(湖州莫干山店)',
         labelList: ['双十一特惠', '度假'],
         banner: $r('app.media.brand'),
         phone: '12345678901',
@@ -112,44 +113,56 @@ export class Mock {
   static INSTRUCTIONS: Instructions = {
     'foundations': [
       {
-        'tag': '基础',
+        'tag': '支持',
         'subTags': [
-          '公共音响系统',
           '地暖',
           '中央空调',
+          '免费咖啡',
+          '会议厅',
           '酒吧',
-          '咖啡',
           '中餐厅',
           '烧烤BBQ',
-          '野餐区',
           '篮球场',
-          '派对',
-          '会议厅',
-          '篝火',
-          'wifi',
-        ],
-      },
-      {
-        'tag': '基础',
-        'subTags': [
+          '泳池',
           '免费停车场',
+          '篝火晚宴',
+          '公用wifi',
+          '洗衣房',
+          '烘干机',
+          '卡拉OK'
         ],
       },
       {
-        'tag': '前台',
+        'tag': '不支持',
         'subTags': [
-          '叫车服务',
-          '行李寄存',
+          '健身房',
+          '充电桩',
         ],
       },
     ],
     'reservation': [
       {
+        'tag': '接待人群',
+        'subTags': ['接待人群：接待来自任何国家/地区的客人']
+      },
+      {
         'tag': '入离',
         'subTags': [
-          '14:00 办理入住',
-          '12:00 办理退房',
+          '入住时间：14:00以后',
+          '离店时间：12:00以前',
         ],
+      },
+      {
+        'tag': '宠物',
+        'subTags': ['宠物：不可携带宠物，服务型动物除外如导盲犬等；如必须携带请提前联系酒店']
+      },
+      {
+        'tag': '年龄限制',
+        'subTags': ['年龄限制：无年龄限制']
+      },
+      {
+        'tag': '押金',
+        'subTags': ['押金：住宿方无需另付押金']
       },
     ],
     'checkOut': [
@@ -173,6 +186,42 @@ export class Mock {
       },
     ],
   };
+  static SURROUNDINGS: SurroundingsResp = {
+    food: [
+      {
+        name: '朝暮餐厅',
+        instance: '472m',
+        image: $r('app.media.food1')
+      },
+      {
+        name: '石颐农庄餐厅',
+        instance: '907m',
+        image: $r('app.media.food2')
+      },
+      {
+        name: '路易斯西餐厅',
+        instance: '1.0km',
+        image: $r('app.media.food3')
+      }
+    ],
+    attractions: [
+      {
+        name: '莫干山风景区',
+        instance: '472m',
+        image: $r('app.media.attractions1')
+      },
+      {
+        name: '武陵村景区',
+        instance: '907m',
+        image: $r('app.media.attractions2')
+      },
+      {
+        name: '大坑景区',
+        instance: '1.0km',
+        image: $r('app.media.attractions3')
+      }
+    ]
+  }
   static CAROUSEL_IMAGE_LIST: CarouselImage[] = [{
     id: 0,
     image: $r('app.media.detail_banner'),
@@ -180,11 +229,12 @@ export class Mock {
   static ROOM_TYPE: RoomTypeResp[] = [
     {
       id: 0,
-      roomTypeName: '山景大床房',
+      roomTypeName: '清梦-山景小院房',
       roomTypeBanner: $r('app.media.room1'),
       roomTypeDetailImageList: [$r('app.media.room1')],
-      labelList: ['清静优雅', '田园风'],
-      occupancyLimit: 2,
+      labelList: ['清静幽雅', '田园风'],
+      bedroomNum: 2,
+      occupancyLimit: 4,
       introduction: '该房型不提供加床、不提供加婴儿床',
       roomTypeBedList: [
         {
@@ -201,53 +251,86 @@ export class Mock {
           updateBy: '',
           updateTime: '2024-11-08T16:13:07',
         },
+        {
+          id: 5,
+          bedTypeCode: 'ONE_EIGHT_METER',
+          bedTypeName: '1.8米床',
+          bedCount: 1,
+          roomTypeId: 1,
+          isDelete: 0,
+          appId: '',
+          remark: '',
+          createBy: '',
+          createTime: '2024-11-04T16:47:40',
+          updateBy: '',
+          updateTime: '2024-11-08T16:13:07',
+        }
       ],
       isRecommended: true,
       instructions: {
         'foundations': [
           {
-            'tag': '基础',
+            'tag': '大小',
             'subTags': [
-              '公共音响系统',
-              '地暖',
-              '中央空调',
-              'wifi',
+              '20㎡',
             ],
           },
           {
-            'tag': '前台',
+            'tag': '楼层',
             'subTags': [
-              '叫车服务',
-              '行李寄存',
+              '7-9层',
+            ],
+          },
+          {
+            'tag': '网络',
+            'subTags': [
+              '免费wifi',
+            ],
+          },
+          {
+            'tag': '采光',
+            'subTags': [
+              '有窗',
+            ],
+          },
+          {
+            'tag': '床铺',
+            'subTags': [
+              '2张1.5米床',
             ],
           },
         ],
         'reservation': [
           {
-            'tag': '入离',
+            'tag': '便利设施',
             'subTags': [
-              '14:00 办理入住',
-              '12:00 办理退房',
+              '雨伞、书桌、晾衣架，多种规格电源插座，110V电压插座，屋内保险箱。雨伞、书桌与晾衣架，多种规格电源插座，110V电压插座和屋内保险箱。雨伞、书桌、晾衣架，多规格电源插座，110V电压插座。',
+            ],
+          },
+          {
+            'tag': '媒体科技',
+            'subTags': [
+              '国内长途电话。',
+            ],
+          },
+          {
+            'tag': '食品饮品',
+            'subTags': [
+              '电热水壶，茶壶。',
+            ],
+          },
+          {
+            'tag': '浴室用品',
+            'subTags': [
+              '拖鞋，24小时热水。',
             ],
           },
         ],
         'checkOut': [
           {
-            'tag': '宠物',
+            'tag': '适用人群',
             'subTags': [
-              '不可携带宠物',
-            ],
-          },
-          {
-            'tag': '年龄',
-            'subTags': [
-              '不允许18岁以下单独办理',
-            ],
-          },
-          {
-            'tag': '早餐',
-            'subTags': [
-              '含双早（中式早餐）',
+              '成人限制为身份证、年龄60周岁(含)以下(按生日计算年龄)',
             ],
           },
         ],
@@ -311,11 +394,12 @@ export class Mock {
     },
     {
       id: 1,
-      roomTypeName: '山景双床房',
+      roomTypeName: '清梦-上下铺多床房',
       roomTypeBanner: $r('app.media.room2'),
       roomTypeDetailImageList: [$r('app.media.room2')],
-      labelList: ['清静优雅', '田园风'],
-      occupancyLimit: 4,
+      labelList: ['清静幽雅', '简约风', '多人宿舍风格'],
+      bedroomNum: 1,
+      occupancyLimit: 2,
       introduction: '该房型不提供加床、不提供加婴儿床',
       roomTypeBedList: [
         {
@@ -337,48 +421,67 @@ export class Mock {
       instructions: {
         'foundations': [
           {
-            'tag': '基础',
+            'tag': '大小',
             'subTags': [
-              '公共音响系统',
-              '地暖',
-              '中央空调',
-              'wifi',
+              '20㎡',
             ],
           },
           {
-            'tag': '前台',
+            'tag': '楼层',
             'subTags': [
-              '叫车服务',
-              '行李寄存',
+              '7-9层',
+            ],
+          },
+          {
+            'tag': '网络',
+            'subTags': [
+              '免费wifi',
+            ],
+          },
+          {
+            'tag': '采光',
+            'subTags': [
+              '有窗',
+            ],
+          },
+          {
+            'tag': '床铺',
+            'subTags': [
+              '2张1.5米床',
             ],
           },
         ],
         'reservation': [
           {
-            'tag': '入离',
+            'tag': '便利设施',
             'subTags': [
-              '14:00 办理入住',
-              '12:00 办理退房',
+              '雨伞、书桌、晾衣架，多种规格电源插座，110V电压插座，屋内保险箱。雨伞、书桌与晾衣架，多种规格电源插座，110V电压插座和屋内保险箱。雨伞、书桌、晾衣架，多规格电源插座，110V电压插座。',
+            ],
+          },
+          {
+            'tag': '媒体科技',
+            'subTags': [
+              '国内长途电话。',
+            ],
+          },
+          {
+            'tag': '食品饮品',
+            'subTags': [
+              '电热水壶，茶壶。',
+            ],
+          },
+          {
+            'tag': '浴室用品',
+            'subTags': [
+              '拖鞋，24小时热水。',
             ],
           },
         ],
         'checkOut': [
           {
-            'tag': '宠物',
+            'tag': '适用人群',
             'subTags': [
-              '不可携带宠物',
-            ],
-          },
-          {
-            'tag': '年龄',
-            'subTags': [
-              '不允许18岁以下单独办理',
-            ],
-          },
-          {
-            'tag': '早餐',
-            'subTags': [
-              '含双早（中式早餐）',
+              '成人限制为身份证、年龄60周岁(含)以下(按生日计算年龄)',
             ],
           },
         ],
@@ -442,56 +545,76 @@ export class Mock {
     },
     {
       id: 2,
-      roomTypeName: ' 山景露台大床房',
+      roomTypeName: '清梦-山景壁炉套房',
       roomTypeBanner: $r('app.media.room3'),
       roomTypeDetailImageList: [$r('app.media.room3')],
-      labelList: ['清静优雅', '田园风'],
-      occupancyLimit: 4,
+      labelList: ['清静幽雅', '简约风', '家庭套房'],
+      bedroomNum: 2,
+      occupancyLimit: 3,
       instructions: {
         'foundations': [
           {
-            'tag': '基础',
+            'tag': '大小',
             'subTags': [
-              '公共音响系统',
-              '地暖',
-              '中央空调',
-              'wifi',
+              '20㎡',
             ],
           },
           {
-            'tag': '前台',
+            'tag': '楼层',
             'subTags': [
-              '叫车服务',
-              '行李寄存',
+              '7-9层',
+            ],
+          },
+          {
+            'tag': '网络',
+            'subTags': [
+              '免费wifi',
+            ],
+          },
+          {
+            'tag': '采光',
+            'subTags': [
+              '有窗',
+            ],
+          },
+          {
+            'tag': '床铺',
+            'subTags': [
+              '2张1.5米床',
             ],
           },
         ],
         'reservation': [
           {
-            'tag': '入离',
+            'tag': '便利设施',
             'subTags': [
-              '14:00 办理入住',
-              '12:00 办理退房',
+              '雨伞、书桌、晾衣架，多种规格电源插座，110V电压插座，屋内保险箱。雨伞、书桌与晾衣架，多种规格电源插座，110V电压插座和屋内保险箱。雨伞、书桌、晾衣架，多规格电源插座，110V电压插座。',
+            ],
+          },
+          {
+            'tag': '媒体科技',
+            'subTags': [
+              '国内长途电话。',
+            ],
+          },
+          {
+            'tag': '食品饮品',
+            'subTags': [
+              '电热水壶，茶壶。',
+            ],
+          },
+          {
+            'tag': '浴室用品',
+            'subTags': [
+              '拖鞋，24小时热水。',
             ],
           },
         ],
         'checkOut': [
           {
-            'tag': '宠物',
+            'tag': '适用人群',
             'subTags': [
-              '不可携带宠物',
-            ],
-          },
-          {
-            'tag': '年龄',
-            'subTags': [
-              '不允许18岁以下单独办理',
-            ],
-          },
-          {
-            'tag': '早餐',
-            'subTags': [
-              '含双早（中式早餐）',
+              '成人限制为身份证、年龄60周岁(含)以下(按生日计算年龄)',
             ],
           },
         ],
@@ -512,6 +635,34 @@ export class Mock {
           'updateBy': '',
           'updateTime': '2024-11-08T16:13:07',
         },
+        {
+          'id': 5,
+          'bedTypeCode': 'ONE_EIGHT_METER',
+          'bedTypeName': '1.5米床',
+          'bedCount': 2,
+          'roomTypeId': 1,
+          'isDelete': 0,
+          'appId': '',
+          'remark': '',
+          'createBy': '',
+          'createTime': '2024-11-04T16:47:40',
+          'updateBy': '',
+          'updateTime': '2024-11-08T16:13:07',
+        },
+        {
+          'id': 6,
+          'bedTypeCode': 'ONE_EIGHT_METER',
+          'bedTypeName': '1.5米床',
+          'bedCount': 2,
+          'roomTypeId': 1,
+          'isDelete': 0,
+          'appId': '',
+          'remark': '',
+          'createBy': '',
+          'createTime': '2024-11-04T16:47:40',
+          'updateBy': '',
+          'updateTime': '2024-11-08T16:13:07',
+        }
       ],
       isRecommended: true,
       roomTypePriceList: [{
@@ -573,62 +724,124 @@ export class Mock {
     },
     {
       id: 3,
-      roomTypeName: '山景小院',
+      roomTypeName: '清梦-海景独栋房',
       roomTypeBanner: $r('app.media.room4'),
       roomTypeDetailImageList: [$r('app.media.room4')],
-      labelList: ['清静优雅', '田园风'],
-      occupancyLimit: 4,
+      labelList: ['清静幽雅', '独栋'],
+      bedroomNum: 4,
+      occupancyLimit: 12,
       introduction: '该房型不提供加床、不提供加婴儿床',
       instructions: {
         'foundations': [
           {
-            'tag': '基础',
+            'tag': '大小',
             'subTags': [
-              '公共音响系统',
-              '地暖',
-              '中央空调',
-              'wifi',
+              '20㎡',
             ],
           },
           {
-            'tag': '前台',
+            'tag': '楼层',
             'subTags': [
-              '叫车服务',
-              '行李寄存',
+              '7-9层',
+            ],
+          },
+          {
+            'tag': '网络',
+            'subTags': [
+              '免费wifi',
+            ],
+          },
+          {
+            'tag': '采光',
+            'subTags': [
+              '有窗',
+            ],
+          },
+          {
+            'tag': '床铺',
+            'subTags': [
+              '2张1.5米床',
             ],
           },
         ],
         'reservation': [
           {
-            'tag': '入离',
+            'tag': '便利设施',
             'subTags': [
-              '14:00 办理入住',
-              '12:00 办理退房',
+              '雨伞、书桌、晾衣架，多种规格电源插座，110V电压插座，屋内保险箱。雨伞、书桌与晾衣架，多种规格电源插座，110V电压插座和屋内保险箱。雨伞、书桌、晾衣架，多规格电源插座，110V电压插座。',
+            ],
+          },
+          {
+            'tag': '媒体科技',
+            'subTags': [
+              '国内长途电话。',
+            ],
+          },
+          {
+            'tag': '食品饮品',
+            'subTags': [
+              '电热水壶，茶壶。',
+            ],
+          },
+          {
+            'tag': '浴室用品',
+            'subTags': [
+              '拖鞋，24小时热水。',
             ],
           },
         ],
         'checkOut': [
           {
-            'tag': '宠物',
+            'tag': '适用人群',
             'subTags': [
-              '不可携带宠物',
-            ],
-          },
-          {
-            'tag': '年龄',
-            'subTags': [
-              '不允许18岁以下单独办理',
-            ],
-          },
-          {
-            'tag': '早餐',
-            'subTags': [
-              '含双早（中式早餐）',
+              '成人限制为身份证、年龄60周岁(含)以下(按生日计算年龄)',
             ],
           },
         ],
       },
       roomTypeBedList: [
+        {
+          'id': 1,
+          'bedTypeCode': 'ONE_EIGHT_METER',
+          'bedTypeName': '1.5米床',
+          'bedCount': 2,
+          'roomTypeId': 1,
+          'isDelete': 0,
+          'appId': '',
+          'remark': '',
+          'createBy': '',
+          'createTime': '2024-11-04T16:47:40',
+          'updateBy': '',
+          'updateTime': '2024-11-08T16:13:07',
+        },
+        {
+          'id': 2,
+          'bedTypeCode': 'ONE_EIGHT_METER',
+          'bedTypeName': '1.5米床',
+          'bedCount': 2,
+          'roomTypeId': 1,
+          'isDelete': 0,
+          'appId': '',
+          'remark': '',
+          'createBy': '',
+          'createTime': '2024-11-04T16:47:40',
+          'updateBy': '',
+          'updateTime': '2024-11-08T16:13:07',
+        },
+        {
+          'id': 3,
+          'bedTypeCode': 'ONE_EIGHT_METER',
+          'bedTypeName': '1.5米床',
+          'bedCount': 2,
+          'roomTypeId': 1,
+          'isDelete': 0,
+          'appId': '',
+          'remark': '',
+          'createBy': '',
+          'createTime': '2024-11-04T16:47:40',
+          'updateBy': '',
+          'updateTime': '2024-11-08T16:13:07',
+        },
         {
           'id': 4,
           'bedTypeCode': 'ONE_EIGHT_METER',
@@ -643,6 +856,34 @@ export class Mock {
           'updateBy': '',
           'updateTime': '2024-11-08T16:13:07',
         },
+        {
+          'id': 5,
+          'bedTypeCode': 'ONE_EIGHT_METER',
+          'bedTypeName': '1.5米床',
+          'bedCount': 2,
+          'roomTypeId': 1,
+          'isDelete': 0,
+          'appId': '',
+          'remark': '',
+          'createBy': '',
+          'createTime': '2024-11-04T16:47:40',
+          'updateBy': '',
+          'updateTime': '2024-11-08T16:13:07',
+        },
+        {
+          'id': 6,
+          'bedTypeCode': 'ONE_EIGHT_METER',
+          'bedTypeName': '1.5米床',
+          'bedCount': 2,
+          'roomTypeId': 1,
+          'isDelete': 0,
+          'appId': '',
+          'remark': '',
+          'createBy': '',
+          'createTime': '2024-11-04T16:47:40',
+          'updateBy': '',
+          'updateTime': '2024-11-08T16:13:07',
+        }
       ],
       isRecommended: true,
       roomTypePriceList: [{
@@ -718,13 +959,14 @@ export class Mock {
     code: 200,
     data: new HotelInfo({
       id: 0,
-      appName: '一间民宿(湖州莫干山店)',
+      appName: '原舍望山民宿',
       labelList: ['双十一特惠', '度假'],
       banner: $r('app.media.detail_banner'),
       phone: '12345678901',
       address: '莫干山镇南路村孙家岭清境原舍',
       introduction: '位于莫干山南路村，坐拥竹山，背靠茶园，独享一片清幽的江南山色。田地平旷，屋舍俨然，有良田美池桑竹之属。\n' +
-        '望山有斑驳老墙，也有新研房舍。老木为梁，老物为潢，质朴少堆彻。在山坳之间，青砖黛瓦的小屋仿若带我们回到了童年，在群山环抱的林问谷地，我们还原了乡村最为本质的生活状态，最淳朴的民风民俗，让忙碌于城市中的人们在这找到心灵休憩短暂停留的地方。',
+        '望山有斑驳老墙，也有新研房舍。老木为梁，老物为潢，质朴少堆彻。\n' +
+        '在山坳之间，青砖黛瓦的小屋仿若带我们回到了童年，在群山环抱的林问谷地，我们还原了乡村最为本质的生活状态，最淳朴的民风民俗，让忙碌于城市中的人们在这找到心灵休憩短暂停留的地方。',
       instructions: this.INSTRUCTIONS,
     }, this.CAROUSEL_IMAGE_LIST, [], this.ROOM_TYPE, this.SCENIC_HOMESTAY_SURROUNDS),
   };

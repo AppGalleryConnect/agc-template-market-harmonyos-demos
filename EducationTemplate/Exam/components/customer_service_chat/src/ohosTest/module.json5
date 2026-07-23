@@ -1,0 +1,12 @@
+{
+  "module": {
+    "name": "customer_service_chat",
+    "type": "feature",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false
+  }
+}

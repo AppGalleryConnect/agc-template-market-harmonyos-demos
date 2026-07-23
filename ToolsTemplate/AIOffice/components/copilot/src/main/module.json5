@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "copilot",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ],
+  }
+
+}

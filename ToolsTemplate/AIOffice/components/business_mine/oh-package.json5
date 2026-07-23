@@ -6,12 +6,14 @@
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
+    "@tencent/wechat_open_sdk": "1.0.0",
     "@hw-agconnect/fast-web": "1.0.1",
     "lib_common": "file:../lib_common",
     "lib_widget": "file:../lib_widget",
     "lib_account": "file:../lib_account",
     "module_imagepreview": "file:../module_imagepreview",
     "module_feedback": "file:../module_feedback",
-    "business_setting": "file:../business_setting"
+    "business_setting": "file:../business_setting",
+    "aggregated_login": "file:../../ohos_agcit/agcit_huawei_common_login/aggregated_login"
   }
 }

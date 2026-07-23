@@ -1,18 +1,18 @@
 import display from '@ohos.display';
-import { common, wantAgent } from '@kit.AbilityKit';
 import media from '@ohos.multimedia.media';
+import { common, wantAgent } from '@kit.AbilityKit';
 import { fileIo as fs } from '@kit.CoreFileKit';
-import { UtilLog } from '@hw-agconnect/util-log';
+import { BusinessError } from '@kit.BasicServicesKit';
 import { avSession } from '@kit.AVSessionKit';
 import { audio } from '@kit.AudioKit';
 import { backgroundTaskManager } from '@kit.BackgroundTasksKit';
+import { UtilLog } from '@hw-agconnect/util-log';
 import { RecipeBriefInfo } from '../types/Index';
 import { Constants } from '../constants/Constants';
 import { PipController } from '../utils/PipController';
 import { VideoViewVM } from '../viewModels/VideoViewVM';
 import { PiPWindowModel } from '../models/PiPWindowModel';
 import { AppStorageV2, PiPWindow } from '@kit.ArkUI';
-import { BusinessError } from '@kit.BasicServicesKit';
 
 @ComponentV2
 export struct VideoView {
@@ -40,7 +40,6 @@ export struct VideoView {
   @Local isSwiping: boolean = false; // 用户滑动过程中
   @Local isPaused: boolean = false; // 暂停播放
   @Local xComponentFlag: boolean = false;
-
   @Local windowWidth: number = 300;
   @Local windowHeight: number = 200;
   @Local subtitle: string = '';
@@ -53,8 +52,8 @@ export struct VideoView {
 
   @Monitor('showPip')
   onShowPip() {
-    if(this.showPip) {
-      if(this.avPlayer && !this.isPaused) {
+    if (this.showPip) {
+      if (this.avPlayer && !this.isPaused) {
         this.pipController.startPip(this.getUIContext().getHostContext() as Context, this.xComponentController,
           this.avPlayer, this.detailScroller)
       }
@@ -66,7 +65,7 @@ export struct VideoView {
   @Monitor('pipWindowModel.videoPlayerStatus')
   onPlayState() {
     this.isPaused = this.pipWindowModel.videoPlayerStatus === 'paused';
-    if(this.avPlayer && !this.isPaused) {
+    if (this.avPlayer && !this.isPaused) {
       this.vm.currentTime = this.vm.currentTime >= this.avPlayer.duration ? 0 : this.vm.currentTime;
     }
     this.setAVPlayerbackState(this.vm.currentTime);
@@ -75,18 +74,20 @@ export struct VideoView {
   @Monitor('isStop')
   onClosePip() {
     // 返回时出现的画中画，当关闭画中画时，需要销毁播放器对象
-    if(this.isStop) {
+    if (this.isStop) {
       this.pipController.stopPip()
     }
   }
 
-  async avSetupURL(){
+  async avSetupURL() {
     if (this.context === undefined) {
       return;
     }
     if (this.avPlayer) {
       UtilLog.info(`${this.tag}: init avPlayer release2createNew`);
-      this.avPlayer.release();
+      this.avPlayer.release().catch((error: BusinessError) => {
+        UtilLog.error(`${this.tag}: avPlayer release failed.,error message is = ${JSON.stringify(error.message)}`);
+      });
       await this.vm.msleepAsync(1500);
     }
     // 创建avPlayer实例对象
@@ -107,7 +108,7 @@ export struct VideoView {
       }, Constants.SET_INTERVAL);
     });
     // 设置对应的播放url
-    if(this.videoData.video.includes('file:///')){
+    if (this.videoData.video.includes('file:///')) {
       let fdPath = 'fd://';
       let path = this.videoData.video;
       let file: fs.File | null = null;
@@ -120,13 +121,13 @@ export struct VideoView {
       } catch (e) {
         UtilLog.error('fs.copyFileSync error: ' + JSON.stringify(e));
       } finally {
-        if(this.avPlayer && this.avPlayer.url?.includes('file:///')) {
+        if (this.avPlayer && this.avPlayer.url?.includes('file:///')) {
           fs.closeSync(file);
         }
       }
     } else {
-      if(this.avPlayer) {
-        if(this.videoUrl) {
+      if (this.avPlayer) {
+        if (this.videoUrl) {
           this.avPlayer.url = this.videoUrl;
         } else {
           this.avPlayer.url = this.videoData.video;
@@ -141,24 +142,24 @@ export struct VideoView {
 
   async avPlay(): Promise<void> {
     if (this.avPlayer) {
-      if(this.vm.currentTime >= this.avPlayer.duration) {
+      if (this.vm.currentTime >= this.avPlayer.duration) {
         this.vm.currentTime = 0;
       }
       await this.CreateAVSession();
       await this.RegisterAVPlayerListener();
-      try {
-        this.avPlayer.play();
-        this.setAVPlayerbackState(this.vm.currentTime)
-      } catch (e) {
-        UtilLog.error(`${this.tag}: avPlay = ${JSON.stringify(e)}`);
-      }
+      this.avPlayer.play().catch((error: BusinessError) => {
+        UtilLog.error(`${this.tag}: avPlayer play failed.,error message is = ${JSON.stringify(error.message)}`);
+      });
+      this.setAVPlayerbackState(this.vm.currentTime)
     }
   }
 
   avPause(): void {
     if (this.avPlayer) {
       try {
-        this.avPlayer.pause();
+        this.avPlayer.pause().catch((error: BusinessError) => {
+          UtilLog.error(`${this.tag}: avPlayer pause failed.,error message is = ${JSON.stringify(error.message)}`);
+        });
         this.setAVPlayerbackState(this.vm.currentTime)
         UtilLog.info(`${this.tag}: avPause==`);
       } catch (e) {
@@ -167,12 +168,12 @@ export struct VideoView {
     }
   }
 
-  async avSeek(seekTime: number, mode: SliderChangeMode): Promise<void> {
+  async avSeek(seekTime: number, _mode: SliderChangeMode): Promise<void> {
     if (this.avPlayer) {
       try {
         UtilLog.info(`${this.tag}: videoSeek  seekTime== ${seekTime}`);
         this.avPlayer.seek(seekTime, 2);
-        this.vm.currentTime = seekTime;// 设置状态： 播放状态，进度位置，播放倍速，缓存的时间。
+        this.vm.currentTime = seekTime; // 设置状态： 播放状态，进度位置，播放倍速，缓存的时间。
         this.setAVPlayerbackState(seekTime)
       } catch (e) {
         UtilLog.info(`${this.tag}: videoSeek== ${JSON.stringify(e)}`);
@@ -196,13 +197,11 @@ export struct VideoView {
     if (this.pipWindowModel.pipController !== undefined) {
       this.pipWindowModel.pipController.updatePiPControlStatus(controlType, status);
     }
-    this.session?.setAVPlaybackState(playbackState, (err) => {
-      if (err) {
-        UtilLog.error(`Failed to set AVPlaybackState. Code: ${err.code}, message: ${err.message}`);
-      } else {
-        UtilLog.info(`SetAVPlaybackState successfully`);
-      }
-    });
+    this.session?.setAVPlaybackState(playbackState).then(() => {
+      UtilLog.info(`SetAVPlaybackState successfully`);
+    }).catch((err: BusinessError) => {
+      UtilLog.error(`Failed to set AVPlaybackState. Code: ${err.code}, message: ${err.message}`);
+    })
   }
 
   avSetSpeed(speed: number): void {
@@ -217,7 +216,7 @@ export struct VideoView {
   }
 
   // 注册avplayer回调函数
-  async setAVPlayerCallback(callback: (avPlayer: media.AVPlayer) => void, vType?: number): Promise<void> {
+  async setAVPlayerCallback(callback: (avPlayer: media.AVPlayer) => void, _vType?: number): Promise<void> {
     // seek操作结果回调函数
     if (this.avPlayer == null) {
       UtilLog.info(`${this.tag}: avPlayer has not init!`);
@@ -236,10 +235,12 @@ export struct VideoView {
         UtilLog.info(`${this.tag}: avPlayer has not init on error`);
         return;
       }
-      this.avPlayer.reset();
+      this.avPlayer.reset().catch((error: BusinessError) => {
+        UtilLog.error(`${this.tag}: avPlayer pause reset.,error message is = ${JSON.stringify(error.message)}`);
+      });
     });
     // 状态机变化回调函数
-    this.avPlayer.on('stateChange', async (state, reason) => {
+    this.avPlayer.on('stateChange', async (state, _reason) => {
       if (this.avPlayer == null) {
         UtilLog.info(`${this.tag}: avPlayer has not init on state change`);
         return;
@@ -253,7 +254,10 @@ export struct VideoView {
           if (this.surfaceId) {
             this.avPlayer.surfaceId = this.surfaceId; // 设置显示画面，当播放的资源为纯音频时无需设置
             UtilLog.info(`${this.tag}: setAVPlayerCallback this.avPlayer.surfaceId = ${this.avPlayer.surfaceId}`);
-            this.avPlayer.prepare();
+            this.avPlayer.prepare().catch((error: BusinessError) => {
+              UtilLog.error(
+                `${this.tag}: avPlayer prepare failed.,error message is = ${JSON.stringify(error.message)}`);
+            });
           }
           break;
         case 'prepared': // prepare调用成功后上报该状态机
@@ -264,9 +268,11 @@ export struct VideoView {
           this.vm.durationTime = this.avPlayer.duration;
           this.vm.currentTime = this.avPlayer.currentTime;
           // 调用播放接口开始播放
-          if(this.isCover) {
+          if (this.isCover) {
             this.isPaused = true;
-            this.avPlayer.pause();
+            this.avPlayer.pause().catch((error: BusinessError) => {
+              UtilLog.error(`${this.tag}: avPlayer pause failed.,error message is = ${JSON.stringify(error.message)}`);
+            });
           } else {
             this.avPlay();
           }
@@ -323,7 +329,7 @@ export struct VideoView {
         let text = (!info.text) ? '' : info.text;
         let startTime = (!info.startTime) ? 0 : info.startTime;
         let duration = (!info.duration) ? 0 : info.duration;
-        UtilLog.info('subtitleUpdate info: text=' + text + ' startTime=' + startTime +' duration=' + duration);
+        UtilLog.info('subtitleUpdate info: text=' + text + ' startTime=' + startTime + ' duration=' + duration);
         this.subtitle = text;
       } else {
         UtilLog.info('subtitleUpdate info is null');
@@ -332,11 +338,15 @@ export struct VideoView {
   }
 
   aboutToAppear() {
-    this.windowWidth = display.getDefaultDisplaySync().width;
-    this.windowHeight = display.getDefaultDisplaySync().height;
-    this.vm.surfaceW = this.windowWidth * Constants.SURFACE_W;
-    this.vm.surfaceH = this.vm.surfaceW / Constants.SURFACE_H;
-    this.context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+    try {
+      this.windowWidth = display.getDefaultDisplaySync().width;
+      this.windowHeight = display.getDefaultDisplaySync().height;
+      this.vm.surfaceW = this.windowWidth * Constants.SURFACE_W;
+      this.vm.surfaceH = this.vm.surfaceW / Constants.SURFACE_H;
+      this.context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+    } catch (err) {
+      UtilLog.error(`${this.tag}: getDefaultDisplaySync filed,error message is = ${JSON.stringify(err.message)}`);
+    }
   }
 
   aboutToDisappear() {
@@ -344,12 +354,10 @@ export struct VideoView {
       UtilLog.info(`${this.tag}: avPlayer has not init aboutToDisappear`);
       return;
     }
-    this.avPlayer.release((err) => {
-      if (err == null) {
-        UtilLog.info(`${this.tag}: videoRelease release success`);
-      } else {
-        UtilLog.error(`${this.tag}: videoRelease release filed,error message is = ${JSON.stringify(err.message)}`);
-      }
+    this.avPlayer.release().then(() => {
+      UtilLog.info(`${this.tag}: videoRelease release success`);
+    }).catch((err: BusinessError) => {
+      UtilLog.error(`${this.tag}: videoRelease release filed,error message is = ${JSON.stringify(err.message)}`);
     });
     this.UnRegisterListener();
   }
@@ -372,7 +380,10 @@ export struct VideoView {
     };
     try {
       let tmpWantAgent = await wantAgent.getWantAgent(wantAgentInfo);
-      this.session?.setLaunchAbility(tmpWantAgent);
+      this.session?.setLaunchAbility(tmpWantAgent).catch((error: BusinessError) => {
+        UtilLog.error(
+          `${this.tag}: session setLaunchAbility failed.,error message is = ${JSON.stringify(error.message)}`);
+      });
       await backgroundTaskManager.startBackgroundRunning(this.context,
         backgroundTaskManager.BackgroundMode.AUDIO_PLAYBACK, tmpWantAgent);
     } catch (error) {
@@ -399,13 +410,14 @@ export struct VideoView {
     }
     try {
       this.session = await avSession.createAVSession(this.context!, 'AVSessionDemo', 'video');
-      if(this.session) {
+      if (this.session) {
         this.setAVMetadataToController();
       }
       this.startContinuousTask();
     } catch (error) {
       let err = error as BusinessError;
-      UtilLog.error(0x0000, 'ProviderManager', `createAVSession failed. error code=${err.code}, message=${err.message}`);
+      UtilLog.error(0x0000, 'ProviderManager',
+        `createAVSession failed. error code=${err.code}, message=${err.message}`);
     }
     this.RegisterSessionListener();
     await this.session?.activate().catch((err: BusinessError) => {
@@ -421,10 +433,12 @@ export struct VideoView {
     try {
       this.session?.on('play', async () => {
         UtilLog.info(`on play, do play task`);
-        this.avPlayer?.play();
+        this.avPlayer?.play().catch((error: BusinessError) => {
+          UtilLog.error(`${this.tag}: avPlayer play failed.,error message is = ${JSON.stringify(error.message)}`);
+        });
         this.isPaused = false;
-        if(this.avPlayer) {
-          if(this.vm.currentTime >= this.avPlayer.duration) {
+        if (this.avPlayer) {
+          if (this.vm.currentTime >= this.avPlayer.duration) {
             this.vm.currentTime = 0;
           }
         }
@@ -433,22 +447,28 @@ export struct VideoView {
 
       this.session?.on('pause', async () => {
         UtilLog.info(`on pause, do pause task`);
-        this.avPlayer?.pause();
+        this.avPlayer?.pause().catch((error: BusinessError) => {
+          UtilLog.error(`${this.tag}: avPlayer pause failed.,error message is = ${JSON.stringify(error.message)}`);
+        });
         this.isPaused = true;
         this.setAVPlayerbackState(this.vm.currentTime)
       });
 
       this.session?.on('stop', async () => {
         UtilLog.info(`on stop , do stop task`);
-        this.avPlayer?.stop();
+        this.avPlayer?.stop().catch((error: BusinessError) => {
+          UtilLog.error(`${this.tag}: avPlayer stop failed.,error message is = ${JSON.stringify(error.message)}`);
+        });
         this.currentState.state = avSession.PlaybackState.PLAYBACK_STATE_PAUSE;
         await this.session?.setAVPlaybackState(this.currentState);
       });
 
       this.session?.on('seek', (position) => {
         UtilLog.info('on seek: seek to' + position);
-        if(position >= this.vm.durationTime) {
-          this.avPlayer?.pause();
+        if (position >= this.vm.durationTime) {
+          this.avPlayer?.pause().catch((error: BusinessError) => {
+            UtilLog.error(`${this.tag}: avPlayer pause failed.,error message is = ${JSON.stringify(error.message)}`);
+          });
           this.isPaused = true;
           this.vm.currentTime = 0;
         } else {
@@ -460,14 +480,19 @@ export struct VideoView {
 
       this.session?.on('setLoopMode', (mode) => {
         UtilLog.info('on setLoopMode: ' + mode);
-        this.session?.setAVPlaybackState(this.currentState);
+        this.session?.setAVPlaybackState(this.currentState).catch((error: BusinessError) => {
+          UtilLog.error(
+            `${this.tag}: session setAVPlaybackState failed.,error message is = ${JSON.stringify(error.message)}`);
+        });
       });
 
       this.session?.on('fastForward', (skipInterval?: number) => {
-        if(this.vm.currentTime + skipInterval! * 1000 > this.vm.durationTime) {
+        if (this.vm.currentTime + skipInterval! * 1000 > this.vm.durationTime) {
           this.vm.currentTime = 0;
           this.isPaused = true;
-          this.avPlayer?.pause();
+          this.avPlayer?.pause().catch((error: BusinessError) => {
+            UtilLog.error(`${this.tag}: avPlayer pause failed.,error message is = ${JSON.stringify(error.message)}`);
+          });
         } else {
           this.vm.currentTime = this.vm.currentTime + skipInterval! * 1000;
         }
@@ -476,7 +501,7 @@ export struct VideoView {
       });
 
       this.session?.on('rewind', (skipInterval?: number) => {
-        if(this.vm.currentTime - skipInterval! * 1000 <= 0) {
+        if (this.vm.currentTime - skipInterval! * 1000 <= 0) {
           this.vm.currentTime = 0;
         } else {
           this.vm.currentTime = this.vm.currentTime - skipInterval! * 1000;
@@ -503,13 +528,13 @@ export struct VideoView {
         let err = error as BusinessError;
         UtilLog.error(`UnRegisterListener failed. error code=${err.code}, message=${err.message}`);
       }
-      this.session.destroy((err) => {
-        if (err) {
-          UtilLog.error(`Destroy BusinessError: code: ${err.code}, message: ${err.message}`);
-        } else {
+      try {
+        this.session.destroy(() => {
           UtilLog.info('Destroy : SUCCESS');
-        }
-      });
+        });
+      } catch (err) {
+        UtilLog.error(`Destroy BusinessError: code: ${err.code}, message: ${err.message}`);
+      }
     }
   }
 
@@ -551,7 +576,8 @@ export struct VideoView {
       }
     } catch (error) {
       let err = error as BusinessError;
-      UtilLog.error(0x0000, 'ProviderManager', `localPlayOrPause failed. error code=${err.code}, message=${err.message}`);
+      UtilLog.error(0x0000, 'ProviderManager',
+        `localPlayOrPause failed. error code=${err.code}, message=${err.message}`);
     }
   }
 
@@ -561,9 +587,14 @@ export struct VideoView {
       UtilLog.info('audioInterrupt success,and InterruptEvent info is:' + info);
       if (this.avPlayer?.state === 'playing') {
         UtilLog.info('audio interrupt, start pause');
-        this.avPlayer?.pause();
+        this.avPlayer?.pause().catch((error: BusinessError) => {
+          UtilLog.error(`${this.tag}: avPlayer pause failed.,error message is = ${JSON.stringify(error.message)}`);
+        });
         this.currentState.state = avSession.PlaybackState.PLAYBACK_STATE_PAUSE;
-        this.session?.setAVPlaybackState(this.currentState);
+        this.session?.setAVPlaybackState(this.currentState).catch((error: BusinessError) => {
+          UtilLog.error(
+            `${this.tag}: session setAVPlaybackState failed.,error message is = ${JSON.stringify(error.message)}`);
+        });
       }
     });
     this.avPlayer?.on('timeUpdate', (time: number) => {
@@ -582,7 +613,7 @@ export struct VideoView {
   }
 
   controlPlay(): void {
-    if(this.isSlider) {
+    if (this.isSlider) {
       if (this.isPaused) {
         this.isPaused = false;
         this.avPlay();
@@ -599,7 +630,7 @@ export struct VideoView {
     Column() {
       Stack({ alignContent: this.isCover ? Alignment.Top : Alignment.Center }) {
         // 视频内容
-        Column(){
+        Column() {
           XComponent({
             // 装载视频容器
             id: 'xComponent',
@@ -621,7 +652,7 @@ export struct VideoView {
           this.controlPlay();
         })
 
-        if(this.isFullScreen && !this.isCover) {
+        if (this.isFullScreen && !this.isCover) {
           // 播放按钮（居中）
           Column() {
             Image($r('app.media.ic_video_pause'))
@@ -648,7 +679,7 @@ export struct VideoView {
               })
             Text(this.vm.timeConvert(this.vm.currentTime))
               .fontColor(Color.White)
-              .margin({left: 8})
+              .margin({ left: 8 })
               .visibility(this.isFullScreen ? Visibility.None : Visibility.Visible)
             Slider({
               value: this.vm.currentTime,
@@ -673,7 +704,7 @@ export struct VideoView {
             Image($r('app.media.ic_full_screen'))
               .width(24)
               .height(24)
-              .margin({left: 8})
+              .margin({ left: 8 })
               .visibility(this.isFullScreen ? Visibility.None : Visibility.Visible)
               .onClick(() => {
                 this.showFullScreen()

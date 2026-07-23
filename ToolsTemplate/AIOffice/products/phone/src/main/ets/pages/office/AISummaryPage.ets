@@ -1,8 +1,8 @@
-import { RouterMap, RouterUtils, WindowModel } from 'lib_common';
-import { NavHeaderBar } from 'lib_widget';
+import { GlobalContext, RouterMap, RouterUtils, WindowModel } from 'lib_common';
 import { HistoryButton } from '../../components/HistoryButton';
 import { PageResultType } from './OfficeResultPage';
 import { AppStorageV2 } from '@kit.ArkUI';
+import { NavHeaderBar } from '../../widget/NavHeaderBar';
 
 const LANGUAGE = ['中文', '英文']
 
@@ -122,8 +122,12 @@ export struct AISummaryPage {
           Button('开始生成')
             .width('100%')
             .height(40)
-            .enabled(!!this.content)
+            .backgroundColor($r('sys.color.comp_background_emphasize'))
             .onClick(() => {
+              if(!this.content){
+                GlobalContext.getUIContext().getPromptAction().showToast({ message: '文本内容不能为空！' });
+                return;
+              }
               let systemPrompt = '你是一个写作专家，需要根据用户的需求生成论文或总结，内容需要严谨';
               let userPrompt =
                 `帮我生成一篇总结，需要总结的内容是${this.content} 。使用${this.language}，其他要求：${this.other}`

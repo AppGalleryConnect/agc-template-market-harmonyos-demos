@@ -1,9 +1,8 @@
-import { PersistenceV2 } from '@kit.ArkUI';
 import { baseActionSheet } from 'base_apis';
 import { CalendarNavTitle } from '../common/CalendarNavTitle'
 import { CalendarEventFooter } from './CalendarEventFooter';
 import { CalendarSheetHeader } from '../common/CalendarSheetHeader';
-import { UserEvent, UserEventItem } from '../../model/UserEventModel';
+import { UserEventItem } from '../../model/UserEventModel';
 import { CalendarBirRem } from '../CalendarBirRem';
 import CalendarEventVM from '../../viewModel/ViewModel';
 import { EVENT_TYPE, TABLET_GRID, TABLE_COL, TABLE_COL_OFFSET } from '../../constants/Constants';
@@ -16,7 +15,6 @@ export function BirthdayRememberDetailsBuilder() {
 @ComponentV2
 export struct BirthdayRememberDetails {
   @Local calendarEventVM: CalendarEventVM = CalendarEventVM.instance;
-  @Local userEvent: UserEvent = PersistenceV2.connect(UserEvent, () => new UserEvent())!;
   @Local eventType: string = '';
   @Local userEventInfo: UserEventItem = new UserEventItem();
   context: UIContext = this.getUIContext()
@@ -94,6 +92,7 @@ export struct BirthdayRememberDetails {
                   detents: ['98%', '100%'],
                   backgroundColor: $r('sys.color.background_secondary'),
                   showClose: false,
+                  keyboardAvoidMode: SheetKeyboardAvoidMode.TRANSLATE_AND_SCROLL,
                   onWillAppear: () => {
                     this.calendarEventVM.setEventInfo(this.userEventInfo)
                   },

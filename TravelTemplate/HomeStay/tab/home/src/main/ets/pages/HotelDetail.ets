@@ -1,11 +1,8 @@
 import { common } from '@kit.AbilityKit';
 import { Constants, NavPathName } from 'constant';
-import { TitleBar } from 'component';
+import { CommonHeader } from 'component';
 import { CalendarUtil, DateInfo, DateModel, Price } from 'calendar_select';
-import { RoomType } from 'type';
-import { Foundations } from '../components/Foundations';
-import { Reservation } from '../components/Reservation';
-import { Checkout } from '../components/Checkout';
+import { RoomType, Tag } from 'type';
 import { EnhancedSource } from '../model/Index';
 import { Logger, AccountUtil } from 'util';
 import { HomePageVM } from '../viewmodel/HomePageVM';
@@ -47,114 +44,137 @@ export struct HotelDetail {
 
   build() {
     NavDestination() {
-      Stack({ alignContent: Alignment.Bottom }) {
-        Column() {
-          TitleBar({
-            isShowBack: true, title: this.vm.tenantInfo?.appName ?? '', clickEvent: () => {
-              this.mainPathStack.pop();
-            },
-          });
+      Column() {
+        CommonHeader({ title: '房间详情', showBackButton: true, backButtonClick: () => {
+          this.mainPathStack.pop();
+        }})
 
-          Scroll() {
-            Column() {
-              Swiper() {
-                Image(this.roomType.roomTypeBanner).height(300);
-              }.indicator(new DotIndicator()
-                .itemWidth(6)
-                .itemHeight(6)
-                .selectedItemWidth(12)
-                .selectedItemHeight(6)
-                .color('#F5F6FA')
-                .selectedColor($r('sys.color.comp_background_emphasize')))
-              .width(Constants.FULL_SCREEN);
+        Scroll() {
+          Column({ space: 16 }) {
+            Image(this.roomType.roomTypeBanner)
+              .height(184)
+              .width(Constants.FULL_SCREEN)
+              .borderRadius(16);
 
-              Column() {
-                Column() {
-                  Text(this.roomType.roomTypeName)
-                    .fontSize(20)
-                    .fontWeight(500)
-                    .width(Constants.FULL_SCREEN)
-                    .textAlign(TextAlign.Start)
-                    .padding({ left: 16, right: 16, top: 16 });
-
-                  Column({ space: 16 }) {
-                    DateInfo(
-                      {
-                        priceList: this.priceList,
-                      }
-                    )
-                      .backgroundColor('#F5F6FA').borderRadius(8);
-                  }.padding({ left: 16, right: 16 }).alignItems(HorizontalAlign.Start).margin({ top: 16 });
-                };
-
-                Column() {
-                  Foundations({ foundations: this.roomType.instructions?.foundations })
-                    .padding({ left: 16, right: 16 }).margin({ top: 16 });
-                  Reservation({
-                    reservation: this.roomType.instructions?.reservation,
-                  }).padding({ left: 16, right: 16 }).margin({ top: 16 });
-                  Checkout({
-                    checkOut: this.roomType.instructions.checkOut,
-                  }).padding({ left: 16, right: 16 });
-                };
-              };
-            };
-          }.height('75%').align(Alignment.Top).scrollBar(BarState.Off).edgeEffect(EdgeEffect.Spring);
-        };
-
-        Row() {
-          Text() {
-            Span('￥').fontSize(12).fontWeight(500).fontColor('#F0353A');
-            Span(`${this.vm.getPriceByDate(this.roomType.roomTypePriceList, CalendarUtil.getCurrentDate(), 0)}`)
-              .fontSize(20)
-              .fontWeight(500)
-              .fontColor('#F0353A');
-          };
-
-          Button('预订')
-            .backgroundColor('#007DFF')
-            .fontSize(14)
-            .width(72)
-            .height(32)
-            .borderRadius(8)
-            .padding({
-              left: 12,
-              right: 12,
-              top: 6,
-              bottom: 6,
-            })
-            .onClick(() => {
-              if (!this.currentUser) {
-                this.mainPathStack.pushPathByName(NavPathName.QUICK_LOGIN_PAGE, null, (popInfo: ESObject) => {
-                  this.currentUser = popInfo.result;
-                  AccountUtil.setUserId(popInfo.result);
-                  (this.getUIContext().getHostContext() as common.UIAbilityContext).eventHub.emit('reLogin',
-                    popInfo.result);
-                  Logger.info('quick login success');
-                });
-              } else {
-                this.mainPathStack.pushPathByName(NavPathName.RESERVE, {
-                  source: 'HotelDetail',
-                  data: this.roomType,
-                } as EnhancedSource);
+            Row() {
+              Text(this.roomType.roomTypeName)
+                .fontWeight(FontWeight.Medium)
+                .textAlign(TextAlign.Start)
+                .margin({ right: 12 })
+              Row({ space: 8 }) {
+                ForEach(this.roomType.labelList, (label: string) => {
+                  Text(label)
+                    .fontSize(10)
+                    .fontColor($r('sys.color.font_emphasize'))
+                    .backgroundColor($r('sys.color.comp_emphasize_tertiary'))
+                    .padding({ top: 4, bottom: 4, left: 7, right: 7 })
+                    .borderRadius(16)
+                }, (label: string, index: number) => `${label}_${index}`)
               }
-            });
-        }
-        .position({ y: '90%' })
-        .height('10%')
-        .padding({ left: 16, right: 16 })
-        .shadow({
-          radius: 2,
-          color: '#F5F6FA',
-          offsetX: 0,
-          offsetY: -5,
-        })
-        .width(Constants.FULL_SCREEN)
-        .justifyContent(FlexAlign.SpaceBetween);
+            }
+            .width(Constants.FULL_SCREEN)
+            .alignItems(VerticalAlign.Center)
+
+            Row() {
+              Text('价格可能浮动，请尽快预定')
+                .fontSize(12)
+                .fontColor($r('sys.color.warning'))
+              Text(`￥${this.vm.getPriceByDate(this.roomType.roomTypePriceList, CalendarUtil.getCurrentDate(), 0)}`)
+                .fontSize(12)
+                .fontColor($r('sys.color.warning'))
+            }
+            .width(Constants.FULL_SCREEN)
+            .justifyContent(FlexAlign.SpaceBetween)
+
+            DateInfo({ priceList: [] })
+              .backgroundColor($r('sys.color.comp_background_primary')).borderRadius(16)
+
+            Row() {
+              ForEach(this.roomType.instructions?.foundations ?? [], (item: Tag) => {
+                Column({ space: 4 }) {
+                  if (item.tag === '大小') {
+                    Image($r('app.media.room_size')).size({ width: 24, height: 24 })
+                  } else if (item.tag === '楼层') {
+                    Image($r('app.media.floor_level')).size({ width: 24, height: 24 })
+                  } else if (item.tag === '网络') {
+                    Image($r('app.media.room_internet')).size({ width: 24, height: 24 })
+                  } else if (item.tag === '采光') {
+                    Image($r('app.media.room_light')).size({ width: 24, height: 24 })
+                  } else if (item.tag === '床铺') {
+                    Image($r('app.media.room_bed')).size({ width: 24, height: 24 })
+                  }
+                  Text(item.subTags[0] ?? '')
+                    .fontSize(12)
+                    .fontColor($r('sys.color.font_primary'))
+                    .maxLines(1)
+                    .textOverflow({ overflow: TextOverflow.Ellipsis })
+                }
+              }, (item: Tag, index: number) => `${item.tag}_${index}`)
+            }
+            .width(Constants.FULL_SCREEN)
+            .justifyContent(FlexAlign.SpaceAround)
+            .backgroundColor($r('sys.color.comp_background_primary'))
+            .padding(12)
+            .borderRadius(16)
+
+            Column({ space: 12 }) {
+              ForEach(this.roomType.instructions?.reservation ?? [], (item: Tag) => {
+                Row({ space: 8 }) {
+                  Text(item.tag)
+                    .fontSize(12)
+                    .fontColor($r('sys.color.font_secondary'))
+                    .width(56)
+                    .flexShrink(0)
+                    .lineHeight(16)
+                  Text(item.subTags.join('，'))
+                    .fontSize(12)
+                    .fontColor($r('sys.color.font_primary'))
+                    .layoutWeight(1)
+                    .lineHeight(16)
+                }.alignItems(VerticalAlign.Top).width(Constants.FULL_SCREEN)
+              }, (item: Tag, index: number) => `${item.tag}_${index}`)
+            }
+            .width(Constants.FULL_SCREEN)
+            .alignItems(HorizontalAlign.Start)
+            .backgroundColor($r('sys.color.comp_background_primary'))
+            .padding(12)
+            .borderRadius(16)
+
+            Button('预订房间')
+              .backgroundColor($r('sys.color.background_emphasize'))
+              .fontColor($r('sys.color.font_on_primary'))
+              .fontWeight(FontWeight.Medium)
+              .width(Constants.FULL_SCREEN)
+              .height(40)
+              .constraintSize({ maxWidth: 448 })
+              .borderRadius($r('sys.float.corner_radius_level10'))
+              .margin({ top: 8, bottom:  16 })
+              .onClick(() => {
+                if (!this.currentUser) {
+                  this.mainPathStack.pushPathByName(NavPathName.QUICK_LOGIN_PAGE, null, (popInfo: ESObject) => {
+                    this.currentUser = popInfo.result;
+                    AccountUtil.setUserId(popInfo.result);
+                    (this.getUIContext().getHostContext() as common.UIAbilityContext).eventHub.emit('reLogin',
+                      popInfo.result);
+                    Logger.info('quick login success');
+                  });
+                } else {
+                  this.mainPathStack.pushPathByName(NavPathName.RESERVE, {
+                    source: 'HotelDetail',
+                    data: this.roomType,
+                  } as EnhancedSource);
+                }
+              })
+          }
+          .width(Constants.FULL_SCREEN)
+          .padding({ left: 16, right: 16, top: 4, bottom: 16 })
+          .alignItems(HorizontalAlign.Center)
+        }.layoutWeight(1).align(Alignment.Top).scrollBar(BarState.Off).edgeEffect(EdgeEffect.Spring);
       };
     }.hideTitleBar(true).onReady((context: NavDestinationContext) => {
       this.roomType = context.pathInfo.param as RoomType;
       this.priceList = this.vm.getPriceList(this.roomType.roomTypePriceList);
     })
+    .backgroundColor($r('sys.color.background_secondary'))
   }
 }

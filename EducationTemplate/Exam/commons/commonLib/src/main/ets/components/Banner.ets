@@ -14,8 +14,8 @@ export struct Banner {
   swiperDisplayCount: BreakpointType<number> = new BreakpointType<number>({
     sm: 1,
     md: 2,
-    lg: 3,
-    xl: 3,
+    lg: 2,
+    xl: 2,
   });
 
   build() {
@@ -29,22 +29,26 @@ export struct Banner {
             .borderRadius(16)
             .margin({ left: 6, right: 6 })
             .width(new BreakpointType<number>({
-              sm: 496,
-              md: 496,
+              sm: 328,
+              md: 336,
               lg: 496,
               xl: 496
             }).getValue(this.breakpointModel.currentBreakpoint))
             .height(new BreakpointType<number>({
-              sm: 159,
+              sm: 184,
               md: 189,
-              lg: 189,
-              xl: 189
+              lg: 279,
+              xl: 279
             }).getValue(this.breakpointModel.currentBreakpoint));
         }, (item: string, index: number) => item + index);
       }
       .indicator(false)
-      .nextMargin(32)
-      .prevMargin(32)
+      .nextMargin(new BreakpointType<number>({
+        sm: 0,
+        md: 0,
+        lg: 120,
+        xl: 120
+      }).getValue(this.breakpointModel.currentBreakpoint))
       .loop(true)
       .autoPlay(true)
       .displayCount(this.swiperDisplayCount.getValue(this.breakpointModel.currentBreakpoint))
@@ -54,8 +58,8 @@ export struct Banner {
     .height(new BreakpointType<number>({
       sm: 159,
       md: 189,
-      lg: 189,
-      xl: 189
+      lg: 279,
+      xl: 279
     }).getValue(this.breakpointModel.currentBreakpoint));
   }
 }

@@ -192,6 +192,10 @@ export class SystemSceneUtils {
           }
           return null;
         })
+        .catch((error: BusinessError) => {
+          Logger.error(TAG, `request Permission from user failed, result: ${JSON.stringify(error)}`);
+          return null;
+        })
     }
     return null;
   }

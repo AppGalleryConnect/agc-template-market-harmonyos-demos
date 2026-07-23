@@ -7,3 +7,7 @@ export { FollowingPage, jumpFollowingPage, FollowingPageBuilder } from './src/ma
 export { ProfilePage, ProfilePageBuilder, jumpProfilePage } from './src/main/ets/profile/ProfilePage'
 
 export { CommentKeyboardBuild } from './src/main/ets/input/CommentKeyboard'
+
+export { Profile } from './src/main/ets/profile/Profile'
+
+export * from './src/main/ets/models/AudienceData'

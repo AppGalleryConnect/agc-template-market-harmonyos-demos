@@ -60,21 +60,25 @@ export struct LoginPage {
     if (loginChannelType === LoginChannelType.HUAWEI) {
       const businessError = error as BusinessError
       const errorMsg = ERROR_MSG_MAP[businessError.code] ?? '未知错误。';
-      this.promptAction.showDialog({
-        title: '温馨提示',
-        message: errorMsg + '是否先模拟登录成功？',
-        buttons: [
-          { text: '取消', color: '#000000' },
-          { text: '确认', color: '#000000' },
-        ]
-      }, (err: BusinessError, data) => { // 按钮动作回调
-        // 根据按钮索引处理动作
-        if (data.index === 1) {
-          this.getUIContext().getPromptAction().showToast({ message: '华为一键登录成功' })
-          this.controller.clearLoginInfo();
-          this.loginSuccess()
-        }
-      })
+      try {
+        this.promptAction.showDialog({
+          title: '温馨提示',
+          message: errorMsg + '是否先模拟登录成功？',
+          buttons: [
+            { text: '取消', color: $r('sys.color.font_primary') },
+            { text: '确认', color: $r('sys.color.font_primary') },
+          ]
+        }, (err: BusinessError, data) => { // 按钮动作回调
+          // 根据按钮索引处理动作
+          if (data.index === 1) {
+            this.getUIContext().getPromptAction().showToast({ message: '华为一键登录成功' })
+            this.controller.clearLoginInfo();
+            this.loginSuccess()
+          }
+        })
+      } catch (e) {
+        console.error('showDialog failed:', (e as BusinessError).message);
+      }
       return;
     }
   }

@@ -7,6 +7,10 @@
     {
       "name": "icon_bg_blue",
       "value": "#4B5CC4"
+    },
+    {
+      "name": "item_title_font",
+      "value": "#E6000000"
     }
   ]
 }

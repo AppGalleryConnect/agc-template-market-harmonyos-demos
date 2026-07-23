@@ -9,7 +9,7 @@ import { FullScreenReport } from './FullScreenReport'
 import { FullScreenResolution } from './FullScreenResolution'
 import { FullScreenShare } from './FullScreenShare'
 import { FullScreenSharePost } from './FullScreenSharePost'
-import { AppStorageV2, window } from '@kit.ArkUI'
+import { AppStorageV2, display, window } from '@kit.ArkUI'
 import { BulletVM } from '../../viewModels/BulletVM'
 
 const TAG = '[FullScreenLayer]'
@@ -24,6 +24,7 @@ export struct FullScreenLayer {
   @Local userAvatar: Resource | string = $r('app.media.person')
   @Local userName: string = 'momo'
   @Local bulletVM: BulletVM = AppStorageV2.connect(BulletVM, 'bulletVM', () => new BulletVM())!
+  @Param isFromVertical: boolean = false
   private promptAction = this.getUIContext().getPromptAction()
   private moreSetting: number = 0
   private share: number = 0
@@ -33,13 +34,25 @@ export struct FullScreenLayer {
   private report: number = 0
   private gift: number = 0
   private windowStage: window.WindowStage = AppStorage.get('windowStage')!;
+  callback: Callback<number> = (data: number) => {
+    this.promptAction.closeCustomDialog(this.gift);
+    this.promptAction.closeCustomDialog(this.moreSetting);
+    this.promptAction.closeCustomDialog(this.bulletSetting);
+  }
 
   onBackPressed(): boolean | void {
     this.interactionMgr.onFullScreen(false)
   }
 
   aboutToAppear(): void {
-    this.windowStage.getMainWindowSync().setWindowSystemBarEnable([])
+    try {
+      display.on('change', this.callback)
+    } catch (e) {
+    }
+    try {
+      this.windowStage.getMainWindowSync().setWindowSystemBarEnable([])
+    } catch (e) {
+    }
     this.bulletVM.direction = 1
     if (this.interactionMgr.onCheckLogin()) {
       let userInfo: LoginUserInfo = this.interactionMgr.onGetLoginUserInfo()
@@ -51,13 +64,21 @@ export struct FullScreenLayer {
   }
 
   aboutToDisappear(): void {
-    this.windowStage.getMainWindowSync().setWindowSystemBarEnable(['status', 'navigation'])
+    try {
+      display.off('change', this.callback)
+    } catch (e) {
+    }
+    try {
+      this.windowStage.getMainWindowSync().setWindowSystemBarEnable(['status', 'navigation'])
+    } catch (e) {
+    }
   }
 
   build() {
     Stack() {
       Stack({ alignContent: Alignment.TopStart }) {
         DetailTopInfo({
+          isFromVertical: this.isFromVertical,
           screenDirection: 1,
           presenter: this.interactionMgr.presenter,
           audienceList: this.interactionMgr.audiences,
@@ -66,7 +87,8 @@ export struct FullScreenLayer {
           onLogin: this.interactionMgr.onLogin,
           onDeleteFollowingClick:this.interactionMgr.onDeleteFollowingClick,
           onAddFollowingClick:this.interactionMgr.onAddFollowingClick,
-          onProfileClick:this.interactionMgr.onProfileClick
+          onProfileClick:this.interactionMgr.onProfileClick,
+          onExit: this.interactionMgr.onExit,
         })
           .visibility(this.showControl ? Visibility.Visible : Visibility.Hidden)
           .zIndex(2)

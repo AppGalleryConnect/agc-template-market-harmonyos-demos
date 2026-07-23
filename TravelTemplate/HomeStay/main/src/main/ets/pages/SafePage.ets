@@ -17,7 +17,7 @@ struct SafePage {
         appDesc: '这是一个适用于民宿的应用模板',
         stack: this.mainPathStack,
         handleConfirm: () => {
-          this.mainPathStack.replacePathByName('Main', null);
+          this.mainPathStack.replacePathByName('SplashPage', null);
         },
       });
     }

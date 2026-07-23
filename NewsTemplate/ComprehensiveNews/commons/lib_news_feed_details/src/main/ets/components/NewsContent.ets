@@ -2,6 +2,7 @@ import { PersistenceV2 } from '@kit.ArkUI'
 import { webview } from '@kit.ArkWeb'
 import { BusinessError } from '@kit.BasicServicesKit'
 import {
+  FontPinchGestureUtils,
   FormatCount,
   GlobalContextUtils,
   Logger,
@@ -9,7 +10,6 @@ import {
   RouterUtils,
   SettingModel,
   TimeUtils,
-  FontPinchGestureUtils,
 } from 'lib_common'
 import { BaseAgent, Share, ShareContentType, ShareUtils } from 'lib_widget'
 import { ImagePreview, ImagePreviewOptions, SourceImageModel } from 'module_imagepreview'
@@ -195,6 +195,18 @@ export struct NewsContent {
     }
   }
 
+  aboutToDisappear(): void {
+    if (this.timer) {
+      clearTimeout(this.timer);
+      this.timer = 0;
+    }
+    try {
+      this.webViewController.deleteJavaScriptRegister('native');
+    } catch (e) {
+      Logger.error(TAG, 'deleteJavaScriptRegister fail, error: ' + JSON.stringify(e));
+    }
+  }
+
   preview = (srcList: string[], index: number) => {
     const options = new ImagePreviewOptions()
     options
@@ -313,7 +325,15 @@ export struct NewsContent {
         .fontColor($r('sys.color.font_primary'))
         .lineHeight(20).margin({ bottom: 24 });
       BaseAgent({ queryText: this.newsFeedVM.keyword });
-    }.layoutWeight(1).justifyContent(FlexAlign.SpaceBetween).padding(16);
+    }
+    .layoutWeight(1)
+    .justifyContent(FlexAlign.SpaceBetween)
+    .padding({
+      top: 16,
+      bottom: this.newsFeedVM.windowModel.windowBottomPadding + 8,
+      left: 16,
+      right: 16
+    });
   }
 
   @Builder

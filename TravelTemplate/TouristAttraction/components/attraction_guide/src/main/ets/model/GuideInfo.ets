@@ -1,9 +1,7 @@
 export interface Guide<T> {
   id: number
   title: string
-  activeIcon: ResourceStr
-  icon: ResourceStr,
-  defaultIcon: ResourceStr
+  icon: Resource,
   type: LocationType
   data: T[]
 }
@@ -20,6 +18,7 @@ export class SiteInfo {
   remainsForMan: number = 0;
   remainsForWoman: number = 0;
   titleColor: number = 0;
+  startMoney:number = 0;
 }
 
 export enum LocationType {

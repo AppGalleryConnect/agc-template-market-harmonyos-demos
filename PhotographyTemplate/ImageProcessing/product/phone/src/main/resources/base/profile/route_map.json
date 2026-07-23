@@ -1,29 +1,19 @@
 {
   "routerMap": [
     {
-      "name": "LaunchPage",
-      "pageSourceFile": "src/main/ets/pages/LaunchPage.ets",
-      "buildFunction": "LaunchPageBuilder"
-    },
-    {
       "name": "MainEntry",
       "pageSourceFile": "src/main/ets/pages/MainEntry.ets",
       "buildFunction": "MainEntryBuilder"
     },
     {
-      "name": "PrivacyPolicyAlert",
-      "pageSourceFile": "src/main/ets/pages/PrivacyPolicyAlert.ets",
-      "buildFunction": "PrivacyPolicyAlertBuilder"
-    },
-    {
-      "name": "LoginPage",
-      "pageSourceFile": "src/main/ets/pages/LoginPage.ets",
-      "buildFunction": "LoginPageBuilder"
-    },
-    {
       "name": "PrivacyPolicyPage",
       "pageSourceFile": "src/main/ets/pages/PrivacyPolicyPage.ets",
       "buildFunction": "PrivacyPolicyBuilder"
+    },
+    {
+      "name": "SplashPage",
+      "pageSourceFile": "src/main/ets/pages/SplashPage.ets",
+      "buildFunction": "buildSplashPage"
     }
   ]
 }

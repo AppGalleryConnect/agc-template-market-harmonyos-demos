@@ -13,10 +13,19 @@ import {
   StatusBarHeight,
   ColorMode
 } from '@agctemplate/widgets';
+import { ShareService } from 'aggregated_share';
 
 const DOMAIN = 0x0000;
 
 export default class EntryAbility extends UIAbility {
+  // 实例化分享服务
+  private shareServiceImpl: ShareService =
+    ShareService.create()
+    // todo 填写微信开放平台配置的应用AppID
+      .initWX('wxc92d9d6570127a32')
+      // todo 填写QQ互联平台配置的应用AppID
+      .initQQ(102061317);
+
   private curBp: BreakPointValue = BreakPointValue.SM;
   private breakPoint = AppStorageV2.connect(BreakPoint, AppStorageKeys.CURRENT_BREAK_POINT,
     () => new BreakPoint(this.curBp))!;
@@ -26,14 +35,18 @@ export default class EntryAbility extends UIAbility {
     () => new AiBarHeight(0))!;
   private currentColorMode: ColorMode = AppStorageV2.connect(ColorMode, 'colorMode', () => new ColorMode('跟随系统'))!
 
+  onNewWant(want: Want): void {
+    this.shareServiceImpl.handleWant(want, this.context);
+  }
+
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
     RouterTable.routerInit();
-    // ȫ������Ϊǳɫģʽ
+    // È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎªÇ³É«Ä£Ê½
     let applicationContext = this.context.getApplicationContext();
     applicationContext.setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_NOT_SET);
     AppStorage.setOrCreate('context', this.context);
     hilog.info(DOMAIN, 'testTag', '%{public}s', 'Ability onCreate');
-
+    this.shareServiceImpl.handleWant(want, this.context);
   }
 
   onConfigurationUpdate(newConfig: Configuration): void {
@@ -53,7 +66,7 @@ export default class EntryAbility extends UIAbility {
     GlobalContext.initContext(this.context, windowStage);
     WindowManager.initWindowStage(windowStage);
     let windowClass = windowStage.getMainWindowSync();
-    // ��ȡӦ������ʱ�Ĵ��ڳߴ�
+    // ï¿½ï¿½È¡Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½Ä´ï¿½ï¿½Ú³ß´ï¿½
     this.updateBreakpoint(windowClass.getWindowProperties().windowRect.width);
     this.updateAvoidArea(windowClass);
     this.windowClassListenEvent(windowClass);
@@ -61,13 +74,17 @@ export default class EntryAbility extends UIAbility {
     WindowManager.setWindowSystemBarProperties({ statusBarColor: 'transparent', navigationBarColor: 'transparent' })
 
 
-    windowStage.loadContent('pages/Index', (err) => {
-      if (err.code) {
-        hilog.error(DOMAIN, 'testTag', 'Failed to load the content. Cause: %{public}s', JSON.stringify(err));
-        return;
-      }
-      hilog.info(DOMAIN, 'testTag', 'Succeeded in loading the content.');
-    });
+    try {
+      windowStage.loadContent('pages/Index', (err) => {
+        if (err.code) {
+          hilog.error(DOMAIN, 'testTag', 'Failed to load the content. Cause: %{public}s', JSON.stringify(err));
+          return;
+        }
+        hilog.info(DOMAIN, 'testTag', 'Succeeded in loading the content.');
+      });
+    } catch (e) {
+      hilog.error(DOMAIN, 'testTag', 'Failed to load the content. Cause: %{public}s', JSON.stringify(e));
+    }
   }
 
   onWindowStageDestroy(): void {
@@ -120,11 +137,11 @@ export default class EntryAbility extends UIAbility {
   }
 
   private windowClassListenEvent(windowClass: window.Window) {
-    // ע��ص��������������ڳߴ�仯
+    // ×¢ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú³ß´ï¿½ä»¯
     windowClass.on('windowSizeChange', (windowSize) => {
       this.updateBreakpoint(windowSize.width)
     })
-    // ע��ص�����������״̬���͵ײ�AI bar�ĸ߶�
+    // ×¢ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½Íµ×²ï¿½AI barï¿½Ä¸ß¶ï¿½
     windowClass.on('avoidAreaChange', (data) => {
       if (window.AvoidAreaType.TYPE_SYSTEM === data.type) {
         this.statusBarHeight.value = data?.area?.topRect?.height || DEFAULT_STATUS_BAR_HEIGHT;
@@ -135,7 +152,7 @@ export default class EntryAbility extends UIAbility {
   }
 
   private updateBreakpoint(windowWidth: number): void {
-    // �����ȵĵ�λ��px����Ϊvp
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ÈµÄµï¿½Î»ï¿½ï¿½pxï¿½ï¿½ï¿½ï¿½Îªvp
     let windowWidthVp = windowWidth / display.getDefaultDisplaySync().densityPixels;
     let newBp: BreakPointValue;
     if (windowWidthVp < 600) {
@@ -147,7 +164,7 @@ export default class EntryAbility extends UIAbility {
     }
     if (this.curBp !== newBp) {
       this.curBp = newBp;
-      // ʹ��״̬������¼��ǰ�ϵ�ֵ
+      // Ê¹ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½Ç°ï¿½Ïµï¿½Öµ
       this.breakPoint.value = this.curBp
     }
   }

@@ -19,7 +19,7 @@ export struct VIP {
         .height(48)
         .fontSize(16)
         .fontWeight(700)
-        .fontColor('#e6000000')
+        .fontColor($r('sys.color.font_primary'))
         .textAlign(TextAlign.Start)
       BannerPanel({ bannerList: this.bannerList, inPage: 'vip', breakPoint: this.currentBreakpoint.value })
 
@@ -28,7 +28,7 @@ export struct VIP {
         .height(48)
         .fontSize(16)
         .fontWeight(700)
-        .fontColor('#e6000000')
+        .fontColor($r('sys.color.font_primary'))
         .textAlign(TextAlign.Start)
       RecommendPanel({ recommendList: this.recommendList, gutter: this.gutter, inPage: 'vip' })
     }

@@ -12,12 +12,16 @@ export class WindowUtils {
    * @param windowStage
    */
   public static async setWinConfig(windowStage: window.WindowStage) {
-    AppStorage.setOrCreate('windowStage', windowStage);
-    let windowClass: window.Window = windowStage.getMainWindowSync();
-    await windowClass.setWindowLayoutFullScreen(true);
-    WindowUtils.setAvoidArea(windowClass);
-    WindowUtils.onAvoidAreaChange(windowStage);
-    WindowUtils.setWindowSize(windowStage);
+    try {
+      AppStorage.setOrCreate('windowStage', windowStage);
+      let windowClass: window.Window = windowStage.getMainWindowSync();
+      await windowClass.setWindowLayoutFullScreen(true);
+      WindowUtils.setAvoidArea(windowClass);
+      WindowUtils.onAvoidAreaChange(windowStage);
+      WindowUtils.setWindowSize(windowStage);
+    } catch (error) {
+      Logger.error(TAG, 'setWinConfig error: ' + JSON.stringify(error));
+    }
   }
 
   /**
@@ -28,10 +32,10 @@ export class WindowUtils {
     let windowModel: WindowModel = AppStorageV2.connect(WindowModel, () => new WindowModel())!;
     let type = window.AvoidAreaType.TYPE_SYSTEM;
     let avoidArea = windowClass.getWindowAvoidArea(type);
-    windowModel.windowTopPadding = px2vp(avoidArea.topRect.height);
+    windowModel.windowTopPadding = windowClass.getUIContext().px2vp(avoidArea.topRect.height);
     type = window.AvoidAreaType.TYPE_NAVIGATION_INDICATOR;
     avoidArea = windowClass.getWindowAvoidArea(type);
-    windowModel.windowBottomPadding = px2vp(avoidArea.bottomRect.height);
+    windowModel.windowBottomPadding = windowClass.getUIContext().px2vp(avoidArea.bottomRect.height);
   }
 
   /**

@@ -28,7 +28,7 @@ struct SplashPage {
           if (!this.guideService.isCompleteGuidance()) {
             this.vm.navStack.replacePathByName('guidePage', true)
           } else {
-            this.vm.navStack.pop()
+            this.vm.navStack.replacePathByName('MainEntry', true)
           }
         },
       });

@@ -2,27 +2,27 @@ import { AddressInfo } from './AddressInfo';
 
 @ObservedV2
 export class UserInfo {
-  authCode?: string = ''
-  idToken?: string = ''
+  authCode?: string = '';
+  idToken?: string = '';
   @Trace avatar: ResourceStr = '';
   @Trace phone: string = '';
   @Trace nickname: string = '';
   @Trace gender: number = 2;
   @Trace birthday: string = '';
-  @Trace isLink: boolean = false
+  @Trace isLink: boolean = false;
 
   mockLink() {
-    this.isLink = true
-    this.phone = '120****4456'
-    this.nickname = '华为用户'
-    this.avatar = $r('app.media.default_avatar')
+    this.isLink = true;
+    this.phone = '120****4456';
+    this.nickname = '华为用户';
+    this.avatar = $r('app.media.default_avatar');
   }
 
   mockUnLink() {
-    this.isLink = false
-    this.phone = ''
-    this.nickname = ''
-    this.avatar = ''
+    this.isLink = false;
+    this.phone = '';
+    this.nickname = '';
+    this.avatar = '';
   }
 }
 
@@ -50,29 +50,18 @@ export class LocationInfo {
 }
 
 export enum DeleteItems {
-  Address = 0,
-  Tourist = 1
+  Address = 0, Tourist = 1
 }
 
 export const enum AppStorageMap {
-  ATTRACTION_LIST = 'attractionList',
-  CATERING_LIST = 'cateringList',
-  ACCOMMODATION_LIST = 'accommodationList',
-  TOILET_LIST = 'toiletList'
+  ATTRACTION_LIST = 'attractionList', CATERING_LIST = 'cateringList', ACCOMMODATION_LIST = 'accommodationList', TOILET_LIST = 'toiletList'
 }
 
 export enum TabBarType {
-  HOME = 0,
-  TICKET = 1,
-  GUIDE = 2,
-  MINE = 3
+  HOME = 0, TICKET = 1, GUIDE = 2, MINE = 3
 }
 
 export class FuncObj {
-  deleteFunc: (id: string, func: () => void) => void = () => {
-  };
-  reloadFunc: () => void = () => {
-  };
   id: string = '';
 
   constructor(deleteFunc: (id: string, func: () => void) => void, reloadFunc: () => void, id: string) {
@@ -80,11 +69,14 @@ export class FuncObj {
     this.reloadFunc = reloadFunc;
     this.id = id;
   }
+
+  deleteFunc: (id: string, func: () => void) => void = () => {
+  };
+  reloadFunc: () => void = () => {
+  };
 }
 
 export class Params {
-  deleteFunc: (id: string) => void = () => {
-  };
   id: string = '';
   list: AddressInfo[] = [];
 
@@ -93,14 +85,19 @@ export class Params {
     this.id = id;
     this.list = list;
   }
+
+  deleteFunc: (id: string) => void = () => {
+  };
 }
 
+@ObservedV2
 export class Page {
-  index: number = 0;
+  @Trace time: number = 0;
+  @Trace index: number = 0;
 }
 
 export class WindowSize {
-  width: number = 0
-  height: number = 0
+  width: number = 0;
+  height: number = 0;
 }
 

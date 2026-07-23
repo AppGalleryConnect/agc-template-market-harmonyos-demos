@@ -79,7 +79,6 @@ export struct SimpleProgressBar {
         .layoutWeight(1)
         .height(15)
         .selectedColor(true?$r('sys.color.alert'):$r('sys.color.comp_background_emphasize'))
-        .trackColor(true?'#3fff':$r('sys.color.comp_background_tertiary'))
         .showSteps(false)
         .showTips(false)
         .animation({ duration: 100, curve: Curve.Smooth })

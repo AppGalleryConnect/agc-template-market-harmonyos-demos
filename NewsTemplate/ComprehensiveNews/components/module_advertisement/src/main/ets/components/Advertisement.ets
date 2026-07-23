@@ -67,6 +67,13 @@ export struct AdvertisementComponent {
     })
   }
 
+  aboutToDisappear(): void {
+    if (this.timeOutIndex !== -1) {
+      clearTimeout(this.timeOutIndex);
+      this.timeOutIndex = -1;
+    }
+  }
+
   build() {
     if (this.adType === 1) {
       NavDestination() {

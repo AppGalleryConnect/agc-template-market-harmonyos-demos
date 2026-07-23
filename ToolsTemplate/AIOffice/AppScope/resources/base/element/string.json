@@ -6,11 +6,15 @@
     },
     {
       "name": "agcit_huawei_ai_office",
-      "value": "1.0.0"
+      "value": "1.0.1"
     },
     {
       "name": "agcittype_huawei_ai_office",
       "value": "industryTemplate"
+    },
+    {
+      "name": "agcitkid_huawei_ai_office",
+      "value": "agcit_huawei_common_login/1.0.1,agcit_huawei_common_feedback/1.0.1,agcit_huawei_ai_office_module_copilot/1.0.0"
     }
   ]
 }

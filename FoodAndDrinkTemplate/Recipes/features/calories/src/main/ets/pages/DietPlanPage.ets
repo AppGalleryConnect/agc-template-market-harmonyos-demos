@@ -3,6 +3,7 @@ import { LengthMetrics } from '@kit.ArkUI';
 import { DietPlanPageVM } from '../viewModels/DietPlanPageVM';
 import { FoodCalories, FoodCategory, MyMenuItem } from '../types/Index';
 import { emitter } from '@kit.BasicServicesKit';
+import { Logger } from 'commonlib';
 
 @Builder
 export function DietPlanPageBuilder() {
@@ -87,7 +88,7 @@ struct DietPlanPage {
             .optionHeight(296)
             .menuItemContentModifier(new MyMenuItem())
             .onSelect((index: number, text?: string | undefined) => {
-              console.info('Select:' + index)
+              Logger.info('Select:' + index)
               this.vm.selectIndex = index;
               if (text) {
                 this.vm.selectText = text;
@@ -261,7 +262,7 @@ struct DietPlanPage {
             .optionHeight(296)
             .menuItemContentModifier(new MyMenuItem())
             .onSelect((index: number, text?: string | undefined) => {
-              console.info('Select:' + index)
+              Logger.info('Select:' + index)
               this.vm.selectIndex = index;
               if (text) {
                 this.vm.selectText = text;

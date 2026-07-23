@@ -1,4 +1,5 @@
-import { TabListItem, ServiceEntryItem, SwiperBanner, MineServiceItem, KEMUTabListItem } from '../types/Types';
+import { TabBarType } from '@ohos_agcit/driver_license_exam_commonlib';
+import { TabListItem, MineServiceItem, KEMUTabListItem } from '../types/Types';
 
 export const TAB_LIST: TabListItem[] = [
   {
@@ -31,5 +32,17 @@ export const KEMUTAB_LIST: KEMUTabListItem[] = [
     label: $r('app.string.subject_four')
   },
 ];
+
+export interface TabBarItem {
+  id: TabBarType;
+  title: ResourceStr;
+  activeIcon: ResourceStr;
+}
+
+export class PhoneConstants {
+  static readonly LEFT_TAB_BAR_WIDTH: number = 96;
+  static readonly LEFT_TAB_BAR_ITEM_HEIGHT: number = 200;
+  static readonly BOTTOM_TAB_BAR_HEIGHT: number = 48;
+}
 
 

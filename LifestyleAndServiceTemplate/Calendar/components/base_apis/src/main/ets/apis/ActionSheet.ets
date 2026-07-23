@@ -58,6 +58,7 @@ class ActionSheetOption {
    */
   backgroundColor?: ResourceStr = ''
   onWillAppear?: () => void
+  keyboardAvoidMode?: SheetKeyboardAvoidMode = SheetKeyboardAvoidMode.RESIZE_ONLY
 }
 
 class ActionSheetParams extends ActionSheetOption {
@@ -79,6 +80,7 @@ class ActionSheetParams extends ActionSheetOption {
     this.onCancel = option.onCancel || undefined
     this.onClose = option.onClose || undefined
     this.onWillAppear = option.onWillAppear || undefined
+    this.keyboardAvoidMode = option.keyboardAvoidMode || SheetKeyboardAvoidMode.RESIZE_ONLY
 
   }
 }
@@ -107,7 +109,7 @@ class ActionSheet {
     params.close = (id: string): Promise<void> => this.close(uiContext, id)
     let contentNode = new ComponentContent(uiContext, wrapBuilder(defaultBuilder), params)
     let sheetOption: SheetOptions = {
-      keyboardAvoidMode: SheetKeyboardAvoidMode.RESIZE_ONLY,
+      keyboardAvoidMode: params.keyboardAvoidMode ?? SheetKeyboardAvoidMode.RESIZE_ONLY,
       height: params.height,
       detents: params.detents,
       preferType: params.preferType || SheetType.CENTER,
@@ -160,7 +162,7 @@ class ActionSheet {
       uiContext.closeBindSheet(val?.content).then(() => {
         val?.params.onClose?.()
         this.contentNodeMap.delete(key)
-      }).catch((error:BusinessError) => {
+      }).catch((error: BusinessError) => {
         UtilLog.error(TAG, 'closeBindSheet error' + error)
       })
     }

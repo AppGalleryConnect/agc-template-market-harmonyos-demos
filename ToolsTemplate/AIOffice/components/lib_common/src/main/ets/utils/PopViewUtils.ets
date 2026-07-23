@@ -1,5 +1,4 @@
-import { ComponentContent, promptAction } from '@kit.ArkUI';
-import { common } from '@kit.AbilityKit';
+import { ComponentContent, promptAction, window } from '@kit.ArkUI';
 import { Logger } from './Logger';
 
 const TAG = '[PopViewUtils]'
@@ -8,8 +7,14 @@ enum PopViewShowType {
   OPEN
 }
 
-async function getUIContext() {
-  return (await (getContext() as common.UIAbilityContext).windowStage.getMainWindow()).getUIContext();
+async function getUIContext(): Promise<UIContext | undefined> {
+  try {
+    const winStage = AppStorage.get('windowStage') as window.WindowStage;
+    return (await winStage.getMainWindow()).getUIContext();
+  } catch (error) {
+    Logger.error(TAG, 'getUIContext error: ' + JSON.stringify(error));
+    return undefined;
+  }
 }
 
 interface PopViewModel {
@@ -22,7 +27,7 @@ interface PopViewModel {
  */
 export class PopViewUtils {
   private static popShare: PopViewUtils;
-  private static uiContext: UIContext;
+  private static uiContext: UIContext | undefined;
   private infoList: PopViewModel[] = [];
   private sheetList: PopViewModel[] = [];
 

@@ -1,4 +1,4 @@
-export { CityManager } from './src/main/ets/utils/Utils';
+export { CityManager, SystemSceneUtils } from './src/main/ets/utils/Utils';
 
 export { IPosition } from './src/main/ets/types/Types';
 

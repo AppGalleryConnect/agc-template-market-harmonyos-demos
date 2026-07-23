@@ -1,4 +1,5 @@
-import { getColor } from '@agctemplate/resources';
+import { AiBarHeight, AppStorageKeys, BreakPoint, BreakPointValue, FontModel } from '@agctemplate/widgets';
+import { AppStorageV2 } from '@kit.ArkUI';
 
 /**
  * 单个Tab
@@ -8,19 +9,12 @@ export struct Tab {
   @Param isFirstTimeIn: boolean = false; // 优化首次进入无弹跳效果
   @Param isSelected: boolean = false;
   @Param isDark: boolean = false;
-  @Param tabHeaderInfo: TabHeaderInfo = new TabHeaderInfo(undefined!, false, undefined!, undefined!, undefined!);
-
-  @Builder
-  SymbolIcon() {
-    Image(this.isSelected ? this.tabHeaderInfo.iconOn : (!this.isDark ? this.tabHeaderInfo.iconOff :
-    this.tabHeaderInfo.iconDarkOff))
-      .animation({
-        duration: this.isSelected ? 500 : 0,
-        curve: Curve.EaseOut,
-        iterations: 1,
-        playMode: PlayMode.Normal,
-      })
-  }
+  @Param tabHeaderInfo: TabHeaderInfo = new TabHeaderInfo(undefined!, false, undefined!);
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
+  @Local currentBreakpoint: BreakPoint = AppStorageV2.connect(BreakPoint, AppStorageKeys.CURRENT_BREAK_POINT,
+    () => new BreakPoint(BreakPointValue.SM))!;
+  @Local aiBarHeight: AiBarHeight = AppStorageV2.connect(AiBarHeight, AppStorageKeys.AI_BAR_HEIGHT,
+    () => new AiBarHeight())!;
 
   build() {
     Flex({
@@ -28,21 +22,20 @@ export struct Tab {
       justifyContent: FlexAlign.Center,
       alignItems: ItemAlign.Center
     }) {
-      Stack() {
-        this.SymbolIcon()
-        // 切换选中状态时，中间态叠加颜色处理
-        this.SymbolIcon()
-      }.height(24).width(24)
+      SymbolGlyph(this.tabHeaderInfo.icon)
+        .fontSize(24)
+        .fontColor(this.isSelected ? ['#EC6E45'] : [$r('sys.color.icon_primary')])
 
       Text(this.tabHeaderInfo.name)
-        .fontColor(this.isSelected ? this.tabHeaderInfo.textColor[0] : (!this.isDark ? this.tabHeaderInfo.textColor[1] :
-        this.tabHeaderInfo.textColor[2]))
-        .fontSize($r('sys.float.Caption_M'))
-        .height(14)
+        .fontColor(this.isSelected ? '#EC6E45' : $r('sys.color.font_primary'))
+        .fontSize(this.fontModel.getFg(10))
+        .fontWeight(FontWeight.Medium)
         .textAlign(TextAlign.Center)
         .margin({ top: 2 })
     }
-    .width('100%').height('100%')
+    .width('100%')
+    .height('100%')
+    .padding(4)
   }
 }
 
@@ -50,21 +43,12 @@ export class TabHeaderInfo {
   index: number = 0;
   name: Resource;
   showSearch: boolean = false;
-  textColor: Array<Resource> =
-    [getColor('app.color.orange'), $r('sys.color.font_secondary'),
-      $r('sys.color.font_on_secondary')];
-  iconOn: Resource
-  iconOff: Resource
-  iconDarkOn?: Resource
-  iconDarkOff: Resource
+  icon: Resource;
 
-  constructor(name: Resource, showSearch: boolean, iconOn: Resource, iconOff: Resource, iconDarkOff: Resource,
-    index?: number) {
+  constructor(name: Resource, showSearch: boolean, icon: Resource, index?: number) {
     this.name = name;
     this.showSearch = showSearch;
-    this.iconOn = iconOn;
-    this.iconOff = iconOff;
-    this.iconDarkOff = iconDarkOff
+    this.icon = icon;
     if (index) {
       this.index = index
     }

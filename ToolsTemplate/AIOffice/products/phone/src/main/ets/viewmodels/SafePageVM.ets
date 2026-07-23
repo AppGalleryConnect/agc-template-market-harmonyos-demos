@@ -1,4 +1,4 @@
-import { BaseViewModel, PreferenceUtils, RouterMap, RouterUtils } from 'lib_common';
+import { BaseViewModel, GlobalContext, PreferenceUtils, RouterMap, RouterUtils } from 'lib_common';
 import { agreePrivacyKey } from '../common/Constants';
 
 @ObservedV2
@@ -22,6 +22,6 @@ export class SafePageVM extends BaseViewModel {
   }
 
   quitApp() {
-    getContext().getApplicationContext().killAllProcesses();
+    GlobalContext.getContext().getApplicationContext().killAllProcesses();
   }
 }

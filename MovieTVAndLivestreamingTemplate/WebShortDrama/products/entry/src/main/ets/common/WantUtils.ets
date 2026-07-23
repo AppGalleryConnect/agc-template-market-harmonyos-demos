@@ -1,12 +1,13 @@
 import { AbilityConstant, Want } from '@kit.AbilityKit';
 import { AppStorageV2 } from '@kit.ArkUI';
-import { RouterToNews,PushActionParams, PushUtils } from '@agctemplate/widgets'
+import { RouterToNews,PushActionParams, PushUtils, AppLinkingRouter } from '@agctemplate/widgets'
 import { ContinueModel } from '@agctemplate/widgets';
 import { jumpDetailPage, MyMessageStorage } from '@agctemplate/detail';
 
 // import { SOURCE_FORM_CARD } from './Constants';
 import { FormCardRouter } from './Types';
 import { Logger } from '@agctemplate/utils';
+import { url } from '@kit.ArkTS';
 
 const TAG = '[WantUtils]';
 
@@ -40,6 +41,31 @@ export class WantUtils {
        RouterToNews.routerToNewsById(articleId);
      }
    }
+
+  public static handleAppLinkingWant(want: Want) {
+    /**
+     * 处理want中获取传入的链接信息
+     * 例如传入的url为：https://linking.xiaobingtang.cn/DramaDetail?id=drama_1&index=7
+     */
+    const uri = want?.uri;
+    if (uri) {
+      try {
+        const urlObject = url.URL.parseURL(uri);
+        const dramaId = urlObject.params.get('id');
+        const dramaIndex = urlObject.params.get('index');
+        if (urlObject.pathname.includes('DramaDetail') && dramaId) {
+          const appLinkRouter: AppLinkingRouter =
+            AppStorageV2.connect(AppLinkingRouter, () => new AppLinkingRouter())!;
+          appLinkRouter.id = new Date().getTime();
+          appLinkRouter.dramaId = dramaId;
+          appLinkRouter.dramaIndex = Number(dramaIndex) ?? 0;
+        }
+        Logger.info(TAG, `Success to handle applinking want. pathname: ${urlObject.pathname}, dramaId: ${dramaId}`)
+      } catch (e) {
+        Logger.error(TAG, `Failed to handle applinking want. uri: ${uri}, Code: ${e.code}, message: ${e.message}`);
+      }
+    }
+  }
 
   /**
    * 服务卡片事件处理

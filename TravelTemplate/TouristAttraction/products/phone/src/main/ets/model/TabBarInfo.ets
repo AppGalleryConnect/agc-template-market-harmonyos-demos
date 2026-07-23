@@ -8,7 +8,7 @@ export interface TabBarData {
   id: TabBarType;
   title: ResourceStr;
   activeIcon: ResourceStr;
-  defaultIcon: ResourceStr;
+  defaultIcon: Resource;
   component: WrappedBuilder<[]>
 }
 
@@ -16,29 +16,29 @@ export const TABS_INFO: TabBarData[] = [
   {
     id: TabBarType.HOME,
     title: '首页',
-    activeIcon: $r('app.media.home_active'),
-    defaultIcon: $r('app.media.home_default'),
+    activeIcon: $r('sys.symbol.house'),
+    defaultIcon: $r('sys.symbol.house'),
     component: wrapBuilder(HomeBuilder),
   },
   {
     id: TabBarType.TICKET,
     title: '门票',
     activeIcon: $r('app.media.tickets_active'),
-    defaultIcon: $r('app.media.tickets_default'),
+    defaultIcon: $r('sys.symbol.coupon'),
     component: wrapBuilder(TicketsBuilder),
   },
   {
     id: TabBarType.GUIDE,
     title: '导览',
     activeIcon: $r('app.media.guide_active'),
-    defaultIcon: $r('app.media.guide_default'),
+    defaultIcon: $r('sys.symbol.map_badge_local'),
     component: wrapBuilder(GuideBuilder),
   },
   {
     id: TabBarType.MINE,
     title: '我的',
     activeIcon: $r('app.media.mine_active'),
-    defaultIcon: $r('app.media.mine_default'),
+    defaultIcon: $r('sys.symbol.person'),
     component: wrapBuilder(MineBuilder),
   },
 ]

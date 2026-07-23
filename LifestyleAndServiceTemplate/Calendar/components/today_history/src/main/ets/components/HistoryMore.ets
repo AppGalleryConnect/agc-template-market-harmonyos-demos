@@ -1,7 +1,9 @@
 import { BaseNavTitle } from 'base_apis'
-import { TodayHistoryData } from '../model/Model'
+import dayjs from 'dayjs'
+import { HistoryParams, TodayHistoryData } from '../model/Model'
 import { ThemeVM } from '../viewModel/ThemeController'
-import { TodayHistoryCard } from './TodayHistoryCard'
+import { HistoryDaysCard } from './HistoryDaysCard'
+import { HistoryDetailsCard } from './HistoryDetailsCard'
 
 @Builder
 export function HistoryMoreBuilder() {
@@ -10,7 +12,9 @@ export function HistoryMoreBuilder() {
 
 @ComponentV2
 export struct HistoryMore {
+  @Local selectDate: Date = new Date()
   @Local todayHistoryList: TodayHistoryData[] = []
+  @Local todayDayList: TodayHistoryData[] = []
   @Local pathStack: NavPathStack = new NavPathStack()
   @Local themeVM: ThemeVM = ThemeVM.instance;
 
@@ -22,18 +26,55 @@ export struct HistoryMore {
         currentTheme: this.themeVM.selectColor,
         routerModule: this.pathStack,
       })
-      Column() {
-        TodayHistoryCard({
-          todayHistoryList: this.todayHistoryList,
-        })
+
+      Scroll() {
+        Column() {
+          Stack() {
+            Image($r('app.media.title_bg'))
+              .width('100%')
+              .height(184)
+              .borderRadius(18)
+              .clip(true)
+              .objectFit(ImageFit.Cover)
+            Column({ space: 8 }) {
+              Text('历史上的今天')
+                .fontSize(24)
+                .fontWeight(FontWeight.Bold)
+                .fontColor($r('sys.color.font_on_primary'))
+              Text(`-${dayjs(this.selectDate).format('YYYY-MM-DD')}-`)
+                .fontSize(16)
+                .fontColor($r('sys.color.font_on_primary'))
+            }
+          }.padding({ left: 16, right: 16 })
+
+
+          Column() {
+            HistoryDaysCard({
+              todayDayList: this.todayDayList,
+            })
+          }
+          .padding({ left: 16, right: 16, top: 32 })
+
+          Column() {
+            HistoryDetailsCard({
+              todayHistoryList: this.todayHistoryList,
+            })
+          }
+          .layoutWeight(1)
+          .padding({ left: 16, right: 16, top: 32 })
+        }
       }
       .layoutWeight(1)
-      .padding({ left: 16, right: 16, top: 16 })
+      .edgeEffect(EdgeEffect.Spring)
+      .scrollBar(BarState.Off)
     }
     .hideTitleBar(true)
     .onReady((ctx) => {
       this.pathStack = ctx.pathStack
-      this.todayHistoryList = this.pathStack.getParamByName('HistoryMore')[0] as []
+      const params = this.pathStack.getParamByName('HistoryMore')[0] as HistoryParams
+      this.todayHistoryList = params.todayHistoryList
+      this.todayDayList = params.todayDayList
+      this.selectDate = params.selectDate
     })
   }
 }

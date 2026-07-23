@@ -40,6 +40,8 @@ export class SearchViewModel {
   @Trace showGuessLike: boolean = true;
   @Trace showHotSearch: boolean = true;
   @Trace isShallowWindow: boolean = false;
+  @Trace windowTopPadding: number = 40;
+  @Trace windowBottomPadding: number = 28;
   @Trace tabBarScroller: Scroller = new Scroller();
   @Trace scroller: Scroller = new Scroller();
   @Trace controller: SearchViewController = new SearchViewController();
@@ -123,6 +125,8 @@ export class SearchViewModel {
     this.showGuessLike = params.showGuessLike!;
     this.showHotSearch = params.showHotSearch!;
     this.isShallowWindow = params.isShallowWindow!;
+    this.windowTopPadding = params.windowTopPadding!;
+    this.windowBottomPadding = params.windowBottomPadding!;
     this.tabBarScroller = params.tabBarScroller!;
     this.scroller = params.scroller!;
     this.controller = params.controller!;

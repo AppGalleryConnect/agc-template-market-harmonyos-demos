@@ -13,18 +13,22 @@
  * limitations under the License.
  */
 
-import { UIAbility } from '@kit.AbilityKit';
-import { window } from '@kit.ArkUI';
+import { AbilityConstant, UIAbility, Want } from '@kit.AbilityKit';
+import { AppStorageV2, window } from '@kit.ArkUI';
 import { RouterTable } from '../model/RouterTable';
 import { UtilLog } from '@hw-agconnect/util-log';
+import { FormCardJump } from '../types/Types';
+import { ShortcutRouter } from '../model/Types';
 
 const TAG = '[EntryAbility]';
 
 export default class EntryAbility extends UIAbility {
 
-  onCreate(): void {
+  onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
     // 初始化路由表
+    UtilLog.info(TAG, 'Ability onCreate');
     RouterTable.routerInit();
+    this.handleShortcutWant(want);
   }
 
   onDestroy(): void {
@@ -41,7 +45,7 @@ export default class EntryAbility extends UIAbility {
         }
         UtilLog.info(TAG, 'Succeeded in loading the content.');
       });
-    }catch (e) {
+    } catch (e) {
       UtilLog.info(TAG, 'Ability onWindowStageCreate error');
     }
   }
@@ -55,7 +59,37 @@ export default class EntryAbility extends UIAbility {
   }
 
   onBackground(): void {
+    const shortcutRouter: ShortcutRouter = AppStorageV2.connect(ShortcutRouter, () => new ShortcutRouter())!;
+    shortcutRouter.pageName = '';
     UtilLog.info(TAG, 'Ability onBackground.');
+  }
+
+  onNewWant(want: Want, launchParam: AbilityConstant.LaunchParam): void {
+    UtilLog.info(TAG, 'onNewWant.',want);
+    this.resolvePagePath(want);
+    this.handleShortcutWant(want)
+  }
+
+  resolvePagePath(want: Want) {
+    let parameters = want?.parameters;
+    if (parameters?.url) {
+      let formCardJump: FormCardJump = AppStorageV2.connect(FormCardJump, () => new FormCardJump())!;
+      formCardJump.form = JSON.parse(parameters?.params.toString() || '');
+      formCardJump.form.id = new Date().getTime()
+    }
+  }
+
+  /**
+   * 快捷方式处理
+   * @param want
+   */
+  handleShortcutWant(want: Want) {
+    UtilLog.info(TAG, 'shortcut11111')
+    const shortCutKey = want?.parameters?.shortCutKey as string ?? '';
+    if (shortCutKey) {
+      const shortcutRouter: ShortcutRouter = AppStorageV2.connect(ShortcutRouter, () => new ShortcutRouter())!;
+      shortcutRouter.pageName = shortCutKey;
+    }
   }
 
 };

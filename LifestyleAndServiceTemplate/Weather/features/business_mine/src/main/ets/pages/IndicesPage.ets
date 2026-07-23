@@ -147,7 +147,7 @@ export struct IndicesPage {
       Grid() {
         GridItem() {
           Column({ space: CommonConstants.SPACE_4 }) {
-            Text(this.vm.weather!.shellTemp + '°C').mainStyle()
+            Text(this.vm.weather?.desc).mainStyle()
             Text('天气').subStyle()
           }
         }
@@ -184,7 +184,7 @@ export struct IndicesPage {
 
         GridItem() {
           Column({ space: CommonConstants.SPACE_4 }) {
-            Text(this.vm.weather!.winSpeed + '级 ' + this.vm.weather!.windDir).mainStyle()
+            Text(this.vm.weather!.windSpeed + '级 ' + this.vm.weather!.windDir).mainStyle()
             Text('风力风向').subStyle()
           }
         }

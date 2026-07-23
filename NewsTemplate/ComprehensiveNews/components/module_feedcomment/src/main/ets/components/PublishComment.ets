@@ -1,4 +1,5 @@
-import { GlobalContextUtils, PopViewUtils } from 'lib_common'
+import { AppStorageV2 } from '@kit.ArkUI'
+import { GlobalContextUtils, PopViewUtils, WindowModel } from 'lib_common'
 import { FeedCommentVM } from '../viewmodel/FeedCommentVM'
 import { CommentParams } from '../model/Model'
 
@@ -16,6 +17,7 @@ export struct PublishComment {
   @Local emojiActive: boolean = false
   @Local keyBordHeight: number = 0
   @Local feedCommentVM: FeedCommentVM = FeedCommentVM.instance;
+  @Local windowModel: WindowModel = AppStorageV2.connect(WindowModel, () => new WindowModel())!;
 
   build() {
     Column() {
@@ -61,6 +63,11 @@ export struct PublishComment {
         .borderRadius(40)
         .backgroundColor(this.commendText.trim() === '' ? '#BEC9F0' : '#5C79D9')
       }
-    }.padding(16)
+    }.padding({
+      top: 8,
+      bottom: 8 + this.windowModel.windowBottomPadding,
+      right: 16,
+      left: 16
+    })
   }
 }

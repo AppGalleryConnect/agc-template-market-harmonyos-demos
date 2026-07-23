@@ -99,5 +99,17 @@ export enum RouterMap {
   Order_Detail_PAGE = 'OrderDetailPage',
   // 浏览记录页面
   BROWSING_HISTORY_PAGE = 'BrowsingHistoryPage',
+  // 广告页
+  LAUNCH_AD_PAGE = 'LaunchAdPage',
+  // 人工客服页面
+  CUSTOM_SERVICE_PAGE = 'CustomServicePage',
+  // 我的下载页面
+  MY_DOWNLOAD_PAGE = 'MyDownloadPage',
+  // 关于页面
+  SETTING_ABOUT = 'SettingAbout',
+  // 会员中心页面
+  MEMBER_CENTER_PAGE = 'MemberCenterPage',
+  // 搜索结果页面
+  RESULT_PAGE = 'ResultPage'
 }
 

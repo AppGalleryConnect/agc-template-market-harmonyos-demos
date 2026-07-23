@@ -17,7 +17,7 @@ let myHandler = async function (event, context, callback, logger) {
                 "totalCount": 80,
                 "latestUpdate": 3,
                 "category": ["年代", "情感", "家庭"],
-                "promotionalUrl": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/app-d45y3/drama_video/1.m3u8",
+                "promotionalUrl": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/app-d45y3/drama_video/3.m3u8",
                 "actorInfo": [{
                     "id": "1",
                     "name": "徐梦圆",
@@ -28,10 +28,10 @@ let myHandler = async function (event, context, callback, logger) {
                     "avatar": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/app-d45y3/avatar/man1.png"
                 }, {
                     "id": "3",
-                    "name": "何瑞聪",
+                    "name": "星野零",
                     "avatar": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/app-d45y3/avatar/man2.png"
                 }],
-                "popular": "200万",
+                "popular": "180万",
                 "curIndex": 3,
                 "favoriteCount": 172,
                 "isFavorite": false,
@@ -53,14 +53,14 @@ let myHandler = async function (event, context, callback, logger) {
             "promotionalUrl": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/app-d45y3/drama_video/2.m3u8",
             "actorInfo": [{
                 "id": "1",
-                "name": "徐梦圆",
+                "name": "墨瞳",
                 "avatar": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/app-d45y3/avatar/woman1.png"
             }, {
                 "id": "2",
-                "name": "何瑞聪",
+                "name": "雷恩",
                 "avatar": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/app-d45y3/avatar/man1.png"
             }],
-            "popular": "200万",
+            "popular": "190万",
             "curIndex": 4,
             "favoriteCount": 164,
             "isFavorite": false,
@@ -82,15 +82,15 @@ let myHandler = async function (event, context, callback, logger) {
             "promotionalUrl": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/app-d45y3/drama_video/3.m3u8",
             "actorInfo": [{
                 "id": "1",
-                "name": "徐梦圆",
+                "name": "赛博",
                 "avatar": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/app-d45y3/avatar/woman1.png"
             }, {
                 "id": "2",
-                "name": "何瑞聪",
+                "name": "萧逸尘",
                 "avatar": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/app-d45y3/avatar/man1.png"
             }, {
                 "id": "3",
-                "name": "何瑞聪",
+                "name": "柳随风",
                 "avatar": "https://agc-storage-drcn.platform.dbankcloud.cn/v0/app-d45y3/avatar/man2.png"
             }],
             "popular": "200万",

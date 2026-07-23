@@ -19,7 +19,7 @@ export struct SearchTipPanel {
               Column() {
                 SymbolGlyph($r('sys.symbol.magnifyingglass'))
                   .fontSize(16)
-                  .fontColor([getColor('app.color.normal_font_color')])
+                  .fontColor([$r('sys.color.icon_secondary')])
               }
 
               Column() {
@@ -28,7 +28,7 @@ export struct SearchTipPanel {
                     if (itemText.text && itemText.text !== '') {
                       Span(itemText.text)
                         .fontColor(itemText.isHighlight ?
-                        getColor('app.color.high_light_font_color') : getColor('app.color.bold_font_color'))
+                        getColor('app.color.high_light_font_color') : $r('sys.color.font_primary'))
                     }
                   }, (itemText: SlicedText, index: number) => {
                     return index + itemText.text
@@ -69,7 +69,6 @@ export struct SearchTipPanel {
         .justifyContent(FlexAlign.Center)
       }
     }
-    .backgroundColor('#F1F3F5')
     .width('100%')
     .height('100%')
     .alignItems(VerticalAlign.Top)
@@ -89,7 +88,6 @@ export struct SearchTipPanel {
     }
     .padding(12)
     .borderRadius(16)
-    .backgroundColor('#F1F3F5')
     .width('100%')
   }
 }

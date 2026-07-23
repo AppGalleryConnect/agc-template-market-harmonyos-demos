@@ -17,8 +17,9 @@ export struct SearchHistoryPanel {
           Stack() {
             Column() {
               Text(getString('app.string.drama_search_history_title'))
-                .fontSize(14)
-                .fontColor(getColor('app.color.normal_font_color'))
+                .fontSize(18)
+                .fontWeight(700)
+                .fontColor($r('sys.color.font_primary'))
             }
             .width('100%')
             .alignItems(HorizontalAlign.Start)
@@ -27,8 +28,8 @@ export struct SearchHistoryPanel {
               Row() {
                 Column() {
                   SymbolGlyph($r('sys.symbol.trash'))
-                    .fontSize(16)
-                    .fontColor([getColor('app.color.normal_font_color')])
+                    .fontSize(24)
+                    .fontColor([$r('sys.color.icon_primary')])
                 }
               }
               .onClick(() => {
@@ -61,7 +62,7 @@ export struct SearchHistoryPanel {
             }
             .margin({ bottom: 6, right: 12 })
             .borderRadius(14)
-            .backgroundColor(getColor('app.color.component_background_color'))
+            .backgroundColor($r('sys.color.comp_background_tertiary'))
             .onClick(() => {
               this.searchRecordClickEvent(record)
             })

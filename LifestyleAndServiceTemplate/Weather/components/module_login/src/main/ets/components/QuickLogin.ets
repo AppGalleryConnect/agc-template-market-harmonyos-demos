@@ -16,12 +16,10 @@
 import { loginComponentManager, LoginWithHuaweiIDButton } from '@kit.AccountKit';
 import { BusinessError } from '@kit.BasicServicesKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
-import { privacyManager } from '@kit.StoreKit';
-import { common } from '@kit.AbilityKit';
+import { PersistenceV2 } from '@kit.ArkUI';
+import { ToastDialog as promptAction } from '@hw-agconnect/ui-toast';
 import { AccountUtil } from '../utils/AccountUtil';
 import { UserInfo } from '../model/UserInfo';
-import { PersistenceV2, promptAction, router } from '@kit.ArkUI';
-import { connection } from '@kit.NetworkKit';
 import { ErrorCode } from '../model/ErrorCode';
 import { AgreementDialog } from './AgreementDialog';
 
@@ -36,6 +34,7 @@ export struct QuickLogin {
   @Param @Require icon: ResourceStr
   @Param @Require loginBtnBgColor: string | ResourceStr
   @Param @Require appName: string = ''
+  @Param horizontalMargin: number = 16;
   // 华为账号用户认证协议链接，此处仅为示例，实际开发过程中，出于可维护性、安全性等方面考虑，域名不建议硬编码在本地
   private static USER_AUTHENTICATION_PROTOCOL: string = ''
   // 是否为mock数据
@@ -228,18 +227,17 @@ export struct QuickLogin {
     } catch (err) {
       hilog.error(this.domainId, this.logTag,
         `Failed to login with LoginWithHuaweiIDButton, errCode: ${err.code}, errMessage: ${err.message}`);
-      AlertDialog.show(
-        {
-          message: '服务或网络异常，请稍后重试',
-          offset: { dx: 0, dy: -12 },
-          alignment: DialogAlignment.Bottom,
-          autoCancel: false,
-          confirm: {
-            value: '知道了',
-            action: () => {
-            },
+      this.getUIContext().showAlertDialog({
+        message: '服务或网络异常，请稍后重试',
+        offset: { dx: 0, dy: -12 },
+        alignment: DialogAlignment.Bottom,
+        autoCancel: false,
+        confirm: {
+          value: '知道了',
+          action: () => {
           },
         },
+      },
       );
     }
   }
@@ -258,6 +256,12 @@ export struct QuickLogin {
     Scroll() {
       Column() {
         Column() {
+          Column()
+            .layoutWeight(1)
+            .constraintSize({
+              minHeight: 24,
+              maxHeight: 154,
+            })
           Column() {
             Image(this.icon)
               .width(48)
@@ -269,6 +273,12 @@ export struct QuickLogin {
               })
               .onError(() => {
                 hilog.error(0x0000, 'testTag', 'appIcon loading fail');
+              })
+            Column()
+              .layoutWeight(1)
+              .constraintSize({
+                minHeight: 24,
+                maxHeight: 64,
               })
             Column() {
               Text(this.quickLoginAnonymousPhone)
@@ -293,10 +303,14 @@ export struct QuickLogin {
                 .margin({
                   top: 8,
                 })
-            }.margin({
-              top: 64,
-            })
+            }
 
+            Column()
+              .layoutWeight(1)
+              .constraintSize({
+                minHeight: 24,
+                maxHeight: 56,
+              })
             Column() {
               LoginWithHuaweiIDButton({
                 params: {
@@ -325,11 +339,12 @@ export struct QuickLogin {
             }
             .height(40)
             .width('100%')
-            .margin({
-              top: 56,
-            })
           }.width('100%')
-
+          Column()
+            .layoutWeight(1)
+            .constraintSize({
+              minHeight: 24,
+            })
           Row() {
             Row() {
               Checkbox({ name: 'privacyCheckbox', group: 'privacyCheckboxGroup' })
@@ -393,17 +408,17 @@ export struct QuickLogin {
             bottom: 16,
           })
         }
-        .justifyContent(FlexAlign.SpaceBetween)
         .constraintSize({ minHeight: '100%' })
         .margin({
-          left: 16,
-          right: 16,
+          left: this.horizontalMargin,
+          right: this.horizontalMargin,
         })
       }
       .width('100%')
-      .height('100%')
-      .padding({ top: '154vp' })
+      .constraintSize({ minHeight: '100%' })
     }
     .edgeEffect(EdgeEffect.Spring)
+    .align(Alignment.Top)
+    .scrollBar(BarState.Off)
   }
 }

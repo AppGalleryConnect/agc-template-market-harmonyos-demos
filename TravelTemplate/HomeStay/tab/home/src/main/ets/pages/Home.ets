@@ -1,18 +1,18 @@
 import { common } from '@kit.AbilityKit';
+import { LengthMetrics } from '@kit.ArkUI';
 import {
   CalendarUtil,
-  CustomCalendarPickerDialog,
   DateInfo,
   DateModel,
-  getLastDayOfMonth,
   getRealTimeDate,
-  Price,
 } from 'calendar_select';
+import { CommonHeader } from 'component';
 import { Constants, NavPathName } from 'constant';
-import { CarouselImage, RoomType } from 'type';
+import { RoomType } from 'type';
 import { AccountUtil, Logger } from 'util';
 import { BasicInfoArea } from '../components/BasicInfoArea';
 import { EnhancedSource } from '../model/Index';
+import { GridRowColSetting } from '../common/GridRowColSetting';
 import { HomePageVM } from '../viewmodel/HomePageVM';
 
 @Builder
@@ -20,32 +20,23 @@ export function HomeBuilder() {
   Home();
 }
 
+@Builder
+export function HotelHomeBuilder() {
+  Home({ isHotelDetail: true });
+}
+
 @ComponentV2
 export struct Home {
+  @Param isHotelDetail: boolean = false;
   vm: HomePageVM = HomePageVM.instance;
-  private swiperController: SwiperController = new SwiperController();
   private scrollerForScroll: Scroller = new Scroller();
+  private flowScroller: Scroller = new Scroller();
   @Local isShow: boolean = false;
   @Local showIndex: number = 0;
-  @Local night: number = CalendarUtil.getNight() ?? 1;
-  @Local readyCloseDialog: boolean = false;
-  @Local priceList: Price[] = [];
-  @Local currentMonthDay: number[] = [];
-  @Local startDate: DateModel = CalendarUtil.getStartDate();
-  @Local endDate: DateModel = CalendarUtil.getEndDate();
   @Local currentUser: string | undefined = AccountUtil.getUserId();
+  @Local breakpoint: string = 'sm';
   @Consumer('homeTabIndex') homeTabIndex: number = 0;
   @Consumer('mainPathStack') mainPathStack: NavPathStack = new NavPathStack();
-  dialogController: CustomDialogController = new CustomDialogController({
-    builder: CustomCalendarPickerDialog({
-      priceList: this.priceList,
-    }),
-    alignment: DialogAlignment.Bottom,
-    customStyle: true,
-    onWillDismiss: () => {
-      this.dialogController.close();
-    },
-  });
 
   aboutToAppear() {
     this.initialDate();
@@ -64,29 +55,21 @@ export struct Home {
   }
 
   initialDate() {
-    // 首次初始化
     let dates: Promise<undefined> = new Promise(() => {
       if (!AppStorage.get('startDate') && !AppStorage.get('endDate')) {
-        this.startDate = getRealTimeDate();
-        let date = new Date();
-        let days = getLastDayOfMonth(date.getFullYear(), date.getMonth());
-        if (this.startDate.day >= days) {
-          this.endDate =
-            new DateModel(this.startDate.day - days + 1, this.startDate.week, this.startDate.month + 1,
-              this.startDate.year);
-        } else {
-          this.endDate =
-            new DateModel(this.startDate.day + 1, this.startDate.week, this.startDate.month, this.startDate.year);
-        }
+        let startDate = getRealTimeDate();
+        let nextDate = new Date(startDate.year, startDate.month - 1, startDate.day + 1);
+        let endDate =
+          new DateModel(nextDate.getDate(), nextDate.getDay(), nextDate.getMonth() + 1, nextDate.getFullYear());
 
-        CalendarUtil.setStartDate(this.startDate);
-        CalendarUtil.setCurrentDate(this.startDate);
-        CalendarUtil.setEndDate(this.endDate);
+        CalendarUtil.setStartDate(startDate);
+        CalendarUtil.setCurrentDate(startDate);
+        CalendarUtil.setEndDate(endDate);
       }
     });
 
     dates.then(() => {
-      Logger.info('init date success with startDate ' + this.startDate);
+      Logger.info('init date success');
     });
   }
 
@@ -96,48 +79,47 @@ export struct Home {
       {
         priceList: [],
       })
-      .backgroundColor('#f5f6fa')
-      .borderRadius(8);
+      .backgroundColor($r('sys.color.comp_background_primary'))
+      .borderRadius(16);
   }
 
   @Builder
   RoomInfoCard(item: RoomType) {
     Column({ space: 8 }) {
-      Image(item.roomTypeBanner).height(120).borderRadius(8).width('100%');
+      Image(item.roomTypeBanner).height(76).borderRadius(8).width('100%');
 
       Column({ space: 4 }) {
-        Text(item.roomTypeName).fontColor('#111111');
-        Text(`${item.roomTypeBedList.length}床·适用${item.occupancyLimit}人`).opacity(0.6).fontSize(14);
-        Row({ space: 4 }) {
+        Text(item.roomTypeName).fontColor($r('sys.color.font_primary')).fontWeight(FontWeight.Medium);
+        Text(`整套${item.bedroomNum}室·${item.roomTypeBedList.length}床·适用${item.occupancyLimit}人`)
+          .fontColor($r('sys.color.font_secondary'))
+          .fontSize(12);
+        Flex({ wrap: FlexWrap.Wrap, space: { main: LengthMetrics.vp(4), cross: LengthMetrics.vp(4) } }) {
           ForEach(item.labelList, (item: string) => {
             Text(item)
               .fontSize(10)
-              .fontColor('#007DFF')
-              .backgroundColor('#10007DFF')
-              .padding(4)
-              .borderRadius(4);
+              .fontColor($r('sys.color.font_emphasize'))
+              .backgroundColor($r('sys.color.comp_emphasize_tertiary'))
+              .padding({ top: 4, bottom: 4, left: 7, right: 7 })
+              .borderRadius(16);
           }, (item: string) => item);
         };
       }.alignItems(HorizontalAlign.Start).width(Constants.FULL_SCREEN);
 
       Row() {
-        Text() {
-          Span('￥').fontSize(12).fontWeight(500);
-          Span(`${this.vm.getPriceByDate(item.roomTypePriceList, CalendarUtil.getCurrentDate(), 0)}`)
-            .fontWeight(500);
-        };
+        Text(`￥${this.vm.getPriceByDate(item.roomTypePriceList, CalendarUtil.getCurrentDate(), 0)}`)
+          .fontSize(14).fontColor($r('sys.color.multi_color_08')).width('50%');
 
         Button('预订', { type: ButtonType.Normal, stateEffect: true })
-          .fontSize(12)
-          .borderRadius(4)
-          .backgroundColor('#007DFF')
-          .width(48)
-          .height(24)
+          .fontSize($r('sys.float.Body_M'))
+          .borderRadius($r('sys.float.corner_radius_level7'))
+          .backgroundColor($r('sys.color.comp_background_emphasize'))
+          .height(28)
+          .width('50%')
           .padding({
-            left: 10,
-            right: 10,
-            top: 6,
-            bottom: 6,
+            left: 8,
+            right: 8,
+            top: 4,
+            bottom: 4,
           })
           .onClick(() => {
             let currentUser = AccountUtil.getUserId();
@@ -157,7 +139,12 @@ export struct Home {
             }
           });
       }.width(Constants.FULL_SCREEN).justifyContent(FlexAlign.SpaceBetween);
-    }.width('100%').onClick(() => {
+    }
+    .width('100%')
+    .borderRadius(16)
+    .backgroundColor($r('sys.color.comp_background_primary'))
+    .padding(12)
+    .onClick(() => {
       this.mainPathStack.pushPathByName(NavPathName.HOTEL_DETAIL, item);
     });
   }
@@ -165,76 +152,85 @@ export struct Home {
   @Builder
   RecommendRoomListBuilder() {
     Column() {
-      Grid() {
+      Row() {
+        Text('房型推荐')
+          .fontSize(18)
+          .fontColor($r('sys.color.font_primary'))
+          .fontWeight(FontWeight.Bold)
+          .layoutWeight(1)
+        Row({ space: 4 }) {
+          Text('查看更多')
+            .fontSize(14)
+            .fontColor($r('sys.color.font_secondary'));
+          Image($r('app.media.icon_direction_right_gray'))
+            .size({
+              width: 12,
+              height: 24,
+            })
+            .objectFit(ImageFit.Contain);
+        }
+        .onClick(() => {
+          this.mainPathStack.pushPathByName(NavPathName.ROOMS, null);
+        })
+      }.margin({ bottom: 8 }).justifyContent(FlexAlign.SpaceBetween);
+
+      WaterFlow({ scroller: this.flowScroller }) {
         LazyForEach(this.vm.roomData, (item: RoomType) => {
           if (item.isRecommended) {
-            GridItem() {
+            FlowItem() {
               this.RoomInfoCard(item);
             };
           }
         });
       }
-      .columnsTemplate('1fr 1fr')
+      .columnsTemplate(GridRowColSetting.getWaterFloColumns(this.breakpoint))
       .scrollBar(BarState.Off)
       .rowsGap(10)
       .columnsGap(10)
       .nestedScroll({
         scrollForward: NestedScrollMode.PARENT_FIRST,
         scrollBackward: NestedScrollMode.SELF_FIRST,
-      }) ;
-
-      Row() {
-        Text('查看更多')
-          .fontSize(12)
-          .fontColor('#999999');
-        Image($r('app.media.icon_direction_right_gray'))
-          .size({
-            width: 12,
-            height: 12,
-          })
-          .objectFit(ImageFit.Contain);
-      }
-      .onClick(() => {
-        this.mainPathStack.pushPathByName(NavPathName.ROOMS, null);
-      })
-      .margin({ top: 24 })
-      .padding({
-        left: 16,
-        right: 16,
-        top: 4,
-        bottom: 4,
-      })
-      .justifyContent(FlexAlign.Center)
-      .alignItems(VerticalAlign.Center)
-      .backgroundColor('#F5F6FA')
-      .borderRadius(4);
+      });
     };
   }
 
   build() {
     NavDestination() {
-      Scroll(this.scrollerForScroll) {
-        Column() {
-          Swiper(this.swiperController) {
-            LazyForEach(this.vm.swiperData, (item: CarouselImage) => {
-              Image(item.image).height(320).width(Constants.FULL_SCREEN);
-            }, (item: CarouselImage) => item.id.toString());
-          }.cachedCount(2).loop(false).indicator(new DotIndicator()
-            .itemWidth(6)
-            .itemHeight(6)
-            .selectedItemWidth(12)
-            .selectedItemHeight(6)
-            .color('#F5F6FA')
-            .selectedColor($r('sys.color.comp_background_emphasize')));
+      GridRow(GridRowColSetting.DEFAULT_GRID_ROW_OPTIONS) {
+        GridCol({ span: GridRowColSetting.GRID_ROW_OPTIONS_COLUMNS }) {
+          Scroll(this.scrollerForScroll) {
+            Column() {
+              Stack() {
+                Image($r('app.media.home_head'))
+                  .height(276)
+                  .width(Constants.FULL_SCREEN)
+                  .linearGradientBlur(200,
+                    { fractionStops: [[0, 0], [0, 0.33], [1, 0.66], [1, 1]], direction: GradientDirection.Top });
+                CommonHeader({
+                  title: this.isHotelDetail ? '民宿详情' : '首页',
+                  showBackButton: this.isHotelDetail,
+                  backButtonClick: () => {
+                    this.mainPathStack.pop();
+                  },
+                })
+              }.alignContent(Alignment.TopStart)
 
-          Column({ space: 20 }) {
-            BasicInfoArea({ isHome: true });
-            this.DateAreaBuilder();
-            this.RecommendRoomListBuilder();
-          }.borderRadius({ topLeft: 8, topRight: 8 })
-          .width(Constants.FULL_SCREEN).padding(12);
-        };
-      }.scrollBar(BarState.Off).edgeEffect(EdgeEffect.Spring);
+              Column({ space: 12 }) {
+                BasicInfoArea({ isHome: true });
+                this.DateAreaBuilder();
+                this.RecommendRoomListBuilder();
+              }.borderRadius({ topLeft: 8, topRight: 8 })
+              .backgroundColor($r('sys.color.background_secondary'))
+              .width(Constants.FULL_SCREEN).padding(12);
+            };
+          }.scrollBar(BarState.Off)
+          .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: true })
+          .backgroundColor($r('sys.color.background_secondary'));
+        }
+      }
+      .onBreakpointChange((breakpoints: string) => {
+        this.breakpoint = breakpoints;
+      })
     }.hideTitleBar(true);
   }
 }

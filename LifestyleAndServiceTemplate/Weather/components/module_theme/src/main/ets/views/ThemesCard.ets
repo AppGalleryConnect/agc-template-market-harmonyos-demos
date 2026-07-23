@@ -1,3 +1,5 @@
+import { AppStorageV2 } from '@kit.ArkUI';
+import { BreakpointModel, BreakpointNameEnum } from 'module_weather_core';
 import { ThemePage, THEME_LIST } from '../constants/Constants';
 import { IThemeInfo } from '../types/Types';
 
@@ -13,6 +15,19 @@ export struct ThemesCard {
     bottom: 16,
   };
   @Local themes: IThemeInfo[] = THEME_LIST;
+  @Local breakpointModel: BreakpointModel =
+    AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
+
+  @Computed
+  get listSpace(): number {
+    if (this.breakpointModel.isLargeWindow) {
+      return 48;
+    }
+    if (this.breakpointModel.currentBreakpoint === BreakpointNameEnum.MD) {
+      return 32;
+    }
+    return 8;
+  }
 
   build() {
     Column({ space: 24 }) {
@@ -25,7 +40,9 @@ export struct ThemesCard {
           Text('查看更多')
             .fontColor($r('sys.color.font_secondary'))
             .fontSize($r('sys.float.Body_M'))
-          Image($r('app.media.arrow')).width(7).fillColor($r('sys.color.icon_secondary'))
+          SymbolGlyph($r('sys.symbol.chevron_right'))
+            .fontSize(24)
+            .fontColor([$r('sys.color.font_fourth')])
         }
         .onClick(() => {
           this.stack.pushPathByName(ThemePage.THEME_LIST, null);
@@ -34,7 +51,7 @@ export struct ThemesCard {
       .width('100%')
       .justifyContent(FlexAlign.SpaceBetween)
 
-      List({ space: 16 }) {
+      List({ space: this.listSpace }) {
         ForEach(this.themes, (theme: IThemeInfo) => {
           ListItem() {
             Column({ space: 8 }) {
@@ -57,6 +74,7 @@ export struct ThemesCard {
       .width('100%')
       .height(80)
       .scrollBar(BarState.Off)
+      .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: true })
       .listDirection(Axis.Horizontal)
       .lanes(1)
     }

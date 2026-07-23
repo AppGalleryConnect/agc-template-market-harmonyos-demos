@@ -14,7 +14,31 @@
     },
     {
       "name": "agcit_huawei_exam_service",
-      "value": "1.0.3"
+      "value": "1.0.4"
+    },
+    {
+      "name": "EntryFormAbility_desc",
+      "value": "form_description"
+    },
+    {
+      "name": "EntryFormAbility_label",
+      "value": "form_label"
+    },
+    {
+      "name": "widget_desc",
+      "value": "备考模板"
+    },
+    {
+      "name": "widget_display_name",
+      "value": "备考模板"
+    },
+    {
+      "name": "search_question",
+      "value": "搜题"
+    },
+    {
+      "name": "daily_practice",
+      "value": "每日一练"
     }
   ]
 }

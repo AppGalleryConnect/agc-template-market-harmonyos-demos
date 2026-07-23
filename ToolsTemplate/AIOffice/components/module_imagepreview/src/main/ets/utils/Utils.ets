@@ -23,14 +23,14 @@ export const getComponentsInfo = (context: UIContext, key: string): ComInfoType 
   let comUtils: ComponentUtils = context.getComponentUtils()
   let info: componentUtils.ComponentInfo = comUtils.getRectangleById(key)
   return {
-    width: px2vp(info.size.width),
-    height: px2vp(info.size.height),
-    localLeft: px2vp(info.localOffset.x),
-    localTop: px2vp(info.localOffset.y),
-    screenLeft: px2vp(info.screenOffset.x),
-    screenTop: px2vp(info.screenOffset.y),
-    windowLeft: px2vp(info.windowOffset.x),
-    windowTop: px2vp(info.windowOffset.y),
+    width: context.px2vp(info.size.width),
+    height: context.px2vp(info.size.height),
+    localLeft: context.px2vp(info.localOffset.x),
+    localTop: context.px2vp(info.localOffset.y),
+    screenLeft: context.px2vp(info.screenOffset.x),
+    screenTop: context.px2vp(info.screenOffset.y),
+    windowLeft: context.px2vp(info.windowOffset.x),
+    windowTop: context.px2vp(info.windowOffset.y),
   }
 }
 
@@ -54,7 +54,11 @@ export function getSizeByUnit(val: string | number, isFont?: boolean): string {
  * 设置顶部状态栏颜色
  */
 export function setWindowSystemBarProp(properties: window.SystemBarProperties) {
-  const windowStage = AppStorage.get('windowStage') as window.WindowStage;
-  const windowClass = windowStage.getMainWindowSync()
-  windowClass.setWindowSystemBarProperties(properties)
+  try {
+    const windowStage = AppStorage.get('windowStage') as window.WindowStage;
+    const windowClass = windowStage.getMainWindowSync()
+    windowClass.setWindowSystemBarProperties(properties)
+  } catch (error) {
+    console.error('[Utils] setWindowSystemBarProp error: ' + JSON.stringify(error));
+  }
 }

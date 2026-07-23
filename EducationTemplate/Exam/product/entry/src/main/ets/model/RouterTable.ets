@@ -59,12 +59,18 @@ import {
   TermsOfServicePageBuilder,
   AuthenticationPageBuilder,
   PrivacyPageBuilder,
+  CustomServicePageBuilder,
+  MyDownloadPageBuilder,
+  MemberCenterPageBuilder
 } from 'minepage';
 
 import { LoginPageBuilder } from '../pages/LoginPage';
 import { MainEntryBuilder } from '../pages/MainEntry';
+import { LaunchAdPageBuilder } from '../pages/LaunchAdPage';
 import { buildFeedbackSubmitPage } from 'feedback/src/main/ets/pages/FeedbackSubmitPage';
 import { buildFeedbackHistoryPage } from 'feedback/src/main/ets/pages/FeedbackHistoryPage';
+import { SettingAbout, SettingAboutBuilder } from 'app_setting/src/main/ets/pages/SettingAbout';
+import { ResultPage, ResultPageBuilder } from 'search/src/main/ets/views/ResultPage';
 
 export class RouterTable {
   static builderMap: Map<string, WrappedBuilder<[object]>> = new Map<string, WrappedBuilder<[object]>>();
@@ -73,6 +79,7 @@ export class RouterTable {
   public static routerInit() {
     RouterTable.builderMap.set(RouterMap.MAIN_PAGE, wrapBuilder(MainEntryBuilder));
     RouterTable.builderMap.set(RouterMap.LOGIN_PAGE, wrapBuilder(LoginPageBuilder));
+    RouterTable.builderMap.set(RouterMap.LAUNCH_AD_PAGE, wrapBuilder(LaunchAdPageBuilder));
     // --------------------------------------------------练习
     RouterTable.builderMap.set(RouterMap.CHAPTER_PRACTICE_PAGE, wrapBuilder(ChapterPracticeBuilder));
     RouterTable.builderMap.set(RouterMap.FEATURE_COURSE_PAGE, wrapBuilder(FeaturedCoursesBuilder));
@@ -115,6 +122,11 @@ export class RouterTable {
     RouterTable.builderMap.set(RouterMap.PRIVACY_PAGE, wrapBuilder(PrivacyPageBuilder));
     RouterTable.builderMap.set(RouterMap.AUTHENTICATION_PAGE, wrapBuilder(AuthenticationPageBuilder));
     RouterTable.builderMap.set(RouterMap.TERMS_SERVICE_PAGE, wrapBuilder(TermsOfServicePageBuilder));
+    RouterTable.builderMap.set(RouterMap.CUSTOM_SERVICE_PAGE, wrapBuilder(CustomServicePageBuilder));
+    RouterTable.builderMap.set(RouterMap.MY_DOWNLOAD_PAGE, wrapBuilder(MyDownloadPageBuilder));
+    RouterTable.builderMap.set(RouterMap.SETTING_ABOUT, wrapBuilder(SettingAboutBuilder));
+    RouterTable.builderMap.set(RouterMap.MEMBER_CENTER_PAGE, wrapBuilder(MemberCenterPageBuilder));
+    RouterTable.builderMap.set(RouterMap.RESULT_PAGE, wrapBuilder(ResultPageBuilder));
   }
 
   // 通过名称获取builder

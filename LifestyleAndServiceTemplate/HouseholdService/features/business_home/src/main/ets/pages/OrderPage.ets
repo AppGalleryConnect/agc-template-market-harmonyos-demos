@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 import { goToAddressListPage } from 'address_management';
-import { CommonConstants, GridRowColSetting, RouterModule } from 'lib_foundation';
+import { BreakpointNameEnum, CommonConstants, GridRowColSetting, RouterModule, WindowUtils } from 'lib_foundation';
 import { IServiceDetail, IServiceDetailItem, WindowUtil } from 'module_base';
 import { TimeSelect } from 'module_time_select';
 import { ServiceText } from '../components/ServiceText';
@@ -55,9 +55,12 @@ export struct OrderPage {
 
   build() {
     NavDestination() {
-      GridRow(GridRowColSetting.DEFAULT_GRID_ROW_OPTIONS) {
-        GridCol({ span: GridRowColSetting.GRID_ROW_OPTIONS_COLUMNS, }) {
-          Column() {
+      Column() {
+        GridRow(GridRowColSetting.DEFAULT_GRID_ROW_OPTIONS) {
+          GridCol({
+            span: GridRowColSetting.DEFAULT_CENTER_COL_SPAN,
+            offset: GridRowColSetting.DEFAULT_CENTER_COL_OFFSET,
+          }) {
             Scroll() {
               Column({ space: 12 }) {
                 this.CardCore()
@@ -70,21 +73,25 @@ export struct OrderPage {
               left: GridRowColSetting.getPageMargin(this.breakpoint),
               right: GridRowColSetting.getPageMargin(this.breakpoint)
             })
-            .layoutWeight(1)
+            .height(`calc(100% - 40vp - ${WindowUtils.windowBottomPadding}vp - 2*${GridRowColSetting.getButtonGutter(
+              this.breakpoint)}vp)`)
             .align(Alignment.Top)
             .scrollBar(BarState.Off)
             .edgeEffect(EdgeEffect.Spring)
+          }
 
+          GridCol({ span: GridRowColSetting.GRID_ROW_OPTIONS_COLUMNS, }) {
             this.BottomBar()
           }
-          .width(CommonConstants.FULL_PERCENT)
-          .height(CommonConstants.FULL_PERCENT)
         }
+        .onBreakpointChange((bp) => {
+          this.breakpoint = bp;
+        })
       }
-      .onBreakpointChange((bp) => {
-        this.breakpoint = bp;
-      })
+      .width(CommonConstants.FULL_PERCENT)
+      .height(CommonConstants.FULL_PERCENT)
     }
+    .padding({ top: WindowUtils.windowTopPadding })
     .title('立即预约', {
       paddingStart: { value: GridRowColSetting.getPageMargin(this.breakpoint), unit: 1 },
       backgroundColor: $r('sys.color.background_secondary')
@@ -191,6 +198,7 @@ export struct OrderPage {
     }
     .width(CommonConstants.FULL_PERCENT)
     .padding(12)
+    .margin({ bottom: 6 })
     .borderRadius(16)
     .backgroundColor(Color.White)
   }
@@ -214,6 +222,7 @@ export struct OrderPage {
           .fontColor($r('sys.color.font_on_primary'))
       }
       .backgroundColor($r('app.color.common_theme_color'))
+      .height(40)
       .padding({
         top: 10,
         bottom: 9,
@@ -226,8 +235,8 @@ export struct OrderPage {
     }
     .width(CommonConstants.FULL_PERCENT)
     .padding({
-      top: 8,
-      bottom: 8,
+      top: GridRowColSetting.getButtonGutter(this.breakpoint),
+      bottom: GridRowColSetting.getButtonGutter(this.breakpoint) + WindowUtils.windowBottomPadding,
       left: 16,
       right: 16
     })
@@ -285,7 +294,9 @@ export struct OrderPage {
       goToAddressListPage(RouterModule.getStack(), {
         onAddressSelected: this.orderVM.jumpAddressManage,
         updateAddress: this.orderVM.updateAddress,
-        deleteAddress: this.orderVM.deleteAddress
+        deleteAddress: this.orderVM.deleteAddress,
+        windowTopPadding: WindowUtils.windowTopPadding,
+        windowBottomPadding: WindowUtils.windowBottomPadding
       });
     })
   }
@@ -357,7 +368,7 @@ export struct OrderPage {
       }
       .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.BOTTOM])
     }
-    .padding({ left: 16, right: 16, bottom: this.breakpoint === 'sm' ? 40 : 16 })
+    .padding({ left: 16, right: 16, bottom: this.breakpoint === BreakpointNameEnum.SM ? 40 : 16 })
   }
 
   @Builder
@@ -407,7 +418,7 @@ export struct OrderPage {
       }
       .bindSheet($$this.orderVM.showServiceDetail, this.ServiceContentDetailCard(), {
         height: SheetSize.MEDIUM,
-        preferType: this.breakpoint === 'sm' ? SheetType.BOTTOM : SheetType.CENTER,
+        preferType: this.breakpoint === BreakpointNameEnum.SM ? SheetType.BOTTOM : SheetType.CENTER,
         blurStyle: BlurStyle.COMPONENT_ULTRA_THICK,
         title: { title: '选择服务' },
       })

@@ -43,3 +43,10 @@ export class UserState {
     this.isLogin = isLogin ?? false
   }
 }
+
+// 设置数据
+@ObservedV2
+export class SettingState {
+  // 更新通知
+  @Trace updateSwitch: boolean = true
+}

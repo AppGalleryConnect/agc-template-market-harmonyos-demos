@@ -24,7 +24,7 @@ export enum EVENT_TYPE {
   SCHEDULE = 'schedule',
   BIRTHDAY = 'birthday',
   ANNIVERSARIES = 'anniversaries',
-  TODO = 'todo'
+  TODO = 'todo',
 }
 
 export const eventTypeEnum = [EVENT_TYPE.SCHEDULE, EVENT_TYPE.BIRTHDAY, EVENT_TYPE.ANNIVERSARIES, EVENT_TYPE.TODO]

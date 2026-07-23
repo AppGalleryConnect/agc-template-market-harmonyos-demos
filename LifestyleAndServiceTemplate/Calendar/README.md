@@ -27,6 +27,7 @@
 | 城市限行组件（traffic_restriction） | 查询定位城市限行信息                                  | [使用指导](components/traffic_restriction/README.md) |
 | 历史上的今天（today_history）       | 查询历史上的今天                                 | [使用指导](components/today_history/README.md)       |
 | 通用会员组件（membership）  | 通用会员组件                                | [使用指导](components/membership/README.md)       |
+| 通用信息反馈组件（feedback）  | 用信息反馈组件                                | [使用指导](components/feedback/README.md)       |
 ### 模板
 本模板为日历应用提供了常用功能的开发样例，模板主要分为万年历、黄历、和我的三大模块：
 
@@ -134,8 +135,8 @@ Application
 
 ### 环境
 
-- DevEco Studio版本：DevEco Studio 6.0.2 Release及以上
-- HarmonyOS SDK版本：HarmonyOS 6.0.2 Release SDK及以上
+- DevEco Studio版本：DevEco Studio 6.1.1 Release及以上
+- HarmonyOS SDK版本：HarmonyOS 6.1.1 Release SDK及以上
 - 设备类型：华为手机（包括双折叠和阔折叠）、平板
 - 系统版本：HarmonyOS 5.0.5(17)及以上
 

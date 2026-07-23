@@ -282,6 +282,8 @@ export class MinePageVM {
   deleteSelectedRecipes() {
     if (this.selectIds.length > 0) {
       this.deleteMyRecipe(this.selectIds)
+    } else {
+      GlobalContextUtils.showToast({ message: '请选中需要删除的菜谱' })
     }
   }
 

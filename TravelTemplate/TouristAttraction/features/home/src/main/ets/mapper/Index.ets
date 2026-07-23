@@ -13,7 +13,7 @@ import {
 } from 'network';
 import { NoteInfo } from 'types';
 import { BulletinInfo } from '../model/BulletinInfo';
-import { CommodityInfo } from '../model/CommodityInfo';
+import { CommodityInfo, SpecCategory, SpecOption, SpuInfo } from '../model/CommodityInfo';
 import { RouteLineInfo } from '../model/RouteLineInfo';
 
 export function mapperAttractionInfo(attractionDetailResp: GetAttractionDetailResp) {
@@ -63,6 +63,8 @@ export function mapperHotNote(rollupInfo: GetHomeInfoResp) {
     hotNoteInfo.noteId = item.noteId;
     hotNoteInfo.name = item.name;
     hotNoteInfo.banner = item.banner;
+    hotNoteInfo.tag = item.tag;
+    hotNoteInfo.location = item.location;
     hotNoteList.push(hotNoteInfo);
   });
   return hotNoteList;
@@ -147,7 +149,50 @@ export function mapperCommodityDetail(getCommodityDetailResp: GetCommodityDetail
   commodityInfo.introduction = getCommodityDetailResp.introduction;
   commodityInfo.detailImages = getCommodityDetailResp.detailImages;
   commodityInfo.detail = getCommodityDetailResp.detail;
+  commodityInfo.specCategories = parseSpecCategories(getCommodityDetailResp.spuInfo);
   return commodityInfo;
+}
+
+function parseSpecCategories(spuInfo: SpuInfo[]): SpecCategory[] {
+  if (!spuInfo || spuInfo.length === 0) {
+    return [];
+  }
+
+  const specCategories: SpecCategory[] = [];
+  const specMap = new Map<string, Set<string>>();
+
+  spuInfo.forEach((spu: SpuInfo) => {
+    if (spu.specValues && spu.specValues.length > 0) {
+      spu.specValues.forEach(specValue => {
+        const categoryName = specValue.name;
+        if (!specMap.has(categoryName)) {
+          specMap.set(categoryName, new Set());
+        }
+        specMap.get(categoryName)!.add(specValue.value);
+      });
+    } else {
+      const specs = spu.spuName.split('/');
+      specs.forEach((spec: string, index: number) => {
+        const key = `规格${index + 1}`;
+        if (!specMap.has(key)) {
+          specMap.set(key, new Set());
+        }
+        specMap.get(key)!.add(spec.trim());
+      });
+    }
+  });
+
+  specMap.forEach((options, categoryName) => {
+    const specCategory: SpecCategory = {
+      id: categoryName, name: categoryName, options: Array.from(options).map(option => {
+        const specOption: SpecOption = { id: option, name: option };
+        return specOption;
+      }),
+    };
+    specCategories.push(specCategory);
+  });
+
+  return specCategories;
 }
 
 export function mapperNoteInfo(getNoteDetailResp: GetNoteDetailResp) {

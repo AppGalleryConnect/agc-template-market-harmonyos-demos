@@ -1,5 +1,7 @@
 import { AppStorageV2, PersistenceV2 } from '@kit.ArkUI';
 import { UtilLog } from '@hw-agconnect/util-log';
+import { common } from '@kit.AbilityKit';
+import { emitter } from '@kit.BasicServicesKit';
 import {
   UserState,
   SettingItem,
@@ -11,15 +13,14 @@ import {
   PAD_BOTTOM,
   BreakpointNameEnum,
   BreakpointModel,
+  BreakpointType,
 } from 'common';
 import { LoginInfo, LoginParams } from 'login_info';
 import { CalendarEventMain, UserEventItem } from 'calendar_events';
 import { getDataFromJSON } from 'base_apis';
 import { RouterModule } from 'router_module';
-import { aesDecName, aesEncName } from '../utils/Utils';
 import { MemberStatusUtil } from 'membership';
-import { common } from '@kit.AbilityKit';
-import { emitter } from '@kit.BasicServicesKit';
+import { aesDecName, aesEncName } from '../utils/Utils';
 
 const TAG = '[MinePage]'
 
@@ -31,6 +32,16 @@ export struct MinePage {
   @Local egDivider: DividerTmp = new DividerTmp(1, 10, 10, '#ffe9f0f0')
   @Local userState: UserState = PersistenceV2.connect(UserState, () => new UserState())!;
   @Local modelShow: boolean = false
+  private lanes: BreakpointType<number> = new BreakpointType<number>({
+    sm: 1,
+    md: 2,
+    lg: 2,
+    xl: 2,
+  });
+
+  public getLanes(): number {
+    return this.lanes.getValue(this.breakPointModel.currentBreakpoint)
+  }
 
   // 是否纵向Tab
   @Computed
@@ -68,13 +79,13 @@ export struct MinePage {
    * mock使用aes加密算法保证用户信息安全
    * */
 
-  async mockUserLogin() {
+  async mockUserLogin(loginParams: LoginParams) {
     this.userState.isLogin = true;
     let mockUserInfo: UserInfo = new UserInfo({
       'idToken': '',
       'userName': await aesEncName('华为用户'),
       'avatar': '',
-      'phoneNumber': '123xxxxx789',
+      'phoneNumber': loginParams.phoneNumber ?? '123xxxxx789',
     })
     this.queryMemberStatus()
     mockUserInfo.userName = await aesDecName(mockUserInfo.userName as Uint8Array)
@@ -98,11 +109,11 @@ export struct MinePage {
               titleColor: this.theme.themeState.titleColor,
               routerModule: RouterModule.getStack(),
               onLogin: (loginParams: LoginParams) => {
-                this.mockUserLogin()
+                this.mockUserLogin(loginParams)
                 UtilLog.info(TAG, 'onLogin', JSON.stringify(loginParams))
               },
               onHuaweiLogin: (loginParams: LoginParams) => {
-                this.mockUserLogin()
+                this.mockUserLogin(loginParams)
                 UtilLog.info(TAG, 'onHuaweiLogin', JSON.stringify(loginParams))
               },
             })
@@ -137,7 +148,7 @@ export struct MinePage {
             pathStack: RouterModule.getStack(),
             selectColor: this.theme.themeState.current,
             titleColor: this.theme.themeState.titleColor,
-            currentColor:this.theme.themeState.calendarColor,
+            currentColor: this.theme.themeState.calendarColor,
             onCalendarEventChange: (userEventInfo: UserEventItem) => {
               UtilLog.info(TAG, 'change userEventInfo', JSON.stringify(userEventInfo))
             },
@@ -158,7 +169,7 @@ export struct MinePage {
       })
       .layoutWeight(1)
       .scrollBar(BarState.Off)
-
+      .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: true })
     }
     .backgroundColor($r('sys.color.background_secondary'))
     .border({ width: { left: this.isTabVertical ? 1 : 0 }, color: '#ccc' })
@@ -177,7 +188,7 @@ export struct MinePage {
                 .attributeModifier(new TextStyleModifier('font_primary/Subtitle_M/Medium'))
             }
 
-            Image($r('app.media.chevron_right')).width(7).height(17)
+            Image($r('app.media.chevron_right')).width(12).height(24)
           }
           .padding({
             top: 16,
@@ -190,6 +201,9 @@ export struct MinePage {
               case 'setting':
                 RouterModule.pushPathByName({ url: 'SettingLevel' })
                 break;
+              case 'feedback':
+                RouterModule.pushPathByName({ url: 'FeedbackSubmitPage', param: this.theme.themeState.calendarColor })
+                break;
             }
           })
         }
@@ -197,6 +211,7 @@ export struct MinePage {
     }
     .divider(this.egDivider)
     .borderRadius(16)
+    .lanes(this.getLanes(), 16)
     .backgroundColor($r('sys.color.background_primary'))
   }
 

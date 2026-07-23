@@ -20,11 +20,20 @@ export struct TopLocation {
         Swiper(this.vm.swiperController) {
           Row() {
             Row() {
-              Image($r('app.media.location')).width(18).height(22)
+              SymbolGlyph($r('sys.symbol.local_fill'))
+                .fontColor([$r('sys.color.icon_secondary')])
+                .fontWeight(FontWeight.Normal)
+                .fontSize(24)
               Text(this.vm.location.name)
-                .attributeModifier(new BaseTextStyleModifier('font_on_primary/Body_L/Medium'))
+                .constraintSize({ maxWidth: 190 })
+                .attributeModifier(new BaseTextStyleModifier('font_primary/Body_L/Medium'))
+                .textOverflow({ overflow: TextOverflow.MARQUEE })
                 .margin({ left: CommonConstants.SPACE_11 })
             }
+            .height(40)
+            .padding({ left: 16, right: 16 })
+            .borderRadius(20)
+            .backgroundColor($r('sys.color.comp_background_primary'))
             .onClick(() => {
               RouterModule.push({
                 url: CityPage.MANAGED,
@@ -38,17 +47,26 @@ export struct TopLocation {
           if (this.vm.realTimeWeather) {
             Row() {
               Row() {
-                Image($r('app.media.location')).width(18).height(22)
+                SymbolGlyph($r('sys.symbol.local_fill'))
+                  .fontColor([$r('sys.color.icon_secondary')])
+                  .fontWeight(FontWeight.Normal)
+                  .fontSize(24)
                 Text(this.vm.location.name)
-                  .attributeModifier(new BaseTextStyleModifier('font_on_primary/Body_L/Medium'))
+                  .attributeModifier(new BaseTextStyleModifier('font_primary/Body_L/Medium'))
                   .margin({ left: CommonConstants.SPACE_11 })
+                  .textOverflow({ overflow: TextOverflow.MARQUEE })
+                  .constraintSize({ maxWidth: 170 })
                 Image($r(`app.media.${this.vm.realTimeWeather!.icon}`))
                   .width(20)
                   .height(20)
                   .margin({ left: CommonConstants.SPACE_6, right: CommonConstants.SPACE_2 })
                 Text(this.vm.realTimeWeather!.temp.toFixed(0) + '°')
-                  .attributeModifier(new BaseTextStyleModifier('font_on_primary/Body_L/Medium'))
+                  .attributeModifier(new BaseTextStyleModifier('font_primary/Body_L/Medium'))
               }
+              .height(40)
+              .padding({ left: 16, right: 16 })
+              .borderRadius(20)
+              .backgroundColor($r('sys.color.comp_background_primary'))
               .onClick(() => {
                 RouterModule.push({
                   url: CityPage.MANAGED,

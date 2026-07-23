@@ -1,0 +1,29 @@
+{
+  "routerMap": [
+    {
+      "name": "SettingPage",
+      "pageSourceFile": "src/main/ets/pages/SettingPage.ets",
+      "buildFunction": "SettingPageBuilder"
+    },
+    {
+      "name": "SettingFont",
+      "pageSourceFile": "src/main/ets/pages/SettingFont.ets",
+      "buildFunction": "SettingFontBuilder"
+    },
+    {
+      "name": "SettingPersonal",
+      "pageSourceFile": "src/main/ets/pages/SettingPersonal.ets",
+      "buildFunction": "SettingPersonalBuilder"
+    },
+    {
+      "name": "SettingPrivacy",
+      "pageSourceFile": "src/main/ets/pages/SettingPrivacy.ets",
+      "buildFunction": "SettingPrivacyBuilder"
+    },
+    {
+      "name": "SettingNetwork",
+      "pageSourceFile": "src/main/ets/pages/SettingNetwork.ets",
+      "buildFunction": "SettingNetworkBuilder"
+    }
+  ]
+}

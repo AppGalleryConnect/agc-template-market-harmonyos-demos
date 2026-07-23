@@ -2,6 +2,7 @@ export interface GetAttractionDetailResp {
   labels: string[]
   detailImages: ResourceStr[]
   attractionId: number
+  ticketId: number
   brief: string
   name: string
   location: string

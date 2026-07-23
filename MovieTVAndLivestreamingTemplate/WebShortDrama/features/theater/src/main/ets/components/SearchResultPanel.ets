@@ -60,7 +60,6 @@ export struct SearchResultPanel {
         .fontColor($r('sys.color.font_tertiary'))
         .margin({ top: 4, bottom: 10 })
     }
-    .backgroundColor('#F1F3F5')
     .padding(12)
     .borderRadius(16)
     .width('100%')

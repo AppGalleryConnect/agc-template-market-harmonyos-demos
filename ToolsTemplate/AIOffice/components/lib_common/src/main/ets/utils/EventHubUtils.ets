@@ -1,11 +1,12 @@
 import { common } from '@kit.AbilityKit';
 import { EventEnum } from '../constants/EventEnum';
+import { GlobalContext } from './GlobalContext';
 
 /**
  * EventHub线程通信
  */
 export class EventHubUtils {
-  private eventHub: common.EventHub = (getContext(this) as common.UIAbilityContext).eventHub;
+  private eventHub: common.EventHub = GlobalContext.getContext().eventHub;
   private static instance: EventHubUtils;
 
   public static getInstance(): EventHubUtils {

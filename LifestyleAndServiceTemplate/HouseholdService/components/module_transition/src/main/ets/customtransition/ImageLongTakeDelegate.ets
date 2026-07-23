@@ -1,6 +1,9 @@
 import { inspector, matrix4, window } from '@kit.ArkUI';
-import { BusinessError } from '@kit.BasicServicesKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+
+const TAG = '[ImageLongTakeDelegate]';
+const DOMAIN = 0x0000;
 
 enum Status {
   IDLE,
@@ -34,7 +37,6 @@ export struct ImageLongTakeDelegate {
   @Local imageWidth: number = 1260;
   @Event backToFirstPage: () => void = () => {
   };
-
   private photoId: string = 'myCat';
   private photoListener: inspector.ComponentObserver =
     this.getUIContext().getUIInspector().createComponentObserver(this.photoId);
@@ -67,19 +69,26 @@ export struct ImageLongTakeDelegate {
   }
 
   init(): void {
-    let photoInfo = this.getUIContext().getComponentUtils().getRectangleById(this.photoId);
-    this.imagePositionX = photoInfo.windowOffset.x;
-    this.imagePositionY = photoInfo.windowOffset.y;
+    try {
+      let photoInfo = this.getUIContext().getComponentUtils().getRectangleById(this.photoId);
+      this.imagePositionX = photoInfo.windowOffset.x;
+      this.imagePositionY = photoInfo.windowOffset.y;
+    } catch (error) {
+      hilog.error(DOMAIN, TAG, `init getRectangleById failed: ${JSON.stringify(error)}`);
+    }
   }
 
   getImageWidth() {
-    window.getLastWindow(this.getUIContext().getHostContext()).then((data) => {
-      let properties = data?.getWindowProperties();
-      this.imageWidth = properties.windowRect.width
-    }).catch((err: BusinessError) => {
-      hilog.error(0x0000, '[ImageLongTakeDelegate]',
-        `Failed to get window properties. Code is ${err.code}, message is ${err.message}`);
-    });
+    try {
+      window.getLastWindow(this.getUIContext().getHostContext()).then((data) => {
+        let properties = data?.getWindowProperties();
+        this.imageWidth = properties.windowRect.width
+      }).catch((err: BusinessError) => {
+        hilog.error(DOMAIN, TAG, `getImageWidth getLastWindow failed: ${JSON.stringify(err)}`);
+      })
+    } catch (error) {
+      hilog.error(DOMAIN, TAG, `getImageWidth getLastWindow exception: ${JSON.stringify(error)}`);
+    }
   }
 
   onAllGestureFinish(): void {
@@ -355,7 +364,7 @@ export struct ImageLongTakeDelegate {
       .height(this.getUIContext().px2vp(this.imageHeight))
       .parallelGesture(GestureGroup(GestureMode.Exclusive,
         // 双击
-        TapGesture({ fingers: 1, count: 2 }).onAction((event) => {
+        TapGesture({ fingers: 1, count: 2 }).onAction((_event) => {
           this.doubleClick()
         }),
         // 单击

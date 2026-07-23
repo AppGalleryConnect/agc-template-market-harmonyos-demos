@@ -29,7 +29,11 @@ export class NoticeCenterPageVM {
     if (date > 3600000) {
       return '1小时前'
     } else if (date > 60000) {
-      return `${new Decimal(date).div(60000).toFixed(0).toString()}分钟前`
+      try {
+        return `${new Decimal(date).div(60000).toFixed(0).toString()}分钟前`
+      } catch (error) {
+        return '几分钟前'
+      }
     } else {
       return '刚刚'
     }

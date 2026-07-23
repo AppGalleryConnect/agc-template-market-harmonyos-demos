@@ -41,7 +41,7 @@ export struct CategoryList {
     this.scroller.scrollToIndex(this.curIndex);
   }
 
-  @Monitor('productList')
+  @Monitor('categoryTabs')
   onProductListChange() {
     this.dataSource.setData(this.categoryTabs);
   }

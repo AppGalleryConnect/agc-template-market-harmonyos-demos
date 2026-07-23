@@ -1,11 +1,13 @@
-import { TextReader } from '@kit.SpeechKit';
-import { Constant, PageUtil } from 'common';
-import { CustomShareParams } from 'module_base';
-import { OrderPageVM } from 'order';
-import { TabBarData, TABS_INFO } from '../model/TabBarInfo';
-import { MainEntryVM } from '../viewmodel/MainEntryVM';
 import { AppStorageV2 } from '@kit.ArkUI';
 import { connection } from '@kit.NetworkKit';
+import { TextReader } from '@kit.SpeechKit';
+import { AppBaseModel } from 'common';
+import { OrderType } from 'mine/src/main/ets/model/OrderTypeInfo';
+import { CustomShareParams } from 'module_base';
+import { OrderPageVM } from 'order';
+import { Page, TabBarType } from 'types';
+import { TabBarData, TABS_INFO } from '../model/TabBarInfo';
+import { MainEntryVM } from '../viewmodel/MainEntryVM';
 
 @Builder
 export function MainBuilder() {
@@ -17,10 +19,10 @@ struct Main {
   orderVm: OrderPageVM = OrderPageVM.instance;
   vm: MainEntryVM = MainEntryVM.instance;
   tabController: TabsController = new TabsController();
-  @Provider('homeTabIndex') homeTabIndex: number = 0;
+  @Local appBaseModel: AppBaseModel = AppStorageV2.connect(AppBaseModel, () => new AppBaseModel())!;
   @Consumer('mainPathStack') mainPathStack: NavPathStack = new NavPathStack();
-  @Local windowBottomHeight: number = AppStorage.get('windowBottomHeight') as number || 28;
   @Local shareRouter: CustomShareParams = AppStorageV2.connect(CustomShareParams, () => new CustomShareParams())!;
+  @Local page: Page = AppStorageV2.connect(Page, 'Page', () => new Page())!;
   public netConnection: connection.NetConnection | undefined = undefined;
   private JUDGE_NET_TAG: string = 'this.currNet.isUseful';
 
@@ -32,15 +34,22 @@ struct Main {
   }
 
   aboutToAppear() {
-    this.register()
+    this.register();
     this.onShareClick();
     this.vm.init(this.getUIContext());
+    this.pageChange();
   }
 
-  onPageShow(): void {
-    let pageInfo = PageUtil.getPageInfo();
-    if (pageInfo.index !== 0) {
-      this.homeTabIndex = pageInfo.index;
+  @Monitor('page.time')
+  pageChange(): void {
+    this.appBaseModel.mainTabIndex = this.page.index;
+    if (this.page.index === TabBarType.MINE) {
+      this.mainPathStack.pushPathByName('OrderView', OrderType.TICKET);
+    } else if (this.page.index === TabBarType.TICKET) {
+      let currentName: string[] = this.mainPathStack.getAllPathName();
+      if (currentName.length && currentName[currentName.length - 1] !== 'Main') {
+        this.mainPathStack.popToName('Main');
+      }
     }
   }
 
@@ -104,40 +113,56 @@ struct Main {
   }
 
   @Builder
-  mainTabBar(title: ResourceStr, targetIndex: number, selectedImg: ResourceStr, normalImg: ResourceStr) {
+  mainTabBar(title: ResourceStr, targetIndex: number, selectedImg: ResourceStr, normalImg: Resource) {
     Column({ space: 4 }) {
-      Image(this.homeTabIndex === targetIndex ? selectedImg : normalImg)
-        .size({ width: 24, height: 24 });
+      SymbolGlyph(normalImg)
+        .fontSize(24)
+        .width(24)
+        .height(24)
+        .fontColor(
+          this.appBaseModel.mainTabIndex === targetIndex ? [$r('sys.color.multi_color_04')] :
+            [$r('sys.color.icon_secondary')]);
       Text(title)
         .fontSize(10)
-        .fontColor(this.homeTabIndex === targetIndex ? '#64BB5C' :
-          Color.Black)
-        .opacity(this.homeTabIndex === targetIndex ? 1 : 0.6);
-    }.onClick(() => {
-      this.homeTabIndex = targetIndex;
+        .fontColor(this.appBaseModel.mainTabIndex === targetIndex ? '#64BB5C' : Color.Black)
+        .opacity(this.appBaseModel.mainTabIndex === targetIndex ? 1 : 0.6);
+    }
+    .onClick(() => {
+      this.appBaseModel.mainTabIndex = targetIndex;
     })
-    .width(Constant.FULL_PERCENT)
+    .width(this.vm.tabWidth)
+    .padding({
+      top: 5,
+      bottom: this.vm.isTabVertical ? 5 : 5 + this.vm.windowBottomHeight,
+      left: 4,
+      right: 4,
+    })
     .justifyContent(FlexAlign.Center);
   }
 
   build() {
     NavDestination() {
-      Tabs({ index: $$this.homeTabIndex }) {
+      Tabs({ index: this.appBaseModel.mainTabIndex }) {
         ForEach(TABS_INFO, (item: TabBarData) => {
           TabContent() {
             item.component.builder();
           }.tabBar(this.mainTabBar(item.title, item.id, item.activeIcon, item.defaultIcon));
         }, (item: TabBarData) => JSON.stringify(item));
       }
-      .padding({ bottom: this.windowBottomHeight })
+      .barWidth(this.vm.tabWidth)
+      .barHeight(this.vm.tabBarHeight)
+      .vertical(this.vm.isTabVertical)
       .scrollable(false)
-      .animationDuration(0)
-      .barPosition(BarPosition.End)
+      .animation({ duration: 200, curve: Curve.EaseInOut })
+      .barOverlap(!this.vm.isTabVertical)
+      .barPosition(this.vm.barPosition)
+      .backgroundColor('rgba(241, 243, 245, 0.8)')
+      .divider(this.vm.showDivider)
       .onChange(() => {
         TextReader.stop().then(() => {
           TextReader.release();
         });
       });
-    }.hideTitleBar(true)
+    }.hideTitleBar(true);
   }
 }

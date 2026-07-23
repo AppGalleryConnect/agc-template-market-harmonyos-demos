@@ -1,5 +1,5 @@
 import { AccountUtil, AppStorageMap, RouterMap, RouterModule, UserInfoModel } from 'lib_foundation';
-import { promptAction } from '@kit.ArkUI';
+import { ToastDialog as promptAction } from '@hw-agconnect/ui-toast';
 import { IndicesWeather, RealTimeWeather } from 'module_weather_core';
 
 @ObservedV2
@@ -33,12 +33,6 @@ export class MineVM {
       AccountUtil.updateName(newName);
       RouterModule.pop();
     }
-  }
-
-  public logout() {
-    AccountUtil.resetInfo();
-    promptAction.showToast({ message: '退出成功~！' });
-    RouterModule.pop();
   }
 
   public getCurrentDateString(): string {

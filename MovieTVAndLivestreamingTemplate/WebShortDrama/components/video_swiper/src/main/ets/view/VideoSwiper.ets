@@ -3,6 +3,7 @@ import { VideoPlayData, VideoPlayDataSource } from '../datasource/VideoPlayDataS
 import { PlayController } from '../controller/PlayController';
 import { PlaySession } from '../controller/PlaySession';
 import { hilog } from '@kit.PerformanceAnalysisKit';
+import { display } from '@kit.ArkUI';
 
 /**
  * 功能描述：
@@ -26,7 +27,6 @@ export struct VideoSwiper {
   @Param @Require videoPlayDataSource: VideoPlayDataSource = new VideoPlayDataSource();
   // 当前视频的下标
   @Param @Once currentVideoIndex: number = 0;
-  @Consumer('currentIndex') currentIndex: number = this.currentVideoIndex;
   // 初始化当前视频的下标
   preVideoIndex: number = this.currentVideoIndex
   // 外部view
@@ -45,13 +45,33 @@ export struct VideoSwiper {
   @Local refreshStatus: RefreshStatus = RefreshStatus.Inactive;
   @Local refreshing: boolean = false
   @Local refreshed: boolean = false
+  @Local isHover: boolean = false
+  private foldStatusChange: Callback<display.FoldStatus> = (data: display.FoldStatus) => {
+    this.getHover();
+  };
+  @Local creaseRegion: number[] = []
   // Swiper组件控制器
   private swiperController: SwiperController = new SwiperController();
   //实时更新接续数据
   @Event updateContinueModel: (index: number) => void = (index: number) => {
   }
 
+  aboutToDisappear(): void {
+    try {
+      display.off('foldStatusChange',this.foldStatusChange);
+    } catch (exception) {
+      hilog.error(0x0000, TAG, 'Failed to unregister callback. Code: ' + JSON.stringify(exception));
+    }
+  }
+
   aboutToAppear(): void {
+    this.getHover()
+    try {
+      display.on('foldStatusChange', this.foldStatusChange);
+    } catch (exception) {
+      hilog.error(0x0000, TAG, 'Failed to register onFoldStatusChange callback. Code: ' + JSON.stringify(exception));
+    }
+    this.getFoldCreaseRegion();
     hilog.debug(0x0000, TAG, `data size:${this.videoPlayDataSource.totalCount()}`)
     this.playController.setSwiperController(this.swiperController)
     this.playController.curentIndex = this.currentVideoIndex
@@ -80,7 +100,7 @@ export struct VideoSwiper {
     Row() {
       LoadingProgress()
         .size({ width: 40, height: 40 })
-        .color(Color.White)
+        .color($r('sys.color.icon_secondary'))
       Text(this.getStatusText())
         .fontSize(14)
         .fontColor($r('sys.color.font_secondary'))
@@ -111,6 +131,8 @@ export struct VideoSwiper {
         Swiper(this.swiperController) { // 使用Swiper组件实现滑动轮播显示的能力
           LazyForEach(this.videoPlayDataSource, (item: VideoPlayData, index: number) => {
             VideoPlayView({
+              creaseRegion: this.creaseRegion,
+              isHover: this.isHover,
               playController: this.playController,
               curIndex: this.currentVideoIndex,
               index: index,
@@ -148,7 +170,6 @@ export struct VideoSwiper {
           hilog.debug(0x0000, TAG,
             `onAnimationStart index: ${index},  targetIndex:${targetIndex}, extraInfo: ${extraInfo}.`);
           this.currentVideoIndex = targetIndex;
-          this.currentIndex = targetIndex
           this.playController.curentIndex = targetIndex
           this.updateContinueModel(targetIndex)
         })
@@ -199,6 +220,37 @@ export struct VideoSwiper {
       this.loadMore()
     } finally {
       this.isLoadingMore = false;
+    }
+  }
+
+  getHover(){
+    try {
+      let orientation: display.Orientation = display.getDefaultDisplaySync().orientation;
+      if (display.getFoldStatus() === display.FoldStatus.FOLD_STATUS_HALF_FOLDED && this.inPage === 'Detail' &&
+        (orientation === display.Orientation.LANDSCAPE || orientation === display.Orientation.LANDSCAPE_INVERTED)
+      ) {
+        this.isHover = true;
+        hilog.info(0x0000, TAG, `success in hover`);
+      } else {
+        this.isHover = false;
+        hilog.info(0x0000, TAG, `fail in hover`);
+      }
+    } catch (error) {
+      hilog.error(0x0000, TAG, `onFoldStatusChange catch error, code: ${error.code}, message: ${error.message}`);
+    }
+  }
+
+  getFoldCreaseRegion() {
+    try {
+      if (display.isFoldable()) {
+        let foldRegion: display.FoldCreaseRegion = display.getCurrentFoldCreaseRegion();
+        let rect: display.Rect = foldRegion.creaseRects[0];
+        // Height of the avoidance area in the upper half screen and height of the avoidance area.
+        this.creaseRegion = [this.getUIContext().px2vp(rect.top), this.getUIContext().px2vp(rect.height)];
+        AppStorage.setOrCreate('creaseRegion', this.creaseRegion);
+      }
+    } catch (error) {
+      hilog.error(0x0000, TAG, `getFoldCreaseRegion catch error, code: ${error.code}, message: ${error.message}`);
     }
   }
 }

@@ -52,7 +52,11 @@ export class ShareConfigModel {
     this.uiContext = uiContext;
     this.queryWindowBottomPadding();
     window.getLastWindow(uiContext.getHostContext()).then(currentWindow => {
-      currentWindow.on('avoidAreaChange', this.setWindowBottomPadding);
+      try {
+        currentWindow.on('avoidAreaChange', this.setWindowBottomPadding);
+      } catch (err) {
+        UtilLog.error(TAG, 'fail to register avoid area change. error:' + JSON.stringify(err));
+      }
     }).catch((e: BusinessError) => {
       UtilLog.error(TAG, 'getLastWindow fail, error: ' + JSON.stringify(e));
     });
@@ -63,11 +67,15 @@ export class ShareConfigModel {
    */
   public unRegisterWindowBottomPadding(uiContext: UIContext) {
     this.uiContext = uiContext;
-    window.getLastWindow(uiContext.getHostContext()).then(currentWindow => {
-      currentWindow.off('avoidAreaChange', this.setWindowBottomPadding);
-    }).catch((e: BusinessError) => {
-      UtilLog.error(TAG, 'getLastWindow fail, error: ' + JSON.stringify(e));
-    });
+    try {
+      window.getLastWindow(uiContext.getHostContext()).then(currentWindow => {
+        currentWindow.off('avoidAreaChange', this.setWindowBottomPadding);
+      }).catch((e: BusinessError) => {
+        UtilLog.error(TAG, 'getLastWindow fail, error: ' + JSON.stringify(e));
+      });
+    } catch (e) {
+      UtilLog.error(TAG, 'unRegisterWindowBottomPadding fail, error: ' + JSON.stringify(e));
+    }
   }
 
   /**

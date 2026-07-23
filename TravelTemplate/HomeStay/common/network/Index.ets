@@ -19,4 +19,6 @@ export { TravelNoteResp,
   CarouselImagesResp,
   CommodityResp,
   TenantResp,
-  TenantInfoResp } from './src/main//ets/types/ResponceTypes';
+  TenantInfoResp,
+  SurroundingsResp,
+  SurroundingsInfoResp } from './src/main//ets/types/ResponceTypes';

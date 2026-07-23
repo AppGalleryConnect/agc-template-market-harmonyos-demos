@@ -1,3 +1,6 @@
+import { Video } from '@ohos_agcit/driver_license_exam_datasource';
+import { LongTakeTransitionParam } from 'module_transition';
+
 export interface TabListItem {
   label: string | Resource;
   icon: Resource;
@@ -23,4 +26,9 @@ export interface MineServiceItem {
   label: Resource;
   icon: Resource;
   routePath: string;
+}
+
+export interface VideoDetailParam {
+  video: Video;
+  longTakeTransitionParam?: LongTakeTransitionParam;
 }

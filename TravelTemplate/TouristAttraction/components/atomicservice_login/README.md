@@ -101,18 +101,22 @@ AtomicserviceLogin(option: [AtomicserviceLoginOptions](#AtomicserviceLoginOption
 
 **参数：**
 
-| 参数名     | 类型                                                          | 是否必填 | 说明             |
-|:--------|:------------------------------------------------------------|:-----|:---------------|
-| options | [AtomicserviceLoginOptions](#AtomicserviceLoginOptions对象说明) | 否    | 元服务登录/关联组件的参数。 |
+| 参数名            | 类型                                              | 是否必填 | 说明                   |
+|:---------------|:------------------------------------------------|:-----|:---------------------|
+| userInfo       | [UserInfo](#UserInfo对象说明)                     | 是    | 用户信息                 |
+| isLink         | boolean                                         | 否    | 是否关联，默认为false，未关联   |
+| initValue      | ResourceStr                                     | 否    | 用户名初始信息，默认为'华为用户'  |
+| controller     | [ApiController](#ApiController对象说明)           | 否    | 控制器                  |
 
-#### AtomicserviceLoginOptions对象说明
+#### UserInfo对象说明
 
-| 参数名        | 类型                                      | 是否必填 | 说明                |
-|:-----------|:----------------------------------------|:-----|:------------------|
-| userInfo   | [userInfoOptions](#userInfoOptions对象说明) | 是    | 用户信息              |
-| isLink     | boolean                                 | 否    | 是否关联，默认为false，未关联 |
-| initValue  | ResourceStr                             | 否    | 用户名初始信息，默认为'华为用户' |
-| controller | [ApiController](#ApiController对象说明)     | 否    | 控制器               |
+| 参数名        | 类型     | 是否必填 | 说明      |
+|:-----------|:-------|:-----|:--------|
+| userName    | string | 否    | 用户昵称    |
+| avatar      | string | 否    | 用户头像    |
+| phoneNumber | string | 否    | 用户手机号   |
+| idToken     | string | 否    | 用户token  |
+| authCode    | string | 否    | 用户凭证    |
 
 **接口：**
 
@@ -166,6 +170,12 @@ onCancelAuthorization: (state: [CancelAuthState](#CancelAuthState枚举说明)) 
 |:--------|:--|:-------|
 | SUCCESS | 1 | 取消授权成功 |
 | ERROR   | 2 | 取消授权错误 |
+
+#### linkToEdit
+
+linkToEdit: () => void = () => {}
+
+点击已关联用户头像的回调，用于跳转到编辑页面
 
 #### unBindPhone
 

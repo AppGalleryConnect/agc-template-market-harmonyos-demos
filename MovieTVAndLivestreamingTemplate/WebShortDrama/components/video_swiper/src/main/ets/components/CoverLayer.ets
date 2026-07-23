@@ -1,3 +1,4 @@
+import { AVPlayerState } from '../constant/AVPlayerState'
 import { AvPlayer } from '../controller/AvPlayer'
 
 @ComponentV2
@@ -11,7 +12,7 @@ export struct CoverLayer {
 
   build() {
     Stack({ alignContent: Alignment.Center }) {
-      if (this.curIndex === this.index && !this.avPlayer.isPlaying) {
+      if (this.curIndex === this.index && this.avPlayer.state === AVPlayerState.PAUSED) {
         Image($r('app.media.ic_paused'))
           .width(60)
           .height(60)
@@ -28,12 +29,13 @@ export struct CoverLayer {
         }
         .zIndex(3);
       }
-      if (!this.avPlayer.isReady) {
-        Image(this.previewUri)
-          .zIndex(2)
-          .width(this.xComponentWidth)
-          .height(this.xComponentHeight)
-      }
+      // if (!this.avPlayer.isReady) {
+      //   Image(this.previewUri)
+      //     .zIndex(2)
+      //     .width(this.xComponentWidth)
+      //     .height(this.xComponentHeight)
+      //     .transition(TransitionEffect.OPACITY)
+      // }
     }
     .width('100%')
     .height('100%')

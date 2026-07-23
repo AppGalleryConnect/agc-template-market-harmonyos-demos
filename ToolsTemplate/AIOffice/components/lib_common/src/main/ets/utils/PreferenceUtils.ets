@@ -1,4 +1,5 @@
 import { preferences } from '@kit.ArkData';
+import { GlobalContext } from './GlobalContext';
 import { Logger } from './Logger';
 
 const TAG = '[PreferenceUtils]';
@@ -11,16 +12,20 @@ export class PreferenceUtils {
   private dataPreferences: preferences.Preferences | null = null;
 
   private constructor(context: Context, fileName: string) {
-    preferences.removePreferencesFromCacheSync(context, fileName);
-    this.dataPreferences = preferences.getPreferencesSync(context, { name: fileName });
-    Logger.info(TAG, `PreferenceUtil: ${fileName} init: ${this.dataPreferences !== null}`);
+    try {
+      preferences.removePreferencesFromCacheSync(context, fileName);
+      this.dataPreferences = preferences.getPreferencesSync(context, { name: fileName });
+      Logger.info(TAG, `PreferenceUtil: ${fileName} init: ${this.dataPreferences !== null}`);
+    } catch (error) {
+      Logger.info(TAG, `PreferenceUtil: init error: ${JSON.stringify(error)}`);
+    }
   }
 
   public static getInstance(context?: Context, fileName: string = 'default') {
     if (PreferenceUtils.preferenceRecord.has(fileName)) {
       return PreferenceUtils.preferenceRecord.get(fileName)!!;
     }
-    let ctx = context || getContext();
+    let ctx = context || GlobalContext.getContext();
     let preferenceUtil: PreferenceUtils = new PreferenceUtils(ctx, fileName);
     PreferenceUtils.preferenceRecord.set(fileName, preferenceUtil);
     return preferenceUtil;

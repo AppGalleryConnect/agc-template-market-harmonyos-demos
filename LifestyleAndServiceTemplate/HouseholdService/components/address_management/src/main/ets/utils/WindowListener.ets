@@ -23,14 +23,19 @@ export class WindowListener {
       this.mainWindow.on('avoidAreaChange', this.onAvoidAreaChange);
       this.mainWindow.on('windowSizeChange', this.onWindowSizeChange);
     } catch (err) {
-      UtilLog.error('PersonalInfoWindow]',
+      UtilLog.error('[PersonalInfoWindow]',
         `Failed to get window properties. Code is ${err.code}, message is ${err.message}`);
     }
   }
 
   public stop(): void {
-    this.mainWindow.off('avoidAreaChange', this.onAvoidAreaChange);
-    this.mainWindow.off('windowSizeChange', this.onWindowSizeChange);
+    try {
+      this.mainWindow.off('avoidAreaChange', this.onAvoidAreaChange);
+      this.mainWindow.off('windowSizeChange', this.onWindowSizeChange);
+    } catch (err) {
+      UtilLog.error('[PersonalInfoWindow]',
+        `Failed to Unregister window properties. Code is ${err.code}, message is ${err.message}`);
+    }
   }
 
   private onAvoidAreaChange: Callback<window.AvoidAreaOptions> = (options: window.AvoidAreaOptions) => {

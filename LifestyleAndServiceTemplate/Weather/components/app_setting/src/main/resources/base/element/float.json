@@ -1,0 +1,32 @@
+{
+  "float": [
+    {
+      "name": "large_radius",
+      "value": "16vp"
+    },
+    {
+      "name": "xl_radius",
+      "value": "20vp"
+    },
+    {
+      "name": "xxl_radius",
+      "value": "32vp"
+    },
+    {
+      "name": "nav_header_height",
+      "value": "56vp"
+    },
+    {
+      "name": "small_img_size",
+      "value": "12vp"
+    },
+    {
+      "name": "normal_img_size",
+      "value": "24vp"
+    },
+    {
+      "name": "option_item_height",
+      "value": "48vp"
+    }
+  ]
+}

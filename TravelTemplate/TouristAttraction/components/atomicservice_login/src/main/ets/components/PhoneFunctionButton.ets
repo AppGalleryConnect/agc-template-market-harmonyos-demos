@@ -31,9 +31,9 @@ export struct PhoneFunctionButton {
             .type(ButtonType.Normal)
             .padding(0)
             .backgroundColor(Color.Transparent)
-            .size({ height: 16 })
+            .size({ height: 20 })
             .fontColor($r('sys.color.font_primary'))
-            .fontSize(14)
+            .fontSize($r('sys.float.Body_M'))
             .fontWeight(FontWeight.Medium)
             .width(76)
             .align(Alignment.End),

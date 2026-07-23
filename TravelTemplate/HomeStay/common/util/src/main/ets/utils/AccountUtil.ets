@@ -51,6 +51,14 @@ export class AccountUtil {
     AccountUtil._personalInfo.nickName = nickName;
   }
 
+  public static getPhone() {
+    return AccountUtil._personalInfo.phone;
+  }
+
+  public static setPhone(phone: string) {
+    AccountUtil._personalInfo.phone = phone;
+  }
+
   public static getPersonalInfo() {
     return AccountUtil._personalInfo
   }

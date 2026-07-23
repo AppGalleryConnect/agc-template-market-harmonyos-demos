@@ -76,7 +76,12 @@ export class SystemUtil {
         destinationName: name,
       },
     }
-    context.startAbility(petalMapWant);
+    try {
+      context.startAbility(petalMapWant);
+    } catch (error) {
+      let e: BusinessError = error as BusinessError;
+      Logger.error(`startAbility failed, ${e.code}, ${e.message}`);
+    }
   }
 
   static getSystemAddress(context: Context) {
@@ -103,8 +108,13 @@ export class SystemUtil {
     return new Promise<string>((resolve, reject) => {
       sceneMap.selectDistrict(context, districtSelectOptions).then((data) => {
         Logger.info('SelectDistrict', 'Succeeded in selecting district.');
+        let lastAdded = '';
         for (let i = 1; i < data.districts.length; i++) {
-          district += data.districts[i].name;
+          const name = data.districts[i].name;
+          if (name && name !== lastAdded) {
+            district += name;
+            lastAdded = name;
+          }
         }
         resolve(district);
       }).catch((err: BusinessError) => {
@@ -219,23 +229,30 @@ export class SystemUtil {
     const atManager = abilityAccessCtrl.createAtManager();
 
 
-    return atManager.requestPermissionsFromUser(context, permissions).then(async (result: PermissionRequestResult) => {
-      Logger.info(`get Permission success, result: ${JSON.stringify(result)}`)
-      if (result.authResults.every(v => v === 0)) {
-        return calendarManager.getCalendarManager(context);
-      }
-      // 首次拒绝后，二次弹窗申请
-      if (result.dialogShownResults?.some(v => !v)) {
-        const arr: Array<abilityAccessCtrl.GrantStatus> =
-          await atManager.requestPermissionOnSetting(context, permissions);
-        if (arr.every(v => v === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED)) {
+    try {
+      return atManager.requestPermissionsFromUser(context, permissions)
+        .then(async (result: PermissionRequestResult) => {
+          Logger.info(`get Permission success, result: ${JSON.stringify(result)}`)
+        if (result.authResults.every(v => v === 0)) {
           return calendarManager.getCalendarManager(context);
         }
-        return null;
-      }
+        // 首次拒绝后，二次弹窗申请
+        if (result.dialogShownResults?.some(v => !v)) {
+          const arr: Array<abilityAccessCtrl.GrantStatus> =
+            await atManager.requestPermissionOnSetting(context, permissions);
+          if (arr.every(v => v === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED)) {
+            return calendarManager.getCalendarManager(context);
+          }
+          return null;
+        }
 
+        return null;
+      })
+    } catch (error) {
+      let e: BusinessError = error as BusinessError;
+      Logger.error(`requestPermissionsFromUser failed, ${e.code}, ${e.message}`);
       return null;
-    })
+    }
   }
 
   // 添加日程
@@ -253,7 +270,13 @@ export class SystemUtil {
       reminderTime: [30], // 距开始时间提前10分钟提醒
     };
 
-    const calendar = await calendarMgr.getCalendar();
+    let calendar: calendarManager.Calendar | null = null;
+    try {
+      calendar = await calendarMgr.getCalendar();
+    } catch (e) {
+      Logger.error(0x0000, 'SystemUtil', `getCalendar = ${JSON.stringify(e)}`);
+      return false;
+    }
     const res = await calendar.addEvent(event)
     return res < 0 ? false : true
   };

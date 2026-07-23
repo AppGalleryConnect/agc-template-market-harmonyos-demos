@@ -1,5 +1,5 @@
 import { RouterMap, RouterModule } from 'commonlib';
-import { SearchQuestionPage } from 'search_question';
+import { SearchQuestionPage } from '../components/SearchQuestionPage';
 
 @ComponentV2
 export struct SearchInputPage {
@@ -7,7 +7,6 @@ export struct SearchInputPage {
     Column() {
       SearchQuestionPage({
         search: (data) => {
-          RouterModule.push({ url: RouterMap.SEARCH_PAGE, param: data })
         },
         back: () => {
           RouterModule.pop()

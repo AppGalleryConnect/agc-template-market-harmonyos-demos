@@ -11,5 +11,7 @@
     "module_theme": "file:../../components/module_theme",
     "module_voice_broadcast": "file:../../components/module_voice_broadcast",
     "module_weather_core": "file:../../components/module_weather_core",
+    "app_setting": "file:../../components/app_setting",
+    "collect_personal_info": "file:../../components/collect_personal_info"
   }
 }

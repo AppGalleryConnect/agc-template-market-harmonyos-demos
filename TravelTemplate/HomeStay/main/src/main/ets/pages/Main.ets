@@ -79,7 +79,7 @@ struct Main {
       .width(Constants.FULL_SCREEN)
       .height(Constants.FULL_SCREEN)
       .padding({ bottom: this.windowBottomHeight })
-      .backgroundColor(Color.White);
+      .backgroundColor($r('sys.color.background_secondary'));
     }
     .hideTitleBar(true)
   }

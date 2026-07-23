@@ -1,0 +1,3596 @@
+{
+  "metadata": {
+    "rootDir": "/devcloud/ws/s5R8h/workspace/j_IPXGSVSW/BacAGCSDKCalendarService/Calendar",
+    "toolType": "ohpm",
+    "toolVersion": "ohpm v5.3.1-rc.4",
+    "author": [
+      {}
+    ]
+  },
+  "modules": [
+    {
+      "moduleName": "membership",
+      "artifact": {
+        "component": {
+          "id": "membership@1.0.2",
+          "repoType": "ohpm",
+          "name": "membership",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.2",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "dayjs@1.11.21",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.21",
+          "files": [
+            {
+              "integrity": "sha512-98IT+HOahAisibz/yjKbzuOBwYcjJ7BCLPzARyHiyEBmRz4fatF+KPJszEHXsGYjUG234aH/cOjW1wwTbKUZlA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.21.tgz"
+            }
+          ]
+        },
+        {
+          "id": "lunar@1.0.0",
+          "desc": "lunar是一款无第三方依赖的公历(阳历)、农历(阴历、老黄历)、佛历和道历工具，支持星座、儒略日、干支、生肖、节气、节日、彭祖百忌、每日宜忌、吉神宜趋、凶煞宜忌、吉神(喜神/福神/财神/阳贵神/阴贵神)方位、胎神方位、冲煞、纳音、星宿、八字、五行、十神、建除十二值星、青龙名堂等十二神、黄道日及吉凶等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "lunar",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-sAMOxbVr7Sn/QEzEQZHz0CwYjOROTgDLc4842CX2d7f+1D2nlHc6T5jtZJoleIMPZItNJLj0GuOaB/JR+Iwe7Q==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/lunar/-/lunar-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "desc": "fast-web基于open harmony基础组件开发的高性能Web容器，提供具有预启动、预渲染、预编译JavaScript生成字节码缓存、离线资源免拦截注入等能力的Web组件。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/fast-web",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-Rss9XtK17SqIOLu1MVWBBtwUEP/txhB3KjuF66TmnI/WnR1VxEUMgdi6hbOfdUAeIsUQyY1wVhFNzguFIIbcMQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/fast-web/-/@hw-agconnect/fast-web-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-base@1.0.1",
+          "desc": "AppGalleryConnectSDK ui component base for OpenHarmony.",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-base",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-72W2eKnmL+ZQo0qxhmWrEKH/8qeXm6AjOF3hR0p4dz/k42g2PHt+zfeZkDLVK+jihQK+GFfSD7r5cAkL3zE6Xg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-base/-/@hw-agconnect/ui-base-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.7",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.7",
+          "files": [
+            {
+              "integrity": "sha512-oiGb0GheCk6h7MiqZvYPsVOdyLorq7e+PU26EHeBgX5r3rAkVbDR7bCF3n5rDU9mb5R/mgckA/um1ZgYGJ2EBQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@ohos/axios/-/@ohos/axios-2.2.7.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/petal-aegis@1.4.11-300",
+          "desc": "Aegis（安全编码SDK）基于HarmonyOS应用特点，由专业安全团队开发，提供简单易用的安全API，集成后可进一步提升应用的安全质量。\n\n为保护用户的个人信息和应用的敏感信息的机密性、完整性、不可抵赖性等，Aegis为您提供丰富的加解密算法，如：哈希算法、消息认证码算法、对称加解密算法、非对称加解密算法、签名验签算法等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/petal-aegis",
+          "version": "1.4.11-300",
+          "files": [
+            {
+              "integrity": "sha512-U49pnWkQ7lpd88gDfm4UfzdAD8QSujmnXk0zbidSPlkPcBkMRRo0Ce+a21d/zEi85WAvK+wmU51td6ojAxeWtQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@hw-agconnect/petal-aegis/-/@hw-agconnect/petal-aegis-1.4.11-300.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "membership@1.0.2",
+          "dependsOn": [
+            {
+              "id": "dayjs@1.11.21"
+            },
+            {
+              "id": "lunar@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/fast-web@1.0.1"
+            },
+            {
+              "id": "@hw-agconnect/petal-aegis@1.4.11-300"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/ui-base@1.0.1"
+            },
+            {
+              "id": "@ohos/axios@2.2.7"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": []
+    },
+    {
+      "moduleName": "app_setting",
+      "artifact": {
+        "component": {
+          "id": "app_setting@1.0.2",
+          "repoType": "ohpm",
+          "name": "app_setting",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.2",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.7",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.7",
+          "files": [
+            {
+              "integrity": "sha512-oiGb0GheCk6h7MiqZvYPsVOdyLorq7e+PU26EHeBgX5r3rAkVbDR7bCF3n5rDU9mb5R/mgckA/um1ZgYGJ2EBQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@ohos/axios/-/@ohos/axios-2.2.7.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-toast@1.0.0",
+          "desc": "ui_toast是基于open harmony基础组件开发的组件，用于在屏幕中显示一个操作的轻量级即时反馈，支持显示图片+文字，刷新弹窗内容和修改弹窗样式。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-toast",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-vmk4trgNRIxAK81xj69zRJCayccuryywF5qfheKWy1hdtSMMvXAX4g1EYvAbMd7/PXT8v+g/Xa/ASFS2BSs1KQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@hw-agconnect/ui-toast/-/@hw-agconnect/ui-toast-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "dayjs@1.11.21",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.21",
+          "files": [
+            {
+              "integrity": "sha512-98IT+HOahAisibz/yjKbzuOBwYcjJ7BCLPzARyHiyEBmRz4fatF+KPJszEHXsGYjUG234aH/cOjW1wwTbKUZlA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.21.tgz"
+            }
+          ]
+        },
+        {
+          "id": "lunar@1.0.0",
+          "desc": "lunar是一款无第三方依赖的公历(阳历)、农历(阴历、老黄历)、佛历和道历工具，支持星座、儒略日、干支、生肖、节气、节日、彭祖百忌、每日宜忌、吉神宜趋、凶煞宜忌、吉神(喜神/福神/财神/阳贵神/阴贵神)方位、胎神方位、冲煞、纳音、星宿、八字、五行、十神、建除十二值星、青龙名堂等十二神、黄道日及吉凶等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "lunar",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-sAMOxbVr7Sn/QEzEQZHz0CwYjOROTgDLc4842CX2d7f+1D2nlHc6T5jtZJoleIMPZItNJLj0GuOaB/JR+Iwe7Q==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/lunar/-/lunar-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "desc": "fast-web基于open harmony基础组件开发的高性能Web容器，提供具有预启动、预渲染、预编译JavaScript生成字节码缓存、离线资源免拦截注入等能力的Web组件。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/fast-web",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-Rss9XtK17SqIOLu1MVWBBtwUEP/txhB3KjuF66TmnI/WnR1VxEUMgdi6hbOfdUAeIsUQyY1wVhFNzguFIIbcMQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/fast-web/-/@hw-agconnect/fast-web-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-base@1.0.1",
+          "desc": "AppGalleryConnectSDK ui component base for OpenHarmony.",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-base",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-72W2eKnmL+ZQo0qxhmWrEKH/8qeXm6AjOF3hR0p4dz/k42g2PHt+zfeZkDLVK+jihQK+GFfSD7r5cAkL3zE6Xg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-base/-/@hw-agconnect/ui-base-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/petal-aegis@1.4.11-300",
+          "desc": "Aegis（安全编码SDK）基于HarmonyOS应用特点，由专业安全团队开发，提供简单易用的安全API，集成后可进一步提升应用的安全质量。\n\n为保护用户的个人信息和应用的敏感信息的机密性、完整性、不可抵赖性等，Aegis为您提供丰富的加解密算法，如：哈希算法、消息认证码算法、对称加解密算法、非对称加解密算法、签名验签算法等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/petal-aegis",
+          "version": "1.4.11-300",
+          "files": [
+            {
+              "integrity": "sha512-U49pnWkQ7lpd88gDfm4UfzdAD8QSujmnXk0zbidSPlkPcBkMRRo0Ce+a21d/zEi85WAvK+wmU51td6ojAxeWtQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@hw-agconnect/petal-aegis/-/@hw-agconnect/petal-aegis-1.4.11-300.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "app_setting@1.0.2",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/ui-toast@1.0.0"
+            },
+            {
+              "id": "dayjs@1.11.21"
+            },
+            {
+              "id": "lunar@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/fast-web@1.0.1"
+            },
+            {
+              "id": "@hw-agconnect/petal-aegis@1.4.11-300"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.7"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/ui-base@1.0.1"
+            },
+            {
+              "id": "@ohos/axios@2.2.7"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": []
+    },
+    {
+      "moduleName": "image_preview",
+      "artifact": {
+        "component": {
+          "id": "image_preview@1.0.0",
+          "repoType": "ohpm",
+          "name": "image_preview",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.7",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.7",
+          "files": [
+            {
+              "integrity": "sha512-oiGb0GheCk6h7MiqZvYPsVOdyLorq7e+PU26EHeBgX5r3rAkVbDR7bCF3n5rDU9mb5R/mgckA/um1ZgYGJ2EBQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@ohos/axios/-/@ohos/axios-2.2.7.har"
+            }
+          ]
+        },
+        {
+          "id": "dayjs@1.11.21",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.21",
+          "files": [
+            {
+              "integrity": "sha512-98IT+HOahAisibz/yjKbzuOBwYcjJ7BCLPzARyHiyEBmRz4fatF+KPJszEHXsGYjUG234aH/cOjW1wwTbKUZlA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.21.tgz"
+            }
+          ]
+        },
+        {
+          "id": "lunar@1.0.0",
+          "desc": "lunar是一款无第三方依赖的公历(阳历)、农历(阴历、老黄历)、佛历和道历工具，支持星座、儒略日、干支、生肖、节气、节日、彭祖百忌、每日宜忌、吉神宜趋、凶煞宜忌、吉神(喜神/福神/财神/阳贵神/阴贵神)方位、胎神方位、冲煞、纳音、星宿、八字、五行、十神、建除十二值星、青龙名堂等十二神、黄道日及吉凶等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "lunar",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-sAMOxbVr7Sn/QEzEQZHz0CwYjOROTgDLc4842CX2d7f+1D2nlHc6T5jtZJoleIMPZItNJLj0GuOaB/JR+Iwe7Q==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/lunar/-/lunar-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "desc": "fast-web基于open harmony基础组件开发的高性能Web容器，提供具有预启动、预渲染、预编译JavaScript生成字节码缓存、离线资源免拦截注入等能力的Web组件。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/fast-web",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-Rss9XtK17SqIOLu1MVWBBtwUEP/txhB3KjuF66TmnI/WnR1VxEUMgdi6hbOfdUAeIsUQyY1wVhFNzguFIIbcMQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/fast-web/-/@hw-agconnect/fast-web-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-base@1.0.1",
+          "desc": "AppGalleryConnectSDK ui component base for OpenHarmony.",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-base",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-72W2eKnmL+ZQo0qxhmWrEKH/8qeXm6AjOF3hR0p4dz/k42g2PHt+zfeZkDLVK+jihQK+GFfSD7r5cAkL3zE6Xg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-base/-/@hw-agconnect/ui-base-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/petal-aegis@1.4.11-300",
+          "desc": "Aegis（安全编码SDK）基于HarmonyOS应用特点，由专业安全团队开发，提供简单易用的安全API，集成后可进一步提升应用的安全质量。\n\n为保护用户的个人信息和应用的敏感信息的机密性、完整性、不可抵赖性等，Aegis为您提供丰富的加解密算法，如：哈希算法、消息认证码算法、对称加解密算法、非对称加解密算法、签名验签算法等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/petal-aegis",
+          "version": "1.4.11-300",
+          "files": [
+            {
+              "integrity": "sha512-U49pnWkQ7lpd88gDfm4UfzdAD8QSujmnXk0zbidSPlkPcBkMRRo0Ce+a21d/zEi85WAvK+wmU51td6ojAxeWtQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@hw-agconnect/petal-aegis/-/@hw-agconnect/petal-aegis-1.4.11-300.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "image_preview@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "dayjs@1.11.21"
+            },
+            {
+              "id": "lunar@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/fast-web@1.0.1"
+            },
+            {
+              "id": "@hw-agconnect/petal-aegis@1.4.11-300"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.7"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/ui-base@1.0.1"
+            },
+            {
+              "id": "@ohos/axios@2.2.7"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": []
+    },
+    {
+      "moduleName": "router_module",
+      "artifact": {
+        "component": {
+          "id": "router_module@1.0.0",
+          "repoType": "ohpm",
+          "name": "router_module",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.7",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.7",
+          "files": [
+            {
+              "integrity": "sha512-oiGb0GheCk6h7MiqZvYPsVOdyLorq7e+PU26EHeBgX5r3rAkVbDR7bCF3n5rDU9mb5R/mgckA/um1ZgYGJ2EBQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@ohos/axios/-/@ohos/axios-2.2.7.har"
+            }
+          ]
+        },
+        {
+          "id": "dayjs@1.11.21",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.21",
+          "files": [
+            {
+              "integrity": "sha512-98IT+HOahAisibz/yjKbzuOBwYcjJ7BCLPzARyHiyEBmRz4fatF+KPJszEHXsGYjUG234aH/cOjW1wwTbKUZlA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.21.tgz"
+            }
+          ]
+        },
+        {
+          "id": "lunar@1.0.0",
+          "desc": "lunar是一款无第三方依赖的公历(阳历)、农历(阴历、老黄历)、佛历和道历工具，支持星座、儒略日、干支、生肖、节气、节日、彭祖百忌、每日宜忌、吉神宜趋、凶煞宜忌、吉神(喜神/福神/财神/阳贵神/阴贵神)方位、胎神方位、冲煞、纳音、星宿、八字、五行、十神、建除十二值星、青龙名堂等十二神、黄道日及吉凶等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "lunar",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-sAMOxbVr7Sn/QEzEQZHz0CwYjOROTgDLc4842CX2d7f+1D2nlHc6T5jtZJoleIMPZItNJLj0GuOaB/JR+Iwe7Q==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/lunar/-/lunar-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "desc": "fast-web基于open harmony基础组件开发的高性能Web容器，提供具有预启动、预渲染、预编译JavaScript生成字节码缓存、离线资源免拦截注入等能力的Web组件。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/fast-web",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-Rss9XtK17SqIOLu1MVWBBtwUEP/txhB3KjuF66TmnI/WnR1VxEUMgdi6hbOfdUAeIsUQyY1wVhFNzguFIIbcMQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/fast-web/-/@hw-agconnect/fast-web-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-base@1.0.1",
+          "desc": "AppGalleryConnectSDK ui component base for OpenHarmony.",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-base",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-72W2eKnmL+ZQo0qxhmWrEKH/8qeXm6AjOF3hR0p4dz/k42g2PHt+zfeZkDLVK+jihQK+GFfSD7r5cAkL3zE6Xg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-base/-/@hw-agconnect/ui-base-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/petal-aegis@1.4.11-300",
+          "desc": "Aegis（安全编码SDK）基于HarmonyOS应用特点，由专业安全团队开发，提供简单易用的安全API，集成后可进一步提升应用的安全质量。\n\n为保护用户的个人信息和应用的敏感信息的机密性、完整性、不可抵赖性等，Aegis为您提供丰富的加解密算法，如：哈希算法、消息认证码算法、对称加解密算法、非对称加解密算法、签名验签算法等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/petal-aegis",
+          "version": "1.4.11-300",
+          "files": [
+            {
+              "integrity": "sha512-U49pnWkQ7lpd88gDfm4UfzdAD8QSujmnXk0zbidSPlkPcBkMRRo0Ce+a21d/zEi85WAvK+wmU51td6ojAxeWtQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@hw-agconnect/petal-aegis/-/@hw-agconnect/petal-aegis-1.4.11-300.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "router_module@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "dayjs@1.11.21"
+            },
+            {
+              "id": "lunar@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/fast-web@1.0.1"
+            },
+            {
+              "id": "@hw-agconnect/petal-aegis@1.4.11-300"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.7"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/ui-base@1.0.1"
+            },
+            {
+              "id": "@ohos/axios@2.2.7"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": []
+    },
+    {
+      "moduleName": "base_apis",
+      "artifact": {
+        "component": {
+          "id": "base_apis@1.0.0",
+          "repoType": "ohpm",
+          "name": "base_apis",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "dayjs@1.11.21",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.21",
+          "files": [
+            {
+              "integrity": "sha512-98IT+HOahAisibz/yjKbzuOBwYcjJ7BCLPzARyHiyEBmRz4fatF+KPJszEHXsGYjUG234aH/cOjW1wwTbKUZlA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.21.tgz"
+            }
+          ]
+        },
+        {
+          "id": "lunar@1.0.0",
+          "desc": "lunar是一款无第三方依赖的公历(阳历)、农历(阴历、老黄历)、佛历和道历工具，支持星座、儒略日、干支、生肖、节气、节日、彭祖百忌、每日宜忌、吉神宜趋、凶煞宜忌、吉神(喜神/福神/财神/阳贵神/阴贵神)方位、胎神方位、冲煞、纳音、星宿、八字、五行、十神、建除十二值星、青龙名堂等十二神、黄道日及吉凶等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "lunar",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-sAMOxbVr7Sn/QEzEQZHz0CwYjOROTgDLc4842CX2d7f+1D2nlHc6T5jtZJoleIMPZItNJLj0GuOaB/JR+Iwe7Q==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/lunar/-/lunar-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.7",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.7",
+          "files": [
+            {
+              "integrity": "sha512-oiGb0GheCk6h7MiqZvYPsVOdyLorq7e+PU26EHeBgX5r3rAkVbDR7bCF3n5rDU9mb5R/mgckA/um1ZgYGJ2EBQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@ohos/axios/-/@ohos/axios-2.2.7.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "desc": "fast-web基于open harmony基础组件开发的高性能Web容器，提供具有预启动、预渲染、预编译JavaScript生成字节码缓存、离线资源免拦截注入等能力的Web组件。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/fast-web",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-Rss9XtK17SqIOLu1MVWBBtwUEP/txhB3KjuF66TmnI/WnR1VxEUMgdi6hbOfdUAeIsUQyY1wVhFNzguFIIbcMQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/fast-web/-/@hw-agconnect/fast-web-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-base@1.0.1",
+          "desc": "AppGalleryConnectSDK ui component base for OpenHarmony.",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-base",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-72W2eKnmL+ZQo0qxhmWrEKH/8qeXm6AjOF3hR0p4dz/k42g2PHt+zfeZkDLVK+jihQK+GFfSD7r5cAkL3zE6Xg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-base/-/@hw-agconnect/ui-base-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/petal-aegis@1.4.11-300",
+          "desc": "Aegis（安全编码SDK）基于HarmonyOS应用特点，由专业安全团队开发，提供简单易用的安全API，集成后可进一步提升应用的安全质量。\n\n为保护用户的个人信息和应用的敏感信息的机密性、完整性、不可抵赖性等，Aegis为您提供丰富的加解密算法，如：哈希算法、消息认证码算法、对称加解密算法、非对称加解密算法、签名验签算法等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/petal-aegis",
+          "version": "1.4.11-300",
+          "files": [
+            {
+              "integrity": "sha512-U49pnWkQ7lpd88gDfm4UfzdAD8QSujmnXk0zbidSPlkPcBkMRRo0Ce+a21d/zEi85WAvK+wmU51td6ojAxeWtQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@hw-agconnect/petal-aegis/-/@hw-agconnect/petal-aegis-1.4.11-300.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "base_apis@1.0.0",
+          "dependsOn": [
+            {
+              "id": "dayjs@1.11.21"
+            },
+            {
+              "id": "lunar@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/fast-web@1.0.1"
+            },
+            {
+              "id": "@hw-agconnect/petal-aegis@1.4.11-300"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.7"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/ui-base@1.0.1"
+            },
+            {
+              "id": "@ohos/axios@2.2.7"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": []
+    },
+    {
+      "moduleName": "base_calendar",
+      "artifact": {
+        "component": {
+          "id": "base_calendar@1.0.0",
+          "repoType": "ohpm",
+          "name": "base_calendar",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.7",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.7",
+          "files": [
+            {
+              "integrity": "sha512-oiGb0GheCk6h7MiqZvYPsVOdyLorq7e+PU26EHeBgX5r3rAkVbDR7bCF3n5rDU9mb5R/mgckA/um1ZgYGJ2EBQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@ohos/axios/-/@ohos/axios-2.2.7.har"
+            }
+          ]
+        },
+        {
+          "id": "dayjs@1.11.21",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.21",
+          "files": [
+            {
+              "integrity": "sha512-98IT+HOahAisibz/yjKbzuOBwYcjJ7BCLPzARyHiyEBmRz4fatF+KPJszEHXsGYjUG234aH/cOjW1wwTbKUZlA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.21.tgz"
+            }
+          ]
+        },
+        {
+          "id": "lunar@1.0.0",
+          "desc": "lunar是一款无第三方依赖的公历(阳历)、农历(阴历、老黄历)、佛历和道历工具，支持星座、儒略日、干支、生肖、节气、节日、彭祖百忌、每日宜忌、吉神宜趋、凶煞宜忌、吉神(喜神/福神/财神/阳贵神/阴贵神)方位、胎神方位、冲煞、纳音、星宿、八字、五行、十神、建除十二值星、青龙名堂等十二神、黄道日及吉凶等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "lunar",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-sAMOxbVr7Sn/QEzEQZHz0CwYjOROTgDLc4842CX2d7f+1D2nlHc6T5jtZJoleIMPZItNJLj0GuOaB/JR+Iwe7Q==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/lunar/-/lunar-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "desc": "fast-web基于open harmony基础组件开发的高性能Web容器，提供具有预启动、预渲染、预编译JavaScript生成字节码缓存、离线资源免拦截注入等能力的Web组件。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/fast-web",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-Rss9XtK17SqIOLu1MVWBBtwUEP/txhB3KjuF66TmnI/WnR1VxEUMgdi6hbOfdUAeIsUQyY1wVhFNzguFIIbcMQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/fast-web/-/@hw-agconnect/fast-web-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-base@1.0.1",
+          "desc": "AppGalleryConnectSDK ui component base for OpenHarmony.",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-base",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-72W2eKnmL+ZQo0qxhmWrEKH/8qeXm6AjOF3hR0p4dz/k42g2PHt+zfeZkDLVK+jihQK+GFfSD7r5cAkL3zE6Xg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-base/-/@hw-agconnect/ui-base-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/petal-aegis@1.4.11-300",
+          "desc": "Aegis（安全编码SDK）基于HarmonyOS应用特点，由专业安全团队开发，提供简单易用的安全API，集成后可进一步提升应用的安全质量。\n\n为保护用户的个人信息和应用的敏感信息的机密性、完整性、不可抵赖性等，Aegis为您提供丰富的加解密算法，如：哈希算法、消息认证码算法、对称加解密算法、非对称加解密算法、签名验签算法等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/petal-aegis",
+          "version": "1.4.11-300",
+          "files": [
+            {
+              "integrity": "sha512-U49pnWkQ7lpd88gDfm4UfzdAD8QSujmnXk0zbidSPlkPcBkMRRo0Ce+a21d/zEi85WAvK+wmU51td6ojAxeWtQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@hw-agconnect/petal-aegis/-/@hw-agconnect/petal-aegis-1.4.11-300.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "base_calendar@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "dayjs@1.11.21"
+            },
+            {
+              "id": "lunar@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/fast-web@1.0.1"
+            },
+            {
+              "id": "@hw-agconnect/petal-aegis@1.4.11-300"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.7"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/ui-base@1.0.1"
+            },
+            {
+              "id": "@ohos/axios@2.2.7"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":base_apis"
+      ]
+    },
+    {
+      "moduleName": "calendar_events",
+      "artifact": {
+        "component": {
+          "id": "calendar_events@1.0.0",
+          "repoType": "ohpm",
+          "name": "calendar_events",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "dayjs@1.11.21",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.21",
+          "files": [
+            {
+              "integrity": "sha512-98IT+HOahAisibz/yjKbzuOBwYcjJ7BCLPzARyHiyEBmRz4fatF+KPJszEHXsGYjUG234aH/cOjW1wwTbKUZlA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.21.tgz"
+            }
+          ]
+        },
+        {
+          "id": "lunar@1.0.0",
+          "desc": "lunar是一款无第三方依赖的公历(阳历)、农历(阴历、老黄历)、佛历和道历工具，支持星座、儒略日、干支、生肖、节气、节日、彭祖百忌、每日宜忌、吉神宜趋、凶煞宜忌、吉神(喜神/福神/财神/阳贵神/阴贵神)方位、胎神方位、冲煞、纳音、星宿、八字、五行、十神、建除十二值星、青龙名堂等十二神、黄道日及吉凶等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "lunar",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-sAMOxbVr7Sn/QEzEQZHz0CwYjOROTgDLc4842CX2d7f+1D2nlHc6T5jtZJoleIMPZItNJLj0GuOaB/JR+Iwe7Q==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/lunar/-/lunar-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.7",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.7",
+          "files": [
+            {
+              "integrity": "sha512-oiGb0GheCk6h7MiqZvYPsVOdyLorq7e+PU26EHeBgX5r3rAkVbDR7bCF3n5rDU9mb5R/mgckA/um1ZgYGJ2EBQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@ohos/axios/-/@ohos/axios-2.2.7.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "desc": "fast-web基于open harmony基础组件开发的高性能Web容器，提供具有预启动、预渲染、预编译JavaScript生成字节码缓存、离线资源免拦截注入等能力的Web组件。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/fast-web",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-Rss9XtK17SqIOLu1MVWBBtwUEP/txhB3KjuF66TmnI/WnR1VxEUMgdi6hbOfdUAeIsUQyY1wVhFNzguFIIbcMQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/fast-web/-/@hw-agconnect/fast-web-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-base@1.0.1",
+          "desc": "AppGalleryConnectSDK ui component base for OpenHarmony.",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-base",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-72W2eKnmL+ZQo0qxhmWrEKH/8qeXm6AjOF3hR0p4dz/k42g2PHt+zfeZkDLVK+jihQK+GFfSD7r5cAkL3zE6Xg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-base/-/@hw-agconnect/ui-base-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/petal-aegis@1.4.11-300",
+          "desc": "Aegis（安全编码SDK）基于HarmonyOS应用特点，由专业安全团队开发，提供简单易用的安全API，集成后可进一步提升应用的安全质量。\n\n为保护用户的个人信息和应用的敏感信息的机密性、完整性、不可抵赖性等，Aegis为您提供丰富的加解密算法，如：哈希算法、消息认证码算法、对称加解密算法、非对称加解密算法、签名验签算法等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/petal-aegis",
+          "version": "1.4.11-300",
+          "files": [
+            {
+              "integrity": "sha512-U49pnWkQ7lpd88gDfm4UfzdAD8QSujmnXk0zbidSPlkPcBkMRRo0Ce+a21d/zEi85WAvK+wmU51td6ojAxeWtQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@hw-agconnect/petal-aegis/-/@hw-agconnect/petal-aegis-1.4.11-300.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "calendar_events@1.0.0",
+          "dependsOn": [
+            {
+              "id": "dayjs@1.11.21"
+            },
+            {
+              "id": "lunar@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/fast-web@1.0.1"
+            },
+            {
+              "id": "@hw-agconnect/petal-aegis@1.4.11-300"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.7"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/ui-base@1.0.1"
+            },
+            {
+              "id": "@ohos/axios@2.2.7"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":base_apis"
+      ]
+    },
+    {
+      "moduleName": "login_info",
+      "artifact": {
+        "component": {
+          "id": "login_info@1.0.0",
+          "repoType": "ohpm",
+          "name": "login_info",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.7",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.7",
+          "files": [
+            {
+              "integrity": "sha512-oiGb0GheCk6h7MiqZvYPsVOdyLorq7e+PU26EHeBgX5r3rAkVbDR7bCF3n5rDU9mb5R/mgckA/um1ZgYGJ2EBQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@ohos/axios/-/@ohos/axios-2.2.7.har"
+            }
+          ]
+        },
+        {
+          "id": "dayjs@1.11.21",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.21",
+          "files": [
+            {
+              "integrity": "sha512-98IT+HOahAisibz/yjKbzuOBwYcjJ7BCLPzARyHiyEBmRz4fatF+KPJszEHXsGYjUG234aH/cOjW1wwTbKUZlA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.21.tgz"
+            }
+          ]
+        },
+        {
+          "id": "lunar@1.0.0",
+          "desc": "lunar是一款无第三方依赖的公历(阳历)、农历(阴历、老黄历)、佛历和道历工具，支持星座、儒略日、干支、生肖、节气、节日、彭祖百忌、每日宜忌、吉神宜趋、凶煞宜忌、吉神(喜神/福神/财神/阳贵神/阴贵神)方位、胎神方位、冲煞、纳音、星宿、八字、五行、十神、建除十二值星、青龙名堂等十二神、黄道日及吉凶等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "lunar",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-sAMOxbVr7Sn/QEzEQZHz0CwYjOROTgDLc4842CX2d7f+1D2nlHc6T5jtZJoleIMPZItNJLj0GuOaB/JR+Iwe7Q==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/lunar/-/lunar-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "desc": "fast-web基于open harmony基础组件开发的高性能Web容器，提供具有预启动、预渲染、预编译JavaScript生成字节码缓存、离线资源免拦截注入等能力的Web组件。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/fast-web",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-Rss9XtK17SqIOLu1MVWBBtwUEP/txhB3KjuF66TmnI/WnR1VxEUMgdi6hbOfdUAeIsUQyY1wVhFNzguFIIbcMQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/fast-web/-/@hw-agconnect/fast-web-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-base@1.0.1",
+          "desc": "AppGalleryConnectSDK ui component base for OpenHarmony.",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-base",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-72W2eKnmL+ZQo0qxhmWrEKH/8qeXm6AjOF3hR0p4dz/k42g2PHt+zfeZkDLVK+jihQK+GFfSD7r5cAkL3zE6Xg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-base/-/@hw-agconnect/ui-base-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/petal-aegis@1.4.11-300",
+          "desc": "Aegis（安全编码SDK）基于HarmonyOS应用特点，由专业安全团队开发，提供简单易用的安全API，集成后可进一步提升应用的安全质量。\n\n为保护用户的个人信息和应用的敏感信息的机密性、完整性、不可抵赖性等，Aegis为您提供丰富的加解密算法，如：哈希算法、消息认证码算法、对称加解密算法、非对称加解密算法、签名验签算法等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/petal-aegis",
+          "version": "1.4.11-300",
+          "files": [
+            {
+              "integrity": "sha512-U49pnWkQ7lpd88gDfm4UfzdAD8QSujmnXk0zbidSPlkPcBkMRRo0Ce+a21d/zEi85WAvK+wmU51td6ojAxeWtQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@hw-agconnect/petal-aegis/-/@hw-agconnect/petal-aegis-1.4.11-300.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "login_info@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "dayjs@1.11.21"
+            },
+            {
+              "id": "lunar@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/fast-web@1.0.1"
+            },
+            {
+              "id": "@hw-agconnect/petal-aegis@1.4.11-300"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.7"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/ui-base@1.0.1"
+            },
+            {
+              "id": "@ohos/axios@2.2.7"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":base_apis"
+      ]
+    },
+    {
+      "moduleName": "traffic_restriction",
+      "artifact": {
+        "component": {
+          "id": "traffic_restriction@1.0.0",
+          "repoType": "ohpm",
+          "name": "traffic_restriction",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.7",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.7",
+          "files": [
+            {
+              "integrity": "sha512-oiGb0GheCk6h7MiqZvYPsVOdyLorq7e+PU26EHeBgX5r3rAkVbDR7bCF3n5rDU9mb5R/mgckA/um1ZgYGJ2EBQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@ohos/axios/-/@ohos/axios-2.2.7.har"
+            }
+          ]
+        },
+        {
+          "id": "dayjs@1.11.21",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.21",
+          "files": [
+            {
+              "integrity": "sha512-98IT+HOahAisibz/yjKbzuOBwYcjJ7BCLPzARyHiyEBmRz4fatF+KPJszEHXsGYjUG234aH/cOjW1wwTbKUZlA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.21.tgz"
+            }
+          ]
+        },
+        {
+          "id": "lunar@1.0.0",
+          "desc": "lunar是一款无第三方依赖的公历(阳历)、农历(阴历、老黄历)、佛历和道历工具，支持星座、儒略日、干支、生肖、节气、节日、彭祖百忌、每日宜忌、吉神宜趋、凶煞宜忌、吉神(喜神/福神/财神/阳贵神/阴贵神)方位、胎神方位、冲煞、纳音、星宿、八字、五行、十神、建除十二值星、青龙名堂等十二神、黄道日及吉凶等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "lunar",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-sAMOxbVr7Sn/QEzEQZHz0CwYjOROTgDLc4842CX2d7f+1D2nlHc6T5jtZJoleIMPZItNJLj0GuOaB/JR+Iwe7Q==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/lunar/-/lunar-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "desc": "fast-web基于open harmony基础组件开发的高性能Web容器，提供具有预启动、预渲染、预编译JavaScript生成字节码缓存、离线资源免拦截注入等能力的Web组件。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/fast-web",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-Rss9XtK17SqIOLu1MVWBBtwUEP/txhB3KjuF66TmnI/WnR1VxEUMgdi6hbOfdUAeIsUQyY1wVhFNzguFIIbcMQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/fast-web/-/@hw-agconnect/fast-web-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-base@1.0.1",
+          "desc": "AppGalleryConnectSDK ui component base for OpenHarmony.",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-base",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-72W2eKnmL+ZQo0qxhmWrEKH/8qeXm6AjOF3hR0p4dz/k42g2PHt+zfeZkDLVK+jihQK+GFfSD7r5cAkL3zE6Xg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-base/-/@hw-agconnect/ui-base-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/petal-aegis@1.4.11-300",
+          "desc": "Aegis（安全编码SDK）基于HarmonyOS应用特点，由专业安全团队开发，提供简单易用的安全API，集成后可进一步提升应用的安全质量。\n\n为保护用户的个人信息和应用的敏感信息的机密性、完整性、不可抵赖性等，Aegis为您提供丰富的加解密算法，如：哈希算法、消息认证码算法、对称加解密算法、非对称加解密算法、签名验签算法等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/petal-aegis",
+          "version": "1.4.11-300",
+          "files": [
+            {
+              "integrity": "sha512-U49pnWkQ7lpd88gDfm4UfzdAD8QSujmnXk0zbidSPlkPcBkMRRo0Ce+a21d/zEi85WAvK+wmU51td6ojAxeWtQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@hw-agconnect/petal-aegis/-/@hw-agconnect/petal-aegis-1.4.11-300.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "traffic_restriction@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "dayjs@1.11.21"
+            },
+            {
+              "id": "lunar@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/fast-web@1.0.1"
+            },
+            {
+              "id": "@hw-agconnect/petal-aegis@1.4.11-300"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.7"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/ui-base@1.0.1"
+            },
+            {
+              "id": "@ohos/axios@2.2.7"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":base_apis"
+      ]
+    },
+    {
+      "moduleName": "yiji_query",
+      "artifact": {
+        "component": {
+          "id": "yiji_query@1.0.0",
+          "repoType": "ohpm",
+          "name": "yiji_query",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "dayjs@1.11.21",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.21",
+          "files": [
+            {
+              "integrity": "sha512-98IT+HOahAisibz/yjKbzuOBwYcjJ7BCLPzARyHiyEBmRz4fatF+KPJszEHXsGYjUG234aH/cOjW1wwTbKUZlA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.21.tgz"
+            }
+          ]
+        },
+        {
+          "id": "lunar@1.0.0",
+          "desc": "lunar是一款无第三方依赖的公历(阳历)、农历(阴历、老黄历)、佛历和道历工具，支持星座、儒略日、干支、生肖、节气、节日、彭祖百忌、每日宜忌、吉神宜趋、凶煞宜忌、吉神(喜神/福神/财神/阳贵神/阴贵神)方位、胎神方位、冲煞、纳音、星宿、八字、五行、十神、建除十二值星、青龙名堂等十二神、黄道日及吉凶等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "lunar",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-sAMOxbVr7Sn/QEzEQZHz0CwYjOROTgDLc4842CX2d7f+1D2nlHc6T5jtZJoleIMPZItNJLj0GuOaB/JR+Iwe7Q==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/lunar/-/lunar-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "desc": "fast-web基于open harmony基础组件开发的高性能Web容器，提供具有预启动、预渲染、预编译JavaScript生成字节码缓存、离线资源免拦截注入等能力的Web组件。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/fast-web",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-Rss9XtK17SqIOLu1MVWBBtwUEP/txhB3KjuF66TmnI/WnR1VxEUMgdi6hbOfdUAeIsUQyY1wVhFNzguFIIbcMQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/fast-web/-/@hw-agconnect/fast-web-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-base@1.0.1",
+          "desc": "AppGalleryConnectSDK ui component base for OpenHarmony.",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-base",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-72W2eKnmL+ZQo0qxhmWrEKH/8qeXm6AjOF3hR0p4dz/k42g2PHt+zfeZkDLVK+jihQK+GFfSD7r5cAkL3zE6Xg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-base/-/@hw-agconnect/ui-base-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.7",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.7",
+          "files": [
+            {
+              "integrity": "sha512-oiGb0GheCk6h7MiqZvYPsVOdyLorq7e+PU26EHeBgX5r3rAkVbDR7bCF3n5rDU9mb5R/mgckA/um1ZgYGJ2EBQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@ohos/axios/-/@ohos/axios-2.2.7.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/petal-aegis@1.4.11-300",
+          "desc": "Aegis（安全编码SDK）基于HarmonyOS应用特点，由专业安全团队开发，提供简单易用的安全API，集成后可进一步提升应用的安全质量。\n\n为保护用户的个人信息和应用的敏感信息的机密性、完整性、不可抵赖性等，Aegis为您提供丰富的加解密算法，如：哈希算法、消息认证码算法、对称加解密算法、非对称加解密算法、签名验签算法等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/petal-aegis",
+          "version": "1.4.11-300",
+          "files": [
+            {
+              "integrity": "sha512-U49pnWkQ7lpd88gDfm4UfzdAD8QSujmnXk0zbidSPlkPcBkMRRo0Ce+a21d/zEi85WAvK+wmU51td6ojAxeWtQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@hw-agconnect/petal-aegis/-/@hw-agconnect/petal-aegis-1.4.11-300.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "yiji_query@1.0.0",
+          "dependsOn": [
+            {
+              "id": "dayjs@1.11.21"
+            },
+            {
+              "id": "lunar@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/fast-web@1.0.1"
+            },
+            {
+              "id": "@hw-agconnect/petal-aegis@1.4.11-300"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/ui-base@1.0.1"
+            },
+            {
+              "id": "@ohos/axios@2.2.7"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":base_apis"
+      ]
+    },
+    {
+      "moduleName": "date_calculation",
+      "artifact": {
+        "component": {
+          "id": "date_calculation@1.0.0",
+          "repoType": "ohpm",
+          "name": "date_calculation",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "lunar@1.0.0",
+          "desc": "lunar是一款无第三方依赖的公历(阳历)、农历(阴历、老黄历)、佛历和道历工具，支持星座、儒略日、干支、生肖、节气、节日、彭祖百忌、每日宜忌、吉神宜趋、凶煞宜忌、吉神(喜神/福神/财神/阳贵神/阴贵神)方位、胎神方位、冲煞、纳音、星宿、八字、五行、十神、建除十二值星、青龙名堂等十二神、黄道日及吉凶等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "lunar",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-sAMOxbVr7Sn/QEzEQZHz0CwYjOROTgDLc4842CX2d7f+1D2nlHc6T5jtZJoleIMPZItNJLj0GuOaB/JR+Iwe7Q==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/lunar/-/lunar-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "dayjs@1.11.21",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.21",
+          "files": [
+            {
+              "integrity": "sha512-98IT+HOahAisibz/yjKbzuOBwYcjJ7BCLPzARyHiyEBmRz4fatF+KPJszEHXsGYjUG234aH/cOjW1wwTbKUZlA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.21.tgz"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "desc": "fast-web基于open harmony基础组件开发的高性能Web容器，提供具有预启动、预渲染、预编译JavaScript生成字节码缓存、离线资源免拦截注入等能力的Web组件。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/fast-web",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-Rss9XtK17SqIOLu1MVWBBtwUEP/txhB3KjuF66TmnI/WnR1VxEUMgdi6hbOfdUAeIsUQyY1wVhFNzguFIIbcMQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/fast-web/-/@hw-agconnect/fast-web-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-base@1.0.1",
+          "desc": "AppGalleryConnectSDK ui component base for OpenHarmony.",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-base",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-72W2eKnmL+ZQo0qxhmWrEKH/8qeXm6AjOF3hR0p4dz/k42g2PHt+zfeZkDLVK+jihQK+GFfSD7r5cAkL3zE6Xg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-base/-/@hw-agconnect/ui-base-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.7",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.7",
+          "files": [
+            {
+              "integrity": "sha512-oiGb0GheCk6h7MiqZvYPsVOdyLorq7e+PU26EHeBgX5r3rAkVbDR7bCF3n5rDU9mb5R/mgckA/um1ZgYGJ2EBQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@ohos/axios/-/@ohos/axios-2.2.7.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/petal-aegis@1.4.11-300",
+          "desc": "Aegis（安全编码SDK）基于HarmonyOS应用特点，由专业安全团队开发，提供简单易用的安全API，集成后可进一步提升应用的安全质量。\n\n为保护用户的个人信息和应用的敏感信息的机密性、完整性、不可抵赖性等，Aegis为您提供丰富的加解密算法，如：哈希算法、消息认证码算法、对称加解密算法、非对称加解密算法、签名验签算法等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/petal-aegis",
+          "version": "1.4.11-300",
+          "files": [
+            {
+              "integrity": "sha512-U49pnWkQ7lpd88gDfm4UfzdAD8QSujmnXk0zbidSPlkPcBkMRRo0Ce+a21d/zEi85WAvK+wmU51td6ojAxeWtQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@hw-agconnect/petal-aegis/-/@hw-agconnect/petal-aegis-1.4.11-300.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "date_calculation@1.0.0",
+          "dependsOn": [
+            {
+              "id": "lunar@1.0.0"
+            },
+            {
+              "id": "dayjs@1.11.21"
+            },
+            {
+              "id": "@hw-agconnect/fast-web@1.0.1"
+            },
+            {
+              "id": "@hw-agconnect/petal-aegis@1.4.11-300"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/ui-base@1.0.1"
+            },
+            {
+              "id": "@ohos/axios@2.2.7"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":base_apis"
+      ]
+    },
+    {
+      "moduleName": "calendar_almanac",
+      "artifact": {
+        "component": {
+          "id": "calendar_almanac@1.0.0",
+          "repoType": "ohpm",
+          "name": "calendar_almanac",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "dayjs@1.11.21",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.21",
+          "files": [
+            {
+              "integrity": "sha512-98IT+HOahAisibz/yjKbzuOBwYcjJ7BCLPzARyHiyEBmRz4fatF+KPJszEHXsGYjUG234aH/cOjW1wwTbKUZlA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.21.tgz"
+            }
+          ]
+        },
+        {
+          "id": "lunar@1.0.0",
+          "desc": "lunar是一款无第三方依赖的公历(阳历)、农历(阴历、老黄历)、佛历和道历工具，支持星座、儒略日、干支、生肖、节气、节日、彭祖百忌、每日宜忌、吉神宜趋、凶煞宜忌、吉神(喜神/福神/财神/阳贵神/阴贵神)方位、胎神方位、冲煞、纳音、星宿、八字、五行、十神、建除十二值星、青龙名堂等十二神、黄道日及吉凶等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "lunar",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-sAMOxbVr7Sn/QEzEQZHz0CwYjOROTgDLc4842CX2d7f+1D2nlHc6T5jtZJoleIMPZItNJLj0GuOaB/JR+Iwe7Q==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/lunar/-/lunar-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "desc": "fast-web基于open harmony基础组件开发的高性能Web容器，提供具有预启动、预渲染、预编译JavaScript生成字节码缓存、离线资源免拦截注入等能力的Web组件。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/fast-web",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-Rss9XtK17SqIOLu1MVWBBtwUEP/txhB3KjuF66TmnI/WnR1VxEUMgdi6hbOfdUAeIsUQyY1wVhFNzguFIIbcMQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/fast-web/-/@hw-agconnect/fast-web-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-base@1.0.1",
+          "desc": "AppGalleryConnectSDK ui component base for OpenHarmony.",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-base",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-72W2eKnmL+ZQo0qxhmWrEKH/8qeXm6AjOF3hR0p4dz/k42g2PHt+zfeZkDLVK+jihQK+GFfSD7r5cAkL3zE6Xg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-base/-/@hw-agconnect/ui-base-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.7",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.7",
+          "files": [
+            {
+              "integrity": "sha512-oiGb0GheCk6h7MiqZvYPsVOdyLorq7e+PU26EHeBgX5r3rAkVbDR7bCF3n5rDU9mb5R/mgckA/um1ZgYGJ2EBQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@ohos/axios/-/@ohos/axios-2.2.7.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/petal-aegis@1.4.11-300",
+          "desc": "Aegis（安全编码SDK）基于HarmonyOS应用特点，由专业安全团队开发，提供简单易用的安全API，集成后可进一步提升应用的安全质量。\n\n为保护用户的个人信息和应用的敏感信息的机密性、完整性、不可抵赖性等，Aegis为您提供丰富的加解密算法，如：哈希算法、消息认证码算法、对称加解密算法、非对称加解密算法、签名验签算法等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/petal-aegis",
+          "version": "1.4.11-300",
+          "files": [
+            {
+              "integrity": "sha512-U49pnWkQ7lpd88gDfm4UfzdAD8QSujmnXk0zbidSPlkPcBkMRRo0Ce+a21d/zEi85WAvK+wmU51td6ojAxeWtQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@hw-agconnect/petal-aegis/-/@hw-agconnect/petal-aegis-1.4.11-300.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "calendar_almanac@1.0.0",
+          "dependsOn": [
+            {
+              "id": "dayjs@1.11.21"
+            },
+            {
+              "id": "lunar@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/fast-web@1.0.1"
+            },
+            {
+              "id": "@hw-agconnect/petal-aegis@1.4.11-300"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/ui-base@1.0.1"
+            },
+            {
+              "id": "@ohos/axios@2.2.7"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":base_apis"
+      ]
+    },
+    {
+      "moduleName": "festival_solar",
+      "artifact": {
+        "component": {
+          "id": "festival_solar@1.0.0",
+          "repoType": "ohpm",
+          "name": "festival_solar",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "lunar@1.0.0",
+          "desc": "lunar是一款无第三方依赖的公历(阳历)、农历(阴历、老黄历)、佛历和道历工具，支持星座、儒略日、干支、生肖、节气、节日、彭祖百忌、每日宜忌、吉神宜趋、凶煞宜忌、吉神(喜神/福神/财神/阳贵神/阴贵神)方位、胎神方位、冲煞、纳音、星宿、八字、五行、十神、建除十二值星、青龙名堂等十二神、黄道日及吉凶等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "lunar",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-sAMOxbVr7Sn/QEzEQZHz0CwYjOROTgDLc4842CX2d7f+1D2nlHc6T5jtZJoleIMPZItNJLj0GuOaB/JR+Iwe7Q==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/lunar/-/lunar-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "dayjs@1.11.21",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.21",
+          "files": [
+            {
+              "integrity": "sha512-98IT+HOahAisibz/yjKbzuOBwYcjJ7BCLPzARyHiyEBmRz4fatF+KPJszEHXsGYjUG234aH/cOjW1wwTbKUZlA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.21.tgz"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "desc": "fast-web基于open harmony基础组件开发的高性能Web容器，提供具有预启动、预渲染、预编译JavaScript生成字节码缓存、离线资源免拦截注入等能力的Web组件。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/fast-web",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-Rss9XtK17SqIOLu1MVWBBtwUEP/txhB3KjuF66TmnI/WnR1VxEUMgdi6hbOfdUAeIsUQyY1wVhFNzguFIIbcMQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/fast-web/-/@hw-agconnect/fast-web-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-base@1.0.1",
+          "desc": "AppGalleryConnectSDK ui component base for OpenHarmony.",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-base",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-72W2eKnmL+ZQo0qxhmWrEKH/8qeXm6AjOF3hR0p4dz/k42g2PHt+zfeZkDLVK+jihQK+GFfSD7r5cAkL3zE6Xg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-base/-/@hw-agconnect/ui-base-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.7",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.7",
+          "files": [
+            {
+              "integrity": "sha512-oiGb0GheCk6h7MiqZvYPsVOdyLorq7e+PU26EHeBgX5r3rAkVbDR7bCF3n5rDU9mb5R/mgckA/um1ZgYGJ2EBQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@ohos/axios/-/@ohos/axios-2.2.7.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/petal-aegis@1.4.11-300",
+          "desc": "Aegis（安全编码SDK）基于HarmonyOS应用特点，由专业安全团队开发，提供简单易用的安全API，集成后可进一步提升应用的安全质量。\n\n为保护用户的个人信息和应用的敏感信息的机密性、完整性、不可抵赖性等，Aegis为您提供丰富的加解密算法，如：哈希算法、消息认证码算法、对称加解密算法、非对称加解密算法、签名验签算法等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/petal-aegis",
+          "version": "1.4.11-300",
+          "files": [
+            {
+              "integrity": "sha512-U49pnWkQ7lpd88gDfm4UfzdAD8QSujmnXk0zbidSPlkPcBkMRRo0Ce+a21d/zEi85WAvK+wmU51td6ojAxeWtQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@hw-agconnect/petal-aegis/-/@hw-agconnect/petal-aegis-1.4.11-300.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "festival_solar@1.0.0",
+          "dependsOn": [
+            {
+              "id": "lunar@1.0.0"
+            },
+            {
+              "id": "dayjs@1.11.21"
+            },
+            {
+              "id": "@hw-agconnect/fast-web@1.0.1"
+            },
+            {
+              "id": "@hw-agconnect/petal-aegis@1.4.11-300"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/ui-base@1.0.1"
+            },
+            {
+              "id": "@ohos/axios@2.2.7"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":base_apis"
+      ]
+    },
+    {
+      "moduleName": "today_history",
+      "artifact": {
+        "component": {
+          "id": "today_history@1.0.0",
+          "repoType": "ohpm",
+          "name": "today_history",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "dayjs@1.11.21",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.21",
+          "files": [
+            {
+              "integrity": "sha512-98IT+HOahAisibz/yjKbzuOBwYcjJ7BCLPzARyHiyEBmRz4fatF+KPJszEHXsGYjUG234aH/cOjW1wwTbKUZlA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.21.tgz"
+            }
+          ]
+        },
+        {
+          "id": "lunar@1.0.0",
+          "desc": "lunar是一款无第三方依赖的公历(阳历)、农历(阴历、老黄历)、佛历和道历工具，支持星座、儒略日、干支、生肖、节气、节日、彭祖百忌、每日宜忌、吉神宜趋、凶煞宜忌、吉神(喜神/福神/财神/阳贵神/阴贵神)方位、胎神方位、冲煞、纳音、星宿、八字、五行、十神、建除十二值星、青龙名堂等十二神、黄道日及吉凶等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "lunar",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-sAMOxbVr7Sn/QEzEQZHz0CwYjOROTgDLc4842CX2d7f+1D2nlHc6T5jtZJoleIMPZItNJLj0GuOaB/JR+Iwe7Q==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/lunar/-/lunar-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "desc": "fast-web基于open harmony基础组件开发的高性能Web容器，提供具有预启动、预渲染、预编译JavaScript生成字节码缓存、离线资源免拦截注入等能力的Web组件。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/fast-web",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-Rss9XtK17SqIOLu1MVWBBtwUEP/txhB3KjuF66TmnI/WnR1VxEUMgdi6hbOfdUAeIsUQyY1wVhFNzguFIIbcMQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/fast-web/-/@hw-agconnect/fast-web-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-base@1.0.1",
+          "desc": "AppGalleryConnectSDK ui component base for OpenHarmony.",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-base",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-72W2eKnmL+ZQo0qxhmWrEKH/8qeXm6AjOF3hR0p4dz/k42g2PHt+zfeZkDLVK+jihQK+GFfSD7r5cAkL3zE6Xg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-base/-/@hw-agconnect/ui-base-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.7",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.7",
+          "files": [
+            {
+              "integrity": "sha512-oiGb0GheCk6h7MiqZvYPsVOdyLorq7e+PU26EHeBgX5r3rAkVbDR7bCF3n5rDU9mb5R/mgckA/um1ZgYGJ2EBQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@ohos/axios/-/@ohos/axios-2.2.7.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/petal-aegis@1.4.11-300",
+          "desc": "Aegis（安全编码SDK）基于HarmonyOS应用特点，由专业安全团队开发，提供简单易用的安全API，集成后可进一步提升应用的安全质量。\n\n为保护用户的个人信息和应用的敏感信息的机密性、完整性、不可抵赖性等，Aegis为您提供丰富的加解密算法，如：哈希算法、消息认证码算法、对称加解密算法、非对称加解密算法、签名验签算法等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/petal-aegis",
+          "version": "1.4.11-300",
+          "files": [
+            {
+              "integrity": "sha512-U49pnWkQ7lpd88gDfm4UfzdAD8QSujmnXk0zbidSPlkPcBkMRRo0Ce+a21d/zEi85WAvK+wmU51td6ojAxeWtQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@hw-agconnect/petal-aegis/-/@hw-agconnect/petal-aegis-1.4.11-300.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "today_history@1.0.0",
+          "dependsOn": [
+            {
+              "id": "dayjs@1.11.21"
+            },
+            {
+              "id": "lunar@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/fast-web@1.0.1"
+            },
+            {
+              "id": "@hw-agconnect/petal-aegis@1.4.11-300"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/ui-base@1.0.1"
+            },
+            {
+              "id": "@ohos/axios@2.2.7"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":base_apis"
+      ]
+    },
+    {
+      "moduleName": "feedback",
+      "artifact": {
+        "component": {
+          "id": "feedback@1.0.1",
+          "repoType": "ohpm",
+          "name": "feedback",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.1",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@ohos/axios@2.2.7",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.7",
+          "files": [
+            {
+              "integrity": "sha512-oiGb0GheCk6h7MiqZvYPsVOdyLorq7e+PU26EHeBgX5r3rAkVbDR7bCF3n5rDU9mb5R/mgckA/um1ZgYGJ2EBQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@ohos/axios/-/@ohos/axios-2.2.7.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/axios-mock-adapter@1.0.0",
+          "desc": "Axios adapter 能够轻松模拟网络请求。本库基于axios-mock-adapter 原库v2.10.0版本进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/axios-mock-adapter",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-PuhQoQI80WpPUvKoGR0rKon6okftskjbB2GHViy4h9pxGPcsxBr3Vw73y3qbNyqTeUpXTI2/gWtBQuTh7XUsag==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@hw-agconnect/axios-mock-adapter/-/@hw-agconnect/axios-mock-adapter-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-toast@1.0.0",
+          "desc": "ui_toast是基于open harmony基础组件开发的组件，用于在屏幕中显示一个操作的轻量级即时反馈，支持显示图片+文字，刷新弹窗内容和修改弹窗样式。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-toast",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-vmk4trgNRIxAK81xj69zRJCayccuryywF5qfheKWy1hdtSMMvXAX4g1EYvAbMd7/PXT8v+g/Xa/ASFS2BSs1KQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@hw-agconnect/ui-toast/-/@hw-agconnect/ui-toast-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "dayjs@1.11.21",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.21",
+          "files": [
+            {
+              "integrity": "sha512-98IT+HOahAisibz/yjKbzuOBwYcjJ7BCLPzARyHiyEBmRz4fatF+KPJszEHXsGYjUG234aH/cOjW1wwTbKUZlA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.21.tgz"
+            }
+          ]
+        },
+        {
+          "id": "lunar@1.0.0",
+          "desc": "lunar是一款无第三方依赖的公历(阳历)、农历(阴历、老黄历)、佛历和道历工具，支持星座、儒略日、干支、生肖、节气、节日、彭祖百忌、每日宜忌、吉神宜趋、凶煞宜忌、吉神(喜神/福神/财神/阳贵神/阴贵神)方位、胎神方位、冲煞、纳音、星宿、八字、五行、十神、建除十二值星、青龙名堂等十二神、黄道日及吉凶等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "lunar",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-sAMOxbVr7Sn/QEzEQZHz0CwYjOROTgDLc4842CX2d7f+1D2nlHc6T5jtZJoleIMPZItNJLj0GuOaB/JR+Iwe7Q==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/lunar/-/lunar-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "desc": "fast-web基于open harmony基础组件开发的高性能Web容器，提供具有预启动、预渲染、预编译JavaScript生成字节码缓存、离线资源免拦截注入等能力的Web组件。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/fast-web",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-Rss9XtK17SqIOLu1MVWBBtwUEP/txhB3KjuF66TmnI/WnR1VxEUMgdi6hbOfdUAeIsUQyY1wVhFNzguFIIbcMQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/fast-web/-/@hw-agconnect/fast-web-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-base@1.0.1",
+          "desc": "AppGalleryConnectSDK ui component base for OpenHarmony.",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-base",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-72W2eKnmL+ZQo0qxhmWrEKH/8qeXm6AjOF3hR0p4dz/k42g2PHt+zfeZkDLVK+jihQK+GFfSD7r5cAkL3zE6Xg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-base/-/@hw-agconnect/ui-base-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/petal-aegis@1.4.11-300",
+          "desc": "Aegis（安全编码SDK）基于HarmonyOS应用特点，由专业安全团队开发，提供简单易用的安全API，集成后可进一步提升应用的安全质量。\n\n为保护用户的个人信息和应用的敏感信息的机密性、完整性、不可抵赖性等，Aegis为您提供丰富的加解密算法，如：哈希算法、消息认证码算法、对称加解密算法、非对称加解密算法、签名验签算法等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/petal-aegis",
+          "version": "1.4.11-300",
+          "files": [
+            {
+              "integrity": "sha512-U49pnWkQ7lpd88gDfm4UfzdAD8QSujmnXk0zbidSPlkPcBkMRRo0Ce+a21d/zEi85WAvK+wmU51td6ojAxeWtQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@hw-agconnect/petal-aegis/-/@hw-agconnect/petal-aegis-1.4.11-300.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "feedback@1.0.1",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.7"
+            },
+            {
+              "id": "@hw-agconnect/axios-mock-adapter@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/ui-toast@1.0.0"
+            },
+            {
+              "id": "dayjs@1.11.21"
+            },
+            {
+              "id": "lunar@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/fast-web@1.0.1"
+            },
+            {
+              "id": "@hw-agconnect/petal-aegis@1.4.11-300"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/axios-mock-adapter@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.7"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.7"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/ui-base@1.0.1"
+            },
+            {
+              "id": "@ohos/axios@2.2.7"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":image_preview"
+      ]
+    },
+    {
+      "moduleName": "common",
+      "artifact": {
+        "component": {
+          "id": "common@1.0.0",
+          "repoType": "ohpm",
+          "name": "common",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.7",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.7",
+          "files": [
+            {
+              "integrity": "sha512-oiGb0GheCk6h7MiqZvYPsVOdyLorq7e+PU26EHeBgX5r3rAkVbDR7bCF3n5rDU9mb5R/mgckA/um1ZgYGJ2EBQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@ohos/axios/-/@ohos/axios-2.2.7.har"
+            }
+          ]
+        },
+        {
+          "id": "dayjs@1.11.21",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.21",
+          "files": [
+            {
+              "integrity": "sha512-98IT+HOahAisibz/yjKbzuOBwYcjJ7BCLPzARyHiyEBmRz4fatF+KPJszEHXsGYjUG234aH/cOjW1wwTbKUZlA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.21.tgz"
+            }
+          ]
+        },
+        {
+          "id": "lunar@1.0.0",
+          "desc": "lunar是一款无第三方依赖的公历(阳历)、农历(阴历、老黄历)、佛历和道历工具，支持星座、儒略日、干支、生肖、节气、节日、彭祖百忌、每日宜忌、吉神宜趋、凶煞宜忌、吉神(喜神/福神/财神/阳贵神/阴贵神)方位、胎神方位、冲煞、纳音、星宿、八字、五行、十神、建除十二值星、青龙名堂等十二神、黄道日及吉凶等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "lunar",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-sAMOxbVr7Sn/QEzEQZHz0CwYjOROTgDLc4842CX2d7f+1D2nlHc6T5jtZJoleIMPZItNJLj0GuOaB/JR+Iwe7Q==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/lunar/-/lunar-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "desc": "fast-web基于open harmony基础组件开发的高性能Web容器，提供具有预启动、预渲染、预编译JavaScript生成字节码缓存、离线资源免拦截注入等能力的Web组件。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/fast-web",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-Rss9XtK17SqIOLu1MVWBBtwUEP/txhB3KjuF66TmnI/WnR1VxEUMgdi6hbOfdUAeIsUQyY1wVhFNzguFIIbcMQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/fast-web/-/@hw-agconnect/fast-web-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-base@1.0.1",
+          "desc": "AppGalleryConnectSDK ui component base for OpenHarmony.",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-base",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-72W2eKnmL+ZQo0qxhmWrEKH/8qeXm6AjOF3hR0p4dz/k42g2PHt+zfeZkDLVK+jihQK+GFfSD7r5cAkL3zE6Xg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-base/-/@hw-agconnect/ui-base-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/petal-aegis@1.4.11-300",
+          "desc": "Aegis（安全编码SDK）基于HarmonyOS应用特点，由专业安全团队开发，提供简单易用的安全API，集成后可进一步提升应用的安全质量。\n\n为保护用户的个人信息和应用的敏感信息的机密性、完整性、不可抵赖性等，Aegis为您提供丰富的加解密算法，如：哈希算法、消息认证码算法、对称加解密算法、非对称加解密算法、签名验签算法等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/petal-aegis",
+          "version": "1.4.11-300",
+          "files": [
+            {
+              "integrity": "sha512-U49pnWkQ7lpd88gDfm4UfzdAD8QSujmnXk0zbidSPlkPcBkMRRo0Ce+a21d/zEi85WAvK+wmU51td6ojAxeWtQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@hw-agconnect/petal-aegis/-/@hw-agconnect/petal-aegis-1.4.11-300.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "common@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "@ohos/axios@2.2.7"
+            },
+            {
+              "id": "dayjs@1.11.21"
+            },
+            {
+              "id": "lunar@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/fast-web@1.0.1"
+            },
+            {
+              "id": "@hw-agconnect/petal-aegis@1.4.11-300"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.7"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/ui-base@1.0.1"
+            },
+            {
+              "id": "@ohos/axios@2.2.7"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":base_apis",
+        ":login_info",
+        ":router_module",
+        ":calendar_events"
+      ]
+    },
+    {
+      "moduleName": "mine",
+      "artifact": {
+        "component": {
+          "id": "mine@1.0.0",
+          "repoType": "ohpm",
+          "name": "mine",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.7",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.7",
+          "files": [
+            {
+              "integrity": "sha512-oiGb0GheCk6h7MiqZvYPsVOdyLorq7e+PU26EHeBgX5r3rAkVbDR7bCF3n5rDU9mb5R/mgckA/um1ZgYGJ2EBQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@ohos/axios/-/@ohos/axios-2.2.7.har"
+            }
+          ]
+        },
+        {
+          "id": "dayjs@1.11.21",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.21",
+          "files": [
+            {
+              "integrity": "sha512-98IT+HOahAisibz/yjKbzuOBwYcjJ7BCLPzARyHiyEBmRz4fatF+KPJszEHXsGYjUG234aH/cOjW1wwTbKUZlA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.21.tgz"
+            }
+          ]
+        },
+        {
+          "id": "lunar@1.0.0",
+          "desc": "lunar是一款无第三方依赖的公历(阳历)、农历(阴历、老黄历)、佛历和道历工具，支持星座、儒略日、干支、生肖、节气、节日、彭祖百忌、每日宜忌、吉神宜趋、凶煞宜忌、吉神(喜神/福神/财神/阳贵神/阴贵神)方位、胎神方位、冲煞、纳音、星宿、八字、五行、十神、建除十二值星、青龙名堂等十二神、黄道日及吉凶等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "lunar",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-sAMOxbVr7Sn/QEzEQZHz0CwYjOROTgDLc4842CX2d7f+1D2nlHc6T5jtZJoleIMPZItNJLj0GuOaB/JR+Iwe7Q==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/lunar/-/lunar-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "desc": "fast-web基于open harmony基础组件开发的高性能Web容器，提供具有预启动、预渲染、预编译JavaScript生成字节码缓存、离线资源免拦截注入等能力的Web组件。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/fast-web",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-Rss9XtK17SqIOLu1MVWBBtwUEP/txhB3KjuF66TmnI/WnR1VxEUMgdi6hbOfdUAeIsUQyY1wVhFNzguFIIbcMQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/fast-web/-/@hw-agconnect/fast-web-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-base@1.0.1",
+          "desc": "AppGalleryConnectSDK ui component base for OpenHarmony.",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-base",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-72W2eKnmL+ZQo0qxhmWrEKH/8qeXm6AjOF3hR0p4dz/k42g2PHt+zfeZkDLVK+jihQK+GFfSD7r5cAkL3zE6Xg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-base/-/@hw-agconnect/ui-base-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/petal-aegis@1.4.11-300",
+          "desc": "Aegis（安全编码SDK）基于HarmonyOS应用特点，由专业安全团队开发，提供简单易用的安全API，集成后可进一步提升应用的安全质量。\n\n为保护用户的个人信息和应用的敏感信息的机密性、完整性、不可抵赖性等，Aegis为您提供丰富的加解密算法，如：哈希算法、消息认证码算法、对称加解密算法、非对称加解密算法、签名验签算法等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/petal-aegis",
+          "version": "1.4.11-300",
+          "files": [
+            {
+              "integrity": "sha512-U49pnWkQ7lpd88gDfm4UfzdAD8QSujmnXk0zbidSPlkPcBkMRRo0Ce+a21d/zEi85WAvK+wmU51td6ojAxeWtQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@hw-agconnect/petal-aegis/-/@hw-agconnect/petal-aegis-1.4.11-300.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "mine@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "dayjs@1.11.21"
+            },
+            {
+              "id": "lunar@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/fast-web@1.0.1"
+            },
+            {
+              "id": "@hw-agconnect/petal-aegis@1.4.11-300"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.7"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/ui-base@1.0.1"
+            },
+            {
+              "id": "@ohos/axios@2.2.7"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":common",
+        ":base_apis",
+        ":login_info",
+        ":calendar_events",
+        ":router_module",
+        ":membership",
+        ":app_setting",
+        ":feedback"
+      ]
+    },
+    {
+      "moduleName": "perpetual",
+      "artifact": {
+        "component": {
+          "id": "perpetual@1.0.0",
+          "repoType": "ohpm",
+          "name": "perpetual",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.7",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.7",
+          "files": [
+            {
+              "integrity": "sha512-oiGb0GheCk6h7MiqZvYPsVOdyLorq7e+PU26EHeBgX5r3rAkVbDR7bCF3n5rDU9mb5R/mgckA/um1ZgYGJ2EBQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@ohos/axios/-/@ohos/axios-2.2.7.har"
+            }
+          ]
+        },
+        {
+          "id": "dayjs@1.11.21",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.21",
+          "files": [
+            {
+              "integrity": "sha512-98IT+HOahAisibz/yjKbzuOBwYcjJ7BCLPzARyHiyEBmRz4fatF+KPJszEHXsGYjUG234aH/cOjW1wwTbKUZlA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.21.tgz"
+            }
+          ]
+        },
+        {
+          "id": "lunar@1.0.0",
+          "desc": "lunar是一款无第三方依赖的公历(阳历)、农历(阴历、老黄历)、佛历和道历工具，支持星座、儒略日、干支、生肖、节气、节日、彭祖百忌、每日宜忌、吉神宜趋、凶煞宜忌、吉神(喜神/福神/财神/阳贵神/阴贵神)方位、胎神方位、冲煞、纳音、星宿、八字、五行、十神、建除十二值星、青龙名堂等十二神、黄道日及吉凶等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "lunar",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-sAMOxbVr7Sn/QEzEQZHz0CwYjOROTgDLc4842CX2d7f+1D2nlHc6T5jtZJoleIMPZItNJLj0GuOaB/JR+Iwe7Q==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/lunar/-/lunar-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "desc": "fast-web基于open harmony基础组件开发的高性能Web容器，提供具有预启动、预渲染、预编译JavaScript生成字节码缓存、离线资源免拦截注入等能力的Web组件。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/fast-web",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-Rss9XtK17SqIOLu1MVWBBtwUEP/txhB3KjuF66TmnI/WnR1VxEUMgdi6hbOfdUAeIsUQyY1wVhFNzguFIIbcMQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/fast-web/-/@hw-agconnect/fast-web-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-base@1.0.1",
+          "desc": "AppGalleryConnectSDK ui component base for OpenHarmony.",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-base",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-72W2eKnmL+ZQo0qxhmWrEKH/8qeXm6AjOF3hR0p4dz/k42g2PHt+zfeZkDLVK+jihQK+GFfSD7r5cAkL3zE6Xg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-base/-/@hw-agconnect/ui-base-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/petal-aegis@1.4.11-300",
+          "desc": "Aegis（安全编码SDK）基于HarmonyOS应用特点，由专业安全团队开发，提供简单易用的安全API，集成后可进一步提升应用的安全质量。\n\n为保护用户的个人信息和应用的敏感信息的机密性、完整性、不可抵赖性等，Aegis为您提供丰富的加解密算法，如：哈希算法、消息认证码算法、对称加解密算法、非对称加解密算法、签名验签算法等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/petal-aegis",
+          "version": "1.4.11-300",
+          "files": [
+            {
+              "integrity": "sha512-U49pnWkQ7lpd88gDfm4UfzdAD8QSujmnXk0zbidSPlkPcBkMRRo0Ce+a21d/zEi85WAvK+wmU51td6ojAxeWtQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@hw-agconnect/petal-aegis/-/@hw-agconnect/petal-aegis-1.4.11-300.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "perpetual@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "dayjs@1.11.21"
+            },
+            {
+              "id": "lunar@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/fast-web@1.0.1"
+            },
+            {
+              "id": "@hw-agconnect/petal-aegis@1.4.11-300"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.7"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/ui-base@1.0.1"
+            },
+            {
+              "id": "@ohos/axios@2.2.7"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":common",
+        ":base_apis",
+        ":base_calendar",
+        ":yiji_query",
+        ":date_calculation",
+        ":festival_solar",
+        ":router_module",
+        ":traffic_restriction",
+        ":today_history"
+      ]
+    },
+    {
+      "moduleName": "almanac",
+      "artifact": {
+        "component": {
+          "id": "almanac@1.0.0",
+          "repoType": "ohpm",
+          "name": "almanac",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "dayjs@1.11.21",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.21",
+          "files": [
+            {
+              "integrity": "sha512-98IT+HOahAisibz/yjKbzuOBwYcjJ7BCLPzARyHiyEBmRz4fatF+KPJszEHXsGYjUG234aH/cOjW1wwTbKUZlA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.21.tgz"
+            }
+          ]
+        },
+        {
+          "id": "lunar@1.0.0",
+          "desc": "lunar是一款无第三方依赖的公历(阳历)、农历(阴历、老黄历)、佛历和道历工具，支持星座、儒略日、干支、生肖、节气、节日、彭祖百忌、每日宜忌、吉神宜趋、凶煞宜忌、吉神(喜神/福神/财神/阳贵神/阴贵神)方位、胎神方位、冲煞、纳音、星宿、八字、五行、十神、建除十二值星、青龙名堂等十二神、黄道日及吉凶等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "lunar",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-sAMOxbVr7Sn/QEzEQZHz0CwYjOROTgDLc4842CX2d7f+1D2nlHc6T5jtZJoleIMPZItNJLj0GuOaB/JR+Iwe7Q==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/lunar/-/lunar-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "desc": "fast-web基于open harmony基础组件开发的高性能Web容器，提供具有预启动、预渲染、预编译JavaScript生成字节码缓存、离线资源免拦截注入等能力的Web组件。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/fast-web",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-Rss9XtK17SqIOLu1MVWBBtwUEP/txhB3KjuF66TmnI/WnR1VxEUMgdi6hbOfdUAeIsUQyY1wVhFNzguFIIbcMQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/fast-web/-/@hw-agconnect/fast-web-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-base@1.0.1",
+          "desc": "AppGalleryConnectSDK ui component base for OpenHarmony.",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-base",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-72W2eKnmL+ZQo0qxhmWrEKH/8qeXm6AjOF3hR0p4dz/k42g2PHt+zfeZkDLVK+jihQK+GFfSD7r5cAkL3zE6Xg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-base/-/@hw-agconnect/ui-base-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.7",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.7",
+          "files": [
+            {
+              "integrity": "sha512-oiGb0GheCk6h7MiqZvYPsVOdyLorq7e+PU26EHeBgX5r3rAkVbDR7bCF3n5rDU9mb5R/mgckA/um1ZgYGJ2EBQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@ohos/axios/-/@ohos/axios-2.2.7.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/petal-aegis@1.4.11-300",
+          "desc": "Aegis（安全编码SDK）基于HarmonyOS应用特点，由专业安全团队开发，提供简单易用的安全API，集成后可进一步提升应用的安全质量。\n\n为保护用户的个人信息和应用的敏感信息的机密性、完整性、不可抵赖性等，Aegis为您提供丰富的加解密算法，如：哈希算法、消息认证码算法、对称加解密算法、非对称加解密算法、签名验签算法等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/petal-aegis",
+          "version": "1.4.11-300",
+          "files": [
+            {
+              "integrity": "sha512-U49pnWkQ7lpd88gDfm4UfzdAD8QSujmnXk0zbidSPlkPcBkMRRo0Ce+a21d/zEi85WAvK+wmU51td6ojAxeWtQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@hw-agconnect/petal-aegis/-/@hw-agconnect/petal-aegis-1.4.11-300.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "almanac@1.0.0",
+          "dependsOn": [
+            {
+              "id": "dayjs@1.11.21"
+            },
+            {
+              "id": "lunar@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/fast-web@1.0.1"
+            },
+            {
+              "id": "@hw-agconnect/petal-aegis@1.4.11-300"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/ui-base@1.0.1"
+            },
+            {
+              "id": "@ohos/axios@2.2.7"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":common",
+        ":base_apis",
+        ":base_calendar",
+        ":router_module",
+        ":calendar_almanac"
+      ]
+    },
+    {
+      "moduleName": "entry",
+      "artifact": {
+        "component": {
+          "id": "entry@1.0.0",
+          "repoType": "ohpm",
+          "name": "entry",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.7",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.7",
+          "files": [
+            {
+              "integrity": "sha512-oiGb0GheCk6h7MiqZvYPsVOdyLorq7e+PU26EHeBgX5r3rAkVbDR7bCF3n5rDU9mb5R/mgckA/um1ZgYGJ2EBQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@ohos/axios/-/@ohos/axios-2.2.7.har"
+            }
+          ]
+        },
+        {
+          "id": "dayjs@1.11.21",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.21",
+          "files": [
+            {
+              "integrity": "sha512-98IT+HOahAisibz/yjKbzuOBwYcjJ7BCLPzARyHiyEBmRz4fatF+KPJszEHXsGYjUG234aH/cOjW1wwTbKUZlA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.21.tgz"
+            }
+          ]
+        },
+        {
+          "id": "lunar@1.0.0",
+          "desc": "lunar是一款无第三方依赖的公历(阳历)、农历(阴历、老黄历)、佛历和道历工具，支持星座、儒略日、干支、生肖、节气、节日、彭祖百忌、每日宜忌、吉神宜趋、凶煞宜忌、吉神(喜神/福神/财神/阳贵神/阴贵神)方位、胎神方位、冲煞、纳音、星宿、八字、五行、十神、建除十二值星、青龙名堂等十二神、黄道日及吉凶等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "lunar",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-sAMOxbVr7Sn/QEzEQZHz0CwYjOROTgDLc4842CX2d7f+1D2nlHc6T5jtZJoleIMPZItNJLj0GuOaB/JR+Iwe7Q==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/lunar/-/lunar-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "desc": "fast-web基于open harmony基础组件开发的高性能Web容器，提供具有预启动、预渲染、预编译JavaScript生成字节码缓存、离线资源免拦截注入等能力的Web组件。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/fast-web",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-Rss9XtK17SqIOLu1MVWBBtwUEP/txhB3KjuF66TmnI/WnR1VxEUMgdi6hbOfdUAeIsUQyY1wVhFNzguFIIbcMQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/fast-web/-/@hw-agconnect/fast-web-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-base@1.0.1",
+          "desc": "AppGalleryConnectSDK ui component base for OpenHarmony.",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-base",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-72W2eKnmL+ZQo0qxhmWrEKH/8qeXm6AjOF3hR0p4dz/k42g2PHt+zfeZkDLVK+jihQK+GFfSD7r5cAkL3zE6Xg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-base/-/@hw-agconnect/ui-base-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/petal-aegis@1.4.11-300",
+          "desc": "Aegis（安全编码SDK）基于HarmonyOS应用特点，由专业安全团队开发，提供简单易用的安全API，集成后可进一步提升应用的安全质量。\n\n为保护用户的个人信息和应用的敏感信息的机密性、完整性、不可抵赖性等，Aegis为您提供丰富的加解密算法，如：哈希算法、消息认证码算法、对称加解密算法、非对称加解密算法、签名验签算法等。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/petal-aegis",
+          "version": "1.4.11-300",
+          "files": [
+            {
+              "integrity": "sha512-U49pnWkQ7lpd88gDfm4UfzdAD8QSujmnXk0zbidSPlkPcBkMRRo0Ce+a21d/zEi85WAvK+wmU51td6ojAxeWtQ==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@hw-agconnect/petal-aegis/-/@hw-agconnect/petal-aegis-1.4.11-300.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "entry@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "dayjs@1.11.21"
+            },
+            {
+              "id": "lunar@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/fast-web@1.0.1"
+            },
+            {
+              "id": "@hw-agconnect/petal-aegis@1.4.11-300"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.7"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/fast-web@1.0.1",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/ui-base@1.0.1"
+            },
+            {
+              "id": "@ohos/axios@2.2.7"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":common",
+        ":perpetual",
+        ":almanac",
+        ":mine",
+        ":base_apis",
+        ":router_module",
+        ":calendar_events"
+      ]
+    }
+  ]
+}

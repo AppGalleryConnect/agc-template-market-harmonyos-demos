@@ -10,7 +10,7 @@
 
 ## 简介
 
-本组件提供了通用的问题反馈功能。
+本组件提供了通用的问题反馈功能。提交反馈内容之后，触发应用评分功能。
 
 <div style='overflow-x:auto'>
   <table style='min-width:800px'>

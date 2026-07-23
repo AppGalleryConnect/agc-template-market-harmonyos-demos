@@ -7,7 +7,12 @@ export interface GetCommodityDetailResp {
   introduction: string;
   name: string;
   detailImages: ResourceStr[];
-  spuInfo: SpuInfo[]
+  spuInfo: SpuInfo[];
+}
+
+export interface SpecValue {
+  name: string;
+  value: string;
 }
 
 export interface SpuInfo {
@@ -15,6 +20,7 @@ export interface SpuInfo {
   spuName: string,
   spuOriginalPrice: number,
   spuDiscountPrice: number,
+  specValues?: SpecValue[]
 }
 
 export interface GetCommodityDetailsResp extends Array<GetCommodityDetailResp> {}

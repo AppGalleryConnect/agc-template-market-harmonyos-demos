@@ -111,10 +111,12 @@ LookAD(options?: LookADOptions)
 
 ### LookADOptions对象说明
 
-| 名称            | 类型                     | 是否必填 | 说明                      |
-|:--------------|:-----------------------|----|-------------------------|
-| award         | string                 | 否  | 奖励名称                    |
-| onLookSuccess | (balance:number)=>void | 否  | 定义回调函数，balance为看广告获得金币数 |
+| 名称            | 类型                                  | 是否必填 | 说明                      |
+|:--------------|:------------------------------------|----|-------------------------|
+| award         | string                              | 否  | 奖励名称                    |
+| onLookSuccess | (balance:number)=>void              | 否  | 定义回调函数，balance为看广告获得金币数 |
+| isLogin       | boolean                             | 否  | 登录状态                         |
+| loginFunc     | ()=>void                            | 否  | 定义登录函数                       |
 
 ## 示例代码
 

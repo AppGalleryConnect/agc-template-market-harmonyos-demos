@@ -4,7 +4,8 @@
     "type": "shared",
     "description": "$string:shared_desc",
     "deviceTypes": [
-      "phone"
+      "phone",
+      "tablet"
     ],
     "deliveryWithInstall": true,
     "requestPermissions":[

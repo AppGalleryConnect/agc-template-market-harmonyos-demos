@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "reason",
+      "value": "获得oaid"
+    },
+    {
+      "name": "agcit_huawei_image_processing",
+      "value": "1.0.2"
+    }
+  ]
+}

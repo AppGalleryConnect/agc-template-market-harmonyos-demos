@@ -93,7 +93,11 @@ export class CustomWindowModel {
    */
   public offAvoidAreaChange() {
     window.getLastWindow(this.context).then(currentWindow => {
-      currentWindow.off('avoidAreaChange', this.getAvoidBottomPadding);
+      try {
+        currentWindow.off('avoidAreaChange', this.getAvoidBottomPadding);
+      } catch (error) {
+        Logger.error(TAG, `unRegisterKeyboardListener failed. error: ${JSON.stringify(error)}`);
+      }
     }).catch((err: BusinessError) => {
       Logger.error(TAG, `unRegisterWindowBottomPadding failed. error: ${JSON.stringify(err)}`)
     })

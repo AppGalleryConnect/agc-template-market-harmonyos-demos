@@ -260,6 +260,10 @@ export class SettingViewModel extends BaseViewModel {
     if (!this.context) {
       return;
     }
-    this.context.getApplicationContext().off('environment', this.callbackId);
+    try {
+      this.context.getApplicationContext().off('environment', this.callbackId);
+    } catch (err) {
+      Logger.error(TAG, `Failed to unregister applicationContext. err: ${JSON.stringify(err)}`);
+    }
   }
 }

@@ -1,30 +1,4 @@
 /**
- * 业务options模型
- */
-export interface BreakpointTypeOptions<T> {
-  [BreakpointNameEnum.SM]?: T,
-  [BreakpointNameEnum.MD]?: T,
-  [BreakpointNameEnum.LG]?: T,
-  [BreakpointNameEnum.XL]?: T,
-}
-
-/**
- * 业务options类
- */
-export class BreakpointType<T> {
-  private options: BreakpointTypeOptions<T>;
-
-  constructor(options: BreakpointTypeOptions<T>) {
-    this.options = options;
-  }
-
-  // 通过bp的值从this.options中获取对应的属性值。
-  public getValue(bp: BreakpointNameEnum) {
-    return Reflect.get(this.options, bp) as T;
-  }
-}
-
-/**
  * 断点名称
  */
 export enum BreakpointNameEnum {
@@ -62,6 +36,24 @@ export class GridRowColSetting {
     xl: 12,
   }
   /**
+   * 居中8栅格列span
+   */
+  public static readonly DEFAULT_CENTER_COL_SPAN: GridColColumnOption = {
+    sm: 4,
+    md: 8,
+    lg: 8,
+    xl: 8,
+  };
+  /**
+   * 居中8栅格列offset
+   */
+  public static readonly DEFAULT_CENTER_COL_OFFSET: GridColColumnOption = {
+    sm: 0,
+    md: 0,
+    lg: 2,
+    xl: 2,
+  };
+  /**
    * 栅格布局-x间距
    */
   public static readonly GRID_ROW_OPTIONS_GUTTER_X: GridRowSizeOption = {
@@ -97,6 +89,24 @@ export class GridRowColSetting {
    * 弹窗最大宽度
    */
   public static readonly DIALOG_MAX_WIDTH: number = 400;
+  /**
+   * 栅格行布-按钮边距
+   */
+  public static readonly BUTTON_GUTTER: GridRowColumnOption = {
+    sm: 8,
+    md: 12,
+    lg: 12,
+    xl: 12,
+  }
+  /**
+   * 网格列数-columnsNum
+   */
+  public static readonly COLUMNS_NUM: GridRowColumnOption = {
+    sm: 2,
+    md: 4,
+    lg: 6,
+    xl: 6,
+  };
 
   /**
    * 获取窗口断点栅格数
@@ -123,5 +133,24 @@ export class GridRowColSetting {
    */
   public static getPageMargin(bp: BreakpointNameEnum | string): number {
     return Reflect.get(GridRowColSetting.GRID_ROW_OPTIONS_MARGIN, bp);
+  }
+
+  /**
+   * 获取按钮边距
+   * @param bp
+   * @returns
+   */
+  public static getButtonGutter(bp: BreakpointNameEnum | string): number {
+    return Reflect.get(GridRowColSetting.BUTTON_GUTTER, bp);
+  }
+
+
+  /**
+   * 获取网格列数
+   * @param bp
+   * @returns
+   */
+  public static getColumnsNum(bp: BreakpointNameEnum | string): number {
+    return Reflect.get(GridRowColSetting.COLUMNS_NUM, bp);
   }
 }

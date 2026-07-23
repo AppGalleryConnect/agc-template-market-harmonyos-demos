@@ -9,6 +9,11 @@
       "name": "Main",
       "pageSourceFile": "src/main/ets/pages/Main.ets",
       "buildFunction": "mainBuilder"
+    },
+    {
+      "name": "SplashAd",
+      "pageSourceFile": "src/main/ets/pages/SplashAd.ets",
+      "buildFunction": "splashAdBuilder"
     }
   ]
 }

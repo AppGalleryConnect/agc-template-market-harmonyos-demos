@@ -1,9 +1,10 @@
-import { AppStorageV2, promptAction } from '@kit.ArkUI';
+import { AppStorageV2 } from '@kit.ArkUI';
 import { Constants, RouterMap } from '../common/Constants';
 import { MediaUtils } from '../common/MediaUtils';
 import { FeedbackModel } from '../common/FeedbackModel';
 import { FeedbackService } from '../services/FuncService';
 import { SubmitFeedbackParams } from '../services/RequestModel';
+import { GlobalContext } from 'lib_common';
 
 @ObservedV2
 export class SubmitVM {
@@ -37,7 +38,7 @@ export class SubmitVM {
       contactPhone: this.contactPhone,
     };
     FeedbackService.addFeedback(params).then(() => {
-      promptAction.showToast({ message: '提交成功' });
+      GlobalContext.getUIContext().getPromptAction().showToast({ message: '提交成功' });
       setTimeout(() => {
         this.stack.pop();
         this.stack.pushPathByName(RouterMap.FEEDBACK_RECORD_LIST_PAGE, null);
@@ -49,11 +50,11 @@ export class SubmitVM {
 
   validInfo() {
     if (!this.body) {
-      promptAction.showToast({ message: '请描述您的问题' });
+      GlobalContext.getUIContext().getPromptAction().showToast({ message: '请描述您的问题' });
       return false;
     }
     if (this.contactPhone && !Constants.PHONE_REG.test(this.contactPhone)) {
-      promptAction.showToast({ message: '请输入正确的手机号码' });
+      GlobalContext.getUIContext().getPromptAction().showToast({ message: '请输入正确的手机号码' });
       return false;
     }
     return true;

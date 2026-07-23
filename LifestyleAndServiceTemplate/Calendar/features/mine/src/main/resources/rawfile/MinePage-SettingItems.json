@@ -1,5 +1,10 @@
 [
   {
+    "id": "feedback",
+    "icon": "app.media.feedback",
+    "name": "意见反馈"
+  },
+  {
     "id": "setting",
     "icon": "app.media.setting",
     "name": "设置"

@@ -1,0 +1,28 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "camera_request",
+      "value": "此工具需要申请相机权限"
+    },
+    {
+      "name": "save_button",
+      "value": "此工具需要申请自定义保存按钮权限"
+    },
+    {
+      "name": "agcit_huawei_image_processing",
+      "value": "1.0.2"
+    },
+    {
+      "name": "location_request",
+      "value": "此工具需要申请位置权限"
+    },
+    {
+      "name": "approximately_location_request",
+      "value": "此工具需要申请位置权限"
+    }
+  ]
+}

@@ -153,8 +153,13 @@ export class AvPlayerController {
 
   async videoStop() {
     if (this.avPlayer) {
-      await this.avPlayer.pause();
-      this.videoSeek(0);
+      try {
+        await this.avPlayer.pause();
+        this.videoSeek(0);
+      } catch (err) {
+        UtilLog.error(TAG,
+          `videoStop failed, code is ${err.code}, message is ${err.message}`);
+      }
     }
   }
 
@@ -185,13 +190,18 @@ export class AvPlayerController {
     if (!this.avPlayer) {
       return;
     }
-    this.avPlayer.release((err) => {
-      if (err === undefined) {
-        UtilLog.info(TAG, 'videoRelease release success');
-      } else {
-        UtilLog.error(TAG,
-          `videoRelease release filed,  code is ${err.code}, message is ${err.message}`);
-      }
-    });
+    try {
+      this.avPlayer.release((err) => {
+        if (err === undefined) {
+          UtilLog.info(TAG, 'videoRelease release success');
+        } else {
+          UtilLog.error(TAG,
+            `videoRelease release filed,  code is ${err.code}, message is ${err.message}`);
+        }
+      });
+    } catch (err) {
+      UtilLog.error(TAG,
+        `videoRelease failed, code is ${err.code}, message is ${err.message}`);
+    }
   }
 }

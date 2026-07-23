@@ -15,7 +15,9 @@ export struct CalendarBirRem {
   @Param readonly: boolean = false
   @Param userEventInfo: UserEventItem = new UserEventItem()
   @Local themeVM: ThemeVM = ThemeVM.instance;
-  context:UIContext = this.getUIContext()
+  context: UIContext = this.getUIContext();
+  listScroller: ListScroller = new ListScroller();
+
   isBirthDay() {
     return this.type === EVENT_TYPE.BIRTHDAY
   }
@@ -33,25 +35,25 @@ export struct CalendarBirRem {
   }
 
   creatUserEventInfo() {
-    this.calendarEventVM.saveEventData(this.getUIContext(),this.userEventInfo)
+    this.calendarEventVM.saveEventData(this.getUIContext(), this.userEventInfo)
   }
 
   @Builder
   datePickerBuilder() {
     BaseDatePicker({
       datePicker: this.userEventInfo.date[0].date,
-      selectColor:this.themeVM.currentColor,
+      selectColor: this.themeVM.currentColor,
       isShowDateTitle: true,
       isBottom: true,
       isLunar: true,
       isLunarDate: this.userEventInfo.date[0].isLunar,
       cancel: () => {
-        baseActionSheet.close(this.context,'datePickerBuilder')
+        baseActionSheet.close(this.context, 'datePickerBuilder')
       },
       confirm: (date: Date) => {
         this.userEventInfo.date[0].lunarDate = solarToLunar(date)
         this.userEventInfo.date[0].date = date
-        baseActionSheet.close(this.context,'datePickerBuilder')
+        baseActionSheet.close(this.context, 'datePickerBuilder')
       },
       onLunarChange: (value: boolean) => {
         this.userEventInfo.date[0].isLunar = value
@@ -93,7 +95,7 @@ export struct CalendarBirRem {
           .fontWeight(FontWeight.Medium)
         Row() {
           Text(this.userEventInfo.date[0].isLunar ? this.userEventInfo.date[0].lunarDate :
-          dayjs(this.userEventInfo.date[0].date).format('YYYY年MM月DD日'))
+            dayjs(this.userEventInfo.date[0].date).format('YYYY年MM月DD日'))
             .fontSize(14)
             .fontColor(this.readonly ? $r('sys.color.font_secondary') : $r('sys.color.font_primary'))
           Image(this.readonly ? $r('app.media.chevron_up_grey') : $r('app.media.chevron_up')).width(12).height(24)
@@ -103,9 +105,9 @@ export struct CalendarBirRem {
         if (this.readonly) {
           return
         }
-        baseActionSheet.show(this.context,{
+        baseActionSheet.show(this.context, {
           id: 'datePickerBuilder',
-          detents:[400,401],
+          detents: [400, 401],
           showClose: false,
           customContent: () => {
             this.datePickerBuilder()
@@ -150,6 +152,11 @@ export struct CalendarBirRem {
       .onChange((value) => {
         this.userEventInfo.remarks = value
       })
+      .onFocus(() => {
+        setTimeout(() => {
+          this.listScroller.scrollEdge(Edge.Bottom)
+        }, 200)
+      })
       .constraintSize({ minHeight: 114 })
       .maxLength(100)
       .showCounter(true, { thresholdPercentage: 1, highlightBorder: true })
@@ -157,7 +164,7 @@ export struct CalendarBirRem {
 
   build() {
     Column() {
-      List({ space: 12 }) {
+      List({ space: 12, scroller: this.listScroller }) {
         ListItem() {
           this.eventTarget()
         }

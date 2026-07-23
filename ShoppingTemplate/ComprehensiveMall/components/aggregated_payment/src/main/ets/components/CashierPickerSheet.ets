@@ -59,7 +59,11 @@ export struct CashierPickerSheet {
   }
 
   public aboutToDisappear(): void {
-    this.mainWindow?.off('windowSizeChange', this.updateHeightBreakpoint);
+    try {
+      this.mainWindow?.off('windowSizeChange', this.updateHeightBreakpoint);
+    } catch (err) {
+
+    }
   }
 
   public build(): void {

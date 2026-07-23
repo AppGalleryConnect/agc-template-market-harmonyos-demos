@@ -31,7 +31,11 @@ export class AvCastController {
   public async startCasting(castItem: avSession.AVQueueItem) {
     hilog.debug(DOMAIN, TAG, `startCasting`)
     this.castItem = castItem
-    this.castController = await AvSessionController.getInstance().getAvSession()?.getAVCastController();
+    try {
+      this.castController = await AvSessionController.getInstance().getAvSession()?.getAVCastController();
+    } catch (e) {
+      hilog.error(DOMAIN, TAG, `startCasting getAVCastController failed: ${e}`);
+    }
     this.setPlaybackStateChangeListener();
     this.prepare();
     this.castServiceModule.isCasting = true
@@ -41,7 +45,11 @@ export class AvCastController {
 
   public endCasting() {
     hilog.debug(DOMAIN, TAG, `endCasting`)
-    AvSessionController.getInstance().getAvSession()?.stopCasting();
+    try {
+      AvSessionController.getInstance().getAvSession()?.stopCasting();
+    } catch (e) {
+      hilog.error(DOMAIN, TAG, `stopCasting failed: ${e}`);
+    }
     this.stopCast();
     this.castServiceModule.isCasting = false
     this.castServiceModule.isCastPlaying = false
@@ -50,7 +58,11 @@ export class AvCastController {
 
   public seekCasting(seekTime: number) {
     hilog.debug(DOMAIN, TAG, `seekCasting`)
-    this.castController?.sendControlCommand({ command: 'seek', parameter: seekTime });
+    try {
+      this.castController?.sendControlCommand({ command: 'seek', parameter: seekTime });
+    } catch (e) {
+      hilog.error(DOMAIN, TAG, `sendControlCommand failed: ${e}`);
+    }
     hilog.debug(DOMAIN, TAG, `seekCasting end`)
   }
 
@@ -67,16 +79,24 @@ export class AvCastController {
   }
 
   private setPlaybackStateChangeListener(): void {
-    this.castController?.on('playbackStateChange', 'all', this.castPlaybackStateChangeListener);
-    this.castController?.on('endOfStream', this.reloadCasting);
-    this.castController?.on('playNext', this.castPlayNextCallback);
-    this.castController?.on('playPrevious', this.castPlayPreviousCallback);
-    this.castController?.on('error', this.errorCallback);
+    try {
+      this.castController?.on('playbackStateChange', 'all', this.castPlaybackStateChangeListener);
+      this.castController?.on('endOfStream', this.reloadCasting);
+      this.castController?.on('playNext', this.castPlayNextCallback);
+      this.castController?.on('playPrevious', this.castPlayPreviousCallback);
+      this.castController?.on('error', this.errorCallback);
+    } catch (e) {
+      hilog.error(DOMAIN, TAG, `setPlaybackStateChangeListener failed: ${e}`);
+    }
   }
 
   private async prepare() {
-    await this.castController?.prepare(this.castItem);
-    await this.castController?.start(this.castItem);
+    try {
+      await this.castController?.prepare(this.castItem);
+      await this.castController?.start(this.castItem);
+    } catch (e) {
+      hilog.error(DOMAIN, TAG, `prepare failed: ${e}`);
+    }
   }
 
   private castPlaybackStateChangeListener = (playbackState: avSession.AVPlaybackState) => {
@@ -140,7 +160,11 @@ export class AvCastController {
       command: 'setVolume',
       parameter: value
     };
-    this.castController?.sendControlCommand(avCommand);
+    try {
+      this.castController?.sendControlCommand(avCommand);
+    } catch (e) {
+      hilog.error(DOMAIN, TAG, `setVolume sendControlCommand failed: ${e}`);
+    }
     hilog.debug(DOMAIN, TAG, `setVolume Volume:${value} end`)
   }
 
@@ -158,7 +182,11 @@ export class AvCastController {
       command: 'setVolume',
       parameter: this.curVolume
     };
-    this.castController?.sendControlCommand(avCommand);
+    try {
+      this.castController?.sendControlCommand(avCommand);
+    } catch (e) {
+      hilog.error(DOMAIN, TAG, `setVolumeByOffset sendControlCommand failed: ${e}`);
+    }
     hilog.debug(DOMAIN, TAG, `setVolumeByOffset Volume:${this.curVolume}`)
   }
 
@@ -166,13 +194,21 @@ export class AvCastController {
     let avCommand: avSession.AVCastControlCommand = {
       command: 'play',
     };
-    await this.castController?.sendControlCommand(avCommand);
+    try {
+      await this.castController?.sendControlCommand(avCommand);
+    } catch (e) {
+      hilog.error(DOMAIN, TAG, `play sendControlCommand failed: ${e}`);
+    }
   }
 
   public pause() {
     let avCommand: avSession.AVCastControlCommand = {
       command: 'pause',
     };
-    this.castController?.sendControlCommand(avCommand);
+    try {
+      this.castController?.sendControlCommand(avCommand);
+    } catch (e) {
+      hilog.error(DOMAIN, TAG, `pause sendControlCommand failed: ${e}`);
+    }
   }
 }

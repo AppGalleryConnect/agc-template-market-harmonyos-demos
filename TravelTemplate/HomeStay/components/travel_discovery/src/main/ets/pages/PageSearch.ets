@@ -1,5 +1,8 @@
 import { PullToRefresh, PullToRefreshConfigurator } from '@ohos/pulltorefresh';
-import { AppStorageV2, LengthMetrics, router } from '@kit.ArkUI';
+import { AppStorageV2, LengthMetrics } from '@kit.ArkUI';
+import { ToastDialog } from '@hw-agconnect/ui-toast';
+import { UtilLog } from '@hw-agconnect/util-log';
+import { SearchApis, SearchItem } from 'search';
 import { QueryTravelogueListType } from '../constant/Index';
 import { CommonConstant, PageRouteName } from '../constant/Index';
 import { CardDataSource, HistoryList, PostCardModel } from '../model/Index';
@@ -19,12 +22,14 @@ export struct PageSearch {
   @Local listNum: number = 0;
   @Local isLoading: boolean = false;
   @Local windowTopHeight: number = AppStorage.get('windowTopHeight') as number || 38.77;
+  @Local hotSearchList: SearchItem[] = [];
   private searchController: SearchController = new SearchController();
   private scroller: Scroller = new Scroller();
   private pullConfig: PullToRefreshConfigurator = new PullToRefreshConfigurator();
 
   aboutToAppear(): void {
     this.setPullConfig();
+    this.loadSearchData();
   }
 
   onBackPress(): boolean | void {
@@ -34,6 +39,14 @@ export struct PageSearch {
       return true;
     }
     return false;
+  }
+
+  loadSearchData() {
+    SearchApis.getHotSearchList()
+      .then((result) => {
+        this.hotSearchList = result;
+      })
+      .catch(() => {});
   }
 
   callInterface(refresh: boolean = true) {
@@ -64,7 +77,7 @@ export struct PageSearch {
       this.isLoading = false;
       this.list.clearAllData();
       this.listNum = this.list.totalCount();
-      this.getUIContext().getPromptAction().showToast({ message: $r('app.string.query_fail') });
+      ToastDialog.showToast({ message: '请求失败，请联网重试' });
       return false;
     });
   }
@@ -83,114 +96,211 @@ export struct PageSearch {
     this.callInterface();
   }
 
+  queryByKeyword(keyword: string) {
+    this.searchValue = keyword;
+    this.queryList();
+  }
+
   getResourceString(res: Resource) {
-    return this.getUIContext().getHostContext()!.resourceManager.getStringSync(res.id);
+    try {
+      return this.getUIContext().getHostContext()!.resourceManager.getStringSync(res.id);
+    } catch (err) {
+      UtilLog.error(`getStringSync error ${err}`);
+      return undefined;
+    }
   }
 
   setPullConfig() {
     this.pullConfig
-      .setHasRefresh(true)// 是否具有下拉刷新功能
-      .setHasLoadMore(true)// 是否具有上拉加载功能
-      .setRefreshTextSize(14)// 下拉加载完毕后提示文本的字体大小
+      .setHasRefresh(true)
+      .setHasLoadMore(true)
+      .setRefreshTextSize(14)
       .setLoadImgHeight(16)
-      .setLoadTextSize(14)// 上拉文本的字体大小
-      .setLoadTextPullUp1(this.getResourceString($r('app.string.pull_load_text')))// 上拉1阶段文本
-      .setLoadTextPullUp2(this.getResourceString($r('app.string.pull_load_release')))// 上拉2阶段文本
-      .setLoadTextLoading(this.getResourceString($r('app.string.pull_loading')))// 上拉加载更多中时的文本
-      .setRefreshCompleteTextHoldTime(500); //上拉刷新后停留的时间, 默认一秒, 建议设置500
+      .setLoadTextSize(14)
+      .setLoadTextPullUp1(this.getResourceString($r('app.string.pull_load_text')))
+      .setLoadTextPullUp2(this.getResourceString($r('app.string.pull_load_release')))
+      .setLoadTextLoading(this.getResourceString($r('app.string.pull_loading')))
+      .setRefreshCompleteTextHoldTime(500);
   }
 
   @Builder
-  buildTitle() {
+  buildSearchBar() {
     Row({ space: 8 }) {
-      Image($r('app.media.ic_public_back'))
-        .width(14)
-        .fillColor($r('app.color.grey_level_6'))
-        .objectFit(ImageFit.Contain)
-        .onClick(() => {
-          if (this.withSearchResp) {
-            this.withSearchResp = false;
-            this.searchValue = '';
-          } else {
-            this.getUIContext().getRouter().back();
-          }
-        });
+      Row() {
+        Image($r('app.media.ic_public_back'))
+          .width(14)
+          .fillColor($r('app.color.grey_level_6'))
+          .objectFit(ImageFit.Contain)
+      }
+      .width(40)
+      .height(40)
+      .borderRadius(20)
+      .backgroundColor($r('sys.color.comp_background_tertiary'))
+      .justifyContent(FlexAlign.Center)
+      .alignItems(VerticalAlign.Center)
+      .onClick(() => {
+        if (this.withSearchResp) {
+          this.withSearchResp = false;
+          this.searchValue = '';
+        } else {
+          this.getUIContext().getRouter().back();
+        }
+      });
+
       Search({
         value: $$this.searchValue,
-        placeholder: $r('app.string.search_input_placeholder'),
+        placeholder: '',
         controller: this.searchController,
       })
-        .backgroundColor($r('app.color.search_input_bg'))
+        .backgroundColor($r('sys.color.comp_background_tertiary'))
         .layoutWeight(1)
+        .placeholderFont({
+          size: $r('sys.float.Body_L'),
+          weight: FontWeight.Regular,
+          family: 'HarmonyHeiTi'
+        })
+        .placeholderColor($r('sys.color.font_secondary'))
+        .textFont({
+          size: $r('sys.float.Body_L'),
+          weight: FontWeight.Medium,
+          family: 'HarmonyHeiTi',
+        })
+        .cancelButton({
+          style: CancelButtonStyle.INPUT,
+        })
+        .caretStyle({ color: $r('sys.color.font_emphasize') })
         .onChange(() => {
           this.searchValue = trimStart(this.searchValue);
         })
         .onSubmit(() => {
           this.queryList();
         });
-      Text($r('app.string.btn_search'))
-        .fontSize(15)
-        .fontColor($r('app.color.grey_level_4'))
-        .fontWeight(400)
-        .lineHeight(20)
-        .onClick(() => {
-          this.queryList();
-        });
-    }.width(CommonConstant.FULL_PERCENT).padding({ left: 14, right: 10 });
+    }
+    .width(CommonConstant.FULL_PERCENT)
+    .padding({ left: 14, right: 10 });
   }
 
   @Builder
-  buildTag(label: string) {
+  buildHistoryTag(label: string) {
     Button() {
       Text(label)
         .fontSize($r('sys.float.Body_M'))
-        .fontWeight(400)
+        .fontWeight(FontWeight.Medium)
+        .fontColor($r('sys.color.font_primary'))
+        .fontFamily('HarmonyHeiTi')
         .maxLines(1)
         .textOverflow({ overflow: TextOverflow.Ellipsis })
         .textAlign(TextAlign.Center);
     }
     .type(ButtonType.Capsule)
-    .borderRadius(23)
-    .borderWidth(1)
-    .borderColor($r('app.color.grey_level_4'))
-    .backgroundColor($r('app.color.search_tag_bg'))
+    .borderRadius(14)
+    .backgroundColor($r('sys.color.comp_background_tertiary'))
     .hoverEffect(HoverEffect.Highlight)
     .padding({
-      left: 10,
-      right: 10,
-      top: 5,
-      bottom: 5,
+      left: 12,
+      right: 12,
+      top: 4,
+      bottom: 4,
     })
     .constraintSize({ maxWidth: 160 })
     .onClick(() => {
-      this.searchValue = label;
-      this.queryList();
+      this.queryByKeyword(label);
     });
-
   }
 
   @Builder
-  buildHistory() {
+  buildHistorySection() {
     Column({ space: 10 }) {
-      Text($r('app.string.search_history'))
-        .fontSize(12)
-        .fontColor($r('app.color.grey_level_9'))
-        .fontWeight(500);
-      if (this.historyList.historyList.length) {
-        Flex({ wrap: FlexWrap.Wrap, space: { main: LengthMetrics.vp(12), cross: LengthMetrics.vp(10) } }) {
-          ForEach(this.historyList.historyList.slice(0, 10), (item: string) => {
-            this.buildTag(item);
-          }, (item: string) => item);
-        };
-      } else {
-        Text($r('app.string.comment_history_empty'))
-          .fontSize(20)
-          .fontColor($r('app.color.grey_level_6'))
-          .margin({ top: 200 })
-          .alignSelf(ItemAlign.Center);
-      }
+      Row() {
+        Text('历史搜索')
+          .fontSize(14)
+          .fontColor($r('sys.color.font_secondary'))
+          .fontWeight(FontWeight.Regular)
+          .fontFamily('HarmonyHeiTi');
 
-    }.width(CommonConstant.FULL_PERCENT).padding(14).alignItems(HorizontalAlign.Start);
+        Row({ space: 4 }) {
+          SymbolGlyph($r('sys.symbol.trash'))
+            .fontSize(16)
+            .fontColor([$r('sys.color.font_secondary')]);
+          Text('清空')
+            .fontSize(14)
+            .fontColor($r('sys.color.font_secondary'))
+            .fontWeight(FontWeight.Regular)
+            .fontFamily('HarmonyHeiTi');
+        }
+        .onClick(() => {
+          SearchApis.deleteHistoryList();
+          this.historyList.historyList.splice(0, this.historyList.historyList.length);
+        });
+      }
+      .width(CommonConstant.FULL_PERCENT)
+      .justifyContent(FlexAlign.SpaceBetween)
+      .alignItems(VerticalAlign.Bottom);
+
+      if (this.historyList.historyList.length) {
+        Flex({
+          wrap: FlexWrap.Wrap,
+          space: { main: LengthMetrics.vp(12), cross: LengthMetrics.vp(12) }
+        }) {
+          ForEach(this.historyList.historyList.slice(0, 10), (item: string) => {
+            this.buildHistoryTag(item);
+          }, (item: string) => item);
+        }
+      }
+    }
+    .width(CommonConstant.FULL_PERCENT)
+    .padding({ left: 16, right: 16, top: 8, bottom: 8 })
+    .alignItems(HorizontalAlign.Start);
+  }
+
+  @Builder
+  buildHotSearchItem(item: SearchItem, index: number) {
+    Row({ space: 12 }) {
+      Text(`${index + 1}.`)
+        .fontSize(14)
+        .fontWeight(index < 3 ? FontWeight.Medium : FontWeight.Normal)
+        .fontColor(index < 3 ? $r('sys.color.warning') : $r('sys.color.font_secondary'));
+
+      Text(item.title)
+        .fontSize(14)
+        .fontColor($r('sys.color.font_primary'))
+        .fontFamily('HarmonyHeiTi')
+        .maxLines(1)
+        .textOverflow({ overflow: TextOverflow.Ellipsis })
+        .layoutWeight(1);
+    }
+    .width(CommonConstant.FULL_PERCENT)
+    .padding({ left: 0, right: 0, top: 8, bottom: 8 })
+    .alignItems(VerticalAlign.Center)
+    .onClick(() => {
+      this.queryByKeyword(item.title);
+    });
+  }
+
+  @Builder
+  buildHotSearchSection() {
+    Column({ space: 16 }) {
+      Row({ space: 4 }) {
+        Image($r('app.media.ic_public_hot'))
+          .width(24)
+          .height(24)
+          .objectFit(ImageFit.Contain);
+
+        Text('热搜榜')
+          .fontSize(18)
+          .fontColor($r('sys.color.font_primary'))
+          .fontWeight(FontWeight.Bold)
+          .fontFamily('HarmonyHeiTi');
+      }
+      .alignItems(VerticalAlign.Center);
+
+      ForEach(this.hotSearchList, (item: SearchItem, index: number) => {
+        this.buildHotSearchItem(item, index);
+      }, (item: SearchItem) => JSON.stringify(item.title));
+    }
+    .width(CommonConstant.FULL_PERCENT)
+    .padding({ left: 16, right: 16, top: 8, bottom: 8 })
+    .alignItems(HorizontalAlign.Start);
   }
 
   @Builder
@@ -249,12 +359,23 @@ export struct PageSearch {
           customRefresh: null,
         });
       } else if (this.isLoading) {
-        LoadingProgress().size({ width: 72, height: 72 }).margin({ top: 200 });
+        LoadingProgress().size({ width: 72, height: 72 });
       } else {
-        Text($r('app.string.search_list_empty'))
-          .fontSize(20)
-          .fontColor($r('app.color.grey_level_6'))
-          .margin({ top: 200 });
+        Column({ space: 12 }) {
+          Image($r('app.media.SearchNoResult'))
+            .width(120)
+            .height(120)
+            .objectFit(ImageFit.Contain);
+
+          Text('暂无搜索结果')
+            .fontSize(14)
+            .fontColor($r('sys.color.font_secondary'))
+            .fontWeight(FontWeight.Regular)
+            .fontFamily('HarmonyHeiTi');
+        }
+        .justifyContent(FlexAlign.Center)
+        .layoutWeight(1)
+        .width(CommonConstant.FULL_PERCENT);
       }
     }
     .width(CommonConstant.FULL_PERCENT)
@@ -266,9 +387,18 @@ export struct PageSearch {
   build() {
     NavDestination() {
       Column() {
-        this.buildTitle();
+        this.buildSearchBar();
         if (!this.withSearchResp && !this.searchValue) {
-          this.buildHistory();
+          Scroll() {
+            Column() {
+              this.buildHistorySection();
+              this.buildHotSearchSection();
+            }
+          }
+          .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: true })
+          .align(Alignment.Top)
+          .scrollBar(BarState.Off)
+          .layoutWeight(1);
         }
         if (this.withSearchResp) {
           this.buildList();
@@ -276,7 +406,8 @@ export struct PageSearch {
       }
       .padding({ top: this.windowTopHeight })
       .height(CommonConstant.FULL_PERCENT)
-      .width(CommonConstant.FULL_PERCENT);
+      .width(CommonConstant.FULL_PERCENT)
+      .backgroundColor($r('sys.color.background_primary'));
     }.hideTitleBar(true);
   }
 }

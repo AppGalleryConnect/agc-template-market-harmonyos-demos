@@ -6,11 +6,12 @@
   "author": "",
   "license": "",
   "dependencies": {
-    "@hw-agconnect/copilot": "^0.1.0",
+    "@hw-agconnect/copilot": "file:../../components/copilot",
     "business_mine": "file:../../components/business_mine",
     "lib_common": "file:../../components/lib_common",
     "lib_account": "file:../../components/lib_account",
-    "lib_widget": "file:../../components/lib_widget",
+    "aggregated_login": "file:../../ohos_agcit/agcit_huawei_common_login/aggregated_login",
+    "feedback": "file:../../ohos_agcit/agcit_huawei_common_feedback/feedback",
     "@lidary/markdown": "2.0.4",
     "rxjs": "7.8.1",
     "dayjs": "^1.11.13"

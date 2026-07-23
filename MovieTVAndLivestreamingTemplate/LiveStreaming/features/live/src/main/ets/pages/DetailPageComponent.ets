@@ -62,6 +62,7 @@ export struct DetailPageComponent {
   @Local isShowMyRoom: boolean = false
   @Local isShowRankList: boolean = false
   @Local isModerator: boolean[] = []
+  @Event stopRecord: Function = () => {}
   private customDialogComponentId: number = 0;
   private avRecorder: media.AVRecorder | undefined = undefined;
   private timeId: number | undefined = undefined;
@@ -102,6 +103,7 @@ export struct DetailPageComponent {
       secondaryButton: {
         value: '确定',
         action: () => {
+          this.stopRecord()
           this.endRecordingProcess()
           this.countUpTextTimerController.pause()
           RouterModule.push({
@@ -114,7 +116,10 @@ export struct DetailPageComponent {
   });
 
   setOrientation(orientation: number) {
-    this.windowClass.setPreferredOrientation(orientation)
+    try {
+      this.windowClass.setPreferredOrientation(orientation)
+    } catch (e) {
+    }
   }
 
   aboutToDisappear(): void {
@@ -134,14 +139,17 @@ export struct DetailPageComponent {
     this.liveStreamer.avatar = this.logoUser.avatar;
     let atManager: abilityAccessCtrl.AtManager = abilityAccessCtrl.createAtManager();
     let context: Context = this.getUIContext().getHostContext() as common.UIAbilityContext;
-    atManager.requestPermissionsFromUser(context, ['ohos.permission.GET_WIFI_INFO'],
-      (err: BusinessError, data: PermissionRequestResult) => {
-        if (err) {
-          console.error(`requestPermissionsFromUser fail, code: ${err.code}, message: ${err.message}`)
-        } else {
-          console.info(data.authResults[0].toString())
-        }
-      })
+    try {
+      atManager.requestPermissionsFromUser(context, ['ohos.permission.GET_WIFI_INFO'],
+        (err: BusinessError, data: PermissionRequestResult) => {
+          if (err) {
+            console.error(`requestPermissionsFromUser fail, code: ${err.code}, message: ${err.message}`)
+          } else {
+            console.info(data.authResults[0].toString())
+          }
+        })
+    } catch (e) {
+    }
     this.liveInteractionMgr.chatMgr.play()
     this.getMicroStatus()
     this.startRecordingProcess()

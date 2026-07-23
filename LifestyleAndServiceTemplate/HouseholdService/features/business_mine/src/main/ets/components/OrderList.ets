@@ -1,11 +1,11 @@
-import { CommonConstants, FullOrderInfo, GridRowColSetting, OrderDetailList } from 'lib_foundation';
+import { BreakpointNameEnum, CommonConstants, FullOrderInfo, GridRowColSetting, OrderDetailList } from 'lib_foundation';
 import { UIEmpty } from 'module_base';
 import { IQueryListParam } from '../viewmodel/MyOrderVM';
 import { OrderCard } from './OrderCard';
 
 @ComponentV2
 export struct OrderList {
-  @Param breakpoint: string = '';
+  @Param breakpoint: BreakpointNameEnum = BreakpointNameEnum.SM;
   @Param data: OrderDetailList = new OrderDetailList();
   @Param isRefreshing: boolean = false;
   @Param isLoading: boolean = false;
@@ -18,9 +18,9 @@ export struct OrderList {
     Column() {
       if (this.data.list.length) {
         Refresh({ refreshing: this.isRefreshing }) {
-          Scroll() {
-            Column({ space: 12 }) {
-              ForEach(this.data.list, (v: FullOrderInfo) => {
+          List({ space: 12 }) {
+            ForEach(this.data.list, (v: FullOrderInfo) => {
+              ListItem() {
                 OrderCard({
                   breakpoint: this.breakpoint,
                   fullOrderInfo: v,
@@ -36,9 +36,10 @@ export struct OrderList {
                     });
                   },
                 })
-              }, (item: FullOrderInfo) => JSON.stringify(item))
-            }.width(CommonConstants.FULL_PERCENT)
+              }
+            }, (item: FullOrderInfo) => JSON.stringify(item))
           }
+          .lanes([BreakpointNameEnum.LG, BreakpointNameEnum.XL].includes(this.breakpoint) ? 2 : 1, 12)
           .width(CommonConstants.FULL_PERCENT)
           .height(CommonConstants.FULL_PERCENT)
           .align(Alignment.Top)

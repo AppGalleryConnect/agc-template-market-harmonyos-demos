@@ -1,8 +1,8 @@
-import { RouterMap, RouterUtils, WindowModel } from 'lib_common';
-import { NavHeaderBar } from 'lib_widget';
+import { GlobalContext, RouterMap, RouterUtils, WindowModel } from 'lib_common';
 import { HistoryButton } from '../../components/HistoryButton';
 import { PageResultType } from './OfficeResultPage';
 import { AppStorageV2 } from '@kit.ArkUI';
+import { NavHeaderBar } from '../../widget/NavHeaderBar';
 
 const SCHOOL_SECTION = ['不限', '本科', '硕士', '博士']
 const NUMBERS = ['1000', '1500', '2000', '其他']
@@ -250,8 +250,12 @@ export struct PaperWritingPage {
           Button('开始生成')
             .width('100%')
             .height(40)
-            .enabled(!!(this.title && this.major && (this.otherCount || this.count !== '其他')))
+            .backgroundColor($r('sys.color.comp_background_emphasize'))
             .onClick(() => {
+              if(!(this.title && this.major && (this.otherCount || this.count !== '其他'))){
+                GlobalContext.getUIContext().getPromptAction().showToast({ message: '请检查题目、专业、字数是否为空！' });
+                return;
+              }
               let systemPrompt = '你是一个写作专家，需要根据用户的需求生成论文或总结，内容需要严谨';
               let userPrompt =
                 `帮我生成一篇论文，论文的标题是${this.title}, 我当前的专业是${this.major}，当前是${this.degree}阶段。要求是字数不少于${this.otherCount ??

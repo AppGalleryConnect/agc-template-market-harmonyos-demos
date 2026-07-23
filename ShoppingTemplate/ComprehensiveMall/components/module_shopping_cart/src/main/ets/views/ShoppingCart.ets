@@ -119,6 +119,7 @@ export struct ShoppingCart {
                 }
                 .width('100%')
                 .constraintSize({ minHeight: '100%' })
+                .margin({ bottom: -28})
                 .alignItems(HorizontalAlign.Center)
                 .justifyContent(FlexAlign.Start)
                 .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.BOTTOM])

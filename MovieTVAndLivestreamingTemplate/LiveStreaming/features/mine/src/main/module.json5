@@ -3,7 +3,8 @@
     "name": "mine",
     "type": "shared",
     "deviceTypes": [
-      "phone"
+      "phone",
+      "tablet"
     ],
     "installationFree":true,
     'deliveryWithInstall': true,

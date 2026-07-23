@@ -1,40 +1,33 @@
-import { AccommodationInfo, AttractionInfo, AttractionUtil, CateringInfo, ToiletInfo } from 'module_base';
-import { Guide, LocationType } from '../model/GuideInfo'
+import { AccommodationInfo, AttractionInfo, AttractionUtil, CateringInfo } from 'module_base';
+import { Guide, LocationType } from '../model/GuideInfo';
+import { Permissions } from '@kit.AbilityKit';
 
 export const GUIDE_TABS_INFO = [{
   id: 0,
   title: '景点',
-  activeIcon: $r('app.media.guide_scenic'),
-  defaultIcon: $r('app.media.guide_scenic_default'),
-  icon: $r('app.media.icon_scenic'),
+  icon: $r('sys.symbol.tropicaltrees_and_sand_1'),
   type: LocationType.ATTRACTION,
   data: AttractionUtil.getAttraction().attractions,
 } as Guide<AttractionInfo>,
   {
     id: 1,
     title: '餐饮',
-    activeIcon: $r('app.media.guide_catering'),
-    defaultIcon: $r('app.media.guide_catering_default'),
-    icon: $r('app.media.icon_catering'),
+    icon: $r('sys.symbol.spoon_chopsticks_fill'),
     type: LocationType.CATERING,
     data: AppStorage.get('cateringList')!,
   } as Guide<CateringInfo>,
   {
     id: 2,
-    title: '住宿',
-    activeIcon: $r('app.media.guide_accommodation'),
-    defaultIcon: $r('app.media.guide_accommodation_default'),
-    icon: $r('app.media.icon_accommodation'),
+    title: '酒店',
+    icon: $r('sys.symbol.hotel'),
     type: LocationType.ACCOMMODATION,
     data: AppStorage.get('accommodationList')!,
   } as Guide<AccommodationInfo>,
-  {
-    id: 3,
-    title: '卫生间',
-    activeIcon: $r('app.media.guide_toilets'),
-    icon: $r('app.media.icon_toilet'),
-    defaultIcon: $r('app.media.guide_toilets_default'),
-    type: LocationType.TOILETS,
-    data: AppStorage.get('toiletList')!,
-  } as Guide<ToiletInfo>,
 ];
+
+export const HEIGHT_LOW_SMALL: number = 120
+export const HEIGHT_LOW_MIDDLE: number = 200
+export const HEIGHT_MIDDLE: number = 638
+export const LOCATION_PERMISSION: Permissions[] = ['ohos.permission.LOCATION', 'ohos.permission.APPROXIMATELY_LOCATION'];
+// 用户授权成功
+export const  USER_GRANT_SUCCESS = 0

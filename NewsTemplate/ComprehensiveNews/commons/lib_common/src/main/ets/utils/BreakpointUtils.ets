@@ -1,5 +1,4 @@
-import mediaQuery from '@ohos.mediaquery';
-import { AppStorageV2, MediaQuery } from '@kit.ArkUI';
+import { AppStorageV2, mediaquery, MediaQuery } from '@kit.ArkUI';
 import { BreakpointNameEnum, BreakpointValueEnum } from '../constants/GridRowColSetting';
 import { BreakpointModel } from '../models/BreakpointModel';
 import { Logger } from './Logger';
@@ -15,10 +14,10 @@ export class BreakpointUtils {
   private static readonly RANGE_LG: string = `(width>=${BreakpointValueEnum.MD}) and (width<${BreakpointValueEnum.LG})`;
   private static readonly RANGE_XL: string = `(width>=${BreakpointValueEnum.LG})`;
   private mediaQuery: MediaQuery;
-  private smListen: mediaQuery.MediaQueryListener;
-  private mdListen: mediaQuery.MediaQueryListener;
-  private lgListen: mediaQuery.MediaQueryListener;
-  private xlListen: mediaQuery.MediaQueryListener;
+  private smListen: mediaquery.MediaQueryListener;
+  private mdListen: mediaquery.MediaQueryListener;
+  private lgListen: mediaquery.MediaQueryListener;
+  private xlListen: mediaquery.MediaQueryListener;
   private breakpointModel: BreakpointModel = new BreakpointModel();
 
   constructor(mediaQuery: MediaQuery) {
@@ -34,22 +33,22 @@ export class BreakpointUtils {
     Logger.info(TAG, `updateBreakpoint: ${value}`);
     this.breakpointModel.currentBreakpoint = value as BreakpointNameEnum;
   }
-  private smFunc: (result: mediaQuery.MediaQueryResult) => void = (result) => {
+  private smFunc: (result: mediaquery.MediaQueryResult) => void = (result) => {
     if (result.matches) {
       this.updateBreakpoint(BreakpointNameEnum.SM);
     }
   }
-  private mdFunc: (result: mediaQuery.MediaQueryResult) => void = (result) => {
+  private mdFunc: (result: mediaquery.MediaQueryResult) => void = (result) => {
     if (result.matches) {
       this.updateBreakpoint(BreakpointNameEnum.MD);
     }
   }
-  private lgFunc: (result: mediaQuery.MediaQueryResult) => void = (result) => {
+  private lgFunc: (result: mediaquery.MediaQueryResult) => void = (result) => {
     if (result.matches) {
       this.updateBreakpoint(BreakpointNameEnum.LG);
     }
   }
-  private xlFunc: (result: mediaQuery.MediaQueryResult) => void = (result) => {
+  private xlFunc: (result: mediaquery.MediaQueryResult) => void = (result) => {
     if (result.matches) {
       this.updateBreakpoint(BreakpointNameEnum.XL);
     }

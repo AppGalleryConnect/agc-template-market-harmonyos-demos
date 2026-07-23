@@ -1,11 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="6px" height="10px" viewBox="0 0 6 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>icon_direction_right</title>
-    <g id="" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-opacity="0.9">
-        <g id="icon" transform="translate(-504.000000, -140.000000)" stroke="#999999">
-            <g id="路径-8" transform="translate(501.000000, 139.000000)">
-                <polyline points="3.5 2 8.5 6 3.5 10"></polyline>
-            </g>
-        </g>
-    </g>
+<svg viewBox="0 0 12 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="12.000000" height="24.000000" fill="none" customFrame="#000000" mask="url(#mask_0)">
+  <metadata>
+    <agcit_code>agcit_huawei_home_stay</agcit_code>
+  </metadata>
+	<defs>
+		<filter id="pixso_custom_mask_type_outline">
+			<feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0 " />
+		</filter>
+		<clipPath id="clipPath_0">
+			<rect width="12.000000" height="24.000000" x="0.000000" y="0.000000" fill="rgb(255,255,255)" />
+		</clipPath>
+	</defs>
+	<mask id="mask_0" width="6.742640" height="12.813077" x="3.000000" y="5.593384" maskUnits="userSpaceOnUse">
+		<g filter="url(#pixso_custom_mask_type_outline)">
+			<path id="路径" d="M4.24827 5.78251L4.28033 5.81277L9.23008 10.7625C9.89926 11.4317 9.9132 12.508 9.2719 13.1941L9.23008 13.2374L4.28033 18.1871C4.15146 18.316 3.98735 18.3882 3.81902 18.4036L3.77303 18.4065L3.72697 18.4065C3.54278 18.4008 3.36026 18.3277 3.21967 18.1871C2.93724 17.9047 2.92715 17.4531 3.18941 17.1585L3.21967 17.1265L7.81586 12.5303C8.0983 12.2479 8.10838 11.7962 7.84612 11.5017L7.81586 11.4696L3.21967 6.87343C2.92678 6.58054 2.92678 6.10567 3.21967 5.81277C3.36089 5.67156 3.54441 5.59843 3.72944 5.59338L3.7757 5.59354C3.94529 5.59932 4.11328 5.66231 4.24827 5.78251Z" fill="rgb(255,255,255)" fill-rule="evenodd" />
+		</g>
+	</mask>
+	<rect id="Public/ic_public_arrow_right" width="12.000000" height="24.000000" x="0.000000" y="0.000000" />
+	<g id="Symbol/color-light/colorPrimary" customFrame="url(#clipPath_0)">
+		<rect id="Symbol/color-light/colorPrimary" width="12.000000" height="24.000000" x="0.000000" y="0.000000" />
+		<rect id="color/#000000" width="12.000000" height="24.000000" x="0.000000" y="0.000000" fill="rgb(0,0,0)" fill-opacity="0.400000006" />
+	</g>
 </svg>

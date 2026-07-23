@@ -33,6 +33,8 @@ import {
   PrivacySettingsPageBuilder,
   Privacy3rdPartySharePageBuilder,
   PrivacyInfoCollectPageBuilder,
+  AnchorCenterBuilder,
+  VideoRecordPlayPageBuilder
 } from '@agctemplate/mine';
 
 import { LoginPageBuilder } from '../pages/LoginPage';
@@ -78,6 +80,8 @@ export class RouterTable {
     RouterTable.builderMap.set(RouterMap.PRIVACY_SETTINGS_PAGE, wrapBuilder(PrivacySettingsPageBuilder));
     RouterTable.builderMap.set(RouterMap.PRIVACY_3RD_PARTY_SHARE_PAGE, wrapBuilder(Privacy3rdPartySharePageBuilder));
     RouterTable.builderMap.set(RouterMap.PRIVACY_INFO_COLLECT_PAGE, wrapBuilder(PrivacyInfoCollectPageBuilder));
+    RouterTable.builderMap.set(RouterMap.ANCHOR_CENTER_PAGE, wrapBuilder(AnchorCenterBuilder));
+    RouterTable.builderMap.set(RouterMap.VIDEO_RECORD_PLAY_PAGE, wrapBuilder(VideoRecordPlayPageBuilder));
 
 
     // --------------------------------------------------详情播放

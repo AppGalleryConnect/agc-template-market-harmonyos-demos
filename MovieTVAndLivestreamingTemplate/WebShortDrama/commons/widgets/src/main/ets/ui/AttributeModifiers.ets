@@ -1,10 +1,11 @@
 import { AiBarHeight, StatusBarHeight } from './avoid_area/AvoidArea';
 import { AppStorageV2, window } from '@kit.ArkUI';
 import { AppStorageKeys } from '../const/AppStorageKeys';
+import { fp2pxUtil } from '../util/FontUtils';
 
 export class MainTitleModifier implements AttributeModifier<TextAttribute> {
   applyNormalAttribute(instance: TextAttribute): void {
-    instance.fontSize($r('sys.float.Title_M'))
+    instance.fontSize(fp2pxUtil(24))
       .fontWeight(FontWeight.Bold)
       .fontColor($r('sys.color.font_primary'))
       .maxLines(1)

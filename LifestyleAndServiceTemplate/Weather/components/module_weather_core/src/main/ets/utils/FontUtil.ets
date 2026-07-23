@@ -11,7 +11,11 @@ class FontModel {
 @ObservedV2
 export class FontUtil {
   // 字体大小倍率
-  private static _fontInfo: FontModel = PersistenceV2.connect(FontModel, 'fontInfo', () => new FontModel())!;
+  private static _fontInfo: FontModel = new FontModel();
+
+  public static setFontInfo() {
+    FontUtil._fontInfo = PersistenceV2.connect(FontModel, 'fontInfo', () => new FontModel())!;
+  }
 
   public static getRate() {
     return FontUtil._fontInfo.rate;

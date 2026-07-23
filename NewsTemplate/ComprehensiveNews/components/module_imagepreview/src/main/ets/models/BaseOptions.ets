@@ -1,63 +1,63 @@
 import { SourceImageModel } from './PreviewModel'
 
-@Observed
+@ObservedV2
 export class BaseOptions {
   /**
    * 数据源
    */
-  dataList: SourceImageModel[] = []
+  @Trace dataList: SourceImageModel[] = []
   /**
    * 是否循环
    */
-  loop?: boolean = false
+  @Trace loop?: boolean = false
   /**
    * 设置是否可以通过系统返回关闭preview 默认 true
    */
-  dismissOnSystemBack: boolean = true
+  @Trace dismissOnSystemBack: boolean = true
   /**
    * 弹窗显示层级模式
    */
-  levelMode?: LevelMode
+  @Trace levelMode?: LevelMode
   /**
    * 对话框需要显示的层级下的节点uniqueId
    */
-  levelUniqueId?: number | string
+  @Trace levelUniqueId?: number | string
   /**
    * 设置页面内对话框蒙层效果
    */
-  immersiveMode?: ImmersiveMode
+  @Trace immersiveMode?: ImmersiveMode
   /**
    * 初始化index
    */
-  startIndex: number = 0
+  @Trace startIndex: number = 0
   /**
    * 最小缩放比例
    */
-  minScale: number = 1
+  @Trace minScale: number = 1
   /**
    * 最大缩放比例
    */
-  maxScale: number = 15
+  @Trace maxScale: number = 15
   /**
    * 指示器
    */
-  indicator: DotIndicator | DigitIndicator | boolean = false
+  @Trace indicator: DotIndicator | DigitIndicator | boolean = false
   /**
    * 背景色 默认 #000000
    */
-  backgroundColor: ResourceColor = '#000000'
+  @Trace backgroundColor: ResourceColor = '#000000'
   /**
    * 动画时长,预览器打开关闭的动画时长
    */
-  duration: number = 200
+  @Trace duration: number = 200
   /**
    * 是否在点击图片后关闭图片预览
    */
-  closeOnClickImage?: boolean = true
+  @Trace closeOnClickImage?: boolean = true
   /**
    * 是否启用双击缩放手势，禁用后，点击时会立即关闭图片预览
    */
-  doubleScale?: boolean = true
+  @Trace doubleScale?: boolean = true
 
   /**
    * 设置数据list

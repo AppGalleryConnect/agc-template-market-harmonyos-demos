@@ -168,6 +168,7 @@ export struct YiJiDayQuery {
         }
       }
       .layoutWeight(1)
+      .align(Alignment.Top)
       .scrollBar(BarState.Off)
       .edgeEffect(EdgeEffect.Spring)
     }
@@ -214,7 +215,7 @@ export struct YiJiDayQuery {
           Row({ space: 5 }) {
             Text(this.localStartDate)
               .attributeModifier(new BaseTextStyleModifier(`font_primary/Body_M/Regular`))
-            Image($r('app.media.chevron_right')).width(7).height(17)
+            Image($r('app.media.chevron_right')).width(12).height(24)
           }
         }
         .width('100%')
@@ -239,7 +240,7 @@ export struct YiJiDayQuery {
           Row({ space: 5 }) {
             Text(this.localEndDate)
               .attributeModifier(new BaseTextStyleModifier(`font_primary/Body_M/Regular`))
-            Image($r('app.media.chevron_right')).width(7).height(17)
+            Image($r('app.media.chevron_right')).width(12).height(24)
           }
         }
         .width('100%')

@@ -17,7 +17,12 @@ export class SystemUtil {
         destinationName: name,
       },
     };
-    context.startAbility(petalMapWant);
+    try {
+      context.startAbility(petalMapWant);
+    } catch (error) {
+      let e: BusinessError = error as BusinessError;
+      UtilLog.error(0xff00, 'SystemUtil', `startAbility failed, ${e.code}, ${e.message}`);
+    }
   }
 
   static doRandBySync(len: number): string {

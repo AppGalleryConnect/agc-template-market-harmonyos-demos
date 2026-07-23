@@ -1,3 +1,4 @@
+import { UtilLog } from '@hw-agconnect/util-log';
 import { Constants } from '../common/Constant';
 import { GridRowColSetting } from '../common/GridRowColSetting';
 import { PopViewUtils } from '../common/PopViewUtils';
@@ -112,7 +113,7 @@ export struct ResultPage {
                     this.vm.closePop();
                   },
                   onStateChange: (event) => {
-                    console.log('onStateChange========' + event.isVisible);
+                    UtilLog.info('onStateChange========' + event.isVisible);
                   },
                 })
             }
@@ -241,6 +242,10 @@ export struct ResultPage {
     })
     .title('搜索', {
       paddingStart: { value: GridRowColSetting.getPageMargin(this.vm.breakpoint), unit: 1 }
+    })
+    .padding({
+      top: this.vm.windowTopPadding,
+      bottom: this.vm.windowBottomPadding,
     })
     .backgroundColor($r('sys.color.background_secondary'))
     .onReady((ctx: NavDestinationContext) => {

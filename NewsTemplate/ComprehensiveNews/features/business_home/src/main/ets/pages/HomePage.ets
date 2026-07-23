@@ -49,9 +49,6 @@ struct HomePage {
       .height(CommonConstants.FULL_PERCENT)
       .backgroundColor($r('sys.color.background_primary'))
       .attributeModifier(this.modifier)
-      .padding({
-        bottom: this.homeViewModel.pagePaddingBottom,
-      })
     }
     .hideTitleBar(true)
   }

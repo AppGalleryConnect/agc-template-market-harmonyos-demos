@@ -1,9 +1,9 @@
-import { PersistenceV2 } from '@ohos.arkui.StateManagement';
+import { PersistenceV2 } from '@kit.ArkUI';
 import { THEME_LIST } from '../constants/Constants';
 import { CommonUtil } from './CommonUtil';
 
 @ObservedV2
-class ThemeModel {
+export class ThemeModel {
   @Trace id: number = 1;
 }
 

@@ -95,6 +95,10 @@
     {
       "name": "tracking_consent",
       "value": "获取开放匿名设备标识符（Open Anonymous Device Identifier, OAID）"
+    },
+    {
+      "name": "agcit_huawei_calendar",
+      "value": "1.0.6"
     }
   ]
 }

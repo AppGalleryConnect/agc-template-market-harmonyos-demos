@@ -1,4 +1,5 @@
-import { Constant } from 'common';
+import { AppStorageV2 } from '@kit.ArkUI';
+import { BreakpointModel, BreakpointNameEnum, BreakpointType, Constant, GridRowColSetting } from 'common';
 import { AttractionInfo } from 'types';
 import { HomePageVM } from '../viewmodel/HomePageVM';
 
@@ -8,29 +9,44 @@ export function HotAttractionsBuilder() {
 }
 
 @ComponentV2
-export struct HotAttractions {
+struct HotAttractions {
   vm: HomePageVM = HomePageVM.instance;
+  @Local breakPointModel: BreakpointModel = AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
   @Consumer('mainPathStack') mainPathStack: NavPathStack = new NavPathStack();
 
   build() {
-    NavDestination() {
-      List({ space: 12 }) {
+    Column() {
+      Grid() {
         LazyForEach(this.vm.hotAttractionList, (item: AttractionInfo) => {
-          ListItem() {
+          GridItem() {
             Stack() {
-              Image(item.banner).size({ width: 100, height: 80 }).borderRadius(8);
-              Text(item.name).fontColor($r('sys.color.font_on_primary')).fontWeight(500);
-            };
+              Image(item.banner)
+                .width('100%')
+                .aspectRatio(4/3)
+                .objectFit(ImageFit.Cover)
+                .borderRadius(8)
+                .mask(new ProgressMask(0, 1, $r('sys.color.mask_tertiary')));
+              Text(item.name)
+                .fontColor($r('sys.color.font_on_primary'))
+                .fontWeight(FontWeight.Medium)
+                .fontSize($r('sys.float.Body_L'));
+            }.width('100%');
           }.onClick(() => {
             this.mainPathStack.pushPathByName('AttractionDetail', item.attractionId);
           });
         });
       }
-      .listDirection(Axis.Horizontal)
+      .columnsTemplate(new BreakpointType({
+        [BreakpointNameEnum.SM]: '1fr '.repeat(3),
+        [BreakpointNameEnum.MD]: '1fr '.repeat(3),
+        [BreakpointNameEnum.LG]: '1fr '.repeat(5),
+        [BreakpointNameEnum.XL]: '1fr '.repeat(5),
+      }).getValue(this.breakPointModel.currentBreakpoint))
+      .columnsGap(GridRowColSetting.getGutter(this.breakPointModel.currentBreakpoint))
       .scrollBar(BarState.Off)
       .width(Constant.FULL_PERCENT)
       .align(Alignment.Start)
       .edgeEffect(EdgeEffect.Spring);
-    }.height(80).backgroundColor('#F1F3F5');
+    }.backgroundColor($r('sys.color.background_secondary'));
   }
 }

@@ -1,8 +1,10 @@
 {
-  "modelVersion": "5.0.5",
+  "modelVersion": "5.1.0",
   "description": "Please describe the basic information.",
   "dependencies": {
-    "@hw-agconnect/util-log": "^1.0.0"
+    "@hw-agconnect/util-log": "^1.0.0",
+    "@hw-agconnect/ui-dialog": "^1.0.1",
+    "@hw-agconnect/ui-toast": "^1.0.0"
   },
   "devDependencies": {
     "@ohos/hypium": "1.0.19",

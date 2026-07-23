@@ -3,7 +3,7 @@
     "name": "dial_panel",
     "type": "har",
     "deviceTypes": [
-      "default",
+      "phone",
       "tablet"
     ]
   }

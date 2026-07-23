@@ -1,0 +1,15 @@
+{
+  "name": "@agctemplate/login",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@agctemplate/widgets": "1.0.0",
+    "@agctemplate/resources": "1.0.0",
+    "@agctemplate/utils": "1.0.0",
+    "@agctemplate/server": "1.0.0",
+    "@agctemplate/common": "1.0.0"
+  }
+}

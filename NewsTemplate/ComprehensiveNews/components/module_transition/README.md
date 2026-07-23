@@ -429,7 +429,6 @@ export struct CardLongTakePageTwo {
          .hideTitleBar(true)
          .onReady((navDestContext: NavDestinationContext) => {
             this.pageInfos = navDestContext.pathStack;
-            console.log(JSON.stringify(navDestContext.pathStack.getAllPathName()), 'RouterUtils.getStack()')
             let param = navDestContext.pathInfo?.param as Record<string, Object>;
             this.indexValue = param['indexValue'] as number;
             this.longTakeTransitionParam = param['longTakeTransitionParam'] as LongTakeTransitionParam;

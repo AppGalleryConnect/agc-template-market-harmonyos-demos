@@ -14,23 +14,24 @@
 
 <img src="./screenshots/Login.png" width="300">
 
-
 ## 约束与限制
+
 ### 环境
 
 * DevEco Studio版本：DevEco Studio 5.0.5 Release及以上
 * HarmonyOS SDK版本：HarmonyOS 5.0.5 Release SDK及以上
-* 设备类型：华为手机（包括双折叠和阔折叠）
+* 设备类型：华为手机（包括双折叠和阔折叠）、平板
 * 系统版本：HarmonyOS 5.0.5(17)及以上
 
 ### 权限
+
 - 网络权限：ohos.permission.INTERNET
 
 ## 使用
 
 1. 安装组件。
 
-   如果是在DevEvo Studio使用插件集成组件，则无需安装组件，请忽略此步骤。
+   如果是在DevEco Studio使用插件集成组件，则无需安装组件，请忽略此步骤。
 
    如果是从生态市场下载组件，请参考以下步骤安装组件。
 
@@ -127,12 +128,13 @@ QuickLogin(options?: QuickLoginOptions)
 | options | [QuickLoginOptions](#QuickLoginOptions对象说明) | 是    | 配置登录组件的参数。 |
 
 ### QuickLoginOptions对象说明
-| 参数名             | 类型                                                                                                    | 必填 | 说明                                                                                                                              |
-|:----------------|:------------------------------------------------------------------------------------------------------|:---|:--------------------------------------------------------------------------------------------------------------------------------|
-| icon            | [ResourceStr](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-types#resourcestr) | 是  | 应用图标，参考[UX设计规范](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/account-phone-unionid-login#section2558741102912) |
-| loginBtnBgColor | [ResourceStr](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-types#resourcestr) | 是  | 一键登录按钮背景色                                                                                                                       |                                                                                                                          |
-| appName         | string                                                                                                | 是  | 应用隐私协议名称                                                                                                                        |                                                                                                                          |
 
+| 参数名              | 类型                                                                                                    | 是否必填 | 说明                                                                                                                              |
+|:-----------------|:------------------------------------------------------------------------------------------------------|:-----|:--------------------------------------------------------------------------------------------------------------------------------|
+| icon             | [ResourceStr](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-types#resourcestr) | 是    | 应用图标，参考[UX设计规范](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/account-phone-unionid-login#section2558741102912) |
+| loginBtnBgColor  | [ResourceStr](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-types#resourcestr) | 是    | 一键登录按钮背景色                                                                                                                       |                                                                                                                          |
+| appName          | string                                                                                                | 是    | 应用隐私协议名称                                                                                                                        |                                                                                                                          |
+| horizontalMargin | number                                                                                                | 否    | 水平边距，默认为16                                                                                                                      |
 
 ### 事件
 

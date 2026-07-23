@@ -1,7 +1,7 @@
 import { CommonConstants } from 'lib_common'
 
 @Builder
-export function LoadMoreFooter(params:Record<string,boolean>) {
+export function LoadMoreFooter(params: Record<string, boolean>) {
   Row({ space: CommonConstants.SPACE_S }) {
     LoadingProgress()
       .height(32)
@@ -13,6 +13,7 @@ export function LoadMoreFooter(params:Record<string,boolean>) {
   }
   .width(CommonConstants.FULL_PERCENT)
   .height(40)
+  .margin({ bottom: params.isHomePage ? 84 : 100 })
   .justifyContent(FlexAlign.Center)
   .visibility(params.isLoading ? Visibility.Visible : Visibility.Hidden)
 }

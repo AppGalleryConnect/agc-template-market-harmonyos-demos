@@ -1,6 +1,14 @@
 import { getColor } from '@agctemplate/resources'
 import { AppStorageV2, window } from '@kit.ArkUI'
-import { AppStorageKeys, StatusBarHeight } from '@agctemplate/widgets'
+import {
+  AiBarHeight,
+  AppStorageKeys,
+  FontModel,
+  fp2pxUtil,
+  MinorsMode,
+  MinorsProtectionUtils,
+  StatusBarHeight
+} from '@agctemplate/widgets'
 import { DramaCoverVM } from '../viewmodels/DramaCoverVM'
 import { getRecommendList, getVipRecommendList } from '../mapper/DramaCoverMapper'
 import { getBannerList, getVipBannerList } from '../mapper/BannerMapper'
@@ -10,16 +18,18 @@ import { NewDrama } from '../views/NewDrama'
 import { VIP } from '../views/VIP'
 import { BillboardPageBuilder } from './BillboardPage'
 import { RecommendPanel } from '../components/RecommendPanel'
-import { SafeJson } from '@agctemplate/utils'
+import { GlobalContext, SafeJson } from '@agctemplate/utils'
 
 const reTabs = ['精选', '古装', '家庭', '年代', '穿越', '职场', '重生', '权谋', '其他']
 const chaTabs = ['热播榜', '飙升榜', '新剧榜', '热搜榜']
+const minorsMode: MinorsMode =
+  AppStorageV2.connect(MinorsMode, 'isMinorsMode', () => new MinorsMode(MinorsProtectionUtils.getMinorsMode()))!
 
 @ComponentV2
 struct TheaterMainPage {
   @Local statusBarHeight: StatusBarHeight = AppStorageV2.connect(StatusBarHeight, AppStorageKeys.STATUS_BAR_HEIGHT,
     () => new StatusBarHeight())!;
-  @Local gutter: number = 10
+  @Local gutter: number = 8
   @Local bannerList: Array<DramaCoverVM> = []
   @Local vipBannerList: Array<DramaCoverVM> = []
   @Local currentRecommendPageNum: number = 1
@@ -33,6 +43,9 @@ struct TheaterMainPage {
   @Provider('sTabs') selIndex: number = 0
   @Provider('rank') rankTab: string = reTabs[this.selIndex]
   @Provider('scroll') scroller: Scroller = new Scroller()
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
+  @Local aiBarHeight: AiBarHeight = AppStorageV2.connect(AiBarHeight, AppStorageKeys.AI_BAR_HEIGHT,
+    () => new AiBarHeight())!;
 
   @Computed
   get _rankTab(): string {
@@ -98,7 +111,7 @@ struct TheaterMainPage {
   @Builder
   contentBuilder() {
     List({ scroller: this.scroller }) {
-      if (this.selectedIndex === 0) {
+      if (minorsMode.isMinorsMode || this.selectedIndex === 0) {
         RecommendPanel({ recommendList: this.recommendTagList, gutter: this.gutter })
       } else if (this.selectedIndex === 1) {
         BillboardPageBuilder(1)
@@ -110,7 +123,6 @@ struct TheaterMainPage {
     }
     .borderColor(Color.Red)
     .padding({ left: 8, right: 8 })
-    .edgeEffect(EdgeEffect.Spring)
     .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: true })
     .scrollBar(BarState.Off)
     .nestedScroll({
@@ -142,9 +154,9 @@ struct TheaterMainPage {
     Column() {
       Row() {
         Text('剧场')
-          .fontSize(26)
+          .fontSize(fp2pxUtil(26))
           .fontWeight(700)
-          .fontColor('#e6000000')
+          .fontColor($r('sys.color.font_primary'))
       }
       .padding({ left: 16 })
       .width('100%')
@@ -152,31 +164,34 @@ struct TheaterMainPage {
       .justifyContent(FlexAlign.Start)
       .alignItems(VerticalAlign.Center)
 
-      Flex() {
-        List({ space: 8 }) {
-          ForEach(['推荐', '排行榜', '新剧', 'VIP专区'], (title: string, index: number) => {
-            ListItem() {
-              Text(title)
-                .width(76)
-                .height(28)
-                .borderRadius(14)
-                .fontColor(this.selectedIndex === index ? '#fff' : '#e6000000')
-                .backgroundColor(this.selectedIndex === index ? '#EC6E45' : '#0d000000')
-                .fontSize(14)
-                .fontWeight(500)
-                .textAlign(TextAlign.Center)
-                .onClick(() => {
-                  this.selectedIndex = index
-                  this.selIndex = 0
-                })
-            }
-          }, (title: string) => title)
+      if (!minorsMode.isMinorsMode) {
+        Flex() {
+          List({ space: 8 }) {
+            ForEach(['推荐', '排行榜', '新剧', 'VIP专区'], (title: string, index: number) => {
+              ListItem() {
+                Text(title)
+                  .width(76)
+                  .height(28)
+                  .borderRadius(14)
+                  .fontColor(this.selectedIndex === index ? '#fff' : $r('sys.color.font_primary'))
+                  .backgroundColor(this.selectedIndex === index ? '#EC6E45' : $r('sys.color.comp_background_tertiary'))
+                  .fontSize(fp2pxUtil(14))
+                  .fontWeight(500)
+                  .textAlign(TextAlign.Center)
+                  .onClick(() => {
+                    this.selectedIndex = index
+                    this.selIndex = 0
+                  })
+              }
+            }, (title: string) => title)
+          }
+          .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: true })
+          .width('100%')
+          .height(104)
+          .listDirection(Axis.Horizontal)
+          .scrollBar(BarState.Off)
+          .padding({ top: 10, left: 16 })
         }
-        .width('100%')
-        .height(104)
-        .listDirection(Axis.Horizontal)
-        .scrollBar(BarState.Off)
-        .padding({ top: 10, left: 16 })
       }
     }
     .padding({ top: 9 })
@@ -202,10 +217,10 @@ struct TheaterMainPage {
           onReachTop: () => {
           }
         })
-      }.backgroundColor('#F1F3F5')
+      }
+      .backgroundColor($r('sys.color.comp_background_tertiary'))
+      .padding({ top: `${this.getUIContext().px2vp(this.statusBarHeight.value)}vp` })
     }
-    .backgroundColor(getColor('app.color.common_background_color'))
-    .padding({ top: `${this.getUIContext().px2vp(this.statusBarHeight.value)}vp` })
   }
 }
 

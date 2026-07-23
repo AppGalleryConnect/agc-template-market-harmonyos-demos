@@ -27,7 +27,7 @@ export class Loading {
 
   public static open() {
     if (Loading._contentNode !== null) {
-      Loading._ctx.getPromptAction()
+      Loading._ctx?.getPromptAction()
         .openCustomDialog(Loading._contentNode, Loading._options)
         .then(() => {
           Logger.info(TAG, 'OpenCustomDialog complete.');
@@ -42,7 +42,7 @@ export class Loading {
 
   public static close() {
     if (Loading._contentNode !== null) {
-      Loading._ctx.getPromptAction()
+      Loading._ctx?.getPromptAction()
         .closeCustomDialog(Loading._contentNode)
         .then(() => {
           Logger.info(TAG, 'CloseCustomDialog complete.');

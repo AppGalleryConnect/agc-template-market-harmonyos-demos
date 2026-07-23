@@ -1,39 +1,146 @@
-import { Constants, NavPathName } from 'constant';
-import { DeleteConfirmDialog, TitleBar } from 'component';
-import { GetInfoRequest, https } from 'network';
-import { AccountUtil } from 'util';
-import { Source } from '../model/Index';
+import { UIDialog } from '@hw-agconnect/ui-dialog';
+import { Constants } from 'constant';
+import { CommonHeader } from 'component';
 import { Passenger } from 'type';
+import { GetInfoRequest, https } from 'network';
+import { Source } from '../model/Index';
 import { GuestPageVM } from '../viewmodel/GuestPageVM';
+import { AddGuest } from './AddGuest';
 
 @Builder
 export function GuestsBuilder() {
   Guests();
 }
 
-@Extend(Image)
-function operationImage() {
-  .size({ width: 24, height: 24 }).opacity(0.2);
-}
-
 @ComponentV2
 export struct Guests {
   vm: GuestPageVM = GuestPageVM.instance;
-  @Local passengerId: number = 0;
   @Local source: string = '';
   @Local openId: string = '';
+  @Local isShowAddSheet: boolean = false;
+  @Local isEditMode: boolean = false;
+  @Local editingPassengerId: number = -1;
+  @Local addGuestName: string = '';
+  @Local addGuestPhone: string = '';
+  @Local addGuestCardType: number = -1;
+  @Local addGuestCardNo: string = '';
   @Consumer('mainPathStack') mainPathStack: NavPathStack = new NavPathStack();
-  @Local windowBottomHeight: number = AppStorage.get('windowBottomHeight') as number || 28;
-  dialogController: CustomDialogController | null = new CustomDialogController({
-    builder: DeleteConfirmDialog({
-      delete: () => {
-        this.vm.deleteGuest(this.getUIContext(), this.passengerId);
+
+  @Builder
+  contextMenuBuilder(item: Passenger) {
+    if (this.source !== 'Reserve') {
+      Flex({ direction: FlexDirection.Column, justifyContent: FlexAlign.Center, alignItems: ItemAlign.Center }) {
+        Row() {
+          Text('编辑')
+            .fontSize(16)
+            .fontColor($r('sys.color.font_primary'))
+            .padding(12)
+            .onClick(() => {
+              this.isEditMode = true;
+              this.editingPassengerId = item.passengerId;
+              this.addGuestName = item.passengerName;
+              this.addGuestPhone = item.passengerPhone;
+              this.addGuestCardType = Number(item.passengerCardType) || 0;
+              this.addGuestCardNo = item.passengerCardId ?? '';
+              this.isShowAddSheet = true;
+            })
+          Text('删除')
+            .fontSize(16)
+            .fontColor($r('sys.color.warning'))
+            .padding(12)
+            .onClick(() => {
+              UIDialog.open({
+                content: '确定要删除此常用旅客吗？',
+                confirmButtonOptions: {
+                  button: '删除',
+                  buttonFontColor: $r('sys.color.warning'),
+                },
+                cancelButtonOptions: {
+                  buttonFontColor: $r('sys.color.font_primary')
+                },
+                showConfirmButton: true,
+                showCancelButton: true,
+                onConfirm: async () => {
+                  this.vm.deleteGuest(this.getUIContext(), item.passengerId);
+                  UIDialog.closeLast();
+                },
+              });
+            })
+        }
+      }
+    }
+  }
+
+  @Builder
+  deleteBuilder(item: Passenger) {
+
+    Image($r('app.media.icon_delete_guests'))
+      .width(40)
+      .height(40)
+      .margin({ left: 16 })
+      .onClick(() => {
+        UIDialog.open({
+          content: '确定要删除此常用旅客吗？',
+          confirmButtonOptions: {
+            button: '删除',
+            buttonFontColor: $r('sys.color.warning'),
+          },
+          cancelButtonOptions: {
+            buttonFontColor: $r('sys.color.font_primary')
+          },
+          showConfirmButton: true,
+          showCancelButton: true,
+          onConfirm: async () => {
+            this.vm.deleteGuest(this.getUIContext(), item.passengerId);
+            UIDialog.closeLast();
+          },
+        });
+      })
+  }
+
+  @Builder
+  addGuestSheetBuilder() {
+    AddGuest({
+      isEditMode: this.isEditMode,
+      editingPassengerId: this.editingPassengerId,
+      initialGuestName: this.addGuestName,
+      initialGuestPhone: this.addGuestPhone,
+      initialGuestCardType: this.addGuestCardType,
+      initialGuestCardNo: this.addGuestCardNo,
+      onClose: () => {
+        this.isShowAddSheet = false;
       },
-    }),
-    customStyle: false,
-    autoCancel: true,
-    backgroundColor: $r('sys.color.ohos_id_blur_style_component_ultra_thick_color'),
-  });
+      onSave: (passengerId: number, name: string, phone: string, cardType: string, cardNo: string) => {
+        if (this.isEditMode) {
+          let index = this.vm.passengers.findIndex((item) => item.passengerId === passengerId);
+          if (index >= 0) {
+            this.vm.passengers.splice(index, 1, {
+              passengerId: passengerId,
+              openId: '',
+              passengerName: name,
+              passengerPhone: phone,
+              passengerCardType: cardType,
+              passengerCardId: cardNo,
+              appId: '',
+            });
+          }
+        } else {
+          this.vm.passengers.push({
+            passengerId: passengerId,
+            openId: '',
+            passengerName: name,
+            passengerPhone: phone,
+            passengerCardType: cardType,
+            passengerCardId: cardNo,
+            appId: '',
+          });
+        }
+      },
+      onDelete: (passengerId: number) => {
+        this.vm.deleteGuest(this.getUIContext(), passengerId);
+      },
+    })
+  }
 
   async aboutToAppear(): Promise<void> {
     const data: GetInfoRequest = {
@@ -51,101 +158,127 @@ export struct Guests {
   build() {
     NavDestination() {
       Column() {
-        Column() {
-          TitleBar({
-            isShowBack: true, title: '常用旅客', clickEvent: () => {
-              this.mainPathStack.pop();
-            },
-          });
+        CommonHeader({
+          title: '常用旅客', showBackButton: true, backButtonClick: () => {
+            this.mainPathStack.pop();
+          },
+        });
 
-          List() {
-            ForEach(this.vm.passengers, (item: Passenger) => {
-              ListItem() {
-                Column() {
-                  Row() {
-                    Column() {
-                      Text(`${item.passengerName}`)
+        List({ space: 12 }) {
+          ForEach(this.vm.passengers, (item: Passenger) => {
+            ListItem() {
+              Row({ space: 12 }) {
+                Column({ space: 4 }) {
+                  Text(item.passengerName)
+                    .fontWeight(FontWeight.Medium)
+                    .fontColor($r('sys.color.font_primary'))
+
+                  if (item.passengerCardId.length) {
+                    Row({ space: 4 }) {
+                      Text('证件号')
                         .fontSize(14)
-                        .fontWeight(500)
-                        .width(Constants.FULL_SCREEN)
-                        .textAlign(TextAlign.Start);
-
-                      Row({ space: 8 }) {
-                        Text('手机号').fontSize(14).fontColor(Color.Gray);
-                        Text(`${item.passengerPhone}`).fontSize(14).fontColor(Color.Gray);
-                      }.margin({ top: 12 }).width(Constants.FULL_SCREEN).justifyContent(FlexAlign.Start);
-
-                      if (item.passengerCardId.length) {
-                        Row({ space: 8 }) {
-                          Text('身份证').fontSize(14).fontColor(Color.Gray);
-                          Text(`${item.passengerCardId}`).fontSize(14).fontColor(Color.Gray);
-                        }.margin({ top: 4 }).width(Constants.FULL_SCREEN).justifyContent(FlexAlign.Start);
-                      }
-                    }.width('60%');
-
-                    if (this.source !== 'Reserve') {
-                      Row({ space: 24 }) {
-                        Image($r('app.media.edit')).operationImage().onClick(() => {
-                          this.mainPathStack.pushPathByName(NavPathName.ADD_GUEST, item, (popInfo: ESObject) => {
-                            let index =
-                              this.vm.passengers.findIndex((item) => item.passengerId === popInfo.result.passengerId);
-                            this.vm.passengers.splice(index, 1, popInfo.result);
-                          });
-                        });
-
-                        Image($r('app.media.delete')).operationImage().onClick(() => {
-                          this.passengerId = item.passengerId;
-                          if (this.dialogController != null) {
-                            this.dialogController.open();
-                          }
-                        });
-                      };
+                        .fontColor($r('sys.color.font_secondary'))
+                      Text(item.passengerCardId)
+                        .fontSize(14)
+                        .fontWeight(FontWeight.Medium)
+                        .fontColor($r('sys.color.font_primary'))
                     }
-                  }.width(Constants.FULL_SCREEN).justifyContent(FlexAlign.SpaceBetween);
+                  }
 
-                  Divider().vertical(false).margin({ top: 16 });
-                };
-              }.padding(16).onClick(() => {
-                if (this.source) {
-                  this.mainPathStack.popToName(NavPathName.RESERVE, item);
+                  Row({ space: 4 }) {
+                    Text('手机号')
+                      .fontSize(14)
+                      .fontColor($r('sys.color.font_secondary'))
+                    Text(item.passengerPhone)
+                      .fontSize(14)
+                      .fontWeight(FontWeight.Medium)
+                      .fontColor($r('sys.color.font_primary'))
+                  }
                 }
-              });
-            }, (item: Passenger) => item.passengerName);
-          }.scrollBar(BarState.Off).align(Alignment.Top).height('80%');
-        };
+                .layoutWeight(1)
+                .alignItems(HorizontalAlign.Start)
 
-        Row() {
-          Button('添加旅客', { type: ButtonType.Normal })
-            .width(150)
-            .height(44)
-            .fontColor(Color.Black)
-            .backgroundColor(Color.White)
-            .border({ width: 1, color: Color.Black, radius: $r('sys.float.corner_radius_level4') })
-            .onClick(() => {
-              this.mainPathStack.pushPathByName(NavPathName.ADD_GUEST, null, (popInfo: ESObject) => {
-                if (this.vm.passengers.find(item => item.passengerId === popInfo.result.passengerId)) {
-                  return;
+                if (this.source !== 'Reserve') {
+                  Image($r('app.media.icon_edit_guests'))
+                    .width(24)
+                    .height(24)
+                    .onClick(() => {
+                      this.isEditMode = true;
+                      this.editingPassengerId = item.passengerId;
+                      this.addGuestName = item.passengerName;
+                      this.addGuestPhone = item.passengerPhone;
+                      this.addGuestCardType = Number(item.passengerCardType) || 0;
+                      this.addGuestCardNo = item.passengerCardId ?? '';
+                      this.isShowAddSheet = true;
+                    })
                 }
-
-                let passenger: Passenger = {
-                  passengerId: popInfo.result.passengerId,
-                  openId: popInfo.result.openId,
-                  passengerName: popInfo.result.passengerName,
-                  passengerPhone: popInfo.result.passengerPhone,
-                  passengerCardType: popInfo.result.passengerCardType,
-                  passengerCardId: popInfo.result.passengerCardId,
-                  appId: popInfo.result.passengerCardId,
-                };
-                this.vm.passengers.push(passenger);
-              });
-            });
+              }
+              .width(Constants.FULL_SCREEN)
+              .backgroundColor($r('sys.color.comp_background_primary'))
+              .padding(12)
+              .borderRadius(16)
+              .alignItems(VerticalAlign.Center)
+              .bindContextMenu(this.contextMenuBuilder(item), ResponseType.LongPress, {
+                preview: MenuPreviewMode.IMAGE,
+                hapticFeedbackMode: HapticFeedbackMode.ENABLED
+              })
+            }
+            .swipeAction({ end: {
+              builder: () => {
+                this.deleteBuilder(item)
+              },
+              onAction: () => {
+                UIDialog.open({
+                  content: '确定要删除此常用旅客吗？',
+                  confirmButtonOptions: {
+                    button: '删除',
+                    buttonFontColor: $r('sys.color.warning'),
+                  },
+                  cancelButtonOptions: {
+                    buttonFontColor: $r('sys.color.font_primary')
+                  },
+                  showConfirmButton: true,
+                  showCancelButton: true,
+                  onConfirm: async () => {
+                    this.vm.deleteGuest(this.getUIContext(), item.passengerId);
+                    UIDialog.closeLast();
+                  },
+                });
+              },
+            } })
+          }, (item: Passenger) => item.passengerName);
         }
-        .position({ y: '90%' })
-        .height('10%')
         .width(Constants.FULL_SCREEN)
-        .alignItems(VerticalAlign.Center)
-        .justifyContent(FlexAlign.Center);
-      };
+        .layoutWeight(1)
+        .margin({ top: 12, left: 16, right: 16 })
+        .scrollBar(BarState.Off)
+
+        Button('添加常用旅客')
+          .borderRadius($r('sys.float.corner_radius_level11'))
+          .height(44)
+          .width(Constants.FULL_SCREEN)
+          .backgroundColor($r('sys.color.comp_background_emphasize'))
+          .fontColor($r('sys.color.font_on_primary'))
+          .margin({ left: 16, right: 16, top: 12, bottom: 44 })
+          .onClick(() => {
+            this.isEditMode = false;
+            this.editingPassengerId = -1;
+            this.addGuestName = '';
+            this.addGuestPhone = '';
+            this.addGuestCardType = -1;
+            this.addGuestCardNo = '';
+            this.isShowAddSheet = true;
+          });
+      }
+      .width(Constants.FULL_SCREEN)
+      .height(Constants.FULL_SCREEN)
+      .backgroundColor($r('sys.color.background_secondary'))
+      .padding({ left: 16, right: 16 })
+      .bindSheet($$this.isShowAddSheet, this.addGuestSheetBuilder(), {
+        height: SheetSize.LARGE,
+        showClose: false,
+        dragBar: false,
+      })
     }.hideTitleBar(true)
     .onReady((context: NavDestinationContext) => {
       let sourceType = context.pathInfo.param as Source;

@@ -56,7 +56,11 @@ struct MinePage {
   private onColumnClicked(indexValue: string, index: number, snapShotComponentId: string): void {
     let param: Record<string, Object> = {};
     let clickedIndex = parseInt(indexValue);
-    let isVip = this.vm.recipeList.getData(index).isVip;
+    let recipeItem = this.vm.recipeList.getData(index);
+    if (!recipeItem) {
+      return;
+    }
+    let isVip = recipeItem.isVip;
     param.id = clickedIndex;
     param.indexValue = clickedIndex;
     param.snapShotId = snapShotComponentId;

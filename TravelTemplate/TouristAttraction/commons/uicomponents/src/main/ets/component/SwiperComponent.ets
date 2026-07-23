@@ -1,12 +1,18 @@
+import { ImagePreviewOptions } from 'image_preview';
+
 @Builder
-export function SwiperComponent(data: IDataSource) {
+export function SwiperComponent(data: IDataSource, height = 316, options: ImagePreviewOptions,
+  onImgClick: (index: number) => void) {
   Swiper() {
-    LazyForEach(data, (item: ResourceStr) => {
-      Image(item).size({ width: '100%', height: 240 });
+    LazyForEach(data, (item: ResourceStr, index: number) => {
+      Image(item).size({ width: '100%', height }).id(options.snapshotId(item, index)).onClick(() => {
+        onImgClick(index)
+      });
     }, (item: string) => item);
-  }.cachedCount(1).gesture(
+  }.cachedCount(1).indicator(
+    new DotIndicator().selectedColor($r('sys.color.multi_color_04')),
+  ).gesture(
     LongPressGesture({ repeat: true, duration: 400 })
-      // 由于repeat设置为true，长按动作存在时会连续触发，触发间隔为duration（默认值500ms）
       .onAction((event: GestureEvent) => {
         return true;
       })

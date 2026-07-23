@@ -1,8 +1,8 @@
-import { CopilotChat, CopilotController } from '@hw-agconnect/copilot';
+import { CopilotChat, CopilotController, TextMessage } from '@hw-agconnect/copilot';
 import { markConfig, MarkdownV2 } from '@lidary/markdown';
 import { RouterMap, RouterUtils } from 'lib_common';
-import { NavHeaderBar } from 'lib_widget';
 import { HistoryButton } from '../../components/HistoryButton';
+import { NavHeaderBar } from '../../widget/NavHeaderBar';
 import { selectOptionAction } from './action/SelectOptionAction';
 import { weatherAction } from './action/WeatherAction';
 
@@ -13,7 +13,8 @@ export struct ChatPage {
       baseUrl: 'https://api.deepseek.com/v1',
       //TODO: 需要替换成真实的apikey，为了安全起见，建议配置在服务端，可以动态下发
       apiKey: '',
-      model: 'deepseek-chat'
+      model: 'deepseek-v4-flash',
+      thinkingEnabled: true
     },
     storeId: 'Chat',
     systemPrompt: '你是一个AI办公写作助手，可以帮助用户解决写作类的问题'
@@ -55,15 +56,17 @@ export struct ChatPage {
               '如何生成一篇800字的作文',
               '如何生成一篇800字的作文',
             ],
-            placeholder: '请输入你的问题'
+            placeholder: '请输入你的问题',
+            thinkingLabel: '思考过程'
           },
           icons: {
-            assistant: $r('app.media.icon_flip_foreground')
+            assistant: $r('app.media.icon_flip_foreground'),
+            // assistantChatIcon:$r('app.media.logo_png')
           },
           isShowDefaultActionCard: true
         },
-        markdownRender: (content: string) => {
-          this.markdownRender(content)
+        markdownRender: (message) => {
+          this.markdownRender(message)
         }
       }).layoutWeight(1)
     }
@@ -73,9 +76,9 @@ export struct ChatPage {
   }
 
   @Builder
-  markdownRender(content: string) {
+  markdownRender(message: TextMessage) {
     MarkdownV2({
-      content: content,
+      content: message.content,
       lineSpace: 4,
       fontStyle: {
         fontSize: $r('sys.float.Body_M'),

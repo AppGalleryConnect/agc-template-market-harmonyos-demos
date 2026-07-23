@@ -1,5 +1,5 @@
 import { CITY_LIST_SAMPLE, CitySelect, CitySelectController, HOT_CITY_LIST_SAMPLE } from 'city_select';
-import { GridRowColSetting, RouterModule } from 'lib_foundation';
+import { GridRowColSetting, RouterModule, WindowUtils } from 'lib_foundation';
 
 @ComponentV2
 struct CitySelectPage {
@@ -29,6 +29,10 @@ struct CitySelectPage {
     }
     .height('100%')
     .width('100%')
+    .padding({
+      top: WindowUtils.windowTopPadding,
+      bottom: WindowUtils.windowBottomPadding,
+    })
     .title('城市选择', {
       paddingStart: { value: GridRowColSetting.getPageMargin(this.breakpoint), unit: 1 }
     })

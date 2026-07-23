@@ -1,7 +1,7 @@
 import { COMMON_SERVICE } from '@ohos_agcit/driver_license_exam_datasource/src/main/ets/Data';
-import {  MinePageCommonService } from '@ohos_agcit/driver_license_exam_datasource/src/main/ets/Model';
+import { MinePageCommonService } from '@ohos_agcit/driver_license_exam_datasource/src/main/ets/Model';
 
-import {   showToast, AccountUtil, StringUtil, CommonConstants,
+import { showToast, AccountUtil, StringUtil, CommonConstants,
   CommonModel } from '@ohos_agcit/driver_license_exam_commonlib';
 import { ExamService } from '@ohos_agcit/driver_license_exam_datasource'
 import { GuideService, licenseTypeName } from '@ohos_agcit/driver_license_exam_guide'
@@ -57,7 +57,7 @@ export struct MineView {
       Text('切换题库：')
         .fontSize(14)
         .maxFontScale(1)
-      Text( this.guideService.guideData.licenseType !== undefined?licenseTypeName[this.guideService.guideData.licenseType]:'')
+      Text(this.guideService.guideData.licenseType !== undefined ? licenseTypeName[this.guideService.guideData.licenseType] : '')
         .fontSize(14)
         .fontColor('#64BB5C')
         .maxFontScale(1)
@@ -78,7 +78,7 @@ export struct MineView {
   StatsModule() {
     Row({ space: 12 }) {
       // 左侧统计
-      Column({space:4}) {
+      Column({ space: 4 }) {
         Text('已做题')
           .fontSize(14)
           .fontFamily('鸿蒙黑体')
@@ -109,7 +109,7 @@ export struct MineView {
       .alignItems(HorizontalAlign.Center)
 
       // 右侧统计
-      Column({space:4}) {
+      Column({ space: 4 }) {
         Text('模拟考试平均分')
           .fontSize(14)
           .fontFamily('鸿蒙黑体')
@@ -175,8 +175,8 @@ export struct MineView {
           .maxFontScale(1)
         Blank()
         Image($r('app.media.ic_right_arrow_lined'))
-          .width(7)
-          .height(14)
+          .width(16)
+          .height(16)
           .fillColor($r('app.color.icon_secondary'))
           .margin({ right: 12 })
       }
@@ -201,8 +201,8 @@ export struct MineView {
         .maxFontScale(1)
       Blank()
       Image($r('app.media.ic_right_arrow_lined'))
-        .width(7)
-        .height(14)
+        .width(16)
+        .height(16)
         .fillColor($r('app.color.icon_secondary'))
         .margin({ right: 12 })
     }
@@ -239,7 +239,7 @@ export struct MineView {
                 .height(56)
                 .borderRadius(28)
 
-              Column({space:4}) {
+              Column({ space: 4 }) {
                 Text(AccountUtil.getUserInfo().nickname)
                   .fontSize(18)
                   .fontFamily('鸿蒙黑体')
@@ -252,7 +252,7 @@ export struct MineView {
                       .width(16)
                       .height(16)
                       .margin({
-                        right:8
+                        right: 8
                       })
 
                     Text(AccountUtil.getUserInfo().phone)
@@ -267,14 +267,14 @@ export struct MineView {
               }
               .alignItems(HorizontalAlign.Start)
               .margin({
-                left:16
+                left: 16
               })
 
               Blank()
               if (!AccountUtil.getUserInfo().phone) {
                 Image($r('app.media.ic_right_arrow_lined'))
-                  .width(7)
-                  .height(18)
+                  .width(16)
+                  .height(16)
                   .fillColor($r('app.color.icon_secondary'))
               }
 
@@ -283,18 +283,18 @@ export struct MineView {
             .onClick(async () => {
               if (AccountUtil.getAccountInfo().idToken === '') {
                 // 真实登录，mock场景先注释
-                // AccountUtil.quickLogin();
-                // this.jumpLoginPage(AccountUtil.getAccountInfo().quickLoginAnonymousPhone);
+                // AccountUtil.quickLogin()
+                // this.jumpLoginPage(AccountUtil.getAccountInfo().quickLoginAnonymousPhone)
                 // mock登录，真实使用场景需删除
                 this.jumpLoginPage('a000******00');
-              }else {
+              } else {
                 this.vm.navStack.pushPathByName('PersonalInfo', undefined)
               }
             });
             Divider()
               .margin({
-                top:12,
-                bottom:12
+                top: 12,
+                bottom: 12
               })
             Row() {
               Text('会员中心')
@@ -309,11 +309,11 @@ export struct MineView {
                 .onClick(() => {
                   if (AccountUtil.getAccountInfo().idToken === '') {
                     // 真实登录，mock场景先注释
-                    // AccountUtil.quickLogin();
-                    // this.jumpLoginPage(AccountUtil.getAccountInfo().quickLoginAnonymousPhone);
+                    // AccountUtil.quickLogin()
+                    // this.jumpLoginPage(AccountUtil.getAccountInfo().quickLoginAnonymousPhone)
                     // mock登录，真实使用场景需删除
                     this.jumpLoginPage('a000******00');
-                  }else {
+                  } else {
                     this.vm.navStack.pushPathByName('membership', true)
                   }
                 })
@@ -329,57 +329,12 @@ export struct MineView {
           .padding(12)
 
 
-          // 新增题库模块
-          Column({space:12}) {
-            this.ExamSwitchModule()
-            this.StatsModule()
-          }
-          .width(CommonConstants.FULL_PERCENT)
-          .borderRadius(16)
-          .backgroundColor($r('sys.color.comp_background_primary'))
-          .margin({ top: 12 })
-          .padding(12)
-
-          List(){
-            ForEach(COMMON_SERVICE, (item: MinePageCommonService) => {
-              ListItem(){
-                Column() {
-                  if (item.label === '意见反馈') {
-                    this.Feedback(item)
-                  } else {
-                    this.FunctionItem(item)
-                  }
-
-                }
-                .width(CommonConstants.FULL_PERCENT)
-                .height(46)
-
-              }
-            }, (item: MinePageCommonService) => {
-              try {
-                return JSON.stringify(item.label)
-              } catch (err) {
-                return ''
-              }
-            })
-          }
-          .backgroundColor($r('sys.color.comp_background_primary'))
-          .divider({
-            strokeWidth:0.5,
-            color:$r('sys.color.comp_divider'),
-            startMargin:12,
-            endMargin:12
-          })
-          .borderRadius(16)
-          .margin({
-            top:12
-          })
-          .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: true })
+          this.DashboardSection()
         }
         .padding({
-          left:16,
-          right:16,
-          top: this.getUIContext().px2vp(this.topRectHeight) + 10,
+          left: 16,
+          right: 16,
+          top: this.getUIContext().px2vp(this.topRectHeight) + 10
         })
         .width(CommonConstants.FULL_PERCENT)
       }
@@ -402,7 +357,66 @@ export struct MineView {
     .width(CommonConstants.FULL_PERCENT)
     .padding({
       top: 12,
-      bottom: 12,
-    });
+      bottom: 12
+    })
+  }
+
+  @Builder
+  DashboardSection() {
+    Grid() {
+      // 新增题库模块
+      GridItem() {
+        Column({ space: 12 }) {
+          this.ExamSwitchModule()
+          this.StatsModule()
+        }
+        .width(CommonConstants.FULL_PERCENT)
+        .borderRadius(16)
+        .backgroundColor($r('sys.color.comp_background_primary'))
+        .margin({ top: 12 })
+        .padding(12)
+      }
+      GridItem() {
+        List() {
+          ForEach(COMMON_SERVICE, (item: MinePageCommonService) => {
+            ListItem() {
+              Column() {
+                if (item.label === '意见反馈') {
+                  this.Feedback(item)
+                } else {
+                  this.FunctionItem(item)
+                }
+
+              }
+              .width(CommonConstants.FULL_PERCENT)
+              .alignItems(HorizontalAlign.Center)
+              .justifyContent(FlexAlign.Center)
+              .height(this.vm.isLargeDevice ? 75 : 46)
+
+            }
+          }, (item: MinePageCommonService) => {
+            try {
+              return JSON.stringify(item.label)
+            } catch (err) {
+              return ''
+            }
+          })
+        }
+        .backgroundColor($r('sys.color.comp_background_primary'))
+        .divider({
+          strokeWidth: 0.5,
+          color: $r('sys.color.comp_divider'),
+          startMargin: 12,
+          endMargin: 12
+        })
+        .borderRadius(16)
+        .margin({
+          top: 12
+        })
+        .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: true })
+      }
+    }
+    .columnsTemplate(this.vm.isLargeDevice ? '1fr 1fr' : '1fr')
+    .columnsGap(this.vm.isLargeDevice ? 24 : 12)
   }
 }

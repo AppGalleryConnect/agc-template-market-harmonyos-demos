@@ -32,7 +32,7 @@
 
    a. 解压下载的组件包，将包中所有文件夹拷贝至您工程根目录的xxx目录下。
 
-   b. 在项目根目录build-profile.json5并添加catering_accommodation和module_base模块
+   b. 在项目根目录build-profile.json5并添加catering_accommodation、image_preview和module_base模块
    ```typescript
    "modules": [
       {
@@ -42,6 +42,10 @@
       {
          "name": "module_base",
          "srcPath": "./xxx/module_base",
+      },
+      {
+         "name": "image_preview",
+         "srcPath": "./xxx/image_preview",
       }
    ]
    ```
@@ -50,6 +54,7 @@
    "dependencies": {
       "catering_accommodation": "file:./xxx/catering_accommodation",
       "module_base": "file:./xxx/module_base",
+      "image_preview": "file:./xxx/image_preview",
    }
    ```
 2. 在主工程的src/main路径下的module.json5文件中配置如下信息：
@@ -77,8 +82,9 @@
 3. 引入组件。
 
    ```typescript
-   import { AttractionLive } from 'attraction_live';
+   import { CateringAndAccommodation, CateringDetail, AccommodationDetail } from 'catering_accommodation';
    ```
+
 4. 初始化景区的经纬度：
    ```typescript
    this.locationInfo.latitude = 22.92;
@@ -86,7 +92,48 @@
    ```
 
 ## API参考
-* 无
+
+该模块提供以下组件，均通过路由跳转调用：
+
+### 接口
+
+#### CateringAndAccommodation
+
+餐饮住宿主页面组件，通过路由名称 `CateringAndAccommodation` 调用。
+
+#### CateringDetail
+
+餐饮详情页面组件，通过路由名称 `CateringDetail` 调用。
+
+#### AccommodationDetail
+
+住宿详情页面组件，通过路由名称 `AccommodationDetail` 调用。
+
+**路由配置示例：**
+
+在 `router_map.json` 中配置：
+
+```typescript
+{
+  "routerMap": [
+    {
+      "name": "CateringAndAccommodation",
+      "pageSourceFile": "src/main/ets/pages/CateringAndAccommodation.ets",
+      "buildFunction": "CateringAndAccommodationBuilder"
+    },
+    {
+      "name": "CateringDetail",
+      "pageSourceFile": "src/main/ets/pages/CateringDetail.ets",
+      "buildFunction": "CateringDetailBuilder"
+    },
+    {
+      "name": "AccommodationDetail",
+      "pageSourceFile": "src/main/ets/pages/AccommodationDetail.ets",
+      "buildFunction": "AccommodationDetailBuilder"
+    }
+  ]
+}
+```
 
 ## 示例代码
 

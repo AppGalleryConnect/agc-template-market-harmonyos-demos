@@ -1,4 +1,4 @@
-import { WeatherUtils } from 'module_weather_core';
+import { GridRowColSetting } from 'module_weather_core';
 import { CommonHeader } from '../components/CommonHeader';
 import { DragList } from '../components/DragList';
 import { CityPage } from '../constants/Constants';
@@ -15,6 +15,8 @@ export struct ManagedCityPage {
   vm: ManagedVM = ManagedVM.instance;
 
   aboutToAppear() {
+    AppStorage.setOrCreate('city_manage_uiContext', this.getUIContext());
+    this.vm.postionList = PositionUtl.getPostionList();
     this.vm.init(this.getUIContext());
   }
 
@@ -26,21 +28,32 @@ export struct ManagedCityPage {
     NavDestination() {
       CommonHeader({ title: '城市管理', stack: this.stack }).margin({ bottom: 8 })
 
-      Scroll() {
-        Column() {
-          this.topInfoBuilder()
+      GridRow(GridRowColSetting.DEFAULT_GRID_ROW_OPTIONS) {
+        GridCol({
+          span: GridRowColSetting.DEFAULT_CENTER_COL_SPAN,
+          offset: GridRowColSetting.DEFAULT_CENTER_COL_OFFSET,
+        }) {
+          Column() {
+            Scroll() {
+              Column() {
+                this.topInfoBuilder()
 
-          this.midInfoBuilder()
+                this.midInfoBuilder()
 
-          Blank().layoutWeight(1)
+                Blank().layoutWeight(1)
+              }
+            }
+            .layoutWeight(1)
+            .scrollBar(BarState.Off)
+            .edgeEffect(EdgeEffect.Spring)
+
+            this.bottomBtn()
+          }
+          .height('100%')
         }
       }
       .layoutWeight(1)
-      .padding({ left: 16, right: 16 })
-      .scrollBar(BarState.Off)
-      .edgeEffect(EdgeEffect.Spring)
-
-      this.bottomBtn()
+      .padding({ left: this.vm.pagePadding, right: this.vm.pagePadding })
     }
     .hideTitleBar(true)
     .backgroundColor($r('sys.color.background_primary'))
@@ -151,8 +164,10 @@ export struct ManagedCityPage {
             .fillColor($r('sys.color.icon_on_secondary'))
             .margin({ right: 11 })
         }
-        Text(index === -1 ? this.vm.minePosition.name : this.vm.postionList[index].name).textStyle1(index)
-        Blank().layoutWeight(1)
+        Text(index === -1 ? this.vm.minePosition.name : this.vm.postionList[index]?.name).textStyle1(index)
+          .maxLines(2)
+          .textOverflow({ overflow: TextOverflow.Ellipsis })
+          .layoutWeight(1)
         if (!this.vm.edit) {
           Row({ space: 18 }) {
             Image($r(`app.media.${index === -1 ? this.vm.mineWeather!.icon : this.vm.otherWeathers[index].icon}`))
@@ -196,8 +211,9 @@ export struct ManagedCityPage {
           .fontColor($r('sys.color.font_on_primary'))
           .fontSize($r('sys.float.Body_L'))
           .textAlign(TextAlign.Center)
+          .constraintSize({ maxWidth: 448 })
           .onClick(() => {
-            this.vm.edit = false;
+            this.vm.setEdit(false);
           })
       } else {
         Text('编辑城市')
@@ -210,7 +226,7 @@ export struct ManagedCityPage {
           .fontSize($r('sys.float.Body_L'))
           .textAlign(TextAlign.Center)
           .onClick(() => {
-            this.vm.edit = true;
+            this.vm.setEdit(true);
           })
 
         Text('添加城市')
@@ -224,21 +240,15 @@ export struct ManagedCityPage {
           .textAlign(TextAlign.Center)
           .onClick(() => {
             this.stack?.pushPathByName(CityPage.SEARCH, this.vm.minePosition, (popRes) => {
-              const newPostion = popRes.result as IPosition;
-              if (this.vm.postionList.findIndex(item => item.code === newPostion.code) === -1) {
-                WeatherUtils.getRealTimeWeathers([newPostion.code]).then(res => {
-                  this.vm.postionList.push(newPostion);
-                  this.vm.otherWeathers.push(res[0]);
-                });
-              }
+              const newPosition = popRes.result as IPosition;
+              this.vm.addPosition(newPosition);
             }, true);
           })
       }
     }
     .width('100%')
-    .padding({ left: 16, right: 16 })
     .height(56)
-    .alignItems(VerticalAlign.Center)
+    .justifyContent(FlexAlign.Center)
   }
 }
 

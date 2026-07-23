@@ -1,6 +1,6 @@
-import { common, Configuration } from '@kit.AbilityKit';
+import { Configuration } from '@kit.AbilityKit';
 import { PersistenceV2, ThemeControl } from '@kit.ArkUI';
-import { Logger, SettingModel, SystemBarOperation } from 'lib_common';
+import { GlobalContext, Logger, SettingModel, SystemBarOperation } from 'lib_common';
 import { gAppTheme } from './AppTheme';
 
 const TAG = 'AppUtils';
@@ -21,7 +21,7 @@ export class AppUtils {
    */
   public static setColorMode() {
     Logger.info(TAG, 'setColorMode PersistenceV2 keys: ' + JSON.stringify(PersistenceV2.keys()));
-    const context = getContext() as common.UIAbilityContext;
+    const context = GlobalContext.getContext();
     const settingInfo: SettingModel = PersistenceV2.connect(SettingModel, () => new SettingModel())!;
     context.getApplicationContext().setColorMode(settingInfo.colorMode);
   }

@@ -10,10 +10,13 @@ export interface IBase {
 }
 
 export interface IComment {
+  id: number;
   createBy: string;
   createTime: string | number;
   evaluateContent: string;
   userHeadImg: string;
+  likeNum: number;
+  likeStatus: StatusFLAG | string;
 }
 
 /**
@@ -29,6 +32,7 @@ export interface ITravelogue {
   content: string;
   likeNum: number;
   collectNum: number;
+  shareNum: number;
   commentNum: number;
   currentUserLikeStatus: StatusFLAG | string;
   currentUserCollectStatus: StatusFLAG | string;

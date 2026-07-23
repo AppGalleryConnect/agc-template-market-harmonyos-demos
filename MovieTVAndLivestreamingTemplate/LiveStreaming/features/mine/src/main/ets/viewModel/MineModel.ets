@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { UserInfo } from 'live_interaction'
 import { NumbObj } from './MessageModel'
 
 @ObservedV2
@@ -19,10 +20,10 @@ export class MineItem {
   @Trace titleName: string
   @Trace icon: ResourceStr
   @Trace url?: string
-  @Trace params?: NumbObj
+  @Trace params?: NumbObj | UserInfo
   @Trace messageNum?: number
 
-  constructor(titleName: string, icon: ResourceStr, url?: string,params?: NumbObj, messageNum?: number) {
+  constructor(titleName: string, icon: ResourceStr, url?: string,params?: NumbObj | UserInfo, messageNum?: number) {
     this.titleName = titleName
     this.icon = icon
     this.url = url

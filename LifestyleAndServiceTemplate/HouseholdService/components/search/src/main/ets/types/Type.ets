@@ -67,6 +67,8 @@ export interface SetValueParams {
   showGuessLike?: boolean;
   showHotSearch?: boolean;
   isShallowWindow?: boolean;
+  windowTopPadding?: number;
+  windowBottomPadding?: number;
   tabBarScroller?: Scroller;
   scroller?: Scroller;
   controller?: SearchViewController;

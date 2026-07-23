@@ -26,6 +26,9 @@ class RouterModule {
   public static stack: NavPathStack = new NavPathStack();
   static builderMap: Map<string, WrappedBuilder<[object]>> = new Map<string, WrappedBuilder<[object]>>();
 
+  public static getStack() {
+    return RouterModule.stack;
+  }
   // 页面跳转(指定页面)
   public static push(info: NavRouterInfo, animated?: boolean) {
     try {

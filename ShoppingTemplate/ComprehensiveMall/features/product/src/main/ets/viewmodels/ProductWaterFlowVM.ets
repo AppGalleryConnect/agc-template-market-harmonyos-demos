@@ -58,12 +58,12 @@ export class ProductWaterFlowVM {
       MotionUtil.holdingHand === motion.HoldingHandStatus.LEFT_HAND_HELD) {
       return {
         left: 16,
-        bottom: 56,
+        bottom: 84,
       };
     }
     return {
       right: 16,
-      bottom: 56,
+      bottom: 84,
     };
   }
 

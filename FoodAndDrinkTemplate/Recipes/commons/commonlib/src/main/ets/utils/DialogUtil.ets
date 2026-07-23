@@ -1,12 +1,7 @@
-import { common } from '@kit.AbilityKit';
 import { ComponentContent, promptAction } from '@kit.ArkUI';
 import { DialogParams } from '../types/Types';
 import { GlobalContextUtils } from './ContextUtils';
 import { Logger } from './Logger';
-
-async function getUIContext() {
-  return (await (GlobalContextUtils.globalUIAbilityContext).windowStage.getMainWindow()).getUIContext()
-}
 
 /**
  * 全局弹窗
@@ -28,7 +23,7 @@ export class DialogUtil {
 
     try {
       if (!DialogUtil.uiContext) {
-        DialogUtil.uiContext = await getUIContext()
+        DialogUtil.uiContext = GlobalContextUtils.globalUIContext
       }
       DialogUtil.contentNode = new ComponentContent(DialogUtil.uiContext, dialogBuilder, params)
       let options: promptAction.BaseDialogOptions = {

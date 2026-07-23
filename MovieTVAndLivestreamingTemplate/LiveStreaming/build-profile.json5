@@ -6,7 +6,7 @@
         "name": "default",
         "signingConfig": "default",
         "compatibleSdkVersion": "5.0.5(17)",
-        "targetSdkVersion": "6.0.2(22)",
+        "targetSdkVersion": "6.1.1(24)",
         "runtimeOS": "HarmonyOS",
         "buildOption": {
           "strictMode": {
@@ -253,6 +253,10 @@
     {
       "name": "dial_panel",
       "srcPath": "./components/dial_panel"
+    },
+    {
+      "name": "aggregated_share",
+      "srcPath": "./components/aggregated_share"
     }
   ]
 }

@@ -5,8 +5,8 @@
       {
         "name": "default",
         "signingConfig": "default",
-        "compatibleSdkVersion": "5.0.3(15)",
-        "targetSdkVersion": "6.0.1(21)",
+        "compatibleSdkVersion": "6.1.0(23)",
+        "targetSdkVersion": "6.1.1(24)",
         "runtimeOS": "HarmonyOS",
         "buildOption": {
           "arkOptions": {
@@ -208,10 +208,6 @@
       "srcPath": "./components/feedback"
     },
     {
-      "name": "vip_center",
-      "srcPath": "./components/vip_center"
-    },
-    {
       "name": "base_apis",
       "srcPath": "./components/base_apis"
     },
@@ -278,6 +274,10 @@
     {
       "name": "membership",
       "srcPath": "./components/membership"
+    },
+    {
+      "name": "module_transition",
+      "srcPath": "./components/module_transition"
     }
   ]
 }

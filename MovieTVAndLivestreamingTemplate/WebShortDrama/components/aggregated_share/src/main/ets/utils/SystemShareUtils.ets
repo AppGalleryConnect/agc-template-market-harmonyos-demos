@@ -152,13 +152,16 @@ export class SystemShareUtils {
    * @param data
    */
   public copy(data: ShareViewData) {
-    const pasteboardData =
-      pasteboard.createData(pasteboard.MIMETYPE_TEXT_PLAIN, `${data.title} | ${data.landingPageUrl}`);
-    const systemPasteboard = pasteboard.getSystemPasteboard();
-    systemPasteboard.setData(pasteboardData);
-    this.windowStage.getMainWindowSync()
-      .getUIContext()
-      .getPromptAction()
-      .showToast({ message: '复制成功' });
+    try {
+      const pasteboardData =
+        pasteboard.createData(pasteboard.MIMETYPE_TEXT_PLAIN, `${data.title} | ${data.landingPageUrl}`);
+      const systemPasteboard = pasteboard.getSystemPasteboard();
+      systemPasteboard.setData(pasteboardData);
+      this.windowStage.getMainWindowSync()
+        .getUIContext()
+        .getPromptAction()
+        .showToast({ message: '复制成功' });
+    } catch (e) {
+    }
   }
 }

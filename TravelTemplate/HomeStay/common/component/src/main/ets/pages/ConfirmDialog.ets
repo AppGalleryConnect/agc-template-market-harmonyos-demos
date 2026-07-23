@@ -28,7 +28,7 @@ export struct ConfirmDialog {
     }
     .size({ width: '80%', height: 120 })
     .justifyContent(FlexAlign.Center)
-    .backgroundColor(Color.White)
+    .backgroundColor($r('sys.color.comp_background_primary'))
     .borderRadius($r('sys.float.corner_radius_level8'))
   }
 }

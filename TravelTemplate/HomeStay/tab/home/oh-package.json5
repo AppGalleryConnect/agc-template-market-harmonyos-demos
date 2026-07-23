@@ -13,6 +13,8 @@
     "constant": "file:../../common/constant",
     "component": "file:../../common/component",
     "calendar_select": "file:../../components/calendar_select",
-    "travel_map": "file:../../components/travel_map"
+    "travel_map": "file:../../components/travel_map",
+    "dial_panel": "file:../../components/dial_panel",
+    "aggregated_payment": "file:../../components/aggregated_payment"
   }
 }

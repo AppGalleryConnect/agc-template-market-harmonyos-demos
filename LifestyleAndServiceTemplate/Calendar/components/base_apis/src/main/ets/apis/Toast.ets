@@ -273,10 +273,14 @@ class Toast {
       if (Toast._instance === null || Toast._instance.loadingDialogArray?.length <= 0) {
         return
       }
-      Toast._instance.loadingDialogArray?.forEach(async (item: ComponentContent<ToastOption>) => {
-        await Toast._instance.promptAction?.closeCustomDialog(item)
-        item?.dispose()
-      })
+      try {
+        Toast._instance.loadingDialogArray?.forEach(async (item: ComponentContent<ToastOption>) => {
+          await Toast._instance.promptAction?.closeCustomDialog(item)
+          item?.dispose()
+        })
+      } catch (e) {
+        UtilLog.error(TAG, `err info ${JSON.stringify(e)}`)
+      }
     }, 1)
   }
 }

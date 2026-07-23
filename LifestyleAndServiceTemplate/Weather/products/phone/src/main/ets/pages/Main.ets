@@ -26,14 +26,17 @@ struct Main {
       .clip(false)
       .barMode(BarMode.Fixed)
       .animationDuration(0)
-      .barHeight(70)
+      .barHeight(this.vm.tabBarHeight)
+      .barWidth(this.vm.tabBarWidth)
+      .vertical(this.vm.tabVertical)
       .scrollable(false)
       .height(CommonConstants.FULL_PERCENT)
       .width(CommonConstants.FULL_PERCENT)
-      .barPosition(BarPosition.End)
+      .barPosition(this.vm.tabBarPosition)
       .barBackgroundColor($r('sys.color.comp_background_primary'))
     }
     .hideTitleBar(true)
+    .backgroundColor($r('sys.color.comp_background_primary'))
   }
 
   @Builder
@@ -56,9 +59,9 @@ struct Main {
         .fontColor(this.vm.curIndex === index ? $r('app.color.common_theme_color') :
           $r('sys.color.font_secondary'))
     }
-    .justifyContent(FlexAlign.Start)
+    .justifyContent(this.vm.isLargeWindow ? FlexAlign.Center : FlexAlign.Start)
     .width(CommonConstants.FULL_PERCENT)
-    .height(CommonConstants.FULL_PERCENT)
-    .padding({ top: CommonConstants.SPACE_6 })
+    .height(this.vm.tabItemHeight)
+    .padding({ top: this.vm.tabItemTopPadding })
   }
 }

@@ -7,6 +7,7 @@ import { CommodityInfo, PurchaseInfo } from '../model/CommodityInfo';
 export class CommodityDetailVM {
   @Trace count: number = 1;
   @Trace addressInfo: AddressInfo = new AddressInfo();
+  @Trace spuName: string[] = [];
   public static _instance: CommodityDetailVM;
 
   public static get instance() {

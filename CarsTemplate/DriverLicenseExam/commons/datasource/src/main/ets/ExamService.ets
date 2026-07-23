@@ -20,7 +20,7 @@ export class ExamService {
   }
 
   public static instance(context: Context) {
-    ExamService.context = context
+    ExamService.context = context;
     if (!ExamService._instance) {
       ExamService._instance = new ExamService();
     }
@@ -37,7 +37,7 @@ export class ExamService {
 
   public getChapterList(): Chapter[] {
     if (this.chapterList.length === 0) {
-      const chapterTitleList: string [] = [];
+      const chapterTitleList: string[] = [];
       this.examDetails.forEach((item: ExamDetail) => {
         if (chapterTitleList.indexOf(item.chapterName) === -1) {
           chapterTitleList.push(item.chapterName);
@@ -46,7 +46,7 @@ export class ExamService {
 
       chapterTitleList.forEach((item: string, index: number) => {
         const examManger = this.getManagerByName(item, EXAM_MANAGER_TYPE.chapter_name, 0, item);
-        const color = COLOR_GARDEN[index%6];
+        const color = COLOR_GARDEN[index % 6];
         this.chapterList.push(new Chapter(item, color, examManger));
       });
     }
@@ -55,7 +55,7 @@ export class ExamService {
   }
 
   public getChapterListByType(type: WRONG_COLLECT): Chapter[] {
-    const chapterTitleList: string [] = [];
+    const chapterTitleList: string[] = [];
     const chapterList: Chapter[] = [];
     if (type === WRONG_COLLECT.WRONG) {
       this.examDetails.forEach((item: ExamDetail) => {
@@ -66,7 +66,7 @@ export class ExamService {
 
       chapterTitleList.forEach((item: string, index: number) => {
         const examManger = this.getManagerByName(item, EXAM_MANAGER_TYPE.chapter_name, 0, item, WRONG_COLLECT.WRONG);
-        const color = COLOR_GARDEN[index%6];
+        const color = COLOR_GARDEN[index % 6];
         chapterList.push(new Chapter(item, color, examManger));
       });
     } else if (type === WRONG_COLLECT.COLLECT) {
@@ -78,11 +78,10 @@ export class ExamService {
 
       chapterTitleList.forEach((item: string, index: number) => {
         const examManger = this.getManagerByName(item, EXAM_MANAGER_TYPE.chapter_name, 0, item, WRONG_COLLECT.COLLECT);
-        const color = COLOR_GARDEN[index%6];
+        const color = COLOR_GARDEN[index % 6];
         chapterList.push(new Chapter(item, color, examManger));
       });
     }
-
 
     return chapterList;
   }
@@ -113,6 +112,26 @@ export class ExamService {
     let examManager = new ExamManager(name, this.generateExamDetail());
     examManager.timeLimit = 1;
     return examManager;
+  }
+
+  /**
+   * 将模拟考试中的错题和收藏同步到全局题库
+   * 模拟考试使用独立的数据对象，答题结果不会自动回写全局题库，
+   * 通过题目内容匹配，将错题(isCorrect===false)和收藏(isCollect===true)同步到全局examDetails
+   * @param examManager 模拟考试的考卷
+   */
+  public syncMockExamToGlobal(examManager: ExamManager): void {
+    for (const mockItem of examManager.examDetails) {
+      const globalItem = this.examDetails.find(item => item.question === mockItem.question);
+      if (globalItem) {
+        if (mockItem.isCorrect === false) {
+          globalItem.isCorrect = false;
+        }
+        if (mockItem.isCollect) {
+          globalItem.isCollect = true;
+        }
+      }
+    }
   }
 
   /**
@@ -318,7 +337,7 @@ export class ExamService {
         examData = originData.filter(item => item.classificationType === ClassificationTypeEnum.MIDDLE);
         break;
       case EXAM_MANAGER_TYPE.mistake:
-        examData = examData = originData.filter(item => {
+        examData = originData.filter(item => {
           item.classificationType === ClassificationTypeEnum.EASY_MISTAKE;
         });
         break;

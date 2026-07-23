@@ -1,3 +1,4 @@
+import { fp2pxUtil } from '@agctemplate/widgets';
 import { ComponentUtils } from '@kit.ArkUI';
 
 @ObservedV2
@@ -41,21 +42,22 @@ export struct BulletSetting {
         Text('显示行数')
           .width(56)
           .height(19)
-          .fontSize(14)
+          .fontSize(fp2pxUtil(14))
           .fontWeight(FontWeight.Regular)
         Row() {
           ForEach(
             [1, 2, 3, 4, 5, 6],
             (item: number) => {
               Text(`${item}`)
+                .accessibilityText(`设置为${item}行`)
                 .width(43)
                 .height(36)
-                .fontSize(14)
+                .fontSize(fp2pxUtil(14))
                 .fontWeight(FontWeight.Medium)
                 .borderRadius(18)
                 .textAlign(TextAlign.Center)
-                .fontColor(this.rowsNum === item ? '#000' : '#9000')
-                .backgroundColor(this.rowsNum === item ? '#fff' : 'transparent')
+                .fontColor(this.rowsNum === item ? $r('sys.color.font_primary') : $r('sys.color.font_tertiary'))
+                .backgroundColor(this.rowsNum === item ? $r('sys.color.comp_background_primary') : 'transparent')
                 .shadow(this.rowsNum === item ? { color: '#3000', radius: 3 } : { color: 'transparent', radius: 0 })
                 .onClick(() => {
                   this.setRowsNum(item)
@@ -70,7 +72,7 @@ export struct BulletSetting {
         .padding({ left: 1, right: 1 })
         .margin({ left: 12 })
         .borderRadius(18)
-        .backgroundColor('#0d000000')
+        .backgroundColor($r('sys.color.comp_background_tertiary'))
       }
       .width('100%')
       .height(48)
@@ -80,7 +82,7 @@ export struct BulletSetting {
         Text('不透明度')
           .width(56)
           .height(19)
-          .fontSize(14)
+          .fontSize(fp2pxUtil(14))
           .fontWeight(FontWeight.Regular)
         Row() {
           Stack({ alignContent: Alignment.Start }) {
@@ -89,10 +91,10 @@ export struct BulletSetting {
               style: SliderStyle.NONE,
             })
               .id('slider')
-              .trackColor('#0d000000')
+              .trackColor($r('sys.color.comp_background_tertiary'))
               .trackThickness(36)
               .trackBorderRadius(18)
-              .selectedColor('#0d000000')
+              .selectedColor($r('sys.color.comp_background_tertiary'))
               .margin({ left: 12 })
               .padding({ right: 12 })
               .width('100%')
@@ -119,7 +121,7 @@ export struct BulletSetting {
         Text('弹幕速度')
           .width(56)
           .height(19)
-          .fontSize(14)
+          .fontSize(fp2pxUtil(14))
           .fontWeight(FontWeight.Regular)
         Row() {
           ForEach(
@@ -128,12 +130,12 @@ export struct BulletSetting {
               Text(item)
                 .width(52)
                 .height(36)
-                .fontSize(14)
+                .fontSize(fp2pxUtil(14))
                 .fontWeight(FontWeight.Medium)
                 .borderRadius(18)
                 .textAlign(TextAlign.Center)
-                .fontColor(this.danMuSpeed === item ? '#000' : '#9000')
-                .backgroundColor(this.danMuSpeed === item ? '#fff' : 'transparent')
+                .fontColor(this.danMuSpeed === item ? $r('sys.color.font_primary') : $r('sys.color.font_tertiary'))
+                .backgroundColor(this.danMuSpeed === item ? $r('sys.color.comp_background_primary') : 'transparent')
                 .shadow(this.danMuSpeed === item ? { color: '#3000', radius: 3 } : { color: 'transparent', radius: 0 })
                 .onClick(() => {
                   if (item) {
@@ -150,7 +152,7 @@ export struct BulletSetting {
         .padding({ left: 1, right: 1 })
         .margin({ left: 12 })
         .borderRadius(18)
-        .backgroundColor('#0d000000')
+        .backgroundColor($r('sys.color.comp_background_tertiary'))
       }
       .width('100%')
       .height(48)
@@ -160,7 +162,7 @@ export struct BulletSetting {
         Text('弹幕字号')
           .width(56)
           .height(19)
-          .fontSize(14)
+          .fontSize(fp2pxUtil(14))
           .fontWeight(FontWeight.Regular)
         Row() {
           ForEach(
@@ -169,12 +171,12 @@ export struct BulletSetting {
               Text(item)
                 .width(52)
                 .height(36)
-                .fontSize(14)
+                .fontSize(fp2pxUtil(14))
                 .fontWeight(FontWeight.Medium)
                 .borderRadius(18)
                 .textAlign(TextAlign.Center)
-                .fontColor(this.danMuSize === item ? '#000' : '#9000')
-                .backgroundColor(this.danMuSize === item ? '#fff' : 'transparent')
+                .fontColor(this.danMuSize === item ? $r('sys.color.font_primary') : $r('sys.color.font_tertiary'))
+                .backgroundColor(this.danMuSize === item ? $r('sys.color.comp_background_primary') : 'transparent')
                 .shadow(this.danMuSize === item ? { color: '#3000', radius: 3 } : { color: 'transparent', radius: 0 })
                 .onClick(() => {
                   if (item) {
@@ -191,7 +193,7 @@ export struct BulletSetting {
         .padding({ left: 1, right: 1 })
         .margin({ left: 12 })
         .borderRadius(18)
-        .backgroundColor('#0d000000')
+        .backgroundColor($r('sys.color.comp_background_tertiary'))
       }
       .width('100%')
       .height(48)
@@ -204,12 +206,12 @@ function textBuilder(param: NodeParams) {
   Text(`${param.value}%`)
     .width(52)
     .height(36)
-    .fontSize(14)
+    .fontSize(fp2pxUtil(14))
     .fontWeight(FontWeight.Medium)
     .borderRadius(18)
     .textAlign(TextAlign.Center)
-    .fontColor(param.isBlock ? '#000' : '#9000')
-    .backgroundColor(param.isBlock ? '#fff' : 'transparent')
+    .fontColor(param.isBlock ? $r('sys.color.font_primary') : $r('sys.color.font_tertiary'))
+    .backgroundColor(param.isBlock ? $r('sys.color.comp_background_primary') : 'transparent')
     .shadow(param.isBlock ? { color: '#3000', radius: 3 } : { color: 'transparent', radius: 0 })
     .offset({ x: param.isBlock ? `${param.value}%` : param.value === 0 ? 11 : 0 })
     .gesture(

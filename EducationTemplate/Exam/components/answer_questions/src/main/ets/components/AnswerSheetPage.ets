@@ -183,6 +183,7 @@ export struct AnswerSheetPage {
     }
     .width('100%')
     .height($r('app.float.vp_70'))
+    .margin({ bottom: 16 })
     .justifyContent(FlexAlign.Center);
   }
 }

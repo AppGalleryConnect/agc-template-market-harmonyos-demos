@@ -1,6 +1,6 @@
 import { RouterMap, RouterUtils } from 'lib_common';
-import { NavHeaderBar } from 'lib_widget';
 import { HistoryButton } from '../../components/HistoryButton';
+import { NavHeaderBar } from '../../widget/NavHeaderBar';
 
 @ComponentV2
 export struct OfficePage {

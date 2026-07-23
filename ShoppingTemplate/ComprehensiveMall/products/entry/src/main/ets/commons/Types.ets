@@ -3,7 +3,6 @@ import { MainMenuOption, SubMenuOption } from './Enums';
 export interface TabListItem {
   label: string;
   icon: Resource;
-  iconChecked: Resource;
   component: WrappedBuilder<[]>;
 }
 

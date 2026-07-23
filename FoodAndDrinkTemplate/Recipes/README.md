@@ -348,10 +348,10 @@ Recipes
 
 ### 环境
 
-* DevEco Studio版本：DevEco Studio 6.0.2 Release及以上
-* HarmonyOS SDK版本：HarmonyOS 6.0.2 Release SDK及以上
-* 设备类型：华为手机（包括双折叠）、平板
-* 系统版本：HarmonyOS 5.1.1(19)及以上
+* DevEco Studio版本：DevEco Studio 6.1.1 Release及以上
+* HarmonyOS SDK版本：HarmonyOS 6.1.1 Release SDK及以上
+* 设备类型：华为手机（包括双折叠和阔折叠）、平板
+* 系统版本：HarmonyOS 6.1.0(23)及以上
 
 ### 权限
 

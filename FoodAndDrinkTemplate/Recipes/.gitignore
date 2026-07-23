@@ -4,6 +4,7 @@
 /.idea
 **/build
 /.hvigor
+/.opencode
 .cxx
 /.clangd
 /.clang-format

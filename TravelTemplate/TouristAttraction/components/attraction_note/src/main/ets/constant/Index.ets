@@ -49,7 +49,6 @@ export enum URL_MAP {
 
 export enum PageRouteName {
   PAGE_DETAIL = 'PageDetail',
-  PAGE_SEARCH = 'PageSearch',
   PAGE_GROUND = 'PageGround',
   ROUTE_DETAIL = 'RoutePageDetail'
 }
@@ -73,3 +72,5 @@ export const BAR_LIST: BarModel[] = [
   },
 ];
 
+export const HEIGHT_LOW_SMALL: number = 120
+export const HEIGHT_LOW_MIDDLE: number = 200

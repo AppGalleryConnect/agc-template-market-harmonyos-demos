@@ -17,19 +17,25 @@ import { AppStorageV2 } from '@kit.ArkUI';
 import {
   PreferenceUtil,
   PreferConstant,
-  TopTabsBuilder,
   GlobalContextUtils,
   Banner,
   BreakpointType
 } from 'commonlib';
 import { PracticeDataSource, PRACTICE_LIST_DATA, PracticeView } from '../model/PracticeMode';
 import { CourseQuestions } from '../model/CourseQuestions';
-import { RouterMap, RouterModule } from 'commonlib';
+import { RouterMap, RouterModule, CommonConstants } from 'commonlib';
 import { Sample } from '../model/Course';
 import { QuestionsRouterModel } from 'answer_questions';
 import { TopicItemType } from 'answer_questions';
 import { UserInfo } from 'login_info';
 import { HomeVM } from '../viewmodels/HomeVM';
+import { FinishStatus, MemberList, MemberParams,
+  MemberSheetUtils,
+  MemberStatusUtil, ProductsInfoOptions } from 'membership';
+import { common } from '@kit.AbilityKit';
+import { UtilLog } from '@hw-agconnect/util-log';
+import { TopTabsBuilder } from '../components/TopTabsBuilder';
+import { iap } from '@kit.IAPKit';
 
 @ComponentV2
 export struct HomePage {
@@ -48,10 +54,101 @@ export struct HomePage {
   // 在AppStorageV2中创建一个key为Sample的键值对（如果存在，则返回AppStorageV2中的数据），并且和prop关联
   @Local prop: Sample = AppStorageV2.connect(Sample, () => new Sample())!;
   @Local logoUser: UserInfo = AppStorageV2.connect(UserInfo, () => new UserInfo())!;
+  @Local lastPurchaseProductExpireTime: string = '';
+
+  subscribeEvent = async (params: MemberParams): Promise<void> => {
+    this.getUIContext().getPromptAction().showToast({ message: this.getSubscribeMsg(params) });
+    if (params.type === iap.ProductType.NONRENEWABLE && params.status === FinishStatus.FINISHED) {
+      this.queryExpireTime(params.productId, params.purchaseTime);
+    }
+  };
+  ownedMemberEvent = async (list: MemberList): Promise<void> => {
+    const isMembership = list.renewList.length > 0 || list.nonRenewList.length > 0;
+    this.logoUser.isMembership = isMembership;
+  };
+  queryExpireTime = (productId: string, time?: number): Promise<string> => {
+    // 请求开发者服务器获取非周期订阅商品到期时间（涉及商品id、购买次数）
+    return new Promise((resolve, reject) => {
+      this.lastPurchaseProductExpireTime = 'xxxx-xx-xx';
+      resolve(this.lastPurchaseProductExpireTime)
+    });
+  };
+
+  getSubscribeMsg(param: MemberParams) {
+    let message = '';
+    if (param.status === FinishStatus.FINISHED) {
+      message = '会员订阅成功';
+      this.logoUser.isMembership = true;
+    } else if (param.status === FinishStatus.UNFINISHED) {
+      message = `会员订阅失败，订阅错误码为${param.errCode}，错误原因为${param.errMsg}`;
+    }
+    return message;
+  }
+
+  productsInfo: ProductsInfoOptions = {
+    isSheet: true,
+    themeColor: '#E39331',
+    // todo: 请先在resources目录下的base/element/color.json和dark/element/color.json文件中定义深浅模式下的不同渐变色值
+    linearColors: [['#F8E6CE', 0.5], ['#E39331', 1.0]],
+    btnFontColor: '#FFFFFF',
+    // todo: 替换为您配置的商品ID及对应的权益
+    productsInfo: [{
+      type: iap?.ProductType.AUTORENEWABLE,
+      productId: 'F0001',
+      privileges: [
+        {
+          id: 'privilege_1',
+          icon: $r('app.media.privilege'),
+          title: '全真试卷无限使用',
+          des: '直击考试真题',
+        },
+      ],
+      privacyName: '连续包周服务协议',
+      privacyContent: CommonConstants.MEMBERSHIP_CONTENT,
+    },
+      {
+        type: iap?.ProductType.NONRENEWABLE,
+        productId: 'F0002',
+        privileges: [
+          {
+            id: 'privilege_1',
+            icon: $r('app.media.privilege'),
+            title: '全真试卷无限使用',
+            des: '直击考试真题',
+          },
+        ],
+      },],
+    privacyContent: CommonConstants.PRIVACY_CONTENT,
+    lastPurchaseProductExpireTime: '',
+    subscribeCallBack: this.subscribeEvent,
+    queryExpireTime: this.queryExpireTime,
+    ownedMemberCallBack: this.ownedMemberEvent,
+  };
 
   aboutToAppear(): void {
     // 获取存储在AppStorageV2中创建一个key为Sample的数据）
     this.prop = AppStorageV2.connect(Sample, 'Sample', () => new Sample())!;
+  }
+
+  queryMemberStatus() {
+    if(this.logoUser.isLogin) {
+      MemberStatusUtil.queryPurchase(this.getUIContext().getHostContext() as common.UIAbilityContext).then((res) => {
+        let autoRenewPurchasedList = res.renewList;
+        let nonAutoRenewPurchasedList = res.nonRenewList;
+
+        if (autoRenewPurchasedList?.length || nonAutoRenewPurchasedList?.length) {
+          this.logoUser.isMembership = true;
+        } else {
+          this.logoUser.isMembership = false;
+          MemberSheetUtils.open(this.productsInfo, this.getUIContext());
+        }
+      }).catch((err: BusinessError) => {
+        UtilLog.error(0xFF00, 'MemberShip',
+          `Failed to query purchase record. Code is ${err.code}, message is ${err.message}`);
+      });
+    } else {
+      this.logoUser.isMembership = false;
+    }
   }
 
   build() {
@@ -167,7 +264,11 @@ export struct HomePage {
           } else if (practiceItem.name === '模拟考试') {
             RouterModule.push({ url: RouterMap.Mock_PAGE, param: 1 });
           } else if (practiceItem.name === '全真试卷') {
-            RouterModule.push({ url: RouterMap.Mock_PAGE, param: 2 });
+            if(this.logoUser.isMembership) {
+              RouterModule.push({ url: RouterMap.Mock_PAGE, param: 2 });
+            } else {
+              this.queryMemberStatus();
+            }
           } else {
             // 错题练习
             this.myWrongPracticeEvent();
@@ -262,6 +363,23 @@ struct ReusableFlowItem {
         .height('32vp')
         .clip(true)
         .margin({ left: $r('app.float.vp_4'), right: $r('app.float.vp_4') });
+
+      if(this.item.name === '全真试卷') {
+        Text('VIP')
+          .width(32)
+          .height(16)
+          .fontSize(10)
+          .fontColor(Color.White)
+          .textAlign(TextAlign.Center)
+          .borderRadius({
+            topLeft: 2,
+            topRight: 12,
+            bottomRight: 2,
+            bottomLeft: 12
+          })
+          .backgroundColor('#fff9a01e')
+          .position({ x: '85%', y: 0 })
+      }
     }
     .backgroundColor($r('sys.color.comp_background_tertiary'))
     .justifyContent(FlexAlign.SpaceBetween)

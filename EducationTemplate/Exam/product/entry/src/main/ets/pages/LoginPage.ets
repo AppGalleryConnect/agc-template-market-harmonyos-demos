@@ -21,10 +21,12 @@ import { GlobalContextUtils, RouterMap, RouterModule } from 'commonlib';
 export struct LoginPage {
   // 半模态or全模态
   isBindContentCover: boolean = false;
+  @Local nextRouter: string = '';
 
   aboutToAppear(): void {
     let temp = RouterModule.getNavParam({ url: RouterMap.LOGIN_PAGE });
     if (temp) {
+      this.nextRouter = temp as string;
       this.isBindContentCover = temp as boolean;
     }
   }
@@ -51,8 +53,10 @@ export struct LoginPage {
             GlobalContextUtils.showToast({ message: '登录成功' });
           } else {
             GlobalContextUtils.showToast({ message: 'mock登录' });
+            if(this.nextRouter && typeof this.nextRouter === 'string') {
+              RouterModule.push({ url: this.nextRouter })
+            }
           }
-
         },
         // 备考隐私协议方法
         onPrivacyPolicy: () => {

@@ -6,6 +6,9 @@ import { RouterModule } from '../utils/RouterModule'
 import { Permissions } from '@kit.AbilityKit';
 import { geoLocationManager } from '@kit.LocationKit';
 import { Logger } from '../utils/Logger';
+import { BreakpointModel } from './BreakpointModel';
+import { BreakpointNameEnum } from '../constants/GridRowColSetting';
+import { AppStorageV2 } from '@kit.ArkUI';
 
 const TAG: string = 'CommonModel';
 
@@ -19,6 +22,12 @@ export class CommonModel {
   @Trace curIndex: number = 0;
 
   @Trace userInfo: UserInfoModel = AccountUtil.getUserInfo();
+  @Trace breakpointModel: BreakpointModel = AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
+
+  @Computed
+  get isLargeDevice() {
+    return this.breakpointModel.currentBreakpoint !== BreakpointNameEnum.SM
+  }
 
   public static get instance() {
     if (!CommonModel._instance) {

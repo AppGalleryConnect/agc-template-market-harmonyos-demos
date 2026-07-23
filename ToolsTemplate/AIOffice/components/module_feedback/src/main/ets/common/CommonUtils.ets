@@ -1,8 +1,7 @@
-import { intl } from '@kit.LocalizationKit';
 import { Constants } from './Constants';
 
 export class CommonUtils {
-  static weekFormat = new intl.DateTimeFormat('zh-CN', { weekday: 'short' });
+  static weekFormat = new Intl.DateTimeFormat('zh-CN', { weekday: 'short' });
 
   /**
    * 格式化时间，2020.02.12 周三 12:00:00

@@ -56,27 +56,29 @@ export struct FeaturedCourses {
    */
   @Builder
   courseListBuilder() {
-    Grid() {
-      ForEach(this.courses, (item: Course, index: number) => {
-        GridItem() {
-          CourseComponent({ course: item })
-            .width('100%')
-            .margin({ bottom: index === 0 ? '8vp' : '0vp' });
-        }
-      }, (item: Course, index: number) => item.courseName + index);
+    List({ space: 12 }) {
+      Repeat(this.courses)
+        .each((ri: RepeatItem<Course>) => {
+          ListItem() {
+            CourseComponent({ course: ri.item })
+              .width('100%')
+          }
+        })
+        .key((item: Course) => JSON.stringify(item))
     }
-    .backgroundColor($r('sys.color.background_secondary'))
     .width('100%')
-    .height('100%')
-    .padding({ left: '16vp', right: '16vp', top: '12vp' })
-    .columnsTemplate('1fr '.repeat(new BreakpointType<number>({
+    .layoutWeight(1)
+    .scrollBar(BarState.Off)
+    .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: true })
+    .lanes(new BreakpointType<number>({
       sm: 1,
       md: 2,
       lg: 3,
       xl: 3
-    }).getValue(this.homeVM.breakPointModel.currentBreakpoint)))
-    .columnsGap($r('app.float.vp_6'))
-    .rowsGap($r('app.float.vp_6'))
+    }).getValue(this.homeVM.breakPointModel.currentBreakpoint))
+    .backgroundColor($r('sys.color.comp_background_gray'))
+    .padding({ left: 16, right: 16 })
+    .contentStartOffset(12)
   }
 }
 

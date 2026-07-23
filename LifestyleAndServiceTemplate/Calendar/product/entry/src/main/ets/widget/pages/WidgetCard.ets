@@ -1,3 +1,4 @@
+import { Constants } from 'common';
 import dayjs from 'dayjs';
 import { Lunar } from 'lunar';
 
@@ -68,6 +69,7 @@ struct WidgetCard {
           action: this.actionType,
           abilityName: this.abilityName,
           params: {
+            source: 'FormCard',
             message: 'perpetual',
           },
         });
@@ -114,6 +116,7 @@ struct WidgetCard {
           action: this.actionType,
           abilityName: this.abilityName,
           params: {
+            source: 'FormCard',
             message: 'almanac',
           },
         });
@@ -136,6 +139,7 @@ struct WidgetCard {
         action: this.actionType,
         abilityName: this.abilityName,
         params: {
+          source: 'FormCard',
           message: 'perpetual',
         },
       });

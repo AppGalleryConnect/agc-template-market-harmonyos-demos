@@ -4,16 +4,6 @@
       "name": "HuaweiLoginPage",
       "pageSourceFile": "src/main/ets/pages/HuaweiLoginPage.ets",
       "buildFunction": "HuaweiLoginPageBuilder"
-    },
-    {
-      "name": "OtherLoginPage",
-      "pageSourceFile": "src/main/ets/pages/OtherLoginPage.ets",
-      "buildFunction": "OtherLoginPageBuilder"
-    },
-    {
-      "name": "ProtocolWebView",
-      "pageSourceFile": "src/main/ets/pages/ProtocolWebView.ets",
-      "buildFunction": "ProtocolWebViewBuilder"
     }
   ]
 }

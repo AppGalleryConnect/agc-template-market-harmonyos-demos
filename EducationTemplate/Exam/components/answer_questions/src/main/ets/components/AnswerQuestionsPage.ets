@@ -15,8 +15,13 @@
 
 import { AnswerItemType, QuestionsRouterModel, QUESTION_DATA, TopicItemType } from '../viewModel/TopicPageModel';
 import { AnswerItem, TopicItemModel, TopicItemModelPreference } from '../viewModel/TopicItemModel';
+import { BreakpointModel } from '../models/BreakpointModel';
 import { AnswerSheetDialog } from '../dialog/AnswerSheetDialog';
 import { AddNoteDialog } from '../dialog/AddNoteDialog';
+import { vibrator } from '@kit.SensorServiceKit';
+import { ParticleComponents } from './ParticleComponents';
+import { AppStorageV2 } from '@kit.ArkUI';
+import { UtilLog } from '@hw-agconnect/util-log';
 
 @ComponentV2
 export struct AnswerQuestionsPage {
@@ -30,6 +35,7 @@ export struct AnswerQuestionsPage {
   @Provider() isCollection: boolean = false;
   // 错题 历史 收藏
   @Provider() sourceRouterModel?: QuestionsRouterModel;
+
 
   build() {
     AnswerQuestionsComponent({
@@ -109,6 +115,10 @@ export struct AnswerQuestionsComponent {
   };
   @Local isShowAnswerSheet: boolean = false;
   @Local isShowNoteSheet: boolean = false;
+  @Local isShowParticle: boolean = false;
+  @Local imageAngle: number = 0;
+  @Local isShowReport: boolean = false;
+  @Local breakpointModel: BreakpointModel = AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
 
   aboutToAppear(): void {
     // 初始化数据
@@ -116,22 +126,114 @@ export struct AnswerQuestionsComponent {
     this.initCurrentModel();
   }
 
+  startVibration(count: number = 1) {
+    try {
+      vibrator.startVibration({
+        type: 'time',
+        duration: 300 // 震动持续时间，单位毫秒
+      }, {
+        usage: 'physicalFeedback' // 震动用途
+      }, (error: BusinessError<void>) => {
+        if (error) {
+          UtilLog.error(`启动震动失败: ${error.code}, ${error.message}`);
+          return;
+        }
+        UtilLog.info('震动启动成功');
+      });
+    } catch (err) {
+      UtilLog.error(`Failed to start vibration. Code: ${err.code}, message: ${err.message}`);
+    }
+  }
+
   build() {
-    Column() {
-      // 顶部内容
-      this.topBuilder();
-      // 收藏面板
-      this.collectBuilder();
-      // 作答面板
-      this.answerPanelBuilder();
-      // 底部操作栏
-      this.bottomOperateBuilder();
+    Stack() {
+      Column() {
+        // 顶部内容
+        this.topBuilder();
+        // 收藏面板
+        this.collectBuilder();
+        // 作答面板
+        this.answerPanelBuilder();
+        // 底部操作栏
+        this.bottomOperateBuilder();
+      }
+      .width('100%')
+      .height('100%')
+      .justifyContent(FlexAlign.SpaceBetween)
+      .backgroundColor(this.isShowParticle ? 'rgba(0, 0, 0, 0.4)' : $r('sys.color.comp_background_primary'))
+      .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM]);
+      if(this.isShowParticle) {
+        Stack() {
+          Image($r('app.media.bg_practice'))
+            .rotate({ z: 1, angle: this.imageAngle })
+            .onAppear(() => {
+              this.getUIContext()?.animateTo({ duration: 5000, iterations: -1 }, () => {
+                this.imageAngle = 360;
+              });
+            })
+            .objectFit(ImageFit.Cover)
+          Stack() {
+            ParticleComponents()
+            Column() {
+              Column() {
+                Image($r('app.media.bg_person'))
+                  .width(218)
+                  .height(174)
+                Column() {
+                  Text('恭喜您完成')
+                    .fontSize(30)
+                  Text('“今日打卡”')
+                    .fontSize(20)
+                    .margin({top: 16})
+                  Button($r('app.string.view_report_btn'),
+                    { type: ButtonType.Normal, stateEffect: true })
+                    .backgroundColor($r('app.color.view_report_btn'))
+                    .fontColor($r('sys.color.font_on_primary'))
+                    .fontSize($r('sys.float.Body_L'))
+                    .fontWeight(FontWeight.Medium)
+                    .width($r('app.float.vp_112'))
+                    .height($r('app.float.vp_40'))
+                    .borderRadius($r('sys.float.corner_radius_level10'))
+                    .margin({top: 16})
+                    .onClick(() => {
+                      this.viewReport();
+                    })
+                }
+                .width(280)
+                .height(195)
+                .justifyContent(FlexAlign.Center)
+                .backgroundColor('rgba(255, 255, 255, 1)')
+                .borderRadius(20)
+                .linearGradient({
+                  // 0点方向顺时针旋转为正向角度，线性渐变起始角度的默认值为180°
+                  colors: [
+                    ['rgba(148, 157, 219, 0.6)', 0.0], // 颜色断点1的颜色和比重，对应组件在180°方向上的起始位置
+                    ['rgba(253, 241, 249, 0.2)', 1.0],// 颜色断点2的颜色和比重，对应组件在180°方向上的终点位置
+                  ]
+                })
+              }
+              .justifyContent(FlexAlign.Center)
+              .width(280)
+              .height(369)
+              .borderRadius(20)
+              Image($r('app.media.ic_close'))
+                .width(38)
+                .height(38)
+                .onClick(() => {
+                  this.isShowParticle = false;
+                })
+            }
+            .justifyContent(FlexAlign.Center)
+            .width('100%').height('100%')
+          }
+
+        }
+        .width('100%')
+        .height('100%')
+      }
     }
     .width('100%')
     .height('100%')
-    .justifyContent(FlexAlign.SpaceBetween)
-    .backgroundColor($r('sys.color.comp_background_primary'))
-    .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM]);
   }
 
   // 作答面板
@@ -289,19 +391,25 @@ export struct AnswerQuestionsComponent {
    */
   @Builder
   nextQuestionBuilder() {
-    Button(this.currentIndex === this.ques.length - 1 ? $r('app.string.view_report_btn') :
+    Button(this.currentIndex === this.ques.length - 1 ? this.isShowReport ? $r('app.string.view_report_btn') : '交卷' :
       $r('app.string.next_question'),
       { type: ButtonType.Normal, stateEffect: true })
       .backgroundColor($r('app.color.view_report_btn'))
       .fontColor($r('sys.color.font_on_primary'))
       .fontSize($r('sys.float.Body_L'))
       .fontWeight(FontWeight.Medium)
-      .width($r('app.float.vp_112'))
+      .width(this.breakpointModel.currentBreakpoint === 'sm' ? 112 : 240)
       .height($r('app.float.vp_40'))
       .borderRadius($r('sys.float.corner_radius_level10'))
       .onClick(() => {
         if (this.currentIndex >= this.ques.length - 1) {
-          this.viewReport();
+          if(this.isShowReport) {
+            this.viewReport();
+          } else {
+            this.isShowParticle = true;
+            this.isShowReport = true;
+            this.startVibration(3)
+          }
         } else {
           this.currentIndex += 1;
           this.currentIndex = Math.min(this.currentIndex, this.ques.length - 1);
@@ -325,7 +433,7 @@ export struct AnswerQuestionsComponent {
       .fontWeight(FontWeight.Medium)
       .borderRadius($r('sys.float.corner_radius_level10'))
       .height($r('app.float.vp_40'))
-      .width($r('app.float.vp_112'))
+      .width(this.breakpointModel.currentBreakpoint === 'sm' ? 112 : 240)
       .onClick(() => {
         if (this.currentIndex > 0) {
           this.currentIndex -= 1;
@@ -521,13 +629,20 @@ export struct AnswerQuestionsComponent {
       // 答题
       Row() {
         Row() {
-          Image($r('app.media.ic_back'))
-            .height($r('app.float.vp_40'))
-            .width($r('app.float.vp_40'))
-            .borderRadius($r('app.float.vp_20'))
-            .onClick(() => {
-              this.onClickBack();
-            });
+          Button() {
+            SymbolGlyph($r('sys.symbol.chevron_backward'))
+              .fontSize(24)
+              .fontColor([$r('sys.color.icon_primary')])
+              .fontWeight(FontWeight.Normal);
+          }
+          .width(40)
+          .height(40)
+          .margin({ right: 8 })
+          .type(ButtonType.Circle)
+          .backgroundColor($r('sys.color.comp_background_tertiary'))
+          .onClick(() => {
+            this.onClickBack()
+          })
         }
         .height($r('app.float.vp_40'))
         .width($r('app.float.vp_40'))

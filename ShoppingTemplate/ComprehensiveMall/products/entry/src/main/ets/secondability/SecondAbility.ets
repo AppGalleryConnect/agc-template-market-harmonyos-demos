@@ -37,16 +37,20 @@ export default class SecondAbility extends UIAbility {
   }
 
   onWindowStageCreate(windowStage: window.WindowStage): void {
-    windowStage.loadContent('views/Index', (): void => {
-      try {
-        windowStage
-          .getMainWindowSync()
-          .getUIContext()
-          .setKeyboardAvoidMode(KeyboardAvoidMode.OFFSET_WITH_CARET);
-        LoneTakeAnimationsTransition.init(windowStage);
-      } catch (err) {
-        UtilLog.error(TAG, JSON.stringify(err));
-      }
-    });
+    try {
+      windowStage.loadContent('views/Index', (): void => {
+        try {
+          windowStage
+            .getMainWindowSync()
+            .getUIContext()
+            .setKeyboardAvoidMode(KeyboardAvoidMode.OFFSET_WITH_CARET);
+          LoneTakeAnimationsTransition.init(windowStage);
+        } catch (err) {
+          UtilLog.error(TAG, JSON.stringify(err));
+        }
+      });
+    } catch (err) {
+      UtilLog.error(TAG, 'loadContent failed: ' + JSON.stringify(err));
+    }
   }
 }

@@ -14,9 +14,11 @@
  */
 import { AbilityConstant, ConfigurationConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { AppStorageV2, window } from '@kit.ArkUI';
+import { BusinessError } from '@kit.BasicServicesKit';
 import { UtilLog as Logger } from '@hw-agconnect/util-log';
-import { CustomLinkModel, CustomShareParams, RouterModule, ShareInfo } from 'lib_foundation';
+import { CustomShareParams, FormUtils, RouterModule, ShareInfo, WindowUtils } from 'lib_foundation';
 import { LoneTakeAnimationsTransition } from 'module_transition';
+import { WantUtils } from '../common/WantUtils';
 
 const TAG = '[EntryAbility]';
 
@@ -29,17 +31,20 @@ export default class EntryAbility extends UIAbility {
       showStack: false,
     })
     Logger.info(TAG, 'Ability onCreate');
-    this.handleShare(want);
-    this.handleAppLinking(want);
+    WantUtils.handleShare(want);
+    WantUtils.handleAppLinking(want);
+    WantUtils.handleFormCardCall(want);
   }
 
   onNewWant(want: Want, launchParam: AbilityConstant.LaunchParam): void {
-    this.handleShare(want);
-    this.handleAppLinking(want);
+    WantUtils.handleShare(want);
+    WantUtils.handleAppLinking(want);
+    WantUtils.handleFormCardCall(want);
   }
 
   onDestroy(): void {
     Logger.info(TAG, 'Ability onDestroy');
+    FormUtils.clearAllFormData(this.context);
   }
 
   onWindowStageCreate(windowStage: window.WindowStage): void {
@@ -47,19 +52,20 @@ export default class EntryAbility extends UIAbility {
     Logger.info(TAG, 'Ability onWindowStageCreate');
     LoneTakeAnimationsTransition.init(windowStage);
 
-    windowStage.loadContent('pages/Index', (err) => {
-      if (err.code) {
-        Logger.error(TAG, 'Failed to load the content. Cause: ' + JSON.stringify(err) ?? '');
-        return;
-      }
+    windowStage.loadContent('pages/Index').then(() => {
       Logger.info(TAG, 'Succeeded in loading the content.');
       this.setColorMode();
+      WindowUtils.setWinConfig(windowStage);
+    }).catch((err: BusinessError) => {
+      Logger.error(TAG, 'Failed to load the content. Cause: ' + JSON.stringify(err) ?? '');
+      return;
     });
   }
 
   onWindowStageDestroy(): void {
     // Main window is destroyed, release UI related resources
     Logger.info(TAG, 'Ability onWindowStageDestroy');
+    FormUtils.clearAllFormData(this.context);
   }
 
   onForeground(): void {
@@ -108,38 +114,5 @@ export default class EntryAbility extends UIAbility {
     }
 
     wantParams['atomicservice.param.key.shareInfo'] = shareParams;
-  }
-
-  handleShare(want: Want) {
-    // 接收方：从want中获取自定义参数，用于后续实现页面的路由跳转
-    const paramStr = want?.parameters?.custShareParam as string;
-    const shareParams: CustomShareParams = JSON.parse(paramStr || '{}');
-    const shareRouter: CustomShareParams = AppStorageV2.connect(CustomShareParams, 'handleShare', () => new CustomShareParams())!;
-    shareRouter.id = new Date().getTime();
-    shareRouter.pageName = '';
-    shareRouter.goodId = '';
-    if (shareParams?.goodId) {
-      shareRouter.pageName = shareParams.pageName;
-      shareRouter.goodId = shareParams.goodId;
-    }
-  }
-
-  handleAppLinking(want: Want) {
-    let uri = want?.uri;
-    if (uri) {
-      // 从链接中解析query参数（自定义参数），拿到参数后，开发者可根据自己的业务需求进行后续的处理。
-      try {
-        const navRouterName =  want.parameters?.navRouterName as string;
-        Logger.info(TAG, 'navRouterName is: ' + navRouterName);
-        // 例如，当navRouterName为GoodDetail时，跳转服务详情页面。
-        if (navRouterName === 'GoodDetail') {
-          const linkScanRouter: CustomLinkModel = AppStorageV2.connect(CustomLinkModel, () => new CustomLinkModel())!;
-          linkScanRouter.id = new Date().getTime();
-          linkScanRouter.pageUrl = navRouterName;
-        }
-      } catch (error) {
-        Logger.error(TAG, 'Failed to parse url. error: ' + JSON.stringify(error));
-      }
-    }
   }
 }

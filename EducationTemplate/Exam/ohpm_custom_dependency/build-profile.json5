@@ -1,0 +1,128 @@
+{
+  "app": {
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "storeFile": "product/entry/src/test/hw_sign/template.p12",
+          "storePassword": "",
+          "keyAlias": "",
+          "keyPassword": "",
+          "signAlg": "SHA256withECDSA",
+          "profile": "product/entry/src/test/hw_sign/examRelease.p7b",
+          "certpath": "product/entry/src/test/hw_sign/template.cer"
+        }
+      }
+    ],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "compatibleSdkVersion": "5.0.5(17)",
+        "targetSdkVersion": "6.1.1(24)",
+        "runtimeOS": "HarmonyOS",
+        "buildOption": {
+          "strictMode": {
+            "caseSensitiveCheck": true,
+            "useNormalizedOHMUrl": true
+          }
+        }
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug"
+      },
+      {
+        "name": "release"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./product/entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "homePage",
+      "srcPath": "./features/homePage"
+    },
+    {
+      "name": "minePage",
+      "srcPath": "./features/minePage"
+    },
+    {
+      "name": "topicPage",
+      "srcPath": "./features/topicPage"
+    },
+    {
+      "name": "commonLib",
+      "srcPath": "./commons/commonLib"
+    },
+    {
+      "name": "base_select",
+      "srcPath": "./components/base_select"
+    },
+    {
+      "name": "select_category",
+      "srcPath": "./components/select_category"
+    },
+    {
+      "name": "answer_questions",
+      "srcPath": "./components/answer_questions"
+    },
+    {
+      "name": "login_info",
+      "srcPath": "./components/login_info"
+    },
+    {
+      "name": "aggregated_payment",
+      "srcPath": "./components/aggregated_payment"
+    },
+    {
+      "name": "feedback",
+      "srcPath": "./components/feedback"
+    },
+    {
+      "name": "search",
+      "srcPath": "./components/search"
+    },
+    {
+      "name": "search_question",
+      "srcPath": "./components/search_question"
+    },
+    {
+      "name": "aggregated_ads",
+      "srcPath": "./components/aggregated_ads"
+    },
+    {
+      "name": "aggregated_share",
+      "srcPath": "./components/aggregated_share"
+    },
+    {
+      "name": "customer_service_chat",
+      "srcPath": "./components/customer_service_chat"
+    },
+    {
+      "name": "image_preview",
+      "srcPath": "./components/image_preview"
+    },
+    {
+      "name": "app_setting",
+      "srcPath": "./components/app_setting"
+    },
+    {
+      "name": "membership",
+      "srcPath": "./components/membership"
+    }
+  ]
+}

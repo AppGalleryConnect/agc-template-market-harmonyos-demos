@@ -3,7 +3,8 @@
     "name": "video_swiper",
     "type": "shared",
     "deviceTypes": [
-      "phone"
+      "phone",
+      "tablet"
     ],
     "installationFree":true,
     'deliveryWithInstall': true,

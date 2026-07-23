@@ -1,29 +1,15 @@
-/*
- * Copyright (c) 2024 Huawei Device Co., Ltd.
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
+import { AppStorageV2 } from '@kit.ArkUI';
+import { emitter } from '@kit.BasicServicesKit';
+import { BaseViewModel, RouterMap, RouterModule } from 'commonlib';
 import { HomePageBuilder } from 'home';
-
 import { MinePageBuilder } from 'mine';
-import { TabListItem } from '../models/Types';
+import { FormCardJumpModel, TabListItem } from '../models/Types';
 
-const TAG = '[MainEntryVM]';
 
 @ObservedV2
-export class MainEntryVM {
+export class MainEntryVM extends BaseViewModel {
+  @Trace formModel: FormCardJumpModel = AppStorageV2.connect(FormCardJumpModel, () => new FormCardJumpModel())!;
   @Trace curIndex: number = 0;
-  public controller: TabsController = new TabsController();
   public tabList: TabListItem[] = [
     {
       label: '首页',
@@ -38,14 +24,60 @@ export class MainEntryVM {
       component: wrapBuilder(MinePageBuilder),
     },
   ];
-  private static _instance: MainEntryVM;
 
-  public static get instance() {
-    if (!MainEntryVM._instance) {
-      MainEntryVM._instance = new MainEntryVM();
-    }
-    return MainEntryVM._instance;
+  @Computed
+  get isTabVertical() {
+    return this.breakPointModel.isTabVertical;
   }
 
+  @Computed
+  get barPosition() {
+    if (this.isTabVertical) {
+      return BarPosition.Start;
+    }
+    return BarPosition.End;
+  }
 
+  @Computed
+  get tabWidth(): Length {
+    if (this.isTabVertical) {
+      return 96;
+    }
+    return '100%';
+  }
+
+  @Computed
+  get tabHeight(): Length {
+    if (this.isTabVertical) {
+      return 400;
+    }
+    return 48;
+  }
+
+  // 服务卡片
+  @Monitor('formModel.formCardId')
+  formCardChange() {
+    if (this.formModel.formCardId) {
+      this.jumpToFormCardPage();
+    }
+  }
+
+  // 跳转到服务卡片的页面
+  public jumpToFormCardPage() {
+    if (!this.formModel.formCardPageUrl) {
+      return;
+    }
+    // 清除路由栈中除Main页面之外的路由
+    let pathNames: string[] = RouterModule.stack.getAllPathName();
+    for (let i = pathNames.length - 1; i > 0; i--) {
+      RouterModule.stack.removeByName(pathNames[i]);
+    }
+    const curPathName = this.formModel.formCardPageUrl;
+    emitter.emit('formCardPageUrl', { data: {url: curPathName}});
+    this.formModel.formCardId = '';
+  }
+
+  offEvent() {
+    emitter.off('formCardPageUrl');
+  }
 }

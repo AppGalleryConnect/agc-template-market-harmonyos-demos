@@ -1,7 +1,7 @@
 import { ShareKinds } from '../model/Model'
 import { firstShareList } from '../constants/Constants'
 import { SheetShowVM } from '../viewModel/SheetShowVM'
-import { componentSnapshot } from '@kit.ArkUI'
+import { PromptAction } from '@kit.ArkUI'
 import { image } from '@kit.ImageKit'
 import { PosterShare } from '../utils/SystemShare'
 
@@ -15,6 +15,7 @@ export struct FirstPosterShare {
   @Local shareList: ShareKinds[][] = firstShareList
   @Local shareShowVM: SheetShowVM = SheetShowVM.instance
   @Param posterShare: PosterShare = new PosterShare()
+  promptAction: PromptAction = this.getUIContext().getPromptAction();
 
   build() {
     List() {
@@ -30,6 +31,18 @@ export struct FirstPosterShare {
               }
               .onClick(() => {
                 switch (value.id) {
+                  case 'wechat':
+                    this.promptAction.showToast({
+                      message: '已分享至微信',
+                      duration: 2000,
+                    });
+                    break
+                  case 'qq':
+                    this.promptAction.showToast({
+                      message: '已分享至QQ',
+                      duration: 2000,
+                    });
+                    break
                   case 'create_poster':
                     this.shareShowVM.setFirstShareShow(false)
                     this.shareShowVM.setSharePpShow(true)

@@ -1,31 +1,4 @@
-import { GetBulletinListResp } from '../types/responseTypes/GetBulletinListResp';
-import { BaseResponse } from '../types/ResponseTypes';
-import { bulletinListMock } from './mockData/getBulletinList';
-import { GetHomeInfoResp } from '../types/responseTypes/GetHomeRollUpInfoResp';
-import { homeRollupInfoMock } from './mockData/getRollupInfo';
-import { GetAttractionsInfoResp } from '../types/responseTypes/GetAttractionListResp';
-import { attractionListMock } from './mockData/getAttractionList';
-import { ticketListMock } from './mockData/getTicketList';
-import { GetTicketListResp } from '../types/responseTypes/GetTicketListResp';
-import { noteListMock } from './mockData/getNoteList';
-import { GetNoteListResp } from '../types/responseTypes/GetNoteListResp';
-import { GetRouteLineListResp } from '../types/responseTypes/GetRouteListResp';
-import { routeListMock } from './mockData/getRouteList';
-import { GetCommodityListResp } from '../types/responseTypes/GetCommodityListResp';
-import { specialCommodityListMock } from './mockData/getSpecialCommodityList';
-import { culturalCommodityListMock } from './mockData/getCulturalCommodityList';
-import { GetBulletinDetailResp } from '../types/responseTypes/GetBulletinDetailResp';
-import { bulletinDetailList } from './mockData/getBulletinDetail';
-import { commodityDetailList } from './mockData/getCommodityDetail';
-import { GetCommodityDetailResp } from '../types/responseTypes/GetCommodityDetailResp';
-import { attractionDetailsMock } from './mockData/getAttractionDetail';
-import { GetAttractionDetailResp } from '../types/responseTypes/GetAttractionDetailResp';
-import { GetTicketDetailResp } from '../types/responseTypes/GetTicketDetailResp';
-import { ticketDetailListMock } from './mockData/getTicketDetail';
-import { GetNoteDetailResp } from '../types/responseTypes/GetNoteDetailResp';
-import { noteDetailListMock } from './mockData/getNoteDetail';
-import { routeDetailListMock } from './mockData/getRouteDetail';
-import { GetRouteLineDetailResp } from '../types/responseTypes/GetRouteDetailResp';
+import { AppStorageV2 } from '@kit.ArkUI';
 import {
   AddressRequest,
   CreateCommodityOrderRequest,
@@ -33,15 +6,42 @@ import {
   GetOrderDetailRequest,
   TouristRequest,
 } from '../types/AxiosRequestParam';
-import { CommodityOrderListItem, GetCommodityOrderListResp } from '../types/responseTypes/GetCommodityOrderListResp';
-import { GetTicketOrderListResp, TicketOrderListItem } from '../types/responseTypes/GetTicketOrderListResp';
-import { AppStorageV2 } from '@kit.ArkUI';
-import { GetTouristListResp, TouristListItem } from '../types/responseTypes/GetTouristListResp';
-import { GetCateringDetailResp } from '../types/responseTypes/GetCateringDetailResp';
-import { cateringDetailMock } from './mockData/getCateringDetail';
-import { accommodationDetailMock } from './mockData/getAccommodationDetail';
+import { BaseResponse } from '../types/ResponseTypes';
 import { GetAccommodationDetailResp } from '../types/responseTypes/GetAccommodationDetailResp';
 import { AddressListItem, GetAddressListResp } from '../types/responseTypes/GetAddressListResp';
+import { GetAttractionDetailResp } from '../types/responseTypes/GetAttractionDetailResp';
+import { GetAttractionsInfoResp } from '../types/responseTypes/GetAttractionListResp';
+import { GetBulletinDetailResp } from '../types/responseTypes/GetBulletinDetailResp';
+import { GetBulletinListResp } from '../types/responseTypes/GetBulletinListResp';
+import { GetCateringDetailResp } from '../types/responseTypes/GetCateringDetailResp';
+import { GetCommodityDetailResp } from '../types/responseTypes/GetCommodityDetailResp';
+import { GetCommodityListResp } from '../types/responseTypes/GetCommodityListResp';
+import { CommodityOrderListItem, GetCommodityOrderListResp } from '../types/responseTypes/GetCommodityOrderListResp';
+import { GetHomeInfoResp } from '../types/responseTypes/GetHomeRollUpInfoResp';
+import { GetNoteDetailResp } from '../types/responseTypes/GetNoteDetailResp';
+import { GetNoteListResp } from '../types/responseTypes/GetNoteListResp';
+import { GetRouteLineDetailResp } from '../types/responseTypes/GetRouteDetailResp';
+import { GetRouteLineListResp } from '../types/responseTypes/GetRouteListResp';
+import { GetTicketDetailResp } from '../types/responseTypes/GetTicketDetailResp';
+import { GetTicketListResp } from '../types/responseTypes/GetTicketListResp';
+import { GetTicketOrderListResp, TicketOrderListItem } from '../types/responseTypes/GetTicketOrderListResp';
+import { GetTouristListResp, TouristListItem } from '../types/responseTypes/GetTouristListResp';
+import { accommodationDetailMock } from './mockData/getAccommodationDetail';
+import { attractionDetailsMock } from './mockData/getAttractionDetail';
+import { attractionListMock } from './mockData/getAttractionList';
+import { bulletinDetailList } from './mockData/getBulletinDetail';
+import { bulletinListMock } from './mockData/getBulletinList';
+import { cateringDetailMock } from './mockData/getCateringDetail';
+import { commodityDetailList } from './mockData/getCommodityDetail';
+import { culturalCommodityListMock } from './mockData/getCulturalCommodityList';
+import { noteDetailListMock } from './mockData/getNoteDetail';
+import { noteListMock } from './mockData/getNoteList';
+import { homeRollupInfoMock } from './mockData/getRollupInfo';
+import { routeDetailListMock } from './mockData/getRouteDetail';
+import { routeListMock } from './mockData/getRouteList';
+import { specialCommodityListMock } from './mockData/getSpecialCommodityList';
+import { ticketDetailListMock } from './mockData/getTicketDetail';
+import { ticketListMock } from './mockData/getTicketList';
 
 class HttpApiMock {
   static addressListMock: GetAddressListResp =
@@ -54,14 +54,67 @@ class HttpApiMock {
   static ticketOrderListMock: GetTicketOrderListResp =
     AppStorageV2.connect(GetTicketOrderListResp, 'GetTicketOrderListResp', () => new GetTicketOrderListResp()) ?? [];
 
+  static getTouristDetail(touristsId: string[]): GetTouristListResp {
+    let touristList: GetTouristListResp = [];
+    touristsId.forEach(item => {
+      let list = HttpApiMock.touristListMock.filter((touristId) => touristId.id === item);
+      touristList.push(...list);
+    });
+    return touristList;
+  }
+
+  static modifyTicketOrderDetail(param: GetOrderDetailRequest) {
+    let list = HttpApiMock.ticketOrderListMock.filter(item => item.orderNo !== param.orderNo);
+    let item = HttpApiMock.ticketOrderListMock.filter(item => item.orderNo === param.orderNo);
+
+    item[0].isAddSchedule = param.isAddSchedule ?? item[0].isAddSchedule;
+    item[0].isAddSubscription = param.isAddSubscription ?? item[0].isAddSubscription;
+    item[0].orderStatus = param.orderStatus ?? item[0].orderStatus;
+
+    list.unshift(item[0]);
+    AppStorageV2.connect(GetTicketOrderListResp, 'GetTicketOrderListResp', () => list)!;
+  }
+
+  static modifyCommodityOrderDetail(orderStatus: number, orderNo: string) {
+    let list = HttpApiMock.commodityOrderListMock.filter(item => item.orderNo !== orderNo);
+    let item = HttpApiMock.commodityOrderListMock.filter(item => item.orderNo === orderNo);
+    item[0].orderStatus = orderStatus;
+    list.unshift(item[0]);
+    AppStorageV2.connect(GetCommodityOrderListResp, 'GetCommodityOrderListResp', () => list)!;
+  }
+
+  static getCommodityOrderList(orderStatus: number) {
+    if (orderStatus === 0) {
+      return HttpApiMock.commodityOrderListMock;
+    } else {
+      return HttpApiMock.commodityOrderListMock.filter(
+        (item: CommodityOrderListItem) => item.orderStatus === orderStatus);
+    }
+  }
+
+  static getTicketOrderList(orderStatus: number) {
+    if (orderStatus === 0) {
+      return HttpApiMock.ticketOrderListMock;
+    } else {
+      return HttpApiMock.ticketOrderListMock.filter((item: TicketOrderListItem) => item.orderStatus === orderStatus);
+    }
+  }
+
+  static getCommodityOrderDetail(orderNo: string) {
+    return HttpApiMock.commodityOrderListMock.filter((item: CommodityOrderListItem) => item.orderNo === orderNo);
+  }
+
+  static getTicketOrderDetail(orderNo: string) {
+    return HttpApiMock.ticketOrderListMock.filter((item: TicketOrderListItem) => item.orderNo === orderNo);
+  }
+
   public getBulletinList(): Promise<BaseResponse<GetBulletinListResp>> {
     return Promise.resolve(bulletinListMock);
   }
 
   public getBulletinDetail(bulletinId: number): Promise<BaseResponse<GetBulletinDetailResp>> {
     return Promise.resolve({
-      code: 0,
-      data: bulletinDetailList.find((item) => item.id === bulletinId),
+      code: 0, data: bulletinDetailList.find((item) => item.id === bulletinId),
     } as BaseResponse<GetBulletinDetailResp>);
   }
 
@@ -75,8 +128,7 @@ class HttpApiMock {
 
   public getAttractionDetail(attractionId: number): Promise<BaseResponse<GetAttractionDetailResp>> {
     return Promise.resolve({
-      code: 0,
-      data: attractionDetailsMock.find(item => item.attractionId === attractionId),
+      code: 0, data: attractionDetailsMock.find(item => item.attractionId === attractionId),
     } as BaseResponse<GetAttractionDetailResp>);
   }
 
@@ -86,8 +138,7 @@ class HttpApiMock {
 
   public getTicketDetail(ticketId: number): Promise<BaseResponse<GetTicketDetailResp>> {
     return Promise.resolve({
-      code: 0,
-      data: ticketDetailListMock.find(item => item.ticketId === ticketId),
+      code: 0, data: ticketDetailListMock.find(item => item.ticketId === ticketId),
     } as BaseResponse<GetTicketDetailResp>);
   }
 
@@ -97,8 +148,7 @@ class HttpApiMock {
 
   public getNoteDetail(nodeId: number): Promise<BaseResponse<GetNoteDetailResp>> {
     return Promise.resolve({
-      code: 0,
-      data: noteDetailListMock.find(item => item.noteId === nodeId),
+      code: 0, data: noteDetailListMock.find(item => item.noteId === nodeId),
     } as BaseResponse<GetNoteDetailResp>);
   }
 
@@ -108,8 +158,7 @@ class HttpApiMock {
 
   public getRouteDetail(routeId: number): Promise<BaseResponse<GetRouteLineDetailResp>> {
     return Promise.resolve({
-      code: 0,
-      data: routeDetailListMock.find(item => item.routeId === routeId),
+      code: 0, data: routeDetailListMock.find(item => item.routeId === routeId),
     } as BaseResponse<GetRouteLineDetailResp>);
   }
 
@@ -119,8 +168,7 @@ class HttpApiMock {
 
   public getCommodityDetail(commodityId: number): Promise<BaseResponse<GetCommodityDetailResp>> {
     return Promise.resolve({
-      code: 0,
-      data: commodityDetailList.find((item) => item.commodityId === commodityId),
+      code: 0, data: commodityDetailList.find((item) => item.commodityId === commodityId),
     } as BaseResponse<GetCommodityDetailResp>);
   }
 
@@ -153,24 +201,21 @@ class HttpApiMock {
       AppStorageV2.connect(GetCommodityOrderListResp, 'GetCommodityOrderListResp', () => [commodityOrder]);
     }
     const resp: BaseResponse<undefined> = {
-      code: 0,
-      data: undefined,
+      code: 0, data: undefined,
     };
     return Promise.resolve(resp);
   }
 
   public getCateringDetail(siteId: string) {
     const resp: BaseResponse<GetCateringDetailResp> = {
-      code: 0,
-      data: cateringDetailMock,
+      code: 0, data: cateringDetailMock,
     };
     return Promise.resolve(resp);
   }
 
   public getAccommodationDetail(siteId: string) {
     const resp: BaseResponse<GetAccommodationDetailResp> = {
-      code: 0,
-      data: accommodationDetailMock,
+      code: 0, data: accommodationDetailMock,
     };
     return Promise.resolve(resp);
   }
@@ -203,19 +248,9 @@ class HttpApiMock {
     }
 
     const resp: BaseResponse<undefined> = {
-      code: 0,
-      data: undefined,
+      code: 0, data: undefined,
     };
     return Promise.resolve(resp);
-  }
-
-  static getTouristDetail(touristsId: string[]): GetTouristListResp {
-    let touristList: GetTouristListResp = [];
-    touristsId.forEach(item => {
-      let list = HttpApiMock.touristListMock.filter((touristId) => touristId.id === item);
-      touristList.push(...list);
-    });
-    return touristList;
   }
 
   public getOrderList(param: GetOrderDetailRequest) {
@@ -229,36 +264,14 @@ class HttpApiMock {
   }
 
   public modifyOrderDetail(param: GetOrderDetailRequest) {
-    param.category === 0 ?
-      HttpApiMock.modifyTicketOrderDetail(param) :
+    param.category === 0 ? HttpApiMock.modifyTicketOrderDetail(param) :
       HttpApiMock.modifyCommodityOrderDetail(param.orderStatus ?? 0, param.orderNo ?? '');
 
     const resp: BaseResponse<undefined> = {
-      code: 0,
-      data: undefined,
+      code: 0, data: undefined,
     };
 
     return Promise.resolve(resp);
-  }
-
-  static modifyTicketOrderDetail(param: GetOrderDetailRequest) {
-    let list = HttpApiMock.ticketOrderListMock.filter(item => item.orderNo !== param.orderNo);
-    let item = HttpApiMock.ticketOrderListMock.filter(item => item.orderNo === param.orderNo);
-
-    item[0].isAddSchedule = param.isAddSchedule ?? item[0].isAddSchedule
-    item[0].isAddSubscription = param.isAddSubscription ?? item[0].isAddSubscription
-    item[0].orderStatus = param.orderStatus ?? item[0].orderStatus
-
-    list.unshift(item[0]);
-    AppStorageV2.connect(GetTicketOrderListResp, 'GetTicketOrderListResp', () => list)!;
-  }
-
-  static modifyCommodityOrderDetail(orderStatus: number, orderNo: string) {
-    let list = HttpApiMock.commodityOrderListMock.filter(item => item.orderNo !== orderNo);
-    let item = HttpApiMock.commodityOrderListMock.filter(item => item.orderNo === orderNo);
-    item[0].orderStatus = orderStatus;
-    list.unshift(item[0]);
-    AppStorageV2.connect(GetCommodityOrderListResp, 'GetCommodityOrderListResp', () => list)!;
   }
 
   public getOrderDetail(param: GetOrderDetailRequest) {
@@ -268,31 +281,6 @@ class HttpApiMock {
         HttpApiMock.getCommodityOrderDetail(param.orderNo ?? ''),
     };
     return Promise.resolve(resp);
-  }
-
-  static getCommodityOrderList(orderStatus: number) {
-    if (orderStatus === 0) {
-      return HttpApiMock.commodityOrderListMock;
-    } else {
-      return HttpApiMock.commodityOrderListMock.filter((item: CommodityOrderListItem) => item.orderStatus ===
-        orderStatus);
-    }
-  }
-
-  static getTicketOrderList(orderStatus: number) {
-    if (orderStatus === 0) {
-      return HttpApiMock.ticketOrderListMock;
-    } else {
-      return HttpApiMock.ticketOrderListMock.filter((item: TicketOrderListItem) => item.orderStatus === orderStatus);
-    }
-  }
-
-  static getCommodityOrderDetail(orderNo: string) {
-    return HttpApiMock.commodityOrderListMock.filter((item: CommodityOrderListItem) => item.orderNo === orderNo);
-  }
-
-  static getTicketOrderDetail(orderNo: string) {
-    return HttpApiMock.ticketOrderListMock.filter((item: TicketOrderListItem) => item.orderNo === orderNo);
   }
 
   public modifyTourist(data: TouristRequest) {
@@ -310,8 +298,7 @@ class HttpApiMock {
     HttpApiMock.touristListMock.splice(index, 1, tourist);
 
     const resp: BaseResponse<undefined> = {
-      code: 0,
-      data: undefined,
+      code: 0, data: undefined,
     };
     return Promise.resolve(resp);
   }
@@ -321,8 +308,7 @@ class HttpApiMock {
     HttpApiMock.touristListMock = list;
 
     const resp: BaseResponse<undefined> = {
-      code: 0,
-      data: undefined,
+      code: 0, data: undefined,
     };
     return Promise.resolve(resp);
   }
@@ -346,17 +332,18 @@ class HttpApiMock {
     }
 
     const resp: BaseResponse<undefined> = {
-      code: 0,
-      data: undefined,
+      code: 0, data: undefined,
     };
     return Promise.resolve(resp);
   }
 
   public createAddress(data: AddressRequest) {
-    // 为默认地址，清空当前默认状态
-    HttpApiMock.addressListMock.map((item) => {
-      item.type = 0;
-    });
+    // 如果设置为默认地址，清空其他地址的默认状态
+    if (data.type === 1) {
+      HttpApiMock.addressListMock.map((item) => {
+        item.type = 0;
+      });
+    }
 
     let address: AddressListItem = {
       id: data.id,
@@ -365,27 +352,30 @@ class HttpApiMock {
       district: data.district,
       detail: data.detail,
       type: data.type,
+      latitude: data.latitude,
+      longitude: data.longitude,
     };
 
     if (HttpApiMock.addressListMock) {
       HttpApiMock.addressListMock.push(address);
     } else {
-      HttpApiMock.addressListMock = [address]
+      HttpApiMock.addressListMock = [address];
       AppStorageV2.connect(GetAddressListResp, 'GetAddressListResp', () => [address])!;
     }
 
     const resp: BaseResponse<undefined> = {
-      code: 0,
-      data: undefined,
+      code: 0, data: undefined,
     };
     return Promise.resolve(resp);
   }
 
   public modifyAddress(data: AddressRequest) {
-    // 为默认地址，清空当前默认状态
-    HttpApiMock.addressListMock.map((item) => {
-      item.type = 0;
-    });
+    // 如果设置为默认地址，清空其他地址的默认状态
+    if (data.type === 1) {
+      HttpApiMock.addressListMock.map((item) => {
+        item.type = 0;
+      });
+    }
 
     let address: AddressListItem = {
       id: data.id,
@@ -394,15 +384,16 @@ class HttpApiMock {
       district: data.district,
       detail: data.detail,
       type: data.type,
+      latitude: data.latitude,
+      longitude: data.longitude,
     };
 
-    let index = HttpApiMock.addressListMock.indexOf(address);
+    let index = HttpApiMock.addressListMock.findIndex((item) => item.id === address.id);
 
     HttpApiMock.addressListMock.splice(index, 1, address);
 
     const resp: BaseResponse<undefined> = {
-      code: 0,
-      data: undefined,
+      code: 0, data: undefined,
     };
     return Promise.resolve(resp);
   }
@@ -412,24 +403,21 @@ class HttpApiMock {
     HttpApiMock.addressListMock = list;
 
     const resp: BaseResponse<undefined> = {
-      code: 0,
-      data: undefined,
+      code: 0, data: undefined,
     };
     return Promise.resolve(resp);
   }
 
   public getAddressList() {
     const resp: BaseResponse<GetAddressListResp> = {
-      code: 0,
-      data: HttpApiMock.addressListMock,
+      code: 0, data: HttpApiMock.addressListMock,
     };
     return Promise.resolve(resp);
   }
 
   public getTouristList(touristsId?: string[]) {
     const resp: BaseResponse<GetTouristListResp> = {
-      code: 0,
-      data: touristsId?.length ? HttpApiMock.getTouristDetail(touristsId) : HttpApiMock.touristListMock,
+      code: 0, data: touristsId?.length ? HttpApiMock.getTouristDetail(touristsId) : HttpApiMock.touristListMock,
     };
     return Promise.resolve(resp);
   }

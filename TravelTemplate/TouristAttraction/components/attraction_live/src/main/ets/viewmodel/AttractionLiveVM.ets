@@ -27,4 +27,12 @@ export class AttractionLiveVM {
       UtilLog.error(0x0000, 'AttractionLiveVM', 'get parking fail ' + JSON.stringify(e));
     });
   }
+
+  getDistance(distance:number){
+    if (distance >= 1000) {
+      return `${(distance / 1000).toFixed(2)}千米`
+    }else {
+      return `${distance.toFixed(0)}米`
+    }
+  }
 }

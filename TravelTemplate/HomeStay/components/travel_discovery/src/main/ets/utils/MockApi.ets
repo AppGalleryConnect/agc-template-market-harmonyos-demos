@@ -1,4 +1,5 @@
 import { InternalAxiosRequestConfig } from '@ohos/axios';
+import { QueryTravelogueListType } from '../constant/Index';
 import { ITravelogue, ITravelogueDetail, ITravelogueList } from '../model/IResponse';
 import { MockData } from './MockData';
 
@@ -11,14 +12,20 @@ export class MockApi {
       data: [],
     };
 
-    const filterList = MockApi.list.filter(v => {
+    let filterList = MockApi.list.filter(v => {
       return v.title.includes(data.title ?? '');
-    })
+    });
+
+    if (data.type === QueryTravelogueListType.NEW) {
+      filterList.sort((a, b) => new Date(b.publishTime).getTime() - new Date(a.publishTime).getTime());
+    } else if (data.type === QueryTravelogueListType.HOT) {
+      filterList.sort((a, b) => b.likeNum - a.likeNum);
+    }
 
     if (data.pageNum === 1) {
       resp.data = filterList.slice(0, 10);
     } else if (data.pageNum === 2) {
-      resp.data = filterList.splice(10);
+      resp.data = filterList.slice(10);
     } else {
       resp.data = [];
     }
@@ -44,6 +51,18 @@ export class MockApi {
   static likeTravelogue(config?: InternalAxiosRequestConfig) {
     const data: ESObject = JSON.parse(config?.data ?? '{}');
     const id = data.relId as number || 1;
+    const relType = data.relType as string || '';
+    if (relType === 'EVALUATE') {
+      for (const travelogue of MockApi.list) {
+        const comment = travelogue.travelogueEvaluateList?.find(v => v.id === id);
+        if (comment) {
+          comment.likeStatus = 'Y';
+          comment.likeNum += 1;
+          return true;
+        }
+      }
+      return true;
+    }
     const item = MockApi.list.find(v => v.id === id);
     if (item) {
       item.currentUserLikeStatus = 'Y';
@@ -55,6 +74,18 @@ export class MockApi {
   static cancelLikeTravelogue(config?: InternalAxiosRequestConfig) {
     const data: ESObject = JSON.parse(config?.data ?? '{}');
     const id = data.relId as number || 1;
+    const relType = data.relType as string || '';
+    if (relType === 'EVALUATE') {
+      for (const travelogue of MockApi.list) {
+        const comment = travelogue.travelogueEvaluateList?.find(v => v.id === id);
+        if (comment) {
+          comment.likeStatus = 'N';
+          comment.likeNum -= 1;
+          return true;
+        }
+      }
+      return true;
+    }
     const item = MockApi.list.find(v => v.id === id);
     if (item) {
       item.currentUserLikeStatus = 'N';
@@ -92,10 +123,13 @@ export class MockApi {
     const item = MockApi.list.find(v => v.id === id);
     if (item) {
       item.travelogueEvaluateList?.splice(0, 0, {
+        id: new Date().getTime(),
         createBy: '',
         createTime: new Date().getTime(),
         evaluateContent: evaluateContent,
         userHeadImg: '',
+        likeNum: 0,
+        likeStatus: 'N',
       },);
       item.commentNum += 1;
     }

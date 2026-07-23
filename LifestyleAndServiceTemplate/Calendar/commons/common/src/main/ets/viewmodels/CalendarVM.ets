@@ -19,6 +19,19 @@ export class CalendarVM {
     xl: 2,
   });
   private static _instance: CalendarVM
+  private cachedLunar: Lunar | null = null
+  private cachedDateKey: string = ''
+
+  private getLunar(date?: dayjs.Dayjs): Lunar {
+    const d = date ?? this.selectDate
+    const key = d.format('YYYY-MM-DD')
+    if (this.cachedLunar && this.cachedDateKey === key) {
+      return this.cachedLunar
+    }
+    this.cachedLunar = Lunar.fromDate(d.toDate())
+    this.cachedDateKey = key
+    return this.cachedLunar
+  }
 
   public static get instance() {
     if (!CalendarVM._instance) {
@@ -26,6 +39,8 @@ export class CalendarVM {
     }
     return CalendarVM._instance
   }
+
+
 
   @Computed
   get pagePadding() {
@@ -59,8 +74,7 @@ export class CalendarVM {
   }
 
   public getTodayYiJi() {
-    const todayLunar = Lunar.fromDate(new Date(this.selectDate.format('YYYY-MM-DD')));
-    // 获取今日宜和忌
+    const todayLunar = this.getLunar();
     const yi = todayLunar.getDayYi();
     const ji = todayLunar.getDayJi();
     this.todayYiJi = {
@@ -79,14 +93,14 @@ export class CalendarVM {
 
   public getCurSolarDate(date?: Date) {
     let currentDate = date ? dayjs(date).format('YYYY.MM.DD') : this.selectDate.format('YYYY.MM.DD')
-    const lunar = Lunar.fromDate(new Date(currentDate));
+    const lunar = date ? Lunar.fromDate(new Date(currentDate)) : this.getLunar()
     const lunarDate = lunar.toString()
     const weekday = weekdayMap[new Date().getDay()]
     return `${currentDate} ${weekday} ${lunarDate}`
   }
 
   public getLunarDateLabel() {
-    let d = Lunar.fromDate(this.selectDate.toDate())
+    const d = this.getLunar()
     return d.getMonthInChinese() + '月' + d.getDayInChinese()
   }
 

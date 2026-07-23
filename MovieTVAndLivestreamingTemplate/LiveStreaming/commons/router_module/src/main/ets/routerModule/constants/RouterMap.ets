@@ -54,6 +54,10 @@ export enum RouterMap {
 
   // 观看记录
   WATCH_RECORD = 'WatchRecordPage',
+  // 主播中心
+  ANCHOR_CENTER_PAGE = 'AnchorCenterPage',
+  // 录像播放页
+  VIDEO_RECORD_PLAY_PAGE = 'VideoRecordPlayPage',
   // 系统消息
   SYS_MESSAGE_PAGE = 'SystemMessagePage',
   // 新增粉丝消息

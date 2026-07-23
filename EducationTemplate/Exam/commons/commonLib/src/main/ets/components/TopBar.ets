@@ -23,13 +23,20 @@ export struct TopBar {
   build() {
     Row() {
       Row() {
-        Image($r('app.media.ic_back'))
-          .width($r('app.float.vp_40'))
-          .height($r('app.float.vp_40'))
-          .borderRadius($r('app.float.vp_20'))
-          .onClick(() => {
-            this.onClickBack()
-          })
+        Button() {
+          SymbolGlyph($r('sys.symbol.chevron_backward'))
+            .fontSize(24)
+            .fontColor([$r('sys.color.icon_primary')])
+            .fontWeight(FontWeight.Normal);
+        }
+        .width(40)
+        .height(40)
+        .margin({ right: 8 })
+        .type(ButtonType.Circle)
+        .backgroundColor($r('sys.color.comp_background_tertiary'))
+        .onClick(() => {
+          this.onClickBack()
+        })
       }
       .width($r('app.float.vp_40'))
       .height($r('app.float.vp_40'))

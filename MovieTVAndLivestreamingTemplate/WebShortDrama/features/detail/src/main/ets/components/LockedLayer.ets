@@ -1,7 +1,6 @@
 import { getMedia, NAV_PAGE_NAME } from '@agctemplate/resources'
-import { VipOpen, VipPackage, VipPackageItem } from 'vip_center'
-import { AppStorageV2, promptAction } from '@kit.ArkUI'
-import { AppStorageKeys, BreakPoint, UserInfoModel } from '@agctemplate/widgets'
+import { AppStorageV2 } from '@kit.ArkUI'
+import { AppStorageKeys, BreakPoint, FontModel, fp2pxUtil, UserInfoModel } from '@agctemplate/widgets'
 import { appRouter, WindowManager } from '@agctemplate/utils';
 import { aggregatedPaymentService, CashierPicker, PaymentType } from 'aggregated_payment';
 import { UIContext } from '@kit.ArkUI';
@@ -22,10 +21,9 @@ import {
 @ComponentV2
 export struct LockedLayer {
   @Local isShowUnlockSheet: boolean = false
-  @Local isShowVIPSheet: boolean = false
   @Local _isShowVIPSheet: boolean = false
+  @Local isEnableVIPSheet: boolean = true
   @Local isShowBuySheet: boolean = false
-  @Local vipPackage: VipPackageItem = new VipPackageItem();
   @Local customDialogId: number = 0
   @Local unIndex: number = 0
   @Local userInfo: UserInfoModel = AppStorageV2.connect(UserInfoModel, 'userInfo', () => new UserInfoModel())!
@@ -40,9 +38,11 @@ export struct LockedLayer {
   @Local purAgree: boolean = false
   private uiContext: UIContext = this.getUIContext();
   private navPathStack: NavPathStack = new NavPathStack();
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
 
   @Local lastPurchaseProductExpireTime: string = '';
   subscribeEvent = async (params: MemberParams): Promise<void> => {
+    this.userInfo.isVip = true;
     this.getUIContext().getPromptAction().showToast({ message: '会员订阅成功' });
     if (params.type === iap?.ProductType.NONRENEWABLE && params.status === FinishStatus.FINISHED) {
       this.queryExpireTime(params.productId, params.purchaseTime);
@@ -50,6 +50,7 @@ export struct LockedLayer {
   };
   ownedMemberEvent = async (list: MemberList): Promise<void> => {
     if (list.renewList.length || list.nonRenewList.length) {
+      this.userInfo.isVip = true;
       this.getUIContext().getPromptAction().showToast({ message: `您已拥有会员` });
     }
   };
@@ -222,9 +223,11 @@ export struct LockedLayer {
       let nonAutoRenewPurchasedList = res.nonRenewList;
 
       if (autoRenewPurchasedList?.length || nonAutoRenewPurchasedList?.length) {
+        this.userInfo.isVip = true;
         this.getUIContext().getPromptAction().showToast({ message: '您已开通会员' });
       } else {
         MemberSheetUtils.open(this.productsInfo, this.getUIContext());
+        this.isEnableVIPSheet = true
       }
     }).catch((err: BusinessError) => {
       hilog.error(0xFF00, 'MemberShip',
@@ -287,7 +290,6 @@ export struct LockedLayer {
     // todo: 端侧支付回调仅可用于参考，以辅助提升支付结果判定效率，不建议完全依赖。如：实际支付成功，但支付回调没有触发。
     aggregatedPaymentService.registerPaymentCallback(
       (type: PaymentType, isSuccess: boolean) => {
-        this.showToast(`收到 ${type} 支付回调，支付结果：${(isSuccess ? '成功' : '失败')}`);
       }
     );
   }
@@ -307,7 +309,7 @@ export struct LockedLayer {
             Text('看点解锁/单集购买')
               .width(135)
               .height(21)
-              .font({ weight: 500, size: 16 })
+              .font({ weight: 500, size: fp2pxUtil(16) })
               .fontColor($r('sys.color.font_on_primary'))
           }
           .width('100%')
@@ -322,6 +324,8 @@ export struct LockedLayer {
           showClose: true,
           title: { title: '解锁剧集' },
           preferType: SheetType.CENTER,
+          backgroundColor: $r('sys.color.comp_background_tertiary'),
+          blurStyle: BlurStyle.COMPONENT_ULTRA_THICK
         })
         .onClick(() => {
           if (this.userInfo.isPhoneAssociated) {
@@ -333,20 +337,17 @@ export struct LockedLayer {
         })
 
         Text('开通会员看全集 >')
-          .font({ weight: 500, size: 16 })
+          .enabled(this.isEnableVIPSheet)
+          .font({ weight: 500, size: this.fontModel.getFg(16) })
           .fontColor('#fff')
-          // .bindSheet($$this.isShowVIPSheet, this.vipSheet(), {
-          //   height: 468,
-          //   showClose: true,
-          //   title: { title: '开通会员' },
-          //   preferType: SheetType.BOTTOM,
-          // })
           .onClick(() => {
+            this.isEnableVIPSheet = false
             if (this.userInfo.isPhoneAssociated) {
               this.queryMemberStatus();
             } else {
               WindowManager.setWindowSystemBarProperties({ statusBarContentColor: '#e6000000' })
               appRouter.push({ builderName: NAV_PAGE_NAME.LoginPage.name, params: { isChange: true } })
+              this.isEnableVIPSheet = true
             }
           })
       }
@@ -370,7 +371,7 @@ export struct LockedLayer {
         Column() {
           Text('看点解锁')
             .fontSize(14)
-            .fontColor(this.userInfo.bonus >= 100 ? '#e6000000' : '#66000000')
+            .fontColor(this.userInfo.bonus >= 100 ? $r('sys.color.font_primary') : $r('sys.color.font_tertiary'))
             .fontWeight(FontWeight.Medium)
             .margin({ bottom: 8 })
 
@@ -383,14 +384,14 @@ export struct LockedLayer {
                 .fontWeight(400)
                 .fontSize(14)
             }
-            .fontColor(this.userInfo.bonus >= 100 ? '#e6000000' : '#66000000')
+            .fontColor(this.userInfo.bonus >= 100 ? $r('sys.color.font_primary') : $r('sys.color.font_tertiary'))
           }
         }
         .border({
           width: this.unIndex === 0 ? 2 : 1,
           color: this.unIndex === 0 && this.userInfo.bonus >= 100 ? '#BD9164' : '#0d000000',
         })
-        .backgroundColor('#fff')
+        .backgroundColor($r('sys.color.comp_background_primary'))
         .borderRadius(16)
         .width(160)
         .height(90)
@@ -404,7 +405,7 @@ export struct LockedLayer {
         Column() {
           Text('单集购买')
             .fontSize(14)
-            .fontColor('#e6000000')
+            .fontColor($r('sys.color.font_primary'))
             .fontWeight(FontWeight.Medium)
             .margin({ bottom: 8 })
 
@@ -423,7 +424,7 @@ export struct LockedLayer {
             }
           }
         }
-        .backgroundColor('#fff')
+        .backgroundColor($r('sys.color.comp_background_primary'))
         .border({
           width: this.unIndex === 1 ? 2 : 1,
           color: this.unIndex === 1 ? '#BD9164' : '#0d000000',
@@ -498,63 +499,16 @@ export struct LockedLayer {
           .fontWeight(FontWeight.Medium)
           .fontSize(16)
       }
+      .enabled(this.isEnableVIPSheet)
       .width('100%')
       .height(40)
       .justifyContent(FlexAlign.Center)
       .onClick(() => {
+        this.isEnableVIPSheet = false;
         this.queryMemberStatus();
       })
     }
     .padding({ left: 16, right: 16 })
-  }
-
-  @Builder
-  vipSheet() {
-    Column() {
-      Column() {
-        VipPackage({
-          packageChange: (vipPackage: VipPackageItem) => {
-            this.vipPackage = vipPackage
-          }
-        })
-      }
-      .clip(true)
-      .margin({ bottom: 111, left: 16, right: 16 })
-
-      Column() {
-        VipOpen({
-          onVipOpen: () => {
-            this.isShowVIPSheet = false
-            this.isShowUnlockSheet = false
-            this.cashierPicker
-              .reset() // 内部状态重置
-              .setAmount(this.vipPackage.amount*100 || 500) // 支付金额，单位：分
-              .setTradeSummary(this.vipPackage.title || '会员周卡') // 订单摘要 (可选，不填则不显示)
-              .open();
-          },
-          isVip: this.userInfo.isVip,
-          onMemberServiceAgreementSheetOpen: () => {
-            this.isMemberServiceAgreementSheetShow = !this.isMemberServiceAgreementSheetShow
-          },
-          onAutomaticRenewalAgreementDialogOpen: () => {
-            this.getUIContext().getPromptAction().openCustomDialog({
-              builder: () => {
-                this.automaticRenewalAgreement()
-              }
-            }).then((dialogId: number) => this.customDialogId = dialogId)
-          }
-        })
-          .bindSheet(
-            this.isMemberServiceAgreementSheetShow,
-            this.memberServiceAgreementSheet(), {
-            height: 736,
-            preferType: SheetType.BOTTOM
-          })
-      }
-      .layoutWeight(1)
-      .justifyContent(FlexAlign.SpaceBetween)
-    }
-    .layoutWeight(1)
   }
 
   @Builder

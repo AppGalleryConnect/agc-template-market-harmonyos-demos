@@ -114,34 +114,36 @@ AttractionGuide(location: number[], initAttractionInfo: AttractionsInfo)
 
 #### 参数说明
 
-| 参数名              | 类型                   | 是否必填 | 说明       |
-|:-----------------|:---------------------|:---|:---------|
-| location       | number[]             | 是  | 经纬度信息    |
-| initAttractionInfo       | [AttractionsInfo](#AttractionsInfo对象说明) | 是  | 初始景区导览信息 |
+| 参数名                | 类型                                      | 是否必填 | 说明       |
+|:-------------------|:----------------------------------------|:-----|:---------|
+| location           | number[]                                | 是    | 经纬度信息    |
+| initAttractionInfo | [AttractionsInfo](#AttractionsInfo对象说明) | 是    | 初始景区导览信息 |
 
 #### AttractionsInfo对象说明
-| 参数名              | 类型                    | 是否必填 | 说明     |
-|:-----------------|:----------------------|:---|:-------|
-| banners       | ResourceStr[]         | 是  | 封面图    |
-| attractions       | [AttractionInfo](#AttractionsInfo对象说明)[] | 是  | 景点信息列表 |
+
+| 参数名         | 类型                                       | 是否必填 | 说明     |
+|:------------|:-----------------------------------------|:-----|:-------|
+| banners     | ResourceStr[]                            | 是    | 封面图    |
+| attractions | [AttractionInfo](#AttractionsInfo对象说明)[] | 是    | 景点信息列表 |
 
 #### AttractionsInfo对象说明
-| 参数名              | 类型               | 是否必填 | 说明       |
-|:-----------------|:-----------------|:---|:---------|
-| labels       | string[]         | 是  | 景点标签     |
-| detailImages       | ResourceStr[]    | 是  | 景点详情图片   |
-| attractionId       | number           | 是  | 景点id     |
-| brief       | string | 是  | 景点简介     |
-| name       | string           | 是  | 景点名称     |
-| location       | string           | 是  | 景点详细地址   |
-| longitude       | number           | 是  | 景点经度     |
-| latitude       | number           | 是  | 景点纬度     |
-| banner       | ResourceStr      | 是  | 景点banner |
-| icon       | ResourceStr      | 是  | 景点图标     |
-| introduction       | string           | 是  | 景点介绍     |
-| consultPhone       | string           | 是  | 景点咨询电话   |
-| audio       | string           | 是  | 景点音频     |
-| isHot       | number           | 是  | 是否热门景点   |
+
+| 参数名          | 类型            | 是否必填 | 说明       |
+|:-------------|:--------------|:-----|:---------|
+| labels       | string[]      | 是    | 景点标签     |
+| detailImages | ResourceStr[] | 是    | 景点详情图片   |
+| attractionId | number        | 是    | 景点id     |
+| brief        | string        | 是    | 景点简介     |
+| name         | string        | 是    | 景点名称     |
+| location     | string        | 是    | 景点详细地址   |
+| longitude    | number        | 是    | 景点经度     |
+| latitude     | number        | 是    | 景点纬度     |
+| banner       | ResourceStr   | 是    | 景点banner |
+| icon         | ResourceStr   | 是    | 景点图标     |
+| introduction | string        | 是    | 景点介绍     |
+| consultPhone | string        | 是    | 景点咨询电话   |
+| audio        | string        | 是    | 景点音频     |
+| isHot        | number        | 是    | 是否热门景点   |
 
 ## 示例代码
 

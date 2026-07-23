@@ -24,26 +24,37 @@ export class AvSessionController {
   }
 
   public async initAvSession(context: common.UIAbilityContext) {
-    this.context = context;
-    if (!this.context) {
-      hilog.info(0x0000, TAG, `session create failed : conext is undefined`);
-      return;
+    try {
+      this.context = context;
+      if (!this.context) {
+        hilog.info(0x0000, TAG, `session create failed : conext is undefined`);
+        return;
+      }
+      this.avSession = await avSession.createAVSession(this.context, 'SHORT_AUDIO_SESSION', 'video')
+      hilog.info(0x0000, TAG, `session create successed : sessionId : ${this.avSession.sessionId}`);
+      this.avSessionController = await this.avSession.getController();
+      hilog.info(0x0000, TAG, `session controller create successed : sessionId : ${this.avSession.sessionId}`);
+      BackgroundTaskManager.startContinuousTask(this.context);
+      this.setLaunchAbility();
+      await this.avSession.setExtras({
+        requireAbilityList: ['url-cast']
+      });
+    } catch (e) {
     }
-    this.avSession = await avSession.createAVSession(this.context, 'SHORT_AUDIO_SESSION', 'video')
-    hilog.info(0x0000, TAG, `session create successed : sessionId : ${this.avSession.sessionId}`);
-    this.avSessionController = await this.avSession.getController();
-    hilog.info(0x0000, TAG, `session controller create successed : sessionId : ${this.avSession.sessionId}`);
-    BackgroundTaskManager.startContinuousTask(this.context);
-    this.setLaunchAbility();
-    await this.avSession.setExtras({
-      requireAbilityList: ['url-cast']
-    });
   }
 
   public async release() {
     this.unregisterSessionListener()
-    await this.avSession?.deactivate()
-    await this.avSession?.destroy()
+    try {
+      await this.avSession?.deactivate()
+    } catch (e) {
+      hilog.error(0x0000, TAG, `release deactivate failed: ${e}`);
+    }
+    try {
+      await this.avSession?.destroy()
+    } catch (e) {
+      hilog.error(0x0000, TAG, `release destroy failed: ${e}`);
+    }
     this.avSession = undefined
   }
 
@@ -62,11 +73,14 @@ export class AvSessionController {
       requestCode: 0,
       wantAgentFlags: [wantAgent.WantAgentFlags.UPDATE_PRESENT_FLAG]
     };
-    wantAgent.getWantAgent(wantAgentInfo).then((agent) => {
-      if (this.avSession) {
-        this.avSession.setLaunchAbility(agent);
-      }
-    });
+    try {
+      wantAgent.getWantAgent(wantAgentInfo).then((agent) => {
+        if (this.avSession) {
+          this.avSession.setLaunchAbility(agent);
+        }
+      });
+    } catch (e) {
+    }
   }
 
   public getAvSession() {
@@ -108,13 +122,17 @@ export class AvSessionController {
 
   public setAvSessionPlayState(playbackState: avSession.AVPlaybackState) {
     if (this.avSession) {
-      this.avSession.setAVPlaybackState(playbackState, (err: BusinessError) => {
-        if (err) {
-          hilog.error(0x0000, TAG, `SetAVPlaybackState BusinessError: code: ${err.code}, message: ${err.message}`);
-        } else {
-          hilog.info(0x0000, TAG, 'SetAVPlaybackState successfully');
-        }
-      });
+      try {
+        this.avSession.setAVPlaybackState(playbackState, (err: BusinessError) => {
+          if (err) {
+            hilog.error(0x0000, TAG, `SetAVPlaybackState BusinessError: code: ${err.code}, message: ${err.message}`);
+          } else {
+            hilog.info(0x0000, TAG, 'SetAVPlaybackState successfully');
+          }
+        });
+      } catch (e) {
+        hilog.error(0x0000, TAG, `setAvSessionPlayState failed: ${e}`);
+      }
     }
   }
 
@@ -129,6 +147,10 @@ export class AvSessionController {
     this.avSession.off('setLoopMode');
     this.avSession.off('seek');
     this.avSession.off('toggleFavorite');
-    BackgroundTaskManager.stopContinuousTask(this.context);
+    try {
+      BackgroundTaskManager.stopContinuousTask(this.context);
+    } catch (e) {
+      hilog.error(0x0000, TAG, `stopContinuousTask failed: ${e}`);
+    }
   }
 }

@@ -39,6 +39,10 @@
     {
       "name": "week_tomorrow_after_tomorrow",
       "value": "后天"
+    },
+    {
+      "name": "agcit_huawei_household_service",
+      "value": "1.0.5"
     }
   ]
 }

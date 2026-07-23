@@ -90,17 +90,18 @@ export struct ScheduleList {
                 .visibility(this.scheduleList.length ? Visibility.Visible : Visibility.None)
               }
               .scrollBar(BarState.Off)
-              .edgeEffect(EdgeEffect.Spring, {alwaysEnabled: true})
+              .nestedScroll(
+                { scrollForward: NestedScrollMode.PARENT_FIRST, scrollBackward: NestedScrollMode.PARENT_FIRST })
             }
           }, (item: UserEventItem) => JSON.stringify(item))
         }
       }
-      .height('100%')
       .justifyContent(FlexAlign.Start)
     }
     .scrollBar(BarState.Off)
     .edgeEffect(EdgeEffect.Spring)
     .layoutWeight(1)
+    .align(Alignment.Top)
     .padding({ bottom: 16, top: 16 })
   }
 }

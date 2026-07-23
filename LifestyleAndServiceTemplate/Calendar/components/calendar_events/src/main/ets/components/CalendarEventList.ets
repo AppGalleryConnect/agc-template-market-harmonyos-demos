@@ -1,7 +1,5 @@
-import { PersistenceV2 } from '@kit.ArkUI';
 import { BaseCustomTabBar, ToggleItem } from 'base_apis'
 import { CalendarNavTitle } from './common/CalendarNavTitle'
-import { UserEvent } from '../model/UserEventModel';
 import CalendarEventVM from '../viewModel/ViewModel';
 import { ScheduleList } from './eventList/ScheduleList';
 import { BirthdayRememberList } from './eventList/BirthdayRememberList';
@@ -15,9 +13,8 @@ export function CalendarEventDetailsBuilder() {
 
 @ComponentV2
 export struct CalendarEventDetails {
-  @Local userEvent: UserEvent = PersistenceV2.connect(UserEvent, () => new UserEvent())!;
-  @Local currentIndex: number = 0
   @Local calendarEventVM: CalendarEventVM = CalendarEventVM.instance;
+  @Local currentIndex: number = 0
   @Local eventList: ToggleItem[] = []
 
   aboutToAppear(): void {
@@ -53,24 +50,29 @@ export struct CalendarEventDetails {
                   if (item.id === EVENT_TYPE.SCHEDULE) {
                     ScheduleList({
                       scheduleList: this.calendarEventVM.userEvent.userEventList.filter(value => value.eventType ===
-                      item.id),
+                        item.id),
                     })
                   }
                   if (item.id === EVENT_TYPE.BIRTHDAY) {
                     BirthdayRememberList({
-                      birthdayRememberList: this.userEvent.userEventList.filter(value => value.eventType === item.id),
+                      birthdayRememberList: this.calendarEventVM.userEvent.userEventList
+                        .filter(value => value.eventType ===
+                          item.id),
                       eventType: item.id,
                     })
                   }
                   if (item.id === EVENT_TYPE.ANNIVERSARIES) {
                     BirthdayRememberList({
-                      birthdayRememberList: this.userEvent.userEventList.filter(value => value.eventType === item.id),
+                      birthdayRememberList: this.calendarEventVM.userEvent.userEventList
+                        .filter(value => value.eventType ===
+                          item.id),
                       eventType: item.id,
                     })
                   }
                   if (item.id === EVENT_TYPE.TODO) {
                     TodoList({
-                      todoList: this.userEvent.userEventList.filter(value => value.eventType === item.id),
+                      todoList: this.calendarEventVM.userEvent.userEventList.filter(value => value.eventType ===
+                        item.id),
                     })
                   }
                 }

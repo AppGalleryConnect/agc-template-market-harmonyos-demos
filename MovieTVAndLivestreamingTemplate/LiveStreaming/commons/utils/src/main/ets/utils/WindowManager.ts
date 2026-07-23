@@ -72,7 +72,11 @@ export class WindowManager {
     if (!w) {
       return false;
     }
-    await w.setWindowLayoutFullScreen(isFullScreen);
+    try {
+      await w.setWindowLayoutFullScreen(isFullScreen);
+    } catch (exception) {
+      Logger.error(TAG, 'Failed to setWindowLayoutFullScreen: ' + SafeJson.ohAegJsonStringify(exception));
+    }
     return true;
   }
 

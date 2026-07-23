@@ -7,8 +7,6 @@ export { CommonHeader } from './src/main/ets/components/CommonHeader';
 
 export { ConfirmSheet } from './src/main/ets/components/ConfirmSheet';
 
-export { SettingFont, SettingFontParams, settingFontBuilder } from './src/main/ets/components/SettingFont';
-
 export { agreeDialogBuilder } from './src/main/ets/components/AgreeDialog';
 
 /**
@@ -16,9 +14,13 @@ export { agreeDialogBuilder } from './src/main/ets/components/AgreeDialog';
  */
 export { CommonConstants } from './src/main/ets/constants/CommonConstants';
 
+export { BreakpointNameEnum, BreakpointType, GridRowColSetting } from './src/main/ets/constants/GridRowColSetting';
+
 export { AppStorageMap, PersistentStorageMap } from './src/main/ets/constants/CommonEnum';
 
 export { RouterMap } from './src/main/ets/constants/RouterMap';
+
+export { FLAG_SHOW_ADS } from './src/main/ets/constants/AppConfig';
 
 /**
  * 样式
@@ -51,3 +53,4 @@ export { SafeUtil } from './src/main/ets/utils/SafeUtil';
 
 export { WindowUtil } from './src/main/ets/utils/WindowUtil';
 
+export { GlobalContextUtils } from './src/main/ets/utils/ContextUtils';

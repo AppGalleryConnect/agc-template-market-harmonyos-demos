@@ -106,9 +106,9 @@ export function checkPsgInfo(guest: string, phone: string) {
 
 export function doRandBySync(): string {
   let data: string = '';
-  let rand = cryptoFramework.createRandom();
   let len = 6;
   try {
+    let rand = cryptoFramework.createRandom();
     let randData = rand.generateRandomSync(len);
     if (randData !== null) {
       for (let i = 0; i < randData.data.length; i++) {
@@ -136,7 +136,9 @@ export function routeToPetal(context: common.UIAbilityContext, name: string) {
       destinationName: name,
     },
   };
-  context.startAbility(petalMapWant);
+  context.startAbility(petalMapWant).catch((err: BusinessError) => {
+    Logger.error(`startAbility failed, ${err.code}, ${err.message}`);
+  });
 }
 
 export function formatPriceToNumber(price:number) {

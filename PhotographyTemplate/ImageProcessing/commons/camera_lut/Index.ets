@@ -1,1 +1,0 @@
-export { XComponentContext } from './src/main/cpp/types/libentry/index'

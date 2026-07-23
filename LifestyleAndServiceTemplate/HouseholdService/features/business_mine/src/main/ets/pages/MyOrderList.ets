@@ -12,7 +12,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { CommonConstants, GridRowColSetting, IMenuItem, MY_ORDER_LIST } from 'lib_foundation';
+import {
+  BreakpointNameEnum,
+  CommonConstants,
+  GridRowColSetting,
+  IMenuItem,
+  MY_ORDER_LIST,
+  WindowUtils
+} from 'lib_foundation';
 import { WindowUtil } from 'module_base';
 import { OrderList } from '../components/OrderList';
 import { IQueryListParam, MyOrderVM } from '../viewmodel/MyOrderVM';
@@ -24,7 +31,7 @@ export function MyOrderListBuilder() {
 
 @ComponentV2
 export struct MyOrderList {
-  @Local breakpoint: string = '';
+  @Local breakpoint: BreakpointNameEnum = BreakpointNameEnum.SM;
   orderVM: MyOrderVM = MyOrderVM.instance;
 
   async aboutToAppear(): Promise<void> {
@@ -75,11 +82,15 @@ export struct MyOrderList {
         }
       }
       .onBreakpointChange((bp) => {
-        this.breakpoint = bp;
+        this.breakpoint = bp as BreakpointNameEnum;
       })
     }
     .title('我的订单', {
       paddingStart: { value: GridRowColSetting.getPageMargin(this.breakpoint), unit: 1 }
+    })
+    .padding({
+      top: WindowUtils.windowTopPadding,
+      bottom: WindowUtils.windowBottomPadding,
     })
     .backgroundColor($r('sys.color.background_secondary'))
   }

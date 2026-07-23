@@ -65,7 +65,7 @@ export struct SettingPage {
 
   build() {
     NavDestination() {
-      Column({space: 17}){
+      Column({ space: 17 }) {
         Row() {
           Text('隐私协议')
             .textExtend();
@@ -73,7 +73,6 @@ export struct SettingPage {
           rightArrow()
         }
         .borderRadius(16)
-        .minHeight(46)
         .backgroundColor($r('app.color.comp_background_list_card'))
         .width(CommonConstants.FULL_PERCENT)
         .onClick(() => {
@@ -92,7 +91,6 @@ export struct SettingPage {
           rightArrow()
         }
         .borderRadius(16)
-        .minHeight(46)
         .backgroundColor($r('app.color.comp_background_list_card'))
         .width(CommonConstants.FULL_PERCENT)
         .onClick(() => {
@@ -110,7 +108,6 @@ export struct SettingPage {
           rightArrow()
         }
         .borderRadius(16)
-        .minHeight(46)
         .backgroundColor($r('app.color.comp_background_list_card'))
         .width(CommonConstants.FULL_PERCENT)
         .onClick(() => {
@@ -128,8 +125,6 @@ export struct SettingPage {
         left: '4%',
         right: '4%'
       })
-
-
     }
     .backgroundColor('#F1F3F5')
     .title('设置')

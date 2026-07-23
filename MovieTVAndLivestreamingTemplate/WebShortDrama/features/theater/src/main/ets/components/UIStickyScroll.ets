@@ -1,6 +1,13 @@
 import { TabStyle } from './Type'
 import { AppStorageV2 } from '@kit.ArkUI'
-import { AppStorageKeys, BreakPoint } from '@agctemplate/widgets'
+import {
+  AppStorageKeys,
+  BreakPoint,
+  FontModel,
+  fp2pxUtil,
+  MinorsMode,
+  MinorsProtectionUtils
+} from '@agctemplate/widgets'
 import { SearchItem, SearchView, SearchViewController } from 'search'
 import { getRankList } from '../mapper/DramaCoverMapper'
 import { DramaCoverVM } from '../viewmodels/DramaCoverVM'
@@ -12,8 +19,12 @@ export const DEFAULT_LARGE_HEIGHT = 60
 
 const HOT_SEARCH_CATEGORY: string = '热搜榜'
 
+const minorsMode: MinorsMode =
+  AppStorageV2.connect(MinorsMode, 'isMinorsMode', () => new MinorsMode(MinorsProtectionUtils.getMinorsMode()))!
+
 @ComponentV2
 export struct UIStickyScroll {
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
   @Consumer('navStack') navPathStack: NavPathStack = new NavPathStack();
   controller: SearchViewController = new SearchViewController();
   @Param @Once headerHeight: number = DEFAULT_SMALL_HEIGHT
@@ -27,7 +38,7 @@ export struct UIStickyScroll {
     // tab选中颜色
     tabActiveColor: '#EC6E45',
     // tab字体颜色
-    tabFontColor: '#99000000',
+    tabFontColor: $r('sys.color.font_secondary'),
     // tab字重
     tabFontWeight: 500,
     // tab字体大小
@@ -103,77 +114,69 @@ export struct UIStickyScroll {
 
   build() {
     Stack() {
-      Column() {
-        // 头部区域
-        Flex({ alignItems: ItemAlign.Center }) {
-          List({ space: 8 }) {
-            ForEach(['推荐', '排行榜', '新剧', 'VIP专区'], (title: string, index: number) => {
-              ListItem() {
-                Text(title)
-                  .width(76)
-                  .height(28)
-                  .borderRadius(14)
-                  .fontColor(this.activeIndex === index ? '#fff' : '#e6000000')
-                  .backgroundColor(this.activeIndex === index ? '#EC6E45' : '#0d000000')
-                  .fontSize(14)
-                  .fontWeight(500)
-                  .textAlign(TextAlign.Center)
-                  .onClick(() => {
-                    this.activeIndex = index
-                    this.actIndex = 0
-                  })
-              }
-            }, (title: string) => title)
-          }
-          .width(this.breakPoint.value === 'sm' ? 360 : 540)
-          .height(56)
-          .listDirection(Axis.Horizontal)
-          .visibility(this.headerTitleVisible ? Visibility.Visible : Visibility.Hidden)
-          .scrollBar(BarState.Off)
-          .padding({ top: 18 })
+      if (!minorsMode.isMinorsMode) {
+        Column() {
+          // 头部区域
+          Flex({ alignItems: ItemAlign.Center }) {
+            List({ space: 8 }) {
+              ForEach(['推荐', '排行榜', '新剧', 'VIP专区'], (title: string, index: number) => {
+                ListItem() {
+                  Text(title)
+                    .width(76)
+                    .height(28)
+                    .borderRadius(14)
+                    .fontColor(this.activeIndex === index ? '#fff' : $r('sys.color.font_primary'))
+                    .backgroundColor(this.activeIndex === index ? '#EC6E45' : $r('sys.color.comp_background_tertiary'))
+                    .fontSize(fp2pxUtil(14))
+                    .fontWeight(500)
+                    .textAlign(TextAlign.Center)
+                    .onClick(() => {
+                      this.activeIndex = index
+                      this.actIndex = 0
+                    })
+                }
+              }, (title: string) => title)
+            }
+            .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: true })
+            .width(this.breakPoint.value === 'sm' ? 360 : 540)
+            .height(56)
+            .listDirection(Axis.Horizontal)
+            .visibility(this.headerTitleVisible ? Visibility.Visible : Visibility.Hidden)
+            .scrollBar(BarState.Off)
+            .padding({ top: 18 })
 
+            Blank()
 
-          Row({ space: 8 }) {
-            // Image(getMedia('app.media.search'))
-            //   .width(40)
-            //   .height(40)
-            //   .borderRadius(20)
-            //   .backgroundColor('#F1F3F5')
-            //   .onClick(() => {
-            //     appRouter.push({
-            //       builderName: NAV_PAGE_NAME.SearchPage.name
-            //     })
-            //   })
-            SearchView({
-              routerStack: this.navPathStack,
-              themeColor: '#EC6E45',
-              controller: this.controller,
-              placeholder: ['输入剧名搜索'],
-              showGuessLike: false,
-              isShallowWindow: true,
-              onClickGetMore: () => {
-                this.getUIContext().getPromptAction().showToast({ message: '前往更多页，暂未开发' })
-              },
-              onClickResultItem: (listItem: SearchItem) => {
-                this.getUIContext().getPromptAction().showToast({ message: '前往详情页，暂未开发' })
-              }
-            })
-          }
-          .justifyContent(FlexAlign.End)
-          .margin({ right: 8 })
-          .padding({ top: 5 })
-          .borderRadius(24)
-          .width('20%')
-        }.height('100%')
+            Row({ space: 8 }) {
+              SearchView({
+                routerStack: this.navPathStack,
+                themeColor: '#EC6E45',
+                controller: this.controller,
+                placeholder: ['输入剧名搜索'],
+                showGuessLike: false,
+                isShallowWindow: true,
+                onClickGetMore: () => {
+                  this.getUIContext().getPromptAction().showToast({ message: '前往更多页，暂未开发' })
+                },
+                onClickResultItem: (listItem: SearchItem) => {
+                  this.getUIContext().getPromptAction().showToast({ message: '前往详情页，暂未开发' })
+                }
+              })
+            }
+            .margin({ right: 8 })
+            .padding({ top: 5 })
+            .borderRadius(24)
+          }.height('100%')
+        }
+        .width('100%')
+        .height(this.headerHeight)
+        .backgroundColor('transparent')
+        .zIndex(2)
+        .padding({
+          left: 16,
+          right: 16,
+        })
       }
-      .width('100%')
-      .height(this.headerHeight)
-      .backgroundColor('transparent')
-      .zIndex(2)
-      .padding({
-        left: 16,
-        right: 16,
-      })
 
       Scroll(this.scroller) {
         Column() {
@@ -185,83 +188,87 @@ export struct UIStickyScroll {
             }
             .visibility(this.headerTitleVisible ? Visibility.Hidden : Visibility.Visible)
           }.width('100%')
-          .height(this.mainHeight + this.headerHeight)
+          .height(minorsMode.isMinorsMode ? this.mainHeight : this.mainHeight + this.headerHeight)
 
           Column() {
-            if (this.activeIndex <= 1) {
-              // tab栏
-              RelativeContainer() {
-                List({ scroller: this.scrollerForTabList }) {
-                  ForEach(this.tabList, (item: string, index) => {
-                    ListItem() {
-                      Column() {
-                        Row() {
-                          Text(item)
-                            .height('100%')
-                            .textAlign(TextAlign.Center)
-                            .fontColor(this.actIndex === index ? this.tabStyle.tabActiveColor :
-                              this.tabStyle.tabFontColor)
-                            .fontWeight(this.tabStyle.tabFontWeight)
-                            .fontSize(this.tabStyle.tabFontSize)
-                            .maxLines(1)
-                            .textOverflow({ overflow: TextOverflow.Ellipsis })
-                        }
-                        .layoutWeight(1)
-                        .constraintSize({
-                          maxWidth: 0.4 * this.tabWidth,
-                        })
-                        .height('100%')
-                        .gesture(
-                          GestureGroup(GestureMode.Exclusive,
-                            TapGesture({ fingers: 1, count: 1 })
-                              .onAction(() => {
-                                this.actIndex = index
-                                this.onTabChange(index)
-                                if (index >= 4) {
-                                  this.scrollerForTabList.scrollToIndex(index - 3, true)
-                                }
-                                if (index <= 3) {
-                                  this.scrollerForTabList.scrollToIndex(0, true)
-                                }
-                              })
-                          )
-                        )
-                        .onAreaChange((oldValue, newValue: Area) => {
-                          if (this.tabItemWidthList[index] !== newValue.width as number) {
-                            this.tabItemWidthList[index] = newValue.width as number
+            if (!minorsMode.isMinorsMode) {
+              if (this.activeIndex <= 1) {
+                // tab栏
+                RelativeContainer() {
+                  List({ scroller: this.scrollerForTabList }) {
+                    ForEach(this.tabList, (item: string, index) => {
+                      ListItem() {
+                        Column() {
+                          Row() {
+                            Text(item)
+                              .height('100%')
+                              .textAlign(TextAlign.Center)
+                              .fontColor(this.actIndex === index ? this.tabStyle.tabActiveColor :
+                                this.tabStyle.tabFontColor)
+                              .fontWeight(this.tabStyle.tabFontWeight)
+                              .fontSize(this.fontModel.getFg(this.tabStyle.tabFontSize as number))
+                              .maxLines(1)
+                              .textOverflow({ overflow: TextOverflow.Ellipsis })
                           }
-                        })
+                          .layoutWeight(1)
+                          .constraintSize({
+                            maxWidth: 0.4 * this.tabWidth,
+                          })
+                          .height('100%')
+                          .gesture(
+                            GestureGroup(GestureMode.Exclusive,
+                              TapGesture({ fingers: 1, count: 1 })
+                                .onAction(() => {
+                                  this.actIndex = index
+                                  this.onTabChange(index)
+                                  if (index >= 4) {
+                                    this.scrollerForTabList.scrollToIndex(index - 3, true)
+                                  }
+                                  if (index <= 3) {
+                                    this.scrollerForTabList.scrollToIndex(0, true)
+                                  }
+                                })
+                            )
+                          )
+                          .onAreaChange((oldValue, newValue: Area) => {
+                            if (this.tabItemWidthList[index] !== newValue.width as number) {
+                              this.tabItemWidthList[index] = newValue.width as number
+                            }
+                          })
 
-                        if (this.actIndex === index) {
-                          Column()
-                            .backgroundColor(this.tabStyle.tabActiveColor)
-                            .borderRadius($r('sys.float.ohos_id_corner_radius_progress_bar'))
-                            .height(2)
-                            .width(this.tabItemWidthList[index])
-                        }
-                      }.padding({ top: this.actIndex === index ? 2 : 0 })
-                    }.height('100%').margin({ right: 16 })
-                  }, (item: string) => item)
-                }.listDirection(Axis.Horizontal).scrollBar(BarState.Off).scrollSnapAlign(ScrollSnapAlign.START)
+                          if (this.actIndex === index) {
+                            Column()
+                              .backgroundColor(this.tabStyle.tabActiveColor)
+                              .borderRadius($r('sys.float.ohos_id_corner_radius_progress_bar'))
+                              .height(2)
+                              .width(this.tabItemWidthList[index])
+                          }
+                        }.padding({ top: this.actIndex === index ? 2 : 0 })
+                      }.height('100%').margin({ right: 16 })
+                    }, (item: string) => item)
+                  }
+                  .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: true })
+                  .listDirection(Axis.Horizontal).scrollBar(BarState.Off).scrollSnapAlign(ScrollSnapAlign.START)
 
-              }
-              .height(this.tabStyle.tabHeight)
-              .padding({ left: 16, right: 16 })
-              .onAreaChange((oldValue, newValue: Area) => {
-                if (this.tabWidth !== newValue.width as number) {
-                  this.tabWidth = newValue.width as number
                 }
-              })
+                .height(this.tabStyle.tabHeight)
+                .padding({ left: 16, right: 16 })
+                .onAreaChange((oldValue, newValue: Area) => {
+                  if (this.tabWidth !== newValue.width as number) {
+                    this.tabWidth = newValue.width as number
+                  }
+                })
+              }
             }
-
             // 自定义内容区
             RelativeContainer() {
               this.contentBuilderParam()
             }
-            .padding({ left: 16, right: 16, top: 8 })
+            .padding({ left: minorsMode.isMinorsMode ? 8 : 16, right: 16, top: 8 })
             .borderRadius({ topLeft: 4, topRight: 4 })
             .width('100%')
-            .height(`calc(100% - ${this.tabStyle.tabHeight}vp)`)
+            .height(
+              minorsMode.isMinorsMode || this.activeIndex > 1 ? '100%' : `calc(100% - ${this.tabStyle.tabHeight}vp)`)
             .gesture(PanGesture(this.panOption).onActionStart((event: GestureEvent) => {
               if (this.isToggleByPan) {
                 if (event.offsetX < 0 && this.actIndex < this.tabList.length - 1) {
@@ -285,14 +292,14 @@ export struct UIStickyScroll {
           }.height(`calc(100% - ${this.headerHeight}vp)`)
         }.width('100%')
       }
-      .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: true })
+      .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: minorsMode.isMinorsMode ? false : true })
       .friction(0.6)
       .scrollBar(BarState.Off)
       .width('100%')
       .height('100%')
       .onScrollEdge((side: Edge) => {
         // 滚动到顶部
-        if (side === Edge.Bottom) {
+        if (!minorsMode.isMinorsMode && side === Edge.Bottom) {
           this.headerTitleVisible = true
           this.onReachTop()
         }

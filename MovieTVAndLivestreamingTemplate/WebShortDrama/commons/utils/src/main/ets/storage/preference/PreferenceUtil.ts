@@ -30,7 +30,10 @@ export class PreferenceUtil {
   private dataPreferences: preferences.Preferences | null = null
 
   private constructor(context: Context, fileName: string) {
-    preferences.removePreferencesFromCacheSync(context, fileName)
+    try {
+      preferences.removePreferencesFromCacheSync(context, fileName)
+    } catch (e) {
+    }
     this.dataPreferences = preferences.getPreferencesSync(context, { name: fileName })
     Logger.info(TAG, `PreferenceUtil: ${fileName} init: ${this.dataPreferences != null}`)
   }

@@ -1,7 +1,7 @@
 import { Header } from '../component/Header'
 import { common } from '@kit.AbilityKit'
 import { AppStorageV2, promptAction } from '@kit.ArkUI'
-import { AppStorageKeys, StatusBarHeight } from '@agctemplate/widgets';
+import { AppStorageKeys, FontModel, fp2pxUtil, StatusBarHeight } from '@agctemplate/widgets';
 
 // 关于
 @ComponentV2
@@ -12,6 +12,7 @@ export struct AboutPage {
   @Local service: string = 'XX'
   @Local business: string = 'XX业务与隐私声明'
   @Local needUpdate: boolean = false;
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
 
   // 检查更新
   checkAppUpdate() {
@@ -40,7 +41,7 @@ export struct AboutPage {
             .height(72)
             .margin({ top: 62, bottom: 8 })
           Text('短剧模板')
-            .fontSize(16)
+            .fontSize(this.fontModel.getFg(16))
             .height(21)
             .fontWeight(FontWeight.Medium)
 
@@ -55,19 +56,19 @@ export struct AboutPage {
                   }
                 }) {
                   Text('版本信息')
-                    .fontSize(16)
-                    .height(21)
+                    .fontSize(this.fontModel.getFg(16))
+                    .height(this.fontModel.getDesFg(21))
                     .fontWeight(500)
                     .fontColor($r('sys.color.font_primary'))
                     .margin({ top: 2 })
                 }
-                .height(21)
-                .width(74)
+                .height(this.fontModel.getDesFg(21))
+                .width(this.fontModel.getDesFg(74))
                 .margin({ bottom: 2 })
 
                 Text('10.15.1')
-                  .fontSize(14)
-                  .height(19)
+                  .fontSize(this.fontModel.getFg(14))
+                  .height(this.fontModel.getDesFg(19))
                   .fontWeight(400)
                   .fontColor($r('sys.color.font_secondary'))
               }
@@ -76,14 +77,15 @@ export struct AboutPage {
               Blank()
               Text(this.needUpdate ? '待更新' : '已是最新版本')
                 .fontWeight(400)
-                .fontSize(14)
+                .fontSize(this.fontModel.getFg(14))
                 .fontColor($r('sys.color.font_secondary'))
-              Image($r('app.media.iconRight'))
-                .size({ width: 18, height: 18 })
+              SymbolGlyph($r('sys.symbol.chevron_right'))
+                .fontSize(this.fontModel.getFg(18))
+                .fontColor([$r('sys.color.icon_fourth')])
             }
             .justifyContent(FlexAlign.SpaceBetween)
             .width('100%')
-            .height(64)
+            .height(this.fontModel.getDesFg(64))
             .onClick(() => {
               this.getUIContext().getPromptAction().showToast({ message: '已是最新版本' })
             })
@@ -93,21 +95,21 @@ export struct AboutPage {
             Row() {
               Column() {
                 Text('客服电话')
-                  .fontSize(16)
-                  .height(21)
+                  .fontSize(this.fontModel.getFg(16))
+                  .height(this.fontModel.getDesFg(21))
                   .fontWeight(500)
                   .fontColor($r('sys.color.font_primary'))
                   .margin({ top: 2 })
 
                 Text('900800')
-                  .fontSize(14)
-                  .height(19)
+                  .fontSize(this.fontModel.getFg(14))
+                  .height(this.fontModel.getDesFg(19))
                   .fontWeight(400)
                   .fontColor($r('sys.color.font_secondary'))
               }
               .alignItems(HorizontalAlign.Start)
             }
-            .height(64)
+            .height(this.fontModel.getDesFg(64))
             .width('100%')
           }
           .backgroundColor($r('sys.color.comp_background_primary'))
@@ -129,17 +131,17 @@ export struct AboutPage {
 
         Column() {
           Text('苏ICP备17040376号-135A')
-            .fontSize(12)
+            .fontSize(fp2pxUtil(12))
             .lineHeight(16)
             .fontWeight(500)
             .fontColor('#0A59F7')
           Text('华为xx 版权所有 © 2019-2023')
-            .fontSize(12)
+            .fontSize(fp2pxUtil(12))
             .lineHeight(16)
             .fontWeight(400)
             .opacity(0.6)
           Text('技术支持：xxxxxxxx')
-            .fontSize(12)
+            .fontSize(fp2pxUtil(12))
             .lineHeight(16)
             .fontWeight(400)
             .opacity(0.6)

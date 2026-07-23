@@ -1,10 +1,11 @@
-import { promptAction, window } from '@kit.ArkUI';
+import { window } from '@kit.ArkUI';
 import { loginComponentManager } from '@kit.AccountKit';
 import { BusinessError } from '@kit.BasicServicesKit';
-import { common } from '@kit.AbilityKit';
 import { deviceInfo } from '@kit.BasicServicesKit';
 import * as wxopensdk from '@tencent/wechat_open_sdk';
-import { BaseViewModel, CommonConfirmDialog, CommonConstants, Logger, PopViewUtils, RouterMap } from 'lib_common';
+import { BaseViewModel, CommonConfirmDialog, CommonConstants,
+  GlobalContext,
+  Logger, PopViewUtils, RouterMap } from 'lib_common';
 import { AccountApi } from '../services/AccountApi';
 import { HuaweiAuthUtils } from '../utils/HuaweiAuthUtils';
 import { ErrorCode } from '../constants/ErrorCode';
@@ -74,7 +75,7 @@ export class LoginVM extends BaseViewModel {
     Logger.error(TAG, 'onClickLoginWithHuaweiIDButton fail, error: ' + JSON.stringify(error));
 
     if (error.code === ErrorCode.ERROR_CODE_AGREEMENT_STATUS_NOT_ACCEPTED) {
-      promptAction.showToast({ message: '请先勾选同意协议' });
+      GlobalContext.getUIContext().getPromptAction().showToast({ message: '请先勾选同意协议' });
       return;
     }
     let errorMsg: string = getAccountErrorMsg(error.code);
@@ -113,18 +114,30 @@ export class LoginVM extends BaseViewModel {
     if (!context) {
       return;
     }
-    window.getLastWindow(context).then((window) => {
-      window.setWindowPrivacyMode(true);
-    });
+    try {
+      window.getLastWindow(context).then((window) => {
+        window.setWindowPrivacyMode(true);
+      }).catch((error: Error) => {
+        Logger.error(TAG, 'setPrivacyMode error: ' + JSON.stringify(error));
+      });
+    } catch (error) {
+      Logger.error(TAG, 'setPrivacyMode error: ' + JSON.stringify(error));
+    }
   }
 
   cancelPrivacyMode(context?: Context) {
     if (!context) {
       return;
     }
-    window.getLastWindow(context).then((window) => {
-      window.setWindowPrivacyMode(false);
-    });
+    try {
+      window.getLastWindow(context).then((window) => {
+        window.setWindowPrivacyMode(false);
+      }).catch((error: Error) => {
+        Logger.error(TAG, 'cancelPrivacyMode error: ' + JSON.stringify(error));
+      });
+    } catch (error) {
+      Logger.error(TAG, 'cancelPrivacyMode error: ' + JSON.stringify(error));
+    }
   }
 
 
@@ -163,15 +176,15 @@ export class LoginVM extends BaseViewModel {
 
   accountPasswordLogin() {
     if (!this.isAgreePrivacy) {
-      promptAction.showToast({ message: '请先勾选同意协议' });
+      GlobalContext.getUIContext().getPromptAction().showToast({ message: '请先勾选同意协议' });
       return;
     }
     if (!this.accountInput) {
-      promptAction.showToast({ message: '请输入账号' });
+      GlobalContext.getUIContext().getPromptAction().showToast({ message: '请输入账号' });
       return;
     }
     if (!this.passwordInput) {
-      promptAction.showToast({ message: '请输入密码' });
+      GlobalContext.getUIContext().getPromptAction().showToast({ message: '请输入密码' });
       return;
     }
     this.accountInstance.accountPasswordLogin()
@@ -199,10 +212,10 @@ export class LoginVM extends BaseViewModel {
     req.state = 'none';
     req.transaction = 'test123';
 
-    const isJumpSuccess = await wxApi.sendReq(getContext() as common.UIAbilityContext, req);
+    const isJumpSuccess = await wxApi.sendReq(GlobalContext.getContext(), req);
     Logger.info(TAG, 'jump wechat result: ' + isJumpSuccess);
     if (!isJumpSuccess) {
-      promptAction.showToast({ message: '未安装微信' });
+      GlobalContext.getUIContext().getPromptAction().showToast({ message: '未安装微信' });
     }
   }
 

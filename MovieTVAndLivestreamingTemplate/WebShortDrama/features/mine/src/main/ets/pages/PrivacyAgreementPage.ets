@@ -136,6 +136,8 @@ export struct PrivacyAgreementPage {
         .justifyContent(FlexAlign.SpaceBetween)
         .width('100%')
       }
+      .backgroundColor($r('sys.color.comp_background_tertiary'))
+      .backgroundBlurStyle(BlurStyle.COMPONENT_ULTRA_THICK)
       .width('100%')
       .height('100%')
       .padding({
@@ -148,7 +150,11 @@ export struct PrivacyAgreementPage {
     }
     .hideTitleBar(true)
     .onBackPressed(() => {
-      (this.getUIContext().getHostContext() as common.UIAbilityContext).terminateSelf()
+      try {
+        (this.getUIContext().getHostContext() as common.UIAbilityContext).terminateSelf()
+      } catch (e) {
+        console.error(`terminateSelf failed: ${e}`);
+      }
       return true
     })
   }
@@ -182,7 +188,8 @@ export function privacyDialog() {
           Span('、')
           Span('XX')
             .fontColor($r('sys.color.font_primary'))
-          Span('获取XX信息，以为您提供XX服务。我们仅在您使用具体功能业务时，才会触发上述行为收集使用相关的个人信息。详情请参阅')
+          Span(
+            '获取XX信息，以为您提供XX服务。我们仅在您使用具体功能业务时，才会触发上述行为收集使用相关的个人信息。详情请参阅')
           Span('XX业务与隐私声明')
             .onClick(() => {
               PromptActionClass.closeDialog()
@@ -209,7 +216,12 @@ export function privacyDialog() {
       Row() {
         Button('退出应用')
           .onClick(() => {
-            (windowStage.getMainWindowSync().getUIContext().getHostContext() as common.UIAbilityContext).terminateSelf()
+            try {
+              (windowStage.getMainWindowSync().getUIContext().getHostContext() as
+                common.UIAbilityContext).terminateSelf()
+            } catch (e) {
+              console.error(`terminateSelf failed: ${e}`);
+            }
           })
           .width(140)
           .height(40)
@@ -234,7 +246,8 @@ export function privacyDialog() {
       }
     }
     .justifyContent(FlexAlign.Start)
-    .backgroundColor(Color.White)
+    .backgroundColor($r('sys.color.comp_background_tertiary'))
+    .backgroundBlurStyle(BlurStyle.COMPONENT_ULTRA_THICK)
     .borderRadius(10)
     .height(229)
     .width(328)

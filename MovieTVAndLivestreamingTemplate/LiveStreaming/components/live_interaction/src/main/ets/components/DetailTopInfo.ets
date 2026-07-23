@@ -13,6 +13,7 @@ export struct DetailTopInfo {
   @Local isShowReportSheet: boolean = false
   @Param @Require presenter: Audience
   @Param @Require audienceList: Array<Audience>
+  @Param isFromVertical: boolean = false
   @Param screenDirection: number = 0
   @Event setToVertical: Function = () => {
   }
@@ -307,7 +308,9 @@ export struct DetailTopInfo {
             }
             .width('100%')
             .height(64)
-          },(item: Audience, index: number) => { return index + '__' + JSON.stringify(item); }
+          }, (item: Audience, index: number) => {
+          return index + '__' + JSON.stringify(item);
+        }
         )
         ListItem() {
           Row()
@@ -436,7 +439,9 @@ export struct DetailTopInfo {
                 }
                 this.onProfileClick(this.audienceList[index - 1])
               })
-          },(item: number, index: number) => { return index + '__' + JSON.stringify(item); })
+          }, (item: number, index: number) => {
+            return index + '__' + JSON.stringify(item);
+          })
           Stack({ alignContent: Alignment.Center }) {
             Row()
               .width(40)
@@ -519,7 +524,11 @@ export struct DetailTopInfo {
           .height(40)
           .borderRadius(20)
           .onClick(() => {
-            this.setToVertical()
+            if (this.isFromVertical) {
+              this.setToVertical()
+            } else {
+              this.onExit()
+            }
           })
         Stack({ alignContent: Alignment.TopStart }) {
           Row()
@@ -600,7 +609,9 @@ export struct DetailTopInfo {
             .height(24)
             .borderRadius(12)
             .margin({ right: 4 })
-        },(item: number, index: number) => { return index + '__' + JSON.stringify(item); })
+        }, (item: number, index: number) => {
+          return index + '__' + JSON.stringify(item);
+        })
         Stack({ alignContent: Alignment.Center }) {
           Row()
             .width(40)

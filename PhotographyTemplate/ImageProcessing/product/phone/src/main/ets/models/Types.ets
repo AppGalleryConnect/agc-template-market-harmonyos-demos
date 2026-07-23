@@ -5,13 +5,14 @@ export interface TabListItem {
   component: WrappedBuilder<[]>;
 }
 
+/**
+ * want-跳转模型
+ */
 @ObservedV2
-export class FormModel {
-  @Trace id: number = 0
-  @Trace url: string = ''
-}
-
-@ObservedV2
-export class FormCardJump {
-  @Trace form: FormModel = new FormModel()
+export class FormCardJumpModel {
+  @Trace formCardId: string = '';
+  @Trace formCardPageUrl: string = '';
+  @Trace shortcutId: string = '';
+  @Trace shortcutPageUrl: string = '';
+  @Trace pageParam: string = '';
 }

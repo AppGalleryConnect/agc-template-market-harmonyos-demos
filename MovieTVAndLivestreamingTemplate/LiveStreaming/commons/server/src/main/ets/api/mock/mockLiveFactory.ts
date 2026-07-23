@@ -16,8 +16,8 @@ class MockLiveFactory {
   ]
 
   videoUrl = [
-    'https://agc-storage-drcn.platform.dbankcloud.cn/v0/app-d45y3/drama_video/2.m3u8',
-    'https://consumer.huawei.com/content/dam/huawei-cbg-site/cn/mkt/plp/new-phones/video/pocket-series.mp4'
+    'https://agc-storage-drcn.platform.dbankcloud.cn/v0/app-d45y3/drama_video/2.m3u8', //此行配置竖屏视频进行调试
+    'https://consumer.huawei.com/content/dam/huawei-cbg-site/cn/mkt/plp/new-phones/video/pocket-series.mp4' //此行配置横屏视频进行调试
   ]
   coverUrls = [
     'app.media.cover_1',
@@ -28,7 +28,7 @@ class MockLiveFactory {
 
   constructor() {
     let index: number = 0;
-    let streamers= this.mockAudienceFactor.getRandomAudienceIds(16)
+    let streamers = this.mockAudienceFactor.getRandomAudienceIds(16)
 
     this.mockAudienceFactor.getAudienceById(streamers[0])!.nickName = 'Leo在路上';
     this.mockAudienceFactor.getAudienceById(streamers[1])!.nickName = '暴躁桃子';

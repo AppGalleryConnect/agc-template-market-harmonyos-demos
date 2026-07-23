@@ -103,13 +103,14 @@ export struct PerpetualCalendar {
 
         ListItem() {
           TodayHistory({
-            selectDate: new Date(this.calendarVM.selectDate.format('YYYY-MM-DD')),
+            selectDate: new Date(this.calendarVM.selectDate.format('YYYY/MM/DD')),
             selectColor: this.theme.themeState.current,
             titleColor: this.theme.themeState.titleColor,
             routerModule: RouterModule.getStack(),
           })
         }
         .padding({ left: 16, right: 16 })
+        .margin({ bottom: 16 })
 
       }
       .edgeEffect(EdgeEffect.Spring)

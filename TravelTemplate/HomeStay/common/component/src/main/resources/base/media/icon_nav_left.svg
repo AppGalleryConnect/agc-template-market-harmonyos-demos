@@ -1,18 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="24" height="24" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>图标/nav/icon_nav_left@2x</title>
-    <defs>
-        <polygon id="path-1" points="20 11 7.8 11 13.4 5.4 12 4 4 12 12 20 13.4 18.6 7.8 13 20 13"></polygon>
-    </defs>
-    <g id="" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="icon" transform="translate(-150.000000, -139.000000)">
-            <g id="图标/nav/icon_nav_left" transform="translate(146.000000, 135.000000)">
-                <rect id="矩形" fill-opacity="0" fill="#D8D8D8" x="0" y="0" width="24" height="24"></rect>
-                <mask id="mask-2" fill="white">
-                    <use xlink:href="#path-1"></use>
-                </mask>
-                <use id="Mask" fill="#000000" xlink:href="#path-1"></use>
-            </g>
-        </g>
-    </g>
+<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40.000000" height="40.000000" fill="none" customFrame="url(#clipPath_1)">
+  <metadata>
+    <agcit_code>agcit_huawei_home_stay</agcit_code>
+  </metadata>
+	<defs>
+		<clipPath id="clipPath_1">
+			<rect width="40.000000" height="40.000000" x="0.000000" y="0.000000" rx="20.000000" fill="rgb(255,255,255)" />
+		</clipPath>
+		<clipPath id="clipPath_2">
+			<rect width="24.000000" height="24.000000" x="8.000000" y="8.000000" fill="rgb(255,255,255)" />
+		</clipPath>
+	</defs>
+	<rect id="3.Icon Button" width="40.000000" height="40.000000" x="0.000000" y="0.000000" rx="20.000000" fill="rgb(0,0,0)" fill-opacity="0.0470588244" />
+	<g id="chevron_backward" clip-path="url(#clipPath_2)" customFrame="url(#clipPath_2)">
+		<rect id="chevron_backward" width="24.000000" height="24.000000" x="8.000000" y="8.000000" />
+		<rect id="rect" width="24.000000" height="24.000000" x="8.000000" y="8.000000" opacity="0" />
+		<g id="g">
+			<path id="path" d="M16.09 20L23.05 13.04C23.19 12.88 23.26 12.7 23.26 12.5C23.26 12.3 23.19 12.12 23.05 11.96C22.9033 11.8133 22.7267 11.74 22.52 11.74C22.3133 11.74 22.1367 11.8133 21.99 11.96L15.01 18.94C14.7233 19.2333 14.58 19.5867 14.58 20C14.58 20.4133 14.7233 20.7667 15.01 21.06L21.97 27.99C22.0967 28.1367 22.2667 28.21 22.48 28.21C22.7 28.21 22.88 28.1367 23.02 27.99C23.1667 27.85 23.24 27.6733 23.24 27.46C23.24 27.2533 23.1667 27.08 23.02 26.94L16.09 20Z" fill="rgb(0,0,0)" fill-opacity="0.898039222" fill-rule="nonzero" />
+		</g>
+	</g>
 </svg>

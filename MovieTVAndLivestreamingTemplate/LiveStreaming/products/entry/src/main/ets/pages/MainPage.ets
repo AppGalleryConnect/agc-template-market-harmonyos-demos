@@ -7,6 +7,7 @@ import { abilityAccessCtrl, common, Permissions } from '@kit.AbilityKit';
 import { deviceInfo } from '@kit.BasicServicesKit';
 
 const permissions: Array<Permissions> = ['ohos.permission.CAMERA', 'ohos.permission.MICROPHONE'];
+const TAG = '[MainPage]';
 
 enum isCommit {
   onChange = 0,
@@ -143,14 +144,12 @@ struct MainPage {
       if (isFirstTime[0]) {
         if (!grantStatus[0] && !grantStatus[1]) {
           this.isPermission = isCommit.success
-          // 用户授权，可以继续访问目标操作。
         } else {
           this.isPermission = isCommit.fail
         }
       } else {
         if (!grantStatus[0] && !grantStatus[1]) {
           this.isPermission = isCommit.success
-          // 用户授权，可以继续访问目标操作。
         } else {
           atManager.requestPermissionOnSetting(context, ['ohos.permission.CAMERA']).then((data1) => {
             atManager.requestPermissionOnSetting(context, ['ohos.permission.MICROPHONE']).then((data2) => {
@@ -177,6 +176,9 @@ struct MainPage {
           })
         }
       }
+    }).catch((e: Error) => {
+      console.info(TAG, `reqPermissionsFromUser failed: ${e.message}`);
+      this.isPermission = isCommit.fail;
     })
   }
 }

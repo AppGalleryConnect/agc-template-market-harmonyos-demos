@@ -5,7 +5,7 @@
       {
         "name": "default",
         "signingConfig": "default",
-        "compatibleSdkVersion": "6.0.0(20)",
+        "compatibleSdkVersion": "6.0.2(22)",
         "targetSdkVersion": "6.0.2(22)",
         "runtimeOS": "HarmonyOS",
         "buildOption": {
@@ -93,6 +93,10 @@
     {
       "name": "network",
       "srcPath": "./commons/network"
+    },
+    {
+      "name": "module_transition",
+      "srcPath": "./components/module_transition"
     }
   ]
 }

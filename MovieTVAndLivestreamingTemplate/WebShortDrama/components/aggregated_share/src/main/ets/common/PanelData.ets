@@ -27,17 +27,17 @@ export const unifiedShareList: ShareKinds[][] = [
   [
     {
       kindId: ShareWay.POSTER,
-      icon: $r('app.media.ic_public_poster'),
+      icon: $r('sys.symbol.picture_badge_arrow_down'),
       label: '生成海报',
     },
     {
       kindId: ShareWay.COPY_TO_PASTEBOARD,
-      icon: $r('app.media.ic_public_copylink'),
+      icon: $r('sys.symbol.link'),
       label: '复制链接',
     },
     {
       kindId: ShareWay.SYSTEM,
-      icon: $r('app.media.ic_public_systemshare'),
+      icon: $r('sys.symbol.dot_radiowaves_left_and_right'),
       label: '系统分享',
     },
   ],

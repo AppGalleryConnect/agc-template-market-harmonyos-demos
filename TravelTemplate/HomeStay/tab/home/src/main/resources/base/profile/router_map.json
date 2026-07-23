@@ -31,6 +31,14 @@
       "data": {
         "description": "this is Personal"
       }
+    },
+    {
+      "name": "HotelHome",
+      "pageSourceFile": "src/main/ets/pages/Home.ets",
+      "buildFunction": "HotelHomeBuilder",
+      "data": {
+        "description": "this is HotelHome"
+      }
     }
   ]
 }

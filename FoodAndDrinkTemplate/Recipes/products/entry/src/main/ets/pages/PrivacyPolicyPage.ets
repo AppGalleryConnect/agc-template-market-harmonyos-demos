@@ -1,6 +1,8 @@
 import { common } from '@kit.AbilityKit'
-import { BreakpointModel, BreakpointType, CommonConstants, PreferenceUtil, RouterMap, RouterModule } from 'commonlib'
 import { AppStorageV2 } from '@kit.ArkUI';
+import { UtilLog } from '@hw-agconnect/util-log';
+import { BreakpointModel, BreakpointType, CommonConstants, PreferenceUtil, RouterMap, RouterModule } from 'commonlib'
+
 
 @Builder
 export function PrivacyPolicyPageBuilder() {
@@ -77,7 +79,9 @@ struct PrivacyPolicyPage {
                 .backgroundColor($r('sys.color.background_secondary'))
                 .onClick(() => {
                   const context = this.getUIContext().getHostContext() as common.UIAbilityContext;
-                  context.terminateSelf()
+                  context.terminateSelf().catch((err: BusinessError) => {
+                    UtilLog.error(`terminate self filed, error message is = ${JSON.stringify(err.message)}`);
+                  })
                 })
               Button('同意')
                 .layoutWeight(1)

@@ -14,9 +14,10 @@
  */
 
 import dayjs from 'dayjs';
-import { TopBar, RouterMap, RouterModule } from 'commonlib';
+import { TopBar, RouterMap, RouterModule, BreakpointModel } from 'commonlib';
 import { TestReportModel } from './TestReportPage';
 import { TopicItemModel } from 'answer_questions';
+import { AppStorageV2 } from '@kit.ArkUI';
 
 @ComponentV2
 export struct ExamResultIndexPage {
@@ -32,6 +33,7 @@ export struct ExamResultIndexPage {
   submitTime: string = dayjs().format('YYYY-MM-DD HH:mm');
   // 俩种模式 1练习模式 2答题模式
   @Local quesType: number = 1;
+  @Local breakpointModel: BreakpointModel = AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
 
   aboutToAppear() {
     // 数据初始化
@@ -88,7 +90,7 @@ export struct ExamResultIndexPage {
     Column({ space: 8 }) {
       Button('再测一下', { type: ButtonType.Normal, stateEffect: true })
         .fontColor($r('sys.color.multi_color_08'))
-        .width('100%')
+        .width(this.breakpointModel.currentBreakpoint === 'sm' ? '100%' : 448)
         .height($r('app.float.vp_40'))
         .borderRadius($r('sys.float.corner_radius_level10'))
         .backgroundColor($r('sys.color.comp_background_tertiary'))
@@ -98,7 +100,7 @@ export struct ExamResultIndexPage {
           RouterModule.pop();
         });
       Button('查看结果', { type: ButtonType.Normal, stateEffect: true })
-        .width('100%')
+        .width(this.breakpointModel.currentBreakpoint === 'sm' ? '100%' : 448)
         .height($r('app.float.vp_40'))
         .borderRadius($r('sys.float.corner_radius_level10'))
         .backgroundColor($r('sys.color.multi_color_08'))
@@ -235,7 +237,6 @@ export struct ExamResultIndexPage {
           .fontSize($r('sys.float.Body_L'))
           .fontColor($r('sys.color.font_primary'))
           .fontWeight(FontWeight.Regular)
-          .width('100%')
           .height($r('app.float.fp_22'));
         Row() {
           Text('提交时间：')
@@ -249,17 +250,16 @@ export struct ExamResultIndexPage {
             .fontWeight(FontWeight.Regular)
             .height($r('app.float.fp_22'));
         }
-        .width('100%')
         .margin({ top: $r('app.float.vp_9') });
       }
+      .justifyContent(FlexAlign.Center)
       .height('100%')
-      .width('100%');
+      .width('100%')
     }
     .width('100%')
     .height($r('app.float.vp_52'))
     .margin({ top: $r('app.float.vp_12') })
     .padding({ left: $r('app.float.vp_16'), right: $r('app.float.vp_16') });
-
   }
 
   /**

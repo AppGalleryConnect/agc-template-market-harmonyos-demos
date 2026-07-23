@@ -45,6 +45,14 @@
       "value": "隐私协议"
     },
     {
+      "name": "color_mode",
+      "value": "显示模式"
+    },
+    {
+      "name": "font_size",
+      "value": "字体大小"
+    },
+    {
       "name": "preferences",
       "value": "我的偏好"
     },
@@ -171,6 +179,18 @@
     {
       "name": "danmaku_switch",
       "value": "弹幕开关"
+    },
+    {
+      "name": "screen_setting",
+      "value": "画面设置"
+    },
+    {
+      "name": "report_setting",
+      "value": "举报"
+    },
+    {
+      "name": "Timeout_setting",
+      "value": "定时关闭"
     },
     {
       "name": "publish",
@@ -394,7 +414,7 @@
     },
     {
       "name": "agcit_huawei_web_short_drama",
-      "value": "1.0.6"
+      "value": "1.0.7"
     }
   ]
 }

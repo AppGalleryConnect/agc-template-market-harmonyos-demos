@@ -6,19 +6,18 @@ import { IComment, ITravelogue } from './IResponse';
 
 @ObservedV2
 export class HistoryList {
-  historyList: string[] = [];
+  @Trace historyList: string[] = [];
 }
 
 @ObservedV2
 export class CommentModel implements IComment {
-  // 评价创建人
+  @Trace id: number = 0;
   @Trace createBy: string = '';
-  // 评价创建时间
   @Trace createTime: string | number = '';
-  // 评价内容
   @Trace evaluateContent: string = '';
-  // 评价人头像
   @Trace userHeadImg: string = '';
+  @Trace likeNum: number = 0;
+  @Trace likeStatus: StatusFLAG | string = StatusFLAG.NO;
 }
 
 export class FindModule {
@@ -48,7 +47,7 @@ export class PostCardModel implements ITravelogue {
   @Trace likeNum: number = 0;
   // 收藏数
   @Trace collectNum: number = 0;
-  // 评论数
+  @Trace shareNum: number = 0;
   commentNum: number = 0;
   // 当前用户点赞状态（Y是，N否）
   @Trace currentUserLikeStatus: StatusFLAG = StatusFLAG.NO;
@@ -69,6 +68,7 @@ export class PostCardModel implements ITravelogue {
     this.publishTime = item?.publishTime || '';
     this.likeNum = item?.likeNum || 0;
     this.collectNum = item?.collectNum || 0;
+    this.shareNum = item?.shareNum || 0;
     this.commentNum = item?.commentNum || 0;
     this.currentUserLikeStatus = item?.currentUserLikeStatus || StatusFLAG.NO;
     this.currentUserCollectStatus = item?.currentUserCollectStatus || StatusFLAG.NO;

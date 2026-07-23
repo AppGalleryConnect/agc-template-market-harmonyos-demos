@@ -1,38 +1,37 @@
-import { promptAction } from '@kit.ArkUI';
-import fs from '@ohos.file.fs';
-import { Constants } from 'constant';
-import { AccountUtil, Logger } from 'util';
+import { ToastDialog } from '@hw-agconnect/ui-toast';
 import { GetInfoRequest, https } from 'network';
+import { CommonHeader } from 'component';
+import {
+  PersonalInfoView,
+  DataType,
+  PersonalInfo as CollectPersonalInfo,
+  ApiHandler,
+  SwitchInfo,
+} from 'collect_personal_info';
 import { PersonalInfoVM } from '../viewmodel/PersonalInfoVM';
-import { FunctionalButton, functionalButtonComponentManager } from '@kit.ScenarioFusionKit';
-import { util } from '@kit.ArkTS';
-import { TitleBar } from 'component';
 import { PersonalPopInfo } from '../model/Index';
-import { getFormatDate } from 'calendar_select';
 
 @Builder
 export function PersonalInfoBuilder() {
-  PersonalInfo();
+  PersonalInfoPage();
 }
 
 @ComponentV2
-struct PersonalInfo {
+struct PersonalInfoPage {
   vm: PersonalInfoVM = PersonalInfoVM.instance;
   @Local nickName: string = '';
   @Local gender: number = 0;
   @Local phoneNo: string = '';
-  @Local isShow: boolean = false;
-  @Local currentDate: string = '';
-  @Local genderSelected: number = 0;
-  @Local isSelected: boolean = false;
-  @Local openId: string = '';
-  controller: TextInputController = new TextInputController();
+  @Local avatar: ResourceStr = '';
+  @Local birthday: string = '';
+  @Local fullName: string = '';
   @Consumer('mainPathStack') mainPathStack: NavPathStack = new NavPathStack();
 
   async aboutToAppear(): Promise<void> {
+    const openId: string = AppStorage.get('openID') as string || '';
     const data: GetInfoRequest = {
       appId: '',
-      openId: this.openId,
+      openId: openId,
     };
 
     const res = await https.queryUserInfo(data);
@@ -42,199 +41,112 @@ struct PersonalInfo {
       this.vm.userInfo.avatar = res.data.avatar;
       this.nickName = res.data.nickName;
       this.gender = res.data.gender;
-      this.currentDate = res.data.birthday;
       this.phoneNo = res.data.phone;
+      this.avatar = res.data.avatar ? res.data.avatar : $r('app.media.avatar');
+      this.birthday = res.data.birthday;
     }
-  }
-
-  @Builder
-  DatePickerBuilder() {
-    Column() {
-      DatePicker({
-        start: new Date('1970-1-1'),
-        end: new Date('2100-1-1'),
-        selected: new Date(this.currentDate),
-      })
-        .disappearTextStyle({ color: Color.Gray, font: { size: '14', weight: FontWeight.Bold } })
-        .textStyle({ color: '#ff182431', font: { size: '14', weight: FontWeight.Normal } })
-        .selectedTextStyle({
-          color: $r('app.color.keyword_type_font_color'),
-          font: { size: '14', weight: FontWeight.Regular },
-        })
-        .onDateChange((value: Date) => {
-          this.currentDate = getFormatDate(value);
-        });
-    }.justifyContent(FlexAlign.Center).height(Constants.FULL_SCREEN);
   }
 
   build() {
     NavDestination() {
-      TitleBar({
-        isShowBack: true, title: '个人信息', clickEvent: () => {
-          this.mainPathStack.pop();
-        },
-      });
       Column() {
-        Column() {
-          Stack({ alignContent: Alignment.Bottom }) {
-            FunctionalButton({
-              params: {
-                openType: functionalButtonComponentManager.OpenType.CHOOSE_AVATAR,
-                label: '',
-                styleOption: {
-                  styleConfig: new functionalButtonComponentManager.ButtonConfig()
-                    .type(ButtonType.Circle)
-                    .backgroundImage(this.vm.userInfo.avatar ? this.vm.userInfo.avatar : $r('app.media.avatar'))
-                    .backgroundImageSize(ImageSize.Contain)
-                    .width(106)
-                    .height(106)
-                    .backgroundColor('#FFE5E5E5'),
-                },
+        CommonHeader({ title: '个人信息', showBackButton: true, backButtonClick: () => {
+          this.saveAndPop();
+        }});
+
+        PersonalInfoView({
+          personalInfo: {
+            avatar: this.avatar,
+            nickName: this.nickName,
+            gender: this.gender,
+            birthDate: this.birthday ? new Date(this.birthday) : new Date(),
+            fullName: this.fullName,
+            phoneNumber: this.phoneNo,
+          } as CollectPersonalInfo,
+          apiInfo: {
+            updateAvatar: async (param: Object) => {
+              this.vm.userInfo.avatar = param as string;
+              this.avatar = param as string;
+              await this.vm.updatePersonInfo();
+            },
+            updateNickName: async (param: Object) => {
+              this.vm.userInfo.nickName = param as string;
+              this.nickName = param as string;
+              await this.vm.updatePersonInfo();
+            },
+            updateGender: async (param: Object) => {
+              this.vm.userInfo.gender = param as number;
+              this.gender = param as number;
+              await this.vm.updatePersonInfo();
+            },
+            updateBirth: async (param: Object) => {
+              this.vm.userInfo.birthday = this.vm.getFormatDate(String(param));
+              this.birthday = String(param);
+              await this.vm.updatePersonInfo();
+            },
+            updateFullName: async (param: Object) => {
+              this.fullName = param as string;
+              await this.vm.updatePersonInfo();
+            },
+            updatePhoneInfo: {
+              codeLength: 6,
+              sendCode: (_phone: string) => {
+                return new Promise((resolve) => {
+                  setTimeout(() => {
+                    resolve();
+                  }, 1000);
+                });
               },
-              controller: new functionalButtonComponentManager.FunctionalButtonController().onChooseAvatar((error,
-                data) => {
-                if (error) {
-                  return;
-                }
-                let avatarFile: fs.File = fs.openSync(data.avatarUri!, fs.OpenMode.READ_ONLY);
-                try {
-                  let newPath: string =
-                    this.getUIContext().getHostContext()!.cacheDir + `/${util.generateRandomUUID(false)}.png`;
-                  fs.copyFileSync(avatarFile.fd, newPath);
-                  this.vm.userInfo.avatar = 'file://' + newPath;
-                } catch (err) {
-                  Logger.error('choose avatar fail' + JSON.stringify(err));
-                } finally {
-                  fs.close(avatarFile);
-                }
-              }),
-            });
-            Text('更换头像').fontSize(10).padding({ bottom: 8 }).fontColor(Color.White);
-          }.margin({ top: 32, bottom: 32 });
-
-          Row() {
-            Text('昵称').fontSize(14).width(72);
-            TextInput({ text: this.nickName, placeholder: '请输入昵称，10字以内' })
-              .fontSize(14)
-              .maxLength(10)
-              .backgroundColor(Color.White)
-              .placeholderFont({ size: $r('sys.float.Body_M') })
-              .onChange((value: string) => {
-                this.nickName = value;
-              });
-          }.padding({ left: 16, right: 16 });
-
-          Divider().vertical(false);
-
-          Row() {
-            Text('性别').fontSize(14).width(72);
-            Row() {
-              Checkbox({ name: 'checkbox1', group: 'checkboxGroup' })
-                .select(this.gender === 1)
-                .selectedColor(Color.Black)
-                .shape(CheckBoxShape.CIRCLE)
-                .onChange((value: boolean) => {
-                  value ? this.gender = 1 : this.gender = 0;
+              verifyCode: (_phone: string, _code: string) => {
+                return new Promise((resolve) => {
+                  setTimeout(() => {
+                    resolve(true);
+                  }, 1000);
                 });
-
-              Text('男').fontSize(14);
-
-              Checkbox({ name: 'checkbox1', group: 'checkboxGroup' })
-                .select(this.gender === 0)
-                .selectedColor(Color.Black)
-                .margin({ left: 36 })
-                .shape(CheckBoxShape.CIRCLE)
-                .onChange((value: boolean) => {
-                  value ? this.gender = 0 : this.gender = 1;
-                });
-
-              Text('女').fontSize(14);
-            }.padding({ left: 10 });
-          }.width(Constants.FULL_SCREEN).justifyContent(FlexAlign.Start).padding(16);
-
-          Divider().vertical(false);
-
-          Row() {
-            Row() {
-              Text('生日').fontSize(14).width(72);
-              Text(`${this.currentDate}`).padding({ left: 14 }).fontSize(14);
-            };
-
-            Image($r('app.media.icon_direction_right')).size({ width: 12, height: 12 });
-          }
-          .width(Constants.FULL_SCREEN)
-          .justifyContent(FlexAlign.SpaceBetween)
-          .padding(16)
-          .onClick(() => {
-            this.isShow = true;
-          })
-          .bindSheet($$this.isShow, this.DatePickerBuilder(), {
-            height: '50%',
-            backgroundColor: Color.White,
-          });
-
-          Divider().vertical(false);
-
-          Row() {
-            Text('手机号').fontSize(14).width(72);
-            TextInput({ text: this.phoneNo, placeholder: '请输入手机号' })
-              .backgroundColor(Color.White)
-              .fontSize(14)
-              .placeholderFont({ size: $r('sys.float.Body_M') })
-              .onChange((value: string) => {
-                this.phoneNo = value;
-              });
-          }.padding({ left: 16, right: 16 });
-
-          Divider().vertical(false);
-
-          Button('保存', { type: ButtonType.Normal })
-            .backgroundColor('#007DFF')
-            .borderRadius($r('sys.float.corner_radius_level4'))
-            .width('90%')
-            .margin({ top: 16 })
-            .onClick(() => {
-              this.save();
-            });
-
-          Button('退出登录', { type: ButtonType.Normal })
-            .fontColor($r('sys.color.black'))
-            .backgroundColor('#FFFFFF')
-            .border({ width: 1, radius: $r('sys.float.corner_radius_level4') })
-            .width('90%')
-            .margin({ top: 16 })
-            .onClick(() => {
-              this.logout();
-            });
-        };
-      }.height('90%').justifyContent(FlexAlign.SpaceBetween);
+              },
+            },
+          } as ApiHandler,
+          switchInfo: {
+            showAvatar: true,
+            showNickName: true,
+            showGender: true,
+            showBirthDate: true,
+            showFullName: true,
+            showPhoneNumber: true,
+            showIntroDesc: true,
+          } as SwitchInfo,
+          onChange: (type: DataType, data: CollectPersonalInfo) => {
+            if (type === DataType.NICK_NAME) {
+              this.nickName = (data.nickName as string) ?? '';
+            } else if (type === DataType.AVATAR) {
+              this.avatar = data.avatar ?? '';
+            } else if (type === DataType.GENDER) {
+              this.gender = data.gender as number ?? 0;
+            } else if (type === DataType.BIRTH_DATE) {
+              this.birthday = String(data.birthDate ?? '');
+            } else if (type === DataType.FULL_NAME) {
+              this.fullName = (data.fullName as string) ?? '';
+            } else if (type === DataType.PHONE_NUMBER) {
+              this.phoneNo = data.phoneNumber ?? '';
+            }
+          },
+        }).layoutWeight(1).padding(16);
+      }
+      .width('100%')
+      .height('100%')
+      .backgroundColor($r('sys.color.background_secondary'));
     }.hideTitleBar(true);
   }
 
-  async logout() {
-    // 用户信息清空
-    AppStorage.setOrCreate('currentUser', '');
-    AppStorage.setOrCreate('openID', '');
-    const res = await this.vm.updatePersonInfo();
-    if (res.code === 200) {
-      this.getUIContext().getPromptAction().showToast({ message: '退出登录成功', duration: 1000 });
-      this.mainPathStack.pop({
-        type: 1,
-        avatar: '',
-        nickname: '',
-      } as PersonalPopInfo);
-    }
-  }
-
-  async save() {
-    // 点击保存时方可修改
+  async saveAndPop() {
     this.vm.userInfo.nickName = this.nickName;
-    this.vm.userInfo.gender = this.gender;
-    this.vm.userInfo.birthday = this.currentDate;
     this.vm.userInfo.phone = this.phoneNo;
+    this.vm.userInfo.avatar = this.avatar as string;
+    this.vm.userInfo.gender = this.gender;
+    this.vm.userInfo.birthday = this.birthday;
     const res = await this.vm.saveUserInfo(this.getUIContext());
     if (res?.code === 200) {
-      this.getUIContext().getPromptAction().showToast({ message: '保存成功', duration: 1000 });
+      ToastDialog.showToast({ message: '保存成功' });
       this.mainPathStack.pop({
         type: 0,
         avatar: this.vm.userInfo.avatar,

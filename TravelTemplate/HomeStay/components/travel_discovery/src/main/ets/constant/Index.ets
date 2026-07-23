@@ -12,6 +12,8 @@ export interface BarModel {
 
 // 关系类型，游记的固定值
 export const RELATE_TYPE = 'TRAVELOGUE';
+// 关系类型，评论评价
+export const RELATE_TYPE_COMMENT = 'EVALUATE';
 
 // 服务端请求基础链接
 export const BASE_URL = '';
@@ -52,10 +54,6 @@ export enum EventEmitName {
 }
 
 export const BAR_LIST: BarModel[] = [
-  {
-    label: $r('app.string.bar_total'),
-    value: QueryTravelogueListType.ALL,
-  },
   {
     label: $r('app.string.bar_new'),
     value: QueryTravelogueListType.NEW,

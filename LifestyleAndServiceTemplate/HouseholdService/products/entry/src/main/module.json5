@@ -5,7 +5,8 @@
     "description": "$string:module_desc",
     "mainElement": "EntryAbility",
     "deviceTypes": [
-      "phone"
+      "phone",
+      "tablet"
     ],
     "deliveryWithInstall": true,
     "installationFree": true,
@@ -45,7 +46,7 @@
               "entity.system.home"
             ],
             "actions": [
-// 从5.1.1(19)开始，须配置为"ohos.want.action.home"。对于5.1.0(18)及之前版本，请配置为"action.system.home"。
+// ��5.1.1(19)��ʼ��������Ϊ"ohos.want.action.home"������5.1.0(18)��֮ǰ�汾��������Ϊ"action.system.home"��
               "action.system.home"
             ]
           }
@@ -55,22 +56,22 @@
     "metadata": [
       {
 /**
-         * todo: 替换Client ID
+         * todo: �滻Client ID
          */
         "name": "client_id",
         "value": "******"
       },
-// todo: 本地模拟接入隐私管理服务，上架打包时删除
+// todo: ����ģ�������˽���������ϼܴ��ʱɾ��
       {
         "name": "appgallery_privacy_hosted",
         "value": "1"
       },
-// todo: 本地模拟接入隐私管理服务，上架打包时删除
+// todo: ����ģ�������˽���������ϼܴ��ʱɾ��
       {
         "name": "appgallery_privacy_link_privacy_statement",
         "value": "https://www.example.com/"
       },
-// todo: 本地模拟接入隐私管理服务，上架打包时删除
+// todo: ����ģ�������˽���������ϼܴ��ʱɾ��
       {
         "name": "appgallery_privacy_link_user_agreement",
         "value": "https://www.example.com/"

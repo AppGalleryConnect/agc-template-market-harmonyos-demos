@@ -78,7 +78,7 @@ export struct CategoryPageContent {
       }
       .width('100%')
       .height('100%')
-      .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP])
+      .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])
       .transition(TransitionEffect.OPACITY.animation({ duration: 600 }))
     }
     .hideTitleBar(true)

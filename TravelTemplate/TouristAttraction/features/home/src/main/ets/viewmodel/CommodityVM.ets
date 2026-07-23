@@ -2,12 +2,13 @@ import { LazyDataSource, Logger } from 'common';
 import { https } from 'network';
 import { mapperCommodityList } from '../mapper/Index';
 import { CommodityInfo } from '../model/CommodityInfo';
+import { CommodityTabBarType } from '../model/CommodityTabInfo';
 
 @ObservedV2
 export class CommodityVM {
   public static _instance: CommodityVM;
-  @Trace type: number = 0;
-  @Trace commodityList: LazyDataSource<CommodityInfo> = new LazyDataSource();
+  @Trace specialCommodityList: LazyDataSource<CommodityInfo> = new LazyDataSource();
+  @Trace culturalCommodityList: LazyDataSource<CommodityInfo> = new LazyDataSource();
 
   public static get instance() {
     if (!CommodityVM._instance) {
@@ -16,10 +17,15 @@ export class CommodityVM {
     return CommodityVM._instance;
   }
 
-  getCommodityList() {
-    https.getCommodityList(this.type).then((res) => {
-      this.commodityList.pushArrayData(mapperCommodityList(res.data));
-      Logger.info('commodity count is' + this.commodityList.totalCount());
+  getCommodityList(type: number = CommodityTabBarType.SPECIAL) {
+    https.getCommodityList(type).then((res) => {
+      const list = mapperCommodityList(res.data);
+      if (type === CommodityTabBarType.SPECIAL) {
+        this.specialCommodityList.pushArrayData(list);
+      } else {
+        this.culturalCommodityList.pushArrayData(list);
+      }
+      Logger.info('commodity count is' + list.length);
     });
   }
 }

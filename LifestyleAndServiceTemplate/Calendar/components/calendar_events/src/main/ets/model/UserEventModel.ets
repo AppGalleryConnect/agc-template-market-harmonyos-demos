@@ -1,4 +1,3 @@
-import { Type } from '@kit.ArkUI';
 import { EVENT_TYPE } from '../constants/Constants';
 import { generateId, solarToLunar } from '../utils/Utils';
 
@@ -97,7 +96,6 @@ export class UserEventItem {
   eventType: EVENT_TYPE = EVENT_TYPE.SCHEDULE
   eventId: number = 0
   @Trace content: string = ''
-  @Type(CalendarStartDate)
   @Trace date: CalendarStartDate[] = [
     new CalendarStartDate(), new CalendarEndDate(),
   ]
@@ -119,7 +117,6 @@ export class CalendarEventMode {
 @ObservedV2
 export class TodoDataGroup {
   title: string = ''
-  @Type(UserEventItem)
   @Trace todoList: UserEventItem[] = []
 
   constructor(title: string, todoList: UserEventItem[]) {
@@ -130,7 +127,6 @@ export class TodoDataGroup {
 
 @ObservedV2
 export class UserEvent {
-  @Type(UserEventItem)
   @Trace userEventList: UserEventItem[] = [];
 }
 

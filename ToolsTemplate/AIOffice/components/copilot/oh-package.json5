@@ -1,0 +1,12 @@
+{
+  "name": "@hw-agconnect/copilot",
+  "version": "1.0.0",
+  "description": "可以对接大模型的聊天组件，支持Agent模式，可以注册function事件、卡片等。",
+  "keywords": ["Copilot","OpenAI","Agent"],
+  "main": "Index.ets",
+  "author": "hms",
+  "license": "ISC",
+  "dependencies": {
+    "rxjs": "7.8.1"
+  }
+}

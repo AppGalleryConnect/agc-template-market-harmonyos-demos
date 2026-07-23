@@ -26,7 +26,7 @@ struct WidgetCard1 {
   @LocalStorageProp('realTimeWeather') realTimeWeather: RealTimeWeather1 | null = null;
   @LocalStorageProp('hourlyWeather') hourlyWeather: HourlyWeather1[] | null = null;
   @LocalStorageProp('colors') colors: [ResourceColor, number][] =
-      this.isDaytime() ? [['#2E6BE0', 0], ['#92C8FD', 1]] : [['#274668', 0], ['#527EAA', 1]];
+    this.isDaytime() ? [['#2E6BE0', 0], ['#92C8FD', 1]] : [['#274668', 0], ['#527EAA', 1]];
   readonly actionType: string = 'router';
   readonly abilityName: string = 'PhoneAbility';
 
@@ -43,6 +43,10 @@ struct WidgetCard1 {
           Row({ space: 4 }) {
             Image($r('app.media.widget_location')).width(12).height(14)
             Text(this.location.name)
+              .maxLines(1)
+              .textOverflow({ overflow: TextOverflow.Ellipsis })
+              .layoutWeight(1)
+              .padding({ right: 16 })
               .fontSize($r('sys.float.Body_M'))
               .fontColor($r('sys.color.font_on_primary'))
               .fontWeight(FontWeight.Medium)

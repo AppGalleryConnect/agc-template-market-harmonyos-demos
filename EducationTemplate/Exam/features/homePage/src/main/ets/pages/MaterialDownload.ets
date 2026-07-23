@@ -13,24 +13,39 @@
  * limitations under the License.
  */
 
-import { BreakpointType, GlobalContextUtils, TopTabsBuilder } from 'commonlib';
+import { BreakpointType, GlobalContextUtils, RouterMap, RouterModule, TopTabsBuilder } from 'commonlib';
 import { CourseBookComponent } from '../components/CourseBookComponent';
 import { CourseBook } from '../model/CourseBook';
 import { HomeVM } from '../viewmodels/HomeVM';
+import { AppStorageV2 } from '@kit.ArkUI';
+import { DownloadInfo, SubjectExercises, Material } from '../model/MaterialModel';
+
 
 @ComponentV2
 export struct MaterialDownload {
   @Param courseBookArray: CourseBook[] = [new CourseBook('一级建造师精华题库', '三色速记手册', 423, 'pdf', 23),
     new CourseBook('二级建造师精华题库', '三色速记手册', 423, 'pdf', 23)];
   @Local materials: Material[] = [];
-  @Local downloadMaterials: string[] = [];
   @Local downloading: boolean = false;
+  @Local subjectObj?: SubjectExercises;
+  @Local isDownload: boolean = false;
+  @Local downloadInfo: DownloadInfo = AppStorageV2.connect(DownloadInfo, () => new DownloadInfo())!;
+  @Local downloadData: string[] = [];
+
   homeVM: HomeVM = HomeVM.instance;
 
   initMaterials() {
+    this.subjectObj = RouterModule.getNavParam({ url: RouterMap.MATERIAL_DOWNLOAD_PAGE }) as SubjectExercises;
     this.courseBookArray.forEach((value: CourseBook) => {
       this.materials.push(new Material(value, false));
     });
+    this.materials.forEach((val: Material) => {
+      val.courseBook.type = this.subjectObj?.type ?? 'pdf';
+      val.courseBook.bookName = this.subjectObj?.name ?? '一级建造师精华题库';
+      if(this.downloadInfo.downloadMaterials.includes(val.courseBook.bookName)) {
+        this.isDownload = true;
+      }
+    })
   }
 
   aboutToAppear(): void {
@@ -61,7 +76,7 @@ export struct MaterialDownload {
         .height('24vp')
         .width('24vp')
         .margin({ right: 8 });
-      Text(this.downloading ? '正在下载' : '下载')
+      Text(this.isDownload ? '已下载' : this.downloading ? '正在下载' : '下载')
         .fontSize($r('sys.float.Body_L'))
         .fontColor($r('sys.color.font_on_primary'));
     }
@@ -75,14 +90,21 @@ export struct MaterialDownload {
     }).getValue(this.homeVM.breakPointModel.currentBreakpoint))
     .backgroundColor('#4c5dc4')
     .borderRadius($r('app.float.vp_20'))
-    .opacity(this.downloadMaterials.length !== 0 ? 1 : 0.6)
+    .opacity(this.downloadData.length && !this.isDownload ? 1 : 0.6)
     .onClick(() => {
+      if(this.isDownload) {
+        return;
+      }
       // 表示处理下载逻辑
-      if (this.downloadMaterials.length !== 0 && !this.downloading) {
+      if (this.downloadData.length !== 0 && !this.downloading) {
         this.downloading = true;
         let timer = setInterval(() => {
           GlobalContextUtils.showToast({ message: '下载完成' });
+          if(!this.downloadInfo.downloadMaterials.includes(this.downloadData[0])) {
+            this.downloadInfo.downloadMaterials.push(this.downloadData[0]);
+          }
           this.downloading = false;
+          this.isDownload = true;
           clearInterval(timer);
         }, 3000);
       }
@@ -109,11 +131,13 @@ export struct MaterialDownload {
                     .selectedColor('#4B5CC4')
                     .shape(CheckBoxShape.CIRCLE)
                     .onChange((value: boolean) => {
+                      if(this.isDownload) {
+                        return;
+                      }
                       if (value) {
-                        this.downloadMaterials.push(item.courseBook.bookName);
+                        this.downloadData.push(item.courseBook.bookName)
                       } else {
-                        this.downloadMaterials =
-                          this.downloadMaterials.filter(name => name !== item.courseBook.bookName);
+                        this.downloadData = [];
                       }
                     });
                 }
@@ -145,16 +169,5 @@ export struct MaterialDownload {
 @Builder
 export function MaterialDownloadBuilder() {
   MaterialDownload();
-}
-
-@ObservedV2
-export class Material {
-  @Trace courseBook: CourseBook;
-  @Trace isSelected: boolean;
-
-  constructor(courseBook: CourseBook, isSelected: boolean) {
-    this.courseBook = courseBook;
-    this.isSelected = isSelected;
-  }
 }
 

@@ -2,25 +2,28 @@ import { jumpDetailPage, ParamsModel } from '@agctemplate/detail';
 import { getString } from '@agctemplate/resources';
 import { MyWatchRecordData, RequestAPI } from '@agctemplate/server';
 import { appRouter, container, WindowManager } from '@agctemplate/utils';
-import { NavDestinationModifier } from '@agctemplate/widgets'
+import {
+  AppStorageKeys,
+  BreakPoint, BreakPointType, BreakPointValue, FontModel, NavDestinationModifier } from '@agctemplate/widgets'
 import { VideoSeries } from '../component/VideoSeries';
 import { Header } from '../component/Header';
 import { MyLikeDramaData, MyLikeDramaRes } from '@agctemplate/server/src/main/ets/bean/response/MyLikeDramaRes';
 import { getDramaInfo, setLike } from '@agctemplate/server/src/main/ets/api/mock/mockData/mockDramaFactory';
+import { AppStorageV2 } from '@kit.ArkUI';
 
 @ComponentV2
 export struct LikesPage {
   @Local myLikeRes: MyLikeDramaRes = new MyLikeDramaRes();
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
+  @Local currentBreakpoint: BreakPoint = AppStorageV2.connect(BreakPoint, AppStorageKeys.CURRENT_BREAK_POINT,
+    () => new BreakPoint(BreakPointValue.SM))!;
+  @Local trackSize: string | number =
+    new BreakPointType<string | number>({
+      sm: 99,
+      md: 159,
+      lg: 189
+    }).getValue(this.currentBreakpoint.value)!
   navDestinationModifier: NavDestinationModifier = new NavDestinationModifier();
-
-  aboutToAppear(): void {
-    container.resolve(RequestAPI).getMyLikeDrama({
-      pageSize: 1,
-      pageNum: 20
-    }).then((res) => {
-      this.myLikeRes = new MyLikeDramaRes(res.getBody());
-    })
-  }
 
   build() {
     NavDestination() {
@@ -43,6 +46,14 @@ export struct LikesPage {
       .width('100%')
 
     }
+    .onWillShow(()=>{
+      container.resolve(RequestAPI).getMyLikeDrama({
+        pageSize: 1,
+        pageNum: 20
+      }).then((res) => {
+        this.myLikeRes = new MyLikeDramaRes(res.getBody());
+      })
+    })
     .onBackPressed(() => {
       appRouter.back(true)
       return true
@@ -85,7 +96,12 @@ export struct LikesPage {
         }) // 打开virtualScroll模式，totalCount为期望加载的数据长度
     }
     .edgeEffect(EdgeEffect.Spring)
-    .columnsTemplate('1fr 1fr 1fr')
+    .columnsTemplate(`repeat(auto-stretch, ${this.trackSize})`)
+    .columnsGap(new BreakPointType<number>({
+      sm: 8,
+      md: 12,
+      lg: 16
+    }).getValue(this.currentBreakpoint.value))
     .scrollBar(BarState.Off)
     .cachedCount(4) // 容器组件的预加载区域大小
     .margin({ bottom: 60 })

@@ -625,15 +625,6 @@ export struct VideoCard {
                 this.switchPlayPause()
               },
               onSwitchFullScreenCallback: async () => {
-                Logger.debug(TAG, 'start switch full screen');
-                // 状态锁 如果详情页触发了返回，则屏蔽全屏按钮点击事件
-                if (this.isDetailBack) {
-                  Logger.debug(TAG, 'switch full screen block: isDetailBack is true');
-                  return;
-                }
-
-                this.onFullScreenOperation(true);
-
                 try {
                   await this.vm.pipWindowModel?.pipController?.stopPiP();
                 } catch (e) {

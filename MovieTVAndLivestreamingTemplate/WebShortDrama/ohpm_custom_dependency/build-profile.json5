@@ -1,0 +1,297 @@
+{
+  "app": {
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {  //  todo: 替换应用签名
+          "storePassword": "",
+          "certpath": "products/entry/src/test/hw_sign/template.cer",
+          "keyAlias": "",
+          "keyPassword": "",
+          "profile": "products/entry/src/test/hw_sign/template.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "products/entry/src/test/hw_sign/template.p12"
+        }
+      }
+    ],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "compatibleSdkVersion": "6.1.0(23)",
+        "targetSdkVersion": "6.1.1(24)",
+        "runtimeOS": "HarmonyOS",
+        "buildOption": {
+          "arkOptions": {
+            "buildProfileFields": {
+              "CLIENT_ID": "112377711"
+            }
+          },
+          "strictMode": {
+            "caseSensitiveCheck": true,
+            "useNormalizedOHMUrl": true
+          }
+        }
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug"
+      },
+      {
+        "name": "release"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./products/entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "common",
+      "srcPath": "./commons/common",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "utils",
+      "srcPath": "./commons/utils",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "resources",
+      "srcPath": "./commons/resources",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "styles",
+      "srcPath": "./commons/styles",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "server",
+      "srcPath": "./commons/server",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "widgets",
+      "srcPath": "./commons/widgets",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "home",
+      "srcPath": "./features/home",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "mine",
+      "srcPath": "./features/mine",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "frame",
+      "srcPath": "./features/frame",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "detail",
+      "srcPath": "./features/detail",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "theater",
+      "srcPath": "./features/theater",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "login",
+      "srcPath": "./features/login",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "video_swiper",
+      "srcPath": "./components/video_swiper"
+    },
+    {
+      "name": "award",
+      "srcPath": "./features/award",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "feedback",
+      "srcPath": "./components/feedback"
+    },
+    {
+      "name": "base_apis",
+      "srcPath": "./components/base_apis"
+    },
+    {
+      "name": "open_ads",
+      "srcPath": "./components/open_ads"
+    },
+    {
+      "name": "favor",
+      "srcPath": "./features/favor",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "aggregated_share",
+      "srcPath": "./components/aggregated_share"
+    },
+    {
+      "name": "aggregated_login",
+      "srcPath": "./components/aggregated_login"
+    },
+    {
+      "name": "module_cast",
+      "srcPath": "./components/module_cast"
+    },
+    {
+      "name": "module_pip",
+      "srcPath": "./components/module_pip"
+    },
+    {
+      "name": "day_signin",
+      "srcPath": "./components/day_signin"
+    },
+    {
+      "name": "look_ad",
+      "srcPath": "./components/look_ad"
+    },
+    {
+      "name": "task_list",
+      "srcPath": "./components/task_list"
+    },
+    {
+      "name": "wheel",
+      "srcPath": "./components/wheel"
+    },
+    {
+      "name": "aggregated_payment",
+      "srcPath": "./components/aggregated_payment"
+    },
+    {
+      "name": "search",
+      "srcPath": "./components/search"
+    },
+    {
+      "name": "dial_panel",
+      "srcPath": "./components/dial_panel"
+    },
+    {
+      "name": "membership",
+      "srcPath": "./components/membership"
+    },
+    {
+      "name": "module_transition",
+      "srcPath": "./components/module_transition"
+    }
+  ]
+}

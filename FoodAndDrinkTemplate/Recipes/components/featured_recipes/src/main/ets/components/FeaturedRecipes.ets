@@ -1,5 +1,5 @@
 import { RecipeBriefInfo } from '../types/Index';
-import { BreakpointModel, BreakpointType } from 'base_ui';
+import { BreakpointModel, BreakpointNameEnum, BreakpointType } from 'base_ui';
 import LazyDataSource from '../utils/LazyDataSource';
 import { RecommendedCard } from './RecommendedCard';
 import { AppStorageV2 } from '@kit.ArkUI';
@@ -46,6 +46,11 @@ export struct FeaturedRecipes {
     return this.columnOptions.getValue(this.breakPointModel.currentBreakpoint);
   }
 
+  @Computed
+  get elevateHeight() {
+    return [BreakpointNameEnum.LG, BreakpointNameEnum.XL].includes(this.breakPointModel.currentBreakpoint) ? 196 : 100;
+  }
+
   @Builder
   uploadBuilder() {
   }
@@ -65,8 +70,9 @@ export struct FeaturedRecipes {
       .width('100%')
       .height(params.isLoading ? 40 : 0)
       .justifyContent(FlexAlign.Center)
-    } else if (!params.hasMore && this.gridCount < 6) { // 导航栏位置
-      Row().width('100%').height(90)
+      .margin({ bottom: this.elevateHeight })
+    } else if (!params.hasMore) { // 导航栏位置
+      Row().width('100%').height(this.elevateHeight)
     }
   }
 

@@ -4,6 +4,7 @@
     "type": "har",
     "deviceTypes": [
       "phone",
+      "tablet"
     ]
   }
 }

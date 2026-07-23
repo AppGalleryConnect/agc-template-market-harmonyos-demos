@@ -1,4 +1,4 @@
-import { AppStorageV2, PiPWindow } from '@kit.ArkUI';
+import { AppStorageV2, display, PiPWindow, window } from '@kit.ArkUI';
 import { ShortDramaDetailListVM, ContinueVideoData } from '../viewmodels/ShortDramaDetailListVM';
 import { VideoDetailComponent as VideoDetailComponent } from '../components/VideoDetailMask';
 import {
@@ -9,7 +9,7 @@ import {
   StatusBarHeight,
   UserInfoModel
 } from '@agctemplate/widgets';
-import { VideoSwiper, PlayerLayoutSize, PlayController } from 'video_swiper';
+import { VideoSwiper, PlayerLayoutSize, PlayController, NetWorkModel, NetworkUtil } from 'video_swiper';
 import { NAV_PAGE_NAME } from '@agctemplate/resources';
 import {
   appRouter,
@@ -27,7 +27,7 @@ import {
   setMyWatchRecord,
   unsetMyWatchRecord
 } from '@agctemplate/server/src/main/ets/api/mock/mockData/mockDramaFactory';
-import { emitter } from '@kit.BasicServicesKit';
+import { emitter, request } from '@kit.BasicServicesKit';
 import { CastListenerImpl } from '../listener/CastListenerImpl';
 import { CastService, CastStatusModel } from 'module_cast';
 import { VideoData } from 'module_cast/src/main/ets/model/VideoData';
@@ -37,12 +37,26 @@ import { MediaSource } from 'video_swiper/src/main/ets/constant/MediaSource';
 import { DetailVideoData } from '../models/DetailVideoData';
 import { JSON } from '@kit.ArkTS';
 import { common } from '@kit.AbilityKit';
+import { ImmersiveListener } from '../listener/ImmersiveListener';
+import { hilog } from '@kit.PerformanceAnalysisKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+import { fileIo } from '@kit.CoreFileKit';
+import { CardLongTakeDelegate, LongTakeAnimationProperties, LongTakeTransitionParam } from 'module_transition';
 
 const TAG: string = 'ShortVideo';
 
+@ObservedV2
+class DetailPageStatus {
+  @Trace isQuit: boolean
+
+  constructor(isQuit: boolean) {
+    this.isQuit = isQuit
+  }
+}
 
 @ComponentV2
 export struct ShortDramaDetailPage {
+  @Local longTakeSession: LongTakeAnimationProperties = new LongTakeAnimationProperties();
   @Local currentBreakpoint: BreakPoint = AppStorageV2.connect(BreakPoint, AppStorageKeys.CURRENT_BREAK_POINT,
     () => new BreakPoint(BreakPointValue.SM))!;
   @Local aiBarHeight: AiBarHeight = AppStorageV2.connect(AiBarHeight, AppStorageKeys.AI_BAR_HEIGHT,
@@ -50,11 +64,10 @@ export struct ShortDramaDetailPage {
   @Local statusBarHeight: StatusBarHeight = AppStorageV2.connect(StatusBarHeight, AppStorageKeys.STATUS_BAR_HEIGHT,
     () => new StatusBarHeight())!;
   // 初始化当前视频的下标
-  @Provider('currentIndex') currentVideoIndex: number = 0;
+  @Local currentVideoIndex: number = 0;
   // 首视频标志
   @Local firstFlag: boolean = true;
   // 当前播放视频的索引
-  @Local isPageShow: boolean = false;
   @Local layoutSize: PlayerLayoutSize = new PlayerLayoutSize()
   @Local storage: MyStorage = MyStorage.instance();
   @Param @Require continueVideoData: ContinueVideoData;
@@ -69,6 +82,11 @@ export struct ShortDramaDetailPage {
   @Local bonus: number = this.userInfo.bonus
   @Local castService: CastService = CastService.getInstance()
   @Local castStatusModel: CastStatusModel = CastService.getInstance().castStatusModel
+  @Local netStatus: NetWorkModel =
+    AppStorageV2.connect(NetWorkModel, 'netStatus', () => new NetWorkModel())!
+  @Param pixelMapImg: PixelMap | undefined = undefined; //删除
+  @Local filePath: string = '';
+  @Local detailPageStatus: DetailPageStatus = AppStorageV2.connect(DetailPageStatus, () => new DetailPageStatus(false))!
   isBackground: boolean = false
   enablePip: boolean = false
   restoredFromPip: boolean = false
@@ -133,14 +151,8 @@ export struct ShortDramaDetailPage {
   };
 
   @Monitor('currentTime')
-  onTimeChange(monitor: IMonitor){
+  onTimeChange(monitor: IMonitor) {
     this.continueVideoDataTra.playTime = monitor.value()?.now as number
-    this.vm.setContinueData(this.continueVideoDataTra)
-  }
-
-  @Monitor('currentVideoIndex')
-  onIndexChange(monitor: IMonitor){
-    this.continueVideoDataTra.currentIndex = monitor.value()?.now as number
     this.vm.setContinueData(this.continueVideoDataTra)
   }
 
@@ -152,6 +164,9 @@ export struct ShortDramaDetailPage {
         this.setAvMetaData()
       }
     });
+    this.continueVideoDataTra.currentIndex = monitor.value()?.now as number
+    this.vm.setContinueData(this.continueVideoDataTra)
+    ImmersiveListener.setCurrentIndex(monitor.value()?.now as number)
   }
 
   @Monitor('castStatusModel.isCasting')
@@ -192,11 +207,18 @@ export struct ShortDramaDetailPage {
     let callback: Callback<emitter.EventData> = (eventData: emitter.EventData) => {
       this.vm.init(this.continueVideoData)
     }
-    emitter.on(event, callback);
+    try {
+      emitter.on(event, callback);
+    } catch (e) {
+    }
   }
 
   // 视频数据初始化
   async aboutToAppear() {
+    this.detailPageStatus.isQuit = false
+    if (display.isFoldable()) {
+      this.setOrientation(window.Orientation.AUTO_ROTATION_RESTRICTED)
+    }
     Logger.info(TAG, 'aboutToAppear')
     // 观看记录
     container.resolve(RequestAPI).getMyWatchRecord({
@@ -221,7 +243,6 @@ export struct ShortDramaDetailPage {
     CastService.getInstance().registerSessionListener(this.castListener)
     this.currentVideoIndex = this.continueVideoData.currentIndex || 0
 
-    Logger.info(TAG, `aboutToAppear continueVideoData:${JSON.stringify(this.continueVideoData)}}`)
     WindowManager.setWindowSystemBarProperties({ statusBarContentColor: '#e6ffffff' })
     PipManager.getInstance().registerLifecycleCallback(this.pipStateCallback);
     PipManager.getInstance().registerPipStateChangeListener();
@@ -232,6 +253,11 @@ export struct ShortDramaDetailPage {
     })
     this.playController.setPlayList(mediaSource)
     this.vm.setContinueData(this.continueVideoData)
+    this.netStatus.inDetailPage = true
+    this.netStatus.noReInit = false
+    this.filePath = this.downloadCover()
+    ImmersiveListener.immersiveListening(this.filePath)
+    AppStorage.set('isDetailShow',true)
   }
 
   registerEmitter() {
@@ -241,11 +267,17 @@ export struct ShortDramaDetailPage {
 
   onForeground: Callback<emitter.EventData> = (eventData: emitter.EventData) => {
     this.isBackground = false
-    Logger.info(TAG, `onForeground: ${JSON.stringify(eventData)}`);
+    try {
+      Logger.info(TAG, `onForeground: ${JSON.stringify(eventData)}`);
+    } catch (e) {
+    }
     this.playController.play()
   }
   onBackground: Callback<emitter.EventData> = (eventData: emitter.EventData) => {
-    Logger.info(TAG, `onBackground: ${JSON.stringify(eventData)}`);
+    try {
+      Logger.info(TAG, `onBackground: ${JSON.stringify(eventData)}`);
+    } catch (e) {
+    }
     this.isBackground = true
 
     if (this.enablePip && !this.castStatusModel.isCasting) {
@@ -262,30 +294,48 @@ export struct ShortDramaDetailPage {
     let event: emitter.InnerEvent = {
       eventId: 1
     };
-    emitter.on(event, this.onBackground);
+    try {
+      emitter.on(event, this.onBackground);
+    } catch (e) {
+    }
   }
 
   foreEmitter() {
     let event: emitter.InnerEvent = {
       eventId: 2
     };
-    emitter.on(event, this.onForeground);
+    try {
+      emitter.on(event, this.onForeground);
+    } catch (e) {
+    }
   }
 
   unEmitter() {
-    Logger.info(TAG, 'on jump')
-    emitter.off(1, this.onBackground)
-    emitter.off(2, this.onForeground)
+    try {
+      Logger.info(TAG, 'on jump')
+      emitter.off(1, this.onBackground)
+      emitter.off(2, this.onForeground)
+    } catch (e) {
+    }
   }
 
   aboutToDisappear(): void {
+    if (display.isFoldable()) {
+      this.setOrientation(window.Orientation.UNSPECIFIED)
+    }
     Logger.info(TAG, 'aboutToDisappear')
     this.unEmitter()
     PipManager.getInstance().setAutoStart(false)
     CastService.getInstance().unregisterSessionListener(this.castListener)
     CastService.getInstance().deinit()
     this.storage.selectSpeed =
-      PreferenceUtil.getInstance(this.getUIContext().getHostContext()).get(PreferConstant.PLAY_SPEED_SETTINGS, '1.0x') as string
+      PreferenceUtil.getInstance(this.getUIContext().getHostContext())
+        .get(PreferConstant.PLAY_SPEED_SETTINGS, '1.0x') as string
+    fileIo.unlink(this.filePath).then(() => {
+      console.info('remove file succeed');
+    }).catch((err: Error) => {
+      console.error('remove file failed with error message: ' + err.message);
+    });
     // 观看记录
     let isWatched: boolean = false
     let isWatchedId: string = ''
@@ -300,42 +350,73 @@ export struct ShortDramaDetailPage {
     if (isWatched) {
       container.resolve(RequestAPI).unsetMyWatchRecord(isWatchedId)
       container.resolve(RequestAPI).setMyWatchRecord(this.vm.dramaInfo)
-    } else {
+    } else if (drama.id) {
       container.resolve(RequestAPI).setMyWatchRecord(drama)
     }
     PipManager.getInstance().unregisterPipStateChangeListener();
     PipManager.getInstance().unRegisterLifecycleCallback(this.pipStateCallback);
     this.vm.deinit()
+    this.netStatus.inDetailPage = false
+    ImmersiveListener.immersiveDisablingListening()
+    this.detailPageStatus.isQuit = true
+    AppStorage.set('isDetailShow',false)
+  }
+
+  @Builder
+  ContentBuilder(){
+    Stack({ alignContent: Alignment.Bottom }) {
+      // 视频切换组件
+      VideoSwiper({
+        playController: this.playController,
+        videoPlayDataSource: this.vm.data,
+        contentBuilder: wrapBuilder(VideoDetailComponent),
+        currentVideoIndex: this.currentVideoIndex,
+        inPage: 'Detail',
+        updateContinueModel: (index: number) => {
+          this.vm.continueModel.currentIndex = index
+        }
+      })
+        .width('100%')
+        .height('100%')
+    }
+    .width('100%')
+    .height('100%')
+    .backgroundColor(Color.Black)
+    .padding({
+      bottom: this.currentBreakpoint.value === BreakPointValue.LG ? 0 :
+        `${this.getUIContext().px2vp(this.aiBarHeight.value)}vp`
+    })
   }
 
   build() {
     NavDestination() {
-      if (this.vm.ready) {
-        Stack({ alignContent: Alignment.Bottom }) {
-          // 视频切换组件
-          VideoSwiper({
-            playController: this.playController,
-            videoPlayDataSource: this.vm.data,
-            contentBuilder: wrapBuilder(VideoDetailComponent),
-            currentVideoIndex: this.currentVideoIndex,
-            inPage: 'Detail',
-            updateContinueModel: (index: number) => {
-              this.vm.continueModel.currentIndex = index
-            }
-          })
-            .width('100%')
-            .height('100%')
-        }
-        .width('100%')
-        .height('100%')
-        .backgroundColor(Color.Black)
-        .padding({
-          bottom: this.currentBreakpoint.value === BreakPointValue.LG ? 0 :
-            `${this.getUIContext().px2vp(this.aiBarHeight.value)}vp`
+      if (this.longTakeSession) {
+        CardLongTakeDelegate({
+          longTakeSession: this.longTakeSession,
+          contentBuilder: (): void => {
+            this.ContentBuilder()
+          },
         })
+      } else {
+        this.ContentBuilder()
       }
     }
+    .onSizeChange((_oldValue: SizeOptions, newValue: SizeOptions) => {
+      this.longTakeSession.setNewSize(newValue);
+    })
+    .backgroundColor(this.longTakeSession.navDestinationBgColor)
     .hideTitleBar(true)
+    .onReady((navDestContext: NavDestinationContext)=>{
+      let param = navDestContext.pathInfo?.param as Record<string, Object>;
+      let longTakeTransitionParam = param.longTakeTransitionParam as LongTakeTransitionParam;
+      if (longTakeTransitionParam) {
+        this.longTakeSession.init(navDestContext, longTakeTransitionParam, {
+          pop: () => {
+            navDestContext.pathStack.pop()
+          },
+        });
+      }
+    })
     .onBackPressed(() => {
       if (CastService.getInstance().castStatusModel.isCasting) {
         this.onBack()
@@ -383,6 +464,10 @@ export struct ShortDramaDetailPage {
       pipConfig.index = this.playController.curentIndex
       PipManager.getInstance().startPip(pipConfig)
     })
+    .onBackPressed(() => {
+      appRouter.back();
+      return true;
+    })
   }
 
   onBack() {
@@ -400,6 +485,54 @@ export struct ShortDramaDetailPage {
     PromptActionClass.setOptions({ alignment: DialogAlignment.Center, maskColor: $r('sys.color.mask_fourth') });
     PromptActionClass.openDialog()
   }
+
+  downloadCover(): string {
+    let contextFaker: Context = this.getUIContext().getHostContext() as common.UIAbilityContext;
+    let filePath = `${contextFaker.cacheDir}/video_${new Date().getTime()}.png`; // 仅为示例 请替换正确的文件路径
+    try {
+      request.downloadFile(contextFaker, {
+        filePath: filePath, // 文件将会保存在context.cacheDir目录下
+        url: this.vm.dramaInfo.coverUrl  // 云侧文件路径，支持传入“文件目录/文件名”，或仅传入文件名
+      }).catch((err: BusinessError) => {
+        hilog.error(0x0000, 'testTag', `Failed to download file, code: ${err.code}, message: ${err.message}`);
+      })
+    } catch (err) {
+      hilog.info(0x0000, 'testTag', `Failed to request the download. Code: ${err.code}, message: ${err.message}`);
+    }
+    return filePath
+  }
+
+  setOrientation(orientation: window.Orientation) {
+    try {
+      window.getLastWindow(this.getUIContext().getHostContext(), (err, data) => { // 获取window实例
+        if (err.code) {
+          console.error(TAG, 'Failed to obtain the top window. Cause: ' + JSON.stringify(err));
+          return;
+        }
+        let windowClass = data;
+        console.info(TAG, 'Succeeded in obtaining the top window. Data: ' + JSON.stringify(data));
+
+        // 设置窗口方向为传感器自动旋转模式。
+        try {
+          windowClass.setPreferredOrientation(orientation, (err) => {
+            if (err.code) {
+              console.error(TAG, 'Failed to set window orientation. Cause: ' + JSON.stringify(err));
+              return;
+            }
+            console.info(TAG, 'Succeeded in setting window orientation.');
+          });
+        } catch (exception) {
+          console.error(TAG, 'Failed to set window orientation. Cause: ' + JSON.stringify(exception));
+        }
+        ;
+      });
+    } catch (exception) {
+      try {
+        console.error(TAG, 'Failed to obtain the top window. Cause: ' + JSON.stringify(exception));
+      } catch (e) {
+      }
+    }
+  }
 }
 
 @Builder
@@ -409,15 +542,17 @@ export function shortDramaDetailPageBuilder() {
       currentIndex: NavParams.getParams()?.currentIndex,
       playTime: NavParams.getParams()?.playTime,
       dramaInfo: NavParams.getParams()?.dramaInfo
-    }
+    },
+    pixelMapImg: NavParams.getParams()?.pixelMapImg
   });
 }
 
 export function jumpDetailPage(dramaInfo: DramaInfo, currentIndex?: number, playTime?: number,
-  callback?: (popInfo: PopInfo) => void) {
+  callback?: (popInfo: PopInfo) => void, pixelMapImg?: PixelMap) {
   appRouter.push({
     builderName: NAV_PAGE_NAME.ShortDramaDetailPage.name,
     params: {
+      pixelMapImg: pixelMapImg,
       dramaInfo: dramaInfo,
       currentIndex: currentIndex,
       playTime: playTime

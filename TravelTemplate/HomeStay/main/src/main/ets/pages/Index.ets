@@ -10,7 +10,7 @@ struct EmptyPage {
   build() {
     Navigation(this.mainPathStack) {
     }
-    .backgroundColor('#f1f3f5')
+    .backgroundColor($r('sys.color.background_secondary'))
     .hideBackButton(true)
     .hideNavBar(true)
     .mode(NavigationMode.Stack);

@@ -18,24 +18,27 @@ export class PipNodeController extends NodeController {
   makeNode(context: UIContext): FrameNode | null {
     console.info(TAG, 'makeNode');
     this.node = new FrameNode(context);
-    if (this.xComponent === null || this.xComponent === undefined) {
-      // 创建XComponent类型的typeNode
-      this.xComponent = typeNode.createNode(context, 'XComponent', {
-        type: XComponentType.SURFACE, // 类型设置为SURFACE
-        controller: PipManager.getInstance().getXComponentController(), // 设置XComponentController
-      });
-    }
-    if (this.canAddNode) {
-      try {
-        this.xComponent.getParent()?.removeChild(this.xComponent);
-      } catch (error) {
-        console.error(TAG, 'Failed to removeChild');
+    try {
+      if (this.xComponent === null || this.xComponent === undefined) {
+        // 创建XComponent类型的typeNode
+        this.xComponent = typeNode.createNode(context, 'XComponent', {
+          type: XComponentType.SURFACE, // 类型设置为SURFACE
+          controller: PipManager.getInstance().getXComponentController(), // 设置XComponentController
+        });
       }
-      try {
-        this.node.appendChild(this.xComponent);
-      } catch (error) {
-        console.error(TAG, 'Failed to appendChild');
+      if (this.canAddNode) {
+        try {
+          this.xComponent.getParent()?.removeChild(this.xComponent);
+        } catch (error) {
+          console.error(TAG, 'Failed to removeChild');
+        }
+        try {
+          this.node.appendChild(this.xComponent);
+        } catch (error) {
+          console.error(TAG, 'Failed to appendChild');
+        }
       }
+    } catch (e) {
     }
     return this.node;
   }

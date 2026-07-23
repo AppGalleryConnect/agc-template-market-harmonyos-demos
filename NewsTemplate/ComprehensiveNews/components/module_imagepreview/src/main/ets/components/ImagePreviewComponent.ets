@@ -1,4 +1,4 @@
-import { display } from '@kit.ArkUI';
+import { display, UIUtils } from '@kit.ArkUI';
 import ComponentUtils from '@ohos.arkui.UIContext';
 import { PromptActionTool } from '../utils/PromptActionTool';
 import { PreviewConstants } from '../constants/Constants';
@@ -6,26 +6,21 @@ import { ImagePreviewOptions } from '../models/ImagePreviewOptions'
 import { SwiperItemRender } from './SwiperItemRender';
 import { PreviewComponentInfo, SourceImageModel } from '../models/PreviewModel';
 
-/**
- * 某些场景下，在状态管理V2中使用animateTo动画，会产生异常效果
- * 这里用ComponentV1暂时先替代，从API version 22开始，可以使用applySync接口实现预期的显示效果。
- * */
-
-@Component
+@ComponentV2
 export struct ImagePreviewComponent {
-  @ObjectLink @Watch('valueChanged') options: ImagePreviewOptions
-  @State currentPage: number = 0
-  @State alpha: number = 0
-  @State currentOffsetX: number = 0
-  @State currentOffsetY: number = 0
-  @State scaleRadio: number = 1
-  @State animating: boolean = false
-  @State thumbWidth?: Length = 0
-  @State thumbHeight?: Length = 0
-  @State thumbX?: Length = 0
-  @State thumbY?: Length = 0
-  @State isDisabledSwiper: boolean = false
-  @State longTakeEffectMap: Map<number, PreviewComponentInfo> = new Map()
+  @Param @Require options: ImagePreviewOptions
+  @Local currentPage: number = 0
+  @Local alpha: number = 0
+  @Local currentOffsetX: number = 0
+  @Local currentOffsetY: number = 0
+  @Local scaleRadio: number = 1
+  @Local animating: boolean = false
+  @Local thumbWidth?: Length = 0
+  @Local thumbHeight?: Length = 0
+  @Local thumbX?: Length = 0
+  @Local thumbY?: Length = 0
+  @Local isDisabledSwiper: boolean = false
+  @Local longTakeEffectMap: Map<number, PreviewComponentInfo> = new Map()
   private componentUtils: ComponentUtils.ComponentUtils = this.getUIContext().getComponentUtils()
   private isScrolling: boolean = false
   private timeOutTag: number = 0
@@ -38,11 +33,8 @@ export struct ImagePreviewComponent {
 
   aboutToAppear() {
     this.currentPage = this.options.startIndex
-  }
-
-  valueChanged() {
-    if (this.options.needDismiss) {
-      this.closeAnimation(this.options.dismissAnimation)
+    this.options.onNeedDismiss = (animated: boolean) => {
+      this.closeAnimation(animated)
     }
   }
 
@@ -216,6 +208,7 @@ export struct ImagePreviewComponent {
     }
     this.animating = true
     this.getInitUIInfo()
+    UIUtils.flushUpdates();
     this.getUIContext().animateTo({
       duration: this.options.duration, onFinish: () => {
         this.animating = false
@@ -240,6 +233,7 @@ export struct ImagePreviewComponent {
     this.thumbY = this.uiContext.px2vp(this.previewComponentInfo?.contentOffsetY) + this.currentOffsetY
     this.thumbWidth = this.previewComponentInfo?.width ?? 0 * this.scaleRadio
     this.thumbHeight = this.previewComponentInfo?.height ?? 0 * this.scaleRadio
+    UIUtils.flushUpdates();
     this.uiContext.animateTo({
       duration: animated ? this.options.duration : 0, onFinish: () => {
         this.animating = false

@@ -1,11 +1,10 @@
 import { getMedia, NAV_PAGE_NAME } from '@agctemplate/resources'
-import { AppStorageKeys, BreakPoint, BreakPointType, BreakPointValue, UserInfoModel } from '@agctemplate/widgets';
+import { AppStorageKeys, BreakPoint, BreakPointType, BreakPointValue,
+  FontModel, UserInfoModel, CommentData, Reply, commentInputDialogBuilder } from '@agctemplate/widgets';
 import { AppStorageV2, ComponentContent, display } from '@kit.ArkUI'
-import { commentInputDialogBuilder } from './CommentInputDialog'
 import { BusinessError, deviceInfo } from '@kit.BasicServicesKit';
 import { appRouter, container, Logger, WindowManager } from '@agctemplate/utils';
 import { CommentInfo, CommentListRes, DramaInfo, ReplyInfo, RequestAPI } from '@agctemplate/server';
-import { CommentData, Reply } from '../models/CommentData';
 
 const TAG = '[CommentComp]'
 
@@ -26,6 +25,7 @@ export struct CommentComp {
   @Local commentId: number = 1
   @Local replyPerson: string = ''
   @Local replyContent: string = ''
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
   @Local currentBreakpoint: BreakPoint = AppStorageV2.connect(BreakPoint, AppStorageKeys.CURRENT_BREAK_POINT,
     () => new BreakPoint(BreakPointValue.SM))!;
   @Local isExpanded: boolean = display.getFoldStatus() === display.FoldStatus.FOLD_STATUS_EXPANDED
@@ -129,8 +129,11 @@ export struct CommentComp {
   }
 
   aboutToAppear(): void {
-    display.on('foldStatusChange', this.callback2)
-    display.on('change', this.callback)
+    try {
+      display.on('foldStatusChange', this.callback2)
+      display.on('change', this.callback)
+    } catch (e) {
+    }
     container.resolve(RequestAPI).getCommentList({
       pageSize: 1,
       pageNum: 20
@@ -157,8 +160,11 @@ export struct CommentComp {
   }
 
   aboutToDisappear(): void {
-    display.off('foldStatusChange', this.callback2)
-    display.off('change', this.callback)
+    try {
+      display.off('foldStatusChange', this.callback2)
+      display.off('change', this.callback)
+    } catch (e) {
+    }
   }
 
   openReplyDialog() {
@@ -201,11 +207,12 @@ export struct CommentComp {
     Column() {
       Row() {
         Text(`${this.commentDataList.length}条评论`)
-          .lineHeight(27)
-          .fontSize(20)
+          .lineHeight(this.fontModel.getDesFg(27))
+          .fontSize(this.fontModel.getFg(20))
           .fontWeight(700)
-          .fontColor('#000')
+          .fontColor($r('sys.color.font_primary'))
         Image(getMedia('app.media.close_btn'))
+          .accessibilityText('返回')
           .width(40)
           .height(40)
           .onClick(() => {
@@ -228,18 +235,20 @@ export struct CommentComp {
                     .height(16)
                     .borderRadius(8)
                   Text(item.name)
-                    .lineHeight(16)
-                    .fontSize(12)
-                    .fontColor('rgba(0, 0, 0, 0.6)')
+                    .accessibilityText(`昵称${item.name}`)
+                    .lineHeight(this.fontModel.getDesFg(16))
+                    .fontSize(this.fontModel.getFg(12))
+                    .fontColor($r('sys.color.font_secondary'))
                 }
                 .width('100%')
-                .height(16)
+                .height(this.fontModel.getDesFg(16))
 
                 Row() {
                   Text(item.commentContent)
-                    .lineHeight(19)
-                    .fontSize(14)
-                    .fontColor('#000')
+                    .lineHeight(this.fontModel.getDesFg(19))
+                    .fontSize(this.fontModel.getFg(14))
+                    .fontColor($r('sys.color.font_primary'))
+                    .accessibilityText(`来自${item.name}的评论${item.commentContent}`)
                 }
                 .width('100%')
                 .padding({ left: 24 })
@@ -249,13 +258,17 @@ export struct CommentComp {
                     Row({ space: 8 }) {
                       Text(item.timeAgo < 1 ? '刚刚' : (item.timeAgo >= 60 ? `${Math.floor(item.timeAgo / 60)}小时前` :
                         `${item.timeAgo}分钟前`))
-                        .lineHeight(13)
-                        .fontSize(10)
-                        .fontColor('rgba(0, 0, 0, 0.4)')
+                        .accessibilityText(item.timeAgo < 1 ? '评论于刚刚' :
+                          (item.timeAgo >= 60 ? `评论于${Math.floor(item.timeAgo / 60)}小时前` :
+                            `评论于${item.timeAgo}分钟前`))
+                        .lineHeight(this.fontModel.getDesFg(13))
+                        .fontSize(this.fontModel.getFg(10))
+                        .fontColor($r('sys.color.font_tertiary'))
                       Text('回复')
-                        .lineHeight(13)
-                        .fontSize(10)
-                        .fontColor('rgba(0, 0, 0, 0.4)')
+                        .accessibilityText('点击回复')
+                        .lineHeight(this.fontModel.getDesFg(13))
+                        .fontSize(this.fontModel.getFg(10))
+                        .fontColor($r('sys.color.font_tertiary'))
                         .onClick(() => {
                           this.commentId = item.id
                           this.replyPerson = item.name
@@ -272,12 +285,14 @@ export struct CommentComp {
 
                     Row({ space: 4 }) {
                       Image(item.isLike ? getMedia('app.media.thumb_select') : getMedia('app.media.hand_thumbsup'))
+                        .accessibilityText(item.isLike ? '取消点赞' : '点赞')
                         .width(16)
                         .height(16)
                       Text(`${item.likeCount}`)
-                        .lineHeight(13)
-                        .fontSize(10)
-                        .fontColor('rgba(0, 0, 0, 0.4)')
+                        .accessibilityText(`有${item.likeCount}人点赞`)
+                        .lineHeight(this.fontModel.getDesFg(13))
+                        .fontSize(this.fontModel.getFg(10))
+                        .fontColor($r('sys.color.font_tertiary'))
                     }
                     .onClick(() => {
                       if (item.isLike) {
@@ -314,26 +329,31 @@ export struct CommentComp {
                                     .height(16)
                                     .borderRadius(8)
                                   Text(each.replyName)
-                                    .lineHeight(16)
-                                    .fontSize(12)
-                                    .fontColor('rgba(0, 0, 0, 0.6)')
+                                    .accessibilityText(`昵称${each.replyName}`)
+                                    .lineHeight(this.fontModel.getDesFg(16))
+                                    .fontSize(this.fontModel.getFg(12))
+                                    .fontColor($r('sys.color.font_secondary'))
                                 }
                                 .width('100%')
-                                .height(16)
+                                .height(this.fontModel.getDesFg(16))
 
                                 Row() {
                                   Text() {
                                     if (each.replyPeople !== item.name) {
                                       Span('回复')
                                       Span(`@${each.replyPeople}`)
-                                        .fontColor('rgba(0, 0, 0, 0.6)')
+                                        .fontColor($r('sys.color.font_secondary'))
                                       Span('：')
                                     }
                                     Span(each.replyContent)
                                   }
-                                  .lineHeight(19)
-                                  .fontSize(14)
-                                  .fontColor('#000')
+                                  .accessibilityGroup(true)
+                                  .accessibilityText(each.replyPeople !== item.name ?
+                                    `${each.replyName}回复${each.replyPeople}说${each.replyContent}` :
+                                    `${each.replyName}回复说${each.replyContent}`)
+                                  .lineHeight(this.fontModel.getDesFg(19))
+                                  .fontSize(this.fontModel.getFg(14))
+                                  .fontColor($r('sys.color.font_primary'))
                                 }
                                 .width('100%')
                                 .padding({ left: 24 })
@@ -343,13 +363,18 @@ export struct CommentComp {
                                     Row({ space: 8 }) {
                                       Text(each.replyTimeAgo < 1 ? '刚刚' : (each.replyTimeAgo >= 60 ?
                                         `${Math.floor(each.replyTimeAgo / 60)}小时前` : `${each.replyTimeAgo}分钟前`))
-                                        .lineHeight(13)
-                                        .fontSize(10)
-                                        .fontColor('rgba(0, 0, 0, 0.4)')
+                                        .accessibilityText(each.replyTimeAgo < 1 ? '回复于刚刚' :
+                                          (each.replyTimeAgo >= 60 ?
+                                            `回复于${Math.floor(each.replyTimeAgo / 60)}小时前` :
+                                            `回复于${each.replyTimeAgo}分钟前`))
+                                        .lineHeight(this.fontModel.getDesFg(13))
+                                        .fontSize(this.fontModel.getFg(10))
+                                        .fontColor($r('sys.color.font_tertiary'))
                                       Text('回复')
-                                        .lineHeight(13)
-                                        .fontSize(10)
-                                        .fontColor('rgba(0, 0, 0, 0.4)')
+                                        .accessibilityText('点击回复')
+                                        .lineHeight(this.fontModel.getDesFg(13))
+                                        .fontSize(this.fontModel.getFg(10))
+                                        .fontColor($r('sys.color.font_tertiary'))
                                         .onClick(() => {
                                           this.commentId = item.id
                                           this.replyPerson = each.replyName
@@ -372,12 +397,14 @@ export struct CommentComp {
                                     Row({ space: 4 }) {
                                       Image(each.replyIsLike ? getMedia('app.media.thumb_select') :
                                         getMedia('app.media.hand_thumbsup'))
+                                        .accessibilityText(each.replyIsLike ? '取消点赞' : '点赞')
                                         .width(16)
                                         .height(16)
                                       Text(`${each.replyLikeCount}`)
-                                        .lineHeight(13)
-                                        .fontSize(10)
-                                        .fontColor('rgba(0, 0, 0, 0.4)')
+                                        .accessibilityText(`有${each.replyLikeCount}人点赞`)
+                                        .lineHeight(this.fontModel.getDesFg(13))
+                                        .fontSize(this.fontModel.getFg(10))
+                                        .fontColor($r('sys.color.font_tertiary'))
                                     }
                                     .onClick(() => {
                                       if (each.replyIsLike) {
@@ -413,9 +440,9 @@ export struct CommentComp {
                     if (item.replyList.length - this.moreList[index] > 0) {
                       Row() {
                         Text(`展开更多${item.replyList.length - this.moreList[index]}条`)
-                          .lineHeight(16)
-                          .fontSize(12)
-                          .fontColor('rgba(0, 0, 0, 0.6)')
+                          .lineHeight(this.fontModel.getDesFg(16))
+                          .fontSize(this.fontModel.getFg(12))
+                          .fontColor($r('sys.color.font_secondary'))
                         Image(getMedia('app.media.arrow_down_black'))
                           .width(16)
                           .height(16)
@@ -443,14 +470,14 @@ export struct CommentComp {
 
       Row() {
         Text('发表评论')
-          .lineHeight(21)
-          .fontSize(16)
-          .fontColor('rgba(0, 0, 0, 0.6)')
+          .lineHeight(this.fontModel.getDesFg(21))
+          .fontSize(this.fontModel.getFg(16))
+          .fontColor($r('sys.color.font_secondary'))
       }
       .width('100%')
       .height(40)
       .borderRadius(24)
-      .backgroundColor('rgba(0, 0, 0, 0.05)')
+      .backgroundColor($r('sys.color.comp_background_tertiary'))
       .margin({ top: 17 })
       .padding({ left: 12 })
       .onClick(() => {
@@ -458,7 +485,6 @@ export struct CommentComp {
           this.openDialog()
         } else {
           this.closeSheet()
-          WindowManager.setWindowSystemBarProperties({ statusBarContentColor: '#e6000000' })
           appRouter.push({ builderName: NAV_PAGE_NAME.LoginPage.name, params: { isChange: true } })
         }
       })
@@ -471,7 +497,7 @@ export struct CommentComp {
       right: new BreakPointType<number>({ sm: 16, md: 24, lg: 32 }).getValue(this.currentBreakpoint.value),
       bottom: 16
     })
-    .backgroundColor('#F1F3F5')
+    .backgroundColor($r('sys.color.background_secondary'))
   }
 }
 

@@ -5,6 +5,5 @@
     "deviceTypes": [
       "default"
     ],
-    "routerMap": "$profile:router_map"
   }
 }

@@ -7,15 +7,17 @@ export class DateModel {
   lunarColor: ResourceStr | Color // 农历/节日、节气展示颜色
   isToMonth: boolean // 是否当前月
   dateStr: string // 日期字符串
+  isToday: boolean // 是否是今天
 
   constructor(dayjsObj: dayjs.Dayjs, day: number, lunarDay: string, isToMonth: boolean, lunarColor: ResourceStr | Color,
-    dateStr: string) {
+    dateStr: string, isToday: boolean = false) {
     this.dayjsObj = dayjsObj
     this.day = day
     this.lunarDay = lunarDay
     this.isToMonth = isToMonth
     this.lunarColor = lunarColor
     this.dateStr = dateStr
+    this.isToday = isToday
   }
 }
 

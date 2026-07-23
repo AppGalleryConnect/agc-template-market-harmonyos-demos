@@ -113,7 +113,7 @@ export struct DateCalculation {
               Row({ space: 5 }) {
                 Text(dayjs(this.localStartDate).format('YYYY年MM月DD日'))
                   .attributeModifier(new BaseTextStyleModifier(`font_primary/Body_M/Regular`))
-                Image($r('app.media.chevron_right')).width(7).height(17)
+                Image($r('app.media.chevron_right')).width(12).height(24)
               }
             }
             .width('100%')
@@ -138,7 +138,7 @@ export struct DateCalculation {
               Row({ space: 5 }) {
                 Text(this.dayCount.toString())
                   .attributeModifier(new BaseTextStyleModifier(`font_primary/Body_M/Regular`))
-                Image($r('app.media.chevron_right')).width(7).height(17)
+                Image($r('app.media.chevron_right')).width(12).height(24)
               }
             }
             .width('100%')
@@ -161,9 +161,6 @@ export struct DateCalculation {
             Row({ space: 5 }) {
               Radio({ value: 'Radio1', group: 'radioGroup1' })
                 .checked(this.forwardOrBack === CALCULATION_TYPE.FORWARD)
-                .radioStyle({
-                  checkedBackgroundColor: $r('sys.color.comp_background_emphasize'),
-                })
                 .onChange((value) => {
                   this.forwardOrBack = CALCULATION_TYPE.FORWARD
                 })
@@ -174,9 +171,6 @@ export struct DateCalculation {
             Row({ space: 5 }) {
               Radio({ value: 'Radio2', group: 'radioGroup1' })
                 .checked(this.forwardOrBack === CALCULATION_TYPE.BACKWARD)
-                .radioStyle({
-                  checkedBackgroundColor: $r('sys.color.comp_background_emphasize'),
-                })
                 .onChange((value) => {
                   this.forwardOrBack = CALCULATION_TYPE.BACKWARD
                 })

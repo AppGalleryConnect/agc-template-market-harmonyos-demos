@@ -33,8 +33,7 @@ export struct HotSearchPanel {
 
         Row() {
           Column({ space: 16 }) {
-            RankList({dramaList: this.rankList, scroller: undefined,
-              isVertical: true})
+            RankList({dramaList: this.rankList, scroller: undefined, isVertical: true})
           }
           .width('100%')
           .alignItems(HorizontalAlign.Start)

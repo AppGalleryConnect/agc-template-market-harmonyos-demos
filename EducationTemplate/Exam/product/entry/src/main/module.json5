@@ -33,6 +33,12 @@
         ],
         "supportWindowMode": [
           "fullscreen"
+        ],
+        "metadata": [
+          {
+            "name": "ohos.ability.shortcuts",
+            "resource": "$profile:shortcuts_config"
+          }
         ]
       }
     ],
@@ -48,6 +54,19 @@
             "resource": "$profile:backup_config"
           }
         ]
+      },
+      {
+        "name": "EntryFormAbility",
+        "srcEntry": "./ets/entryformability/EntryFormAbility.ets",
+        "label": "$string:EntryFormAbility_label",
+        "description": "$string:EntryFormAbility_desc",
+        "type": "form",
+        "metadata": [
+          {
+            "name": "ohos.extension.form",
+            "resource": "$profile:form_config"
+          }
+        ]
       }
     ],
 // 配置信息如下
@@ -57,6 +76,11 @@
       {
         "name": "client_id",
         "value": "******"
+      }
+    ],
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.VIBRATE"
       }
     ]
   }

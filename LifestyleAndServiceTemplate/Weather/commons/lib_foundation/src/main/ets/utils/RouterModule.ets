@@ -14,7 +14,7 @@ export interface NavRouterInfo<T = undefined> {
   onPop?: Callback<PopInfo>;
 }
 
-const TAG: string = '[RouterModule]';
+const TAG = '[RouterModule]';
 
 export class RouterModule {
   public static stack: NavPathStack = new NavPathStack();

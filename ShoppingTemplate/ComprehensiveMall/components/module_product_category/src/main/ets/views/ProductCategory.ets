@@ -70,13 +70,15 @@ export struct ProductCategory {
         ForEach(this.categoryTabs, (item: CategoryItem, index: number) => {
           ListItem() {
             this.tabBarItemBuilder(item, index);
-          };
+          }
+          .padding({ bottom: index === this.categoryTabs.length - 1 ? 72 : 0 });
         }, (item: CategoryItem, index: number) => index + JSON.stringify(item));
       }
       .width('30%')
       .constraintSize({ maxWidth: 240 })
       .height('100%')
       .borderWidth({ right: 1 })
+      .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.BOTTOM])
       .borderColor($r('sys.color.comp_divider'))
       .scrollBar(BarState.Off)
 
@@ -99,13 +101,13 @@ export struct ProductCategory {
           this.productListBuilder()
         }
       }
+      .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.BOTTOM])
       .padding({ left: $r('app.float.space_l'), right: $r('app.float.space_l') })
       .layoutWeight(1)
     }
     .width('100%')
     .layoutWeight(1)
-    .padding({ bottom: this.isChildRoute ? 0 : 56 })
-    .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP]);
+    .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM]);
   }
 
   @Builder
@@ -184,7 +186,7 @@ export struct ProductCategory {
             }
           }, (item: number) => item.toString())
         } else {
-          ForEach(this.productList, (item: ProductSummaryItem) => {
+          ForEach(this.productList, (item: ProductSummaryItem, index: number) => {
             GridCol({
               offset: 0,
               order: 0,
@@ -201,6 +203,7 @@ export struct ProductCategory {
                   .maxLines(1)
                   .textOverflow({ overflow: TextOverflow.Ellipsis })
               }
+              .padding({ bottom: index === this.productList.length - 1 ? 72 : 0 })
               .alignItems(HorizontalAlign.Start)
               .onClick(() => {
                 this.handleClickCard?.(item)
@@ -217,6 +220,7 @@ export struct ProductCategory {
     .layoutWeight(1)
     .align(Alignment.Top)
     .scrollBar(BarState.Off)
+    .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.BOTTOM])
     .edgeEffect(EdgeEffect.Spring)
   }
 }

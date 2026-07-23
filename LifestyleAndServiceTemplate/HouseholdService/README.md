@@ -112,9 +112,11 @@ HouseholdService
 │       ├─common
 │       │   ├─AppPrivacyUtils.ets                       // 隐私弹框           
 │       │   ├─Constant.ets                              // 常量定义 
+│       │   ├─ForemUtils.ets                            // 服务卡片工具类 
 │       │   ├─GoodDataSource.ets                        // 商品datasource定义
 │       │   ├─GridRowColSetting.ets                     // 栅格通用设置
-│       │   └─PushUtils.ets                             // 服务通知模拟
+│       │   ├─PushUtils.ets                             // 服务通知模拟
+│       │   └─WindowUtils.ets                           // 窗口管理类
 │       ├─http         
 │       │   ├─ApiManage.ets                             // 服务端接口定义 
 │       │   ├─AxiosBase.ets                             // 接口调用基础类            
@@ -325,9 +327,6 @@ HouseholdService
 │  │ 
 ├─features
 │  ├─business_home/src/main/ets                         // 首页模块             
-│  │    ├─common                     
-│  │    │   ├─Constant.ets                              // 常量定义       
-│  │    │   └─Model.ets                                 // 模型定义     
 │  │    ├─components 
 │  │    │   ├─Advertisement.ets                         // 广告组件                     
 │  │    │   └─ServiceText.ets                           // 价格文本组件             
@@ -358,7 +357,9 @@ HouseholdService
 │            └─MyOrderVM.ets                            // 订单列表viewmodel  
 │
 └─products
-   └─entry/src/main/ets                
+   └─entry/src/main/ets       
+        ├─common                         
+        │   └─WantUtils.ets                             // Want工具类            
         ├─components                         
         │   └─AllCategory.ets                           // 分类页面        
         ├─entryability                                       
@@ -369,18 +370,26 @@ HouseholdService
         │   ├─Index.ets                                 // 入口页面
         │   └─Main.ets                                  // 主页面
         └─widget/pages                                 
-            └─WidgetCard.ets                            // 主页面
- 
+            ├─common                         
+            │   └─ConstantS.ets                         // 服务卡片常量   
+            ├─model                         
+            │   └─Model.ets                             // 服务卡片数据模型
+            ├─pages
+            │   ├─MiddleCard.ets                        // 2*4卡片                        
+            │   └─MiniCard.ets                          // 2*2卡片 
+            └─util                         
+                ├─DataUtil.ets                          // 日期工具类                        
+                └─FormUtils.ets                         // 服务卡片管理类 
 ```
 
 ## 约束与限制
 
 ### 环境
 
-* DevEco Studio版本：DevEco Studio 6.0.2 Release及以上
-* HarmonyOS SDK版本：HarmonyOS 6.0.2 Release SDK及以上
-* 设备类型：华为手机（包括双折叠和阔折叠）
-* 系统版本：HarmonyOS 5.1.0(18)及以上
+* DevEco Studio版本：DevEco Studio 6.1.1 Release及以上
+* HarmonyOS SDK版本：HarmonyOS 6.1.1 Release SDK及以上
+* 设备类型：华为手机（包括双折叠和阔折叠）、平板
+* 系统版本：HarmonyOS 6.0.0(20)及以上
 
 ### 权限
 

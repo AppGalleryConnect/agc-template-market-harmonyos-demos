@@ -89,7 +89,8 @@ export struct TodoList {
 
                   }
                   .scrollBar(BarState.Off)
-                  .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: true })
+                  .nestedScroll(
+                    { scrollForward: NestedScrollMode.PARENT_FIRST, scrollBackward: NestedScrollMode.PARENT_FIRST })
                 }
               }, (item: UserEventItem) => JSON.stringify(item))
             }
@@ -142,13 +143,13 @@ export struct TodoList {
             .alignItems(HorizontalAlign.Start)
           }.visibility(this.todoList.length ? Visibility.Visible : Visibility.None)
         }
-        .layoutWeight(1)
         .backgroundColor($r('sys.color.background_primary'))
       }
     }
     .scrollBar(BarState.Off)
     .edgeEffect(EdgeEffect.Spring)
     .layoutWeight(1)
+    .align(Alignment.Top)
     .padding({ bottom: 16, top: 16 })
   }
 

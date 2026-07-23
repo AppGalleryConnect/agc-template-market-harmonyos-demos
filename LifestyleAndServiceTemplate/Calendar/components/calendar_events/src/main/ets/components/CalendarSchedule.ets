@@ -24,8 +24,8 @@ export struct CalendarSchedule {
   @Local reminderList: ReminderType[] = reminderList
   @Param userEventInfo: UserEventItem = new UserEventItem()
   @Param readonly: boolean = false
-  @Param scroller: Scroller = new Scroller()
   @Local themeVM: ThemeVM = ThemeVM.instance;
+  listScroller: ListScroller = new ListScroller();
 
   aboutToAppear(): void {
     RemindEventDispatcher.scheduleCallback = () => {
@@ -242,20 +242,15 @@ export struct CalendarSchedule {
         this.userEventInfo.remarks = value
       })
       .onFocus(() => {
-        this.scroller.scrollTo({
-          xOffset: 0,
-          yOffset: 300,
-          animation:
-          {
-            duration: 500,
-          },
-        })
+        setTimeout(() => {
+          this.listScroller.scrollEdge(Edge.Bottom)
+        }, 200)
       })
   }
 
   build() {
     Column() {
-      List({ space: 16 }) {
+      List({ space: 16, scroller: this.listScroller }) {
         ListItem() {
           this.calendarEventContent()
         }
@@ -278,7 +273,7 @@ export struct CalendarSchedule {
       })
       .layoutWeight(1)
       .scrollBar(BarState.Off)
-      .edgeEffect(EdgeEffect.None)
+      .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: true })
     }
     .margin({ top: 16 })
     .layoutWeight(1)

@@ -404,12 +404,12 @@ export class MockArticle {
       isMarked: false,
       postImgList: [
         {
-          picVideoUrl: 'https://e-file.huawei.com/mediares/MarketingMaterial_MCD/EBG/PUBLIC/zh/2025/04/5feb8457-d5e9-4949-a181-795e4d873af9.mp4',
-          surfaceUrl: 'https://e-file.huawei.com/mediares/Video_MCD/EBG/PUBLIC/zh/2025/04/3c04b872-197d-4551-a353-0eb99def6ca2.png',
+          picVideoUrl: 'https://agc-storage-drcn.platform.dbankcloud.cn/v0/default-bucket-o7oax/template_source%2Fvideo_1.mp4?token=6504c93e-6dc3-423b-aff1-1e594711ba30',
+          surfaceUrl: 'https://www-file.huawei.com/admin/asset/v1/pro/view/6c813cb0874744f4b54fd61f1f9e8f24.jpg',
         },
       ],
-      videoUrl: 'https://e-file.huawei.com/mediares/MarketingMaterial_MCD/EBG/PUBLIC/zh/2025/04/5feb8457-d5e9-4949-a181-795e4d873af9.mp4',
-      coverUrl: 'https://e-file.huawei.com/mediares/Video_MCD/EBG/PUBLIC/zh/2025/04/3c04b872-197d-4551-a353-0eb99def6ca2.png',
+      videoUrl: 'https://agc-storage-drcn.platform.dbankcloud.cn/v0/default-bucket-o7oax/template_source%2Fvideo_1.mp4?token=6504c93e-6dc3-423b-aff1-1e594711ba30',
+      coverUrl: 'https://www-file.huawei.com/admin/asset/v1/pro/view/6c813cb0874744f4b54fd61f1f9e8f24.jpg',
       videoDuration: 48234,
       navInfo: {
         setting: '{"type":"view","children":[{"type":"view","children":[{"type":"List","children":[{"type":"native","showType":"TopTextBottomBigImageCard","name":"上文下大图"}],"style":{"backgroundColor":"#FFFFFF","padding-top":"12","padding-bottom":"12"}}]}]}',
@@ -480,13 +480,13 @@ export class MockArticle {
       }],
       postImgList: [
         {
-          picVideoUrl: 'https://e-file.huawei.com/mediares/MarketingMaterial_MCD/EBG/PUBLIC/zh/2025/05/e225ca18-0b76-4fca-918a-ff97e3a99de8.mp4',
-          surfaceUrl: 'https://www-file.huawei.com/admin/asset/v1/pro/view/ca03b4509af94cadbdde656fd9cd23ef.jpg',
+          picVideoUrl: 'https://agc-storage-drcn.platform.dbankcloud.cn/v0/default-bucket-o7oax/template_source%2Fvideo_1.mp4?token=6504c93e-6dc3-423b-aff1-1e594711ba30',
+          surfaceUrl: 'https://www-file.huawei.com/admin/asset/v1/pro/view/6c813cb0874744f4b54fd61f1f9e8f24.jpg',
         },
       ],
       playCount: '1700',
-      videoUrl: 'https://e-file.huawei.com/mediares/MarketingMaterial_MCD/EBG/PUBLIC/zh/2025/05/e225ca18-0b76-4fca-918a-ff97e3a99de8.mp4',
-      coverUrl: 'https://e-file.huawei.com/mediares/Video_MCD/EBG/PUBLIC/zh/2025/05/43f01339-48e0-4e5d-a433-ccb8c423cdfe.png',
+      videoUrl: 'https://agc-storage-drcn.platform.dbankcloud.cn/v0/default-bucket-o7oax/template_source%2Fvideo_1.mp4?token=6504c93e-6dc3-423b-aff1-1e594711ba30',
+      coverUrl: 'https://www-file.huawei.com/admin/asset/v1/pro/view/6c813cb0874744f4b54fd61f1f9e8f24.jpg',
       videoType: 1,
       videoDuration: 98005,
       navInfo: {

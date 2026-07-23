@@ -1,0 +1,2369 @@
+{
+  "metadata": {
+    "rootDir": "/devcloud/ws/sHQbT/workspace/j_FVTKFEL5/BacAGCSDKExam/Exam",
+    "toolType": "ohpm",
+    "toolVersion": "ohpm v5.3.1-rc.4",
+    "author": [
+      {}
+    ]
+  },
+  "modules": [
+    {
+      "moduleName": "select_category",
+      "artifact": {
+        "component": {
+          "id": "select_category@1.0.3",
+          "repoType": "ohpm",
+          "name": "select_category",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.3",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "dayjs@1.11.13",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.13",
+          "files": [
+            {
+              "integrity": "sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.13.tgz"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "select_category@1.0.3",
+          "dependsOn": [
+            {
+              "id": "dayjs@1.11.13"
+            },
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":aggregated_payment"
+      ]
+    },
+    {
+      "moduleName": "base_select",
+      "artifact": {
+        "component": {
+          "id": "base_select@1.0.2",
+          "repoType": "ohpm",
+          "name": "base_select",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.2",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "dayjs@1.11.13",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.13",
+          "files": [
+            {
+              "integrity": "sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.13.tgz"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "base_select@1.0.2",
+          "dependsOn": [
+            {
+              "id": "dayjs@1.11.13"
+            },
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":aggregated_payment"
+      ]
+    },
+    {
+      "moduleName": "answer_questions",
+      "artifact": {
+        "component": {
+          "id": "answer_questions@1.0.2",
+          "repoType": "ohpm",
+          "name": "answer_questions",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.2",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "dayjs@1.11.13",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.13",
+          "files": [
+            {
+              "integrity": "sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.13.tgz"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "answer_questions@1.0.2",
+          "dependsOn": [
+            {
+              "id": "dayjs@1.11.13"
+            },
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":aggregated_payment"
+      ]
+    },
+    {
+      "moduleName": "login_info",
+      "artifact": {
+        "component": {
+          "id": "login_info@1.0.0",
+          "repoType": "ohpm",
+          "name": "login_info",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "dayjs@1.11.13",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.13",
+          "files": [
+            {
+              "integrity": "sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.13.tgz"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "login_info@1.0.0",
+          "dependsOn": [
+            {
+              "id": "dayjs@1.11.13"
+            },
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":aggregated_payment"
+      ]
+    },
+    {
+      "moduleName": "aggregated_ads",
+      "artifact": {
+        "component": {
+          "id": "aggregated_ads@1.0.3",
+          "repoType": "ohpm",
+          "name": "aggregated_ads",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.3",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "dayjs@1.11.13",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.13",
+          "files": [
+            {
+              "integrity": "sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.13.tgz"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "aggregated_ads@1.0.3",
+          "dependsOn": [
+            {
+              "id": "dayjs@1.11.13"
+            },
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":aggregated_payment"
+      ]
+    },
+    {
+      "moduleName": "search",
+      "artifact": {
+        "component": {
+          "id": "search@1.0.2",
+          "repoType": "ohpm",
+          "name": "search",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.2",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@hw-agconnect/ui-toast@1.0.0",
+          "desc": "ui_toast是基于open harmony基础组件开发的组件，用于在屏幕中显示一个操作的轻量级即时反馈，支持显示图片+文字，刷新弹窗内容和修改弹窗样式。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-toast",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-vmk4trgNRIxAK81xj69zRJCayccuryywF5qfheKWy1hdtSMMvXAX4g1EYvAbMd7/PXT8v+g/Xa/ASFS2BSs1KQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-toast/-/@hw-agconnect/ui-toast-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "dayjs@1.11.13",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.13",
+          "files": [
+            {
+              "integrity": "sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.13.tgz"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "search@1.0.2",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/ui-toast@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "dayjs@1.11.13"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":aggregated_payment"
+      ]
+    },
+    {
+      "moduleName": "app_setting",
+      "artifact": {
+        "component": {
+          "id": "app_setting@1.0.2",
+          "repoType": "ohpm",
+          "name": "app_setting",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.2",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-toast@1.0.0",
+          "desc": "ui_toast是基于open harmony基础组件开发的组件，用于在屏幕中显示一个操作的轻量级即时反馈，支持显示图片+文字，刷新弹窗内容和修改弹窗样式。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-toast",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-vmk4trgNRIxAK81xj69zRJCayccuryywF5qfheKWy1hdtSMMvXAX4g1EYvAbMd7/PXT8v+g/Xa/ASFS2BSs1KQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-toast/-/@hw-agconnect/ui-toast-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "dayjs@1.11.13",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.13",
+          "files": [
+            {
+              "integrity": "sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.13.tgz"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "app_setting@1.0.2",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/ui-toast@1.0.0"
+            },
+            {
+              "id": "dayjs@1.11.13"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":aggregated_payment"
+      ]
+    },
+    {
+      "moduleName": "membership",
+      "artifact": {
+        "component": {
+          "id": "membership@1.0.3",
+          "repoType": "ohpm",
+          "name": "membership",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.3",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "dayjs@1.11.13",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.13",
+          "files": [
+            {
+              "integrity": "sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.13.tgz"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "membership@1.0.3",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "dayjs@1.11.13"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":aggregated_payment"
+      ]
+    },
+    {
+      "moduleName": "feedback",
+      "artifact": {
+        "component": {
+          "id": "feedback@1.0.1",
+          "repoType": "ohpm",
+          "name": "feedback",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.1",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/axios-mock-adapter@1.0.0",
+          "desc": "Axios adapter that allows to easily mock requests",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/axios-mock-adapter",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-MHya9ckoaeA5l/jMviaHyGYJAFHMolZdQFjyGE4RO3bQEYsNrGB/0sZhlcfUbEHH++WNH/rgl4bsRfAgpEa0Dw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/axios-mock-adapter/-/@hw-agconnect/axios-mock-adapter-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-toast@1.0.0",
+          "desc": "ui_toast是基于open harmony基础组件开发的组件，用于在屏幕中显示一个操作的轻量级即时反馈，支持显示图片+文字，刷新弹窗内容和修改弹窗样式。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-toast",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-vmk4trgNRIxAK81xj69zRJCayccuryywF5qfheKWy1hdtSMMvXAX4g1EYvAbMd7/PXT8v+g/Xa/ASFS2BSs1KQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-toast/-/@hw-agconnect/ui-toast-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "dayjs@1.11.13",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.13",
+          "files": [
+            {
+              "integrity": "sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.13.tgz"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "feedback@1.0.1",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            },
+            {
+              "id": "@hw-agconnect/axios-mock-adapter@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/ui-toast@1.0.0"
+            },
+            {
+              "id": "dayjs@1.11.13"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/axios-mock-adapter@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":aggregated_payment"
+      ]
+    },
+    {
+      "moduleName": "search_question",
+      "artifact": {
+        "component": {
+          "id": "search_question@1.0.4",
+          "repoType": "ohpm",
+          "name": "search_question",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.4",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "dayjs@1.11.13",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.13",
+          "files": [
+            {
+              "integrity": "sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.13.tgz"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "search_question@1.0.4",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "dayjs@1.11.13"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":aggregated_payment"
+      ]
+    },
+    {
+      "moduleName": "image_preview",
+      "artifact": {
+        "component": {
+          "id": "image_preview@1.0.0",
+          "repoType": "ohpm",
+          "name": "image_preview",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "dayjs@1.11.13",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.13",
+          "files": [
+            {
+              "integrity": "sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.13.tgz"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "image_preview@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "dayjs@1.11.13"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":aggregated_payment"
+      ]
+    },
+    {
+      "moduleName": "commonLib",
+      "artifact": {
+        "component": {
+          "id": "commonlib@1.0.0",
+          "repoType": "ohpm",
+          "name": "commonlib",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "dayjs@1.11.13",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.13",
+          "files": [
+            {
+              "integrity": "sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.13.tgz"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "commonlib@1.0.0",
+          "dependsOn": [
+            {
+              "id": "dayjs@1.11.13"
+            },
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":answer_questions",
+        ":membership",
+        ":aggregated_payment"
+      ]
+    },
+    {
+      "moduleName": "homePage",
+      "artifact": {
+        "component": {
+          "id": "homepage@1.0.0",
+          "repoType": "ohpm",
+          "name": "homepage",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "dayjs@1.11.13",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.13",
+          "files": [
+            {
+              "integrity": "sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.13.tgz"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "homepage@1.0.0",
+          "dependsOn": [
+            {
+              "id": "dayjs@1.11.13"
+            },
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":commonLib",
+        ":login_info",
+        ":search",
+        ":search_question",
+        ":answer_questions",
+        ":base_select",
+        ":select_category",
+        ":membership",
+        ":aggregated_payment"
+      ]
+    },
+    {
+      "moduleName": "minePage",
+      "artifact": {
+        "component": {
+          "id": "minepage@1.0.0",
+          "repoType": "ohpm",
+          "name": "minepage",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@hw-agconnect/ui-dialog@1.0.1",
+          "desc": "ui_dialog是基于open harmony基础组件开发的组件，用于在屏幕中显示一个全局弹窗的功能，支持自定义样式，支持任意视图弹出，支持动态数据更新。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-dialog",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-f4SrF/ttuRIhNgS1QLxmYlpMzUuv7EIQgCxSiAsTpdKHlCy3pszEKIZjOCJQmWJhWStVwqkCX/ajZjWMcPR1UA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-dialog/-/@hw-agconnect/ui-dialog-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "dayjs@1.11.13",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.13",
+          "files": [
+            {
+              "integrity": "sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.13.tgz"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "minepage@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/ui-dialog@1.0.1"
+            },
+            {
+              "id": "dayjs@1.11.13"
+            },
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":commonLib",
+        ":login_info",
+        ":feedback",
+        ":answer_questions",
+        ":customer_service_chat",
+        ":app_setting",
+        ":membership",
+        ":aggregated_payment"
+      ]
+    },
+    {
+      "moduleName": "customer_service_chat",
+      "artifact": {
+        "component": {
+          "id": "customer_service_chat@1.0.0",
+          "repoType": "ohpm",
+          "name": "customer_service_chat",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "dayjs@1.11.13",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.13",
+          "files": [
+            {
+              "integrity": "sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.13.tgz"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "customer_service_chat@1.0.0",
+          "dependsOn": [
+            {
+              "id": "dayjs@1.11.13"
+            },
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":image_preview",
+        ":aggregated_payment"
+      ]
+    },
+    {
+      "moduleName": "aggregated_share",
+      "artifact": {
+        "component": {
+          "id": "aggregated_share@1.0.2",
+          "repoType": "ohpm",
+          "name": "aggregated_share",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.2",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-toast@1.0.0",
+          "desc": "ui_toast是基于open harmony基础组件开发的组件，用于在屏幕中显示一个操作的轻量级即时反馈，支持显示图片+文字，刷新弹窗内容和修改弹窗样式。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-toast",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-vmk4trgNRIxAK81xj69zRJCayccuryywF5qfheKWy1hdtSMMvXAX4g1EYvAbMd7/PXT8v+g/Xa/ASFS2BSs1KQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-toast/-/@hw-agconnect/ui-toast-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@tencent/wechat_open_sdk@1.0.15",
+          "desc": "Tencent WeChat OpenSDK",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@tencent/wechat_open_sdk",
+          "version": "1.0.15",
+          "files": [
+            {
+              "integrity": "sha512-O9W8Gj16YBu0fl3d78r4eQQdnljczJPcIDws9i+ErVg94y8twHBkLWdyysiWfhGA7+ltB3mu8EZsk/EAr8LZSw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/ohpm-center/@tencent/wechat_open_sdk/-/@tencent/wechat_open_sdk-1.0.15.har"
+            }
+          ]
+        },
+        {
+          "id": "@tencent/qq-open-sdk@1.0.4",
+          "desc": "QQ Open SDK",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@tencent/qq-open-sdk",
+          "version": "1.0.4",
+          "files": [
+            {
+              "integrity": "sha512-8hQfQxSvrPpIo6n63zsugeG/ZC947vZvDWPkCG6+vOMaLxEp9ynntnnR0inml4ZltQbszFGIBTmpxYCTer8whg==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@tencent/qq-open-sdk/-/@tencent/qq-open-sdk-1.0.4.har"
+            }
+          ]
+        },
+        {
+          "id": "dayjs@1.11.13",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.13",
+          "files": [
+            {
+              "integrity": "sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.13.tgz"
+            }
+          ]
+        },
+        {
+          "id": "core@1.0.0",
+          "desc": "Please describe the basic information.",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "local",
+          "name": "core",
+          "version": "1.0.0",
+          "files": [
+            {
+              "localPath": "components/aggregated_share/libs/weibo_open_sdk",
+              "hash": ""
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "aggregated_share@1.0.2",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/ui-toast@1.0.0"
+            },
+            {
+              "id": "@tencent/wechat_open_sdk@1.0.15"
+            },
+            {
+              "id": "@tencent/qq-open-sdk@1.0.4"
+            },
+            {
+              "id": "dayjs@1.11.13"
+            },
+            {
+              "id": "core@1.0.0"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":aggregated_payment"
+      ]
+    },
+    {
+      "moduleName": "topicPage",
+      "artifact": {
+        "component": {
+          "id": "topicpage@1.0.0",
+          "repoType": "ohpm",
+          "name": "topicpage",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@hw-agconnect/ui-dialog@1.0.1",
+          "desc": "ui_dialog是基于open harmony基础组件开发的组件，用于在屏幕中显示一个全局弹窗的功能，支持自定义样式，支持任意视图弹出，支持动态数据更新。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-dialog",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-f4SrF/ttuRIhNgS1QLxmYlpMzUuv7EIQgCxSiAsTpdKHlCy3pszEKIZjOCJQmWJhWStVwqkCX/ajZjWMcPR1UA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-dialog/-/@hw-agconnect/ui-dialog-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "dayjs@1.11.13",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.13",
+          "files": [
+            {
+              "integrity": "sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.13.tgz"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "topicpage@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/ui-dialog@1.0.1"
+            },
+            {
+              "id": "dayjs@1.11.13"
+            },
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":commonLib",
+        ":answer_questions",
+        ":login_info",
+        ":aggregated_share",
+        ":search",
+        ":aggregated_payment"
+      ]
+    },
+    {
+      "moduleName": "entry",
+      "artifact": {
+        "component": {
+          "id": "entry@1.0.0",
+          "repoType": "ohpm",
+          "name": "entry",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "dayjs@1.11.13",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.13",
+          "files": [
+            {
+              "integrity": "sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.13.tgz"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "entry@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "dayjs@1.11.13"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":homePage",
+        ":topicPage",
+        ":minePage",
+        ":commonLib",
+        ":login_info",
+        ":answer_questions",
+        ":feedback",
+        ":aggregated_ads",
+        ":app_setting",
+        ":search",
+        ":aggregated_payment"
+      ]
+    },
+    {
+      "moduleName": "aggregated_payment",
+      "artifact": {
+        "component": {
+          "id": "aggregated_payment@1.0.0",
+          "repoType": "ohpm",
+          "name": "aggregated_payment",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@tencent/wechat_open_sdk@1.0.15",
+          "desc": "Tencent WeChat OpenSDK",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@tencent/wechat_open_sdk",
+          "version": "1.0.15",
+          "files": [
+            {
+              "integrity": "sha512-O9W8Gj16YBu0fl3d78r4eQQdnljczJPcIDws9i+ErVg94y8twHBkLWdyysiWfhGA7+ltB3mu8EZsk/EAr8LZSw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/ohpm-center/@tencent/wechat_open_sdk/-/@tencent/wechat_open_sdk-1.0.15.har"
+            }
+          ]
+        },
+        {
+          "id": "@cashier_alipay/cashiersdk@15.8.39",
+          "desc": "alipay standard cashier sdk for ohos",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@cashier_alipay/cashiersdk",
+          "version": "15.8.39",
+          "files": [
+            {
+              "integrity": "sha512-Kje5nrvA2iCFiGnTOI1+XPHy8JIOQ7Cn800Se/Af5rYKhdN4SqdtD2Rbtg2PdOWc8Gje0jcMwe2Sl12aL0hxwQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/ohpm-center/@cashier_alipay/cashiersdk/-/@cashier_alipay/cashiersdk-15.8.39.har"
+            }
+          ]
+        },
+        {
+          "id": "@taobao-ohos/utdid_sdk@1.2.5",
+          "desc": "@taobao-ohos/utdid_sdk: 适用于鸿蒙设备获取utdid的sdk包",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "local",
+          "name": "@taobao-ohos/utdid_sdk",
+          "version": "1.2.5",
+          "files": [
+            {
+              "localPath": "oh_modules/.ohpm/@cashier_alipay+cashiersdk@15.8.39/oh_modules/@cashier_alipay/cashiersdk/lib/utdid_sdk-1.2.5.har",
+              "hash": "sha512-1AhtmjV8TR3zNJx4LMOJ+pfpK7WWOo7U0w+BvET2RdkzfOkmC7sUH5M4SKW916qyQEDA1s9u8fjKHgct53lu+Q=="
+            }
+          ]
+        },
+        {
+          "id": "libutdid_native.so@0.0.1",
+          "desc": "Please describe the basic information.",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "local",
+          "name": "libutdid_native.so",
+          "version": "0.0.1",
+          "files": [
+            {
+              "localPath": "oh_modules/.ohpm/@taobao-ohos+utdid_sdk@ecjyoomnzz6zaipo1koz9+avemnpw7+togfp5uwrtiu=/oh_modules/@taobao-ohos/utdid_sdk/src/main/cpp/types/libutdid_native",
+              "hash": ""
+            }
+          ]
+        },
+        {
+          "id": "@ohos/crypto-js@2.0.4",
+          "desc": "The encryption algorithm class library can be very convenient to perform the encryption and decryption operations it supports in the front end. Currently, the algorithms supported by crypto-js are: MD5, SHA-1, SHA-256, HMAC, HMAC-MD5, HMAC-SHA1, HMAC-SHA256, PBKDF2, etc.",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/crypto-js",
+          "version": "2.0.4",
+          "files": [
+            {
+              "integrity": "sha512-589ur6oqU1UNibqefMly2cwEeEhkSoCAA3uc+oNUwRnYYtevn/kQnO+Coi36N+VJSeeg/uFzZk1K/wUMdovpOA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/ohpm-center/@ohos/crypto-js/-/@ohos/crypto-js-2.0.4.har"
+            }
+          ]
+        },
+        {
+          "id": "@alipay/blueshieldsdk@1.0.30",
+          "desc": "Security Kits provided by Ant Group",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "local",
+          "name": "@alipay/blueshieldsdk",
+          "version": "1.0.30",
+          "files": [
+            {
+              "localPath": "oh_modules/.ohpm/@cashier_alipay+cashiersdk@15.8.39/oh_modules/@cashier_alipay/cashiersdk/lib/blueshieldsdk-1.0.30.har",
+              "hash": "sha512-+DQo8oJ4wwazXEPN2885QBB5YnZRk4NCyVNEmIGPkao8EphA/DuQ2PWQj15Fl2a0KE/i86B/WgP2CUoF6IwR6Q=="
+            }
+          ]
+        },
+        {
+          "id": "libblueshield.so@1.0.8",
+          "desc": "Please describe the basic information.",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "local",
+          "name": "libblueshield.so",
+          "version": "1.0.8",
+          "files": [
+            {
+              "localPath": "oh_modules/.ohpm/@alipay+blueshieldsdk@qgf9fllog8tazdv8uop120fy3saz8l+7jb55+sipesk=/oh_modules/@alipay/blueshieldsdk/src/main/cpp/types/libblueshield",
+              "hash": ""
+            }
+          ]
+        },
+        {
+          "id": "pako@2.1.0",
+          "desc": "zlib port to javascript - fast, modularized, with browser support",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "pako",
+          "version": "2.1.0",
+          "files": [
+            {
+              "integrity": "sha512-w+eufiZ1WuJYgPXbV/PO3NCMEc3xqylkKHzp8bxp1uW4qaSNQUkwmLLEc3kKsfz8lpV1F8Ht3U1Cm+9Srog2ug==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/ohpm-center/pako/-/pako-2.1.0.har"
+            }
+          ]
+        },
+        {
+          "id": "dayjs@1.11.13",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.13",
+          "files": [
+            {
+              "integrity": "sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.13.tgz"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "aggregated_payment@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@tencent/wechat_open_sdk@1.0.15"
+            },
+            {
+              "id": "@cashier_alipay/cashiersdk@15.8.39"
+            },
+            {
+              "id": "dayjs@1.11.13"
+            },
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@cashier_alipay/cashiersdk@15.8.39",
+          "dependsOn": [
+            {
+              "id": "@taobao-ohos/utdid_sdk@1.2.5"
+            },
+            {
+              "id": "@alipay/blueshieldsdk@1.0.30"
+            },
+            {
+              "id": "pako@2.1.0"
+            }
+          ]
+        },
+        {
+          "id": "@taobao-ohos/utdid_sdk@1.2.5",
+          "dependsOn": [
+            {
+              "id": "libutdid_native.so@0.0.1"
+            },
+            {
+              "id": "@ohos/crypto-js@2.0.4"
+            }
+          ]
+        },
+        {
+          "id": "@alipay/blueshieldsdk@1.0.30",
+          "dependsOn": [
+            {
+              "id": "libblueshield.so@1.0.8"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": []
+    }
+  ]
+}

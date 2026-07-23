@@ -27,60 +27,66 @@ export class RewardAdStatusHandler {
       // 如果没有明确声明publisherBundleName，那么订阅者可能会收到来自其它包名的伪造事件，从而导致安全性问题或误导。
       publisherBundleName: 'com.huawei.hms.adsservice'
     };
-    // 创建订阅者回调
-    commonEventManager.createSubscriber(subscribeInfo, (err: BusinessError, commonEventSubscriber:
-      commonEventManager.CommonEventSubscriber) => {
-      if (err) {
-        hilog.error(0x0000, 'testTag', `Failed to create subscriber. Code is ${err.code}, message is ${err.message}`);
-        return;
-      }
-      hilog.info(0x0000, 'testTag', 'Succeeded in creating subscriber');
-      this.subscriber = commonEventSubscriber;
-      // 订阅公共事件回调
-      if (!this.subscriber) {
-        hilog.warn(0x0000, 'testTag', 'Need create subscriber');
-        return;
-      }
-      commonEventManager.subscribe(this.subscriber, (err: BusinessError, commonEventSubscriber:
-        commonEventManager.CommonEventData) => {
+    try { // 创建订阅者回调
+      commonEventManager.createSubscriber(subscribeInfo, (err: BusinessError, commonEventSubscriber:
+        commonEventManager.CommonEventSubscriber) => {
         if (err) {
-          hilog.error(0x0000, 'testTag', `Failed to subscribe. Code is ${err.code}, message is ${err.message}`);
-        } else {
-          hilog.info(0x0000, 'testTag', 'Succeeded in subscribing data');
-          const status: string = commonEventSubscriber?.parameters?.[KEY_REWARD_STATUS];
-          switch (status) {
-            case AdStatus.AD_OPEN:
-              hilog.info(0x0000, 'testTag', 'Status is onAdOpen');
-              break;
-            case AdStatus.AD_CLICKED:
-              hilog.info(0x0000, 'testTag', 'Status is onAdClick');
-              break;
-            case AdStatus.AD_CLOSED:
-              hilog.info(0x0000, 'testTag', 'Status is onAdClose');
-              item.isFirstClick = true
-              this.unRegisterPPSReceiver();
-              break;
-            case AdStatus.AD_REWARDED:
-              const rewardData: Record<string, string | number> = commonEventSubscriber?.parameters?.[KEY_REWARD_DATA];
-              const rewardType: string = rewardData?.rewardType as string;
-              const rewardAmount: number = rewardData?.rewardAmount as number;
-              item.isLookAD = true
-              hilog.info(0x0000, 'testTag', `Status is onAdReward. Type is ${rewardType}, Amount is ${rewardAmount}`);
-              break;
-            case AdStatus.AD_VIDEO_START:
-              hilog.info(0x0000, 'testTag', 'Status is onAdVideoStart');
-              break;
-            case AdStatus.AD_COMPLETED:
-              hilog.info(0x0000, 'testTag', 'Status is onAdCompleted');
-              item.isFirstClick = true
-              this.windowStage.getMainWindowSync().getUIContext().getRouter().replaceUrl({ url: 'components/LookAD' })
-              break;
-            default:
-              break;
-          }
+          hilog.error(0x0000, 'testTag', `Failed to create subscriber. Code is ${err.code}, message is ${err.message}`);
+          return;
         }
+        hilog.info(0x0000, 'testTag', 'Succeeded in creating subscriber');
+        this.subscriber = commonEventSubscriber;
+        // 订阅公共事件回调
+        if (!this.subscriber) {
+          hilog.warn(0x0000, 'testTag', 'Need create subscriber');
+          return;
+        }
+        commonEventManager.subscribe(this.subscriber, (err: BusinessError, commonEventSubscriber:
+          commonEventManager.CommonEventData) => {
+          if (err) {
+            hilog.error(0x0000, 'testTag', `Failed to subscribe. Code is ${err.code}, message is ${err.message}`);
+          } else {
+            hilog.info(0x0000, 'testTag', 'Succeeded in subscribing data');
+            const status: string = commonEventSubscriber?.parameters?.[KEY_REWARD_STATUS];
+            switch (status) {
+              case AdStatus.AD_OPEN:
+                hilog.info(0x0000, 'testTag', 'Status is onAdOpen');
+                break;
+              case AdStatus.AD_CLICKED:
+                hilog.info(0x0000, 'testTag', 'Status is onAdClick');
+                break;
+              case AdStatus.AD_CLOSED:
+                hilog.info(0x0000, 'testTag', 'Status is onAdClose');
+                item.isFirstClick = true
+                this.unRegisterPPSReceiver();
+                break;
+              case AdStatus.AD_REWARDED:
+                const rewardData: Record<string, string | number> =
+                  commonEventSubscriber?.parameters?.[KEY_REWARD_DATA];
+                const rewardType: string = rewardData?.rewardType as string;
+                const rewardAmount: number = rewardData?.rewardAmount as number;
+                item.isLookAD = true
+                hilog.info(0x0000, 'testTag', `Status is onAdReward. Type is ${rewardType}, Amount is ${rewardAmount}`);
+                break;
+              case AdStatus.AD_VIDEO_START:
+                hilog.info(0x0000, 'testTag', 'Status is onAdVideoStart');
+                break;
+              case AdStatus.AD_COMPLETED:
+                hilog.info(0x0000, 'testTag', 'Status is onAdCompleted');
+                item.isFirstClick = true
+                this.windowStage.getMainWindowSync()
+                  .getUIContext()
+                  .getRouter()
+                  .replaceUrl({ url: 'components/LookAD' })
+                break;
+              default:
+                break;
+            }
+          }
+        });
       });
-    });
+    } catch (e) {
+    }
   }
 
 

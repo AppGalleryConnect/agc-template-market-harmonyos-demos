@@ -7,6 +7,7 @@ import { image } from '@kit.ImageKit';
 import fs from '@ohos.file.fs';
 import { MediaParams, VideoSizeData } from '../models/MediaModel';
 import { util } from '@kit.ArkTS';
+import { GlobalContext } from './GlobalContext';
 
 const DOMAIN = 0x0000;
 const TAG = '[MediaUtils]';
@@ -43,19 +44,29 @@ export class MediaUtils {
     if (!uri) {
       return undefined;
     }
-    let avImageGenerator: media.AVImageGenerator = await media.createAVImageGenerator();
-    const fileAlbum = fileIo.openSync(uri, fileIo.OpenMode.READ_ONLY);
-    const avFileDescriptor = { fd: fileAlbum.fd } as media.AVFileDescriptor;
-    const videoSize = await MediaUtils.getVideoData(avFileDescriptor);
-    if (avImageGenerator) {
-      avImageGenerator.fdSrc = avFileDescriptor;
-    } else {
-      hilog.error(DOMAIN, TAG, 'Create AVImageGenerator failed!');
+    try {
+      let avImageGenerator: media.AVImageGenerator = await media.createAVImageGenerator();
+      const fileAlbum = fileIo.openSync(uri, fileIo.OpenMode.READ_ONLY);
+      const avFileDescriptor = { fd: fileAlbum.fd } as media.AVFileDescriptor;
+      const videoSize = await MediaUtils.getVideoData(avFileDescriptor);
+      if (avImageGenerator) {
+        avImageGenerator.fdSrc = avFileDescriptor;
+      } else {
+        hilog.error(DOMAIN, TAG, 'Create AVImageGenerator failed!');
+        return undefined;
+      }
+      try {
+        const pixelMap = await avImageGenerator?.fetchFrameByTime(0,
+          media.AVImageQueryOptions.AV_IMAGE_QUERY_CLOSEST_SYNC, videoSize.photoSize);
+        return pixelMap;
+      } catch (error) {
+        hilog.error(DOMAIN, TAG, `Fetch frame by time failed, error: ${JSON.stringify(error)}`);
+        return undefined;
+      }
+    } catch (error) {
+      hilog.error(DOMAIN, TAG, `getVideoThumbnail error: ${JSON.stringify(error)}`);
       return undefined;
     }
-    const pixelMap = await avImageGenerator?.fetchFrameByTime(0,
-      media.AVImageQueryOptions.AV_IMAGE_QUERY_CLOSEST_SYNC, videoSize.photoSize);
-    return pixelMap;
   }
 
   /**
@@ -65,15 +76,19 @@ export class MediaUtils {
    */
   public static async getVideoData(avFileDescriptor: media.AVFileDescriptor): Promise<VideoSizeData> {
     let videoSize: VideoSizeData = new VideoSizeData();
-    let avMetaDataExtractor: media.AVMetadataExtractor = await media.createAVMetadataExtractor();
-    avMetaDataExtractor.fdSrc = avFileDescriptor;
-    let metadata = await avMetaDataExtractor.fetchMetadata();
-    videoSize.photoSize.width = parseInt(metadata.videoWidth as string);
-    videoSize.photoSize.height = parseInt(metadata.videoHeight as string);
-    if (metadata.duration) {
-      videoSize.totalTime = parseInt(metadata.duration);
+    try {
+      let avMetaDataExtractor: media.AVMetadataExtractor = await media.createAVMetadataExtractor();
+      avMetaDataExtractor.fdSrc = avFileDescriptor;
+      let metadata = await avMetaDataExtractor.fetchMetadata();
+      videoSize.photoSize.width = parseInt(metadata.videoWidth as string);
+      videoSize.photoSize.height = parseInt(metadata.videoHeight as string);
+      if (metadata.duration) {
+        videoSize.totalTime = parseInt(metadata.duration);
+      }
+      avMetaDataExtractor.release();
+    } catch (error) {
+      hilog.error(DOMAIN, TAG, `getVideoData error: ${JSON.stringify(error)}`);
     }
-    avMetaDataExtractor.release();
     return videoSize;
   }
 
@@ -88,7 +103,7 @@ export class MediaUtils {
     }
     let file: fs.File | null = null;
     try {
-      const newPath: string = getContext().cacheDir + `/${util.generateRandomUUID(false)}.png`;
+      const newPath: string = GlobalContext.getContext().cacheDir + `/${util.generateRandomUUID(false)}.png`;
       file = fs.openSync(newPath, fs.OpenMode.WRITE_ONLY | fs.OpenMode.CREATE);
       let imagePacker: image.ImagePacker = image.createImagePacker();
       let packOpts: image.PackingOption = { format: 'image/png', quality: 100 };

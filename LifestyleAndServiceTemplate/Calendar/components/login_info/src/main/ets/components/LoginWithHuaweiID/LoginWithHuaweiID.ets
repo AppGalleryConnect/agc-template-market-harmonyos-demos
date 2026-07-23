@@ -1,7 +1,7 @@
 import { authentication, loginComponentManager, LoginWithHuaweiIDButton } from '@kit.AccountKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { BusinessError } from '@kit.BasicServicesKit';
-import {  promptAction } from '@kit.ArkUI';
+import { promptAction } from '@kit.ArkUI';
 import { util } from '@kit.ArkTS';
 import { LoginParams, ThemeState } from '../../model/Model';
 import { LoginEventDispatcher } from '../../utils/Utils';
@@ -14,26 +14,31 @@ export function LoginWithHuaweiIDBuilder() {
 
 @ComponentV2
 export struct LoginWithHuaweiID {
-  @Local routerModule:NavPathStack = new NavPathStack()
+  @Local routerModule: NavPathStack = new NavPathStack()
   logTag: string = 'QuickLoginButtonComponent';
-  @Local authorizationCode:string | undefined = ''
+  @Local authorizationCode: string | undefined = ''
   domainId: number = 0x0000;
   // 第二步获取的匿名化手机号传到此处
   @Local quickLoginAnonymousPhone: string = '';
   // 是否勾选协议
   @Local isSelected: boolean = false;
-  @Event onLoginWithHuawei:() => void = () => {}
-  @Event onPrivacy:() => void = () => {}
-  @Event onTermsOfService:() => void = () => {}
-  @Event onOtherLogin:() => void = () => {}
+  @Event onLoginWithHuawei: () => void = () => {
+  }
+  @Event onPrivacy: () => void = () => {
+  }
+  @Event onTermsOfService: () => void = () => {
+  }
+  @Event onOtherLogin: () => void = () => {
+  }
   private static USER_AUTHENTICATION_PROTOCOL: string =
     '';
   private static USER_SERVICE_TAG = '用户服务协议';
   private static PRIVACY_TAG = '隐私协议';
 
   onMockUserLogin() {
-    let loginParams:LoginParams  = {
-      authorizationCode: this.authorizationCode
+    let loginParams: LoginParams = {
+      authorizationCode: this.authorizationCode,
+      phoneNumber: this.quickLoginAnonymousPhone,
     }
     LoginEventDispatcher.dispatchToHuaweiLogin(loginParams)
   }
@@ -100,10 +105,10 @@ export struct LoginWithHuaweiID {
   // 构造LoginWithHuaweiIDButton组件的控制器
   controller: loginComponentManager.LoginWithHuaweiIDButtonController =
     new loginComponentManager.LoginWithHuaweiIDButtonController()
-      /**
-       * 当应用使用自定义的登录页时，如果用户未同意协议，需要设置协议状态为NOT_ACCEPTED，当用户同意协议后再设置
-       * 协议状态为ACCEPTED，才可以使用华为账号一键登录功能
-       */
+    /**
+     * 当应用使用自定义的登录页时，如果用户未同意协议，需要设置协议状态为NOT_ACCEPTED，当用户同意协议后再设置
+     * 协议状态为ACCEPTED，才可以使用华为账号一键登录功能
+     */
       .setAgreementStatus(loginComponentManager.AgreementStatus.NOT_ACCEPTED)
       .onClickLoginWithHuaweiIDButton((error: BusinessError | undefined,
         response: loginComponentManager.HuaweiIDCredential) => {
@@ -216,7 +221,7 @@ export struct LoginWithHuaweiID {
     NavDestination() {
       BaseNavTitle({
         title: '华为账号一键登录',
-        routerModule:this.routerModule
+        routerModule: this.routerModule,
       })
       Scroll() {
         Column() {
@@ -324,7 +329,7 @@ export struct LoginWithHuaweiID {
               .borderRadius(16)
               .width('100%')
               .onClick(() => {
-                this.routerModule.replacePathByName('LoginPage',null)
+                this.routerModule.replacePathByName('LoginPage', null)
               })
             }.margin({ top: 16 })
           }.width('100%')
@@ -371,9 +376,9 @@ export struct LoginWithHuaweiID {
                         hilog.info(this.domainId, this.logTag, `click privacy text tag: ${item.tag}`);
                         // 华为账号用户认证协议
                         if (item.tag === LoginWithHuaweiID.USER_SERVICE_TAG) {
-                          this.routerModule.pushPathByName('TermsOfServicePage',null)
+                          this.routerModule.pushPathByName('TermsOfServicePage', null)
                         } else {
-                          this.routerModule.pushPathByName('PrivacyPolicyPage',null)
+                          this.routerModule.pushPathByName('PrivacyPolicyPage', null)
                         }
                       })
                   }
@@ -413,13 +418,12 @@ export struct AgreementDialog {
   logTag: string = 'AgreementDialog';
   domainId: number = 0x0000;
   dialogController?: CustomDialogController;
-
-  cancel: () => void = () => {};
-
-  confirm: () => void = () => {};
-
-  clickHyperlinkText: () => void = () => {};
-
+  cancel: () => void = () => {
+  };
+  confirm: () => void = () => {
+  };
+  clickHyperlinkText: () => void = () => {
+  };
   privacyText: loginComponentManager.PrivacyText[] = [];
 
   build() {

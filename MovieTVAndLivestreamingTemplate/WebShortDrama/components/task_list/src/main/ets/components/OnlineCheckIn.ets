@@ -1,5 +1,7 @@
+import { FontModel } from '../model/FontModel'
 import { OnlineInfo } from '../model/OnlineInfoModel'
 import { OnlineCheckInViewModel } from '../viewmodel/OnlineCheckInViewModel'
+import { AppStorageV2 } from '@kit.ArkUI'
 
 @ComponentV2
 export struct OnlineCheckIn {
@@ -7,6 +9,7 @@ export struct OnlineCheckIn {
   @Consumer('balance') balance: number = 0
   @Param addAward: () => void = () => {}
   viewModel: OnlineCheckInViewModel = new OnlineCheckInViewModel()
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
 
   async aboutToAppear(): Promise<void> {
     await this.viewModel.init((progressValue) => {
@@ -50,12 +53,11 @@ export struct OnlineCheckIn {
       .height(8)
 
       Text(onlineInfo.time)
-        .fontSize(12)
+        .fontSize(this.fontModel.getFg(12))
         .height(16)
         .fontWeight(FontWeight.Regular)
         .fontColor($r('sys.color.font_secondary'))
     }
-    .width(40)
     .onClick(() => {
       if (onlineInfo.canGet && !onlineInfo.isObtained) {
         this.balance = onlineInfo.coin

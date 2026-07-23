@@ -108,8 +108,7 @@ export class HomePageVM {
 
   public emptyToast() {
     GlobalContextUtils.showToast({
-      message: '暂无更新数据',
-      alignment: Alignment.Bottom,
+      message: '暂无更新数据'
     })
   }
 

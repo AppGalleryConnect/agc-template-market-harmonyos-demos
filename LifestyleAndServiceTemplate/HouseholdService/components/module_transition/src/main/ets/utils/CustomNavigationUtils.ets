@@ -1,8 +1,10 @@
 import { componentSnapshot } from '@kit.ArkUI';
+import { UtilLog } from '@hw-agconnect/util-log';
 import { SnapShotImage } from './SnapShotImage';
 import { LongTakeTransitionParam } from './LongTakeTransitionParam';
 
 const TAG = 'CustomTransition';
+const DOMAIN = 0x00FF;
 
 export interface AnimateCallback {
   animation: ((isPush: boolean, isExit: boolean,
@@ -38,10 +40,10 @@ export class CustomTransition {
     // 这里通过extraParam.clickedComponentId获取被点击组件的截图
     try {
       let pixelMap = componentSnapshot.getSync(componentId);
-      console.info(TAG, `get ${componentId} snapshot sync success!`);
+      UtilLog.info(DOMAIN, TAG, `get ${componentId} snapshot sync success!`);
       SnapShotImage.pixelMap = pixelMap;
     } catch (error) {
-      console.error(`getSync ${componentId} errorCode: ` + error.code + ' message: ' + error.message);
+      UtilLog.error(DOMAIN, TAG, `getSync ${componentId} errorCode: ` + error.code + ' message: ' + error.message);
     }
     addParamAndPushPath(extraParam);
     return;

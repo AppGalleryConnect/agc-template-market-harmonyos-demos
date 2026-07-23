@@ -1,4 +1,4 @@
-import { CommonBlank, TitleBar } from 'component';
+import { CommonBlank, CommonHeader } from 'component';
 import { Constants, NavPathName } from 'constant';
 import { Commodity } from 'type';
 import { ContentCard } from '../components/ContentCard';
@@ -17,11 +17,9 @@ export struct CommodityList {
   build() {
     NavDestination() {
       Column() {
-        TitleBar({
-          isShowBack: true, title: '商品列表', clickEvent: () => {
-            this.mainPathStack.pop();
-          },
-        });
+        CommonHeader({ title: '商品列表', showBackButton: true, backButtonClick: () => {
+          this.mainPathStack.pop();
+        } });
 
         if (this.vm.commodityList.length !== 0) {
           WaterFlow() {

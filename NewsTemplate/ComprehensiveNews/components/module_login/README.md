@@ -286,6 +286,7 @@ obtainVerifyCode: () => Promise<void>
 ```
 import { PromptAction } from '@kit.ArkUI';
 import { BusinessError } from '@kit.BasicServicesKit';
+import { hilog } from '@kit.PerformanceAnalysisKit';
 import {
   AggregatedLogin,
   Channel,
@@ -328,7 +329,7 @@ struct AggregatedLoginSample1 {
         this.navPathStack.clear();
       }
     } catch (err) {
-      console.error('弹窗操作异常:', (err as BusinessError).message);
+      hilog.error(0x0000, '[Login]', '弹窗操作异常:', (err as BusinessError).message);
     }
   }
 
@@ -423,6 +424,7 @@ export const ERROR_MSG_MAP: Record<number, string> = {
 ```
 import { PromptAction } from '@kit.ArkUI';
 import { BusinessError } from '@kit.BasicServicesKit';
+import { hilog } from '@kit.PerformanceAnalysisKit';
 import {
    Channel,
    LoginController,
@@ -468,7 +470,7 @@ struct AggregatedLoginSample2 {
             LoginSheetUtils.close()
          }
       } catch (err) {
-         console.error('弹窗操作异常:', (err as BusinessError).message);
+         hilog.error(0x0000, '[Login]', '弹窗操作异常:', (err as BusinessError).message);
       }
    }
 

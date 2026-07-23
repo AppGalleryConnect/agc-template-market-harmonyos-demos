@@ -3,7 +3,8 @@
     "name": "utils",
     "type": "shared",
     "deviceTypes": [
-      "phone"
+      "phone",
+      "tablet"
     ],
     "installationFree":true,
     'deliveryWithInstall': true

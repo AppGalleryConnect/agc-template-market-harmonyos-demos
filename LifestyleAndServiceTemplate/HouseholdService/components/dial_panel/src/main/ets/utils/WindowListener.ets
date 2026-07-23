@@ -41,8 +41,13 @@ export class WindowListener {
   }
 
   public stop(): void {
-    this.mainWindow.off('avoidAreaChange', this.onAvoidAreaChange);
-    this.mainWindow.off('windowSizeChange', this.onWindowSizeChange);
+    try {
+      this.mainWindow.off('avoidAreaChange', this.onAvoidAreaChange);
+      this.mainWindow.off('windowSizeChange', this.onWindowSizeChange);
+    } catch (err) {
+      UtilLog.error('[ModuleBaseWindow]',
+        `Failed to Unregister window properties. Code is ${err.code}, message is ${err.message}`);
+    }
   }
 
   private loadAvoidAreaInfo(types: window.AvoidAreaType[]): void {

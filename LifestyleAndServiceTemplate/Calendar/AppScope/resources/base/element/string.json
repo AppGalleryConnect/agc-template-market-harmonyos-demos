@@ -6,7 +6,7 @@
     },
     {
       "name": "agcit_huawei_calendar",
-      "value": "1.0.5"
+      "value": "1.0.6"
     },
     {
       "name": "agcittype_huawei_calendar",
@@ -14,7 +14,7 @@
     },
     {
       "name": "agcitkid_huawei_calendar",
-      "value": "agcit_huawei_calendar_base_calendar/1.0.2,agcit_huawei_calendar_calendar_almanac/1.0.2,agcit_huawei_calendar_calendar_events/1.0.2,agcit_huawei_calendar_date_calculation/1.0.2,agcit_huawei_calendar_festival_solar/1.0.2,agcit_huawei_calendar_login_info/1.0.2,agcit_huawei_calendar_traffic_restriction/1.0.2,agcit_huawei_calendar_yiji_query/1.0.2,agcit_huawei_calendar_today_history/1.0.1,agcit_huawei_common_membership/1.0.2"
+      "value": "agcit_huawei_calendar_base_calendar/1.0.2,agcit_huawei_calendar_calendar_almanac/1.0.2,agcit_huawei_calendar_calendar_events/1.0.2,agcit_huawei_calendar_date_calculation/1.0.2,agcit_huawei_calendar_festival_solar/1.0.2,agcit_huawei_calendar_login_info/1.0.2,agcit_huawei_calendar_traffic_restriction/1.0.2,agcit_huawei_calendar_yiji_query/1.0.2,agcit_huawei_calendar_today_history/1.0.1,agcit_huawei_common_membership/1.0.2,agcit_huawei_common_feedback/1.0.1"
     }
   ]
 }

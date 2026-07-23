@@ -130,6 +130,7 @@ onChange: (index: number, item: [TabInfo](#TabInfo对象说明)) => void
 ## 示例代码
 
 ```ts
+import { hilog } from '@kit.PerformanceAnalysisKit';
 import { ChannelEdit, TabInfo } from 'module_channeledit';
 
 @Entry
@@ -209,10 +210,10 @@ export struct Index {
         currentIndex: this.currentIndex,
         onChange: (index: number, item: TabInfo) => {
           this.currentIndex = index
-          console.log('index',index)
+          hilog.info(0x0000, '[ChannelEdit]', index)
         },
         onSave: () => {
-          console.log('save')
+          hilog.info(0x0000, '[ChannelEdit]', 'save')
         },
       })
     }

@@ -124,13 +124,17 @@ export class PipController {
           // 停止视频
           if(avPlayer) {
             this.pipWindowModel.videoPlayerStatus = 'paused';
-            avPlayer.pause();
+            avPlayer.pause().catch((err: BusinessError) => {
+              Logger.error(`${TAG}: avPlayer pause failed,error message is = ${JSON.stringify(err.message)}`);
+            });
           }
         } else if (status === 1) {
           // 播放视频
           if(avPlayer) {
             this.pipWindowModel.videoPlayerStatus = 'playing';
-            avPlayer.play();
+            avPlayer.play().catch((err: BusinessError) => {
+              Logger.error(`${TAG}: avPlayer play failed,error message is = ${JSON.stringify(err.message)}`);
+            });
           }
         }
         break;

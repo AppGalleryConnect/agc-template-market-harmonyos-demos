@@ -1,5 +1,4 @@
-import { componentUtils, window } from '@kit.ArkUI';
-import { BusinessError, emitter } from '@kit.BasicServicesKit';
+import { AppStorageV2, window } from '@kit.ArkUI';
 import { Constants as Const } from '../constant/Contants'
 import { PlayController, PlayerLayoutSize } from '../controller/PlayController';
 import { VideoPlayData } from '../datasource/VideoPlayDataSource';
@@ -12,6 +11,8 @@ import { AvPlayer } from '../controller/AvPlayer';
 import { AvPlayerPool } from '../controller/AvPlayerPool';
 import { MediaSource } from '../constant/MediaSource'
 import { media } from '@kit.MediaKit';
+import { NetWorkModel } from '../utils/NetWorkModel';
+import { AVPlayerState } from 'module_cast/src/main/ets/common/CommonConstants';
 
 const TAG = '[VideoPlayer]';
 const otherClickHeight = 200
@@ -50,7 +51,10 @@ export struct VideoPlayView {
   videoFit: VideoFit = VideoFit.Contain
   @Local duration: number = 0;
   @Consumer('currentTime') currentTime: number = 0
-
+  @Local netStatus: NetWorkModel =
+    AppStorageV2.connect(NetWorkModel, 'netStatus', () => new NetWorkModel())!
+  @Param @Require isHover: boolean
+  @Param @Require creaseRegion: number[] = []
   @Monitor('curIndex', 'isPageShow', 'onFoldStatusChange')
   onIndexChanged(monitor: IMonitor) {
     monitor.dirty.forEach((path: string) => {
@@ -67,7 +71,7 @@ export struct VideoPlayView {
   }
 
   // 本视频索引
-  @Param @Once index: number = 0;
+  @Param index: number = 0;
   @Local layoutSize: PlayerLayoutSize = new PlayerLayoutSize()
   @Local aspRatio: number = 0.5;
   @Local isPlaying: boolean = false;
@@ -102,9 +106,39 @@ export struct VideoPlayView {
     })
   }
 
+  @Monitor('netStatus.reInit')
+  onNetChange(monitor: IMonitor) {
+    if (monitor.value()?.now) {
+      this.videoPrepare()
+      if (this.curIndex === this.index && (this.inPage === 'Detail' || !this.netStatus.inDetailPage)) {
+        let timeoutID = setInterval(() => {
+          if (this.avPlayer?.isReady) {
+            this.avPlayer.seek(this.currentTime * 1000)
+            this.avPlayer!.play()
+            clearTimeout(timeoutID)
+          }
+        }, 60);
+      }
+    }
+  }
+
+  @Monitor('netStatus.isShowGoOn')
+  onChangeToCellular(monitor: IMonitor) {
+    if (monitor.value()?.now) {
+      this.avPlayer?.pause()
+    } else {
+      if (this.curIndex === this.index && (this.inPage === 'Detail' || !this.netStatus.inDetailPage)) {
+        this.avPlayer?.play()
+        this.netStatus.noReInit = false
+      }
+    }
+  }
+
   @Monitor('avPlayer.currentTime')
-  onTimeChange(monitor: IMonitor){
-    this.currentTime = monitor.value()?.now as number
+  onTimeChange(monitor: IMonitor) {
+    if (monitor.value()?.now) {
+      this.currentTime = monitor.value()?.now as number
+    }
   }
 
   aboutToDisappear(): void {
@@ -143,36 +177,8 @@ export struct VideoPlayView {
               .foregroundBlurStyle(this.videoData.isLocked() ? BlurStyle.COMPONENT_THIN : BlurStyle.NONE)
               .width(this.xComponentWidth)
               .height(this.xComponentHeight)
-              .onLoad(async () => {
-                this.surfaceID = this.xComponentController.getXComponentSurfaceId();
-                this.playController.setSurfaceId(this.index, this.surfaceID)
-                hilog.info(0x0000, TAG,
-                  `surfaceID: ${this.surfaceID}, curIndex: ${this.curIndex}, index: ${this.index}.`);
-                let mediaSource: MediaSource =
-                  new MediaSource(this.videoData.getId(), this.videoData.getUrl() as media.AVFileDescriptor | string,
-                    this.videoData.isLocked())
-                this.avPlayer = await this.playerPool.acquire(mediaSource)
-                this.playerSession.setAVPlayer(this.avPlayer)
-                hilog.info(0x000, TAG, `normal setSurfaceID:${this.surfaceID} id:${this.avPlayer.id}`)
-                this.avPlayer.setSurfaceID(this.surfaceID)
-                if (!this.videoData.isLocked() && this.firstFlag) {
-                  if (this.videoData.getPlayTime() > 0) {
-                    this.avPlayer.seek(this.videoData.getPlayTime() * 1000)
-                  }
-                  let timeoutID = setInterval(() => {
-                    if (this.avPlayer?.isReady) {
-                      this.avPlayer!.play()
-                      clearTimeout(timeoutID)
-                    }
-                  }, 60);
-                  this.firstLoaded()
-                }
-
-                this.setListener()
-                this.playController.setAVPlayer(this.index, this.avPlayer)
-                hilog.info(0x0000, TAG,
-                  `Xcomponent create success,surfaceID: ${this.surfaceID}, curIndex: ${this.curIndex},
-                  index: ${this.index}, url: ${this.videoData.getUrl()}`);
+              .onLoad(() => {
+                this.videoPrepare()
               })
               .onDestroy(() => {
                 hilog.info(0x0000, TAG,
@@ -194,7 +200,7 @@ export struct VideoPlayView {
           }
           .id(this.componentId)
           .width(this.layoutSize.playerWidth)
-          .height(this.layoutSize.playerHeight)
+          .height(this.isHover ? this.creaseRegion[0] : this.layoutSize.playerHeight)
           .position({ x: this.layoutSize.playerPositionX, y: this.layoutSize.playerPositionY })
           .onSizeChange(() => {
             hilog.info(0x0000, TAG,
@@ -203,8 +209,14 @@ export struct VideoPlayView {
           })
 
           Column()
+            .accessibilityText(this.avPlayer?.state === AVPlayerState.PAUSED ? '点击播放视频' : '点击暂停视频')
             .width('100%')
-            .height(this.pauseClickHeight)
+            .height(this.isHover ? `calc(100% - ${this.creaseRegion[0] + this.creaseRegion[1]}vp)` :
+              this.pauseClickHeight)
+            .position({
+              x: this.layoutSize.playerPositionX,
+              y: this.isHover ? this.creaseRegion[0] + this.creaseRegion[1] : this.layoutSize.playerPositionY
+            })
             .onClick(() => {
               hilog.info(0x0000, TAG,
                 `iconOnClick playerWidth: ${this.layoutSize.playerWidth},
@@ -221,11 +233,16 @@ export struct VideoPlayView {
           if (this.contentBuilder) {
             Column() {
               this.contentBuilder?.builder(this.videoData, this.playController, this.playerSession);
-            }.zIndex(7)
+            }
+            .zIndex(7)
             .width('100%')
-            .height('100%')
+            .height(this.isHover ? `calc(100% - ${this.creaseRegion[0] + this.creaseRegion[1]}vp)` : '100%')
             .hitTestBehavior(HitTestMode.Transparent)
-            .position({ x: this.layoutSize.playerPositionX, y: this.layoutSize.playerPositionY })
+            .position({
+              x: this.layoutSize.playerPositionX,
+              y: this.isHover ? this.creaseRegion[0] + this.creaseRegion[1] : this.layoutSize.playerPositionY
+            })
+            .padding({top: this.isHover ? 0 : 24})
           }
         }
         .width('100%')
@@ -233,7 +250,7 @@ export struct VideoPlayView {
         .backgroundColor(Color.Black)
       }
       .onAreaChange((oldVal, newVal) => {
-        this.pauseClickHeight = parseInt(newVal.height.toString()) - otherClickHeight
+        this.pauseClickHeight = parseInt(newVal.height.toString())
         if (this.pauseClickHeight <= 30) {
           this.pauseClickHeight = 30
         }
@@ -257,7 +274,7 @@ export struct VideoPlayView {
       try {
         let windowClass = await window.getLastWindow(context);
         await windowClass.setWindowKeepScreenOn(false);
-      }catch (error) {
+      } catch (error) {
         console.error('Failed.');
       }
       return;
@@ -273,7 +290,7 @@ export struct VideoPlayView {
       try {
         let windowClass = await window.getLastWindow(context);
         await windowClass.setWindowKeepScreenOn(true);
-      }catch (error) {
+      } catch (error) {
         console.error('Failed.');
       }
     }
@@ -318,9 +335,20 @@ export struct VideoPlayView {
         return
       }
       hilog.info(0x0000, TAG,
-        `enter indexChange play. curIndex: ${this.curIndex}, index: ${this.index}, isPageShow: ${this.isPageShow}.`);
+        `enter indexChange play. curIndex: ${this.curIndex}, index: ${this.index}, isPageShow: ${this.isPageShow}, avplayer: ${this.avPlayer?.state}.`);
       // 准备好了，直接播放视频，否则等待准备
-      this.avPlayer?.play()
+      this.avPlayer!.play()
+      let timeoutID = setInterval(() => {
+        if (this.avPlayer?.state === AVPlayerState.PLAYING || this.index !== this.curIndex) {
+          setTimeout(()=>{
+            if (this.avPlayer?.state === AVPlayerState.PLAYING || this.index !== this.curIndex){
+              clearTimeout(timeoutID)
+            }
+          },60)
+        } else if (this.avPlayer?.isReady && this.index === this.curIndex) {
+          this.avPlayer!.play()
+        }
+      }, 60);
       this.updateIsPlay(true)
       this.isPlaying = true;
       this.trackThicknessSize = Const.TRACK_SIZE_MIN;
@@ -381,5 +409,39 @@ export struct VideoPlayView {
         this.xComponentHeight = this.getUIContext().px2vp(playerComponentHeight);
       }
     }
+  }
+
+  async videoPrepare() {
+    this.surfaceID = this.xComponentController.getXComponentSurfaceId();
+    this.playController.setSurfaceId(this.index, this.surfaceID)
+    hilog.info(0x0000, TAG,
+      `surfaceID: ${this.surfaceID}, curIndex: ${this.curIndex}, index: ${this.index}.`);
+    let mediaSource: MediaSource =
+      new MediaSource(this.videoData.getId(), this.videoData.getUrl() as media.AVFileDescriptor | string,
+        this.videoData.isLocked())
+    this.avPlayer = await this.playerPool.acquire(mediaSource)
+    this.playerSession.setAVPlayer(this.avPlayer)
+    hilog.info(0x000, TAG, `normal setSurfaceID:${this.surfaceID} id:${this.avPlayer.id}`)
+    this.avPlayer.setSurfaceID(this.surfaceID)
+    if (!this.videoData.isLocked() && this.firstFlag) {
+      if (this.videoData.getPlayTime() > 0) {
+        this.avPlayer.seek(this.videoData.getPlayTime() * 1000)
+      }
+      this.avPlayer!.play()
+      let timeoutID = setInterval(() => {
+        if (this.avPlayer?.state === AVPlayerState.PLAYING) {
+          clearTimeout(timeoutID)
+        } else if (this.avPlayer?.isReady) {
+          this.avPlayer!.play()
+        }
+      }, 60);
+      this.firstLoaded()
+    }
+
+    this.setListener()
+    this.playController.setAVPlayer(this.index, this.avPlayer)
+    hilog.info(0x0000, TAG,
+      `Xcomponent create success,surfaceID: ${this.surfaceID}, curIndex: ${this.curIndex},
+                  index: ${this.index}, url: ${this.videoData.getUrl()}`);
   }
 }

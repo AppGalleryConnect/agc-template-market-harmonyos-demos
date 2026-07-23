@@ -51,7 +51,7 @@ struct DishesPage {
   }
 
   onPageHide(): void {
-    console.log('onPageHide111')
+    Logger.info('onPageHide')
   }
 
   private onBackPressed(): boolean {

@@ -214,23 +214,32 @@ export struct VideoPlayView {
 
     avPlayer.on('audioInterrupt', async (interruptEvent: audio.InterruptEvent) => {
       if (interruptEvent.forceType === audio.InterruptForceType.INTERRUPT_FORCE) {
-        // 强制打断类型（INTERRUPT_FORCE）：音频相关处理已由系统执行，应用需更新自身状态，做相应调整
         switch (interruptEvent.hintType) {
           case audio.InterruptHint.INTERRUPT_HINT_PAUSE:
-            avPlayer.pause();
+            try {
+              avPlayer.pause();
+            } catch (e) {
+              hilog.error(0x0000, TAG, `pause failed: ${e}`);
+            }
             break;
           case audio.InterruptHint.INTERRUPT_HINT_STOP:
-            avPlayer.pause();
+            try {
+              avPlayer.pause();
+            } catch (e) {
+              hilog.error(0x0000, TAG, `pause failed: ${e}`);
+            }
             break;
-
           default:
             break;
         }
       } else if (interruptEvent.forceType === audio.InterruptForceType.INTERRUPT_SHARE) {
-        // 共享打断类型（INTERRUPT_SHARE）：应用可自主选择执行相关操作或忽略音频打断事件
         switch (interruptEvent.hintType) {
           case audio.InterruptHint.INTERRUPT_HINT_RESUME:
-            avPlayer.play();
+            try {
+              avPlayer.play();
+            } catch (e) {
+              hilog.error(0x0000, TAG, `play failed: ${e}`);
+            }
             break;
           default:
             break;
@@ -241,15 +250,22 @@ export struct VideoPlayView {
     avPlayer.on('audioOutputDeviceChangeWithInfo', (data: audio.AudioStreamDeviceChangeInfo) => {
       if (data.changeReason === audio.AudioStreamDeviceChangeReason.REASON_OLD_DEVICE_UNAVAILABLE) {
         hilog.info(0x0001, TAG, `Device connect: ${data.changeReason}`);
-        avPlayer.pause();
+        try {
+          avPlayer.pause();
+        } catch (e) {
+          hilog.error(0x0000, TAG, `pause failed: ${e}`);
+        }
       }
     });
 
-    //error listen, when the avPlayer is error, to load reset interface
     avPlayer.on('error', (err: BusinessError) => {
       hilog.info(0x0000, TAG, `Invoke avPlayer failed, code is ${err.code}, message is ${err.message}.` +
         `----state: ${avPlayer.state}, curIndex: ${this.curIndex}, index: ${this.index}.`);
-      avPlayer.reset();
+      try {
+        avPlayer.reset();
+      } catch (e) {
+        hilog.error(0x0000, TAG, `reset failed: ${e}`);
+      }
     })
 
     this.setAVPlayerStateListen(avPlayer);
@@ -264,25 +280,39 @@ export struct VideoPlayView {
         case 'initialized':
           hilog.info(0x0000, TAG,
             `AVPlayer state initialized called. curIndex: ${this.curIndex}, index: ${this.index}.`);
-          avPlayer.surfaceId = this.surfaceID;
-          avPlayer.prepare();
+          try {
+            avPlayer.surfaceId = this.surfaceID;
+            avPlayer.prepare();
+          } catch (e) {
+            hilog.error(0x0000, TAG, `initialized prepare failed: ${e}`);
+          }
           break;
         case 'prepared':
           hilog.info(0x0000, TAG, `AVPlayer state prepared called. curIndex: ${this.curIndex}, index: ${this.index}.`);
-          avPlayer.audioInterruptMode = audio.InterruptMode.INDEPENDENT_MODE;
+          try {
+            avPlayer.audioInterruptMode = audio.InterruptMode.INDEPENDENT_MODE;
+          } catch (e) {
+            hilog.error(0x0000, TAG, `audioInterruptMode failed: ${e}`);
+          }
           this.preparedFlag = true;
           this.freshLoaded();
-          // 起播进度调整
           if (this.videoData.getPlayTime() > 0) {
             hilog.info(0x0000, TAG, `AVPlayer state prepared called. need seekto: ${this.videoData.getPlayTime()}.`);
-            avPlayer.seek(this.videoData.getPlayTime())
+            try {
+              avPlayer.seek(this.videoData.getPlayTime())
+            } catch (e) {
+              hilog.error(0x0000, TAG, `seek failed: ${e}`);
+            }
           }
           hilog.info(0x0000, TAG,
             `prepared firstFlag:${this.firstFlag}, index:${this.index}, isPageShow:${this.isPageShow}`);
-          // 首播起播
           if (this.firstFlag && this.index === this.curIndex && this.isPageShow) {
             hilog.info(0x0000, TAG, 'first video prepared go play!');
-            avPlayer.play();
+            try {
+              avPlayer.play();
+            } catch (e) {
+              hilog.error(0x0000, TAG, `play failed: ${e}`);
+            }
             this.firstLoaded();
           }
           break;
@@ -307,9 +337,17 @@ export struct VideoPlayView {
           if (this.playController.autoPlay) {
             this.playController.changeIndex(this.curIndex + 1)
           }
-          avPlayer.seek(0, media.SeekMode.SEEK_CLOSEST);
+          try {
+            avPlayer.seek(0, media.SeekMode.SEEK_CLOSEST);
+          } catch (e) {
+            hilog.error(0x0000, TAG, `seek failed: ${e}`);
+          }
           if(this.playController.loopPlay){
-            this.avPlayer?.play()
+            try {
+              this.avPlayer?.play()
+            } catch (e) {
+              hilog.error(0x0000, TAG, `play failed: ${e}`);
+            }
           }
           break;
         case 'released':
@@ -317,7 +355,11 @@ export struct VideoPlayView {
           break;
         case 'error':
           hilog.info(0x0000, TAG, `AVPlayer state error called. curIndex: ${this.curIndex}, index: ${this.index}.`);
-          avPlayer.reset();
+          try {
+            avPlayer.reset();
+          } catch (e) {
+            hilog.error(0x0000, TAG, `reset failed: ${e}`);
+          }
           break;
         default:
           hilog.info(0x0000, TAG, `AVPlayer state unknown called. curIndex: ${this.curIndex}, index: ${this.index}.`);
@@ -453,14 +495,18 @@ export struct VideoPlayView {
     if (!this.pipController) {
       return;
     }
-    //通过setAutoStartEnabled接口设置是否需要在应用返回桌面时自动启动画中画，注册stateChange和controlPanelActionEvent回调
-    this.pipController.setAutoStartEnabled(false);
-    this.pipController.on('stateChange', (state: PiPWindow.PiPState, reason: string) => {
-      this.onStateChange(state, reason);
-    });
-    this.pipController.on('controlPanelActionEvent', (event: PiPWindow.PiPActionEventType, status?: number) => {
-      this.onActionEvent(event, status);
-    });
+    try {
+      this.pipController.setAutoStartEnabled(false);
+      this.pipController.on('stateChange', (state: PiPWindow.PiPState, reason: string) => {
+        this.onStateChange(state, reason);
+      });
+      this.pipController.on('controlPanelActionEvent', (event: PiPWindow.PiPActionEventType, status?: number) => {
+        this.onActionEvent(event, status);
+      });
+    } catch (error) {
+      let err = error as BusinessError;
+      console.error(`initPipController failed, errCode = ${err.code}, errMessage = ${err.message}.`);
+    }
   }
 
   onStateChange(state: PiPWindow.PiPState, reason: string) {

@@ -39,6 +39,8 @@ export struct CommonHeader {
   // 背景颜色
   @Param bgColor: ResourceColor = Color.Transparent;
   headerHeight: number = HeaderConstant.HEIGHT;
+  // 标题左边距
+  @Param leftPadding: number = 16;
 
   build() {
     Row() {
@@ -77,6 +79,6 @@ export struct CommonHeader {
     .width(HeaderConstant.FULL_PERCENT)
     .justifyContent(FlexAlign.Start)
     .backgroundColor(this.bgColor)
-    .padding({ left: HeaderConstant.PADDING, top: WindowUtil.getAvoidArea().top })
+    .padding({ left: this.leftPadding, top: WindowUtil.getAvoidArea().top })
   }
 }

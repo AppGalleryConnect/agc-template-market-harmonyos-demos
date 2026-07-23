@@ -1,6 +1,7 @@
-import { CARD_TYPE_OPTIONS, Constant, SystemUtil } from 'common';
+import { BreakpointNameEnum, Constant } from 'common';
 import { Tourist, Tourists } from 'tourist_management';
 import { TouristInfo } from 'types';
+import { DeleteConfirmDialog } from 'uicomponents';
 import { TicketVM } from '../viewmodel/TicketVM';
 
 @ComponentV2
@@ -9,195 +10,248 @@ export struct TouristManagement {
   @Local isShow: boolean = false;
   @Local initialSheet: boolean = true;
   @Local isShowTourist: boolean = false;
+  @Local showEditSheet: boolean = false;
   @Local editItem: TouristInfo = new TouristInfo();
+  @Local pathStack: NavPathStack = new NavPathStack();
+  dialogController: CustomDialogController | null = new CustomDialogController({
+    builder: DeleteConfirmDialog({
+      delete: () => {
+        this.vm.deleteItemInfo(this.editItem.id);
+      }, type: 0,
+    }), customStyle: true, autoCancel: true,
+  });
 
   aboutToAppear(): void {
     this.vm.getTourists();
   }
 
   aboutToDisappear(): void {
-    // 退出后将填充游客信息清空
-    this.vm.selectedTourists = [new TouristInfo(SystemUtil.doRandBySync(2))];
+    this.vm.selectedTourists = [];
+    this.vm.selectedTouristsId = [];
     this.vm.selectTouristCount = 1;
-  }
-
-  @Builder
-  CardTypeSelectBuilder(tourist: TouristInfo) {
-    TextPicker({ range: CARD_TYPE_OPTIONS, selected: tourist.cardType })
-      .onChange((value: string | string[], index: number | number[]) => {
-        tourist.cardType = (Array.isArray(index) ? index[0] : index);
-      });
+    this.vm.touristList = this.vm.touristList.map((item) => {
+      item.isChecked = false;
+      return item;
+    });
   }
 
   @Builder
   TouristCard(tourist: TouristInfo, index: number) {
     Row() {
-      Text(`游客${index + 1}${index === 0 ? '（联系人）' : ''}`).opacity(0.4);
-    }.justifyContent(FlexAlign.SpaceBetween).width(Constant.FULL_PERCENT);
+      Column() {
+        Text(tourist.name).fontSize($r('sys.float.Body_L'));
+        Row({ space: 4 }) {
+          Text('证件号').fontColor($r('sys.color.font_secondary')).fontSize($r('sys.float.Body_M'));
+          Text(tourist.cardNo)
+            .fontColor($r('sys.color.font_primary'))
+            .fontSize($r('sys.float.Body_M'))
+            .fontWeight(FontWeight.Medium);
+        };
 
-    Row() {
-      Text('姓名').fontSize(14).width(80).textAlign(TextAlign.Start);
-      TextInput({ text: tourist?.name, placeholder: '请新增/选择游客' })
-        .backgroundColor(Color.Transparent)
-        .placeholderColor($r('sys.color.font_secondary'))
-        .onChange((value: string) => {
-          tourist.name = value;
-        })
-    };
+        Row({ space: 4 }) {
+          Text('手机号').fontColor($r('sys.color.font_secondary')).fontSize($r('sys.float.Body_M'));
+          Text(tourist.phone)
+            .fontColor($r('sys.color.font_primary'))
+            .fontSize($r('sys.float.Body_M'))
+            .fontWeight(FontWeight.Medium);
+        };
+      }.alignItems(HorizontalAlign.Start);
 
-    Divider().margin({ top: 4, bottom: 4 });
-
-    Row() {
-      Text(CARD_TYPE_OPTIONS[tourist.cardType]).fontSize(14).width(80).textAlign(TextAlign.Start);
-
-      TextInput({ text: tourist?.cardNo, placeholder: '请新增/选择游客' })
-        .backgroundColor(Color.Transparent)
-        .placeholderColor($r('sys.color.font_secondary'))
-        .onChange((value: string) => {
-          tourist.cardNo = value;
-        })
-    };
-
-    Divider().margin({ top: 4, bottom: 4 });
-
-    if (index === 0) {
-      Row() {
-        Text('手机号').fontSize(14).width(80).textAlign(TextAlign.Start);
-        TextInput({ text: tourist?.phone, placeholder: '请新增/选择游客' })
-          .backgroundColor(Color.Transparent)
-          .placeholderColor($r('sys.color.font_secondary'))
-          .onChange((value: string) => {
-            tourist.phone = value;
-          })
+      Row({ space: 16 }) {
+        SymbolGlyph($r('sys.symbol.square_and_pencil'))
+          .fontSize(24)
+          .width(24)
+          .height(24)
+          .fontColor([$r('sys.color.icon_tertiary')])
+          .onClick(() => {
+            this.editItem = tourist;
+            this.showEditSheet = true;
+          });
+        SymbolGlyph($r('sys.symbol.xmark_circle'))
+          .fontSize(24)
+          .width(24)
+          .height(24)
+          .fontColor([$r('sys.color.icon_tertiary')])
+          .onClick(() => {
+            this.vm.clearSelected(tourist);
+          });
       };
     }
+    .justifyContent(FlexAlign.SpaceBetween)
+    .width(Constant.FULL_PERCENT)
+    .backgroundColor($r('sys.color.comp_background_tertiary'))
+    .padding(12)
+    .borderRadius(16);
   }
 
   @Builder
   AddressManagementBuilder() {
-    if (this.initialSheet) {
-      Tourists({
-        touristList: this.vm.touristList,
-        isInReserve: true,
-        changeSelectedStatus: (isChecked: boolean, touristId: string) => {
-          if (!isChecked) {
-            const index = this.vm.selectedTouristsId.findIndex((id) => {
-              return id === touristId
-            })
-            if (index !== -1) {
-              this.vm.selectedTouristsId.splice(index, 1)
-            }
-          }
+    Navigation(this.pathStack) {
+      Column() {
+        Row() {
+          Text('选择游客')
+            .fontSize($r('sys.float.Title_S'))
+            .fontColor($r('sys.color.font_primary'))
+            .fontWeight(FontWeight.Bold);
 
-          if (isChecked) {
-            if (this.vm.selectedTouristsId.length === this.vm.selectTouristCount) {
-              const oldId = this.vm.selectedTouristsId[0]
-              const index = this.vm.touristList.findIndex((item) => {
-                return item.id === oldId
-              })
-              if (index !== -1) {
-                this.vm.touristList[index].isChecked = false
-              }
-              this.vm.selectedTouristsId.shift()
-            }
-            this.vm.selectedTouristsId.push(touristId)
-          }
+          SymbolGlyph($r('sys.symbol.xmark'))
+            .width(40)
+            .height(40)
+            .fontSize(18)
+            .fontColor([$r('sys.color.icon_primary')])
+            .backgroundColor($r('sys.color.comp_background_tertiary'))
+            .borderRadius(1000)
+            .padding(11)
+            .onClick(() => {
+              this.isShowTourist = false;
+            });
+        }
+        .width('100%')
+        .justifyContent(FlexAlign.SpaceBetween)
+        .padding({
+          top: 16,
+          bottom: 8,
+          left: this.vm.breakPointModel.pagePadding,
+          right: this.vm.breakPointModel.pagePadding,
+        });
 
-          this.vm.touristList = this.vm.touristList.map((tourist) => {
-            if (tourist.id === touristId) {
-              tourist.isChecked = isChecked;
-            }
-            return tourist;
-          });
-        },
-        setSelectedTourist: () => {
-          let tourists = this.vm.touristList.filter(item => item.isChecked);
-          let len = tourists.length;
-          // 替换选择数量的游客
-          for (let i = 0; i < len; i++) {
-            if (i > len - 1) {
-              this.vm.selectedTourists[i] = new TouristInfo();
-              return;
-            } else if (i === this.vm.selectedTourists.length) {
-              // 全部填充完成后退出
-              return;
-            }
-            this.vm.selectedTourists[i].id = tourists[i].id;
-            this.vm.selectedTourists[i].name = tourists[i].name;
-            this.vm.selectedTourists[i].phone = tourists[i].phone;
-            this.vm.selectedTourists[i].cardType = tourists[i].cardType;
-            this.vm.selectedTourists[i].cardNo = tourists[i].cardNo;
-            this.vm.selectedTourists[i].isChecked = tourists[i].isChecked;
-          }
-        },
-        changeSheetContent: (value: boolean, tourist: TouristInfo) => {
-          this.editItem = tourist;
-          this.initialSheet = value;
-        },
-        closeSheet: () => {
-          this.isShowTourist = false;
-        },
-        addOrEditTourist: (tourist: TouristInfo, isEdit: boolean) => {
-          this.vm.editItemInfo(tourist, isEdit);
-        },
-      });
-    } else {
+        Tourists({
+          touristList: this.vm.touristList,
+          isInReserve: true,
+          useRoute: true,
+          onEditTourist: (tourist: TouristInfo, isEdit: boolean) => {
+            this.editItem = tourist;
+            this.pathStack.pushPath({ name: 'EditTourist' });
+          },
+          changeSelectedStatus: (isChecked: boolean, touristId: string) => {
+            this.vm.changeSelectedStatus(isChecked, touristId);
+          },
+          setSelectedTourist: () => {
+            this.vm.setSelectedTourist();
+          },
+          closeSheet: () => {
+            this.isShowTourist = false;
+          },
+          deleteTourist: (id: string) => {
+            this.vm.deleteItemInfo(id);
+          },
+          addOrEditTourist: (tourist: TouristInfo, isEdit: boolean) => {
+            this.vm.editItemInfo(tourist, isEdit, true);
+          },
+        }).layoutWeight(1);
+      }
+      .width(Constant.FULL_PERCENT)
+      .height(Constant.FULL_PERCENT);
+    }
+    .navDestination(this.sheetNavDest)
+    .hideTitleBar(true)
+    .hideToolBar(true)
+    .mode(NavigationMode.Stack)
+    .height(Constant.FULL_PERCENT)
+    .width(Constant.FULL_PERCENT);
+  }
+
+  @Builder
+  sheetNavDest(name: string) {
+    if (name === 'EditTourist') {
       Tourist({
         touristInfo: this.editItem,
-        isInReserve: true,
         isEdit: this.editItem.name.length > 0,
-        changeSheetContent: (value: boolean) => {
-          this.initialSheet = value;
-        },
-        cancelEdit: (value: boolean) => {
-          this.initialSheet = value;
+        showBack: true,
+        pathStack: this.pathStack,
+        close: () => {
+          this.pathStack.pop();
         },
         addOrEditTourist: (tourist: TouristInfo, isEdit: boolean) => {
-          this.vm.editItemInfo(tourist, isEdit);
+          this.vm.editItemInfo(tourist, isEdit, true);
+        },
+        deleteTourist: (id: string) => {
+          this.vm.deleteItemInfo(id);
         },
       });
     }
   }
 
+  @Builder
+  EditAddressBuilder() {
+    Tourist({
+      touristInfo: this.editItem,
+      isEdit: this.editItem.name.length > 0,
+      close: () => {
+        this.showEditSheet = false;
+      },
+      addOrEditTourist: (tourist: TouristInfo, isEdit: boolean) => {
+        this.vm.editItemInfo(tourist, isEdit, true);
+      },
+      deleteTourist: (id: string) => {
+        this.vm.deleteItemInfo(id);
+      },
+    });
+  }
+
   build() {
-    Column() {
+    Column({ space: 12 }) {
       Row() {
-        Text('游客信息').fontSize(14).fontWeight(500);
-        Text('新增/选择')
-          .borderRadius(4)
-          .padding(4)
-          .fontSize(14)
-          .fontColor('#E84026')
-          .backgroundColor('rgba(232, 64, 38, 0.2)')
+        Text('游客信息')
+          .fontSize($r('sys.float.Subtitle_L'))
+          .fontWeight(FontWeight.Bold)
+          .fontColor($r('sys.color.font_primary'));
+        Button('选择/添加', { controlSize: ControlSize.SMALL })
+          .fontColor($r('sys.color.multi_color_04'))
+          .backgroundColor($r('sys.color.comp_background_tertiary'))
           .onClick(() => {
-            // 拉起游客选择
-            this.isShowTourist = true;
+            // 拉起游客选择 // 无常用游客或者无常用游客待选时展示选择游客；否则展示新增游客
+            if (!this.vm.touristList.length || (this.vm.touristList.length === this.vm.selectedTourists.length &&
+              this.vm.touristList.length < this.vm.selectTouristCount)) {
+              this.editItem = new TouristInfo();
+              this.showEditSheet = true;
+            } else {
+              this.pathStack.clear();
+              this.isShowTourist = true;
+            }
           })
           .bindSheet($$this.isShowTourist, this.AddressManagementBuilder(), {
-            height: '80%',
-            title: { title: '选择游客' },
-            onWillDismiss: ((dismissSheetAction: DismissSheetAction) => {
-              // 回到上一页
-              if (!this.initialSheet) {
-                this.initialSheet = true;
-              }
-              dismissSheetAction.dismiss();
-            }),
+            height: this.vm.breakPointModel.currentBreakpoint === BreakpointNameEnum.SM ? 748 : 612,
+            detents: this.vm.breakPointModel.currentBreakpoint === BreakpointNameEnum.SM ? [748, 749] : [612, 613],
+            preferType: SheetType.CENTER,
+            showClose: false
           });
-      }.justifyContent(FlexAlign.SpaceBetween).width(Constant.FULL_PERCENT);
+      }
+      .alignItems(VerticalAlign.Bottom)
+      .justifyContent(FlexAlign.SpaceBetween)
+      .width(Constant.FULL_PERCENT)
+      .height(40)
+      .padding({ bottom: 8 })
+      .bindSheet($$this.showEditSheet, this.EditAddressBuilder(), {
+        height: this.vm.getSheetHeight(true),
+        detents: this.vm.breakPointModel.currentBreakpoint === BreakpointNameEnum.SM ? [748, 749] : [612, 613],
+        preferType: SheetType.CENTER,
+        showClose: false,
+        backgroundColor: $r('sys.color.comp_background_gray')
+      });
 
-      Text(`请填写至少1位游客信息，已填写${this.vm.selectedTourists.length}位`)
-        .opacity(0.6)
-        .width(Constant.FULL_PERCENT)
-        .textAlign(TextAlign.Start)
-        .fontSize(12)
-        .margin({ top: 4, bottom: 12 });
+      Text() {
+        Span(`请选择/填写`).fontColor($r('sys.color.font_secondary'));
+        Span(`${this.vm.selectTouristCount}`).fontColor($r('sys.color.warning'));
+        Span(`位游客信息，已填写`).fontColor($r('sys.color.font_secondary'));
+        Span(`${this.vm.selectedTourists.length}`).fontColor($r('sys.color.warning'));
+        Span(`位`).fontColor($r('sys.color.font_secondary'));
+      }.fontSize(14);
 
-      Column() {
+      Column({ space: 8 }) {
         ForEach(this.vm.selectedTourists, (item: TouristInfo, index: number) => {
           this.TouristCard(item, index);
         }, (item: TouristInfo) => item.id);
-      };
-    }.padding(12).backgroundColor($r('sys.color.font_on_primary')).borderRadius(8);
+      }.visibility(this.vm.selectedTourists.length ? Visibility.Visible : Visibility.Hidden);
+    }
+    .alignItems(HorizontalAlign.Start)
+    .backgroundColor($r('sys.color.comp_background_primary'))
+    .borderRadius(16)
+    .padding({
+      top: 16,
+      bottom: 16,
+      left: 12,
+      right: 12,
+    });
   }
 }

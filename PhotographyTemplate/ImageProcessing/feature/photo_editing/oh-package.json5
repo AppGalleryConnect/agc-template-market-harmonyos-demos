@@ -1,0 +1,15 @@
+{
+  "name": "photo_editing",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    'commonlib': "file:../../commons/commonlib",
+    "mine": "file:../mine",
+    "aggregated_login": "file:../../components/aggregated_login",
+    "aggregated_share": "file:../../components/aggregated_share",
+    "membership": "file:../../components/membership"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "feedback",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@ohos/axios": "2.2.6",
+    "@hw-agconnect/axios-mock-adapter": "1.0.0",
+    "lib_common": "file:../../../components/lib_common",
+    "lib_widget": "file:../../../components/lib_widget"
+  }
+}

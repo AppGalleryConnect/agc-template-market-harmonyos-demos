@@ -25,8 +25,8 @@ export struct UIDays {
   @Param maxTemp: number = 46;
   @Param minTemp: number = 16;
   @Param itemWidth: number = 48;
+  @Param customHeight: number = 317;
   @Local curIndex: number = 1;
-  customHeight: number = 317;
   canvasHeight: number = 120;
   maxController: CanvasController = new CanvasController({
     labelPosition: 'top',
@@ -90,7 +90,7 @@ export struct UIDays {
     if (s === '优') {
       return $r('sys.color.confirm');
     } else if (s === '良') {
-      return $r('sys.color.multi_color_11');
+      return $r('sys.color.multi_color_10');
     } else if (s === '差') {
       return $r('sys.color.multi_color_08');
     }

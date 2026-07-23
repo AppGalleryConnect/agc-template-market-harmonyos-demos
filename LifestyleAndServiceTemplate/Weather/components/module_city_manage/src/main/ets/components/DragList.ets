@@ -38,7 +38,7 @@ export struct DragList {
 
   startDragItem(dragIndex: number) {
     this.initState();
-    animateTo({ curve: Curve.Linear }, () => {
+    this.getUIContext().animateTo({ curve: Curve.Linear }, () => {
       this._dragIndex = dragIndex;
       this._originDragIndex = dragIndex;
     });
@@ -52,7 +52,7 @@ export struct DragList {
     this.itemOffsetList[this._dragIndex] = eventOffsetY - (this._dragIndex - this._originDragIndex) *
     this._itemTotalHeight + this._listScroller.currentOffset().yOffset - this._originListOffsetY;
     this.itemOffsetList[this._dragIndex - 1] = this._itemTotalHeight;
-    animateTo({ curve: Curve.Sharp, duration: 100 }, () => {
+    this.getUIContext().animateTo({ curve: Curve.Sharp, duration: 100 }, () => {
       this.itemOffsetList[this._dragIndex - 1] = 0;
     });
   }
@@ -65,7 +65,7 @@ export struct DragList {
     this.itemOffsetList[this._dragIndex] = eventOffsetY - (this._dragIndex - this._originDragIndex) *
     this._itemTotalHeight + this._listScroller.currentOffset().yOffset - this._originListOffsetY;
     this.itemOffsetList[this._dragIndex + 1] = -this._itemTotalHeight;
-    animateTo({ curve: Curve.Sharp, duration: 100 }, () => {
+    this.getUIContext().animateTo({ curve: Curve.Sharp, duration: 100 }, () => {
       this.itemOffsetList[this._dragIndex + 1] = 0;
     });
   }
@@ -75,7 +75,7 @@ export struct DragList {
   }
 
   endDragItem() {
-    animateTo({ curve: Curve.Sharp, duration: 100 }, () => {
+    this.getUIContext().animateTo({ curve: Curve.Sharp, duration: 100 }, () => {
       this.initState();
     });
   }

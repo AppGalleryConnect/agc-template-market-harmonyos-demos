@@ -7,6 +7,9 @@ import { AVPlayerState } from '../constant/AVPlayerState';
 import { AVPlayerListener } from './AvPlayerListener';
 import { MediaSource } from '../constant/MediaSource';
 import { Constants as Const } from '../constant/Contants'
+import { AVPlayerConstants, CommonConstants, ViewConstants } from '../common/CommonConstants';
+import { CustomConfigs } from '../common/CustomConfigs';
+import { VideoInfoModel } from '../common/VideoInfoModel';
 
 interface PlayerParam {
   videoInfo: VideoPlayData;
@@ -27,8 +30,8 @@ const DOMAIN = 0x0000
 
 @ObservedV2
 export class AvPlayer {
-  @Trace videoHeight:number = Const.SURFACE_HEIGHT;
-  @Trace videoWidth:number = Const.SURFACE_WIDTH;
+  @Trace videoHeight: number = Const.SURFACE_HEIGHT;
+  @Trace videoWidth: number = Const.SURFACE_WIDTH;
   @Trace isPlaying: boolean = false;
   @Trace isReady: boolean = false;
   @Trace currentTime: number = 0;
@@ -42,7 +45,7 @@ export class AvPlayer {
   @Trace startPlay: boolean = false;
   @Trace isCompleted: boolean = false;
   listeners: Set<AVPlayerListener> = new Set
-  state: AVPlayerState = AVPlayerState.IDLE
+  @Trace state: AVPlayerState = AVPlayerState.IDLE
   private surfaceID: string = ''; // surfaceID用于播放画面显示，具体的值需要通过Xcomponent接口获取，相关文档链接见上面Xcomponent创建方法
   avPlayer?: media.AVPlayer;
   prepared: boolean = false;
@@ -52,6 +55,25 @@ export class AvPlayer {
   public stateChangeCallbacks: Map<string, Array<(state: string) => void>> = new Map();
   public timeUpdateCallbacks: Map<string, Array<(time: number) => void>> = new Map();
   public avPlayerCallback: Map<string, Array<(...arg: string[] | number[]) => void>> = new Map();
+  private playbackCallbackInterval: number = 0;
+  private netCheckInterval: number = 0;
+  private weakNetCheckInterval: number = 0;
+  private bitrateUpCheckInterval: number = 0;
+  private isSeeking: boolean = false;
+  private isResumePlay: boolean = false;
+  private isWeakNet: boolean = false;
+  private isBitrateUpAvailable: boolean = true;
+  private currentBitrateIndex: number | undefined = undefined;
+  private maxBufferValueList: Array<number> = [];
+  private recentDownRates: Array<number> = [];
+  private downloadRate: number = 0;
+  private maxDownloadRate: number = 0;
+  private source: media.MediaSource | undefined = undefined;
+  private strategy: media.PlaybackStrategy | undefined = undefined;
+  @Trace bitrateList: Array<number> = [];
+  @Trace currentResolutionIndex: number | undefined = undefined;
+  @Trace videoNetInfo: VideoInfoModel = new VideoInfoModel();
+  ctx: UIContext = AppStorage.get('UIContext')!;
 
   setListener(listener: AVPlayerListener) {
     this.listeners.add(listener)
@@ -114,16 +136,152 @@ export class AvPlayer {
     return this.state === AVPlayerState.ERROR
   }
 
+  private isDownloading() {
+    return this.downloadRate !== 0;
+  }
+
+  private findTargetBitrate() {
+    const bitrateListLength = this.bitrateList.length;
+    const downloadBitrate = this.downloadRate;
+    if (downloadBitrate > this.bitrateList[bitrateListLength - 1]) {
+      return this.bitrateList[bitrateListLength - 1];
+    } else {
+      const targetBitrate = this.bitrateList.find((_value, index) =>
+      index < bitrateListLength - 1 &&
+        this.bitrateList[index] <= downloadBitrate &&
+        this.bitrateList[index + 1] > downloadBitrate
+      ) ?? this.bitrateList[0];
+      return targetBitrate;
+    }
+  }
+
+  private autoReduceBitrate(targetBitrate: number) {
+    this.ctx.getPromptAction()
+      .showToast({ message: '当前网络环境差，将自动降低分辨率', duration: ViewConstants.TOAST_TIME_MS });
+    this.setBitrate(targetBitrate);
+  }
+
+  private autoIncreaseBitrate(targetBitrate: number) {
+    this.ctx.getPromptAction()
+      .showToast({ message: '当前网络较为稳定，将自动提升分辨率', duration: ViewConstants.TOAST_TIME_MS });
+    this.setBitrate(targetBitrate);
+  }
+
+  private isNewResolutionCaching() {
+    return this.currentBitrateIndex !== this.currentResolutionIndex;
+  }
+
+  public clearAllCallback() {
+    if (!this.avPlayer) {
+      return;
+    }
+    clearInterval(this.playbackCallbackInterval);
+    clearInterval(this.netCheckInterval);
+    clearInterval(this.weakNetCheckInterval);
+    this.avPlayer.off('availableBitrates');
+    this.avPlayer.off('bitrateDone');
+    this.avPlayer.off('videoSizeChange');
+    this.avPlayer.off('bufferingUpdate');
+    this.avPlayer.off('seekDone');
+    this.avPlayer.off('timeUpdate');
+    this.avPlayer.off('error');
+    this.avPlayer.off('stateChange');
+  }
+
+  private isValidVideoStream() {
+    if (this.bitrateList.length === 0 || this.currentBitrateIndex === undefined) {
+      console.warn('Bitrate list does not exist, maybe invalid video stream');
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  public setBitrate(bitrate: number) {
+    if (!this.avPlayer || !this.isValidVideoStream()) {
+      return;
+    }
+
+    if (this.avPlayer.state === 'prepared' || this.avPlayer.state === 'playing' ||
+      this.avPlayer.state === 'paused' || this.avPlayer.state === 'completed') {
+      this.avPlayer.setBitrate(bitrate);
+    }
+  }
+
   // 注册avplayer回调函数
   setAVPlayerCallback(avPlayer: media.AVPlayer) {
+    avPlayer.on('availableBitrates', (bitrateList: Array<number>) => {
+      const bitrateListLength = bitrateList.length;
+      if (bitrateListLength === 0) {
+        console.warn(`No available bitrate`);
+        return;
+      }
+      this.bitrateList = bitrateList.sort((a, b) => (a - b));
+      bitrateList.forEach((element) => {
+        this.maxBufferValueList.push(CustomConfigs.PREFERRED_BUFFER_SIZE * CommonConstants.MB_TO_BIT / element *
+        CommonConstants.SECOND_TO_MS);
+      });
+
+      this.setBitrate(this.bitrateList[bitrateListLength - 1]);
+      console.info(`Available bitrates: ${this.bitrateList}`);
+    });
+    avPlayer.on('bitrateDone', (bitrate: number) => {
+      console.info(`AVPlayer set bitrate done, bitrate: ${bitrate}`);
+      this.maxDownloadRate = 0;
+      this.currentBitrateIndex = this.bitrateList.findIndex((value) => value === bitrate);
+    });
+    avPlayer.on('videoSizeChange', (width: number, height: number) => {
+      console.info(`AVPlayer video size changed, resolution ${width} x ${height}`);
+
+      this.currentBitrateIndex =
+        Array.from(CustomConfigs.SELECTABLE_RESOLUTIONS.keys()).findIndex((value) => value === height);
+
+      this.isBitrateUpAvailable = false;
+      clearInterval(this.bitrateUpCheckInterval);
+      this.bitrateUpCheckInterval = setTimeout(() => {
+        this.isBitrateUpAvailable = true;
+      }, AVPlayerConstants.BITRATE_UP_CHECK_INTERVAL);
+
+      this.currentResolutionIndex = this.currentBitrateIndex;
+      this.ctx.getPromptAction().showToast({ message: '分辨率切换完成', duration: ViewConstants.TOAST_TIME_MS });
+
+    });
+    avPlayer.on('bufferingUpdate', (infoType: media.BufferingInfoType, value: number) => {
+      this.videoNetInfo.currentBufferInfoType = infoType;
+      this.videoNetInfo.currentBufferInfoValue = value;
+
+      if (infoType !== media.BufferingInfoType.CACHED_DURATION || this.isWeakNet || !this.isDownloading() ||
+      this.isSeeking || !this.isValidVideoStream()) {
+        return;
+      }
+      if (value < CustomConfigs.CACHED_PERCENT_THRESHOLD * this.maxBufferValueList[this.currentBitrateIndex!]) {
+        // Match the bitrate lower than the current download rate; if no match is found, select the lowest bitrate.
+        const targetBitrate = this.findTargetBitrate();
+        if (targetBitrate < this.bitrateList[this.currentBitrateIndex!]) {
+          this.autoReduceBitrate(targetBitrate);
+        }
+      } else {
+        const nextBitrateIndex = this.currentBitrateIndex! + 1;
+        if (nextBitrateIndex < this.bitrateList.length && value > this.maxBufferValueList[nextBitrateIndex] &&
+          this.maxDownloadRate >= this.bitrateList[nextBitrateIndex] &&
+          !this.isNewResolutionCaching() && this.isBitrateUpAvailable) {
+          this.autoIncreaseBitrate(this.bitrateList[nextBitrateIndex]);
+        }
+      }
+    });
     // seek操作结果回调函数
     avPlayer.on('seekDone', (seekDoneTime: number) => {
       hilog.info(DOMAIN, TAG, `AVPlayer[${this.id}] seek succeeded, seek time is ${seekDoneTime}`);
     });
     // error回调监听函数,当avPlayer在操作过程中出现错误时调用reset接口触发重置流程
     avPlayer.on('error', (err: BusinessError) => {
-      hilog.error(DOMAIN, TAG, `AVPlayer[${this.id}] Invoke avPlayer failed, code is ${err.code}, message is ${err.message}`);
-      avPlayer.reset(); // 调用reset重置资源，触发idle状态
+      hilog.error(DOMAIN, TAG,
+        `AVPlayer[${this.id}] Invoke avPlayer failed, code is ${err.code}, message is ${err.message}`);
+      try {
+        avPlayer.reset(); // 调用reset重置资源，触发idle状态
+      } catch (e) {
+        hilog.error(DOMAIN, TAG, `AVPlayer[${this.id}].reset failed: ${e}`);
+      }
     });
     // 状态机变化回调函数
     avPlayer.on('stateChange', async (state: string, reason: media.StateChangeReason) => {
@@ -131,7 +289,11 @@ export class AvPlayer {
         case 'idle': // 成功调用reset接口后触发该状态机上报
           hilog.info(DOMAIN, TAG, `AVPlayer[${this.id}] state idle called.`);
           this.state = AVPlayerState.IDLE
-          avPlayer.release(); // 调用release接口销毁实例对象
+          try {
+            avPlayer.release(); // 调用release接口销毁实例对象
+          } catch (e) {
+            hilog.error(DOMAIN, TAG, `AVPlayer[${this.id}].release failed: ${e}`);
+          }
           break;
         case 'initialized': // avplayer 设置播放源后触发该状态上报
           hilog.info(DOMAIN, TAG, `AVPlayer[${this.id}] state initialized called.`)
@@ -139,7 +301,11 @@ export class AvPlayer {
           if (this.surfaceID !== '') {
             avPlayer.surfaceId = this.surfaceID;
           }
-          avPlayer.prepare();
+          try {
+            avPlayer.prepare();
+          } catch (e) {
+            hilog.error(DOMAIN, TAG, `AVPlayer[${this.id}].prepare failed: ${e}`);
+          }
           break;
         case 'prepared': // prepare调用成功后上报该状态机
           hilog.info(DOMAIN, TAG, `AVPlayer[${this.id}] state prepared called.`);
@@ -246,22 +412,29 @@ export class AvPlayer {
 
   // 以下示例通过URL设置网络地址来播放直播码流
   async init(videoInfo: MediaSource) {
-    // 创建avPlayer实例对象
-    this.avPlayer = await media.createAVPlayer();
-    // 创建状态机变化回调函数
-    this.setAVPlayerCallback(this.avPlayer);
-    if(typeof videoInfo.url === 'string'){
+    try { // 创建avPlayer实例对象
+      this.avPlayer = await media.createAVPlayer();
+      // 创建状态机变化回调函数
       this.setAVPlayerCallback(this.avPlayer);
-      let mediaSource: media.MediaSource =
-        media.createMediaSourceWithUrl(videoInfo.url);
-      let playbackStrategy : media.PlaybackStrategy =
-        {preferredWidth: 1, preferredHeight: 2, preferredBufferDuration: 3, preferredHdr: false};
-      this.avPlayer.setMediaSource(mediaSource, playbackStrategy);
-    }else{
-      this.avPlayer.fdSrc = videoInfo.url as media.AVFileDescriptor;
+      if (typeof videoInfo.url === 'string') {
+        this.setAVPlayerCallback(this.avPlayer);
+        let mediaSource: media.MediaSource =
+          media.createMediaSourceWithUrl(videoInfo.url);
+        let playbackStrategy: media.PlaybackStrategy =
+          {
+            preferredWidth: 1080,
+            preferredHeight: 1920,
+            preferredBufferDuration: 20,
+            preferredHdr: false
+          };
+        this.avPlayer.setMediaSource(mediaSource, playbackStrategy);
+      } else {
+        this.avPlayer.fdSrc = videoInfo.url as media.AVFileDescriptor;
+      }
+      this.videoInfo = videoInfo
+      this.id = this.videoInfo.id
+    } catch (e) {
     }
-    this.videoInfo = videoInfo
-    this.id = this.videoInfo.id
   }
 
   schedule() {
@@ -323,7 +496,11 @@ export class AvPlayer {
     this.commands.push({
       func: () => {
         hilog.info(DOMAIN, TAG, `AVPlayer[${this.id}].play()`);
-        this.avPlayer?.play();
+        try {
+          this.avPlayer?.play();
+        } catch (e) {
+          hilog.error(DOMAIN, TAG, `AVPlayer[${this.id}].play failed: ${e}`);
+        }
       }, name: commandName
     });
     this.schedule();
@@ -346,7 +523,11 @@ export class AvPlayer {
     this.commands.push({
       func: () => {
         hilog.info(DOMAIN, TAG, `AVPlayer[${this.id}].pause()`);
-        this.avPlayer?.pause();
+        try {
+          this.avPlayer?.pause();
+        } catch (e) {
+          hilog.error(DOMAIN, TAG, `AVPlayer[${this.id}].pause failed: ${e}`);
+        }
       }, name: commandName
     });
     this.schedule();
@@ -369,7 +550,11 @@ export class AvPlayer {
     this.commands.push({
       func: () => {
         hilog.info(DOMAIN, TAG, 'AVPlayer.stop()');
-        this.avPlayer?.stop();
+        try {
+          this.avPlayer?.stop();
+        } catch (e) {
+          hilog.error(DOMAIN, TAG, `AVPlayer[${this.id}].stop failed: ${e}`);
+        }
       }, name: commandName
     });
     this.schedule();
@@ -379,7 +564,11 @@ export class AvPlayer {
     this.commands.push({
       func: () => {
         hilog.info(DOMAIN, TAG, `AVPlayer[${this.id}].release()`);
-        this.avPlayer?.release();
+        try {
+          this.avPlayer?.release();
+        } catch (e) {
+          hilog.error(DOMAIN, TAG, `AVPlayer[${this.id}].release failed: ${e}`);
+        }
       }
     });
     this.schedule();

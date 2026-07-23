@@ -7,6 +7,10 @@
     {
       "name": "input_city_name",
       "value": "请输入城市名称"
+    },
+    {
+      "name": "agcit_huawei_household_service",
+      "value": "1.0.5"
     }
   ]
 }

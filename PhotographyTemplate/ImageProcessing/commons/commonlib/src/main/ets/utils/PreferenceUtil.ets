@@ -34,7 +34,7 @@ export class PreferenceUtil {
       this.dataPreferences = preferences.getPreferencesSync(context, { name: fileName })
       Logger.info(`PreferenceUtil: ${fileName} init: ${this.dataPreferences != null}`)
     } catch (e) {
-      console.error(`Failed to remove preferences from cacheSync. error: ${JSON.stringify(e)}`)
+      Logger.error(`Failed to remove preferences from cacheSync. error: ${JSON.stringify(e)}`)
     }
   }
 

@@ -15,14 +15,22 @@ export class Preferences {
 
   static writeData(key: string, value: boolean): boolean {
     if (Preferences.dataPreferences) {
-      Preferences.dataPreferences.putSync(key, value);
-      Preferences.dataPreferences.flush((err: BusinessError) => {
-        if (err) {
-          console.error(`Failed to flush. Code:${err.code}, message:${err.message}`);
-          return;
-        }
-        console.info('Succeeded in flushing.');
-      })
+      try {
+        Preferences.dataPreferences.putSync(key, value);
+      } catch (e) {
+        console.error(`Failed to putSync. Code:${(e as BusinessError).code}, message:${(e as BusinessError).message}`);
+      }
+      try {
+        Preferences.dataPreferences.flush((err: BusinessError) => {
+          if (err) {
+            console.error(`Failed to flush. Code:${err.code}, message:${err.message}`);
+            return;
+          }
+          console.info('Succeeded in flushing.');
+        })
+      } catch (e) {
+        console.error(`Failed to flush. Code:${(e as BusinessError).code}, message:${(e as BusinessError).message}`);
+      }
       return true
     } else {
       return false
@@ -42,22 +50,30 @@ export class Preferences {
     let observer = (key: string) => {
       console.info('The key' + key + 'changed.');
     }
-    Preferences.dataPreferences?.on('change', observer);
-    Preferences.dataPreferences?.put(key, value, (err: BusinessError) => {
-      if (err) {
-        console.error(`Failed to put the value of 'startup'. Code:${err.code},message:${err.message}`);
-        return;
-      }
-      console.info("Succeeded in putting the value of 'startup'.");
-      if (Preferences.dataPreferences !== null) {
-        Preferences.dataPreferences.flush((err: BusinessError) => {
-          if (err) {
-            console.error(`Failed to flush. Code:${err.code}, message:${err.message}`);
-            return;
-          }
-          console.info('Succeeded in flushing.');
-        })
-      }
-    })
+    try {
+      Preferences.dataPreferences?.on('change', observer);
+    } catch (e) {
+      console.error(`Failed to register observer. Code:${(e as BusinessError).code}, message:${(e as BusinessError).message}`);
+    }
+    try {
+      Preferences.dataPreferences?.put(key, value, (err: BusinessError) => {
+        if (err) {
+          console.error(`Failed to put the value of 'startup'. Code:${err.code},message:${err.message}`);
+          return;
+        }
+        console.info("Succeeded in putting the value of 'startup'.");
+        if (Preferences.dataPreferences !== null) {
+          Preferences.dataPreferences.flush((err: BusinessError) => {
+            if (err) {
+              console.error(`Failed to flush. Code:${err.code}, message:${err.message}`);
+              return;
+            }
+            console.info('Succeeded in flushing.');
+          })
+        }
+      })
+    } catch (e) {
+      console.error(`Failed to put data. Code:${(e as BusinessError).code}, message:${(e as BusinessError).message}`);
+    }
   }
 }

@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 
+import { UIDialog } from '@hw-agconnect/ui-dialog';
 import { QuestionsRouterModel, TopicItemType } from 'answer_questions';
 import { PreferenceUtil, PreferConstant, TopBar, RouterMap, RouterModule } from 'commonlib';
 
@@ -124,35 +125,45 @@ export struct MyCollectionPage {
         title: $r('app.string.my_collection')
       });
       Row() {
-        Image(!this.isSelectAll ? $r('app.media.icon_select_all_off') : $r('app.media.icon_select_all'))
-          .height($r('app.float.vp_40'))
-          .width($r('app.float.vp_40'))
-          .onClick(() => {
-            this.isSelAll();
-          })
-          .visibility(this.isSelectDelete ? Visibility.Visible : Visibility.Hidden);
         Image($r('app.media.ic_public_trash'))
           .width($r('app.float.vp_40'))
           .height($r('app.float.vp_40'))
-          .opacity(this.swipeDelete ? 0.4 : 1)
-          .margin({ left: $r('app.float.vp_8') });
-      }
-      .onClick(() => {
-        if (!this.swipeDelete && this.collectionQues.length > 0) {
-          this.isSelectDelete = !this.isSelectDelete;
-          this.selectCount = 0;
-          this.isSelectAll = false;
-          this.collectionQues.forEach((item: CollectionModel) => {
-            item.isDelete = false;
+          .opacity(this.swipeDelete || this.selectCount === 0 ? 0.4 : 1)
+          .visibility(this.isSelectDelete ? Visibility.Visible : Visibility.Hidden)
+          .onClick(() => {
+            this.deleteSelectData()
+          })
+
+        Image($r('app.media.ic_edit'))
+          .width($r('app.float.vp_40'))
+          .height($r('app.float.vp_40'))
+          .visibility(this.isSelectDelete ? Visibility.None : Visibility.Visible)
+          .onClick(() => {
+            if (!this.swipeDelete && this.collectionQues.length > 0) {
+              this.isSelectDelete = !this.isSelectDelete;
+              this.selectCount = 0;
+              this.isSelectAll = false;
+              this.collectionQues.forEach((item: CollectionModel) => {
+                item.isDelete = false;
+              });
+            }
           });
-        }
-      });
+
+        Image(!this.isSelectAll ? $r('app.media.icon_select_all_off') : $r('app.media.icon_select_all'))
+          .height($r('app.float.vp_40'))
+          .width($r('app.float.vp_40'))
+          .margin({ left: $r('app.float.vp_8') })
+          .onClick(() => {
+            this.isSelAll();
+          })
+          .visibility(this.isSelectDelete ? Visibility.Visible : Visibility.None);
+      }
     }
     .width('100%')
-    .height($r('app.float.vp_56'))
-    .padding({ left: $r('app.float.vp_16'), right: $r('app.float.vp_16') })
+    .padding({ left: $r('app.float.vp_16'), right: $r('app.float.vp_16'), top: $r('app.float.vp_10') })
     .justifyContent(FlexAlign.SpaceBetween)
-    .backgroundColor($r('sys.color.comp_background_primary'));
+    .backgroundColor($r('sys.color.background_secondary'))
+    .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP,SafeAreaEdge.BOTTOM]);
   }
 
   @Builder
@@ -174,7 +185,6 @@ export struct MyCollectionPage {
   build() {
     Column() {
       this.topBuilder();
-      Divider().color($r('sys.color.comp_divider'));
       Column() {
         if (this.collectionQues.length <= 0) {
           Text('暂无收藏记录')
@@ -184,8 +194,6 @@ export struct MyCollectionPage {
         } else {
           // 收藏列表
           this.collectionListBuilder();
-          // 删除按钮
-          this.deleteButtonBuilder();
         }
       }
       .width('100%')
@@ -271,37 +279,6 @@ export struct MyCollectionPage {
   }
 
   /**
-   * 删除按钮
-   */
-  @Builder
-  deleteButtonBuilder() {
-    Row() {
-      Image($r('app.media.icon_delete'))
-        .width($r('app.float.vp_25'))
-        .height($r('app.float.vp_25'))
-        .margin($r('app.float.vp_8'));
-      Text('删除')
-        .fontColor($r('sys.color.font_on_primary'))
-        .fontSize($r('sys.float.Body_L'))
-        .fontWeight(FontWeight.Medium)
-        .textAlign(TextAlign.Center);
-    }
-    .opacity(this.selectCount > 0 ? 1 : 0.4)
-    .justifyContent(FlexAlign.Center)
-    .alignItems(VerticalAlign.Center)
-    .backgroundColor('#4c5dc4')
-    .borderRadius($r('app.float.vp_20'))
-    .width($r('app.float.vp_312'))
-    .height($r('app.float.vp_40'))
-    .margin({ top: $r('app.float.vp_8'), bottom: $r('app.float.vp_8') })
-    .visibility(this.isSelectDelete ? Visibility.Visible : Visibility.None)
-    .onClick(() => {
-      // 删除选中
-      this.deleteSelectData();
-    });
-  }
-
-  /**
    * 数据初始化
    */
   initData() {
@@ -358,20 +335,42 @@ export struct MyCollectionPage {
     if (this.selectCount === 0) {
       return;
     }
-    let arr: string[] = [];
-    this.collectionQues.forEach((model: CollectionModel) => {
-      if (model.isDelete) {
-        arr.push(model.keyID);
+    UIDialog.open({
+      title: `是否删除${this.selectCount}条记录？`,
+      contentOptions: {
+        content: '将在同账号其他设备的数据中同步删除',
+        contentFontSize: 14,
+        contentFontWeight: 400,
+        contentFontColor: 'rgba(0, 0, 0, 0.9)'
+      },
+      confirmButtonOptions: {
+        button: '删除',
+        buttonFontColor: 'rgba(232, 64, 38, 1)',
+      },
+      cancelButtonOptions: {
+        button: '取消',
+        buttonFontColor: 'rgba(0, 0, 0, 0.9)',
+      },
+      showConfirmButton: true,
+      showCancelButton: true,
+      onConfirm: () => {
+        let arr: string[] = [];
+        this.collectionQues.forEach((model: CollectionModel) => {
+          if (model.isDelete) {
+            arr.push(model.keyID);
+          }
+        });
+        this.collectionArr = this.collectionArr.filter((it: TopicItemType) => !arr.includes(it.keyID));
+        this.collectionQues = this.collectionQues.filter((it: CollectionModel) => !it.isDelete);
+        // 更新
+        PreferenceUtil.getInstance().put(PreferConstant.EXAM_PREFER_COLLECT, this.collectionArr);
+        if (this.collectionQues.length === 0) {
+          this.isSelectDelete = false;
+        }
+        this.swipeDelete = this.collectionQues.length === 0;
+        this.selectCount = 0;
       }
-    });
-    this.collectionArr = this.collectionArr.filter((it: TopicItemType) => !arr.includes(it.keyID));
-    this.collectionQues = this.collectionQues.filter((it: CollectionModel) => !it.isDelete);
-    // 更新
-    PreferenceUtil.getInstance().put(PreferConstant.EXAM_PREFER_COLLECT, this.collectionArr);
-    if (this.collectionQues.length === 0) {
-      this.isSelectDelete = false;
-    }
-    this.swipeDelete = this.collectionQues.length === 0;
+    })
   }
 }
 

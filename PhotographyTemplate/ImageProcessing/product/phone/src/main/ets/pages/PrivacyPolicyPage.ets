@@ -1,20 +1,18 @@
-/*
- * Copyright (c) 2024 Huawei Device Co., Ltd.
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+import { AppStorageV2, window } from '@kit.ArkUI'
+import { common } from '@kit.AbilityKit'
+import { BusinessError } from '@kit.BasicServicesKit';
+import { UIDialog } from '@hw-agconnect/ui-dialog'
+import {
+  CommonConstants,
+  GridRowColSetting,
+  Logger,
+  PreferConstant,
+  PreferenceUtil,
+  RouterMap,
+  RouterModule,
+  WindowSize,
+} from 'commonlib'
 
-import { AppStorageV2, display, window } from '@kit.ArkUI'
-import { PreferConstant, PreferenceUtil, RouterMap, RouterModule, WindowSize } from 'commonlib'
 
 @Builder
 export function PrivacyPolicyBuilder() {
@@ -24,202 +22,176 @@ export function PrivacyPolicyBuilder() {
 @ComponentV2
 struct PrivacyPolicy {
   @Local windowSize: WindowSize = AppStorageV2.connect(WindowSize, () => new WindowSize())!
-  @Local contentHeight: number = 0
-  screenHeight: number = 0
-  screenWidth: number = 0
-  uiContext: UIContext = this.getUIContext()
-  private pageSize: window.Size = {
-    width: display.getDefaultDisplaySync().width,
-    height: display.getDefaultDisplaySync().height
-  };
 
-  @Monitor('windowSize.screenHeight')
-  onNameChange() {
-    this.getCurrentScreen()
+  @Computed
+  get iconMargin() {
+    const isSplitScreen = this.windowSize.windowStatusType === window.WindowStatusType.SPLIT_SCREEN;
+    return isSplitScreen ? 0 : 136;
   }
 
-  aboutToAppear(): void {
-    this.getCurrentScreen()
+  privacyClick() {
+    RouterModule.push({ url: RouterMap.PRIVACY_STATEMENT_PAGE, param: true })
   }
 
-  /**
-   * 获取当前屏幕宽高
-   */
-  getCurrentScreen() {
-    this.contentHeight = this.uiContext.px2vp(this.windowSize.screenHeight)
+  openPrivacyDialog() {
+    UIDialog.open({
+      titleOptions: {
+        primaryTitle: '您需要同意协议才能体验功能',
+      },
+      contentBuilder: () => {
+        this.contentBuilder()
+      },
+      actionBuilder: () => {
+        this.actionBuilder();
+      },
+      closeOnClickMask: false,
+      closeOnBackPress: false,
+    })
   }
 
-  @Builder
-  splitScreen() {
-    Scroll() {
-      Column() {
-        Image($r('app.media.ic_launch'))
-          .width($r('app.float.vp_72'))
-          .height($r('app.float.vp_72'))
-          .borderRadius($r('app.float.vp_16'))
-          .margin({ top: $r('app.float.vp_158') })
-        Text('拍照美化')
-          .fontSize($r('sys.float.Title_L'))
-          .fontWeight(FontWeight.Medium)
-          .fontColor($r('sys.color.font_primary'))
-          .margin({ top: $r('app.float.vp_24') })
-        Text('业务描述')
-          .fontSize($r('sys.float.Body_M'))
-          .fontWeight(FontWeight.Regular)
-          .fontColor($r('sys.color.font_secondary'))
-          .margin({ top: $r('app.float.vp_2') })
-        Blank()
-          .layoutWeight(1)
-        Image($r('app.media.ic_me_security_shield'))
-          .width($r('app.float.vp_24'))
-          .height($r('app.float.vp_24'))
-        Text('隐私协议') {
-          Span('本应用需')
-          Span('联网').fontWeight(FontWeight.Medium).fontColor($r('sys.color.font_primary'))
-          Span('，调用')
-          Span('XX').fontWeight(FontWeight.Medium).fontColor($r('sys.color.font_primary'))
-          Span('、')
-          Span('XX').fontWeight(FontWeight.Medium).fontColor($r('sys.color.font_primary'))
-          Span('权限，获取XX信息，以为您提供XX服务。我们仅在您使用具体功能业务时，才会触发上述行为收集使用相关的个人信息。详情请参阅')
-          Span('XX业务与隐私的声明、权限使用说明').fontWeight(FontWeight.Medium).fontColor('#4B5CC4').onClick(() => {
-            RouterModule.push({ url: RouterMap.PRIVACY_STATEMENT_PAGE, param: true })
+  quiteApp() {
+    const uiContext: UIContext = this.getUIContext();
+    const ctx = uiContext.getHostContext() as common.UIAbilityContext;
+    ctx.terminateSelf().catch((e: BusinessError) => {
+      Logger.error('[PrivacyPolicy]', 'terminateSelf fail, error: ' + JSON.stringify(e))
+    });
+  }
+
+  agree() {
+    PreferenceUtil.getInstance().put(PreferConstant.PRIVACY_POLICY_KEY, '1');
+    RouterModule.replace({ url: RouterMap.SPLASH_PAGE });
+  }
+
+  build() {
+    NavDestination() {
+      GridRow({
+        columns: GridRowColSetting.GRID_ROW_OPTIONS_COLUMNS,
+      }) {
+        GridCol({
+          span: { xs: 4, sm: 4, md: 6, lg: 8 },
+          offset: { md: 1, lg: 2 },
+        }) {
+          Column() {
+            Column() {
+              Image($r('app.media.app_icon'))
+                .width(72)
+                .draggable(false)
+                .margin({ top: this.iconMargin })
+                .borderRadius(16)
+              Text('拍照美化')
+                .fontSize($r('sys.float.Title_L'))
+                .fontWeight(FontWeight.Medium)
+                .margin({ top: 24, bottom: 2 })
+              Text('业务描述')
+                .fontSize($r('sys.float.Body_M'))
+                .fontColor($r('sys.color.font_secondary'))
+            }
+            .width(CommonConstants.FULL_PERCENT)
+            .layoutWeight(1)
+
+            Column({ space: CommonConstants.SPACE_L }) {
+              Image($r('app.media.ic_security'))
+                .width($r('app.float.vp_24'))
+                .draggable(false)
+
+              this.documentBuilder()
+
+              Row({ space: CommonConstants.SPACE_M }) {
+                Button('取消')
+                  .fontColor($r('sys.color.multi_color_aux_01'))
+                  .backgroundColor($r('sys.color.comp_background_tertiary'))
+                  .height(40)
+                  .layoutWeight(1)
+                  .onClick(() => {
+                    this.openPrivacyDialog()
+                  })
+                Button('同意')
+                  .height(40)
+                  .backgroundColor($r('sys.color.multi_color_aux_01'))
+                  .layoutWeight(1)
+                  .onClick(() => {
+                    this.agree();
+                  })
+              }
+              .padding({ top: CommonConstants.PADDING_L, bottom: CommonConstants.PADDING_L })
+            }
+          }
+          .height(CommonConstants.FULL_PERCENT)
+          .width(CommonConstants.FULL_PERCENT)
+          .padding({
+            left: CommonConstants.PADDING_L,
+            right: CommonConstants.PADDING_L,
+            top: this.windowSize.statusHeight,
+            bottom: this.windowSize.bottomHeight,
           })
-          Span('。')
         }
-        .fontSize($r('sys.float.Caption_M'))
-        .fontColor($r('sys.color.font_secondary')).margin({ top: 16 })
-
-        Text('请您仔细阅读上述声明，点击“同意”，即表示您知悉并同意我们向您提供本应用服务。')
-          .fontSize($r('sys.float.Caption_M'))
-          .fontColor($r('sys.color.font_secondary'))
-          .margin({ top: 4 })
-
-        Row({ space: 12 }) {
-          Button('取消')
-            .layoutWeight(1)
-            .fontSize($r('sys.float.Body_L'))
-            .fontWeight(FontWeight.Medium)
-            .fontColor($r('sys.color.font_on_primary'))
-            .backgroundColor($r('sys.color.comp_background_tertiary'))
-            .onClick(() => {
-              RouterModule.push({ url: RouterMap.PRIVACY_STATEMENT_ALERT_PAGE }, false)
-            })
-          Button('同意')
-            .layoutWeight(1)
-            .fontSize($r('sys.float.Body_L'))
-            .fontWeight(FontWeight.Medium)
-            .fontColor($r('sys.color.font_on_primary'))
-            .backgroundColor($r('sys.color.multi_color_aux_01'))
-            .onClick(() => {
-              PreferenceUtil.getInstance().put(PreferConstant.PRIVACY_POLICY_KEY, '1')
-              RouterModule.replace({ url: RouterMap.MAIN_ENTRY })
-            })
-        }.margin({ top: $r('app.float.vp_16') })
       }
-      .padding({ left: $r('app.float.vp_16'), right: $r('app.float.vp_16') })
-      .width('100%')
-      .height(this.getUIContext().px2vp(this.pageSize.height))
     }
-    .scrollBar(BarState.Off)
-    .scrollable(ScrollDirection.Vertical)
-    .edgeEffect(this.windowSize.windowStatusType === 5 ? EdgeEffect.Spring : EdgeEffect.None)
-    .width('100%')
-    .height(this.contentHeight)
+    .hideTitleBar(true)
+    .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])
   }
 
   @Builder
-  otherScreen() {
-    Column() {
-      Image($r('app.media.icon'))
-        .height($r('app.float.vp_72'))
-        .width($r('app.float.vp_72'))
-        .borderRadius($r('app.float.vp_16'))
-        .margin({ top: $r('app.float.vp_158') })
-      Text('拍照美化')
-        .fontWeight(FontWeight.Medium)
-        .fontSize($r('sys.float.Title_L'))
-        .fontColor($r('sys.color.font_primary'))
-        .margin({ top: $r('app.float.vp_24') })
-      Text('业务描述')
-        .fontWeight(FontWeight.Regular)
-        .fontSize($r('sys.float.Body_M'))
-        .fontColor($r('sys.color.font_secondary'))
-        .margin({ top: $r('app.float.vp_2') })
-      Blank()
-        .layoutWeight(1)
-      Image($r('app.media.ic_me_security_shield'))
-        .height($r('app.float.vp_24'))
-        .width($r('app.float.vp_24'))
-      Text('隐私协议') {
+  documentBuilder() {
+    Column({ space: CommonConstants.SPACE_S }) {
+      Text() {
         Span('本应用需')
-        Span('联网')
-          .fontWeight(FontWeight.Medium)
-          .fontColor($r('sys.color.font_primary'))
-        Span('，调用')
-        Span('XX')
-          .fontWeight(FontWeight.Medium)
-          .fontColor($r('sys.color.font_primary'))
-        Span('、')
-        Span('XX')
-          .fontWeight(FontWeight.Medium)
-          .fontColor($r('sys.color.font_primary'))
-        Span('权限，获取XX信息，以为您提供XX服务。我们仅在您使用具体功能业务时，才会触发上述行为收集使用相关的个人信息。详情请参阅')
+        Span('联网').fontWeight(FontWeight.Medium).fontColor($r('sys.color.font_primary'))
+        Span('，调用XX、XX权限，获取XX信息，以为您提供XX服务。我们仅在您使用具体功能业务时，才会触发上述行为收集使用相关的个人信息。详情请参阅')
         Span('XX业务与隐私的声明、权限使用说明')
           .fontWeight(FontWeight.Medium)
           .fontColor('#4B5CC4')
           .onClick(() => {
-            RouterModule.push({ url: RouterMap.PRIVACY_STATEMENT_PAGE, param: true })
+            this.privacyClick();
           })
         Span('。')
       }
-      .fontColor($r('sys.color.font_secondary')).margin({ top: 16 })
       .fontSize($r('sys.float.Caption_M'))
+      .fontColor($r('sys.color.font_secondary'))
 
       Text('请您仔细阅读上述声明，点击“同意”，即表示您知悉并同意我们向您提供本应用服务。')
-        .fontColor($r('sys.color.font_secondary'))
         .fontSize($r('sys.float.Caption_M'))
-        .margin({ top: 4 })
-
-      Row({ space: 12 }) {
-        Button('取消')
-          .layoutWeight(1)
-          .fontWeight(FontWeight.Medium)
-          .fontSize($r('sys.float.Body_L'))
-          .onClick(() => {
-            RouterModule.push({ url: RouterMap.PRIVACY_STATEMENT_ALERT_PAGE }, false)
-          })
-          .backgroundColor($r('sys.color.comp_background_tertiary'))
-          .fontColor($r('sys.color.font_on_primary'))
-        Button('同意')
-          .layoutWeight(1)
-          .fontWeight(FontWeight.Medium)
-          .fontSize($r('sys.float.Body_L'))
-          .onClick(() => {
-            PreferenceUtil.getInstance().put(PreferConstant.PRIVACY_POLICY_KEY, '1')
-            RouterModule.replace({ url: RouterMap.MAIN_ENTRY })
-          })
-          .backgroundColor($r('sys.color.multi_color_aux_01'))
-          .fontColor($r('sys.color.font_on_primary'))
-      }.margin({ top: $r('app.float.vp_16') })
+        .fontColor($r('sys.color.font_secondary'))
     }
-    .padding({ left: $r('app.float.vp_16'), right: $r('app.float.vp_16'), bottom: $r('app.float.vp_44') })
-    .width('100%')
-    .height(this.getUIContext().px2vp(this.pageSize.height))
+    .width(CommonConstants.FULL_PERCENT)
+    .alignItems(HorizontalAlign.Start)
   }
 
-  build() {
-    NavDestination(){
-      Column() {
-        if (this.windowSize.windowStatusType === 5) {
-          this.splitScreen()
-        } else {
-          this.otherScreen()
-        }
-      }
-      .width('100%')
-      .height('100%')
-    }.backgroundColor($r('sys.color.background_secondary'))
-    .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])
-    .hideTitleBar(true);
+  @Builder
+  contentBuilder() {
+    Column() {
+      this.documentBuilder()
+    }
+    .padding({
+      left: CommonConstants.PADDING_XXL,
+      right: CommonConstants.PADDING_XXL,
+      top: CommonConstants.PADDING_L,
+    })
+  }
+
+  @Builder
+  actionBuilder() {
+    Row({ space: CommonConstants.SPACE_M }) {
+      Button('退出应用')
+        .type(ButtonType.ROUNDED_RECTANGLE)
+        .fontColor($r('sys.color.multi_color_aux_01'))
+        .backgroundColor($r('sys.color.comp_background_tertiary'))
+        .layoutWeight(1)
+        .onClick(() => {
+          this.quiteApp();
+        })
+      Button('同意并继续')
+        .type(ButtonType.ROUNDED_RECTANGLE)
+        .backgroundColor($r('sys.color.multi_color_aux_01'))
+        .layoutWeight(1)
+        .onClick(() => {
+          this.agree();
+        })
+    }
+    .padding({
+      left: CommonConstants.PADDING_L,
+      right: CommonConstants.PADDING_L,
+      top: CommonConstants.PADDING_L,
+    })
   }
 }

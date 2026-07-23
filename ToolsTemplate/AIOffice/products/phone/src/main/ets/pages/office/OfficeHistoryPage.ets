@@ -1,7 +1,7 @@
 import { StoreManager, TextMessage } from '@hw-agconnect/copilot';
 import { RouterMap, RouterUtils } from 'lib_common';
-import { NavHeaderBar } from 'lib_widget';
 import { CopilotHistory } from '../../components/CopilotHistory';
+import { NavHeaderBar } from '../../widget/NavHeaderBar';
 import { PageResultType } from './OfficeResultPage';
 
 const RESULT_TYPE = ['论文写作', '智能总结']

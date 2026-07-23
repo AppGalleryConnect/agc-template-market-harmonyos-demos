@@ -70,6 +70,7 @@ export struct SubmitPage {
         placeholder: '请详细描述您的问题（必填）',
         text: $$this.vm.body,
       })
+        .fontColor($r('sys.color.font_primary'))
         .fontSize(16 * this.vm.feedbackModel.fontSizeRatio)
         .placeholderColor($r('sys.color.font_tertiary'))
         .placeholderFont({ size: 16 * this.vm.feedbackModel.fontSizeRatio })
@@ -249,6 +250,7 @@ export struct SubmitPage {
     .alignContent(Alignment.TopEnd)
     .clip(true)
     .onClick(() => {
+      console.log('===>123=============')
       ImagePreview.show(this.vm.imgArr, {
         startIndex: index,
         showIndex: true,

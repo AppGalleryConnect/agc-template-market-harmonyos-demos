@@ -1,5 +1,7 @@
 import { Logger } from './Logger';
 
+const TAG = '[CanvasUtil]';
+
 // 基础点类型接口
 export interface Point {
   x: number;
@@ -115,19 +117,19 @@ export class CanvasController {
     const dataLength = temperatureArray.length;
 
     if (dataLength === 0) {
-      Logger.error('气温数组不能为空');
+      Logger.error(TAG, '气温数组不能为空');
       return points;
     }
     if (intervalLength <= 0) {
-      Logger.error('区间长度必须为正数');
+      Logger.error(TAG, '区间长度必须为正数');
       return points;
     }
     if (canvasHeight <= 0) {
-      Logger.error('Canvas 高度必须为正数');
+      Logger.error(TAG, 'Canvas 高度必须为正数');
       return points;
     }
     if (minTemperature >= maxTemperature) {
-      Logger.error('最低气温必须小于最高气温');
+      Logger.error(TAG, '最低气温必须小于最高气温');
       return points;
     }
 
@@ -152,7 +154,7 @@ export class CanvasController {
    */
   public draw(ctx: CanvasRenderingContext2D, temps: PointWithTemp[], verticalLineIndex: number | null = null) {
     if (!temps || temps.length < 2) {
-      Logger.error('至少需要 2 个点才能绘制曲线');
+    Logger.error(TAG, '至少需要 2 个点才能绘制曲线');
       return;
     }
     ctx.clearRect(0, 0, ctx.width, ctx.height);

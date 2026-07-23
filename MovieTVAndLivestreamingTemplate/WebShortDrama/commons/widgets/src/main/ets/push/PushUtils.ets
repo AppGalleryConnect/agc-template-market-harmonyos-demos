@@ -28,7 +28,7 @@ export class PushUtils {
     /*
      * 这里的Authorization需要开发者自行获取，详情见readme
      * */
-    axios.post('https://push-api.cloud.huawei.com/v3/388421841222475582/messages:send',
+    axios.post('https://push-api.cloud.huawei.com/v3/461323198430147944/messages:send',
       PushUtils.pushMessageParams(dramaList), {
         headers: {
           'Content-Type': 'application/json',

@@ -1,5 +1,6 @@
-import { ExamService, Video} from '@ohos_agcit/driver_license_exam_datasource'
+import { ExamService, Video } from '@ohos_agcit/driver_license_exam_datasource'
 import { AccountUtil, CommonConstants, CommonModel, showToast } from '@ohos_agcit/driver_license_exam_commonlib'
+import { VideoDetailParam } from '../../types/Types'
 import { iap } from '@kit.IAPKit';
 import { BusinessError } from '@kit.BasicServicesKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
@@ -23,7 +24,7 @@ export function VideoListViewBuild() {
 struct VideoListView {
   vm: CommonModel = CommonModel.instance;
   examService: ExamService = ExamService.instance(this.getUIContext().getHostContext() as Context);
-  @Local videoList:Video[] = this.examService.getVideList();
+  @Local videoList: Video[] = this.examService.getVideList();
   @Local bottomRectHeight: number = 0;
   @Local topRectHeight: number = 0;
 
@@ -257,14 +258,17 @@ struct VideoListView {
     ownedMemberCallBack: this.ownedMemberEvent,
   };
 
-  queryMemberStatus(item:Video) {
+  queryMemberStatus(item: Video) {
     MemberStatusUtil.queryPurchase(this.getUIContext().getHostContext() as common.UIAbilityContext).then((res) => {
       let autoRenewPurchasedList = res.renewList;
       let nonAutoRenewPurchasedList = res.nonRenewList;
 
       if (autoRenewPurchasedList?.length || nonAutoRenewPurchasedList?.length) {
         // this.getUIContext().getPromptAction().showToast({ message: '您已开通会员' });
-        this.vm.navStack.pushPathByName('videoDetailView', item)
+        let param: VideoDetailParam = {
+          video: item
+        };
+        this.vm.navStack.pushPathByName('videoDetailView', param)
       } else {
         MemberSheetUtils.open(this.productsInfo, this.getUIContext());
       }
@@ -280,7 +284,8 @@ struct VideoListView {
       const params: Record<string, Object> = { 'anonymousPhone': quickLoginAnonymousPhone };
       this.vm.navStack.pushPathByName('QuickLoginPage', params, true);
     } else {
-      const hint: string = (this.getUIContext().getHostContext() as Context).resourceManager.getStringSync($r('app.string.get_mobile_number_error').id);
+      const hint: string = (this.getUIContext()
+        .getHostContext() as Context).resourceManager.getStringSync($r('app.string.get_mobile_number_error').id);
       showToast(hint, this.getUIContext());
     }
   }
@@ -288,10 +293,10 @@ struct VideoListView {
   build() {
     NavDestination() {
       Column() {
-        List({space:12}) {
-          ForEach(this.videoList, (item:Video) => {
+        List({ space: 12 }) {
+          ForEach(this.videoList, (item: Video) => {
             ListItem() {
-              Row({space:12}) {
+              Row({ space: 12 }) {
                 RelativeContainer() {
                   Image(item.poster)
                     .height(CommonConstants.FULL_HEIGHT)
@@ -302,8 +307,8 @@ struct VideoListView {
                     .height(24)
                     .height(24)
                     .alignRules({
-                      bottom:{anchor:'__container__', align:VerticalAlign.Center},
-                      left:{anchor:'__container__', align:HorizontalAlign.Center}
+                      bottom: { anchor: '__container__', align: VerticalAlign.Center },
+                      left: { anchor: '__container__', align: HorizontalAlign.Center }
                     })
                     .offset({
                       x: -12,
@@ -315,8 +320,8 @@ struct VideoListView {
                     .fontColor(Color.White)
                     .maxFontScale(1)
                     .alignRules({
-                      bottom:{anchor:'__container__', align: VerticalAlign.Bottom},
-                      right: {anchor:'__container__',align: HorizontalAlign.End}
+                      bottom: { anchor: '__container__', align: VerticalAlign.Bottom },
+                      right: { anchor: '__container__', align: HorizontalAlign.End }
                     })
                     .offset({
                       x: -8,
@@ -326,14 +331,14 @@ struct VideoListView {
                 .height(CommonConstants.FULL_HEIGHT)
                 .width(124)
 
-                Column({space:8}) {
+                Column({ space: 8 }) {
                   Row() {
                     Text(item.simpleDescription)
                       .fontSize(16)
                       .fontColor($r('sys.color.font_primary'))
                       .fontWeight(FontWeight.Medium)
                       .textOverflow({
-                        overflow:TextOverflow.Ellipsis
+                        overflow: TextOverflow.Ellipsis
                       })
                       .ellipsisMode(EllipsisMode.END)
                       .maxLines(1)
@@ -353,7 +358,7 @@ struct VideoListView {
                     .fontWeight(FontWeight.Regular)
                     .maxFontScale(1)
                     .textOverflow({
-                      overflow:TextOverflow.Ellipsis
+                      overflow: TextOverflow.Ellipsis
                     })
                     .ellipsisMode(EllipsisMode.END)
                     .maxLines(3)
@@ -373,18 +378,22 @@ struct VideoListView {
                 } else if (item.needVip) {
                   this.queryMemberStatus(item);
                 } else {
-                  this.vm.navStack.pushPathByName('videoDetailView', item)
+                  let param: VideoDetailParam = {
+                    video: item
+                  };
+                  this.vm.navStack.pushPathByName('videoDetailView', param)
                 }
               })
             }
 
-          }, (item:Video) => JSON.stringify(item))
+          }, (item: Video) => JSON.stringify(item))
         }
+        .lanes(this.vm.isLargeDevice ? 2 : 1, 12)
         .scrollBar(BarState.Off)
       }
       .width(CommonConstants.FULL_WIDTH)
       .padding({
-        top:12,
+        top: 12,
         left: 16,
         right: 16
       })
@@ -393,7 +402,7 @@ struct VideoListView {
     .height(CommonConstants.FULL_HEIGHT)
     .width(CommonConstants.FULL_WIDTH)
     .padding({
-      top:this.getUIContext().px2vp(this.topRectHeight),
+      top: this.getUIContext().px2vp(this.topRectHeight),
       bottom: this.getUIContext().px2vp(this.bottomRectHeight)
     })
     .backgroundColor($r('sys.color.background_secondary'))

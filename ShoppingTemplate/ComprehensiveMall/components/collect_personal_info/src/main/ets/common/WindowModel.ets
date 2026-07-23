@@ -41,7 +41,11 @@ export class WindowModel {
   public registerWindowBottomPadding() {
     this.getWindowBottomPadding();
     window.getLastWindow(this.context).then(currentWindow => {
-      currentWindow.on('avoidAreaChange', this.getWindowBottomPadding);
+      try {
+        currentWindow.on('avoidAreaChange', this.getWindowBottomPadding);
+      } catch (err) {
+        UtilLog.error(TAG, 'fail to register avoid area change. error:' + JSON.stringify(err));
+      }
     }).catch((err: BusinessError) => {
       UtilLog.error(DOMAIN, TAG, `registerWindowBottomPadding failed. error: ${JSON.stringify(err)}`);
     });
@@ -51,11 +55,15 @@ export class WindowModel {
    * 取消监听底部避让区域变化
    */
   public unRegisterWindowBottomPadding() {
-    window.getLastWindow(this.context).then(currentWindow => {
-      currentWindow.off('avoidAreaChange', this.getWindowBottomPadding);
-    }).catch((err: BusinessError) => {
+    try {
+      window.getLastWindow(this.context).then(currentWindow => {
+        currentWindow.off('avoidAreaChange', this.getWindowBottomPadding);
+      }).catch((err: BusinessError) => {
+        UtilLog.error(DOMAIN, TAG, `unRegisterWindowBottomPadding failed. error: ${JSON.stringify(err)}`);
+      });
+    } catch (err) {
       UtilLog.error(DOMAIN, TAG, `unRegisterWindowBottomPadding failed. error: ${JSON.stringify(err)}`);
-    });
+    }
   }
 
   /**
@@ -79,10 +87,14 @@ export class WindowModel {
    * 取消注册监听键盘区域变化
    */
   public unRegisterKeyboardListener(callback: Callback<number>) {
-    window.getLastWindow(this.context).then(currentWindow => {
-      currentWindow.off('keyboardHeightChange', callback);
-    }).catch((err: BusinessError) => {
+    try {
+      window.getLastWindow(this.context).then(currentWindow => {
+        currentWindow.off('keyboardHeightChange', callback);
+      }).catch((err: BusinessError) => {
+        UtilLog.error(DOMAIN, TAG, `unRegisterKeyboardListener failed. error: ${JSON.stringify(err)}`);
+      });
+    } catch (err) {
       UtilLog.error(DOMAIN, TAG, `unRegisterKeyboardListener failed. error: ${JSON.stringify(err)}`);
-    });
+    }
   }
 }

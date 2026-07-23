@@ -1,4 +1,4 @@
-import { AbilityConstant, ConfigurationConstant, UIAbility, Want } from '@kit.AbilityKit';
+import { AbilityConstant, ConfigurationConstant, UIAbility, Want, Configuration } from '@kit.AbilityKit';
 import { AppStorageV2, display, window } from '@kit.ArkUI';
 import { GlobalContext, Logger, WindowManager } from '@agctemplate/utils';
 import {
@@ -7,7 +7,9 @@ import {
   BreakPoint,
   BreakPointValue,
   DEFAULT_STATUS_BAR_HEIGHT,
-  StatusBarHeight
+  StatusBarHeight,
+  MinorsProtectionUtils,
+  ColorMode
 } from '@agctemplate/widgets';
 import { emitter } from '@kit.BasicServicesKit';
 import { CastService } from 'module_cast';
@@ -18,6 +20,7 @@ import { ShareService } from 'aggregated_share';
 import { ContinueUtils } from '../common/ContinueUtils';
 import { WantUtils } from '../common/WantUtils';
 import { CloudPrefetchUtils } from '../common/CloudPrefetchUtils';
+import { LoneTakeAnimationsTransition } from 'module_transition';
 
 const TAG = 'EntryAbility'
 
@@ -31,7 +34,6 @@ export default class EntryAbility extends UIAbility {
       .initWX('wxc92d9d6570127a32')
       // todo 填写QQ互联平台配置的应用AppID
       .initQQ(102061317);
-
   // 实例化登录服务
   private loginServiceImpl: WXLoginService =
     WXLoginService.create()
@@ -44,36 +46,45 @@ export default class EntryAbility extends UIAbility {
     () => new StatusBarHeight(DEFAULT_STATUS_BAR_HEIGHT))!;
   private aiBarHeight = AppStorageV2.connect(AiBarHeight, AppStorageKeys.AI_BAR_HEIGHT,
     () => new AiBarHeight(0))!;
+  private currentColorMode: ColorMode = AppStorageV2.connect(ColorMode, 'colorMode', () => new ColorMode('跟随系统'))!
 
   onNewWant(want: Want, launchParam: AbilityConstant.LaunchParam): void {
     this.loginServiceImpl.handleWant(want);
     this.shareServiceImpl.handleWant(want, this.context);
-    this.setNeedLoadContent(false);//热启动不加载接续页面
+    WantUtils.handleAppLinkingWant(want); //AppLinking跳转
+    this.setNeedLoadContent(false); //热启动不加载接续页面
     WantUtils.handlePushWant(want);
-    WantUtils.handleRestoreCall(want, launchParam);//热启动加载传来的接续数据
+    WantUtils.handleRestoreCall(want, launchParam); //热启动加载传来的接续数据
   }
 
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
     this.loginServiceImpl.handleWant(want);
     this.shareServiceImpl.handleWant(want, this.context);
-    this.setNeedLoadContent(true);//冷启动加载接续页面
-    ContinueUtils.disableContinue(this.context);//冷启动关闭接续功能
+    WantUtils.handleAppLinkingWant(want); //AppLinking跳转
+    this.setNeedLoadContent(true); //冷启动加载接续页面
+    ContinueUtils.disableContinue(this.context); //冷启动关闭接续功能
     WantUtils.handlePushCall(want);
-    WantUtils.handleRestoreCall(want, launchParam);//冷启动加载传来的接续数据
+    WantUtils.handleRestoreCall(want, launchParam); //冷启动加载传来的接续数据
     const bundleName = this.context.abilityInfo.bundleName
-    AppStorage.setOrCreate('bundleName',bundleName)
+    AppStorage.setOrCreate('bundleName', bundleName)
     Logger.info(TAG, 'Ability onCreate');
     let applicationContext = this.context.getApplicationContext();
-    applicationContext.setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_LIGHT);
+    applicationContext.setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_NOT_SET);
     CastService.getInstance().init(this.context)
-    this.contextInit();
     CloudPrefetchUtils.functionPreload();
+    MinorsProtectionUtils.createSubscriber()
   }
 
   //接续功能，传入迁移数据
   onContinue(wantParam: Record<string, Object>) {
     Logger.info(TAG, 'Ability onContinue');
     return ContinueUtils.handleContinue(wantParam, this.context);
+  }
+
+  onConfigurationUpdate(newConfig: Configuration): void {
+    this.currentColorMode.colorMode = newConfig.colorMode!;
+    Logger.info('testTag', 'the newConfig.colorMode is %{public}s',
+      JSON.stringify(this.currentColorMode.colorMode) ?? '');
   }
 
   onDestroy(): void {
@@ -108,7 +119,10 @@ export default class EntryAbility extends UIAbility {
         id: 2
       }
     };
-    emitter.emit(event, eventData);
+    try {
+      emitter.emit(event, eventData);
+    } catch (e) {
+    }
     Logger.info(TAG, 'Ability onForeground');
   }
 
@@ -123,12 +137,11 @@ export default class EntryAbility extends UIAbility {
         id: 1
       }
     };
-    emitter.emit(event, eventData);
+    try {
+      emitter.emit(event, eventData);
+    } catch (e) {
+    }
     Logger.info(TAG, 'Ability onBackground');
-  }
-
-  private contextInit() {
-    GlobalContext.initContext(this.context);
   }
 
   private updateAvoidArea(windowClass: window.Window) {
@@ -173,7 +186,9 @@ export default class EntryAbility extends UIAbility {
   }
 
   async handleWindowStageCreateOrRestore(windowStage: window.WindowStage) {
-    AppStorage.setOrCreate('windowStage',windowStage);
+    LoneTakeAnimationsTransition.init(windowStage);
+    GlobalContext.initContextWindowStage(this.context, windowStage);
+    AppStorage.setOrCreate('windowStage', windowStage);
     // Main window is created, set main page for this ability
     Logger.info(TAG, 'Ability onWindowStageCreate');
     WindowManager.initWindowStage(windowStage);
@@ -183,22 +198,30 @@ export default class EntryAbility extends UIAbility {
     this.updateAvoidArea(windowClass);
     this.windowClassListenEvent(windowClass);
     await WindowManager.setWindowLayoutFullScreen(true)
-    windowStage.loadContent('pages/Index', (err) => {
-      if (err.code) {
-        Logger.error(TAG, `Failed to load the content. Cause: ${JSON.stringify(err) ?? ''}`);
-        return;
-      }
-      Logger.info(TAG, 'Succeeded in loading the content.');
-    });
-    windowStage.getMainWindow().then((window) => {
-      let ctx = window.getUIContext();
-      AppStorage.setOrCreate('UIContext', ctx);
-      // 通过主窗口UIContext创建typeNode节点
-      PipManager.getInstance().makeTypeNode(ctx);
-    })
+    try {
+      windowStage.loadContent('pages/Index', (err) => {
+        if (err.code) {
+          Logger.error(TAG, `Failed to load the content. Cause: ${JSON.stringify(err) ?? ''}`);
+          return;
+        }
+        Logger.info(TAG, 'Succeeded in loading the content.');
+      });
+    } catch (e) {
+      Logger.error(TAG, `loadContent failed: ${e}`);
+    }
+    try {
+      windowStage.getMainWindow().then((window) => {
+        let ctx = window.getUIContext();
+        AppStorage.setOrCreate('UIContext', ctx);
+        // 通过主窗口UIContext创建typeNode节点
+        PipManager.getInstance().makeTypeNode(ctx);
+      })
+    } catch (e) {
+      Logger.error(TAG, `getMainWindow failed: ${e}`);
+    }
     Preferences.createPreferences(this.context)
-    Preferences.writeData('showControl',false)
-    Preferences.writeData('isShowBullet',true)
+    Preferences.writeData('showControl', false)
+    Preferences.writeData('isShowBullet', true)
   }
 
   setNeedLoadContent(value: boolean) {

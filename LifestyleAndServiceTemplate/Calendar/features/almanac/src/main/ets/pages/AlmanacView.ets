@@ -42,11 +42,13 @@ export struct Almanac {
         }
       }
       .scrollBar(BarState.Off)
+      .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: true })
+      .layoutWeight(1)
     }
     .justifyContent(FlexAlign.Start)
     .height('100%')
     .backgroundColor($r('sys.color.background_secondary'))
-    .padding({ top: Number(AppStorage.get('topRectHeight')) })
+    .padding({ top: Number(AppStorage.get('topRectHeight')), bottom: this.vm.pagePaddingBottom })
     .border({ width: { left: this.vm.isTabVertical ? 1 : 0 }, color: '#ccc' })
   }
 }

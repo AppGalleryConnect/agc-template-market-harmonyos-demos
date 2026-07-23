@@ -1,14 +1,18 @@
-import { NavDestinationModifier } from '@agctemplate/widgets'
+import { ColorMode, UserInfoModel } from '@agctemplate/widgets'
 import { iap } from '@kit.IAPKit';
 import { FinishStatus, MemberList, MemberParams, MemberShipPage, ProductInfo } from 'membership';
+import { AppStorageV2 } from '@kit.ArkUI';
+import { ConfigurationConstant } from '@kit.AbilityKit';
 
 @ComponentV2
 export struct VIPCenterPage {
-  navDestinationModifier: NavDestinationModifier = new NavDestinationModifier();
+  @Local userInfo: UserInfoModel = AppStorageV2.connect(UserInfoModel, 'userInfo', () => new UserInfoModel())!
+  @Local currentColorMode: ColorMode = AppStorageV2.connect(ColorMode, 'colorMode', () => new ColorMode('跟随系统'))!
   @Local linearColors: Array<[
     ResourceColor,
     number
-  ]> = [['#FFFFFF', 0.0], ['#FCF5EB', 0.5], ['#F2D2A6', 1.0]];
+  ]> = this.currentColorMode.colorMode === ConfigurationConstant.ColorMode.COLOR_MODE_LIGHT ?
+    [['#FFFFFF', 0.0], ['#FCF5EB', 0.5], ['#F2D2A6', 1.0]] : [['#000000', 0.0], ['#3D372F', 0.5], ['#706350', 1.0]];
   navPathStack: NavPathStack = new NavPathStack();
   @Local lastPurchaseProductExpireTime: string = '';
   subscribeEvent = async (params: MemberParams): Promise<void> => {
@@ -19,6 +23,7 @@ export struct VIPCenterPage {
   };
   ownedMemberEvent = async (list: MemberList): Promise<void> => {
     if (list.renewList.length || list.nonRenewList.length) {
+      this.userInfo.isVip = true;
       this.getUIContext().getPromptAction().showToast({ message: `您已拥有会员` });
     }
   };
@@ -29,9 +34,16 @@ export struct VIPCenterPage {
     });
   };
 
+  @Monitor('currentColorMode.colorMode')
+  onModeChange(monitor: IMonitor) {
+    this.linearColors = this.currentColorMode.colorMode === ConfigurationConstant.ColorMode.COLOR_MODE_LIGHT ?
+      [['#FFFFFF', 0.0], ['#FCF5EB', 0.5], ['#F2D2A6', 1.0]] : [['#000000', 0.0], ['#3D372F', 0.5], ['#706350', 1.0]];
+  }
+
   getSubscribeMsg(param: MemberParams) {
     let message = '';
     if (param.status === FinishStatus.FINISHED) {
+      this.userInfo.isVip = true;
       message = '会员订阅成功';
     } else if (param.status === FinishStatus.UNFINISHED) {
       message = `会员订阅失败，订阅错误码为${param.errCode}，错误原因为${param.errMsg}`;
@@ -55,15 +67,6 @@ export struct VIPCenterPage {
         ownedMemberCallBack: this.ownedMemberEvent,
       })
     }
-    .backgroundImage($r('app.media.vip_bg'))
-    .backgroundImageSize({ width: '100%', height: '50%' })
-    .backgroundImagePosition(Alignment.Bottom)
-    .linearGradient({
-      direction: GradientDirection.Right, // 渐变方向
-      repeating: false, // 渐变颜色是否重复
-      colors: this.linearColors, // 数组末尾元素占比小于1时满足重复着色效果
-    })
-    .attributeModifier(this.navDestinationModifier)
     .hideTitleBar(true)
     .onReady((ctx) => {
       this.navPathStack = ctx.pathStack;

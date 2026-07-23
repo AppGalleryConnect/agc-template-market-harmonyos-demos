@@ -29,6 +29,8 @@ export class AlmanacVM {
    * 凶神宜忌
    */
   @Trace xiongShenYiJi: string[] = []
+  private cachedLunar: Lunar | null = null
+  private cachedDateKey: string = ''
 
   public static get instance() {
     if (!AlmanacVM._instance) {
@@ -37,65 +39,34 @@ export class AlmanacVM {
     return AlmanacVM._instance
   }
 
+  private getLunar(): Lunar {
+    const key = this.selectDate.toDateString()
+    if (this.cachedLunar && this.cachedDateKey === key) {
+      return this.cachedLunar
+    }
+    this.cachedLunar = Lunar.fromDate(dayjs(this.selectDate).toDate())
+    this.cachedDateKey = key
+    return this.cachedLunar
+  }
+
   @Monitor('selectDate')
   selectDateChange() {
-    this.getTodayYiJi()
-    this.getLunarDay()
-    this.getClashElementsInfo()
-    this.getFiveElementsInfo()
-    this.getPengZuBaiJi()
-    this.getJiShenYiQu()
-    this.getXiongShenYiJi()
-    this.getTodayYinLi()
-  }
-
-  public getLunarDay() {
-    const lunar = Lunar.fromDate(dayjs(this.selectDate).toDate());
-    const lunarMonth = lunar.getMonthInChinese();
-    const lunarDay = lunar.getDayInChinese()
-    const lunarDate = `${lunarMonth}月${lunarDay}`;
-    this.lunarDate = lunarDate
-  }
-
-  public getTodayYiJi() {
-    const todayLunar = Lunar.fromDate(this.selectDate);
-    // 获取今日宜和忌
-    this.yiText = todayLunar.getDayYi();
-    this.jiText = todayLunar.getDayJi();
-  }
-
-  public getClashElementsInfo() {
-    const d = Lunar.fromDate(this.selectDate);
-    this.clashElements = d.getDayChongDesc()
-  }
-
-  public getFiveElementsInfo() {
-    const d = Lunar.fromDate(this.selectDate);
-    this.fiveElement =  d.getBaZiWuXing()
-  }
-
-  public getPengZuBaiJi() {
-    const d = Lunar.fromDate(this.selectDate);
-    this.pengZuBaiJi =  d.getPengZuGan() + d.getPengZuZhi()
-  }
-
-  public getJiShenYiQu() {
-    const d = Lunar.fromDate(this.selectDate);
-    this.jiShenYiQu =  d.getDayJiShen()
-  }
-
-  public getXiongShenYiJi() {
-    const d = Lunar.fromDate(this.selectDate);
-    this.xiongShenYiJi = d.getDayXiongSha()
-  }
-
-  public getTodayYinLi() {
-    const lunar = Lunar.fromDate(this.selectDate);
-    const yearGanZhi = lunar.getYearInGanZhi(); // 获取天干地支年
-    const shengXiao = lunar.getYearShengXiao(); // 获取生肖
-    let monthGanZhi = lunar.getMonthInGanZhi(); // 获取月天干地支
-    const dayGanZhi = lunar.getDayInGanZhi();
-    this.yinLiDate =  `${yearGanZhi}${shengXiao}年 ${monthGanZhi}月 ${dayGanZhi}日`;
+    this.cachedLunar = null
+    this.cachedDateKey = ''
+    const lunar = this.getLunar()
+    this.yiText = lunar.getDayYi()
+    this.jiText = lunar.getDayJi()
+    this.lunarDate = `${lunar.getMonthInChinese()}月${lunar.getDayInChinese()}`
+    this.clashElements = lunar.getDayChongDesc()
+    this.fiveElement = lunar.getBaZiWuXing()
+    this.pengZuBaiJi = lunar.getPengZuGan() + lunar.getPengZuZhi()
+    this.jiShenYiQu = lunar.getDayJiShen()
+    this.xiongShenYiJi = lunar.getDayXiongSha()
+    const yearGanZhi = lunar.getYearInGanZhi()
+    const shengXiao = lunar.getYearShengXiao()
+    const monthGanZhi = lunar.getMonthInGanZhi()
+    const dayGanZhi = lunar.getDayInGanZhi()
+    this.yinLiDate = `${yearGanZhi}${shengXiao}年 ${monthGanZhi}月 ${dayGanZhi}日`
   }
 
   public setSelectDate(date: Date) {

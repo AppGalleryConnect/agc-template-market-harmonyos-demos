@@ -21,7 +21,7 @@ export const HOTEL_TABS_INFO: HotelTabBar[] = [
   },
   {
     index: HotelTabBarType.BOOKING,
-    title: '预定须知',
+    title: '预订须知',
   },
   {
     index: HotelTabBarType.SURROUNDING,

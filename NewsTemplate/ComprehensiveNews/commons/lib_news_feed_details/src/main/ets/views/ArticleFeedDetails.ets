@@ -14,6 +14,7 @@ import {
   CommonConstants,
   loadingPage,
   EventEnum,
+  Logger,
 } from 'lib_common';
 import { CommentResponse, NewsResponse } from 'lib_news_api';
 import { BaseAgent, NavHeaderBar, Share } from 'lib_widget';
@@ -71,6 +72,11 @@ export struct ArticleFeedDetails {
 
   aboutToDisappear(): void {
     this.newsFeedVM.offGestureShare()
+    try {
+      this.webViewController.deleteJavaScriptRegister('native') ;
+    } catch (e) {
+      Logger.error('[ArticleFeedDetails]', 'deleteJavaScriptRegister fail, error: ' + JSON.stringify(e));
+    }
   }
 
   readBody() {

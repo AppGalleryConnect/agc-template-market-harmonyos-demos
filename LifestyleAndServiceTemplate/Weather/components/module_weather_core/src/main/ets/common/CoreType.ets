@@ -65,7 +65,7 @@ export interface RealTimeWeather {
   /**
    * 风速
    */
-  winSpeed: number;
+  windSpeed: number;
 
   /**
    * 空气质量
@@ -191,4 +191,14 @@ export interface IndicesWeather {
    * 显示图标
    */
   icon: string;
+}
+
+/**
+ * 卡片碰撞区域（单位：px）
+ */
+export interface CardRect {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
 }

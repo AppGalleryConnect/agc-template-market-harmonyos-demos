@@ -1,0 +1,109 @@
+{
+  "app": {
+    "signingConfigs": [
+      // todo: 请配置您的手动签名信息
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "storeFile": "product/phone/src/test/hw_sign/template.p12",
+          "storePassword": "",
+          "keyAlias": "",
+          "keyPassword": "",
+          "signAlg": "SHA256withECDSA",
+          "profile": "product/phone/src/test/hw_sign/ImageProcessingReleaseRelease.p7b",
+          "certpath": "product/phone/src/test/hw_sign/template.cer"
+        }
+      }
+    ],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "compatibleSdkVersion": "5.1.0(18)",
+        "targetSdkVersion": "6.1.1(24)",
+        "runtimeOS": "HarmonyOS",
+        "buildOption": {
+          "strictMode": {
+            "caseSensitiveCheck": true,
+            "useNormalizedOHMUrl": true
+          }
+        }
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug"
+      },
+      {
+        "name": "release"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "phone",
+      "srcPath": "./product/phone",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "commonlib",
+      "srcPath": "./commons/commonlib"
+    },
+    {
+      "name": "mine",
+      "srcPath": "./feature/mine"
+    },
+    {
+      "name": "home",
+      "srcPath": "./feature/home"
+    },
+    {
+      "name": "membership",
+      "srcPath": "./components/membership"
+    },
+    {
+      "name": "camera",
+      "srcPath": "./feature/camera"
+    },
+    {
+      "name": "photo_editing",
+      "srcPath": "./feature/photo_editing"
+    },
+    {
+      "name": "aggregated_login",
+      "srcPath": "./components/aggregated_login"
+    },
+    {
+      "name": "aggregated_share",
+      "srcPath": "./components/aggregated_share",
+    },
+    {
+      "name": "module_advertisement",
+      "srcPath": "./components/module_advertisement"
+    },
+    {
+      "name": "app_setting",
+      "srcPath": "./components/app_setting",
+    },
+    {
+      "name": "collect_personal_info",
+      "srcPath": "./components/collect_personal_info",
+    },
+    {
+      "name": "feedback",
+      "srcPath": "./components/feedback"
+    },
+    {
+      "name": "image_preview",
+      "srcPath": "./components/image_preview"
+    }
+  ]
+}

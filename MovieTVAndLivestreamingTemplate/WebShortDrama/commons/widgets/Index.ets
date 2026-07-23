@@ -33,3 +33,21 @@ export { PushUtils } from './src/main/ets/push/PushUtils';
 export { PushActionParams } from './src/main/ets/push/Model';
 
 export { RouterToNews } from './src/main/ets/push/NewsPushUtils';
+
+export { MinorsMode } from './src/main/ets/models/MinorsModel'
+
+export { MinorsProtectionUtils } from './src/main/ets/push/minorsProtectionUtils'
+
+export { AppLinkingRouter } from './src/main/ets/models/AppLinkingModel'
+
+export { ColorMode } from './src/main/ets/data_source/ColorMode'
+
+export { SettingFontViewModel } from './src/main/ets/models/SettingFontVM'
+
+export { fp2pxUtil } from './src/main/ets/util/FontUtils'
+
+export { FontModel } from './src/main/ets/models/FontModel'
+
+export { CommentData, Reply, LikeItem } from './src/main/ets/models/MessageData'
+
+export { commentInputDialogBuilder } from './src/main/ets/models/CommentInputDialog'

@@ -3,7 +3,8 @@
     "name": "module_login",
     "type": "har",
     "deviceTypes": [
-      "phone"
+      "phone",
+      "tablet"
     ],
     "requestPermissions": [{
       "name": "ohos.permission.GET_NETWORK_INFO"

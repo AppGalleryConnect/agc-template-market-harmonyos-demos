@@ -1,0 +1,24 @@
+{
+  "routerMap": [
+    {
+      "name": "PersonalHomePage",
+      "pageSourceFile": "src/main/ets/pages/PersonalHomePage.ets",
+      "buildFunction": "PersonalHomePageBuilder"
+    },
+    {
+      "name": "FollowerPage",
+      "pageSourceFile": "src/main/ets/pages/FollowerPage.ets",
+      "buildFunction": "FollowerPageBuilder"
+    },
+    {
+      "name": "WatchPage",
+      "pageSourceFile": "src/main/ets/pages/WatchPage.ets",
+      "buildFunction": "WatchPageBuilder"
+    },
+    {
+      "name": "SubscribePage",
+      "pageSourceFile": "src/main/ets/pages/SubscribePage.ets",
+      "buildFunction": "SubscribePageBuilder"
+    }
+  ]
+}

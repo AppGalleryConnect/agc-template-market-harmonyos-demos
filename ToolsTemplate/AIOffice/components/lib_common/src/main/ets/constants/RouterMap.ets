@@ -15,6 +15,7 @@ export enum RouterMap {
   HUAWEI_LOGIN_PAGE = 'HuaweiLoginPage',
   OTHER_LOGIN_PAGE = 'OtherLoginPage',
   PROTOCOL_WEBVIEW = 'ProtocolWebView',
+  AGGREGATED_LOGIN_PAGE = 'AggregatedLoginPage',
 
   // 我的模块
   MINE_MSG_SYSTEM = 'MessageSystemPage',
@@ -28,4 +29,5 @@ export enum RouterMap {
   PROFILE_HOME = 'PersonalHomePage',
   // 意见反馈模块
   FEEDBACK_PAGE = 'FeedbackPage',
+  FEEDBACK_HISTORY_PAGE = 'FeedbackHistoryPage'
 }

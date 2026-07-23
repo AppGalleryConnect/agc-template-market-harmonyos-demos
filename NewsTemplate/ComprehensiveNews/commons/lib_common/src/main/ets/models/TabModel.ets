@@ -19,14 +19,5 @@ export class TabModel {
   @Trace tabHeight: Length = '';
   // 视频tab页的头部tab
   @Trace videoCurrentTabIndex: number = VideoType.CHOICE;
-
-  // 是否纵向Tab
-  @Computed
-  get isTabVertical() {
-    return [
-      BreakpointNameEnum.LG,
-      BreakpointNameEnum.XL,
-    ].includes(this.breakPointModel.currentBreakpoint);
-  }
 }
 

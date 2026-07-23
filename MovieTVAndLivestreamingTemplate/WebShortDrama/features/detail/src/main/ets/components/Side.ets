@@ -2,7 +2,7 @@ import { AppStorageV2, ComponentContent, display, window } from '@kit.ArkUI';
 import { ShortDramaDetailItemVM } from '../viewmodels/ShortDramaDetailItemVM';
 import { PlayController } from 'video_swiper';
 import { getMedia, NAV_PAGE_NAME } from '@agctemplate/resources';
-import { UserInfoModel } from '@agctemplate/widgets';
+import { FontModel, UserInfoModel } from '@agctemplate/widgets';
 import { commentBuilder, CommentParam } from './CommentComp';
 import { QQShareData, SharePicker } from 'aggregated_share';
 import { appRouter, Logger, WindowManager } from '@agctemplate/utils';
@@ -25,6 +25,7 @@ export struct Side {
   @Local myMessageStorage: MyMessageStorage = MyMessageStorage.instance()
   @Local isShowShareSheet: boolean = false
   @Local commentShow: boolean = false
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
   @Local isExpanded: boolean = display.getFoldStatus() === display.FoldStatus.FOLD_STATUS_EXPANDED
   @Local isTabletLandScape: boolean = deviceInfo.deviceType === 'tablet' &&
     (display.getDefaultDisplaySync().orientation === display.Orientation.LANDSCAPE ||
@@ -60,23 +61,11 @@ export struct Side {
   windowStage: window.WindowStage = AppStorage.get('windowStage') as window.WindowStage;
   // 获取主窗口的方式
   mainWin: window.Window = this.windowStage.getMainWindowSync();
-  private commentNode: ComponentContent<CommentParam> = new ComponentContent(
-    this.getUIContext(),
-    wrapBuilder<[CommentParam]>(commentBuilder),
-    {
-      dramaInfo: this.videoDes.dramaInfo,
-      commentNum: (comments: number) => {
-        this.videoDes.commentCount = comments.toString()
-      },
-      closeSheet: () => {
-        this.commentShow = false
-        this.closeCommentDialog()
-      }
-    } as CommentParam
-  )
+  private commentNode: ComponentContent<CommentParam> | undefined = undefined
 
   openCommentDialog() {
     this.getUIContext().getPromptAction().openCustomDialog(this.commentNode, {
+      enableHoverMode: true,
       onWillDismiss: (dismissDialogAction: DismissDialogAction) => {
         Logger.info(TAG, 'reason' + JSON.stringify(dismissDialogAction.reason))
         if (dismissDialogAction.reason === DismissReason.PRESS_BACK) {
@@ -101,7 +90,9 @@ export struct Side {
   }
 
   closeCommentDialog() {
-    this.getUIContext().getPromptAction().closeCustomDialog(this.commentNode)
+    if (this.commentNode) {
+      this.getUIContext().getPromptAction().closeCustomDialog(this.commentNode)
+    }
   }
 
   // 点击点赞按钮的回调函数
@@ -151,8 +142,11 @@ export struct Side {
   }
 
   aboutToAppear(): void {
-    display.on('foldStatusChange',this.callback2)
-    display.on('change', this.callback)
+    try {
+      display.on('foldStatusChange', this.callback2)
+      display.on('change', this.callback)
+    } catch (e) {
+    }
     if (this.myMessageStorage.showFlag) {
       return
     } else {
@@ -166,9 +160,9 @@ export struct Side {
 
   aboutToDisappear(): void {
     try {
-      display.off('foldStatusChange',this.callback2)
+      display.off('foldStatusChange', this.callback2)
       display.off('change', this.callback)
-    }catch (error){
+    } catch (error) {
       console.error('failed.')
     }
   }
@@ -182,7 +176,10 @@ export struct Side {
         id: 7
       }
     };
-    emitter.emit(event, eventData);
+    try {
+      emitter.emit(event, eventData);
+    } catch (e) {
+    }
   }
 
   build() {
@@ -193,32 +190,35 @@ export struct Side {
           .width(22)
           .height(20)
           .margin({ top: 2 })
-          .onClick(() => {
-            if (this.userInfo.isPhoneAssociated) {
-              this.changeLikeCount(!this.videoDes.dramaSocialInfo.isLike ? true : false)
-              this.sideSendFavoriteEmitter()
-            } else {
-              WindowManager.setWindowSystemBarProperties({ statusBarContentColor: '#e6000000' })
-              this.playControl.pause()
-              appRouter.push({ builderName: NAV_PAGE_NAME.LoginPage.name, params: { isChange: true } })
-            }
-          })
+          .accessibilityText(this.videoDes.dramaSocialInfo.isLike ? '取消点赞' : '点赞')
         Text(`${this.videoDes.dramaSocialInfo.likeCount}`)
-          .fontSize(10)
+          .fontSize(this.fontModel.getFg(10))
           .fontColor('#fff')
           .margin({ top: 4 })
+          .accessibilityText(`有${this.videoDes.dramaSocialInfo.likeCount}个点赞`)
       }
+      .onClick(() => {
+        if (this.userInfo.isPhoneAssociated) {
+          this.changeLikeCount(!this.videoDes.dramaSocialInfo.isLike)
+          this.sideSendFavoriteEmitter()
+        } else {
+          this.playControl.pause()
+          appRouter.push({ builderName: NAV_PAGE_NAME.LoginPage.name, params: { isChange: true } })
+        }
+      })
       .width(40)
       .height(40)
       .id('fabulousButton')
 
       Column() {
         Image(getMedia('app.media.comment_white'))
+          .accessibilityText('评论')
           .width(22)
           .height(20)
           .margin({ top: 2 })
         Text(this.videoDes.commentCount)
-          .fontSize(10)
+          .accessibilityText(`有${this.videoDes.commentCount}条评论`)
+          .fontSize(this.fontModel.getFg(10))
           .fontColor('#fff')
           .margin({ top: 4 })
       }
@@ -226,11 +226,25 @@ export struct Side {
       .height(40)
       .id('comment_button')
       .onClick(() => {
+        this.commentNode = new ComponentContent(
+          this.getUIContext(),
+          wrapBuilder<[CommentParam]>(commentBuilder),
+          {
+            dramaInfo: this.videoDes.dramaInfo,
+            commentNum: (comments: number) => {
+              this.videoDes.commentCount = comments.toString()
+            },
+            closeSheet: () => {
+              this.commentShow = false
+              this.closeCommentDialog()
+            }
+          } as CommentParam
+        )
         if (this.isTabletLandScape) {
           this.playControl.setPlayerPositionX('-15%')
-        } else if(this.isExpanded){
+        } else if (this.isExpanded) {
           this.playControl.setPlayerWidth('50%')
-        }else {
+        } else {
           this.playControl.setPlayerHeight('40%')
         }
         this.commentShow = true
@@ -243,21 +257,21 @@ export struct Side {
           .width(22)
           .height(20)
           .margin({ top: 2 })
-          .onClick(() => {
-            if (this.userInfo.isPhoneAssociated) {
-              this.changeFavoriteCount(!this.videoDes.dramaSocialInfo.isFavorite ? true : false);
-              // this.sideSendFavoriteEmitter()
-            } else {
-              WindowManager.setWindowSystemBarProperties({ statusBarContentColor: '#e6000000' })
-              this.playControl.pause()
-              appRouter.push({ builderName: NAV_PAGE_NAME.LoginPage.name, params: { isChange: true } })
-            }
-          })
+          .accessibilityText(this.videoDes.dramaSocialInfo.isFavorite ? '取消收藏' : '收藏')
         Text(`${this.videoDes.dramaSocialInfo.favoriteCount}`)
-          .fontSize(10)
+          .accessibilityText(`有${this.videoDes.dramaSocialInfo.favoriteCount}人收藏`)
+          .fontSize(this.fontModel.getFg(10))
           .fontColor('#fff')
           .margin({ top: 4 })
       }
+      .onClick(() => {
+        if (this.userInfo.isPhoneAssociated) {
+          this.changeFavoriteCount(!this.videoDes.dramaSocialInfo.isFavorite ? true : false);
+        } else {
+          this.playControl.pause()
+          appRouter.push({ builderName: NAV_PAGE_NAME.LoginPage.name, params: { isChange: true } })
+        }
+      })
       .width(40)
       .height(40)
       .id('favoriteButton')
@@ -276,16 +290,19 @@ export struct Side {
         .width(21)
         .height(21)
       Text('分享')
-        .fontSize(10)
+        .fontSize(this.fontModel.getFg(10))
         .fontColor($r('sys.color.font_on_primary'))
     }
+    .accessibilityGroup(true)
+    .accessibilityText('分享')
     .onClick(() => {
       const picker: SharePicker = new SharePicker({
         title: this.videoDes.dramaInfo.name,
         subTitle: '微短剧应用模板',
         coverUrl: this.videoDes.dramaInfo.coverUrl,
         createTime: new Date('2025/09-15 08:00:00').getTime(),
-        thumbUrl: this.videoDes.dramaInfo.coverUrl
+        thumbUrl: this.videoDes.dramaInfo.coverUrl,
+        landingPageUrl: `https://linking.xiaobingtang.cn/DramaDetail?id=${this.videoDes.dramaInfo.id}&index=${this.playControl.curentIndex}`
       });
 
       picker.setSignQQShareDataCB((shareJson: string) => {

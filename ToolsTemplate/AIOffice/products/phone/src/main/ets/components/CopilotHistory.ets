@@ -1,6 +1,7 @@
 import { StoreInfo, StoreManager } from '@hw-agconnect/copilot';
 import dayJs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
+import { TipsDialog } from '@kit.ArkUI';
 
 dayJs.extend(utc)
 
@@ -11,8 +12,24 @@ export struct CopilotHistory {
   @Event onClickEvent?: (threadId: string) => void;
   @Local infos: StoreInfo[] = []
   @Local deleteThreadIds: string[] = [];
-  @Local isAllChecked: boolean = false;
-  @Local isAllCheckClicked: boolean = false;
+  @Local isAllChecked: boolean = false; // 是否处于全选
+  @Local isAllCheckClicked: boolean = false; // 是否点击全选按钮
+  deleteController: CustomDialogController = new CustomDialogController({
+    builder: TipsDialog({
+      content: '确定删除历史记录吗？',
+      primaryButton: {
+        value: '取消',
+        action: () => {
+        },
+      },
+      secondaryButton: {
+        value: '确定',
+        action: () => {
+          this.onDeleteConfirm()
+        }
+      }
+    })
+  })
 
   @Monitor('storeId')
   onStoreIdChanged(): void {
@@ -27,6 +44,18 @@ export struct CopilotHistory {
     })
   }
 
+  onDeleteConfirm() {
+    if (this.deleteThreadIds.length) {
+      this.infos = this.infos.filter((storeInfo: StoreInfo) => {
+        if (this.deleteThreadIds.includes(storeInfo.threadId)) {
+          StoreManager.getStore(this.storeId).deleteMessages(storeInfo.threadId)
+        }
+        return !this.deleteThreadIds.includes(storeInfo.threadId)
+      })
+      this.deleteThreadIds = []
+    }
+  }
+
   build() {
     Column() {
       if (this.infos.length) {
@@ -38,7 +67,7 @@ export struct CopilotHistory {
             .onClick(() => {
               this.onClickEvent?.(item.threadId)
             })
-          },(item: StoreInfo, index: number): string => item.threadId)
+          }, (item: StoreInfo, index: number): string => item.threadId)
         }
         .padding({ top: 8 })
         .layoutWeight(1)
@@ -57,8 +86,8 @@ export struct CopilotHistory {
           }
           .width('50%')
           .onClick(() => {
-            this.isAllChecked = !this.isAllChecked
-            this.isAllCheckClicked = this.isAllChecked
+            this.isAllCheckClicked = !this.isAllCheckClicked;
+            this.isAllChecked = this.isAllCheckClicked
           })
 
           Column({ space: 4 }) {
@@ -75,14 +104,7 @@ export struct CopilotHistory {
           .opacity(this.deleteThreadIds.length ? 1 : 0.4)
           .enabled(this.deleteThreadIds.length > 0)
           .onClick(() => {
-            if (this.deleteThreadIds.length) {
-              this.infos = this.infos.filter((storeInfo: StoreInfo) => {
-                if (this.deleteThreadIds.includes(storeInfo.threadId)) {
-                  StoreManager.getStore(this.storeId).deleteMessages(storeInfo.threadId)
-                }
-                return !this.deleteThreadIds.includes(storeInfo.threadId)
-              })
-            }
+            this.deleteController.open()
           })
         }
         .width('100%')
@@ -97,9 +119,8 @@ export struct CopilotHistory {
     .justifyContent(FlexAlign.Start)
   }
 
-
   @Builder
-  historyItemBuilder(item: StoreInfo){
+  historyItemBuilder(item: StoreInfo) {
     Column() {
       Text(this.getFormatTime(item.createTime, 'YYYY-MM-DD'))
         .fontColor($r('sys.color.font_secondary'))
@@ -119,11 +140,11 @@ export struct CopilotHistory {
               this.deleteThreadIds.push(item.threadId)
             } else {
               this.deleteThreadIds.splice(this.deleteThreadIds.indexOf(item.threadId), 1)
+              this.isAllChecked = false
             }
             if (this.deleteThreadIds.length === this.infos.length) {
               this.isAllChecked = true
-            } else {
-              this.isAllChecked = false
+              this.isAllCheckClicked = this.isAllChecked
             }
           })
 

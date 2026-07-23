@@ -30,7 +30,11 @@ export class PersonalWindowModel {
   public registerWindowBottomPadding() {
     this.getWindowBottomPadding();
     window.getLastWindow(ContextUtils.globalContext).then(currentWindow => {
-      currentWindow.on('avoidAreaChange', this.getWindowBottomPadding);
+      try {
+        currentWindow.on('avoidAreaChange', this.getWindowBottomPadding);
+      } catch (e) {
+        UtilLog.error(TAG, `Failed to on current window. Code is ${e.code}, message is ${e.message}`);
+      }
     }).catch((e: BusinessError) => {
       UtilLog.error(TAG, 'getLastWindow fail, error: ' + JSON.stringify(e));
     });
@@ -41,7 +45,11 @@ export class PersonalWindowModel {
    */
   public unRegisterWindowBottomPadding() {
     window.getLastWindow(ContextUtils.globalContext).then(currentWindow => {
-      currentWindow.off('avoidAreaChange', this.getWindowBottomPadding);
+      try {
+        currentWindow.off('avoidAreaChange', this.getWindowBottomPadding);
+      } catch (e) {
+        UtilLog.error(TAG, `Failed to off current window. Code is ${e.code}, message is ${e.message}`);
+      }
     }).catch((e: BusinessError) => {
       UtilLog.error(TAG, 'getLastWindow fail, error: ' + JSON.stringify(e));
     });
@@ -69,7 +77,11 @@ export class PersonalWindowModel {
    */
   public unRegisterKeyboardListener(callback: Callback<number>) {
     window.getLastWindow(ContextUtils.globalContext).then(currentWindow => {
-      currentWindow.off('keyboardHeightChange', callback);
+      try {
+        currentWindow.off('keyboardHeightChange', callback);
+      } catch (e) {
+        UtilLog.error(TAG, 'off currentWindow fail, error: ' + JSON.stringify(e));
+      }
     }).catch((e: BusinessError) => {
       UtilLog.error(TAG, 'getLastWindow fail, error: ' + JSON.stringify(e));
     });

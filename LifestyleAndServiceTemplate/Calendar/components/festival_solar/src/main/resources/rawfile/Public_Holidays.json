@@ -4,36 +4,36 @@
     "name": "元旦",
     "holiday": "1月1日",
     "totalRest": 1,
-    "weekDay": "周三"
+    "weekDay": "周四"
   },
   {
-    "day": "01月29日",
+    "day": "02月17日",
     "name": "春节",
-    "holiday": "1月28日-2月4日",
-    "totalRest": 8,
-    "weekDay": "周三",
-    "adjustWorkDays": "1月26日(星期日)、2月8日(星期六)上班"
+    "holiday": "2月15日-2月21日",
+    "totalRest": 7,
+    "weekDay": "周二",
+    "adjustWorkDays": "2月8日(星期日)、2月22日(星期日)上班"
   },
   {
-    "day": "04月04日",
+    "day": "04月05日",
     "name": "清明节",
     "holiday": "4月4日-4月6日",
     "totalRest": 3,
-    "weekDay": "周五",
-    "adjustWorkDays": "9月28日(星期日)、10月11日(星期六)上班"
+    "weekDay": "周日",
+    "adjustWorkDays": "3月29日(星期日)上班"
   },
   {
     "day": "05月01日",
     "name": "劳动节",
     "holiday": "5月1日-5月5日",
     "totalRest": 5,
-    "weekDay": "周四",
-    "adjustWorkDays": "4月27日(星期日)上班"
+    "weekDay": "周五",
+    "adjustWorkDays": "4月26日(星期日)上班"
   },
   {
-    "day": "05月31日",
+    "day": "06月19日",
     "name": "端午节",
-    "holiday": "5月31日-6月2日",
+    "holiday": "6月19日-6月21日",
     "totalRest": 3,
     "weekDay": "周五"
   },
@@ -43,6 +43,6 @@
     "holiday": "10月1日-10月8日",
     "totalRest": 8,
     "weekDay": "周四",
-    "adjustWorkDays": "9月28日(星期日)、10月11日(星期六)上班"
+    "adjustWorkDays": "9月28日(星期一)、10月11日(星期日)上班"
   }
 ]

@@ -1,6 +1,6 @@
 import { RouterUtils } from 'lib_common';
-import { NavHeaderBar } from 'lib_widget';
 import { CopilotHistory } from '../../components/CopilotHistory';
+import { NavHeaderBar } from '../../widget/NavHeaderBar';
 
 @Builder
 export function ChatHistoryPageBuilder() {

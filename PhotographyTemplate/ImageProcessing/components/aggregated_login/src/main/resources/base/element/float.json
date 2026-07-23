@@ -1,0 +1,16 @@
+{
+  "float": [
+    {
+      "name": "radius_20",
+      "value": "20vp"
+    },
+    {
+      "name": "fontsize_12",
+      "value": "12vp"
+    },
+    {
+      "name": "fontsize_10",
+      "value": "10vp"
+    }
+  ]
+}

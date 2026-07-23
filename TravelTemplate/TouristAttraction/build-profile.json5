@@ -5,8 +5,8 @@
       {
         "name": "default",
         "signingConfig": "default",
-        "targetSdkVersion": "6.0.2(22)",
-        "compatibleSdkVersion": "5.0.5(17)",
+        "targetSdkVersion": "6.1.1(24)",
+        "compatibleSdkVersion": "6.1.0(23)",
         "runtimeOS": "HarmonyOS",
         "buildOption": {
           "strictMode": {
@@ -181,6 +181,10 @@
     {
       "name": "atomicservice_login",
       "srcPath": "./components/atomicservice_login"
+    },
+    {
+      "name": "image_preview",
+      "srcPath": "./components/image_preview"
     }
   ]
 }

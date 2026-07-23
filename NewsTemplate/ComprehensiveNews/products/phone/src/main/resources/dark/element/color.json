@@ -1,0 +1,12 @@
+{
+  "color": [
+    {
+      "name": "start_window_background",
+      "value": "#000000"
+    },
+    {
+      "name": "widget_title_bg",
+      "value": "#1AFFFFFF"
+    }
+  ]
+}

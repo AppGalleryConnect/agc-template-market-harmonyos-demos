@@ -7,9 +7,9 @@ export interface BaseResponse<T = ESObject> {
 }
 
 export interface GetUserInfoResp {
-  avatar: string;
-
   nickname: string;
+
+  avatar: string;
 
   phone: string;
 }

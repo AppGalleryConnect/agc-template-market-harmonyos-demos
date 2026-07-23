@@ -42,7 +42,7 @@ export class SearchFoodPageVM {
 
   init() {
     let params = RouterModule.getNavParam<Record<string, object>>(RouterMap.SEARCH_FOOD_PAGE)
-    this.selectFoods = params?.selectFoods as FoodCalories[]
+    this.selectFoods = (params?.selectFoods as FoodCalories[] | undefined) ?? []
     this.selectIndex = Number(params?.id || 0)
     this.selectText = this.menuList[this.selectIndex].value
   }
@@ -107,8 +107,8 @@ export class SearchFoodPageVM {
     data.push(playData)
     addDietPlans(this.selectIndex, this.selectText.toString(), data).then(res => {
       if (res.status === 200) {
-        RouterModule.pop('success')
         this.isShowArray[index] = false
+        RouterModule.push(RouterMap.CALORIES_PAGE)
       } else {
         promptAction.showToast({ message: '添加失败~' })
       }

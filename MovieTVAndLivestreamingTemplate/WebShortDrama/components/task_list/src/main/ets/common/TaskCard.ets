@@ -1,5 +1,6 @@
-import { promptAction } from '@kit.ArkUI'
+import { AppStorageV2, promptAction } from '@kit.ArkUI'
 import StrConstants from '../constants/StrConstants'
+import { FontModel } from '../model/FontModel'
 
 @ComponentV2
 export struct TaskCard {
@@ -12,8 +13,10 @@ export struct TaskCard {
   @Param dailyPointLimit: string = '每天最多+500看点'
   @Local isClaim: boolean = false
   @Consumer('balance') balance: number = 0
-  @Param button: () => void = () => {}
-  @Param addAward: () => void = () => {}
+  @Param button: () => boolean = () => true
+  @Param addAward: () => void = () => {
+  }
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
 
   build() {
     Row() {
@@ -25,9 +28,12 @@ export struct TaskCard {
         Column() {
           Row() {
             Text(this.title)
-              .fontSize(14)
+              .width(130)
+              .fontSize(this.fontModel.getFg(14))
               .fontWeight(FontWeight.Medium)
               .fontColor($r('sys.color.font_primary'))
+              .maxLines(2)
+              .textOverflow({ overflow: TextOverflow.Ellipsis })
 
             Image($r(this.coinIcon))
               .width(46)
@@ -36,25 +42,29 @@ export struct TaskCard {
           }
 
           Text(this.dailyPointLimit)
+            .width(180)
             .fontWeight(FontWeight.Regular)
-            .fontSize(12)
+            .fontSize(this.fontModel.getFg(12))
             .fontColor($r('sys.color.font_tertiary'))
             .margin({ top: 2 })
+            .maxLines(1)
+            .textOverflow({ overflow: TextOverflow.Ellipsis })
 
         }
         .alignItems(HorizontalAlign.Start)
         .margin({ left: 12 })
       }
 
-      Button(this.isWatchShows ? $r('app.string.watch_drama') : (this.isClaim ? $r('app.string.completed') : $r('app.string.receive')))
+      Button(this.isWatchShows ? $r('app.string.watch_drama') :
+        (this.isClaim ? $r('app.string.completed') : $r('app.string.receive')))
         .fontWeight(FontWeight.Medium)
         .fontColor(this.isWatchShows ? '#EC6E45' :
-          (this.isClaim ? $r('sys.color.font_tertiary') : $r('sys.color.font_on_primary')))
+          (this.isClaim ? $r('sys.color.font_secondary') : $r('sys.color.font_on_primary')))
         .enabled(!this.isClaim)
         .width(72)
         .height(28)
         .backgroundColor(this.isWatchShows ? 'rgba(236,110,69,0.1)' :
-          (this.isClaim ? $r('sys.color.comp_background_tertiary') : '#EC6E45'))
+          (this.isClaim ? $r('sys.color.comp_background_secondary') : '#EC6E45'))
         .onClick(() => {
           this.buttonFun()
         })
@@ -64,25 +74,30 @@ export struct TaskCard {
     .margin({ top: this.topMargin, bottom: this.bottomMargin })
   }
 
-
   async buttonFun() {
     let WARN_TEXT = '未识别的标题:'
     switch (this.title) {
       case StrConstants.WATCH_REWARD:
-        this.getUIContext().getPromptAction().showToast({ message: StrConstants.WATCH_REWARD })
-        this.button()
+        if (this.button()) {
+          this.getUIContext().getPromptAction().showToast({ message: StrConstants.WATCH_REWARD })
+        }
         break
       default:
-        this.getUIContext().getPromptAction().showToast({ message: this.title })
-        this.updateBalanceAndClaim()
+        if (this.updateBalanceAndClaim()) {
+          this.getUIContext().getPromptAction().showToast({ message: this.title })
+        }
         break
     }
   }
 
-  updateBalanceAndClaim() {
-    this.balance = 100
-    this.isClaim = true
-    this.button()
-    this.addAward()
+  updateBalanceAndClaim(): boolean {
+    if (this.button()) {
+      this.balance = 100
+      this.isClaim = true
+      this.addAward()
+      return true
+    } else {
+      return false
+    }
   }
 }

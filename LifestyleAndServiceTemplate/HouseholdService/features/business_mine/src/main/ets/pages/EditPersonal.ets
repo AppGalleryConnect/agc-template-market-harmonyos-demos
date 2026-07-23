@@ -27,7 +27,8 @@ import {
   sendCode,
   updateUserInfo,
   UserInfo,
-  verifyCode
+  verifyCode,
+  WindowUtils
 } from 'lib_foundation';
 import { ApiHandler, DataType, PersonalInfo, PersonalInfoView } from 'collect_personal_info';
 
@@ -133,6 +134,10 @@ export struct EditPersonal {
     }
     .title('编辑资料', {
       paddingStart: { value: GridRowColSetting.getPageMargin(this.breakpoint), unit: 1 }
+    })
+    .padding({
+      top: WindowUtils.windowTopPadding,
+      bottom: WindowUtils.windowBottomPadding,
     })
     .backgroundColor($r('sys.color.background_secondary'))
   }

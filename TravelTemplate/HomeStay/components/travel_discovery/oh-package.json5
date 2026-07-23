@@ -6,8 +6,11 @@
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
-    '@ohos/axios': 'latest',
-    '@ohos/pulltorefresh': '2.1.0',
-    "@hw-agconnect/util-log": "^1.0.0"
+    "@ohos/axios": 'latest',
+    "@ohos/pulltorefresh": "2.1.0",
+    "@hw-agconnect/util-log": "^1.0.0",
+    "component": "file:../../common/component",
+    "aggregated_share": "file:../aggregated_share",
+    "search": "file:../search"
   }
 }

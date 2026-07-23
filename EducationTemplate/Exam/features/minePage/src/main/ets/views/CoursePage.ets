@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 
+import { UIDialog } from '@hw-agconnect/ui-dialog';
 import { AppStorageV2, } from '@kit.ArkUI';
 import {
   SampleOrderInfo, OrderInfo, Logger, TopBar, BreakpointType, RouterMap, RouterModule
@@ -39,13 +40,10 @@ export struct CoursePage {
     Column() {
       // 顶部
       this.topBuilder();
-      Divider().color($r('sys.color.comp_divider'));
       Column() {
         if (this.propOrderInfo.orderInfos.length > 0) {
           // 我的课程列表
           this.orderInfosBuilder();
-          // 删除按钮
-          this.deleteButtonBuilder();
         } else {
           Text('当前暂无课程。')
             .fontColor($r('sys.color.icon_secondary'))
@@ -64,42 +62,38 @@ export struct CoursePage {
     .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM]);
   }
 
-  /**
-   * 删除按钮
-   */
-  @Builder
-  deleteButtonBuilder() {
-    if (this.isSelectDelete) {
-      Row() {
-        Image($r('app.media.icon_delete'))
-          .height($r('app.float.vp_24'))
-          .width($r('app.float.vp_24'));
-        Text('删除')
-          .fontColor($r('sys.color.font_on_primary'))
-          .fontSize($r('sys.float.Body_L'))
-          .fontWeight(FontWeight.Medium)
-          .margin({ left: $r('app.float.vp_8') });
-      }
-      .width($r('app.float.vp_312'))
-      .height(40)
-      .justifyContent(FlexAlign.Center)
-      .borderRadius(20)
-      .backgroundColor('#4c5dc4')
-      .opacity(this.selectCount > 0 ? 1 : 0.4)
-      .margin({ top: $r('app.float.vp_8'), bottom: $r('app.float.vp_8') })
-      .onClick(() => {
-        if (this.selectCount > 0) {
-          // 删除选中
-          this.deleteSelectData();
-        }
-      });
-    }
+  confirmDialog(confirmCallback: () => void) {
+    UIDialog.open({
+      title: `是否删除${this.selectCount || 1}条记录？`,
+      contentOptions: {
+        content: '将在同账号其他设备的数据中同步删除',
+        contentFontSize: 14,
+        contentFontWeight: 400,
+        contentFontColor: 'rgba(0, 0, 0, 0.9)'
+      },
+      confirmButtonOptions: {
+        button: '删除',
+        buttonFontColor: 'rgba(232, 64, 38, 1)',
+      },
+      cancelButtonOptions: {
+        button: '取消',
+        buttonFontColor: 'rgba(0, 0, 0, 0.9)',
+      },
+      showConfirmButton: true,
+      showCancelButton: true,
+      onConfirm: confirmCallback
+    })
   }
 
   // 移除所选中的
   deleteSelectData() {
     this.isSelectDelete = false;
     this.propOrderInfo.orderInfos = this.propOrderInfo.orderInfos.filter((it: OrderInfo) => it.isDelete === false);
+  }
+
+  deleteSingleData(index: number) {
+    this.propOrderInfo.orderInfos.splice(index, 1);
+    this.swiperDel = this.propOrderInfo.orderInfos.length === 0 ? true : false;
   }
 
   // 是否全选
@@ -268,8 +262,10 @@ export struct CoursePage {
         .height($r('app.float.vp_40'))
         .margin({ left: $r('app.float.vp_12') })
         .onClick(() => {
-          this.propOrderInfo.orderInfos.splice(index, 1);
-          this.swiperDel = this.propOrderInfo.orderInfos.length === 0 ? true : false;
+          this.selectCount = 1;
+          this.confirmDialog(() => {
+            this.deleteSingleData(index)
+          })
         });
     }.padding($r('app.float.vp_4')).justifyContent(FlexAlign.SpaceEvenly);
   }
@@ -287,36 +283,53 @@ export struct CoursePage {
         title: '我的课程'
       });
       Row() {
-        Image(this.isSelectAll ? $r('app.media.icon_select_all') : $r('app.media.icon_select_all_off'))
-          .width($r('app.float.vp_40'))
-          .height($r('app.float.vp_40'))
-          .onClick(() => {
-            this.isSelectAllClick();
-          })
-          .visibility(this.isSelectDelete ? Visibility.Visible : Visibility.Hidden);
         Image($r('app.media.ic_public_trash'))
           .width($r('app.float.vp_40'))
           .height($r('app.float.vp_40'))
-          .opacity(this.propOrderInfo.orderInfos.length === 0 || this.swiperDel ? 0.4 : 1)
-          .margin({ left: $r('app.float.vp_8') });
+          .opacity(this.propOrderInfo.orderInfos.length === 0 || this.swiperDel || !this.selectCount ? 0.4 : 1)
+          .margin({ left: $r('app.float.vp_8') })
+          .visibility(this.isSelectDelete ? Visibility.Visible : Visibility.Hidden)
+          .onClick(() => {
+            if (this.selectCount === 0) {
+              return;
+            }
+            this.confirmDialog(() => {
+              this.deleteSelectData()
+            })
+          })
+
+        Image($r('app.media.ic_edit'))
+          .width($r('app.float.vp_40'))
+          .height($r('app.float.vp_40'))
+          .visibility(this.isSelectDelete ? Visibility.None : Visibility.Visible)
+          .onClick(() => {
+            if (!this.swiperDel && this.propOrderInfo.orderInfos.length > 0) {
+              this.isSelectDelete = !this.isSelectDelete;
+
+              this.isSelectAll = false;
+              this.selectCount = 0;
+              this.propOrderInfo.orderInfos.forEach((item: OrderInfo) => {
+                item.isDelete = false;
+              });
+            }
+          });
+
+        Image(this.isSelectAll ? $r('app.media.icon_select_all') : $r('app.media.icon_select_all_off'))
+          .width($r('app.float.vp_40'))
+          .height($r('app.float.vp_40'))
+          .margin({ left: $r('app.float.vp_8') })
+          .onClick(() => {
+            this.isSelectAllClick();
+          })
+          .visibility(this.isSelectDelete ? Visibility.Visible : Visibility.None);
+
       }
-      .onClick(() => {
-        if (!this.swiperDel && this.propOrderInfo.orderInfos.length > 0) {
-          this.isSelectDelete = !this.isSelectDelete;
-          if (!this.isSelectDelete) {
-            this.isSelectAll = false;
-            this.selectCount = 0;
-            this.propOrderInfo.orderInfos.forEach((item: OrderInfo) => {
-              item.isDelete = false;
-            });
-          }
-        }
-      });
     }
-    .height($r('app.float.vp_56'))
     .width('100%')
-    .padding({ left: $r('app.float.vp_16'), right: $r('app.float.vp_16') })
-    .justifyContent(FlexAlign.SpaceBetween);
+    .padding({ left: $r('app.float.vp_16'), right: $r('app.float.vp_16'), top: $r('app.float.vp_10') })
+    .justifyContent(FlexAlign.SpaceBetween)
+    .backgroundColor($r('sys.color.background_secondary'))
+    .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP,SafeAreaEdge.BOTTOM]);
   }
 }
 

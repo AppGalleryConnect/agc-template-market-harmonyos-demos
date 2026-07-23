@@ -20,10 +20,6 @@ export struct CustomTabBar {
         })
       }, (item: TabBarData) => item.id.toString())
     }
-    .border({
-      width: 0.5,
-      color: Color.White
-    })
     .clip(false)
     .height(54)
     .width(Constants.FULL_SCREEN)
@@ -44,11 +40,9 @@ struct TabItem {
         .size({ width: 24, height: 24 })
       Text(tabsInfo[this.index].title)
         .fontSize(12)
-        .fontColor(this.selectedIndex === this.index ? $r('app.color.keyword_type_font_color') : Color.Black)
+        .fontColor(this.selectedIndex === this.index ? $r('app.color.keyword_type_font_color') : $r('sys.color.font_secondary'))
         .margin({top: 4})
     }
-    .borderWidth({top: 1})
-    .borderColor('#F6F6F6')
     .padding({ top: 6, bottom: 8 })
     .clip(false)
     .layoutWeight(1)

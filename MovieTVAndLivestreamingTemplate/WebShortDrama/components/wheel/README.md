@@ -102,12 +102,14 @@ Wheel(options?: WheelOptions)
 
 ### WheelOptions对象说明
 
-| 名称       | 类型                     | 是否必填 | 说明                     |
-| :--------- |:-----------------------| ---- |------------------------|
-| textCOIN | string[]               | 否   | 转盘奖项                   |
-| title | string                 | 否   | 活动名称                   |
-| subTitle | string                 | 否   | 活动提示                   |
-| onWheelSuccess | (balance:number)=>void | 否   | 定义回调函数，balance为转盘获得金币数 |
+| 名称       | 类型                                  | 是否必填 | 说明                     |
+| :--------- |:------------------------------------| ---- |------------------------|
+| textCOIN | string[]                            | 否   | 转盘奖项                   |
+| title | string                              | 否   | 活动名称                   |
+| subTitle | string                              | 否   | 活动提示                   |
+| onWheelSuccess | (balance:number)=>void              | 否   | 定义回调函数，balance为转盘获得金币数 |
+| isLogin       | boolean                             | 否  | 登录状态                         |
+| loginFunc     | ()=>void                            | 否  | 定义登录函数                       |
 
 ## 示例代码
 ```

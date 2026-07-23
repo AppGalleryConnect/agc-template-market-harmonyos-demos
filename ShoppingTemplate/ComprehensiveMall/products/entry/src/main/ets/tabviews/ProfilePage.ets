@@ -44,8 +44,9 @@ export struct ProfilePage {
           buildOrderInfoArea()
           buildSubMenuArea()
         }
-        .margin({ bottom: 80 })
+        .margin({ bottom: 100 })
       }
+      .expandSafeArea([SafeAreaType.SYSTEM, SafeAreaType.CUTOUT], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])
       .layoutWeight(1)
       .align(Alignment.Top)
       .edgeEffect(EdgeEffect.Spring)
@@ -59,7 +60,7 @@ export struct ProfilePage {
     })
     .backgroundColor($r('app.color.background_color_grey'))
     .alignItems(HorizontalAlign.Start)
-    .expandSafeArea([SafeAreaType.SYSTEM, SafeAreaType.CUTOUT], [SafeAreaEdge.TOP])
+    .expandSafeArea([SafeAreaType.SYSTEM, SafeAreaType.CUTOUT], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])
     .transition(TransitionEffect.OPACITY.animation({ duration: 600 }))
   }
 }

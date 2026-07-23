@@ -1,0 +1,14 @@
+{
+  "routerMap": [
+    {
+      "name": "MemberShipPage",
+      "pageSourceFile": "src/main/ets/pages/MemberShipPage.ets",
+      "buildFunction": "buildMemberShipPage"
+    },
+    {
+      "name": "MemberShipView",
+      "pageSourceFile": "src/main/ets/component/MemberShipView.ets",
+      "buildFunction": "MemberShipViewBuilder"
+    }
+  ]
+}

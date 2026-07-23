@@ -1,8 +1,7 @@
-import { PersistenceV2 } from '@kit.ArkUI';
 import { baseActionSheet, BaseCell, getDataFromJSON, ToastUtils, ToggleItem } from 'base_apis'
 import CalendarEventVM from '../viewModel/ViewModel';
 import { CalendarEvent } from './CalendarEvents'
-import { UserEvent, UserEventItem } from '../model/UserEventModel';
+import { UserEventItem } from '../model/UserEventModel';
 import { CalendarEventList } from '../components/CalendarEventAllList';
 import { CalendarSheetHeader } from '../components/common/CalendarSheetHeader';
 import { RemindEventDispatcher } from '../utils/EventDispatcher';
@@ -15,7 +14,6 @@ export struct CalendarEventMain {
   @Param selectColor: ResourceStr = '#c4272b';
   @Param titleColor: ResourceStr = '#ffffff';
   @Param currentColor: ResourceStr = '#c4272b';
-  @Local userEvent: UserEvent = PersistenceV2.connect(UserEvent, () => new UserEvent())!;
   @Param pathStack: NavPathStack = new NavPathStack()
   @Event onCalendarEventChange: (userEventInfo: UserEventItem) => void = () => {
   }
@@ -39,7 +37,7 @@ export struct CalendarEventMain {
       this.onCalendarEventDelete(userEventInfo)
     }
     this.eventList = getDataFromJSON<ToggleItem>(this.getUIContext().getHostContext()!, 'Event_list.json');
-    this.calendarEventVM.setUserEvent(this.userEvent)
+    this.calendarEventVM.initDBAndLoad(this.getUIContext().getHostContext()!)
     this.calendarEventVM.setContext(this.context)
     this.themeVM.setTheme(this.selectColor, this.titleColor, this.currentColor)
   }

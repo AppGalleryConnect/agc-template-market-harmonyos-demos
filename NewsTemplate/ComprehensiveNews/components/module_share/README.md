@@ -478,6 +478,7 @@ struct ShareSample2 {
 
 ```
 import { image } from '@kit.ImageKit';
+import { hilog } from '@kit.PerformanceAnalysisKit';
 import { SharePicker, downloadImage, saveToSandbox, ShareContentType } from 'aggregated_share';
 
 @Entry
@@ -549,7 +550,7 @@ struct ShareSample3 {
               this.pixelMap = await imageSource.createPixelMap();
               this.imageUri = await saveToSandbox(this.getUIContext(), buffer);
             } catch (e) {
-              console.error('加载图片失败', JSON.stringify(e));
+              hilog.error(0x0000, '[Share]', '加载图片失败', JSON.stringify(e));
             }
           })
 

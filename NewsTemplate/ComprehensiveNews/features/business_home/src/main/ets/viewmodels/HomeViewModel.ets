@@ -74,12 +74,4 @@ export class HomeViewModel extends BaseViewModel {
       AppStorage.setOrCreate('isPushCardEntry', '')
     }
   }
-
-  @Computed
-  get pagePaddingBottom() {
-    if (this.tabModel.isTabVertical) {
-      return this.windowModel.windowBottomPadding;
-    }
-    return 48;
-  }
 }

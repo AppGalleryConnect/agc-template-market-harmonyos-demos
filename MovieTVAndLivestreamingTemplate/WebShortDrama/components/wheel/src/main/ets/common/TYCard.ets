@@ -1,3 +1,6 @@
+import { FontModel } from '../model/FontModel'
+import { AppStorageV2 } from '@kit.ArkUI'
+
 @ComponentV2
 export struct TYCard {
   @Param topPadding: number = 16
@@ -8,20 +11,21 @@ export struct TYCard {
   @Param rightTitle: ResourceStr = ''
   @Param bottomMargin: number = 0
   @BuilderParam content: () => void
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
 
   @Builder
   renderLeftText() {
       Text(this.liftTitle)
         .fontWeight(FontWeight.Bold)
         .fontColor($r('sys.color.font_primary'))
-        .fontSize(16)
+        .fontSize(this.fontModel.getFg(16))
   }
 
   @Builder
   renderRightText() {
       if (this.rightTitle !== '') {
         Text(this.rightTitle)
-          .fontSize(12)
+          .fontSize(this.fontModel.getFg(12))
           .fontWeight(FontWeight.Regular)
           .fontColor($r('sys.color.font_secondary'))
       }

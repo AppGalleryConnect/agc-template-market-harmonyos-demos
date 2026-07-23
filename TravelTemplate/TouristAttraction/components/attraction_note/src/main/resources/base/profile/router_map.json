@@ -9,14 +9,6 @@
       }
     },
     {
-      "name": "PageSearch",
-      "pageSourceFile": "src/main/ets/pages/PageSearch.ets",
-      "buildFunction": "PageSearchBuilder",
-      "data": {
-        "description": "this is PageSearch"
-      }
-    },
-    {
       "name": "PageDetail",
       "pageSourceFile": "src/main/ets/pages/PageDetail.ets",
       "buildFunction": "PageDetailBuilder",

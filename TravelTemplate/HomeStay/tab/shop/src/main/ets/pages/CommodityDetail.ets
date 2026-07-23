@@ -1,8 +1,10 @@
 import { common } from '@kit.AbilityKit';
-import { CounterComponent, CounterType, promptAction } from '@kit.ArkUI';
+import { CounterComponent, CounterType } from '@kit.ArkUI';
+import { UIDialog } from '@hw-agconnect/ui-dialog';
+import { ToastDialog } from '@hw-agconnect/ui-toast';
 import { Constants, NavPathName } from 'constant';
 import { Commodity } from 'type';
-import { TitleBar } from 'component';
+import { CommonHeader } from 'component';
 import { Logger, AccountUtil, formatPriceToNumber } from 'util';
 import { SelectKeys } from '../model/Index';
 import { mapCommodityParam } from '../mapper/CommodityInfoMapper';
@@ -21,13 +23,8 @@ export struct CommodityDetail {
   @Local isShow: boolean = false;
   @Local value: number = 1;
   @Local selectedSfc: string = '';
-  @Local activeIndex: number = 0;
-  @Local detailIndex: number = 0;
   @Local amount: number = 0;
-  scroller = new Scroller();
-  detailScroller = new Scroller();
   @Consumer('mainPathStack') mainPathStack: NavPathStack = new NavPathStack();
-  private tabIndexArr: number[] = [0, 1];
 
   @Monitor('selectKeys')
   selectKeysChange(monitor: IMonitor) {
@@ -50,89 +47,100 @@ export struct CommodityDetail {
   }
 
   @Builder
-  TabBuilder(index: number) {
-    Column() {
-      Text(Constants.commodityFeatureTab[index].title)
-        .fontColor(this.activeIndex === index ? $r('app.color.keyword_type_font_color') :
-          Color.Black)
-        .fontSize(14)
-        .fontWeight(this.activeIndex === index ? 600 : 400)
-        .enableDataDetector(this.activeIndex === index ? true : false);
-
-      Divider()
-        .vertical(false)
-        .width(16)
-        .margin({ top: 4 })
-        .strokeWidth(2)
-        .color(this.activeIndex === index ? $r('app.color.keyword_type_font_color') : $r('sys.color.white'));
-    }.justifyContent(FlexAlign.Start).onClick(() => {
-      this.goToCommodityInfo(index);
-    });
-  }
-
-  @Builder
   SpecificationBuilder() {
     Column() {
-      Column() {
-        Divider().vertical(false);
+      Row() {
+        Image(this.commodity.banner)
+          .width(112)
+          .height(112)
+          .borderRadius(8)
+          .objectFit(ImageFit.Cover)
 
-        Column() {
-          Text('规格').fontSize(12).margin({ top: 12 });
+        Column({ space: 4 }) {
+          Text() {
+            Span('实付￥').fontSize(12).fontWeight(FontWeight.Medium)
+              .fontColor($r('sys.color.warning'))
+            Span(`${formatPriceToNumber(this.amount)}`).fontSize(24).fontWeight(FontWeight.Bold)
+              .fontColor($r('sys.color.warning'))
+          }
+
+          Text(`￥${formatPriceToNumber(this.commodity.counterPrice[this.selectKeys.index])}`)
+            .fontSize(12)
+            .fontColor($r('sys.color.font_tertiary'))
+            .decoration({ type: TextDecorationType.LineThrough })
+
+          Column({ space: 2 }) {
+            Text('免运费 | 7天无理由')
+              .fontSize(12)
+              .fontColor($r('sys.color.font_secondary'))
+            Text('48小时内发货')
+              .fontSize(12)
+              .fontColor($r('sys.color.font_secondary'))
+          }.alignItems(HorizontalAlign.Start)
+        }.alignItems(HorizontalAlign.Start).margin({ left: 8 }).layoutWeight(1)
+      }.width(Constants.FULL_SCREEN).padding({ left: 16, right: 16 })
+
+      Column() {
+        Text('规格').fontSize(14).fontWeight(FontWeight.Medium).fontColor($r('sys.color.font_primary'));
+        Flex({ wrap: FlexWrap.Wrap }) {
           ForEach(this.commodity.specification.split(','), (sfc: string, index: number) => {
             Text(`${sfc}`)
-              .fontColor(this.selectKeys.index === index ? '#FFFFFF' :
-                '#000000')
-              .border({ width: 1, color: '#D6D6D6', radius: 4 })
-              .padding(6)
-              .fontSize(12)
-              .margin({ top: 12 })
-              .backgroundColor(this.selectKeys.index === index ? '#007DFF' :
-                '#FFFFFF')
+              .fontColor(this.selectKeys.index === index ? $r('sys.color.font_emphasize') :
+                $r('sys.color.font_primary'))
+              .border({
+                width: this.selectKeys.index === index ? 1 : 0,
+                color: $r('sys.color.brand'),
+                radius: 4
+              })
+              .height(28)
+              .fontSize(14)
+              .padding({ left: 12, right: 12 })
+              .margin({ top: 8, right: 8 })
+              .backgroundColor(this.selectKeys.index === index ? '#1A0A59F7' :
+                $r('sys.color.comp_background_tertiary'))
               .onClick(() => {
                 if (this.selectKeys.index !== index) {
-                  // 选择切换，规格变化
                   this.selectKeys.index = index;
                   this.selectedSfc = sfc;
                   this.amount = this.commodity.retailPrice[this.selectKeys.index] * this.value;
                 }
-              });
-          }, (sfc: string) => sfc);
-        }.alignItems(HorizontalAlign.Start).padding({ left: 16, right: 16 }).width(Constants.FULL_SCREEN);
+              })
+          }, (sfc: string) => sfc)
+        }
+      }.alignItems(HorizontalAlign.Start)
+      .padding({ left: 16, right: 16 })
+      .width(Constants.FULL_SCREEN)
+      .margin({ top: 12 })
 
-        Divider().vertical(false).margin({ top: 24 });
+      Row() {
+        Text('数量').fontSize(14).fontWeight(FontWeight.Medium).fontColor($r('sys.color.font_primary'));
 
-        Row() {
-          Text('数量').fontSize(12);
-
-          CounterComponent({
-            options: {
-              type: CounterType.LIST,
-              numberOptions: {
-                value: this.value,
-                min: 1,
-                max: 10,
-                onChange: (value: number) => {
-                  this.value = value;
-                  this.amount = this.commodity.retailPrice[this.selectKeys.index] * this.value;
-                },
+        CounterComponent({
+          options: {
+            type: CounterType.LIST,
+            numberOptions: {
+              value: this.value,
+              min: 1,
+              max: 10,
+              onChange: (value: number) => {
+                this.value = value;
+                this.amount = this.commodity.retailPrice[this.selectKeys.index] * this.value;
               },
             },
-          });
-        }.padding({ left: 16, right: 16 });
-      };
+          },
+        }).margin({ right: 16 });
+      }.width(Constants.FULL_SCREEN).padding({ left: 16, right: 16 })
+
+      Blank().layoutWeight(1)
 
       Column() {
-        Text() {
-          Span('需支付：').fontSize(14);
-          Span(`￥${formatPriceToNumber(this.amount)}`).fontColor(Color.Red).fontSize(20).fontWeight(600);
-        }.alignSelf(ItemAlign.Start);
-
         Button('立即购买', { type: ButtonType.Normal })
           .width(Constants.FULL_SCREEN)
-          .borderRadius(8)
-          .backgroundColor($r('app.color.keyword_type_font_color'))
-          .height(44)
-          .margin({ top: 6 })
+          .height(40)
+          .borderRadius(20)
+          .backgroundColor($r('sys.color.comp_background_emphasize'))
+          .fontColor($r('sys.color.font_on_primary'))
+          .fontWeight(FontWeight.Medium)
           .onClick(() => {
             if (!this.currentUser) {
               this.isShow = false;
@@ -145,125 +153,65 @@ export struct CommodityDetail {
               });
             } else {
               if (this.selectedSfc.length === 0) {
-                this.getUIContext().getPromptAction().showToast({ message: '请先选择产品规格' });
+                ToastDialog.showToast({ message: '请先选择产品规格' });
               } else {
-                //关闭弹窗
                 this.isShow = false;
                 this.purchase();
               }
             }
           });
-      }.padding(16).alignItems(HorizontalAlign.Center).width(Constants.FULL_SCREEN).margin({ bottom: 10 });
-    }.height(Constants.FULL_SCREEN).justifyContent(FlexAlign.SpaceBetween);
-  }
-
-  @Builder
-  CommodityFeatureBuilder(index: number) {
-    TabContent() {
-      List({ scroller: this.scroller }) {
-        ListItem() {
-          Column() {
-            Column() {
-              Text('产品详情').fontSize(16).fontWeight(500).margin({ bottom: 6 }).padding({ left: 16 });
-              ForEach(this.commodity.imageList, (item: string) => {
-                Image(item).width(Constants.FULL_SCREEN).objectFit(ImageFit.Contain);
-              }, (item: string) => item);
-            }.width(Constants.FULL_SCREEN).alignItems(HorizontalAlign.Start);
-
-            Column() {
-              Text('品牌').fontSize(16).fontWeight(600).margin({ top: 20, bottom: 20 });
-
-              Row() {
-                Row() {
-                  Image(this.commodity.banner).size({ width: 48, height: 48 }).borderRadius(8);
-                  Text('莫干山农产').fontSize(16).margin({ left: 8 });
-                };
-              }
-              .width(Constants.FULL_SCREEN)
-              .justifyContent(FlexAlign.SpaceBetween);
-            }.width(Constants.FULL_SCREEN).alignItems(HorizontalAlign.Start).padding({ left: 16 });
-          };
-        };
-
-        ListItem() {
-          Column() {
-            Text('须知').fontSize(16).fontWeight(500).margin({ top: 20, bottom: 6 });
-            Text('拍前须知').fontSize(14).margin({ bottom: 6 });
-            Text('发货须知').fontSize(14).margin({ bottom: 6 });
-            Text('签收须知').fontSize(14);
-          }.width(Constants.FULL_SCREEN).alignItems(HorizontalAlign.Start).margin({ bottom: 10 });
-        }.padding({ left: 16 });
-      }
-      .onScrollIndex((start: number, end: number, center: number) => {
-        this.activeIndex = end;
-      })
-      .scrollBar(BarState.Off);
-    }.tabBar(this.TabBuilder(index));
+      }.width(Constants.FULL_SCREEN)
+      .padding({ left: 16, right: 16, bottom: 36 });
+    }.height(Constants.FULL_SCREEN)
   }
 
   build() {
     NavDestination() {
       Column() {
         Column() {
-          TitleBar({
-            isShowBack: true, title: '商品详情', clickEvent: () => {
-              this.mainPathStack.pop();
-            },
-          });
+          CommonHeader({ title: '商品详情', showBackButton: true, backButtonClick: () => {
+            this.mainPathStack.pop();
+          } });
 
-          List({ scroller: this.detailScroller }) {
-            ListItem() {
-              Basic({ commodity: this.commodity });
-            };
-
-            ListItem() {
-              Tabs() {
-                ForEach(this.tabIndexArr, (item: number) => {
-                  this.CommodityFeatureBuilder(item);
-                }, (item: number) => item.toString());
-              }.barWidth(120).scrollable(false).onChange((index: number) => {
-                this.goToCommodityInfo(index);
-              });
-            };
-          }.onScrollIndex((index: number) => {
-            this.detailIndex = index;
-          }).scrollBar(BarState.Off);
-        }.height('80%');
+          Scroll() {
+            Basic({ commodity: this.commodity, onSpecClick: () => {
+              this.isShow = true;
+            } }).bindSheet($$this.isShow, this.SpecificationBuilder(), {
+              preferType: SheetType.CENTER,
+              height: SheetSize.LARGE,
+              backgroundColor: $r('sys.color.comp_background_primary'),
+              title: {
+                title: '商品规格选择'
+              }
+            });
+          }.scrollBar(BarState.Off);
+        }.layoutWeight(1);
 
         Row() {
           Button('立即购买', { type: ButtonType.Normal })
             .width(Constants.FULL_SCREEN)
-            .borderRadius($r('sys.float.corner_radius_level4'))
-            .backgroundColor($r('app.color.keyword_type_font_color'))
+            .height(40)
+            .borderRadius(20)
+            .backgroundColor($r('sys.color.comp_background_emphasize'))
+            .fontColor($r('sys.color.font_on_primary'))
+            .fontWeight(FontWeight.Medium)
             .onClick(() => {
-              this.isShow = true;
-            })
-            .bindSheet($$this.isShow, this.SpecificationBuilder(), {
-              preferType: SheetType.CENTER,
-              height: '60%',
-              backgroundColor: Color.White,
-              title: {
-                title: this.commodity.goodsName
-              }
+              UIDialog.open({
+                content: '请选择规格后下单商品',
+                showConfirmButton: true,
+                confirmButton: '我知道了',
+              })
             });
         }
-        .position({ y: '90%' })
-        .height('10%')
         .width(Constants.FULL_SCREEN)
         .justifyContent(FlexAlign.End)
-        .padding(16);
+        .padding({ left: 16, right: 16, bottom: 36 });
       };
     }.hideTitleBar(true).onReady((context: NavDestinationContext) => {
       this.commodity = context.pathInfo.param as Commodity;
       this.amount = this.commodity.retailPrice[this.selectKeys.index];
       this.selectedSfc = this.commodity.specification.split(',')[this.selectKeys.index];
     });
-  }
-
-  goToCommodityInfo(index: number) {
-    this.detailScroller.scrollToIndex(1);
-    this.activeIndex = index;
-    this.scroller.scrollToIndex(this.activeIndex);
   }
 
   purchase() {

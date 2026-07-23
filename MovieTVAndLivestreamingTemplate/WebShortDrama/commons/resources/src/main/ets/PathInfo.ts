@@ -4,11 +4,17 @@
   "ShortDramaDetailPage": {
     "name": "ShortDramaDetailPage"
   },
+  "ReportPage": {
+    "name": "ReportPage"
+  },
   "MainTabPage": {
     "name": "MainTabPage"
   },
   "HomeMainPage": {
     "name": "HomeMainPage"
+  },
+  "MinorsModePage": {
+    "name": "MinorsModePage"
   },
   "MineMainPage": {
     "name": "MineMainPage"
@@ -57,6 +63,9 @@
   },
   "MineMessagePage": {
     "name": "MineMessagePage"
+  },
+  "SettingFontPage": {
+    "name": "SettingFontPage"
   },
   "SearchPage": {
     "name": "SearchPage"

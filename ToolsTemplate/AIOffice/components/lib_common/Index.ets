@@ -1,4 +1,6 @@
 // constants
+export { ERROR_MSG_MAP } from './src/main/ets/constants/ErrorMsgMap';
+
 export { CommonConstants } from './src/main/ets/constants/CommonConstants';
 
 export { EventEnum } from './src/main/ets/constants/EventEnum';
@@ -91,6 +93,8 @@ export { SystemBarOperation } from './src/main/ets/utils/SystemBarOperation';
 export { CommonBreakpoint } from './src/main/ets/utils/CommonBreakpoint'
 
 export { MediaUtils } from './src/main/ets/utils/MediaUtils'
+
+export { GlobalContext } from './src/main/ets/utils/GlobalContext';
 
 // dialogs
 export { CommonConfirmDialog, IConfirmDialogParams } from './src/main/ets/dialogs/CommonConfirmDialog';

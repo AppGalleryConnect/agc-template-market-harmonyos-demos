@@ -100,6 +100,6 @@ export struct RemindSheet {
     }
     .width('100%')
     .alignItems(HorizontalAlign.Start)
-    .padding({ left: 16, right: 16 })
+    .padding({ left: 16, right: 16, bottom: 16 })
   }
 }

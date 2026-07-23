@@ -136,20 +136,6 @@ export struct VideoProgramDetails {
   }
 
   backIntercept() {
-    Logger.debug(TAG, 'start backIntercept');
-    // 避免重复触发返回
-    if (this.isDetailBack) {
-      Logger.debug(TAG, 'backIntercept blocked: isDetailBack: true');
-      return;
-    }
-    this.isDetailBack = true;
-
-    // 检查全局标志位，如果正在进行全屏操作，阻止返回操作
-    if (this.isEnteringFullScreen) {
-      Logger.debug(TAG, 'backIntercept blocked: isEnteringFullScreen is true');
-      return;
-    }
-
     this.videoPipModel.enableVideoPip(this.videoDetails!.id);
     RouterUtils.pop(this.videoDetails);
   }
@@ -352,7 +338,7 @@ export struct VideoProgramDetails {
 
               this.titleBar()
             }
-            .priorityGesture(
+            .gesture(
               GestureGroup(GestureMode.Exclusive,
                 // 双击暂停或播放
                 TapGesture({ count: 2 })

@@ -7,11 +7,13 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@hw-agconnect/ui-calendar-picker": "^1.0.2",
+    "@hw-agconnect/ui-toast": "^1.0.0",
     "common": "file:../../commons/common",
     "types": "file:../../commons/types",
     "uicomponents": "file:../../commons/uicomponents",
     "network": "file:../../commons/network",
     "tourist_management": "file:../../components/tourist_management",
-    "module_base": "file:../../components/module_base"
+    "module_base": "file:../../components/module_base",
+    'image_preview': 'file:../../components/image_preview'
   }
 }

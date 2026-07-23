@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rich Text Example</title>
+</head>
+<body>
+
+<div id="rich-text-container"></div>
+
+<script>
+    const params = {};
+    const url = window.location.href;
+    const urlObj = new URL(url);
+    for (const [key, value] of urlObj.searchParams.entries()) {
+           params[key] = value;
+           document.getElementById("rich-text-container").innerHTML = params[key];
+        }
+
+</script>
+
+</body>
+</html>

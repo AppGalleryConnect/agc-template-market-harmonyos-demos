@@ -4,7 +4,7 @@ import { RouterModule } from 'router_module';
 import {
   DividerTmp,
   NavigationTitle,
-  SettingItem,
+  SettingItem as BaseSettingItem,
   SettingLevelItem,
   TextStyleModifier,
   ThemeModel,
@@ -15,9 +15,11 @@ import {
   TABLET_GRID,
   TABLE_COL,
   TABLE_COL_OFFSET,
+  SettingState,
 } from 'common'
 import { ThemeToggleBuilder } from './ThemeToggleBuilder';
 import { WeekdayPicker } from './WeekdayPicker';
+import { SettingGroup, SettingView, SettingItem, SupportedSetting, AboutModel, WebModel } from 'app_setting';
 
 @Builder
 export function SettingLevelBuilder() {
@@ -34,7 +36,9 @@ export struct SettingLevel {
   @Local dayList: string[] = ['周日', '周一']
   @Local weekStart: WeekStart = PersistenceV2.connect(WeekStart, () => new WeekStart())!;
   @Local userState: UserState = PersistenceV2.connect(UserState, () => new UserState())!;
-  private context: UIContext = this.getUIContext() ;
+  @Local settingState: SettingState = PersistenceV2.connect(SettingState, () => new SettingState())!;
+  private context: UIContext = this.getUIContext();
+
   aboutToAppear(): void {
     getDataFromJSON<SettingLevelItem>(this.getUIContext().getHostContext()!,
       'MinePage-Setting-Level-Items.json').forEach(item => {
@@ -43,6 +47,34 @@ export struct SettingLevel {
     this.setTheme('theme', this.theme.themeState.name)
     this.setTheme('weekday', this.dayList[this.weekStart.startWeek])
   }
+
+  @Local group1: SettingGroup = new SettingGroup()
+    .setTitle('更多')
+    .setList([
+      new SettingItem()
+        .setSupportedType(SupportedSetting.ABOUT)
+        .setExtraParams({
+          icpText: '苏ICP备17040376号-135A',
+          copyrightText: '华为xx 版权所有 © 2019-2026',
+          support: '技术支持：xxxxxxxx',
+          hotline: '00000000',
+        } as AboutModel),
+    ])
+  @Local group2: SettingGroup = new SettingGroup()
+    .setList([
+      new SettingItem()
+        .setSupportedType(SupportedSetting.PUSH_SWITCH)
+        .setSwitchValue(true)
+        .setOnChange((isOn) => {
+        }),
+      new SettingItem()
+        .setSwitchValue(this.settingState.updateSwitch)
+        .setSupportedType(SupportedSetting.UPDATE_NOTICE)
+        .setOnChange((isOn) => {
+          // 回调当前推送开关情况
+          this.settingState.updateSwitch = isOn as boolean
+        }),
+    ])
 
   setTheme(projectName: string, projectValue: string) {
     this.settingLevelItems.forEach((item) => {
@@ -64,7 +96,7 @@ export struct SettingLevel {
   }
 
   @Builder
-  themePickerBuilder(item: SettingItem) {
+  themePickerBuilder(item: BaseSettingItem) {
     ThemeToggleBuilder({
       confirm: () => {
         baseActionSheet.close(this.context, 'ThemeToggle')
@@ -74,7 +106,7 @@ export struct SettingLevel {
   }
 
   @Builder
-  weekdayPickerBuilder(item: SettingItem) {
+  weekdayPickerBuilder(item: BaseSettingItem) {
     WeekdayPicker({
       dayList: this.dayList,
       weekdayConfirm: () => {
@@ -105,7 +137,7 @@ export struct SettingLevel {
 
                 ListItem() {
                   List() {
-                    ForEach(value.classifieds, (item: SettingItem) => {
+                    ForEach(value.classifieds, (item: BaseSettingItem) => {
                       ListItem() {
                         Flex({ justifyContent: FlexAlign.SpaceBetween, alignItems: ItemAlign.Center }) {
                           Row({ space: 16 }) {
@@ -116,7 +148,7 @@ export struct SettingLevel {
                           Row({ space: 5 }) {
                             Text(item.currentValue)
                               .attributeModifier(new TextStyleModifier('font_primary/Body_M/Regular'))
-                            Image($r('app.media.chevron_right')).width(7).height(17)
+                            Image($r('app.media.chevron_right')).width(12).height(24)
                           }
                         }
                         .padding({
@@ -160,20 +192,30 @@ export struct SettingLevel {
                           }
                         })
                       }
-                    }, (item: SettingItem) => item.id)
+                    }, (item: BaseSettingItem) => item.id)
                   }
                   .divider(this.egDivider)
-                  .edgeEffect(EdgeEffect.Spring, {alwaysEnabled: true})
                 }
                 .backgroundColor($r('sys.color.background_primary'))
                 .borderRadius(16)
                 .margin({ bottom: 21 })
               }, (value: SettingLevelItem) => value.title)
+              ListItem() {
+                Column() {
+                  SettingView({
+                    pathStack: RouterModule.getStack(),
+                    themeColor: this.theme.themeState.calendarColor,
+                    settingList: [this.group2, this.group1],
+                  })
+                }
+                .width('100%')
+              }
             }
             .layoutWeight(1)
             .scrollBar(BarState.Off)
             .margin({ left: 16, right: 16, top: 21 })
-            .edgeEffect(EdgeEffect.Spring, {alwaysEnabled: true})
+            .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: true })
+
             Button('退出登录')
               .fontSize($r('sys.float.Body_M'))
               .fontWeight(FontWeight.Medium)
@@ -193,7 +235,7 @@ export struct SettingLevel {
                   },
                 })
               })
-              .margin({ bottom: 20 })
+              .margin({ bottom: 32 })
           }
           .layoutWeight(1)
           .justifyContent(FlexAlign.SpaceBetween)

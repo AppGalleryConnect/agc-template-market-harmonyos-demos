@@ -4,6 +4,7 @@ import { BroadCastUtil } from '../utils/BroadcastUtil';
 @ComponentV2
 export struct VoiceListItem {
   @Require @Param voice: VoicePackage;
+  @Param cardRadius: number = 0;
   @Event callback: () => void;
   @Local progress: string = '下载';
 
@@ -50,6 +51,7 @@ export struct VoiceListItem {
     }
     .width('100%')
     .backgroundColor($r('sys.color.comp_background_primary'))
+    .borderRadius(this.cardRadius)
     .padding({
       left: 16,
       right: 16,

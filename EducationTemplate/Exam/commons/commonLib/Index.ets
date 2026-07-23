@@ -38,3 +38,10 @@ export { GlobalContextUtils } from './src/main/ets/utils/ContextUtils';
 export { Banner } from './src/main/ets/components/Banner';
 
 export { RouterModule, RouterMap } from './src/main/ets/utils/RouterModule';
+
+export { myRawfileCopy, viewPDF, viewFile, downloadFile, viewExcel, viewWord } from './src/main/ets/utils/FileViewUtil';
+
+// 公共常量
+export { CommonConstants } from './src/main/ets/constants/CommonConstants';
+
+export { SystemBarOperation } from './src/main/ets/utils/SystemBarOperation';

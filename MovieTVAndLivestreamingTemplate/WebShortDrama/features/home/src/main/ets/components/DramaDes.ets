@@ -7,7 +7,7 @@ import { getMedia, NAV_PAGE_NAME } from '@agctemplate/resources';
 import { commentBuilder, CommentParam } from './CommentComp';
 import { appRouter, container, Logger, WindowManager } from '@agctemplate/utils';
 import { AppStorageV2, ComponentContent, display, window } from '@kit.ArkUI';
-import { UserInfoModel } from '@agctemplate/widgets';
+import { FontModel, UserInfoModel } from '@agctemplate/widgets';
 import { QQShareData, SharePicker } from 'aggregated_share';
 import { emitter, deviceInfo } from '@kit.BasicServicesKit';
 import { ProcessController } from 'video_swiper/src/main/ets/view/ProcessController';
@@ -32,6 +32,7 @@ export struct HomeDramaDes {
   @Local isFavorite: boolean = false
   @Local isShowCommentSheet: boolean = false
   @Local userInfo: UserInfoModel = AppStorageV2.connect(UserInfoModel, 'userInfo', () => new UserInfoModel())!;
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
   @Local commentCount: number = 3
   @Local isShowShareSheet: boolean = false
   @Consumer('curTabIndex') curTabIndex: number = 0;
@@ -84,20 +85,7 @@ export struct HomeDramaDes {
       })
     }
   }
-  private commentNode: ComponentContent<CommentParam> = new ComponentContent(
-    this.getUIContext(),
-    wrapBuilder<[CommentParam]>(commentBuilder),
-    {
-      dramaInfo: this.dramaInfo,
-      commentNum: (comments: number) => {
-        this.commentCount = comments
-      },
-      closeSheet: () => {
-        this.isShowCommentSheet = false
-        this.closeCommentDialog()
-      }
-    } as CommentParam
-  )
+  private commentNode: ComponentContent<CommentParam> | undefined = undefined
 
   openCommentDialog() {
     this.getUIContext().getPromptAction().openCustomDialog(this.commentNode, {
@@ -123,14 +111,16 @@ export struct HomeDramaDes {
   }
 
   closeCommentDialog() {
-    this.getUIContext().getPromptAction().closeCustomDialog(this.commentNode)
+    if (this.commentNode) {
+      this.getUIContext().getPromptAction().closeCustomDialog(this.commentNode)
+    }
   }
 
   aboutToAppear(): void {
     try {
-      display.on('foldStatusChange',this.callback2)
+      display.on('foldStatusChange', this.callback2)
       display.on('change', this.callback)
-    }catch (error){
+    } catch (error) {
       console.error('failed')
     }
     this.playerSession.registerListener(this.avPlayerListener)
@@ -151,8 +141,11 @@ export struct HomeDramaDes {
   }
 
   aboutToDisappear(): void {
-    display.off('foldStatusChange',this.callback2)
-    display.off('change', this.callback)
+    try {
+      display.off('foldStatusChange', this.callback2)
+      display.off('change', this.callback)
+    } catch (e) {
+    }
   }
 
   registerEmitter() {
@@ -182,7 +175,7 @@ export struct HomeDramaDes {
     };
     try {
       emitter.on(event, this.onBackground);
-    }catch (error){
+    } catch (error) {
       console.error('failed')
     }
   }
@@ -191,13 +184,19 @@ export struct HomeDramaDes {
     let event: emitter.InnerEvent = {
       eventId: 2
     };
-    emitter.on(event, this.onForeground);
+    try {
+      emitter.on(event, this.onForeground);
+    } catch (e) {
+    }
   }
 
   unEmitter() {
-    Logger.info(TAG, 'on jump')
-    emitter.off(1, this.onBackground)
-    emitter.off(2, this.onForeground)
+    try {
+      Logger.info(TAG, 'on jump')
+      emitter.off(1, this.onBackground)
+      emitter.off(2, this.onForeground)
+    } catch (e) {
+    }
   }
 
   getDeleteEmitter() {
@@ -210,7 +209,10 @@ export struct HomeDramaDes {
       this.likeCount = this.dramaInfo.likeCount
       this.favoriteCount = this.dramaInfo.favoriteCount
     }
-    emitter.on(event, callback);
+    try {
+      emitter.on(event, callback);
+    } catch (e) {
+    }
   }
 
   getDetailInfoFavoriteEmitter() {
@@ -223,7 +225,10 @@ export struct HomeDramaDes {
       this.likeCount = this.dramaInfo.likeCount
       this.favoriteCount = this.dramaInfo.favoriteCount
     }
-    emitter.on(event, callback);
+    try {
+      emitter.on(event, callback);
+    } catch (e) {
+    }
   }
 
   getSideFavoriteEmitter() {
@@ -236,7 +241,10 @@ export struct HomeDramaDes {
       this.likeCount = this.dramaInfo.likeCount
       this.favoriteCount = this.dramaInfo.favoriteCount
     }
-    emitter.on(event, callback);
+    try {
+      emitter.on(event, callback);
+    } catch (e) {
+    }
   }
 
   build() {
@@ -260,52 +268,69 @@ export struct HomeDramaDes {
       Column({ space: 16 }) {
         Column() {
           Image(this.isThumb ? getMedia('app.media.thumb_select') : getMedia('app.media.thumb_white'))
+            .accessibilityText(this.isThumb ? '取消点赞' : '点赞')
             .width(22)
             .height(20)
             .margin({ top: 2 })
-            .onClick(() => {
-              if (this.userInfo.isPhoneAssociated) {
-                if (this.isThumb) {
-                  this.likeCount--
-                  container.resolve(RequestAPI).unsetLike(this.dramaInfo.id)
-                } else {
-                  this.likeCount++
-                  container.resolve(RequestAPI).setLike(this.dramaInfo.id)
-                }
-                this.isThumb = !this.isThumb
-              } else {
-                WindowManager.setWindowSystemBarProperties({ statusBarContentColor: '#e6000000' })
-                this.playControl.pause()
-                appRouter.push({ builderName: NAV_PAGE_NAME.LoginPage.name, params: { isChange: true } })
-              }
-            })
           Text(`${this.likeCount}`)
-            .fontSize(10)
+            .accessibilityText(`有${this.likeCount}个点赞`)
+            .fontSize(this.fontModel.getFg(10))
             .fontColor('#fff')
             .margin({ top: 4 })
         }
+        .onClick(() => {
+          if (this.userInfo.isPhoneAssociated) {
+            if (this.isThumb) {
+              this.likeCount--
+              container.resolve(RequestAPI).unsetLike(this.dramaInfo.id)
+            } else {
+              this.likeCount++
+              container.resolve(RequestAPI).setLike(this.dramaInfo.id)
+            }
+            this.isThumb = !this.isThumb
+          } else {
+            this.playControl.pause()
+            appRouter.push({ builderName: NAV_PAGE_NAME.LoginPage.name, params: { isChange: true } })
+          }
+        })
         .width(40)
         .height(40)
 
         Column() {
           Image(getMedia('app.media.comment_white'))
+            .accessibilityText('评论')
             .width(22)
             .height(20)
             .margin({ top: 2 })
           Text(`${this.commentCount}`)
-            .fontSize(10)
+            .accessibilityText(`有${this.commentCount}条评论`)
+            .fontSize(this.fontModel.getFg(10))
             .fontColor('#fff')
             .margin({ top: 4 })
         }
         .width(40)
         .height(40)
         .onClick(() => {
+          this.commentNode = new ComponentContent(
+            this.getUIContext(),
+            wrapBuilder<[CommentParam]>(commentBuilder),
+            {
+              dramaInfo: this.dramaInfo,
+              commentNum: (comments: number) => {
+                this.commentCount = comments
+              },
+              closeSheet: () => {
+                this.isShowCommentSheet = false
+                this.closeCommentDialog()
+              }
+            } as CommentParam
+          )
           this.isShowCommentSheet = !this.isShowCommentSheet
           if (this.isTabletLandScape) {
             this.playControl.setPlayerPositionX('-15%')
-          } else if(this.isExpanded){
+          } else if (this.isExpanded) {
             this.playControl.setPlayerWidth('50%')
-          }else {
+          } else {
             this.playControl.setPlayerHeight('40%')
           }
           this.openCommentDialog()
@@ -314,30 +339,31 @@ export struct HomeDramaDes {
         Column() {
           Image(this.isFavorite ? getMedia('app.media.favorite_select') :
             getMedia('app.media.favorite_white'))
+            .accessibilityText(this.isFavorite ? '取消收藏' : '收藏')
             .width(22)
             .height(20)
             .margin({ top: 2 })
-            .onClick(() => {
-              if (this.userInfo.isPhoneAssociated) {
-                if (this.isFavorite) {
-                  this.favoriteCount--
-                  container.resolve(RequestAPI).unsetFavorite(this.dramaInfo.id)
-                } else {
-                  this.favoriteCount++
-                  container.resolve(RequestAPI).setFavorite(this.dramaInfo.id)
-                }
-                this.isFavorite = !this.isFavorite
-              } else {
-                WindowManager.setWindowSystemBarProperties({ statusBarContentColor: '#e6000000' })
-                this.playControl.pause()
-                appRouter.push({ builderName: NAV_PAGE_NAME.LoginPage.name, params: { isChange: true } })
-              }
-            })
           Text(`${this.favoriteCount}`)
-            .fontSize(10)
+            .accessibilityText(`有${this.favoriteCount}人收藏`)
+            .fontSize(this.fontModel.getFg(10))
             .fontColor('#fff')
             .margin({ top: 4 })
         }
+        .onClick(() => {
+          if (this.userInfo.isPhoneAssociated) {
+            if (this.isFavorite) {
+              this.favoriteCount--
+              container.resolve(RequestAPI).unsetFavorite(this.dramaInfo.id)
+            } else {
+              this.favoriteCount++
+              container.resolve(RequestAPI).setFavorite(this.dramaInfo.id)
+            }
+            this.isFavorite = !this.isFavorite
+          } else {
+            this.playControl.pause()
+            appRouter.push({ builderName: NAV_PAGE_NAME.LoginPage.name, params: { isChange: true } })
+          }
+        })
         .width(40)
         .height(40)
 
@@ -370,16 +396,19 @@ export struct HomeDramaDes {
         .width(21)
         .height(21)
       Text('分享')
-        .fontSize(10)
+        .fontSize(this.fontModel.getFg(10))
         .fontColor($r('sys.color.font_on_primary'))
     }
+    .accessibilityGroup(true)
+    .accessibilityText('分享')
     .onClick(() => {
       const picker: SharePicker = new SharePicker({
         title: this.dramaInfo.name,
         subTitle: '微短剧应用模板',
         coverUrl: this.dramaInfo.coverUrl,
         createTime: new Date('2025/09-15 08:00:00').getTime(),
-        thumbUrl: this.dramaInfo.coverUrl
+        thumbUrl: this.dramaInfo.coverUrl,
+        landingPageUrl: `https://linking.xiaobingtang.cn/DramaDetail?id=${this.dramaInfo.id}&index=0`
       });
 
       picker.setSignQQShareDataCB((shareJson: string) => {

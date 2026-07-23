@@ -3,6 +3,8 @@
  */
 import { common } from '@kit.AbilityKit';
 import { CircleShape } from '@kit.ArkUI';
+import { BusinessError } from '@kit.BasicServicesKit';
+import { UtilLog } from '@hw-agconnect/util-log';
 import { PostCardModel } from '../model/Index';
 import { handleCount, handleImgSrc } from '../utils/Index';
 import { CommonConstant, EventEmitName, PageRouteName, StatusFLAG } from '../constant/Index';
@@ -31,23 +33,23 @@ export struct ContentCard {
   }
 
   build() {
-    Column({ space: 10 }) {
+    Column({ space: 8 }) {
       if (this.getImage()) {
         Image(this.getImage())
           .width(CommonConstant.FULL_PERCENT)
           .objectFit(ImageFit.Contain)
           .interpolation(ImageInterpolation.High)
-          .borderRadius({ topLeft: 8, topRight: 8 })
+          .borderRadius(8)
           .autoResize(true)
-          .syncLoad(true);
+          .syncLoad(true)
+          .padding({ left: 12, right: 12 });
       }
 
       Column({ space: 8 }) {
         if (this.data.title) {
           Text(this.data.title)
             .fontSize(14)
-            .fontColor($r('app.color.grey_level_9'))
-            .fontWeight(500)
+            .fontColor($r('sys.color.font_primary'))
             .lineHeight(20)
             .maxLines(2)
             .textOverflow({ overflow: TextOverflow.Ellipsis });
@@ -55,32 +57,29 @@ export struct ContentCard {
 
         Row({ space: 4 }) {
           Image(handleImgSrc(this.getUIContext().getHostContext()!, this.data.publisherAvatar))
-            .width(18)
-            .height(18)
-            .clipShape(new CircleShape({ width: 18, height: 18 }))
+            .width(24)
+            .height(24)
+            .clipShape(new CircleShape({ width: 24, height: 24 }))
             .autoResize(true)
             .syncLoad(true);
           Text(this.data.publisher)
             .fontSize(10)
-            .fontColor($r('app.color.grey_level_4'))
-            .fontWeight(400)
+            .fontColor($r('sys.color.font_secondary'))
             .lineHeight(14)
             .maxLines(1)
             .textOverflow({ overflow: TextOverflow.Ellipsis })
-            .margin({ left: 2, right: 10 })
             .layoutWeight(1);
-          Blank();
-          Row({ space: 3 }) {
+          Row({ space: 4 }) {
             Image(this.data.currentUserLikeStatus === StatusFLAG.YES ? $r('app.media.ic_public_like_filled') :
               $r('app.media.ic_public_like'))
-              .width(12)
-              .height(12)
+              .width(16)
+              .height(16)
               .objectFit(ImageFit.Contain)
               .autoResize(true)
               .syncLoad(true);
             Text(handleCount(this.data.likeNum))
               .fontSize(10)
-              .fontColor($r('app.color.grey_level_6'))
+              .fontColor($r('sys.color.font_primary'))
               .fontWeight(400)
               .lineHeight(14);
           }.onClick(() => {
@@ -99,18 +98,17 @@ export struct ContentCard {
         }.width(CommonConstant.FULL_PERCENT);
       }
       .width(CommonConstant.FULL_PERCENT)
-      .padding({
-        left: 10,
-        right: 20,
-        top: 6,
-        bottom: 6,
-      });
+      .padding({ left: 8, right: 8 });
     }
     .width(CommonConstant.FULL_PERCENT)
     .backgroundColor($r('app.color.white'))
-    .borderRadius($r('app.float.card_radius'))
+    .borderRadius(16)
+    .padding({ top: 12, bottom: 12 })
     .onClick(() => {
-      this.getUIContext().getRouter().pushNamedRoute({ name: PageRouteName.PAGE_DETAIL, params: { id: this.data.id } });
+      this.getUIContext().getRouter().pushNamedRoute({ name: PageRouteName.PAGE_DETAIL, params: { id: this.data.id } })
+        .catch((err: BusinessError) => {
+          UtilLog.error(`pushNameRoute error ${err}`);
+        });
     });
   }
 }

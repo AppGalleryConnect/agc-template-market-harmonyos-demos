@@ -1,0 +1,13 @@
+{
+  "modelVersion": "6.0.0",
+  "description": "Please describe the basic information.",
+  "dependencies": {
+    "dayjs": "1.11.13",
+    "@hw-agconnect/util-log": "1.0.0",
+    "aggregated_payment": "file:./components/aggregated_payment"
+  },
+  "devDependencies": {
+    "@ohos/hypium": "1.0.19",
+  },
+  "dynamicDependencies": {}
+}

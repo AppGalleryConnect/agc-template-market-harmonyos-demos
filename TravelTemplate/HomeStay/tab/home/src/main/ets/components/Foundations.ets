@@ -8,66 +8,56 @@ export struct Foundations {
   @Param @Require foundations: Tag[];
 
   build() {
-    Column({ space: 16 }) {
-      Text(`设施服务`).fontSize(16).fontWeight(500).alignSelf(ItemAlign.Start);
+    Column({ space: 8 }) {
+      Text(`设施服务`)
+        .fontSize(18)
+        .fontColor($r('sys.color.font_primary'))
+        .fontWeight(FontWeight.Bold)
+        .alignSelf(ItemAlign.Start);
 
-      Column({ space: 16 }) {
+      Column({ space: 12 }) {
         if (this.foundations) {
-          Row() {
-            Column() {
-              Text('基础').fontSize(12).opacity(0.6);
-            }.alignItems(HorizontalAlign.Start).width(32);
-
-            Column() {
-              Grid() {
-                ForEach(this.vm.getTags(this.foundations, '基础'),
-                  (item: string) => {
-                    GridItem() {
-                      Row() {
-                        Image($r('app.media.icon_configuration')).size({ width: 12, height: 12 });
-                        Text(`${item}`)
-                          .fontSize(12)
-                          .width(72)
-                          .maxLines(1)
-                          .textOverflow({ overflow: TextOverflow.Ellipsis })
-                          .fontColor('#333333')
-                          .margin({ left: 4 });
-                      }.justifyContent(FlexAlign.Start).width(Constants.FULL_SCREEN);
-                    };
-                  }, (item: string) => item);
-              }.columnsTemplate('1fr 1fr 1fr')
-              .rowsGap(16);
-            }.margin({ left: 16 });
-          }.alignItems(VerticalAlign.Top).justifyContent(FlexAlign.Start);
-        }
-
-        Row() {
-          Column() {
-            Text('前台').fontSize(12).opacity(0.6);
-          }.alignItems(HorizontalAlign.Start).width(32);
-
           Column() {
             Grid() {
-              ForEach(this.vm.getTags(this.foundations, '前台'),
+              ForEach(this.vm.getTags(this.foundations, '支持'),
                 (item: string) => {
                   GridItem() {
                     Row() {
-                      Image($r('app.media.icon_configuration')).size({ width: 12, height: 12 });
+                      Image($r('app.media.icon_configuration')).size({ width: 16, height: 16 });
                       Text(`${item}`)
                         .fontSize(12)
-                        .width(64)
                         .maxLines(1)
                         .textOverflow({ overflow: TextOverflow.Ellipsis })
-                        .fontColor('#333333')
+                        .fontColor($r('sys.color.font_primary'))
                         .margin({ left: 4 });
                     }.justifyContent(FlexAlign.Start).width(Constants.FULL_SCREEN);
                   };
                 }, (item: string) => item);
-            }.columnsTemplate('1fr 1fr 1fr')
-            .rowsGap(16);
-          }.margin({ left: 16 });
-        }.justifyContent(FlexAlign.Start);
-      };
+            }.columnsTemplate('0.9fr 1.2fr 1.1fr 1fr')
+            .rowsGap(12);
+          };
+
+          Column() {
+            Grid() {
+              ForEach(this.vm.getTags(this.foundations, '不支持'),
+                (item: string) => {
+                  GridItem() {
+                    Row() {
+                      Image($r('app.media.icon_no_configuration')).size({ width: 16, height: 16 });
+                      Text(`${item}`)
+                        .fontSize(12)
+                        .maxLines(1)
+                        .textOverflow({ overflow: TextOverflow.Ellipsis })
+                        .fontColor($r('sys.color.font_tertiary'))
+                        .margin({ left: 4 });
+                    }.justifyContent(FlexAlign.Start).width(Constants.FULL_SCREEN);
+                  };
+                }, (item: string) => item);
+            }.columnsTemplate('0.9fr 1.2fr 1.1fr 1fr')
+            .rowsGap(12);
+          };
+        }
+      }.backgroundColor($r('sys.color.comp_background_primary')).padding(12).borderRadius(16);
     };
   }
 }

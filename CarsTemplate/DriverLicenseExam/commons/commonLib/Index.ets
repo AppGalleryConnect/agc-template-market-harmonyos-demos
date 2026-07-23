@@ -18,7 +18,7 @@ export { CommonConstants } from './src/main/ets/constants/CommonContants';
 
 export { showToast } from './src/main/ets/constants/ShowToast';
 
-export { dealAllError,ErrorCode } from './src/main/ets/constants/Constants';
+export { dealAllError, ErrorCode } from './src/main/ets/constants/Constants';
 
 export { PreferencesUtil } from './src/main/ets/utils/PreferencesUtil'
 
@@ -44,4 +44,24 @@ export { PushUtils } from './src/main/ets/push/PushUtils'
 export { PushActionParams } from './src/main/ets/push/Model'
 
 
+export {
+  BreakpointTypeOptions,
+  BreakpointType,
+  BreakpointNameEnum,
+  BreakpointValueEnum,
+  GridRowColSetting,
+} from './src/main/ets/constants/GridRowColSetting';
 
+export { BreakpointUtils } from './src/main/ets/utils/BreakpointUtils';
+
+export { CommonBreakpoint } from './src/main/ets/utils/CommonBreakpoint';
+
+export { BaseViewModel } from './src/main/ets/model/BaseViewModel';
+
+export { TabModel } from './src/main/ets/model/TabModel';
+
+export { BreakpointModel } from './src/main/ets/model/BreakpointModel';
+
+export { TabBarType } from './src/main/ets/constants/TabEnum';
+
+export { VideoType, VideoLiveStatus } from './src/main/ets/constants/VideoEnum';

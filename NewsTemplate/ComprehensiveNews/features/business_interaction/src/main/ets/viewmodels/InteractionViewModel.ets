@@ -158,8 +158,7 @@ export class InteractionViewModel extends BaseViewModel {
 
   public emptyToast() {
     this.contextModel.showToast({
-      message: '暂无更新数据',
-      alignment: Alignment.Bottom,
+      message: '暂无更新数据'
     })
   }
 

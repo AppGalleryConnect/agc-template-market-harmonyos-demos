@@ -1,7 +1,7 @@
-import { display, window } from '@kit.ArkUI';
+import { AppStorageV2, display, window } from '@kit.ArkUI';
 import { RouterMap, RouterModule } from '@agctemplate/router_module';
 import { Header } from '../component/Header';
-import { BarVM } from '@agctemplate/widgets';
+import { AppStorageKeys, BarVM, BreakPoint, BreakPointValue } from '@agctemplate/widgets';
 import { UserInfoRow } from '../component/UserInfoRow';
 import { deviceInfo } from '@kit.BasicServicesKit';
 
@@ -10,6 +10,8 @@ export struct PrivacySettingsPage {
   @Local bottomHeight: number = 0;
   @Local isPersonalized: boolean = false
   @Local isVersionCheckSheet: boolean = false
+  @Local breakPoint: BreakPoint = AppStorageV2.connect(BreakPoint, AppStorageKeys.CURRENT_BREAK_POINT,
+    () => new BreakPoint())!;
   @Local isLandScapeTablet: boolean = display.getDefaultDisplaySync().orientation === display.Orientation.LANDSCAPE ||
     display.getDefaultDisplaySync().orientation === display.Orientation.LANDSCAPE_INVERTED &&
       deviceInfo.deviceType === 'tablet'
@@ -50,60 +52,65 @@ export struct PrivacySettingsPage {
     NavDestination() {
       Column() {
         Header({ title: '隐私设置' })
-        Column() {
+        Scroll() {
           Column() {
-            GenericCard() {
-              Personalized({
-                switchButton: (isOn) => {
-                  this.isPersonalized = isOn
-                }
-              })
-            }
+            Column() {
+              GenericCard() {
+                Personalized({
+                  switchButton: (isOn) => {
+                    this.isPersonalized = isOn
+                  }
+                })
+              }
 
-            GenericCard() {
-              UserInfoRow({
-                leftTitle: '用户协议',
-                rightOnClick: () => {
-                  RouterModule.push({ url: RouterMap.TERMS_SERVICE_PAGE })
-                }
-              })
-              this.line()
-              UserInfoRow({
-                leftTitle: '隐私政策',
-                rightOnClick: () => {
-                  RouterModule.push({ url: RouterMap.PRIVACY_STATEMENT_PAGE })
-                }
-              })
-            }
+              GenericCard() {
+                UserInfoRow({
+                  leftTitle: '用户协议',
+                  rightOnClick: () => {
+                    RouterModule.push({ url: RouterMap.TERMS_SERVICE_PAGE })
+                  }
+                })
+                this.line()
+                UserInfoRow({
+                  leftTitle: '隐私政策',
+                  rightOnClick: () => {
+                    RouterModule.push({ url: RouterMap.PRIVACY_STATEMENT_PAGE })
+                  }
+                })
+              }
 
-            GenericCard() {
-              UserInfoRow({
-                leftTitle: '第三方信息共享清单',
-                rightOnClick: () => {
-                  RouterModule.push({ url: RouterMap.PRIVACY_3RD_PARTY_SHARE_PAGE })
-                }
-              })
-              this.line()
-              UserInfoRow({
-                leftTitle: '个人信息收集清单',
-                rightOnClick: () => {
-                  RouterModule.push({ url: RouterMap.PRIVACY_INFO_COLLECT_PAGE })
-                }
-              })
+              GenericCard() {
+                UserInfoRow({
+                  leftTitle: '第三方信息共享清单',
+                  rightOnClick: () => {
+                    RouterModule.push({ url: RouterMap.PRIVACY_3RD_PARTY_SHARE_PAGE })
+                  }
+                })
+                this.line()
+                UserInfoRow({
+                  leftTitle: '个人信息收集清单',
+                  rightOnClick: () => {
+                    RouterModule.push({ url: RouterMap.PRIVACY_INFO_COLLECT_PAGE })
+                  }
+                })
+              }
             }
+            .height(388)
+
           }
-          .height(388)
-
+          .justifyContent(FlexAlign.SpaceBetween)
+          .width(this.breakPoint.value === BreakPointValue.LG ? '70%' : '100%')
+          .height('100%')
+          .padding({
+            left: 16,
+            right: 16,
+            bottom: this.bottomHeight
+          })
         }
-        .justifyContent(FlexAlign.SpaceBetween)
-        .width(this.isLandScapeTablet ? '70%' : '100%')
         .height('100%')
-        .padding({
-          left: 16,
-          right: 16,
-          bottom: this.bottomHeight
-        })
-        .backgroundColor($r('sys.color.comp_background_gray'))
+        .align(Alignment.TopStart)
+        .edgeEffect(EdgeEffect.Spring)
+        .scrollBar(BarState.Off)
       }
       .width('100%')
       .height('100%')

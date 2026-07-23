@@ -1,0 +1,17 @@
+{
+  "name": "@agctemplate/award",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@agctemplate/resources": "1.0.0",
+    "@agctemplate/utils": "1.0.0",
+    "@agctemplate/widgets": "1.0.0",
+    "day_signin": "file:../../components/day_signin",
+    "look_ad": "file:../../components/look_ad",
+    "task_list": "file:../../components/task_list",
+    "wheel": "file:../../components/wheel"
+  }
+}

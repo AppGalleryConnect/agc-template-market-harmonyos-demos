@@ -114,7 +114,7 @@ struct Index {
   build() {
     Column() {
       Hotline({ hotlines: this.hotlines });
-    }
+    }.backgroundColor($r('sys.color.background_secondary')).padding(16).width('100%').height('100%')
   }
 }
 ```

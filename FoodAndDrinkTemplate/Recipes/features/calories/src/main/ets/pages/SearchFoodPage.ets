@@ -1,5 +1,5 @@
 import { LengthMetrics } from '@kit.ArkUI';
-import { CommonConstants, PreferenceUtil, RouterMap, RouterModule } from 'commonlib';
+import { CommonConstants, PreferenceUtil, RouterMap, RouterModule, Logger } from 'commonlib';
 import { FoodCalories, MyMenuItem } from '../types/Index';
 import { SearchFoodPageVM } from '../viewModels/SearchFoodPageVM';
 import { emitter } from '@kit.BasicServicesKit';
@@ -93,7 +93,7 @@ struct SearchFoodPage {
             .optionHeight(296)
             .menuItemContentModifier(new MyMenuItem())
             .onSelect((index: number, text?: string | undefined) => {
-              console.info('Select:' + index)
+              Logger.info('Select:' + index)
               this.vm.selectIndex = index;
               if (text) {
                 this.vm.selectText = text;

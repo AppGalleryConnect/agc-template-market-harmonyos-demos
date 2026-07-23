@@ -1,10 +1,10 @@
 import { HistoryButton } from '../../components/HistoryButton';
 import { CopilotController, MessageRole, TextMessage } from '@hw-agconnect/copilot';
 import { pasteboard } from '@kit.BasicServicesKit';
-import { AppStorageV2, promptAction } from '@kit.ArkUI';
+import { AppStorageV2 } from '@kit.ArkUI';
 import { MarkdownV2 } from '@lidary/markdown';
 import { RouterMap, RouterUtils, WindowModel } from 'lib_common';
-import { NavHeaderBar } from 'lib_widget';
+import { NavHeaderBar } from '../../widget/NavHeaderBar';
 
 export interface PageResultType {
   systemPrompt?: string;
@@ -67,7 +67,7 @@ export struct OfficeResultPage {
   private async copyToClipboard(): Promise<void> {
     try {
       if (!this.chatResult || this.chatResult.trim() === '') {
-        promptAction.showToast({
+        this.getUIContext().getPromptAction().showToast({
           message: '暂无内容可复制',
           duration: 2000
         });
@@ -78,13 +78,13 @@ export struct OfficeResultPage {
       const systemPasteboard = pasteboard.getSystemPasteboard();
       await systemPasteboard.setData(pasteboardData);
 
-      promptAction.showToast({
+      this.getUIContext().getPromptAction().showToast({
         message: '已复制到剪贴板',
         duration: 2000
       });
     } catch (error) {
       console.error('复制失败:', error);
-      promptAction.showToast({
+      this.getUIContext().getPromptAction().showToast({
         message: '复制失败',
         duration: 2000
       });
@@ -153,6 +153,7 @@ export struct OfficeResultPage {
           .margin({
             bottom: this.windowModel.windowBottomPadding + 12
           })
+          .backgroundColor($r('sys.color.comp_background_emphasize'))
           .onClick(() => {
             if (this.controller?.context.isLoading) {
               this.controller.cancel();

@@ -4,7 +4,7 @@ import { fileIo, storageStatistics } from '@kit.CoreFileKit';
 import { BusinessError, deviceInfo, emitter } from '@kit.BasicServicesKit';
 import { RouterMap, RouterModule } from '@agctemplate/router_module';
 import { Header } from '../component/Header';
-import { AccountUtil, BarVM, ColorMode } from '@agctemplate/widgets';
+import { AccountUtil, AppStorageKeys, BarVM, BreakPoint, BreakPointValue, ColorMode } from '@agctemplate/widgets';
 import { UserInfoRow } from '../component/UserInfoRow';
 import { titleBuilder } from 'live_interaction';
 import { GlobalContext, Logger, PreferConstant, PreferenceUtil } from '@agctemplate/utils';
@@ -19,27 +19,17 @@ export struct SetUpPage {
   @Local resolution: string = '1080P 原画（高帧率）'
   @Local isBackgroundPlay: boolean = false
   @Local isVersionCheckSheet: boolean = false
+  @Local appCache: number = 10.33;
   @Local colorMode: ColorMode = AppStorageV2.connect(ColorMode, 'colorMode', () => new ColorMode('跟随系统'))!
-  @Local isLandScapeTablet: boolean = display.getDefaultDisplaySync().orientation === display.Orientation.LANDSCAPE ||
-    display.getDefaultDisplaySync().orientation === display.Orientation.LANDSCAPE_INVERTED &&
-      deviceInfo.deviceType === 'tablet'
+  @Local breakPoint: BreakPoint = AppStorageV2.connect(BreakPoint, AppStorageKeys.CURRENT_BREAK_POINT,
+    () => new BreakPoint())!;
   private context = this.getUIContext().getHostContext();
   private preferenceVideoQuality = PreferenceUtil.getInstance(this.context, PreferConstant.VIDEO_QUALITY)
   private preferenceBackgroundPlay = PreferenceUtil.getInstance(this.context, PreferConstant.BACKGROUND_PLAY)
-  callback: Callback<number> = (data: number) => {
-    if (display.getDefaultDisplaySync().orientation === display.Orientation.LANDSCAPE ||
-      display.getDefaultDisplaySync().orientation === display.Orientation.LANDSCAPE_INVERTED &&
-        deviceInfo.deviceType === 'tablet') {
-      this.isLandScapeTablet = true
-    } else {
-      this.isLandScapeTablet = false
-    }
-  }
 
   aboutToAppear(): void {
     try {
-      display.on('change', this.callback)
-      this.getClearSize()
+      this.getCache()
       window.getLastWindow(this.context, (_err, data) => {
         const avoidAreaBottom = data.getWindowAvoidArea(window.AvoidAreaType.TYPE_NAVIGATION_INDICATOR);
         this.bottomHeight = avoidAreaBottom.bottomRect.height;
@@ -50,13 +40,6 @@ export struct SetUpPage {
     this.preferenceBackgroundPlay = PreferenceUtil.getInstance(this.context, PreferConstant.BACKGROUND_PLAY)
     this.resolution = this.preferenceVideoQuality.get('resolution', '1080P 原画（高帧率）') as string
     this.isBackgroundPlay = this.preferenceBackgroundPlay.get('backgroundPlay', true) as boolean
-  }
-
-  aboutToDisappear(): void {
-    try {
-      display.off('change', this.callback)
-    } catch (e) {
-    }
   }
 
   @Builder
@@ -76,110 +59,132 @@ export struct SetUpPage {
 
   build() {
     NavDestination() {
-      Column() {
-        Header({ title: '设置' })
+      Stack({alignContent:Alignment.Bottom}){
         Column() {
-          Column() {
-            GenericCard() {
-              UserInfoRow({
-                leftTitle: '个人信息', rightOnClick: () => {
-                  RouterModule.push({ url: RouterMap.PERSONAL_CENTER_PAGE })
-                }
-              })
-              this.line()
-              UserInfoRow({
-                leftTitle: '隐私设置', rightOnClick: () => {
-                  RouterModule.push({ url: RouterMap.PRIVACY_SETTINGS_PAGE })
-                }
-              })
-            }
-
-            GenericCard() {
-              UserInfoRow({
-                leftTitle: '显示模式',
-                rightContent: this.colorMode.modeName,
-                isTriangle: true,
-                rightMenu: () => {
-                  this.menuBuilder()
-                }
-              })
-            }
-
-            GenericCard() {
-              UserInfoRow({
-                leftTitle: '视频后台播放',
-                isSwitch: true,
-                switchButton: (isOn) => {
-                  this.isBackgroundPlay = isOn
-                  this.preferenceBackgroundPlay.put('backgroundPlay', this.isBackgroundPlay)
-                  let event: emitter.InnerEvent = {
-                    eventId: 4,
-                  };
-                  let eventData: emitter.EventData = {
-                    data: {
-                      content: 'changeBack',
-                      id: 4
+          Header({ title: '设置' })
+          Scroll(){
+            Column() {
+              Column() {
+                GenericCard() {
+                  UserInfoRow({
+                    leftTitle: '个人信息', rightOnClick: () => {
+                      RouterModule.push({ url: RouterMap.PERSONAL_CENTER_PAGE })
                     }
-                  };
-                  try {
-                    emitter.emit(event, eventData);
-                  } catch (e) {
-                  }
-                }
-              })
-              this.line()
-              UserInfoRow({
-                leftTitle: '视频默认清晰度', rightContent: this.resolution, rightOnClick: () => {
-                  this.isShowResolutionSheet = !this.isShowResolutionSheet
-                }
-              })
-                .bindSheet($$this.isShowResolutionSheet, this.resolutionSheet(this.resolution), {
-                  height: 363,
-                  preferType: SheetType.CENTER,
-                  title: titleBuilder('清晰度设置'),
-                  backgroundColor: $r('sys.color.comp_background_tertiary'),
-                  blurStyle: BlurStyle.COMPONENT_THICK,
-                  onWillAppear: () => {
-                    try {
-                      emitter.on('ResolutionSelected', (event: emitter.EventData) => {
-                        this.resolution = event.data!.resolution
-                      })
-                    } catch (e) {
+                  })
+                  this.line()
+                  UserInfoRow({
+                    leftTitle: '隐私设置', rightOnClick: () => {
+                      RouterModule.push({ url: RouterMap.PRIVACY_SETTINGS_PAGE })
                     }
-                  },
-                  onWillDisappear: () => {
-                    this.preferenceVideoQuality.put('resolution', this.resolution)
-                  }
-                })
-              this.line()
-              UserInfoRow({
-                leftTitle: '清除缓存', rightContent: '16M', rightOnClick: () => {
-                  this.showAlert()
+                  })
                 }
-              })
-            }
 
-            GenericCard() {
-              UserInfoRow({
-                leftTitle: '版本检测', rightOnClick: () => {
-                  this.checkAppUpdate()
+                GenericCard() {
+                  UserInfoRow({
+                    leftTitle: '显示模式',
+                    rightContent: this.colorMode.modeName,
+                    isTriangle: true,
+                    rightMenu: () => {
+                      this.menuBuilder()
+                    }
+                  })
                 }
-              })
 
-              this.line()
-              UserInfoRow({
-                leftTitle: '关于我们', rightOnClick: () => {
-                  RouterModule.push({ url: RouterMap.ABOUT_PAGE })
+                GenericCard() {
+                  UserInfoRow({
+                    leftTitle: '视频后台播放',
+                    isSwitch: true,
+                    switchButton: (isOn) => {
+                      this.isBackgroundPlay = isOn
+                      this.preferenceBackgroundPlay.put('backgroundPlay', this.isBackgroundPlay)
+                      let event: emitter.InnerEvent = {
+                        eventId: 4,
+                      };
+                      let eventData: emitter.EventData = {
+                        data: {
+                          content: 'changeBack',
+                          id: 4
+                        }
+                      };
+                      try {
+                        emitter.emit(event, eventData);
+                      } catch (e) {
+                      }
+                    }
+                  })
+                  this.line()
+                  UserInfoRow({
+                    leftTitle: '视频默认清晰度', rightContent: this.resolution, rightOnClick: () => {
+                      this.isShowResolutionSheet = !this.isShowResolutionSheet
+                    }
+                  })
+                    .bindSheet($$this.isShowResolutionSheet, this.resolutionSheet(this.resolution), {
+                      height: 363,
+                      preferType: SheetType.CENTER,
+                      title: titleBuilder('清晰度设置'),
+                      backgroundColor: $r('sys.color.comp_background_tertiary'),
+                      blurStyle: BlurStyle.COMPONENT_THICK,
+                      onWillAppear: () => {
+                        try {
+                          emitter.on('ResolutionSelected', (event: emitter.EventData) => {
+                            this.resolution = event.data!.resolution
+                          })
+                        } catch (e) {
+                        }
+                      },
+                      onWillDisappear: () => {
+                        this.preferenceVideoQuality.put('resolution', this.resolution)
+                      }
+                    })
+                  this.line()
+                  UserInfoRow({
+                    leftTitle: '清除缓存', rightContent: this.appCache + 'M', rightOnClick: () => {
+                      this.showAlert()
+                    }
+                  })
                 }
-              })
+
+                GenericCard() {
+                  UserInfoRow({
+                    leftTitle: '版本检测', rightOnClick: () => {
+                      this.checkAppUpdate()
+                    }
+                  })
+
+                  this.line()
+                  UserInfoRow({
+                    leftTitle: '关于我们', rightOnClick: () => {
+                      RouterModule.push({ url: RouterMap.ABOUT_PAGE })
+                    }
+                  })
+                }
+              }
+              .height(388)
+              .width('100%')
+
+              Row()
+                .height(40)
+
             }
+            .justifyContent(FlexAlign.SpaceBetween)
+            // .layoutWeight(1)
+            .width(this.breakPoint.value === BreakPointValue.LG ? '70%' : '100%')
+            .padding({
+              left: 16,
+              right: 16,
+            })
           }
-          .height(388)
-          .width('100%')
+          .align(Alignment.TopStart)
+          .edgeEffect(EdgeEffect.Spring)
+          .scrollBar(BarState.Off)
+          .height(`calc(100% - 80vp - ${BarVM.instance.aiBarH})`)
+          .backgroundColor($r('sys.color.comp_background_gray'))
+        }
+        .width('100%')
+        .height('100%')
 
-
+        Row() {
           Button('退出登录')
-            .borderRadius(20)
             .fontColor($r('sys.color.font_primary'))
             .backgroundColor($r('sys.color.comp_background_tertiary'))
             .fontSize($r('sys.float.Body_L'))
@@ -200,17 +205,12 @@ export struct SetUpPage {
               }
             })
         }
-        .justifyContent(FlexAlign.SpaceBetween)
-        .layoutWeight(1)
-        .width(this.isLandScapeTablet ? '70%' : '100%')
+        .width(this.breakPoint.value === BreakPointValue.LG ? '70%' : '100%')
         .padding({
           left: 16,
           right: 16,
         })
-        .backgroundColor($r('sys.color.comp_background_gray'))
       }
-      .width('100%')
-      .height('100%')
     }
     .backgroundColor($r('sys.color.comp_background_gray'))
     .padding({ top: BarVM.instance.staBarH, bottom: BarVM.instance.aiBarH })
@@ -279,10 +279,31 @@ export struct SetUpPage {
           value: '确定',
           action: () => {
             this.clean()
+            this.getCache()
           }
         }
       ]
     })
+  }
+
+  byteToM(num: number) {
+    const mb = num / 1048576
+    return Math.round(mb * 100) / 100
+  }
+
+  getCache() {
+    try {
+      storageStatistics.getCurrentBundleStats((error: BusinessError, bundleStats: storageStatistics.BundleStats) => {
+        if (error) {
+
+        } else {
+
+          this.appCache = this.byteToM(bundleStats.cacheSize)
+        }
+      });
+    } catch (e) {
+      console.error('Failed to getCache. Cause: ' + JSON.stringify(e));
+    }
   }
 
   async clean() {
@@ -325,6 +346,7 @@ export struct SetUpPage {
         })
       }
       this.getClearSize()
+      this.getUIContext().getPromptAction().showToast({ message: '缓存清理完成！' })
     } catch (e) {
     }
   }

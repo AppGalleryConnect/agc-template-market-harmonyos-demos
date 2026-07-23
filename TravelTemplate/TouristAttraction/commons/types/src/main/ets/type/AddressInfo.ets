@@ -6,6 +6,8 @@ export class AddressInfo {
   @Trace district: string = '';
   @Trace detail: string = '';
   @Trace type: number = 0;
+  @Trace latitude: number = 0;
+  @Trace longitude: number = 0;
 }
 
 export class AddressList extends Array<AddressInfo> {

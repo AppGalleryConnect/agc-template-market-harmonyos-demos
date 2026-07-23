@@ -32,7 +32,7 @@ export class CommonUtil {
 
   static getInitDates(currentYear: number, currentMonth: number, currentDay: number) {
     const result: Date[] = [];
-    let count = 3
+    let count = 4
     if (CommonUtil.isDisplayModeFull()) {
       count = 7
     }

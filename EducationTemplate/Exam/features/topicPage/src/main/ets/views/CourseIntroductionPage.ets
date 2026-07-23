@@ -33,6 +33,8 @@ import {
 import { MyDataSource } from '../viewModel/CourseHomeModel';
 import { QuestionsRouterModel, TopicItemType } from 'answer_questions';
 import { TopicVM } from '../viewModel/TopicVM';
+import { QQShareData, SharePicker } from 'aggregated_share';
+
 
 @ComponentV2
 export struct CourseIntroductionPage {
@@ -362,7 +364,7 @@ export struct CourseIntroductionPage {
       });
     }
     .backgroundColor($r('sys.color.comp_background_tertiary'))
-    .width('70%')
+    .width(this.topicVM.breakPointModel.currentBreakpoint === 'sm' ? '70%' : 444)
     .height($r('app.float.vp_40'))
     .borderRadius($r('app.float.vp_20'))
     .justifyContent(FlexAlign.SpaceBetween)
@@ -438,7 +440,7 @@ struct ReusableFlowItem {
 
 @ComponentV2
 struct SubjectItem {
-  @Param subjectItem: SubjectExercises = new SubjectExercises($r('app.media.ic_home'), '建筑工程经济', 0, 0);
+  @Param subjectItem: SubjectExercises = new SubjectExercises($r('app.media.ic_home'), '建筑工程经济', 0, 0, 'pdf', '');
 
   build() {
     Column() {
@@ -500,7 +502,7 @@ struct SubjectItem {
 
 @ComponentV2
 struct InfoItem {
-  @Param subjectItem: SubjectExercises = new SubjectExercises($r('app.media.ic_home'), '建筑工程经济', 0, 0);
+  @Param subjectItem: SubjectExercises = new SubjectExercises($r('app.media.ic_home'), '建筑工程经济', 0, 0, 'pdf', '');
 
   build() {
     Column() {
@@ -510,11 +512,11 @@ struct InfoItem {
           .height($r('app.float.vp_48'))
           .margin({ left: $r('app.float.vp_12'), right: $r('app.float.vp_12') });
         Column() {
-          Text('建筑工程经济')
+          Text(this.subjectItem.name)
             .fontSize($r('sys.float.Body_M'))
             .fontWeight(FontWeight.Medium)
             .fontColor($r('sys.color.font_primary'));
-          Text('建筑工程经济')
+          Text(this.subjectItem.name)
             .fontSize($r('sys.float.Body_S'))
             .fontWeight(FontWeight.Regular)
             .fontColor($r('sys.color.font_primary'))
@@ -562,7 +564,27 @@ struct InfoItem {
         .borderRadius($r('sys.float.corner_radius_level7'))
 
         .onClick(() => {
-          GlobalContextUtils.showToast({ message: '暂不支持分享' });
+          const picker: SharePicker = new SharePicker({
+            title: '建筑工程经济',
+            subTitle: '建筑工程经济',
+            coverUrl: this.subjectItem.imageSrc,
+            createTime: new Date().getTime(),
+            thumbUrl: '', // 实际需要传入url(png)，例：https://agc-storage-drcn.platform.dbankcloud.cn/v0/template-thwjd/commonwidget%2Fexample960x720.png
+            landingPageUrl: '', // 二维码生成,例：https://www.xxxxxx.com/recipes?action=recipesList
+          });
+
+          picker.setSignQQShareDataCB((shareJson: string) => {
+            const signData = new QQShareData();
+            signData.shareJson = shareJson;
+            signData.timestamp = Date.parse(new Date().toString()) / 1000;
+            signData.nonce = 62695688;
+            signData.shareJsonSign = 'Hsvqs0IpjiN6DfFfhboGp+r3XzQ=';
+            return Promise.resolve(signData);
+          })
+
+          picker.show(this.getUIContext(), {
+            autoClose: true,
+          });
         });
 
         Row() {
@@ -584,7 +606,7 @@ struct InfoItem {
         .backgroundColor($r('sys.color.comp_background_tertiary'))
         .borderRadius($r('sys.float.corner_radius_level7'))
         .onClick(() => {
-          RouterModule.push({ url: RouterMap.MATERIAL_DOWNLOAD_PAGE });
+          RouterModule.push({ url: RouterMap.MATERIAL_DOWNLOAD_PAGE, param: this.subjectItem });
         });
 
       }

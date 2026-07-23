@@ -17,6 +17,9 @@ export struct LookAD {
   @Param adId: string = 'testx9dtjwj8hp'
   @Param adType: number = 7
   @Param award: string = '领看点'
+  @Param isLogin: boolean = true
+  @Event loginFunc: () => void = () => {
+  }
   private context: common.UIAbilityContext = this.getUIContext().getHostContext() as common.UIAbilityContext;
   windowStage: window.WindowStage = AppStorage.get('windowStage') as window.WindowStage;
   mainWin: window.Window = this.windowStage.getMainWindowSync();
@@ -74,13 +77,21 @@ export struct LookAD {
               .height(28)
               .backgroundColor(item.isClaim ? $r('sys.color.comp_background_tertiary') : 'rgba(236,110,69,0.1)')
               .onClick(() => {
-                item.isFirstClick = false
-                this.handleButtonClick(item, index)
-                let sysBarProps: window.SystemBarProperties = {
-                  statusBarColor: '#00000000',
-                  statusBarContentColor: '#ffffff'
-                };
-                this.mainWin.setWindowSystemBarProperties(sysBarProps)
+                if (this.isLogin) {
+                  item.isFirstClick = false
+                  this.handleButtonClick(item, index)
+                  let sysBarProps: window.SystemBarProperties = {
+                    statusBarColor: '#00000000',
+                    statusBarContentColor: '#ffffff'
+                  };
+                  try {
+                    this.mainWin.setWindowSystemBarProperties(sysBarProps)
+                  } catch (e) {
+                    console.error(`setWindowSystemBarProperties failed: ${e}`);
+                  }
+                } else {
+                  this.loginFunc()
+                }
               })
           }
         }, (item: SignInClass) => item.coinNumber.toString())

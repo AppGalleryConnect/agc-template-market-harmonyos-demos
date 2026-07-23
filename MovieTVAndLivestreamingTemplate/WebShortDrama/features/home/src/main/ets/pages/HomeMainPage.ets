@@ -1,4 +1,4 @@
-import { VideoSwiper, PlayController } from 'video_swiper';
+import { VideoSwiper, PlayController, NetWorkModel, NetworkUtil } from 'video_swiper';
 import { DramaDesComponent } from '../components/DramaDes';
 import { PlayErrorLayer } from '../components/PlayErrorLayer';
 import { DramaListVM } from '../viewmodel/DramaListVM';
@@ -7,10 +7,8 @@ import { Logger } from '@agctemplate/utils';
 import { notificationManager } from '@kit.NotificationKit';
 import { PushUtils } from '@agctemplate/widgets';
 import { BusinessError } from '@kit.BasicServicesKit'
-import { DramaInfo } from '@agctemplate/server';
-import { jumpDetailPage } from '@agctemplate/detail';
-import { WindowManager } from '@agctemplate/utils';
 import { common } from '@kit.AbilityKit';
+import { AVPlayerState } from 'video_swiper/src/main/ets/constant/AVPlayerState';
 
 const TAG = 'HomeMainPage'
 
@@ -19,6 +17,8 @@ export struct HomeMainPage {
   @Param @Require index: number;
   @Consumer('curTabIndex') curTabIndex: number = 0;
   @Local noFlash: boolean = true
+  playController: PlayController = new PlayController()
+  @Local vm: DramaListVM = new DramaListVM(this.playController)
 
   @Monitor('curTabIndex')
   onIndexChange(monitor: IMonitor) {
@@ -30,13 +30,15 @@ export struct HomeMainPage {
           this.playController.play();
         } else {
           this.playController.pause()
+          setTimeout(()=>{
+            if(this.index !== curIndex){
+              this.playController.pause()
+            }
+          },1000)
         }
       }
     })
   }
-
-  @Local vm: DramaListVM = new DramaListVM()
-  playController: PlayController = new PlayController()
 
   aboutToAppear(): void {
     Logger.info(TAG, 'main aboutToAppear')
@@ -55,8 +57,11 @@ export struct HomeMainPage {
           console.info('requestEnableNotification success');
         }
       };
-      notificationManager.requestEnableNotification(this.getUIContext().getHostContext() as common.UIAbilityContext,
-        requestEnableNotificationCallback)
+      try {
+        notificationManager.requestEnableNotification(this.getUIContext().getHostContext() as common.UIAbilityContext,
+          requestEnableNotificationCallback)
+      } catch (e) {
+      }
       if (AppStorage.get('pushCardEntry')) {
         let dramaData = AppStorage.get('pushCardEntry') as string
         // let routerParams: DramaInfo = {
@@ -70,7 +75,8 @@ export struct HomeMainPage {
     })
     this.playController.autoPlay = false
     this.vm.checkContinueScene();
-
+    this.vm.checkAppLinkingScene();
+    AppStorage.setOrCreate('isDetailShow',false)
   }
 
   getDeleteEmitter() {
@@ -80,7 +86,10 @@ export struct HomeMainPage {
     let callback: Callback<emitter.EventData> = (eventData: emitter.EventData) => {
       // this.vm.refresh()
     }
-    emitter.on(event, callback);
+    try {
+      emitter.on(event, callback);
+    } catch (e) {
+    }
   }
 
   getDetailInfoFavoriteEmitter() {
@@ -90,7 +99,10 @@ export struct HomeMainPage {
     let callback: Callback<emitter.EventData> = (eventData: emitter.EventData) => {
       this.vm.refresh()
     }
-    emitter.on(event, callback);
+    try {
+      emitter.on(event, callback);
+    } catch (e) {
+    }
   }
 
   getSideFavoriteEmitter() {
@@ -100,7 +112,10 @@ export struct HomeMainPage {
     let callback: Callback<emitter.EventData> = (eventData: emitter.EventData) => {
       this.vm.refresh()
     }
-    emitter.on(event, callback);
+    try {
+      emitter.on(event, callback);
+    } catch (e) {
+    }
   }
 
   build() {
@@ -122,7 +137,7 @@ export struct HomeMainPage {
           .width('100%')
           .height('100%')
       }
-      .padding({ top: '56vp' })
+      .padding({ top: 56 , bottom: 100 })
       .width('100%')
       .height('100%')
       .backgroundColor(Color.Black)

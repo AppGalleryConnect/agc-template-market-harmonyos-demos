@@ -18,12 +18,10 @@ export struct OrderHeader {
   }
 
   modifyOrderSilent() {
-    // 订单状态修改为已取消
     this.vm.orderList.map((item => {
       if (item.orderSn === this.order.orderSn) {
         this.order.orderStatus = OrderTabBarType.CANCEL;
         item.orderStatus = OrderTabBarType.CANCEL;
-        //更新本地持久化数据
         AppStorageBank.updateOrder(this.vm.orderList);
       }
     }));
@@ -32,42 +30,46 @@ export struct OrderHeader {
   aboutToAppear(): void {
     let curStamp = new Date().getTime();
     let createStamp = new Date(this.order.createTime).getTime();
-    this.count = createStamp + Constants.MAX_TO_PAY_TIME - curStamp;
+    this.count = createStamp + 10 * 60 * 1000 - curStamp;
     if (this.count < 0 && this.order.orderStatus === OrderTabBarType.TO_PAY) {
       this.modifyOrderSilent();
     }
   }
 
   build() {
-    Row({ space: 8 }) {
-      Image($r(`${this.getOrderRsr()?.icon}`)).size({ width: 24, height: 24 });
-      Text(this.getOrderRsr()?.text).fontSize(14).fontWeight(600);
+    Column() {
+      Text(this.getOrderRsr()?.text ?? '')
+        .fontSize(24)
+        .fontColor($r('sys.color.font_primary'))
+        .fontWeight(FontWeight.Medium);
+
       if (this.order.orderStatus === 1) {
-        Row() {
-          Text('还有').opacity(0.4).fontSize(12);
+        Row({ space: 4 }) {
+          Text('订单将在 ')
+            .fontColor($r('sys.color.font_secondary'))
+            .fontSize(12);
           TextTimer({ isCountDown: true, count: this.count, controller: this.textTimerController })
             .format(this.format)
-            .fontColor(Color.Black)
+            .fontColor($r('app.color.keyword_type_font_color'))
             .fontSize(12)
-            .opacity(0.4)
             .onTimer((utc: number, elapsedTime: number) => {
               Logger.info('textTimer notCountDown utc is：' + utc + ', elapsedTime: ' + elapsedTime);
               if ((elapsedTime + 1) * 1000 >= this.count) {
-                // 再请求更新
                 this.modifyOrderSilent();
               }
             })
             .onAppear(() => {
               this.textTimerController.start();
             });
-          Text('关闭订单').opacity(0.4).fontSize(12);
-        };
+          Text(' 后取消，请尽快支付')
+            .fontColor($r('sys.color.font_secondary'))
+            .fontSize(12);
+        }
+        .margin({ top: 8 });
       }
     }
-    .padding({ left: 16, top: 14, bottom: 14 })
-    .justifyContent(FlexAlign.Start)
     .width(Constants.FULL_SCREEN)
-    .backgroundColor('#F5F6FA')
-    .margin({ bottom: 20 });
+    .alignItems(HorizontalAlign.Start)
+    .backgroundColor($r('sys.color.comp_background_tertiary'));
   }
 }

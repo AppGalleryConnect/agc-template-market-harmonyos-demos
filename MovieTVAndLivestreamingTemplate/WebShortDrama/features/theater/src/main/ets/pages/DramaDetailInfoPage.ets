@@ -1,5 +1,13 @@
-import { getColor, getMedia, NAV_PAGE_NAME } from '@agctemplate/resources';
-import { AiBarHeight, AppStorageKeys, StatusBarHeight, UserInfoModel } from '@agctemplate/widgets';
+import { buttonItem, getColor, getMedia, NAV_PAGE_NAME } from '@agctemplate/resources';
+import {
+  AiBarHeight,
+  AppStorageKeys,
+  StatusBarHeight,
+  UserInfoModel,
+  ColorMode,
+  FontModel,
+  fp2pxUtil
+} from '@agctemplate/widgets';
 import { AppStorageV2, promptAction, window } from '@kit.ArkUI';
 import { appRouter, container, NavParams, WindowManager } from '@agctemplate/utils';
 import { DramaCoverVM } from '../viewmodels/DramaCoverVM';
@@ -14,6 +22,7 @@ import {
 } from '@agctemplate/server/src/main/ets/api/mock/mockData/mockDramaFactory';
 import { Drama } from '@agctemplate/server/src/main/ets/api/mock/mockData/bean';
 import { emitter } from '@kit.BasicServicesKit';
+import { ConfigurationConstant } from '@kit.AbilityKit';
 
 @ComponentV2
 export struct DramaDetailInfoPage {
@@ -32,13 +41,24 @@ export struct DramaDetailInfoPage {
   @Local recommendList: Array<DramaCoverVM> = []
   @Local pageNum: number = 1
   @Local dramaInfo: Drama | null = null
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
   @Local userInfo: UserInfoModel = AppStorageV2.connect(UserInfoModel, 'userInfo', () => new UserInfoModel())!;
+  @Local currentColorMode: ColorMode = AppStorageV2.connect(ColorMode, 'colorMode', () => new ColorMode('跟随系统'))!
   totalTabIndex: number = 0
   leftIndex: number = 0
   tabArray: Array<string> = []
   fullIndexArray: Array<number> = []
   tailIndexArray: Array<number> = []
   private controller: TabsController = new TabsController()
+
+  @Monitor('currentColorMode.colorMode')
+  onColorModeChange(monitor: IMonitor) {
+    if (this.currentColorMode.colorMode === ConfigurationConstant.ColorMode.COLOR_MODE_DARK) {
+      WindowManager.setWindowSystemBarProperties({ statusBarContentColor: '#e6ffffff' })
+    } else {
+      WindowManager.setWindowSystemBarProperties({ statusBarContentColor: '#e6000000' })
+    }
+  }
 
   aboutToAppear(): void {
     this.dramaInfo = getDramaInfo(this.vm.detailInfo.id)
@@ -92,20 +112,16 @@ export struct DramaDetailInfoPage {
       Column() {
         Row() {
           Text('剧集观看')
-            .height(27)
-            .fontSize(20)
+            .height(this.fontModel.getDesFg(27))
+            .fontSize(this.fontModel.getFg(20))
             .fontWeight(700)
-            .fontColor('#000')
-          Image(getMedia('app.media.close_btn'))
-            .width(40)
-            .height(40)
-            .borderRadius(20)
-            .onClick(() => {
-              this.isShowSerialPickerSheet = !this.isShowSerialPickerSheet
-            })
+            .fontColor($r('sys.color.font_primary'))
+          buttonItem($r('sys.symbol.xmark'), () => {
+            this.isShowSerialPickerSheet = !this.isShowSerialPickerSheet
+          })
         }
         .width('100%')
-        .height(56)
+        .height(this.fontModel.getDesFg(56))
         .margin({ top: 8 })
         .justifyContent(FlexAlign.SpaceBetween)
 
@@ -114,17 +130,17 @@ export struct DramaDetailInfoPage {
             ForEach(this.tabArray, (item: string, index: number) => {
               ListItem() {
                 Text(item)
-                  .fontColor(this.currentTabIndex === index ? 'rgba(0, 0, 0, 0.9)' :
-                    'rgba(0, 0, 0, 0.4)')
-                  .fontSize(14)
-                  .height(19)
+                  .fontColor(this.currentTabIndex === index ? $r('sys.color.font_primary') :
+                    $r('sys.color.font_tertiary'))
+                  .fontSize(this.fontModel.getFg(14))
+                  .height(this.fontModel.getDesFg(19))
               }.onClick(() => {
                 this.currentTabIndex = index
               })
             }, (item: string, index: number) => item + index)
           }.width('100%')
           .listDirection(Axis.Horizontal)
-          .height(19)
+          .height(this.fontModel.getDesFg(19))
           .margin({ bottom: 16 })
 
           Tabs({ index: this.currentTabIndex, controller: this.controller }) {
@@ -138,17 +154,17 @@ export struct DramaDetailInfoPage {
                           Stack({ alignContent: Alignment.BottomEnd }) {
                             Text(`${(index) * this.spliceNum + indexIndex + 1}`)
                               .textAlign(TextAlign.Center)
-                              .width(48)
-                              .height(48)
+                              .width(this.fontModel.getDesFg(48))
+                              .height(this.fontModel.getDesFg(48))
                               .fontColor(this.currentIndex === (index * this.spliceNum + indexIndex) ? '#EC6E45' :
                                 $r('sys.color.font_primary'))
-                              .fontSize($r('sys.float.Body_M'))
+                              .fontSize(this.fontModel.getFg(14))
                               .backgroundColor(this.currentIndex === (index * this.spliceNum + indexIndex) ?
-                                'rgba(236, 110, 69, 0.05)' : 'rgba(0, 0, 0, 0.05)')
+                                'rgba(236, 110, 69, 0.05)' : $r('sys.color.comp_background_tertiary'))
                             if (this.currentIndex === (index * this.spliceNum + indexIndex)) {
                               Image(getMedia('app.media.playing'))
-                                .width(12)
-                                .height(10)
+                                .width(this.fontModel.getDesFg(12))
+                                .height(this.fontModel.getDesFg(10))
                                 .margin({ bottom: 3, right: 3 })
                             }
                           }
@@ -156,9 +172,10 @@ export struct DramaDetailInfoPage {
                           if (indexIndex > 10 && index === 0 || index > 0) {
                             Text('VIP')
                               .textAlign(TextAlign.Center)
-                              .fontSize(6)
+                              .fontSize(fp2pxUtil(8))
                               .width(13)
                               .height(11)
+                              .fontColor($r('sys.color.font_primary'))
                               .backgroundColor('rgba(255,215,0,0.36)')
                           }
                         }
@@ -177,17 +194,17 @@ export struct DramaDetailInfoPage {
                           Stack({ alignContent: Alignment.BottomEnd }) {
                             Text(`${(index) * this.spliceNum + indexIndex + 1}`)
                               .textAlign(TextAlign.Center)
-                              .width(48)
-                              .height(48)
+                              .width(this.fontModel.getDesFg(48))
+                              .height(this.fontModel.getDesFg(48))
                               .fontColor(this.currentIndex === (index * this.spliceNum + indexIndex) ? '#EC6E45' :
                                 $r('sys.color.font_primary'))
-                              .fontSize($r('sys.float.Body_M'))
+                              .fontSize(this.fontModel.getFg(14))
                               .backgroundColor(this.currentIndex === (index * this.spliceNum + indexIndex) ?
-                                'rgba(236, 110, 69, 0.05)' : 'rgba(0, 0, 0, 0.05)')
+                                'rgba(236, 110, 69, 0.05)' : $r('sys.color.comp_background_tertiary'))
                             if (this.currentIndex === (index * this.spliceNum + indexIndex)) {
                               Image(getMedia('app.media.playing'))
-                                .width(12)
-                                .height(10)
+                                .width(this.fontModel.getDesFg(12))
+                                .height(this.fontModel.getDesFg(10))
                                 .margin({ bottom: 3, right: 3 })
                             }
 
@@ -196,9 +213,10 @@ export struct DramaDetailInfoPage {
                           if (indexIndex > 10 && index === 0 || index > 0) {
                             Text('VIP')
                               .textAlign(TextAlign.Center)
-                              .fontSize(6)
+                              .fontSize(fp2pxUtil(8))
                               .width(13)
                               .height(11)
+                              .fontColor($r('sys.color.font_primary'))
                               .backgroundColor('rgba(255,215,0,0.36)')
                           }
 
@@ -245,7 +263,10 @@ export struct DramaDetailInfoPage {
         id: 5
       }
     };
-    emitter.emit(event, eventData);
+    try {
+      emitter.emit(event, eventData);
+    } catch (e) {
+    }
   }
 
   build() {
@@ -261,20 +282,20 @@ export struct DramaDetailInfoPage {
                   .borderRadius(4)
                 Column() {
                   Text(this.vm.detailInfo.name)
-                    .fontSize(16)
+                    .fontSize(this.fontModel.getFg(16))
                     .fontWeight(500)
                     .fontColor($r('sys.color.font_primary'))
                     .maxLines(1)
                     .width('100%')
-                    .height(21)
+                    .height(this.fontModel.getDesFg(21))
                     .textAlign(TextAlign.Start)
                     .textOverflow({
                       overflow: TextOverflow.Ellipsis
                     })
 
                   Text(`${this.vm.detailInfo.category} · 热度${this.vm.detailInfo.popular}`)
-                    .height(16)
-                    .fontSize(12)
+                    .height(this.fontModel.getDesFg(16))
+                    .fontSize(this.fontModel.getFg(12))
                     .fontColor($r('sys.color.font_secondary'))
                     .fontWeight(400)
                     .margin({ top: 2 })
@@ -289,7 +310,7 @@ export struct DramaDetailInfoPage {
                             .height(16)
                             .borderRadius(8)
                           Text(item.name)
-                            .fontSize(12)
+                            .fontSize(fp2pxUtil(12))
                             .fontWeight(FontWeight.Regular)
                             .opacity(0.6)
                             .height(16)
@@ -312,33 +333,33 @@ export struct DramaDetailInfoPage {
               Column() {
                 Row() {
                   Text('剧情简介')
-                    .height(24)
-                    .fontSize(18)
+                    .height(this.fontModel.getDesFg(24))
+                    .fontSize(this.fontModel.getFg(18))
                     .fontWeight(700)
-                    .fontColor('#000')
+                    .fontColor($r('sys.color.font_primary'))
                   ForEach(
                     this.vm.detailInfo.category,
                     (item: string) => {
                       Text(item)
-                        .height(16)
-                        .fontSize(10)
-                        .lineHeight(13)
+                        .height(this.fontModel.getDesFg(16))
+                        .fontSize(this.fontModel.getFg(10))
+                        .lineHeight(this.fontModel.getDesFg(13))
                         .fontWeight(400)
-                        .fontColor('#000')
+                        .fontColor($r('sys.color.font_primary'))
                         .padding({ left: 4, right: 4 })
-                        .backgroundColor('rgba(0, 0, 0, 0.05)')
+                        .backgroundColor($r('sys.color.comp_background_tertiary'))
                         .margin({ left: 12 })
                     }, (item: string) => item
                   )
                 }
-                .height(24)
+                .height(this.fontModel.getDesFg(24))
 
                 Text(this.vm.detailInfo.description)
                   .width('100%')
                   .margin({ top: 12 })
-                  .fontSize(14)
+                  .fontSize(this.fontModel.getFg(14))
                   .fontWeight(400)
-                  .lineHeight(19)
+                  .lineHeight(this.fontModel.getDesFg(19))
                   .fontColor($r('sys.color.font_primary'))
                   .align(Alignment.TopStart)
               }
@@ -348,46 +369,46 @@ export struct DramaDetailInfoPage {
 
               Row() {
                 Text('剧集')
-                  .height(24)
-                  .fontSize(18)
+                  .height(this.fontModel.getDesFg(24))
+                  .fontSize(this.fontModel.getFg(18))
                   .fontWeight(700)
-                  .fontColor('#000')
+                  .fontColor($r('sys.color.font_primary'))
                 Row() {
                   Text(this.vm.detailInfo.latestUpdate === this.vm.detailInfo.totalCount ? '已完结' : '连载中')
-                    .lineHeight(16)
-                    .fontSize(12)
-                    .fontColor('rgba(0, 0, 0, 0.6)')
+                    .lineHeight(this.fontModel.getDesFg(16))
+                    .fontSize(this.fontModel.getFg(12))
+                    .fontColor($r('sys.color.font_secondary'))
                   Text('·')
-                    .lineHeight(16)
-                    .fontSize(12)
-                    .fontColor('rgba(0, 0, 0, 0.6)')
+                    .lineHeight(this.fontModel.getDesFg(16))
+                    .fontSize(this.fontModel.getFg(12))
+                    .fontColor($r('sys.color.font_secondary'))
                   Text(`共${this.vm.detailInfo.totalCount}集`)
-                    .lineHeight(16)
-                    .fontSize(12)
-                    .fontColor('rgba(0, 0, 0, 0.6)')
+                    .lineHeight(this.fontModel.getDesFg(16))
+                    .fontSize(this.fontModel.getFg(12))
+                    .fontColor($r('sys.color.font_secondary'))
                   Column() {
-                    Image(getMedia('app.media.arrow_right'))
-                      .width(9)
-                      .height(9)
+                    SymbolGlyph($r('sys.symbol.chevron_forward'))
+                      .fontSize(this.fontModel.getFg(9))
+                      .fontColor([$r('sys.color.icon_secondary')])
                   }
-                  .width(16)
-                  .height(16)
+                  .width(this.fontModel.getDesFg(16))
+                  .height(this.fontModel.getDesFg(16))
                   .justifyContent(FlexAlign.Center)
                   .margin({ left: 2 })
                 }
-                .height(16)
+                .height(this.fontModel.getDesFg(16))
                 .onClick(() => {
                   this.isShowSerialPickerSheet = !this.isShowSerialPickerSheet
                 })
                 .bindSheet($$this.isShowSerialPickerSheet, this.serialPickerBuilder(), {
                   height: 736,
-                  detents:[SheetSize.LARGE],
+                  detents: [SheetSize.LARGE],
                   showClose: false,
                   preferType: SheetType.CENTER
                 })
               }
               .width('100%')
-              .height(56)
+              .height(this.fontModel.getDesFg(56))
               .margin({ top: 24 })
               .justifyContent(FlexAlign.SpaceBetween)
 
@@ -396,17 +417,17 @@ export struct DramaDetailInfoPage {
                   ForEach(this.tabArray, (item: string, index: number) => {
                     ListItem() {
                       Text(item)
-                        .fontColor(this.currentTabIndex === index ? 'rgba(0, 0, 0, 0.9)' :
-                          'rgba(0, 0, 0, 0.4)')
-                        .fontSize(14)
-                        .height(19)
+                        .fontColor(this.currentTabIndex === index ? $r('sys.color.font_primary') :
+                          $r('sys.color.font_tertiary'))
+                        .fontSize(this.fontModel.getFg(14))
+                        .height(this.fontModel.getDesFg(19))
                     }.onClick(() => {
                       this.currentTabIndex = index
                     })
                   }, (item: string, index: number) => item + index)
                 }.width('100%')
                 .listDirection(Axis.Horizontal)
-                .height(19)
+                .height(this.fontModel.getDesFg(19))
                 .margin({ bottom: 16 })
 
                 Tabs({ index: this.currentTabIndex, controller: this.controller }) {
@@ -424,9 +445,9 @@ export struct DramaDetailInfoPage {
                                     .height(48)
                                     .fontColor(this.currentIndex === (index * this.spliceNum + indexIndex) ? '#EC6E45' :
                                       $r('sys.color.font_primary'))
-                                    .fontSize($r('sys.float.Body_M'))
+                                    .fontSize(this.fontModel.getFg(14))
                                     .backgroundColor(this.currentIndex === (index * this.spliceNum + indexIndex) ?
-                                      'rgba(236, 110, 69, 0.05)' : $r('sys.color.background_secondary'))
+                                      'rgba(236, 110, 69, 0.05)' : $r('sys.color.comp_background_tertiary'))
                                   if (this.currentIndex === (index * this.spliceNum + indexIndex)) {
                                     Image(getMedia('app.media.playing'))
                                       .width(12)
@@ -438,9 +459,10 @@ export struct DramaDetailInfoPage {
                                 if (indexIndex > 10 && index === 0 || index > 0) {
                                   Text('VIP')
                                     .textAlign(TextAlign.Center)
-                                    .fontSize(6)
+                                    .fontSize(fp2pxUtil(8))
                                     .width(13)
                                     .height(11)
+                                    .fontColor($r('sys.color.font_primary'))
                                     .backgroundColor('rgba(255,215,0,0.36)')
                                 }
                               }
@@ -463,9 +485,9 @@ export struct DramaDetailInfoPage {
                                     .height(48)
                                     .fontColor(this.currentIndex === (index * this.spliceNum + indexIndex) ? '#EC6E45' :
                                       $r('sys.color.font_primary'))
-                                    .fontSize($r('sys.float.Body_M'))
+                                    .fontSize(this.fontModel.getFg(14))
                                     .backgroundColor(this.currentIndex === (index * this.spliceNum + indexIndex) ?
-                                      'rgba(236, 110, 69, 0.05)' : $r('sys.color.background_secondary'))
+                                      'rgba(236, 110, 69, 0.05)' : $r('sys.color.comp_background_tertiary'))
                                   if (this.currentIndex === (index * this.spliceNum + indexIndex)) {
                                     Image(getMedia('app.media.playing'))
                                       .width(12)
@@ -477,9 +499,10 @@ export struct DramaDetailInfoPage {
                                 if (indexIndex > 10 && index === 0 || index > 0) {
                                   Text('VIP')
                                     .textAlign(TextAlign.Center)
-                                    .fontSize(6)
+                                    .fontSize(fp2pxUtil(8))
                                     .width(13)
                                     .height(11)
+                                    .fontColor($r('sys.color.font_primary'))
                                     .backgroundColor('rgba(255,215,0,0.36)')
                                 }
                               }
@@ -534,7 +557,7 @@ export struct DramaDetailInfoPage {
 
               Column()
                 .width('100%')
-                .height(156)
+                .height(this.fontModel.getDesFg(156))
             }
             .width('100%')
           }
@@ -554,11 +577,11 @@ export struct DramaDetailInfoPage {
                 .width(21)
                 .height(21)
               Text('收藏')
-                .fontSize(10)
+                .fontSize(fp2pxUtil(10))
                 .lineHeight(13)
                 .margin({ top: 4 })
             }
-            .width(48)
+            .width(this.fontModel.getDesFg(48))
             .margin({ right: 12 })
             .onClick(() => {
               if (this.userInfo.isPhoneAssociated) {
@@ -578,17 +601,17 @@ export struct DramaDetailInfoPage {
 
             Row() {
               Row({ space: 16 }) {
-                Image(getMedia('app.media.continue_play'))
-                  .width(12)
-                  .height(14)
+                SymbolGlyph($r('sys.symbol.play_fill'))
+                  .fontSize(fp2pxUtil(14))
+                  .fontColor([$r('sys.color.icon_primary')])
                 Text('继续播放')
                   .lineHeight(21)
-                  .fontSize(16)
+                  .fontSize(fp2pxUtil(16))
                   .fontWeight(500)
               }
             }
             .borderRadius(20)
-            .backgroundColor('rgba(0, 0, 0, 0.05)')
+            .backgroundColor($r('sys.color.comp_background_tertiary'))
             .justifyContent(FlexAlign.Center)
             .layoutWeight(1)
             .height(40)
@@ -602,7 +625,7 @@ export struct DramaDetailInfoPage {
           .padding({ left: 16, right: 16 })
         }
         .width('100%')
-        .backgroundColor(getColor('app.color.normal_background_color'))
+        .backgroundColor($r('sys.color.background_primary'))
       }
     }
     .onBackPressed(() => {
@@ -610,7 +633,6 @@ export struct DramaDetailInfoPage {
       appRouter.back(true)
       return true
     })
-    .backgroundColor(getColor('app.color.normal_background_color'))
     .padding({
       top: `${this.getUIContext().px2vp(this.statusBarHeight.value)}vp`,
       bottom: `${this.getUIContext().px2vp(this.aiBarHeight.value)}vp`
@@ -629,29 +651,30 @@ struct RecommendView {
   @Event onItemClick: Function
   @Local rotating: number = 0
   @Event changeRecommendList: () => void
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
 
   build() {
     Column() {
       Row() {
         Text('猜你喜欢')
-          .height(24)
-          .fontSize($r('sys.float.Subtitle_L'))
+          .height(this.fontModel.getDesFg(24))
+          .fontSize(this.fontModel.getFg(18))
           .fontWeight(FontWeight.Bold)
           .fontColor($r('sys.color.font_primary'))
           .margin({ bottom: 12 })
         Row() {
-          Image(getMedia('app.media.ic_public_refresh'))
-            .width(14)
-            .height(14)
+          SymbolGlyph($r('sys.symbol.arrow_clockwise'))
+            .fontSize(this.fontModel.getFg(14))
+            .fontColor([$r('sys.color.icon_secondary')])
             .margin({ right: 4 })
             .rotate({ angle: this.rotating })
             .animation({ duration: 300, curve: Curve.Linear })
           Text('换一批')
-            .fontSize(12)
-            .lineHeight(16)
-            .fontColor('rgba(0, 0, 0, 0.6)')
+            .fontSize(this.fontModel.getFg(12))
+            .lineHeight(this.fontModel.getDesFg(16))
+            .fontColor($r('sys.color.font_secondary'))
         }
-        .height(16)
+        .height(this.fontModel.getDesFg(16))
         .onClick(() => {
           this.rotating += 360
           setTimeout(() => {
@@ -660,7 +683,7 @@ struct RecommendView {
         })
       }
       .width('100%')
-      .height(56)
+      .height(this.fontModel.getDesFg(56))
       .justifyContent(FlexAlign.SpaceBetween)
 
       List() {
@@ -676,14 +699,6 @@ struct RecommendView {
       .scrollBar(BarState.Off)
     }
     .width('100%')
-    .onVisibleAreaChange([0], (isExpanding: boolean, currentRatio: number) => {
-      if (isExpanding) {
-        let sysBarProps: window.SystemBarProperties = {
-          statusBarContentColor: '#000000'
-        };
-        this.mainWin.setWindowSystemBarProperties(sysBarProps)
-      }
-    })
   }
 }
 

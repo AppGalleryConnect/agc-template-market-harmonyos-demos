@@ -3,7 +3,8 @@
     "name": "home",
     "type": "shared",
     "deviceTypes": [
-      "phone"
+      "phone",
+      "tablet"
     ],
     "installationFree":true,
     'deliveryWithInstall': true,

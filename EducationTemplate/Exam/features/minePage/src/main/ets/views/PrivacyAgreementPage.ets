@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 
+import { UtilLog } from '@hw-agconnect/util-log';
 import { common } from '@kit.AbilityKit';
 import { PreferenceUtil, PreferConstant, RouterMap, RouterModule } from 'commonlib';
 
@@ -178,7 +179,9 @@ export struct PrivacyUseAlert {
         Row() {
           Button('退出应用')
             .onClick(() => {
-              this.context.terminateSelf();
+              this.context.terminateSelf().catch((e: BusinessError<void>) => {
+                UtilLog.error('terminateSelf fail, error: ' + JSON.stringify(e))
+              });
             })
             .width(140)
             .height(40)

@@ -1,0 +1,16 @@
+{
+  "color": [
+    {
+      "name": "video_duration_bg",
+      "value": "#999999"
+    },
+    {
+      "name": "profile_bg1",
+      "value": "#000000"
+    },
+    {
+      "name": "profile_bg2",
+      "value": "#000000"
+    }
+  ]
+}

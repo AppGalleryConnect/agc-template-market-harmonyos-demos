@@ -1,3 +1,4 @@
+import { fp2pxUtil } from '@agctemplate/widgets';
 import { MyStorage, speedArr, speeds } from '../models/SpeedData';
 
 @ComponentV2
@@ -10,13 +11,14 @@ export struct SpeedSegmentButton {
     Row() {
       ForEach(speeds, (item: string) => {
         Button(item)
+          .accessibilityText(`设置为${item}倍速播放`)
           .width('20%')
           .height(36)
-          .fontSize($r('sys.float.Body_M'))
+          .fontSize(fp2pxUtil(14))
           .padding('2px 8px 8px 2px')
-          .borderRadius('18px')
+          .borderRadius(18)
           .fontColor(this.storage.selectSpeed === item ? $r('sys.color.font_primary') : $r('sys.color.font_tertiary'))
-          .backgroundColor(this.storage.selectSpeed === item ? '#fff' : 'transparent')
+          .backgroundColor(this.storage.selectSpeed === item ? $r('sys.color.comp_background_primary') : 'transparent')
           .shadow(this.storage.selectSpeed === item ? { color:'#3000', radius:3 } : { color:'transparent', radius:0 })
           .onClick(() => {
             this.storage.selectSpeed = item
@@ -27,6 +29,6 @@ export struct SpeedSegmentButton {
     .width('100%')
     .height(36)
     .borderRadius(18)
-    .backgroundColor('#0d000000')
+    .backgroundColor($r('sys.color.comp_background_tertiary'))
   }
 }

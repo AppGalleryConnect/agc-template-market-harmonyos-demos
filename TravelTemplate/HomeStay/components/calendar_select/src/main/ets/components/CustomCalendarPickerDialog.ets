@@ -1,107 +1,49 @@
-import { promptAction } from '@kit.ArkUI';
-import { common } from '@kit.AbilityKit';
+import { ToastDialog } from '@hw-agconnect/ui-toast';
 import { Constants } from '../constant/Constants';
-import { DateModel, Price } from '../model/DateModel';
+import { DateModel, DayInfo, Price } from '../model/DateModel';
 import { getMonthDate, getRealTimeDate } from '../utils/Time';
-import { MonthDataSource, Month, DayInfo } from '../model/DateModel';
 import { CalendarUtil } from '../utils/CalendarUtil';
 
-@CustomDialog
+@ComponentV2
 export struct CustomCalendarPickerDialog {
-  @State contentData: MonthDataSource = new MonthDataSource();
-  @State daysInfo: DayInfo[] = [];
-  @State nextMonth: number = 1;
-  @State nextYear: number = 1;
-  @State nextMonthDay: number[] = [];
-  @State currentMonthDay: number[] = [];
-  @State initialIndex: number = 0;
-  @State currentMonth: number = 0;
-  @State currentDay: number = 0;
-  @State currentYear: number = 0;
-  @State endDate: DateModel = CalendarUtil.getEndDate();
-  @State startDate: DateModel = CalendarUtil.getStartDate();
-  @State night: number = CalendarUtil.getNight();
-  @Prop priceList: Price[];
-  cloneStartDate: DateModel = new DateModel();
-  cloneEndDate: DateModel = new DateModel();
-  controller: CustomDialogController;
-  customY: number = 0;
+  @Param priceList: Price[] = [];
+  @Event onClose: () => void = () => {};
+  @Event onConfirm: (startDate: DateModel, endDate: DateModel) => void = () => {};
+  @Local currentMonth: number = 0;
+  @Local currentDay: number = 0;
+  @Local currentYear: number = 0;
+  @Local currentMonthDay: number[] = [];
+  @Local currentMonthDaysInfo: DayInfo[] = [];
+  @Local tempStartDate: DateModel = new DateModel();
+  @Local tempEndDate: DateModel = new DateModel();
+  @Local selectStep: number = 0;
 
-  isApplySelected(day: number, month: number | string) {
-    return (day === this.startDate.day && month ===
-    this.startDate.month) || (day === this.endDate.day && month ===
-    this.endDate.month);
-  }
-
-  aboutToDisappear(): void {
-    let resetFlag = this.endDate.day === 0 ||
-      (this.startDate.day === this.cloneEndDate.day && this.startDate.month === this.cloneEndDate.month &&
-        this.startDate.year === this.cloneEndDate.year);
-    // 未选择离店时间或入住日期与上次离店日期相同
-    if (resetFlag) {
-      this.startDate =
-        new DateModel(this.cloneStartDate.day, 0, this.cloneStartDate.month, this.cloneStartDate.year);
-      this.endDate =
-        CalendarUtil.getEndDate() ??
-          new DateModel(this.cloneStartDate.day + 1, 0, this.cloneStartDate.month, this.cloneStartDate.year);
-    }
-    //写入应用内存
-    CalendarUtil.setStartDate(this.startDate);
-    CalendarUtil.setEndDate(this.endDate);
-    this.getUIContext().getHostContext()!.eventHub.emit('update_date', this.startDate, this.endDate);
-  }
-
-  // 获取当前月和下个月的日期数据
   aboutToAppear() {
-    this.cloneStartDate.year = this.startDate.year;
-    this.cloneStartDate.month = this.startDate.month;
-    this.cloneStartDate.day = this.startDate.day;
-    this.cloneEndDate.year = this.endDate.year;
-    this.cloneEndDate.month = this.endDate.month;
-    this.cloneEndDate.day = this.endDate.day;
+    let startDate = CalendarUtil.getStartDate();
+    let endDate = CalendarUtil.getEndDate();
+    this.tempStartDate = new DateModel(startDate.day, startDate.week, startDate.month, startDate.year);
+    this.tempEndDate = new DateModel(endDate.day, endDate.week, endDate.month, endDate.year);
+
+    if (this.tempEndDate.day !== 0) {
+      this.selectStep = 2;
+    }
+
     let currentDate: DateModel = getRealTimeDate() ?? new DateModel(0, 0, 0, 0);
     this.currentMonth = currentDate.month;
     this.currentDay = currentDate.day;
     this.currentYear = currentDate.year;
 
     this.currentMonthDay = getMonthDate(this.currentMonth, this.currentYear);
-    // 如果下个月是在下一年，则下个月是1月份，年份要+1
-    if (this.currentMonth === Constants.MONTHS) {
-      this.nextMonth = Constants.JANUARY;
-      this.nextYear = this.currentYear + 1;
-    } else {
-      this.nextMonth = this.currentMonth + 1;
-      this.nextYear = this.currentYear;
-    }
-    this.nextMonthDay = getMonthDate(this.nextMonth, this.nextYear);
-    let months: Month[] = [this.getCurrentMonthData(), this.getNextMonthData()];
-
-    this.contentData.pushData(months);
-
-    this.initialIndex = this.startDate.month > this.currentMonth ? 1 : 0;
-  }
-
-  getCurrentMonthData() {
-    return new Month(`${this.currentYear}年 ${this.currentMonth}月`, this.currentMonth,
-      this.currentMonthDay,
-      this.getDaysInfo(this.currentMonthDay, this.currentMonth, this.currentYear));
-  }
-
-  getNextMonthData() {
-    return new Month(`${this.nextYear}年 ${this.nextMonth}月`, this.nextMonth,
-      this.nextMonthDay,
-      this.getDaysInfo(this.nextMonthDay, this.nextMonth, this.nextYear));
+    this.currentMonthDaysInfo = this.getDaysInfo(this.currentMonthDay, this.currentMonth, this.currentYear);
   }
 
   getDaysInfo(day: number[], month: number, year: number): DayInfo[] {
     let daysInfo: DayInfo[] = [];
-
     day.forEach((item: number) => {
       let dayInfo = new DayInfo();
       let priceItem = this.priceList.find((priceItem: Price) => priceItem.date ===
         `${year}-${month < 10 ? month.toString().padStart(2, '0') : month}-${item < 10 ?
           item.toString().padStart(2, '0') : item}`);
-
       if (priceItem) {
         dayInfo.day = item;
         dayInfo.price = priceItem.price;
@@ -111,273 +53,229 @@ export struct CustomCalendarPickerDialog {
       }
       daysInfo.push(dayInfo);
     });
-
     return daysInfo;
   }
 
-  getValidDay(days: number[]) {
-    return days.filter((item) => item !== 0);
-  }
-
-  getPriceFontColor(dayInfo: DayInfo, monthItem: Month) {
-    if (this.isSelectedDay(dayInfo, monthItem)) {
-      return $r('app.color.normal_bg_color');
-    }
-    return $r('app.color.keyword_type_font_color');
-  }
-
-  getFontColor(dayInfo: DayInfo, monthItem: Month) {
-    if (this.isSelectedDay(dayInfo, monthItem)) {
-      return $r('app.color.normal_bg_color');
-    }
-    return '#000000';
-  }
-
-  isTransparent(dayInfo: DayInfo, monthItem: Month) {
-    // 跨年情况，1月可选
-    return this.isCruMonthAvailable(dayInfo, monthItem) || monthItem.num > this.currentMonth ||
-      this.currentMonth === 12;
-  }
-
-  isEnable(dayInfo: DayInfo, monthItem: Month) {
-    // 不展示日期不可点击
+  isEnable(dayInfo: DayInfo) {
     if (dayInfo.day === 0) {
       return false;
     }
+    return dayInfo.day >= this.currentDay;
+  }
 
-    // 跨年情况，1月可选
-    if (monthItem.num > this.currentMonth || (this.currentMonth === 12 && monthItem.num === 1)) {
-      return true;
+  isSelectedDay(dayInfo: DayInfo) {
+    let isStart = dayInfo.day === this.tempStartDate.day && this.currentMonth === this.tempStartDate.month;
+    let isEnd = dayInfo.day === this.tempEndDate.day && this.currentMonth === this.tempEndDate.month;
+    return isStart || isEnd;
+  }
+
+  isInTravel(dayInfo: DayInfo) {
+    if (this.tempEndDate.day === 0 || this.tempStartDate.day === 0) {
+      return false;
     }
-    return dayInfo.day >= this.currentDay && monthItem.num ===
-    this.currentMonth;
-  }
-
-  isSelectedDay(dayInfo: DayInfo, monthItem: Month) {
-    return (dayInfo.day === this.startDate.day && monthItem.num ===
-    this.startDate.month) || (dayInfo.day === this.endDate.day && monthItem.num ===
-    this.endDate.month);
-  }
-
-  isCruMonthAvailable(dayInfo: DayInfo, monthItem: Month) {
-    return (dayInfo.day >= this.currentDay && monthItem.num ===
-    this.currentMonth);
-  }
-
-  getBgColor(dayInfo: DayInfo, monthItem: Month): Resource {
-    if (this.isSelectedDay(dayInfo, monthItem)) {
-      return $r('app.color.keyword_type_font_color');
-    } else if (this.isInTravel(dayInfo, monthItem)) {
-      return $r('app.color.mid_bg_color');
+    if (dayInfo.day === 0) {
+      return false;
     }
-    return $r('app.color.normal_bg_color');
+    if (this.tempStartDate.month === this.tempEndDate.month && this.currentMonth === this.tempStartDate.month) {
+      return dayInfo.day > this.tempStartDate.day && dayInfo.day < this.tempEndDate.day;
+    }
+    if (this.currentMonth === this.tempStartDate.month) {
+      return dayInfo.day > this.tempStartDate.day;
+    }
+    if (this.currentMonth === this.tempEndDate.month) {
+      return dayInfo.day < this.tempEndDate.day;
+    }
+    return false;
   }
 
-  isInTravel(dayInfo: DayInfo, monthItem: Month) {
-    let notInSameYear =
-      ((this.endDate.month === 1 && this.startDate.month === 12) && dayInfo.day <= this.endDate.day && monthItem.num ===
-      this.endDate.month && dayInfo.day !== 0) ||
-        ((this.endDate.month === 1 && this.startDate.month === 12) && dayInfo.day >= this.startDate.day &&
-          monthItem.num ===
-          this.startDate.month && dayInfo.day !== 0);
-    let inSameMonth = (dayInfo.day >= this.startDate.day && monthItem.num ===
-    this.startDate.month) && (dayInfo.day <= this.endDate.day && monthItem.num ===
-    this.startDate.month);
-    let notInSameMonth =
-      (this.endDate.month > this.startDate.month && dayInfo.day <= this.endDate.day && monthItem.num ===
-      this.endDate.month && dayInfo.day !== 0) ||
-        (this.endDate.month > this.startDate.month && dayInfo.day >= this.startDate.day && monthItem.num ===
-        this.startDate.month && dayInfo.day !== 0);
-
-    return inSameMonth || notInSameMonth || notInSameYear;
+  isRangeStart(dayInfo: DayInfo) {
+    if (this.tempEndDate.day === 0) {
+      return false;
+    }
+    return dayInfo.day === this.tempStartDate.day && this.currentMonth === this.tempStartDate.month;
   }
 
-  // 显示日历布局的每个月上方的年月信息
-  @Builder
-  itemHead(text: string) {
-    Text(text)
-      .backgroundColor(Color.White)
-      .width(Constants.FULL_SCREEN)
-      .fontSize(14)
-      .textAlign(TextAlign.Center)
-      .fontColor(Color.Black)
-      .fontWeight(500);
+  isRangeEnd(dayInfo: DayInfo) {
+    if (this.tempEndDate.day === 0) {
+      return false;
+    }
+    return dayInfo.day === this.tempEndDate.day && this.currentMonth === this.tempEndDate.month;
   }
 
-  // 自定义日历选取器内容
+  hasRangeLeft(dayInfo: DayInfo) {
+    return this.isInTravel(dayInfo) || this.isRangeEnd(dayInfo);
+  }
+
+  hasRangeRight(dayInfo: DayInfo) {
+    return this.isInTravel(dayInfo) || this.isRangeStart(dayInfo);
+  }
+
+  getFontColor(dayInfo: DayInfo) {
+    if (this.isSelectedDay(dayInfo) || this.isInTravel(dayInfo)) {
+      return $r('sys.color.font_on_primary');
+    }
+    if (dayInfo.day === 0 || !this.isEnable(dayInfo)) {
+      return $r('sys.color.font_tertiary');
+    }
+    return $r('sys.color.font_primary');
+  }
+
+  getPriceFontColor(dayInfo: DayInfo) {
+    if (this.isSelectedDay(dayInfo) || this.isInTravel(dayInfo)) {
+      return $r('sys.color.font_on_primary');
+    }
+    return $r('sys.color.font_secondary');
+  }
+
   build() {
     Column() {
-      Column() {
-        Row() {
-          Column() {
-            Text('入住日期')
-              .fontColor(Color.Gray)
-              .fontSize(12);
-            Text(`${this.startDate?.month}月${this.startDate?.day}日`)
-              .margin(6)
-              .fontSize(18);
-          };
+      Row() {
+        Text('选择日期')
+          .fontSize(20)
+          .fontColor($r('sys.color.font_primary'))
+          .fontWeight(FontWeight.Bold);
 
-          Column() {
-            Button(`${this.night}晚`)
-              .height(24)
-              .fontSize(12)
-              .backgroundColor(Color.White)
-              .border({ radius: 10, width: 1 })
-              .fontColor(Color.Black)
-              .padding({
-                left: 12,
-                right: 12,
-                top: 4,
-                bottom: 4,
-              });
-          }.justifyContent(FlexAlign.Center);
+        Blank();
 
-          Column() {
-            Text('离店日期')
-              .fontColor(Color.Gray)
-              .fontSize(12);
-            Text(`${this.endDate?.month}月${this.endDate?.day}日`)
-              .margin(6)
-              .fontSize(18);
-          };
-        }
-        .justifyContent(FlexAlign.SpaceBetween)
-        .alignItems(VerticalAlign.Center)
-        .width(Constants.FULL_SCREEN)
-        .backgroundColor('#F5F6FA')
-        .borderRadius(8)
-        .margin(16)
-        .padding(16);
-      }.width(Constants.FULL_SCREEN).padding(16);
-
-      // 显示周信息，从周日开始到周六
-      List() {
-        ForEach(Constants.WEEK, (weekInformation: string) => {
-          ListItem() {
-            Text(weekInformation)
-              .textAlign(TextAlign.Center)
-              .width(Constants.FULL_SCREEN)
-              .fontSize(16)
-              .fontColor(Color.Black);
-          }
-          .width('14.3%');
-        }, (item: string) => item);
+        Image($r('app.media.ic_right_close'))
+        .width(40)
+        .height(40)
+        .onClick(() => {
+          this.onClose();
+        });
       }
       .width(Constants.FULL_SCREEN)
-      .height(20)
-      .listDirection(Axis.Horizontal)
-      .scrollBar(BarState.Off);
+      .padding({ left: 16, right: 16, top: 16, bottom: 8 });
 
-      Divider().vertical(false).width(Constants.FULL_SCREEN).margin({ top: 16 });
+      Text(`${this.currentYear}年${this.currentMonth}月`)
+        .fontColor($r('sys.color.font_primary'))
+        .fontWeight(FontWeight.Medium)
+        .width(Constants.FULL_SCREEN)
+        .textAlign(TextAlign.Start)
+        .padding({ left: 16, top: 12, bottom: 8 });
 
-      Scroll() {
-        List({ initialIndex: this.initialIndex }) {
-          LazyForEach(this.contentData, (monthItem: Month) => {
-            ListItemGroup({ header: this.itemHead(monthItem.month) }) {
-              ListItem() {
-                Grid() {
-                  ForEach(monthItem.daysInfo, (dayInfo: DayInfo, index: number) => {
-                    GridItem() {
-                      Column() {
-                        Text(`${dayInfo.day ? dayInfo.day.toString() : ''}`)
-                          .fontSize(14)
-                          .fontColor(this.getFontColor(dayInfo, monthItem))
-                          .opacity(this.isTransparent(dayInfo, monthItem) ? 1 : 0.2);
+      Grid() {
+        ForEach(Constants.WEEK, (weekInformation: string) => {
+          GridItem() {
+            Text(weekInformation)
+              .textAlign(TextAlign.Center)
+              .fontSize(12)
+              .fontColor($r('sys.color.font_primary'));
+          }
+          .height(33);
+        }, (item: string) => item);
 
-                        if (this.priceList.length && dayInfo.price !== 0) {
-                          Text(`￥${(dayInfo.price * 100 / 100)}`)
-                            .fontSize(10)
-                            .fontColor(this.getPriceFontColor(dayInfo, monthItem));
-                        }
-                      };
-                    }
-                    .enabled(this.isEnable(dayInfo, monthItem))
-                    .backgroundColor(this.getBgColor(dayInfo, monthItem))
-                    .onClick(() => {
-                      this.selectDate(dayInfo, monthItem);
-                    });
-                  }, (item: DayInfo, index: number) => item.day.toString() + index.toString());
+        ForEach(this.currentMonthDaysInfo, (dayInfo: DayInfo, index: number) => {
+          GridItem() {
+            Stack() {
+              Row() {
+                if (this.hasRangeLeft(dayInfo)) {
+                  Row().width('50%').height(33).backgroundColor($r('sys.color.comp_emphasize_secondary'));
+                } else {
+                  Row().width('50%').height(33);
                 }
-                .columnsTemplate('1fr 1fr 1fr 1fr 1fr 1fr 1fr')
-                .rowsTemplate(Math.floor(monthItem.daysInfo.length / 7) === 6 ? '1fr 1fr 1fr 1fr 1fr 1fr' :
-                  '1fr 1fr 1fr 1fr 1fr')
-                .padding(0);
-              }.height(`${Math.floor(monthItem.daysInfo.length / 7) * 42}`);
-            }.margin({ top: 24 });
-          }, (item: Month) => item.month);
-        }
-        .edgeEffect(EdgeEffect.None)
-        .scrollBar(BarState.Off)
-        .sticky(StickyStyle.Header);
-      };
+                if (this.hasRangeRight(dayInfo)) {
+                  Row().width('50%').height(33).backgroundColor($r('sys.color.comp_emphasize_secondary'));
+                } else {
+                  Row().width('50%').height(33);
+                }
+              }
+              .width('100%')
+              .height(33);
+
+              Column({ space: 1 }) {
+                Text(`${dayInfo.day ? dayInfo.day.toString() : ''}`)
+                  .fontSize(14)
+                  .fontWeight(FontWeight.Bold)
+                  .fontColor(this.getFontColor(dayInfo));
+
+                if (this.priceList.length && dayInfo.price !== 0) {
+                  Text(`￥${dayInfo.price}`)
+                    .fontSize(8)
+                    .fontWeight(FontWeight.Bold)
+                    .fontColor(this.getPriceFontColor(dayInfo));
+                }
+              }
+              .justifyContent(FlexAlign.Center)
+              .width(33)
+              .height(33)
+              .borderRadius(this.isSelectedDay(dayInfo) ? 16.5 : 0)
+              .backgroundColor(this.isSelectedDay(dayInfo) ? $r('sys.color.comp_background_emphasize') :
+                Color.Transparent);
+            }
+            .width('100%')
+            .height(33)
+          }
+          .enabled(this.isEnable(dayInfo))
+          .onClick(() => {
+            this.selectDate(dayInfo);
+          });
+        }, (item: DayInfo, index: number) => item.day.toString() + index.toString());
+      }
+      .columnsTemplate('1fr 1fr 1fr 1fr 1fr 1fr 1fr')
+      .rowsGap(12)
+      .columnsGap(0)
+      .width(Constants.FULL_SCREEN)
+      .padding(16);
+
+      Row({ space: 12 }) {
+        Button('取消')
+          .borderRadius($r('sys.float.corner_radius_level10'))
+          .height(40)
+          .layoutWeight(1)
+          .backgroundColor($r('sys.color.comp_background_tertiary'))
+          .fontColor($r('sys.color.font_primary'))
+          .onClick(() => {
+            this.onClose();
+          });
+
+        Button('确定')
+          .borderRadius($r('sys.float.corner_radius_level10'))
+          .height(40)
+          .layoutWeight(1)
+          .backgroundColor($r('sys.color.comp_background_emphasize'))
+          .fontColor($r('sys.color.font_on_primary'))
+          .enabled(this.tempEndDate.day !== 0)
+          .onClick(() => {
+            this.onConfirm(this.tempStartDate, this.tempEndDate);
+          });
+      }
+      .width(Constants.FULL_SCREEN)
+      .padding({ left: 16, right: 16, top: 12, bottom: 44 });
     }
-    .padding({ bottom: 16 })
     .width(Constants.FULL_SCREEN)
+    .backgroundColor($r('sys.color.background_primary'))
     .borderRadius({
       topLeft: $r('sys.float.corner_radius_level8'),
       topRight: $r('sys.float.corner_radius_level8'),
     })
-    .backgroundColor($r('sys.color.comp_background_primary'))
     .alignItems(HorizontalAlign.Center);
   }
 
-  selectDate(dayInfo: DayInfo, monthItem: Month) {
-    let weekIndex = monthItem.days.indexOf(dayInfo.day) % Constants.WEEK_NUMBER;
-    // 离店日期不为空
-    if (this.endDate.day !== 0) {
-      //清空离店日期
-      this.startDate.day = dayInfo.day;
-      this.startDate.month = monthItem.num;
-      this.startDate.week = weekIndex;
-      this.startDate.year = Number(monthItem.month.split('年')[0]);
-      this.endDate = new DateModel(0, 0, 0, this.currentYear);
-      this.getUIContext().getPromptAction().showToast({
-        message: '请选择离店日期',
-        duration: 200,
-      });
+  selectDate(dayInfo: DayInfo) {
+    let weekIndex = this.currentMonthDay.indexOf(dayInfo.day) % Constants.WEEK_NUMBER;
+
+    if (this.selectStep === 0 || this.selectStep === 2) {
+      this.tempStartDate = new DateModel(dayInfo.day, weekIndex, this.currentMonth, this.currentYear);
+      this.tempEndDate = new DateModel(0, 0, 0, 0);
+      this.selectStep = 1;
+      ToastDialog.showToast({ message: '请选择离店日期' });
     } else {
-      let endYear = Number(monthItem.month.split('年')[0]);
-      if (this.startDate.day === dayInfo.day && this.startDate.month === monthItem.num &&
-        this.startDate.year === endYear) {
-        this.getUIContext().getPromptAction().showToast({
-          message: '入住日期与离店日期不能为同一天',
-          duration: 200,
-        });
+      if (dayInfo.day === this.tempStartDate.day && this.currentMonth === this.tempStartDate.month) {
+        ToastDialog.showToast({ message: '入住日期与离店日期不能为同一天' });
         return;
       }
 
-      this.endDate.day = dayInfo.day;
-      this.endDate.month = monthItem.num;
-      this.endDate.week = weekIndex;
-      this.endDate.year = endYear;
+      let endDate = new DateModel(dayInfo.day, weekIndex, this.currentMonth, this.currentYear);
 
-      if ((this.startDate.month > this.endDate.month && this.startDate.year === this.endDate.year) ||
-        (this.startDate.month === this.endDate.month && this.startDate.day > this.endDate.day) ||
-        (this.startDate.year > this.endDate.year && this.startDate.month < this.endDate.month)) {
-        this.swapDate(this.startDate, this.endDate);
+      if (this.tempStartDate.day > endDate.day) {
+        let tmp = this.tempStartDate;
+        this.tempStartDate = new DateModel(endDate.day, endDate.week, endDate.month, endDate.year);
+        this.tempEndDate = new DateModel(tmp.day, tmp.week, tmp.month, tmp.year);
+      } else {
+        this.tempEndDate = endDate;
       }
-
-      this.calcNight();
-      this.controller.close();
+      this.selectStep = 2;
     }
-  }
-
-  swapDate(start: DateModel, end: DateModel) {
-    let startInfo = [start.day, start.month, start.year];
-    let endInfo = [end.day, end.month, end.year];
-
-    end.set(startInfo[0], startInfo[1], startInfo[2]);
-    start.set(endInfo[0], endInfo[1], endInfo[2]);
-  }
-
-  calcNight() {
-    if (this.startDate.month === this.endDate.month) {
-      this.night = this.endDate.day - this.startDate.day;
-    } else {
-      let curentMonthDays = getMonthDate(this.startDate.month, this.startDate.year).filter((item) => item !== 0).length;
-      this.night = curentMonthDays - this.startDate.day + this.endDate.day;
-    }
-    CalendarUtil.setNight(this.night);
   }
 }

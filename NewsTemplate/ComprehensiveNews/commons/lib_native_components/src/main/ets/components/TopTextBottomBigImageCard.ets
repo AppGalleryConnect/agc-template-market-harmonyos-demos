@@ -42,7 +42,7 @@ struct NativeComponent {
               Stack() {
                 BaseImage({
                   url: item.surfaceUrl,
-                  downloadWithoutWlan: this.settingInfo.network.downloadWithoutWlan
+                  downloadWithoutWlan: this.settingInfo.network.downloadWithoutWlan,
                 })
                   .width(CommonConstants.FULL_PERCENT)
                   .clip(true)
@@ -51,7 +51,7 @@ struct NativeComponent {
 
               BaseImage({
                 url: item.picVideoUrl,
-                downloadWithoutWlan: this.settingInfo.network.downloadWithoutWlan
+                downloadWithoutWlan: this.settingInfo.network.downloadWithoutWlan,
               })
                 .width(CommonConstants.FULL_PERCENT)
                 .clip(true)
@@ -59,8 +59,8 @@ struct NativeComponent {
             }
           }
           .id('news_flow_tb' + this.cardData.extraInfo.channelId + this.cardData.extraInfo.flowIndex +
-          this.cardData.extraInfo.flexId)
-        },(item: PostImgList) => JSON.stringify(item))
+            this.cardData.extraInfo.flexId)
+        }, (item: PostImgList) => JSON.stringify(item))
       }
       .listDirection(Axis.Horizontal)
 
@@ -73,7 +73,7 @@ struct NativeComponent {
     .onClick(() => {
       this.cardViewModel.pushToNewsDetails(this.cardData, '',
         'news_flow_tb' + this.cardData.extraInfo.channelId + this.cardData.extraInfo.flowIndex +
-        this.cardData.extraInfo.flexId)
+          this.cardData.extraInfo.flexId)
     })
   }
 }

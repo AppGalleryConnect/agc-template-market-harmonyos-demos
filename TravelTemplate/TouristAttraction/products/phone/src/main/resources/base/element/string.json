@@ -29,12 +29,16 @@
       "value": "松山湖景区"
     },
     {
+      "name": "location_reason",
+      "value": "地图导览和定位功能需要允许应用运行时获取位置信息"
+    },
+    {
       "name": "agcit_40717667622022212647",
       "value": "@ohos-agcit/tourist-attraction/1.0.0"
     },
     {
       "name": "agcit_huawei_tourist_attraction",
-      "value": "1.0.1"
+      "value": "1.0.4"
     }
   ]
 }

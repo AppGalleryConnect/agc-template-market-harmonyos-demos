@@ -1,8 +1,8 @@
 import { TypePicker, UICalendarPicker } from '@hw-agconnect/ui-calendar-picker';
-import { CommonUtil, Constant, Logger } from 'common';
+import { CommonUtil, Logger } from 'common';
 import { TicketVM } from '../viewmodel/TicketVM';
 
-@Component
+@ComponentV2
 export struct UICalendar {
   vm: TicketVM = TicketVM.instance;
 
@@ -24,14 +24,18 @@ export struct UICalendar {
         Logger.info('select date is ' + this.vm.selectedDate);
       },
     }) {
-      Row() {
-        Text('更多日期').maxLines(2).opacity(0.6).fontSize(14).padding(4);
-        Image($r('app.media.chevron_right')).size({ width: 12, height: 24 });
+      Row({space:4}) {
+        Text('更多日期').maxLines(2).width(29).fontColor($r('sys.color.font_primary')).fontSize($r('sys.float.Body_S')).textAlign(TextAlign.End);
+        SymbolGlyph($r('sys.symbol.chevron_right'))
+          .width(12)
+          .height(24)
+          .fontSize(24)
+          .fontColor([$r('sys.color.icon_fourth')])
       }
-      .borderRadius(8)
-      .height(Constant.FULL_PERCENT)
+      .padding({left:8,top:8,bottom:8})
+      .height(54)
       .alignItems(VerticalAlign.Center)
-      .border({ width: 1, radius: 8, color: Color.Black });
+      .backgroundColor($r('sys.color.comp_background_primary'))
     };
   }
 }

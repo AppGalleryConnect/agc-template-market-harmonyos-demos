@@ -1,7 +1,7 @@
 import { AbilityConstant, UIAbility, Want, Configuration } from '@kit.AbilityKit';
 import { window, KeyboardAvoidMode } from '@kit.ArkUI';
 import { deviceInfo } from '@kit.BasicServicesKit';
-import { BundleUtils, Logger } from 'lib_common';
+import { BundleUtils, GlobalContext, Logger } from 'lib_common';
 import { NetworkUtils } from '../common/NetworkUtils';
 import { WindowUtils } from '../common/WindowUtils';
 import { AppUtils } from '../common/AppUtils';
@@ -24,6 +24,7 @@ export default class EntryAbility extends UIAbility {
 
   onWindowStageCreate(windowStage: window.WindowStage): void {
     Logger.info(TAG, 'Ability onWindowStageCreate');
+    GlobalContext.initContext(this.context, windowStage)
     this.handleWindowStageCreateOrRestore(windowStage);
   }
 
@@ -50,23 +51,31 @@ export default class EntryAbility extends UIAbility {
 
   handleWindowStageCreateOrRestore(windowStage: window.WindowStage) {
     WindowUtils.setWinConfig(windowStage);
-    windowStage.loadContent('pages/Index', (err) => {
-      if (err.code) {
-        Logger.error(TAG, 'Failed to load the content. Cause: ' + JSON.stringify(err));
-        return;
-      }
-      Logger.info(TAG, 'Succeeded in loading the content.');
-      windowStage.getMainWindowSync().getUIContext().setKeyboardAvoidMode(KeyboardAvoidMode.RESIZE);
+    try {
+      windowStage.loadContent('pages/Index', (err) => {
+        if (err.code) {
+          Logger.error(TAG, 'Failed to load the content. Cause: ' + JSON.stringify(err));
+          return;
+        }
+        Logger.info(TAG, 'Succeeded in loading the content.');
+        try {
+          windowStage.getMainWindowSync().getUIContext().setKeyboardAvoidMode(KeyboardAvoidMode.RESIZE);
+        } catch (error) {
+          Logger.error(TAG, 'setKeyboardAvoidMode error: ' + JSON.stringify(error));
+        }
 
-      AppUtils.setAppTheme();
-      AppUtils.setColorMode();
-      BundleUtils.getBundleInfo();
-      // 判断是否是模拟器
-      let productMode = deviceInfo.productModel;
-      if (productMode !== 'emulator') {
-        NetworkUtils.initNetwork();
-      }
-    });
+        AppUtils.setAppTheme();
+        AppUtils.setColorMode();
+        BundleUtils.getBundleInfo();
+        // 判断是否是模拟器
+        let productMode = deviceInfo.productModel;
+        if (productMode !== 'emulator') {
+          NetworkUtils.initNetwork();
+        }
+      });
+    } catch (error) {
+      Logger.error(TAG, 'loadContent error: ' + JSON.stringify(error));
+    }
   }
 
   setNeedLoadContent(value: boolean) {

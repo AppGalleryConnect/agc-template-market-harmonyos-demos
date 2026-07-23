@@ -62,6 +62,7 @@ function mapRoomTypeList(roomTypeResp: RoomType[]): RoomType[] {
       roomTypeDetailImageList: item.roomTypeDetailImageList,
       labelList: item.labelList,
       introduction: item.introduction,
+      bedroomNum: item.bedroomNum,
       occupancyLimit: item.occupancyLimit,
       roomTypeBedList: roomTypeBedList.length ? item.roomTypeBedList : [],
       roomTypePriceList: roomTypePriceList.length ? item.roomTypePriceList : [],

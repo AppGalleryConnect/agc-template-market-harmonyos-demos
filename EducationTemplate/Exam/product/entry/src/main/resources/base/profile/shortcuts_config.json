@@ -1,0 +1,34 @@
+{
+  "shortcuts": [
+    {
+      "shortcutId": "id_exam_search",
+      "label": "$string:search_question",
+      "icon": "$media:icon_magni_fyingglass",
+      "wants": [
+        {
+          "bundleName": "com.example.xxx",
+          "moduleName": "entry",
+          "abilityName": "EntryAbility",
+          "parameters": {
+            "shortCutKey": "SearchInputPage"
+          }
+        }
+      ]
+    },
+    {
+      "shortcutId": "id_daily_practice",
+      "label": "$string:daily_practice",
+      "icon": "$media:icon_doing_exercises",
+      "wants": [
+        {
+          "bundleName": "com.example.xxx",
+          "moduleName": "entry",
+          "abilityName": "EntryAbility",
+          "parameters": {
+            "shortCutKey": "AnswerQuestionsPage"
+          }
+        }
+      ]
+    }
+  ]
+}

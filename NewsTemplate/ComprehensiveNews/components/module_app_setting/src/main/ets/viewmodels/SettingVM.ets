@@ -256,6 +256,10 @@ export class SettingViewModel extends BaseViewModel {
     if (!this.context) {
       return;
     }
-    this.context.getApplicationContext().off('environment', this.callbackId);
+    try {
+      this.context.getApplicationContext().off('environment', this.callbackId);
+    } catch (e) {
+      Logger.error(TAG, 'handleDark fail, error: ' + JSON.stringify(e));
+    }
   }
 }

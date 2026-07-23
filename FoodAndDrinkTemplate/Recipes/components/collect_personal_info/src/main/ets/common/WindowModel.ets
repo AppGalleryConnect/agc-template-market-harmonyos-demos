@@ -57,7 +57,11 @@ export class WindowModel {
    */
   public unRegisterWindowBottomPadding() {
     window.getLastWindow(this.context).then(currentWindow => {
-      currentWindow.off('avoidAreaChange', this.getWindowBottomPadding);
+      try {
+        currentWindow.off('avoidAreaChange', this.getWindowBottomPadding);
+      } catch (error) {
+        UtilLog.error(DOMAIN, TAG, `unRegisterKeyboardListener failed. error: ${JSON.stringify(error)}`);
+      }
     }).catch((err: BusinessError) => {
       UtilLog.error(DOMAIN, TAG, `unRegisterWindowBottomPadding failed. error: ${JSON.stringify(err)}`)
     })
@@ -85,7 +89,11 @@ export class WindowModel {
    */
   public unRegisterKeyboardListener(callback: Callback<number>) {
     window.getLastWindow(this.context).then(currentWindow => {
-      currentWindow.off('keyboardHeightChange', callback);
+      try {
+        currentWindow.off('keyboardHeightChange', callback);
+      } catch (error) {
+        UtilLog.error(DOMAIN, TAG, `unRegisterKeyboardListener failed. error: ${JSON.stringify(error)}`);
+      }
     }).catch((err: BusinessError) => {
       UtilLog.error(DOMAIN, TAG, `unRegisterKeyboardListener failed. error: ${JSON.stringify(err)}`)
     })

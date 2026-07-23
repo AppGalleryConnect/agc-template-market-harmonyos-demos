@@ -6,7 +6,15 @@ import { SafeJson } from '../json/SafeJson';
  */
 export class BundleInfoUtil {
   public static async getBundleInfo(): Promise<bundleManager.BundleInfo> {
-    return bundleManager.getBundleInfoForSelf(bundleManager.BundleFlag.GET_BUNDLE_INFO_DEFAULT);
+    try {
+      return bundleManager.getBundleInfoForSelf(bundleManager.BundleFlag.GET_BUNDLE_INFO_DEFAULT);
+    } catch (e) {
+      if (e instanceof Error) {
+        throw e;
+      } else {
+        throw new Error(`GetBundleInfo failed: ${String(e)}`);
+      }
+    }
   }
 
   public static getBundleInfoSync(): bundleManager.BundleInfo {

@@ -1,13 +1,17 @@
-import { AppStorageV2 } from '@kit.ArkUI';
+import { PersistenceV2 } from '@kit.ArkUI';
 import { UserInfo, UserInfoModel } from '../types/UserInfo';
 
 @ObservedV2
 export class AccountUtil {
-  private static _userInfo: UserInfoModel = AppStorageV2.connect(
-    UserInfoModel,
-    'userInfo',
-    () => new UserInfoModel(),
-  )!;
+  private static _userInfo: UserInfoModel = new UserInfoModel();
+
+  public static setUserInfo() {
+    AccountUtil._userInfo = PersistenceV2.connect(
+      UserInfoModel,
+      'userInfo',
+      () => new UserInfoModel(),
+    )!;
+  }
 
   public static getUserInfo(): UserInfoModel {
     return AccountUtil._userInfo;
@@ -35,6 +39,10 @@ export class AccountUtil {
 
   public static updateName(name: string) {
     AccountUtil._userInfo.nickname = name;
+  }
+
+  public static updateCellphone(cellphone: string) {
+    AccountUtil._userInfo.cellphone = cellphone;
   }
 
   public static resetInfo() {

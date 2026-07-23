@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 
+import { UIDialog } from '@hw-agconnect/ui-dialog';
 import { TopicItemModelPreference } from 'answer_questions';
 import { PreferenceUtil, PreferConstant, Logger, TopBar, RouterMap, RouterModule } from 'commonlib';
 
@@ -36,19 +37,15 @@ export struct MyNotesPage {
     Column() {
       // 顶部
       this.topBuilder();
-      Divider().color($r('sys.color.comp_divider'));
       Column() {
         if (this.noteModels.length > 0) {
           // 笔记列表
           this.noteListBuilder();
-          // 删除按钮
-          this.deleteButtonBuilder();
-
         } else {
-          Text('当前暂无笔记，您可以在练习中添加笔记。')
-            .fontSize($r('sys.float.Body_S'))
-            .fontColor($r('sys.color.icon_secondary'))
-            .height('100%');
+          Image($r('app.media.no_note'))
+            .width(120)
+            .height(150)
+            .margin({ top: 230, bottom: 36 });
         }
       }
       .width('100%')
@@ -83,35 +80,36 @@ export struct MyNotesPage {
     }
   }
 
-  /**
-   * 删除按钮
-   */
-  @Builder
-  deleteButtonBuilder() {
-    Row() {
-      Image($r('app.media.icon_delete'))
-        .width($r('app.float.vp_24'))
-        .height($r('app.float.vp_24'));
-      Text('删除')
-        .fontColor($r('sys.color.font_on_primary'))
-        .fontSize($r('sys.float.Body_L'))
-        .fontWeight(FontWeight.Medium)
-        .margin({ left: $r('app.float.vp_8') });
-    }
-    .justifyContent(FlexAlign.Center)
-    .borderRadius(20)
-    .backgroundColor('#4c5dc4')
-    .opacity(this.selectCount > 0 ? 1 : 0.4)
-    .visibility(this.isSelectDelete ? Visibility.Visible : Visibility.None)
-    .width($r('app.float.vp_312'))
-    .height(40)
-    .margin({ top: $r('app.float.vp_8'), bottom: $r('app.float.vp_8') })
-    .onClick(() => {
-      if (this.selectCount > 0) {
-        // 删除选中
-        this.deleteSelectData();
-      }
-    });
+  confirmDialog(confirmCallback: () => void) {
+    UIDialog.open({
+      title: `是否删除${this.selectCount || 1}条记录？`,
+      contentOptions: {
+        content: '将在同账号其他设备的数据中同步删除',
+        contentFontSize: 14,
+        contentFontWeight: 400,
+        contentFontColor: 'rgba(0, 0, 0, 0.9)'
+      },
+      confirmButtonOptions: {
+        button: '删除',
+        buttonFontColor: 'rgba(232, 64, 38, 1)',
+      },
+      cancelButtonOptions: {
+        button: '取消',
+        buttonFontColor: 'rgba(0, 0, 0, 0.9)',
+      },
+      showConfirmButton: true,
+      showCancelButton: true,
+      onConfirm: confirmCallback
+    })
+  }
+
+  deleteSingleData(item: NoteModel, index:number) {
+    this.swipeDelete = false;
+    this.notes.splice(index, 1);
+    this.topicItemModelPreferences.splice(index, 1);
+    this.noteModels.splice(index, 1);
+    // 更新
+    PreferenceUtil.getInstance(PreferConstant.TOPIC_NOTES).delete(item.keyID);
   }
 
   // 移除所选中的
@@ -261,12 +259,9 @@ export struct MyNotesPage {
         .height($r('app.float.vp_40'))
         .margin({ left: $r('app.float.vp_12') })
         .onClick(() => {
-          this.swipeDelete = false;
-          this.notes.splice(index, 1);
-          this.topicItemModelPreferences.splice(index, 1);
-          this.noteModels.splice(index, 1);
-          // 更新
-          PreferenceUtil.getInstance(PreferConstant.TOPIC_NOTES).delete(item.keyID);
+          this.confirmDialog(() => {
+            this.deleteSingleData(item, index)
+          })
         });
     }
     .padding($r('app.float.vp_4'))
@@ -287,35 +282,50 @@ export struct MyNotesPage {
         title: $r('app.string.my_notes')
       });
       Row() {
-        Image(!this.isSelectAll ? $r('app.media.icon_select_all_off') : $r('app.media.icon_select_all'))
-          .width($r('app.float.vp_40'))
-          .height($r('app.float.vp_40'))
-          .visibility(this.isSelectDelete ? Visibility.Visible : Visibility.Hidden)
-          .onClick(() => {
-            this.isSelectAllClick();
-          });
         Image($r('app.media.ic_public_trash'))
           .width($r('app.float.vp_40'))
           .height($r('app.float.vp_40'))
-          .margin({ left: $r('app.float.vp_8') })
-          .opacity(this.noteModels.length === 0 || this.swipeDelete ? 0.4 : 1);
-      }
-      .onClick(() => {
-        if (!this.swipeDelete && this.noteModels.length > 0) {
-          this.isSelectDelete = !this.isSelectDelete;
-          this.isSelectAll = false;
-          this.selectCount = 0;
-          this.noteModels.forEach((item: NoteModel, index: number) => {
-            item.isDelete = false;
+          .opacity(this.swipeDelete || this.selectCount === 0 ? 0.4 : 1)
+          .visibility(this.isSelectDelete ? Visibility.Visible : Visibility.Hidden)
+          .onClick(() => {
+            if (this.selectCount === 0) {
+              return;
+            }
+            this.confirmDialog(() => {
+              this.deleteSelectData()
+            })
+          })
+
+        Image($r('app.media.ic_edit'))
+          .width($r('app.float.vp_40'))
+          .height($r('app.float.vp_40'))
+          .visibility(this.isSelectDelete ? Visibility.None : Visibility.Visible)
+          .onClick(() => {
+            if (!this.swipeDelete && this.noteModels.length > 0) {
+              this.isSelectDelete = !this.isSelectDelete;
+              this.isSelectAll = false;
+              this.selectCount = 0;
+              this.noteModels.forEach((item: NoteModel, index: number) => {
+                item.isDelete = false;
+              });
+            }
           });
-        }
-      });
+
+        Image(!this.isSelectAll ? $r('app.media.icon_select_all_off') : $r('app.media.icon_select_all'))
+          .width($r('app.float.vp_40'))
+          .height($r('app.float.vp_40'))
+          .margin({ left: $r('app.float.vp_8') })
+          .visibility(this.isSelectDelete ? Visibility.Visible : Visibility.None)
+          .onClick(() => {
+            this.isSelectAllClick();
+          });
+      }
     }
     .width('100%')
-    .height($r('app.float.vp_56'))
-    .padding({ left: $r('app.float.vp_16'), right: $r('app.float.vp_16') })
+    .padding({ left: $r('app.float.vp_16'), right: $r('app.float.vp_16'), top: $r('app.float.vp_10') })
     .justifyContent(FlexAlign.SpaceBetween)
-    .backgroundColor($r('sys.color.comp_background_primary'));
+    .backgroundColor($r('sys.color.background_secondary'))
+    .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM]);
   }
 }
 

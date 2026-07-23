@@ -11,6 +11,8 @@ export class RoomType {
   roomTypeDetailImageList: string[] | Resource[] = [];
   /*标签列表 */
   labelList: string[] = [];
+  /*卧室数量 */
+  bedroomNum: number = 0;
   /*入住人数限制 */
   occupancyLimit: number = 0;
   /*房型介绍 */

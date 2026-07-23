@@ -27,6 +27,10 @@
     {
       "name": "calendarWidget_display_name",
       "value": "日历模板卡片"
+    },
+    {
+      "name": "agcit_huawei_calendar",
+      "value": "1.0.6"
     }
   ]
 }

@@ -13,13 +13,14 @@
  * limitations under the License.
  */
 
-import { AlertDialog, window } from '@kit.ArkUI';
+import { AlertDialog, AppStorageV2, window } from '@kit.ArkUI';
 import { PreferenceUtil, PreferConstant, GlobalContextUtils, RouterMap, RouterModule } from 'commonlib';
 import { QuestionsRouterModel } from 'answer_questions';
 import { RouterTable } from '../model/RouterTable';
 import { MainVM } from '../viewmodels/MainVM';
 import { common } from '@kit.AbilityKit';
 import { UtilLog } from '@hw-agconnect/util-log';
+import { UserInfo } from 'login_info';
 
 const TAG = '[Index]';
 
@@ -34,6 +35,7 @@ struct Index {
   rightButtonText = '';
   mainVM: MainVM = MainVM.instance;
   private ctx: common.UIAbilityContext = this.getUIContext().getHostContext() as common.UIAbilityContext;
+  @Local logoUser: UserInfo = AppStorageV2.connect(UserInfo, () => new UserInfo())!;
 
   backPageDialogOpen(content: string, leftButtonText: string, rightButtonText: string) {
     this.backPageDialogController = new CustomDialogController({
@@ -66,14 +68,7 @@ struct Index {
     } catch (e) {
       UtilLog.error(TAG, 'registerBreakpointListener, error: ' + JSON.stringify(e));
     }
-    //读取状态值，如果为空设置为true
-    let isFirstLaunch = PreferenceUtil.getInstance().get(PreferConstant.FIRST_LAUNCH, true) as boolean;
-    if (isFirstLaunch) {
-      //隐私政策
-      RouterModule.replace({ url: RouterMap.PRIVACY_AGREEMENT_PAGE });
-      return;
-    }
-    RouterModule.replace({ url: RouterMap.MAIN_PAGE });
+    RouterModule.replace({ url: RouterMap.LAUNCH_AD_PAGE })
   }
 
   @Builder

@@ -23,17 +23,18 @@ export interface ScenicBasicInfo {
   /*纬度*/
   latitude: number,
 
-  /*封面图片*/
-  banner: ResourceStr,
-
   /*介绍*/
   introduction: string,
+
+  /*封面图片*/
+  banner: ResourceStr,
 
   /*咨询电话*/
   consultPhone: string,
 
   /*轮播图列表*/
   detailImages: ResourceStr[]
+
   /*标签列表*/
   labels: string[]
 }
@@ -48,8 +49,8 @@ export class AttractionLiveInfo {
   @Trace currentDate: Date = new Date();
   @Trace temperature: number = 0;
   @Trace currentDayVisitors: number = 0;
-  @Trace maxVisitors: number = 0;
   @Trace maxInstantVisitors: number = 0;
+  @Trace maxVisitors: number = 0;
   @Trace weatherId: string = '';
   @Trace atmosphereId: string = '';
   @Trace name: string = '';
@@ -117,9 +118,9 @@ export class PlayInfo {
 export class TouristInfo {
   @Trace id: string = ''
   @Trace name: string = ''
-  @Trace phone: string = ''
-  @Trace cardType: number = 0
+  @Trace cardType: number = -1
   @Trace cardNo: string = ''
+  @Trace phone: string = ''
   @Trace isChecked: boolean = false
 
   constructor(id: string = '') {
@@ -145,17 +146,17 @@ export interface BasicInfo {
   /*联系电话*/
   phone: string;
 
-  /*banner图片*/
-  banner: ResourceStr;
-
-  /*banner图片*/
-  banners: ResourceStr[];
-
   /*经度*/
   longitude: number;
 
   /*纬度*/
   latitude: number;
+
+  /*banner图片*/
+  banner: ResourceStr;
+
+  /*banner图片*/
+  banners: ResourceStr[];
 
   /*详情*/
   detail: string

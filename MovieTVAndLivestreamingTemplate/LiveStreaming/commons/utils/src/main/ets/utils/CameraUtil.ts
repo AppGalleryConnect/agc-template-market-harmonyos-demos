@@ -38,9 +38,14 @@ export class CameraUtil {
     photoSelectOptions.isPreviewForSingleSelectionSupported = false;
     photoSelectOptions.isOriginalSupported = true;
     let photoPicker = new photoAccessHelper.PhotoViewPicker();
-    let res = await photoPicker.select(photoSelectOptions);
-    if (res) {
-      uris = res.photoUris;
+    try {
+      let res = await photoPicker.select(photoSelectOptions);
+      if (res) {
+        uris = res.photoUris;
+      }
+    } catch (error) {
+      let err = error as BusinessError;
+      Logger.info(TAG, `pickPicture failed, errCode = ${err.code}, errMessage = ${err.message}.`);
     }
     return uris;
   }

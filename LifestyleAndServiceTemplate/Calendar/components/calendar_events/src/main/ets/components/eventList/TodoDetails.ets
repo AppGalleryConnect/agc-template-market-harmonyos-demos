@@ -83,6 +83,7 @@ export struct TodoDetails {
                   detents: ['98%', '100%'],
                   backgroundColor: $r('sys.color.background_secondary'),
                   showClose: false,
+                  keyboardAvoidMode:SheetKeyboardAvoidMode.TRANSLATE_AND_SCROLL,
                   customContent: () => {
                     this.CalendarScheduleEdit()
                   },

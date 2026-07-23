@@ -1,19 +1,9 @@
 {
   "routerMap": [
     {
-      "name": "FeedbackPage",
-      "pageSourceFile": "src/main/ets/pages/FeedbackManagePage.ets",
-      "buildFunction": "FeedbackManagePageBuilder"
-    },
-    {
       "name": "FeedbackRecordListPage",
       "pageSourceFile": "src/main/ets/pages/RecordListPage.ets",
       "buildFunction": "RecordListPageBuilder"
-    },
-    {
-      "name": "FeedbackSubmitPage",
-      "pageSourceFile": "src/main/ets/pages/SubmitPage.ets",
-      "buildFunction": "SubmitPageBuilder"
     }
   ]
 }

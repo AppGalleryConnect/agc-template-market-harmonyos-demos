@@ -1,5 +1,5 @@
 import { display, window } from '@kit.ArkUI';
-import { emitter } from '@kit.BasicServicesKit';
+import { BusinessError, emitter } from '@kit.BasicServicesKit';
 import { UtilLog } from '@hw-agconnect/util-log';
 import * as AudioSubWindow from '../components/AudioSubWindowPlayer';
 import { AudioConstants } from '../constants/Constants';
@@ -20,10 +20,7 @@ export class MediaTools {
     if ((!MediaViewModel.getInstance().isPlaying || hasSubWindow) && isNotCreate) {
       return
     }
-    windowStage.createSubWindow(AudioConstants.AUDIO_SUB_NAME, async (err, windowClass) => {
-      if (err.code > 0) {
-        return;
-      }
+    windowStage.createSubWindow(AudioConstants.AUDIO_SUB_NAME).then(async (windowClass) => {
       try {
         // 设置子窗口加载页
         windowClass.loadContentByName(AudioSubWindow.entryName, () => {
@@ -40,6 +37,9 @@ export class MediaTools {
       } catch (err) {
         UtilLog.error(TAG, `failed to create subWindow Cause:${err}`);
       }
+    }).catch((err: BusinessError) => {
+      UtilLog.error(TAG, `failed to create subWindow Cause:${err}`);
+      return;
     })
   }
 

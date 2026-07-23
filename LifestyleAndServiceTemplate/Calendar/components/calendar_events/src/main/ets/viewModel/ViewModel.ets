@@ -7,6 +7,8 @@ import dayjs from 'dayjs'
 import { compareDates } from '../utils/Utils'
 import { eventTypeEnum, EVENT_TYPE } from '../constants/Constants'
 import { RemindEventDispatcher } from '../utils/EventDispatcher'
+import { RdbInit } from '../database/RdbInit'
+import { UserEventDB } from '../database/UserEventDB'
 
 
 @ObservedV2
@@ -23,6 +25,11 @@ export class CalendarEventVM {
       CalendarEventVM._instance = new CalendarEventVM()
     }
     return CalendarEventVM._instance
+  }
+
+  public async initDBAndLoad(context: Context) {
+    const events = await RdbInit.loadAllEvents()
+    this.userEvent.userEventList = events
   }
 
   public setEventInfo(eventInfo: UserEventItem) {
@@ -85,6 +92,7 @@ export class CalendarEventVM {
     if (!validateRes) {
       return false
     }
+    await UserEventDB.updateEvent(this.userEventInfo)
     this.userEvent.userEventList.forEach(item => {
       if (item.id === this.userEventInfo.id) {
         item.content = this.userEventInfo.content
@@ -119,12 +127,13 @@ export class CalendarEventVM {
     if (!validateRes) {
       return
     }
-    this.calendarManage.calendarEventCreate(userEventInfo).then(res => {
+    this.calendarManage.calendarEventCreate(userEventInfo).then(async res => {
       if (res.status === 'success') {
         userEventInfo.eventId = userEventInfo.eventId ? userEventInfo.eventId : res.data as number
       }
     })
-      .finally(() => {
+      .finally(async () => {
+        await UserEventDB.insertEvent(userEventInfo)
         RemindEventDispatcher.dispatchToEventChange(userEventInfo)
         this.userEvent.userEventList.unshift(userEventInfo)
         baseActionSheet.close(uiContext, 'CalendarReminder')
@@ -139,9 +148,10 @@ export class CalendarEventVM {
       confirmColor: '#E84026',
       message: '删除后将无法恢复，是否删除？',
       confirmMessage:'删除',
-      confirmAction: () => {
+      confirmAction: async () => {
         RemindEventDispatcher.dispatchToEventDelete(this.userEventInfo)
         this.calendarManage.calendarEventCreate(info, 'delete')
+        await UserEventDB.deleteEvent(info.id)
         let index = this.userEvent.userEventList.findIndex(item => item.id === info.id)
         this.userEvent.userEventList.splice(index, 1)
         if (cb) {
@@ -158,10 +168,6 @@ export class CalendarEventVM {
 
   public getPageInfo() {
     return CalendarEventVM.instance.pageInfo
-  }
-
-  public setUserEvent(userEvent: UserEvent) {
-    CalendarEventVM.instance.userEvent = userEvent
   }
 
   public setContext(context: UIContext) {

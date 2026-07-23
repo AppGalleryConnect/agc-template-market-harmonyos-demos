@@ -1,3 +1,0 @@
-.*/resources/(zh_TW|bo_CN|ug|zh_HK)/.*
-.*/resources/base/element/string.json
-.*/resources/base/element/strarray.json

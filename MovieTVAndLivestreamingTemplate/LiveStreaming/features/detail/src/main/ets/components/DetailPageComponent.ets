@@ -64,12 +64,18 @@ export struct DetailPageComponent {
   restoreDirection: number = 0
   @Local breakPoint: BreakPoint = AppStorageV2.connect(BreakPoint, AppStorageKeys.CURRENT_BREAK_POINT,
     () => new BreakPoint())!;
+  @Local isFromVertical: boolean = false
   callback: Callback<number> = (data: number) => {
     this.screenDirection = display.getDefaultDisplaySync().orientation
   }
 
   setOrientation(orientation: number) {
-    this.windowClass.setPreferredOrientation(orientation)
+    try {
+      this.windowClass.setPreferredOrientation(orientation)
+    } catch (error) {
+      let err = error as BusinessError;
+      console.error(`setOrientation failed, errCode = ${err.code}, errMessage = ${err.message}.`);
+    }
   }
 
   @Monitor('breakPoint.value')
@@ -80,7 +86,11 @@ export struct DetailPageComponent {
   changeOrientation() {
     if (this.screenDirection === PORTRAIT || this.screenDirection === PORTRAIT_INVERTED) {
       this.setOrientation(window.Orientation.AUTO_ROTATION_LANDSCAPE_RESTRICTED)
-      this.windowClass.setWindowSystemBarEnable([])
+      try {
+        this.windowClass.setWindowSystemBarEnable([])
+      } catch (e) {
+        hilog.error(0x0000, TAG, `setWindowSystemBarEnable failed: ${e}`);
+      }
       this.screenDirection = LANDSCAPE
       this.playControl.disableSwipe(true)
       this.playControl.backPressListener().registerOnBackPress(() => {
@@ -88,12 +98,17 @@ export struct DetailPageComponent {
       })
     } else {
       this.playControl.backPressListener().clearOnBackPress()
-      this.setOrientation(window.Orientation.PORTRAIT)
-      this.windowClass.setWindowSystemBarEnable(['status', 'navigation'])
+      this.setOrientation(window.Orientation.USER_ROTATION_PORTRAIT)
+      try {
+        this.windowClass.setWindowSystemBarEnable(['status', 'navigation'])
+      } catch (e) {
+        hilog.error(0x0000, TAG, `setWindowSystemBarEnable failed: ${e}`);
+      }
       this.screenDirection = PORTRAIT
       this.playControl.disableSwipe(false)
     }
     this.initPlayerLayout()
+    this.isFromVertical = true
   }
 
   onBackPressed(): void {
@@ -111,6 +126,7 @@ export struct DetailPageComponent {
       emitter.off(4)
       this.setOrientation(window.Orientation.UNSPECIFIED)
     } catch (e) {
+      hilog.error(0x0000, TAG, `aboutToDisappear failed: ${e}`);
     }
   }
 
@@ -252,15 +268,15 @@ export struct DetailPageComponent {
     this.liveInteractionMgr.onLogin = () => {
       this.playControl.pause();
       let restoreDirection: number = this.screenDirection
-      if (this.screenDirection === LANDSCAPE || this.screenDirection === LANDSCAPE_INVERTED &&
-        display.getFoldStatus() !== display.FoldStatus.FOLD_STATUS_EXPANDED && deviceInfo.deviceType === 'phone') {
+      if ((this.screenDirection === LANDSCAPE || this.screenDirection === LANDSCAPE_INVERTED) &&
+        (display.getFoldStatus() !== display.FoldStatus.FOLD_STATUS_EXPANDED && deviceInfo.deviceType === 'phone')) {
         this.changeOrientation()
       }
       RouterModule.push({
         url: RouterMap.LOGIN_PAGE, param: true, onPop: () => {
           this.playControl.play();
-          if (restoreDirection === LANDSCAPE || restoreDirection === LANDSCAPE_INVERTED &&
-            display.getFoldStatus() !== display.FoldStatus.FOLD_STATUS_EXPANDED && deviceInfo.deviceType === 'phone') {
+          if ((restoreDirection === LANDSCAPE || restoreDirection === LANDSCAPE_INVERTED) &&
+            (display.getFoldStatus() !== display.FoldStatus.FOLD_STATUS_EXPANDED && deviceInfo.deviceType === 'phone')){
             this.changeOrientation()
           }
         }
@@ -301,9 +317,6 @@ export struct DetailPageComponent {
       this.isShowPay = true
       this.payItem = item
       this.restoreDirection = this.screenDirection
-      if (this.restoreDirection === LANDSCAPE || this.restoreDirection === LANDSCAPE_INVERTED) {
-        this.changeOrientation()
-      }
     }
     this.liveInteractionMgr.setGiftData(giftData)
     this.liveInteractionMgr.onLiveClick = (liveCard: MoreLiveCard) => {
@@ -339,18 +352,10 @@ export struct DetailPageComponent {
       paySuccessEvent: () => {
         this.onPayGiftSuccess(this.payItem.name, this.payItem.price, this.payItem.id)
         this.isShowPay = false;
-        if (this.restoreDirection === LANDSCAPE || this.restoreDirection === LANDSCAPE_INVERTED) {
-          this.changeOrientation()
-          this.restoreDirection = 0
-        }
       },
       payFailEvent: () => {
         this.onPayGiftError(this.payItem.name, this.payItem.price, this.payItem.id)
         this.isShowPay = false;
-        if (this.restoreDirection === LANDSCAPE || this.restoreDirection === LANDSCAPE_INVERTED) {
-          this.changeOrientation()
-          this.restoreDirection = 0
-        }
       }
     })
   }
@@ -362,21 +367,20 @@ export struct DetailPageComponent {
           preferType: this.preferType,
           interactionMgr: this.liveInteractionMgr
 
-        }).bindSheet($$this.isShowPay, this.paymentChannelSheet(), {
-          height: '65%', onWillDismiss: () => {
-            this.isShowPay = false
-            if (this.restoreDirection === LANDSCAPE || this.restoreDirection === LANDSCAPE_INVERTED) {
-              this.changeOrientation()
-            }
-          }
         })
       } else {
         FullScreenLayer({
+          isFromVertical: this.isFromVertical,
           interactionMgr: this.liveInteractionMgr
         })
 
       }
     }
+    .bindSheet($$this.isShowPay, this.paymentChannelSheet(), {
+      height: 450, preferType: SheetType.CENTER, onWillDismiss: () => {
+        this.isShowPay = false
+      }
+    })
     .height('100%')
     .width('100%')
     .padding({

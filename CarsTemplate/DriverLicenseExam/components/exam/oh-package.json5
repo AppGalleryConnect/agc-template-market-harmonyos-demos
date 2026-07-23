@@ -1,9 +1,11 @@
 {
   "name": "exam",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "Please describe the basic information.",
   "main": "Index.ets",
   "author": "",
   "license": "Apache-2.0",
-  "dependencies": {}
+  "dependencies": {
+    "@ohos_agcit/driver_license_exam_commonlib": "file:../../commons/commonLib"
+  }
 }

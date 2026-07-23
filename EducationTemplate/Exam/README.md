@@ -10,7 +10,7 @@
 
 ## 功能介绍
 
-本模板中提供了多种组件，您可以按需选择合适的组件进行使用，所有组件存放在工程根目录的components下。
+您可以基于此模板直接定制应用，也可以挑选此模板中提供的多种组件使用，从而降低您的开发难度，提高您的开发效率。
 
 | 组件                   | 描述                | 使用指导                                             |
 |----------------------|-------------------|--------------------------------------------------|
@@ -21,6 +21,10 @@
 | 一键搜题组件（search_question） | 多功能搜题组件           | [使用指导](components/search_question/README.md)       |
 | 通用问题反馈组件（feedback）    | 问题反馈组件            | [使用指导](components/feedback/README.md)       |
 | 通用支付组件（aggregated_payment） | 支持华为支付，微信支付，支付宝支付 | [使用指导](components/aggregated_payment/README.md)  |
+| 广告组件（aggregated_ads）        | 支持展示开屏广告         | [使用指导](components/aggregated_ads/README.md)        |
+| 通用分享组件（aggregated_share）    | 支持分享到微信好友、朋友圈、QQ、微博等方式，支持碰一碰分享、生成海报、系统分享等功能    | [使用指导](components/aggregated_share/README.md)      |
+| 通用会员组件（membership）            | 支持应用内支付实现会员开通的能力 | [使用指导](components/membership/README.md)            |
+| 通用应用内设置组件（app_setting）      | 支持设置基础设置项        | [使用指导](components/app_setting/README.md)           |
 
 
 本模板为备考类应用提供了常用功能的开发样例，模板主要分练习、课程和我的三大模块：
@@ -88,6 +92,7 @@ Exam
   │  │  │      Banner.ets                       // banner组件
   │  │  ├─constants
   │  │  │      RouterMap.ets                    // 路由
+  │  │  │      CommonConstants.ets              // 公共常量  
   │  │  ├─models
   │  │  │      BaseViewModel.ets                // base模型  
   │  │  │      BreakpointModel.ets              // 断点模型    
@@ -97,24 +102,35 @@ Exam
   │  │  │      RouterModule.ets                 // 路由工具
   │  │  │      Logger.ets                       // 日志
   │  │  │      PreferenceUtil.ets               // 首选项
+  │  │  │      SystemBarOperation.ets           // 顶部状态栏颜色设置  
   │  │  ├─viewModel
   │  │  │      BrowsingHistoryModel.ets         // 记录模块数据模型
   │  │  │      OrderInfo.ets                    // 订单数据模型
   │  │  │      PracticeRecordModel.ets          // 练习数据模型
   │  └─resources
-  │─components   
+  │─components 
+  │  ├─aggregated_ads
+  │  ├─aggregated_payment
+  │  ├─aggregated_share
   │  ├─answer_questions
-  │  ├─select_category
-  │  ├─search_question
-  │  ├─search
-  │  ├─login_info
+  │  ├─app_setting  
+  │  ├─base_select
+  │  ├─customer_service_chat
+  │  ├─feedback
   │  ├─feed_back
-  │  └─aggregated_payment  
+  │  ├─image_preview
+  │  ├─login_info
+  │  ├─membership      
+  │  ├─search
+  │  ├─search_question
+  │  └─select_category  
   │─features/homePage/src/main   
   │  ├─ets
   │  │  ├─components                             // 封装组件
   │  │  │      CourseBookComponent.ets           // 资料卡片组件        
-  │  │  │      CourseComponent.ets               // 课程卡片      
+  │  │  │      CourseComponent.ets               // 课程卡片
+  │  │  │      SearchQuestionPage.ets            // 问题搜索组件
+  │  │  │      TopTabsBuilder.ets                // 顶部搜索组件          
   │  │  ├─model
   │  │  │     ChapterPractice.ets                // 分类页面数据模型
   │  │  │     CommonTopic.ets                    // 分类数据模型
@@ -122,6 +138,7 @@ Exam
   │  │  │     CourseArray.ets                    // 课程数组模型
   │  │  │     CourseBook.ets                     // 资料模型
   │  │  │     CourseQuestions.ets                // 科目数据模型
+  │  │  │     MaterialModel.ets                  // 下载资料数据模型  
   │  │  │     PracticeMode.ets                   // 业务类型数据模型  
   │  │  │     TopicItemModel.ets                 // 答题类型数据模型  
   │  │  │     TopicModel.ets                     // 分类数据源  
@@ -135,6 +152,8 @@ Exam
   │  │  │      SecondListPage.ets                // 2级分类
   │  │  │      ThirdListPage.ets                 // 3级分类
   │  │  │      TopicHomePage.ets                 // 1级分类  
+  │  │  ├─utils
+  │  │  │      FileViewUtil.ets                  // 文件预览工具类    
   │  │  ├─viewmodels
   │  │  │      HomeVM.ets                        // 数据模型   
   │  └─resources
@@ -162,8 +181,11 @@ Exam
   │  ├─ets
   │  │  ├─components
   │  │  │      Header.ets                        // Header组件
-  │  │  │      DarkColorDialog.ets               // 深色模式弹框  
-  │  │  ├─viewModel                              // 数据类型
+  │  │  │      DarkColorDialog.ets               // 深色模式弹框
+  │  │  │      MainArea.ets                      // 表格组件内容区
+  │  │  │      ScrollComponent.ets               // 表格组件滚动区
+  │  │  │      TableRow.ets                      // 表格表头组件        
+  │  │  ├─viewModel                              
   │  │  │      MessageModel.ets             
   │  │  │      setUpModel.ets                    // 设置相关模型数据模型
   │  │  │      MineModel.ets                     // 用户资料信息数据模型
@@ -194,9 +216,12 @@ Exam
      │  ├─entryability
      │  │      EntryAbility.ets                  // 应用程序入口
      │  ├─entrybackupability
-     │  │      EntryBackupAbility.ets            // Backup配置入口     
+     │  │      EntryBackupAbility.ets            // Backup配置入口
+     │  ├─entryformAbility
+     │  │      EntryFormAbility.ets              // 卡片配置入口 
      │  ├─pages
      │  │      Index.ets                         // 入口页面
+     │  │      LaunchAdPage.ets                  // 开屏广告页面
      │  │      LoginPage.ets                     // login页面
      │  │      MainEntry.ets                     // 主页面
      │  ├─model
@@ -212,13 +237,13 @@ Exam
 
 ### 环境
 
-* DevEco Studio版本：DevEco  Studio 6.0.2 Release及以上
-* HarmonyOS SDK版本：HarmonyOS 6.0.2 Release SDK及以上
+* DevEco Studio版本：DevEco  Studio 6.1.1 Release及以上
+* HarmonyOS SDK版本：HarmonyOS 6.1.1 Release SDK及以上
 * 设备类型：华为手机（包括双折叠和阔折叠）、平板
 * 系统版本：HarmonyOS 5.0.5(17)及以上
 
 
-## 权限
+### 权限
 
 - 网络权限：ohos.permission.INTERNET
 
@@ -239,6 +264,8 @@ Exam
 
    c. 将模板工程根目录下AppScope/app.json5文件中的bundleName替换为创建应用的包名。
 
+   d. 创建桌面快捷方式需要将模板工程product目录下entry/src/main/resources/base/profile/shortcuts_config.json5文件中的bundleName替换为创建应用的包名。
+
 2. 配置华为账号服务。
 
    a. 将应用的client ID配置到product/entry/src/main路径下的module.json5文件中，详细参考：[配置Client ID](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/account-client-id)。
@@ -249,9 +276,25 @@ Exam
 
    华为支付当前仅支持商户接入，在使用服务前，需要完成商户入网、开发服务等相关配置，本模板仅提供了端侧集成的示例。详细参考：[支付服务接入准备](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/payment-preparations)。
 
-4. 对应用进行[手工签名](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-signing#section297715173233)。
+4. 配置App Linking服务。
 
-5. 添加手工签名所用证书对应的公钥指纹。详细参考：[配置公钥指纹](https://developer.huawei.com/consumer/cn/doc/app/agc-help-cert-fingerprint-0000002278002933)
+   a. [开通App Linking服务](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/applinking-enable-applinking)
+
+   b. [在开发者网站上关联应用](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/app-linking-startupapp#section6903241628)
+
+   c. [在AGC为应用创建关联的网址域名](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/app-linking-startupapp#section1101111611317)
+
+   d. 在products/entry/src/main路径下的module.json5中配置关联的网址域名，详细参考：[在module.json5中配置关联的网址域名](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/app-linking-startupapp#section13808113610362)
+
+5. 配置广告服务。
+
+   a. 如果仅调测广告，可使用测试广告位ID：开屏广告：testd7c5cewoj6。
+
+   b. 申请正式的广告位ID。 登录[鲸鸿动能媒体服务平台](https://developer.huawei.com/consumer/cn/service/ads/publisher/html/index.html?lang=zh) 进行申请，具体操作详情请参见[展示位创建](https://developer.huawei.com/consumer/cn/doc/distribution/monetize/zhanshiweichuangjian-0000001132700049)。
+
+6. 对应用进行[手工签名](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-signing#section297715173233)。
+
+7. 添加手工签名所用证书对应的公钥指纹。详细参考：[配置公钥指纹](https://developer.huawei.com/consumer/cn/doc/app/agc-help-cert-fingerprint-0000002278002933)
 
 ### 运行调试工程
 

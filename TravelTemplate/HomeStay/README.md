@@ -14,11 +14,23 @@
 
 本模板提供如下组件，所有组件存放在工程根目录的components下，如果您仅需使用组件，可参考对应组件的指导链接；如果您使用此模板，请参考本文档。
 
-| 组件                | 描述 | 使用指导 |
-| ------------------- | ---- | -------- |
-| 日历组件（calendar_select） |  提供入住、离开日期选择的功能。    |[使用指导](components/calendar_select/README.md)|
-| 游记组件（travel_discovery）               |   提供游记浏览搜索、详情查看及评论等功能。   |  [使用指导](components/travel_discovery/README.md) |
-| 地图（定位选点）组件（travel_map）               |   提供地图展示能力，并支持地图定位和选点定制功能。   |  [使用指导](components/travel_map/README.md) |
+| 组件                              | 描述                                | 使用指导                                               |
+|---------------------------------|-----------------------------------|----------------------------------------------------|
+| 日历组件（calendar_select）           | 提供入住、离开日期选择的功能。                   | [使用指导](components/calendar_select/README.md)       |
+| 游记组件（travel_discovery）          | 提供游记浏览搜索、详情查看及评论等功能。              | [使用指导](components/travel_discovery/README.md)      |
+| 地图（点位选点）组件（travel_map）          | 提供地图展示能力，并支持地图定位和选点定制功能。          | [使用指导](components/travel_map/README.md)            |
+| 通用搜索组件（search）                  | 提供搜索栏、历史搜索、热门搜索、搜索自动补全、搜索结果展示等功能。 | [使用指导](components/search/README.md)                |
+| 通用登录组件（aggregated_login）        | 提供华为账号一键登录、微信登录及其他登录方式的聚合能力。      | [使用指导](components/aggregated_login/README.md)      |
+| 通用支付组件（aggregated_payment）      | 提供华为支付、支付宝、微信支付的聚合收银台能力。          | [使用指导](components/aggregated_payment/README.md)    |
+| 广告组件（aggregated_ads）            | 提供华为开屏广告展示能力。                     | [使用指导](components/aggregated_ads/README.md)        |
+| 通用分享组件（aggregated_share）        | 提供系统分享、QQ分享等聚合分享能力。               | [使用指导](components/aggregated_share/README.md)      |
+| 通用客服组件（customer_service_chat）   | 提供在线客服即时聊天功能。                     | [使用指导](components/customer_service_chat/README.md) |
+| 通用问题反馈组件（feedback）              | 提供意见反馈提交和反馈历史查看功能。                | [使用指导](components/feedback/README.md)              |
+| 通用应用内设置组件（app_setting）          | 提供关于、字体大小、隐私设置、退出登录等应用设置功能。       | [使用指导](components/app_setting/README.md)           |
+| 通用个人信息组件（collect_personal_info） | 提供表单化的个人信息采集与编辑功能。                | [使用指导](components/collect_personal_info/README.md) |
+| 通用地址管理组件（address_management）    | 提供收货地址列表展示、新增编辑及默认地址选择功能。         | [使用指导](components/address_management/README.md)    |
+| 通用拨号组件（dial_panel）              | 提供电话客服拨号面板功能。                     | [使用指导](components/dial_panel/README.md)            |
+| 通用图片预览组件（image_preview）         | 提供图片预览功能，支持手势缩放和动态照片播放。           | [使用指导](components/image_preview/README.md)         |
 
 本模板为民宿住宿类应用提供了常用功能的开发样例，模板主要分首页、发现、地图、商城和我的五大模块：
 
@@ -40,39 +52,40 @@
 ```ts
 民宿旅游
  |-- 首页
- |    |-- 顶部轮播
+ |    |-- 民宿横幅展示
  |    |-- 民宿信息
- |    |    └-- 民宿基本信息
+ |    |    └-- 民宿基本信息/简介/基础设施/周边信息
  |    |-- 入离时间
  |    |    └-- 入离时间选择
- |    |-- 热门房型
- |    |    |-- 热门房型详情
- |    |         └-- 热门房型下单
- |    |    |-- 全部房型
- |    |         └-- 房型详情
- |    |              └-- 房型下单
+ |    |-- 房型推荐
+ |    |    └-- 房型详情
+ |    |         └-- 房型预订
  |-- 发现
- |    └-- 发现列表
- |         └-- 发现详情
- |         └-- 发现搜索
+ |    └-- 游记瀑布流
+ |         └-- 游记详情
+ |         └-- 游记搜索
  |-- 地图
- |    └-- 民宿信息
+ |    └-- 民宿位置展示
  |    └-- 民宿导航
  |-- 商城
- |    └-- 商品列表
+ |    └-- 商品瀑布流
  |         └-- 商品详情
- |              └-- 商品下单
+ |              └-- 商品购买
  └-- 我的
+      |-- 快速登录
+      |-- 个人信息
       |-- 我的订单
       |    └-- 住宿订单
       |    └-- 商品订单
+      |-- 我的收藏
+      |-- 浏览历史
       |-- 常用旅客
-      |    └-- 游客列表
-      |         └-- 新增游客 
-      |-- 客服
-      |    └-- 常见问题列表
-      └-- 投诉建议
-           └-- 新增投诉建议
+      |    └-- 旅客列表
+      |         └-- 新增/编辑旅客
+      |-- 在线客服
+      |-- 意见反馈
+      |-- 应用设置
+      └-- 地址管理
 ```
 
 本模板工程代码结构如下所示：
@@ -206,10 +219,10 @@ HomeStay
 ## 约束与限制
 
 ### 环境
-* DevEco Studio版本：DevEco Studio 6.0.2 Release及以上
-* HarmonyOS SDK版本：HarmonyOS 6.0.2 Release SDK及以上
-* 设备类型：华为手机（直板机）
-* HarmonyOS版本：HarmonyOS 5.0.5(17)及以上
+* DevEco Studio版本：DevEco Studio 6.1.1 Release及以上
+* HarmonyOS SDK版本：HarmonyOS 6.1.1 Release SDK及以上
+* 设备类型：华为手机（包括双折叠和阔折叠）
+* HarmonyOS版本：HarmonyOS 5.1.0(18)及以上
 
 ### 权限
 - 获取位置权限：ohos.permission.APPROXIMATELY_LOCATION、ohos.permission.LOCATION。

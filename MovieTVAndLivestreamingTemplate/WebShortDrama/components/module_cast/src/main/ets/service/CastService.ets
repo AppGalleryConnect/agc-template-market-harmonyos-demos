@@ -63,17 +63,21 @@ export class CastService {
   }
 
   private async initAvCastController() {
-    if (AvSessionController.getInstance().getAvSession()) {
-      hilog.error(0x000, TAG, 'initAvCastController')
-      AvSessionController.getInstance().getAvSession()?.on('play', this.sessionPlayCallback);
-      AvSessionController.getInstance().getAvSession()?.on('pause', this.sessionPauseCallback);
-      AvSessionController.getInstance().getAvSession()?.on('playNext', this.sessionPlayNextCallback);
-      AvSessionController.getInstance().getAvSession()?.on('playPrevious', this.sessionPlayPreviousCallback);
-      AvSessionController.getInstance().getAvSession()?.on('fastForward', this.sessionFastForwardCallback);
-      AvSessionController.getInstance().getAvSession()?.on('rewind', this.sessionRewindCallback);
-      AvSessionController.getInstance().getAvSession()?.on('seek', this.sessionSeekCallback);
-      AvSessionController.getInstance().getAvSession()?.on('outputDeviceChange', this.sessionOutputDeviceChange)
-      AvSessionController.getInstance().getAvSession()?.activate();
+    try {
+      if (AvSessionController.getInstance().getAvSession()) {
+        hilog.error(0x000, TAG, 'initAvCastController')
+        AvSessionController.getInstance().getAvSession()?.on('play', this.sessionPlayCallback);
+        AvSessionController.getInstance().getAvSession()?.on('pause', this.sessionPauseCallback);
+        AvSessionController.getInstance().getAvSession()?.on('playNext', this.sessionPlayNextCallback);
+        AvSessionController.getInstance().getAvSession()?.on('playPrevious', this.sessionPlayPreviousCallback);
+        AvSessionController.getInstance().getAvSession()?.on('fastForward', this.sessionFastForwardCallback);
+        AvSessionController.getInstance().getAvSession()?.on('rewind', this.sessionRewindCallback);
+        AvSessionController.getInstance().getAvSession()?.on('seek', this.sessionSeekCallback);
+        AvSessionController.getInstance().getAvSession()?.on('outputDeviceChange', this.sessionOutputDeviceChange)
+        AvSessionController.getInstance().getAvSession()?.activate();
+      }
+    } catch (e) {
+      hilog.error(0x000, TAG, `initAvCastController failed: ${e}`);
     }
   }
 
@@ -93,7 +97,12 @@ export class CastService {
     if (currentDevice.castCategory === avSession.AVCastCategory.CATEGORY_REMOTE &&
       connectState === avSession.ConnectionState.STATE_CONNECTED) {
       if (this.curSource) {
-        let innerController = await this.sessionController.getAvSession()?.getAVCastController()
+        let innerController: avSession.AVCastController | null = null;
+        try {
+          innerController = await this.sessionController.getAvSession()?.getAVCastController() ?? null;
+        } catch (e) {
+          hilog.error(DOMAIN, TAG, `getAVCastController failed: ${e}`);
+        }
         if (innerController) {
           this.castController = new AvCastController(innerController)
           if (this.sessionListener) {

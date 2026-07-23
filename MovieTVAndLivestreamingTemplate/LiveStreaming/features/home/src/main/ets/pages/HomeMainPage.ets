@@ -3,7 +3,15 @@ import { jumpDetailPage } from '@agctemplate/detail'
 import { getMedia } from '@agctemplate/resources'
 import { RouterMap, RouterModule } from '@agctemplate/router_module';
 import { BigCard, CommonCard } from '../components/LiveCards'
-import { BarVM, cardsData, LiveCard, LiveCardModel } from '@agctemplate/widgets'
+import {
+  AppStorageKeys,
+  BarVM,
+  BreakPoint,
+  BreakPointValue,
+  cardsData,
+  LiveCard,
+  LiveCardModel
+} from '@agctemplate/widgets'
 import { Callback } from '@kit.BasicServicesKit';
 import { AppStorageV2, display } from '@kit.ArkUI';
 import { deviceInfo } from '@kit.BasicServicesKit';
@@ -36,6 +44,8 @@ export struct HomeMainPage {
     display.getDefaultDisplaySync().orientation === display.Orientation.LANDSCAPE_INVERTED &&
       deviceInfo.deviceType === 'tablet';
   @Local bottomSpace: number = 0
+  @Local breakPoint: BreakPoint = AppStorageV2.connect(BreakPoint, AppStorageKeys.CURRENT_BREAK_POINT,
+    () => new BreakPoint())!;
   callback: Callback<display.FoldStatus> = (data: display.FoldStatus) => {
     if (data === display.FoldStatus.FOLD_STATUS_FOLDED) {
       this.gridPadding = 0
@@ -55,6 +65,7 @@ export struct HomeMainPage {
     }
   };
   private uiContext: UIContext = this.getUIContext();
+
   aboutToAppear() {
     this.startAutoPlay();
     try {
@@ -204,7 +215,9 @@ export struct HomeMainPage {
                 .onClick(() => {
                   jumpDetailPage('')
                 })
-            },(item: number, index: number) => { return index + '__' + JSON.stringify(item); })
+            }, (item: number, index: number) => {
+              return index + '__' + JSON.stringify(item);
+            })
           }
           .margin({ left: 16, right: 16 })
           .width('100%')
@@ -229,7 +242,7 @@ export struct HomeMainPage {
 
         Row() {
           Text('在线主播')
-            .margin({ left: 16, top: 16, bottom: this.isLandscapeTablet ? 8 : 16 })
+            .margin({ left: 16, top: 16, bottom: this.breakPoint.value === BreakPointValue.LG ? 8 : 16 })
             .height(24)
             .fontSize(18)
             .fontWeight(700)
@@ -248,7 +261,9 @@ export struct HomeMainPage {
               this.watchRecords.id = card.id;
               jumpDetailPage('')
             })
-          },(item: LiveCard, index: number) => { return index + '__' + JSON.stringify(item); })
+          }, (item: LiveCard, index: number) => {
+            return index + '__' + JSON.stringify(item);
+          })
         }
         .layoutWeight(1)
         .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: true })
@@ -258,14 +273,10 @@ export struct HomeMainPage {
         .columnsGap(8)
         .margin({ left: 16, right: 16 })
         .scrollBar(BarState.Off)
-        .padding({ left: this.gridPadding, right: this.gridPadding, bottom: this.bottomSpace })
-        .onScrollStart(() => {
-          this.bottomSpace = 0
-        })
-        .onReachEnd(() => {
-          this.bottomSpace =
-            this.isLandscapeTablet ? 133 + this.getUIContext().px2vp(BarVM.instance.aiBarHeight.value) :
-              TabStyle.BAR_HEIGHT + this.getUIContext().px2vp(BarVM.instance.aiBarHeight.value)
+        .padding({
+          left: this.gridPadding,
+          right: this.gridPadding,
+          bottom: this.breakPoint.value === BreakPointValue.SM ? 76 : 0
         })
       }
       .width('100%')

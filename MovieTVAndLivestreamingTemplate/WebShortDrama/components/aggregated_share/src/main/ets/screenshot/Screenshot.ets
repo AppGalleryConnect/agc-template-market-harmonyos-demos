@@ -59,7 +59,7 @@ export struct Screenshot {
       .backgroundColor($r('sys.color.comp_background_tertiary'))
 
       Row() {
-        Text('长按二维码查看详情')
+        Text('扫码直达分享好剧')
           .fontSize($r('sys.float.Body_S'))
           .fontColor($r('sys.color.font_tertiary'))
         QRCode(this.data.landingPageUrl).width(64).height(64)

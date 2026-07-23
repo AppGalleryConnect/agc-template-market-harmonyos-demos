@@ -1033,7 +1033,7 @@ export class MockData {
       id: 'home_clean_1',
       title: '深度保洁',
       subTitle: '每月一次，省心洁净',
-      image: 'mockImage://good_clean.png',
+      image: 'mockImage://good_clean_1.png',
       intro: [
         {
           type: IntroType.IMAGE,

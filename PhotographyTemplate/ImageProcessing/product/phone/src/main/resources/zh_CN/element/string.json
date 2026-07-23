@@ -13,8 +13,12 @@
       "value": "拍摄美化行业模版"
     },
     {
+      "name": "apply_location_reason",
+      "value": "需要知道您所在的位置，以便提供相应服务。"
+    },
+    {
       "name": "agcit_huawei_image_processing",
-      "value": "1.0.0"
+      "value": "1.0.2"
     }
   ]
 }

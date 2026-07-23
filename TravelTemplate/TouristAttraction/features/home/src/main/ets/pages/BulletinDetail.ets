@@ -1,6 +1,7 @@
-import { Constant } from 'common';
-import { TitleBar } from 'uicomponents';
+import { AppStorageV2 } from '@kit.ArkUI';
+import { BreakpointModel, Constant, GridRowColSetting } from 'common';
 import { https } from 'network';
+import { AsWebRichText, TitleBar } from 'uicomponents';
 import { mapperBulletinInfo } from '../mapper/Index';
 import { BulletinInfo } from '../model/BulletinInfo';
 
@@ -13,11 +14,14 @@ export function BulletinDetailBuilder() {
 export struct BulletinDetail {
   @Local bulletinId: number = 0;
   @Local bulletinInfo: BulletinInfo = new BulletinInfo();
+  @Local breakPointModel: BreakpointModel = AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
   @Consumer('mainPathStack') mainPathStack: NavPathStack = new NavPathStack();
 
   getBulletinById() {
     https.getBulletinDetail(this.bulletinId).then((res) => {
       this.bulletinInfo = mapperBulletinInfo(res.data);
+      this.bulletinInfo.detail =
+        `<meta name="viewport" content="width=device-width, initial-scale=1.0">${this.bulletinInfo.detail}`;
     });
   }
 
@@ -25,29 +29,45 @@ export struct BulletinDetail {
     NavDestination() {
       Column() {
         TitleBar({
-          isShowBack: true, title: '公告详情', clickEvent: () => {
+          isShowBack: true, title: '资讯详情', clickEvent: () => {
             this.mainPathStack.pop();
           },
         });
 
         Scroll() {
-          Column() {
-            Image(this.bulletinInfo.banner).width(Constant.FULL_PERCENT).height(200).objectFit(ImageFit.Fill);
+          GridRow(GridRowColSetting.DEFAULT_GRID_ROW_OPTIONS) {
+            GridCol({
+              span: GridRowColSetting.DEFAULT_CENTER_COL_SPAN,
+              offset: GridRowColSetting.DEFAULT_CENTER_COL_OFFSET,
+            }) {
+              Column({ space: 24 }) {
+                Column({ space: 4 }) {
+                  Text(this.bulletinInfo.title)
+                    .maxLines(2)
+                    .textOverflow({ overflow: TextOverflow.Ellipsis })
+                    .fontWeight(FontWeight.Bold)
+                    .fontColor($r('sys.color.font_primary'))
+                    .fontSize($r('sys.float.Subtitle_L'));
 
-            Column() {
-              Text(this.bulletinInfo.title)
-                .maxLines(2)
-                .textOverflow({ overflow: TextOverflow.Ellipsis })
-                .fontWeight(700)
-                .lineHeight(28)
-                .fontSize(20);
+                  Text(`时间：${this.bulletinInfo.releaseTime}`)
+                    .fontSize($r('sys.float.Body_S'))
+                    .fontColor($r('sys.color.font_secondary'));
+                }.alignItems(HorizontalAlign.Start).width(Constant.FULL_PERCENT);
 
-              Text(this.bulletinInfo.releaseTime).fontSize(12).opacity(0.6).margin({ top: 16, bottom: 16 });
-
-              Text(this.bulletinInfo.detail).fontSize(14).lineHeight(20);
-            }.padding(16).alignItems(HorizontalAlign.Start).width(Constant.FULL_PERCENT);
+                if (this.bulletinInfo.detail) {
+                  Column() {
+                    AsWebRichText({ url: Constant.RICH_TEXT_URI, richTextStr: this.bulletinInfo.detail })
+                      .layoutWeight(1);
+                  }.alignItems(HorizontalAlign.Start).width(Constant.FULL_PERCENT).layoutWeight(1);
+                }
+              };
+            };
           };
-        }.height('90%').align(Alignment.Top);
+        }
+        .padding({ top: 12, bottom: 16 })
+        .margin({ left: this.breakPointModel.pagePadding, right: this.breakPointModel.pagePadding })
+        .layoutWeight(1)
+        .align(Alignment.Top);
       };
     }.hideTitleBar(true).onReady((context: NavDestinationContext) => {
       this.bulletinId = context.pathInfo.param as number;

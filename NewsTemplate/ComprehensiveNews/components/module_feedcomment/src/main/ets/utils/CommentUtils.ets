@@ -13,7 +13,7 @@ export class CommentUtils {
    * @param replyAuthor 回复对象
    * @param callback 回复回调事件
    */
-  public static  commentSheetOpen(replyAuthor: string | null, callback: (replyContent: string) => void) {
+  public static commentSheetOpen(replyAuthor: string | null, callback: (replyContent: string) => void) {
     if (!CommentUtils.userInfoModel.isLogin) {
       LoginSheetUtils.open()
       return

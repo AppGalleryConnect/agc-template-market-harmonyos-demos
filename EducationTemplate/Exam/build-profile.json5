@@ -6,7 +6,7 @@
         "name": "default",
         "signingConfig": "default",
         "compatibleSdkVersion": "5.0.5(17)",
-        "targetSdkVersion": "6.0.2(22)",
+        "targetSdkVersion": "6.1.1(24)",
         "runtimeOS": "HarmonyOS",
         "buildOption": {
           "strictMode": {
@@ -85,6 +85,30 @@
     {
       "name": "search_question",
       "srcPath": "./components/search_question"
+    },
+    {
+      "name": "aggregated_ads",
+      "srcPath": "./components/aggregated_ads"
+    },
+    {
+      "name": "aggregated_share",
+      "srcPath": "./components/aggregated_share"
+    },
+    {
+      "name": "customer_service_chat",
+      "srcPath": "./components/customer_service_chat"
+    },
+    {
+      "name": "image_preview",
+      "srcPath": "./components/image_preview"
+    },
+    {
+      "name": "app_setting",
+      "srcPath": "./components/app_setting"
+    },
+    {
+      "name": "membership",
+      "srcPath": "./components/membership"
     }
   ]
 }

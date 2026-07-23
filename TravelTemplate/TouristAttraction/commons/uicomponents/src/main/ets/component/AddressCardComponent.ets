@@ -1,4 +1,5 @@
-import { AddressInfo } from 'types'
+import { Constant } from 'module_base';
+import { AddressInfo } from 'types';
 
 @ComponentV2
 export struct AddressCardComponent {
@@ -7,35 +8,50 @@ export struct AddressCardComponent {
   @Event deleteAddress: (address: AddressInfo) => void;
 
   build() {
-    Column({ space: 4 }) {
-      Row({ space: 8 }) {
-        Text(`${this.address.name} ${this.address.phone}`)
-          .fontWeight(500)
-          .opacity(0.9)
+    Column() {
+      Column({ space: 4 }) {
+        Row({ space: 12 }) {
+          Text(this.address.name)
+            .fontWeight(FontWeight.Medium)
+            .fontSize($r('sys.float.Body_L'))
+            .fontColor($r('sys.color.font_primary'))
+          Text(this.address.phone)
+            .fontWeight(FontWeight.Medium)
+            .fontSize($r('sys.float.Body_L'))
+            .fontColor($r('sys.color.font_primary'))
+        }.width('100%').justifyContent(FlexAlign.Start)
 
-        if (this.address.type === 1) {
-          Text('默认')
-            .fontSize(10)
-            .padding(4)
-            .border({ width: 1, color: '#64BB5C', radius: 4 })
-            .fontColor('#64BB5C')
-        }
-      }.width('100%').justifyContent(FlexAlign.Start)
+        Text(`${this.address.district}${this.address.detail}`).width(Constant.FULL_PERCENT)
+          .fontSize($r('sys.float.Body_M')).fontColor($r('sys.color.font_primary'))
+      }
 
-      Text(`${this.address.district}${this.address.detail}`)
-        .fontSize(14)
-        .opacity(0.6)
-        .width('100%')
-        .textAlign(TextAlign.Start)
+      Divider().color($r('sys.color.comp_divider')).margin({ top: 12, bottom: 12 })
 
       Row({ space: 24 }) {
-        Image($r('app.media.edit')).size({ width: 24, height: 24 }).onClick(() => {
-          this.editAddress(this.address)
-        })
-        Image($r('app.media.delete')).size({ width: 24, height: 24 }).onClick(() => {
-          this.deleteAddress(this.address)
-        })
-      }.width('100%').justifyContent(FlexAlign.End)
-    }.padding(12).backgroundColor($r('sys.color.font_on_primary')).borderRadius(8)
+        Row({ space: 8 }) {
+          Toggle({ type: ToggleType.Switch, isOn: this.address.type === 1 })
+            .selectedColor($r('sys.color.multi_color_04'))
+            .switchPointColor($r('sys.color.comp_background_primary_contrary'))
+          Text('默认地址').fontSize($r('sys.float.Body_M')).fontColor($r('sys.color.font_primary'))
+        }
+
+        Row({ space: 8 }) {
+          Button('编辑', { controlSize: ControlSize.SMALL })
+            .width(72)
+            .fontColor($r('sys.color.multi_color_04'))
+            .backgroundColor($r('sys.color.comp_background_tertiary'))
+            .onClick((event: ClickEvent) => {
+              this.editAddress(this.address)
+            })
+          Button('删除', { controlSize: ControlSize.SMALL })
+            .width(72)
+            .fontColor($r('sys.color.warning'))
+            .backgroundColor($r('sys.color.comp_background_tertiary'))
+            .onClick((event: ClickEvent) => {
+              this.deleteAddress(this.address)
+            })
+        }
+      }.width('100%').justifyContent(FlexAlign.SpaceBetween)
+    }.padding(12).backgroundColor($r('sys.color.comp_background_primary')).borderRadius(16)
   }
 }

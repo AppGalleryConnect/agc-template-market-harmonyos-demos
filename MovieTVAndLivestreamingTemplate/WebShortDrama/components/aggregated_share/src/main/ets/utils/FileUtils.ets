@@ -1,13 +1,12 @@
-import { promptAction, window } from '@kit.ArkUI';
 import { http } from '@kit.NetworkKit';
 import { image } from '@kit.ImageKit';
 import { photoAccessHelper } from '@kit.MediaLibraryKit';
 import { fileUri, fileIo as fs } from '@kit.CoreFileKit';
 import { Logger } from '../common/Logger';
 import { BusinessError } from '@kit.BasicServicesKit';
+import { GlobalContext } from '@agctemplate/utils';
 
 const TAG = 'FileUtils';
-const windowStage: window.WindowStage = AppStorage.get('windowStage')!
 
 /**
  * 写入数据到沙箱
@@ -18,7 +17,10 @@ export async function saveToSandbox(buffer: ArrayBuffer): Promise<string> {
   let file: fs.File | null = null;
   try {
     const savePath =
-      `${windowStage.getMainWindowSync().getUIContext().getHostContext()!.cacheDir}/${new Date().getTime()}.png`;
+      `${GlobalContext.getWindowStage()
+        .getMainWindowSync()
+        .getUIContext()
+        .getHostContext()!.cacheDir}/${new Date().getTime()}.png`;
     file = fs.openSync(savePath, fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE);
     fs.writeSync(file.fd, buffer);
 
@@ -64,7 +66,7 @@ export async function saveImgToAlbum(img: PixelMap): Promise<void> {
   return new Promise(async (resolve, reject) => {
     const uri = await saveImgToSandbox(img);
     const phAccessHelper =
-      photoAccessHelper.getPhotoAccessHelper(windowStage.getMainWindowSync().getUIContext().getHostContext());
+      photoAccessHelper.getPhotoAccessHelper(GlobalContext.getContext());
     let srcFile: fs.File | null = null;
     let desFile: fs.File | null = null;
     try {
@@ -88,11 +90,19 @@ export async function saveImgToAlbum(img: PixelMap): Promise<void> {
       srcFile = fs.openSync(srcFileUris[0], fs.OpenMode.READ_ONLY);
       desFile = fs.openSync(desFileUris[0], fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE);
       fs.copyFileSync(srcFile.fd, desFile.fd);
-      windowStage.getMainWindowSync().getUIContext().getPromptAction().showToast({ message: '保存成功' });
+      GlobalContext.getWindowStage()
+        .getMainWindowSync()
+        .getUIContext()
+        .getPromptAction()
+        .showToast({ message: '保存成功' });
       resolve();
     } catch (err) {
       Logger.error(TAG, 'saveImgToAlbum fail, error: ' + JSON.stringify(err));
-      windowStage.getMainWindowSync().getUIContext().getPromptAction().showToast({ message: '保存失败' });
+      GlobalContext.getWindowStage()
+        .getMainWindowSync()
+        .getUIContext()
+        .getPromptAction()
+        .showToast({ message: '保存失败' });
       reject();
     } finally {
       if (srcFile) {
@@ -136,13 +146,42 @@ export function downloadImage(url: string): Promise<ArrayBuffer> {
  * @returns
  */
 export async function compressImage(buf: ArrayBuffer): Promise<ArrayBuffer> {
-  const pixel = image.createImageSource(buf).createPixelMapSync();
-  const packOpts: image.PackingOption = { format: 'image/jpeg', quality: 50 };
-  return new Promise((resolve) => {
-    image.createImagePacker().packToData(pixel, packOpts).then((data: ArrayBuffer) => {
-      resolve(data);
-    })
-  })
+  let pixel: image.PixelMap | null = null;
+
+  try {
+    // 1. 创建 ImageSource 并同步生成 PixelMap
+    // 这里最容易因为 buf 数据问题抛出异常
+    const imageSource = image.createImageSource(buf);
+    pixel = imageSource.createPixelMapSync();
+
+    // 注意：imageSource 是同步创建的，通常不需要显式 release，
+    // 但 pixel 是重量级对象，必须手动 release。
+
+    const packOpts: image.PackingOption = {
+      format: 'image/jpeg',
+      quality: 50
+    };
+
+    // 2. 执行压缩 (异步)
+    const packedData = await image.createImagePacker().packToData(pixel, packOpts);
+
+    return packedData;
+
+  } catch (error) {
+    // 捕获所有异常：包括 createPixelMapSync 的同步异常 和 packToData 的异步异常
+    console.error('Image compression failed:', error);
+
+    throw new Error(error instanceof Error ? error.message : String(error));
+  } finally {
+    // 3. 关键步骤：确保 pixel 资源被释放，防止内存泄漏
+    if (pixel) {
+      try {
+        pixel.release();
+      } catch (releaseError) {
+        console.warn('Failed to release pixel resource:', releaseError);
+      }
+    }
+  }
 }
 
 /**

@@ -1,17 +1,14 @@
 @Extend(Row)
 function buttonRow() {
-  .backgroundColor('rgba(255, 255, 255, 0.9)')
-  .borderRadius(16)
-  .padding({
-    left: 26,
-    right: 26,
-    top: 18,
-    bottom: 18,
-  });
+  .backgroundColor($r('sys.color.comp_background_tertiary'))
+  .borderRadius(12)
+  .width('100%')
+  .layoutWeight(1)
+  .justifyContent(FlexAlign.Center);
 }
 
 @Entry
-@Component
+@ComponentV2
 struct AttractionCard {
   /*
    * The action type.
@@ -21,7 +18,7 @@ struct AttractionCard {
    * The ability name.
    */
   readonly abilityName: string = 'EntryAbility';
-  @State index: number = 0;
+  @Local index: number = 0;
   /*
    * The width percentage setting.
    */
@@ -32,21 +29,26 @@ struct AttractionCard {
   readonly fullHeightPercent: string = '100%';
 
   build() {
-    Stack() {
-      Row().height(150).width(this.fullWidthPercent).backgroundColor('rgba(250, 250, 250, 0.85)').backdropBlur(135);
-
+    Column() {
       Row({ space: 12 }) {
-        Image($r('app.media.card')).size({ width: 126, height: 126 }).borderRadius(16).onClick(() => {
+        Image($r('app.media.card')).height('100%').aspectRatio(1).borderRadius(16).onClick(() => {
           postCardAction(this, {
             action: this.actionType,
             abilityName: this.abilityName,
             params: { index: 0 },
           });
         });
-        Column() {
+        Column({ space: 12 }) {
           Row({ space: 16 }) {
-            Image($r('app.media.card_ticket')).size({ width: 24, height: 24 });
-            Text('前往购票').opacity(0.9);
+            SymbolGlyph($r('sys.symbol.coupon'))
+              .fontSize(24)
+              .width(24)
+              .height(24)
+              .fontColor([$r('sys.color.icon_secondary')]);
+            Text('前往购票')
+              .fontSize($r('sys.float.Body_M'))
+              .fontColor($r('sys.color.font_primary'))
+              .fontWeight(FontWeight.Medium);
           }
           .buttonRow().onClick(() => {
             postCardAction(this, {
@@ -57,8 +59,11 @@ struct AttractionCard {
           });
 
           Row({ space: 16 }) {
-            Image($r('app.media.card_guide')).size({ width: 24, height: 24 });
-            Text('我的订单').opacity(0.9);
+            Image($r('app.media.card_bag')).size({ width: 24, height: 24 });
+            Text('我的订单')
+              .fontSize($r('sys.float.Body_M'))
+              .fontColor($r('sys.color.font_primary'))
+              .fontWeight(FontWeight.Medium);
           }
           .buttonRow().onClick(() => {
             postCardAction(this, {
@@ -67,8 +72,12 @@ struct AttractionCard {
               params: { index: 3 },
             });
           });
-        }.justifyContent(FlexAlign.SpaceBetween).height(this.fullHeightPercent);
-      }.height(150).width(this.fullWidthPercent).padding(12);
+        }.justifyContent(FlexAlign.SpaceBetween).height(this.fullHeightPercent).layoutWeight(1);
+      }
+      .height(this.fullHeightPercent)
+      .width(this.fullWidthPercent)
+      .padding(12)
+      .backgroundColor($r('sys.color.comp_background_primary'));
     };
   }
 }

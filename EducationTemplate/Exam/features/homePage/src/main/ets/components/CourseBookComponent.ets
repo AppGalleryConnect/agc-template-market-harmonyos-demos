@@ -14,12 +14,15 @@
  */
 
 import { CourseBook } from '../model/CourseBook'
+import { filePreview } from '@kit.PreviewKit'
+import { viewFile, viewPDF, viewWord } from 'commonlib'
 
 // 资料下载卡片组件
 @ComponentV2
 export struct CourseBookComponent {
   @Param @Require courseBook: CourseBook
   @Param @Require pageType: string = 'home'
+  uiContext = this.getUIContext();
 
   // 计算属性用来通过文件类型添加不同图片
   @Computed
@@ -45,6 +48,15 @@ export struct CourseBookComponent {
     .padding({ top: 8 })
     .height(68)
     .width(281)
+    .onClick(() => {
+      if (this.courseBook.type === 'pdf') {
+        viewPDF(this.uiContext, this.courseBook.bookName);
+      } else if (this.courseBook.type === 'zip') {
+        viewFile('test.zip', '', this.uiContext);
+      } else if (this.courseBook.type === 'word') {
+        viewWord(this.uiContext, this.courseBook.bookName)
+      }
+    })
   }
 
   /**

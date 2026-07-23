@@ -163,9 +163,9 @@ export struct OrderListPage {
           }
           .lanes(this.curBreakpoint.value === BreakpointTypeEnum.LG ? 2 : 1, 12)
           .layoutWeight(1)
-          .edgeEffect(EdgeEffect.Spring)
           .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.BOTTOM])
           .scrollBar(BarState.Off)
+          .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: true })
           .onReachEnd(() => {
             this.vm.getOrderList()
           })

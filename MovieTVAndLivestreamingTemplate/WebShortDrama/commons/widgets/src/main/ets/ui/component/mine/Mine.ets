@@ -38,6 +38,8 @@ export struct Mine {
             commonServicesContents: this.commonServicesContents_2
           });
         }
+        ListItem() {}
+        .height(88).width('100%')
       }
       .edgeEffect(EdgeEffect.Spring)
       .listDirection(Axis.Vertical)

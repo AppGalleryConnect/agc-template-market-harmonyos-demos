@@ -41,18 +41,22 @@ export default class EntryAbility extends UIAbility {
   }
 
   onWindowStageCreate(windowStage: window.WindowStage): void {
-    windowStage.loadContent('views/Index', (): void => {
-      try {
-        windowStage
-          .getMainWindowSync()
-          .getUIContext()
-          .setKeyboardAvoidMode(KeyboardAvoidMode.OFFSET_WITH_CARET);
-        PushUtil.getTokenSyn();
-        LoneTakeAnimationsTransition.init(windowStage);
-      } catch (err) {
-        UtilLog.error(TAG, JSON.stringify(err));
-      }
-    });
+    try {
+      windowStage.loadContent('views/Index', (): void => {
+        try {
+          windowStage
+            .getMainWindowSync()
+            .getUIContext()
+            .setKeyboardAvoidMode(KeyboardAvoidMode.OFFSET_WITH_CARET);
+          PushUtil.getTokenSyn();
+          LoneTakeAnimationsTransition.init(windowStage);
+        } catch (err) {
+          UtilLog.error(TAG, JSON.stringify(err));
+        }
+      });
+    } catch (err) {
+      UtilLog.error(TAG, 'loadContent failed: ' + JSON.stringify(err));
+    }
   }
 
   onWindowStageActive(windowStage: window.WindowStage): void {

@@ -21,6 +21,9 @@ import { BreakpointType, RouterMap, RouterModule } from 'commonlib';
 import { NumbObj } from '../viewModel/MessageModel';
 import { MineItem } from '../viewModel/MineModel';
 import { MineVM } from '../viewModel/MineVM';
+import { MemberStatusUtil } from 'membership';
+import { UtilLog } from '@hw-agconnect/util-log';
+import { common } from '@kit.AbilityKit';
 
 @Builder
 export function MinePageBuilder() {
@@ -63,68 +66,148 @@ export struct MinePage {
   @Local mineArr: MineItem[] = [
     new MineItem('练习记录', $r('app.media.icon_practice'), RouterMap.PRACTICE_RECORDS_PAGE),
     new MineItem('浏览记录', $r('app.media.ic_ict_configuration_history'), RouterMap.BROWSING_HISTORY_PAGE),
+    new MineItem('我的下载', $r('app.media.ic_download'), RouterMap.MY_DOWNLOAD_PAGE),
     new MineItem('联系客服', $r('app.media.ic_public_headphones_mic'), ''),
     new MineItem('意见反馈', $r('app.media.ic_feedback'), RouterMap.FEEDBACK_PAGE),
     new MineItem('设置', $r('app.media.icon_Setting'), RouterMap.SET_UP_PAGE)
   ];
+  @Local isCustom: boolean = false;
   feedBackVM: FeedbackVM = FeedbackVM.instance;
   mineVM: MineVM = MineVM.instance;
+
+  @Monitor('logoUser.isLogin')
+  changeLogin(monitor: IMonitor) {
+    this.queryMemberStatus();
+  }
+
+  queryMemberStatus() {
+    if(this.logoUser.isLogin) {
+      MemberStatusUtil.queryPurchase(this.getUIContext().getHostContext() as common.UIAbilityContext).then((res) => {
+        let autoRenewPurchasedList = res.renewList;
+        let nonAutoRenewPurchasedList = res.nonRenewList;
+
+        if (autoRenewPurchasedList?.length || nonAutoRenewPurchasedList?.length) {
+          this.logoUser.isMembership = true;
+        } else {
+          this.logoUser.isMembership = false;
+        }
+      }).catch((err: BusinessError) => {
+        UtilLog.error(0xFF00, 'MemberShip',
+          `Failed to query purchase record. Code is ${err.code}, message is ${err.message}`);
+      });
+    } else {
+      this.logoUser.isMembership = false;
+    }
+  }
 
   @Builder
   perMine() {
     Row() {
-      Image(this.logoUser.isLogin ?
-        (this.logoUser.avatar && this.logoUser.avatar !== '') ? this.logoUser.avatar : $r('app.media.path2x') :
-        $r('app.media.person'))
-        .borderRadius(40)
-        .width(48)
-        .aspectRatio(1)
-        .onClick(() => {
-        });
       Row() {
         Column() {
-          Text(this.logoUser.isLogin ? this.logoUser.name : '点击登录')
-            .height(24)
-            .fontSize($r('sys.float.Subtitle_L'))
-            .fontColor($r('sys.color.font_primary'))
-            .fontWeight(FontWeight.Medium)
-            .margin({ left: 16, bottom: 2 })
-            .onClick(() => {
-              if (!this.logoUser.isLogin) {
-                RouterModule.push({ url: RouterMap.LOGIN_PAGE, param: true });
-              }
-            });
           Row() {
-            if (this.logoUser.isLogin) {
-              Image($r('app.media.iphone')).height(14).width(10).margin({ right: 10 });
+            Image(this.logoUser.isLogin ?
+              (this.logoUser.avatar && this.logoUser.avatar !== '') ? this.logoUser.avatar : $r('app.media.path2x') :
+              $r('app.media.person'))
+              .borderRadius(40)
+              .width(48)
+              .aspectRatio(1)
+              .onClick(() => {
+              });
+            Column() {
+              Row() {
+                Text(this.logoUser.isLogin ? this.logoUser.name : '点击登录')
+                  .height(24)
+                  .fontSize($r('sys.float.Subtitle_L'))
+                  .fontColor($r('sys.color.font_primary'))
+                  .fontWeight(FontWeight.Medium)
+                  .margin({ left: 16, bottom: 2 })
+                  .onClick(() => {
+                    if (!this.logoUser.isLogin) {
+                      RouterModule.push({ url: RouterMap.LOGIN_PAGE, param: true });
+                    }
+                  });
+
+                SymbolGlyph($r('sys.symbol.v_diamond_fill'))
+                .fontColor([this.logoUser.isMembership ? '#D3B685' :
+                  $r('sys.color.font_tertiary')])
+                  .fontWeight(FontWeight.Normal)
+                  .fontSize(16)
+                  .margin({
+                    left: 2,
+                  })
+                Text('会员')
+                  .fontSize(12)
+                  .fontColor($r('sys.color.font_tertiary'))
+                  .fontColor(this.logoUser.isMembership ? $r('sys.color.font_primary') :
+                    $r('sys.color.font_tertiary'))
+                  .fontWeight(FontWeight.Regular)
+                  .margin({
+                    left: 2,
+                  })
+              }
+              Row() {
+                if (this.logoUser.isLogin) {
+                  Image($r('app.media.iphone')).height(14).width(10).margin({ right: 10 });
+                }
+                Text(this.logoUser.isLogin ? this.logoUser.cellphone : '登录后享受更多服务')
+                  .height(16)
+                  .textAlign(TextAlign.Center)
+                  .fontSize($r('sys.float.Body_S'))
+                  .fontColor($r('sys.color.font_primary'))
+                  .fontWeight(FontWeight.Regular);
+              }
+              .margin({ left: 16 })
+              .height(16);
             }
-            Text(this.logoUser.isLogin ? this.logoUser.cellphone : '登录后享受更多服务')
-              .height(16)
-              .textAlign(TextAlign.Center)
-              .fontSize($r('sys.float.Body_S'))
-              .fontColor($r('sys.color.font_primary'))
-              .fontWeight(FontWeight.Regular);
-          }.margin({ left: 16 }).alignItems(VerticalAlign.Center).height(16);
+            .layoutWeight(1)
+            .alignItems(HorizontalAlign.Start)
+            Image($r('app.media.iconRight'))
+              .width(18)
+              .aspectRatio(1)
+              .margin({ right: 2 })
+              .onClick(() => {
+                if (this.logoUser.isLogin) {
+                  RouterModule.push({ url: RouterMap.PERSONAL_CENTER_PAGE });
+                } else {
+                  RouterModule.push({ url: RouterMap.LOGIN_PAGE });
+                }
+              });
+          }
+
+          if(this.logoUser.isLogin) {
+            Divider().width('100%')
+              .margin({top: 12, bottom: 4})
+              .backgroundColor($r('sys.color.comp_divider'))
+              .padding({left: 8, right: 16})
+            Row() {
+              Text(this.logoUser.isMembership ? '请查看您的会员权益' : '开通会员享受更多权益')
+                .fontSize(14)
+                .fontColor($r('sys.color.font_primary'))
+                .fontWeight(FontWeight.Regular)
+              Button('会员中心')
+                .fontSize($r('sys.float.Body_M'))
+                .fontColor($r('sys.color.font_primary'))
+                .backgroundColor('#D3B685')
+                .height(28)
+                .onClick(() => {
+                  if (this.logoUser.isLogin) {
+                    RouterModule.push({url: RouterMap.MEMBER_CENTER_PAGE});
+                  } else {
+                    RouterModule.push({ url: RouterMap.LOGIN_PAGE });
+                  }
+                })
+            }
+            .width('100%')
+            .justifyContent(FlexAlign.SpaceBetween)
+            .padding(8)
+          }
         }
         .alignItems(HorizontalAlign.Start);
-
-        Blank();
-        Image($r('app.media.iconRight'))
-          .width(18)
-          .aspectRatio(1)
-          .margin({ right: 2 })
-          .onClick(() => {
-            if (this.logoUser.isLogin) {
-              RouterModule.push({ url: RouterMap.PERSONAL_CENTER_PAGE });
-            } else {
-              RouterModule.push({ url: RouterMap.LOGIN_PAGE });
-            }
-          });
       }
       .layoutWeight(1);
     }
     .width('100%')
-    .height(72)
     .padding(12)
     .backgroundColor($r('sys.color.comp_background_list_card'))
     .borderRadius(16);
@@ -224,6 +307,94 @@ export struct MinePage {
   }
 
   @Builder
+  buildServiceComponent() {
+    Column() {
+      Column() {
+        Row() {
+          Row() {
+            Image($r('app.media.ic_call'))
+              .height(48)
+              .width(48)
+              .objectFit(ImageFit.Contain)
+            Text('电话客服')
+              .fontSize($r('sys.float.Body_L'))
+              .fontWeight(600)
+              .margin({left: 16})
+          }
+          Image($r('app.media.icon_right'))
+            .height(24)
+            .width(12)
+        }
+        .width('100%')
+        .height(40)
+        .justifyContent(FlexAlign.SpaceBetween)
+        .borderRadius($r('sys.float.corner_radius_level10'))
+        .bindSheet($$this.isCustom, this.buildMakeCallComponent(), {
+          height: 270, // 半模态高度
+          title: this.buildTitle('电话客服'),
+          dragBar: true, // 是否显示控制条
+          showClose: true, // 是否显示关闭图标
+          maskColor: $r('sys.color.ohos_id_color_mask_thin'),
+          blurStyle: BlurStyle.Regular,
+          preferType: SheetType.CENTER,
+          backgroundColor: 'rgba(0, 0, 0, 0.05)',
+          shouldDismiss: ((sheetDismiss: SheetDismiss) => { // 半模态页面交互式关闭回调函数
+            sheetDismiss.dismiss();
+          })
+        })
+        .onClick(() => {
+          this.isCustom = true;
+        });
+
+        Divider()
+          .color($r('sys.color.comp_divider'))
+          .margin({left: 60})
+
+        Row() {
+          Row() {
+            Image($r('app.media.ic_help'))
+              .height(48)
+              .width(48)
+              .objectFit(ImageFit.Contain)
+            Text('在线客服')
+              .fontSize($r('sys.float.Body_L'))
+              .fontWeight(600)
+              .margin({left: 16})
+          }
+          Image($r('app.media.icon_right'))
+            .height(24)
+            .width(12)
+        }
+        .justifyContent(FlexAlign.SpaceBetween)
+        .width('100%')
+        .height(40)
+        .borderRadius($r('sys.float.corner_radius_level10'))
+        .onClick(() => {
+          RouterModule.push({ url: RouterMap.CUSTOM_SERVICE_PAGE })
+          this.isOpen = false;
+        });
+      }
+      .width('100%')
+      .height(170)
+      .backgroundColor($r('sys.color.comp_background_list_card'))
+      .borderRadius(16)
+      .padding({ left: 12, right: 12 })
+      .justifyContent(FlexAlign.SpaceEvenly);
+    }
+    .width('100%')
+    .height(170)
+    .alignItems(HorizontalAlign.Center)
+    .justifyContent(FlexAlign.Start)
+    .padding({
+      left: 16,
+      right: 16,
+      bottom: 16,
+      top: 8
+    })
+
+  }
+
+  @Builder
   buildMakeCallComponent() {
     Column() {
       Column() {
@@ -256,7 +427,7 @@ export struct MinePage {
             } catch (e) {
             }
           }
-          this.isOpen = false;
+          this.isCustom = false;
         });
 
         Button() {
@@ -288,12 +459,12 @@ export struct MinePage {
       right: 16,
       bottom: 16,
       top: 8
-    });
+    })
   }
 
   @Builder
-  buildTitle() {
-    Text('联系客服')
+  buildTitle(val: string) {
+    Text(val)
       .fontSize($r('sys.float.Title_S'))
       .fontWeight(FontWeight.Medium);
   }
@@ -319,12 +490,13 @@ export struct MinePage {
               GridItem() {
                 if (item.titleName === '联系客服') {
                   UserItem({ title: item.titleName, image: item.icon, url: item.url })
-                    .bindSheet($$this.isOpen, this.buildMakeCallComponent(), {
+                    .bindSheet($$this.isOpen, this.buildServiceComponent(), {
                       height: 270, // 半模态高度
-                      title: this.buildTitle(),
+                      title: this.buildTitle('联系客服'),
                       dragBar: true, // 是否显示控制条
                       showClose: true, // 是否显示关闭图标
                       maskColor: $r('sys.color.ohos_id_color_mask_thin'),
+                      backgroundColor: 'rgba(0, 0, 0, 0.05)',
                       blurStyle: BlurStyle.Regular,
                       preferType: SheetType.CENTER,
                       shouldDismiss: ((sheetDismiss: SheetDismiss) => { // 半模态页面交互式关闭回调函数
@@ -332,13 +504,17 @@ export struct MinePage {
                       })
                     })
                     .onClick(() => {
+                      if (!this.logoUser.isLogin) {
+                        RouterModule.push({ url: RouterMap.LOGIN_PAGE, param: true });
+                        return;
+                      }
                       this.isOpen = true;
                     });
                 } else {
                   UserItem({ title: item.titleName, image: item.icon, url: item.url })
                     .onClick(() => {
                       if (this.logoUser.isLogin && item.url &&
-                        (item.titleName === '浏览记录' || item.titleName === '练习记录')) {
+                        (item.titleName === '浏览记录' || item.titleName === '练习记录' || item.titleName === '我的下载')) {
                         RouterModule.push({ url: item.url, param: this.logoUser });
                       } else if (this.logoUser.isLogin && item.url && (item.titleName === '设置')) {
                         RouterModule.push({ url: item.url });

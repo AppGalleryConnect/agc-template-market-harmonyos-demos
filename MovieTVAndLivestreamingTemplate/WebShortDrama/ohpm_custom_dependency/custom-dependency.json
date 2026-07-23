@@ -1,0 +1,1772 @@
+{
+  "metadata": {
+    "rootDir": "/devcloud/ws/suUba/workspace/j_LXDYR9IF/BacAGCSDKWebShortDrama/WebShortDrama",
+    "toolType": "ohpm",
+    "toolVersion": "ohpm v5.3.1-rc.4",
+    "author": [
+      {}
+    ]
+  },
+  "modules": [
+    {
+      "moduleName": "styles",
+      "artifact": {
+        "component": {
+          "id": "@agctemplate/styles@1.0.0",
+          "repoType": "ohpm",
+          "name": "@agctemplate/styles",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "@agctemplate/styles@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": []
+    },
+    {
+      "moduleName": "open_ads",
+      "artifact": {
+        "component": {
+          "id": "@agctemplate/open_ads@1.0.0",
+          "repoType": "ohpm",
+          "name": "@agctemplate/open_ads",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "@agctemplate/open_ads@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": []
+    },
+    {
+      "moduleName": "module_cast",
+      "artifact": {
+        "component": {
+          "id": "module_cast@1.0.2",
+          "repoType": "ohpm",
+          "name": "module_cast",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.2",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "module_cast@1.0.2",
+          "dependsOn": [
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": []
+    },
+    {
+      "moduleName": "day_signin",
+      "artifact": {
+        "component": {
+          "id": "day_signin@1.0.1",
+          "repoType": "ohpm",
+          "name": "day_signin",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.1",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "day_signin@1.0.1",
+          "dependsOn": [
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": []
+    },
+    {
+      "moduleName": "look_ad",
+      "artifact": {
+        "component": {
+          "id": "look_ad@1.0.2",
+          "repoType": "ohpm",
+          "name": "look_ad",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.2",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "look_ad@1.0.2",
+          "dependsOn": [
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": []
+    },
+    {
+      "moduleName": "task_list",
+      "artifact": {
+        "component": {
+          "id": "task_list@1.0.1",
+          "repoType": "ohpm",
+          "name": "task_list",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.1",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "task_list@1.0.1",
+          "dependsOn": [
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": []
+    },
+    {
+      "moduleName": "wheel",
+      "artifact": {
+        "component": {
+          "id": "wheel@1.0.1",
+          "repoType": "ohpm",
+          "name": "wheel",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.1",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "wheel@1.0.1",
+          "dependsOn": [
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": []
+    },
+    {
+      "moduleName": "dial_panel",
+      "artifact": {
+        "component": {
+          "id": "dial_panel@1.0.0",
+          "repoType": "ohpm",
+          "name": "dial_panel",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "dial_panel@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": []
+    },
+    {
+      "moduleName": "utils",
+      "artifact": {
+        "component": {
+          "id": "@agctemplate/utils@1.0.0",
+          "repoType": "ohpm",
+          "name": "@agctemplate/utils",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "@agctemplate/utils@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": []
+    },
+    {
+      "moduleName": "base_apis",
+      "artifact": {
+        "component": {
+          "id": "base_apis@1.0.0",
+          "repoType": "ohpm",
+          "name": "base_apis",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "dayjs@1.11.21",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.21",
+          "files": [
+            {
+              "integrity": "sha512-98IT+HOahAisibz/yjKbzuOBwYcjJ7BCLPzARyHiyEBmRz4fatF+KPJszEHXsGYjUG234aH/cOjW1wwTbKUZlA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.21.tgz"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "base_apis@1.0.0",
+          "dependsOn": [
+            {
+              "id": "dayjs@1.11.21"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": []
+    },
+    {
+      "moduleName": "module_transition",
+      "artifact": {
+        "component": {
+          "id": "module_transition@1.0.0",
+          "repoType": "ohpm",
+          "name": "module_transition",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "module_transition@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": []
+    },
+    {
+      "moduleName": "feedback",
+      "artifact": {
+        "component": {
+          "id": "feedback@1.0.0",
+          "repoType": "ohpm",
+          "name": "feedback",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/axios-mock-adapter@1.0.0",
+          "desc": "Axios adapter that allows to easily mock requests",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/axios-mock-adapter",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-MHya9ckoaeA5l/jMviaHyGYJAFHMolZdQFjyGE4RO3bQEYsNrGB/0sZhlcfUbEHH++WNH/rgl4bsRfAgpEa0Dw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/axios-mock-adapter/-/@hw-agconnect/axios-mock-adapter-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "feedback@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            },
+            {
+              "id": "@hw-agconnect/axios-mock-adapter@1.0.0"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/axios-mock-adapter@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": []
+    },
+    {
+      "moduleName": "video_swiper",
+      "artifact": {
+        "component": {
+          "id": "video_swiper@1.0.4",
+          "repoType": "ohpm",
+          "name": "video_swiper",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.4",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "video_swiper@1.0.4",
+          "dependsOn": [
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":module_cast"
+      ]
+    },
+    {
+      "moduleName": "module_pip",
+      "artifact": {
+        "component": {
+          "id": "module_pip@1.0.0",
+          "repoType": "ohpm",
+          "name": "module_pip",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "module_pip@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":video_swiper"
+      ]
+    },
+    {
+      "moduleName": "common",
+      "artifact": {
+        "component": {
+          "id": "@agctemplate/common@1.0.0",
+          "repoType": "ohpm",
+          "name": "@agctemplate/common",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "@agctemplate/common@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":utils"
+      ]
+    },
+    {
+      "moduleName": "resources",
+      "artifact": {
+        "component": {
+          "id": "@agctemplate/resources@1.0.0",
+          "repoType": "ohpm",
+          "name": "@agctemplate/resources",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "@agctemplate/resources@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":utils"
+      ]
+    },
+    {
+      "moduleName": "aggregated_payment",
+      "artifact": {
+        "component": {
+          "id": "aggregated_payment@1.0.0",
+          "repoType": "ohpm",
+          "name": "aggregated_payment",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@tencent/wechat_open_sdk@1.0.15",
+          "desc": "Tencent WeChat OpenSDK",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@tencent/wechat_open_sdk",
+          "version": "1.0.15",
+          "files": [
+            {
+              "integrity": "sha512-O9W8Gj16YBu0fl3d78r4eQQdnljczJPcIDws9i+ErVg94y8twHBkLWdyysiWfhGA7+ltB3mu8EZsk/EAr8LZSw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/ohpm-center/@tencent/wechat_open_sdk/-/@tencent/wechat_open_sdk-1.0.15.har"
+            }
+          ]
+        },
+        {
+          "id": "@cashier_alipay/cashiersdk@1.0.0",
+          "desc": "Please describe the basic information.",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "local",
+          "name": "@cashier_alipay/cashiersdk",
+          "version": "1.0.0",
+          "files": [
+            {
+              "localPath": "components/aggregated_payment/libs/swallow_alipay_sdk",
+              "hash": ""
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "aggregated_payment@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@tencent/wechat_open_sdk@1.0.15"
+            },
+            {
+              "id": "@cashier_alipay/cashiersdk@1.0.0"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": []
+    },
+    {
+      "moduleName": "aggregated_share",
+      "artifact": {
+        "component": {
+          "id": "aggregated_share@1.0.0",
+          "repoType": "ohpm",
+          "name": "aggregated_share",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "dayjs@1.11.21",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.21",
+          "files": [
+            {
+              "integrity": "sha512-98IT+HOahAisibz/yjKbzuOBwYcjJ7BCLPzARyHiyEBmRz4fatF+KPJszEHXsGYjUG234aH/cOjW1wwTbKUZlA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.21.tgz"
+            }
+          ]
+        },
+        {
+          "id": "@tencent/wechat_open_sdk@1.0.15",
+          "desc": "Tencent WeChat OpenSDK",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@tencent/wechat_open_sdk",
+          "version": "1.0.15",
+          "files": [
+            {
+              "integrity": "sha512-O9W8Gj16YBu0fl3d78r4eQQdnljczJPcIDws9i+ErVg94y8twHBkLWdyysiWfhGA7+ltB3mu8EZsk/EAr8LZSw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/ohpm-center/@tencent/wechat_open_sdk/-/@tencent/wechat_open_sdk-1.0.15.har"
+            }
+          ]
+        },
+        {
+          "id": "@tencent/qq-open-sdk@1.0.3",
+          "desc": "QQ Open SDK",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@tencent/qq-open-sdk",
+          "version": "1.0.3",
+          "files": [
+            {
+              "integrity": "sha512-hfpi+AHRfhXzLUW9Zw5V95THdnXaxtKNZ0/MVS897FQ/PEiKAfp3DaC8x0bLTO69mb/S4Fi/drxDGGfDwYSjaA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/ohpm-center/@tencent/qq-open-sdk/-/@tencent/qq-open-sdk-1.0.3.har"
+            }
+          ]
+        },
+        {
+          "id": "core@1.0.0",
+          "desc": "Please describe the basic information.",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "local",
+          "name": "core",
+          "version": "1.0.0",
+          "files": [
+            {
+              "localPath": "components/aggregated_share/libs/weibo_open_sdk",
+              "hash": ""
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "aggregated_share@1.0.0",
+          "dependsOn": [
+            {
+              "id": "dayjs@1.11.21"
+            },
+            {
+              "id": "@tencent/wechat_open_sdk@1.0.15"
+            },
+            {
+              "id": "@tencent/qq-open-sdk@1.0.3"
+            },
+            {
+              "id": "core@1.0.0"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":utils"
+      ]
+    },
+    {
+      "moduleName": "server",
+      "artifact": {
+        "component": {
+          "id": "@agctemplate/server@1.0.0",
+          "repoType": "ohpm",
+          "name": "@agctemplate/server",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "@agctemplate/server@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":utils",
+        ":common"
+      ]
+    },
+    {
+      "moduleName": "widgets",
+      "artifact": {
+        "component": {
+          "id": "@agctemplate/widgets@1.0.0",
+          "repoType": "ohpm",
+          "name": "@agctemplate/widgets",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "@agctemplate/widgets@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":common",
+        ":server",
+        ":utils",
+        ":resources"
+      ]
+    },
+    {
+      "moduleName": "login",
+      "artifact": {
+        "component": {
+          "id": "@agctemplate/login@1.0.0",
+          "repoType": "ohpm",
+          "name": "@agctemplate/login",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "@agctemplate/login@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":widgets",
+        ":resources",
+        ":utils",
+        ":server",
+        ":common"
+      ]
+    },
+    {
+      "moduleName": "theater",
+      "artifact": {
+        "component": {
+          "id": "@agctemplate/theater@1.0.0",
+          "repoType": "ohpm",
+          "name": "@agctemplate/theater",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "@agctemplate/theater@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":utils",
+        ":resources",
+        ":widgets",
+        ":server",
+        ":search",
+        ":module_transition"
+      ]
+    },
+    {
+      "moduleName": "award",
+      "artifact": {
+        "component": {
+          "id": "@agctemplate/award@1.0.0",
+          "repoType": "ohpm",
+          "name": "@agctemplate/award",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "@agctemplate/award@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":resources",
+        ":utils",
+        ":widgets",
+        ":day_signin",
+        ":look_ad",
+        ":task_list",
+        ":wheel"
+      ]
+    },
+    {
+      "moduleName": "search",
+      "artifact": {
+        "component": {
+          "id": "search@1.0.0",
+          "repoType": "ohpm",
+          "name": "search",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "search@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":utils",
+        ":resources",
+        ":widgets",
+        ":server"
+      ]
+    },
+    {
+      "moduleName": "membership",
+      "artifact": {
+        "component": {
+          "id": "membership@1.0.2",
+          "repoType": "ohpm",
+          "name": "membership",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.2",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "membership@1.0.2",
+          "dependsOn": [
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":widgets"
+      ]
+    },
+    {
+      "moduleName": "aggregated_login",
+      "artifact": {
+        "component": {
+          "id": "aggregated_login@1.0.0",
+          "repoType": "ohpm",
+          "name": "aggregated_login",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@tencent/wechat_open_sdk@1.0.15",
+          "desc": "Tencent WeChat OpenSDK",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@tencent/wechat_open_sdk",
+          "version": "1.0.15",
+          "files": [
+            {
+              "integrity": "sha512-O9W8Gj16YBu0fl3d78r4eQQdnljczJPcIDws9i+ErVg94y8twHBkLWdyysiWfhGA7+ltB3mu8EZsk/EAr8LZSw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/ohpm-center/@tencent/wechat_open_sdk/-/@tencent/wechat_open_sdk-1.0.15.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "aggregated_login@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@tencent/wechat_open_sdk@1.0.15"
+            },
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":widgets"
+      ]
+    },
+    {
+      "moduleName": "detail",
+      "artifact": {
+        "component": {
+          "id": "@agctemplate/detail@1.0.0",
+          "repoType": "ohpm",
+          "name": "@agctemplate/detail",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "@agctemplate/detail@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":utils",
+        ":resources",
+        ":widgets",
+        ":server",
+        ":common",
+        ":theater",
+        ":video_swiper",
+        ":base_apis",
+        ":aggregated_payment",
+        ":module_cast",
+        ":module_pip",
+        ":aggregated_share",
+        ":membership",
+        ":module_transition"
+      ]
+    },
+    {
+      "moduleName": "entry",
+      "artifact": {
+        "component": {
+          "id": "entry@1.0.0",
+          "repoType": "ohpm",
+          "name": "entry",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "entry@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":utils",
+        ":frame",
+        ":resources",
+        ":widgets",
+        ":home",
+        ":mine",
+        ":detail",
+        ":theater",
+        ":login",
+        ":award",
+        ":open_ads",
+        ":favor",
+        ":module_cast",
+        ":module_pip",
+        ":aggregated_login",
+        ":aggregated_share",
+        ":module_transition"
+      ]
+    },
+    {
+      "moduleName": "home",
+      "artifact": {
+        "component": {
+          "id": "@agctemplate/home@1.0.0",
+          "repoType": "ohpm",
+          "name": "@agctemplate/home",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "@agctemplate/home@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":utils",
+        ":resources",
+        ":widgets",
+        ":detail",
+        ":server",
+        ":video_swiper",
+        ":aggregated_share"
+      ]
+    },
+    {
+      "moduleName": "mine",
+      "artifact": {
+        "component": {
+          "id": "@agctemplate/mine@1.0.0",
+          "repoType": "ohpm",
+          "name": "@agctemplate/mine",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "@agctemplate/mine@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":widgets",
+        ":resources",
+        ":utils",
+        ":server",
+        ":common",
+        ":detail",
+        ":open_ads",
+        ":aggregated_login",
+        ":feedback",
+        ":membership",
+        ":dial_panel"
+      ]
+    },
+    {
+      "moduleName": "frame",
+      "artifact": {
+        "component": {
+          "id": "@agctemplate/frame@1.0.0",
+          "repoType": "ohpm",
+          "name": "@agctemplate/frame",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "@agctemplate/frame@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":widgets",
+        ":utils",
+        ":resources",
+        ":home",
+        ":mine",
+        ":theater",
+        ":award",
+        ":favor",
+        ":video_swiper"
+      ]
+    },
+    {
+      "moduleName": "favor",
+      "artifact": {
+        "component": {
+          "id": "@agctemplate/favor@1.0.0",
+          "repoType": "ohpm",
+          "name": "@agctemplate/favor",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@ohos/hypium@1.0.19",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.19",
+          "files": [
+            {
+              "integrity": "sha512-FirsK6XzbGEe7cGlDAjHoVavQ3uZ0RK6V9EC4HlL+8ErND0qAtXBq1NH7COFjoOBrFDVnd2zYVTItsDSawwYnw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.19.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "@agctemplate/favor@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/hypium@1.0.19"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":widgets",
+        ":resources",
+        ":utils",
+        ":server",
+        ":common",
+        ":detail",
+        ":mine"
+      ]
+    }
+  ]
+}

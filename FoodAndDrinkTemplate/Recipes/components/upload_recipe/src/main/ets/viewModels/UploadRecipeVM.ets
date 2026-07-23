@@ -8,6 +8,7 @@ import { common } from '@kit.AbilityKit';
 import { image } from '@kit.ImageKit';
 import { media } from '@kit.MediaKit';
 import fileIo from '@ohos.file.fs';
+import { hilog } from '@kit.PerformanceAnalysisKit';
 import { dataSharePredicates } from '@kit.ArkData';
 
 
@@ -265,7 +266,7 @@ export class UploadRecipeVM {
           fs.closeSync(file);
         }
       } catch (e) {
-        console.error(TAG, 'fs.closeSync error: ' + JSON.stringify(e));
+        hilog.error(0x0001, TAG, 'fs.closeSync error: ' + JSON.stringify(e));
       }
     }
   }

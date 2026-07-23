@@ -162,6 +162,7 @@ struct SeckillListPage {
       .expandSafeArea()
       .scrollBar(BarState.Off)
       .align(Alignment.Start)
+      .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: true })
     }
   }
 

@@ -1,4 +1,4 @@
-import { fromPlain, SignIn, SignInClass, toPlainObject } from '../model/SignInModel'
+import { fromPlain, SignIn, SignInClass, toPlainObject } from '../model/DaySignInModel'
 import { common } from '@kit.AbilityKit'
 import StrConstants from '../constants/StrConstants'
 import PreferencesManager from '../utils/PreferencesManager'

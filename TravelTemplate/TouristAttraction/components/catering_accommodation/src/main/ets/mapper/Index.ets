@@ -11,7 +11,8 @@ export function mapAccommodationInfo(sites: site.Site[]) {
     accommodationInfo.longitude = item.location?.longitude ?? 0;
     accommodationInfo.latitude = item.location?.latitude ?? 0;
     accommodationInfo.address = item.formatAddress ?? '';
-    accommodationInfo.phone = item.poi?.phone ?? '';
+    //todo 模板使用虚拟电话，真实场景请替换代码。accommodationInfo.phone = item.poi?.phone ?? '';
+    accommodationInfo.phone = '12345678911';
     accommodationInfo.comments = item.poi?.comment?.total ?? 0;
     accommodationInfo.rating = item.poi?.comment?.averageRating ?? 0;
     // mock图片
@@ -31,7 +32,8 @@ export function mapCateringInfo(sites: site.Site[]) {
     cateringInfo.longitude = item.location?.longitude ?? 0;
     cateringInfo.latitude = item.location?.latitude ?? 0;
     cateringInfo.address = item.formatAddress ?? '';
-    cateringInfo.phone = item.poi?.phone ?? '';
+    //todo 模板使用虚拟电话，真实场景请替换代码。cateringInfo.phone = item.poi?.phone ?? '';
+    cateringInfo.phone = '12345678911';
     cateringInfo.comments = item.poi?.comment?.total ?? 0;
     cateringInfo.rating = item.poi?.comment?.averageRating ?? 0;
     cateringList.push(cateringInfo);

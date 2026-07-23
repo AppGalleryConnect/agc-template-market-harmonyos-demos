@@ -4,6 +4,10 @@ import { PurchaseIngredients } from './PurchaseIngredients';
 import { Decimal } from '@kit.ArkTS';
 import { promptAction } from '@kit.ArkUI';
 import { BusinessError } from '@kit.BasicServicesKit';
+import { hilog } from '@kit.PerformanceAnalysisKit';
+
+const DOMAIN = 0x0001;
+const TAG = '[ShoppingBasket]';
 
 @ComponentV2
 export struct ShoppingBasket {
@@ -160,8 +164,8 @@ export struct ShoppingBasket {
                               })
                             },
                             onWillDismiss: (dismissDialogAction: DismissDialogAction) => {
-                              console.info('reason' + JSON.stringify(dismissDialogAction.reason))
-                              console.log('dialog onWillDismiss')
+                              hilog.info(DOMAIN, TAG, `reason: ${JSON.stringify(dismissDialogAction.reason)}`);
+                              hilog.info(DOMAIN, TAG, 'dialog onWillDismiss');
                               if (dismissDialogAction.reason === DismissReason.PRESS_BACK) {
                                 dismissDialogAction.dismiss()
                               }
@@ -173,7 +177,7 @@ export struct ShoppingBasket {
                             this.customDialogComponentId = dialogId
                           })
                             .catch((error: BusinessError) => {
-                              console.error(`openCustomDialog error code is ${error.code}, message is ${error.message}`)
+                              hilog.error(DOMAIN, TAG, `openCustomDialog error code is ${error.code}, message is ${error.message}`);
                             })
                         })
                     }
@@ -241,7 +245,7 @@ export struct ShoppingBasket {
             } catch (error) {
               let message = (error as BusinessError).message;
               let code = (error as BusinessError).code;
-              console.error(`closeCustomDialog error code is ${code}, message is ${message}`);
+              hilog.error(DOMAIN, TAG, `closeCustomDialog error code is ${code}, message is ${message}`);
             }
           })
         Button('确定')
@@ -257,7 +261,7 @@ export struct ShoppingBasket {
             } catch (error) {
               let message = (error as BusinessError).message;
               let code = (error as BusinessError).code;
-              console.error(`closeCustomDialog error code is ${code}, message is ${message}`);
+              hilog.error(DOMAIN, TAG, `closeCustomDialog error code is ${code}, message is ${message}`);
             }
           })
       }.margin({ top: 8 })

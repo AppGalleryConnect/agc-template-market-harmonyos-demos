@@ -1,4 +1,7 @@
+import { getStringSync } from '@agctemplate/resources'
 import { PreferConstant, PreferenceUtil } from '@agctemplate/utils'
+import { FontModel } from '@agctemplate/widgets'
+import { AppStorageV2 } from '@kit.ArkUI'
 
 @ComponentV2
 export struct UserInfoRow {
@@ -9,6 +12,9 @@ export struct UserInfoRow {
   @Event switchButton: (isOn: boolean) => void
   @Local isToggleOn: boolean = false
   @Param isSwitch: boolean = false
+  @Param isTriangle: boolean = false
+  @BuilderParam rightMenu: () => void
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
 
   aboutToAppear(): void {
     this.isToggleOn = PreferenceUtil.getInstance(this.getUIContext().getHostContext()).get(
@@ -19,19 +25,24 @@ export struct UserInfoRow {
     Row() {
       Column({ space: 2 }) {
         Text(this.leftTitle)
-          .height(21)
+          .fontWeight(500)
+          .fontColor($r('sys.color.font_primary'))
+          .fontSize(this.fontModel.getFg(16))
         if (this.subTitle) {
-          Text(this.subTitle).height(19).fontWeight(400).fontSize(14).fontColor($r('sys.color.font_secondary'))
+          Text(this.subTitle)
+            .fontWeight(400)
+            .fontSize(this.fontModel.getFg(14))
+            .fontColor($r('sys.color.font_secondary'))
+            .width('72%')
         }
       }
+      .padding({ top: this.subTitle ? 9 : 0, bottom: this.subTitle ? 9 : 0 })
       .alignItems(HorizontalAlign.Start)
 
       Blank()
       Text(this.rightContent)
-        .height(19)
         .textAlign(TextAlign.End)
-        .width(120)
-        .fontSize($r('sys.float.Body_M'))
+        .fontSize(this.fontModel.getFg(14))
         .fontWeight(FontWeight.Regular)
         .fontColor($r('sys.color.font_secondary'))
         .maxLines(1)
@@ -39,6 +50,7 @@ export struct UserInfoRow {
 
       if (this.isSwitch) {
         Toggle({ type: ToggleType.Switch, isOn: this.isToggleOn })
+          .accessibilityText(getStringSync(this.leftTitle as Resource))
           .size({ width: 36, height: 20 })
           .onChange(() => {
             this.isToggleOn = !this.isToggleOn
@@ -46,17 +58,27 @@ export struct UserInfoRow {
               this.switchButton(this.isToggleOn)
             }
           })
+      } else if (this.isTriangle) {
+        SymbolGlyph($r('sys.symbol.arrowtriangle_down_fill'))
+          .fontSize(this.fontModel.getFg(24))
+          .fontColor([$r('sys.color.icon_fourth')])
+          .margin({ left: 8 })
       } else {
-        Image($r('app.media.iconRight'))
-          .size({ width: 24, height: 24 })
+        SymbolGlyph($r('sys.symbol.chevron_right'))
+          .fontSize(this.fontModel.getFg(24))
+          .fontColor([$r('sys.color.icon_fourth')])
       }
     }
+    .bindMenu(this.isTriangle ? this.rightMenu : [], { placement: Placement.BottomRight })
     .onClick(() => {
       if (this.rightOnClick) {
         this.rightOnClick()
       }
     })
-    .size({ width: '100%', height: 48 })
+    .width('100%')
+    .constraintSize({
+      minHeight: 48
+    })
     .padding({ left: 12, right: 12 })
   }
 }

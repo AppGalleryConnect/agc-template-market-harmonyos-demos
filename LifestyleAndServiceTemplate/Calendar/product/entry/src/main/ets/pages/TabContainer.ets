@@ -1,5 +1,5 @@
-import { PersistenceV2 } from '@kit.ArkUI';
-import { emitter } from '@kit.BasicServicesKit';
+import { AppStorageV2, PersistenceV2 } from '@kit.ArkUI';
+import { UtilLog } from '@hw-agconnect/util-log';
 import { baseToast, getDataFromJSON } from 'base_apis';
 import { PerpetualCalendar } from 'perpetual'
 import { TabsInfo, ThemeModel, UserState, WeekStart } from 'common'
@@ -7,6 +7,8 @@ import { Almanac } from 'almanac'
 import { MinePage } from 'mine'
 import { RouterModule } from 'router_module';
 import { IndexVM } from '../viewmodel/IndexVM';
+import { FormCardParams, FormCardRouter } from '../common/Types';
+
 
 @ComponentV2
 export struct TabContainer {
@@ -16,7 +18,7 @@ export struct TabContainer {
   @Local tabsInfos: TabsInfo[] = []
   private controller: TabsController = new TabsController()
   @Local weekStart: WeekStart = PersistenceV2.connect(WeekStart, () => new WeekStart())!;
-  @Local message: string = '';
+  @Local formCardModel: FormCardRouter = AppStorageV2.connect(FormCardRouter, () => new FormCardRouter())!;
   vm: IndexVM = new IndexVM();
 
   getTabsInfo() {
@@ -24,26 +26,34 @@ export struct TabContainer {
   }
 
   aboutToAppear() {
-    let event: emitter.InnerEvent = {
-      eventId: 1,
-    };
-    this.widgetInterception()
     this.getTabsInfo()
     this.registerInterception()
+  }
+
+  @Monitor('formCardModel.id')
+  onFormCardClick() {
+    this.widgetInterception();
   }
 
   /*
    * 卡片跳转拦截
    * */
   widgetInterception() {
-    this.message = AppStorage.get('widget_router') ?? ''
-    if (!this.message) {
+    if (!this.formCardModel) {
       return
     }
-    if (this.message === 'almanac') {
-      this.controller.changeIndex(1)
-    } else {
-      this.controller.changeIndex(0)
+    try {
+      const message: FormCardParams = JSON.parse(this.formCardModel.params)
+      if (!message.message) {
+        return
+      }
+      if (message.message === 'almanac') {
+        this.controller.changeIndex(1)
+      } else {
+        this.controller.changeIndex(0)
+      }
+    } catch (e) {
+      UtilLog.error('form card error' + JSON.stringify(e))
     }
   }
 
@@ -63,7 +73,7 @@ export struct TabContainer {
          * */
         let target: NavDestinationContext = to as NavDestinationContext;
         if (!this.userState.isLogin &&
-        ['PersonInformation', 'VipOpenCenter'].includes(target?.pathInfo?.name)) {
+          ['PersonInformation', 'VipOpenCenter'].includes(target?.pathInfo?.name)) {
           baseToast.show(this.getUIContext(), {
             type: 'dialog',
             hasTitle: $r('app.string.associated_account'),

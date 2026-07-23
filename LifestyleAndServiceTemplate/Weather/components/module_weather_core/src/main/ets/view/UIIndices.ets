@@ -21,8 +21,9 @@ function subStyle() {
 export struct UIIndices {
   @Require @Param weathers: IndicesWeather[];
   @Event click?: (weather: IndicesWeather) => void;
-  itemHeight: number = 64;
-  itemSpace: number = 8;
+  @Param itemHeight: number = 64;
+  @Param itemSpace: number = 8;
+  @Param columnsNum: number = 2;
 
   build() {
     CardContainer({ title: '生活指数' }) {
@@ -32,9 +33,10 @@ export struct UIIndices {
         }, (weather: IndicesWeather, index) => JSON.stringify(weather) + '_' + index)
       }
       .width(StyleConstants.FULL_PERCENT)
-      .height(this.itemHeight * 4 + this.itemSpace * 3 + 12)
+      .height(this.itemHeight * (this.weathers.length / this.columnsNum) +
+        this.itemSpace * (this.weathers.length / this.columnsNum - 1) + 12)
       .padding({ left: StyleConstants.SPACE_16, right: StyleConstants.SPACE_16, bottom: StyleConstants.SPACE_12 })
-      .columnsTemplate('1fr 1fr')
+      .columnsTemplate('1fr '.repeat(this.columnsNum))
       .rowsGap(this.itemSpace)
       .columnsGap(this.itemSpace)
     }
@@ -55,10 +57,10 @@ export struct UIIndices {
 
         Image($r('app.media.ic_weather_arrow')).height(13).fillColor($r('sys.color.icon_secondary'))
       }
-      .padding(StyleConstants.SPACE_12)
     }
     .width(StyleConstants.FULL_PERCENT)
     .height(this.itemHeight)
+    .padding(StyleConstants.SPACE_12)
     .borderRadius(12)
     .backgroundColor($r('sys.color.comp_background_tertiary'))
     .onClick(() => {

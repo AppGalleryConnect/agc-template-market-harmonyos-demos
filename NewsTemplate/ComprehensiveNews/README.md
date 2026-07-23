@@ -26,7 +26,7 @@
 | 通用隐私同意弹窗组件（module_consent_dialog） | 支持全屏、弹窗、半模态等形式的隐私弹窗                            | [使用指导](components/module_consent_dialog/README.md)    |
 | 通用会员组件（module_membership）         | 支持应用内支付进行会员开通                                  | [使用指导](components/module_membership/README.md)        |
 | 通用图片预览组件（module_imagepreview）     | 支持预览图片、双指放大、缩小，滑动预览                            | [使用指导](components/module_imagepreview/README.md)      |
-| 通用搜索组件（module_search）             | 支持显示搜索历史、猜你想搜和热搜榜等，支持搜索联想，支持一多适配，平板提供可选的浅层窗口模式 | [使用指导](components/module_search/README.md)      |
+| 通用搜索组件（module_search）             | 支持显示搜索历史、猜你想搜和热搜榜等，支持搜索联想，支持一多适配，平板提供可选的浅层窗口模式 | [使用指导](components/module_search/README.md)            |
 | 新闻广告组件（module_advertisement）      | 支持全屏广告、横幅广告                                    | [使用指导](components/module_advertisement/README.md)     |
 | 频道编辑组件（module_channeledit）        | 支持频道添加、删除、拖拽排序                                 | [使用指导](components/module_channeledit/README.md)       |
 | 高亮组件（module_highlight）            | 支持根据关键字高亮显示文本中命中关键词的部分                         | [使用指导](components/module_highlight/README.md)         |
@@ -400,10 +400,10 @@ ComprehensiveNews
 
 ### 环境
 
-- DevEco Studio版本：DevEco Studio 6.1.0 Release及以上
-- HarmonyOS SDK版本：HarmonyOS 6.1.0 Release SDK及以上
+- DevEco Studio版本：DevEco Studio 6.1.1 Release及以上
+- HarmonyOS SDK版本：HarmonyOS 6.1.1 Release SDK及以上
 - 设备类型：华为手机（包括双折叠和阔折叠）、平板
-- 系统版本：HarmonyOS 6.0.0(20)及以上
+- 系统版本：HarmonyOS 6.1.0(23)及以上
 
 ### 权限
 

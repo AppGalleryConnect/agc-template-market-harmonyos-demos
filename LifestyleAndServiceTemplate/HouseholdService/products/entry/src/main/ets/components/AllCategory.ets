@@ -16,9 +16,11 @@ import { AppStorageV2 } from '@kit.ArkUI';
 import { CategoryController, CategoryList } from 'category_list';
 import {
   AppStorageBank,
+  BreakpointNameEnum,
   ClickId,
   CommonConstants,
   deleteHistoryList,
+  getAllCategoryServices,
   getGood,
   getGuessList,
   getHistoryList,
@@ -31,6 +33,7 @@ import {
   JumpCategoryParam,
   RouterModule,
   updateCitySelected,
+  WindowUtils,
 } from 'lib_foundation';
 import { CommonUtils, IGoodCategory, IGoodInfo, RouterMap, WindowUtil } from 'module_base';
 import { LoneTakeAnimationsTransition, LongTakeTransitionParam } from 'module_transition';
@@ -38,7 +41,7 @@ import { PresentationType, SearchItem, SearchView, SearchViewController } from '
 
 @ComponentV2
 export struct AllCategory {
-  @Local breakpoint: string = '';
+  @Local breakpoint: BreakpointNameEnum = BreakpointNameEnum.SM;
   @Local contentList: IGoodCategory[] = [];
   @Local homeBaseInfo: HomeBaseInfo = AppStorageV2.connect(HomeBaseInfo, () => new HomeBaseInfo())!;
   @Local clickId: ClickId = AppStorageV2.connect(ClickId, () => new ClickId())!;
@@ -46,9 +49,16 @@ export struct AllCategory {
   controller: CategoryController = new CategoryController();
   searchController: SearchViewController = new SearchViewController();
 
-  aboutToAppear(): void {
+  aboutToAppear() {
     WindowUtil.initWindowUtil(this.getUIContext());
-    this.contentList = AppStorageBank.allCategoryList;
+    if (!AppStorageBank.allCategoryList.length) {
+      getAllCategoryServices().then((resp) => {
+        AppStorageBank.setAllCategoryList(resp);
+        this.contentList = resp;
+      });
+    } else {
+      this.contentList = AppStorageBank.allCategoryList;
+    }
   }
 
   @Monitor('clickId.clickId')
@@ -80,9 +90,14 @@ export struct AllCategory {
         }
       }
       .onBreakpointChange((bp) => {
-        this.breakpoint = bp;
+        this.breakpoint = bp as BreakpointNameEnum;
       })
     }
+    .padding({
+      top: WindowUtils.windowTopPadding,
+      bottom: [BreakpointNameEnum.LG, BreakpointNameEnum.XL].includes(this.breakpoint) ?
+        WindowUtils.windowBottomPadding : 0,
+    })
     .onBackPressed(() => {
       return this.searchController.onBackPressed();
     })
@@ -94,7 +109,7 @@ export struct AllCategory {
 
   @Builder
   topBar() {
-    Row({ space: 40 }) {
+    Row() {
       Row({ space: 4 }) {
         Text(this.homeBaseInfo.citySelected)
           .fontSize(16)
@@ -126,6 +141,8 @@ export struct AllCategory {
           routerStack: RouterModule.getStack(),
           showHotSearch: false,
           showFilterTag: false,
+          windowTopPadding: WindowUtils.windowTopPadding,
+          windowBottomPadding: WindowUtils.windowBottomPadding,
           controller: this.searchController,
           queryHistoryList: getHistoryList,
           queryGuessList: getGuessList,
@@ -138,9 +155,9 @@ export struct AllCategory {
           },
         })
       }
-      .layoutWeight(1)
-      .justifyContent(FlexAlign.End)
+      .width(180)
     }
+    .justifyContent(FlexAlign.SpaceBetween)
     .padding({
       left: GridRowColSetting.getPageMargin(this.breakpoint),
       right: GridRowColSetting.getPageMargin(this.breakpoint)

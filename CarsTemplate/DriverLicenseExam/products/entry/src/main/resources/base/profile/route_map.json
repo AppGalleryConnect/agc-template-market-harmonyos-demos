@@ -97,6 +97,11 @@
       "name": "membership",
       "pageSourceFile": "src/main/ets/pages/mine/MemberShip.ets",
       "buildFunction": "MemberShipSample1Builder"
+    },
+    {
+      "name": "MainEntry",
+      "pageSourceFile": "src/main/ets/pages/MainEntry.ets",
+      "buildFunction": "MainEntryBuilder"
     }
   ]
 }

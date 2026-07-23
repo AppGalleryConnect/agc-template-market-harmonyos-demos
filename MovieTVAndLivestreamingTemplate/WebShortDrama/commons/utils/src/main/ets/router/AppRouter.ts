@@ -75,10 +75,10 @@ class AppRouter {
    * 注意：params中传递变量为引用传递，如果被@state等装饰器修饰，则存在反向修改跳转起始页的情况
    * @param options Options.
    */
-  public async push(options: NavRouterOption): Promise<boolean> {
+  public async push(options: NavRouterOption, isAnimated: boolean = true): Promise<boolean> {
     if (options && options.builderName) {
       options.routerType = RouterType.PUSH;
-      return this.navPageByPushOrReplace(options, false);
+      return this.navPageByPushOrReplace(options, false, isAnimated);
     }
     return false;
   }
@@ -87,10 +87,10 @@ class AppRouter {
    * 用新页面替换当前页面
    * @param options Options.
    */
-  public async replace(options: NavRouterOption): Promise<boolean> {
+  public async replace(options: NavRouterOption, isAnimated: boolean = true): Promise<boolean> {
     if (options && options.builderName) {
       options.routerType = RouterType.REPLACE;
-      return this.navPageByPushOrReplace(options, true);
+      return this.navPageByPushOrReplace(options, true, isAnimated);
     }
     return false;
   }
@@ -119,26 +119,26 @@ class AppRouter {
   }
 
   @routerInterceptor
-  private async navPagePop(options?: NavRouterOption): Promise<void> {
+  private async navPagePop(options?: NavRouterOption, isAnimated: boolean = true): Promise<void> {
     if (this.navStackAction) {
       this.navStackAction(NavRouterActionType.POP, {
         name: options?.builderName,
         params: options?.params,
-        animated: options?.styleOption?.animated === undefined ? true : options?.styleOption?.animated,
+        animated: isAnimated,
       });
     }
   }
 
   @routerInterceptor
   private async navPageByPushOrReplace(options: NavRouterOption,
-    byReplace: boolean): Promise<boolean> {
+    byReplace: boolean, isAnimated: boolean = true): Promise<boolean> {
     try {
       if (this.navStackAction) {
         if (this.navStackAction(byReplace ? NavRouterActionType.REPLACE : NavRouterActionType.PUSH,
           {
             name: options.builderName,
             params: options.params,
-            animated: true,
+            animated: isAnimated,
             popCallback: options.popCallback
           })) {
           return true;

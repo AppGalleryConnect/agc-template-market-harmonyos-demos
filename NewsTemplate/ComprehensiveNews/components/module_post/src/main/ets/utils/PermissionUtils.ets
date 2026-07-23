@@ -1,5 +1,6 @@
 import { abilityAccessCtrl, bundleManager, PermissionRequestResult, Permissions } from '@kit.AbilityKit';
 import { BusinessError } from '@kit.BasicServicesKit';
+import { UtilLog } from '@hw-agconnect/util-log';
 
 const TAG = '[PermissionUtils]';
 
@@ -24,7 +25,7 @@ export class PermissionUtils {
       tokenId = bundleInfo.appInfo.accessTokenId;
     } catch (error) {
       const err: BusinessError = error as BusinessError;
-      console.error(TAG, `Failed to get bundle info for self. Code is ${err.code}, message is ${err.message}`);
+      UtilLog.error(TAG, `Failed to get bundle info for self. Code is ${err.code}, message is ${err.message}`);
     }
 
     // 校验应用是否被授予权限
@@ -32,7 +33,7 @@ export class PermissionUtils {
       grantStatus = atManager.checkAccessTokenSync(tokenId, permission);
     } catch (error) {
       const err: BusinessError = error as BusinessError;
-      console.error(TAG, `Failed to check access token. Code is ${err.code}, message is ${err.message}`);
+      UtilLog.error(TAG, `Failed to check access token. Code is ${err.code}, message is ${err.message}`);
     }
 
     return grantStatus === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED;
@@ -50,24 +51,24 @@ export class PermissionUtils {
     return atManager.requestPermissionsFromUser(context, permissions)
       .then(async (result: PermissionRequestResult) => {
         if (result.authResults.every(v => v === 0)) {
-          console.info(TAG, 'permissions granted: ' + JSON.stringify(permissions));
+          UtilLog.info(TAG, 'permissions granted: ' + JSON.stringify(permissions));
           return true;
         }
         // 二次向用户申请
         if ((result.dialogShownResults ?? []).some(v => !v)) {
-          console.info(TAG, 'start reapply permissions: ' + JSON.stringify(permissions));
+          UtilLog.info(TAG, 'start reapply permissions: ' + JSON.stringify(permissions));
           try {
             const resp = await atManager.requestPermissionOnSetting(context, permissions);
             return resp.every(v => v === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED);
           } catch (error) {
-            console.error(TAG, 'requestPermissionOnSetting fail, error: ' + JSON.stringify(error));
+            UtilLog.error(TAG, 'requestPermissionOnSetting fail, error: ' + JSON.stringify(error));
             return false;
           }
         }
         return false;
       })
       .catch((error: BusinessError) => {
-        console.error(TAG, 'requestPermissionsFromUser fail, error: ' + JSON.stringify(error));
+        UtilLog.error(TAG, 'requestPermissionsFromUser fail, error: ' + JSON.stringify(error));
         return false;
       });
   }

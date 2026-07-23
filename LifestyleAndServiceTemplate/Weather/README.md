@@ -14,14 +14,15 @@
 
 本模板提供如下组件，所有组件存放在工程根目录的components下，如果您仅需使用组件，可参考对应组件的指导链接；如果您使用此模板，请参考本文档。
 
-| 组件                             | 描述                               | 使用指导                                                  |
-|--------------------------------|----------------------------------|-------------------------------------------------------|
-| 城市管理组件（module_city_manage）     | 提供城市选择、排序管理的能力，包括列表管理页和地区搜索页。    | [使用指导](./components/module_city_manage/README.md)     |
-| 登录组件（module_login）             | 提供华为账号一键登录的能力。                   | [使用指导](./components/module_login/README.md)           |
-| 主题组件（module_theme）             | 提供个性主题的浏览、选择能力，包括主题列表页和主题详情页。    | [使用指导](./components/module_theme/README.md)           |
-| 语音播报组件（module_voice_broadcast） | 提供语音列表组件，支持下载、切换语音包。提供接口播放中英文文本。 | [使用指导](./components/module_voice_broadcast/README.md) |
-| 天气组件（module_weather_core）      | 提供实时天气、24小时天气、15天天气和生活指数组件。      | [使用指导](./components/module_weather_core/README.md)    |
-
+| 组件                              | 描述                               | 使用指导                                                  |
+|---------------------------------|----------------------------------|-------------------------------------------------------|
+| 通用应用内设置组件（app_setting）          | 支持开关切换、下拉选择、页面跳转、文本刷新等通用设置项。     | [使用指导](./components/app_setting/README.md)            |
+| 通用个人信息组件（collect_personal_info） | 支持编辑头像、昵称、姓名、性别、手机号、生日、个人简介等。    | [使用指导](./components/collect_personal_info/README.md)  |
+| 城市管理组件（module_city_manage）      | 提供城市选择、排序管理的能力，包括列表管理页和地区搜索页。    | [使用指导](./components/module_city_manage/README.md)     |
+| 登录组件（module_login）              | 提供华为账号一键登录的能力。                   | [使用指导](./components/module_login/README.md)           |
+| 主题组件（module_theme）              | 提供个性主题的浏览、选择能力，包括主题列表页和主题详情页。    | [使用指导](./components/module_theme/README.md)           |
+| 语音播报组件（module_voice_broadcast）  | 提供语音列表组件，支持下载、切换语音包。提供接口播放中英文文本。 | [使用指导](./components/module_voice_broadcast/README.md) |
+| 天气组件（module_weather_core）       | 提供实时天气、24小时天气、15天天气和生活指数组件。      | [使用指导](./components/module_weather_core/README.md)    |
 
 本模板为天气应用提供了常用功能的开发样例，模板主要分首页和我的两大模块：
 
@@ -74,8 +75,10 @@
      │    ├──语音包下载  
      │    └──语音包切换  
      └──更多设置       
-          ├──字号调整 
-          └──隐私协议  
+          ├──字号设置 
+          ├──隐私协议 
+          ├──检测版本 
+          └──关于我们  
 
 ```
 
@@ -87,14 +90,15 @@ Weather
 │    └──lib_foundation/src/main/ets            // 公共工具模块(har)
 │         ├──components                          
 │         │    AgreeDialog.ets                 // 安全弹窗组件    
-│         │    CommonButtom.ets                // 公共按钮组件    
+│         │    CommonButton.ets                // 公共按钮组件    
 │         │    CommonHeader.ets                // 公共标题组件    
-│         │    ComfirmSheet.ets                // 确认取消组件    
-│         │    SettingFont.ets                 // 字号设置组件    
-│         ├──constatns                         
+│         │    ConfirmSheet.ets                // 确认取消组件    
+│         ├──constants                         
+│         │    AppConfig.ets                   // 应用配置
 │         │    CommonConstants.ets             // 公共常量       
 │         │    CommonEnum.ets                  // 公共枚举  
-│         │    RouterMap.ets                   // 页面表        
+│         │    GridRowColSetting.ets           // 网格行列设置
+│         │    RouterMap.ets                   // 页面路由表        
 │         ├──styles                             
 │         │    CardAttributeUpdater.ets        // 卡片样式
 │         │    TextStyleModifier.ets           // 文字样式
@@ -103,6 +107,7 @@ Weather
 │         │    UserInfo.ets                    // 用户类型     
 │         └──utils                             
 │              AccountUtil.ets                 // 账号管理工具       
+│              ContextUtils.ets                // 上下文工具
 │              FontUtil.ets                    // 字号管理工具       
 │              Logger.ets                      // 日志打印工具  
 │              PopViewUtils.ets                // 弹窗管理工具       
@@ -110,14 +115,16 @@ Weather
 │              SafeUtil.ets                    // 安全管理工具      
 │              WindowUtil.ets                  // 窗口管理工具     
 │                                              
-│                                              
 ├──components                                  // 组件层
-│    ├──module_city_manage/src/main/ets        // 城市管理组件(har）
+│    ├──app_setting                            // 应用设置组件
+│    ├──collect_personal_info                  // 个人信息收集组件
+│    ├──module_advertisement                   // 广告组件
+│    ├──module_city_manage                     // 城市管理组件(har)
 │    │    ├──components                             
 │    │    │    CommonHeader.ets                // 标题栏组件
 │    │    │    DragList.ets                    // 拖拽列表组件
 │    │    ├──constants                             
-│    │    │    Contants.ets                    // 页面表
+│    │    │    Constants.ets                   // 常量
 │    │    ├──pages                             
 │    │    │    ManagedCityPage.ets             // 城市管理页
 │    │    │    SearchCityPage.ets              // 城市搜索页
@@ -125,7 +132,7 @@ Weather
 │    │    │    Types.ets                       // 省市区类型
 │    │    ├──utils                             
 │    │    │    Loading.ets                     // 定位加载弹窗   
-│    │    │    PostionUtil.ets                 // 城市持久化工具   
+│    │    │    PositionUtil.ets                // 城市持久化工具   
 │    │    │    Utils.ets                       // 相关辅助工具   
 │    │    │    WindowUtil.ets                  // 窗口管理工具   
 │    │    └──viewmodels                              
@@ -147,7 +154,7 @@ Weather
 │    │    │    CommonHeader.ets                // 标题栏组件
 │    │    │    ThemeSwiper.ets                 // 图片轮播组件
 │    │    ├──constants                             
-│    │    │    Contants.ets                    // 页面表和主题常量
+│    │    │    Constants.ets                   // 页面表和主题常量
 │    │    ├──pages                             
 │    │    │    ThemeDetailPage.ets             // 主题详情页
 │    │    │    ThemeListPage.ets               // 主题列表页
@@ -173,20 +180,28 @@ Weather
 │    │                                         
 │    └──module_weather_core/src/main/ets       // 天气组件(har)
 │         ├──common                          
+│         │    BreakpointModel.ets             // 断点模型
 │         │    CoreType.ets                    // 自定义tab组件
+│         │    GridRowColSetting.ets           // 网格行列设置
+│         │    RainEffectResumeState.ets       // 雨效恢复状态
 │         │    StyleConstants.ets              // 相关样式常量
 │         ├──components                          
 │         │    CardContainer.ets               // 卡片容器组件
 │         │    CustomCanvas.ets                // 自定义画板组件
+│         │    RainEffect.ets                  // 雨效组件
+│         │    RainEffectParticle.ets          // 雨效粒子
 │         ├──http                        
 │         │    Api.ets                         // 模拟天气接口
 │         ├──utils                        
+│         │    BreakpointUtils.ets             // 断点工具
 │         │    CanvasUtil.ets                  // 画板工具  
 │         │    CommonUtil.ets                  // 通用工具  
 │         │    FontUtil.ets                    // 字体工具  
 │         │    Logger.ets                      // 日志工具  
+│         │    RainConfig.ets                  // 雨效配置
+│         │    RainEffectResumeUtil.ets        // 雨效恢复工具
 │         │    WeatherUtils.ets                // 导出接口  
-│         └──views                             
+│         └──view                             
 │              UIDays.ets                      // 15日天气组件
 │              UIHours.ets                     // 24小时天气组件
 │              UIIndices.ets                   // 生活指数天气组件
@@ -195,7 +210,9 @@ Weather
 ├──features                                                                       
 │    ├──business_home/src/main/ets             // 首页tab模块(har)
 │    │    ├──components                        
-│    │    │    TopLocation .ets                // 常用地址项
+│    │    │    TopLocation.ets                 // 常用地址项
+│    │    ├──constants
+│    │    │    HomeConstants.ets               // 首页常量
 │    │    ├──pages                             
 │    │    │    Home.ets                        // 首页Tab页
 │    │    ├──utils                             
@@ -205,7 +222,6 @@ Weather
 │    │                                         
 │    └──business_mine/src/main/ets             // 我的tab模块(har)
 │         ├──components                         
-│         │    AvatarButton.ets                // 头像选择按钮                     
 │         │    MineBot.ets                     // 我的更多设置
 │         │    MineTop.ets                     // 我的信息展示
 │         ├──pages                             
@@ -218,14 +234,16 @@ Weather
 │         │    SettingPage.ets                 // 更多设置页
 │         └──viewmodels                        
 │              MineVM.ets                      // 我的视图模型
-│                                                                                           
+│              ProfileVM.ets                   // 个人信息视图模型
+│              SettingVM.ets                   // 设置视图模型
 │                                                                                           
 └──products                                    // 产品层                  
      └──phone/src/main/ets                     // 应用入口模块(hap)
           ├──pages                             
           │    Index.ets                       // 加载页              
           │    Main.ets                        // 主页面                    
-          │    SafePage.ets                    // 安全协议页面                    
+          │    SafePage.ets                    // 安全协议页面
+          │    SplashAd.ets                    // 开屏广告页面                    
           ├──phoneability                      
           │    PhoneAbility.ets                // 主进程生命周期
           ├──phonebackupability                      
@@ -234,8 +252,6 @@ Weather
           │    PhoneFormAbility.ets            // 卡片生命周期
           ├──types                             
           │    Types.ets                       // 相关类型           
-          ├──utils                         
-          │    WidgetUpdate.ets                // 刷新卡片方法                   
           ├──viewmodels                        
           │    IndexVM.ets                     // 加载页面视图模型                
           │    MainVM.ets                      // 主页面视图模型                
@@ -254,16 +270,20 @@ Weather
 ## 约束与限制
 
 ### 环境
-- DevEco Studio版本：DevEco Studio 5.1.1 Release及以上
-- HarmonyOS SDK版本：HarmonyOS 5.1.1 Release SDK及以上
-- 设备类型：华为手机（包括双折叠和阔折叠）
-- 系统版本：HarmonyOS 5.0.5(17)及以上
+
+- DevEco Studio版本：DevEco Studio 6.1.1 Release及以上
+- HarmonyOS SDK版本：HarmonyOS 6.1.1 Release SDK及以上
+- 设备类型：华为手机（包括双折叠和阔折叠）、平板
+- 系统版本：HarmonyOS 6.0.0(20)及以上
 
 ### 权限
+
 - 网络权限：ohos.permission.INTERNET
-- 获取位置权限：ohos.permission.APPROXIMATELY_LOCATION。
+- 获取位置权限：ohos.permission.APPROXIMATELY_LOCATION
+- 跨应用关联权限：ohos.permission.APP_TRACKING_CONSENT
 
 ## 调试
+
 语音播报功能，暂不支持模拟器调试。
 
 ## 快速入门
@@ -288,9 +308,20 @@ Weather
 
 3. 开通地图服务。详见[开通地图服务](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/map-config-agc)。
 
-4. 对应用进行[手工签名](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-signing#section297715173233)。
+4. 配置广告服务。
 
-5. 添加手工签名所用证书对应的公钥指纹。详细参考：[配置应用签名证书指纹](https://developer.huawei.com/consumer/cn/doc/app/agc-help-cert-fingerprint-0000002278002933)
+   a. 如果仅调测广告，可使用测试广告位ID：开屏广告：testd7c5cewoj6、横幅广告：testw6vs28auh3。
+
+   b. 申请正式的广告位ID。登录[鲸鸿动能媒体服务平台](https://developer.huawei.com/consumer/cn/service/ads/publisher/html/index.html?lang=zh)进行申请，具体操作详情请参见[展示位创建](https://developer.huawei.com/consumer/cn/doc/distribution/monetize/zhanshiweichuangjian-0000001132700049)。
+
+   c. 工程中默认不显示开屏广告，可以在commons/lib_foundation/src/main/ets/constants/AppConfig.ets打开开关：
+   ```
+   export const FLAG_SHOW_ADS: boolean = true;
+   ```
+
+5. 对应用进行[手工签名](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-signing#section297715173233)。
+
+6. 添加手工签名所用证书对应的公钥指纹。详细参考：[配置应用签名证书指纹](https://developer.huawei.com/consumer/cn/doc/app/agc-help-cert-fingerprint-0000002278002933)
 
 ### 运行调试工程
 
@@ -299,10 +330,10 @@ Weather
 2. 菜单选择“Run > Run 'phone' ”或者“Run > Debug 'phone' ”，运行或调试模板工程。
 
 ## 示例效果
+
 | 城市排序                                                       | 气温曲线                                                        | 主题设置                                                           | 字号调整                                                      |
 |------------------------------------------------------------|-------------------------------------------------------------|----------------------------------------------------------------|-----------------------------------------------------------|
 | <img src="screenshots/CitySort.jpeg" alt="城市" width="300"> | <img src="screenshots/TempCurve.jpeg" alt="气温" width="300"> | <img src="screenshots/WeatherTheme.jpeg" alt="主题" width="300"> | <img src="screenshots/FontSet.jpeg" alt="字号" width="300"> |
-
 
 ## 开源许可协议
 

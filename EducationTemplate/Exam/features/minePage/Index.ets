@@ -49,3 +49,8 @@ export { PrivacyPageBuilder } from './src/main/ets/views/PrivacyPage';
 
 export { TermsOfServicePageBuilder } from './src/main/ets/views/TermsOfServicePage';
 
+export { CustomServicePageBuilder } from './src/main/ets/views/CustomServicePage';
+
+export { MyDownloadPageBuilder } from './src/main/ets/views/MyDownloadPage';
+
+export { MemberCenterPageBuilder } from './src/main/ets/views/MemberCenterPage';

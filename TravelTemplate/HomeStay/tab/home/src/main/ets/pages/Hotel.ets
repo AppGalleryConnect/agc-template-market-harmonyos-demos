@@ -1,10 +1,8 @@
-import { TitleBar } from 'component';
+import { CommonHeader } from 'component';
 import { Constants } from 'constant';
-import { CommonMap } from 'travel_map';
 import { TenantInfo } from 'type';
-import { Logger } from 'util';
 import { BasicInfoArea } from '../components/BasicInfoArea';
-import { Checkout } from '../components/Checkout';
+import { Surroundings } from '../components/Surroundings';
 import { Foundations } from '../components/Foundations';
 import { Reservation } from '../components/Reservation';
 import { HotelTabBar, HOTEL_TABS_INFO } from '../model/HotelTabInfo';
@@ -12,9 +10,9 @@ import { HomePageVM } from '../viewmodel/HomePageVM';
 
 @Extend(Column)
 function detailCommon() {
-  .backgroundColor(Color.White)
-  .padding(10)
-  .borderRadius(8);
+  .backgroundColor($r('sys.color.comp_background_primary'))
+  .padding(12)
+  .borderRadius(16);
 }
 
 @Builder
@@ -33,34 +31,11 @@ export struct Hotel {
   scroller = new Scroller();
 
   @Builder
-  hotelTabBar(title: ResourceStr, targetIndex: number) {
-    Column({ space: 4 }) {
-      Text(title)
-        .fontColor(this.index === targetIndex ? '#007DFF' :
-          '#333333')
-        .opacity(this.index === targetIndex ? 1 :
-          0.6)
-        .fontWeight(this.index === targetIndex ? 600 :
-          400);
-
-      if (this.index === targetIndex) {
-        Divider().color('#007DFF').strokeWidth(2).width(20);
-      }
-    }
-    .onClick(() => {
-      this.index = targetIndex;
-      this.goToHotelInfo();
-    })
-    .width(Constants.FULL_SCREEN)
-    .justifyContent(FlexAlign.Center);
-  }
-
-  @Builder
   InfoBuilder() {
     List({ space: 16, scroller: this.scroller }) {
       ListItem() {
         Column({ space: 16 }) {
-          BasicInfoArea({ isHome: false }).backgroundColor(Color.White).borderRadius(8).padding(10);
+          BasicInfoArea({ isHome: false });
           Column() {
             Text(this.vm.hotelInfo.appInfo.introduction)
               .fontSize(14).lineHeight(24);
@@ -69,89 +44,58 @@ export struct Hotel {
       };
 
       ListItem() {
-        Foundations({ foundations: this.vm.hotelInfo.appInfo.instructions?.foundations }).backgroundColor(Color.White)
-          .borderRadius(8).padding(16);
+        Foundations({
+          foundations: this.vm.hotelInfo.appInfo.instructions?.foundations
+        })
       };
 
       ListItem() {
         Reservation({
           reservation: this.vm.hotelInfo.appInfo.instructions?.reservation,
-        }).backgroundColor(Color.White)
-          .borderRadius(8).padding(16);
+        })
       };
 
       ListItem() {
-        Checkout({
-          checkOut: this.vm.hotelInfo.appInfo.instructions.checkOut,
-        }).backgroundColor(Color.White)
-          .borderRadius(8).padding(16);
+        Surroundings({
+          tenantInfo: this.vm.tenantInfo,
+          foodList: this.vm.surroundings.food,
+          attractionsList: this.vm.surroundings.attractions
+        })
       };
-
-      ListItem() {
-        Column({ space: 16 }) {
-          Text(`周边信息`).fontSize(16).fontWeight(500).alignSelf(ItemAlign.Start);
-          CommonMap(
-            {
-              travelMapOptions: {
-                location: {
-                  latitude: Number(this.tenantInfo?.position[1]),
-                  longitude: Number(this.tenantInfo?.position[0]),
-                },
-                icon: $r('app.media.point'),
-                titleOptions: {
-                  name: this.tenantInfo?.appName ?? '',
-                  strokeColor: 0xFFFFFFFF,
-                },
-                cameraSpeed: 1000,
-                zoom: 10,
-                height: 172,
-                pointClickCallBack: () => {
-                  Logger.info('click point annotation');
-                },
-              },
-            },
-          );
-        };
-      };
-    }.scrollBar(BarState.Off).padding({ left: 16, right: 16 }).edgeEffect(EdgeEffect.Spring);
-  }
-
-  goToHotelInfo() {
-    if (this.index === 0) {
-      this.scroller.scrollToIndex(0);
-    } else {
-      this.scroller.scrollToIndex(1);
-    }
+    }.scrollBar(BarState.Off)
+    .padding({ left: 16, right: 16 })
+    .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: true })
+    .layoutWeight(1);
   }
 
   build() {
     NavDestination() {
-      Scroll() {
-        Column() {
-          TitleBar({
-            isShowBack: true, title: '门店信息', clickEvent: () => {
-              this.mainPathStack.pop();
-            },
-          });
+      Column() {
+        CommonHeader({ title: '门店信息', showBackButton: true, backButtonClick: () => {
+          this.mainPathStack.pop();
+        }})
 
-          Tabs({ index: this.index }) {
-            ForEach(HOTEL_TABS_INFO, (item: HotelTabBar) => {
-              TabContent() {
-                this.InfoBuilder();
-              }.tabBar(this.hotelTabBar(item.title, item.index));
-            }, (item: HotelTabBar) => JSON.stringify(item));
-          }
-          .height('88%')
-          .barPosition(BarPosition.Start)
-          .animationDuration(0)
-          .backgroundColor('#F5F6FA')
-          .barWidth(Constants.FULL_SCREEN)
-          .onChange((value: number) => {
-            this.index = value;
-            this.goToHotelInfo();
-          });
-        };
+        Row() {
+          ForEach(HOTEL_TABS_INFO, (item: HotelTabBar) => {
+            Column() {
+              Text(item.title)
+                .fontSize(14)
+                .fontColor(this.index === item.index ? $r('sys.color.font_emphasize') :
+                  $r('sys.color.font_secondary'))
+                .fontWeight(this.index === item.index ? FontWeight.Bold : FontWeight.Regular);
+            }
+            .onClick(() => {
+              this.index = item.index;
+              this.scroller.scrollToIndex(this.index);
+            })
+            .layoutWeight(1)
+            .height(40)
+            .justifyContent(FlexAlign.Center);
+          }, (item: HotelTabBar) => JSON.stringify(item));
+        }.width(Constants.FULL_SCREEN)
+
+        this.InfoBuilder();
       };
-    }.hideTitleBar(true);
+    }.hideTitleBar(true).backgroundColor($r('sys.color.background_secondary'));
   }
 }

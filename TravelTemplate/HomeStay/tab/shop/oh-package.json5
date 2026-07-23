@@ -11,6 +11,8 @@
     "type": "file:../../common/type",
     "util": "file:../../common/util",
     "constant": "file:../../common/constant",
-    "component": "file:../../common/component"
+    "component": "file:../../common/component",
+    "address_management": "file:../../components/address_management",
+    "aggregated_payment": "file:../../components/aggregated_payment"
   }
 }

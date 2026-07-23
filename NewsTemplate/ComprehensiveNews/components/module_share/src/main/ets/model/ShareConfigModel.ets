@@ -52,7 +52,11 @@ export class ShareConfigModel {
     this.uiContext = uiContext;
     this.queryWindowBottomPadding();
     window.getLastWindow(uiContext.getHostContext()).then(currentWindow => {
-      currentWindow.on('avoidAreaChange', this.setWindowBottomPadding);
+      try {
+        currentWindow.on('avoidAreaChange', this.setWindowBottomPadding);
+      } catch (e) {
+        UtilLog.error(TAG, `Failed to on current window. Code is ${e.code}, message is ${e.message}`);
+      }
     }).catch((e: BusinessError) => {
       UtilLog.error(TAG, 'getLastWindow fail, error: ' + JSON.stringify(e));
     });
@@ -64,7 +68,11 @@ export class ShareConfigModel {
   public unRegisterWindowBottomPadding(uiContext: UIContext) {
     this.uiContext = uiContext;
     window.getLastWindow(uiContext.getHostContext()).then(currentWindow => {
-      currentWindow.off('avoidAreaChange', this.setWindowBottomPadding);
+      try {
+        currentWindow.off('avoidAreaChange', this.setWindowBottomPadding);
+      } catch (e) {
+        UtilLog.error(TAG, `Failed to off current window. Code is ${e.code}, message is ${e.message}`);
+      }
     }).catch((e: BusinessError) => {
       UtilLog.error(TAG, 'getLastWindow fail, error: ' + JSON.stringify(e));
     });

@@ -1,0 +1,18 @@
+<svg viewBox="0 0 12 24" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="12.000000" height="24.000000" fill="none" customFrame="#000000">
+  <metadata>
+    <agcit_code>agcit_huawei_home_stay</agcit_code>
+  </metadata>
+	<defs>
+		<clipPath id="clipPath_1">
+			<rect width="12.000000" height="24.000000" x="0.000000" y="0.000000" fill="rgb(255,255,255)" />
+		</clipPath>
+	</defs>
+	<rect id=".Arrow-right small" width="12.000000" height="24.000000" x="0.000000" y="0.000000" />
+	<g id="chevron_right" clip-path="url(#clipPath_1)" customFrame="url(#clipPath_1)">
+		<rect id="chevron_right" width="12.000000" height="24.000000" x="0.000000" y="0.000000" />
+		<rect id="rect" width="12.000000" height="24.000000" x="0.000000" y="0.000000" opacity="0" fill="rgb(0,0,0)" fill-opacity="0.200000003" />
+		<g id="g">
+			<path id="path" d="M2.80998 18.8401C2.98332 19.0134 3.16998 19.0967 3.36998 19.0901C3.56998 19.0834 3.74332 19.0001 3.88998 18.8401L9.16998 12.7701C9.37665 12.5434 9.47665 12.2867 9.46998 12.0001C9.46332 11.7134 9.36332 11.4567 9.16998 11.2301L3.88998 5.14007C3.76332 4.98007 3.58998 4.9034 3.36998 4.91007C3.15665 4.91673 2.97665 4.9934 2.82998 5.14007C2.68998 5.28007 2.61998 5.45007 2.61998 5.65007C2.61998 5.85007 2.68998 6.03007 2.82998 6.19007L7.84998 12.0001L2.80998 17.7801C2.68332 17.9401 2.61332 18.1201 2.59998 18.3201C2.59332 18.5201 2.66332 18.6934 2.80998 18.8401Z" fill="rgb(0,0,0)" fill-opacity="0.200000003" fill-rule="nonzero" />
+		</g>
+	</g>
+</svg>

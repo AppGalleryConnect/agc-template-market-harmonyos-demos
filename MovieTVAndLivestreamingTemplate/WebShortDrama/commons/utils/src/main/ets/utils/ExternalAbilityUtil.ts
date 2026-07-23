@@ -2,6 +2,7 @@
 import call from '@ohos.telephony.call';
 import { BusinessError } from '@ohos.base';
 import { common, wantConstant } from '@kit.AbilityKit';
+import { hilog } from '@kit.PerformanceAnalysisKit';
 import { Logger } from "../logger/AppLogger";
 
 /**
@@ -22,7 +23,12 @@ export class ExternalAbilityUtil {
         pushParams: "com.huawei.hmsapp.alliance"
       }
     }
-    return context?.startAbility(wantInfo)
+    try {
+      return context?.startAbility(wantInfo)
+    } catch (e) {
+      console.error(TAG, `startPermissionManager failed: ${e}`);
+      return Promise.reject(e);
+    }
   }
 
   /**
@@ -37,7 +43,12 @@ export class ExternalAbilityUtil {
       uri: uri,
       type: mimeType
     }
-    return context?.startAbility(wantInfo)
+    try {
+      return context?.startAbility(wantInfo)
+    } catch (e) {
+      console.error(TAG, `startPreview failed: ${e}`);
+      return Promise.reject(e);
+    }
   }
 
   /**
@@ -49,7 +60,12 @@ export class ExternalAbilityUtil {
       abilityName: "com.huawei.hmos.settings.MainAbility",
       uri: 'wifi_entry'
     }
-    return context?.startAbility(wantInfo);
+    try {
+      return context?.startAbility(wantInfo);
+    } catch (e) {
+      console.error(TAG, `startWifiManager failed: ${e}`);
+      return Promise.reject(e);
+    }
   }
 
   /**
@@ -63,7 +79,12 @@ export class ExternalAbilityUtil {
       "entities": ["entity.system.browsable"],
       "uri": url
     }
-    return context?.startAbility(want);
+    try {
+      return context?.startAbility(want);
+    } catch (e) {
+      console.error(TAG, `startBrowser failed: ${e}`);
+      return Promise.reject(e);
+    }
   }
 
 }

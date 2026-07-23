@@ -17,31 +17,31 @@ export const tabsInfo: TabBarData[] = [
   {
     id: TabBarType.HOME,
     title: '首页',
-    activeIcon: $r('app.media.home_active'),
+    activeIcon: $r('app.media.home_fill'),
     defaultIcon: $r('app.media.home')
   },
   {
     id: TabBarType.DISCOVER,
     title: '发现',
-    activeIcon: $r('app.media.find_active'),
-    defaultIcon: $r('app.media.find')
+    activeIcon: $r('app.media.discover_fill'),
+    defaultIcon: $r('app.media.discover')
   },
   {
     id: TabBarType.MAP,
     title: '地图',
-    activeIcon: $r('app.media.map_active'),
+    activeIcon: $r('app.media.map_fill'),
     defaultIcon: $r('app.media.map')
   },
   {
     id: TabBarType.SHOP,
     title: '商城',
-    activeIcon: $r('app.media.shop_active'),
+    activeIcon: $r('app.media.shop_fill'),
     defaultIcon: $r('app.media.shop')
   },
   {
     id: TabBarType.MINE,
     title: '我的',
-    activeIcon: $r('app.media.mine_active'),
+    activeIcon: $r('app.media.mine_fill'),
     defaultIcon: $r('app.media.mine')
   }
 ]

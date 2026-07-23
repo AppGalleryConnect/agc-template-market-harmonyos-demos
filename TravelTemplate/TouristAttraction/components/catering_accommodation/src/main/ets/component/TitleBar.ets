@@ -1,27 +1,36 @@
+import { BreakPointUtils } from '../utils/BreakPointUtils';
+
 @ComponentV2
 export struct CustomTitle {
   @Param @Require isShowBack: boolean;
   @Param @Require title: string;
+  @Param @Require breakpoint: string = '';
   @Param @Require clickEvent: () => void;
   @Local windowTopHeight: number = AppStorage.get('windowTopHeight') as number || 38.77;
 
   build() {
-    Stack({ alignContent: Alignment.Start }) {
-      Text(this.title).fontSize(18).fontWeight(500).width('100%').textAlign(TextAlign.Center);
-
+    Row({ space: 8 }) {
       if (this.isShowBack) {
-        Image($r('app.media.left_arrow'))
-          .size({ height: 24, width: 24 })
+        SymbolGlyph($r('sys.symbol.chevron_backward'))
+          .width(40)
+          .height(40)
+          .fontSize(24)
+          .fontColor([$r('sys.color.icon_primary')])
+          .backgroundColor($r('sys.color.comp_background_tertiary'))
+          .borderRadius(1000)
+          .padding(8)
           .onClick(this.clickEvent);
       }
-    }
-    .margin({ top: this.windowTopHeight })
-    .width('100%')
-    .padding({
-      left: 12,
-      top: 16,
-      right: 12,
-      bottom: 12,
+      Text(this.title)
+        .fontSize($r('sys.float.Title_S'))
+        .fontWeight(FontWeight.Bold)
+        .fontColor($r('sys.color.font_primary'))
+        .textAlign(TextAlign.Start);
+    }.margin({ top: this.windowTopHeight }).width('100%').height(56).padding({
+      top: 8,
+      bottom: 8,
+      left: BreakPointUtils.getBreakPointGutter(this.breakpoint),
+      right: BreakPointUtils.getBreakPointGutter(this.breakpoint),
     });
   }
 }

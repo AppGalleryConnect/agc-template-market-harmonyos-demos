@@ -1,0 +1,64 @@
+{
+  "color": [
+    {
+      "name": "page_bg",
+      "value": "#202224"
+    },
+    {
+      "name": "white",
+      "value": "#202224"
+    },
+    {
+      "name": "tab_bar",
+      "value": "#E99020"
+    },
+    {
+      "name": "search_input_bg",
+      "value": "#2C2C2C"
+    },
+    {
+      "name": "search_tag_bg",
+      "value": "#33FFFFFF"
+    },
+    {
+      "name": "swiper_indicator",
+      "value": "#3C3C3C"
+    },
+    {
+      "name": "swiper_indicator_selected",
+      "value": "#317AF7"
+    },
+    {
+      "name": "detail_shadow",
+      "value": "#2C2C2C"
+    },
+    {
+      "name": "grey_level_1",
+      "value": "#3C3C3C"
+    },
+    {
+      "name": "grey_level_2",
+      "value": "#555555"
+    },
+    {
+      "name": "grey_level_4",
+      "value": "#666666"
+    },
+    {
+      "name": "grey_level_6",
+      "value": "#999999"
+    },
+    {
+      "name": "grey_level_9",
+      "value": "#E5E5E5"
+    },
+    {
+      "name": "black",
+      "value": "#E5E5E5"
+    },
+    {
+      "name": "find_item_bg",
+      "value": "#2C2C2C"
+    }
+  ]
+}

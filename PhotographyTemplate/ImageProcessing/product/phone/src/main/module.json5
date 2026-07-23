@@ -5,12 +5,25 @@
     "description": "$string:module_desc",
     "mainElement": "PhoneAbility",
     "deviceTypes": [
-      "phone"
+      "phone",
+      "tablet"
     ],
     "deliveryWithInstall": true,
     "installationFree": false,
     "pages": "$profile:main_pages",
     "routerMap": "$profile:route_map",
+    "querySchemes": [
+// 用于校验微信是否安装
+      "weixin",
+// 用于校验是否可以通过 openLink 拉起微信（不填写将尝试采用显式跳转拉起微信）
+      "wxopensdk",
+// 用于校验支付宝是否安装
+      "alipays",
+// qq分享
+      "qqopenapi",
+// 用于校验是否可以通过 openLink 拉起支付宝（不填写将尝试前往H5页面进行支付）
+      "https"
+    ],
     "abilities": [
       {
         "name": "PhoneAbility",
@@ -29,6 +42,31 @@
             "actions": [
               "ohos.want.action.home"
             ]
+          },
+// 微信
+          {
+            "actions": [
+              "wxentity.action.open"
+            ]
+          },
+// QQ
+          {
+            "entities": [
+              "entity.system.browser"
+            ],
+            "actions": [
+              "ohos.want.action.viewData"
+            ],
+            "uris": [
+              {
+// 接收QQ回调数据
+                "scheme": "qqopenapi",
+// todo 填写业务申请的QQ互联AppId，如果填错会导致QQ无法回调
+                "host": "111111111",
+                "pathRegex": "\\b(auth|share)\\b"
+              }
+            ],
+            "domainVerify": true
           }
         ]
       }
@@ -45,6 +83,19 @@
             "resource": "$profile:backup_config"
           }
         ]
+      },
+      {
+        "name": "PhoneFormAbility",
+        "srcEntry": "./ets/phoneformability/PhoneFormAbility.ets",
+        "label": "$string:PhoneFormAbility_label",
+        "description": "$string:PhoneFormAbility_desc",
+        "type": "form",
+        "metadata": [
+          {
+            "name": "ohos.extension.form",
+            "resource": "$profile:form_config"
+          }
+        ]
       }
     ],
     "metadata": [
@@ -52,6 +103,22 @@
 // todo 配置为获取的Client ID
         "name": "client_id",
         "value": "******"
+      }
+    ],
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.APPROXIMATELY_LOCATION",
+        "reason": "$string:apply_location_reason",
+        "usedScene": {
+          "when": "inuse"
+        }
+      },
+      {
+        "name": "ohos.permission.LOCATION",
+        "reason": "$string:apply_location_reason",
+        "usedScene": {
+          "when": "inuse"
+        }
       }
     ]
   }

@@ -1,4 +1,4 @@
-import { HomeDetailResp, HomeResp, https } from 'network';
+import { HomeDetailResp, HomeResp, https, Mock, SurroundingsResp } from 'network';
 import { NavigationConfig } from '../model/Index';
 import { CarouselImage, Commodity, HotelInfo, HotScenicSpot, RoomType, RoomTypePrice, Tag, TenantInfo } from 'type';
 import { mapHotelInfoResponse } from '../mapper/HotelInfoMapper';
@@ -15,6 +15,7 @@ export class HomePageVM {
   @Trace hotelInfo: HotelInfo = new HotelInfo();
   @Trace roomData: LazyDataSource<RoomType> = new LazyDataSource();
   @Trace tenantInfo: TenantInfo | undefined = AppStorage.get('tenantInfo');
+  @Trace surroundings: SurroundingsResp = Mock.SURROUNDINGS;
   private static _instance: HomePageVM;
 
   private constructor() {

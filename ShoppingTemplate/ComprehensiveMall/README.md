@@ -195,10 +195,10 @@
 
 ### 环境
 
-- DevEco Studio版本：DevEco Studio 6.0.2 Release及以上
-- HarmonyOS SDK版本：HarmonyOS 6.0.2 Release SDK及以上
+- DevEco Studio版本：DevEco Studio 6.1.1 Release及以上
+- HarmonyOS SDK版本：HarmonyOS 6.1.1 Release SDK及以上
 - 设备类型：华为手机（包括双折叠和阔折叠）、华为平板
-- 系统版本：HarmonyOS 6.0.0(20)及以上
+- 系统版本：HarmonyOS 6.1.0(23)及以上
 
 ### 权限
 
@@ -327,9 +327,9 @@
 
 ## 示例效果
 
-| 首页                                                   | 分类                                                       | 购物车                                                   | 我的                                                        |
-| ------------------------------------------------------ | ---------------------------------------------------------- | -------------------------------------------------------- | ----------------------------------------------------------- |
-| <img src="screenshot/home.png" alt="首页" width="300"> | <img src="screenshot/category.png" alt="分类" width="300"> | <img src="screenshot/cart.png" alt="购物车" width="300"> | <img src="screenshot/profile.png" alt="购物车" width="300"> |
+| 首页                                                    | 分类                                                       | 购物车                                                   | 我的                                                        |
+|-------------------------------------------------------| ---------------------------------------------------------- | -------------------------------------------------------- | ----------------------------------------------------------- |
+| <img src="screenshot/home.jpeg" alt="首页" width="300"> | <img src="screenshot/category.jpeg" alt="分类" width="300"> | <img src="screenshot/cart.jpeg" alt="购物车" width="300"> | <img src="screenshot/profile.jpeg" alt="购物车" width="300"> |
 
 
 ## 开源许可协议

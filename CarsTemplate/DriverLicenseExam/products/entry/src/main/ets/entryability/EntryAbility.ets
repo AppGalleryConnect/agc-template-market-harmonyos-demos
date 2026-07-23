@@ -1,13 +1,14 @@
 import { AbilityConstant, ConfigurationConstant, UIAbility, Want } from '@kit.AbilityKit';
-import { AppStorageV2, window } from '@kit.ArkUI';
+import { window } from '@kit.ArkUI';
 import { Logger, PreferencesUtil } from '@ohos_agcit/driver_license_exam_commonlib';
 import { BusinessError } from '@kit.BasicServicesKit';
 import { WantUtils } from '../util/WantUtils';
 import { ShareService } from 'aggregated_share';
 import { notificationManager } from '@kit.NotificationKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
-import { CommonModel, CommonConstants } from '@ohos_agcit/driver_license_exam_commonlib';
+import { CommonModel } from '@ohos_agcit/driver_license_exam_commonlib';
 import { EXAM_MANAGER_TYPE, ROUTE_PARAM, Video, ExamService } from '@ohos_agcit/driver_license_exam_datasource'
+import { LoneTakeAnimationsTransition } from 'module_transition'
 
 const TAG: string = '[EntryAbility]';
 
@@ -16,8 +17,10 @@ export default class EntryAbility extends UIAbility {
   public onWindowStageCreate(windowStage: window.WindowStage): void {
     Logger.info(TAG, '%{public}s', 'Ability onWindowStageCreate');
 
+    LoneTakeAnimationsTransition.init(windowStage);
+
     try {
-      windowStage.loadContent('pages/MainEntry', (err) => {
+      windowStage.loadContent('pages/Index', (err) => {
         if (err.code) {
           Logger.error(TAG, 'Failed to load the content. Cause: %{public}s', JSON.stringify(err) ?? '');
           return;

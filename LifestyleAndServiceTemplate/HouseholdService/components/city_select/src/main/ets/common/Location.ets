@@ -60,19 +60,22 @@ const applyLocationPermission = async (context: common.UIAbilityContext): Promis
   }
   // 向用户申请
   const atManager = abilityAccessCtrl.createAtManager();
-  return atManager.requestPermissionsFromUser(context, [permission])
-    .then(async (result: PermissionRequestResult) => {
-      if (result.authResults.every(v => v === 0)) {
-        return true;
-      }
-      // 二次向用户申请
-      if (isApplyLocPermAgain) {
-        const resp = await atManager.requestPermissionOnSetting(context, [permission]);
-        return resp.every(v => v === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED);
-      }
-      isApplyLocPermAgain = true;
-      return false;
-    });
+  try {
+    const result = await atManager.requestPermissionsFromUser(context, [permission]);
+    if (result.authResults.every(v => v === 0)) {
+      return true;
+    }
+    // 二次向用户申请
+    if (isApplyLocPermAgain) {
+      const resp = await atManager.requestPermissionOnSetting(context, [permission]);
+      return resp.every(v => v === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED);
+    }
+  } catch (err) {
+    UtilLog.error(DOMAIN, TAG, `requestPermissionsFromUser failed. err: ${JSON.stringify(err)}`);
+  }
+
+  isApplyLocPermAgain = true;
+  return false;
 }
 
 /**

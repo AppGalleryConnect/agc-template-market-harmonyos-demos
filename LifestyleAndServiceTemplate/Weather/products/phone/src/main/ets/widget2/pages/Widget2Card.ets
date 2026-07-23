@@ -34,7 +34,7 @@ struct WidgetCard2 {
   @LocalStorageProp('hourlyWeather') hourlyWeather: HourlyWeather2[] | null = null;
   @LocalStorageProp('dailyWeather') dailyWeather: DailyWeather2[] | null = null;
   @LocalStorageProp('colors') colors: [ResourceColor, number][] =
-      this.isDaytime() ? [['#2E6BE0', 0], ['#92C8FD', 1]] : [['#274668', 0], ['#527EAA', 1]];
+    this.isDaytime() ? [['#2E6BE0', 0], ['#92C8FD', 1]] : [['#274668', 0], ['#527EAA', 1]];
   readonly actionType: string = 'router';
   readonly abilityName: string = 'PhoneAbility';
 
@@ -68,50 +68,49 @@ struct WidgetCard2 {
   }
 
   build() {
-    RelativeContainer() {
-      Column() {
-        if (this.location) {
-          Row({ space: 4 }) {
-            Image($r('app.media.widget_location')).width(12).height(14)
-            Text(this.location.name)
-              .fontSize($r('sys.float.Body_M'))
+    Column() {
+      Row({ space: 16 }) {
+        Column() {
+          if (this.location) {
+            Row({ space: 4 }) {
+              Image($r('app.media.widget_location')).width(12).height(14)
+              Text(this.location.name)
+                .maxLines(1)
+                .layoutWeight(1)
+                .textOverflow({ overflow: TextOverflow.Ellipsis })
+                .fontSize($r('sys.float.Body_M'))
+                .fontColor($r('sys.color.font_on_primary'))
+                .fontWeight(FontWeight.Medium)
+            }
+          }
+
+          if (this.realTimeWeather) {
+            Text(Math.round(this.realTimeWeather.temp) + '°')
+              .alignSelf(ItemAlign.Start)
+              .fontSize(40)
+              .lineHeight(53)
               .fontColor($r('sys.color.font_on_primary'))
               .fontWeight(FontWeight.Medium)
           }
         }
+        .layoutWeight(1)
 
         if (this.realTimeWeather) {
-          Text(Math.round(this.realTimeWeather.temp) + '°')
-            .fontSize(40)
-            .lineHeight(53)
-            .fontColor($r('sys.color.font_on_primary'))
-            .fontWeight(FontWeight.Medium)
+          Column() {
+            Image($r(`app.media.${this.realTimeWeather.icon}`)).width(18)
+            Text(this.realTimeWeather.desc)
+              .fontSize($r('sys.float.Body_S'))
+              .fontColor($r('sys.color.font_on_primary'))
+              .margin({ top: 4, bottom: 2 })
+            Text(Math.round(this.realTimeWeather.maxTemp) + '°/' + Math.round(this.realTimeWeather.minTemp) + '°')
+              .fontSize($r('sys.float.Body_S'))
+              .fontColor($r('sys.color.font_on_primary'))
+          }
         }
       }
-      .alignItems(HorizontalAlign.Start)
-      .alignRules({
-        'top': { 'anchor': '__container__', 'align': VerticalAlign.Top },
-        'left': { 'anchor': '__container__', 'align': HorizontalAlign.Start },
-      })
-
-      if (this.realTimeWeather) {
-        Column() {
-          Image($r(`app.media.${this.realTimeWeather.icon}`)).width(18)
-          Text(this.realTimeWeather.desc)
-            .fontSize($r('sys.float.Body_S'))
-            .fontColor($r('sys.color.font_on_primary'))
-            .margin({ top: 4, bottom: 2 })
-          Text(Math.round(this.realTimeWeather.maxTemp) + '°/' + Math.round(this.realTimeWeather.minTemp) + '°')
-            .fontSize($r('sys.float.Body_S'))
-            .fontColor($r('sys.color.font_on_primary'))
-        }
-        .alignItems(HorizontalAlign.End)
-        .alignRules({
-          'top': { 'anchor': '__container__', 'align': VerticalAlign.Top },
-          'right': { 'anchor': '__container__', 'align': HorizontalAlign.End },
-        })
-
-      }
+      .width('100%')
+      .justifyContent(FlexAlign.SpaceBetween)
+      .alignItems(VerticalAlign.Top)
 
       if (this.hourlyWeather?.length) {
         List({ space: 22 }) {
@@ -140,11 +139,6 @@ struct WidgetCard2 {
         .lanes(1)
         .width('100%')
         .height(54)
-        .offset({ y: 74 })
-        .alignRules({
-          'top': { 'anchor': '__container__', 'align': VerticalAlign.Top },
-          'left': { 'anchor': '__container__', 'align': HorizontalAlign.Start },
-        })
       }
 
       if (this.dailyWeather?.length) {
@@ -168,15 +162,12 @@ struct WidgetCard2 {
             .height(20)
           }, (weather: DailyWeather2, index) => JSON.stringify(weather) + '_' + index)
         }
+        .padding({top:10})
+        .layoutWeight(1)
         .listDirection(Axis.Vertical)
         .scrollBar(BarState.Off)
         .lanes(1)
         .width('100%')
-        .height(180)
-        .alignRules({
-          'bottom': { 'anchor': '__container__', 'align': VerticalAlign.Bottom },
-          'left': { 'anchor': '__container__', 'align': HorizontalAlign.Start },
-        })
       }
     }
     .width('100%')

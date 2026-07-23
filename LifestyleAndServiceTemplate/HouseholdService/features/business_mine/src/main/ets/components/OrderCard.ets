@@ -17,10 +17,12 @@ import { calendarManager } from '@kit.CalendarKit';
 import { UtilLog } from '@hw-agconnect/util-log';
 import { DialPanel } from 'dial_panel';
 import {
+  BreakpointNameEnum,
   cancelOrder,
   CommonConfirmDialog,
   CommonConstants,
   CurAppInfo,
+  FormUtils,
   FullOrderInfo,
   HomeBaseInfo,
   IAppointmentUpdate,
@@ -40,7 +42,7 @@ const TAG = '[OrderCard]'
 
 @ComponentV2
 struct OperateBtn {
-  @Param breakpoint: string = '';
+  @Param breakpoint: BreakpointNameEnum = BreakpointNameEnum.SM;
   @Param isShowSubscribe: boolean = true;
   @Param btnWidth: number = 0;
   @Param label: string = '';
@@ -48,7 +50,7 @@ struct OperateBtn {
   @Param bgColor: ResourceColor = $r('sys.color.comp_background_tertiary');
 
   build() {
-    if (this.breakpoint === 'sm') {
+    if (this.breakpoint === BreakpointNameEnum.SM) {
       Button(this.label)
         .fontSize(this.label.length === 4 ? $r('sys.float.Body_M') : $r('sys.float.Body_S'))
         .fontWeight(500)
@@ -80,7 +82,7 @@ struct OperateBtn {
 
 @ComponentV2
 export struct OrderCard {
-  @Param breakpoint: string = '';
+  @Param breakpoint: BreakpointNameEnum = BreakpointNameEnum.SM;
   @Param fullOrderInfo: FullOrderInfo = new FullOrderInfo();
   @Local containerWidth: number = 0;
   homeBaseInfo: HomeBaseInfo = AppStorageV2.connect(HomeBaseInfo, () => new HomeBaseInfo())!;
@@ -104,7 +106,7 @@ export struct OrderCard {
 
   @Computed
   get isShowSmallBtn() {
-    return this.isShowSubscribe && (this.breakpoint === 'sm');
+    return this.isShowSubscribe && (this.breakpoint === BreakpointNameEnum.SM);
   }
 
   @Computed
@@ -256,6 +258,9 @@ export struct OrderCard {
           contentBuilder: ApplyContentBuilder,
           confirm: () => {
             refund(this.fullOrderInfo.orderId).then(() => {
+              FormUtils.checkAndCleanExpiredFormData(this.uiContext.getHostContext()!);
+              FormUtils.removeFormData(this.fullOrderInfo.orderId, this.uiContext.getHostContext()!);
+              FormUtils.updateWidgets(this.uiContext.getHostContext()!);
               this.refreshList();
             });
           }
@@ -276,6 +281,9 @@ export struct OrderCard {
       .onClick(() => {
         this.countDownVM.stopCountdown(this.fullOrderInfo.orderId);
         payOrder(this.fullOrderInfo.orderId).then(() => {
+          FormUtils.checkAndCleanExpiredFormData(this.uiContext.getHostContext()!);
+          FormUtils.addFormData(this.fullOrderInfo, this.uiContext.getHostContext()!);
+          FormUtils.updateWidgets(this.uiContext.getHostContext()!);
           this.getUIContext().getPromptAction().showToast({ message: '支付成功' });
           this.jumpTab(2);
         })

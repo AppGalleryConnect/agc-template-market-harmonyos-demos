@@ -7,6 +7,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "module_base": "file:../module_base",
+    'image_preview': 'file:../image_preview',
     "@hw-agconnect/util-log": "^1.0.0"
   }
 }

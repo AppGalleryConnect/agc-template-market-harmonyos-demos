@@ -6,6 +6,7 @@ import { MemberShipVM } from '../viewmodel/MemberShipVM';
 import { MemberPrivacy } from '../component/MemberPrivacy';
 import { privacyCheckHint } from '../component/PrivacyCheckHint';
 import { BreakpointType } from '../constant/Enum';
+import { NavDestinationModifier } from '@agctemplate/widgets'
 
 @Preview
 @ComponentV2
@@ -36,6 +37,8 @@ export struct MemberShipPage {
   });
   private privacyCheckNode?: ComponentContent<Object>;
   private uiContext: UIContext = this.getUIContext();
+  navDestinationModifier: NavDestinationModifier = new NavDestinationModifier();
+  private ctx: UIContext = AppStorage.get('UIContext')!;
 
   @Computed
   get memberStatus() {
@@ -95,11 +98,20 @@ export struct MemberShipPage {
   Operation() {
     if (!this.isSheet) {
       Row({ space: 8 }) {
-        Image($r('app.media.membership_back')).size({ width: 40, height: 40 }).onClick(() => {
+        Button({ type: ButtonType.Circle }) {
+          SymbolGlyph($r('sys.symbol.chevron_left'))
+            .fontSize(24)
+            .fontColor([$r('sys.color.icon_primary')])
+        }
+        .width(40)
+        .height(40)
+        .backgroundColor($r('sys.color.comp_background_tertiary'))
+        .onClick(() => {
           this.routerModule.pop();
         });
+
         Text('会员中心').fontSize(20).fontWeight(FontWeight.Bold).fontColor($r('sys.color.font_primary'));
-      }.position({ left: 16 }).zIndex(2);
+      }.position({ left: 16, top: `${this.ctx.px2vp(this.navDestinationModifier.statusBarHeight.value)}vp` }).zIndex(2);
     }
   }
 
@@ -121,7 +133,7 @@ export struct MemberShipPage {
           .opacity(0.5)
           .size({ height: 100, width: 100 })
           .rotate({ angle: 15 })
-          .margin({ right: 24, top: 12 });
+          .margin({ right: 24, top: `${12 + this.ctx.px2vp(this.navDestinationModifier.statusBarHeight.value)}vp` });
       };
 
       GridRow({
@@ -178,7 +190,9 @@ export struct MemberShipPage {
           .backgroundColor($r('sys.color.comp_background_primary'))
           .margin({ top: 24 });
         };
-      }.padding({ left: 16, right: 16 });
+      }
+      .padding({ left: 16, right: 16 })
+      .offset({ y: `${+this.ctx.px2vp(this.navDestinationModifier.statusBarHeight.value)}vp` })
     };
   }
 
@@ -253,7 +267,9 @@ export struct MemberShipPage {
               this.vm.selectedProductIndex = index;
             });
           };
-        },(item: iap.Product, index: number) => { return index + '__' + JSON.stringify(item); });
+        }, (item: iap.Product, index: number) => {
+          return index + '__' + JSON.stringify(item);
+        });
       }
       .width('100%')
       .height(124)
@@ -288,7 +304,9 @@ export struct MemberShipPage {
               }.alignItems(HorizontalAlign.Start).width('calc(100% - 48vp)');
             }.width('100%');
           };
-        },(item: MemberShipPrivilege, index: number) => { return index + '__' + JSON.stringify(item); });
+        }, (item: MemberShipPrivilege, index: number) => {
+          return index + '__' + JSON.stringify(item);
+        });
       }
       .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: true })
       .padding(12)
@@ -376,57 +394,59 @@ export struct MemberShipPage {
               if (!this.isSheet) {
                 this.Owned();
               }
-
-              GridRow({
-                columns: 12,
-                breakpoints: { value: ['320vp', '600vp', '840vp', '1440vp'] },
-              }) {
-                GridCol({
-                  span: {
-                    xs: 12,
-                    sm: 12,
-                    md: 12,
-                    lg: this.isSheet ? 12 : 8,
-                  },
-                  offset: {
-                    xs: 0,
-                    sm: 0,
-                    md: 0,
-                    lg: 2,
-                  },
+              Column() {
+                GridRow({
+                  columns: 12,
+                  breakpoints: { value: ['320vp', '600vp', '840vp', '1440vp'] },
                 }) {
-                  if (this.vm.productInfoList.length) {
-                    Column() {
-                      this.Plan();
-                      this.Privilege();
-                    }.padding({ left: 16, right: 16 });
+                  GridCol({
+                    span: {
+                      xs: 12,
+                      sm: 12,
+                      md: 12,
+                      lg: this.isSheet ? 12 : 8,
+                    },
+                    offset: {
+                      xs: 0,
+                      sm: 0,
+                      md: 0,
+                      lg: 2,
+                    },
+                  }) {
+                    if (this.vm.productInfoList.length) {
+                      Column() {
+                        this.Plan();
+                        this.Privilege();
+                      }.padding({ left: 16, right: 16 });
+                    } else {
+                      this.EmptyHint();
+                    }
+                  };
+                }.onBreakpointChange((breakpoints: string) => {
+                  if (this.isSheet) {
+                    this.cardWidth = Math.floor((this.screenWidth - 48) / 3);
+                    if (breakpoints === BreakpointType.XS || breakpoints === BreakpointType.SM) {
+                      this.isBelowMD = true;
+                    } else if (breakpoints === BreakpointType.MD || breakpoints === BreakpointType.LG) {
+                      this.isBelowMD = false;
+                    }
                   } else {
-                    this.EmptyHint();
+                    if (breakpoints === BreakpointType.XS || breakpoints === BreakpointType.SM) {
+                      this.isBelowMD = true;
+                      this.cardWidth = Math.floor((this.screenWidth - 48) / 3);
+                    } else if (breakpoints === BreakpointType.MD) {
+                      this.cardWidth = Math.floor((this.screenWidth - 48) / 3);
+                      this.subscribeButtonAreaWidth = '60%';
+                      this.isBelowMD = false;
+                    } else if (breakpoints === BreakpointType.LG) {
+                      this.cardWidth = Math.floor((this.screenWidth * (8 / 12) - 48) / 3);
+                      this.subscribeButtonAreaWidth = '60%';
+                      this.isBelowMD = false;
+                    }
                   }
-                };
-              }.onBreakpointChange((breakpoints: string) => {
-                if (this.isSheet) {
-                  this.cardWidth = Math.floor((this.screenWidth - 48) / 3);
-                  if (breakpoints === BreakpointType.XS || breakpoints === BreakpointType.SM) {
-                    this.isBelowMD = true;
-                  } else if (breakpoints === BreakpointType.MD || breakpoints === BreakpointType.LG) {
-                    this.isBelowMD = false;
-                  }
-                } else {
-                  if (breakpoints === BreakpointType.XS || breakpoints === BreakpointType.SM) {
-                    this.isBelowMD = true;
-                    this.cardWidth = Math.floor((this.screenWidth - 48) / 3);
-                  } else if (breakpoints === BreakpointType.MD) {
-                    this.cardWidth = Math.floor((this.screenWidth - 48) / 3);
-                    this.subscribeButtonAreaWidth = '60%';
-                    this.isBelowMD = false;
-                  } else if (breakpoints === BreakpointType.LG) {
-                    this.cardWidth = Math.floor((this.screenWidth * (8 / 12) - 48) / 3);
-                    this.subscribeButtonAreaWidth = '60%';
-                    this.isBelowMD = false;
-                  }
-                }
-              });
+                });
+              }
+              .offset({ y: `${this.ctx.px2vp(this.navDestinationModifier.statusBarHeight.value)}vp` })
             };
           }
           .align(Alignment.Top)
@@ -439,6 +459,7 @@ export struct MemberShipPage {
             this.Activation();
           }
         }
+        .padding({ bottom: `${this.ctx.px2vp(this.navDestinationModifier.aiBarHeight.value)}vp` })
         .height('100%')
         .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])
         .backgroundColor($r('sys.color.background_secondary'))

@@ -12,6 +12,7 @@ export class BulletVM {
   @Trace bulletComments: Array<BulletItem> = []
   @Trace xTrans: Array<number> = []
   @Trace storage: BulletSettingStorage = BulletSettingStorage.instance();
+  @Trace isPause: boolean = false
   private createBullet: number = -1
   private timer: number = -1
   windowStage: window.WindowStage = AppStorage.get('windowStage')!
@@ -70,6 +71,8 @@ export class BulletVM {
     this.timer = setInterval(() => {
       this.bulletMove()
     }, 16)
+
+    this.isPause = false
   }
 
   // 关闭弹幕
@@ -78,5 +81,11 @@ export class BulletVM {
     clearInterval(this.timer)
     this.bulletComments = []
     this.xTrans = []
+  }
+
+  // 暂停弹幕
+  pauseBullet() {
+    clearInterval(this.timer)
+    this.isPause = true
   }
 }

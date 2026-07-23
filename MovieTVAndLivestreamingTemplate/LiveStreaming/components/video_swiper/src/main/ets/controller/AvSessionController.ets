@@ -98,13 +98,18 @@ export class AvSessionController {
 
   public setAvSessionPlayState(playbackState: avSession.AVPlaybackState) {
     if (this.avSession) {
-      this.avSession.setAVPlaybackState(playbackState, (err: BusinessError) => {
-        if (err) {
-          hilog.info(0x0000, TAG, `SetAVPlaybackState BusinessError: code: ${err.code}, message: ${err.message}`);
-        } else {
-          hilog.info(0x0000, TAG, 'SetAVPlaybackState successfully');
-        }
-      });
+      try {
+        this.avSession.setAVPlaybackState(playbackState, (err: BusinessError) => {
+          if (err) {
+            hilog.info(0x0000, TAG, `SetAVPlaybackState BusinessError: code: ${err.code}, message: ${err.message}`);
+          } else {
+            hilog.info(0x0000, TAG, 'SetAVPlaybackState successfully');
+          }
+        });
+      } catch (error) {
+        let err = error as BusinessError;
+        hilog.error(0x0000, TAG, `setAvSessionPlayState failed, errCode = ${err.code}, errMessage = ${err.message}.`);
+      }
     }
   }
 

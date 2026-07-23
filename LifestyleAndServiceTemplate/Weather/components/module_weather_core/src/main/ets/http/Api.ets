@@ -1,9 +1,69 @@
 import { DailyWeather, HourlyWeather, RealTimeWeather, IndicesWeather } from '../common/CoreType';
 import { CommonUtil } from '../utils/CommonUtil';
 
+/**
+ * Mock天气场景枚举
+ * 用于模拟不同天气场景的数据生成
+ */
+enum MockWeatherScene {
+  // 晴天场景
+  Sunny,
+  // 雨天场景
+  Rain,
+}
+
+/**
+ * Mock天气视觉效果接口
+ * 包含天气描述、图标、降雨量和空气质量
+ */
+interface MockWeatherVisual {
+  // 天气描述
+  desc: string;
+
+  // 天气图标
+  icon: string;
+
+  // 降雨量
+  rain: number;
+
+  // 空气质量
+  airQuality: string;
+}
+
+/**
+ * Mock每日温度结果接口
+ */
+interface MockDailyTempResult {
+  // 最高温度
+  maxTemp: number;
+
+  // 最低温度
+  minTemp: number;
+}
+
+/**
+ * Mock每小时数据结果接口
+ */
+interface MockHourlyDataResult {
+  // 温度
+  temp: number;
+
+  // 天气描述
+  desc: string;
+
+  // 天气图标
+  icon: string;
+
+  // 空气质量
+  airQuality: string;
+
+  // 小时数（0-23）
+  hour: number;
+}
+
 export class WeatherMgtApi {
   private static readonly _mockDailyWeatherList: DailyWeather[] = [
-  // 昨天
+    // 昨天
     {
       time: '',
       maxTemp: 38,
@@ -603,93 +663,353 @@ export class WeatherMgtApi {
   ];
   private static readonly _mockWindDirList: string[] =
     ['东风', '西风', '南方', '北风', '东南方', '东北风', '西南风', '西北风'];
+  private static readonly _beijingMockCodes: string[] = ['110000', '110100', '北京', '北京市'];
+  private static readonly _shanghaiMockCodes: string[] = ['310000', '310100', '上海', '上海市'];
 
   public static getRealTimeWeather(codes: string[]): Promise<RealTimeWeather[]> {
     const res: RealTimeWeather[] = [];
     for (let i = 0; i < codes.length; i++) {
-      /**
-       * 与15天的当天天气保持一致
-       */
-      const maxTemp = WeatherMgtApi._mockDailyWeatherList[1].maxTemp;
-      const minTemp = WeatherMgtApi._mockDailyWeatherList[1].minTemp;
-      const rain = WeatherMgtApi._mockDailyWeatherList[1].rain;
-      /**
-       * 与逐小时的当前天气保持一致
-       */
-      const now = WeatherMgtApi._mockHourlyWeatherList[new Date().getHours()];
-      const temp = now.temp;
-      const airQuality = now.airQuality;
-      const desc = now.desc;
-      const icon = now.icon;
+      const code = codes[i];
+      const scene = WeatherMgtApi._getMockWeatherScene(code);
+      const todayDaily = WeatherMgtApi._getTodayDailyTemp(code);
+      const curHourly = WeatherMgtApi._getCurrentHourlyData(code);
+      const rain = WeatherMgtApi._getHourlyVisual(scene, curHourly.hour).rain;
 
-      /**
-       * 随机生成
-       */
-      const shellTemp = CommonUtil.generateRandomInRange(temp - 5, temp + 5);
+      const shellTemp = CommonUtil.generateRandomInRange(curHourly.temp - 5, curHourly.temp + 5);
       const humidity = CommonUtil.generateRandomInRange(30, 60);
       const pressure = CommonUtil.generateRandomInRange(940, 1020);
       const uv = WeatherMgtApi._isDaytime() ? CommonUtil.generateRandomInRange(1, 4) : 0;
       const windDir = WeatherMgtApi._mockWindDirList[CommonUtil.generateRandomInRange(0, 7)];
-      const winSpeed = CommonUtil.generateRandomInRange(1, 4);
+      const windSpeed = CommonUtil.generateRandomInRange(1, 4);
 
       res.push({
         time: new Date().toString(),
-        temp,
-        maxTemp,
-        minTemp,
+        temp: curHourly.temp,
+        maxTemp: todayDaily.maxTemp,
+        minTemp: todayDaily.minTemp,
         shellTemp,
         humidity,
         rain,
-        desc,
-        icon,
+        desc: curHourly.desc,
+        icon: curHourly.icon,
         pressure,
         uv,
         windDir,
-        winSpeed,
-        airQuality,
+        windSpeed,
+        airQuality: curHourly.airQuality,
       });
     }
     return Promise.resolve(res);
   }
 
   public static getWeatherIn16Days(code: string): Promise<DailyWeather[]> {
-    for (let i = 0; i < WeatherMgtApi._mockDailyWeatherList.length; i++) {
-      WeatherMgtApi._mockDailyWeatherList[i].time = WeatherMgtApi._getFutureDate(i - 1);
-    }
-    return Promise.resolve(WeatherMgtApi._mockDailyWeatherList);
+    return Promise.resolve(WeatherMgtApi._buildDailyWeatherList(code));
   }
 
   public static getHourlyWeather(code: string): Promise<HourlyWeather[]> {
+    const hourlyWeatherList = WeatherMgtApi._buildHourlyWeatherList(code);
     const curHour = new Date().getHours();
     if (curHour) {
-      const toady = WeatherMgtApi._mockHourlyWeatherList.slice(curHour);
-      const nextDay = WeatherMgtApi._mockHourlyWeatherList.slice(0, curHour);
-      return Promise.resolve(toady.concat(nextDay));
+      const today = hourlyWeatherList.slice(curHour);
+      const nextDay = hourlyWeatherList.slice(0, curHour);
+      return Promise.resolve(today.concat(nextDay));
     }
-    return Promise.resolve(WeatherMgtApi._mockHourlyWeatherList);
+    return Promise.resolve(hourlyWeatherList);
   }
 
   public static getIndicesWeather(code: string, day: 1 | 3): Promise<IndicesWeather[][]> {
-    const day1 = WeatherMgtApi._getFutureDate(0)
-    const day2 = WeatherMgtApi._getFutureDate(1)
-    const day3 = WeatherMgtApi._getFutureDate(2)
+    const scene = WeatherMgtApi._getMockWeatherScene(code);
+    const day1 = WeatherMgtApi._getFutureDate(0);
+    const day2 = WeatherMgtApi._getFutureDate(1);
+    const day3 = WeatherMgtApi._getFutureDate(2);
     if (day === 1) {
-      WeatherMgtApi._mockIndicesWeatherList1.forEach(weather => weather.time = day1);
       return Promise.resolve(
         [
-          WeatherMgtApi._mockIndicesWeatherList1,
+          WeatherMgtApi._buildIndicesWeatherList(WeatherMgtApi._mockIndicesWeatherList1, day1, scene),
         ]);
     } else {
-      WeatherMgtApi._mockIndicesWeatherList1.forEach(weather => weather.time = day1);
-      WeatherMgtApi._mockIndicesWeatherList2.forEach(weather => weather.time = day2);
-      WeatherMgtApi._mockIndicesWeatherList3.forEach(weather => weather.time = day3);
       return Promise.resolve(
         [
-          WeatherMgtApi._mockIndicesWeatherList1,
-          WeatherMgtApi._mockIndicesWeatherList2,
-          WeatherMgtApi._mockIndicesWeatherList3,
-        ])
+          WeatherMgtApi._buildIndicesWeatherList(WeatherMgtApi._mockIndicesWeatherList1, day1, scene),
+          WeatherMgtApi._buildIndicesWeatherList(WeatherMgtApi._mockIndicesWeatherList2, day2, scene),
+          WeatherMgtApi._buildIndicesWeatherList(WeatherMgtApi._mockIndicesWeatherList3, day3, scene),
+        ]);
     }
+  }
+
+  private static _getMockWeatherScene(code: string): MockWeatherScene {
+    if (WeatherMgtApi._matchMockCode(code, WeatherMgtApi._beijingMockCodes)) {
+      return MockWeatherScene.Rain;
+    }
+    if (WeatherMgtApi._matchMockCode(code, WeatherMgtApi._shanghaiMockCodes)) {
+      return MockWeatherScene.Sunny;
+    }
+    const normalizedCode = WeatherMgtApi._normalizeCityCode(code);
+    return WeatherMgtApi._getStableHash(normalizedCode) % 2 === 0 ? MockWeatherScene.Sunny : MockWeatherScene.Rain;
+  }
+
+  /**
+   * 将行政区码归一化为地级市级标识。
+   * 中国行政区码规则：前2位=省，前4位=地级市，后2位=区县。
+   * 对于纯数字码取前4位，确保同一城市的不同区码得到一致的场景判断。
+   * 非数字码（如城市名）原样返回。
+   */
+  private static _normalizeCityCode(code: string): string {
+    const trimmed = code.trim();
+    if (trimmed.length >= 4 && /^\d+$/.test(trimmed)) {
+      return trimmed.substring(0, 4);
+    }
+    return trimmed;
+  }
+
+  private static _matchMockCode(code: string, mockCodes: string[]): boolean {
+    const normalizedCode = code.trim();
+    for (let i = 0; i < mockCodes.length; i++) {
+      if (normalizedCode === mockCodes[i] || normalizedCode.startsWith(mockCodes[i])) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private static _getStableHash(code: string): number {
+    let hash = 0;
+    for (let i = 0; i < code.length; i++) {
+      hash = hash * 31 + code.charCodeAt(i);
+    }
+    return Math.abs(hash);
+  }
+
+  private static _getTodayDailyTemp(code: string): MockDailyTempResult {
+    const scene = WeatherMgtApi._getMockWeatherScene(code);
+    const weather = WeatherMgtApi._mockDailyWeatherList[1];
+    const tempOffset = scene === MockWeatherScene.Rain ? -5 : 0;
+    const result: MockDailyTempResult = {
+      maxTemp: weather.maxTemp + tempOffset,
+      minTemp: weather.minTemp + tempOffset,
+    };
+    return result;
+  }
+
+  private static _getCurrentHourlyData(code: string): MockHourlyDataResult {
+    const scene = WeatherMgtApi._getMockWeatherScene(code);
+    const curHour = new Date().getHours();
+    const weather = WeatherMgtApi._mockHourlyWeatherList[curHour];
+    const visual = WeatherMgtApi._getHourlyVisual(scene, curHour);
+    const tempOffset = scene === MockWeatherScene.Rain ? -4 : 0;
+    const result: MockHourlyDataResult = {
+      temp: weather.temp + tempOffset,
+      desc: visual.desc,
+      icon: visual.icon,
+      airQuality: visual.airQuality,
+      hour: curHour,
+    };
+    return result;
+  }
+
+  private static _buildDailyWeatherList(code: string): DailyWeather[] {
+    const scene = WeatherMgtApi._getMockWeatherScene(code);
+    const dailyWeatherList: DailyWeather[] = [];
+    for (let i = 0; i < WeatherMgtApi._mockDailyWeatherList.length; i++) {
+      const weather = WeatherMgtApi._mockDailyWeatherList[i];
+      const dayVisual = WeatherMgtApi._getDailyVisual(scene, i, false);
+      const nightVisual = WeatherMgtApi._getDailyVisual(scene, i, true);
+      const tempOffset = scene === MockWeatherScene.Rain ? -5 : 0;
+      dailyWeatherList.push({
+        time: WeatherMgtApi._getFutureDate(i - 1),
+        maxTemp: weather.maxTemp + tempOffset,
+        minTemp: weather.minTemp + tempOffset,
+        dayDesc: dayVisual.desc,
+        dayIcon: dayVisual.icon,
+        nightDesc: nightVisual.desc,
+        nightIcon: nightVisual.icon,
+        airQuality: dayVisual.airQuality,
+        rain: dayVisual.rain,
+      });
+    }
+    return dailyWeatherList;
+  }
+
+  private static _buildHourlyWeatherList(code: string): HourlyWeather[] {
+    const scene = WeatherMgtApi._getMockWeatherScene(code);
+    const hourlyWeatherList: HourlyWeather[] = [];
+    for (let i = 0; i < WeatherMgtApi._mockHourlyWeatherList.length; i++) {
+      const weather = WeatherMgtApi._mockHourlyWeatherList[i];
+      const visual = WeatherMgtApi._getHourlyVisual(scene, i);
+      const tempOffset = scene === MockWeatherScene.Rain ? -4 : 0;
+      hourlyWeatherList.push({
+        time: weather.time,
+        temp: weather.temp + tempOffset,
+        desc: visual.desc,
+        icon: visual.icon,
+        airQuality: visual.airQuality,
+      });
+    }
+    return hourlyWeatherList;
+  }
+
+  private static _getDailyVisual(scene: MockWeatherScene, index: number, isNight: boolean): MockWeatherVisual {
+    if (scene === MockWeatherScene.Rain) {
+      if (index < 5) {
+        return {
+          desc: '小雨',
+          icon: 'ic_weather_lightrain',
+          rain: 60,
+          airQuality: '优',
+        };
+      }
+      if (index < 11) {
+        return {
+          desc: '中雨',
+          icon: 'ic_weather_rain',
+          rain: 80,
+          airQuality: '良',
+        };
+      }
+      return {
+        desc: '大雨',
+        icon: 'ic_weather_rain',
+        rain: 95,
+        airQuality: '良',
+      };
+    }
+    if (index % 3 === 0) {
+      return {
+        desc: '多云',
+        icon: isNight ? 'ic_weather_mostcloudy_night' : 'ic_weather_mostcloudy_day',
+        rain: 20,
+        airQuality: '优',
+      };
+    }
+    return {
+      desc: '晴',
+      icon: isNight ? 'ic_weather_sunny_night' : 'ic_weather_sunny_day',
+      rain: 10,
+      airQuality: '优',
+    };
+  }
+
+  private static _getHourlyVisual(scene: MockWeatherScene, hour: number): MockWeatherVisual {
+    if (scene === MockWeatherScene.Rain) {
+      if (hour < 10) {
+        return {
+          desc: '小雨',
+          icon: 'ic_weather_lightrain',
+          rain: 60,
+          airQuality: '优',
+        };
+      }
+      if (hour < 17) {
+        return {
+          desc: '中雨',
+          icon: 'ic_weather_rain',
+          rain: 80,
+          airQuality: '良',
+        };
+      }
+      return {
+        desc: '大雨',
+        icon: 'ic_weather_rain',
+        rain: 95,
+        airQuality: '良',
+      };
+    }
+    if (hour < 6 || hour >= 18) {
+      if (hour % 4 === 0) {
+        return {
+          desc: '多云',
+          icon: 'ic_weather_mostcloudy_night',
+          rain: 20,
+          airQuality: '优',
+        };
+      }
+      return {
+        desc: '晴',
+        icon: 'ic_weather_sunny_night',
+        rain: 10,
+        airQuality: '优',
+      };
+    }
+    if (hour === 8 || hour === 11 || hour === 15 || hour === 17) {
+      return {
+        desc: '多云',
+        icon: 'ic_weather_mostcloudy_day',
+        rain: 20,
+        airQuality: '优',
+      };
+    }
+    return {
+      desc: '晴',
+      icon: 'ic_weather_sunny_day',
+      rain: 10,
+      airQuality: '优',
+    };
+  }
+
+  private static _buildIndicesWeatherList(
+    source: IndicesWeather[],
+    time: string,
+    scene: MockWeatherScene,
+  ): IndicesWeather[] {
+    const indicesWeatherList: IndicesWeather[] = [];
+    for (let i = 0; i < source.length; i++) {
+      const weather = source[i];
+      const level = WeatherMgtApi._getMockIndexLevel(weather.type, weather.level, scene);
+      indicesWeatherList.push({
+        time,
+        type: weather.type,
+        name: weather.name,
+        level,
+        category: WeatherMgtApi._getMockIndexCategory(weather.type, level, scene),
+        text: weather.text,
+        icon: weather.icon,
+      });
+    }
+    return indicesWeatherList;
+  }
+
+  private static _getMockIndexLevel(type: number, defaultLevel: number, scene: MockWeatherScene): number {
+    if (scene === MockWeatherScene.Rain) {
+      if (type === 2 || type === 3 || type === 7 || type === 8) {
+        return 4;
+      }
+      if (type === 4 || type === 5 || type === 6) {
+        return 3;
+      }
+      return defaultLevel;
+    }
+    if (type === 2 || type === 3 || type === 4 || type === 5 || type === 6 || type === 7) {
+      return 1;
+    }
+    if (type === 8) {
+      return 2;
+    }
+    return defaultLevel;
+  }
+
+  private static _getMockIndexCategory(type: number, level: number, scene: MockWeatherScene): string {
+    if (type === 5 || type === 6) {
+      if (level === 1) {
+        return '少发';
+      }
+      if (level === 2) {
+        return '较易发';
+      }
+      return '易发';
+    }
+    if (scene === MockWeatherScene.Rain && (type === 2 || type === 3 || type === 7 || type === 8)) {
+      return '不宜';
+    }
+    if (level === 1) {
+      return '适宜';
+    }
+    if (level === 2) {
+      return '较适宜';
+    }
+    if (level === 3) {
+      return '较不宜';
+    }
+    return '不宜';
   }
 
   private static _isDaytime(): boolean {

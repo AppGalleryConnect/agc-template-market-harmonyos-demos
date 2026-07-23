@@ -1,0 +1,16 @@
+{
+  "insightIntents": [
+    {
+      "domain": "NewsDomain",
+      "intentName": "ViewRankingList",
+      "intentVersion": "1.0.1",
+      "srcEntry": "./ets/insightintents/IntentExecutorImpl.ets",
+      "uiAbility": {
+        "ability": "PhoneAbility",
+        "executeMode": [
+          "foreground"
+        ]
+      }
+    }
+  ]
+}

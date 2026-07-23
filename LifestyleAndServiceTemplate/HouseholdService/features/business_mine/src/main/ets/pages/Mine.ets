@@ -17,6 +17,7 @@ import { ToastDialog as promptAction } from '@hw-agconnect/ui-toast';
 import { goToAddressListPage } from 'address_management';
 import { AtomicserviceLogin } from 'atomicservice_login';
 import {
+  BreakpointNameEnum,
   CommonConstants,
   GoodDeTailSource,
   GridRowColSetting,
@@ -28,13 +29,14 @@ import {
   MY_TOOL_LIST,
   RouterModule,
   UserInfo,
+  WindowUtils,
 } from 'lib_foundation';
 import { GoodCard, GoodCardSize, IGoodInfo, RouterMap, WindowUtil } from 'module_base';
 import { MineVM } from '../viewmodel/MineVM';
 
 @ComponentV2
 export struct Mine {
-  @Local breakpoint: string = '';
+  @Local breakpoint: BreakpointNameEnum = BreakpointNameEnum.SM;
   userInfo: UserInfo = AppStorageV2.connect(UserInfo, () => new UserInfo())!;
   linkState: LinkState = AppStorageV2.connect(LinkState, () => new LinkState())!;
   mineVM: MineVM = new MineVM();
@@ -59,13 +61,13 @@ export struct Mine {
                 }
                 .padding({
                   left: GridRowColSetting.getPageMargin(this.breakpoint),
-                  right: GridRowColSetting.getPageMargin(this.breakpoint)
+                  right: GridRowColSetting.getPageMargin(this.breakpoint),
+                  top: WindowUtils.windowTopPadding,
                 })
                 .linearGradient({
                   angle: 0,
                   colors: [['rgba(242, 204, 206, 0)', 0], ['rgba(242, 204, 206, 1)', 1]],
                 })
-                .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP])
 
                 Column() {
                   this.SubTitle('服务与工具')
@@ -75,11 +77,12 @@ export struct Mine {
                 }
                 .padding({
                   left: GridRowColSetting.getPageMargin(this.breakpoint),
-                  right: GridRowColSetting.getPageMargin(this.breakpoint)
+                  right: GridRowColSetting.getPageMargin(this.breakpoint),
+                  bottom: [BreakpointNameEnum.LG, BreakpointNameEnum.XL].includes(this.breakpoint) ?
+                    WindowUtils.windowBottomPadding : 0,
                 })
               }
             }
-            .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP])
             .width(CommonConstants.FULL_PERCENT)
             .height(CommonConstants.FULL_PERCENT)
             .scrollBar(BarState.Off)
@@ -94,10 +97,14 @@ export struct Mine {
           .width(CommonConstants.FULL_PERCENT)
           .height(CommonConstants.FULL_PERCENT)
           .alignContent(Alignment.Top)
+          .padding({
+            bottom: [BreakpointNameEnum.LG, BreakpointNameEnum.XL].includes(this.breakpoint) ?
+              WindowUtils.windowBottomPadding : 0
+          })
         }
       }
       .onBreakpointChange((bp) => {
-        this.breakpoint = bp;
+        this.breakpoint = bp as BreakpointNameEnum;
       })
     }
     .hideTitleBar(true)
@@ -109,10 +116,14 @@ export struct Mine {
     Row() {
       Text('我的').fontSize(26).fontWeight(FontWeight.Bold).height(56)
     }
-    .padding({ left: 16, right: 16 })
+    .padding({
+      left: 16,
+      right: 16,
+      top: WindowUtils.windowTopPadding
+    })
     .width(CommonConstants.FULL_PERCENT)
     .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP])
-    .backgroundColor(Color.White)
+    .backgroundColor($r('app.color.common_page_bg'))
     .opacity(this.mineVM.titleBgOpacity)
   }
 
@@ -195,50 +206,57 @@ export struct Mine {
 
   @Builder
   ToolCard() {
-    Column() {
+    List() {
       ForEach(MY_TOOL_LIST, (v: IMenuItem, index: number) => {
-        Stack() {
-          Row({ space: 16 }) {
-            SymbolGlyph(v.imgUrl as Resource).fontSize(24)
-            Column() {
-              Row() {
-                Text(v.textLabel)
-                  .lineHeight(21)
-                  .fontSize($r('sys.float.Subtitle_M'))
-                  .fontWeight(FontWeight.Medium)
-                SymbolGlyph($r('sys.symbol.chevron_right'))
-                  .fontColor([$r('sys.color.icon_fourth')])
-                  .fontSize(24)
-              }
-              .margin({ top: 17, bottom: 17 })
-              .width('100%')
-              .justifyContent(FlexAlign.SpaceBetween)
+        ListItem() {
+          Stack() {
+            Row({ space: 16 }) {
+              SymbolGlyph(v.imgUrl as Resource).fontSize(24)
+              Column() {
+                Row() {
+                  Text(v.textLabel)
+                    .lineHeight(21)
+                    .fontSize($r('sys.float.Subtitle_M'))
+                    .fontWeight(FontWeight.Medium)
+                  SymbolGlyph($r('sys.symbol.chevron_right'))
+                    .fontColor([$r('sys.color.icon_fourth')])
+                    .fontSize(24)
+                }
+                .margin({ top: 17, bottom: 17 })
+                .width('100%')
+                .justifyContent(FlexAlign.SpaceBetween)
 
-              if (index !== MY_TOOL_LIST.length - 1) {
-                Divider().strokeWidth('1px')
+                if (index !== MY_TOOL_LIST.length - 1) {
+                  Divider().strokeWidth('1px')
+                }
               }
+              .height('100%')
+              .layoutWeight(1)
             }
-            .height('100%')
-            .layoutWeight(1)
+            .height(56)
+            .onClick(() => {
+              v.textLabel === '地址管理' ? goToAddressListPage(RouterModule.getStack(), {
+                windowTopPadding: WindowUtils.windowTopPadding,
+                windowBottomPadding: WindowUtils.windowBottomPadding
+              }) :
+                RouterModule.push({ url: v.routerUrl! });
+            })
+
+            LoginBtnInMine({
+              btnHeight: 56,
+              btnWidth: '100%',
+              fontSize: $r('sys.float.Subtitle_M'),
+              onBind: () => {
+                v.textLabel === '地址管理' ? goToAddressListPage(RouterModule.getStack()) :
+                  RouterModule.push({ url: v.routerUrl! });
+              }
+            })
+              .visibility(this.linkState.isLink ? Visibility.None : Visibility.Visible)
           }
-          .height(56)
-          .onClick(() => {
-              v.textLabel === '地址管理' ? goToAddressListPage(RouterModule.getStack()) :
-                RouterModule.push({ url: v.routerUrl! });
-          })
-          LoginBtnInMine({
-            btnHeight: 56,
-            btnWidth: '100%',
-            fontSize: $r('sys.float.Subtitle_M'),
-            onBind: () => {
-              v.textLabel === '地址管理' ? goToAddressListPage(RouterModule.getStack()) :
-                RouterModule.push({ url: v.routerUrl! });
-            }
-          })
-            .visibility(this.linkState.isLink ? Visibility.None : Visibility.Visible)
         }
       }, (item: IMenuItem) => item.imgUrl + item.textLabel)
     }
+    .lanes([BreakpointNameEnum.LG, BreakpointNameEnum.XL].includes(this.breakpoint) ? 2 : 1, 16)
     .width(CommonConstants.FULL_PERCENT)
     .padding({
       top: 4,
@@ -248,14 +266,13 @@ export struct Mine {
     })
     .borderRadius(16)
     .backgroundColor(Color.White)
-    .alignItems(HorizontalAlign.Start)
   }
 
   @Builder
   WaterFlowList() {
-    WaterFlow() {
+    List({ space: this.breakpoint === BreakpointNameEnum.SM ? 8 : 16 }) {
       LazyForEach(this.mineVM.goodDataSource, (v: IGoodInfo, index: number) => {
-        FlowItem() {
+        ListItem() {
           GoodCard({
             goodInfo: v,
             type: GoodCardSize.SMALL,
@@ -272,12 +289,9 @@ export struct Mine {
       }, (v: IGoodInfo) => v.id.toString() + v.subIndex)
     }
     .cachedCount(10)
-    .columnsTemplate(this.breakpoint === 'sm' ? '1fr 1fr' : '1fr 1fr 1fr 1fr')
-    .columnsGap(this.breakpoint === 'sm' ? 8 : 16)
-    .rowsGap(this.breakpoint === 'sm' ? 8 : 16)
+    .lanes(GridRowColSetting.getColumnsNum(this.breakpoint), 12)
     .width(CommonConstants.FULL_PERCENT)
     .scrollBar(BarState.Off)
-    .cachedCount(2)
     .nestedScroll({
       scrollForward: NestedScrollMode.PARENT_FIRST,
       scrollBackward: NestedScrollMode.SELF_FIRST,

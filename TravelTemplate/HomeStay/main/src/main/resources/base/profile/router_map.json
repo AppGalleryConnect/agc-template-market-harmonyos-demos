@@ -9,6 +9,11 @@
       "name": "Main",
       "pageSourceFile": "src/main/ets/pages/Main.ets",
       "buildFunction": "MainBuilder"
+    },
+    {
+      "name": "SplashPage",
+      "pageSourceFile": "src/main/ets/pages/SplashPage.ets",
+      "buildFunction": "SplashPageBuilder"
     }
   ]
 }

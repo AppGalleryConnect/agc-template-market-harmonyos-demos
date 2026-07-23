@@ -1,4 +1,8 @@
 import { cryptoFramework } from '@kit.CryptoArchitectureKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+import { Logger } from './Logger';
+
+const TAG = '[CommonUtil]';
 
 export class CommonUtil {
   public static generateRandomInRange(n: number, m: number): number {
@@ -11,8 +15,14 @@ export class CommonUtil {
   }
 
   private static _generateRandom0To255(): number {
-    let rand = cryptoFramework.createRandom();
-    let randData = rand.generateRandomSync(1);
-    return randData.data[0];
+    try {
+      let rand = cryptoFramework.createRandom();
+      let randData = rand.generateRandomSync(1);
+      return randData.data[0];
+    } catch (error) {
+      const err: BusinessError = error as BusinessError;
+      Logger.error(TAG, `Failed to generate random number. Code: ${err.code}, message: ${err.message}`);
+      return 0;
+    }
   }
 }

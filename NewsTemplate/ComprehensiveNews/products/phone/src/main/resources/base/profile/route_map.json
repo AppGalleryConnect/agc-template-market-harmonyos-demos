@@ -1,0 +1,19 @@
+{
+  "routerMap": [
+    {
+      "name": "IndexPage",
+      "pageSourceFile": "src/main/ets/pages/IndexPage.ets",
+      "buildFunction": "IndexPageBuilder"
+    },
+    {
+      "name": "SafePage",
+      "pageSourceFile": "src/main/ets/pages/SafePage.ets",
+      "buildFunction": "SafePageBuilder"
+    },
+    {
+      "name": "SplashPage",
+      "pageSourceFile": "src/main/ets/pages/SplashPage.ets",
+      "buildFunction": "SplashPageBuilder"
+    }
+  ]
+}

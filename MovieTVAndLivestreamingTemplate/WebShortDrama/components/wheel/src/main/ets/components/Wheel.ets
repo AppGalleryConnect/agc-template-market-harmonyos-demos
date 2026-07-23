@@ -4,7 +4,6 @@ import StyleConstants from '../constants/StyleConstants'
 import PrizeDialog from '../customdialog/PrizeDialog'
 import DrawModel from '../viewmodel/DrawModel'
 import PrizeData from '../model/PrizeData'
-import { promptAction } from '@kit.ArkUI'
 import { TYCard } from '../common/TYCard'
 
 @ComponentV2
@@ -25,6 +24,9 @@ export struct Wheel {
   @Param title: string = '福利转盘'
   @Param subTitle: string = '最高可得8888看点'
   @Event onWheelSuccess: (balance: number) => void
+  @Param isLogin: boolean = true
+  @Event loginFunc: () => void = () => {
+  }
   dialogController: CustomDialogController = new CustomDialogController({
     builder: PrizeDialog(),
     autoCancel: false,
@@ -64,7 +66,11 @@ export struct Wheel {
           .width(StyleConstants.CENTER_IMAGE_WIDTH)
           .enabled(this.enableFlag)
           .onClick(() => {
-            this.handleImageClick()
+            if (this.isLogin) {
+              this.handleImageClick()
+            } else {
+              this.loginFunc()
+            }
           })
       }
       .width(this.canvasWidth)
@@ -151,7 +157,7 @@ export struct Wheel {
       }
     }, () => {
       this.rotateDegree = CommonConstants.CIRCLE * CommonConstants.FIVE +
-      CommonConstants.ANGLE - randomAngle
+        CommonConstants.ANGLE - randomAngle
     })
   }
 }

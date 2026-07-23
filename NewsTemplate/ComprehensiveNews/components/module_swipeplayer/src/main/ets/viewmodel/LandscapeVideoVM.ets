@@ -89,19 +89,24 @@ export class LandscapeVideoVM {
   }
 
   init() {
-    this.windowClass?.on('windowSizeChange', (size) => {
-      this.xComponentWidth = this.uiContext!.px2vp(size.width);
-      this.xComponentHeight = this.uiContext!.px2vp(size.height);
-      this.isFullMode = isDisplayModeFull();
-      Logger.debug(TAG, 'this.isFullMode: ' + this.isFullMode + ', width: ' + size.width + ', height: ' + size.height);
-      if (!this.isBackFlag && size.width < size.height && !this.isFullMode &&
-        this.pathStack.getAllPathName().includes(PageNameEnum.VIDEO_LANDSCAPE_PAGE)
-      ) {
-        Logger.debug(TAG, 'on windowSizeChange quitFullScreen');
-        this.quitFullScreen();
-      }
-    })
-    this.showOrHiddenBar();
+    try {
+      this.windowClass?.on('windowSizeChange', (size) => {
+        this.xComponentWidth = this.uiContext!.px2vp(size.width);
+        this.xComponentHeight = this.uiContext!.px2vp(size.height);
+        this.isFullMode = isDisplayModeFull();
+        Logger.debug(TAG, 'this.isFullMode: ' + this.isFullMode + ', width: ' + size.width + ', height: ' + size.height);
+        if (!this.isBackFlag && size.width < size.height && !this.isFullMode &&
+          this.pathStack.getAllPathName().includes(PageNameEnum.VIDEO_LANDSCAPE_PAGE)
+        ) {
+          Logger.debug(TAG, 'on windowSizeChange quitFullScreen');
+          this.quitFullScreen();
+        }
+      })
+      this.showOrHiddenBar();
+    } catch (err) {
+      Logger.error(TAG, 'register windowClass fail, error: ' + JSON.stringify(err));
+    }
+
   }
 
   async getWindowInfo() {

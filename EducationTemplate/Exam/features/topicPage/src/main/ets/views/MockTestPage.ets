@@ -38,7 +38,6 @@ struct MockItemComponent {
     .width('100%')
     .padding($r('app.float.vp_12'))
     .borderRadius($r('app.float.vp_16'))
-    .margin({ bottom: $r('app.float.vp_12') });
   }
 
   /**
@@ -104,41 +103,37 @@ export struct MockTestPage {
    */
   @Builder
   examListBuilder() {
-    Grid() {
-      ForEach(this.mockTestList, (item: MockItem) => {
-        //模拟试卷子项
-        GridItem() {
-          MockItemComponent({ item: item })
-            .onClick(() => {
-              // 跳转项的num+1
-              this.prop = AppStorageV2.connect(MockObj, () => new MockObj())!;
-              this.prop.mockList.forEach((it: MockItem) => {
-                if (it.id === item.id) {
-                  it.num = it.num + 1;
-                }
+    List({ space: 12 }) {
+      Repeat(this.mockTestList)
+        .each((ri: RepeatItem<MockItem>) => {
+          ListItem() {
+            MockItemComponent({ item: ri.item })
+              .onClick(() => {
+                // 跳转项的num+1
+                this.prop = AppStorageV2.connect(MockObj, () => new MockObj())!;
+                this.prop.mockList.forEach((it: MockItem) => {
+                  if (it.id === ri.item.id) {
+                    it.num = it.num + 1;
+                  }
+                });
+                RouterModule.push({ url: RouterMap.ANSWER_QUESTIONS_TWO_PAGE });
               });
-              RouterModule.push({ url: RouterMap.ANSWER_QUESTIONS_TWO_PAGE });
-            });
-        };
-      }, (item: MockItem, index: number) => item.id + index);
+          }
+        })
+        .key((item: MockItem) => JSON.stringify(item))
     }
     .width('100%')
-    .height('100%')
-    .padding({
-      left: $r('app.float.vp_16'),
-      right: $r('app.float.vp_16'),
-      top: $r('app.float.vp_12'),
-      bottom: $r('app.float.vp_12')
-    })
-    .backgroundColor($r('sys.color.comp_background_gray'))
-    .columnsTemplate('1fr '.repeat(new BreakpointType<number>({
+    .layoutWeight(1)
+    .scrollBar(BarState.Off)
+    .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: true })
+    .lanes(new BreakpointType<number>({
       sm: 1,
       md: 2,
       lg: 3,
       xl: 3
-    }).getValue(this.topicVM.breakPointModel.currentBreakpoint)))
-    .columnsGap($r('app.float.vp_12'))
-    .rowsGap($r('app.float.vp_6'));
+    }).getValue(this.topicVM.breakPointModel.currentBreakpoint))
+    .backgroundColor($r('sys.color.comp_background_gray'))
+    .padding({ left: 16, right: 16 })
   }
 }
 

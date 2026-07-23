@@ -114,7 +114,7 @@ export struct LoginInfo {
                 .attributeModifier(new BaseTextStyleModifier('font_primary/Subtitle_L/Medium'))
             }
             Row({ space: 5 }) {
-              Image($r('app.media.chevron_right')).height(17).width(7)
+              Image($r('app.media.chevron_right')).width(12).height(24)
             }
           }
           .flexGrow(1)

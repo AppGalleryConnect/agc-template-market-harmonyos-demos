@@ -1,0 +1,19 @@
+{
+  "routerMap": [
+    {
+      "name": "PictureBeautification",
+      "pageSourceFile": "src/main/ets/pages/PictureBeautification.ets",
+      "buildFunction": "PictureBeautificationBuilder"
+    },
+    {
+      "name": "CollagePage",
+      "pageSourceFile": "src/main/ets/pages/CollagePage.ets",
+      "buildFunction": "CollagePageBuilder"
+    },
+    {
+      "name": "ShareImagePage",
+      "pageSourceFile": "src/main/ets/pages/ShareImagePage.ets",
+      "buildFunction": "ShareImagePageBuilder"
+    }
+  ]
+}

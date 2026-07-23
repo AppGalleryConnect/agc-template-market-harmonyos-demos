@@ -166,7 +166,7 @@ export class MockApi {
      * 首页聚合信息
      */
     adapter.onGet(URL_MAP.GET_HOME_INFO).reply(() => {
-      const bannerGoodIdList: string[] = ['home_clean_banner1', 'clothes_wash_0', 'closet_storage_organization_0'];
+      const bannerGoodIdList: string[] = ['home_clean_banner1', 'home_clean_1', 'closet_storage_organization_0'];
       MockData.HOME_INFO.bannerGoods = bannerGoodIdList.map((v: string) => {
         return MockData.ALL_GOOD_LIST.find((item) => item.id === v)!;
       })

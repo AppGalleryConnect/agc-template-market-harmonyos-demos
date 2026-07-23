@@ -77,7 +77,11 @@ export class CustomWindowModel {
   public onAvoidAreaChange() {
     this.getAvoidPadding();
     window.getLastWindow(ContextUtils.globalContext).then(currentWindow => {
-      currentWindow.on('avoidAreaChange', this.getAvoidPadding);
+      try {
+        currentWindow.on('avoidAreaChange', this.getAvoidPadding);
+      } catch (e) {
+        Logger.error(TAG, 'on currentWindow fail, error: ' + JSON.stringify(e));
+      }
     }).catch((e: BusinessError) => {
       Logger.error(TAG, 'getLastWindow fail, error: ' + JSON.stringify(e));
     });
@@ -88,7 +92,11 @@ export class CustomWindowModel {
    */
   public offAvoidAreaChange() {
     window.getLastWindow(ContextUtils.globalContext).then(currentWindow => {
-      currentWindow.off('avoidAreaChange', this.getAvoidPadding);
+      try {
+        currentWindow.off('avoidAreaChange', this.getAvoidPadding);
+      } catch (e) {
+        Logger.error(TAG, `Failed to off curren window. Code is ${e.code}, message is ${e.message}`);
+      }
     }).catch((e: BusinessError) => {
       Logger.error(TAG, 'getLastWindow fail, error: ' + JSON.stringify(e));
     });

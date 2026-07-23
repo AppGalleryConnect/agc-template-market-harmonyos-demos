@@ -300,8 +300,8 @@ struct SwiperItem {
   init(width: number, height: number) {
     let comInfo = getComponentsInfo(this.getUIContext(), 'PreviewImgContent')
     let rootRatio = comInfo.height / comInfo.width
-    this.imgWidth = px2vp(width)
-    this.imgHeight = px2vp(height)
+    this.imgWidth = this.getUIContext().px2vp(width)
+    this.imgHeight = this.getUIContext().px2vp(height)
     this.imageRatio = height / width
     this.rootWidth = this.imgWidth
     this.rootHeight = this.imgHeight
@@ -531,30 +531,42 @@ class ImagePreview {
     if (ImagePreview._instance.contentNode) {
       this.hide()
     }
-    let windowClass = await window.getLastWindow(getContext())
+    let windowClass = (AppStorage.get('windowStage') as window.WindowStage).getMainWindowSync();
     let systemBarProperty = windowClass.getWindowSystemBarProperties()
     AppStorage.setOrCreate('statusBarContentColor', systemBarProperty.statusBarContentColor)
     let uiContext = windowClass.getUIContext()
     let contentNode = new ComponentContent(uiContext, wrapBuilder(previewBuilder), opt)
     let promptAction = uiContext.getPromptAction()
     ImagePreview._instance = this.getInstance(contentNode, promptAction)
-    promptAction.openCustomDialog(contentNode, {
+    try {
+      promptAction.openCustomDialog(contentNode, {
       alignment: DialogAlignment.Center,
       isModal: true,
       maskColor: opt.maskColor,
       autoCancel: false,
       onDidAppear: () => {
-        windowClass.setWindowSystemBarProperties({
-          statusBarContentColor: '#ffffff',
-        })
+        try {
+          windowClass.setWindowSystemBarProperties({
+            statusBarContentColor: '#ffffff',
+          })
+        } catch (error) {
+          console.error('[ImagePreview] setWindowSystemBarProperties error: ' + JSON.stringify(error));
+        }
       },
       onWillDisappear: () => {
         let mainStatusBarContentColor: string = AppStorage.get('statusBarContentColor') ?? '#ffffff'
-        windowClass.setWindowSystemBarProperties({
-          statusBarContentColor: mainStatusBarContentColor,
-        })
+        try {
+          windowClass.setWindowSystemBarProperties({
+            statusBarContentColor: mainStatusBarContentColor,
+          })
+        } catch (error) {
+          console.error('[ImagePreview] setWindowSystemBarProperties error: ' + JSON.stringify(error));
+        }
       },
     })
+    } catch (error) {
+      console.error('[ImagePreview] openCustomDialog error: ' + JSON.stringify(error));
+    }
   }
 
   /**
@@ -562,8 +574,12 @@ class ImagePreview {
    */
   public hide() {
     if (ImagePreview._instance.contentNode) {
-      ImagePreview._instance.promptAction?.closeCustomDialog(ImagePreview._instance.contentNode)
-      ImagePreview._instance.contentNode?.dispose()
+      try {
+        ImagePreview._instance.promptAction?.closeCustomDialog(ImagePreview._instance.contentNode)
+        ImagePreview._instance.contentNode?.dispose()
+      } catch (error) {
+        console.error('[ImagePreview] hide error: ' + JSON.stringify(error));
+      }
       ImagePreview._instance.contentNode = null
     }
   }

@@ -212,26 +212,30 @@ class Toast {
    * 根据参数打开弹框
    */
   private async open(option: ToastOption) {
-    let windowClass = await window.getLastWindow(this.windowStage.getMainWindowSync().getUIContext().getHostContext()!)
-    let uiContext = windowClass.getUIContext()
-    let loadingDialog = new ComponentContent(uiContext, wrapBuilder(defaultBuilder), option)
-    let promptAction = uiContext.getPromptAction()
-    let uiObserver = uiContext.getUIObserver()
-    Toast._instance = Toast.getInstance(loadingDialog, promptAction, uiObserver)
-    await promptAction.openCustomDialog(loadingDialog, {
-      alignment: DialogAlignment.Center,
-      autoCancel: false,
-      isModal: true,
-      transition: TransitionEffect.IDENTITY,
-      onWillDismiss: (dismissDialogAction: DismissDialogAction) => {
-        if (dismissDialogAction.reason === DismissReason.PRESS_BACK) {
-          dismissDialogAction.dismiss()
-        }
-        if (dismissDialogAction.reason === DismissReason.TOUCH_OUTSIDE) {
-          dismissDialogAction.dismiss()
-        }
-      },
-    })
+    try {
+      let windowClass =
+        await window.getLastWindow(this.windowStage.getMainWindowSync().getUIContext().getHostContext()!)
+      let uiContext = windowClass.getUIContext()
+      let loadingDialog = new ComponentContent(uiContext, wrapBuilder(defaultBuilder), option)
+      let promptAction = uiContext.getPromptAction()
+      let uiObserver = uiContext.getUIObserver()
+      Toast._instance = Toast.getInstance(loadingDialog, promptAction, uiObserver)
+      await promptAction.openCustomDialog(loadingDialog, {
+        alignment: DialogAlignment.Center,
+        autoCancel: false,
+        isModal: true,
+        transition: TransitionEffect.IDENTITY,
+        onWillDismiss: (dismissDialogAction: DismissDialogAction) => {
+          if (dismissDialogAction.reason === DismissReason.PRESS_BACK) {
+            dismissDialogAction.dismiss()
+          }
+          if (dismissDialogAction.reason === DismissReason.TOUCH_OUTSIDE) {
+            dismissDialogAction.dismiss()
+          }
+        },
+      })
+    } catch (e) {
+    }
   }
 
   /**
@@ -246,7 +250,11 @@ class Toast {
     if (Toast._instance === null || Toast._instance.loadingDialog === null) {
       return
     }
-    await Toast._instance.promptAction?.closeCustomDialog(Toast._instance.loadingDialog)
+    try {
+      await Toast._instance.promptAction?.closeCustomDialog(Toast._instance.loadingDialog)
+    } catch (e) {
+      console.error(`autoHide closeCustomDialog failed: ${e}`);
+    }
     Toast._instance.loadingDialog?.dispose()
   }
 
@@ -263,8 +271,12 @@ class Toast {
         return
       }
       Toast._instance.loadingDialogArray?.forEach(async (item: ComponentContent<ToastOption>) => {
-        await Toast._instance.promptAction?.closeCustomDialog(item)
-        item?.dispose()
+        try {
+          await Toast._instance.promptAction?.closeCustomDialog(item)
+          item?.dispose()
+        } catch (e) {
+          console.error(`hideAll closeCustomDialog failed: ${e}`);
+        }
       })
     }, 1)
   }

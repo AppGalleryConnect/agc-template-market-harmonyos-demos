@@ -6,7 +6,7 @@ const commentLists: CommentItem[] = [
     drama: {
       id: 'drama_5',
       coverUrl: 'https://agc-storage-drcn.platform.dbankcloud.cn/v0/app-d45y3/pic1.png',
-      promotionalUrl: 'https://agc-storage-drcn.platform.dbankcloud.cn/v0/app-d45y3/drama_video/.m3u8',
+      promotionalUrl: 'https://agc-storage-drcn.platform.dbankcloud.cn/v0/app-d45y3/drama_video/3.m3u8',
       name: '锦鲤萌宝闹大观园',
       description: '一口气看完大结局，一部让你熬夜看完的短剧，怕你情绪把控不住 #轮到你看我爱别人短剧',
       totalCount: 80,

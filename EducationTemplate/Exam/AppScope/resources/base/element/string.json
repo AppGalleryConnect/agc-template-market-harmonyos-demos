@@ -14,7 +14,7 @@
     },
     {
       "name": "agcitkid_huawei_exam_service",
-      "value": "agcit_huawei_exam_answer_questions/1.0.2,agcit_huawei_common_payment/1.0.0,agcit_huawei_exam_select_category/1.0.3,agcit_huawei_exam_login_info/1.0.2,agcit_huawei_exam_search_question/1.0.4,agcit_huawei_exam_search/1.0.4,agcit_huawei_common_feedback/1.0.1"
+      "value": "agcit_huawei_recipes_aggregated_ads/1.0.3,agcit_huawei_common_payment/1.0.0,agcit_huawei_common_share/1.0.2,agcit_huawei_exam_answer_questions/1.0.2,agcit_huawei_common_app_setting/1.0.2,agcit_huawei_exam_base_select/1.0.2,agcit_huawei_common_customer_service_chat/1.0.0,agcit_huawei_common_feedback/1.0.1,agcit_huawei_common_image_preview/1.0.0,agcit_huawei_exam_login_info/1.0.2,agcit_huawei_common_membership/1.0.3,agcit_huawei_exam_search/1.0.3,agcit_huawei_exam_search_question/1.0.4,agcit_huawei_exam_select_category/1.0.3"
     }
   ]
 }

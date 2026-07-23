@@ -17,7 +17,8 @@ import { AppStorageV2 } from '@kit.ArkUI';
 import { pasteboard } from '@kit.BasicServicesKit';
 import { Header } from '../components/Header';
 import {
-  GlobalContextUtils, OrderInfo, OrderState, SampleOrderInfo, RouterMap, RouterModule
+  GlobalContextUtils, OrderInfo, OrderState, SampleOrderInfo, RouterMap, RouterModule, BreakpointType,
+  BreakpointModel
 } from 'commonlib';
 import { MyInfo } from './OrderListPage';
 
@@ -29,9 +30,21 @@ export function OrderDetailBuilder() {
 @ComponentV2
 export struct OrderDetailPage {
   textTimerController: TextTimerController = new TextTimerController();
-  @Local info: OrderInfo = new OrderInfo('', false, OrderState.WaitToPay, '', '', false);
+  @Local info: OrderInfo = new OrderInfo('', false, OrderState.WaitToPay, '', '', false, false);
   refreshCallback: () => void = () => {
   };
+  @Local breakpointModel: BreakpointModel = AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
+  buttonWidth: BreakpointType<number> = new BreakpointType<number>({
+    sm: 160,
+    md: 448,
+    lg: 448,
+    xl: 448,
+  });
+
+  @Computed
+  get getButtonWidth() {
+    return this.buttonWidth.getValue(this.breakpointModel.currentBreakpoint);
+  }
 
   @Builder
   infoItem(title: string, content: string, image?: Resource) {
@@ -225,7 +238,7 @@ export struct OrderDetailPage {
         .fontSize($r('sys.float.Body_L'))
         .fontWeight(FontWeight.Medium)
         .fontColor($r('sys.color.font_on_primary'))
-        .width(160)
+        .width(this.getButtonWidth)
         .height(40)
         .onClick(() => {
           if (this.info.orderState === OrderState.Cancelled) {

@@ -35,15 +35,17 @@ export class OrderInfo {
   @Trace isDelete: boolean = false
   //下单时间
   startTime: number = 0
+  @Trace isPay: boolean = false
 
   constructor(id: string, isCollect: boolean, orderState: OrderState, orderNo: string, content: string,
-    isDelete: boolean) {
+    isDelete: boolean, isPay: boolean) {
     this.id = id
     this.isCollect = isCollect
     this.orderState = orderState
     this.orderNo = orderNo
     this.content = content
     this.isDelete = isDelete
+    this.isPay = isPay
   }
 }
 

@@ -1,6 +1,9 @@
 import { PersistenceV2 } from '@kit.ArkUI';
 import { common } from '@kit.AbilityKit';
+import { UtilLog } from '@hw-agconnect/util-log';
 import { UserState } from 'common';
+
+const TAG = '[SafePage]'
 
 @Entry
 @ComponentV2
@@ -79,8 +82,12 @@ struct SafePage {
           .fontColor($r('sys.color.font_primary'))
           .layoutWeight(1)
           .onClick(() => {
-            let context: common.UIAbilityContext = this.getUIContext().getHostContext() as common.UIAbilityContext;
-            context.terminateSelf();
+            try {
+              let context: common.UIAbilityContext = this.getUIContext().getHostContext() as common.UIAbilityContext;
+              context.terminateSelf();
+            } catch (e) {
+              UtilLog.error(TAG, 'Failed to context.terminateSelf. Cause: %{public}s', JSON.stringify(e) ?? '')
+            }
           })
         Button($r('app.string.button_agree'))
           .backgroundColor($r('app.color.theme_blue_color'))

@@ -5,7 +5,7 @@ import { PlayController } from 'video_swiper'
 import { util } from '@kit.ArkTS'
 import { ShortDramaDetailListVM } from '../viewmodels/ShortDramaDetailListVM'
 import { DetailVideoData } from '../models/DetailVideoData'
-import { UserInfoModel } from '@agctemplate/widgets'
+import { FontModel, fp2pxUtil, UserInfoModel } from '@agctemplate/widgets'
 import { AppStorageV2 } from '@kit.ArkUI'
 
 export class ActorInfo {
@@ -24,6 +24,7 @@ export struct DramaDesc {
   @Param @Require @Once dramaInfo: DramaInfo
   @Param @Require playController: PlayController
   @Event closeSheet: () => void
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
 
   build() {
     Column() {
@@ -35,18 +36,18 @@ export struct DramaDesc {
         Column() {
           Flex({ alignItems: ItemAlign.Center }) {
             Text(this.dramaInfo.name)
-              .fontSize(16)
+              .fontSize(this.fontModel.getFg(16))
               .fontWeight(FontWeight.Medium)
               .flexBasis('auto')
-              .height(21)
+              .height(this.fontModel.getDesFg(21))
               .maxLines(1)
               .textOverflow({ overflow: TextOverflow.Ellipsis })
             Row() {
               SymbolGlyph($r('sys.symbol.chevron_right'))
-                .height(16)
-                .width(16)
-            }.height(21)
-            .width(16)
+                .fontSize(this.fontModel.getFg(16))
+                .fontColor([$r('sys.color.icon_primary')])
+            }.height(this.fontModel.getDesFg(21))
+            .width(this.fontModel.getDesFg(16))
             .margin({ left: 2 })
             .onClick(() => {
               this.closeSheet()
@@ -66,10 +67,10 @@ export struct DramaDesc {
           .align(Alignment.Start)
 
           Text(this.dramaInfo.description)
-            .fontSize(12)
+            .fontSize(this.fontModel.getFg(12))
             .fontWeight(FontWeight.Regular)
             .opacity(0.6)
-            .height(16)
+            .height(this.fontModel.getDesFg(16))
             .maxLines(1)
             .textAlign(TextAlign.Start)
             .margin({ top: 2, bottom: 8 })
@@ -82,7 +83,7 @@ export struct DramaDesc {
                     .width(16)
                     .height(16)
                   Text(item.name)
-                    .fontSize(12)
+                    .fontSize(fp2pxUtil(12))
                     .fontWeight(FontWeight.Regular)
                     .opacity(0.6)
                     .height(16)
@@ -119,6 +120,7 @@ export struct SerialPicker {
   fullIndexArray: Array<number> = [];
   tailIndexArray: Array<number> = []
   private controller: TabsController = new TabsController()
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
 
   aboutToAppear(): void {
     this.currentTabIndex = Math.floor(this.currentIndex / this.spliceNum)
@@ -154,7 +156,7 @@ export struct SerialPicker {
               Text(item)
                 .fontColor(this.currentTabIndex === index ? $r('sys.color.font_primary') :
                 $r('sys.color.font_secondary'))
-                .fontSize($r('sys.float.Body_M'))
+                .fontSize(this.fontModel.getFg(14))
                 .height(19)
             }.onClick(() => {
               this.currentTabIndex = index
@@ -182,9 +184,9 @@ export struct SerialPicker {
                           })
                           .fontColor(this.currentIndex === (index * this.spliceNum + indexIndex) ? '#EC6E45' :
                           $r('sys.color.font_primary'))
-                          .fontSize($r('sys.float.Body_M'))
+                          .fontSize(this.fontModel.getFg(14))
                           .backgroundColor(this.currentIndex === (index * this.spliceNum + indexIndex) ?
-                            'rgba(236, 110, 69, 0.05)' : $r('sys.color.background_secondary'))
+                            'rgba(236, 110, 69, 0.05)' : $r('sys.color.comp_background_tertiary'))
                         if (this.currentIndex === (index * this.spliceNum + indexIndex)) {
                           Image(getMedia('app.media.playing'))
                             .width(10)
@@ -193,9 +195,9 @@ export struct SerialPicker {
                         }
                         if ((index * this.spliceNum + indexIndex) > 10 &&
                         this.isLocked(index * this.spliceNum + indexIndex)) {
-                          Image(getMedia('app.media.icon_Lock'))
-                            .width(16)
-                            .height(16)
+                          SymbolGlyph($r('sys.symbol.lock_fill'))
+                            .fontSize(fp2pxUtil(16))
+                            .fontColor([$r('sys.color.icon_tertiary')])
                         }
                       }
                     }
@@ -214,9 +216,9 @@ export struct SerialPicker {
                           })
                           .fontColor(this.currentIndex === (index * this.spliceNum + indexIndex) ? '#EC6E45' :
                           $r('sys.color.font_primary'))
-                          .fontSize($r('sys.float.Body_M'))
+                          .fontSize(this.fontModel.getFg(14))
                           .backgroundColor(this.currentIndex === (index * this.spliceNum + indexIndex) ?
-                            'rgba(236, 110, 69, 0.05)' : $r('sys.color.background_secondary'))
+                            'rgba(236, 110, 69, 0.05)' : $r('sys.color.comp_background_tertiary'))
                         if (this.currentIndex === (index * this.spliceNum + indexIndex)) {
                           Image(getMedia('app.media.playing'))
                             .width(10)
@@ -225,9 +227,9 @@ export struct SerialPicker {
                         }
                         if ((index * this.spliceNum + indexIndex) > 10 &&
                         this.isLocked(index * this.spliceNum + indexIndex)) {
-                          Image(getMedia('app.media.icon_Lock'))
-                            .width(16)
-                            .height(16)
+                          SymbolGlyph($r('sys.symbol.lock_fill'))
+                            .fontSize(fp2pxUtil(16))
+                            .fontColor([$r('sys.color.icon_tertiary')])
                         }
                       }
                     }

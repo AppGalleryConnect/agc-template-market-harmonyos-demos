@@ -1,0 +1,19 @@
+{
+  "name": "@agctemplate/detail",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@agctemplate/utils": "1.0.0",
+    "@agctemplate/resources": "1.0.0",
+    "@agctemplate/widgets": "1.0.0",
+    "@agctemplate/server": "1.0.0",
+    "@agctemplate/common": "1.0.0",
+    "@agctemplate/video_swiper": "1.0.0",
+    "@agctemplate/router_module": "1.0.0",
+    "@agctemplate/aggregated_payment": "1.0.0",
+    "live_interaction": "../../components/live_interaction",
+  }
+}

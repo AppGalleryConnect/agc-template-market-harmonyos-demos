@@ -1,0 +1,15 @@
+{
+  "name": "aggregated_payment",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@tencent/wechat_open_sdk": "1.0.14",
+    // 支付宝 SDK 官方版本 (当前仅支持真机)
+    "@cashier_alipay/cashiersdk": "15.8.39",
+    // 支付宝 SDK 兼容版本 (接口一致，功能无实现，用于确保引入支付组件的应用可以在模拟器正常运行)
+    // "@cashier_alipay/cashiersdk": "./libs/swallow_alipay_sdk" // todo: 模拟器环境下请注释掉官方版本并启用兼容版本，重新同步项目
+  }
+}

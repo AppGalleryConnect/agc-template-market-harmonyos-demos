@@ -87,7 +87,7 @@ export struct BirthdayRememberList {
           .fontColor($r('sys.color.font_on_primary'))
       }
       .visibility(this.countdown.isToday(this.birthdayRememberList[0].date[0].date) ||
-      this.countdown.isBeforeDay(this.birthdayRememberList[0].date[0].date) ? Visibility.None :
+        this.countdown.isBeforeDay(this.birthdayRememberList[0].date[0].date) ? Visibility.None :
         Visibility.Visible)
     }
     .height(120)
@@ -196,18 +196,20 @@ export struct BirthdayRememberList {
                     },
                   },
                 })
-              }.edgeEffect(EdgeEffect.Spring, { alwaysEnabled: true })
+              }
+              .nestedScroll(
+                { scrollForward: NestedScrollMode.PARENT_FIRST, scrollBackward: NestedScrollMode.PARENT_FIRST })
             }
           }, (item: UserEventItem) => JSON.stringify(item))
         }
 
       }
-      .height('100%')
       .justifyContent(FlexAlign.Start)
     }
     .scrollBar(BarState.Off)
     .edgeEffect(EdgeEffect.Spring)
     .layoutWeight(1)
+    .align(Alignment.Top)
     .padding({ bottom: 16, top: 16 })
   }
 }

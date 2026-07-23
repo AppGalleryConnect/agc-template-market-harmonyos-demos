@@ -85,9 +85,6 @@ struct InteractionPage {
       .width(CommonConstants.FULL_PERCENT)
       .height(CommonConstants.FULL_PERCENT)
       .backgroundColor($r('sys.color.background_tertiary'))
-      .padding({
-        bottom: this.pagePaddingBottom,
-      })
     }
     .hideTitleBar(true)
   }
@@ -110,13 +107,5 @@ struct InteractionPage {
     }
     .layoutWeight(1)
     .justifyContent(FlexAlign.End)
-  }
-
-  @Computed
-  get pagePaddingBottom() {
-    if (this.tabModel.isTabVertical) {
-      return this.windowModel.windowBottomPadding;
-    }
-    return 48;
   }
 }

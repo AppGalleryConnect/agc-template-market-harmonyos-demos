@@ -9,14 +9,12 @@ import { SimpleDialog } from '../utils/SimpleDialog';
 
 @ComponentV2
 struct AddressListPage {
-  @Local
-  private addressList: AddressVM[] = [];
-  @Local
-  private isInitializing: boolean = true;
-  @Local
-  private isLoading: boolean = false;
-  @Local
-  private templateForWaterFlow: string = '1fr';
+  @Local private addressList: AddressVM[] = [];
+  @Local private isInitializing: boolean = true;
+  @Local private isLoading: boolean = false;
+  @Local private templateForWaterFlow: string = '1fr';
+  @Local windowTopPadding: number = 40;
+  @Local windowBottomPadding: number = 28;
   private uiContext: UIContext = this.getUIContext();
   private dialog: SimpleDialog = new SimpleDialog(this.uiContext);
   private sheet: AddressFormSheet = new AddressFormSheet(this.uiContext)
@@ -115,6 +113,10 @@ struct AddressListPage {
       }
       .width('100%')
       .height('100%')
+      .padding({
+        top: this.windowTopPadding,
+        bottom: this.windowBottomPadding,
+      })
       .backgroundColor($r('sys.color.background_secondary'))
       .expandSafeArea([SafeAreaType.SYSTEM, SafeAreaType.CUTOUT], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])
     }
@@ -126,6 +128,8 @@ struct AddressListPage {
         this.onAddressSelected = params.onAddressSelected;
         this.deleteAddress = params.deleteAddress;
         this.sheet.updateAddress(params.updateAddress);
+        this.windowTopPadding = params.windowTopPadding;
+        this.windowBottomPadding = params.windowBottomPadding;
       }
     })
   }

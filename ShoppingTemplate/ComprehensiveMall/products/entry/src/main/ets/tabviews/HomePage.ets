@@ -1,4 +1,4 @@
-import { LoadingStatus } from 'lib_foundation';
+import { LoadingStatus, WindowUtil } from 'lib_foundation';
 import { CommonLoading, CommonSymbol, NavTitleBar } from 'lib_widget';
 import { HomePageContent } from '../components/HomePageContent';
 import { HomePageVM } from '../viewmodels/HomePageVM';
@@ -50,6 +50,7 @@ export struct HomePage {
                 });
             }
           }
+          .margin({ bottom: -28})
           .justifyContent(FlexAlign.Center)
           .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.BOTTOM])
         }
@@ -102,7 +103,7 @@ export struct HomePage {
 
   @Builder
   buildHeader() {
-    Column(){
+    Column() {
       Row() {
         Text('首页')
           .fontSize($r('sys.float.Title_M'))
@@ -126,9 +127,7 @@ export struct HomePage {
       .height($r('app.float.nav_header_height'))
       .width('100%')
     }
-    .backgroundColor(this.vm.isTablet ? $r('app.color.background_color_transparent') :
-      $r('app.color.background_color_primary'))
-    .expandSafeArea()
+    .backgroundColor(this.vm.isTablet ? $r('app.color.background_color_transparent') : $r('app.color.background_color_primary'))
     .padding({
       left: $r('app.float.space_l'),
       right: $r('app.float.space_l'),

@@ -115,6 +115,7 @@ struct ChapterListView {
         left: 16,
         right: 16
       })
+      .lanes(this.vm.isLargeDevice ? 2 : 1, 24)
       .divider({
         strokeWidth:1,
         color:$r('sys.color.comp_divider')

@@ -45,7 +45,7 @@
 
 * 详情：沉浸式观看短剧，支持剧集播放常用功能(上下滑切换剧集，选集，社交交互等)
 
-本模板已集成华为账号、推送、预加载、会员订阅等服务，适配平板和折叠的一多布局，支持不同设备间同步短剧浏览进度，只需做少量配置和定制即可快速实现华为账号的登录功能。
+本模板已集成华为账号、推送、预加载、广告、朗读、无障碍屏幕朗读、适老化、深色模式、会员订阅等服务，适配平板和折叠的一多布局、视频悬停态播放，支持不同设备间同步短剧浏览进度，提供剧场页面动态布局能力，只需做少量配置和定制即可快速实现华为账号的登录功能。
 
 | 首页                         | 剧场                         | 福利                         | 追剧                         | 我的                         | 详情                         |
 |----------------------------|----------------------------|----------------------------|----------------------------|----------------------------|----------------------------|
@@ -198,10 +198,10 @@ WebShortDrama
 
 ### 环境
 
-- DevEco Studio版本：DevEco Studio 6.0.1 Release及以上
-- HarmonyOS SDK版本：HarmonyOS 6.0.1 Release SDK及以上
+- DevEco Studio版本：DevEco Studio 6.1.1 Release及以上
+- HarmonyOS SDK版本：HarmonyOS 6.1.1 Release SDK及以上
 - 设备类型：华为手机（包括双折叠和阔折叠）和华为平板
-- 系统版本：HarmonyOS 5.0.3(15)及以上
+- 系统版本：HarmonyOS 6.1.0(23)及以上
 
 ### 权限
 
@@ -225,15 +225,24 @@ WebShortDrama
 ```
 
 ### 使用约束
-- 跨设备同步新闻浏览进度，使用约束如下，详细参考：[应用接续开发指导](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/app-continuation-guide#section17575828642)
-   1. 双端设备需要登录同一华为账号
-   2. 双端设备需要打开 WLAN 和蓝牙开关，或者在设置中的“多设备协同 > 高级”中启用“多设备协同增强服务”功能
-   3. 双端设备需要在“设置”应用中开启“多设备协同 > 接续”功能
-   4. 双端设备都需要安装该应用
+1. 跨设备同步短剧浏览进度，使用约束如下，详细参考：[应用接续开发指导](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/app-continuation-guide#section17575828642)
+   -  双端设备需要登录同一华为账号
+   -  双端设备需要打开 WLAN 和蓝牙开关，或者在设置中的“多设备协同 > 高级”中启用“多设备协同增强服务”功能
+   -  双端设备需要在“设置”应用中开启“多设备协同 > 接续”功能
+   -  双端设备都需要安装该应用
+
+2. 碰一碰分享，使用约束如下，详细参考：[手机与手机碰一碰分享](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/knock-share-between-phones-overview#section184317615456)
+   - 任意一端设备不支持碰一碰能力时，轻碰无任何响应
+
+3. 使用隔空传送功能前，需要先打开隔空传送开关，开启路径：设置 > 系统 > 快捷启动和手势 > 隔空传送。详细参考：[打开设备侧隔空传送开关](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/gestures-share-open)
+
+4. 暂不支持模拟器的功能：小艺朗读、隔空传送
 
 ## 快速入门
 
 ### 配置工程
+
+在运行此模板前，需要完成以下配置：
 
 1. 在AppGallery Connect创建应用，将包名配置到模板中。
 
@@ -293,9 +302,27 @@ WebShortDrama
 
    c. [端云调试](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/push-server)。
 
-8. 对应用进行[手工签名](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-signing#section297715173233)。
+8. 配置App Linking服务。
 
-9. 添加手工签名所用证书对应的公钥指纹。详细参考：[配置应用签名证书指纹](https://developer.huawei.com/consumer/cn/doc/app/agc-help-cert-fingerprint-0000002278002933)
+   a. [开通App Linking服务](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/applinking-enable-applinking)
+
+   b. [在开发者网站上关联应用](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/app-linking-startupapp#section6903241628)
+
+   c. [在AGC为应用创建关联的网址域名](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/app-linking-startupapp#section1101111611317)
+
+   d. 在products/phone/src/main路径下的module.json5中配置关联的网址域名，详细参考：[在module.json5中配置关联的网址域名](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/app-linking-startupapp#section13808113610362)
+
+   e. 在products/phone/src/main/ets/common/WantUtils.ets#WantUtils.handleAppLinkingWant方法中处理传入的链接，详细参考：[处理传入的链接](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/app-linking-startupapp#section1620481746)
+
+9. 配置广告服务。
+
+   a. 如果仅调测广告，可使用测试广告位ID：开屏广告：testd7c5cewoj6。
+
+   b. 申请正式的广告位ID。登录[鲸鸿动能媒体服务平台](https://developer.huawei.com/consumer/cn/service/ads/publisher/html/index.html?lang=zh)进行申请，具体操作详情请参见[展示位创建](https://developer.huawei.com/consumer/cn/doc/distribution/monetize/zhanshiweichuangjian-0000001132700049)。
+
+10. 对应用进行[手工签名](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/ide-signing#section297715173233)。
+
+11. 添加手工签名所用证书对应的公钥指纹。详细参考：[配置应用签名证书指纹](https://developer.huawei.com/consumer/cn/doc/app/agc-help-cert-fingerprint-0000002278002933)
 
 ### 运行调试工程
 
@@ -305,7 +332,7 @@ WebShortDrama
 
 ## 示例效果
 
-[功能展示录屏](./screenshots/功能展示录屏.mp4)
+![功能展示录屏](./screenshots/功能展示录屏.gif)
 
 ## 开源许可协议
 

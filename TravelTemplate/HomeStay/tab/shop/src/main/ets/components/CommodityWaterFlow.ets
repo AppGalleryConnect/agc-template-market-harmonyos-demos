@@ -1,8 +1,8 @@
 import { Constants, NavPathName } from 'constant';
+import { CommonBlank } from 'component';
 import { ContentCard } from './ContentCard';
 import { Commodity } from 'type';
 import { ShopPageVM } from '../viewmodel/ShopPageVM';
-import { CommonBlank } from 'component';
 
 @Builder
 export function CommodityWaterFlowBuilder() {
@@ -25,13 +25,12 @@ export struct CommodityWaterFlow {
               this.mainPathStack.pushPathByName(NavPathName.COMMODITY_DETAIL, item);
             });
           }
-          .width(Constants.FULL_SCREEN);
         }, (item: Commodity) => item.id.toString());
       }
       .enableScrollInteraction(false)
       .cachedCount(10)
       .columnsTemplate('1fr 1fr')
-      .columnsGap(8)
+      .columnsGap(12)
       .rowsGap(8)
       .width(Constants.FULL_SCREEN);
     } else {

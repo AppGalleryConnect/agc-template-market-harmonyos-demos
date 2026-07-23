@@ -1,7 +1,10 @@
 import { getMedia, NAV_PAGE_NAME } from '@agctemplate/resources'
 import { DramaInfo } from '@agctemplate/server'
 import { appRouter, WindowManager } from '@agctemplate/utils'
+import { FontModel, fp2pxUtil } from '@agctemplate/widgets'
 import { DramaCoverVM } from '../viewmodels/DramaCoverVM'
+import { AppStorageV2 } from '@kit.ArkUI'
+import { LoneTakeAnimationsTransition, LongTakeTransitionParam } from 'module_transition'
 
 @ComponentV2
 export struct BannerPanel {
@@ -10,6 +13,7 @@ export struct BannerPanel {
   @Local curIndex: number = 0
   @Local scrolling: boolean = false
   @Param breakPoint: string = 'sm'
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
 
   build() {
     Column() {
@@ -90,53 +94,56 @@ export struct BannerPanel {
           }
         }
 
-        Column() {
+        Column({ space: 8 }) {
           Text(banner.title)
+            .fontSize(this.fontModel.getFg(14))
             .width('100%')
             .height(19)
             .fontWeight(500)
-            .fontColor('#e6000000')
-            .margin({ bottom: 8 })
+            .fontColor($r('sys.color.font_primary'))
             .maxLines(1)
             .textOverflow({ overflow: TextOverflow.Ellipsis })
 
-          Row() {
+          Row({ space: 8 }) {
             ForEach(banner.tags, (tag: string) => {
               Text(tag)
                 .width(28)
                 .height(16)
-                .backgroundColor('#0d000000')
-                .fontSize(10)
+                .backgroundColor($r('sys.color.comp_background_tertiary'))
+                .fontSize(fp2pxUtil(10))
                 .fontWeight(400)
-                .fontColor('#e6000000')
+                .fontColor($r('sys.color.font_primary'))
                 .textAlign(TextAlign.Center)
-                .margin({ right: 8 })
                 .borderRadius(4)
             }, (tag: string) => tag)
           }
 
           Text(banner.description)
-            .fontColor($r('sys.color.mask_secondary'))
-            .font({ weight: 400, size: 14 })
+            .fontColor($r('sys.color.font_secondary'))
+            .fontSize(this.fontModel.getFg(14))
             .maxLines(3)
             .textOverflow({ overflow: TextOverflow.Ellipsis })
-            .margin({ top: 8 })
         }
         .width(200)
-        .height(99)
         .margin({
           left: 12,
-          top: 19.5,
-          right: 12,
-          bottom: 19.5
+          right: 12
         })
         .alignItems(HorizontalAlign.Start)
       }
+      .id('BannerPanel' + banner.dramaId)
+      .alignItems(VerticalAlign.Center)
       .width(340)
       .height(138)
       .borderRadius(8)
-      .backgroundColor('#fff')
-      .onClick(() => {
+      .backgroundColor($r('sys.color.comp_background_primary'))
+      .onClick(async () => {
+        const longTakeTransitionParam: LongTakeTransitionParam | undefined =
+          await LoneTakeAnimationsTransition.generateLongTakeParam(this.getUIContext(),
+            'BannerPanel' + banner.dramaId, 8);
+        if (longTakeTransitionParam) {
+          banner.longTakeTransitionParam = longTakeTransitionParam;
+        }
         onDramaClick(banner,
           () => {
             WindowManager.setWindowSystemBarProperties({ statusBarContentColor: '#e6000000' })
@@ -151,6 +158,8 @@ export function onDramaClick(option: DramaCoverVM, callback?: (popInfo: PopInfo)
   appRouter.push({
     builderName: NAV_PAGE_NAME.ShortDramaDetailPage.name,
     params: {
+      longTakeTransitionParam: option.longTakeTransitionParam,
+      pixelMapImg: option.pixelMapImg,
       dramaInfo: new DramaInfo({ id: option.dramaId })
     }, popCallback: callback
   })

@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "business_profile",
+    "type": "har",
+    "routerMap": "$profile:route_map",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ]
+  }
+}

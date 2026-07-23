@@ -8,8 +8,8 @@ const TAG = '[CommonUtils]';
 export function secondToTime(seconds: number): string {
   let hourUnit = 60 * 60;
   let hour: number = Math.floor(seconds / hourUnit);
-  let minute: number = Math.floor((seconds - hour * 60) / 60);
-  let second: number = seconds % (60 * 60);
+  let minute: number = Math.floor((seconds - hour * hourUnit) / 60);
+  let second: number = seconds % 60;
   let hourStr: string = hour < 10 ? `0${hour.toString()}` : `${hour.toString()}`;
   let minuteStr: string = minute < 10 ? `0${minute.toString()}` : `${minute.toString()}`;
   let secondStr: string = second < 10 ? `0${second.toString()}` : `${second.toString()}`;
@@ -41,7 +41,11 @@ export async function playVideo(avPlayer: media.AVPlayer | undefined, curIndex: 
   if (avPlayer.state === AVPlayerState.PREPARED || avPlayer.state === AVPlayerState.PAUSED ||
     avPlayer?.state === AVPlayerState.COMPLETED) {
     hilog.debug(0x0000, TAG,  `playVideo. state:${avPlayer.state}, curIndex: ${curIndex}, index: ${index}.`);
-    await avPlayer.play();
+    try {
+      await avPlayer.play();
+    } catch (e) {
+      hilog.error(0x0000, TAG, `playVideo failed: ${e}`);
+    }
   }
 }
 
@@ -51,7 +55,11 @@ export async function pauseVideo(avPlayer: media.AVPlayer | undefined, curIndex:
     return;
   }
   hilog.debug(0x0000, TAG,  `pauseVideo. state:${avPlayer.state}, curIndex: ${curIndex}, index: ${index}.`);
-  await avPlayer.pause();
+  try {
+    await avPlayer.pause();
+  } catch (e) {
+    hilog.error(0x0000, TAG, `pauseVideo failed: ${e}`);
+  }
 }
 
 export async function stopVideo(avPlayer: media.AVPlayer | undefined, curIndex: number, index: number) {
@@ -62,7 +70,11 @@ export async function stopVideo(avPlayer: media.AVPlayer | undefined, curIndex: 
   if (avPlayer.state === AVPlayerState.PREPARED || avPlayer.state === AVPlayerState.PLAYING ||
     avPlayer.state === AVPlayerState.PAUSED || avPlayer?.state === AVPlayerState.COMPLETED) {
     hilog.debug(0x0000, TAG,  `stopVideo. state:${avPlayer.state}, curIndex: ${curIndex}, index: ${index}.`);
-    await avPlayer.stop();
+    try {
+      await avPlayer.stop();
+    } catch (e) {
+      hilog.error(0x0000, TAG, `stopVideo failed: ${e}`);
+    }
   }
 }
 
@@ -72,11 +84,15 @@ export function releaseVideo(avPlayer: media.AVPlayer | undefined, curIndex: num
     return;
   }
   hilog.debug(0x0000, TAG,  `releaseVideo. state:${avPlayer.state}, curIndex: ${curIndex}, index: ${index}.`);
-  avPlayer.off('timeUpdate');
-  avPlayer.off('seekDone');
-  avPlayer.off('error');
-  avPlayer.off('stateChange');
-  avPlayer.release();
+  try {
+    avPlayer.off('timeUpdate');
+    avPlayer.off('seekDone');
+    avPlayer.off('error');
+    avPlayer.off('stateChange');
+    avPlayer.release();
+  } catch (e) {
+    hilog.error(0x0000, TAG, `releaseVideo failed: ${e}`);
+  }
 }
 
 export function getRandomUUID(length: number): string {

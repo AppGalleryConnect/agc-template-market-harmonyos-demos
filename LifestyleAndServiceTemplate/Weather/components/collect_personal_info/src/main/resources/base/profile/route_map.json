@@ -1,0 +1,14 @@
+{
+  "routerMap": [
+    {
+      "name": "OldPhone",
+      "pageSourceFile": "src/main/ets/components/EnterPhoneNumber.ets",
+      "buildFunction": "oldPhoneBuilder"
+    },
+    {
+      "name": "NewPhone",
+      "pageSourceFile": "src/main/ets/components/EnterPhoneNumber.ets",
+      "buildFunction": "newPhoneBuilder"
+    }
+  ]
+}

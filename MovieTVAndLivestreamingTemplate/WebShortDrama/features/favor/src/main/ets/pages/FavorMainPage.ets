@@ -1,12 +1,9 @@
 import { jumpDetailPage, ParamsModel } from '@agctemplate/detail'
 import { VideoSeries } from '@agctemplate/mine'
-import { getMedia, getString } from '@agctemplate/resources'
+import { getString } from '@agctemplate/resources'
 import { MyFollowDramaData, MyFollowDramaRes, RequestAPI } from '@agctemplate/server'
-import { GET } from '@agctemplate/server/src/main/ets/api/Decorators'
 import {
-  getDramaInfo,
-  setFavorite,
-  unsetFavorite
+  getDramaInfo, unsetFavorite
 } from '@agctemplate/server/src/main/ets/api/mock/mockData/mockDramaFactory'
 import { container, WindowManager } from '@agctemplate/utils'
 import {
@@ -15,12 +12,13 @@ import {
   BreakPoint,
   BreakPointType,
   BreakPointValue,
+  FontModel,
+  fp2pxUtil,
   MainTitleModifier,
   StatusBarHeight
 } from '@agctemplate/widgets'
 import { AlertDialog, AppStorageV2, display } from '@kit.ArkUI'
 import { emitter } from '@kit.BasicServicesKit'
-import { deviceInfo } from '@kit.BasicServicesKit';
 
 @ComponentV2
 export struct FavorMainPage {
@@ -29,6 +27,7 @@ export struct FavorMainPage {
   @Local selectedIds: string[] = []
   @Local deletePromptMsg: string | Resource = '此条'
   @Local myFollowDramaRes: MyFollowDramaRes = new MyFollowDramaRes();
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
   @Local statusBarHeight: StatusBarHeight = AppStorageV2.connect(StatusBarHeight, AppStorageKeys.STATUS_BAR_HEIGHT,
     () => new StatusBarHeight())!;
   @Local aiBarHeight: AiBarHeight = AppStorageV2.connect(AiBarHeight, AppStorageKeys.AI_BAR_HEIGHT,
@@ -37,18 +36,20 @@ export struct FavorMainPage {
   @Consumer('curTabIndex') currentIndex: number = 0;
   @Local currentBreakpoint: BreakPoint = AppStorageV2.connect(BreakPoint, AppStorageKeys.CURRENT_BREAK_POINT,
     () => new BreakPoint(BreakPointValue.SM))!;
-  @Local trackSize: number =
-    new BreakPointType<number>({ sm: 99, md: 159, lg: 189 }).getValue(this.currentBreakpoint.value)!
-  @Local isTabletLandScape: boolean = deviceInfo.deviceType === 'tablet' &&
-    (display.getDefaultDisplaySync().orientation === display.Orientation.LANDSCAPE ||
-      display.getDefaultDisplaySync().orientation === display.Orientation.LANDSCAPE_INVERTED)
+  @Local trackSize: string | number =
+    new BreakPointType<string | number>({
+      sm: this.fontModel.getDesFg(99),
+      md: this.fontModel.getDesFg(159),
+      lg: this.fontModel.getDesFg(189)
+    }).getValue(this.currentBreakpoint.value)!
+  @Local isLandScape: boolean = display.getDefaultDisplaySync().orientation === display.Orientation.LANDSCAPE ||
+    display.getDefaultDisplaySync().orientation === display.Orientation.LANDSCAPE_INVERTED
   callback: Callback<number> = (data: number) => {
-    if (deviceInfo.deviceType === 'tablet' &&
-      (display.getDefaultDisplaySync().orientation === display.Orientation.LANDSCAPE ||
-        display.getDefaultDisplaySync().orientation === display.Orientation.LANDSCAPE_INVERTED)) {
-      this.isTabletLandScape = true
+    if (display.getDefaultDisplaySync().orientation === display.Orientation.LANDSCAPE ||
+      display.getDefaultDisplaySync().orientation === display.Orientation.LANDSCAPE_INVERTED) {
+      this.isLandScape = true
     } else {
-      this.isTabletLandScape = false
+      this.isLandScape = false
     }
   }
   modifier: MainTitleModifier = new MainTitleModifier();
@@ -96,11 +97,17 @@ export struct FavorMainPage {
   aboutToAppear(): void {
     this.sendDeleteFavoriteEmitter()
     this.updateFavorites()
-    display.on('change', this.callback)
+    try {
+      display.on('change', this.callback)
+    } catch (e) {
+    }
   }
 
   aboutToDisappear(): void {
-    display.off('change', this.callback)
+    try {
+      display.off('change', this.callback)
+    } catch (e) {
+    }
   }
 
   sendDeleteFavoriteEmitter() {
@@ -112,7 +119,10 @@ export struct FavorMainPage {
         id: 6
       }
     };
-    emitter.emit(event, eventData);
+    try {
+      emitter.emit(event, eventData);
+    } catch (e) {
+    }
   }
 
   build() {
@@ -132,23 +142,21 @@ export struct FavorMainPage {
         }
         .width('100%')
       }
-      .position({ left: this.isTabletLandScape && this.isDeleting ? 96 : 0 })
       .width('100%')
-      .height(this.isDeleting ? '92.5%' : '100%')
+      .height('100%')
       .padding({
         left: 16,
-        right: this.isTabletLandScape && this.isDeleting ? 112 : 16,
-        bottom: this.isDeleting ? 80 : 0
+        right: 16,
       })
       .backgroundColor($r('sys.color.background_secondary'))
+
       if (this.isDeleting) {
         this.footItemBuilder()
       }
     }
     .backgroundColor($r('sys.color.background_secondary'))
     .padding({
-      top: `${this.getUIContext().px2vp(this.statusBarHeight.value)}vp`,
-      bottom: this.isDeleting ? 0 : 70
+      top: `${this.getUIContext().px2vp(this.statusBarHeight.value)}vp`
     })
     .hideTitleBar(true)
   }
@@ -160,6 +168,7 @@ export struct FavorMainPage {
         .attributeModifier(this.modifier)
 
       Button(this.isDeleting ? '取消' : '编辑')
+        .fontSize(fp2pxUtil(16))
         .margin({ left: 8 })
         .height(40)
         .borderRadius(20)
@@ -168,7 +177,7 @@ export struct FavorMainPage {
         .onClick(() => {
           if (this.myFollowDramaRes.myFollowDramas.length > 0) {
             this.isDeleting = !this.isDeleting
-            this.tabState = !this.tabState
+            this.tabState = !this.isDeleting
             this.selectedIds = []
             this.selectCount = 0
             this.myFollowDramaRes.myFollowDramas.forEach(item => {
@@ -212,6 +221,7 @@ export struct FavorMainPage {
               }
             })
           }
+          .padding({ bottom: ri.index === this.myFollowDramaRes.myFollowDramas.length - 1 ? 160 : 0})
         })
         .key((item: MyFollowDramaData, index: number): string => item.id)// 键值生成函数
         .virtualScroll({
@@ -220,48 +230,53 @@ export struct FavorMainPage {
     }
     .edgeEffect(EdgeEffect.Spring)
     .columnsTemplate(`repeat(auto-stretch, ${this.trackSize})`)
-    .columnsGap(new BreakPointType<number>({ sm: 8, md: 12, lg: 16 }).getValue(this.currentBreakpoint.value))
+    .columnsGap(new BreakPointType<string | number>({
+      sm: 8,
+      md: 12,
+      lg: 16
+    }).getValue(this.currentBreakpoint.value))
     .scrollBar(BarState.Off)
     .cachedCount(4) // 容器组件的预加载区域大小
   }
 
   @Builder
   footItemBuilder() {
-    Flex({
-      direction: this.isTabletLandScape ? FlexDirection.Column : FlexDirection.Row,
-      justifyContent: FlexAlign.Center
-    }) {
+    Row() {
       Column() {
-        Image(getMedia('app.media.ic_public_delete_all'))
-          .width(22)
-          .height(22)
+        SymbolGlyph($r('sys.symbol.eraser_line'))
+          .fontSize(24)
+          .fontColor([$r('sys.color.icon_primary')])
         Text('一键清空')
-          .height(14)
-          .fontSize(13)
-          .margin({ top: 5.36 })
+          .fontSize(this.fontModel.getFg(10))
+          .fontWeight(FontWeight.Regular)
+          .fontColor($r('sys.color.font_primary'))
+          .textAlign(TextAlign.Center)
+          .margin({ top: 2 })
       }
       .justifyContent(FlexAlign.Center)
       .alignItems(HorizontalAlign.Center)
-      .width(this.isTabletLandScape ? '100%' : '50%')
-      .height(this.isTabletLandScape ? '50%' : '100%')
+      .layoutWeight(1)
+      .height('100%')
       .onClick(() => {
         this.getAllIds()
         this.deleteDialogController.open()
       })
 
       Column() {
-        Image(getMedia('app.media.ic_public_delete'))
-          .width(22)
-          .height(22)
+        SymbolGlyph($r('sys.symbol.trash'))
+          .fontSize(24)
+          .fontColor([this.selectCount > 0 ? $r('sys.color.icon_primary') : $r('sys.color.icon_secondary')])
         Text('删除')
-          .height(14)
-          .fontSize(13)
-          .margin({ top: 5.36 })
+          .fontSize(this.fontModel.getFg(10))
+          .fontWeight(FontWeight.Medium)
+          .fontColor(this.selectCount > 0 ? $r('sys.color.font_primary') : $r('sys.color.font_secondary'))
+          .textAlign(TextAlign.Center)
+          .margin({ top: 2 })
       }
       .justifyContent(FlexAlign.Center)
       .alignItems(HorizontalAlign.Center)
-      .width(this.isTabletLandScape ? '100%' : '50%')
-      .height(this.isTabletLandScape ? '50%' : '100%')
+      .layoutWeight(1)
+      .height('100%')
       .opacity(this.selectCount > 0 ? 1 : 0.4)
       .enabled(this.selectCount > 0)
       .onClick(() => {
@@ -269,14 +284,16 @@ export struct FavorMainPage {
         this.deleteDialogController.open()
       })
     }
-    .position({ left: 0, bottom: 0 })
-    .width(this.isTabletLandScape ? 96 : '100%')
-    .height(this.isTabletLandScape ? '100%' : 60)
+    .width(this.currentBreakpoint.value === 'sm' ? 168 : 184)
+    .backgroundBlurStyle(BlurStyle.COMPONENT_REGULAR,
+      { colorMode: ThemeColorMode.LIGHT, adaptiveColor: AdaptiveColor.DEFAULT, scale: 1.0 })
+    .height(56)
+    .borderRadius(28)
     .backgroundColor($r('sys.color.comp_background_gray'))
-    .padding({
-      top: 8,
-      bottom: 8,
-    })
+    .justifyContent(FlexAlign.SpaceEvenly)
+    .alignItems(VerticalAlign.Center)
+    .position({ left: '50%', bottom: 28 })
+    .translate({ x: '-50%' })
   }
 
   // 更新观看记录数据

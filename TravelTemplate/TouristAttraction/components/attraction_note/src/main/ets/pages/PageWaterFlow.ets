@@ -2,11 +2,13 @@
  * Copyright (c) Huawei Technologies Co., Ltd. 2024-2024. All rights reserved.
  */
 import { PullToRefresh, PullToRefreshConfigurator } from '@ohos/pulltorefresh';
+import { Constant } from 'module_base';
+import { ContentCard } from '../components/ContentCard';
+import { BreakpointNameEnum, BreakpointType, GridRowColSetting } from '../constant/GridRowColSetting';
 import { BAR_LIST, BarModel, CommonConstant } from '../constant/Index';
 import { CardDataSource, PostCardModel } from '../model/Index';
-import { queryTravelogueList } from '../utils/ApiManage';
-import { ContentCard } from '../components/ContentCard';
 import { QueryTravelogueListRequest } from '../model/IRequest';
+import { queryTravelogueList } from '../utils/ApiManage';
 
 @Builder
 export function PageGroundBuilder() {
@@ -20,10 +22,11 @@ export struct PageGround {
   @Local curPageNum: number = 1;
   @Local list: CardDataSource = new CardDataSource();
   @Local windowTopHeight: number = AppStorage.get('windowTopHeight') as number || 38.77;
+  @Local breakpoint: string = '';
   @Param @Require isShowBack: boolean;
+  @Consumer('mainPathStack') mainPathStack: NavPathStack = new NavPathStack();
   private scroller: Scroller = new Scroller();
   private pullConfig: PullToRefreshConfigurator = new PullToRefreshConfigurator();
-  @Consumer('mainPathStack') mainPathStack: NavPathStack = new NavPathStack();
 
   aboutToAppear(): void {
     this.setPullConfig();
@@ -40,9 +43,7 @@ export struct PageGround {
     }
 
     const data: QueryTravelogueListRequest = {
-      type: BAR_LIST[this.currentIndex].value,
-      pageNum: this.curPageNum,
-      pageSize: 10,
+      type: BAR_LIST[this.currentIndex].value, pageNum: this.curPageNum, pageSize: 10,
     };
     return queryTravelogueList(data).then((resp: ESObject) => {
       if (refresh) {
@@ -81,15 +82,19 @@ export struct PageGround {
           ContentCard({
             data: item,
           });
-        }
-        .width(CommonConstant.FULL_PERCENT);
+        }.width(CommonConstant.FULL_PERCENT);
       });
     }
     .edgeEffect(EdgeEffect.Spring)
     .cachedCount(10)
-    .columnsTemplate('1fr 1fr')
-    .columnsGap(6)
-    .rowsGap(6)
+    .columnsTemplate(new BreakpointType({
+      [BreakpointNameEnum.SM]: '1fr '.repeat(2),
+      [BreakpointNameEnum.MD]: '1fr '.repeat(3),
+      [BreakpointNameEnum.LG]: '1fr '.repeat(5),
+      [BreakpointNameEnum.XL]: '1fr '.repeat(5),
+    }).getValue(this.breakpoint))
+    .columnsGap(GridRowColSetting.getGutter(this.breakpoint))
+    .rowsGap(12)
     .width(CommonConstant.FULL_PERCENT)
     .layoutWeight(1);
   }
@@ -130,99 +135,70 @@ export struct PageGround {
         customLoad: null,
         customRefresh: null,
       });
-    }.layoutWeight(1).backgroundColor($r('app.color.page_bg'))
-    .padding(6);
+    }.layoutWeight(1);
   }
 
   @Builder
   buildTabBar() {
-    Row({ space: 16 }) {
+    Row({ space: GridRowColSetting.getGutter(this.breakpoint) }) {
       ForEach(BAR_LIST, (item: BarModel, index: number) => {
-        Column() {
+        Row() {
           Text(item.label)
-            .fontColor(this.currentIndex === index ? $r('app.color.grey_level_9') : $r('app.color.grey_level_4'))
-            .fontSize(16)
-            .fontWeight(this.currentIndex === index ? 500 : 400)
-            .lineHeight(20)
-            .margin({ bottom: 2 });
-          Divider()
-            .width(20)
-            .strokeWidth(2)
-            .opacity(this.currentIndex === index ? 1 : 0);
-        }.onClick(() => {
+            .fontColor(this.currentIndex === index ? $r('sys.color.font_on_primary') : $r('sys.color.font_secondary'))
+            .fontSize($r('sys.float.Subtitle_M'))
+            .fontWeight(this.currentIndex === index ? FontWeight.Medium : FontWeight.Regular);
+        }
+        .height(36)
+        .borderRadius(20)
+        .padding({ left: 16, right: 16 })
+        .backgroundColor(
+          this.currentIndex === index ? $r('sys.color.multi_color_04') : $r('sys.color.comp_background_tertiary'))
+        .onClick(() => {
           this.currentIndex = index;
           this.list.clearAllData();
           this.queryList();
         });
       }, (item: BarModel) => item.label.toString());
-    }
-    .width(CommonConstant.FULL_PERCENT)
-    .justifyContent(FlexAlign.Center);
-  }
-
-  @Builder
-  buildTitle() {
-    Row() {
-      if (this.isShowBack) {
-        Image($r('app.media.ic_public_back'))
-          .width(14)
-          .height(28)
-          .fillColor($r('app.color.grey_level_9'))
-          .objectFit(ImageFit.Contain)
-          .onClick(() => {
-            this.mainPathStack.pop()
-          });
-        Text($r('app.string.water_flow_title'))
-          .fontSize(18)
-          .fontColor($r('app.color.grey_level_9'))
-          .fontWeight(400)
-          .lineHeight(24)
-          .margin({ left: 8 });
-      }
-      Blank();
-      Image($r('app.media.ic_public_input_search'))
-        .width(22)
-        .objectFit(ImageFit.Contain)
-        .fillColor($r('app.color.black'))
-        .onClick(() => {
-          this.mainPathStack.pushPathByName('PageSearch', null);
-        });
-    }.width(CommonConstant.FULL_PERCENT).padding({ left: 10, right: 10 }).hitTestBehavior(HitTestMode.Transparent);
-  }
-
-  @Builder
-  buildTop() {
-    Stack() {
-      this.buildTabBar();
-      this.buildTitle();
-    }.padding({ top: 8, bottom: 8 }).align(Alignment.Center);
+    }.width(CommonConstant.FULL_PERCENT).padding({ top: 10, bottom: 10 });
   }
 
   build() {
     NavDestination() {
-      Stack({ alignContent: Alignment.Start }) {
-        Text('游玩攻略').fontSize(18).fontWeight(500).width('100%').textAlign(TextAlign.Center);
-        Image($r('app.media.left_arrow'))
-          .size({ height: 24, width: 24 })
-          .onClick(() => {
-            this.mainPathStack.pop()
-          });
-      }
-      .margin({ top: this.windowTopHeight })
-      .width('100%')
-      .padding({
-        left: 12,
-        top: 16,
-        right: 12,
-        bottom: 12,
-      });
+      GridRow(GridRowColSetting.DEFAULT_GRID_ROW_OPTIONS) {
+        GridCol({ span: GridRowColSetting.GRID_ROW_OPTIONS_COLUMNS }) {
+          Column() {
+            Row({ space: 8 }) {
+              SymbolGlyph($r('sys.symbol.chevron_backward'))
+                .width(40)
+                .height(40)
+                .fontSize(24)
+                .fontColor([$r('sys.color.icon_primary')])
+                .backgroundColor($r('sys.color.comp_background_tertiary'))
+                .borderRadius(1000)
+                .padding(8)
+                .onClick(() => {
+                  this.mainPathStack.pop();
+                });
+              Text('游玩攻略')
+                .fontSize($r('sys.float.Title_S'))
+                .fontWeight(FontWeight.Bold)
+                .fontColor($r('sys.color.font_primary'))
+                .textAlign(TextAlign.Start);
+            }.margin({ top: this.windowTopHeight }).width('100%').padding({ top: 8, bottom: 8 });
 
-      Column() {
-        this.buildTop();
-        this.buildList();
-      }
-      .width(CommonConstant.FULL_PERCENT)
-      .height(CommonConstant.FULL_PERCENT);
-    }.hideTitleBar(true);
+            Column() {
+              this.buildTabBar();
+              this.buildList();
+            }.layoutWeight(1);
+          }.width(CommonConstant.FULL_PERCENT).margin({
+            top: 8,
+            left: GridRowColSetting.getPageMargin(this.breakpoint),
+            right: GridRowColSetting.getPageMargin(this.breakpoint),
+          }).constraintSize({ maxWidth: Constant.FULL_PERCENT });
+        };
+      }.onBreakpointChange((bp) => {
+        this.breakpoint = bp;
+      });
+    }.hideTitleBar(true).backgroundColor($r('sys.color.background_secondary'));
   }
 }

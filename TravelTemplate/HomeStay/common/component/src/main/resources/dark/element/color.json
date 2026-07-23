@@ -1,0 +1,12 @@
+{
+  "color": [
+    {
+      "name": "order_item_detail_font_color",
+      "value": "#CCCCCC"
+    },
+    {
+      "name": "keyword_type_font_color",
+      "value": "#317AF7"
+    }
+  ]
+}

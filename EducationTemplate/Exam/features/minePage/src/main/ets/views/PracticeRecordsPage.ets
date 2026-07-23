@@ -13,9 +13,11 @@
  * limitations under the License.
  */
 
-import { RouterMap, RouterModule } from 'commonlib';
+import { Logger, RouterMap, RouterModule, SystemBarOperation } from 'commonlib';
 import { GlobalContextUtils, PracticeModel, PracticeRecordModel, PRACTICE_RECORD_DATA, TopBar } from 'commonlib';
 import dayjs from 'dayjs';
+import { MainArea } from '../components/MainArea';
+import { window } from '@kit.ArkUI';
 
 /**
  * 练习记录页面
@@ -25,28 +27,49 @@ export struct PracticeRecordsPage {
   practiceModels: PracticeModel[] = [];
   practiceRecordModels: PracticeRecordModel[] = [];
   todayPracticeRecord: PracticeRecordModel = new PracticeRecordModel();
+  private panOption: PanGestureOptions = new PanGestureOptions({ direction: PanDirection.Left | PanDirection.Right });
+  @Provider('offset') offsetX: number | undefined = undefined;
 
   aboutToAppear(): void {
+    SystemBarOperation.setWindowSystemBarProp({
+      statusBarColor: '#ffffff',
+    })
     // 练习记录测试数据
     this.practiceModels = PRACTICE_RECORD_DATA;
     // 初始化数据
     this.initData();
   }
 
+  aboutToDisappear(): void {
+    SystemBarOperation.setWindowSystemBarProp({
+      statusBarColor: '#F1F3F5',
+    })
+  }
+
   build() {
     Column() {
       // 顶部
       this.topBuilder();
-      Divider().color($r('sys.color.comp_divider'));
       Column() {
         // 当天练习
         this.todayPracticeBuilder();
         // 练习明细
         this.practiceDetailsBuilder();
         // 明细表
-        this.tableBuilder();
+        Column() {
+          MainArea({ practiceRecordModels: this.practiceRecordModels });
+        }
+        .width('100%')
+        .gesture(
+          // 用于触发拖动手势事件，滑动的最小距离为5vp时拖动手势识别成功。
+          PanGesture(this.panOption).onActionStart((event?: GestureEvent) => {
+            this.offsetX = event?.offsetX;
+            Logger.info('gesture11: PanGesture start' + event?.offsetX);
+          })
+        )
       }
       .padding({ left: $r('app.float.vp_16'), right: $r('app.float.vp_16') })
+      .margin({top: 12})
       .width('100%')
       .layoutWeight(1)
       .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.BOTTOM]);
@@ -73,8 +96,10 @@ export struct PracticeRecordsPage {
       Row() {
         this.tableCell($r('app.string.practice_date'));
         this.tableCell($r('app.string.practice_duration'));
-        this.tableCell($r('app.string.practice_count'));
+        this.tableCell('总题数');
+        this.tableCell('错题数');
         this.tableCell($r('app.string.correct_rate'));
+        this.tableCell('查看');
       }
       .height($r('app.float.vp_40'))
       .width('100%')
@@ -87,7 +112,8 @@ export struct PracticeRecordsPage {
             Row() {
               this.tableCell(item.date);
               this.tableCell(item.practiceDuration ?? '-');
-              this.tableCell(item.practiceCount ?? '-');
+              this.tableCell(item.totalCount ?? '-');
+              this.tableCell(item.wrongCount ?? '-');
               this.tableCell(item.correctRate ?? '-');
             }
             .width('100%')
@@ -171,23 +197,39 @@ export struct PracticeRecordsPage {
           .fontColor($r('sys.color.font_secondary'));
       }
       .height($r('app.float.vp_56'))
-      .width($r('app.float.vp_80'))
+      .width('23%')
       .justifyContent(FlexAlign.Center)
       .borderRadius(12)
       .backgroundColor($r('sys.color.background_primary'));
 
       Column() {
-        Text(this.todayPracticeRecord.practiceCount ?? '-')
+        Text(this.todayPracticeRecord.totalCount ?? '-')
           .fontWeight(FontWeight.Medium)
           .fontSize($r('sys.float.Body_L'))
           .fontColor($r('sys.color.font_primary'));
-        Text($r('app.string.practice_count'))
+        Text('总题数')
           .fontSize($r('sys.float.Caption_L'))
           .margin({ top: $r('app.float.vp_4') })
           .fontColor($r('sys.color.font_secondary'));
       }
       .height($r('app.float.vp_56'))
-      .width($r('app.float.vp_80'))
+      .width('23%')
+      .justifyContent(FlexAlign.Center)
+      .borderRadius(12)
+      .backgroundColor($r('sys.color.background_primary'));
+
+      Column() {
+        Text(this.todayPracticeRecord.wrongCount ?? '-')
+          .fontWeight(FontWeight.Medium)
+          .fontSize($r('sys.float.Body_L'))
+          .fontColor($r('sys.color.font_primary'));
+        Text('错误')
+          .fontSize($r('sys.float.Caption_L'))
+          .margin({ top: $r('app.float.vp_4') })
+          .fontColor($r('sys.color.font_secondary'));
+      }
+      .height($r('app.float.vp_56'))
+      .width('23%')
       .justifyContent(FlexAlign.Center)
       .borderRadius(12)
       .backgroundColor($r('sys.color.background_primary'));
@@ -203,7 +245,7 @@ export struct PracticeRecordsPage {
           .fontColor($r('sys.color.font_secondary'));
       }
       .height($r('app.float.vp_56'))
-      .width($r('app.float.vp_80'))
+      .width('23%')
       .justifyContent(FlexAlign.Center)
       .borderRadius(12)
       .backgroundColor($r('sys.color.background_primary'));
@@ -213,7 +255,7 @@ export struct PracticeRecordsPage {
     .justifyContent(FlexAlign.SpaceAround)
     .backgroundColor($r('sys.color.background_secondary'))
     .borderRadius($r('app.float.vp_16'))
-    .padding({ left: $r('app.float.vp_16'), right: $r('app.float.vp_16') })
+    .padding({ left: 8, right: 8 })
     .onClick(() => {
       if (this.todayPracticeRecord.practiceCount) {
         RouterModule.push({ url: RouterMap.DAY_PRACTICE_DETAILS_PAGE, param: this.todayPracticeRecord });
@@ -232,6 +274,9 @@ export struct PracticeRecordsPage {
       // 练习记录
       TopBar({
         onClickBack: () => {
+          SystemBarOperation.setWindowSystemBarProp({
+            statusBarColor: '#F1F3F5',
+          })
           RouterModule.pop();
         },
         title: $r('app.string.practice_records')
@@ -239,7 +284,8 @@ export struct PracticeRecordsPage {
     }
     .width('100%')
     .height($r('app.float.vp_56'))
-    .padding({ left: $r('app.float.vp_16'), right: $r('app.float.vp_16') });
+    .padding({ left: $r('app.float.vp_16'), right: $r('app.float.vp_16') })
+    .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP,SafeAreaEdge.BOTTOM]);
   }
 
   /**
@@ -274,6 +320,8 @@ export struct PracticeRecordsPage {
         record.practiceCount = practiceCount.toString();
         record.correctRate = (rightCount / topicCount * 100).toFixed(2) + '%';
         record.practiceModels = onDayPracticeModels;
+        record.wrongCount = (topicCount - rightCount).toString();
+        record.totalCount = topicCount.toString();
       }
       this.practiceRecordModels.push(record);
       if (index === 0) {

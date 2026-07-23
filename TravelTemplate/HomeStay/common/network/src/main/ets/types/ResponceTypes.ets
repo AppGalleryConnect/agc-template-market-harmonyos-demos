@@ -108,6 +108,17 @@ export interface Tag {
   subTags: string[]
 }
 
+export interface SurroundingsResp {
+  food: SurroundingsInfoResp[],
+  attractions: SurroundingsInfoResp[],
+}
+
+export interface SurroundingsInfoResp {
+  name: string,
+  instance: string,
+  image: ResourceStr,
+}
+
 export interface RoomTypeResp {
   /*主键ID */
   id: number,
@@ -123,6 +134,9 @@ export interface RoomTypeResp {
 
   /*标签列表 */
   labelList: string[],
+
+  /*卧室数量 */
+  bedroomNum: number,
 
   /*入住人数限制 */
   occupancyLimit: number,

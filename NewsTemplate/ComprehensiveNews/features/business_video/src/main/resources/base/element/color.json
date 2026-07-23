@@ -1,0 +1,24 @@
+{
+  "color": [
+    {
+      "name": "color_grey",
+      "value": "#B3B3B4"
+    },
+    {
+      "name": "color_black_90",
+      "value": "#e6000000"
+    },
+    {
+      "name": "color_black_60",
+      "value": "#99000000"
+    },
+    {
+      "name": "color_black_40",
+      "value": "#66000000"
+    },
+    {
+      "name": "color_tab_blue",
+      "value": "#5C79D9"
+    }
+  ]
+}

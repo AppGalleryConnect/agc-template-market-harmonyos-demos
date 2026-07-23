@@ -12,18 +12,15 @@ export function TouristListBuilder() {
 export struct TouristList {
   vm: TouristVM = TouristVM.instance;
   @Local touristId: string = '';
-  @Consumer('mainPathStack') mainPathStack: NavPathStack = new NavPathStack();
-  @Param @Once isInReserve: boolean = false;
   dialogController: CustomDialogController | null = new CustomDialogController({
     builder: DeleteConfirmDialog({
       delete: () => {
         this.vm.deleteItemInfo(this.touristId);
-      },
-      type: 0,
-    }),
-    customStyle: true,
-    autoCancel: true,
+      }, type: 0,
+    }), customStyle: true, autoCancel: true,
   });
+  @Consumer('mainPathStack') mainPathStack: NavPathStack = new NavPathStack();
+  @Param @Once isInReserve: boolean = false;
 
   aboutToAppear(): void {
     this.vm.getTourists();
@@ -39,18 +36,16 @@ export struct TouristList {
         });
 
         Tourists({
-          touristList: this.vm.touristList,
-          deleteTourist: (id: string) => {
+          touristList: this.vm.touristList, deleteTourist: (id: string) => {
             this.touristId = id;
             if (this.dialogController != null) {
               this.dialogController.open();
             }
-          },
-          addOrEditTourist: (tourist: TouristInfo, isEdit: boolean) => {
+          }, addOrEditTourist: (tourist: TouristInfo, isEdit: boolean) => {
             this.vm.editItemInfo(tourist, isEdit);
           },
-        });
-      };
+        }).layoutWeight(1);
+      }.backgroundColor($r('sys.color.background_secondary'));
     }.hideTitleBar(true).onReady((context: NavDestinationContext) => {
       this.isInReserve = context.pathInfo.param as boolean;
     });

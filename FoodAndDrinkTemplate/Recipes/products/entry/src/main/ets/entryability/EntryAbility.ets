@@ -38,15 +38,12 @@ export default class EntryAbility extends UIAbility {
   onWindowStageCreate(windowStage: window.WindowStage): void {
     // Main window is created, set main page for this ability
     UtilLog.info(TAG, 'Ability onWindowStageCreate');
-
-    windowStage.loadContent('pages/Index', (err) => {
-      if (err.code) {
-        UtilLog.error(TAG, JSON.stringify(err));
-        return;
-      }
+    windowStage.loadContent('pages/Index').then(() => {
       this.setWinConfig(windowStage);
       LoneTakeAnimationsTransition.init(windowStage);
       UtilLog.info(TAG, 'Succeeded in loading the content.');
+    }).catch((err: BusinessError) => {
+      UtilLog.error(TAG, 'LoadContent failed. error: ' + JSON.stringify(err));
     });
   }
 

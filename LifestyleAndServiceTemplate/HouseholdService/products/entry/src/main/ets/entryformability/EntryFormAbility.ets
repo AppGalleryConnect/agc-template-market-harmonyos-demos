@@ -13,35 +13,42 @@
  * limitations under the License.
  */
 
-import { formBindingData, FormExtensionAbility, formInfo } from '@kit.FormKit';
+import { formBindingData, FormExtensionAbility, formInfo, formProvider } from '@kit.FormKit';
 import { Want } from '@kit.AbilityKit';
+import { hilog } from '@kit.PerformanceAnalysisKit';
+import { FormUtils } from '../widget/util/FormUtils';
+
+const TAG: string = '[EntryFormAbility]';
+const DOMAIN: number = 0x0000;
 
 export default class EntryFormAbility extends FormExtensionAbility {
+
   onAddForm(want: Want) {
-    // Called to return a FormBindingData object.
-    let formData = '';
-    return formBindingData.createFormBindingData(formData);
+    const formId: string = want.parameters?.[formInfo.FormParam.IDENTITY_KEY] as string;
+    hilog.info(DOMAIN, TAG, `onAddForm formId: ${formId}`);
+    if (formId) {
+      FormUtils.addFormId(formId, this.context);
+    }
+    FormUtils.checkAndCleanExpiredFormData(this.context);
+
+    return formBindingData.createFormBindingData(FormUtils.queryFormDataFromLocal(this.context));
   }
 
-  onCastToNormalForm(formId: string) {
-    // Called when the form provider is notified that a temporary form is successfully
-    // converted to a normal form.
-  }
-
+  // 卡片定时刷新
   onUpdateForm(formId: string) {
-    // Called to notify the form provider to update a specified form.
+    hilog.info(DOMAIN, TAG, `onUpdateForm, formId = ${formId}`);
+    FormUtils.checkAndCleanExpiredFormData(this.context);
   }
 
-  onFormEvent(formId: string, message: string) {
-    // Called when a specified message event defined by the form provider is triggered.
-  }
 
+  // 卡片移除时调用
   onRemoveForm(formId: string) {
-    // Called to notify the form provider that a specified form has been destroyed.
+    hilog.info(DOMAIN, TAG, `onRemoveForm, formId = ${formId}`);
+    FormUtils.delFormId(formId, this.context);
   }
 
   onAcquireFormState(want: Want) {
-    // Called to return a {@link FormState} object.
+    // 卡片提供方接收查询卡片状态通知接口，默认返回卡片初始状态。
     return formInfo.FormState.READY;
   }
 };

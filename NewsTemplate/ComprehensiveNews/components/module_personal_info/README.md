@@ -290,7 +290,6 @@ struct PersonalSample1 {
           personalInfo: this.personalInfo,
           apiInfo: this.apiInfo,
           onChange: (type: DataType, data: PersonalInfo) => {
-            console.log('personal info change, all data: ' + JSON.stringify(data));
           },
         })
       }

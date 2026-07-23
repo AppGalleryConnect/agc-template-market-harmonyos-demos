@@ -7,7 +7,7 @@ import {
   QueryTravelogueListRequest,
   RecordBrowseRequest,
 } from '../model/IRequest';
-import { RELATE_TYPE, URL_MAP } from '../constant/Index';
+import { RELATE_TYPE, RELATE_TYPE_COMMENT, URL_MAP } from '../constant/Index';
 
 const userId: number = AppStorage.get('userId') || 93;
 const appId: string = AppStorage.get('appId') || '5765880207855322407';
@@ -82,5 +82,17 @@ export const cancelFavorTravelogue = (id: number): Promise<ESObject> => {
 export const commentTravelogue = (id: number, content: string): Promise<ESObject> => {
   const url = URL_MAP.COMMENT_TRAVELOGUE;
   const data: CommentTravelogueRequest = { userId, travelId: id, evaluateContent: content };
+  return request.post(url, data);
+};
+
+export const likeComment = (commentId: number): Promise<ESObject> => {
+  const url = URL_MAP.LIKE_TRAVELOGUE;
+  const data: LikeTravelogueRequest = { userId, relId: commentId, relType: RELATE_TYPE_COMMENT };
+  return request.post(url, data);
+};
+
+export const cancelLikeComment = (commentId: number): Promise<ESObject> => {
+  const url = URL_MAP.CANCEL_LIKE_TRAVELOGUE;
+  const data: LikeTravelogueRequest = { userId, relId: commentId, relType: RELATE_TYPE_COMMENT };
   return request.post(url, data);
 };

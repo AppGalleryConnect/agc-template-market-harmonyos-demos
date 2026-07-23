@@ -1,94 +1,113 @@
-import { Constants, NavPathName } from 'constant';
 import { common, Want } from '@kit.AbilityKit';
+import { BusinessError } from '@kit.BasicServicesKit';
+import { UtilLog } from '@hw-agconnect/util-log';
+import { Constants, NavPathName } from 'constant';
 import { TenantInfo } from 'type';
 import { CommonMap } from 'travel_map';
+import { CommonHeader } from 'component';
+import { ColorMetrics } from '@kit.ArkUI';
 
 @ComponentV2
 export struct MapPage {
-  @Local isShow: boolean = true;
+  @Local isShow: boolean = false;
   @Local tenantInfo: TenantInfo | undefined = AppStorage.get('tenantInfo');
-  @Local tiltGesturesEnabled: boolean = false;
   @Consumer('mainPathStack') mainPathStack: NavPathStack = new NavPathStack();
+
+  @Builder
+  hotelDetailSheetBuilder() {
+    Column() {
+      Text(`${this.tenantInfo?.appName}`)
+        .fontSize(20)
+        .fontWeight(FontWeight.Medium)
+        .fontColor($r('sys.color.font_primary'))
+        .width(Constants.FULL_SCREEN)
+        .margin({ top: 10, bottom: 20 });
+
+      Column() {
+        Text(`${this.tenantInfo?.introduction}`)
+          .fontSize(14)
+          .fontColor($r('sys.color.font_primary'))
+          .lineHeight(19)
+      }
+      .width(Constants.FULL_SCREEN)
+      .padding(12)
+      .borderRadius(16)
+      .backgroundColor($r('sys.color.comp_background_primary'));
+
+      Row({ space: 12 }) {
+        Button('民宿详情', { type: ButtonType.Normal })
+          .backgroundColor($r('sys.color.comp_background_tertiary'))
+          .layoutWeight(1)
+          .height(36)
+          .fontColor($r('sys.color.font_primary'))
+          .borderRadius($r('sys.float.corner_radius_level10'))
+          .fontWeight(FontWeight.Medium)
+          .onClick(() => {
+            this.isShow = false;
+            this.mainPathStack.pushPathByName(NavPathName.HOTEL_HOME, null, false);
+          });
+        Button({ type: ButtonType.Normal }) {
+          Row({ space: 8 }) {
+            SymbolGlyph($r('sys.symbol.location_north_up_right_fill'))
+              .fontColor([$r('sys.color.font_on_primary')])
+              .fontWeight(FontWeight.Medium)
+              .width(16)
+              .height(16)
+            Text('导航')
+              .fontColor($r('sys.color.font_on_primary'))
+              .fontWeight(FontWeight.Medium)
+          }
+        }
+          .backgroundColor($r('sys.color.comp_background_emphasize'))
+          .layoutWeight(1)
+          .height(36)
+          .borderRadius($r('sys.float.corner_radius_level10'))
+          .onClick(() => {
+            this.routeToPetal();
+          });
+      }.width(Constants.FULL_SCREEN).justifyContent(FlexAlign.SpaceBetween).margin({ top: 24, bottom: 36 });
+    }
+    .width(Constants.FULL_SCREEN)
+    .padding(16)
+    .backgroundColor($r('sys.color.background_secondary'))
+  }
 
   build() {
     NavDestination() {
-      Stack({ alignContent: Alignment.Bottom }) {
-        CommonMap(
-          {
-            travelMapOptions: {
-              location: {
-                latitude: Number(this.tenantInfo?.position[1]),
-                longitude: Number(this.tenantInfo?.position[0]),
-              },
-              icon: $r('app.media.point'),
-              titleOptions: {
-                name: this.tenantInfo?.appName ?? '',
-                strokeColor: 0xFFFFFFFF,
-              },
-              cameraSpeed: 1000,
-              zoom: 10,
-              height: '100%',
-              pointClickCallBack: () => {
-                this.isShow = true;
+      Column() {
+        Stack({ alignContent: Alignment.TopStart }) {
+          CommonMap(
+            {
+              travelMapOptions: {
+                location: {
+                  latitude: Number(this.tenantInfo?.position[1]),
+                  longitude: Number(this.tenantInfo?.position[0]),
+                },
+                icon: $r('app.media.point'),
+                titleOptions: {
+                  name: this.tenantInfo?.appName ?? '',
+                },
+                cameraSpeed: 1000,
+                zoom: 10,
+                height: '100%',
+                pointClickCallBack: () => {
+                  this.isShow = true;
+                },
               },
             },
-          },
-        );
-
-        if (this.isShow) {
-          Column() {
-            Flex() {
-              Text(`${this.tenantInfo?.appName}`).fontSize(18).fontWeight(500);
-            };
-
-            Text(`${this.tenantInfo?.introduction}`)
-              .fontSize(12)
-              .fontColor(Color.Gray)
-              .margin({ top: 16 })
-              .maxLines(3)
-              .textOverflow({ overflow: TextOverflow.Ellipsis });
-
-            Row({ space: 12 }) {
-              Button('民宿详情', { type: ButtonType.Normal })
-                .backgroundColor('#007DFF')
-                .layoutWeight(1)
-                .fontColor($r('sys.color.font_on_primary'))
-                .borderRadius($r('sys.float.corner_radius_level4'))
-                .fontSize($r('sys.float.Body_L'))
-                .onClick(() => {
-                  // 返回酒店详情页面
-                  this.mainPathStack.pushPathByName(NavPathName.HOTEL, null, false);
-                });
-              Button('导航', { type: ButtonType.Normal })
-                .backgroundColor(Color.White)
-                .fontColor(Color.Black)
-                .layoutWeight(1)
-                .fontSize($r('sys.float.Body_L'))
-                .border({ width: 1, color: Color.Black, radius: $r('sys.float.corner_radius_level4') })
-                .onClick(() => {
-                  // 跳转到花瓣地图导航
-                  this.routeToPetal();
-                });
-            }.width(Constants.FULL_SCREEN).justifyContent(FlexAlign.SpaceBetween).margin({ top: 16 });
-          }
-          .width(Constants.FULL_SCREEN)
-          .height(160)
-          .backgroundColor(Color.White)
-          .padding(16)
-          .borderRadius({ topLeft: 8, topRight: 8 })
-          .gesture(
-            // 绑定滑动手势且限制仅在竖直方向滑动时触发
-            SwipeGesture({ direction: SwipeDirection.Vertical })
-              .onAction((event: GestureEvent) => {
-                if (event) {
-                  this.isShow = false;
-                }
-              }),
-          )
-          .transition(TransitionEffect.OPACITY.animation({ duration: 500, curve: Curve.Ease }));
-        }
-      };
-    }.hideTitleBar(true);
+          );
+          CommonHeader({ title: '地图' })
+        }.layoutWeight(1)
+      }
+      .width(Constants.FULL_SCREEN)
+      .height(Constants.FULL_SCREEN)
+      .bindSheet($$this.isShow, this.hotelDetailSheetBuilder(), {
+        height: SheetSize.FIT_CONTENT,
+        backgroundColor: $r('sys.color.background_secondary'),
+        showClose: true,
+        dragBar: true,
+      })
+    }.hideTitleBar(true)
   }
 
   routeToPetal() {
@@ -103,6 +122,8 @@ export struct MapPage {
       },
     };
     let context = this.getUIContext().getHostContext() as common.UIAbilityContext;
-    context.startAbility(petalMapWant);
+    context.startAbility(petalMapWant).catch((err: BusinessError) => {
+      UtilLog.error(`startAbility error ${err}`);
+    });
   }
 }

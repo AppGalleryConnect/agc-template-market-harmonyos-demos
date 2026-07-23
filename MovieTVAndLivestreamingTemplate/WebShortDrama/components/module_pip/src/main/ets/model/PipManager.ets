@@ -125,13 +125,17 @@ export class PipManager {
   registerPipStateChangeListener() {
     console.info(TAG, 'registerPipStateChangeListener');
     // 通过画中画控制器实例的on('stateChange')接口注册生命周期事件回调
-    this.pipController?.on('stateChange', (state: PiPWindow.PiPState, reason: string) => {
-      this.onStateChange(state, reason);
-    });
-    // 通过画中画控制器实例的on('controlEvent')接口注册控制事件回调
-    this.pipController?.on('controlEvent', (control: PiPWindow.ControlEventParam) => {
-      this.onActionEvent(control);
-    });
+    try {
+      this.pipController?.on('stateChange', (state: PiPWindow.PiPState, reason: string) => {
+        this.onStateChange(state, reason);
+      });
+      // 通过画中画控制器实例的on('controlEvent')接口注册控制事件回调
+      this.pipController?.on('controlEvent', (control: PiPWindow.ControlEventParam) => {
+        this.onActionEvent(control);
+      });
+    } catch (e) {
+      console.error(TAG, `registerPipStateChangeListener failed: ${e}`);
+    }
   }
 
   // 解注册监听
@@ -213,10 +217,13 @@ export class PipManager {
   makeTypeNode(ctx: UIContext) {
     if (this.xComponent === null || this.xComponent === undefined) {
       // 创建XComponent类型的typeNode
-      this.xComponent = typeNode.createNode(ctx, 'XComponent', {
-        type: XComponentType.SURFACE, // 类型设置为SURFACE
-        controller: PipManager.getInstance().getXComponentController(), // 设置XComponentController
-      });
+      try {
+        this.xComponent = typeNode.createNode(ctx, 'XComponent', {
+          type: XComponentType.SURFACE, // 类型设置为SURFACE
+          controller: PipManager.getInstance().getXComponentController(), // 设置XComponentController
+        });
+      } catch (e) {
+      }
     }
   }
 

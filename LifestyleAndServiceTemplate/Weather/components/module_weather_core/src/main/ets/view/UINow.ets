@@ -19,6 +19,8 @@ function subStyle() {
 @ComponentV2
 export struct UINow {
   @Require @Param weather: RealTimeWeather;
+  @Param customHeight: number = 232;
+  @Param headerMargin: Margin = {};
   @BuilderParam customUi?: () => void;
 
   build() {
@@ -32,7 +34,7 @@ export struct UINow {
     .backgroundColor($r('sys.color.comp_background_primary'))
     .width(StyleConstants.FULL_PERCENT)
     .padding(12)
-    .height(232)
+    .height(this.customHeight)
   }
 
   @Builder
@@ -57,6 +59,7 @@ export struct UINow {
     }
     .width(StyleConstants.FULL_PERCENT)
     .height(74)
+    .margin(this.headerMargin)
   }
 
   @Builder
@@ -100,7 +103,7 @@ export struct UINow {
 
       GridItem() {
         Column({ space: StyleConstants.SPACE_4 }) {
-          Text(this.weather.winSpeed + '级 ' + this.weather.windDir).mainStyle(true)
+          Text(this.weather.windSpeed + '级 ' + this.weather.windDir).mainStyle(true)
           Text('风力风向').subStyle()
         }
       }

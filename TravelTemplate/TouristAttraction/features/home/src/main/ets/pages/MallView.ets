@@ -1,10 +1,12 @@
 import { AppStorageV2 } from '@kit.ArkUI';
-import { Constant, LazyDataSource } from 'common';
+import { BreakpointModel, BreakpointNameEnum, BreakpointType, Constant,
+  GridRowColSetting,
+  LazyDataSource } from 'common';
 import { LoginConfirmDialogComponent } from 'module_base';
 import { UserInfo } from 'types';
 import { TitleBar } from 'uicomponents';
 import { CommodityInfo } from '../model/CommodityInfo';
-import { COMMODITY_TABS_INFO, CommodityTabBarData } from '../model/CommodityTabInfo';
+import { CommodityTabBarType } from '../model/CommodityTabInfo';
 import { CommodityVM } from '../viewmodel/CommodityVM';
 
 @Builder
@@ -16,8 +18,11 @@ export function MallBuilder() {
 export struct MallView {
   vm: CommodityVM = CommodityVM.instance;
   @Local userInfo: UserInfo = AppStorageV2.connect(UserInfo, () => new UserInfo())!;
+  @Local breakPointModel: BreakpointModel = AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
   @Consumer('mainPathStack') mainPathStack: NavPathStack = new NavPathStack();
   @Local currentCommodityId: number = 0
+  @Local currentTabIndex: number = 0;
+  tabsController: TabsController = new TabsController();
   dialogController: CustomDialogController | null = new CustomDialogController({
     builder: LoginConfirmDialogComponent({
       confirm: () => {
@@ -31,29 +36,55 @@ export struct MallView {
   });
 
   aboutToAppear(): void {
-    this.vm.getCommodityList();
+    this.vm.getCommodityList(CommodityTabBarType.SPECIAL);
+    this.vm.getCommodityList(CommodityTabBarType.CULTURE);
   }
 
   @Builder
-  CommodityTabBar(title: ResourceStr, targetIndex: number) {
-    Column({ space: 4 }) {
-      Text(title)
-        .fontColor(this.vm.type === targetIndex ? '#64BB5C' :
-          Color.Black)
-        .opacity(this.vm.type === targetIndex ? 1 :
-          0.6);
-
-      if (this.vm.type === targetIndex) {
-        Divider().color('#64BB5C').strokeWidth(3).width(64);
-      }
+  CommodityTabBar() {
+    Row() {
+      Text('特色特产')
+        .fontColor(
+          this.currentTabIndex === 0 ? $r('sys.color.font_primary') : $r('sys.color.font_secondary'))
+        .fontWeight(FontWeight.Medium)
+        .fontSize($r('sys.float.Body_M'))
+        .layoutWeight(1)
+        .textAlign(TextAlign.Center)
+        .height(36)
+        .padding({ top: 6, bottom: 6, left: 12, right: 12 })
+        .backgroundColor(
+          this.currentTabIndex === 0 ? $r('sys.color.comp_background_primary_contrary_secondary') : '#00000000')
+        .borderRadius(18)
+        .shadow(this.currentTabIndex === 0 ? {
+          radius: 3, offsetX: 0, offsetY: 0, color: '#33000000', fill: false,
+        } : { radius: 0 })
+        .onClick(() => {
+          this.tabsController.changeIndex(0);
+        })
+      Text('文创产品')
+        .fontColor(
+          this.currentTabIndex === 1 ? $r('sys.color.font_primary') : $r('sys.color.font_secondary'))
+        .fontWeight(FontWeight.Medium)
+        .fontSize($r('sys.float.Body_M'))
+        .layoutWeight(1)
+        .textAlign(TextAlign.Center)
+        .height(36)
+        .padding({ top: 6, bottom: 6, left: 12, right: 12 })
+        .backgroundColor(
+          this.currentTabIndex === 1 ? $r('sys.color.comp_background_primary_contrary_secondary') : '#00000000')
+        .borderRadius(18)
+        .shadow(this.currentTabIndex === 1 ? {
+          radius: 3, offsetX: 0, offsetY: 0, color: '#33000000', fill: false,
+        } : { radius: 0 })
+        .onClick(() => {
+          this.tabsController.changeIndex(1);
+        })
     }
-    .onClick(() => {
-      // 切换tab触发数据请求
-      this.vm.type = targetIndex;
-      this.vm.getCommodityList();
-    })
     .width(Constant.FULL_PERCENT)
-    .justifyContent(FlexAlign.Center);
+    .constraintSize({ maxWidth: Constant.MAX_WIDTH })
+    .padding(2)
+    .backgroundColor($r('sys.color.comp_background_tertiary'))
+    .borderRadius(20)
   }
 
   @Builder
@@ -67,59 +98,52 @@ export struct MallView {
       }, (item: CommodityInfo) => item.commodityId.toString());
     }
     .cachedCount(10)
-    .columnsTemplate('repeat(auto-stretch, 150)')
-    .columnsGap(8)
-    .rowsGap(8)
+    .columnsTemplate(new BreakpointType({
+      [BreakpointNameEnum.SM]: '1fr '.repeat(2),
+      [BreakpointNameEnum.MD]: '1fr '.repeat(3),
+      [BreakpointNameEnum.LG]: '1fr '.repeat(5),
+      [BreakpointNameEnum.XL]: '1fr '.repeat(5),
+    }).getValue(this.breakPointModel.currentBreakpoint))
+    .columnsGap(GridRowColSetting.getGutter(this.breakPointModel.currentBreakpoint))
+    .rowsGap(12)
+    .margin({ top: 16 })
     .width(Constant.FULL_PERCENT)
-    .padding(16)
-    .backgroundColor('#F1F3F5');
+    .backgroundColor($r('sys.color.background_secondary'));
   }
 
   @Builder
   CommodityCardBuilder(item: CommodityInfo) {
     Column() {
       Image(item.banner)
-        .width('100%')
-        .height(90)
+        .width(Constant.FULL_PERCENT)
+        .height(160)
         .borderRadius(8)
 
       Column() {
         Text(item.name)
-          .fontSize(12)
-          .fontWeight(500)
-          .margin({ top: 8, bottom: 12 })
-          .maxLines(2)
+          .fontSize($r('sys.float.Body_M'))
+          .fontWeight(FontWeight.Medium)
+          .margin({ top: 8, bottom: 4 })
           .width(Constant.FULL_PERCENT)
+          .maxLines(2)
           .textAlign(TextAlign.Start);
 
-        Row() {
-          Row() {
-            Text() {
-              Span('￥').fontSize(12).fontColor('#E84026');
-              Span(`${item.spuInfo[item.basicSpu]?.spuDiscountPrice}`)
-                .fontSize(16)
-                .fontWeight(500)
-                .fontColor('#E84026');
-            };
+        Row({ space: 2 }) {
+          Text() {
+            Span('￥').fontSize($r('sys.float.Body_S'));
+            Span(`${item.spuInfo[item.basicSpu]?.spuDiscountPrice}`)
+              .fontSize($r('sys.float.Body_L'))
+              .fontWeight(FontWeight.Medium);
+          }.fontColor($r('sys.color.multi_color_08'));
 
-            Text(`￥${item.spuInfo[item.basicSpu]?.spuOriginalPrice}`)
-              .fontSize(10)
-              .decoration({ type: TextDecorationType.LineThrough })
-              .opacity(0.4);
-          }.alignItems(VerticalAlign.Bottom);
-
-          Button('预订')
-            .backgroundColor('#64BB5C')
-            .fontSize($r('sys.float.Body_S'))
-            .height(28)
-            .borderRadius(24)
-            .fontColor($r('sys.color.font_on_primary'));
-        }.width(Constant.FULL_PERCENT).justifyContent(FlexAlign.SpaceBetween);
-      }.padding(12);
+          Text(`￥${item.spuInfo[item.basicSpu]?.spuOriginalPrice}`)
+            .fontSize(12)
+            .decoration({ type: TextDecorationType.LineThrough })
+            .fontColor($r('sys.color.font_tertiary'));
+        }.width(Constant.FULL_PERCENT);
+      }.padding({ left: 8, right: 8 });
     }
-    .width(150)
-    .height(180)
-    .backgroundColor($r('sys.color.font_on_primary'))
+    .backgroundColor($r('sys.color.comp_background_primary'))
     .borderRadius(8)
     .onClick(() => {
       if (this.userInfo.isLink) {
@@ -131,26 +155,40 @@ export struct MallView {
     })
   }
 
+  onTabChange(index: number) {
+    this.currentTabIndex = index;
+  }
+
   build() {
     NavDestination() {
       Column() {
         TitleBar({
-          isShowBack: true, title: '特色文创', clickEvent: () => {
+          isShowBack: true, title: '特产文创', clickEvent: () => {
             this.mainPathStack.pop();
           },
         });
-
-        Tabs({ index: this.vm.type }) {
-          ForEach(COMMODITY_TABS_INFO, (item: CommodityTabBarData) => {
+        Column() {
+          this.CommodityTabBar()
+          Tabs({ index: this.currentTabIndex, controller: this.tabsController }) {
             TabContent() {
-              this.CommodityWaterFlowBuilder(this.vm.commodityList);
-            }.tabBar(this.CommodityTabBar(item.title, item.type));
-          }, (item: CommodityTabBarData) => item.title.toString());
-        }.barWidth(160).animationMode(AnimationMode.NO_ANIMATION).height('90%').onChange((value: number) => {
-          this.vm.type = value;
-          this.vm.getCommodityList();
-        });
+              this.CommodityWaterFlowBuilder(this.vm.specialCommodityList);
+            }
+            TabContent() {
+              this.CommodityWaterFlowBuilder(this.vm.culturalCommodityList);
+            }
+          }
+          .barHeight(0)
+          .scrollable(true)
+          .onAnimationStart((index: number, targetIndex: number) => {
+            this.onTabChange(targetIndex);
+          })
+          .layoutWeight(1)
+        }
+        .margin({ left: this.breakPointModel.pagePadding, right: this.breakPointModel.pagePadding, top: 8 })
+        .constraintSize({ maxWidth: Constant.FULL_PERCENT })
+        .width(Constant.FULL_PERCENT)
+        .layoutWeight(1);
       };
-    }.hideTitleBar(true);
+    }.hideTitleBar(true).backgroundColor($r('sys.color.background_secondary'));
   }
 }

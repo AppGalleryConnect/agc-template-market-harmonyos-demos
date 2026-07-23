@@ -23,6 +23,7 @@ import {
   OrderStatus,
   RouterModule,
   UIOrderPart,
+  WindowUtils,
 } from 'lib_foundation';
 import { CommonUtils, RouterMap, WindowUtil } from 'module_base';
 import { FormItem, FormType } from 'module_form';
@@ -105,9 +106,12 @@ export struct MyOrderDetail {
 
   build() {
     NavDestination() {
-      GridRow(GridRowColSetting.DEFAULT_GRID_ROW_OPTIONS) {
-        GridCol({ span: GridRowColSetting.GRID_ROW_OPTIONS_COLUMNS, }) {
-          Column({ space: 12 }) {
+      Column({ space: 12 }) {
+        GridRow(GridRowColSetting.DEFAULT_GRID_ROW_OPTIONS) {
+          GridCol({
+            span: GridRowColSetting.DEFAULT_CENTER_COL_SPAN,
+            offset: GridRowColSetting.DEFAULT_CENTER_COL_OFFSET,
+          }) {
             Refresh({ refreshing: $$this.orderDetailVM.isRefreshing }) {
               Scroll() {
                 Column({ space: 12 }) {
@@ -121,29 +125,34 @@ export struct MyOrderDetail {
               .width(CommonConstants.FULL_PERCENT)
               .height(CommonConstants.FULL_PERCENT)
               .align(Alignment.Top)
+              .scrollBar(BarState.Off)
+              .edgeEffect(EdgeEffect.Spring)
               .padding({
                 left: GridRowColSetting.getPageMargin(this.breakpoint),
                 right: GridRowColSetting.getPageMargin(this.breakpoint)
               })
             }
-            .layoutWeight(1)
+            .height(`calc(100% - 40vp - ${WindowUtils.windowBottomPadding}vp - 2*${GridRowColSetting.getButtonGutter(this.breakpoint)}vp)`)
             .onRefreshing(() => {
               this.orderDetailVM.onRefreshing();
             })
+          }
 
+          GridCol({ span: GridRowColSetting.GRID_ROW_OPTIONS_COLUMNS, }) {
             this.bottomOperate()
           }
-          .width(CommonConstants.FULL_PERCENT)
-          .height(CommonConstants.FULL_PERCENT)
         }
+        .onBreakpointChange((bp) => {
+          this.breakpoint = bp;
+        })
       }
-      .onBreakpointChange((bp) => {
-        this.breakpoint = bp;
-      })
+      .width(CommonConstants.FULL_PERCENT)
+      .height(CommonConstants.FULL_PERCENT)
     }
     .onWillAppear(() => {
       this.orderDetailVM.getLeftTime();
     })
+    .padding({ top: WindowUtils.windowTopPadding })
     .title('订单详情', {
       paddingStart: { value: GridRowColSetting.getPageMargin(this.breakpoint), unit: 1 }
     })
@@ -312,12 +321,13 @@ export struct MyOrderDetail {
       left: 12,
       right: 12
     })
+    .margin({ bottom: 6 })
     .cardContainer()
   }
 
   @Builder
   bottomOperate() {
-    Row({ space: 8 }) {
+    Row({ space: GridRowColSetting.getButtonGutter(this.breakpoint) }) {
       if (this.isShowCancel) {
         Row() {
           OperateBtn({
@@ -326,6 +336,7 @@ export struct MyOrderDetail {
             bgColor: $r('sys.color.comp_background_tertiary'),
           })
         }
+        .constraintSize({ maxWidth: 448 })
         .layoutWeight(1)
         .onClick(() => {
           CommonConfirmDialog.show({
@@ -342,6 +353,7 @@ export struct MyOrderDetail {
             label: '立即支付',
           })
         }
+        .constraintSize({ maxWidth: 448 })
         .layoutWeight(1)
         .onClick(() => {
           this.orderDetailVM.payOrder();
@@ -355,6 +367,7 @@ export struct MyOrderDetail {
             bgColor: $r('sys.color.comp_background_tertiary'),
           })
         }
+        .constraintSize({ maxWidth: 448 })
         .layoutWeight(1)
         .onClick(() => {
           CommonConfirmDialog.show({
@@ -371,7 +384,7 @@ export struct MyOrderDetail {
             label: '联系客服',
           })
         }
-        .justifyContent(FlexAlign.Center)
+        .constraintSize({ maxWidth: 448 })
         .layoutWeight(1)
         .onClick(() => {
           this.dialPanel
@@ -384,8 +397,8 @@ export struct MyOrderDetail {
     .justifyContent(FlexAlign.Center)
     .width(CommonConstants.FULL_PERCENT)
     .padding({
-      top: 8,
-      bottom: 8,
+      top: GridRowColSetting.getButtonGutter(this.breakpoint),
+      bottom: GridRowColSetting.getButtonGutter(this.breakpoint) + WindowUtils.windowBottomPadding,
       left: 16,
       right: 16
     })
@@ -402,7 +415,6 @@ struct OperateBtn {
 
   build() {
     Button(this.label)
-      .constraintSize({ maxWidth: 448 })
       .fontSize($r('sys.float.Body_L'))
       .fontWeight(500)
       .fontColor(this.fgColor)

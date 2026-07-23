@@ -14,11 +14,12 @@
  */
 
 import { AppStorageV2 } from '@kit.ArkUI';
-import { TopTabsBuilder, SampleOrderInfo, OrderInfo, OrderState, Banner, BreakpointType } from 'commonlib';
+import { SampleOrderInfo, OrderInfo, OrderState, Banner, BreakpointType } from 'commonlib';
 import { RouterMap, RouterModule } from 'commonlib';
 import { MyDataSource, Sample } from '../viewModel/CourseHomeModel';
 import { UserInfo } from 'login_info';
 import { TopicVM } from '../viewModel/TopicVM';
+import { TopTabsBuilder } from '../components/TopTabsBuilder';
 
 // 精选课程卡片组件
 @ComponentV2
@@ -92,7 +93,7 @@ export struct CourseComponent {
             RouterModule.push({ url: RouterMap.GOOD_COURSE_DETAIL_PAGE, param: this.course });
           } else {
             // 跳转我的课程详情页
-            RouterModule.push({ url: RouterMap.COURSE_INTRODUCTION_PAGE });
+            RouterModule.push({ url: RouterMap.COURSE_INTRODUCTION_PAGE, param: this.course });
           }
         });
       }
@@ -129,9 +130,9 @@ export struct CourseHomePage {
   topicVM: TopicVM = TopicVM.instance;
   @Local isGoodCourse: boolean = true;
   @Local goodCourse: OrderInfo[] =
-    [new OrderInfo('111', false, OrderState.WaitToPay, '20231010152332345', '一级建造师精华题库中级班', false),
-      new OrderInfo('222', false, OrderState.WaitToPay, '20231010152332346', '一级建造师精华题库初级班', false),
-      new OrderInfo('333', false, OrderState.WaitToPay, '20231010152332347', '一级建造师精华题库高级班', false)
+    [new OrderInfo('111', false, OrderState.WaitToPay, '20231010152332345', '一级建造师精华题库中级班', false, false),
+      new OrderInfo('222', false, OrderState.WaitToPay, '20231010152332346', '一级建造师精华题库初级班', false, false),
+      new OrderInfo('333', false, OrderState.WaitToPay, '20231010152332347', '一级建造师精华题库高级班', false, false)
     ];
   @Local myCourse: OrderInfo[] = [];
   data: MyDataSource = new MyDataSource([]);

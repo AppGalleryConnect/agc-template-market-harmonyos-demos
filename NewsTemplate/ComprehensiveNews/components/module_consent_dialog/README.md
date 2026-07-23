@@ -289,6 +289,7 @@ PrivacyConsentController 的构造函数。
 import { PrivacyConsentController, PrivacyDocument, TextType } from 'privacy_consent_dialog';
 import { common } from '@kit.AbilityKit';
 import { BusinessError } from '@kit.BasicServicesKit';
+import { hilog } from '@kit.PerformanceAnalysisKit';
 
 const TAG: string = '[PrivacyConsentDialog] ';
 
@@ -344,7 +345,7 @@ struct Index {
     })
     .onReject(() => {
       const ctx: common.UIAbilityContext = this.getUIContext().getHostContext() as common.UIAbilityContext;
-      ctx.terminateSelf().catch((e: BusinessError<void>) => console.log(TAG, e));
+      ctx.terminateSelf().catch((e: BusinessError<void>) => hilog.error(0x0000, TAG, e));
     });
 
   public build(): void {
@@ -369,7 +370,7 @@ struct Index {
     try {
       this.getUIContext().getPromptAction().showToast({ message: msg });
     } catch (e) {
-      console.log(TAG, e);
+      hilog.error(0x0000, TAG, e);
     }
   }
 }

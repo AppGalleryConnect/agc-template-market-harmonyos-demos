@@ -6,6 +6,8 @@ import {
   BreakPoint,
   BreakPointType,
   BreakPointValue,
+  FontModel,
+  fp2pxUtil,
   MinePageVM,
   StatusBarHeight
 } from '@agctemplate/widgets';
@@ -14,6 +16,7 @@ import { getMedia } from '@agctemplate/resources';
 @Preview
 @ComponentV2
 export struct MyPreferencesPage {
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
   @Local statusBarHeight: StatusBarHeight = AppStorageV2.connect(StatusBarHeight, AppStorageKeys.STATUS_BAR_HEIGHT,
     () => new StatusBarHeight())!;
   @Local channels: CardItem[] = [new CardItem('女生短剧'), new CardItem('男生短剧')]
@@ -88,9 +91,9 @@ export struct MyPreferencesPage {
         this.topBuilder()
         Column() {
           Text('频道')
-            .fontSize(16)
+            .fontSize(this.fontModel.getFg(16))
             .fontWeight(500)
-            .lineHeight(21)
+            .lineHeight(this.fontModel.getDesFg(21))
             .fontColor($r('sys.color.font_primary'))
             .height(56)
 
@@ -98,9 +101,9 @@ export struct MyPreferencesPage {
             ForEach(this.channels, (item: CardItem, index: number) => {
               Row() {
                 Text(item.name)
-                  .fontSize(16)
+                  .fontSize(this.fontModel.getFg(16))
                   .fontWeight(500)
-                  .lineHeight(21)
+                  .lineHeight(this.fontModel.getDesFg(21))
                   .fontColor($r('sys.color.font_primary'))
                   .margin({ left: 12 })
 
@@ -129,14 +132,14 @@ export struct MyPreferencesPage {
 
           Text() {
             Span('分类')
-              .fontSize(16)
+              .fontSize(this.fontModel.getFg(16))
               .fontWeight(500)
-              .lineHeight(21)
+              .lineHeight(this.fontModel.getDesFg(21))
               .fontColor($r('sys.color.font_primary'))
-            Span(`已选择${this.category.filter(item => item.isSelect).length}项`)
-              .fontSize(14)
+            Span(`（已选择${this.category.filter(item => item.isSelect).length}项）`)
+              .fontSize(this.fontModel.getFg(14))
               .fontWeight(400)
-              .lineHeight(19)
+              .lineHeight(this.fontModel.getDesFg(19))
               .fontColor($r('sys.color.font_secondary'))
           }
           .height(56)
@@ -156,9 +159,9 @@ export struct MyPreferencesPage {
               Column() {
                 Text(item.name)
                   .textAlign(TextAlign.Center)
-                  .fontSize(14)
+                  .fontSize(this.fontModel.getFg(14))
                   .fontWeight(500)
-                  .lineHeight(19)
+                  .lineHeight(this.fontModel.getDesFg(19))
                   .fontColor($r('sys.color.font_primary'))
                   .onClick(() => {
                     item.isSelect = !item.isSelect
@@ -183,7 +186,7 @@ export struct MyPreferencesPage {
               .borderRadius(20)
               .fontColor($r('sys.color.font_on_primary'))
               .backgroundColor('#EE5D1A')
-              .fontSize($r('sys.float.Body_L'))
+              .fontSize(fp2pxUtil(16))
               .fontWeight(FontWeight.Medium)
               .width('100%')
               .constraintSize({
@@ -233,6 +236,7 @@ export struct MyPreferencesPage {
       })
       Row() {
         Button('清空')
+          .fontSize(fp2pxUtil(16))
           .margin({ left: 8 })
           .height(40)
           .borderRadius(20)

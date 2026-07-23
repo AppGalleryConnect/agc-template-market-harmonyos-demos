@@ -1,10 +1,17 @@
 import { ListItemModel } from '../../model/ListItemModel'
 import { RowModifier } from '../../AttributeModifiers'
 import { deviceInfo } from '@kit.BasicServicesKit'
+import { FontModel } from '../../../models/FontModel'
+import { AppStorageV2 } from '@kit.ArkUI'
+import { fp2pxUtil } from '../../../util/FontUtils'
+import { common } from '@kit.AbilityKit'
+import { GlobalContext } from '@agctemplate/utils'
+
+const fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
 
 @Extend(Text)
 function mainTextDescStyles() {
-  .fontSize($r('sys.float.Subtitle_M'))
+  .fontSize(fontModel.getFg(16))
   .fontWeight(FontWeight.Medium)
   .fontColor($r('sys.color.font_primary'))
   .maxLines(1)
@@ -15,7 +22,7 @@ function mainTextDescStyles() {
 
 @Extend(Text)
 function contentTextDescStyles() {
-  .fontSize($r('sys.float.Body_M'))
+  .fontSize(fontModel.getFg(14))
   .fontWeight(FontWeight.Regular)
   .fontColor($r('sys.color.font_secondary'))
   .maxLines(1)
@@ -26,11 +33,10 @@ function contentTextDescStyles() {
 
 @Extend(Text)
 function redDotStyles() {
-  .fontSize(10)
-  .lineHeight(13)
-  .width(16)
+  .fontSize(fontModel.getFg(10))
+  .width(fontModel.getDesFg(16))
   .aspectRatio(1)
-  .borderRadius(8)
+  .borderRadius(fontModel.getDesFg(8))
   .textAlign(TextAlign.Center)
   .backgroundColor($r('sys.color.warning'))
   .fontColor($r('sys.color.font_on_primary'))
@@ -53,10 +59,9 @@ export struct CommonServices {
     Column({ space: 8 }) {
       if (this.title) {
         Text(this.title)
-          .fontSize($r('sys.float.Subtitle_L'))
+          .fontSize(fontModel.getFg(18))
           .fontWeight(FontWeight.Bold)
           .fontColor($r('sys.color.font_primary'))
-          .height(24)
           .margin({
             left: 12,
             right: 12,
@@ -71,7 +76,7 @@ export struct CommonServices {
             Row({ space: 16 }) {
               if (item.icon && item.symbol) {
                 SymbolGlyph(item.icon as Resource)
-                  .fontSize(24)
+                  .fontSize(fp2pxUtil(24))
                   .width(24)
                   .renderingStrategy(SymbolRenderingStrategy.SINGLE)
                   .fontColor([$r('sys.color.icon_secondary')])
@@ -100,11 +105,12 @@ export struct CommonServices {
                       .contentTextDescStyles()
                   } else if (item.redDot) {
                     Text(item.redDot)
+                      .accessibilityText(`共${item.redDot}条`)
                       .redDotStyles()
                   }
-                  if (this.commonServicesContents.length !== 2 || index !== 1) {
+                  if (this.commonServicesContents.length !== 2 || index !== 1 || item.icon) {
                     SymbolGlyph($r('sys.symbol.chevron_right'))
-                      .fontSize(24)
+                      .fontSize(fontModel.getFg(24))
                       .renderingStrategy(SymbolRenderingStrategy.SINGLE)
                       .fontColor([$r('sys.color.icon_fourth')])
                   }
@@ -148,7 +154,7 @@ export struct CommonServices {
       .padding({ bottom: 4 })
     }
     .alignItems(HorizontalAlign.Start)
-    .backgroundColor($r('sys.color.background_primary'))
+    .backgroundColor($r('sys.color.comp_background_list_card'))
     .borderRadius(16)
   }
 }

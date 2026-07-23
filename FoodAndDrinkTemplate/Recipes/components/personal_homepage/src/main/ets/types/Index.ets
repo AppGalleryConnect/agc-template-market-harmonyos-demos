@@ -1,4 +1,5 @@
 import { Decimal } from '@kit.ArkTS'
+import { hilog } from '@kit.PerformanceAnalysisKit';
 
 export interface UserInfo {
   id: number;
@@ -67,7 +68,12 @@ export class BloggerInfo {
 
   private formatNumber(num: number) {
     if (num >= 10000) {
-      return `${new Decimal(num).div(10000).toFixed(1)}万`
+      try {
+        return `${new Decimal(num).div(10000).toFixed(1)}万`
+      } catch (error) {
+        hilog.error(0x0000, '[BloggerInfo]', 'formatNumber fail, error: ' + JSON.stringify(error));
+        return num.toString()
+      }
     } else {
       return num.toString()
     }

@@ -36,8 +36,12 @@ export class WindowListener {
   }
 
   public stop(): void {
-    this.mainWindow?.off('avoidAreaChange', this.onAvoidAreaChange);
-    this.mainWindow?.off('windowSizeChange', this.onWindowSizeChange);
+    try {
+      this.mainWindow?.off('avoidAreaChange', this.onAvoidAreaChange);
+      this.mainWindow?.off('windowSizeChange', this.onWindowSizeChange);
+    } catch (err) {
+      UtilLog.error(LOG_TAG, 'stop failed. error: ' + JSON.stringify(err));
+    }
   }
 
   private loadAvoidAreaInfo(types: window.AvoidAreaType[]): void {

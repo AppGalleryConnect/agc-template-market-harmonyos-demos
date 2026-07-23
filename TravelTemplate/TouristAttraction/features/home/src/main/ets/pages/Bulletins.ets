@@ -1,5 +1,6 @@
-import { Constant } from 'common';
-import { TitleBar, ViewDetailComponent } from 'uicomponents';
+import { AppStorageV2 } from '@kit.ArkUI';
+import { BreakpointModel, Constant } from 'common';
+import { TitleBar } from 'uicomponents';
 import { BulletinInfo } from '../model/BulletinInfo';
 import { HomePageVM } from '../viewmodel/HomePageVM';
 
@@ -11,27 +12,32 @@ export function BulletinsBuilder() {
 @ComponentV2
 export struct Bulletins {
   vm: HomePageVM = HomePageVM.instance;
+  @Local breakPointModel: BreakpointModel = AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
   @Consumer('mainPathStack') mainPathStack: NavPathStack = new NavPathStack();
 
   @Builder
   BulletinCardBuilder(bulletin: BulletinInfo) {
     Row() {
-      Column({ space: 18 }) {
+      Column({ space: 4 }) {
         Text(bulletin.title)
           .maxLines(2)
           .textOverflow({ overflow: TextOverflow.Ellipsis })
-          .fontWeight(500)
-          .fontSize(16);
-        Text(`时间：${bulletin.releaseTime}`).fontSize(12).opacity(0.6);
-      }.alignItems(HorizontalAlign.Start).width('80%');
-
-      ViewDetailComponent();
+          .fontWeight(FontWeight.Medium)
+          .fontColor($r('sys.color.font_primary'))
+          .fontSize($r('sys.float.Subtitle_M'));
+        Text(`时间：${bulletin.releaseTime}`).fontSize($r('sys.float.Body_S')).fontColor($r('sys.color.font_secondary'));
+      }.alignItems(HorizontalAlign.Start).width('100%');
     }
     .width(Constant.FULL_PERCENT)
-    .backgroundColor($r('sys.color.font_on_primary'))
-    .borderRadius(8)
+    .backgroundColor($r('sys.color.comp_background_primary'))
+    .borderRadius(16)
     .justifyContent(FlexAlign.SpaceBetween)
-    .padding(12)
+    .padding({
+      top: 16,
+      bottom: 16,
+      left: 12,
+      right: 12,
+    })
     .onClick(() => {
       this.mainPathStack.pushPathByName('BulletinDetail', bulletin.id);
     });
@@ -41,7 +47,7 @@ export struct Bulletins {
     NavDestination() {
       Column() {
         TitleBar({
-          isShowBack: true, title: '公告列表', clickEvent: () => {
+          isShowBack: true, title: '景区资讯', clickEvent: () => {
             this.mainPathStack.pop();
           },
         });
@@ -52,8 +58,15 @@ export struct Bulletins {
               this.BulletinCardBuilder(item);
             };
           });
-        }.align(Alignment.TopStart).padding({ left: 12, right: 12 }).height('90%').scrollBar(BarState.Off).edgeEffect(EdgeEffect.Spring);
+        }
+        .align(Alignment.TopStart)
+        .padding({ left: this.breakPointModel.pagePadding, right: this.breakPointModel.pagePadding })
+        .layoutWeight(1)
+        .scrollBar(BarState.Off)
+        .edgeEffect(EdgeEffect.Spring)
+        .contentStartOffset(12)
+        .contentEndOffset(12);
       };
-    }.hideTitleBar(true).backgroundColor('#F1F3F5F2');
+    }.hideTitleBar(true).backgroundColor($r('sys.color.background_secondary'));
   }
 }

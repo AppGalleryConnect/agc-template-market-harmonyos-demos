@@ -1,11 +1,11 @@
 import { getMedia, getString } from '@agctemplate/resources'
 import { CommentInfo, CommentListRes, LikeInfo, RequestAPI } from '@agctemplate/server';
 import { appRouter, container, PreferConstant, PreferenceUtil } from '@agctemplate/utils'
-import { MinePageVM, NavDestinationModifier, UserInfoModel } from '@agctemplate/widgets'
+import { FontModel, MinePageVM, NavDestinationModifier, UserInfoModel, CommentData,
+  fp2pxUtil } from '@agctemplate/widgets'
 import { CommentReplyContent } from '../component/CommentReplyContent';
 import { Header } from '../component/Header';
 import { LikeContent } from '../component/LikeContent';
-import { CommentData, LikeItem } from '../models/messageData';
 import { AppStorageV2, promptAction } from '@kit.ArkUI';
 import { MyMessageStorage } from '@agctemplate/detail';
 import { AlertDialog } from '@kit.ArkUI'
@@ -39,6 +39,7 @@ export struct MyMessagePage {
   tabsContent: string[] = ['评论回复', '点赞']
   @Local isReplyListShow: boolean = true
   @Local isLikeListShow: boolean = true
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
   deleteDialogController: CustomDialogController = new CustomDialogController({
     builder: AlertDialog({
       content: '是否清空' + (this.currentIndex === 0 ? '评论' : '点赞') + '数据',
@@ -77,10 +78,10 @@ export struct MyMessagePage {
     Button(tabName)
       .height(28)
       .constraintSize({ minWidth: 72 })
-      .fontSize($r('sys.float.Body_M'))
+      .fontSize(fp2pxUtil(14))
       .fontWeight(500)
       .fontColor(tabIndex === this.currentIndex ? $r('sys.color.font_on_primary') : $r('sys.color.font_primary'))
-      .backgroundColor(tabIndex === this.currentIndex ? '#EC6E45' : 'rgba(0, 0, 0, 0.05)')
+      .backgroundColor(tabIndex === this.currentIndex ? '#EC6E45' : $r('sys.color.comp_background_tertiary'))
       .onClick(() => {
         this.controller.changeIndex(tabIndex)
         this.currentIndex = tabIndex
@@ -106,7 +107,7 @@ export struct MyMessagePage {
       Column() {
         Header({
           title: getString('app.string.my_message'),
-          rightImageRes: getMedia('app.media.ic_public_trash'),
+          rightImageRes: $r('sys.symbol.clean'),
           rightOnClick: () => {
             if (this.myMessageList.length > 0) {
               this.deleteDialogController.open()

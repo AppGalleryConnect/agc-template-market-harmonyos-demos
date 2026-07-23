@@ -24,6 +24,10 @@ export { AppPrivacyUtils } from './src/main/ets/common/AppPrivacyUtils';
 
 export { PushUtils } from './src/main/ets/common/PushUtils';
 
+export { FormUtils } from './src/main/ets/common/FormUtils';
+
+export { WindowUtils } from './src/main/ets/common/WindowUtils';
+
 export { UIBackBtn } from './src/main/ets/uicomponent/UIBackBtn';
 
 export { NavHeaderBar } from './src/main/ets/uicomponent/NavHeaderBar';
@@ -36,7 +40,7 @@ export { UIOrderPart } from './src/main/ets/uicomponent/UIOrderPart';
 
 export { CommonConfirmDialog } from './src/main/ets/uicomponent/UIDialog';
 
-export { GridRowColSetting } from './src/main/ets/common/GridRowColSetting';
+export { GridRowColSetting, BreakpointNameEnum } from './src/main/ets/common/GridRowColSetting';
 
 export * from './src/main/ets/login/LoginUtil';
 

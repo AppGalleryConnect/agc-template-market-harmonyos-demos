@@ -57,7 +57,6 @@ export struct PersonalHomepage {
       }
     }
     .width('100%')
-    .padding({ bottom: 12 })
     .alignItems(HorizontalAlign.Start);
   }
 }

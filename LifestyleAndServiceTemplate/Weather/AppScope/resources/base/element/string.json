@@ -6,7 +6,7 @@
     },
     {
       "name": "agcit_huawei_weather",
-      "value": "1.0.0"
+      "value": "1.0.1"
     },
     {
       "name": "agcittype_huawei_weather",
@@ -14,7 +14,7 @@
     },
     {
       "name": "agcitkid_huawei_weather",
-      "value": "agcit_huawei_weather_module_city_manage/1.0.0,agcit_huawei_weather_module_login/1.0.0,agcit_huawei_weather_module_theme/1.0.0,agcit_huawei_weather_module_voice_broadcast/1.0.0,agcit_huawei_weather_module_weather_core/1.0.0"
+      "value": "agcit_huawei_weather_module_city_manage/1.0.1,agcit_huawei_weather_module_login/1.0.1,agcit_huawei_weather_module_theme/1.0.1,agcit_huawei_weather_module_voice_broadcast/1.0.1,agcit_huawei_weather_module_weather_core/1.0.1,agcit_huawei_common_app_setting/1.0.0,agcit_huawei_common_collect_personal_info/1.0.0"
     }
   ]
 }

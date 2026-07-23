@@ -106,11 +106,13 @@ TaskList(options?: TaskListOptions)
 
 ### TaskListOptions对象说明
 
-| 名称            | 类型                                 | 是否必填 | 说明                              |
-|:--------------|:-----------------------------------|----|---------------------------------|
-| taskmsg       | Array<[TaskModel](#TaskModel对象说明)> | 否  | 任务信息数组                          |
-| onTaskSuccess | (balance:number)=>void             | 否  | 定义回调函数，balance为做任务获得金币数         |
-| button        | ()=>void                           | 否  | 定义任务函数（定义点击“领取”按钮后，触发任务奖励的判断函数） |
+| 名称            | 类型                                  | 是否必填 | 说明                              |
+|:--------------|:------------------------------------|----|---------------------------------|
+| taskmsg       | Array<[TaskModel](#TaskModel对象说明)>  | 否  | 任务信息数组                          |
+| onTaskSuccess | (balance:number)=>void              | 否  | 定义回调函数，balance为做任务获得金币数         |
+| button        | ()=>void                            | 否  | 定义任务函数（定义点击“领取”按钮后，触发任务奖励的判断函数） |
+| isLogin       | boolean                             | 否  | 登录状态                         |
+| loginFunc     | ()=>void                            | 否  | 定义登录函数                       |
 
 ### TaskModel对象说明
 

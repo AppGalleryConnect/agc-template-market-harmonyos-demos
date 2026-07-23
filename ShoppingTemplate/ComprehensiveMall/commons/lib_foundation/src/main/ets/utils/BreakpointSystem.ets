@@ -66,9 +66,13 @@ class BreakpointSystem {
       window.getLastWindow(this._uiContext.getHostContext())
         .then((win) => {
           this._windowClass = win;
-          this._windowClass.on('windowSizeChange', () => {
-            this.updateBreakpoint();
-          });
+          try {
+            this._windowClass.on('windowSizeChange', () => {
+              this.updateBreakpoint();
+            });
+          } catch (err) {
+            UtilLog.error(TAG, 'fail to listen window size change. error:' + JSON.stringify(err));
+          }
         })
         .catch((err: BusinessError) => {
           UtilLog.error(TAG, 'get last window failed. error: ' + JSON.stringify(err));
@@ -78,7 +82,11 @@ class BreakpointSystem {
 
   public unregister() {
     if (this._windowClass) {
-      this._windowClass.off('windowSizeChange');
+      try {
+        this._windowClass.off('windowSizeChange');
+      } catch (err) {
+        UtilLog.error(TAG, 'unregister failed. error: ' + JSON.stringify(err));
+      }
     }
   }
 

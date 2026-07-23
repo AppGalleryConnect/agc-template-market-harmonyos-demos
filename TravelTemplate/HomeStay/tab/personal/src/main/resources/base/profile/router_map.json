@@ -24,14 +24,7 @@
         "description": "this is PersonalInfo"
       }
     },
-    {
-      "name": "Complaint",
-      "pageSourceFile": "src/main/ets/pages/Complaint.ets",
-      "buildFunction": "ComplaintBuilder",
-      "data": {
-        "description": "this is Complaint"
-      }
-    },
+
     {
       "name": "Customer",
       "pageSourceFile": "src/main/ets/pages/Customer.ets",
@@ -73,14 +66,6 @@
       }
     },
     {
-      "name": "AddGuest",
-      "pageSourceFile": "src/main/ets/pages/AddGuest.ets",
-      "buildFunction": "AddGuestBuilder",
-      "data": {
-        "description": "this is Guests"
-      }
-    },
-    {
       "name": "QuickLoginPage",
       "pageSourceFile": "src/main/ets/pages/QuickLoginPage.ets",
       "buildFunction": "QuickLoginPageBuilder",
@@ -88,20 +73,20 @@
         "description": ""
       }
     },
-    {
-      "name": "PrivacyPolicyPage",
-      "pageSourceFile": "src/main/ets/pages/PrivacyPolicyPage.ets",
-      "buildFunction": "PrivacyPolicyPageBuilder",
+{
+      "name": "MyFavorites",
+      "pageSourceFile": "src/main/ets/pages/MyFavorites.ets",
+      "buildFunction": "MyFavoritesBuilder",
       "data": {
-        "description": ""
+        "description": "this is MyFavorites"
       }
     },
     {
-      "name": "TermsOfServicePage",
-      "pageSourceFile": "src/main/ets/pages/TermsOfServicePage.ets",
-      "buildFunction": "TermsOfServicePageBuilder",
+      "name": "BrowseHistory",
+      "pageSourceFile": "src/main/ets/pages/BrowseHistory.ets",
+      "buildFunction": "BrowseHistoryBuilder",
       "data": {
-        "description": ""
+        "description": "this is BrowseHistory"
       }
     }
   ]

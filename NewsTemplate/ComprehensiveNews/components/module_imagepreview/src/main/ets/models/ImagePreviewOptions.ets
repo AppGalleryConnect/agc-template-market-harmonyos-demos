@@ -3,32 +3,33 @@ import { BaseOptions } from './BaseOptions'
 import { PreviewImgType, SourceImageModel } from './PreviewModel'
 
 
-@Observed
+@ObservedV2
 export class ImagePreviewOptions extends BaseOptions {
   /**
    * 弹窗ID
    */
-  dialogId: string = ''
+  @Trace dialogId: string = ''
   /**
    * 是否开启一镜到底效果
    */
-  longTake?: boolean = true
+  @Trace longTake?: boolean = true
   /**
-   * 关闭预览标志位
+   * 关闭预览触发回调（由组件内部赋值，外部调用closePreview时触发）
    */
-  needDismiss: boolean = false
+  onNeedDismiss: (animated: boolean) => void = () => {
+  }
   /**
    * 关闭预览动画是否开启
    */
-  dismissAnimation: boolean = true
+  @Trace dismissAnimation: boolean = true
   /**
    * 是否显示分页文字
    */
-  showPageText: boolean = true
+  @Trace showPageText: boolean = true
   /**
    * 设置item的id 默认是 model + index
    */
-  snapshotId: (item: PreviewImgType, index: number) => string = (item, index) => JSON.stringify(item) + index
+  @Trace snapshotId: (item: PreviewImgType, index: number) => string = (item, index) => JSON.stringify(item) + index
   /**
    * 顶部自定义builder
    */
@@ -40,7 +41,7 @@ export class ImagePreviewOptions extends BaseOptions {
   /**
    * 返回回调
    */
-  onBackListener: () => void = () => {
+   onBackListener: () => void = () => {
   }
   /**
    * 打开回调
@@ -95,11 +96,11 @@ export class ImagePreviewOptions extends BaseOptions {
   /**
    * 动图是否自动播放，false状态下手指按压触发播放
    */
-  movingPhotoAutoPlay?: boolean = true
+  @Trace movingPhotoAutoPlay?: boolean = true
   /**
    * 是否显示图片指示器
    */
-  showIndicator?: boolean = true
+  @Trace showIndicator?: boolean = true
 
   /**
    * 设置组件快照id

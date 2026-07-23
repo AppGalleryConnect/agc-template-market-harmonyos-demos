@@ -10,12 +10,12 @@ export struct BaseCalendar {
   holidayVM: HolidayVM = HolidayVM.instance;
   swiperController: SwiperController = new SwiperController();
   @Local selectedDay: DateModel | null = null
-  /*
+  /**
    * 当前选择时间
    * */
   @Event onCurrentDateSelected: (date: string) => void = () => {
   }
-  /*
+  /**
    * 当前时间
    * */
   @Param currentDate: string = ''
@@ -24,19 +24,19 @@ export struct BaseCalendar {
    */
 
   @Param selectedColor: ResourceStr | Color = '#C4272B'
-  /*
+  /**
    * 图标形状
    * */
   @Param selectedStyle: 'circle' | 'squares' = 'circle'
-  /*
+  /**
    * 周首日 0=周日, 1=周一
    * */
   @Param startWeekday: 'sunday' | 'monday' = 'monday'
-  /*
+  /**
    * 是否展示休息日
    * */
   @Param showHoliday: boolean = false
-  /*
+  /**
    * 是否展示农历
    * */
   @Param isShowLunar: boolean = false
@@ -52,7 +52,8 @@ export struct BaseCalendar {
    * 节日、节气展示颜色
    */
   @Param festivalColor: ResourceStr | Color = Color.Red
-  context:UIContext = this.getUIContext()
+  context: UIContext = this.getUIContext()
+
   aboutToAppear() {
     this.initCalendar()
   }
@@ -81,14 +82,14 @@ export struct BaseCalendar {
   datePickerBuilder() {
     BaseDatePicker({
       datePicker: new Date(this.vm.selectDate.format('YYYY-MM-DD')),
-      selectColor:this.selectedColor,
+      selectColor: this.selectedColor,
       confirm: (date: Date) => {
         this.vm.changeDate(date);
         this.onCurrentDateSelected(dayjs(date).format('YYYY-MM-DD'))
-        baseActionSheet.close(this.context,'datePickerBuilder')
+        baseActionSheet.close(this.context, 'datePickerBuilder')
       },
       cancel: () => {
-        baseActionSheet.close(this.context,'datePickerBuilder')
+        baseActionSheet.close(this.context, 'datePickerBuilder')
       },
     })
   }
@@ -108,9 +109,9 @@ export struct BaseCalendar {
       }
       .height(24)
       .onClick(() => {
-        baseActionSheet.show(this.context,{
+        baseActionSheet.show(this.context, {
           id: 'datePickerBuilder',
-          detents:[300,301],
+          detents: [300, 301],
           showClose: false,
           customContent: () => {
             this.datePickerBuilder()
@@ -122,8 +123,13 @@ export struct BaseCalendar {
         .width(32)
         .height(32)
         .onClick(() => {
-          this.vm.getCurDateList();
-          this.vm.changeDate(dayjs().toDate());
+          let targetIndex = this.vm.changeDateAnimated(dayjs().toDate())
+          if (targetIndex >= 0) {
+            setTimeout(() => {
+              this.vm.animationTargetIndex = targetIndex
+              this.swiperController.changeIndex(targetIndex, true)
+            }, 50)
+          }
           this.onCurrentDateSelected(dayjs(this.vm.selectDate).format('YYYY-MM-DD'))
         })
     }
@@ -155,7 +161,7 @@ export struct BaseCalendar {
             .fontSize($r('sys.float.Body_S'))
             .fontWeight(FontWeight.Regular)
             .textAlign(TextAlign.Center);
-        },(item: string) => item);
+        }, (item: string) => item);
       }
       .width('100%')
       .justifyContent(FlexAlign.SpaceAround);
@@ -172,11 +178,12 @@ export struct BaseCalendar {
                       .fontSize(14)
                       .lineHeight(20)
                       .fontWeight(700)
-                      .fontColor(this.vm.isDateSelect(item) ?
-                      $r('sys.color.font_on_primary') : $r('sys.color.font_primary'))
+                      .fontColor(this.vm.isTodaySelected(item) ?
+                        $r('sys.color.font_on_primary') : $r('sys.color.font_primary'))
                     Row() {
                       Text('休')
-                        .fontColor($r('sys.color.font_on_primary'))
+                        .fontColor(this.vm.isTodaySelected(item) ?
+                          $r('sys.color.font_on_primary') : Color.White)
                         .fontSize(10);
                     }
                     .justifyContent(FlexAlign.Center)
@@ -190,18 +197,22 @@ export struct BaseCalendar {
                       right: 2,
                     })
                     .visibility(this.showHoliday && this.holidayVM.isHoliday(item.dateStr) ? Visibility.Visible :
-                    Visibility.None)
+                      Visibility.None)
 
                     Text(item.lunarDay)
                       .textStyle(item)
                       .fontSize(12)
                       .lineHeight(16)
-                      .fontColor(this.vm.isDateSelect(item) ? $r('sys.color.font_on_primary') : item.lunarColor)
+                      .fontColor(this.vm.isTodaySelected(item) ? $r('sys.color.font_on_primary') : item.lunarColor)
                       .visibility(this.isShowLunar ? Visibility.Visible : Visibility.None)
                   }
                   .dateItemStyle()
-                  .backgroundColor(this.vm.isDateSelect(item) ?
-                  this.selectedColor : '#00ffffff')
+                  .backgroundColor(this.vm.isTodaySelected(item) ?
+                    this.selectedColor : (this.vm.isNonTodaySelected(item) ? '#00000000' : '#00ffffff'))
+                  .border({
+                    width: this.vm.isNonTodaySelected(item) ? 2 : 0,
+                    color: this.selectedColor
+                  })
                   .borderRadius(this.selectedStyle === 'squares' ? 0 : 24);
                 }
                 .onClick(() => {
@@ -215,14 +226,14 @@ export struct BaseCalendar {
                   this.onCurrentDateSelected(dayjs(item.dayjsObj).format('YYYY-MM-DD'))
                 });
               }
-            },(item: DateModel) => JSON.stringify(item));
+            }, (item: DateModel) => JSON.stringify(item));
           }
           .columnsTemplate('1fr 1fr 1fr 1fr 1fr 1fr 1fr')
           .maxCount(7)
           .columnsGap(0)
           .rowsGap(0)
           .padding({ bottom: 20 })
-        },(item: DateModelList) => JSON.stringify(item));
+        }, (item: DateModelList) => JSON.stringify(item));
       }
       .cachedCount(0)
       .indicator(false)

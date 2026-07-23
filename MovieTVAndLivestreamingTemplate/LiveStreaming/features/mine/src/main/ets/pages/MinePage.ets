@@ -106,6 +106,7 @@ export struct MinePage {
   @Local mineArr: MineItem[] = [
     new MineItem('观看记录', $r('app.media.icon_history'), RouterMap.WATCH_RECORD),
     new MineItem('消息通知', $r('app.media.icon_message2'), RouterMap.MESSAGE_CENTER_PAGE),
+    new MineItem('主播中心', $r('app.media.music_mic_stars'), RouterMap.ANCHOR_CENTER_PAGE, this.logoUser),
     new MineItem('意见反馈', $r('app.media.icon_feedback'), RouterMap.FEEDBACK_PAGE),
     new MineItem('联系客服', $r('app.media.ic_public_headphones_mic'), ''),
     new MineItem('设置', $r('app.media.icon_Setting'), RouterMap.SET_UP_PAGE)
@@ -182,7 +183,7 @@ export struct MinePage {
       if (!this.logoUser.isLogin) {
         RouterModule.push({ url: RouterMap.LOGIN_PAGE, param: true })
       } else {
-        RouterModule.push({ url: RouterMap.PROFILE_PAGE, param: this.logoUser })
+        RouterModule.push({ url: RouterMap.PERSONAL_CENTER_PAGE })
       }
     })
     .width('100%')
@@ -203,52 +204,61 @@ export struct MinePage {
             .fontColor($r('sys.color.font_primary'))
             .margin({ top: 12, bottom: 12 })
         }
+        .width('100%')
 
-        this.perMine()
+        Scroll(){
+          Column({ space: 12 }){
+            this.perMine()
 
-        OuterFrameCard() {
-          GridRow({
-            columns: { sm: 1, md: 2 },
-            gutter: { x: 48 }
-          }) {
-            ForEach(this.mineArr, (item: MineItem, index: number) => {
-              GridCol() {
-                if (item.titleName === '联系客服') {
-                  UserItem({
-                    title: item.titleName,
-                    image: item.icon,
-                    url: item.url,
-                    isLine: !(index === this.mineArr.length - 1),
-                    messageNum: item.messageNum
-                  })
-                    .onClick(() => {
-                      this.dialPanel
-                        .setTitle('联系客服')
-                        .setPhoneNumber('12345678901')
-                        .setAutoClosePanel(false) // 成功跳转后不自动关闭模态窗
-                        .open();
-                    })
-                } else {
-                  UserItem({
-                    title: item.titleName,
-                    image: item.icon,
-                    url: item.url,
-                    isLine: !(index === this.mineArr.length - 1),
-                    messageNum: item.messageNum
-                  })
-                    .onClick(() => {
-                      if (this.logoUser.isLogin && item.url) {
-                        RouterModule.push({ url: item.url, param: item.params });
-                      } else {
-                        RouterModule.push({ url: RouterMap.LOGIN_PAGE })
-                      }
-                    })
-                }
+            OuterFrameCard() {
+              GridRow({
+                columns: { sm: 1, md: 2 },
+                gutter: { x: 48 }
+              }) {
+                ForEach(this.mineArr, (item: MineItem, index: number) => {
+                  GridCol() {
+                    if (item.titleName === '联系客服') {
+                      UserItem({
+                        title: item.titleName,
+                        image: item.icon,
+                        url: item.url,
+                        isLine: !(index === this.mineArr.length - 1),
+                        messageNum: item.messageNum
+                      })
+                        .onClick(() => {
+                          this.dialPanel
+                            .setTitle('联系客服')
+                            .setPhoneNumber('12345678901')
+                            .setAutoClosePanel(false) // 成功跳转后不自动关闭模态窗
+                            .open();
+                        })
+                    } else {
+                      UserItem({
+                        title: item.titleName,
+                        image: item.icon,
+                        url: item.url,
+                        isLine: !(index === this.mineArr.length - 1),
+                        messageNum: item.messageNum
+                      })
+                        .onClick(() => {
+                          if (this.logoUser.isLogin && item.url) {
+                            RouterModule.push({ url: item.url, param: item.params });
+                          } else {
+                            RouterModule.push({ url: RouterMap.LOGIN_PAGE })
+                          }
+                        })
+                    }
+                  }
+                }, (item: MineItem) => JSON.stringify(item))
               }
-            }, (item: MineItem) => JSON.stringify(item))
-          }
 
+            }
+          }
         }
+        .layoutWeight(1)
+        .edgeEffect(EdgeEffect.Spring)
+        .scrollBar(BarState.Off)
+        .align(Alignment.TopStart)
       }
       .backgroundColor($r('sys.color.background_secondary'))
       .backgroundImage(this.currentColorMode.colorMode === ConfigurationConstant.ColorMode.COLOR_MODE_DARK ? '' :

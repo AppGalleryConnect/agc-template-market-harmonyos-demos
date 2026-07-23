@@ -104,9 +104,11 @@ DaySignIn(options?: DaySignInOptions)
 
 | 名称            | 类型                                   | 是否必填 | 说明                           |
 |:--------------|:-------------------------------------|----|------------------------------|
-| title         | ResourceStr                               | 否  | 活动名称                         |
+| title         | ResourceStr                          | 否  | 活动名称                         |
 | coinArray     | number[]                             | 否  | 活动周期每日获取金币数                  |
 | onSignSuccess | (day: number, balance: number)=>void | 否  | 定义回调函数，day为签到天数，balance为金币奖励 |
+| isLogin       | boolean                              | 否  | 登录状态                         |
+| loginFunc     | ()=>void                             | 否  | 定义登录函数                       |
 
 ## 示例代码
 

@@ -91,10 +91,14 @@ export class WXShareUtils {
           const thumbRawData = await downloadImage(data.thumbUrl);
           thumbBuffer = await compressImage(thumbRawData);
         } else {
-          const thumbRawData = await this.windowStage.getMainWindowSync()
-            .getUIContext()
-            .getHostContext()!.resourceManager.getMediaContent(data.thumbUrl.id);
-          thumbBuffer = await compressImage(thumbRawData.buffer as ArrayBuffer);
+          try {
+            const thumbRawData = await this.windowStage.getMainWindowSync()
+              .getUIContext()
+              .getHostContext()!.resourceManager.getMediaContent(data.thumbUrl.id);
+            thumbBuffer = await compressImage(thumbRawData.buffer as ArrayBuffer);
+          } catch (e) {
+            Logger.error(TAG, `getMediaContent failed: ${e}`);
+          }
         }
         if (thumbBuffer.byteLength / 1024 > 64) {
           Logger.error(TAG, `thumbData is over 64K, buffer length: ${thumbBuffer.byteLength / 1024}K`);

@@ -142,7 +142,6 @@ struct SearchPage {
       })
     }
     .title(this.titleBuilder())
-    .backgroundColor('#F1F3F5')
     .padding({ top: `${this.getUIContext().px2vp(this.statusBarHeight.value)}vp`, bottom: `${this.getUIContext().px2vp(this.aiBarHeight.value)}vp` })
     .onReady((context:NavDestinationContext)=>{
       const text = context.pathInfo.param as string

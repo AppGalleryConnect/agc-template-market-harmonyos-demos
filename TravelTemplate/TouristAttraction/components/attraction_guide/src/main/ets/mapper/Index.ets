@@ -1,62 +1,42 @@
-import { map, mapCommon, site } from '@kit.MapKit';
-import { AttractionListItem, GetAttractionsInfoResp, ToiletInfo } from 'module_base';
-import { SiteInfo } from '../model/GuideInfo';
+import { site } from '@kit.MapKit';
+import { AccommodationInfo, CateringInfo } from 'module_base';
 
-export function mapSiteInfo(sitesResp: site.Site[], type: number) {
-  let sites: SiteInfo[] = [];
-  sitesResp.forEach((item: site.Site) => {
-    let siteInfo = new SiteInfo();
-    siteInfo.siteId = item.siteId;
-    siteInfo.name = item.name ?? '';
-    siteInfo.icon = item.poi?.icon ?? '';
-    siteInfo.location = item.formatAddress ?? '';
-    siteInfo.longitude = item.location?.longitude ?? 0;
-    siteInfo.latitude = item.location?.latitude ?? 0;
-    siteInfo.audio = '';
-    sites.push(siteInfo);
+export function mapAccommodationInfo(sites: site.Site[]) {
+  let accommodationList: AccommodationInfo[] = [];
+  sites.forEach((item: site.Site) => {
+    let accommodationInfo = new AccommodationInfo();
+    accommodationInfo.siteId = item.siteId;
+    accommodationInfo.distance = item.distance ?? 0;
+    accommodationInfo.name = item.name ?? '';
+    accommodationInfo.longitude = item.location?.longitude ?? 0;
+    accommodationInfo.latitude = item.location?.latitude ?? 0;
+    accommodationInfo.address =
+      item.formatAddress ?? ''; //todo 模板使用虚拟电话，真实场景请替换代码。accommodationInfo.phone = item.poi?.phone ?? '';
+    accommodationInfo.phone = '12345678911';
+    accommodationInfo.comments = item.poi?.comment?.total ?? 0;
+    accommodationInfo.rating = item.poi?.comment?.averageRating ?? 0; // mock图片
+    accommodationInfo.banner = item.poi?.icon ?? $r('app.media.ic_accommodation');
+    accommodationList.push(accommodationInfo);
   });
-  return sites;
+  return accommodationList;
 }
 
-export function mapAttractionSite(attractionsInfoResp: GetAttractionsInfoResp) {
-  let attractionSites: SiteInfo[] = [];
-  attractionsInfoResp.attractions.forEach((item: AttractionListItem) => {
-    let siteInfo = new SiteInfo();
-    siteInfo.siteId = item.attractionId.toString();
-    siteInfo.name = item.name ?? '';
-    siteInfo.icon = item.icon;
-    attractionSites.push(siteInfo);
+export function mapCateringInfo(sites: site.Site[]) {
+  let cateringList: CateringInfo[] = [];
+  sites.forEach((item: site.Site) => {
+    let cateringInfo = new CateringInfo();
+    cateringInfo.siteId = item.siteId;
+    cateringInfo.distance = item.distance ?? 0;
+    cateringInfo.name = item.name ?? '';
+    cateringInfo.longitude = item.location?.longitude ?? 0;
+    cateringInfo.latitude = item.location?.latitude ?? 0;
+    cateringInfo.address =
+      item.formatAddress ?? ''; //todo 模板使用虚拟电话，真实场景请替换代码。cateringInfo.phone = item.poi?.phone ?? '';
+    cateringInfo.phone = '12345678911';
+    cateringInfo.comments = item.poi?.comment?.total ?? 0;
+    cateringInfo.rating = item.poi?.comment?.averageRating ?? 0;
+    cateringList.push(cateringInfo); // mock图片
+    cateringInfo.banner = item.poi?.icon ?? $r('app.media.ic_catering');
   });
-  return attractionSites;
-}
-
-export function mapperToilet(sites: site.Site[], latitude: number, longitude: number) {
-  let toiletList: ToiletInfo[] = [];
-  sites.forEach(site => {
-    let toiletInfo = new ToiletInfo();
-    toiletInfo.siteId = site.siteId;
-    toiletInfo.name = site.name ?? '';
-    toiletInfo.longitude = site.location?.longitude ?? 0;
-    toiletInfo.latitude = site.location?.latitude ?? 0;
-    toiletInfo.distance =
-      calDistance(toiletInfo.longitude,
-        toiletInfo.latitude, latitude, longitude);
-    // 转换为PixelMap
-    toiletInfo.icon = site.poi?.icon ?? '';
-    toiletList.push(toiletInfo);
-  });
-  return toiletList;
-}
-
-function calDistance(parkingLot: number, parkingLat: number, latitude: number, longitude: number) {
-  let fromLatLng: mapCommon.LatLng = {
-    latitude: latitude,
-    longitude: longitude,
-  };
-  let toLatLng: mapCommon.LatLng = {
-    latitude: parkingLat,
-    longitude: parkingLot,
-  };
-
-  return map.calculateDistance(fromLatLng, toLatLng);
+  return cateringList;
 }

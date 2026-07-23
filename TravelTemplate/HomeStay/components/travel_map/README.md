@@ -146,7 +146,7 @@ export struct Home {
             },
             icon: $r('app.media.point'),
             titleOptions: {
-              name: '一间民宿',
+              name: '民宿模板',
               strokeColor: 0xFFFFFFFF,
             },
             cameraSpeed: 1000,

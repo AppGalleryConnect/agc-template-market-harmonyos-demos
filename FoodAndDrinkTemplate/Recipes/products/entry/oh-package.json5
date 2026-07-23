@@ -15,7 +15,6 @@
     "aggregated_ads": 'file:../../components/aggregated_ads',
     "aggregated_login": "file:../../components/aggregated_login",
     "module_transition": "file:../../components/module_transition",
-    "floating_navbar": "file:../../components/floating_navbar",
     "@hw-agconnect/util-log": "^1.0.0",
   }
 }

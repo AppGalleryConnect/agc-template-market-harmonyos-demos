@@ -1,8 +1,8 @@
+import { PersistenceV2 } from '@kit.ArkUI';
 import { textToSpeech } from '@kit.CoreSpeechKit';
 import { BusinessError } from '@kit.BasicServicesKit';
 import { Logger } from './Logger';
 import { VoiceModel, VoicePackage, VoiceType } from '../types/Types';
-import { PersistenceV2 } from '@ohos.arkui.StateManagement';
 
 const TAG = '[BroadCastUtil]';
 
@@ -158,7 +158,12 @@ export class BroadCastUtil {
       requestId: Date.now().toString(),
       extraParams: extraParam,
     };
-    BroadCastUtil._ttsEngine!.speak(text, speakParams);
+    try {
+      BroadCastUtil._ttsEngine!.speak(text, speakParams);
+    } catch (error) {
+      const err: BusinessError = error as BusinessError;
+      Logger.error(TAG, `Failed to speak. Code: ${err.code}, message: ${err.message}`);
+    }
   }
 
   public static stop() {
@@ -176,7 +181,7 @@ export class BroadCastUtil {
     BroadCastUtil._voiceModel.curVoice = type;
   }
 
-  public static async _queryList() {
+  private static async _queryList() {
     let voicesQuery: textToSpeech.VoiceQuery = {
       requestId: Date.now().toString(),
       online: 1,
@@ -184,6 +189,9 @@ export class BroadCastUtil {
     if (!BroadCastUtil._ttsEngine) {
       await BroadCastUtil._createEngine();
     }
-    return BroadCastUtil._ttsEngine!.listVoices(voicesQuery);
+    return BroadCastUtil._ttsEngine!.listVoices(voicesQuery).catch((err: BusinessError) => {
+      Logger.error(TAG, `Failed to listVoices. Code: ${err.code}, message: ${err.message}`);
+      return [];
+    });
   }
 }

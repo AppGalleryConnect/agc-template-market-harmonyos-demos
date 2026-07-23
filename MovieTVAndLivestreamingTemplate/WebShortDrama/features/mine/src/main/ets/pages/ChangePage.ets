@@ -7,7 +7,7 @@ import { AvatarButton } from '../component/AvatarButton';
 @ComponentV2
 export struct ChangePage {
   @Local vm: MinePageVM = MinePageVM.instance;
-  @Local name: string = '';
+  @Local name: string = this.vm.localInfo.nickname ? this.vm.localInfo.nickname : this.vm.userInfo.nickname;
   navDestinationModifier: NavDestinationModifier = new NavDestinationModifier();
 
   build() {
@@ -22,8 +22,7 @@ export struct ChangePage {
           Text(getString('app.string.modify_name'))
             .fontSize(20)
             .margin({ top: 10, bottom: 10 })
-          TextInput({ placeholder: this.vm.localInfo.nickname ?
-          this.vm.localInfo.nickname : this.vm.userInfo.nickname, text: this.name })
+          TextInput({ text: this.name })
             .height(60)
             .width('90%')
             .maxLength(10)
@@ -38,6 +37,7 @@ export struct ChangePage {
               })
               .backgroundColor(0xffffff)
               .fontColor($r('sys.color.font_primary'))
+              .backgroundColor($r('sys.color.comp_background_tertiary'))
 
             Button(getString('app.string.confirm'))
               .onClick(() => {
@@ -50,6 +50,7 @@ export struct ChangePage {
               })
               .backgroundColor(0xffffff)
               .fontColor($r('sys.color.warning'))
+              .backgroundColor($r('sys.color.comp_background_tertiary'))
           }
           .margin({ top: 10, bottom: 10 })
         }

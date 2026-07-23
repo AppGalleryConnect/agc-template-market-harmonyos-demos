@@ -13,10 +13,10 @@
  * limitations under the License.
  */
 
-import { CommonUtils, RouterMap, SystemSceneUtils } from 'module_base';
+import { CommonUtils, RouterMap, SystemSceneUtils, WindowUtil } from 'module_base';
 import {
   cancelOrder,
-  CurAppInfo,
+  FormUtils,
   FullOrderInfo,
   getOrder,
   OrderStatus,
@@ -59,6 +59,9 @@ export class MyOrderDetailVM {
     // todo: 传入false，不走mock
     SystemSceneUtils.requestPaymentPromise(true).then(() => {
       payOrder(this.fullOrderInfo.orderId).then(() => {
+        FormUtils.checkAndCleanExpiredFormData(WindowUtil.context);
+        FormUtils.addFormData(this.fullOrderInfo, WindowUtil.context);
+        FormUtils.updateWidgets(WindowUtil.context);
         CommonUtils.hideLoading();
         this.onRefreshing();
       })
@@ -77,6 +80,9 @@ export class MyOrderDetailVM {
   applyRefund() {
     CommonUtils.showLoading();
     refund(this.fullOrderInfo.orderId).then(() => {
+      FormUtils.checkAndCleanExpiredFormData(WindowUtil.context);
+      FormUtils.removeFormData(this.fullOrderInfo.orderId, WindowUtil.context);
+      FormUtils.updateWidgets(WindowUtil.context);
       CommonUtils.hideLoading();
       this.onRefreshing();
     });

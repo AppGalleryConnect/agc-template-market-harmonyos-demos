@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>聊天对话框</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#07C160',
+                        secondary: '#E5E5EA',
+                        textDark: '#303133',
+                        textLight: '#808080',
+                        bgLight: '#F5F5F5',
+                        bgDark: '#ECECEC',
+                    },
+                    fontFamily: {
+                        sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        #chatContainer {
+            padding-top: 0;
+        }
+        .image-msg {
+            max-height: 160px;
+            max-width: 120px;
+        }
+
+        img {
+            max-height: 160px;
+            max-width: 120px;
+        }
+
+        #messageInput {
+           border-radius: 1.5rem;
+           background-color: #F2F2F2;
+        }
+
+        #custom-footer {
+            padding-bottom: 1.75rem;
+        }
+
+        textarea:focus {
+          border: none;
+          outline: none;
+        }
+    </style>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .scrollbar-hide::-webkit-scrollbar {
+                display: none;
+            }
+            .scrollbar-hide {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+            .message-appear {
+                animation: messageAppear 0.3s ease-out forwards;
+            }
+            @keyframes messageAppear {
+                from {
+                    opacity: 0;
+                    transform: translateY(10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            .bubble-left {
+                border-radius: 2px 16px 16px 16px;
+            }
+            .bubble-right {
+                border-radius: 16px 2px 16px 16px;
+            }
+            .emoji-tab-active {
+                color: #07C160;
+                border-bottom: 2px solid #07C160;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans text-textDark h-screen flex flex-col overflow-hidden">
+<!-- 聊天内容区域 -->
+<main class="flex-1 overflow-y-auto scrollbar-hide p-4" id="chatContainer">
+</main>
+
+<!-- 底部输入区域 -->
+<footer id="custom-footer" class="bg-white border-t border-gray-200 p-3">
+    <div class="flex items-center">
+        <div class="relative flex-1 mx-2">
+            <textarea id="messageInput" placeholder="输入" rows="1"
+                      enterkeyhint="send" inputmode="text"
+                      class="w-full rounded-lg p-2 resize-none transition-all"
+            ></textarea>
+        </div>
+
+        <button class="p-2 text-gray-500 transition-colors" id="emojiBtn">
+            <i class="fa fa-smile-o text-xl"></i>
+        </button>
+
+        <label for="imageUpload" class="p-2 text-gray-500 transition-colors cursor-pointer">
+            <i class="fa fa-image text-xl"></i>
+        </label>
+        <input type="file" id="imageUpload" accept="image/*" class="hidden">
+    </div>
+
+    <!-- 表情选择面板 -->
+    <div id="emojiPanel" class="mt-3 p-3 bg-white rounded-lg shadow-lg hidden">
+        <!-- 表情分类标签 -->
+        <div class="flex border-b border-gray-200 mb-3 overflow-x-auto scrollbar-hide pb-2">
+            <button class="emoji-tab emoji-tab-active px-3 py-1 text-sm mr-2 whitespace-nowrap" data-category="common">
+                常用
+            </button>
+            <button class="emoji-tab px-3 py-1 text-sm mr-2 whitespace-nowrap" data-category="people">人物</button>
+            <button class="emoji-tab px-3 py-1 text-sm mr-2 whitespace-nowrap" data-category="nature">自然</button>
+            <button class="emoji-tab px-3 py-1 text-sm mr-2 whitespace-nowrap" data-category="food">食物</button>
+            <button class="emoji-tab px-3 py-1 text-sm mr-2 whitespace-nowrap" data-category="activity">活动</button>
+            <button class="emoji-tab px-3 py-1 text-sm mr-2 whitespace-nowrap" data-category="travel">旅行</button>
+            <button class="emoji-tab px-3 py-1 text-sm mr-2 whitespace-nowrap" data-category="objects">物品</button>
+            <button class="emoji-tab px-3 py-1 text-sm mr-2 whitespace-nowrap" data-category="symbols">符号</button>
+        </div>
+
+        <!-- 表情内容区域 -->
+        <div class="emoji-container h-64 overflow-y-auto scrollbar-hide">
+            <!-- 常用表情 -->
+            <div class="emoji-category" id="emoji-common">
+                <div class="grid grid-cols-8 gap-2">
+                    <button class="emoji-btn" data-emoji="😀">😀</button>
+                    <button class="emoji-btn" data-emoji="😂">😂</button>
+                    <button class="emoji-btn" data-emoji="😊">😊</button>
+                    <button class="emoji-btn" data-emoji="😍">😍</button>
+                    <button class="emoji-btn" data-emoji="🤔">🤔</button>
+                    <button class="emoji-btn" data-emoji="👍">👍</button>
+                    <button class="emoji-btn" data-emoji="👏">👏</button>
+                    <button class="emoji-btn" data-emoji="🙌">🙌</button>
+                    <button class="emoji-btn" data-emoji="🎉">🎉</button>
+                    <button class="emoji-btn" data-emoji="🔥">🔥</button>
+                    <button class="emoji-btn" data-emoji="❤️">❤️</button>
+                    <button class="emoji-btn" data-emoji="✨">✨</button>
+                    <button class="emoji-btn" data-emoji="💩">💩</button>
+                    <button class="emoji-btn" data-emoji="👀">👀</button>
+                    <button class="emoji-btn" data-emoji="👋">👋</button>
+                    <button class="emoji-btn" data-emoji="🤝">🤝</button>
+                    <button class="emoji-btn" data-emoji="🙏">🙏</button>
+                    <button class="emoji-btn" data-emoji="😎">😎</button>
+                    <button class="emoji-btn" data-emoji="🥳">🥳</button>
+                    <button class="emoji-btn" data-emoji="🤗">🤗</button>
+                </div>
+            </div>
+
+            <!-- 人物表情 -->
+            <div class="emoji-category hidden" id="emoji-people">
+                <div class="grid grid-cols-8 gap-2">
+                    <button class="emoji-btn" data-emoji="👩">👩</button>
+                    <button class="emoji-btn" data-emoji="👨">👨</button>
+                    <button class="emoji-btn" data-emoji="👧">👧</button>
+                    <button class="emoji-btn" data-emoji="👦">👦</button>
+                    <button class="emoji-btn" data-emoji="👵">👵</button>
+                    <button class="emoji-btn" data-emoji="👴">👴</button>
+                    <button class="emoji-btn" data-emoji="👱‍♀️">👱‍♀️</button>
+                    <button class="emoji-btn" data-emoji="👱">👱</button>
+                    <button class="emoji-btn" data-emoji="👨‍⚕️">👨‍⚕️</button>
+                    <button class="emoji-btn" data-emoji="👩‍⚕️">👩‍⚕️</button>
+                    <button class="emoji-btn" data-emoji="👨‍🌾">👨‍🌾</button>
+                    <button class="emoji-btn" data-emoji="👩‍🌾">👩‍🌾</button>
+                    <button class="emoji-btn" data-emoji="👨‍🔧">👨‍🔧</button>
+                    <button class="emoji-btn" data-emoji="👩‍🔧">👩‍🔧</button>
+                    <button class="emoji-btn" data-emoji="👨‍🎓">👨‍🎓</button>
+                    <button class="emoji-btn" data-emoji="👩‍🎓">👩‍🎓</button>
+                    <button class="emoji-btn" data-emoji="👨‍⚖️">👨‍⚖️</button>
+                    <button class="emoji-btn" data-emoji="👩‍⚖️">👩‍⚖️</button>
+                    <button class="emoji-btn" data-emoji="👨‍✈️">👨‍✈️</button>
+                    <button class="emoji-btn" data-emoji="👩‍✈️">👩‍✈️</button>
+                </div>
+            </div>
+
+            <!-- 自然表情 -->
+            <div class="emoji-category hidden" id="emoji-nature">
+                <div class="grid grid-cols-8 gap-2">
+                    <button class="emoji-btn" data-emoji="🌞">🌞</button>
+                    <button class="emoji-btn" data-emoji="🌝">🌝</button>
+                    <button class="emoji-btn" data-emoji="🌙">🌙</button>
+                    <button class="emoji-btn" data-emoji="🌟">🌟</button>
+                    <button class="emoji-btn" data-emoji="☁️">☁️</button>
+                    <button class="emoji-btn" data-emoji="🌧️">🌧️</button>
+                    <button class="emoji-btn" data-emoji="❄️">❄️</button>
+                    <button class="emoji-btn" data-emoji="🔥">🔥</button>
+                    <button class="emoji-btn" data-emoji="💨">💨</button>
+                    <button class="emoji-btn" data-emoji="🌊">🌊</button>
+                    <button class="emoji-btn" data-emoji="🌍">🌍</button>
+                    <button class="emoji-btn" data-emoji="🌋">🌋</button>
+                    <button class="emoji-btn" data-emoji="🌲">🌲</button>
+                    <button class="emoji-btn" data-emoji="🌳">🌳</button>
+                    <button class="emoji-btn" data-emoji="🌴">🌴</button>
+                    <button class="emoji-btn" data-emoji="🌵">🌵</button>
+                    <button class="emoji-btn" data-emoji="🌼">🌼</button>
+                    <button class="emoji-btn" data-emoji="🌸">🌸</button>
+                    <button class="emoji-btn" data-emoji="🌷">🌷</button>
+                    <button class="emoji-btn" data-emoji="🌹">🌹</button>
+                </div>
+            </div>
+
+            <!-- 食物表情 -->
+            <div class="emoji-category hidden" id="emoji-food">
+                <div class="grid grid-cols-8 gap-2">
+                    <button class="emoji-btn" data-emoji="🍎">🍎</button>
+                    <button class="emoji-btn" data-emoji="🍐">🍐</button>
+                    <button class="emoji-btn" data-emoji="🍊">🍊</button>
+                    <button class="emoji-btn" data-emoji="🍋">🍋</button>
+                    <button class="emoji-btn" data-emoji="🍌">🍌</button>
+                    <button class="emoji-btn" data-emoji="🍉">🍉</button>
+                    <button class="emoji-btn" data-emoji="🍇">🍇</button>
+                    <button class="emoji-btn" data-emoji="🍓">🍓</button>
+                    <button class="emoji-btn" data-emoji="🍈">🍈</button>
+                    <button class="emoji-btn" data-emoji="🍒">🍒</button>
+                    <button class="emoji-btn" data-emoji="🍑">🍑</button>
+                    <button class="emoji-btn" data-emoji="🍍">🍍</button>
+                    <button class="emoji-btn" data-emoji="🥭">🥭</button>
+                    <button class="emoji-btn" data-emoji="🍅">🍅</button>
+                    <button class="emoji-btn" data-emoji="🥝">🥝</button>
+                    <button class="emoji-btn" data-emoji="🍆">🍆</button>
+                    <button class="emoji-btn" data-emoji="🌶️">🌶️</button>
+                    <button class="emoji-btn" data-emoji="🥔">🥔</button>
+                    <button class="emoji-btn" data-emoji="🥕">🥕</button>
+                    <button class="emoji-btn" data-emoji="🌽">🌽</button>
+                </div>
+            </div>
+
+            <!-- 活动表情 -->
+            <div class="emoji-category hidden" id="emoji-activity">
+                <div class="grid grid-cols-8 gap-2">
+                    <button class="emoji-btn" data-emoji="⚽">⚽</button>
+                    <button class="emoji-btn" data-emoji="🏀">🏀</button>
+                    <button class="emoji-btn" data-emoji="🏈">🏈</button>
+                    <button class="emoji-btn" data-emoji="⚾">⚾</button>
+                    <button class="emoji-btn" data-emoji="🎾">🎾</button>
+                    <button class="emoji-btn" data-emoji="🏐">🏐</button>
+                    <button class="emoji-btn" data-emoji="🏉">🏉</button>
+                    <button class="emoji-btn" data-emoji="🎱">🎱</button>
+                    <button class="emoji-btn" data-emoji="🏓">🏓</button>
+                    <button class="emoji-btn" data-emoji="🏸">🏸</button>
+                    <button class="emoji-btn" data-emoji="🥊">🥊</button>
+                    <button class="emoji-btn" data-emoji="🥋">🥋</button>
+                    <button class="emoji-btn" data-emoji="🏹">🏹</button>
+                    <button class="emoji-btn" data-emoji="⛷️">⛷️</button>
+                    <button class="emoji-btn" data-emoji="🏂">🏂</button>
+                    <button class="emoji-btn" data-emoji="🎿">🎿</button>
+                    <button class="emoji-btn" data-emoji="🏊">🏊</button>
+                    <button class="emoji-btn" data-emoji="🏊‍♀️">🏊‍♀️</button>
+                    <button class="emoji-btn" data-emoji="🚴">🚴</button>
+                    <button class="emoji-btn" data-emoji="🚴‍♀️">🚴‍♀️</button>
+                </div>
+            </div>
+
+            <!-- 旅行表情 -->
+            <div class="emoji-category hidden" id="emoji-travel">
+                <div class="grid grid-cols-8 gap-2">
+                    <button class="emoji-btn" data-emoji="✈️">✈️</button>
+                    <button class="emoji-btn" data-emoji="🚀">🚀</button>
+                    <button class="emoji-btn" data-emoji="⛵">⛵</button>
+                    <button class="emoji-btn" data-emoji="🚢">🚢</button>
+                    <button class="emoji-btn" data-emoji="🚂">🚂</button>
+                    <button class="emoji-btn" data-emoji="🚄">🚄</button>
+                    <button class="emoji-btn" data-emoji="🚗">🚗</button>
+                    <button class="emoji-btn" data-emoji="🚙">🚙</button>
+                    <button class="emoji-btn" data-emoji="🚌">🚌</button>
+                    <button class="emoji-btn" data-emoji="🚎">🚎</button>
+                    <button class="emoji-btn" data-emoji="🚑">🚑</button>
+                    <button class="emoji-btn" data-emoji="🚓">🚓</button>
+                    <button class="emoji-btn" data-emoji="🚒">🚒</button>
+                    <button class="emoji-btn" data-emoji="🚐">🚐</button>
+                    <button class="emoji-btn" data-emoji="🚚">🚚</button>
+                    <button class="emoji-btn" data-emoji="🚛">🚛</button>
+                    <button class="emoji-btn" data-emoji="🚜">🚜</button>
+                    <button class="emoji-btn" data-emoji="🛵">🛵</button>
+                    <button class="emoji-btn" data-emoji="🚲">🚲</button>
+                    <button class="emoji-btn" data-emoji="🛺">🛺</button>
+                </div>
+            </div>
+
+            <!-- 物品表情 -->
+            <div class="emoji-category hidden" id="emoji-objects">
+                <div class="grid grid-cols-8 gap-2">
+                    <button class="emoji-btn" data-emoji="📱">📱</button>
+                    <button class="emoji-btn" data-emoji="💻">💻</button>
+                    <button class="emoji-btn" data-emoji="⌚">⌚</button>
+                    <button class="emoji-btn" data-emoji="📺">📺</button>
+                    <button class="emoji-btn" data-emoji="📷">📷</button>
+                    <button class="emoji-btn" data-emoji="📸">📸</button>
+                    <button class="emoji-btn" data-emoji="🔦">🔦</button>
+                    <button class="emoji-btn" data-emoji="🔌">🔌</button>
+                    <button class="emoji-btn" data-emoji="💡">💡</button>
+                    <button class="emoji-btn" data-emoji="🔦">🔦</button>
+                    <button class="emoji-btn" data-emoji="🔋">🔋</button>
+                    <button class="emoji-btn" data-emoji="🔌">🔌</button>
+                    <button class="emoji-btn" data-emoji="🔍">🔍</button>
+                    <button class="emoji-btn" data-emoji="🔒">🔒</button>
+                    <button class="emoji-btn" data-emoji="🔓">🔓</button>
+                    <button class="emoji-btn" data-emoji="🔑">🔑</button>
+                    <button class="emoji-btn" data-emoji="🔨">🔨</button>
+                    <button class="emoji-btn" data-emoji="🔧">🔧</button>
+                    <button class="emoji-btn" data-emoji="⚙️">⚙️</button>
+                    <button class="emoji-btn" data-emoji="🔩">🔩</button>
+                </div>
+            </div>
+
+            <!-- 符号表情 -->
+            <div class="emoji-category hidden" id="emoji-symbols">
+                <div class="grid grid-cols-8 gap-2">
+                    <button class="emoji-btn" data-emoji="❤">❤</button>
+                    <button class="emoji-btn" data-emoji="💛">💛</button>
+                    <button class="emoji-btn" data-emoji="💚">💚</button>
+                    <button class="emoji-btn" data-emoji="💙">💙</button>
+                    <button class="emoji-btn" data-emoji="💜">💜</button>
+                    <button class="emoji-btn" data-emoji="🖤">🖤</button>
+                    <button class="emoji-btn" data-emoji="🤍">🤍</button>
+                    <button class="emoji-btn" data-emoji="🤎">🤎</button>
+                    <button class="emoji-btn" data-emoji="💕">💕</button>
+                    <button class="emoji-btn" data-emoji="💞">💞</button>
+                    <button class="emoji-btn" data-emoji="💓">💓</button>
+                    <button class="emoji-btn" data-emoji="💗">💗</button>
+                    <button class="emoji-btn" data-emoji="💖">💖</button>
+                    <button class="emoji-btn" data-emoji="💝">💝</button>
+                    <button class="emoji-btn" data-emoji="💘">💘</button>
+                    <button class="emoji-btn" data-emoji="💯">💯</button>
+                    <button class="emoji-btn" data-emoji="🔥">🔥</button>
+                    <button class="emoji-btn" data-emoji="✨">✨</button>
+                    <button class="emoji-btn" data-emoji="❄️">❄️</button>
+                    <button class="emoji-btn" data-emoji="💧">💧</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // 使用更可靠的方式切换表情面板
+    let isEmojiPanelOpen = false;
+
+    // DOM 元素
+    const chatContainer = document.getElementById('chatContainer');
+    const messageInput = document.getElementById('messageInput');
+    const emojiBtn = document.getElementById('emojiBtn');
+    const emojiPanel = document.getElementById('emojiPanel');
+    const imageUpload = document.getElementById('imageUpload');
+    const emojiBtns = document.querySelectorAll('.emoji-btn');
+    const emojiTabs = document.querySelectorAll('.emoji-tab');
+    const emojiCategories = document.querySelectorAll('.emoji-category');
+
+    // 初始化数据
+    let myAvatar = '';
+    let otherAvatar = '';
+    let messages = [];
+
+    queryAllInfo();
+
+    // 自动调整文本框高度
+    messageInput.addEventListener('input', function() {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight > 120 ? 120 : this.scrollHeight) + 'px';
+    });
+
+    // 查询信息
+    function queryAllInfo() {
+        console.log('queryAllInfo');
+        msgIMChatViewModel.queryList().then((resp) => {
+            console.log('queryAllInfo resp: '+ JSON.stringify(resp));
+            myAvatar = resp.myAvatar;
+            otherAvatar = resp.otherAvatar;
+            messages = resp.messages;
+            // 初始化显示消息
+            messages.forEach(message => {
+                appendMessage(message.content, message.type, message.isMyself, message.createTime);
+            });
+        })
+    }
+
+    // 模拟对方回复
+    function mockReply() {
+        setTimeout(() => {
+            const reply = {
+                type: 'text',
+                content: '感谢你的消息！',
+            };
+            appendMessage(reply.content, reply.type, false);
+        }, 1000);
+    }
+
+    // 发送文字消息
+    function sendMessage() {
+        const message = messageInput.value.trim();
+        if (message) {
+            appendMessage(message, 'text', true);
+            messageInput.value = '';
+            messageInput.style.height = 'auto';
+            msgIMChatViewModel.sendMessage(message, 'text');
+            mockReply();
+        }
+    }
+
+    // 发送图片消息
+    imageUpload.addEventListener('change', function(e) {
+        if (this.files && this.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const createTime = new Date().getTime();
+                appendMessage(e.target.result, 'image', true, createTime);
+                msgIMChatViewModel.sendMessage(e.target.result, 'image', createTime);
+                mockReply();
+            };
+            reader.readAsDataURL(this.files[0]);
+            this.value = ''; // 重置输入，允许重复选择同一文件
+        }
+    });
+
+    // 追加消息到聊天窗口
+    function appendMessage(content, type, isMyself, createTime) {
+        if (type === 'time') {
+            showTime(content);
+        } else if (isMyself) {
+            showMyMessage(content, type, createTime);
+        } else {
+            showTAMessage(content, type, createTime);
+        }
+    }
+
+    // 显示时间
+    function showTime(content) {
+        let messageHtml = `
+            <div class="flex justify-center my-4">
+                <span class="bg-gray-200 text-xs text-textLight px-3 py-1 rounded-full">
+                    ${escapeHTML(content)}
+                </span>
+            </div>
+        `;
+
+        chatContainer.insertAdjacentHTML('beforeend', messageHtml);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+
+    // 自己的消息
+    function showMyMessage(content, type, createTime) {
+        let messageHtml = '';
+
+        if (type === 'text') {
+            messageHtml = `
+                <div class="flex items-start justify-end mb-4 message-appear">
+                    <div class="mr-3 max-w-[70%]">
+                        <div class="bg-white p-3 bubble-right shadow-sm">
+                            <p>${escapeHTML(content)}</p>
+                        </div>
+                    </div>
+                    <img src="${myAvatar}"
+                        alt="自己头像"
+                        class="my-avatar w-10 h-10 rounded-full object-cover"
+                        onclick="msgIMChatViewModel.jumpMyProfile()"
+                    >
+                </div>
+            `;
+        } else if (type === 'image') {
+            messageHtml = `
+                <div class="flex items-start justify-end mb-4 message-appear">
+                    <div class="mr-3 max-w-[70%]">
+                        <div class="bubble-right shadow-sm">
+                            <img src="${content}"
+                                alt="自己发送的图片"
+                                class="send-image rounded-lg max-w-full"
+                                onclick="msgIMChatViewModel.enterPreview('${content}', ${createTime})"
+                            >
+                        </div>
+                    </div>
+                    <img src="${myAvatar}" alt="自己头像" class="my-avatar w-10 h-10 rounded-full object-cover"
+                    onclick="msgIMChatViewModel.jumpMyProfile()"
+                    >
+                </div>
+            `;
+        }
+
+        chatContainer.insertAdjacentHTML('beforeend', messageHtml);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+
+    // 对面的消息
+    function showTAMessage(content, type, createTime) {
+        let messageHtml = '';
+
+        if (type === 'text') {
+            messageHtml = `
+                <div class="flex items-start mb-4 message-appear">
+                    <img src="${otherAvatar}"
+                        alt="对方头像"
+                        class="other-avatar w-10 h-10 rounded-full object-cover"
+                        onclick="msgIMChatViewModel.jumpTAProfile()"
+                    >
+                    <div class="ml-3 max-w-[70%]">
+                        <div class="bg-white p-3 bubble-left shadow-sm">
+                            <p>${escapeHTML(content)}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        } else if (type === 'image') {
+            messageHtml = `
+                 <div class="flex items-start mb-4 message-appear">
+                    <img src="${otherAvatar}" alt="对方头像" class="other-avatar w-10 h-10 rounded-full object-cover"
+                    onclick="msgIMChatViewModel.jumpTAProfile()"
+                    >
+                    <div class="ml-3 max-w-[70%]">
+                        <div class="bubble-left shadow-sm">
+                            <img src="${content}"
+                                alt="对方发送的图片"
+                                class="send-image rounded-lg image-msg"
+                                onclick="msgIMChatViewModel.enterPreview('${content}', ${createTime})"
+                            >
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        chatContainer.insertAdjacentHTML('beforeend', messageHtml);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+
+    // 转义HTML特殊字符
+    function escapeHTML(str) {
+        return str
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+    }
+
+    // 优化后的切换函数
+    function toggleEmojiPanel() {
+        isEmojiPanelOpen = !isEmojiPanelOpen;
+
+        // 确保输入框获得/失去焦点
+        if (isEmojiPanelOpen) {
+            messageInput.blur(); // 隐藏键盘
+        }
+
+        setTimeout(() => {
+         emojiPanel.classList.toggle('hidden', !isEmojiPanelOpen);
+        }, 200)
+
+        // 添加动画类以确保过渡效果
+        if (isEmojiPanelOpen) {
+            emojiPanel.classList.add('animate-fade-in');
+        } else {
+            emojiPanel.classList.remove('animate-fade-in');
+        }
+    }
+
+    // 表情选择面板切换
+    emojiBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        toggleEmojiPanel()
+    });
+
+    // 点击其他区域关闭表情面板
+    document.addEventListener('click', function(event) {
+        if (isEmojiPanelOpen && !emojiPanel.contains(event.target) && event.target !== emojiBtn) {
+            isEmojiPanelOpen = false;
+            emojiPanel.classList.add('hidden');
+        }
+    });
+
+    // 处理触摸事件，提高移动端响应速度
+    emojiBtn.addEventListener('touchstart', function(e) {
+        e.preventDefault(); // 阻止默认行为
+        e.stopPropagation();
+        toggleEmojiPanel();
+    }, { passive: false });
+
+    // 添加CSS动画支持
+    const style = document.createElement('style');
+    style.textContent = `
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    `;
+    document.head.appendChild(style);
+
+    // 选择表情
+    emojiBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const emoji = this.getAttribute('data-emoji');
+            messageInput.value = messageInput.value + emoji;
+        });
+    });
+
+    // 表情分类切换
+    emojiTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const category = this.getAttribute('data-category');
+
+            // 更新标签样式
+            emojiTabs.forEach(t => t.classList.remove('emoji-tab-active'));
+            this.classList.add('emoji-tab-active');
+
+            // 显示对应分类
+            emojiCategories.forEach(cat => {
+                cat.classList.add('hidden');
+            });
+            document.getElementById(`emoji-${category}`).classList.remove('hidden');
+        });
+    });
+
+    // 绑定发送按钮和回车事件
+    messageInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage();
+        }
+    });
+</script>
+</body>
+</html>

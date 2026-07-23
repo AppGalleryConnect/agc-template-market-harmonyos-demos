@@ -4,6 +4,11 @@
       "name": "ShortDramaDetailPage",
       "pageSourceFile": "src/main/ets/page/ShortDramaDetailPage.ets",
       "buildFunction": "shortDramaDetailPageBuilder"
+    },
+    {
+      "name": "ReportPage",
+      "pageSourceFile": "src/main/ets/page/ReportPage.ets",
+      "buildFunction": "reportPageBuilder"
     }
   ]
 }

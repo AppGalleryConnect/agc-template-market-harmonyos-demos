@@ -63,12 +63,29 @@ struct CollectionView {
       right: '4%',
     })
     .onClick(() => {
-      if (this.typeStatus === WRONG_COLLECT.WRONG) {
-        this.examService.clearWrongQuestion()
-      } else {
-        this.examService.clearCollectQuestion();
-      }
-      this.toggleWrongOrCollect(this.typeStatus);
+      this.getUIContext().getPromptAction().showDialog({
+        title: '提示',
+        message: '是否全部删除？',
+        buttons: [
+          {
+            text: '取消',
+            color: '#999999'
+          },
+          {
+            text: '确认',
+            color: '#64BB5C'
+          }
+        ]
+      }).then((result) => {
+        if (result.index === 1) {
+          if (this.typeStatus === WRONG_COLLECT.WRONG) {
+            this.examService.clearWrongQuestion()
+          } else {
+            this.examService.clearCollectQuestion();
+          }
+          this.toggleWrongOrCollect(this.typeStatus);
+        }
+      })
     })
   }
 

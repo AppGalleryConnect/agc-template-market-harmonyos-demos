@@ -21,6 +21,7 @@ export class CalendarVM {
   @Trace curIndex: number = 1
   @Trace weekStart: number = 1
   @Trace changeFlag: boolean = false
+  @Trace animationTargetIndex: number = -1
   @Trace monthDate: dayjs.Dayjs = dayjs()
   @Trace weekDayList: string[] = Constants.weekList
   private curDate: dayjs.Dayjs = dayjs()
@@ -45,6 +46,13 @@ export class CalendarVM {
 
   public handleSwiper(newIndex: number, direction: number, controller: SwiperController) {
     UtilLog.info(TAG, 'index' + newIndex + '  ', this.curIndex)
+
+    if (this.animationTargetIndex >= 0) {
+      if (newIndex === this.animationTargetIndex) {
+        this.animationTargetIndex = -1
+      }
+      return
+    }
 
     if (newIndex === 1 && this.curIndex === 0) {
       return;
@@ -108,6 +116,14 @@ export class CalendarVM {
     return item.dayjsObj.format('YYYYMMDD') === this.selectDate.format('YYYYMMDD')
   }
 
+  public isTodaySelected(item: DateModel): boolean {
+    return item.isToday && this.isDateSelect(item)
+  }
+
+  public isNonTodaySelected(item: DateModel): boolean {
+    return !item.isToday && this.isDateSelect(item)
+  }
+
   public changeDate(date: Date) {
     let gap = (date.getFullYear() - this.curDate.year()) * 12 + date.getMonth() - this.curDate.month()
     UtilLog.info(TAG, 'new date::' + date.toDateString() + 'gap::' + gap)
@@ -121,6 +137,32 @@ export class CalendarVM {
     this.curIndex = 2
     this.selectDate = dayjs(date)
     UtilLog.info(TAG, 'changedate::' + this.selectDate.format('YYYYMMDD'))
+  }
+
+  public changeDateAnimated(date: Date): number {
+    let targetGap = (date.getFullYear() - this.curDate.year()) * 12 + date.getMonth() - this.curDate.month()
+    let currentGap =
+      (this.selectDate.year() - this.curDate.year()) * 12 + this.selectDate.month() - this.curDate.month()
+
+    if (currentGap === targetGap) {
+      this.selectDate = dayjs(date)
+      return -1
+    }
+
+    let minGap = Math.min(currentGap, targetGap) - 2
+    let maxGap = Math.max(currentGap, targetGap) + 2
+
+    this.dateListSource.clearData()
+    for (let i = minGap; i <= maxGap; i++) {
+      let month = this.getDateList(i)
+      this.dateListSource.pushData(month)
+    }
+
+    let currentPosition = currentGap - minGap
+    this.curIndex = currentPosition
+    this.selectDate = dayjs(date)
+
+    return targetGap - minGap
   }
 
   public updateWeekdayStart(value: number) {
@@ -188,6 +230,7 @@ export class CalendarVM {
         isCurrentMonth,
         lunarColor,
         dayjsObj.format('YYYY-M-D'),
+        dayjsObj.isSame(dayjs(), 'day'),
       );
 
       // 记录当天信息

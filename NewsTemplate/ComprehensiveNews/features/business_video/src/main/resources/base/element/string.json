@@ -1,0 +1,16 @@
+{
+  "string": [
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "double_rate_remind",
+      "value": "2.0X快进中"
+    },
+    {
+      "name": "agcit_huawei_comprehensive_news",
+      "value": "1.0.6"
+    }
+  ]
+}

@@ -34,4 +34,8 @@ export { WatchRecordPageBuilder } from './src/main/ets/pages/WatchRecordPage';
 
 export { PrivacySettingsPageBuilder } from './src/main/ets/pages/PrivacySettingsPage';
 
+export { AnchorCenterBuilder } from './src/main/ets/pages/AnchorCenterPage'
+
+export { VideoRecordPlayPageBuilder } from './src/main/ets/pages/VideoRecordPlayPage';
+
 

@@ -1,0 +1,1906 @@
+{
+  "metadata": {
+    "rootDir": "/devcloud/ws/skQZ2/workspace/j_PA0DJHTC/BacAGCSDKImageProcessing/ImageProcessing",
+    "toolType": "ohpm",
+    "toolVersion": "ohpm v5.3.1-rc.4",
+    "author": [
+      {}
+    ]
+  },
+  "modules": [
+    {
+      "moduleName": "commonlib",
+      "artifact": {
+        "component": {
+          "id": "commonlib@1.0.0",
+          "repoType": "ohpm",
+          "name": "commonlib",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/axios-mock-adapter@1.0.0",
+          "desc": "Axios adapter that allows to easily mock requests",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/axios-mock-adapter",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-MHya9ckoaeA5l/jMviaHyGYJAFHMolZdQFjyGE4RO3bQEYsNrGB/0sZhlcfUbEHH++WNH/rgl4bsRfAgpEa0Dw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/axios-mock-adapter/-/@hw-agconnect/axios-mock-adapter-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-toast@1.0.0",
+          "desc": "ui_toast是基于open harmony基础组件开发的组件，用于在屏幕中显示一个操作的轻量级即时反馈，支持显示图片+文字，刷新弹窗内容和修改弹窗样式。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-toast",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-vmk4trgNRIxAK81xj69zRJCayccuryywF5qfheKWy1hdtSMMvXAX4g1EYvAbMd7/PXT8v+g/Xa/ASFS2BSs1KQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-toast/-/@hw-agconnect/ui-toast-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-dialog@1.0.1",
+          "desc": "ui_dialog是基于open harmony基础组件开发的组件，用于在屏幕中显示一个全局弹窗的功能，支持自定义样式，支持任意视图弹出，支持动态数据更新。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-dialog",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-f4SrF/ttuRIhNgS1QLxmYlpMzUuv7EIQgCxSiAsTpdKHlCy3pszEKIZjOCJQmWJhWStVwqkCX/ajZjWMcPR1UA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-dialog/-/@hw-agconnect/ui-dialog-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.24",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.24",
+          "files": [
+            {
+              "integrity": "sha512-4qrcxj+qYhQMmLpdS+3+TfvbOmyj2UG8+6Bmfj9CSn1JPHNY5gJ4NOXU7dIVUd1JPSjhGkNVwaAc8AU596UQZA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.24.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "commonlib@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            },
+            {
+              "id": "@hw-agconnect/axios-mock-adapter@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/ui-toast@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/ui-dialog@1.0.1"
+            },
+            {
+              "id": "@ohos/hypium@1.0.24"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/axios-mock-adapter@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":module_advertisement"
+      ]
+    },
+    {
+      "moduleName": "membership",
+      "artifact": {
+        "component": {
+          "id": "membership@1.0.3",
+          "repoType": "ohpm",
+          "name": "membership",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.3",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-toast@1.0.0",
+          "desc": "ui_toast是基于open harmony基础组件开发的组件，用于在屏幕中显示一个操作的轻量级即时反馈，支持显示图片+文字，刷新弹窗内容和修改弹窗样式。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-toast",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-vmk4trgNRIxAK81xj69zRJCayccuryywF5qfheKWy1hdtSMMvXAX4g1EYvAbMd7/PXT8v+g/Xa/ASFS2BSs1KQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-toast/-/@hw-agconnect/ui-toast-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-dialog@1.0.1",
+          "desc": "ui_dialog是基于open harmony基础组件开发的组件，用于在屏幕中显示一个全局弹窗的功能，支持自定义样式，支持任意视图弹出，支持动态数据更新。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-dialog",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-f4SrF/ttuRIhNgS1QLxmYlpMzUuv7EIQgCxSiAsTpdKHlCy3pszEKIZjOCJQmWJhWStVwqkCX/ajZjWMcPR1UA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-dialog/-/@hw-agconnect/ui-dialog-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.24",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.24",
+          "files": [
+            {
+              "integrity": "sha512-4qrcxj+qYhQMmLpdS+3+TfvbOmyj2UG8+6Bmfj9CSn1JPHNY5gJ4NOXU7dIVUd1JPSjhGkNVwaAc8AU596UQZA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.24.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "membership@1.0.3",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/ui-toast@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/ui-dialog@1.0.1"
+            },
+            {
+              "id": "@ohos/hypium@1.0.24"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":module_advertisement"
+      ]
+    },
+    {
+      "moduleName": "aggregated_login",
+      "artifact": {
+        "component": {
+          "id": "aggregated_login@1.0.2",
+          "repoType": "ohpm",
+          "name": "aggregated_login",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.2",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@tencent/wechat_open_sdk@1.0.15",
+          "desc": "Tencent WeChat OpenSDK",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@tencent/wechat_open_sdk",
+          "version": "1.0.15",
+          "files": [
+            {
+              "integrity": "sha512-O9W8Gj16YBu0fl3d78r4eQQdnljczJPcIDws9i+ErVg94y8twHBkLWdyysiWfhGA7+ltB3mu8EZsk/EAr8LZSw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/ohpm-center/@tencent/wechat_open_sdk/-/@tencent/wechat_open_sdk-1.0.15.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-toast@1.0.0",
+          "desc": "ui_toast是基于open harmony基础组件开发的组件，用于在屏幕中显示一个操作的轻量级即时反馈，支持显示图片+文字，刷新弹窗内容和修改弹窗样式。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-toast",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-vmk4trgNRIxAK81xj69zRJCayccuryywF5qfheKWy1hdtSMMvXAX4g1EYvAbMd7/PXT8v+g/Xa/ASFS2BSs1KQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-toast/-/@hw-agconnect/ui-toast-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-dialog@1.0.1",
+          "desc": "ui_dialog是基于open harmony基础组件开发的组件，用于在屏幕中显示一个全局弹窗的功能，支持自定义样式，支持任意视图弹出，支持动态数据更新。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-dialog",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-f4SrF/ttuRIhNgS1QLxmYlpMzUuv7EIQgCxSiAsTpdKHlCy3pszEKIZjOCJQmWJhWStVwqkCX/ajZjWMcPR1UA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-dialog/-/@hw-agconnect/ui-dialog-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.24",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.24",
+          "files": [
+            {
+              "integrity": "sha512-4qrcxj+qYhQMmLpdS+3+TfvbOmyj2UG8+6Bmfj9CSn1JPHNY5gJ4NOXU7dIVUd1JPSjhGkNVwaAc8AU596UQZA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.24.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "aggregated_login@1.0.2",
+          "dependsOn": [
+            {
+              "id": "@tencent/wechat_open_sdk@1.0.15"
+            },
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/ui-toast@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/ui-dialog@1.0.1"
+            },
+            {
+              "id": "@ohos/hypium@1.0.24"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":module_advertisement"
+      ]
+    },
+    {
+      "moduleName": "app_setting",
+      "artifact": {
+        "component": {
+          "id": "app_setting@1.0.2",
+          "repoType": "ohpm",
+          "name": "app_setting",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.2",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-toast@1.0.0",
+          "desc": "ui_toast是基于open harmony基础组件开发的组件，用于在屏幕中显示一个操作的轻量级即时反馈，支持显示图片+文字，刷新弹窗内容和修改弹窗样式。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-toast",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-vmk4trgNRIxAK81xj69zRJCayccuryywF5qfheKWy1hdtSMMvXAX4g1EYvAbMd7/PXT8v+g/Xa/ASFS2BSs1KQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-toast/-/@hw-agconnect/ui-toast-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-dialog@1.0.1",
+          "desc": "ui_dialog是基于open harmony基础组件开发的组件，用于在屏幕中显示一个全局弹窗的功能，支持自定义样式，支持任意视图弹出，支持动态数据更新。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-dialog",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-f4SrF/ttuRIhNgS1QLxmYlpMzUuv7EIQgCxSiAsTpdKHlCy3pszEKIZjOCJQmWJhWStVwqkCX/ajZjWMcPR1UA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-dialog/-/@hw-agconnect/ui-dialog-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.24",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.24",
+          "files": [
+            {
+              "integrity": "sha512-4qrcxj+qYhQMmLpdS+3+TfvbOmyj2UG8+6Bmfj9CSn1JPHNY5gJ4NOXU7dIVUd1JPSjhGkNVwaAc8AU596UQZA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.24.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "app_setting@1.0.2",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/ui-toast@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/ui-dialog@1.0.1"
+            },
+            {
+              "id": "@ohos/hypium@1.0.24"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":module_advertisement"
+      ]
+    },
+    {
+      "moduleName": "collect_personal_info",
+      "artifact": {
+        "component": {
+          "id": "collect_personal_info@1.0.1",
+          "repoType": "ohpm",
+          "name": "collect_personal_info",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.1",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-toast@1.0.0",
+          "desc": "ui_toast是基于open harmony基础组件开发的组件，用于在屏幕中显示一个操作的轻量级即时反馈，支持显示图片+文字，刷新弹窗内容和修改弹窗样式。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-toast",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-vmk4trgNRIxAK81xj69zRJCayccuryywF5qfheKWy1hdtSMMvXAX4g1EYvAbMd7/PXT8v+g/Xa/ASFS2BSs1KQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-toast/-/@hw-agconnect/ui-toast-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-dialog@1.0.1",
+          "desc": "ui_dialog是基于open harmony基础组件开发的组件，用于在屏幕中显示一个全局弹窗的功能，支持自定义样式，支持任意视图弹出，支持动态数据更新。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-dialog",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-f4SrF/ttuRIhNgS1QLxmYlpMzUuv7EIQgCxSiAsTpdKHlCy3pszEKIZjOCJQmWJhWStVwqkCX/ajZjWMcPR1UA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-dialog/-/@hw-agconnect/ui-dialog-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.24",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.24",
+          "files": [
+            {
+              "integrity": "sha512-4qrcxj+qYhQMmLpdS+3+TfvbOmyj2UG8+6Bmfj9CSn1JPHNY5gJ4NOXU7dIVUd1JPSjhGkNVwaAc8AU596UQZA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.24.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "collect_personal_info@1.0.1",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/ui-toast@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/ui-dialog@1.0.1"
+            },
+            {
+              "id": "@ohos/hypium@1.0.24"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":module_advertisement"
+      ]
+    },
+    {
+      "moduleName": "module_advertisement",
+      "artifact": {
+        "component": {
+          "id": "module_advertisement@1.0.0",
+          "repoType": "ohpm",
+          "name": "module_advertisement",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-toast@1.0.0",
+          "desc": "ui_toast是基于open harmony基础组件开发的组件，用于在屏幕中显示一个操作的轻量级即时反馈，支持显示图片+文字，刷新弹窗内容和修改弹窗样式。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-toast",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-vmk4trgNRIxAK81xj69zRJCayccuryywF5qfheKWy1hdtSMMvXAX4g1EYvAbMd7/PXT8v+g/Xa/ASFS2BSs1KQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-toast/-/@hw-agconnect/ui-toast-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-dialog@1.0.1",
+          "desc": "ui_dialog是基于open harmony基础组件开发的组件，用于在屏幕中显示一个全局弹窗的功能，支持自定义样式，支持任意视图弹出，支持动态数据更新。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-dialog",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-f4SrF/ttuRIhNgS1QLxmYlpMzUuv7EIQgCxSiAsTpdKHlCy3pszEKIZjOCJQmWJhWStVwqkCX/ajZjWMcPR1UA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-dialog/-/@hw-agconnect/ui-dialog-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.24",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.24",
+          "files": [
+            {
+              "integrity": "sha512-4qrcxj+qYhQMmLpdS+3+TfvbOmyj2UG8+6Bmfj9CSn1JPHNY5gJ4NOXU7dIVUd1JPSjhGkNVwaAc8AU596UQZA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.24.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "module_advertisement@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/ui-toast@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/ui-dialog@1.0.1"
+            },
+            {
+              "id": "@ohos/hypium@1.0.24"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": []
+    },
+    {
+      "moduleName": "image_preview",
+      "artifact": {
+        "component": {
+          "id": "image_preview@1.0.0",
+          "repoType": "ohpm",
+          "name": "image_preview",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-toast@1.0.0",
+          "desc": "ui_toast是基于open harmony基础组件开发的组件，用于在屏幕中显示一个操作的轻量级即时反馈，支持显示图片+文字，刷新弹窗内容和修改弹窗样式。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-toast",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-vmk4trgNRIxAK81xj69zRJCayccuryywF5qfheKWy1hdtSMMvXAX4g1EYvAbMd7/PXT8v+g/Xa/ASFS2BSs1KQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-toast/-/@hw-agconnect/ui-toast-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-dialog@1.0.1",
+          "desc": "ui_dialog是基于open harmony基础组件开发的组件，用于在屏幕中显示一个全局弹窗的功能，支持自定义样式，支持任意视图弹出，支持动态数据更新。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-dialog",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-f4SrF/ttuRIhNgS1QLxmYlpMzUuv7EIQgCxSiAsTpdKHlCy3pszEKIZjOCJQmWJhWStVwqkCX/ajZjWMcPR1UA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-dialog/-/@hw-agconnect/ui-dialog-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.24",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.24",
+          "files": [
+            {
+              "integrity": "sha512-4qrcxj+qYhQMmLpdS+3+TfvbOmyj2UG8+6Bmfj9CSn1JPHNY5gJ4NOXU7dIVUd1JPSjhGkNVwaAc8AU596UQZA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.24.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "image_preview@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/ui-toast@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/ui-dialog@1.0.1"
+            },
+            {
+              "id": "@ohos/hypium@1.0.24"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":module_advertisement"
+      ]
+    },
+    {
+      "moduleName": "feedback",
+      "artifact": {
+        "component": {
+          "id": "feedback@1.0.1",
+          "repoType": "ohpm",
+          "name": "feedback",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.1",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/axios-mock-adapter@1.0.0",
+          "desc": "Axios adapter that allows to easily mock requests",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/axios-mock-adapter",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-MHya9ckoaeA5l/jMviaHyGYJAFHMolZdQFjyGE4RO3bQEYsNrGB/0sZhlcfUbEHH++WNH/rgl4bsRfAgpEa0Dw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/axios-mock-adapter/-/@hw-agconnect/axios-mock-adapter-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-toast@1.0.0",
+          "desc": "ui_toast是基于open harmony基础组件开发的组件，用于在屏幕中显示一个操作的轻量级即时反馈，支持显示图片+文字，刷新弹窗内容和修改弹窗样式。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-toast",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-vmk4trgNRIxAK81xj69zRJCayccuryywF5qfheKWy1hdtSMMvXAX4g1EYvAbMd7/PXT8v+g/Xa/ASFS2BSs1KQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-toast/-/@hw-agconnect/ui-toast-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-dialog@1.0.1",
+          "desc": "ui_dialog是基于open harmony基础组件开发的组件，用于在屏幕中显示一个全局弹窗的功能，支持自定义样式，支持任意视图弹出，支持动态数据更新。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-dialog",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-f4SrF/ttuRIhNgS1QLxmYlpMzUuv7EIQgCxSiAsTpdKHlCy3pszEKIZjOCJQmWJhWStVwqkCX/ajZjWMcPR1UA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-dialog/-/@hw-agconnect/ui-dialog-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.24",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.24",
+          "files": [
+            {
+              "integrity": "sha512-4qrcxj+qYhQMmLpdS+3+TfvbOmyj2UG8+6Bmfj9CSn1JPHNY5gJ4NOXU7dIVUd1JPSjhGkNVwaAc8AU596UQZA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.24.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "feedback@1.0.1",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            },
+            {
+              "id": "@hw-agconnect/axios-mock-adapter@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/ui-toast@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/ui-dialog@1.0.1"
+            },
+            {
+              "id": "@ohos/hypium@1.0.24"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/axios-mock-adapter@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":image_preview",
+        ":module_advertisement"
+      ]
+    },
+    {
+      "moduleName": "mine",
+      "artifact": {
+        "component": {
+          "id": "mine@1.0.0",
+          "repoType": "ohpm",
+          "name": "mine",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@tencent/wechat_open_sdk@1.0.15",
+          "desc": "Tencent WeChat OpenSDK",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@tencent/wechat_open_sdk",
+          "version": "1.0.15",
+          "files": [
+            {
+              "integrity": "sha512-O9W8Gj16YBu0fl3d78r4eQQdnljczJPcIDws9i+ErVg94y8twHBkLWdyysiWfhGA7+ltB3mu8EZsk/EAr8LZSw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/ohpm-center/@tencent/wechat_open_sdk/-/@tencent/wechat_open_sdk-1.0.15.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-toast@1.0.0",
+          "desc": "ui_toast是基于open harmony基础组件开发的组件，用于在屏幕中显示一个操作的轻量级即时反馈，支持显示图片+文字，刷新弹窗内容和修改弹窗样式。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-toast",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-vmk4trgNRIxAK81xj69zRJCayccuryywF5qfheKWy1hdtSMMvXAX4g1EYvAbMd7/PXT8v+g/Xa/ASFS2BSs1KQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-toast/-/@hw-agconnect/ui-toast-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-dialog@1.0.1",
+          "desc": "ui_dialog是基于open harmony基础组件开发的组件，用于在屏幕中显示一个全局弹窗的功能，支持自定义样式，支持任意视图弹出，支持动态数据更新。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-dialog",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-f4SrF/ttuRIhNgS1QLxmYlpMzUuv7EIQgCxSiAsTpdKHlCy3pszEKIZjOCJQmWJhWStVwqkCX/ajZjWMcPR1UA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-dialog/-/@hw-agconnect/ui-dialog-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.24",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.24",
+          "files": [
+            {
+              "integrity": "sha512-4qrcxj+qYhQMmLpdS+3+TfvbOmyj2UG8+6Bmfj9CSn1JPHNY5gJ4NOXU7dIVUd1JPSjhGkNVwaAc8AU596UQZA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.24.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "mine@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@tencent/wechat_open_sdk@1.0.15"
+            },
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/ui-toast@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/ui-dialog@1.0.1"
+            },
+            {
+              "id": "@ohos/hypium@1.0.24"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":commonlib",
+        ":aggregated_login",
+        ":collect_personal_info",
+        ":feedback",
+        ":app_setting",
+        ":membership",
+        ":module_advertisement"
+      ]
+    },
+    {
+      "moduleName": "camera",
+      "artifact": {
+        "component": {
+          "id": "camera@1.0.0",
+          "repoType": "ohpm",
+          "name": "camera",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-toast@1.0.0",
+          "desc": "ui_toast是基于open harmony基础组件开发的组件，用于在屏幕中显示一个操作的轻量级即时反馈，支持显示图片+文字，刷新弹窗内容和修改弹窗样式。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-toast",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-vmk4trgNRIxAK81xj69zRJCayccuryywF5qfheKWy1hdtSMMvXAX4g1EYvAbMd7/PXT8v+g/Xa/ASFS2BSs1KQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-toast/-/@hw-agconnect/ui-toast-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-dialog@1.0.1",
+          "desc": "ui_dialog是基于open harmony基础组件开发的组件，用于在屏幕中显示一个全局弹窗的功能，支持自定义样式，支持任意视图弹出，支持动态数据更新。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-dialog",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-f4SrF/ttuRIhNgS1QLxmYlpMzUuv7EIQgCxSiAsTpdKHlCy3pszEKIZjOCJQmWJhWStVwqkCX/ajZjWMcPR1UA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-dialog/-/@hw-agconnect/ui-dialog-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.24",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.24",
+          "files": [
+            {
+              "integrity": "sha512-4qrcxj+qYhQMmLpdS+3+TfvbOmyj2UG8+6Bmfj9CSn1JPHNY5gJ4NOXU7dIVUd1JPSjhGkNVwaAc8AU596UQZA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.24.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "camera@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/ui-toast@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/ui-dialog@1.0.1"
+            },
+            {
+              "id": "@ohos/hypium@1.0.24"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":commonlib",
+        ":mine",
+        ":module_advertisement"
+      ]
+    },
+    {
+      "moduleName": "aggregated_share",
+      "artifact": {
+        "component": {
+          "id": "aggregated_share@1.0.2",
+          "repoType": "ohpm",
+          "name": "aggregated_share",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.2",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-toast@1.0.0",
+          "desc": "ui_toast是基于open harmony基础组件开发的组件，用于在屏幕中显示一个操作的轻量级即时反馈，支持显示图片+文字，刷新弹窗内容和修改弹窗样式。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-toast",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-vmk4trgNRIxAK81xj69zRJCayccuryywF5qfheKWy1hdtSMMvXAX4g1EYvAbMd7/PXT8v+g/Xa/ASFS2BSs1KQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-toast/-/@hw-agconnect/ui-toast-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@tencent/wechat_open_sdk@1.0.15",
+          "desc": "Tencent WeChat OpenSDK",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@tencent/wechat_open_sdk",
+          "version": "1.0.15",
+          "files": [
+            {
+              "integrity": "sha512-O9W8Gj16YBu0fl3d78r4eQQdnljczJPcIDws9i+ErVg94y8twHBkLWdyysiWfhGA7+ltB3mu8EZsk/EAr8LZSw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/ohpm-center/@tencent/wechat_open_sdk/-/@tencent/wechat_open_sdk-1.0.15.har"
+            }
+          ]
+        },
+        {
+          "id": "@tencent/qq-open-sdk@1.0.4",
+          "desc": "QQ Open SDK",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@tencent/qq-open-sdk",
+          "version": "1.0.4",
+          "files": [
+            {
+              "integrity": "sha512-8hQfQxSvrPpIo6n63zsugeG/ZC947vZvDWPkCG6+vOMaLxEp9ynntnnR0inml4ZltQbszFGIBTmpxYCTer8whg==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@tencent/qq-open-sdk/-/@tencent/qq-open-sdk-1.0.4.har"
+            }
+          ]
+        },
+        {
+          "id": "dayjs@1.11.13",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.13",
+          "files": [
+            {
+              "integrity": "sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.13.tgz"
+            }
+          ]
+        },
+        {
+          "id": "core@1.0.0",
+          "desc": "Please describe the basic information.",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "local",
+          "name": "core",
+          "version": "1.0.0",
+          "files": [
+            {
+              "localPath": "components/aggregated_share/libs/weibo_open_sdk",
+              "hash": ""
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-dialog@1.0.1",
+          "desc": "ui_dialog是基于open harmony基础组件开发的组件，用于在屏幕中显示一个全局弹窗的功能，支持自定义样式，支持任意视图弹出，支持动态数据更新。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-dialog",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-f4SrF/ttuRIhNgS1QLxmYlpMzUuv7EIQgCxSiAsTpdKHlCy3pszEKIZjOCJQmWJhWStVwqkCX/ajZjWMcPR1UA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-dialog/-/@hw-agconnect/ui-dialog-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.24",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.24",
+          "files": [
+            {
+              "integrity": "sha512-4qrcxj+qYhQMmLpdS+3+TfvbOmyj2UG8+6Bmfj9CSn1JPHNY5gJ4NOXU7dIVUd1JPSjhGkNVwaAc8AU596UQZA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.24.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "aggregated_share@1.0.2",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/ui-toast@1.0.0"
+            },
+            {
+              "id": "@tencent/wechat_open_sdk@1.0.15"
+            },
+            {
+              "id": "@tencent/qq-open-sdk@1.0.4"
+            },
+            {
+              "id": "dayjs@1.11.13"
+            },
+            {
+              "id": "core@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/ui-dialog@1.0.1"
+            },
+            {
+              "id": "@ohos/hypium@1.0.24"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":module_advertisement"
+      ]
+    },
+    {
+      "moduleName": "photo_editing",
+      "artifact": {
+        "component": {
+          "id": "photo_editing@1.0.0",
+          "repoType": "ohpm",
+          "name": "photo_editing",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-toast@1.0.0",
+          "desc": "ui_toast是基于open harmony基础组件开发的组件，用于在屏幕中显示一个操作的轻量级即时反馈，支持显示图片+文字，刷新弹窗内容和修改弹窗样式。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-toast",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-vmk4trgNRIxAK81xj69zRJCayccuryywF5qfheKWy1hdtSMMvXAX4g1EYvAbMd7/PXT8v+g/Xa/ASFS2BSs1KQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-toast/-/@hw-agconnect/ui-toast-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-dialog@1.0.1",
+          "desc": "ui_dialog是基于open harmony基础组件开发的组件，用于在屏幕中显示一个全局弹窗的功能，支持自定义样式，支持任意视图弹出，支持动态数据更新。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-dialog",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-f4SrF/ttuRIhNgS1QLxmYlpMzUuv7EIQgCxSiAsTpdKHlCy3pszEKIZjOCJQmWJhWStVwqkCX/ajZjWMcPR1UA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-dialog/-/@hw-agconnect/ui-dialog-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.24",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.24",
+          "files": [
+            {
+              "integrity": "sha512-4qrcxj+qYhQMmLpdS+3+TfvbOmyj2UG8+6Bmfj9CSn1JPHNY5gJ4NOXU7dIVUd1JPSjhGkNVwaAc8AU596UQZA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.24.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "photo_editing@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/ui-toast@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/ui-dialog@1.0.1"
+            },
+            {
+              "id": "@ohos/hypium@1.0.24"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":commonlib",
+        ":mine",
+        ":aggregated_login",
+        ":aggregated_share",
+        ":membership",
+        ":module_advertisement"
+      ]
+    },
+    {
+      "moduleName": "phone",
+      "artifact": {
+        "component": {
+          "id": "phone@1.0.0",
+          "repoType": "ohpm",
+          "name": "phone",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-toast@1.0.0",
+          "desc": "ui_toast是基于open harmony基础组件开发的组件，用于在屏幕中显示一个操作的轻量级即时反馈，支持显示图片+文字，刷新弹窗内容和修改弹窗样式。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-toast",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-vmk4trgNRIxAK81xj69zRJCayccuryywF5qfheKWy1hdtSMMvXAX4g1EYvAbMd7/PXT8v+g/Xa/ASFS2BSs1KQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-toast/-/@hw-agconnect/ui-toast-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-dialog@1.0.1",
+          "desc": "ui_dialog是基于open harmony基础组件开发的组件，用于在屏幕中显示一个全局弹窗的功能，支持自定义样式，支持任意视图弹出，支持动态数据更新。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-dialog",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-f4SrF/ttuRIhNgS1QLxmYlpMzUuv7EIQgCxSiAsTpdKHlCy3pszEKIZjOCJQmWJhWStVwqkCX/ajZjWMcPR1UA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-dialog/-/@hw-agconnect/ui-dialog-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.24",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.24",
+          "files": [
+            {
+              "integrity": "sha512-4qrcxj+qYhQMmLpdS+3+TfvbOmyj2UG8+6Bmfj9CSn1JPHNY5gJ4NOXU7dIVUd1JPSjhGkNVwaAc8AU596UQZA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.24.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "phone@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/ui-toast@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/ui-dialog@1.0.1"
+            },
+            {
+              "id": "@ohos/hypium@1.0.24"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":commonlib",
+        ":home",
+        ":mine",
+        ":camera",
+        ":photo_editing",
+        ":aggregated_share",
+        ":module_advertisement"
+      ]
+    },
+    {
+      "moduleName": "home",
+      "artifact": {
+        "component": {
+          "id": "home@1.0.0",
+          "repoType": "ohpm",
+          "name": "home",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.13",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.13",
+          "files": [
+            {
+              "integrity": "sha512-k5fed1a+H44DCdLCm486LmDegwgi1gXXvtrpRgxbf0MLY2IRFjxLSG3FKWWYunwVObN2Dpp+T0vkP9+yFfOxtA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@ohos/axios/-/@ohos/axios-2.2.13.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-toast@1.0.0",
+          "desc": "ui_toast是基于open harmony基础组件开发的组件，用于在屏幕中显示一个操作的轻量级即时反馈，支持显示图片+文字，刷新弹窗内容和修改弹窗样式。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-toast",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-vmk4trgNRIxAK81xj69zRJCayccuryywF5qfheKWy1hdtSMMvXAX4g1EYvAbMd7/PXT8v+g/Xa/ASFS2BSs1KQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-toast/-/@hw-agconnect/ui-toast-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-dialog@1.0.1",
+          "desc": "ui_dialog是基于open harmony基础组件开发的组件，用于在屏幕中显示一个全局弹窗的功能，支持自定义样式，支持任意视图弹出，支持动态数据更新。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-dialog",
+          "version": "1.0.1",
+          "files": [
+            {
+              "integrity": "sha512-f4SrF/ttuRIhNgS1QLxmYlpMzUuv7EIQgCxSiAsTpdKHlCy3pszEKIZjOCJQmWJhWStVwqkCX/ajZjWMcPR1UA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-dialog/-/@hw-agconnect/ui-dialog-1.0.1.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/hypium@1.0.24",
+          "desc": "OpenHarmony JSUnit",
+          "dev": true,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "@ohos/hypium",
+          "version": "1.0.24",
+          "files": [
+            {
+              "integrity": "sha512-4qrcxj+qYhQMmLpdS+3+TfvbOmyj2UG8+6Bmfj9CSn1JPHNY5gJ4NOXU7dIVUd1JPSjhGkNVwaAc8AU596UQZA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/product_npm/@ohos/hypium/-/@ohos/hypium-1.0.24.tgz"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "home@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/ui-toast@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/ui-dialog@1.0.1"
+            },
+            {
+              "id": "@ohos/hypium@1.0.24"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.13"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":commonlib",
+        ":photo_editing",
+        ":module_advertisement"
+      ]
+    }
+  ]
+}

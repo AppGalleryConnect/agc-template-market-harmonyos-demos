@@ -14,18 +14,19 @@
 
 此模板提供如下组件，所有组件存放在工程根目录的components下，如果您仅需使用组件，可参考对应组件的指导链接；如果您使用此模板，请参考本文档。
 
-| 组件                              | 描述                       | 使用指导                                        |
-|---------------------------------| -------------------------- |---------------------------------------------|
-| 考试组件(exam)                      | 展示各类考题，可进行考试   | [使用指导](components/exam/README.md)           |
-| 考试引导组件(guide)                   | 首次引导进入对应类型的考试 | [使用指导](components/guide/README.md)          |
-| 搜索组件(search)                    | 搜索考题                   | [使用指导](components/search/README.md)         |
-| 广告组件(aggregated_ads)            | 展示开屏广告的能力 | [使用指导](components/aggregated_ads/README.md) |
-| 通用分享组件(aggregated_share)        | 分享到微信朋友圈等 | [使用指导](components/aggregated_share/README.md)         |
-| 通用应用内设置组件(app_setting)          | 支持设置开关切换下拉等功能 | [使用指导](components/app_setting/README.md) |
-| 检测应用更新组件(check_app_update)      | 检测应用是否存在新版本 | [使用指导](components/check_app_update/README.md) |
-| 通用个人信息组件(collect_personal_info) | 支持编辑头像、昵称等 | [使用指导](components/collect_personal_info/README.md) |
-| 通用问题反馈组件(feedback)              | 提供意见反馈功能 | [使用指导](components/feedback/README.md) |
-| 会员组件(membership)                | 应用内支付会员开通 | [使用指导](components/membership/README.md) |
+| 组件                              | 描述            | 使用指导                                               |
+|---------------------------------|---------------|----------------------------------------------------|
+| 考试组件(exam)                      | 展示各类考题，可进行考试  | [使用指导](components/exam/README.md)                  |
+| 考试引导组件(guide)                   | 首次引导进入对应类型的考试 | [使用指导](components/guide/README.md)                 |
+| 搜索组件(search)                    | 搜索考题          | [使用指导](components/search/README.md)                |
+| 广告组件(aggregated_ads)            | 展示开屏广告的能力     | [使用指导](components/aggregated_ads/README.md)        |
+| 通用分享组件(aggregated_share)        | 分享到微信朋友圈等     | [使用指导](components/aggregated_share/README.md)      |
+| 通用应用内设置组件(app_setting)          | 支持设置开关切换下拉等功能 | [使用指导](components/app_setting/README.md)           |
+| 检测应用更新组件(check_app_update)      | 检测应用是否存在新版本   | [使用指导](components/check_app_update/README.md)      |
+| 通用个人信息组件(collect_personal_info) | 支持编辑头像、昵称等    | [使用指导](components/collect_personal_info/README.md) |
+| 通用问题反馈组件(feedback)              | 提供意见反馈功能      | [使用指导](components/feedback/README.md)              |
+| 会员组件(membership)                | 应用内支付会员开通     | [使用指导](components/membership/README.md)            |
+| 一镜到底(module_transition)         | 一镜到底          | [使用指导](components/module_transition/README.md)               |
 本模板为驾考类应用提供了常用功能的开发样例，模板主要有引导页、考试和我的三大模块：
 
 * 引导页：提供定位、城市选择、驾照类型选择、学车阶段选择功能。
@@ -104,13 +105,20 @@ DriverLicenseExam
   |   |    |     CommonEnums.ets                    // 公共枚举
   |   |    |     Constants.ets                     // 异常类常量 
   |   |    |     ShowToast.ets                     // 错误提示处理工具
+  |   |    |     TabEnum.ets                       // 主页面Tab枚举值
+  |   |    |     VideoEnum.ets                     // 视频页面Tab枚举值
   |   |    |- model 
-  |   |    |     CommonModel.ets                   // 地理位置获取
+  |   |    |     CommonModel.ets                   // 地理位置获取 
+  |   |    |     BaseViewModel.ets                 // 所有ViewModel的基类
+  |   |    |     BreakpointModel.ets               // 栅格断点 
+  |   |    |     TabModel.ets                      // 应用的Tab信息
   |   |    |- push
   |   |    |     Model.ets                         // 推送数据模型
   |   |    |     PushUtils.ets                     // 推送工具类
   |   |    └- utils 
   |   |          AccountUtil.ets                   // 账号管理工具
+  |   |          BreakpointUtils.ets               // 断点工具
+  |   |          CommonBreakpoint.ets              // 通用断点工具
   |   |          FormatUtil.ets                    // 日历、图片等格式管理工具
   |   |          LocateUtil.ets                    // 定位工具类
   |   |          Logger.ets                        // 日志管理工具
@@ -121,6 +129,7 @@ DriverLicenseExam
   |   |          StringUtil.ets                    // 字符串处理工具
   |   |
   |   |- datasource/src/main/ets                   // 数据管理模块(har)
+  |   |    |- Data.ets                             // 常量类
   |   |    |- ExamService.ets                      // 考试、练习数据处理服务 
   |   |    |- Model.ets                            // 考试相关数据模型
   |   |  
@@ -148,6 +157,7 @@ DriverLicenseExam
   |   |    |- components  
   |   |    |     Exam.ets                          // 答题组件  
   |   |    |     SelectComponent.ets               // 试题组件  
+  |   |    |     ExamResultPage.ets                // 考试详情页面 
   |   |    |  
   |   |    |- controller 
   |   |    |     ExamController.ets                // 答题设置controller
@@ -193,6 +203,7 @@ DriverLicenseExam
   |   |- collect_personal_info                     // 通用个人信息组件
   |   |- feedback                                  // 通用问题反馈组件
   |   |- membership                                // 通用会员组件
+  |   |- module_transition                         // 一镜到底组件
   |
   |- products                                      // 入口模块
   |   |- entry/src/main/ets                   
@@ -234,13 +245,17 @@ DriverLicenseExam
   |   |    |     |     VideoDetailView.ets          // 视频播放页面
   |   |    |     |     VideoListView.ets            // 视频列表
   |   |    |     |
-  |   |    |     |- MainEntry.ets                   // 入口文件
+  |   |    |     |- Index.ets                       // 入口文件
+  |   |    |     |- MainEntry.ets                   // 首页
   |   |    |     |- SelectCityView.ets              // 城市选择页面
   |   |    |     └- SplashPage.ets                  // 开屏广告
   |   |    |- types                               
-  |   |    |    Types.ets                          // 公共Type
+  |   |    |    Types.ets                           // 公共Type
   |   |    └- util                               
-  |   |         WantUtils.ets                      // want处理工具类
+  |   |    |   WantUtils.ets                        // want处理工具类
+  |   |    └- viewmodels                               
+  |   |        |- IndexVM.ets                       // 入口文件ViewMmodels
+  |   |        └- MainEntryVM.ets                   // 首页ViewModels
 ```
 
 
@@ -248,7 +263,7 @@ DriverLicenseExam
 ### 环境
 - DevEco Studio版本：DevEco Studio 6.0.2 Release及以上
 - HarmonyOS SDK版本：HarmonyOS 6.0.2 Release SDK及以上
-- 设备类型：华为手机（包括双折叠和阔折叠）
+- 设备类型：华为手机（包括双折叠和阔折叠）、平板
 - 系统版本：HarmonyOS 6.0.0(20)及以上
 
 ### 权限

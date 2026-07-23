@@ -1,7 +1,5 @@
-import { AppStorageV2, promptAction } from '@kit.ArkUI';
 import {
-  BaseViewModel,
-  CommonConstants,
+  BaseViewModel, CommonConstants, GlobalContext,
 } from 'lib_common';
 import { AccountApi } from 'lib_account';
 import { PhoneConstants, TABS_INFO } from '../common/Constants';
@@ -43,7 +41,7 @@ export class IndexPageViewModel extends BaseViewModel {
       return false;
     } else {
       this.firstBackTime = nowTime;
-      promptAction.showToast({ message: '再按一次退出' });
+      GlobalContext.getUIContext().getPromptAction().showToast({ message: '再按一次退出' });
       return true;
     }
   }

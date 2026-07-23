@@ -4,6 +4,7 @@ import { DramaCoverVM } from '../viewmodels/DramaCoverVM'
 import { onDramaClick } from './BannerPanel'
 import { DramaCover } from './DramaCover'
 import { AppStorageV2 } from '@kit.ArkUI'
+import { LoneTakeAnimationsTransition, LongTakeTransitionParam } from 'module_transition'
 
 @ComponentV2
 export struct RankList {
@@ -22,6 +23,8 @@ export struct RankList {
           ListItem() {
             DramaCover({ drama: drama, index: index + 1, isVertical: this.isVertical })
           }
+          .padding( { bottom: index === this.dramaList.length - 1 ? 100 : 0})
+          .id('RankList' + drama.dramaId)
           .margin({
             top: this.isVertical ? 0 : 12,
             // 水平排列时：让后两个元素的右侧加6个像素
@@ -31,7 +34,13 @@ export struct RankList {
             // 水平排列时：让前两个元素的左侧加6个像素
             left: this.isVertical ? 0 : ([1, 2].indexOf(index + 1) !== -1 ? 12 : 6)
           })
-          .onClick(() => {
+          .onClick(async () => {
+            const longTakeTransitionParam: LongTakeTransitionParam | undefined =
+              await LoneTakeAnimationsTransition.generateLongTakeParam(this.getUIContext(),
+                'RankList' + drama.dramaId, 8);
+            if (longTakeTransitionParam) {
+              drama.longTakeTransitionParam = longTakeTransitionParam;
+            }
             onDramaClick(drama,
               () => {
                 WindowManager.setWindowSystemBarProperties({ statusBarContentColor: '#e6000000' })

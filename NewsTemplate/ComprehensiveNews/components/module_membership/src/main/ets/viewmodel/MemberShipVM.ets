@@ -351,7 +351,11 @@ export class MemberShipVM {
 
   public registerWindowBottomPadding() {
     window.getLastWindow(this.uiContext?.getHostContext()).then(currentWindow => {
-      currentWindow.on('avoidAreaChange', this.getWindowBottomPadding);
+      try {
+        currentWindow.on('avoidAreaChange', this.getWindowBottomPadding);
+      } catch (e) {
+        UtilLog.error(0xFF00, 'MemberShip', `Failed to on curren window. Code is ${e.code}, message is ${e.message}`);
+      }
     }).catch((e: BusinessError) => {
       UtilLog.error(0xFF00, 'MemberShip', `Failed to on avoidAreaChange. Code is ${e.code}, message is ${e.message}`);
     });
@@ -359,7 +363,11 @@ export class MemberShipVM {
 
   public unRegisterWindowBottomPadding() {
     window.getLastWindow(this.uiContext?.getHostContext()).then(currentWindow => {
-      currentWindow.off('avoidAreaChange', this.getWindowBottomPadding);
+      try {
+        currentWindow.off('avoidAreaChange', this.getWindowBottomPadding);
+      } catch (e) {
+        UtilLog.error(0xFF00, 'MemberShip', `Failed to off curren window. Code is ${e.code}, message is ${e.message}`);
+      }
     }).catch((e: BusinessError) => {
       UtilLog.error(0xFF00, 'MemberShip', `Failed to off avoidAreaChange. Code is ${e.code}, message is ${e.message}`);
     });

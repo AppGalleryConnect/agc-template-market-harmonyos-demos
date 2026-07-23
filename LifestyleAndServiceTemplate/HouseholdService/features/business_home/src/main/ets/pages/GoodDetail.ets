@@ -15,6 +15,7 @@
 import { AppStorageV2 } from '@kit.ArkUI';
 import { DialPanel } from 'dial_panel';
 import {
+  BreakpointNameEnum,
   CardContainer,
   CommonConstants,
   CustomShareParams,
@@ -24,7 +25,8 @@ import {
   LinkState,
   LoginBtnInCard,
   NavHeaderBar,
-  RouterModule
+  RouterModule,
+  WindowUtils
 } from 'lib_foundation';
 import {
   CommonUtils,
@@ -46,11 +48,12 @@ export function GoodDetailBuilder() {
 
 @ComponentV2
 export struct GoodDetail {
-  @Local breakpoint: string = '';
+  @Local breakpoint: string = 'sm';
   @Local good: GoodInfo = new GoodInfo();
   @Local longTakeTransitionParam: LongTakeTransitionParam | undefined = undefined;
   @Local longTakeSession: LongTakeAnimationProperties = new LongTakeAnimationProperties();
-  @Local instance: CustomShareParams = AppStorageV2.connect(CustomShareParams, 'shareInstance', () => new CustomShareParams())!;
+  @Local instance: CustomShareParams =
+    AppStorageV2.connect(CustomShareParams, 'shareInstance', () => new CustomShareParams())!;
   homeBaseInfo: HomeBaseInfo = AppStorageV2.connect(HomeBaseInfo, () => new HomeBaseInfo())!;
   linkState: LinkState = AppStorageV2.connect(LinkState, () => new LinkState())!;
   private uiContext: UIContext = this.getUIContext();
@@ -69,7 +72,7 @@ export struct GoodDetail {
   @Computed
   get gridCount() {
     const length = this.imagesItem.length;
-    const isSmallScreen = this.breakpoint === 'sm';
+    const isSmallScreen = this.breakpoint === BreakpointNameEnum.SM;
 
     if (isSmallScreen) {
       return length === 1 ? '1fr' : '1fr 1fr';
@@ -116,6 +119,7 @@ export struct GoodDetail {
         this.ContentBuilder()
       }
     }
+    .padding({ top: WindowUtils.windowTopPadding })
     .id('GoodDetail')
     .hideTitleBar(true)
     // 弹出页需要修改navDestination的背景颜色为session中的值
@@ -123,7 +127,6 @@ export struct GoodDetail {
     .onSizeChange(() => {
       this.longTakeSession.setNewSize({ width: '100%', height: '100%' });
     })
-    .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])
     .onReady((navDestContext: NavDestinationContext) => {
       if (this.longTakeTransitionParam) {
         this.longTakeSession.init(navDestContext, this.longTakeTransitionParam, {
@@ -137,32 +140,38 @@ export struct GoodDetail {
 
   @Builder
   ContentBuilder() {
-    GridRow(GridRowColSetting.DEFAULT_GRID_ROW_OPTIONS) {
-      GridCol({ span: GridRowColSetting.GRID_ROW_OPTIONS_COLUMNS, }) {
-        Column() {
+    Column() {
+      NavHeaderBar({
+        title: this.good.title || '服务详情',
+        showBackBtn: true,
+      })
+        .margin({
+          bottom: 12,
+          left: GridRowColSetting.getPageMargin(this.breakpoint),
+          right: GridRowColSetting.getPageMargin(this.breakpoint)
+        })
+
+      GridRow(GridRowColSetting.DEFAULT_GRID_ROW_OPTIONS) {
+        GridCol({
+          span: GridRowColSetting.DEFAULT_CENTER_COL_SPAN,
+          offset: GridRowColSetting.DEFAULT_CENTER_COL_OFFSET,
+        }) {
           Scroll() {
             Column({ space: 12 }) {
-              NavHeaderBar({
-                title: this.good.title || '服务详情',
-                showBackBtn: true,
-              })
               this.Banner()
-              Column({ space: 12 }) {
-                this.TitleCard()
-                if (this.good.serviceContentList) {
-                  this.ServiceContentCard()
-                }
-                if (this.good.servicePipeList) {
-                  this.ServiceWorkflowCard()
-                }
-                if (this.good.feeList) {
-                  this.ChargeInstructionCard()
-                }
-                if (this.good.qaList.length) {
-                  this.CommonQuestionCard()
-                }
+              this.TitleCard()
+              if (this.good.serviceContentList) {
+                this.ServiceContentCard()
               }
-
+              if (this.good.servicePipeList) {
+                this.ServiceWorkflowCard()
+              }
+              if (this.good.feeList) {
+                this.ChargeInstructionCard()
+              }
+              if (this.good.qaList.length) {
+                this.CommonQuestionCard()
+              }
               this.MoreDetail()
             }
           }
@@ -171,25 +180,28 @@ export struct GoodDetail {
             left: GridRowColSetting.getPageMargin(this.breakpoint),
             right: GridRowColSetting.getPageMargin(this.breakpoint)
           })
-          .layoutWeight(1)
+          .height(`calc(100% - 116vp - ${WindowUtils.windowBottomPadding}vp - 2*${GridRowColSetting.getButtonGutter(
+            this.breakpoint)}vp)`)
           .align(Alignment.Top)
           .scrollBar(BarState.Off)
           .edgeEffect(EdgeEffect.Spring)
+        }
 
+        GridCol({ span: GridRowColSetting.GRID_ROW_OPTIONS_COLUMNS }) {
           this.BottomOperate()
         }
-        .width(CommonConstants.FULL_PERCENT)
-        .height(CommonConstants.FULL_PERCENT)
       }
+      .onBreakpointChange((bp) => {
+        this.breakpoint = bp;
+      })
     }
-    .onBreakpointChange((bp) => {
-      this.breakpoint = bp;
-    })
+    .width(CommonConstants.FULL_PERCENT)
+    .height(CommonConstants.FULL_PERCENT)
   }
 
   @Builder
   Banner() {
-    if (this.breakpoint === 'sm') {
+    if (this.breakpoint === BreakpointNameEnum.SM) {
       Image(CommonUtils.handleImgUrl(this.good.image))
         .width(CommonConstants.FULL_PERCENT)
         .aspectRatio(16 / 9)
@@ -354,8 +366,8 @@ export struct GoodDetail {
           }
         }, (item: IntroItem) => item.type + item.value)
       }
-      .rowsGap(this.breakpoint === 'sm' ? 8 : 12)
-      .columnsGap(this.breakpoint === 'sm' ? 8 : 12)
+      .rowsGap(this.breakpoint === BreakpointNameEnum.SM ? 8 : 12)
+      .columnsGap(this.breakpoint === BreakpointNameEnum.SM ? 8 : 12)
       .columnsTemplate(this.gridCount)
     }
   }
@@ -410,13 +422,12 @@ export struct GoodDetail {
             })
         }
       }
-
     }
     .justifyContent(FlexAlign.Center)
     .width(CommonConstants.FULL_PERCENT)
     .padding({
-      top: 8,
-      bottom: 8,
+      top: GridRowColSetting.getButtonGutter(this.breakpoint),
+      bottom: GridRowColSetting.getButtonGutter(this.breakpoint) + WindowUtils.windowBottomPadding,
       right: 10,
       left: 10
     })

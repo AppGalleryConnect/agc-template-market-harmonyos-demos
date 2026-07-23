@@ -1,7 +1,7 @@
 import { common } from '@kit.AbilityKit';
-import { ConfirmDialog } from 'component';
+import { DialPanel } from 'dial_panel';
 import { Constants, NavPathName } from 'constant';
-import { consult, routeToPetal } from 'util';
+import { routeToPetal } from 'util';
 import { HomePageVM } from '../viewmodel/HomePageVM';
 
 @ComponentV2
@@ -9,16 +9,9 @@ export struct BasicInfoArea {
   @Param isHome: boolean = false;
   vm: HomePageVM = HomePageVM.instance;
   @Consumer('mainPathStack') mainPathStack: NavPathStack = new NavPathStack();
-  dialogController: CustomDialogController | null = new CustomDialogController({
-    builder: ConfirmDialog({
-      call: () => {
-        consult(this.vm.hotelInfo.appInfo.phone);
-      },
-      phone: this.vm.hotelInfo.appInfo.phone,
-    }),
-    customStyle: true,
-    autoCancel: true,
-  });
+  private dialPanel: DialPanel = new DialPanel(this.getUIContext())
+    .setTitle('联系客服')
+    .setPhoneNumber(this.vm.hotelInfo.appInfo.phone);
 
   jumpToInfo() {
     if (this.isHome) {
@@ -34,38 +27,52 @@ export struct BasicInfoArea {
         });
 
         Column({ space: 6 }) {
-          Text(this.vm.hotelInfo.appInfo.appName)
-            .fontSize(20)
-            .fontWeight(500)
-            .fontColor('#111111')
-            .maxLines(1)
-            .textOverflow({ overflow: TextOverflow.Ellipsis })
-            .onClick(() => {
-              this.jumpToInfo();
-            });
+          Row({ space: 8 }) {
+            Text(this.vm.hotelInfo.appInfo.appName)
+              .fontSize(20)
+              .fontWeight(FontWeight.Medium)
+              .fontColor($r('sys.color.font_primary'))
+              .maxLines(1)
+              .textOverflow({ overflow: TextOverflow.Ellipsis })
+              .onClick(() => {
+                this.jumpToInfo();
+              });
+            if (!this.isHome) {
+              Image($r('app.media.navigating')).size({ height: 16, width: 16 }).onClick(() => {
+                routeToPetal(this.getUIContext().getHostContext() as common.UIAbilityContext,
+                  this.vm.hotelInfo.appInfo.appName);
+              });
+            }
+          }
 
-          Row({ space: 4 }) {
-            Image($r('app.media.icon_position')).size({ height: 12, width: 12 });
-            Text(this.vm.hotelInfo.appInfo.address).fontSize(12).onClick(() => {
-              this.jumpToInfo();
-            }).maxLines(1).textOverflow({ overflow: TextOverflow.Ellipsis });
-          };
-        }.width('50%').alignItems(HorizontalAlign.Start);
-      };
+
+          Text(this.vm.hotelInfo.appInfo.address).fontSize(12).onClick(() => {
+            this.jumpToInfo();
+          }).maxLines(1).textOverflow({ overflow: TextOverflow.Ellipsis });
+
+        }.layoutWeight(1).alignItems(HorizontalAlign.Start);
+      }.layoutWeight(1);
 
       Row({ space: 12 }) {
-        Image($r('app.media.navigating')).size({ height: 24, width: 24 }).onClick(() => {
-          routeToPetal(this.getUIContext().getHostContext() as common.UIAbilityContext,
-            this.vm.hotelInfo.appInfo.appName);
-        });
-        Image($r('app.media.phone'))
-          .size({ height: 24, width: 24 })
-          .onClick(() => {
-            if (this.dialogController !== null) {
-              this.dialogController.open();
-            }
+        if (this.isHome) {
+          Image($r('app.media.navigating')).size({ height: 16, width: 16 }).onClick(() => {
+            routeToPetal(this.getUIContext().getHostContext() as common.UIAbilityContext,
+              this.vm.hotelInfo.appInfo.appName);
           });
-      }.height(Constants.FULL_SCREEN).alignItems(VerticalAlign.Top).padding({ top: 8 });
-    }.width(Constants.FULL_SCREEN).justifyContent(FlexAlign.SpaceBetween).height(60);
+        }
+
+        Image($r('app.media.phone'))
+          .size({ height: 16, width: 16 })
+          .onClick(() => {
+            this.dialPanel.open();
+          });
+      }.height(Constants.FULL_SCREEN).alignItems(VerticalAlign.Top).padding({ top: 12 });
+    }
+    .width(Constants.FULL_SCREEN)
+    .justifyContent(FlexAlign.SpaceBetween)
+    .height(84)
+    .padding(12)
+    .borderRadius(16)
+    .backgroundColor($r('sys.color.comp_background_primary'));
   }
 }

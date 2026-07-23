@@ -16,6 +16,7 @@ import { AppStorageV2 } from '@kit.ArkUI';
 import {
   AdInfo,
   AppStorageBank,
+  BreakpointNameEnum,
   CommonConstants,
   deleteHistoryList,
   getGood,
@@ -29,7 +30,8 @@ import {
   LinkState,
   MENU_LIST,
   RouterModule,
-  ServiceCard
+  ServiceCard,
+  WindowUtils
 } from 'lib_foundation';
 import { CommonUtils, IGoodInfo, RouterMap, TypeGood, WindowUtil } from 'module_base';
 import { DialPanel } from 'dial_panel';
@@ -40,7 +42,7 @@ import { AdvertisementComponent } from '../components/Advertisement';
 
 @ComponentV2
 export struct HomePage {
-  @Local breakpoint: string = '';
+  @Local breakpoint: BreakpointNameEnum = BreakpointNameEnum.SM;
   linkState: LinkState = AppStorageV2.connect(LinkState, () => new LinkState())!;
   homeVM: HomeVM = HomeVM.instance;
   controller: SearchViewController = new SearchViewController();
@@ -79,9 +81,14 @@ export struct HomePage {
         }
       }
       .onBreakpointChange((bp) => {
-        this.breakpoint = bp;
+        this.breakpoint = bp as BreakpointNameEnum;
       })
     }
+    .padding({
+      top: WindowUtils.windowTopPadding,
+      bottom: [BreakpointNameEnum.LG, BreakpointNameEnum.XL].includes(this.breakpoint) ?
+        WindowUtils.windowBottomPadding : 0,
+    })
     .onBackPressed(() => {
       return this.controller.onBackPressed();
     })
@@ -123,6 +130,8 @@ export struct HomePage {
           routerStack: RouterModule.getStack(),
           showHotSearch: false,
           showFilterTag: false,
+          windowTopPadding: WindowUtils.windowTopPadding,
+          windowBottomPadding: WindowUtils.windowBottomPadding,
           controller: this.controller,
           queryHistoryList: getHistoryList,
           queryGuessList: getGuessList,
@@ -135,7 +144,7 @@ export struct HomePage {
           },
         })
       }
-      .layoutWeight(1)
+      .width(180)
       .justifyContent(FlexAlign.End)
     }
     .justifyContent(FlexAlign.SpaceBetween)
@@ -160,8 +169,8 @@ export struct HomePage {
           })
       }, (v: IGoodInfo) => v.id ?? '')
     }
-    .itemSpace(this.breakpoint === 'sm' ? 0 : 12)
-    .displayCount(this.breakpoint === 'sm' ? 1 : 2, true)
+    .itemSpace(this.breakpoint === BreakpointNameEnum.SM ? 0 : 12)
+    .displayCount(this.breakpoint === BreakpointNameEnum.SM ? 1 : 2, true)
     .width(CommonConstants.FULL_PERCENT)
     .margin({ bottom: 12 })
     .autoPlay(true)
@@ -238,6 +247,7 @@ export struct HomePage {
         Text('--已经到底啦--').fontSize(14).height(40).width(CommonConstants.FULL_PERCENT).textAlign(TextAlign.Center)
       }
     }
+    .lanes([BreakpointNameEnum.LG, BreakpointNameEnum.XL].includes(this.breakpoint) ? 3 : 1, 12)
     .width(CommonConstants.FULL_PERCENT)
     .height(CommonConstants.FULL_PERCENT)
     .cachedCount(2)

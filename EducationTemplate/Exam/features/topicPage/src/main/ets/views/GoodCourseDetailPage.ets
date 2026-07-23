@@ -28,6 +28,9 @@ import { MyDataSource, GoodCourse } from '../viewModel/CourseHomeModel';
 import { aggregatedPaymentService, CashierPicker, PaymentType } from 'aggregated_payment';
 import { UserInfo } from 'login_info';
 import { UtilLog } from '@hw-agconnect/util-log';
+import { QQShareData, SharePicker } from 'aggregated_share';
+
+const TAG = '[GoodCourseDetailPage]';
 
 @ComponentV2
 export struct GoodCourseDetailPage {
@@ -39,6 +42,7 @@ export struct GoodCourseDetailPage {
   @Local prop: SampleOrderInfo = AppStorageV2.connect(SampleOrderInfo, () => new SampleOrderInfo())!;
   @Local propCollect: SampleCollectInfo = AppStorageV2.connect(SampleCollectInfo, () => new SampleCollectInfo())!;
   @Local logoUser: UserInfo = AppStorageV2.connect(UserInfo, () => new UserInfo())!;
+  @Local orderState: OrderState = OrderState.WaitToPay;
   courseName: string = '';
   uiContext: UIContext = this.getUIContext();
   promptAction: PromptAction = this.uiContext.getPromptAction();
@@ -46,6 +50,7 @@ export struct GoodCourseDetailPage {
     .onRealPayment(async (type: PaymentType) => {
       // mock场景
       this.cashierPicker.close();
+
       if (type === PaymentType.WECHAT) {
         const isWeChatOpenSuccess: boolean =
           await aggregatedPaymentService.requestPaymentByWeChat(this.uiContext, {
@@ -86,6 +91,11 @@ export struct GoodCourseDetailPage {
       if (temp instanceof OrderInfo) {
         this.courseName = temp.content;
         this.goodCourse.id = temp.id;
+        UtilLog.debug(TAG, 'prop111', JSON.stringify(this.prop.orderInfos[0]?.orderState ?? 0))
+        if(this.prop.orderInfos.length) {
+          const matchedOrder = this.prop.orderInfos.find((item) => item.id === this.goodCourse.id);
+          this.orderState = matchedOrder ? matchedOrder.orderState : 0;
+        }
       } else {
         this.courseName = temp;
       }
@@ -208,7 +218,27 @@ export struct GoodCourseDetailPage {
         .height($r('app.float.vp_30'))
         .margin({ right: $r('app.float.vp_6') })
         .onClick(() => {
-          GlobalContextUtils.showToast({ message: '暂不支持分享' });
+          const picker: SharePicker = new SharePicker({
+            title: this.courseName !== '' ? this.courseName : this.goodCourse.title,
+            subTitle: this.courseName !== '' ? this.courseName : this.goodCourse.title,
+            coverUrl: this.goodCourse.icon,
+            createTime: new Date().getTime(),
+            thumbUrl: '', // 实际需要传入url(png)，例：https://agc-storage-drcn.platform.dbankcloud.cn/v0/template-thwjd/commonwidget%2Fexample960x720.png
+            landingPageUrl: '', // 二维码生成,例：https://www.xxxxxx.com/exam?action=examList
+          });
+
+          picker.setSignQQShareDataCB((shareJson: string) => {
+            const signData = new QQShareData();
+            signData.shareJson = shareJson;
+            signData.timestamp = Date.parse(new Date().toString()) / 1000;
+            signData.nonce = 62695688; // 随机自然数
+            signData.shareJsonSign = 'Hsvqs0IpjiN6DfFfhboGp+r3XzQ='; // 签名串，需要使用HMAC-SHA1 加密后，自己通过 Base64 编码得到
+            return Promise.resolve(signData);
+          })
+
+          picker.show(this.getUIContext(), {
+            autoClose: true,
+          });
         });
 
         Column() {
@@ -234,7 +264,8 @@ export struct GoodCourseDetailPage {
             let orderNo = '202506' + Date.now();
             let content = this.courseName;
             let orderInfo =
-              new OrderInfo(this.goodCourse.id, this.goodCourse.isCollect, OrderState.All, orderNo, content, false);
+              new OrderInfo(this.goodCourse.id, this.goodCourse.isCollect, OrderState.All, orderNo, content,
+                false, false);
             this.propCollect.orderInfos.unshift(orderInfo);
             GlobalContextUtils.showToast({ message: '收藏成功' });
           } else {
@@ -246,8 +277,7 @@ export struct GoodCourseDetailPage {
         });
       }.justifyContent(FlexAlign.SpaceBetween)
       .alignItems(VerticalAlign.Center);
-
-      Text('￥288 立即购买')
+      Text(this.orderState === 0 ? '￥288 立即购买' : '去学习')//this.goodCourse.isPay
         .padding({
           left: $r('app.float.vp_20'),
           right: $r('app.float.vp_20'),
@@ -262,14 +292,19 @@ export struct GoodCourseDetailPage {
         .fontWeight(FontWeight.Medium)
         .backgroundColor('rgb(232, 64, 38)')
         .onClick(() => {
-          if (this.logoUser.isLogin) {
-            this.cashierPicker
-              .reset()
-              .setAmount(28800)
-              .setTradeSummary('精华题库中级班')
-              .open();
+          if(this.orderState !==0) {
+            // 跳转我的课程详情页
+            RouterModule.push({ url: RouterMap.COURSE_INTRODUCTION_PAGE });
           } else {
-            RouterModule.push({ url: RouterMap.LOGIN_PAGE });
+            if (this.logoUser.isLogin) {
+              this.cashierPicker
+                .reset()
+                .setAmount(28800)
+                .setTradeSummary('精华题库中级班')
+                .open();
+            } else {
+              RouterModule.push({ url: RouterMap.LOGIN_PAGE });
+            }
           }
         });
     }
@@ -311,7 +346,7 @@ export struct GoodCourseDetailPage {
     let orderNo = '202506' + Date.now();
     let content = this.courseName;
     let orderInfo =
-      new OrderInfo(this.goodCourse.id, this.goodCourse.isCollect, OrderState.Paid, orderNo, content, false);
+      new OrderInfo(this.goodCourse.id, this.goodCourse.isCollect, OrderState.Paid, orderNo, content, false, true);
     sampleOrderInfo.orderInfos.unshift(orderInfo);
     GlobalContextUtils.showToast({ message: '支付成功' });
     RouterModule.pop();
@@ -322,7 +357,7 @@ export struct GoodCourseDetailPage {
     let orderNo = '202506' + Date.now();
     let content = this.courseName;
     let orderInfo =
-      new OrderInfo(this.goodCourse.id, this.goodCourse.isCollect, OrderState.WaitToPay, orderNo, content, false);
+      new OrderInfo(this.goodCourse.id, this.goodCourse.isCollect, OrderState.WaitToPay, orderNo, content, false, true);
     orderInfo.startTime =  Date.now()
     sampleOrderInfo.orderInfos.unshift(orderInfo);
     GlobalContextUtils.showToast({ message: '支付失败' });

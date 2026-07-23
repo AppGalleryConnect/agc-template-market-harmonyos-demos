@@ -13,13 +13,42 @@
  * limitations under the License.
  */
 
-import { BreakpointType } from 'commonlib';
+import { BreakpointType, RouterMap, RouterModule } from 'commonlib';
 import { TabListItem } from '../model/TabListItem';
 import { MainVM } from '../viewmodels/MainVM';
+import { HdsTabs } from '@kit.UIDesignKit';
 
 @ComponentV2
 struct MainPage {
   vm: MainVM = MainVM.instance;
+
+  @Monitor('vm.formCardJump.form.id', 'vm.formCardJump.form.url')
+  formChange(monitor: IMonitor) {
+    if (monitor.value('vm.formCardJump.form.url')?.now) {
+      let url = monitor.value('vm.formCardJump.form.url')?.now as string;
+      this.widgetInterception(url);
+    }
+  }
+
+  /*
+    * 卡片跳转拦截
+    * */
+  widgetInterception(url: string) {
+    if (url) {
+      if (url === RouterMap.MAIN_PAGE) {
+        RouterModule.popToName(RouterMap.MAIN_PAGE)
+        this.vm.curIndex = 0;
+        this.vm.controller.changeIndex(0);
+      } else {
+        if ((url === RouterMap.COLLECTION_PAGE || url === RouterMap.MESSAGE_CENTER_PAGE) && !this.vm.userInfo.isLogin) {
+          RouterModule.push({ url: RouterMap.LOGIN_PAGE, param: url })
+        } else {
+          RouterModule.push({ url: url });
+        }
+      }
+      this.vm.formCardJump.form.url = '';
+    }
+  }
 
   @Builder
   tabBarBuilder(item: TabListItem, index: number) {
@@ -39,7 +68,7 @@ struct MainPage {
   }
 
   build() {
-    Tabs({index: $$this.vm.curIndex, controller: this.vm.controller }) {
+    HdsTabs({index: this.vm.curIndex, controller: this.vm.hdsController }) {
       ForEach(this.vm.tabList, (item: TabListItem, index: number) => {
         TabContent() {
           item.component.builder();
@@ -47,6 +76,9 @@ struct MainPage {
         .tabBar(this.tabBarBuilder(item, index));
       }, (item: TabListItem, index) => JSON.stringify(item) + '_' + index);
     }
+    .onChange((index) => {
+      this.vm.curIndex = index;
+    })
     .vertical(new BreakpointType<boolean>({
       sm: false,
       md: false,
@@ -64,8 +96,8 @@ struct MainPage {
     .barHeight(new BreakpointType<Length>({
       sm: TabStyle.BAR_HEIGHT,
       md: TabStyle.BAR_HEIGHT,
-      lg: 300,
-      xl: 300,
+      lg: 400,
+      xl: 400,
     }).getValue(this.vm.breakPointModel.currentBreakpoint))
     .barWidth(new BreakpointType<Length>({
       sm: '100%',

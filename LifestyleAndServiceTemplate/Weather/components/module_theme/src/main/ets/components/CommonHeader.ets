@@ -31,6 +31,7 @@ export struct CommonHeader {
   headerHeight: number = HeaderConstant.HEIGHT;
 
   async aboutToAppear() {
+    AppStorage.setOrCreate('theme_uiContext', this.getUIContext())
     await WindowUtil.initWindowUtil();
   }
 

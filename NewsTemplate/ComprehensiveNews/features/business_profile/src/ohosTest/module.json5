@@ -1,0 +1,12 @@
+{
+  "module": {
+    "name": "business_profile_test",
+    "type": "feature",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false
+  }
+}

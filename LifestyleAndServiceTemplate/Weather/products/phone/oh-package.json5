@@ -7,8 +7,9 @@
   "license": "",
   "dependencies": {
     "lib_foundation": "file:../../commons/lib_foundation",
+    "module_weather_core": "file:../../components/module_weather_core",
+    "module_advertisement": "file:../../components/module_advertisement",
     "business_home": "file:../../features/business_home",
     "business_mine": "file:../../features/business_mine",
   }
 }
-

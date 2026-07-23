@@ -1,7 +1,6 @@
-import { PersistenceV2 } from '@kit.ArkUI';
 import dayjs from 'dayjs';
 import { ToggleItem } from 'base_apis';
-import { UserEvent, UserEventItem } from '../model/UserEventModel';
+import { UserEventItem } from '../model/UserEventModel';
 import CalendarEventVM from '../viewModel/ViewModel';
 import { eventRecord, EVENT_TYPE, FOLDER_SPAN, GRID_ROW_OPTIONS, routerMap } from '../constants/Constants';
 import { DistanceToday } from './common/DistanceToday';
@@ -9,7 +8,6 @@ import { DistanceToday } from './common/DistanceToday';
 
 @ComponentV2
 export struct CalendarEventList {
-  @Local userEvent: UserEvent = PersistenceV2.connect(UserEvent, () => new UserEvent())!;
   @Local calendarEventVM: CalendarEventVM = CalendarEventVM.instance;
   @Param eventList: ToggleItem[] = []
 
@@ -48,7 +46,7 @@ export struct CalendarEventList {
             y: 8,
           },
         }) {
-          ForEach(this.userEvent.userEventList, (item: UserEventItem) => {
+          ForEach(this.calendarEventVM.userEvent.userEventList, (item: UserEventItem) => {
             GridCol({
               span: FOLDER_SPAN,
             }) {

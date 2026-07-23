@@ -19,7 +19,9 @@ export enum OrderStatusType {
   TO_PAY = 1,
   TO_USE = 2,
   CANCELED = 3,
-  COMPLETED = 4
+  COMPLETED = 4,
+  TO_SHIP = 5,
+  TO_RECEIVE = 6
 }
 
 export interface OrderType {
@@ -49,6 +51,16 @@ export const ORDER_TYPES: Array<OrderType> = [
     status: 4,
     text: '已完成',
     icon: 'app.media.icon_order_ready'
+  },
+  {
+    status: 5,
+    text: '待发货',
+    icon: 'app.media.icon_order_pay'
+  },
+  {
+    status: 6,
+    text: '待收货/取件',
+    icon: 'app.media.icon_order_travel'
   }
 ]
 
@@ -58,15 +70,15 @@ export const ORDER_TYPES_INFO: OrderTypesTabBar[] = [
     title: '住宿订单',
   },
   {
-    index: OrderStatusType.TO_PAY,
+    index: OrderStatusType.ALL,
     title: '商城订单',
   },
 ]
 
-export const ORDER_TABS_INFO: OrderTabBar[] = [
+export const HOTEL_ORDER_TABS_INFO: OrderTabBar[] = [
   {
     index: OrderStatusType.ALL,
-    title: '全部订单',
+    title: '全部',
     icon: $r('app.media.icon_my_order1'),
   },
   {
@@ -88,5 +100,38 @@ export const ORDER_TABS_INFO: OrderTabBar[] = [
     index: OrderStatusType.COMPLETED,
     title: '已完成',
     icon: $r('app.media.icon_my_order5'),
+  },
+];
+
+export const COMMODITY_ORDER_TABS_INFO: OrderTabBar[] = [
+  {
+    index: OrderStatusType.ALL,
+    title: '全部',
+    icon: $r('app.media.icon_my_order1'),
+  },
+  {
+    index: OrderStatusType.TO_PAY,
+    title: '待付款',
+    icon: $r('app.media.icon_my_order2'),
+  },
+  {
+    index: OrderStatusType.TO_SHIP,
+    title: '待发货',
+    icon: $r('app.media.icon_my_order3'),
+  },
+  {
+    index: OrderStatusType.TO_RECEIVE,
+    title: '待收货/取件',
+    icon: $r('app.media.icon_my_order4'),
+  },
+  {
+    index: OrderStatusType.CANCELED,
+    title: '已取消',
+    icon: $r('app.media.icon_my_order5'),
+  },
+  {
+    index: OrderStatusType.COMPLETED,
+    title: '已完成',
+    icon: $r('app.media.icon_my_order1'),
   },
 ];

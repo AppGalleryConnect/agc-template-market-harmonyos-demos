@@ -5,8 +5,8 @@
       {
         "name": "default",
         "signingConfig": "default",
-        "compatibleSdkVersion": "5.1.1(19)",
-        "targetSdkVersion": "6.0.2(22)",
+        "compatibleSdkVersion": "6.1.0(23)",
+        "targetSdkVersion": "6.1.1(24)",
         "runtimeOS": "HarmonyOS",
         "buildOption": {
           "strictMode": {
@@ -125,10 +125,6 @@
     {
       "name": "image_preview",
       "srcPath": "./components/image_preview"
-    },
-    {
-      "name": "floating_navbar",
-      "srcPath": "./components/floating_navbar"
     }
   ]
 }

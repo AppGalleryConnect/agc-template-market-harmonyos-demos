@@ -24,7 +24,7 @@ export struct NewsTabContent {
 
   @Builder
   loadMoreFooter() {
-    LoadMoreFooter({ 'isLoading': this.newsContentVM.isLoading })
+    LoadMoreFooter({ 'isLoading': this.newsContentVM.isLoading, 'isHomePage': true })
   }
 
   build() {

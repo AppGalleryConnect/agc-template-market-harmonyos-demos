@@ -1,9 +1,8 @@
 import { preferences } from '@kit.ArkData';
 import { BusinessError, commonEventManager } from '@kit.BasicServicesKit';
-import { LocationInfo } from 'lib_foundation';
-import { Logger } from 'lib_foundation/src/main/ets/utils/Logger';
-import { DailyWeather, HourlyWeather, RealTimeWeather, WeatherUtils } from 'module_weather_core';
 import { formBindingData, formProvider } from '@kit.FormKit';
+import { LocationInfo, Logger } from 'lib_foundation';
+import { DailyWeather, HourlyWeather, RealTimeWeather, WeatherUtils } from 'module_weather_core';
 
 const TAG = '[WidgetUtil]';
 
@@ -14,17 +13,28 @@ export class WidgetUtil {
   private static readonly _formIdEventName: string = 'form_id_event_name';
 
   public static getFormIds(ctx: Context) {
-    const store = WidgetUtil._getStore(ctx);
-    return store.getSync(WidgetUtil._formIdKey, []) as string[];
+    try {
+      const store = WidgetUtil._getStore(ctx);
+      return store.getSync(WidgetUtil._formIdKey, []) as string[];
+    } catch (error) {
+      const err: BusinessError = error as BusinessError;
+      Logger.error(TAG, `Failed to get form ids. Code: ${err.code}, message: ${err.message}`);
+      return [];
+    }
   }
 
   public static async addFormId(formId: string, cxt: Context) {
     const list = WidgetUtil.getFormIds(cxt);
     if (!list.some(id => id === formId)) {
       list.push(formId);
-      const store = WidgetUtil._getStore(cxt);
-      store.putSync(WidgetUtil._formIdKey, list);
-      await store.flush();
+      try {
+        const store = WidgetUtil._getStore(cxt);
+        store.putSync(WidgetUtil._formIdKey, list);
+        await store.flush();
+      } catch (error) {
+        const err: BusinessError = error as BusinessError;
+        Logger.error(TAG, `Failed to add form id. Code: ${err.code}, message: ${err.message}`);
+      }
     }
   }
 
@@ -33,22 +43,31 @@ export class WidgetUtil {
     const index = list.findIndex(id => id === formId);
     if (index !== -1) {
       list.splice(index, 1);
-      const store = WidgetUtil._getStore(cxt);
-      store.putSync(WidgetUtil._formIdKey, list);
-      await store.flush();
+      try {
+        const store = WidgetUtil._getStore(cxt);
+        store.putSync(WidgetUtil._formIdKey, list);
+        await store.flush();
+      } catch (error) {
+        const err: BusinessError = error as BusinessError;
+        Logger.error(TAG, `Failed to delete form id. Code: ${err.code}, message: ${err.message}`);
+      }
     }
   }
 
   // 发布公共事件跨进程传递卡片id
   public static publishFormId(formId: string, isDelete: boolean) {
-    commonEventManager.publish(WidgetUtil._formIdEventName, { data: formId, parameters: { isDelete } },
-      (err: BusinessError) => {
-        if (err) {
-          Logger.error(TAG, `Failed to publish common event. Code is ${err.code}, message is ${err.message}`);
-        } else {
-          Logger.info(TAG, 'Succeeded in publishing common event.');
-        }
-      });
+    try {
+      commonEventManager.publish(WidgetUtil._formIdEventName, { data: formId, parameters: { isDelete } },
+        (err: BusinessError) => {
+          if (err) {
+            Logger.error(TAG, `Failed to publish common event. Code is ${err.code}, message is ${err.message}`);
+          } else {
+            Logger.info(TAG, 'Succeeded in publishing common event.');
+          }
+        });
+    } catch (error) {
+      Logger.error(TAG, 'Failed to commonEventManager.publish. Cause:' + JSON.stringify(error));
+    }
   }
 
   // 订阅获取卡片id
@@ -58,38 +77,52 @@ export class WidgetUtil {
       events: [WidgetUtil._formIdEventName],
       publisherPermission: '',
     };
-    commonEventManager.createSubscriber(subscribeInfo, (err1, data1) => {
-      if (err1) {
-        Logger.error(TAG, `Failed to create subscriber. Code is ${err1.code}, message is ${err1.message}`);
-        return;
-      }
-      subscriber = data1;
-      // 订阅公共事件回调
-      commonEventManager.subscribe(subscriber, (err2, data2) => {
-        if (err2) {
-          Logger.error(TAG, `Failed to subscribe common event. Code is ${err2.code}, message is ${err2.message}`);
+    try {
+      commonEventManager.createSubscriber(subscribeInfo, (err1, data1) => {
+        if (err1) {
+          Logger.error(TAG, `Failed to create subscriber. Code is ${err1.code}, message is ${err1.message}`);
           return;
-        } else {
-          if (data2.parameters?.isDelete) {
-            WidgetUtil.delFormId(data2.data as string, ctx);
-          } else {
-            WidgetUtil.addFormId(data2.data as string, ctx);
-          }
-          Logger.info(TAG, 'Succeeded in creating subscriber1.');
         }
+        subscriber = data1;
+        // 订阅公共事件回调
+        commonEventManager.subscribe(subscriber, (err2, data2) => {
+          if (err2) {
+            Logger.error(TAG, `Failed to subscribe common event. Code is ${err2.code}, message is ${err2.message}`);
+            return;
+          } else {
+            if (data2.parameters?.isDelete) {
+              WidgetUtil.delFormId(data2.data as string, ctx);
+            } else {
+              WidgetUtil.addFormId(data2.data as string, ctx);
+            }
+            Logger.info(TAG, 'Succeeded in creating subscriber1.');
+          }
+        });
       });
-    });
+    } catch (error) {
+      Logger.error(TAG, 'Failed to commonEventManager.createSubscriber. Cause:' + JSON.stringify(error));
+    }
   }
 
   public static getLocation(ctx: Context) {
-    const store = WidgetUtil._getStore(ctx);
-    return store.getSync(WidgetUtil._locationKey, []) as LocationInfo;
+    try {
+      const store = WidgetUtil._getStore(ctx);
+      return store.getSync(WidgetUtil._locationKey, []) as LocationInfo;
+    } catch (error) {
+      const err: BusinessError = error as BusinessError;
+      Logger.error(TAG, `Failed to get location. Code: ${err.code}, message: ${err.message}`);
+      return {} as LocationInfo;
+    }
   }
 
   public static async setLocation(location: LocationInfo, ctx: Context) {
     const store = WidgetUtil._getStore(ctx);
-    store.put(WidgetUtil._locationKey, location);
-    store.flush();
+    try {
+      store.putSync(WidgetUtil._locationKey, location);
+      store.flushSync();
+    } catch (e) {
+      Logger.info(TAG, JSON.stringify(e));
+    }
   }
 
   /**
@@ -127,10 +160,23 @@ export class WidgetUtil {
       'colors': WidgetUtil._isDaytime() ? [['#2E6BE0', 0], ['#92C8FD', 1]] : [['#274668', 0], ['#527EAA', 1]],
     };
     if (formId) {
-      formProvider.updateForm(formId, formBindingData.createFormBindingData(formData));
+      try {
+        formProvider.updateForm(formId, formBindingData.createFormBindingData(formData))
+          .catch((error: BusinessError) => {
+            Logger.error(TAG, 'Failed to formProvider.updateForm. Cause:' + JSON.stringify(error));
+          });
+      } catch (error) {
+        Logger.error(TAG, 'Failed to formProvider.updateForm. Cause:' + JSON.stringify(error));
+      }
     } else {
       WidgetUtil.getFormIds(ctx).forEach(id => {
-        formProvider.updateForm(id, formBindingData.createFormBindingData(formData));
+        try {
+          formProvider.updateForm(id, formBindingData.createFormBindingData(formData)).catch((error: BusinessError) => {
+            Logger.error(TAG, 'Failed to formProvider.updateForm. Cause:' + JSON.stringify(error));
+          });
+        } catch (error) {
+          Logger.error(TAG, 'Failed to formProvider.updateForm. Cause:' + JSON.stringify(error));
+        }
       });
     }
   }
@@ -142,6 +188,12 @@ export class WidgetUtil {
   }
 
   private static _getStore(ctx: Context) {
-    return preferences.getPreferencesSync(ctx, { name: WidgetUtil._fileName });
+    try {
+      return preferences.getPreferencesSync(ctx, { name: WidgetUtil._fileName });
+    } catch (error) {
+      const err: BusinessError = error as BusinessError;
+      Logger.error(TAG, `Failed to get preferences. Code: ${err.code}, message: ${err.message}`);
+      throw new Error(`Failed to get preferences. Code: ${err.code}, message: ${err.message}`);
+    }
   }
 }

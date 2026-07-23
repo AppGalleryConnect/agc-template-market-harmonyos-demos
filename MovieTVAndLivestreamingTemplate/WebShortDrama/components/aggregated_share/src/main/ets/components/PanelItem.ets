@@ -21,6 +21,7 @@ export struct PanelItem {
   @Local qqShare: QQShareUtils = QQShareUtils.instance;
   @Local weiboShare: WeiboShareUtils = WeiboShareUtils.instance;
   @Local touchModifier: CustomTouchModifier = new CustomTouchModifier();
+  private symItem: ResourceStr[] = ['生成海报', '复制链接', '系统分享']
 
   sendTextOrUrl() {
     switch (this.value.kindId) {
@@ -75,10 +76,22 @@ export struct PanelItem {
   build() {
     Column() {
       Column({ space: CommonConstants.PADDING_XS }) {
-        Image(this.value.icon)
-          .width(40)
-          .height(40)
-          .draggable(false)
+        if (this.symItem.includes(this.value.label)) {
+          Column() {
+            SymbolGlyph(this.value.icon as Resource)
+              .fontSize(24)
+              .fontColor([$r('sys.color.icon_primary')])
+          }
+          .size({ width: 48, height: 48 })
+          .backgroundColor($r('sys.color.comp_background_list_card'))
+          .borderRadius(8)
+          .justifyContent(FlexAlign.Center)
+        } else {
+          Image(this.value.icon)
+            .width(40)
+            .height(40)
+            .draggable(false)
+        }
         Text(this.value.label)
           .fontSize($r('sys.float.Body_S'))
           .fontColor($r('sys.color.font_primary'))

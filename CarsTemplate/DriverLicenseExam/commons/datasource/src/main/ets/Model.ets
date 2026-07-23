@@ -1,4 +1,4 @@
-import { ExamDetail, ExamManager } from 'exam'
+import { ExamManager } from 'exam'
 
 export interface ROUTE_PARAM {
   title: string | Resource,
@@ -13,6 +13,10 @@ export interface CLASSIFY_BY_TYPE {
   name: Resource,
   quantity: number,
   type: EXAM_MANAGER_TYPE,
+}
+
+export interface RouteCommonParam {
+  fromPage?: string
 }
 
 export enum WRONG_COLLECT {

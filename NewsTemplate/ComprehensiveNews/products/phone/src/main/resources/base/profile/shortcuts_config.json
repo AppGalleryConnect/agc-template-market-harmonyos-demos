@@ -1,0 +1,49 @@
+{
+  "shortcuts": [
+    {
+      "shortcutId": "id_digital_news",
+      "label": "$string:go_to_digital_news",
+      "icon": "$media:shortcut_digital_news",
+      "wants": [
+        {
+          "bundleName": "zhxw.1.1",
+          "moduleName": "phone",
+          "abilityName": "PhoneAbility",
+          "parameters": {
+            "shortCutKey": "DigitalNewsPage"
+          }
+        }
+      ]
+    },
+    {
+      "shortcutId": "id_tv",
+      "label": "$string:go_to_tv",
+      "icon": "$media:shortcut_tv",
+      "wants": [
+        {
+          "bundleName": "zhxw.1.1",
+          "moduleName": "phone",
+          "abilityName": "PhoneAbility",
+          "parameters": {
+            "shortCutKey": "TVPage"
+          }
+        }
+      ]
+    },
+    {
+      "shortcutId": "id_audio",
+      "label": "$string:go_to_audio",
+      "icon": "$media:shortcut_audio",
+      "wants": [
+        {
+          "bundleName": "zhxw.1.1",
+          "moduleName": "phone",
+          "abilityName": "PhoneAbility",
+          "parameters": {
+            "shortCutKey": "AudioPage"
+          }
+        }
+      ]
+    }
+  ]
+}

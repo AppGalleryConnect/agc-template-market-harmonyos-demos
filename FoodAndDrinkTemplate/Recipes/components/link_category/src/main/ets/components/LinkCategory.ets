@@ -175,7 +175,7 @@ export struct LinkCategory {
           }, (item: RecipeCategory) => item.id.toString())
           ListItem() {}
           .width('100%')
-          .height(this.gridCount === 5 ? 0 : 80)
+          .height(88)
         }
         .layoutWeight(1)
         .height('100%')

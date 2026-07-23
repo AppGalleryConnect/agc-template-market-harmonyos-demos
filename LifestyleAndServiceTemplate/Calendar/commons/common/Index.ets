@@ -10,7 +10,7 @@ export { ServiceTitle } from './src/main/ets/components/ServiceTitle'
 
 export { calculateNextEvents } from './src/main/ets/utils/CalculateDate'
 
-export { UserInfo, UserState, ReservationRecord } from './src/main/ets/models/UserStateModel'
+export { UserInfo, UserState, ReservationRecord, SettingState } from './src/main/ets/models/UserStateModel'
 
 export { DividerTmp } from './src/main/ets/models/DividerTmp'
 
@@ -54,3 +54,7 @@ export {
 } from './src/main/ets/constants/GridRowColSetting';
 
 export { BreakpointModel } from './src/main/ets/models/BreakpointModel';
+
+export { PushUtils } from './src/main/ets/utils/PushUtils'
+
+export { PushCardInfo } from './src/main/ets/models/PushModel'

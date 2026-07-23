@@ -2,7 +2,6 @@ import {
   abilityAccessCtrl,
   bundleManager,
   common,
-  Context,
   PermissionRequestResult,
   Permissions,
 } from '@kit.AbilityKit';
@@ -66,7 +65,7 @@ export class CityManager {
  */
 export class SystemSceneUtils {
   static isApplyLocPermAgain: boolean = false;
-  static context: Context = getContext() as common.UIAbilityContext;
+  static context: common.UIAbilityContext | null = null
 
   /**
    * 检查用户是否授权
@@ -113,9 +112,6 @@ export class SystemSceneUtils {
       Logger.info('already granted location and approximate location permissions')
       return true;
     }
-    if (!SystemSceneUtils.context) {
-      SystemSceneUtils.context = getContext() as common.UIAbilityContext;
-    }
     // 向用户申请
     const atManager = abilityAccessCtrl.createAtManager();
     return atManager.requestPermissionsFromUser(SystemSceneUtils.context, permissions)
@@ -125,10 +121,19 @@ export class SystemSceneUtils {
         }
         // 二次向用户申请
         if (SystemSceneUtils.isApplyLocPermAgain) {
-          const resp = await atManager.requestPermissionOnSetting(SystemSceneUtils.context, permissions);
-          return resp.every(v => v === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED);
+          try {
+            const resp = await atManager.requestPermissionOnSetting(SystemSceneUtils.context, permissions);
+            return resp.every(v => v === abilityAccessCtrl.GrantStatus.PERMISSION_GRANTED);
+          } catch (error) {
+            const err: BusinessError = error as BusinessError;
+            Logger.error(`Failed to request permission on setting. Code: ${err.code}, message: ${err.message}`);
+            return false;
+          }
         }
         SystemSceneUtils.isApplyLocPermAgain = true;
+        return false;
+      }).catch((err: BusinessError) => {
+        Logger.error(`Failed to requestPermissionsFromUser. Code: ${err.code}, message: ${err.message}`);
         return false;
       });
   }

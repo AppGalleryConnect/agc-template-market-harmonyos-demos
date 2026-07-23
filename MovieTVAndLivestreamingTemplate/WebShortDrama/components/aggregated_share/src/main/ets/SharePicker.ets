@@ -1,6 +1,7 @@
 import { ShareViewData, ShareRecordData, ShareOptions, QQShareData } from './common/ShareParams';
 import { PopViewUtils } from './utils/PopViewUtils';
 import { shareViewBuilder } from './views/ShareView';
+import { display } from '@kit.ArkUI';
 
 /**
  * 拉起分享面板的picker
@@ -10,8 +11,11 @@ export class SharePicker {
   @Trace private data: ShareViewData = new ShareViewData();
   @Trace private sheetOptions: SheetOptions = {
     showClose: true,
-    height: SheetSize.FIT_CONTENT,
+    height: (display.getDefaultDisplaySync().orientation === display.Orientation.LANDSCAPE ||
+      display.getDefaultDisplaySync().orientation === display.Orientation.LANDSCAPE_INVERTED) &&
+      display.getFoldStatus() === display.FoldStatus.FOLD_STATUS_HALF_FOLDED ? '100%' : SheetSize.FIT_CONTENT,
     preferType: SheetType.CENTER,
+    enableHoverMode: true,
     onTypeDidChange: (type: SheetType) => {
       this.data.sheetType = type;
     },

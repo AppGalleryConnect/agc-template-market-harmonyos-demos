@@ -1,6 +1,6 @@
+import { ReadStateCode, TextReader } from '@kit.SpeechKit';
 import { PlayInfo } from 'module_base';
 import { TextReaderUtil } from '../utils/TextReaderUtil';
-import { ReadStateCode, TextReader } from '@kit.SpeechKit';
 
 @ComponentV2
 export struct VoiceComponent {
@@ -14,9 +14,17 @@ export struct VoiceComponent {
   }
 
   build() {
-    Image(this.textReaderUtil.readState === ReadStateCode.PLAYING ? $r('app.media.voice_pause') :
-    $r('app.media.voice_play')).size({ width: 32, height: 32 }).objectFit(ImageFit.Fill).onClick(async () => {
-      this.textReaderUtil.init(this.playInfo, this.getUIContext());
-    });
+    SymbolGlyph(this.textReaderUtil.readState === ReadStateCode.PLAYING ? $r('sys.symbol.pause') :
+      $r('sys.symbol.earphone_bluetooth_left'))
+      .width(40)
+      .height(40)
+      .fontSize(24)
+      .fontColor([$r('sys.color.icon_primary')])
+      .backgroundColor($r('sys.color.comp_background_tertiary'))
+      .borderRadius(1000)
+      .padding(8)
+      .onClick(async () => {
+        this.textReaderUtil.init(this.playInfo, this.getUIContext());
+      });
   }
 }

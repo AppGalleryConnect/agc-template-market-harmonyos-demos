@@ -31,4 +31,12 @@ export enum RouterMap {
    * 生活指数页
    */
   INDICES = 'IndicesPage',
+  /**
+   * 开屏广告页
+   */
+  SPLASH_AD = 'SplashAd',
+  /**
+   * 字体设置页面
+   */
+  SETTING_FONT = 'SettingFont',
 }

@@ -1,9 +1,8 @@
-import { BarVM } from '@agctemplate/widgets'
+import { AppStorageKeys, BarVM, BreakPoint, BreakPointValue } from '@agctemplate/widgets'
 import { Header } from '../component/Header'
 import { AppGalleryUtils } from '../utils/AppGalleryUtils'
 import { common } from '@kit.AbilityKit'
-import { display, promptAction } from '@kit.ArkUI'
-import { deviceInfo } from '@kit.BasicServicesKit'
+import { AppStorageV2 } from '@kit.ArkUI'
 
 // 关于
 @ComponentV2
@@ -12,18 +11,8 @@ export struct AboutPage {
   @Local service: string = 'XX'
   @Local business: string = 'XX业务与隐私声明'
   @Local needUpdate: boolean = false;
-  @Local isLandScapeTablet: boolean = display.getDefaultDisplaySync().orientation === display.Orientation.LANDSCAPE ||
-    display.getDefaultDisplaySync().orientation === display.Orientation.LANDSCAPE_INVERTED &&
-      deviceInfo.deviceType === 'tablet'
-  callback: Callback<number> = (data: number) => {
-    if (display.getDefaultDisplaySync().orientation === display.Orientation.LANDSCAPE ||
-      display.getDefaultDisplaySync().orientation === display.Orientation.LANDSCAPE_INVERTED &&
-        deviceInfo.deviceType === 'tablet') {
-      this.isLandScapeTablet = true
-    } else {
-      this.isLandScapeTablet = false
-    }
-  }
+  @Local breakPoint: BreakPoint = AppStorageV2.connect(BreakPoint, AppStorageKeys.CURRENT_BREAK_POINT,
+    () => new BreakPoint())!;
   private uiContext: UIContext = this.getUIContext();
 
   // 检查更新
@@ -40,17 +29,9 @@ export struct AboutPage {
   }
 
   aboutToAppear(): void {
-    try {
-      display.on('change', this.callback)
-    } catch (e) {
-    }
   }
 
   aboutToDisappear(): void {
-    try {
-      display.off('change', this.callback)
-    } catch (e) {
-    }
   }
 
   build() {
@@ -138,7 +119,7 @@ export struct AboutPage {
             .width('100%')
           }
           .backgroundColor($r('sys.color.comp_background_primary'))
-          .width(this.isLandScapeTablet ? '70%' : '90%')
+          .width(this.breakPoint.value === BreakPointValue.LG ? '70%' : '90%')
           .margin({ top: 61 })
           .padding({
             top: 4,

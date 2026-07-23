@@ -36,7 +36,7 @@ export struct InterActionTabContent {
 
   @Builder
   loadMoreFooter() {
-    LoadMoreFooter({ 'isLoading': this.vm.isLoading })
+    LoadMoreFooter({ 'isLoading': this.vm.isLoading, 'isHomePage': false })
   }
 
   build() {

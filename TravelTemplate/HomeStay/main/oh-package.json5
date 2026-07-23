@@ -14,7 +14,10 @@
     "type": "file:../common/type",
     "constant": "file:../common/constant",
     "component": "file:../common/component",
+    "aggregated_ads": 'file:../components/aggregated_ads',
     "travel_discovery": "file:../components/travel_discovery",
-    "util": "file:../common/util"
+    "util": "file:../common/util",
+    "aggregated_login": "file:../components/aggregated_login",
+    "aggregated_payment": "file:../components/aggregated_payment"
   }
 }

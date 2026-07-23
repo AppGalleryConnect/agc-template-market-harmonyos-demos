@@ -68,7 +68,11 @@ export class ShareConfigModel {
   public unRegisterWindowBottomPadding(uiContext: UIContext) {
     this.uiContext = uiContext;
     window.getLastWindow(uiContext.getHostContext()).then(currentWindow => {
-      currentWindow.off('avoidAreaChange', this.setWindowBottomPadding);
+      try {
+        currentWindow.off('avoidAreaChange', this.setWindowBottomPadding);
+      } catch (error) {
+        UtilLog.error(TAG, `unRegisterKeyboardListener failed. error: ${JSON.stringify(error)}`);
+      }
     }).catch((e: BusinessError) => {
       UtilLog.error(TAG, 'getLastWindow fail, error: ' + JSON.stringify(e));
     });

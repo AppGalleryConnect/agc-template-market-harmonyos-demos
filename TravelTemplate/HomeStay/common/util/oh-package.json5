@@ -7,6 +7,6 @@
   "license": "Apache-2.0",
   "dependencies": {
     "type": "file:../type",
-    "@hw-agconnect/util-log": "^1.0.0"
+    "@hw-agconnect/util-log": "^1.0.0",
   }
 }

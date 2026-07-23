@@ -78,6 +78,7 @@ export struct PaySuccess {
           Row() {
             Button('查看订单')
               .width(Constant.FULL_PERCENT)
+              .constraintSize({maxWidth:Constant.MAX_WIDTH})
               .padding({ left: 24, right: 24 })
               .backgroundColor('rgb(100, 187, 92)')
               .fontColor($r('sys.color.font_on_primary'))

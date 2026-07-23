@@ -1,6 +1,7 @@
-import { LazyDataSource } from 'common';
+import { AppStorageV2 } from '@kit.ArkUI';
+import { BreakpointModel, BreakpointNameEnum, BreakpointType, LazyDataSource } from 'common';
 import { AttractionInfo } from 'module_base';
-import { SwiperComponent, TitleBar } from 'uicomponents';
+import { TitleBar } from 'uicomponents';
 import { HomePageVM } from '../viewmodel/HomePageVM';
 
 @Builder
@@ -12,32 +13,51 @@ export function AttractionsBuilder() {
 export struct Attractions {
   vm: HomePageVM = HomePageVM.instance;
   @Local banners: LazyDataSource<ResourceStr> = new LazyDataSource();
+  @Local breakPointModel: BreakpointModel = AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
   @Consumer('mainPathStack') mainPathStack: NavPathStack = new NavPathStack();
 
   @Builder
   AttractionItemBuilder(attraction: AttractionInfo) {
-    Row() {
-      Image(attraction.banner).size({ width: 96, height: 96 }).borderRadius(8);
+    Row({ space: 16 }) {
+      Image(attraction.banner).size({ width: 80, height: 80 }).borderRadius(8);
       Column() {
-        Text(attraction.name).fontWeight(500);
-        Row() {
+        Text(attraction.name)
+          .fontWeight(FontWeight.Medium)
+          .fontSize($r('sys.float.Body_L'))
+          .fontColor($r('sys.color.font_primary'));
+        Row({ space: 8 }) {
           ForEach(attraction.labels, (item: string) => {
             Text(item)
-              .fontSize(10)
-              .border({ width: 1, radius: 4, color: '#2EB78A' })
-              .padding(2)
-              .fontColor('#2EB78A')
-              .margin({ right: 4 });
+              .fontSize($r('sys.float.Caption_M'))
+              .fontColor($r('sys.color.font_secondary'))
+              .border({ width: 1, radius: 4, color: $r('sys.color.comp_divider') })
+              .height(16)
+              .padding({
+                top: 1,
+                bottom: 1,
+                left: 4,
+                right: 4,
+              });
           }, (item: string) => item);
         }.margin({ top: 4, bottom: 8 });
 
-        Row() {
+        Row({ space: 8 }) {
           ForEach(attraction.detailImages, (item: ResourceStr) => {
-            Image(item).size({ height: 48, width: 48 }).borderRadius(8).margin({ right: 8 });
+            Image(item).size({ height: 32, width: 32 }).borderRadius(4);
           }, (item: ResourceStr) => item.toString());
         };
-      }.alignItems(HorizontalAlign.Start).justifyContent(FlexAlign.SpaceBetween).margin({ left: 8 });
-    }.onClick(() => {
+      }.alignItems(HorizontalAlign.Start).justifyContent(FlexAlign.SpaceBetween);
+    }
+    .width('100%')
+    .padding({
+      top: 16,
+      bottom: 16,
+      left: 12,
+      right: 12,
+    })
+    .borderRadius(16)
+    .backgroundColor($r('sys.color.comp_background_primary'))
+    .onClick(() => {
       this.mainPathStack.pushPathByName('AttractionDetail', attraction.attractionId);
     });
   }
@@ -46,25 +66,29 @@ export struct Attractions {
     NavDestination() {
       Column() {
         TitleBar({
-          isShowBack: true, title: '景点列表', clickEvent: () => {
+          isShowBack: true, title: '热门景区', clickEvent: () => {
             this.mainPathStack.pop();
           },
         });
 
-        Scroll() {
-          Column() {
-            SwiperComponent(this.vm.attractionListBanner);
-
-            Column() {
-              List({ space: 12 }) {
-                LazyForEach(this.vm.attractionList, (item: AttractionInfo) => {
-                  this.AttractionItemBuilder(item);
-                });
-              };
-            }.padding(12);
-          };
-        }.height('90%').align(Alignment.Top).scrollBar(BarState.Off).edgeEffect(EdgeEffect.Spring);
-      };
+        List({ space: 12 }) {
+          LazyForEach(this.vm.attractionList, (item: AttractionInfo) => {
+            this.AttractionItemBuilder(item);
+          });
+        }
+        .lanes(new BreakpointType<number>({
+          [BreakpointNameEnum.SM]: 1,
+          [BreakpointNameEnum.MD]: 1,
+          [BreakpointNameEnum.LG]: 2,
+          [BreakpointNameEnum.XL]: 2,
+        }).getValue(this.breakPointModel.currentBreakpoint), 16)
+        .contentStartOffset(12)
+        .contentEndOffset(12)
+        .scrollBar(BarState.Off)
+        .edgeEffect(EdgeEffect.Spring)
+        .layoutWeight(1)
+        .margin({ left: this.breakPointModel.pagePadding, right: this.breakPointModel.pagePadding });
+      }.backgroundColor($r('sys.color.comp_background_secondary'));
     }.hideTitleBar(true);
   }
 }

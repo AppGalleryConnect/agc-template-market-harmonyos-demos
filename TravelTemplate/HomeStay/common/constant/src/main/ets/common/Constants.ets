@@ -43,7 +43,9 @@ export enum OrderTabBarType {
   TO_PAY = 1,
   TO_USE = 2,
   CANCEL = 3,
-  READY = 4
+  READY = 4,
+  TO_SHIP = 5,
+  TO_RECEIVE = 6
 }
 
 export enum NavPathName {
@@ -51,7 +53,6 @@ export enum NavPathName {
   PURCHASE = 'Purchase',
   QUICK_LOGIN_PAGE = 'QuickLoginPage',
   COMMODITY_DETAIL = 'CommodityDetail',
-  PAY_SUCCESS = 'PaySuccess',
   ADD_GUEST = 'AddGuest',
   COMMODITY_LIST = 'CommodityList',
   ROOMS = 'Rooms',
@@ -65,6 +66,10 @@ export enum NavPathName {
   PERSONAL_INFO = 'PersonalInfo',
   GUESTS = 'Guests',
   HOTEL = 'Hotel',
+  HOTEL_HOME = 'HotelHome',
+  MY_FAVORITES = 'MyFavorites',
+  BROWSE_HISTORY = 'BrowseHistory',
+  ABOUT = 'About',
 }
 
 export class Constants {
@@ -92,7 +97,7 @@ export class Constants {
     },
     {
       index: 2,
-      page: 'Complaint',
+      page: 'FeedbackSubmitPage',
     },
     {
       index: 3,
@@ -132,7 +137,7 @@ export class Constants {
     },
     {
       value: 3,
-      title: '关于我们',
+      title: '设置',
       icon: 'app.media.icon_my_about',
     },
   ];

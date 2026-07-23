@@ -1,0 +1,16 @@
+{
+  "color": [
+    {
+      "name": "video_bg",
+      "value": "#C4C4C4"
+    },
+    {
+      "name": "video_duration_bg",
+      "value": "#999999"
+    },
+    {
+      "name": "my_instant_reply_bg",
+      "value": "#F7F6FF"
+    }
+  ]
+}

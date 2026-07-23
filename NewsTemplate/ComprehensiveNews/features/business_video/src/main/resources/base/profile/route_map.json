@@ -1,0 +1,24 @@
+{
+  "routerMap": [
+    {
+      "name": "VideoPage",
+      "pageSourceFile": "src/main/ets/pages/VideoPage.ets",
+      "buildFunction": "VideoPageBuilder"
+    },
+    {
+      "name": "VideoDetailPage",
+      "pageSourceFile": "src/main/ets/pages/VideoDetailPage.ets",
+      "buildFunction": "VideoDetailBuilder"
+    },
+    {
+      "name": "CommentViewPage",
+      "pageSourceFile": "src/main/ets/pages/CommentViewPage.ets",
+      "buildFunction": "CommentViewPageBuilder"
+    },
+    {
+      "name": "LivestreamDetailPage",
+      "pageSourceFile": "src/main/ets/pages/LivestreamDetailPage.ets",
+      "buildFunction": "LivestreamDetailPageBuilder"
+    }
+  ]
+}

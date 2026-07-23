@@ -1,4 +1,9 @@
-import { componentUtils, ComponentUtils, window } from '@kit.ArkUI'
+import { componentUtils, ComponentUtils, window } from '@kit.ArkUI';
+import { BusinessError } from '@kit.BasicServicesKit';
+import { UtilLog } from '@hw-agconnect/util-log';
+
+const TAG = '[TransitionUtils]'
+const DOMAIN = 0xFF00
 
 /**
  * 组件信息类型
@@ -14,8 +19,6 @@ export interface ComInfoType {
   windowLeft: number
 }
 
-
-
 /**
  * 获取组件信息
  * @param {context} UIContext
@@ -23,16 +26,30 @@ export interface ComInfoType {
  * */
 export const getComponentsInfo = (context: UIContext, key: string): ComInfoType => {
   let comUtils: ComponentUtils = context.getComponentUtils()
-  let info: componentUtils.ComponentInfo = comUtils.getRectangleById(key)
-  return {
-    width: px2vp(info.size.width),
-    height: px2vp(info.size.height),
-    localLeft: px2vp(info.localOffset.x),
-    localTop: px2vp(info.localOffset.y),
-    screenLeft: px2vp(info.screenOffset.x),
-    screenTop: px2vp(info.screenOffset.y),
-    windowLeft: px2vp(info.windowOffset.x),
-    windowTop: px2vp(info.windowOffset.y),
+  try {
+    const info: componentUtils.ComponentInfo = comUtils.getRectangleById(key)
+    return {
+      width: context.px2vp(info.size.width),
+      height: context.px2vp(info.size.height),
+      localLeft: context.px2vp(info.localOffset.x),
+      localTop: context.px2vp(info.localOffset.y),
+      screenLeft: context.px2vp(info.screenOffset.x),
+      screenTop: context.px2vp(info.screenOffset.y),
+      windowLeft: context.px2vp(info.windowOffset.x),
+      windowTop: context.px2vp(info.windowOffset.y),
+    }
+  } catch (error) {
+    UtilLog.error(TAG, `getRectangleById failed, key: ${key}, error: ${JSON.stringify(error)}`)
+    return {
+      width: 0,
+      height: 0,
+      localLeft: 0,
+      localTop: 0,
+      screenLeft: 0,
+      screenTop: 0,
+      windowLeft: 0,
+      windowTop: 0,
+    }
   }
 }
 
@@ -58,6 +75,12 @@ export function getSizeByUnit(val: string | number, isFont?: boolean): string {
  */
 export function setWindowSystemBarProp(properties: window.SystemBarProperties) {
   const windowStage = AppStorage.get('windowStage') as window.WindowStage;
-  const windowClass = windowStage.getMainWindowSync()
-  windowClass.setWindowSystemBarProperties(properties)
+  try {
+    const windowClass = windowStage.getMainWindowSync()
+    windowClass.setWindowSystemBarProperties(properties).catch((error: BusinessError) => {
+      UtilLog.error(TAG, `setWindowSystemBarProperties failed, code: ${error.code}, message: ${error.message}`);
+    })
+  } catch (error) {
+    UtilLog.error(TAG, `setWindowSystemBarProp failed, code: ${(error).code}, message: ${(error).message}`);
+  }
 }

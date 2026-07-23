@@ -3,6 +3,7 @@ import { BusinessError } from '@kit.BasicServicesKit';
 import { util } from '@kit.ArkTS';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import fs from '@ohos.file.fs';
+import { GlobalContext } from 'lib_common';
 
 const DOMAIN = 0x0000;
 const TAG = '[MediaUtils]';
@@ -45,7 +46,7 @@ export class MediaUtils {
     let tempFile: fs.File | null = null;
     try {
       tempFile = fs.openSync(uri, fs.OpenMode.READ_ONLY);
-      let newPath: string = getContext().cacheDir + `/${util.generateRandomUUID(false)}.${suffix}`;
+      let newPath: string = GlobalContext.getContext().cacheDir + `/${util.generateRandomUUID(false)}.${suffix}`;
       fs.copyFileSync(tempFile.fd, newPath);
       hilog.info(DOMAIN, TAG, 'handleUri copyFileSync success, cache path: ' + newPath);
       return 'file://' + newPath;

@@ -9,6 +9,7 @@
     '@ohos/axios': 'latest',
     '@ohos/pulltorefresh': '2.1.0',
     "module_base": "file:../module_base",
-    "@hw-agconnect/util-log": "^1.0.0"
+    "@hw-agconnect/util-log": "^1.0.0",
+    'image_preview': 'file:../image_preview'
   }
 }

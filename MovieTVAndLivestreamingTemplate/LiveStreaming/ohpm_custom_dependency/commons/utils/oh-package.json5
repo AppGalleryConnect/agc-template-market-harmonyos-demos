@@ -1,0 +1,11 @@
+{
+  "name": "@agctemplate/utils",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "Index.ts",
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@ohos/axios": '2.2.4'
+  }
+}

@@ -160,7 +160,7 @@ struct Index {
           }
         },
       });
-    }.title('游客列表').mode(NavigationMode.Stack);
+    }.title('游客列表').mode(NavigationMode.Stack).backgroundColor($r('sys.color.background_secondary'));
   }
 }
 ```
@@ -192,7 +192,7 @@ struct TouristPage {
           this.getUIContext().getPromptAction().showToast({ message: '模拟新增或编辑' })
         },
       });
-    }.title('游客管理');
+    }.title('游客管理').backgroundColor($r('sys.color.background_secondary'));
   }
 }
 ```

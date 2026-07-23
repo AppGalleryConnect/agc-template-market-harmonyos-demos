@@ -1,4 +1,5 @@
 import { LengthMetrics, MeasureUtils } from '@kit.ArkUI';
+import { UtilLog } from '@hw-agconnect/util-log';
 import { Constants } from '../common/Constant';
 import { SearchWordItem } from '../types/Type';
 import { GridRowColSetting } from '../common/GridRowColSetting';
@@ -169,7 +170,7 @@ export struct HistorySearch {
 
       // 如果当前遍历的历史词宽度已经大于容器宽度，判定为overflow，直接返回，不需要遍历全部历史词。
       if (wordsWidth > this.containerWidth) {
-        console.log(TAG + ' Overflow happens at word ' + i);
+        UtilLog.info(TAG + ' Overflow happens at word ' + i);
         this.isOverflow = true;
         // 找到当历史词折叠时，第一行显示到第几个单词
         this.findLastShownWord(historyList, measure, minLength, maxLength);
@@ -196,7 +197,7 @@ export struct HistorySearch {
       if (wordsWidth >
         this.containerWidth - Constants.FOLD_BUTTON_DIAMETER - GridRowColSetting.getGuessLikeSpace(this.breakpoint)) {
         this.foldedLastIndex = i - 1;
-        console.log(TAG + ' When folded, the words are truncated at ' + i);
+        UtilLog.info(TAG + ' When folded, the words are truncated at ' + i);
         return;
       }
       if (i !== historyList.length - 1) {

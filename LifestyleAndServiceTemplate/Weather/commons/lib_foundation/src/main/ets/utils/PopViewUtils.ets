@@ -1,5 +1,6 @@
-import { ComponentContent, promptAction } from '@kit.ArkUI';
+import { ComponentContent, promptAction, UIContext } from '@kit.ArkUI';
 import { common } from '@kit.AbilityKit';
+import { BusinessError } from '@kit.BasicServicesKit';
 import { Logger } from './Logger';
 
 const TAG = '[PopViewUtils]';
@@ -9,7 +10,14 @@ enum PopViewShowType {
 }
 
 async function getUIContext() {
-  return (await (getContext() as common.UIAbilityContext).windowStage.getMainWindow()).getUIContext();
+  let uiContext = AppStorage.get('uiContext') as UIContext
+  try {
+    return (await (uiContext.getHostContext() as common.UIAbilityContext).windowStage.getMainWindow()).getUIContext();
+  } catch (error) {
+    const err: BusinessError = error as BusinessError;
+    Logger.error(TAG, `Failed to get UI context. Code: ${err.code}, message: ${err.message}`);
+    return uiContext;
+  }
 }
 
 interface PopViewModel {
@@ -58,7 +66,10 @@ export class PopViewUtils {
           }
         },
       };
-      prompt.openCustomDialog(componentContent, customOptions);
+      prompt.openCustomDialog(componentContent, customOptions)
+        .catch((error: BusinessError) => {
+          Logger.error(TAG, `Failed to open custom dialog. Code: ${error.code}, message: ${error.message}`);
+        });
       let infoList = PopViewUtils._shareInstance()._infoList;
       let info: PopViewModel = {
         com: componentContent,
@@ -83,7 +94,10 @@ export class PopViewUtils {
         PopViewUtils._shareInstance()._infoList = PopViewUtils._shareInstance()._infoList.filter((model) => {
           return model.com !== info.com;
         });
-        prompt.closeCustomDialog(info.com);
+        prompt.closeCustomDialog(info.com)
+          .catch((error: BusinessError) => {
+            Logger.error(TAG, `Failed to close custom dialog. Code: ${error.code}, message: ${error.message}`);
+          });
         Logger.info(TAG, 'dialog close');
       }
     }
@@ -111,7 +125,10 @@ export class PopViewUtils {
         showClose: options?.showClose,
         title: options?.title,
       };
-      PopViewUtils._uiContext.openBindSheet(componentContent, sheetOptions);
+      PopViewUtils._uiContext.openBindSheet(componentContent, sheetOptions)
+        .catch((error: BusinessError) => {
+          Logger.error(TAG, `Failed to open bind sheet. Code: ${error.code}, message: ${error.message}`);
+        });
       let sheetList = PopViewUtils._shareInstance()._sheetList;
       let info: PopViewModel = {
         com: componentContent,
@@ -135,7 +152,10 @@ export class PopViewUtils {
         PopViewUtils._shareInstance()._sheetList = PopViewUtils._shareInstance()._sheetList.filter((model) => {
           return model.com !== info.com;
         });
-        PopViewUtils._uiContext.closeBindSheet(info.com);
+        PopViewUtils._uiContext.closeBindSheet(info.com)
+          .catch((error: BusinessError) => {
+            Logger.error(TAG, `Failed to close bind sheet. Code: ${error.code}, message: ${error.message}`);
+          });
         Logger.info(TAG, 'sheet close');
       }
     }

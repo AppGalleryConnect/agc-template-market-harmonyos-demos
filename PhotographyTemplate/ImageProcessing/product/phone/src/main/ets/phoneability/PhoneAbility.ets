@@ -1,73 +1,92 @@
 import { AbilityConstant, ConfigurationConstant, UIAbility, Want } from '@kit.AbilityKit';
-import { hilog } from '@kit.PerformanceAnalysisKit';
-import { window } from '@kit.ArkUI';
-import { AppStorageV2 } from '@kit.ArkUI';
-import { WindowSize } from 'commonlib';
+import { AppStorageV2, window } from '@kit.ArkUI';
+import { BusinessError } from '@kit.BasicServicesKit';
+import { ShareService } from 'aggregated_share';
+import { ContextUtil, Logger, RdbUtil, WindowUtil } from 'commonlib';
+import { FormCardJumpModel } from '../models/Types';
 
-const DOMAIN = 0x0000;
+const TAG = '[EntryAbility]';
 
 export default class PhoneAbility extends UIAbility {
-  private mWindow!: window.Window;
-  onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
-    AppStorage.setOrCreate('context',this.context)
-    // 全局设置为浅色模式
-    let applicationContext = this.context.getApplicationContext();
-    applicationContext.setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_LIGHT);
-    hilog.info(DOMAIN, 'testTag', '%{public}s', 'Ability onCreate');
-  }
 
-  onDestroy(): void {
-    hilog.info(DOMAIN, 'testTag', '%{public}s', 'Ability onDestroy');
+  // 实例化分享服务
+  private shareServiceImpl: ShareService =
+    ShareService.create()
+    // todo 填写微信开放平台配置的应用AppID
+      .initWX('111111111')
+      // todo 填写QQ互联平台配置的应用AppID
+      .initQQ(111111111);
+
+  onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
+    Logger.info(TAG, 'Ability onCreate');
+    AppStorage.setOrCreate('context', this.context)
+    // 全局设置为浅色模式
+    try {
+      this.context.getApplicationContext().setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_LIGHT);
+    } catch (err) {
+      Logger.info(TAG, `Failed to set colorMode. Cause: ${JSON.stringify(err)}`);
+    }
+
+    this.handleFormWant(want);
+    this.shareServiceImpl.handleWant(want, this.context);
   }
 
   onWindowStageCreate(windowStage: window.WindowStage): void {
     // Main window is created, set main page for this ability
-    hilog.info(DOMAIN, 'testTag', '%{public}s', 'Ability onWindowStageCreate');
-    this.mWindow = windowStage.getMainWindowSync();
-    windowStage.loadContent('pages/Index', (err) => {
-      if (err.code) {
-        hilog.error(DOMAIN, 'testTag', 'Failed to load the content. Cause: %{public}s', JSON.stringify(err));
-        return;
+    Logger.info(TAG, 'Ability onWindowStageCreate');
+    // 数据库初始化
+    RdbUtil.initDB(this.context);
+    windowStage.loadContent('pages/Index').then(() => {
+      Logger.info(TAG, 'Succeeded in loading the content.');
+      try {
+        ContextUtil.setUIContext('EntryAbility', windowStage.getMainWindowSync().getUIContext());
+      } catch (e) {
+        Logger.error(TAG, 'Failed to getMainWindowSync. Cause: %{public}s', JSON.stringify(e) ?? '');
       }
-      hilog.info(DOMAIN, 'testTag', 'Succeeded in loading the content.');
-    });
-    // 订阅窗口尺寸变化
-    this.mWindow.on('windowSizeChange', (size: window.Size) => {
-      let windowModel: WindowSize = AppStorageV2.connect(WindowSize, () => new WindowSize())!
-      windowModel.screenHeight = size.height
-      windowModel.screenWidth = size.width
-    });
-
-    // 安全区域变化时更新状态栏和导航栏高度
-    this.mWindow.on('avoidAreaChange', (data) => {
-      let windowModel: WindowSize = AppStorageV2.connect(WindowSize, () => new WindowSize())!
-      if (data.type === window.AvoidAreaType.TYPE_SYSTEM) {
-        // 存储窗口内容规避的状态栏高度
-        windowModel.statusHeight = data.area.topRect.height
-      } else if (data.type === window.AvoidAreaType.TYPE_NAVIGATION_INDICATOR) {
-        // 存储窗口内容规避的底部安全区高度
-        windowModel.bottomHeight = data.area.bottomRect.height
-      }
+    }).catch((err: BusinessError) => {
+      Logger.error(TAG, 'Failed to load the content. Cause: ' + JSON.stringify(err));
     })
 
-    this.mWindow.on('windowStatusChange', (windowStatusType) => {
-      let windowModel: WindowSize = AppStorageV2.connect(WindowSize, () => new WindowSize())!
-      windowModel.windowStatusType = windowStatusType
-    });
+    WindowUtil.setWinConfig(windowStage);
+  }
+
+  onNewWant(want: Want): void {
+    this.handleFormWant(want);
+    this.shareServiceImpl.handleWant(want, this.context);
+  }
+
+  onDestroy(): void {
+    Logger.info(TAG, 'Ability onDestroy');
+    WindowUtil.offAvoidAreaChange();
+    WindowUtil.offWindowSizeChange();
+    WindowUtil.offWindowStatusChange();
   }
 
   onWindowStageDestroy(): void {
     // Main window is destroyed, release UI related resources
-    hilog.info(DOMAIN, 'testTag', '%{public}s', 'Ability onWindowStageDestroy');
+    Logger.info(TAG, 'Ability onWindowStageDestroy');
   }
 
   onForeground(): void {
     // Ability has brought to foreground
-    hilog.info(DOMAIN, 'testTag', '%{public}s', 'Ability onForeground');
+    Logger.info(TAG, 'Ability onForeground');
   }
 
   onBackground(): void {
     // Ability has back to background
-    hilog.info(DOMAIN, 'testTag', '%{public}s', 'Ability onBackground');
+    Logger.info(TAG, 'Ability onBackground');
+  }
+
+  handleFormWant(want: Want) {
+    const formModel: FormCardJumpModel = AppStorageV2.connect(FormCardJumpModel, () => new FormCardJumpModel())!;
+    // 参数解析
+    let params = want?.parameters;
+    // 服务卡片
+    if (params?.source === 'FormCard') {
+      formModel.formCardId = Date.now().toString();
+      const pageUrl = params?.pageUrl && typeof params.pageUrl === 'string' ? params.pageUrl : '';
+      formModel.formCardPageUrl = pageUrl
+      return;
+    }
   }
 }

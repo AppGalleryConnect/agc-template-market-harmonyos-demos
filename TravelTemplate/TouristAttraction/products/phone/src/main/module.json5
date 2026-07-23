@@ -5,7 +5,8 @@
     "description": "$string:module_desc",
     "mainElement": "EntryAbility",
     "deviceTypes": [
-      "phone"
+      "phone",
+      "tablet"
     ],
     "deliveryWithInstall": true,
     "installationFree": true,
@@ -18,7 +19,7 @@
         "description": "$string:EntryAbility_desc",
         "icon": "$media:atomicIcon",
         "label": "$string:EntryAbility_label",
-        "startWindowIcon": "$media:startIcon",
+        "startWindowIcon": "$media:atomicIcon",
         "startWindowBackground": "$color:start_window_background",
         "exported": true,
         "skills": [
@@ -56,7 +57,7 @@
       },
       {
         "name": "ohos.permission.LOCATION",
-        "reason": "$string:app_name",
+        "reason": "$string:location_reason",
         "usedScene": {
           "abilities": [
             "EntryAbility"
@@ -66,7 +67,7 @@
       },
       {
         "name": "ohos.permission.APPROXIMATELY_LOCATION",
-        "reason": "$string:app_name",
+        "reason": "$string:location_reason",
         "usedScene": {
           "abilities": [
             "EntryAbility"

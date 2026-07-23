@@ -1,11 +1,13 @@
 import { ExamController } from '../controller/ExamController';
 import { ExamDetail, QuestionTypeEnum } from '../model/QuestionAnswerRecord';
 import { JSON } from '@kit.ArkTS';
+import { CommonModel } from '@ohos_agcit/driver_license_exam_commonlib';
 
 
 @ComponentV2
 export struct SelectComponent {
   private examController: ExamController = ExamController.instance;
+  private vm: CommonModel = CommonModel.instance;
   // 是否显示答案/解析/视频讲解等
   @Local showAnswer: boolean = false;
   // 答案索引
@@ -270,7 +272,7 @@ export struct SelectComponent {
         src: this.item.videoExplainUrl,
       })
         .width('100%')
-        .height(160)
+        .height(this.vm.isLargeDevice ? 313 : 160)
         .borderRadius(8);
     }
     .width('100%')

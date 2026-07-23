@@ -1,9 +1,10 @@
+import { hdsMaterial } from '@kit.UIDesignKit';
+import { emitter } from '@kit.BasicServicesKit';
+import { common } from '@kit.AbilityKit';
+import { HdsTabs, HdsTabsController } from '@hms.hds.hdsBaseComponent';
+import { CommentUtil, RouterMap, RouterModule } from 'commonlib';
 import { TabListItem } from '../types/Types';
 import { MainEntryVM } from '../viewmodels/MainEntryVM';
-import { emitter } from '@kit.BasicServicesKit';
-import { CommentUtil, RouterMap, RouterModule } from 'commonlib';
-import { common } from '@kit.AbilityKit';
-import { FloatingNavBar, NavItemModel } from 'floating_navbar';
 
 @Builder
 export function MainEntryBuilder() {
@@ -13,36 +14,10 @@ export function MainEntryBuilder() {
 @ComponentV2
 struct MainEntry {
   @Local vm: MainEntryVM = MainEntryVM.instance;
-  @Local tabOpacity: number = 1
-  private controller: TabsController = new TabsController();
-
+  private controller: HdsTabsController = new HdsTabsController();
   callBackFunc: () => void = () => {
     this.controller.changeIndex(1);
   };
-
-  switchTab(index: number) {
-    if (this.vm.curIndex === index) {
-      return
-    }
-    // 先淡出
-    this.getUIContext().animateTo({
-      duration: 80,
-      curve: Curve.EaseIn,
-      onFinish: () => {
-        this.vm.curIndex = index;
-        this.controller.changeIndex(index);
-        // 再淡入
-        this.getUIContext().animateTo({
-          duration: 200,
-          curve: Curve.EaseOut,
-        }, () => {
-          this.tabOpacity = 1
-        })
-      }
-    }, () => {
-      this.tabOpacity = 0
-    })
-  }
 
   @Monitor('vm.formCardJump.form.id', 'vm.formCardJump.form.url')
   formChange(monitor: IMonitor) {
@@ -89,24 +64,38 @@ struct MainEntry {
 
   build() {
     NavDestination() {
-      if (this.vm.isLandscape) {
-        Flex({
-          direction: FlexDirection.Row,
-          justifyContent: FlexAlign.Center,
-          alignItems: ItemAlign.Center
-        }) {
-          this.FloatingNavBarBuilder();
-          this.TabsBuilder();
-        }
-        .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.BOTTOM])
-      } else {
-        Stack({ alignContent: Alignment.Bottom }) {
-          this.TabsBuilder();
-          this.FloatingNavBarBuilder();
-        }
+      HdsTabs({
+        barPosition: BarPosition.End,
+        index: this.vm.curIndex,
+        controller: this.controller
+      }) {
+        ForEach(this.vm.tabList, (item: TabListItem, index: number) => {
+          TabContent() {
+            item.component.builder();
+          }
+          .tabBar(this.tabBarBuilder(item, index))
+          .clip(index !== 0)
+          .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])
+        }, (item: TabListItem) => item.label);
       }
+      .scrollable(false)
+      .barHeight(56)
+      .barOverlap(true)
+      .barFloatingStyle({
+        barBottomMargin: 28, // 距离屏幕底部的边距
+        adaptToHandedness: true,
+        systemMaterialEffect: {
+          materialType: hdsMaterial.MaterialType.ADAPTIVE,
+          materialLevel: hdsMaterial.MaterialLevel.ADAPTIVE
+        }
+      })
+      .onChange((index: number) => {
+        this.vm.curIndex = index;
+        if (index === 3) {
+          emitter.emit('refreshMinePage')
+        }
+      });
     }
-    .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.BOTTOM])
     .hideTitleBar(true)
     .backgroundColor($r('sys.color.comp_background_gray'))
     .onShown(() => {
@@ -117,72 +106,17 @@ struct MainEntry {
   }
 
   @Builder
-  TabsBuilder() {
-    Tabs({
-      barPosition: this.vm.isLandscape ? BarPosition.Start : BarPosition.End,
-      index: this.vm.curIndex,
-      controller: this.controller
-    }) {
-      ForEach(this.vm.tabList, (item: TabListItem, index: number) => {
-        TabContent() {
-          item.component.builder();
-        }
-        .clip(index !== 0)
-        .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])
-      }, (item: TabListItem) => item.label);
+  tabBarBuilder(item: TabListItem, index: number) {
+    Column({ space: 2 }) {
+      SymbolGlyph(item.icon)
+        .fontSize(24)
+        .fontColor(this.vm.curIndex === index ? ['#FD4238'] : [$r('sys.color.icon_primary')])
+      Text(item.label)
+        .fontColor(this.vm.curIndex === index ? '#FD4238' : $r('sys.color.font_primary'))
+        .fontSize($r('sys.float.Caption_M'))
+        .fontWeight(FontWeight.Medium)
     }
-    .scrollable(false)
-    .layoutWeight(1) // 横屏时生效
-    .width('100%') // 竖屏时生效
-    .height('100%')
-    .barHeight(0)
-    .animationDuration(0)
-    .opacity(this.tabOpacity)
-    .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])
-    .onChange((index: number) => {
-      this.vm.curIndex = index;
-      if (index === 3) {
-        emitter.emit('refreshMinePage')
-      }
-    });
-  }
-
-  @Builder
-  FloatingNavBarBuilder() {
-    FloatingNavBar({
-      items: this.vm.navItems,
-      selectedIndex: this.vm.curIndex,
-      isLandscape: this.vm.isLandscape,
-      screenSize: this.vm.breakPoint,
-      itemBuilder: (item: NavItemModel, index: number) => {
-        this.navItemBuilder(item, index)
-      }
-    })
-      .padding({
-        bottom: this.vm.isLandscape ? 0 : 28,
-        left: this.vm.isLandscape ? 0 : 16,
-        right: this.vm.isLandscape ? 0 : 16
-      })
-  }
-
-  @Builder
-  navItemBuilder(item: NavItemModel, index: number) {
-    Column() {
-      Image(this.vm.curIndex === index ? item.selectedIcon : item.icon)
-        .width(24)
-        .height(24)
-        .margin({ top: 4 });
-      Text(item.title)
-        .fontColor(this.vm.curIndex === index ? Color.Red :
-          $r('sys.color.font_secondary'))
-        .fontSize(10)
-        .margin({ top: 4 });
-    }
-    .layoutWeight(1)
-    .height('100%')
-    .justifyContent(FlexAlign.Center)
-    .onClick(() => {
-      this.switchTab(index)
-    })
+    .width('100%')
+    .padding(4)
   }
 }

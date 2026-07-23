@@ -15,17 +15,23 @@
 <img src="./screenshots/Theme.jpeg" width="300">
 
 ## 约束与限制
+
 ### 环境
+
 * DevEco Studio版本：DevEco Studio 5.0.5 Release及以上
 * HarmonyOS SDK版本：HarmonyOS 5.0.5 Release SDK及以上
-* 设备类型：华为手机（包括双折叠和阔折叠）
+* 设备类型：华为手机（包括双折叠和阔折叠）、平板
 * 系统版本：HarmonyOS 5.0.5(17)及以上
+
+### 权限
+
+无
 
 ## 使用
 
 1. 安装组件。
 
-   如果是在DevEvo Studio使用插件集成组件，则无需安装组件，请忽略此步骤。
+   如果是在DevEco Studio使用插件集成组件，则无需安装组件，请忽略此步骤。
 
    如果是从生态市场下载组件，请参考以下步骤安装组件。
 
@@ -67,7 +73,6 @@
    ThemesCard({ stack: this.stack })
    ```
 
-
 ## API参考
 
 ### 子组件
@@ -101,12 +106,12 @@ ThemesCard(options?: ThemesCardOptions)
 
 **字段：**
 
-| 名称       | 类型                                                         | 说明                                                         |
-| ---------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| themePic   | [Resource](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-types#resource) | 当前主题展示图片。每次获取时，会根据当前时间从当前主题的图片中选择一张。 |
-| themeColor | string                                                       | 当前主题展示颜色。                                           |
-| themePics  | [Resource](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-types#resource)[] | 当前主题所有图片。                                           |
-| themeLabel | string                                                       | 当前主题文字标签。                                           |
+| 名称         | 类型                                                                                                | 说明                                   |
+|------------|---------------------------------------------------------------------------------------------------|--------------------------------------|
+| themePic   | [Resource](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-types#resource)   | 当前主题展示图片。每次获取时，会根据当前时间从当前主题的图片中选择一张。 |
+| themeColor | string                                                                                            | 当前主题展示颜色。                            |
+| themePics  | [Resource](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-types#resource)[] | 当前主题所有图片。                            |
+| themeLabel | string                                                                                            | 当前主题文字标签。                            |
 
 **方法：**
 
@@ -116,7 +121,6 @@ ThemesCard(options?: ThemesCardOptions)
 | getThemeById(id: number)     | 通过Id获取对应主题     |
 | getThemePicsById(id: number) | 通过Id获取对应主题所有图片 |
 | change(id: number)           | 通过Id修改对应主题     |
-
 
 ## 示例代码
 

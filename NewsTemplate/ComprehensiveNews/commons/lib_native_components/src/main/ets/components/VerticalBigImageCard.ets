@@ -28,14 +28,13 @@ struct NativeComponent {
   get getSurface() {
     return this.cardData.nativeCardData.type === NewsEnum.Video ?
       this.cardData.nativeCardData?.postImgList?.[0]?.surfaceUrl :
-    this.cardData.nativeCardData?.postImgList?.[0].picVideoUrl
+      this.cardData.nativeCardData?.postImgList?.[0].picVideoUrl
   }
 
   build() {
     Stack({ alignContent: Alignment.BottomEnd }) {
       BaseImage({
         url: this.getSurface,
-        fit: ImageFit.Fill,
         downloadWithoutWlan: this.settingInfo.network.downloadWithoutWlan,
       })
       Column({ space: CommonConstants.SPACE_S }) {
@@ -62,13 +61,13 @@ struct NativeComponent {
     }
     .attributeModifier(new ComponentModifier(this.layout.style)).clip(true)
     .id('news_flow_video' + this.cardData.extraInfo.channelId + this.cardData.currentIndex +
-    this.cardData.extraInfo.flowIndex +
-    this.cardData.extraInfo.flexId)
+      this.cardData.extraInfo.flowIndex +
+      this.cardData.extraInfo.flexId)
     .onClick(() => {
       this.cardViewModel.pushToNewsDetails(this.cardData, '',
         'news_flow_video' + this.cardData.extraInfo.channelId + this.cardData.currentIndex +
-        this.cardData.extraInfo.flowIndex +
-        this.cardData.extraInfo.flexId)
+          this.cardData.extraInfo.flowIndex +
+          this.cardData.extraInfo.flexId)
     })
   }
 }

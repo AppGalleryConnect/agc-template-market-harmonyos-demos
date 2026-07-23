@@ -33,9 +33,9 @@ export struct UIHours {
   @Param maxTemp: number = 42;
   @Param minTemp: number = 20;
   @Param itemWidth: number = 48;
+  @Param customHeight: number = 224;
   @Local curIndex: number = 0;
   @Local showText: string = '';
-  customHeight: number = 224;
   canvasHeight: number = 120;
   controller: CanvasController = new CanvasController({ labelPosition: 'none', firstSegmentDashed: false });
 

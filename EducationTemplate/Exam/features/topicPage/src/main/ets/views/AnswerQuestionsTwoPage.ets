@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-import { AlertDialog } from '@kit.ArkUI';
+import { AlertDialog, AppStorageV2 } from '@kit.ArkUI';
 import { TestReportModel } from './TestReportPage';
-import { Logger, RouterMap, RouterModule } from 'commonlib';
+import { Logger, RouterMap, RouterModule, BreakpointModel } from 'commonlib';
 import { AnswerItem, AnswerSheetDialog, QUESTION_DATA, TopicItemModel } from 'answer_questions';
 
 @ComponentV2
@@ -31,6 +31,7 @@ export struct AnswerQuestionsTwoPage {
   @Local currentModel?: TopicItemModel;
   @Local format: string = 'HH:mm:ss';
   @Local isShowAnswerSheet: boolean = false;
+  @Local breakpointModel: BreakpointModel = AppStorageV2.connect(BreakpointModel, () => new BreakpointModel())!;
   // 退出页面弹框
   backPageDialogController: CustomDialogController = new CustomDialogController({
     builder: AlertDialog({
@@ -170,7 +171,7 @@ export struct AnswerQuestionsTwoPage {
       .fontWeight(FontWeight.Medium)
       .fontColor($r('sys.color.font_on_primary'))
       .borderRadius($r('sys.float.corner_radius_level10'))
-      .width($r('app.float.vp_112'))
+      .width(this.breakpointModel.currentBreakpoint === 'sm' ? 112 : 240)
       .height($r('app.float.vp_40'))
       .onClick(() => {
         if (this.currentIndex >= this.ques.length - 1) {
@@ -197,7 +198,7 @@ export struct AnswerQuestionsTwoPage {
       .fontSize($r('sys.float.Body_L'))
       .fontWeight(FontWeight.Medium)
       .height($r('app.float.vp_40'))
-      .width($r('app.float.vp_112'))
+      .width(this.breakpointModel.currentBreakpoint === 'sm' ? 112 : 240)
       .borderRadius($r('sys.float.corner_radius_level10'))
       .onClick(() => {
         if (this.currentIndex === 0) {

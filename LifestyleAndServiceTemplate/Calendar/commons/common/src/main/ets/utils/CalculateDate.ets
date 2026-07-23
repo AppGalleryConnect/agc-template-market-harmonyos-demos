@@ -17,10 +17,12 @@ export const weekdayMap = ['星期日', '星期一', '星期二', '星期三', '
 const FESTIVALS: FestivalsInfo[] = [
   { name: '元旦', month: 0, day: 1 },
   { name: '情人节', month: 1, day: 14 },
+  { name: '春节', month: 1, day: 17 },
+  { name: '清明节', month: 3, day: 4 },
   { name: '劳动节', month: 4, day: 1 },
-  { name: '端午节', month: 4, day: 31 },
+  { name: '端午节', month: 5, day: 19 },
+  { name: '中秋节', month: 8, day: 25 },
   { name: '国庆节', month: 9, day: 1 },
-  { name: '中秋节', month: 9, day: 6 },
   { name: '圣诞节', month: 11, day: 25 },
 ];
 

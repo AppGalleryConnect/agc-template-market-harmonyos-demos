@@ -4,7 +4,13 @@ import { RowModifier } from '../../AttributeModifiers'
 import { AssociateUtil } from '../../../util/Utils'
 import { MinePageVM } from '../../viewmodel/MinePageVM'
 import { FunctionalButton, functionalButtonComponentManager } from '@kit.ScenarioFusionKit'
+import { MinorsMode } from '../../../models/MinorsModel'
+import { AppStorageV2 } from '@kit.ArkUI'
+import { MinorsProtectionUtils } from '../../../push/minorsProtectionUtils'
+import { FontModel } from '../../../models/FontModel'
+import { fp2pxUtil } from '../../../util/FontUtils'
 
+const fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
 
 @Extend(Image)
 function profileImageStyles() {
@@ -21,7 +27,7 @@ function profileImageStyles() {
 function userNameStyles() {
   .fontColor($r('sys.color.font_primary'))
   .fontWeight(FontWeight.Medium)
-  .fontSize($r('sys.float.Subtitle_L'))
+  .fontSize(fontModel.getFg(18))
   .textOverflow({
     overflow: TextOverflow.Ellipsis
   })
@@ -29,6 +35,8 @@ function userNameStyles() {
 }
 
 const TAG = 'UserLogin';
+const minorsMode: MinorsMode =
+  AppStorageV2.connect(MinorsMode, 'isMinorsMode', () => new MinorsMode(MinorsProtectionUtils.getMinorsMode()))!
 
 @ComponentV2
 export struct UserLogin {
@@ -53,36 +61,34 @@ export struct UserLogin {
           if (this.userInfoHandler && this.vm.userInfo.isPhoneAssociated) {
             this.userInfoHandler();
           } else {
-            appRouter.push({builderName:NAV_PAGE_NAME.LoginPage.name})
+            appRouter.push({ builderName: NAV_PAGE_NAME.LoginPage.name })
           }
         })
       }
 
-      if (this.vm.userInfo.isPhoneAssociated) {
+      if (this.vm.userInfo.isPhoneAssociated && !minorsMode.isMinorsMode) {
         Divider().height(0.5).padding({ left: 12, right: 12 })
-        Row() {
-          Text(this.vm.userInfo.isVip ? getString('app.string.VIP_information') : getString('app.string.Non_VIP_information'))
-            .fontSize(14)
-            .lineHeight(19)
+        Flex({ direction: FlexDirection.Row, wrap: FlexWrap.Wrap, alignItems: ItemAlign.Center}) {
+          Text(this.vm.userInfo.isVip ? getString('app.string.VIP_information') :
+            getString('app.string.Non_VIP_information'))
+            .fontSize(fontModel.getFg(14))
             .fontColor($r('sys.color.font_primary'))
 
           Blank()
           Button(this.vm.userInfo.isVip ? getString('app.string.VIP_button') : getString('app.string.Non_VIP_button'))
-            .fontSize($r('sys.float.Body_M'))
+            .fontSize(fp2pxUtil(14))
             .fontWeight(500)
-            .fontColor($r('sys.color.font_primary'))
             .height(28)
-            .backgroundColor('#F1D1A5')
-            .onClick(()=>{
-              appRouter.push({builderName:NAV_PAGE_NAME.VIPCenterPage.name})
+            .backgroundColor('#BD9164')
+            .onClick(() => {
+              appRouter.push({ builderName: NAV_PAGE_NAME.VIPCenterPage.name })
             })
         }
         .width('100%')
-        .padding({ left: 12, right: 12 })
-        .height(56)
+        .padding({ top: 14, bottom: 14, left: 12, right: 12 })
       }
     }
-    .backgroundColor($r('sys.color.background_primary'))
+    .backgroundColor($r('sys.color.comp_background_list_card'))
     .borderRadius(16)
     .padding(4)
 
@@ -93,7 +99,8 @@ export struct UserLogin {
   profileImage() {
     Image((this.vm.userInfo.isPhoneAssociated) ?
       this.vm.localInfo.avatar ? this.vm.localInfo.avatar :
-      this.vm.userInfo.avatar : getMedia('app.media.user_login_img'))
+        this.vm.userInfo.avatar : getMedia('app.media.user_login_img'))
+      .accessibilityText('账号头像')
       .profileImageStyles()
       .onError((error: ImageError) => {
         Logger.warn(TAG, 'image error')
@@ -107,6 +114,8 @@ export struct UserLogin {
       if (this.vm.userInfo.isPhoneAssociated) {
         Text(this.vm.localInfo.nickname ? this.vm.localInfo.nickname : this.vm.userInfo.nickname)
           .userNameStyles()
+          .accessibilityText(`账号昵称${this.vm.localInfo.nickname ? this.vm.localInfo.nickname :
+            this.vm.userInfo.nickname}`)
       } else {
         Text('点击登录')
           .userNameStyles()
@@ -127,7 +136,7 @@ export struct UserLogin {
           .width(16)
         Text(getString('app.string.unlink'))
           .fontWeight(FontWeight.Medium)
-          .fontSize($r('sys.float.Body_M'))
+          .fontSize(fontModel.getFg(14))
           .fontColor($r('sys.color.font_primary'))
       }
       .backgroundColor($r('sys.color.comp_background_tertiary'))
@@ -170,7 +179,7 @@ export struct UserLogin {
             .width(16)
           Text(getString('app.string.to_link'))
             .fontWeight(FontWeight.Medium)
-            .fontSize($r('sys.float.Body_M'))
+            .fontSize(fontModel.getFg(14))
             .fontColor(getColor('app.color.orange'))
         }
       }

@@ -1,0 +1,9 @@
+{
+  "routerMap": [
+    {
+      "name": "examResultPage",
+      "pageSourceFile": "src/main/ets/components/ExamResultPage.ets",
+      "buildFunction": "ExamResultPageBuilder"
+    }
+  ]
+}

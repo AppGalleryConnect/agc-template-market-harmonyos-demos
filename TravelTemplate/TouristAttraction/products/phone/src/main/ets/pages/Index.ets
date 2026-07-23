@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { AppPrivacyUtils } from 'common';
+import { AppPrivacyUtils, BreakpointUtils } from 'common';
 import { RouterModule } from '../model/TabBarInfo';
 
 @Entry
@@ -20,8 +20,10 @@ import { RouterModule } from '../model/TabBarInfo';
 struct Index {
   @Local privacyImpl: AppPrivacyUtils = AppPrivacyUtils.instance;
   @Provider('mainPathStack') mainPathStack: NavPathStack = new NavPathStack();
+  breakpoint: BreakpointUtils | null = null;
 
   aboutToAppear() {
+    this.registerBreakpointListener();
     RouterModule.setStack(this.mainPathStack)
     this.privacyImpl.subscribe();
     if (!this.privacyImpl.CONFIG_SHOW_HOME && !this.privacyImpl.agreeFlag) {
@@ -33,8 +35,13 @@ struct Index {
 
   aboutToDisappear(): void {
     this.privacyImpl.unSubscribe();
+    this.breakpoint?.unRegister();
   }
 
+  registerBreakpointListener() {
+    this.breakpoint = new BreakpointUtils(this.getUIContext().getMediaQuery());
+    this.breakpoint?.register();
+  }
   @Monitor('privacyImpl.agreeFlag')
   agreeFlagChange() {
     if (!this.privacyImpl.CONFIG_SHOW_HOME && this.privacyImpl.agreeFlag) {

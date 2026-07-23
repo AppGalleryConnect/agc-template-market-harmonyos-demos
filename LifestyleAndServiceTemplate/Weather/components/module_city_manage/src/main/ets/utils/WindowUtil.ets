@@ -1,10 +1,8 @@
-import { AppStorageV2 } from '@ohos.arkui.StateManagement';
-import { window } from '@kit.ArkUI';
+import { window, AppStorageV2 } from '@kit.ArkUI';
 import { BusinessError } from '@kit.BasicServicesKit';
 import { Logger } from './Utils';
 
-
-const TAG = 'WindowUtil';
+const TAG = '[WindowUtil]';
 
 @ObservedV2
 export class AvoidAreaSize {
@@ -27,11 +25,17 @@ export class WindowUtil {
   }
 
   public static addWindowAvoidAreaListener() {
+    let uiContext: UIContext = AppStorage.get('city_manage_uiContext') as UIContext
     if (WindowUtil._currentWindow) {
-      const systemArea = WindowUtil._currentWindow.getWindowAvoidArea(window.AvoidAreaType.TYPE_SYSTEM);
-      WindowUtil._avoidAreaSize.top = px2vp(systemArea.topRect.height);
-      const bottomArea = WindowUtil._currentWindow.getWindowAvoidArea(window.AvoidAreaType.TYPE_NAVIGATION_INDICATOR);
-      WindowUtil._avoidAreaSize.bottom = px2vp(bottomArea.bottomRect.height);
+      try {
+        const systemArea = WindowUtil._currentWindow.getWindowAvoidArea(window.AvoidAreaType.TYPE_SYSTEM);
+        WindowUtil._avoidAreaSize.top = uiContext.px2vp(systemArea.topRect.height);
+        const bottomArea = WindowUtil._currentWindow.getWindowAvoidArea(window.AvoidAreaType.TYPE_NAVIGATION_INDICATOR);
+        WindowUtil._avoidAreaSize.bottom = uiContext.px2vp(bottomArea.bottomRect.height);
+      } catch (error) {
+        const err: BusinessError = error as BusinessError;
+        Logger.error(TAG, `Failed to get window avoid area. Code: ${err.code}, message: ${err.message}`);
+      }
     }
   }
 
@@ -40,8 +44,9 @@ export class WindowUtil {
   }
 
   private static async _getCurrentWindow() {
+    let uiContext: UIContext = AppStorage.get('city_manage_uiContext') as UIContext
     await window
-      .getLastWindow(getContext())
+      .getLastWindow(uiContext.getHostContext())
       .then((win) => {
         WindowUtil._currentWindow = win;
       })

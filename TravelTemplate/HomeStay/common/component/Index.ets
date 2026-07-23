@@ -1,6 +1,6 @@
 export { CommonBlank } from './src/main/ets/pages/CommonBlank';
 
-export { TitleBar } from './src/main/ets/pages/TitleBar';
+export { CommonHeader } from './src/main/ets/pages/CommonHeader';
 
 export { ConfirmDialog } from './src/main/ets/pages/ConfirmDialog';
 

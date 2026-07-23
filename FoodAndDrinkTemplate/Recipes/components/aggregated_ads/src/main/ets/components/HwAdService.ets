@@ -3,6 +3,10 @@ import { AdStatus, AdType } from '../common/Constant';
 import { Prompt } from '@kit.ArkUI';
 import { abilityAccessCtrl, common } from '@kit.AbilityKit';
 import { BusinessError } from '@kit.BasicServicesKit';
+import { hilog } from '@kit.PerformanceAnalysisKit';
+
+const DOMAIN = 0x0001;
+const TAG = '[HwAdService]';
 
 @ComponentV2
 export struct HwAdService {
@@ -36,7 +40,7 @@ export struct HwAdService {
     try {
       this.requestOAIDTrackingConsentPermissions(this.context);
     } catch (error) {
-      console.log(`Catch err, code: ${error.code}, message: ${error.message}`);
+      hilog.error(DOMAIN, TAG, `Catch err, code: ${error.code}, message: ${error.message}`);
     }
   }
 
@@ -48,13 +52,13 @@ export struct HwAdService {
           this.oaid = data;
           this.requestAd(this.splashImageAdReqParams, this.adOptions);
         }).catch((error: BusinessError) => {
-          console.log(`ads[0].adType is : `);
+          hilog.error(DOMAIN, TAG, `getOAID failed, code: ${error.code}, message: ${error.message}`);
         });
       }).catch((err: BusinessError) => {
-        console.log(`ads[0].adType is :`);
+        hilog.error(DOMAIN, TAG, `requestPermissionsFromUser failed, code: ${err.code}, message: ${err.message}`);
       });
     } catch (err) {
-      console.log(`ads[0].adType is : `);
+      hilog.error(DOMAIN, TAG, `requestOAIDTrackingConsentPermissions catch err: ${JSON.stringify(err)}`);
     }
   }
 

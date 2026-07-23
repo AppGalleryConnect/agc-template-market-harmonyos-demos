@@ -1,5 +1,9 @@
 import axios, { AxiosResponse } from '@ohos/axios';
 import { BusinessError } from '@kit.BasicServicesKit';
+import { hilog } from '@kit.PerformanceAnalysisKit';
+
+const DOMAIN = 0x0001;
+const TAG = '[Network]';
 
 export const axiosInstance = axios.create({
   baseURL: '',
@@ -12,20 +16,12 @@ axiosInstance.interceptors.response.use(
     if (response.status === 200) {
       return Promise.resolve(response);
     } else {
-      console.error(
-        '[Network]'+
-          `https request failed：${response.config.url}. error:`+
-        JSON.stringify(response.status),
-      );
+      hilog.error(DOMAIN, TAG, `https request failed：${response.config.url}. error: ${JSON.stringify(response.status)}`);
       return Promise.reject(response);
     }
   },
   (error: BusinessError) => {
-    console.error(
-      '[Network]'+
-        `https request failed：. error:`+
-      JSON.stringify(error),
-    );
+    hilog.error(DOMAIN, TAG, `https request failed. error: ${JSON.stringify(error)}`);
     return Promise.reject(error);
   },
 );

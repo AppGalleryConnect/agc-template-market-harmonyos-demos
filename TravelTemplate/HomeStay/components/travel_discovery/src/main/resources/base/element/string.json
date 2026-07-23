@@ -1,10 +1,6 @@
 {
   "string": [
     {
-      "name": "agcic_72935861410526710813",
-      "value": "@ohos-agcic/travel-discovery/1.0.0"
-    },
-    {
       "name": "water_flow_title",
       "value": "游记"
     },

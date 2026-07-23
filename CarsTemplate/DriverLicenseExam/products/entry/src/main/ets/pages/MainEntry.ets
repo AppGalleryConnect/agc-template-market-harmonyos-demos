@@ -7,8 +7,8 @@ import { GuideService } from '@ohos_agcit/driver_license_exam_guide';
 import { ExamService } from '@ohos_agcit/driver_license_exam_datasource'
 import { notificationManager } from '@kit.NotificationKit';
 import { PushUtils , PushActionParams } from '@ohos_agcit/driver_license_exam_commonlib'
-import common from '@ohos.app.ability.common';
-import { formBindingData, FormExtensionAbility, formInfo , formProvider} from '@kit.FormKit';
+import { formBindingData, formProvider} from '@kit.FormKit';
+import { MainEntryVM } from '../viewmodels/MainEntryVM';
 
 interface GeneratedObjectLiteralInterface_1 {
   index: number;
@@ -16,10 +16,15 @@ interface GeneratedObjectLiteralInterface_1 {
   totalCount: number;
 }
 
-@Entry
+@Builder
+export function MainEntryBuilder() {
+  MainEntry();
+}
+
 @ComponentV2
-struct MainEntry {
+export struct MainEntry {
   vm: CommonModel = CommonModel.instance;
+  mainEntryVm: MainEntryVM = new MainEntryVM();
   bottomRectHeight: number = 0;
   guideService: GuideService = GuideService.instance;
   examService: ExamService = ExamService.instance(this.getUIContext().getHostContext() as Context);
@@ -28,13 +33,11 @@ struct MainEntry {
   @Local accuracyRate: number = 0;
   @Local averageScore: number = 0;
   @Local projectIndex: number  = 0;
+  @Local isEnabled: boolean = true;
 
   aboutToAppear(): void {
     this.bottomRectHeight = AppStorage.get('bottomRectHeight') || 0;
-    this.vm.navStack.pushPathByName('splashPage', true);
-    this.sendPushNotice();
     this.updateForm(0);
-
   }
 
 
@@ -80,9 +83,9 @@ struct MainEntry {
 
   build() {
     Stack({ alignContent: Alignment.TopStart }) {
-      Navigation(this.vm.navStack) {
+      NavDestination() {
         Column() {
-          Tabs({ barPosition: BarPosition.End, index: this.vm.curIndex }) {
+          Tabs({ index: this.vm.curIndex }) {
             TabContent() {
               HomeView({
                 didCount: this.didCount,
@@ -106,6 +109,12 @@ struct MainEntry {
           }
           .scrollable(false)
           .height(CommonConstants.FULL_HEIGHT)
+          .barWidth(this.mainEntryVm.tabWidth)
+          .barHeight(this.mainEntryVm.tabHeight)
+          .vertical(this.mainEntryVm.tabModel.isTabVertical)
+          .divider(this.mainEntryVm.showDivider)
+          .barOverlap(!this.mainEntryVm.tabModel.isTabVertical)
+          .barPosition(this.mainEntryVm.barPosition)
           .animationDuration(0)
           .barMode(BarMode.Fixed)
           .onChange((index: number) => {
@@ -120,8 +129,8 @@ struct MainEntry {
       .hideTitleBar(true)
       .hideToolBar(true)
       .hideBackButton(true)
-      .mode(NavigationMode.Stack)
-      .onNavBarStateChange(() => {
+      .enabled(this.isEnabled)
+      .onShown(() => {
         this.totalCount = this.examService.getTotalCount();
         this.didCount = this.examService.getDidCount();
         this.accuracyRate = this.examService.calAccuracyRate();

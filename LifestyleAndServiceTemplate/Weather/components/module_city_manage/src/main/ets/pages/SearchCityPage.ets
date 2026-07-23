@@ -1,3 +1,4 @@
+import { GridRowColSetting } from 'module_weather_core';
 import { CommonHeader } from '../components/CommonHeader';
 import { CommonUtil } from '../utils/Utils';
 import { SearchVM } from '../viewmodels/SearchVM';
@@ -28,27 +29,35 @@ export struct SearchCityPage {
           }, 200))
       }
 
-      Scroll() {
-        Column() {
-          if (this.vm.text) {
-            this.searchResListBuilder()
-          } else {
-            this.popularFlexBuilder()
-          }
+      GridRow(GridRowColSetting.DEFAULT_GRID_ROW_OPTIONS) {
+        GridCol({
+          span: this.vm.text ? this.vm.searchResultColSpan : this.vm.defaultCenterColSpan,
+          offset: this.vm.text ? this.vm.searchResultColOffset : this.vm.defaultCenterColOffset,
+        }) {
+          Scroll() {
+            Column() {
+              if (this.vm.text) {
+                this.searchResListBuilder()
+              } else {
+                this.popularFlexBuilder()
+              }
 
-          Blank().layoutWeight(1)
+              Blank().layoutWeight(1)
+            }
+            .width('100%')
+            .constraintSize({ minHeight: '100%' })
+            .justifyContent(FlexAlign.Start)
+            .onSizeChange((_, n) => {
+              this.vm.updateItemWidth(Number(n.width));
+            })
+          }
+          .layoutWeight(1)
+          .scrollBar(BarState.Off)
+          .edgeEffect(EdgeEffect.Spring)
         }
-        .width('100%')
-        .height('100%')
-        .justifyContent(FlexAlign.Start)
-        .onSizeChange((_, n) => {
-          this.vm.itemWidth = ((n.width as number) - 8 * 3) / 4;
-        })
       }
       .layoutWeight(1)
-      .padding({ left: 16, right: 16 })
-      .scrollBar(BarState.Off)
-      .edgeEffect(EdgeEffect.Spring)
+      .padding({ left: this.vm.pagePadding, right: this.vm.pagePadding, bottom: 24 })
       .margin({ top: 16 })
     }
     .hideTitleBar(true)
@@ -69,7 +78,7 @@ export struct SearchCityPage {
           .fontSize($r('sys.float.Body_L'))
 
         Text() {
-          ImageSpan($r('app.media.local_fill')).width(12).height(15).margin({ right: 2 })
+          ImageSpan($r('app.media.local_fill')).width(12).height(15).margin({ right: 4 })
           Span(this.vm.curPostion.name)
         }
         .itemStyle()
@@ -107,22 +116,23 @@ export struct SearchCityPage {
           .fontWeight(FontWeight.Medium)
           .fontColor($r('sys.color.font_primary'))
           .fontSize($r('sys.float.Body_L'))
+        Grid() {
+          ForEach(SearchVM.popularCityList, (city: City) => {
+            GridItem() {
+              Text(city.name).itemStyle().width('100%')
+            }.onClick(() => {
+              this.stack?.pop(city);
+            })
+          }, (city: City) => city.code)
+        }
+        .height(28 * 5 + 4 * 8)
+        .columnsTemplate('1fr 1fr 1fr 1fr')
+        .rowsTemplate('1fr 1fr 1fr 1fr 1fr')
+        .rowsGap(8)
+        .columnsGap(8)
       }
-
-      Grid() {
-        ForEach(SearchVM.popularCityList, (city: City) => {
-          GridItem() {
-            Text(city.name).itemStyle().width('100%')
-          }.onClick(() => {
-            this.stack?.pop(city);
-          })
-        }, (city: City) => city.code)
-      }
-      .height(28 * 5 + 4 * 8)
-      .columnsTemplate('1fr 1fr 1fr 1fr')
-      .rowsTemplate('1fr 1fr 1fr 1fr 1fr')
-      .rowsGap(8)
-      .columnsGap(8)
+      .width('100%')
+      .alignItems(HorizontalAlign.Start)
     }
     .alignItems(HorizontalAlign.Start)
   }
@@ -178,7 +188,7 @@ function itemStyle() {
   .height(28)
   .textAlign(TextAlign.Center)
   .backgroundColor($r('sys.color.comp_background_tertiary'))
-  .borderRadius(8)
+  .borderRadius(16)
   .fontColor($r('sys.color.font_primary'))
   .fontSize(12)
 }

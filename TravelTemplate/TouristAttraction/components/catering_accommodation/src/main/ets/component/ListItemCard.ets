@@ -1,5 +1,5 @@
 import { AppStorageV2 } from '@kit.ArkUI';
-import { UserInfo } from 'module_base';
+import { Constant, UserInfo } from 'module_base';
 import { AccommodationInfo, CateringInfo, CateringTabBarType } from '../model/Index';
 
 @ComponentV2
@@ -10,39 +10,52 @@ export struct ListItemCard {
   @Local userInfo: UserInfo = AppStorageV2.connect(UserInfo, 'userInfo', () => new UserInfo())!;
 
   build() {
-    Row({ space: 8 }) {
-      Image(this.data.banner).objectFit(ImageFit.Contain).width('20%');
+    Row({ space: 16 }) {
+      Image(this.data.banner).objectFit(ImageFit.Contain).width(72).height(96);
       Column({ space: 6 }) {
-        Text(this.data.name).fontSize(18).fontWeight(500).maxLines(1).textOverflow({ overflow: TextOverflow.Ellipsis });
-        Row() {
+        Column({ space: 4 }) {
+          Text(this.data.name)
+            .fontSize($r('sys.float.Body_L'))
+            .fontWeight(FontWeight.Medium)
+            .fontColor($r('sys.color.font_primary'))
+            .maxLines(1)
+            .textOverflow({ overflow: TextOverflow.Ellipsis });
           Row() {
-            Image($r('app.media.location')).size({ width: 16, height: 16 });
-            Text(this.data.address)
-              .fontSize(12)
-              .maxLines(2)
-              .opacity(0.6)
-              .width('calc(80% - 16vp)')
-              .textOverflow({ overflow: TextOverflow.Ellipsis });
-          }.width('80%');
+            Row({ space: 4 }) {
+              SymbolGlyph($r('sys.symbol.local'))
+                .width(16)
+                .height(16)
+                .fontSize(16)
+                .fontColor([$r('sys.color.icon_secondary')])
+              Text(this.data.address)
+                .fontSize($r('sys.float.Body_S'))
+                .maxLines(2)
+                .fontColor($r('sys.color.font_secondary'))
+                .layoutWeight(1)
+                .textOverflow({ overflow: TextOverflow.Ellipsis });
+            }.layoutWeight(1).alignItems(VerticalAlign.Top);
 
-          Text(`${this.data.distance === 0 ? '--' : this.data.distance}m`).fontSize(12);
-        }.alignItems(VerticalAlign.Top).justifyContent(FlexAlign.SpaceBetween).width('100%');
+          }.width(Constant.FULL_PERCENT);
+
+        }.width(Constant.FULL_PERCENT).alignItems(HorizontalAlign.Start)
 
         Row() {
-          if (this.type === CateringTabBarType.CATERING && this.data.rating) {
-            Row() {
-              Rating({ rating: this.data.rating, indicator: true })
-                .stars(5)
-                .stepSize(0.1);
-              Text(`${this.data.rating}`).fontSize(14).fontWeight(500).fontColor('#E84026').margin({ left: 4 });
-            };
-          } else {
-            Text('')
-          }
+          Text() {
+            Span('￥').fontSize($r('sys.float.Body_S'))
+            Span(`${this.data.startPrice}`).fontSize($r('sys.float.Subtitle_L')).fontWeight(FontWeight.Medium)
+            Span(`起`).fontSize($r('sys.float.Body_S'))
+          }.fontColor($r('sys.color.warning')).align(Alignment.End);
 
-          Button('预定').backgroundColor('#64BB5C').size({ width: 64, height: 28 });
+          Button('预定', { controlSize: ControlSize.SMALL })
+            .fontColor($r('sys.color.font_on_primary'))
+            .backgroundColor($r('sys.color.multi_color_04'))
+            .width(72);
         }.justifyContent(FlexAlign.SpaceBetween).width('100%');
-      }.alignItems(HorizontalAlign.Start).width('80%');
-    }.height(120).onClick(this.routeToDetailPage);
+      }.alignItems(HorizontalAlign.Start).justifyContent(FlexAlign.SpaceBetween).layoutWeight(1).height(96);
+    }
+    .padding(12)
+    .borderRadius(16)
+    .onClick(this.routeToDetailPage)
+    .backgroundColor($r('sys.color.comp_background_primary'));
   }
 }

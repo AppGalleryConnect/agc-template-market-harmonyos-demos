@@ -68,7 +68,7 @@ export struct PublicHolidays {
   build() {
     Column() {
       Row() {
-        Text(`2025年`)
+        Text(`2026年`)
           .attributeModifier(new BaseTextStyleModifier('font_secondary/Body_M/Regular'))
       }
       .justifyContent(FlexAlign.Start)

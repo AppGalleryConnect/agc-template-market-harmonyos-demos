@@ -25,6 +25,7 @@ export struct LivePage {
   @Local isSpeak2: boolean = false
   @Local isSpeak3: boolean = false
   @Provider('isLocated') isLocated: boolean = !!this.liveStreamer.location
+  @Event startRecord: Function = () => {}
   @Local isExpanded: boolean = display.getFoldStatus() === display.FoldStatus.FOLD_STATUS_EXPANDED
   @Local isLandScapeTablet: boolean = display.getDefaultDisplaySync().orientation === display.Orientation.LANDSCAPE ||
     display.getDefaultDisplaySync().orientation === display.Orientation.LANDSCAPE_INVERTED &&
@@ -167,6 +168,7 @@ export struct LivePage {
             RouterModule.push({ url: RouterMap.Real_Name_Auth_Page })
           } else {
             this.isLive = true
+            this.startRecord()
           }
         })
     }
@@ -372,6 +374,8 @@ export struct LivePage {
       } else if (data.dialogShownResults![0] && data.authResults[0]) {
         this.isLocated = false
       }
+    }).catch((e: Error) => {
+      console.error(`requestPermissionsFromUser failed: ${e.message}`);
     })
   }
 

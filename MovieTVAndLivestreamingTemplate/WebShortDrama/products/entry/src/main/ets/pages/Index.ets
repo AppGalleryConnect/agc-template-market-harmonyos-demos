@@ -1,17 +1,14 @@
-import { TabHeaderInfo, TabInfoRegister } from '@agctemplate/frame';
-import { HomeMainPageBuilder } from '@agctemplate/home';
-import { MineMainPageBuilder } from '@agctemplate/mine';
-import { TheaterMainPageBuilder } from '@agctemplate/theater'
+import { initMainPageContent } from '@agctemplate/frame';
 import { appRouter, deepEqual, NavRouterActionType, navStackActionOptions } from '@agctemplate/utils';
 import '@agctemplate/resources';
 import '@agctemplate/login';
-import { getMedia, getString, NAV_PAGE_NAME } from '@agctemplate/resources';
-import { AwardMainPageBuilder } from '@agctemplate/award';
-import { FavorMainPageBuilder } from '@agctemplate/favor';
+import { NAV_PAGE_NAME } from '@agctemplate/resources';
+import { LoneTakeAnimationsTransition } from 'module_transition';
 
 @Entry
 @ComponentV2
 struct Index {
+  @Local isEnabled: boolean = true;
   @Provider('navStack') navPathStack: NavPathStack = new NavPathStack();
   navStackAction: (actionType: NavRouterActionType, options: navStackActionOptions) => boolean =
     (actionType: NavRouterActionType, options: navStackActionOptions) => {
@@ -35,10 +32,10 @@ struct Index {
           }
           if (options.name) {
             options.params ? this.navPathStack.popToName(options.name, options.params, options.animated) :
-            this.navPathStack.popToName(options.name, options.animated)
+              this.navPathStack.popToName(options.name, options.animated)
           } else {
             options.params ? this.navPathStack.pop(options.params, options.animated) :
-            this.navPathStack.pop(options.animated)
+              this.navPathStack.pop(options.animated)
           }
           return true;
         default:
@@ -49,7 +46,7 @@ struct Index {
   aboutToAppear() {
     appRouter.setNavStackAction(this.navStackAction);
     appRouter.setNavPathStack(this.navPathStack);
-    this.initMainPageContent();
+    initMainPageContent();
     appRouter.push({
       builderName: NAV_PAGE_NAME.LaunchPage.name
     })
@@ -62,34 +59,17 @@ struct Index {
     .hideTitleBar(true)
     .width('100%')
     .height('100%')
-  }
-
-  initMainPageContent() {
-    TabInfoRegister.tabInfos = [{
-      tabHeaderInfo: new TabHeaderInfo(getString('app.string.home'), false,
-        getMedia('app.media.home_select'), getMedia('app.media.home_unselect'),
-        getMedia('app.media.home_unselect_dark')),
-      tabContentBuilder: wrapBuilder(HomeMainPageBuilder)
-    }, {
-      tabHeaderInfo: new TabHeaderInfo(getString('app.string.theater'), false,
-        getMedia('app.media.theater_select'), getMedia('app.media.theater_unselect'),
-        getMedia('app.media.theater_unselect_dark')),
-      tabContentBuilder: wrapBuilder(TheaterMainPageBuilder)
-    }, {
-      tabHeaderInfo: new TabHeaderInfo(getString('app.string.award'), false,
-        getMedia('app.media.award_select'), getMedia('app.media.award_unselect'),
-        getMedia('app.media.award_unselect_dark')),
-      tabContentBuilder: wrapBuilder(AwardMainPageBuilder)
-    }, {
-      tabHeaderInfo: new TabHeaderInfo(getString('app.string.favor'), false,
-        getMedia('app.media.favor_select'), getMedia('app.media.favor_unselect'),
-        getMedia('app.media.favor_unselect_dark')),
-      tabContentBuilder: wrapBuilder(FavorMainPageBuilder)
-    }, {
-      tabHeaderInfo: new TabHeaderInfo(getString('app.string.mine'), false,
-        getMedia('app.media.mine_select'), getMedia('app.media.mine_unselect'),
-        getMedia('app.media.mine_unselect_dark')),
-      tabContentBuilder: wrapBuilder(MineMainPageBuilder)
-    }];
+    .enabled(this.isEnabled)
+    .customNavContentTransition((from: NavContentInfo, to: NavContentInfo, operation: NavigationOperation) => {
+      return LoneTakeAnimationsTransition.customNavContentTransition(from, to, operation, {
+        // 自定义转场过程中禁用手势，避免出现体验问题
+        onTransitionStart: () => {
+          this.isEnabled = false;
+        },
+        onTransitionEnd: () => {
+          this.isEnabled = true;
+        },
+      });
+    })
   }
 }

@@ -1,0 +1,722 @@
+{
+  "metadata": {
+    "rootDir": "/devcloud/ws/sFdK4/workspace/j_7GCREV4W/BacAGCSDKLiveStreaming/LiveStreaming",
+    "toolType": "ohpm",
+    "toolVersion": "ohpm v5.3.1-rc.4",
+    "author": [
+      {}
+    ]
+  },
+  "modules": [
+    {
+      "moduleName": "styles",
+      "artifact": {
+        "component": {
+          "id": "@agctemplate/styles@1.0.0",
+          "repoType": "ohpm",
+          "name": "@agctemplate/styles",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [],
+      "dependencies": [],
+      "moduleDependencies": []
+    },
+    {
+      "moduleName": "feed_back",
+      "artifact": {
+        "component": {
+          "id": "@agctemplate/feed_back@1.0.0",
+          "repoType": "ohpm",
+          "name": "@agctemplate/feed_back",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [],
+      "dependencies": [],
+      "moduleDependencies": []
+    },
+    {
+      "moduleName": "router_module",
+      "artifact": {
+        "component": {
+          "id": "@agctemplate/router_module@1.0.0",
+          "repoType": "ohpm",
+          "name": "@agctemplate/router_module",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [],
+      "dependencies": [],
+      "moduleDependencies": []
+    },
+    {
+      "moduleName": "module_share",
+      "artifact": {
+        "component": {
+          "id": "module_share@1.0.0",
+          "repoType": "ohpm",
+          "name": "module_share",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [],
+      "dependencies": [],
+      "moduleDependencies": []
+    },
+    {
+      "moduleName": "module_base",
+      "artifact": {
+        "component": {
+          "id": "module_base@1.0.0",
+          "repoType": "ohpm",
+          "name": "module_base",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [],
+      "dependencies": [],
+      "moduleDependencies": []
+    },
+    {
+      "moduleName": "dial_panel",
+      "artifact": {
+        "component": {
+          "id": "dial_panel@1.0.0",
+          "repoType": "ohpm",
+          "name": "dial_panel",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [],
+      "dependencies": [],
+      "moduleDependencies": []
+    },
+    {
+      "moduleName": "utils",
+      "artifact": {
+        "component": {
+          "id": "@agctemplate/utils@1.0.0",
+          "repoType": "ohpm",
+          "name": "@agctemplate/utils",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@ohos/axios@2.2.4",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.4",
+          "files": [
+            {
+              "integrity": "sha512-5oH753kGFwfJP1kvCnI92RRaSqRbN0b24vmNNrUV+T8+5ako98rtVQOhA7ezMPox5Z3PFWndLQTF/P/hEK/yeQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/ohpm-center/@ohos/axios/-/@ohos/axios-2.2.4.har"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "@agctemplate/utils@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.4"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": []
+    },
+    {
+      "moduleName": "live_interaction",
+      "artifact": {
+        "component": {
+          "id": "live_interaction@1.0.0",
+          "repoType": "ohpm",
+          "name": "live_interaction",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [],
+      "dependencies": [],
+      "moduleDependencies": [
+        ":module_share"
+      ]
+    },
+    {
+      "moduleName": "common",
+      "artifact": {
+        "component": {
+          "id": "@agctemplate/common@1.0.0",
+          "repoType": "ohpm",
+          "name": "@agctemplate/common",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [],
+      "dependencies": [],
+      "moduleDependencies": [
+        ":utils"
+      ]
+    },
+    {
+      "moduleName": "resources",
+      "artifact": {
+        "component": {
+          "id": "@agctemplate/resources@1.0.0",
+          "repoType": "ohpm",
+          "name": "@agctemplate/resources",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [],
+      "dependencies": [],
+      "moduleDependencies": [
+        ":utils"
+      ]
+    },
+    {
+      "moduleName": "aggregated_payment",
+      "artifact": {
+        "component": {
+          "id": "@agctemplate/aggregated_payment@1.0.0",
+          "repoType": "ohpm",
+          "name": "@agctemplate/aggregated_payment",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@cashier_alipay/cashiersdk@1.0.0",
+          "desc": "Please describe the basic information.",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "local",
+          "name": "@cashier_alipay/cashiersdk",
+          "version": "1.0.0",
+          "files": [
+            {
+              "localPath": "components/aggregated_payment/libs/swallow_alipay_sdk",
+              "hash": ""
+            }
+          ]
+        },
+        {
+          "id": "@tencent/wechat_open_sdk@1.0.15",
+          "desc": "Tencent WeChat OpenSDK",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@tencent/wechat_open_sdk",
+          "version": "1.0.15",
+          "files": [
+            {
+              "integrity": "sha512-O9W8Gj16YBu0fl3d78r4eQQdnljczJPcIDws9i+ErVg94y8twHBkLWdyysiWfhGA7+ltB3mu8EZsk/EAr8LZSw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/ohpm-center/@tencent/wechat_open_sdk/-/@tencent/wechat_open_sdk-1.0.15.har"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "@agctemplate/aggregated_payment@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@cashier_alipay/cashiersdk@1.0.0"
+            },
+            {
+              "id": "@tencent/wechat_open_sdk@1.0.15"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": []
+    },
+    {
+      "moduleName": "aggregated_share",
+      "artifact": {
+        "component": {
+          "id": "aggregated_share@1.0.2",
+          "repoType": "ohpm",
+          "name": "aggregated_share",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.2",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "desc": "UtilLog是基于open harmony的HiLog模块开发的多功能日志打印组件。支持多数据、多类型的美化格式输出。支持堆栈信息开关显示以及快速跳转定位源码。支持自定义TAG、边框等多样式设置。支持自定义行为，开放日志上报或缓存。支持函数标头注解，打印耗时与返回值。支持axios网络请求打印相关信息。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/util-log",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-Qyk/g2RpnplzT6t1JVEkkWRbEI0I4XvwmUT8q8frWfwLxqoTSxwixSX5OvDGI+TmueQHj7ubyGNRdoJsZqB/CA==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/util-log/-/@hw-agconnect/util-log-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@ohos/axios@2.2.4",
+          "desc": "Axios ，是一个基于 promise 的网络请求库。本库基于npm Axios 原库进行适配，使其可以运行在 OpenHarmony，并沿用其现有用法和特性。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@ohos/axios",
+          "version": "2.2.4",
+          "files": [
+            {
+              "integrity": "sha512-5oH753kGFwfJP1kvCnI92RRaSqRbN0b24vmNNrUV+T8+5ako98rtVQOhA7ezMPox5Z3PFWndLQTF/P/hEK/yeQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/ohpm-center/@ohos/axios/-/@ohos/axios-2.2.4.har"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/ui-toast@1.0.0",
+          "desc": "ui_toast是基于open harmony基础组件开发的组件，用于在屏幕中显示一个操作的轻量级即时反馈，支持显示图片+文字，刷新弹窗内容和修改弹窗样式。",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@hw-agconnect/ui-toast",
+          "version": "1.0.0",
+          "files": [
+            {
+              "integrity": "sha512-vmk4trgNRIxAK81xj69zRJCayccuryywF5qfheKWy1hdtSMMvXAX4g1EYvAbMd7/PXT8v+g/Xa/ASFS2BSs1KQ==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/product_ohpm/@hw-agconnect/ui-toast/-/@hw-agconnect/ui-toast-1.0.0.har"
+            }
+          ]
+        },
+        {
+          "id": "@tencent/wechat_open_sdk@1.0.15",
+          "desc": "Tencent WeChat OpenSDK",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@tencent/wechat_open_sdk",
+          "version": "1.0.15",
+          "files": [
+            {
+              "integrity": "sha512-O9W8Gj16YBu0fl3d78r4eQQdnljczJPcIDws9i+ErVg94y8twHBkLWdyysiWfhGA7+ltB3mu8EZsk/EAr8LZSw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/ohpm-center/@tencent/wechat_open_sdk/-/@tencent/wechat_open_sdk-1.0.15.har"
+            }
+          ]
+        },
+        {
+          "id": "@tencent/qq-open-sdk@1.0.4",
+          "desc": "QQ Open SDK",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@tencent/qq-open-sdk",
+          "version": "1.0.4",
+          "files": [
+            {
+              "integrity": "sha512-8hQfQxSvrPpIo6n63zsugeG/ZC947vZvDWPkCG6+vOMaLxEp9ynntnnR0inml4ZltQbszFGIBTmpxYCTer8whg==",
+              "resolved": "https://mirrors.tools.huawei.com/ohpm/@tencent/qq-open-sdk/-/@tencent/qq-open-sdk-1.0.4.har"
+            }
+          ]
+        },
+        {
+          "id": "dayjs@1.11.13",
+          "desc": "2KB immutable date time library alternative to Moment.js with the same modern API ",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "npm",
+          "name": "dayjs",
+          "version": "1.11.13",
+          "files": [
+            {
+              "integrity": "sha512-oaMBel6gjolK862uaPQOVTA7q3TZhuSvuMQAAglQDOWYO9A91IrAOUJEyKVlqJlHE0vq5p5UXxzdPfMH/x6xNg==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/npm/npm-central-repo/dayjs/-/dayjs-1.11.13.tgz"
+            }
+          ]
+        },
+        {
+          "id": "core@1.0.0",
+          "desc": "Please describe the basic information.",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "local",
+          "name": "core",
+          "version": "1.0.0",
+          "files": [
+            {
+              "localPath": "components/aggregated_share/libs/weibo_open_sdk",
+              "hash": ""
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "aggregated_share@1.0.2",
+          "dependsOn": [
+            {
+              "id": "@hw-agconnect/util-log@1.0.0"
+            },
+            {
+              "id": "@hw-agconnect/ui-toast@1.0.0"
+            },
+            {
+              "id": "@tencent/wechat_open_sdk@1.0.15"
+            },
+            {
+              "id": "@tencent/qq-open-sdk@1.0.4"
+            },
+            {
+              "id": "dayjs@1.11.13"
+            },
+            {
+              "id": "core@1.0.0"
+            }
+          ]
+        },
+        {
+          "id": "@hw-agconnect/util-log@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@ohos/axios@2.2.4"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": []
+    },
+    {
+      "moduleName": "server",
+      "artifact": {
+        "component": {
+          "id": "@agctemplate/server@1.0.0",
+          "repoType": "ohpm",
+          "name": "@agctemplate/server",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [],
+      "dependencies": [],
+      "moduleDependencies": [
+        ":utils",
+        ":common"
+      ]
+    },
+    {
+      "moduleName": "widgets",
+      "artifact": {
+        "component": {
+          "id": "@agctemplate/widgets@1.0.0",
+          "repoType": "ohpm",
+          "name": "@agctemplate/widgets",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [],
+      "dependencies": [],
+      "moduleDependencies": [
+        ":common",
+        ":server",
+        ":utils",
+        ":resources",
+        ":live_interaction"
+      ]
+    },
+    {
+      "moduleName": "detail",
+      "artifact": {
+        "component": {
+          "id": "@agctemplate/detail@1.0.0",
+          "repoType": "ohpm",
+          "name": "@agctemplate/detail",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [],
+      "dependencies": [],
+      "moduleDependencies": [
+        ":utils",
+        ":resources",
+        ":widgets",
+        ":server",
+        ":common",
+        ":video_swiper",
+        ":router_module",
+        ":aggregated_payment",
+        ":live_interaction"
+      ]
+    },
+    {
+      "moduleName": "video_swiper",
+      "artifact": {
+        "component": {
+          "id": "@agctemplate/video_swiper@1.0.0",
+          "repoType": "ohpm",
+          "name": "@agctemplate/video_swiper",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [],
+      "dependencies": [],
+      "moduleDependencies": [
+        ":server"
+      ]
+    },
+    {
+      "moduleName": "module_auth",
+      "artifact": {
+        "component": {
+          "id": "module_auth@1.0.0",
+          "repoType": "ohpm",
+          "name": "module_auth",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [],
+      "dependencies": [],
+      "moduleDependencies": [
+        ":module_base",
+        ":widgets",
+        ":live_interaction"
+      ]
+    },
+    {
+      "moduleName": "module_login",
+      "artifact": {
+        "component": {
+          "id": "@agctemplate/module_login@1.0.0",
+          "repoType": "ohpm",
+          "name": "@agctemplate/module_login",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [
+        {
+          "id": "@tencent/wechat_open_sdk@1.0.15",
+          "desc": "Tencent WeChat OpenSDK",
+          "dev": false,
+          "dynamic": false,
+          "repoType": "ohpm",
+          "name": "@tencent/wechat_open_sdk",
+          "version": "1.0.15",
+          "files": [
+            {
+              "integrity": "sha512-O9W8Gj16YBu0fl3d78r4eQQdnljczJPcIDws9i+ErVg94y8twHBkLWdyysiWfhGA7+ltB3mu8EZsk/EAr8LZSw==",
+              "resolved": "https://cmc.centralrepo.rnd.huawei.com/artifactory/api/ohpm/ohpm-center/@tencent/wechat_open_sdk/-/@tencent/wechat_open_sdk-1.0.15.har"
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        {
+          "id": "@agctemplate/module_login@1.0.0",
+          "dependsOn": [
+            {
+              "id": "@tencent/wechat_open_sdk@1.0.15"
+            }
+          ]
+        }
+      ],
+      "moduleDependencies": [
+        ":widgets"
+      ]
+    },
+    {
+      "moduleName": "live",
+      "artifact": {
+        "component": {
+          "id": "@agctemplate/live@1.0.0",
+          "repoType": "ohpm",
+          "name": "@agctemplate/live",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [],
+      "dependencies": [],
+      "moduleDependencies": [
+        ":router_module",
+        ":resources",
+        ":widgets",
+        ":server",
+        ":video_swiper",
+        ":live_interaction",
+        ":detail",
+        ":utils",
+        ":aggregated_payment",
+        ":module_auth",
+        ":module_base"
+      ]
+    },
+    {
+      "moduleName": "home",
+      "artifact": {
+        "component": {
+          "id": "@agctemplate/home@1.0.0",
+          "repoType": "ohpm",
+          "name": "@agctemplate/home",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [],
+      "dependencies": [],
+      "moduleDependencies": [
+        ":utils",
+        ":resources",
+        ":widgets",
+        ":detail",
+        ":server",
+        ":video_swiper",
+        ":router_module",
+        ":live_interaction"
+      ]
+    },
+    {
+      "moduleName": "mine",
+      "artifact": {
+        "component": {
+          "id": "@agctemplate/mine@1.0.0",
+          "repoType": "ohpm",
+          "name": "@agctemplate/mine",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [],
+      "dependencies": [],
+      "moduleDependencies": [
+        ":widgets",
+        ":resources",
+        ":utils",
+        ":server",
+        ":common",
+        ":detail",
+        ":router_module",
+        ":feed_back",
+        ":module_login",
+        ":live_interaction",
+        ":dial_panel",
+        ":aggregated_share"
+      ]
+    },
+    {
+      "moduleName": "entry",
+      "artifact": {
+        "component": {
+          "id": "entry@1.0.0",
+          "repoType": "ohpm",
+          "name": "entry",
+          "desc": "Please describe the basic information.",
+          "version": "1.0.0",
+          "dev": false,
+          "dynamic": false,
+          "files": []
+        }
+      },
+      "components": [],
+      "dependencies": [],
+      "moduleDependencies": [
+        ":common",
+        ":utils",
+        ":resources",
+        ":widgets",
+        ":home",
+        ":live",
+        ":mine",
+        ":detail",
+        ":router_module",
+        ":feed_back",
+        ":module_login",
+        ":module_share",
+        ":live_interaction",
+        ":module_auth",
+        ":aggregated_share"
+      ]
+    }
+  ]
+}

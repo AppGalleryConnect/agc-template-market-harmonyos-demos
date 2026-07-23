@@ -12,6 +12,7 @@
     "personal": "file:../personal",
     "type": "file:../../common/type",
     "constant": "file:../../common/constant",
-    "travel_map": "file:../../components/travel_map"
+    "travel_map": "file:../../components/travel_map",
+    "component": "file:../../common/component"
   }
 }

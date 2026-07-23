@@ -6,12 +6,12 @@ const TAG = '[BasicDataSource]';
 class BasicDataSource<T> implements IDataSource {
   private listeners: DataChangeListener[] = [];
 
-  public totalCount(): number {
-    return 0;
-  }
-
   public getData(index: number): T | undefined {
     return undefined;
+  }
+
+  public totalCount(): number {
+    return 0;
   }
 
   registerDataChangeListener(listener: DataChangeListener): void {
@@ -29,27 +29,27 @@ class BasicDataSource<T> implements IDataSource {
     }
   }
 
-  notifyDataReload(): void {
-    this.listeners.forEach(listener => {
-      listener.onDataReloaded();
-    });
-  }
-
   notifyDataAdd(index: number): void {
     this.listeners.forEach(listener => {
       listener.onDataAdd(index);
     });
   }
 
-  notifyDataChange(index: number): void {
+  notifyDataReload(): void {
     this.listeners.forEach(listener => {
-      listener.onDataChange(index);
+      listener.onDataReloaded();
     });
   }
 
   notifyDataDelete(index: number): void {
     this.listeners.forEach(listener => {
       listener.onDataDelete(index);
+    });
+  }
+
+  notifyDataChange(index: number): void {
+    this.listeners.forEach(listener => {
+      listener.onDataChange(index);
     });
   }
 
@@ -68,18 +68,13 @@ export default class LazyDataSource<T> extends BasicDataSource<T> {
     return this.dataArray.length;
   }
 
-  public addLastItem() {
-    this.dataArray.splice(this.dataArray.length, 0, this.dataArray[this.dataArray.length-1]);
-    this.notifyDataAdd(this.dataArray.length - 1);
-  }
-
   public getData(index: number): T {
     return this.dataArray[index];
   }
 
-  public addData(index: number, data: T): void {
-    this.dataArray.splice(index, 0, data);
-    this.notifyDataAdd(index);
+  public addLastItem() {
+    this.dataArray.splice(this.dataArray.length, 0, this.dataArray[this.dataArray.length-1]);
+    this.notifyDataAdd(this.dataArray.length - 1);
   }
 
   public pushData(data: T): void {
@@ -87,10 +82,9 @@ export default class LazyDataSource<T> extends BasicDataSource<T> {
     this.notifyDataAdd(this.dataArray.length - 1);
   }
 
-  public replaceData(replaceData: T): void {
-    let index = this.dataArray.indexOf(replaceData);
-    this.dataArray.splice(index, 1, replaceData);
-    this.notifyDataReload();
+  public addData(index: number, data: T): void {
+    this.dataArray.splice(index, 0, data);
+    this.notifyDataAdd(index);
   }
 
   public pushArrayData(newData: ObservedArray<T>): void {
@@ -99,18 +93,24 @@ export default class LazyDataSource<T> extends BasicDataSource<T> {
     this.notifyDataReload();
   }
 
+  public replaceData(replaceData: T): void {
+    let index = this.dataArray.indexOf(replaceData);
+    this.dataArray.splice(index, 1, replaceData);
+    this.notifyDataReload();
+  }
+
   public appendArrayData(addData: ObservedArray<T>): void {
     this.dataArray.push(...addData);
     this.notifyDataReload();
   }
 
+  public getDataList(): ObservedArray<T> {
+    return this.dataArray;
+  }
+
   public deleteData(index: number): void {
     this.dataArray.splice(index, 1);
     this.notifyDataDelete(index);
-  }
-
-  public getDataList(): ObservedArray<T> {
-    return this.dataArray;
   }
 
   public clear(): void {

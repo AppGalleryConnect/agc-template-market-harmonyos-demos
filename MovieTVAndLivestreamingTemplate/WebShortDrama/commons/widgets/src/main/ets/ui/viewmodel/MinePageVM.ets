@@ -12,7 +12,7 @@ export class MinePageVM {
 
   public static get instance() {
     if (!MinePageVM._instance) {
-      MinePageVM._instance = PersistenceV2.connect(MinePageVM, '_instance', () => new MinePageVM())!;
+      MinePageVM._instance = AppStorageV2.connect(MinePageVM, '_instance', () => new MinePageVM())!;
     }
     return MinePageVM._instance;
   }

@@ -17,7 +17,7 @@ import { AppStorageV2, promptAction } from '@kit.ArkUI';
 import { MessageItem, NumbObj } from '../viewModel/MessageModel';
 import { RouterMap, RouterModule } from '@agctemplate/router_module';
 import { TopBar } from '../component/TopBar';
-import { BarVM } from '@agctemplate/widgets';
+import { AppStorageKeys, BarVM, BreakPoint, BreakPointValue } from '@agctemplate/widgets';
 import { SystemMsgList } from './SystemMessagePage';
 import { NewFansList } from './NewFansMessagePage';
 
@@ -28,6 +28,8 @@ export struct MessageCenterPage {
   @Local message: NumbObj = AppStorageV2.connect(NumbObj, () => new NumbObj())!;
   @Local systemMsgList: SystemMsgList = AppStorageV2.connect(SystemMsgList, () => new SystemMsgList())!
   @Local newFansList: NewFansList = AppStorageV2.connect(NewFansList, () => new NewFansList())!
+  @Local breakPoint: BreakPoint = AppStorageV2.connect(BreakPoint, AppStorageKeys.CURRENT_BREAK_POINT,
+    () => new BreakPoint())!;
 
   aboutToAppear(): void {
     const params = RouterModule.getNavParam<NumbObj>({ url: RouterMap.MESSAGE_CENTER_PAGE })
@@ -44,9 +46,7 @@ export struct MessageCenterPage {
 
   build() {
     NavDestination() {
-      Column() {
-        // 顶部
-        this.topBuilder();
+      Scroll() {
         Column() {
           if (this.message.listArr.length > 0) {
             // 我的课程列表
@@ -58,19 +58,24 @@ export struct MessageCenterPage {
               .fontColor($r('sys.color.icon_secondary'))
           }
         }
-        .width('100%')
+        .width(this.breakPoint.value === BreakPointValue.LG ? '70%' : '100%')
         .height('100%')
       }
       .padding({
         left: $r('app.float.vp_16'),
-        right: $r('app.float.vp_16'),
-        top: BarVM.instance.staBarH,
-        bottom: BarVM.instance.aiBarH
+        right: $r('app.float.vp_16')
       })
-      .backgroundColor($r('sys.color.background_secondary'))
       .width('100%')
       .height('100%')
-    }.hideTitleBar(true)
+      .edgeEffect(EdgeEffect.Spring)
+      .scrollBar(BarState.Off)
+    }
+    .backgroundColor($r('sys.color.background_secondary'))
+    .padding({
+      top: BarVM.instance.staBarH,
+    })
+    .title('消息中心')
+    .menus(this.FunctionButton())
     .onBackPressed(() => {
       RouterModule.pop('result')
       return true
@@ -179,7 +184,7 @@ export struct MessageCenterPage {
         },
         title: '消息中心'
       })
-      Button({type:ButtonType.Circle}) {
+      Button({ type: ButtonType.Circle }) {
         SymbolGlyph($r('sys.symbol.clean'))
           .fontSize(24)
           .fontColor([$r('sys.color.icon_primary')])
@@ -195,6 +200,22 @@ export struct MessageCenterPage {
     .justifyContent(FlexAlign.SpaceBetween)
     .width('100%')
     .height($r('app.float.vp_56'))
+  }
+
+  @Builder
+  FunctionButton() {
+    Button({ type: ButtonType.Circle }) {
+      SymbolGlyph($r('sys.symbol.clean'))
+        .fontSize(24)
+        .fontColor([$r('sys.color.icon_primary')])
+    }
+    .height($r('app.float.vp_40'))
+    .width($r('app.float.vp_40'))
+    .backgroundColor($r('sys.color.comp_background_tertiary'))
+    .onClick(() => {
+      this.clearAll()
+    })
+    .margin({ right: 16, top: 8 })
   }
 
   clearAll() {

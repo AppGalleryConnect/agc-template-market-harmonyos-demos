@@ -14,17 +14,17 @@
  */
 
 import { AtomicServiceWeb, AtomicServiceWebController } from '@kit.ArkUI';
-import { CommonConstants, GridRowColSetting, RouterModule } from 'lib_foundation';
+import { CommonConstants, GridRowColSetting, RouterModule, WindowUtils } from 'lib_foundation';
 
 @Builder
 export function OfficialWebBuilder() {
   OfficialWeb()
 }
 
-@Component
+@ComponentV2
 export struct OfficialWeb {
-  @State breakpoint: string = '';
-  @State controller: AtomicServiceWebController = new AtomicServiceWebController();
+  @Local breakpoint: string = '';
+  @Local controller: AtomicServiceWebController = new AtomicServiceWebController();
 
   build() {
     NavDestination() {
@@ -53,6 +53,10 @@ export struct OfficialWeb {
     }
     .title('官网', {
       paddingStart: { value: GridRowColSetting.getPageMargin(this.breakpoint), unit: 1 }
+    })
+    .padding({
+      top: WindowUtils.windowTopPadding,
+      bottom: WindowUtils.windowBottomPadding,
     })
     .backgroundColor($r('sys.color.background_secondary'))
   }

@@ -7,26 +7,22 @@ import { buildProfilePage } from '../tabviews/ProfilePage';
 export const TAB_LIST: TabListItem[] = [
   {
     label: '首页',
-    icon: $r('app.media.ic_tab_inactive_home'),
-    iconChecked: $r('app.media.ic_tab_active_home'),
+    icon: $r('sys.symbol.house_fill'),
     component: wrapBuilder(buildHomePage),
   },
   {
     label: '分类',
-    icon: $r('app.media.ic_tab_inactive_category'),
-    iconChecked: $r('app.media.ic_tab_active_category'),
+    icon: $r('sys.symbol.square_fill_grid_2x2'),
     component: wrapBuilder(buildCategoryPage),
   },
   {
     label: '购物车',
-    icon: $r('app.media.ic_tab_inactive_cart'),
-    iconChecked: $r('app.media.ic_tab_active_cart'),
+    icon: $r('sys.symbol.cart_fill'),
     component: wrapBuilder(buildCartPage),
   },
   {
     label: '我的',
-    icon: $r('app.media.ic_tab_inactive_profile'),
-    iconChecked: $r('app.media.ic_tab_active_profile'),
+    icon: $r('sys.symbol.person_fill'),
     component: wrapBuilder(buildProfilePage),
   },
 ];

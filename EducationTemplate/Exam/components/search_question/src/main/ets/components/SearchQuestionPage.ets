@@ -149,28 +149,32 @@ export struct SearchQuestionPage {
       PasteButton({ text: PasteDescription.PASTE })
         .onClick((_event: ClickEvent, result: PasteButtonOnClickResult) => {
           if (PasteButtonOnClickResult.SUCCESS === result) {
-            pasteboard.getSystemPasteboard().getData((err: BusinessError, pasteData: pasteboard.PasteData) => {
-              if (err) {
-                return;
-              }
-              if (pasteData.getPrimaryText()) {
-                if (this.isFocus) {
-                  if (this.textInput.length !== this.selectionStart && this.textInput.length !== 0) {
-                    let str1 = this.textInput.slice(0, this.selectionStart)
-                    let str2 = this.textInput.slice(this.selectionStart, this.textInput.length);
-                    this.textInput = str1 + pasteData.getPrimaryText() + str2
-                  } else {
-                    if (this.selectionStart === this.textInput.length) {
-                      this.textInput += pasteData.getPrimaryText();
-                    } else {
-                      this.textInput = pasteData.getPrimaryText();
-                    }
-                  }
-                } else {
-                  this.textInput = pasteData.getPrimaryText();
+            try {
+              pasteboard.getSystemPasteboard().getData((err: BusinessError, pasteData: pasteboard.PasteData) => {
+                if (err) {
+                  return;
                 }
-              }
-            });
+                if (pasteData.getPrimaryText()) {
+                  if (this.isFocus) {
+                    if (this.textInput.length !== this.selectionStart && this.textInput.length !== 0) {
+                      let str1 = this.textInput.slice(0, this.selectionStart)
+                      let str2 = this.textInput.slice(this.selectionStart, this.textInput.length);
+                      this.textInput = str1 + pasteData.getPrimaryText() + str2
+                    } else {
+                      if (this.selectionStart === this.textInput.length) {
+                        this.textInput += pasteData.getPrimaryText();
+                      } else {
+                        this.textInput = pasteData.getPrimaryText();
+                      }
+                    }
+                  } else {
+                    this.textInput = pasteData.getPrimaryText();
+                  }
+                }
+              });
+            } catch (err) {
+              UtilLog.error(TAG, `Failed to creat data, errCode: ${err.code}, errMessage: ${err.message}`);
+            }
           }
         })
         .width(44)

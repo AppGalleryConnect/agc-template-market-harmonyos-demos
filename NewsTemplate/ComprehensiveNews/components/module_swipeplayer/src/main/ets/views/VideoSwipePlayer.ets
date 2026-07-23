@@ -59,7 +59,8 @@ export struct VideoSwipePlayer {
   // 播控中心控制器
   avSessionController: VideoSessionController = VideoSessionController.instance;
   @Local videoState: AVPlayerState = AVPlayerState.IDLE;
-  @Local videoStateIndex: number = 0
+  @Local videoStateIndex: number = 0;
+  @Local firstFlag: boolean = true;
   @Provider() navDestinationUpdateListeners: Map<string, (info: uiObserver.NavDestinationInfo) => void> = new Map();
   @Local breakpointModel: BreakpointModel = new BreakpointModel();
   @Local pipWindowModel: PiPWindowModel = AppStorageV2.connect(PiPWindowModel, () => new PiPWindowModel())!;
@@ -203,56 +204,56 @@ export struct VideoSwipePlayer {
   }
 
   build() {
-    Stack({ alignContent: Alignment.TopStart }) {
-      Swiper(this.swiperController) {
-        LazyForEach(this.datasource, (item: VideoPlayerData, index: number) => {
-          VideoPlayerView({
-            videoData: item,
-            index: index,
-            autoPlay: this.options?.autoPlay,
-            enableAVSession: this.enableAVSession,
-            currentIndex: this.currentIndex,
-            totalCount: this.options?.totalCount,
-            swipePlayerController: this.swipePlayerController,
-            videoItemAVPlayerController: this.videoItemAVPlayerController,
-            videoNetwork: this.videoNetwork,
-            videoNetworkSetting: this.videoNetworkSetting,
-            videoLayerBuilder: this.videoLayerBuilder,
-            fullBtnBuilder: this.fullBtnBuilder,
-            pathStack: this.pathStack,
-            isLandscape: this.isLandscape,
-            isShown: this.isShown,
-            breakpointModel: this.breakpointModel,
-            playerStateCallback: this.playerStateCallback,
-            playerTimeUpdateCallback: this.playerTimeUpdateCallback,
-          })
-        }, (item: VideoPlayerData, index: number) => JSON.stringify(item) + index);
-      }
-      .cachedCount(this.options?.cachedCount ?? 2)
-      .width('100%')
-      .height('100%')
-      .vertical(true)
-      .loop(false)
-      .curve(Curve.Ease)
-      .duration(300)
-      .indicator(false)
-      .backgroundColor(Color.Black)
-      .effectMode(EdgeEffect.Spring)
-      .onChange((index: number) => {
-        this.currentIndex = index;
-        if (this.options?.swiperCallback?.onChange) {
-          this.options.swiperCallback?.onChange(index);
-        }
-      })
-      .onAnimationStart((index: number, targetIndex: number, extraInfo: SwiperAnimationEvent) => {
-        this.currentIndex = targetIndex;
-        if (this.options?.swiperCallback?.onAnimationStart) {
-          this.options.swiperCallback?.onAnimationStart(index, targetIndex, extraInfo);
-        }
-      })
+    Swiper(this.swiperController) {
+      LazyForEach(this.datasource, (item: VideoPlayerData, index: number) => {
+        VideoPlayerView({
+          videoData: item,
+          index: index,
+          autoPlay: this.options?.autoPlay,
+          enableAVSession: this.enableAVSession,
+          currentIndex: this.currentIndex,
+          totalCount: this.options?.totalCount,
+          swipePlayerController: this.swipePlayerController,
+          videoItemAVPlayerController: this.videoItemAVPlayerController,
+          videoNetwork: this.videoNetwork,
+          videoNetworkSetting: this.videoNetworkSetting,
+          videoLayerBuilder: this.videoLayerBuilder,
+          fullBtnBuilder: this.fullBtnBuilder,
+          pathStack: this.pathStack,
+          isLandscape: this.isLandscape,
+          isShown: this.isShown,
+          breakpointModel: this.breakpointModel,
+          playerStateCallback: this.playerStateCallback,
+          playerTimeUpdateCallback: this.playerTimeUpdateCallback,
+          firstFlag: this.firstFlag,
+          $firstFlag: (val: boolean) => {
+            this.firstFlag = val;
+          }
+        })
+      }, (item: VideoPlayerData, index: number) => JSON.stringify(item) + index);
     }
+    .cachedCount(this.firstFlag ? 0 : (this.options?.cachedCount ?? 2))
     .width('100%')
     .height('100%')
+    .vertical(true)
+    .loop(false)
+    .curve(Curve.Ease)
+    .duration(300)
+    .indicator(false)
+    .backgroundColor(Color.Black)
+    .effectMode(EdgeEffect.Spring)
+    .onChange((index: number) => {
+      this.currentIndex = index;
+      if (this.options?.swiperCallback?.onChange) {
+        this.options.swiperCallback?.onChange(index);
+      }
+    })
+    .onAnimationStart((index: number, targetIndex: number, extraInfo: SwiperAnimationEvent) => {
+      this.currentIndex = targetIndex;
+      if (this.options?.swiperCallback?.onAnimationStart) {
+        this.options.swiperCallback?.onAnimationStart(index, targetIndex, extraInfo);
+      }
+    })
     .id('player')
     .onVisibleAreaChange([0.0, 1.0], (isExpanding: boolean, currentRatio: number) => {
       if (isExpanding && currentRatio >= 1.0) {

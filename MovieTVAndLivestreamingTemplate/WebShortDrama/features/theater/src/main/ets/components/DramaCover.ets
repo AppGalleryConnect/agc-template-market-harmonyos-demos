@@ -1,5 +1,7 @@
 import { getColor, getMedia, getString } from '@agctemplate/resources'
+import { FontModel, fp2pxUtil } from '@agctemplate/widgets'
 import { DramaCoverVM } from '../viewmodels/DramaCoverVM'
+import { AppStorageV2 } from '@kit.ArkUI'
 
 export function getCoverEpisodeShowText(isEnd: boolean, episodes: number, latestUpdate: number) {
   return isEnd ? getString('app.string.cover_episode_info', episodes.toString()) :
@@ -29,6 +31,7 @@ export struct DramaCover {
   @Param @Require index: number
   @Param @Require isVertical: boolean
   @Consumer('rank') selectedCategory: string = ''
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
 
   @Builder
   episodeInfoBuilder(latestUpdate: number, episodes: number) {
@@ -41,7 +44,7 @@ export struct DramaCover {
           left: 8
         })
         .borderRadius(14)
-        .fontSize(10)
+        .fontSize(fp2pxUtil(10))
         .fontColor(Color.White)
         .backgroundColor($r('sys.color.mask_tertiary'))
         .height(16)
@@ -65,7 +68,7 @@ export struct DramaCover {
                 bottom: 1,
                 left: 8
               })
-              .fontSize(10)
+              .fontSize(fp2pxUtil(10))
               .fontColor(Color.White)
               .fontWeight(FontWeight.Medium)
               .borderRadius({
@@ -86,18 +89,20 @@ export struct DramaCover {
         Column() {
           Row() {
             Text(this.drama.title)
+              .width(145)
               .maxLines(this.isVertical ? 1 : 2)
-              .fontSize(14)
+              .fontSize(this.fontModel.getFg(14))
               .fontWeight(FontWeight.Medium)
+              .textOverflow({ overflow: TextOverflow.Ellipsis })
             if (this.selectedCategory === '热播榜') {
               Row() {
                 Image(getMedia('app.media.ic_hot'))
                   .width(16)
                   .margin({ right: 2 })
                 Text(this.index === 1 ? '980.4万' : this.index === 2 ? '916.4万' : '680.4万')
-                  .fontSize(12)
+                  .fontSize(this.fontModel.getFg(12))
                   .fontWeight(500)
-                  .fontColor('#e6000000')
+                  .fontColor($r('sys.color.font_primary'))
               }
               .alignItems(VerticalAlign.Center)
               .justifyContent(FlexAlign.End)
@@ -109,9 +114,9 @@ export struct DramaCover {
                   .margin({ right: 2 })
                 Text(this.index === 1 ? '1980.4%' : this.index === 2 ? '1046.4%' :
                   this.index === 3 ? '980.4%' : '680.4%')
-                  .fontSize(12)
+                  .fontSize(this.fontModel.getFg(12))
                   .fontWeight(500)
-                  .fontColor('#e6000000')
+                  .fontColor($r('sys.color.font_primary'))
               }
               .alignItems(VerticalAlign.Center)
               .justifyContent(FlexAlign.End)
@@ -123,9 +128,9 @@ export struct DramaCover {
                   .margin({ right: 2 })
                 Text(this.index === 1 ? '180.4万' : this.index === 2 ? '146.4万' :
                   this.index === 3 ? '80.4万' : this.index === 4 ? '63.7万' : '60.4万')
-                  .fontSize(12)
+                  .fontSize(this.fontModel.getFg(12))
                   .fontWeight(500)
-                  .fontColor('#e6000000')
+                  .fontColor($r('sys.color.font_primary'))
               }
               .alignItems(VerticalAlign.Center)
               .justifyContent(FlexAlign.End)
@@ -145,10 +150,10 @@ export struct DramaCover {
               Text(tag)
                 .width(28)
                 .height(16)
-                .backgroundColor('#0d000000')
-                .fontSize(10)
+                .backgroundColor($r('sys.color.comp_background_tertiary'))
+                .fontSize(fp2pxUtil(10))
                 .fontWeight(400)
-                .fontColor('#e6000000')
+                .fontColor($r('sys.color.font_primary'))
                 .textAlign(TextAlign.Center)
                 .margin({ right: 8 })
                 .borderRadius(4)
@@ -161,8 +166,8 @@ export struct DramaCover {
           Row() {
             Text(this.drama.content)
               .maxLines(2)
-              .fontSize(12)
-              .fontColor(getColor('app.color.normal_font_color'))
+              .fontSize(this.fontModel.getFg(12))
+              .fontColor($r('sys.color.font_tertiary'))
               .textOverflow({ overflow: TextOverflow.Ellipsis })
           }
           .height(38)

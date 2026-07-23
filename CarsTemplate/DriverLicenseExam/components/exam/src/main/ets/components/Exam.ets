@@ -1,3 +1,4 @@
+import { CommonModel } from '@ohos_agcit/driver_license_exam_commonlib';
 import { ExamDetail, ExamManager } from '../model/QuestionAnswerRecord';
 import { SelectComponent } from './SelectComponent';
 import { CustomContentDialog } from '@kit.ArkUI';
@@ -15,6 +16,9 @@ export struct Exam {
   // 记录模拟考试分数回调, 用于计算模拟考试平均分
   @Param mockExamCall: (score: number) => void = (score: number) => {
   };
+  // 退出考试时同步答题数据到全局题库（仅模拟考试需要）
+  @Param syncExamData: () => void = () => {
+  };
   // 监听monitor中isShowMockExamDialog的变化
   private examController: ExamController = ExamController.instance;
   // 显示剩余时间
@@ -23,10 +27,17 @@ export struct Exam {
   @Local isShowProblemListSheet: boolean = false;
   // 记录当前是第几题
   @Local currentIndex: number = 0;
+  // 是否显示未答完题提醒弹窗
+  @Local isShowIncompleteSubmitDialog: boolean = false;
   // 模拟考试-暂停考试/继续考试
   @Local isStop: boolean = false;
+  // 控制计时器是否运行
+  @Local isTimerRunning: boolean = true;
+  // 定时器引用
+  private timer: number = -1;
   // 仅渲染当前题附近页面，降低超大题库切换开销
   private readonly renderWindowSize: number = 2;
+  vm: CommonModel = CommonModel.instance;
 
   @Monitor('examController.isShowMockExamDialog')
   mockExamDialogChange() {
@@ -42,24 +53,23 @@ export struct Exam {
 
     if (this.examManager.timeLimit !== 0) {
       this.remainTime = this.examManager.timeLimit * 60;
-      let showDialog: boolean = true;
-      setInterval(() => {
-        if (showDialog && !this.isStop) {
+      this.timer = setInterval(() => {
+        if (this.isTimerRunning && !this.isStop) {
           if (this.remainTime >= 1) {
             this.remainTime--;
           } else {
-            showDialog = false;
+            this.isTimerRunning = false;
             this.isStop = true;
             this.examSubmitDialog.open();
           }
         }
-
       }, 1000); // 1秒触发一次
     }
   }
 
   // 如果想退出考试重新进入后将已做题回显，去掉这个方法
   aboutToDisappear(): void {
+    this.syncExamData();
     this.examManager.clearSelectedOption();
   }
 
@@ -91,9 +101,9 @@ export struct Exam {
           };
         }, (item: ExamDetail, index: number) => {
           try {
-            return JSON.stringify(index)
+            return JSON.stringify(index);
           } catch (err) {
-            return ''
+            return '';
           }
         });
       }
@@ -176,6 +186,12 @@ export struct Exam {
     },
     autoCancel: false,
   });
+  examIncompleteSubmitDialog: CustomDialogController = new CustomDialogController({
+    builder: () => {
+      this.examIncompleteSubmitBuilder();
+    },
+    autoCancel: false,
+  });
 
   @Builder
   examExitBuilder() {
@@ -185,7 +201,7 @@ export struct Exam {
         .maxFontScale(1)
 
       Blank().height(12)
-      
+
       Text('是否确认立即退出考试?')
         .dialogInfoStyle()
         .maxFontScale(1)
@@ -198,12 +214,11 @@ export struct Exam {
           .fontColor('#64BB5C')
           .maxFontScale(1)
           .onClick(() => {
-            this.examExitDialog.close()
+            this.examExitDialog.close();
             this.isStop = false;
-          })
+          });
         Column() {
           Column() {
-
           }
           .height(24)
           .width(1)
@@ -219,9 +234,64 @@ export struct Exam {
           .fontColor($r('sys.color.font_secondary'))
           .maxFontScale(1)
           .onClick(() => {
-            this.examExitDialog.close()
+            this.examExitDialog.close();
+            this.appPathStack.pop();
+          });
+      }
+      .width(296)
+      .height(40)
+
+      Blank()
+    }
+    .width(328)
+    .height(164)
+  }
+
+  @Builder
+  examIncompleteSubmitBuilder() {
+    Column() {
+      Text('温馨提示')
+        .maxFontScale(1)
+        .dialogTitleStyle()
+        .fontColor($r('sys.color.font_primary'))
+
+      Blank().height(12)
+
+      Text('您还有未答完的题目，是否确认交卷?')
+        .dialogInfoStyle()
+        .maxFontScale(1)
+
+      Blank().height(28)
+
+      Row() {
+        Text('继续答题')
+          .dialogChooseStyle()
+          .fontColor('#64BB5C')
+          .maxFontScale(1)
+          .onClick(() => {
+            this.examIncompleteSubmitDialog.close();
+            this.isStop = false;
+          });
+        Column() {
+          Column() {
+          }
+          .height(24)
+          .width(1)
+          .backgroundColor('rgba(0,0,0,0.05)')
+        }
+        .justifyContent(FlexAlign.Center)
+        .alignItems(HorizontalAlign.Center)
+        .width(8)
+        .height('100%')
+
+        Text('确认交卷')
+          .dialogChooseStyle()
+          .fontColor($r('sys.color.font_secondary'))
+          .maxFontScale(1)
+          .onClick(() => {
+            this.examIncompleteSubmitDialog.close();
             this.examSubmitDialog.open();
-          })
+          });
       }
       .width(296)
       .height(40)
@@ -238,8 +308,7 @@ export struct Exam {
     },
     autoCancel: false,
     onWillDismiss: (dismissDialogAction: DismissDialogAction) => {
-      
-    }
+    },
   });
 
   @Builder
@@ -250,14 +319,14 @@ export struct Exam {
         .dialogTitleStyle()
 
       Blank().height(12)
-      
+
       Text('未答题数: ' + (this.examManager.total - this.examManager.correctNumber - this.examManager.errorNumber) +
         '           ' + '考试成绩: ' + this.examManager.correctNumber + '分')
         .dialogInfoStyle()
         .maxFontScale(1)
 
       Blank().height(28)
-      
+
       Row() {
         Text('重新考试')
           .dialogChooseStyle()
@@ -265,16 +334,30 @@ export struct Exam {
           .maxFontScale(1)
           .onClick(() => {
             this.isStop = false;
+            this.isTimerRunning = true;
+            if (this.timer !== -1) {
+              clearInterval(this.timer);
+            }
+            this.timer = setInterval(() => {
+              if (this.isTimerRunning && !this.isStop) {
+                if (this.remainTime >= 1) {
+                  this.remainTime--;
+                } else {
+                  this.isTimerRunning = false;
+                  this.isStop = true;
+                  this.examSubmitDialog.open();
+                }
+              }
+            }, 1000);
             this.examSubmitDialog.close();
 
             this.examManager.clearRecords();
             this.examController.renderView = !this.examController.renderView;
             examController.swiperController.changeIndex(0);
             this.remainTime = this.examManager.timeLimit * 60;
-          })
+          });
         Column() {
           Column() {
-
           }
           .height(24)
           .width(1)
@@ -285,16 +368,22 @@ export struct Exam {
         .width(8)
         .height('100%')
 
-        Text('我知道了')
+        Text('查看详情')
           .dialogChooseStyle()
           .fontColor($r('sys.color.font_secondary'))
           .maxFontScale(1)
           .onClick(() => {
+            if (this.timer !== -1) {
+              clearInterval(this.timer);
+            }
             this.isStop = false;
             this.examSubmitDialog.close();
             this.mockExamCall(this.examManager.correctNumber);
-            this.appPathStack.pop();
-          })
+            this.appPathStack.pushPathByName(
+              'examResultPage',
+              this.examManager,
+            );
+          });
       }
       .width(296)
       .height(40)
@@ -356,7 +445,7 @@ export struct Exam {
       })
       .bindSheet($$this.isShowProblemListSheet, this.showProblemListSheet(), {
         height: '70%',
-        width: '100%',
+        width: this.vm.isLargeDevice ? '61%' : '100%',
         preferType: SheetType.CENTER,
         title: { title: '答题卡' },
         backgroundColor: $r('sys.color.comp_background_primary'),
@@ -366,29 +455,31 @@ export struct Exam {
 
       Row() {
         Image(this.examManager.examDetails.length > 0 && this.examManager.examDetails[this.currentIndex-1].isCollect ?
-        $r('app.media.has_been_marked') :
-        $r('app.media.not_marked'))
+          $r('app.media.has_been_marked') :
+          $r('app.media.not_marked'))
           .width(24)
           .height(24)
           .margin({
             right: '1%',
           })
 
-      Text('收藏')
-        .fontSize(12)
-        .fontColor($r('sys.color.font_primary'))
-        .maxFontScale(1)
+        Text('收藏')
+          .fontSize(12)
+          .fontColor($r('sys.color.font_primary'))
+          .maxFontScale(1)
       }
       .onClick(() => {
-        this.examManager.examDetails[this.currentIndex-1].isCollect =
-          !this.examManager.examDetails[this.currentIndex-1].isCollect;
+        const detail = this.examManager.examDetails[this.currentIndex - 1];
+        if (detail) {
+          detail.isCollect = !detail.isCollect;
+        }
       });
 
       Row() {
         Image($r('app.media.bell'))
           .width(16)
           .height(16)
-          .fillColor($r('sys.color.icon_primary'));
+          .fillColor($r('sys.color.background_primary'));
         Text('交卷')
           .fontColor(Color.White)
           .fontSize(12)
@@ -405,7 +496,12 @@ export struct Exam {
       })
       .onClick(() => {
         this.isStop = true;
-        this.examExitDialog.open();
+        const answeredCount = this.examManager.correctNumber + this.examManager.errorNumber;
+        if (answeredCount < this.examManager.total) {
+          this.examIncompleteSubmitDialog.open();
+        } else {
+          this.examSubmitDialog.open();
+        }
       })
       .visibility(this.examManager.timeLimit === 0 ? Visibility.None : Visibility.Visible);
     }
@@ -452,15 +548,13 @@ export struct Exam {
               examController.swiperController.changeIndex(index);
               this.isShowProblemListSheet = !this.isShowProblemListSheet;
             } catch (err) {
-
             }
-
           });
         }, (item: ExamDetail) => {
           try {
-            return JSON.stringify(item.isCorrect)
+            return JSON.stringify(item.isCorrect);
           } catch (err) {
-            return ''
+            return '';
           }
         });
       }
@@ -512,8 +606,8 @@ export struct Exam {
   @Builder
   clearRecords() {
     Row() {
-        Text('确定要清空当前操作记录吗')
-          .fontColor($r('sys.color.font_primary'));
+      Text('确定要清空当前操作记录吗')
+        .fontColor($r('sys.color.font_primary'));
     }
     .justifyContent(FlexAlign.Center)
     .width('100%');
@@ -530,7 +624,6 @@ export struct Exam {
     return (minute < 10 ? '0' + minute : minute + '') + ':' + (second < 10 ? '0' + second : second) + '';
   }
 }
-
 
 @Extend(Text)
 function dialogTitleStyle() {
@@ -622,7 +715,7 @@ export function showSettingSheet() {
   }
   .height('100%')
   .padding({
-    left :20,
+    left: 20,
     right: 20
   })
   .backgroundColor($r('sys.color.comp_background_primary'))

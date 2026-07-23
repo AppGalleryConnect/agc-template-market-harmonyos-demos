@@ -35,6 +35,8 @@ export struct HotSearch {
         .fontWeight(FontWeight.Regular)
         .fontFamily('HarmonyHeiTi')
         .fontColor(Number(index) < 3 ? $r('sys.color.alert') : $r('sys.color.font_secondary'))
+        .width(24)
+        .textAlign(TextAlign.Center)
 
       if (listItem.thumbnail) {
         Image($r(`app.media.${listItem.thumbnail}`))

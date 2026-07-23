@@ -1,7 +1,7 @@
 import { AppStorageV2 } from '@kit.ArkUI';
 import { webview } from '@kit.ArkWeb';
 import { CommonConstants, WindowModel } from 'lib_common';
-import { NavHeaderBar } from 'lib_widget';
+import { NavHeaderBar } from '../widget/NavHeaderBar';
 
 @Builder
 export function PrivacyPageBuilder() {

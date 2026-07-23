@@ -1,3 +1,4 @@
+import { UtilLog } from '@hw-agconnect/util-log';
 import { LongTakeTransitionConstants, LongTakeTransitionType } from '../constants/LongTakeTransitionConstants';
 import { LongTakeTransitionParam } from '../utils/LongTakeTransitionParam';
 import { RectInfoPx } from '../utils/ComponentAttrUtils';
@@ -49,95 +50,103 @@ export class LongTakeAnimationProperties {
   @Trace transitionParam: LongTakeTransitionParam = new LongTakeTransitionParam(new RectInfoPx());
 
   private initParams(): void {
-    let uiContext = WindowUtils.window.getUIContext();
-    let postNode = uiContext.getFrameNodeById(this.postPageSharedComponentId);
-    let stackNode =
-      uiContext.getFrameNodeById(this.getNavDestinationId() + LongTakeTransitionConstants.POST_PAGE_STACK_ID);
-    let snapShotStackNode =
-      uiContext.getFrameNodeById(this.getNavDestinationId() + LongTakeTransitionConstants.POST_PAGE_SNAPSHOT_STACK_ID);
+    try {
+      const uiContext = WindowUtils.window.getUIContext();
+      const postNode = uiContext.getFrameNodeById(this.postPageSharedComponentId);
+      const stackNode =
+        uiContext.getFrameNodeById(this.getNavDestinationId() + LongTakeTransitionConstants.POST_PAGE_STACK_ID);
+      const snapShotStackNode =
+        uiContext.getFrameNodeById(
+          this.getNavDestinationId() + LongTakeTransitionConstants.POST_PAGE_SNAPSHOT_STACK_ID);
 
-    let isWindowLayoutFullScreen: boolean = WindowUtils.window.getImmersiveModeEnabledState();
+      const isWindowLayoutFullScreen: boolean = WindowUtils.window.getImmersiveModeEnabledState();
 
-    let stackPositionVp = stackNode?.getPositionToWindowWithTransform();
-    let stackSizePx = stackNode?.getMeasuredSize();
-    let stackCenterXPx = uiContext.vp2px(stackPositionVp?.x) + (stackSizePx?.width!) / 2;
+      const stackPositionVp = stackNode?.getPositionToWindowWithTransform();
+      const stackSizePx = stackNode?.getMeasuredSize();
+      const stackCenterXPx = uiContext.vp2px(stackPositionVp?.x) + (stackSizePx?.width!) / 2;
 
-    if (!this.postPageSharedComponentId || !postNode || !snapShotStackNode || !stackSizePx) {
-      if (!stackSizePx?.width || !stackSizePx?.height) {
-        return;
-      }
+      if (!this.postPageSharedComponentId || !postNode || !snapShotStackNode || !stackSizePx) {
+        if (!stackSizePx?.width || !stackSizePx?.height) {
+          return;
+        }
 
-      let initScaleX = this.cardItemInfoPx.width / stackSizePx?.width!;
-      let initScaleY = this.cardItemInfoPx.height / stackSizePx?.height!;
+        let initScaleX = this.cardItemInfoPx.width / stackSizePx?.width!;
+        let initScaleY = this.cardItemInfoPx.height / stackSizePx?.height!;
 
-      this.initPositionValueY = (stackPositionVp?.y! !== 0) ? 0
-        : (isWindowLayoutFullScreen ? 0 : -uiContext.px2vp(WindowUtils.topAvoidAreaHeightPx));
+        this.initPositionValueY = (stackPositionVp?.y! !== 0) ? 0
+          : (isWindowLayoutFullScreen ? 0 : -uiContext.px2vp(WindowUtils.topAvoidAreaHeightPx));
 
-      if (initScaleX >= initScaleY) {
-        this.initScale = initScaleX;
-        this.initTranslateX =
-          uiContext.px2vp(this.cardItemInfoPx.left + this.cardItemInfoPx.width / 2 - stackCenterXPx);
-        this.initClipWidth = uiContext.px2vp(stackSizePx?.width);
-        this.initClipHeight = uiContext.px2vp((this.cardItemInfoPx.height) / this.initScale);
-        this.snapShotSize = { width: uiContext.px2vp(stackSizePx?.width) };
-        this.initTranslateY = uiContext.px2vp(this.cardItemInfoPx.top -
-          ((uiContext.vp2px(this.initClipHeight) - uiContext.vp2px(this.initClipHeight) * this.initScale) / 2)) -
-          stackPositionVp?.y!;
+        if (initScaleX >= initScaleY) {
+          this.initScale = initScaleX;
+          this.initTranslateX =
+            uiContext.px2vp(this.cardItemInfoPx.left + this.cardItemInfoPx.width / 2 - stackCenterXPx);
+          this.initClipWidth = uiContext.px2vp(stackSizePx?.width);
+          this.initClipHeight = uiContext.px2vp((this.cardItemInfoPx.height) / this.initScale);
+          this.snapShotSize = { width: uiContext.px2vp(stackSizePx?.width) };
+          this.initTranslateY = uiContext.px2vp(this.cardItemInfoPx.top -
+            ((uiContext.vp2px(this.initClipHeight) - uiContext.vp2px(this.initClipHeight) * this.initScale) / 2)) -
+            stackPositionVp?.y!;
+        } else {
+          this.initScale = initScaleY;
+          this.initTranslateY =
+            uiContext.px2vp(this.cardItemInfoPx.top - (stackSizePx?.height! * (1 - this.initScale) / 2)) -
+              stackPositionVp?.y!;
+          this.initClipHeight = uiContext.px2vp(stackSizePx?.height);
+          this.initClipWidth = uiContext.px2vp((this.cardItemInfoPx.width) / this.initScale);
+          this.initTranslateX =
+            uiContext.px2vp(this.cardItemInfoPx.left + this.cardItemInfoPx.width / 2 - stackCenterXPx);
+          this.snapShotSize = { height: uiContext.px2vp(stackSizePx?.height) };
+        }
       } else {
-        this.initScale = initScaleY;
-        this.initTranslateY =
-          uiContext.px2vp(this.cardItemInfoPx.top - (stackSizePx?.height! * (1 - this.initScale) / 2)) -
-            stackPositionVp?.y!;
-        this.initClipHeight = uiContext.px2vp(stackSizePx?.height);
-        this.initClipWidth = uiContext.px2vp((this.cardItemInfoPx.width) / this.initScale);
+        const snapShotStackPositionToWindowVp = snapShotStackNode?.getPositionToWindowWithTransform();
+        const postNodePositionXVp = postNode.getPositionToWindowWithTransform().x;
+        const postNodePositionYVp = postNode.getPositionToWindowWithTransform().y;
+        const postNodeWidthPx = postNode.getMeasuredSize().width;
+        let postNodeHeightPx = postNode.getMeasuredSize().height;
+        UtilLog.info(TAG,
+          'the size is ' + postNodeWidthPx + ' and ' + postNodeHeightPx + ' and ' +
+            uiContext.vp2px(postNodePositionXVp) +
+            ' and ' + uiContext.vp2px(postNodePositionYVp));
+
+        this.initScale = this.cardItemInfoPx.width / postNodeWidthPx;
+        this.initClipHeight = uiContext.px2vp(this.cardItemInfoPx.height / this.initScale);
+
+        if (postNodeHeightPx === 0 || this.transitionParam.options?.type === LongTakeTransitionType.ImageLongTake) {
+          postNodeHeightPx = postNodeHeightPx ?? this.cardItemInfoPx.height / this.initScale;
+          this.initPositionValueX = -postNodePositionXVp + stackPositionVp?.x!;
+          this.snapShotPositionY =
+            postNodePositionYVp + uiContext.px2vp(postNodeHeightPx) / 2 - this.initClipHeight / 2 -
+              snapShotStackPositionToWindowVp?.y!;
+          this.initPositionValueY =
+            -(postNodePositionYVp + uiContext.px2vp(postNodeHeightPx) / 2 - this.initClipHeight / 2 -
+              stackPositionVp?.y!);
+          this.snapShotPositionX = postNodePositionXVp - snapShotStackPositionToWindowVp?.x!;
+          this.initTranslateY =
+            uiContext.px2vp(this.cardItemInfoPx.top) - (this.initClipHeight * (1 - this.initScale) / 2) -
+              stackPositionVp?.y!;
+        } else if (!this.transitionParam.options?.type ||
+          this.transitionParam.options?.type === LongTakeTransitionType.CardLongTake) {
+          this.initPositionValueX = -postNodePositionXVp + stackPositionVp?.x!;
+          this.initPositionValueY = -postNodePositionYVp + stackPositionVp?.y!;
+          this.snapShotPositionY = postNodePositionYVp - snapShotStackPositionToWindowVp?.y!;
+          this.snapShotPositionX = postNodePositionXVp - snapShotStackPositionToWindowVp?.x!;
+          this.initTranslateY =
+            uiContext.px2vp(this.cardItemInfoPx.top - uiContext.vp2px(this.initClipHeight) * (1 - this.initScale) / 2) -
+              stackPositionVp?.y!;
+        }
+
+        this.initClipWidth = uiContext.px2vp(postNodeWidthPx);
+        this.snapShotSize = { width: uiContext.px2vp(postNodeWidthPx) };
         this.initTranslateX =
           uiContext.px2vp(this.cardItemInfoPx.left + this.cardItemInfoPx.width / 2 - stackCenterXPx);
-        this.snapShotSize = { height: uiContext.px2vp(stackSizePx?.height) };
       }
-    } else {
-      let snapShotStackPositionToWindowVp = snapShotStackNode?.getPositionToWindowWithTransform();
-      let postNodePositionXVp = postNode.getPositionToWindowWithTransform().x;
-      let postNodePositionYVp = postNode.getPositionToWindowWithTransform().y;
-      let postNodeWidthPx = postNode.getMeasuredSize().width;
-      let postNodeHeightPx = postNode.getMeasuredSize().height;
-      console.info(TAG,
-        'the size is ' + postNodeWidthPx + ' and ' + postNodeHeightPx + ' and ' + uiContext.vp2px(postNodePositionXVp) +
-          ' and ' + uiContext.vp2px(postNodePositionYVp));
-
-      this.initScale = this.cardItemInfoPx.width / postNodeWidthPx;
-      this.initClipHeight = uiContext.px2vp(this.cardItemInfoPx.height / this.initScale);
-
-      if (postNodeHeightPx === 0 || this.transitionParam.options?.type === LongTakeTransitionType.ImageLongTake) {
-        postNodeHeightPx = postNodeHeightPx ?? this.cardItemInfoPx.height / this.initScale;
-        this.initPositionValueX = -postNodePositionXVp + stackPositionVp?.x!;
-        this.snapShotPositionY = postNodePositionYVp + uiContext.px2vp(postNodeHeightPx) / 2 - this.initClipHeight / 2 -
-          snapShotStackPositionToWindowVp?.y!;
-        this.initPositionValueY =
-          -(postNodePositionYVp + uiContext.px2vp(postNodeHeightPx) / 2 - this.initClipHeight / 2 -
-            stackPositionVp?.y!);
-        this.snapShotPositionX = postNodePositionXVp - snapShotStackPositionToWindowVp?.x!;
-        this.initTranslateY =
-          uiContext.px2vp(this.cardItemInfoPx.top) - (this.initClipHeight * (1 - this.initScale) / 2) -
-            stackPositionVp?.y!;
-      } else if (!this.transitionParam.options?.type ||
-        this.transitionParam.options?.type === LongTakeTransitionType.CardLongTake) {
-        this.initPositionValueX = -postNodePositionXVp + stackPositionVp?.x!;
-        this.initPositionValueY = -postNodePositionYVp + stackPositionVp?.y!;
-        this.snapShotPositionY = postNodePositionYVp - snapShotStackPositionToWindowVp?.y!;
-        this.snapShotPositionX = postNodePositionXVp - snapShotStackPositionToWindowVp?.x!;
-        this.initTranslateY =
-          uiContext.px2vp(this.cardItemInfoPx.top - uiContext.vp2px(this.initClipHeight) * (1 - this.initScale) / 2) -
-            stackPositionVp?.y!;
-      }
-
-      this.initClipWidth = uiContext.px2vp(postNodeWidthPx);
-      this.snapShotSize = { width: uiContext.px2vp(postNodeWidthPx) };
-      this.initTranslateX = uiContext.px2vp(this.cardItemInfoPx.left + this.cardItemInfoPx.width / 2 - stackCenterXPx);
+      UtilLog.info(TAG,
+        'the value is initScale: ' + this.initScale + ' initTranslateX ' + this.initTranslateX + ' initClipWidth ' +
+          this.initClipWidth + ' initClipHeight ' + this.initClipHeight + ' initTranslateY ' + this.initTranslateY +
+          ' initPositionValue ' + this.initPositionValueY);
+    } catch (error) {
+      UtilLog.error(TAG, 'init failed ' + JSON.stringify(error));
     }
-    console.info(TAG,
-      'the value is initScale: ' + this.initScale + ' initTranslateX ' + this.initTranslateX + ' initClipWidth ' +
-      this.initClipWidth + ' initClipHeight ' + this.initClipHeight + ' initTranslateY ' + this.initTranslateY +
-        ' initPositionValue ' + this.initPositionValueY);
   }
 
   public doAnimation(isPush: boolean, isExit: boolean, transitionProxy: NavigationTransitionProxy): void {
@@ -149,140 +158,148 @@ export class LongTakeAnimationProperties {
   }
 
   public doEnterAnimation(transitionProxy?: NavigationTransitionProxy): void {
-    let uiContext = WindowUtils.window.getUIContext();
-    this.initParams();
-    this.scaleValue = this.initScale;
-    this.translateX = this.initTranslateX;
-    this.clipWidth = this.initClipWidth;
-    this.clipHeight = this.initClipHeight;
-    this.translateY = this.initTranslateY;
-    this.positionYValue = this.initPositionValueY;
-    this.positionXValue = this.initPositionValueX;
-    this.radius = (this.cardItemInfoPx.cornerRadius ?? 0) / this.initScale;
-    this.transitionParam.options?.onEnterTransitionStart?.();
-    this.snapShotOpacity = 1;
-    this.postPageOpacity = 0;
+    try {
+      const uiContext = WindowUtils.window.getUIContext();
+      this.initParams();
+      this.scaleValue = this.initScale;
+      this.translateX = this.initTranslateX;
+      this.clipWidth = this.initClipWidth;
+      this.clipHeight = this.initClipHeight;
+      this.translateY = this.initTranslateY;
+      this.positionYValue = this.initPositionValueY;
+      this.positionXValue = this.initPositionValueX;
+      this.radius = (this.cardItemInfoPx.cornerRadius ?? 0) / this.initScale;
+      this.transitionParam.options?.onEnterTransitionStart?.();
+      this.snapShotOpacity = 1;
+      this.postPageOpacity = 0;
 
-    let animationCount = ++this.animationCount;
+      let animationCount = ++this.animationCount;
 
-    // 开始做动画效果
-    uiContext.animateTo({
-      duration: 250,
-      curve: Curve.EaseInOut,
-      onFinish: () => {
-        if (animationCount === this.animationCount) {
-          this.radius = 0;
-          this.animationCount = 0;
-          this.transitionParam.options?.onEnterTransitionEnd?.();
-        }
-        if (transitionProxy) {
-          transitionProxy.finishTransition();
-        }
-      },
-    }, () => {
-      this.translateX = 0;
-      this.scaleValue = 1.0;
-      this.translateY = 0;
-      this.clipWidth = '100%';
-      this.clipHeight = '100%';
-      this.positionYValue = 0;
-      this.positionXValue = 0;
-      this.navDestinationBgColor = this.finalBgColor;
-      this.radius = DEFAULT_SCREEN_RADIUS;
-    })
-
-    uiContext.animateTo({
-      delay: 50,
-      duration: 75,
-      curve: Curve.Sharp,
-    }, () => {
-      this.snapShotOpacity = 0;
-    })
-
-    uiContext.animateTo({
-      duration: 100,
-      curve: Curve.Sharp,
-    }, () => {
-      this.postPageOpacity = 1.0;
-    })
-  }
-
-  public doBackAnimation(transitionProxy?: NavigationTransitionProxy, isChanged?: boolean): void {
-    let uiContext = WindowUtils.window.getUIContext();
-    if (this.animationCount === 0) {
-      this.radius = DEFAULT_SCREEN_RADIUS;
-    }
-    ++this.animationCount;
-    this.transitionParam.options?.onBackTransitionStart?.();
-
-    if (isChanged) {
+      // 开始做动画效果
       uiContext.animateTo({
         duration: 250,
-        curve: Curve.EaseOut,
+        curve: Curve.EaseInOut,
         onFinish: () => {
-          this.transitionParam.options?.onBackTransitionEnd?.();
+          if (animationCount === this.animationCount) {
+            this.radius = 0;
+            this.animationCount = 0;
+            this.transitionParam.options?.onEnterTransitionEnd?.();
+          }
           if (transitionProxy) {
             transitionProxy.finishTransition();
           }
         },
       }, () => {
-        this.scaleValue = 0.05;
         this.translateX = 0;
+        this.scaleValue = 1.0;
         this.translateY = 0;
-        this.radius = (this.cardItemInfoPx.cornerRadius ?? 0) / this.initScale;
-        this.navDestinationBgColor = INIT_BG_COLOR;
+        this.clipWidth = '100%';
+        this.clipHeight = '100%';
+        this.positionYValue = 0;
+        this.positionXValue = 0;
+        this.navDestinationBgColor = this.finalBgColor;
+        this.radius = DEFAULT_SCREEN_RADIUS;
       })
 
       uiContext.animateTo({
-        duration: 250,
-        curve: Curve.EaseOut,
+        delay: 50,
+        duration: 75,
+        curve: Curve.Sharp,
       }, () => {
         this.snapShotOpacity = 0;
       })
 
       uiContext.animateTo({
-        duration: 250,
-        curve: Curve.EaseInOut,
-      }, () => {
-        this.postPageOpacity = 0;
-      })
-    } else {
-      uiContext.animateTo({
-        duration: 250,
-        curve: Curve.EaseInOut,
-        onFinish: () => {
-          this.transitionParam.options?.onBackTransitionEnd?.();
-          if (transitionProxy) {
-            transitionProxy.finishTransition();
-          }
-        },
-      }, () => {
-        this.scaleValue = this.initScale;
-        this.translateX = this.initTranslateX;
-        this.clipWidth = this.initClipWidth;
-        this.clipHeight = this.initClipHeight;
-        this.translateY = this.initTranslateY;
-        this.radius = (this.cardItemInfoPx.cornerRadius ?? 0) / this.initScale;
-        this.positionXValue = this.initPositionValueX;
-        this.positionYValue = this.initPositionValueY;
-        this.navDestinationBgColor = INIT_BG_COLOR;
-      })
-
-      uiContext.animateTo({
-        delay: 80,
-        duration: 150,
-        curve: Curve.Friction,
-      }, () => {
-        this.snapShotOpacity = 1;
-      })
-
-      uiContext.animateTo({
-        delay: 130,
         duration: 100,
-        curve: Curve.Friction,
+        curve: Curve.Sharp,
       }, () => {
-        this.postPageOpacity = 0;
+        this.postPageOpacity = 1.0;
       })
+    } catch (error) {
+      UtilLog.error(TAG, 'do enter animation failed ' + JSON.stringify(error));
+    }
+  }
+
+  public doBackAnimation(transitionProxy?: NavigationTransitionProxy, isChanged?: boolean): void {
+    try {
+      let uiContext = WindowUtils.window.getUIContext();
+      if (this.animationCount === 0) {
+        this.radius = DEFAULT_SCREEN_RADIUS;
+      }
+      ++this.animationCount;
+      this.transitionParam.options?.onBackTransitionStart?.();
+
+      if (isChanged) {
+        uiContext.animateTo({
+          duration: 250,
+          curve: Curve.EaseOut,
+          onFinish: () => {
+            this.transitionParam.options?.onBackTransitionEnd?.();
+            if (transitionProxy) {
+              transitionProxy.finishTransition();
+            }
+          },
+        }, () => {
+          this.scaleValue = 0.05;
+          this.translateX = 0;
+          this.translateY = 0;
+          this.radius = (this.cardItemInfoPx.cornerRadius ?? 0) / this.initScale;
+          this.navDestinationBgColor = INIT_BG_COLOR;
+        })
+
+        uiContext.animateTo({
+          duration: 250,
+          curve: Curve.EaseOut,
+        }, () => {
+          this.snapShotOpacity = 0;
+        })
+
+        uiContext.animateTo({
+          duration: 250,
+          curve: Curve.EaseInOut,
+        }, () => {
+          this.postPageOpacity = 0;
+        })
+      } else {
+        uiContext.animateTo({
+          duration: 250,
+          curve: Curve.EaseInOut,
+          onFinish: () => {
+            this.transitionParam.options?.onBackTransitionEnd?.();
+            if (transitionProxy) {
+              transitionProxy.finishTransition();
+            }
+          },
+        }, () => {
+          this.scaleValue = this.initScale;
+          this.translateX = this.initTranslateX;
+          this.clipWidth = this.initClipWidth;
+          this.clipHeight = this.initClipHeight;
+          this.translateY = this.initTranslateY;
+          this.radius = (this.cardItemInfoPx.cornerRadius ?? 0) / this.initScale;
+          this.positionXValue = this.initPositionValueX;
+          this.positionYValue = this.initPositionValueY;
+          this.navDestinationBgColor = INIT_BG_COLOR;
+        })
+
+        uiContext.animateTo({
+          delay: 80,
+          duration: 150,
+          curve: Curve.Friction,
+        }, () => {
+          this.snapShotOpacity = 1;
+        })
+
+        uiContext.animateTo({
+          delay: 130,
+          duration: 100,
+          curve: Curve.Friction,
+        }, () => {
+          this.postPageOpacity = 0;
+        })
+      }
+    } catch (error) {
+      UtilLog.error(TAG, 'do back animation failed ' + JSON.stringify(error));
     }
   }
 
@@ -305,7 +322,7 @@ export class LongTakeAnimationProperties {
   public init(context: NavDestinationContext, param: LongTakeTransitionParam, options: LongTakeSessionOptions): void {
     this.navPathStack = context?.pathStack;
     if (!context || !param || !context.navDestinationId || !param.componentRectInfo || !options) {
-      console.info(TAG, 'init param is invalid!');
+      UtilLog.info(TAG, 'init param is invalid!');
       return;
     }
     if (param.componentRectInfo.width === 0 || param.componentRectInfo.height === 0) {
@@ -328,7 +345,7 @@ export class LongTakeAnimationProperties {
         }, undefined);
       return;
     } catch (e) {
-      console.info(TAG, 'initLongTakeTransition error ' + e);
+      UtilLog.error(TAG, 'initLongTakeTransition error ' + e);
       return;
     }
   }

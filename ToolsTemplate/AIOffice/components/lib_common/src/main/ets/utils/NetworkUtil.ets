@@ -71,49 +71,61 @@ export class NetworkUtil {
   }
 
   handleNetworkAvailable() {
-    let httpRequest = http.createHttp();
-    let options: http.HttpRequestOptions = {
-      readTimeout: 3000,
-      connectTimeout: 3000,
-    };
-    httpRequest.request(
-      'https://www-file.huawei.com/admin/asset/v1/pro/view/2644ff4ada00431f91c7d31209cf5f9b.jpg',
-      options,
-      (err: BusinessError, data: http.HttpResponse) => {
-        if (err) {
-          const noNetworkErrors = [2300005, 2300006, 2300007]
-          if (noNetworkErrors.includes(err.code)) {
-            this.networkModel.isNetworkAvailable = false
+    try {
+      let httpRequest = http.createHttp();
+      let options: http.HttpRequestOptions = {
+        readTimeout: 3000,
+        connectTimeout: 3000,
+      };
+      httpRequest.request(
+        'https://www-file.huawei.com/admin/asset/v1/pro/view/2644ff4ada00431f91c7d31209cf5f9b.jpg',
+        options,
+        (err: BusinessError, data: http.HttpResponse) => {
+          if (err) {
+            const noNetworkErrors = [2300005, 2300006, 2300007]
+            if (noNetworkErrors.includes(err.code)) {
+              this.networkModel.isNetworkAvailable = false
+            }
+          } else {
+            this.networkModel.isNetworkAvailable = true
           }
-        } else {
-          this.networkModel.isNetworkAvailable = true
-        }
-      })
+        })
+    } catch (error) {
+      Logger.error(TAG, `handleNetworkAvailable error: ${JSON.stringify(error)}`);
+    }
   }
 
   netQualityListener() {
-    netQuality.on('netSceneChange', (list: Array<netQuality.NetworkScene>) => {
-      if (list.length > 0) {
-        list.forEach((scene) => {
-          // WiFi是弱网情况，且流量管理里面的移动数据开关打开，则切换到移动数据
-          if (this.settingInfo.network.optimizeWith4G && scene.scene === 'weakSignal' &&
-            scene.pathType === netQuality.PathType.WIFI_PRIMARY
-          ) {
-            let netHandles = connection.getAllNetsSync();
-            for (let i = 0; i < netHandles.length; i++) {
-              let item = netHandles[i];
-              if (item.netId !== 0) {
-                let netCapabilities = connection.getNetCapabilitiesSync(item);
-                if (netCapabilities.bearerTypes[0] === connection.NetBearType.BEARER_CELLULAR) {
-                  connection.setAppNet(item);
-                  return;
+    try {
+      netQuality.on('netSceneChange', (list: Array<netQuality.NetworkScene>) => {
+        if (list.length > 0) {
+          list.forEach((scene) => {
+            // WiFi是弱网情况，且流量管理里面的移动数据开关打开，则切换到移动数据
+            if (this.settingInfo.network.optimizeWith4G && scene.scene === 'weakSignal' &&
+              scene.pathType === netQuality.PathType.WIFI_PRIMARY
+            ) {
+              try {
+                let netHandles = connection.getAllNetsSync();
+                for (let i = 0; i < netHandles.length; i++) {
+                  let item = netHandles[i];
+                  if (item.netId !== 0) {
+                    let netCapabilities = connection.getNetCapabilitiesSync(item);
+                    if (netCapabilities.bearerTypes[0] === connection.NetBearType.BEARER_CELLULAR) {
+                      connection.setAppNet(item);
+                      return;
+                    }
+                  }
                 }
+              } catch (error) {
+                Logger.error(TAG, `netQualityListener error: ${JSON.stringify(error)}`);
               }
             }
-          }
-        });
-      }
-    });
+          });
+        }
+      });
+    } catch (error) {
+      Logger.error(TAG, `netQuality.on error: ${JSON.stringify(error)}`);
+    }
   }
 
   registerNet() {

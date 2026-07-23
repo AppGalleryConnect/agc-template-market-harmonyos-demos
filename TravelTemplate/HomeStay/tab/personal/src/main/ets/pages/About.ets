@@ -1,6 +1,16 @@
-import { TitleBar } from 'component';
-import { Constants, NavPathName } from 'constant';
-import { TenantInfo } from '../model/Index';
+import { CommonHeader } from 'component';
+import { NavPathName } from 'constant';
+import {
+  AboutModel,
+  SettingGroup,
+  SettingItem,
+  SettingType,
+  SettingView,
+  SupportedSetting,
+} from 'app_setting';
+import { PersonalPopInfo, TenantInfo } from '../model/Index';
+import { PersonalInfoVM } from '../viewmodel/PersonalInfoVM';
+import { AccountUtil } from 'util';
 
 @Builder
 export function AboutBuilder() {
@@ -9,58 +19,68 @@ export function AboutBuilder() {
 
 @ComponentV2
 export struct About {
-  @Local tenantInfo: TenantInfo | undefined = AppStorage.get('tenantInfo');
   @Consumer('mainPathStack') mainPathStack: NavPathStack = new NavPathStack();
+  @Local tenantInfo: TenantInfo | undefined = AppStorage.get('tenantInfo');
+  vm: PersonalInfoVM = PersonalInfoVM.instance;
+
+  @Local group1: SettingGroup = new SettingGroup()
+    .setList([
+      new SettingItem()
+        .setType(SettingType.ROUTER)
+        .setLabel('个人信息')
+        .setRouterParam({ routerName: NavPathName.PERSONAL_INFO }),
+      new SettingItem()
+        .setSupportedType(SupportedSetting.PRIVACY)
+        .setLabel('隐私设置'),
+    ])
+  @Local group2: SettingGroup = new SettingGroup()
+    .setList([
+      new SettingItem()
+        .setSupportedType(SupportedSetting.CLEAR_CACHE),
+    ])
+  @Local group3: SettingGroup = new SettingGroup()
+    .setList([
+      new SettingItem()
+        .setSupportedType(SupportedSetting.CHECK_VERSION)
+        .setLabel('版本检测'),
+      new SettingItem()
+        .setSupportedType(SupportedSetting.ABOUT)
+        .setLabel('关于我们')
+        .setExtraParams({
+          hotline: this.tenantInfo?.phone ?? '',
+          icpText: '苏ICP备xxxx号-xxx',
+          copyrightText: '华为xx 版权所有 © 2019-2026',
+        } as AboutModel),
+    ])
+
+  @Local userId: string = AccountUtil.getUserId();
 
   build() {
     NavDestination() {
       Column() {
-        TitleBar({
-          isShowBack: true, title: '关于我们', clickEvent: () => {
-            this.mainPathStack.pop();
+        CommonHeader({ title: '设置', showBackButton: true, backButtonClick: () => {
+          this.mainPathStack.pop();
+        }});
+
+        SettingView({
+          pathStack: this.mainPathStack,
+          settingList: [this.group1, this.group2, this.group3],
+          isLogin: this.userId !== '',
+          signOutApi: async () => {
+            AppStorage.setOrCreate('currentUser', '');
+            AppStorage.setOrCreate('openID', '');
+            AccountUtil.setUserId('');
+            AccountUtil.setAvatar('');
+            AccountUtil.setNickName('');
+            await this.vm.updatePersonInfo();
+            this.mainPathStack.pop({
+              type: 1,
+              avatar: '',
+              nickname: '',
+            } as PersonalPopInfo);
           },
-        });
-
-        Column({ space: 24 }) {
-          Image(this.tenantInfo?.banner)
-            .size({ width: 80, height: 80 })
-            .borderRadius(8)
-            .objectFit(ImageFit.Contain);
-
-          Text(this.tenantInfo?.introduction)
-            .fontSize(14)
-            .lineHeight(36);
-
-          Column({ space: 12 }) {
-            Row() {
-              Text('查看隐私政策').fontSize(14).fontColor('#000000').opacity(0.9);
-              Image($r('app.media.icon_direction_right')).size({ width: 12, height: 12 });
-            }
-            .width(Constants.FULL_SCREEN)
-            .justifyContent(FlexAlign.SpaceBetween)
-            .borderRadius(8)
-            .padding(12)
-            .backgroundColor('#F6F6F6')
-            .onClick(() => {
-              this.mainPathStack.pushPathByName(NavPathName.PRIVACY_POLICY_PAGE, null);
-            });
-
-            Row() {
-              Text('查看用户协议').fontSize(14).fontColor('#000000').opacity(0.9);
-              Image($r('app.media.icon_direction_right')).size({ width: 12, height: 12 });
-            }
-            .width(Constants.FULL_SCREEN)
-            .justifyContent(FlexAlign.SpaceBetween)
-            .borderRadius(8)
-            .padding(12)
-            .backgroundColor('#F6F6F6')
-            .onClick(() => {
-              this.mainPathStack.pushPathByName(NavPathName.TERMS_OF_SERVICE_PAGE, null);
-            });
-          };
-
-        }.padding(16).height('90%').width(Constants.FULL_SCREEN);
-      };
+        }).layoutWeight(1)
+      }.width('100%').height('100%').backgroundColor($r('sys.color.background_secondary'));
     }.hideTitleBar(true);
   }
 }

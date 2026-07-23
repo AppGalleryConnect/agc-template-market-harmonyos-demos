@@ -1,6 +1,7 @@
 import { CitySearchController, UICitySelect } from 'module_city_select';
 import { GuideService } from '@ohos_agcit/driver_license_exam_guide'
 import { CommonModel } from '@ohos_agcit/driver_license_exam_commonlib';
+import { RouteCommonParam } from '@ohos_agcit/driver_license_exam_datasource';
 
 @Builder
 export function SelectCityViewBuilder() {
@@ -18,10 +19,23 @@ struct SelectCityView {
 
   @Local bottomRectHeight: number = 0;
   @Local topRectHeight: number = 0;
+  @Local fromPage:string = '';
 
   aboutToAppear(): void {
     this.bottomRectHeight = AppStorage.get('bottomRectHeight') || 0;
     this.topRectHeight = AppStorage.get('topRectHeight') || 0;
+    const param: Array<RouteCommonParam> = this.vm.navStack.getParamByName('selectCityView') as Array<RouteCommonParam>;
+    if (param?.length) {
+      this.fromPage = param[0]?.fromPage || '';
+    }
+  }
+
+  back(): void {
+    if (this.fromPage === 'GuidePage') {
+      this.vm.navStack.replacePathByName('guidePage', true);
+    } else {
+      this.vm.navStack.pop();
+    }
   }
 
   build() {
@@ -38,7 +52,7 @@ struct SelectCityView {
           goBack: (citySelected?: string) => {
             const message = citySelected ? `选择了${citySelected}并返回` : '直接返回';
             this.getUIContext().getPromptAction().showToast({ message });
-            this.vm.navStack.pop();
+            this.back()
           },
           emitUpdateRecentCityList:(city: string) => {
             this.currentCity = city;
@@ -51,6 +65,10 @@ struct SelectCityView {
     .height('100%')
     .width('100%')
     .title('城市选择')
+    .onBackPressed(() => {
+      this.back();
+      return true;
+    })
     .padding({
       top:this.getUIContext().px2vp(this.topRectHeight),
       bottom: this.getUIContext().px2vp(this.bottomRectHeight)

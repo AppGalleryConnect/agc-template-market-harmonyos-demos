@@ -1,3 +1,4 @@
+import { fp2pxUtil } from '@agctemplate/widgets'
 import { BulletItem } from '../models/BulletItem'
 
 @ComponentV2
@@ -13,7 +14,7 @@ export struct BulletView {
         (item: BulletItem, index) => {
           if(item.isUser) {
             Text(item.content)
-              .fontSize(item.size)
+              .fontSize(fp2pxUtil(item.size))
               .fontColor('#fff')
               .translate({ x: `${this.xTrans[index]}vp`, y: 0 })
               .position({ y: `${item.positionY}` })
@@ -28,7 +29,7 @@ export struct BulletView {
               .opacity(item.opacity)
           }else {
             Text(item.content)
-              .fontSize(item.size)
+              .fontSize(fp2pxUtil(item.size))
               .fontColor('#fff')
               .translate({ x: `${this.xTrans[index]}vp`, y: 0 })
               .position({ y: `${item.positionY}` })

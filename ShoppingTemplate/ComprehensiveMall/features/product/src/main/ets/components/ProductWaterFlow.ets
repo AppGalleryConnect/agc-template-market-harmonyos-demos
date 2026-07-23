@@ -71,6 +71,7 @@ export struct ProductWaterFlow {
                     ListProductCardView({ product: ri.item });
                   }
                 }
+                .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.BOTTOM])
                 .id(this.vm.testId + '/' + ri.item.productId)
                 .onClick(() => {
                   if (this.openSwiper) {
@@ -147,7 +148,7 @@ export struct ProductWaterFlow {
       }
     }
     .width('100%')
-    .constraintSize({ minHeight: 100 })
+    .constraintSize({ minHeight: 128 })
     .layoutWeight(1)
     .justifyContent(FlexAlign.Center)
     .alignItems(VerticalAlign.Top)

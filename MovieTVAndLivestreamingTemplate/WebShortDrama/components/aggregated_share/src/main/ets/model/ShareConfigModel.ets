@@ -20,10 +20,13 @@ export class ShareConfigModel {
    * 主动获取底部避让区域高度
    */
   public queryWindowBottomPadding: () => void = () => {
-    window.getLastWindow(this.windowStage.getMainWindowSync().getUIContext().getHostContext()).then(currentWindow => {
-      const area = currentWindow.getWindowAvoidArea(window.AvoidAreaType.TYPE_NAVIGATION_INDICATOR);
-      this.windowBottomPadding = this.windowStage.getMainWindowSync().getUIContext().px2vp(area.bottomRect.height);
-    })
+    try {
+      window.getLastWindow(this.windowStage.getMainWindowSync().getUIContext().getHostContext()).then(currentWindow => {
+        const area = currentWindow.getWindowAvoidArea(window.AvoidAreaType.TYPE_NAVIGATION_INDICATOR);
+        this.windowBottomPadding = this.windowStage.getMainWindowSync().getUIContext().px2vp(area.bottomRect.height);
+      })
+    } catch (e) {
+    }
   }
   /**
    * 监听avoidAreaChange的回调函数
@@ -41,26 +44,35 @@ export class ShareConfigModel {
    */
   public registerWindowBottomPadding() {
     this.queryWindowBottomPadding();
-    window.getLastWindow(this.windowStage.getMainWindowSync().getUIContext().getHostContext()).then(currentWindow => {
-      currentWindow.on('avoidAreaChange', this.setWindowBottomPadding);
-    })
+    try {
+      window.getLastWindow(this.windowStage.getMainWindowSync().getUIContext().getHostContext()).then(currentWindow => {
+        currentWindow.on('avoidAreaChange', this.setWindowBottomPadding);
+      })
+    } catch (e) {
+    }
   }
 
   /**
    * 取消监听底部避让区域变化
    */
   public unRegisterWindowBottomPadding() {
-    window.getLastWindow(this.windowStage.getMainWindowSync().getUIContext().getHostContext()).then(currentWindow => {
-      currentWindow.off('avoidAreaChange', this.setWindowBottomPadding);
-    })
+    try {
+      window.getLastWindow(this.windowStage.getMainWindowSync().getUIContext().getHostContext()).then(currentWindow => {
+        currentWindow.off('avoidAreaChange', this.setWindowBottomPadding);
+      })
+    } catch (e) {
+    }
   }
 
   /**
    * 还原应用窗口模式
    */
   public restoreWindowLayout() {
-    window.getLastWindow(this.windowStage.getMainWindowSync().getUIContext().getHostContext()).then(currentWindow => {
-      currentWindow.setWindowLayoutFullScreen(this.isLayoutFullScreen);
-    })
+    try {
+      window.getLastWindow(this.windowStage.getMainWindowSync().getUIContext().getHostContext()).then(currentWindow => {
+        currentWindow.setWindowLayoutFullScreen(this.isLayoutFullScreen);
+      })
+    } catch (e) {
+    }
   }
 }

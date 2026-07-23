@@ -19,11 +19,17 @@ struct IndexPage {
 
   aboutToAppear(): void {
     this.vm.refreshUserInfo();
-    window.getLastWindow(this.getUIContext().getHostContext()).then(currentWindow => {
-      currentWindow.on('keyboardHeightChange', (data: number) => {
-        this.keyboardHeight = this.getUIContext().px2vp(data);
+    try {
+      window.getLastWindow(this.getUIContext().getHostContext()).then(currentWindow => {
+        currentWindow.on('keyboardHeightChange', (data: number) => {
+          this.keyboardHeight = this.getUIContext().px2vp(data);
+        })
+      }).catch((error: Error) => {
+        console.error('[IndexPage] getLastWindow error: ' + JSON.stringify(error));
       })
-    })
+    } catch (error) {
+      console.error('[IndexPage] aboutToAppear error: ' + JSON.stringify(error));
+    }
   }
 
   @Monitor('selectedIndex')

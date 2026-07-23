@@ -5,7 +5,8 @@
     "deliveryWithInstall": true,
     "routerMap": "$profile:mine_route_map",
     "deviceTypes": [
-      "phone"
+      "phone",
+      "tablet"
     ]
   }
 }

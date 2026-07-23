@@ -1,9 +1,0 @@
-#ifndef AVCODEC_SAMPLE_ERROE_H
-#define AVCODEC_SAMPLE_ERROE_H
-
-enum AVCodecSampleError : int {
-    AVCODEC_SAMPLE_ERR_OK = 0,
-    AVCODEC_SAMPLE_ERR_ERROR = -1,
-};
-
-#endif  // AVCODEC_SAMPLE_ERROE_H

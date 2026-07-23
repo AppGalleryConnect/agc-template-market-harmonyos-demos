@@ -30,7 +30,7 @@ export struct ThemeSwiper {
   @Local marginWidth: number = 0;
   @Local swiperHeight: number = 0;
   @Local ratio: number = 0;
-  @Local imgSpace: number = 16;
+  @Local imgSpace: number = 12;
   @Local containerRatio: number = 1;
   @Local maxWidth: number = 264;
   @Local minWidth: number = 136;
@@ -57,13 +57,15 @@ export struct ThemeSwiper {
 
   // 根据切换模式初始化,宽高限制
   initDataByIsCovered(): void {
-    if (this.imgWidth <= 0 || this.imgHeight <= 0) {
+    if (this._bakWidth <= 0 || this._bakHeight <= 0) {
       CommonUtil.error('Set the image width and height correctly!');
       return;
     }
     this.curIndex = 0;
     // 获取当前容器宽度相对360vp的比率
     this.containerRatio = this.containerWidth / 360;
+    this.imgWidth = this._bakWidth;
+    this.imgHeight = this._bakHeight;
     this.imgSpace = 10 * this.containerRatio;
     this.maxWidth = 264 * this.containerRatio;
     this.minWidth = 136 * this.containerRatio;
@@ -76,8 +78,20 @@ export struct ThemeSwiper {
       this.imgHeight = this.imgHeight * (this.minWidth / this.imgWidth);
       this.imgWidth = this.minWidth;
     }
-    this.marginWidth = (this.containerWidth - this.imgWidth - this.imgSpace) / 2;
+    const fullVisibleMax = this.containerWidth * 0.35;
+    const isWideEnough = this.containerWidth >= this._bakWidth * 3;
+    if (isWideEnough && this.imgWidth > fullVisibleMax) {
+      this.imgHeight = this._bakHeight * (fullVisibleMax / this._bakWidth);
+      this.imgWidth = fullVisibleMax;
+    }
     this.ratio = 7 * this.imgSpace / this.imgHeight;
+    const sideCardMeasuredWidth = this.imgWidth * (1 - this.ratio) + 24 * this.containerRatio;
+    const naturalMargin = (this.containerWidth - this.imgWidth - this.imgSpace) / 2;
+    if (isWideEnough) {
+      this.marginWidth = Math.max(naturalMargin, Math.min(sideCardMeasuredWidth, this.containerWidth / 3));
+    } else {
+      this.marginWidth = Math.min(naturalMargin, sideCardMeasuredWidth);
+    }
     this.swiperHeight = this.imgHeight + 16 * this.containerRatio;
     this.allScale = new Array(this.imgList.length).fill(1 - this.ratio);
     this.allScale[0] = 1;
@@ -95,7 +109,7 @@ export struct ThemeSwiper {
   }
 
   build() {
-    Column({ space: 10 }) {
+    Column() {
       if (this.isShow) {
         Swiper(this._controller) {
           ForEach(this.imgList, (url: Src, index) => {
@@ -103,7 +117,7 @@ export struct ThemeSwiper {
               Image(url)
                 .borderRadius(16)
                 .shadow({
-                  radius: vp2px(4 * this.containerRatio * this.shadowRatio),
+                  radius: this.getUIContext().vp2px(4 * this.containerRatio * this.shadowRatio),
                   color: 'rgba(0,0,0,0.2)',
                   fill: true,
                   offsetY: 4,
@@ -171,12 +185,15 @@ export struct ThemeSwiper {
             .count(5)
         }
       }
-    }.size({ width: '100%', height: this.swiperHeight }).onAreaChange((oldValue: Area, newValue: Area) => {
+    }
+    .size({ width: '100%', height: this.swiperHeight })
+    .onAreaChange((_oldValue: Area, newValue: Area) => {
       if (this.containerWidth !== newValue.width as number) {
         this.containerWidth = newValue.width as number;
         this.imgWidth = this._bakWidth;
         this.imgHeight = this._bakHeight;
-        this.refresh();
+        this.containerRatio = this.containerWidth / 360;
+        this.initDataByIsCovered();
       }
     })
   }

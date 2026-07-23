@@ -28,6 +28,53 @@ export interface ShareInfo {
 }
 
 /**
+ * 服务卡片列表item模型
+ */
+export class FormItemModel {
+  goodId: string
+  orderId: string
+  title: string
+  appointTime: string
+  addressName: string
+  isShow: boolean
+  subTitle?: string
+  appointTimeRaw: number
+
+  constructor(goodId: string, orderId: string, title: string, appointTime: string, addressName: string,
+    isShow: boolean = true, appointTimeRaw: number = 0) {
+    this.goodId = goodId;
+    this.orderId = orderId;
+    this.title = title;
+    this.appointTime = appointTime;
+    this.addressName = addressName;
+    this.isShow = isShow;
+    this.appointTimeRaw = appointTimeRaw;
+  }
+}
+
+/**
+ * 服务卡片-数据模型
+ */
+export class FormCardData {
+  data: string = '';
+}
+
+/**
+ * 服务卡片-跳转模型
+ */
+@ObservedV2
+export class FormCardRouter {
+  @Trace id: number = 0;
+  @Trace pageUrl: string = '';
+  @Trace orderId: string = '';
+  @Trace goodId: string = '';
+  @Trace categoryParam: IJumpCategoryParam = {
+    tabIndex: 1,
+    listInitialIndex: 0
+  };
+}
+
+/**
  * 分享参数模型
  */
 @ObservedV2
@@ -61,19 +108,14 @@ export class SimpleGoodInfo {
 export class FullOrderInfo implements IFullOrderInfo {
   // 订单ID
   @Trace id: string = '';
-
   // 订单标题
   @Trace title: string = '';
-
   // 订单副标题
   @Trace subTitle?: string = '';
-
   // 会员价格
   @Trace vipPrice: number = 0;
-
   // 图片链接
   @Trace image: string = '';
-
   // 预约地址
   @Trace addressName: string = '';
   // 手机号

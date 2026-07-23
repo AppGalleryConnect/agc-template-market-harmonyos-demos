@@ -265,11 +265,16 @@ export function registerAVPlayerCallback(
     });
   });
 
-  avPlayer.on('audioOutputDeviceChangeWithInfo', (data: audio.AudioStreamDeviceChangeInfo) => {
-    callbackMap.get('audioOutputDeviceChangeWithInfo')?.forEach((item) => {
-      item(data);
+  try {
+    avPlayer.on('audioOutputDeviceChangeWithInfo', (data: audio.AudioStreamDeviceChangeInfo) => {
+      callbackMap.get('audioOutputDeviceChangeWithInfo')?.forEach((item) => {
+        item(data);
+      });
     });
-  });
+  } catch (err) {
+    Logger.error(TAG, `isDisplayModeFolded err, error code: ${err.code}, error message: ${err.message}`);
+  }
+
 
   avPlayer.on('subtitleUpdate', (info: media.SubtitleInfo) => {
     callbackMap.get('subtitleUpdate')?.forEach((item) => {

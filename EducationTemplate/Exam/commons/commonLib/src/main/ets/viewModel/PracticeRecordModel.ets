@@ -25,6 +25,10 @@ export class PracticeRecordModel {
   @Trace practiceCount?: string
   // 正确率
   @Trace correctRate?: string
+  // 总题数
+  @Trace totalCount?: string
+  // 错题数
+  @Trace wrongCount?: string
   // 练习数据
   practiceModels?: PracticeModel[]
 }

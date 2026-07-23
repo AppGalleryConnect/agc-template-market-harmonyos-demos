@@ -103,6 +103,10 @@
     {
       "name": "verifyCode_tips",
       "value": "获取验证码为模拟场景，真实获取验证码以业务实现为准"
+    },
+    {
+      "name": "agcit_huawei_calendar",
+      "value": "1.0.6"
     }
   ]
 }

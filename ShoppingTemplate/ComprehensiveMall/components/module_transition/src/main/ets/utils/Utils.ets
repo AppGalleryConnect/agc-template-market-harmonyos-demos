@@ -57,7 +57,11 @@ export function getSizeByUnit(val: string | number, isFont?: boolean): string {
  * 设置顶部状态栏颜色
  */
 export function setWindowSystemBarProp(properties: window.SystemBarProperties) {
-  const windowStage = AppStorage.get('windowStage') as window.WindowStage;
-  const windowClass = windowStage.getMainWindowSync();
-  windowClass.setWindowSystemBarProperties(properties);
+  try {
+    const windowStage = AppStorage.get('windowStage') as window.WindowStage;
+    const windowClass = windowStage.getMainWindowSync();
+    windowClass.setWindowSystemBarProperties(properties);
+  } catch (err) {
+    console.error('setWindowSystemBarProp failed: ' + JSON.stringify(err));
+  }
 }

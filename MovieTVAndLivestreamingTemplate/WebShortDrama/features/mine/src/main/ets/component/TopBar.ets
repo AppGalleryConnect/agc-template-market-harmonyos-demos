@@ -14,6 +14,7 @@
  *
  */
 import { getMedia } from '@agctemplate/resources';
+import { fp2pxUtil } from '@agctemplate/widgets';
 
 @ComponentV2
 export struct TopBar {
@@ -23,16 +24,20 @@ export struct TopBar {
 
   build() {
     Row() {
-      Image(getMedia('app.media.black_back'))
-        .onClick(() => {
-          this.onClickBack()
-        })
-        .width(40)
-        .aspectRatio(1)
-        .borderRadius(20)
+      Button({ type: ButtonType.Circle }) {
+        SymbolGlyph($r('sys.symbol.chevron_backward'))
+          .fontSize(fp2pxUtil(24))
+          .fontColor([$r('sys.color.icon_primary')])
+      }
+      .width(40)
+      .height(40)
+      .backgroundColor($r('sys.color.comp_background_tertiary'))
+      .onClick(() => {
+        this.onClickBack()
+      })
 
       Text(this.title)
-        .fontSize(20)
+        .fontSize(fp2pxUtil(20))
         .fontWeight(700)
         .fontColor($r('sys.color.font_primary'))
         .margin({ left: 8 })

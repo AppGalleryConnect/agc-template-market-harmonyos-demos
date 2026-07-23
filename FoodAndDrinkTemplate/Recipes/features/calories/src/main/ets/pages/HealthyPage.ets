@@ -290,6 +290,6 @@ struct HealthyPage {
       .height('100%')
     }
     .backgroundColor($r('sys.color.comp_background_gray'))
-    .padding({ bottom: 88 })
+    .padding({ bottom: 100 })
   }
 }

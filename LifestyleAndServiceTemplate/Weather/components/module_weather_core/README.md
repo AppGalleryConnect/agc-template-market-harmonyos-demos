@@ -15,17 +15,23 @@
 <img src="./screenshots/All.jpg" width="300">
 
 ## 约束与限制
+
 ### 环境
+
 * DevEco Studio版本：DevEco Studio 5.0.5 Release及以上
 * HarmonyOS SDK版本：HarmonyOS 5.0.5 Release SDK及以上
-* 设备类型：华为手机（包括双折叠和阔折叠）
+* 设备类型：华为手机（包括双折叠和阔折叠）、平板
 * 系统版本：HarmonyOS 5.0.5(17)及以上
+
+### 权限
+
+无
 
 ## 使用
 
 1. 安装组件。
 
-   如果是在DevEvo Studio使用插件集成组件，则无需安装组件，请忽略此步骤。
+   如果是在DevEco Studio使用插件集成组件，则无需安装组件，请忽略此步骤。
 
    如果是从生态市场下载组件，请参考以下步骤安装组件。
 
@@ -84,10 +90,12 @@ UINow(options?: UINowOptions)
 
 ### UINowOptions对象说明
 
-| 名称       | 类型                                      | 是否必填 | 说明     |
-|----------|-----------------------------------------|------|--------|
-| weather  | [RealTimeWeather](#RealTimeWeather对象说明) | 是    | 实时天气数据 |
-| customUi | () => void                              | 否    | 自定义构建器 |
+| 名称           | 类型                                                                                          | 是否必填 | 说明          |
+|--------------|---------------------------------------------------------------------------------------------|------|-------------|
+| weather      | [RealTimeWeather](#RealTimeWeather对象说明)                                                     | 是    | 实时天气数据      |
+| customHeight | number                                                                                      | 否    | 自定义高度，默认232 |
+| headerMargin | [Margin](https://developer.huawei.com/consumer/cn/doc/harmonyos-references/ts-types#margin) | 否    | 头部外边距       |
+| customUi     | () => void                                                                                  | 否    | 自定义构建器      |
 
 ### RealTimeWeather对象说明
 
@@ -105,9 +113,8 @@ UINow(options?: UINowOptions)
 | pressure   | number | 是    | 气压     |
 | uv         | number | 是    | 紫外线    |
 | windDir    | string | 是    | 风向     |
-| winSpeed   | number | 是    | 风速     |
+| windSpeed  | number | 是    | 风速     |
 | airQuality | string | 是    | 空气质量   |
-
 
 UIHours(options?: UIHoursOptions)
 
@@ -121,12 +128,13 @@ UIHours(options?: UIHoursOptions)
 
 ### UIHoursOptions对象说明
 
-| 名称        | 类型                                    | 是否必填 | 说明       |
-|-----------|---------------------------------------|------|----------|
-| weathers  | [HourlyWeather](#HourlyWeather对象说明)[] | 是    | 24小时天气数据 |
-| maxTemp   | number                                | 否    | 最高温度     |
-| minTemp   | number                                | 否    | 最低温度     |
-| itemWidth | number                                | 否    | 单元宽度     |
+| 名称           | 类型                                    | 是否必填 | 说明          |
+|--------------|---------------------------------------|------|-------------|
+| weathers     | [HourlyWeather](#HourlyWeather对象说明)[] | 是    | 24小时天气数据    |
+| maxTemp      | number                                | 否    | 最高温度，默认42   |
+| minTemp      | number                                | 否    | 最低温度，默认20   |
+| itemWidth    | number                                | 否    | 单元宽度，默认48   |
+| customHeight | number                                | 否    | 自定义高度，默认224 |
 
 ### HourlyWeather对象说明
 
@@ -137,7 +145,6 @@ UIHours(options?: UIHoursOptions)
 | desc       | string | 是    | 天气描述 |
 | icon       | string | 是    | 天气图标 |
 | airQuality | string | 是    | 空气质量 |
-
 
 UIDays(options?: UIDaysOptions)
 
@@ -151,12 +158,13 @@ UIDays(options?: UIDaysOptions)
 
 ### UIDaysOptions对象说明
 
-| 名称        | 类型                                  | 是否必填 | 说明      |
-|-----------|-------------------------------------|------|---------|
-| weathers  | [DailyWeather](#DailyWeather对象说明)[] | 是    | 15天天气数据 |
-| maxTemp   | number                              | 否    | 最高温度    |
-| minTemp   | number                              | 否    | 最低温度    |
-| itemWidth | number                              | 否    | 单元宽度    |
+| 名称           | 类型                                  | 是否必填 | 说明          |
+|--------------|-------------------------------------|------|-------------|
+| weathers     | [DailyWeather](#DailyWeather对象说明)[] | 是    | 15天天气数据     |
+| maxTemp      | number                              | 否    | 最高温度，默认46   |
+| minTemp      | number                              | 否    | 最低温度，默认16   |
+| itemWidth    | number                              | 否    | 单元宽度，默认48   |
+| customHeight | number                              | 否    | 自定义高度，默认317 |
 
 ### DailyWeather对象说明
 
@@ -172,7 +180,6 @@ UIDays(options?: UIDaysOptions)
 | airQuality | string | 是    | 空气质量   |
 | rain       | number | 是    | 降雨概率   |
 
-
 UIIndices(options?: UIIndicesOptions)
 
 生活指数组件。
@@ -185,10 +192,13 @@ UIIndices(options?: UIIndicesOptions)
 
 ### UIIndicesOptions对象说明
 
-| 名称       | 类型                                                       | 是否必填 | 说明     |
-|----------|----------------------------------------------------------|------|--------|
-| weathers | [IndicesWeather](#IndicesWeather对象说明)[]                  | 是    | 生活指数数据 |
-| click    | (weather: [IndicesWeather](#IndicesWeather对象说明)) => void | 否    | 点击回调事件 |
+| 名称         | 类型                                                       | 是否必填 | 说明        |
+|------------|----------------------------------------------------------|------|-----------|
+| weathers   | [IndicesWeather](#IndicesWeather对象说明)[]                  | 是    | 生活指数数据    |
+| click      | (weather: [IndicesWeather](#IndicesWeather对象说明)) => void | 否    | 点击回调事件    |
+| itemHeight | number                                                   | 否    | 单项高度，默认64 |
+| itemSpace  | number                                                   | 否    | 项间距，默认8   |
+| columnsNum | number                                                   | 否    | 列数，默认2    |
 
 ### IndicesWeather对象说明
 
@@ -202,6 +212,66 @@ UIIndices(options?: UIIndicesOptions)
 | text     | string | 是    | 详细描述 |
 | icon     | string | 是    | 显示图标 |
 
+### RainEffect
+
+雨滴动效容器组件，根据雨量等级显示粒子效果。
+
+**参数：**
+
+| 名称            | 类型                                     | 是否必填 | 说明          |
+|---------------|----------------------------------------|------|-------------|
+| rainLevel     | [RainLevel](#RainLevel枚举说明)            | 否    | 雨量等级，默认NONE |
+| cardRects     | Map<string, [CardRect](#CardRect对象说明)> | 否    | 卡片碰撞区域Map   |
+| resumeVersion | number                                 | 否    | 前后台恢复版本号    |
+| themeColor    | string                                 | 否    | 主题背景颜色      |
+
+### RainLevel枚举说明
+
+雨量等级枚举。
+
+**枚举：**
+
+| 名称     | 数值 | 说明 |
+|--------|----|----|
+| NONE   | 0  | 无  |
+| LIGHT  | 1  | 小雨 |
+| MEDIUM | 2  | 中雨 |
+| HEAVY  | 3  | 大雨 |
+
+### CardRect对象说明
+
+卡片碰撞区域（单位：px）。
+
+**参数：**
+
+| 名称     | 类型     | 是否必填 | 说明  |
+|--------|--------|------|-----|
+| x      | number | 是    | X坐标 |
+| y      | number | 是    | Y坐标 |
+| width  | number | 是    | 宽度  |
+| height | number | 是    | 高度  |
+
+### RainConfig
+
+雨滴粒子参数配置，根据雨量等级返回对应的发射率、速度、角度等参数。
+
+**方法：**
+
+| 名称                                                                           | 说明             |
+|------------------------------------------------------------------------------|----------------|
+| getRainLevel(desc: string): [RainLevel](#RainLevel枚举说明)                      | 根据天气描述文字解析雨量等级 |
+| getEmitRate(level: [RainLevel](#RainLevel枚举说明)): number                      | 获取粒子发射速率       |
+| getLifetime(level: [RainLevel](#RainLevel枚举说明)): number                      | 获取粒子生命周期（毫秒）   |
+| getParticleFallSpeed(level: [RainLevel](#RainLevel枚举说明)): [number, number]   | 获取雨丝下落速度范围     |
+| getParticleFallAngle(level: [RainLevel](#RainLevel枚举说明)): [number, number]   | 获取雨丝下落角度范围     |
+| getParticleAccSpeed(level: [RainLevel](#RainLevel枚举说明)): [number, number]    | 获取雨丝加速度范围      |
+| getParticleAccAngle(level: [RainLevel](#RainLevel枚举说明)): [number, number]    | 获取雨丝加速度角度范围    |
+| getParticleSplashSpeed(level: [RainLevel](#RainLevel枚举说明)): [number, number] | 获取溅射粒子初速度范围    |
+| getRainColor(backgroundColor: string): [string, string]                      | 根据背景色获取雨滴颜色范围  |
+| getSplashColor(backgroundColor: string): [string, string]                    | 根据背景色获取溅射颜色范围  |
+| getRainOpacity(backgroundColor: string): [number, number]                    | 获取雨丝不透明度范围     |
+| getSplashOpacity(backgroundColor: string): [number, number]                  | 获取溅射不透明度范围     |
+| getRainSize(): [number, number]                                              | 获取雨滴尺寸范围       |
 
 ### WeatherUtils
 
@@ -221,13 +291,13 @@ WeatherUtils.getHourlyWeathers(codes: string):Promise<[HourlyWeather](#HourlyWea
 
 #### getDailyWeathers
 
-WeatherUtils.getRealTimeWeathers(codes: string):Promise<[DailyWeather](#DailyWeather对象说明)[]>
+WeatherUtils.getDailyWeathers(codes: string):Promise<[DailyWeather](#DailyWeather对象说明)[]>
 
 获取对应地区码区域的15天天气数据。
 
 #### getIndicesWeathers
 
-WeatherUtils.getRealTimeWeathers(code: string, day: 1 | 3):Promise<[IndicesWeather](#IndicesWeather对象说明)[][]>
+WeatherUtils.getIndicesWeathers(code: string, day: 1 | 3):Promise<[IndicesWeather](#IndicesWeather对象说明)[][]>
 
 获取对应地区码区域对应天数的生活指数数据。
 

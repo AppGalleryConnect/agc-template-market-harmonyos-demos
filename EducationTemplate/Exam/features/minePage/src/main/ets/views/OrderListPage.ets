@@ -119,7 +119,7 @@ export struct OrderListPage {
 
 @ComponentV2
 struct OrderItem {
-  @Param info: OrderInfo = new OrderInfo('', false, OrderState.WaitToPay, '', '', false);
+  @Param info: OrderInfo = new OrderInfo('', false, OrderState.WaitToPay, '', '', false, false);
   @Param refreshEvent: () => void = () => {
   };
 
@@ -279,7 +279,7 @@ struct OrderItem {
 }
 
 export class MyInfo {
-  info: OrderInfo = new OrderInfo('', false, OrderState.WaitToPay, '', '', false);
+  info: OrderInfo = new OrderInfo('', false, OrderState.WaitToPay, '', '', false, false);
   refreshCallback: () => void = () => {
   };
 }

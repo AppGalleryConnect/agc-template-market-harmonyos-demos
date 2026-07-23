@@ -63,10 +63,31 @@
               }
             ],
             "domainVerify": true
+          },
+// AppLinking
+          {
+            "entities": [
+// entities必须包含"entity.system.browsable"
+              "entity.system.browsable"
+            ],
+            "actions": [
+// actions必须包含"ohos.want.action.viewData"
+              "ohos.want.action.viewData"
+            ],
+            "uris": [
+              {
+// scheme须配置为https
+                "scheme": "https",
+// host须配置为关联的网址域名
+                "host": "linking.xiaobingtang.cn"
+// path可选，表示域名服务器上的目录或文件路径，例如linking.xiaobingtang.cn/path1中的path1
+// 如果应用只能处理部分特定的path，则此处应该配置应用所支持的path，避免出现应用不能处理的path链接也被引流到应用中的问题
+//"path": "path1"
+              }
+            ],
+// domainVerify须设置为true
+            "domainVerify": true
           }
-        ],
-        "supportWindowMode": [
-          "fullscreen"
         ]
       }
     ],
@@ -86,6 +107,10 @@
       }
     ],
     "metadata": [
+      {
+        "name": "minors_mode",
+        "value": "1"
+      },
       {
         "name": "client_id",
 /*

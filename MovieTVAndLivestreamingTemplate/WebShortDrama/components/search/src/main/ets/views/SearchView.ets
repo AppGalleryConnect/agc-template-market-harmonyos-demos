@@ -1,3 +1,4 @@
+import { fp2pxUtil } from '@agctemplate/widgets';
 import { mediaquery } from '@kit.ArkUI';
 import { Constants } from '../common/Constant';
 import { GridRowColSetting } from '../common/GridRowColSetting';
@@ -186,7 +187,7 @@ export struct SearchView {
         Button({ type: ButtonType.Circle }) {
           SymbolGlyph($r('sys.symbol.magnifyingglass'))
             .fontColor([$r('sys.color.icon_primary')])
-            .fontSize(Constants.SEARCH_ICON_WIDTH)
+            .fontSize(fp2pxUtil(Constants.SEARCH_ICON_WIDTH))
         }
         .width(Constants.BACK_BACKGROUND_WIDTH)
         .height(Constants.BACK_BACKGROUND_HEIGHT)

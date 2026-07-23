@@ -102,9 +102,9 @@ AIOffice
 
 ### 环境
 
-* DevEco Studio版本：DevEco Studio 5.0.5 Release及以上
-* HarmonyOS SDK版本：HarmonyOS 5.0.5 Release SDK及以上
-* 设备类型：华为手机（包括双折叠和阔折叠）、平板
+* DevEco Studio版本：DevEco Studio 6.0.2 Release及以上
+* HarmonyOS SDK版本：HarmonyOS 6.0.2 Release SDK及以上
+* 设备类型：华为手机（包括双折叠和阔折叠）
 * HarmonyOS版本：HarmonyOS 5.0.5(17)及以上
 
 ### 权限

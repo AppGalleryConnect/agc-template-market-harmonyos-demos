@@ -19,6 +19,10 @@
     {
       "name": "good_card_consult_btn",
       "value": "咨询"
+    },
+    {
+      "name": "agcit_huawei_household_service",
+      "value": "1.0.5"
     }
   ]
 }

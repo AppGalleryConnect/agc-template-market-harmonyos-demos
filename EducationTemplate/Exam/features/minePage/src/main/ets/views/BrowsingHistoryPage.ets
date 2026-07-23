@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 
+import { UIDialog } from '@hw-agconnect/ui-dialog';
 import {
   BROWSING_HISTORY_DATA,
   BrowsingHistoryModel,
@@ -63,13 +64,10 @@ export struct BrowsingHistoryPage {
     Column() {
       // 顶部
       this.topBuilder();
-      Divider().color($r('sys.color.comp_divider'));
       Column() {
         if (this.historyModels.length > 0) {
           // 浏览列表
           this.browseListBuilder();
-          // 删除按钮
-          this.deleteButtonBuilder();
         } else {
           Text('当前暂无课程的浏览记录。')
             .fontSize($r('sys.float.Body_S'))
@@ -88,35 +86,27 @@ export struct BrowsingHistoryPage {
     .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP,SafeAreaEdge.BOTTOM]);
   }
 
-  /**
-   * 删除按钮
-   */
-  @Builder
-  deleteButtonBuilder() {
-    if (this.isSelectDelete) {
-      Row() {
-        Image($r('app.media.icon_delete'))
-          .width($r('app.float.vp_24'))
-          .height($r('app.float.vp_24'));
-        Text('删除')
-          .fontSize($r('sys.float.Body_L'))
-          .fontColor($r('sys.color.font_on_primary'))
-          .fontWeight(FontWeight.Medium)
-          .margin({ left: $r('app.float.vp_8') });
-      }
-      .width($r('app.float.vp_312'))
-      .borderRadius(20)
-      .justifyContent(FlexAlign.Center)
-      .padding({ top: $r('app.float.vp_8'), bottom: $r('app.float.vp_8') })
-      .opacity(this.selectCount > 0 ? 1 : 0.4)
-      .backgroundColor('#4c5dc4')
-      .onClick(() => {
-        if (this.selectCount > 0) {
-          // 删除选中
-          this.deleteSelectData();
-        }
-      });
-    }
+  confirmDialog(confirmCallback: () => void) {
+    UIDialog.open({
+      title: `是否删除${this.selectCount || 1}条记录？`,
+      contentOptions: {
+        content: '将在同账号其他设备的数据中同步删除',
+        contentFontSize: 14,
+        contentFontWeight: 400,
+        contentFontColor: 'rgba(0, 0, 0, 0.9)'
+      },
+      confirmButtonOptions: {
+        button: '删除',
+        buttonFontColor: 'rgba(232, 64, 38, 1)',
+      },
+      cancelButtonOptions: {
+        button: '取消',
+        buttonFontColor: 'rgba(0, 0, 0, 0.9)',
+      },
+      showConfirmButton: true,
+      showCancelButton: true,
+      onConfirm: confirmCallback
+    })
   }
 
   // 移除所选中的
@@ -261,8 +251,10 @@ export struct BrowsingHistoryPage {
         .width($r('app.float.vp_40'))
         .margin({ left: $r('app.float.vp_12') })
         .onClick(() => {
-          this.historyModels.splice(index, 1);
-          this.swipeDelete = false;
+          this.confirmDialog(() => {
+            this.historyModels.splice(index, 1);
+            this.swipeDelete = false;
+          })
         });
     }.padding($r('app.float.vp_4')).justifyContent(FlexAlign.SpaceEvenly);
   }
@@ -281,37 +273,54 @@ export struct BrowsingHistoryPage {
         title: $r('app.string.browsing_history')
       });
       Row() {
-        Image(this.isSelectAll ? $r('app.media.icon_select_all') : $r('app.media.icon_select_all_off'))
-          .height($r('app.float.vp_40'))
-          .width($r('app.float.vp_40'))
-          .onClick(() => {
-            this.isSelectAllClick();
-          })
-          .visibility(this.isSelectDelete ? Visibility.Visible : Visibility.Hidden);
         Image($r('app.media.ic_public_trash'))
           .height($r('app.float.vp_40'))
           .width($r('app.float.vp_40'))
-          .opacity(this.historyModels.length === 0 || this.swipeDelete ? 0.4 : 1)
-          .margin({ left: $r('app.float.vp_8') });
+          .opacity(this.historyModels.length === 0 || this.swipeDelete || !this.selectCount ? 0.4 : 1)
+          .visibility(this.isSelectDelete ? Visibility.Visible : Visibility.Hidden)
+          .onClick(() => {
+            if (this.selectCount > 0) {
+              // 删除选中
+              this.confirmDialog(() => {
+                this.deleteSelectData()
+              })
+            }
+          })
+
+        Image($r('app.media.ic_edit'))
+          .width($r('app.float.vp_40'))
+          .height($r('app.float.vp_40'))
+          .visibility(this.isSelectDelete ? Visibility.None : Visibility.Visible)
+          .onClick(() => {
+            if (!this.swipeDelete && this.historyModels.length > 0) {
+              this.isSelectDelete = !this.isSelectDelete;
+              if (!this.isSelectDelete) {
+                this.selectCount = 0;
+                this.isSelectAll = false;
+                this.historyModels.forEach((item: HistoryModel) => {
+                  item.isDelete = false;
+                });
+              }
+            }
+          });
+
+        Image(this.isSelectAll ? $r('app.media.icon_select_all') : $r('app.media.icon_select_all_off'))
+          .height($r('app.float.vp_40'))
+          .width($r('app.float.vp_40'))
+          .margin({ left: $r('app.float.vp_8') })
+          .onClick(() => {
+            this.isSelectAllClick();
+          })
+          .visibility(this.isSelectDelete ? Visibility.Visible : Visibility.None);
       }
       .onClick(() => {
-        if (!this.swipeDelete && this.historyModels.length > 0) {
-          this.isSelectDelete = !this.isSelectDelete;
-          if (!this.isSelectDelete) {
-            this.selectCount = 0;
-            this.isSelectAll = false;
-            this.historyModels.forEach((item: HistoryModel) => {
-              item.isDelete = false;
-            });
-          }
-        }
       });
     }
     .width('100%')
-    .height($r('app.float.vp_56'))
-    .padding({ left: $r('app.float.vp_16'), right: $r('app.float.vp_16') })
+    .padding({ left: $r('app.float.vp_16'), right: $r('app.float.vp_16'), top: $r('app.float.vp_10') })
     .justifyContent(FlexAlign.SpaceBetween)
-    .backgroundColor($r('sys.color.comp_background_primary'))
+    .backgroundColor($r('sys.color.background_secondary'))
+    .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP,SafeAreaEdge.BOTTOM]);
   }
 }
 

@@ -14,6 +14,5 @@ export interface Location {
 }
 
 export interface TitleOptions {
-  name: string,
-  strokeColor: number
+  name: string
 }

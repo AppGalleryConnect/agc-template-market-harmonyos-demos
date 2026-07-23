@@ -230,15 +230,19 @@ export class MediaViewModel {
     if (!this.avPlayer) {
       return;
     }
-    this.avPlayer.on('seekDone', this.seekCall);
+    try {
+      this.avPlayer.on('seekDone', this.seekCall);
 
-    this.avPlayer.on('error', this.errorCall);
+      this.avPlayer.on('error', this.errorCall);
 
-    this.avPlayer.on('timeUpdate', this.updateTimeCall);
+      this.avPlayer.on('timeUpdate', this.updateTimeCall);
 
-    this.avPlayer.on('stateChange', this.stateCall);
+      this.avPlayer.on('stateChange', this.stateCall);
 
-    this.avPlayer.on('volumeChange', this.volumeChangeCall);
+      this.avPlayer.on('volumeChange', this.volumeChangeCall);
+    } catch (e) {
+      UtilLog.error(TAG, 'register avPlayer fail, error: ' + JSON.stringify(e));
+    }
   }
 
   setLaunchAbility() {
@@ -606,13 +610,11 @@ export class MediaViewModel {
 
   private async setPlayState(playbackState: avSession.AVPlaybackState) {
     if (this.session) {
-      this.session.setAVPlaybackState(playbackState, (err: BusinessError) => {
-        if (err) {
-          UtilLog.info(TAG, `SetAVPlaybackState BusinessError: code: ${err.code}, message: ${err.message}`);
-        } else {
-          UtilLog.info(TAG, 'SetAVPlaybackState successfully');
-        }
-      });
+      this.session.setAVPlaybackState(playbackState).then(() => {
+        UtilLog.info(TAG, 'SetAVPlaybackState successfully');
+      }).catch((err: BusinessError) => {
+        UtilLog.info(TAG, `SetAVPlaybackState BusinessError: code: ${err.code}, message: ${err.message}`);
+      })
     }
   }
 }

@@ -16,5 +16,6 @@
     "catering_accommodation": "file:../../components/catering_accommodation",
     "module_base": "file:../../components/module_base",
     "attraction_note": "file:../../components/attraction_note",
+    "image_preview": "file:../../components/image_preview",
   }
 }

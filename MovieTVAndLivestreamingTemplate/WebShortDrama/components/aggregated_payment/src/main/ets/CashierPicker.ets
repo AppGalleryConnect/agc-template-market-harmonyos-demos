@@ -72,7 +72,12 @@ export class CashierPicker {
       this.pickerContent.isOpen = false;
       // DISAPPEAR 动画结束后执行真正关闭
       setTimeout(() => {
-        this.promptAction.closeCustomDialog(this.node).finally(() => this.node = null);
+        try {
+          this.promptAction.closeCustomDialog(this.node).finally(() => this.node = null);
+        } catch (e) {
+          console.error(`closeCustomDialog failed: ${e}`);
+          this.node = null;
+        }
       }, this.pickerContent.durationForDisappear);
     }
   }

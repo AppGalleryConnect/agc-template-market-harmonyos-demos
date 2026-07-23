@@ -303,6 +303,10 @@ export class SettingViewModel extends BaseViewModel {
     if (!this.context) {
       return;
     }
-    this.context.getApplicationContext().off('environment', this.callbackId);
+    try {
+      this.context.getApplicationContext().off('environment', this.callbackId);
+    } catch (err) {
+      Logger.error(TAG, `offConfigurationUpdate failed. err: ${JSON.stringify(err)}`);
+    }
   }
 }

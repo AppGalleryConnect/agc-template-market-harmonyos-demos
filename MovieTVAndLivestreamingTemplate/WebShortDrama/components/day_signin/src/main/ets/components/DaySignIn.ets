@@ -1,6 +1,9 @@
-import { SignIn, SignInClass } from '../model/SignInModel'
+import { SignIn, SignInClass } from '../model/DaySignInModel'
 import { DaySignInViewModel } from '../viewmodel/DaySignInViewModel'
 import { TYCard } from '../common/TYCard'
+import { FontModel } from '../model/FontModel'
+import { AppStorageV2 } from '@kit.ArkUI'
+import { fp2pxUtil } from '../model/FontUtils'
 
 @ComponentV2
 export struct DaySignIn {
@@ -19,6 +22,10 @@ export struct DaySignIn {
     new SignInClass(65)]
   @Local currentDay: number = 0
   viewModel: DaySignInViewModel = new DaySignInViewModel(this.coinArray)
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
+  @Param isLogin: boolean = true
+  @Event loginFunc: () => void = () => {
+  }
 
   async aboutToAppear() {
     await this.viewModel.initPreferences()
@@ -43,7 +50,7 @@ export struct DaySignIn {
               Column() {
                 Column() {
                   Text(item.coinNumber + '')
-                    .fontSize(12)
+                    .fontSize(fp2pxUtil(12))
                     .fontWeight(FontWeight.Regular)
                     .fontColor($r('sys.color.font_on_primary'))
                     .height(16)
@@ -63,7 +70,7 @@ export struct DaySignIn {
 
                 Text(`第${index + 1}天`)
                   .fontWeight(FontWeight.Regular)
-                  .fontSize(10)
+                  .fontSize(this.fontModel.getFg(10))
                   .fontColor($r('sys.color.font_primary'))
                   .margin({ top: 8, bottom: 12 })
               }
@@ -76,7 +83,7 @@ export struct DaySignIn {
         Column() {
           Button(this.signInList[this.currentDay].isClaim ? $r('app.string.checked_in') :
             $r('app.string.check_in'))
-            .fontSize($r('sys.float.Body_L'))
+            .fontSize(fp2pxUtil(16))
             .fontWeight(FontWeight.Medium)
             .backgroundColor(this.signInList[this.currentDay].isClaim ? '#D5633E' : '#EC6E45')
             .enabled(!this.signInList[this.currentDay].isClaim)
@@ -84,7 +91,11 @@ export struct DaySignIn {
             .width('100%')
             .margin({ top: 8 })
             .onClick(() => {
-              this.handleSignIn()
+              if (this.isLogin) {
+                this.handleSignIn()
+              } else {
+                this.loginFunc()
+              }
             })
         }
         .padding({ left: 12, right: 12 })

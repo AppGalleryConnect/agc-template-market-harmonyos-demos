@@ -1,0 +1,100 @@
+{
+  "string": [
+    {
+      "name": "agcit_huawei_common_login",
+      "value": "1.0.0"
+    },
+    {
+      "name": "agcittype_huawei_common_login",
+      "value": "serviceComponent"
+    },
+    {
+      "name": "scope_not_supported",
+      "value": "The scopes or permissions are not supported."
+    },
+    {
+      "name": "network_error",
+      "value": "No Internet connection. Check your network settings."
+    },
+    {
+      "name": "app_not_required_scopes_or_permissions",
+      "value": "The app does not have the required scopes or permissions."
+    },
+    {
+      "name": "service_error",
+      "value": "Service or network error. Please try again later."
+    },
+    {
+      "name": "not_login_in",
+      "value": "You have not logged in with your Huawei ID. Please try again."
+    },
+    {
+      "name": "mobile_number",
+      "value": "请输入账号"
+    },
+    {
+      "name": "verification_code",
+      "value": "短信验证码"
+    },
+    {
+      "name": "obtaining_verification_code",
+      "value": "获取验证码"
+    },
+    {
+      "name": "tips",
+      "value": "提示"
+    },
+    {
+      "name": "verifyCode_tips",
+      "value": "获取验证码为模拟场景，真实获取验证码以业务实现为准"
+    },
+    {
+      "name": "obtain_in_seconds",
+      "value": "秒后重新获取"
+    },
+    {
+      "name": "login",
+      "value": "登录"
+    },
+    {
+      "name": "login_in_other",
+      "value": "其他方式登录"
+    },
+    {
+      "name": "quickly_login",
+      "value": "华为账号一键登录"
+    },
+    {
+      "name": "read_and_agree",
+      "value": "阅读并同意"
+    },
+    {
+      "name": "user_privacy_agreement",
+      "value": "《用户隐私协议》"
+    },
+    {
+      "name": "select_the_agreement",
+      "value": "请阅读并勾选协议"
+    },
+    {
+      "name": "password",
+      "value": "请输入密码"
+    },
+    {
+      "name": "message_login",
+      "value": "密码登录"
+    },
+    {
+      "name": "verification_code_login",
+      "value": "验证码登录"
+    },
+    {
+      "name": "forgot_password",
+      "value": "忘记密码"
+    },
+    {
+      "name": "wx_login",
+      "value": "微信"
+    }
+  ]
+}

@@ -78,6 +78,7 @@ export function mapCommodityOrderDetail(getCommodityOrderDetailResp: ESObject) {
   commodityOrderInfo.banner = getCommodityOrderDetailResp.banner;
   commodityOrderInfo.originalPrice = getCommodityOrderDetailResp.originalPrice;
   commodityOrderInfo.phone = getCommodityOrderDetailResp.phone;
+  commodityOrderInfo.specValues = getCommodityOrderDetailResp.specValues || [];
   return commodityOrderInfo;
 }
 

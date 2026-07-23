@@ -508,8 +508,8 @@ export struct SwipeVideoPage {
     let data2 = {
       id: 'video2',
       title: '星联光模块',
-      videoUrl: 'https://e-file.huawei.com/mediares/MarketingMaterial_MCD/EBG/PUBLIC/zh/2025/04/5feb8457-d5e9-4949-a181-795e4d873af9.mp4',
-      coverUrl: 'https://e-file.huawei.com/mediares/Video_MCD/EBG/PUBLIC/zh/2025/04/3c04b872-197d-4551-a353-0eb99def6ca2.png',
+      videoUrl: 'https://agc-storage-drcn.platform.dbankcloud.cn/v0/default-bucket-o7oax/template_source%2Fvideo_1.mp4?token=6504c93e-6dc3-423b-aff1-1e594711ba30',
+      coverUrl: 'https://www-file.huawei.com/admin/asset/v1/pro/view/6c813cb0874744f4b54fd61f1f9e8f24.jpg',
       videoDuration: 48234,
     } as VideoInfo
 

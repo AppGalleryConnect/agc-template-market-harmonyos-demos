@@ -24,7 +24,7 @@
 ### 环境
 * DevEco Studio版本：DevEco Studio 5.0.1 Release及以上
 * HarmonyOS SDK版本：HarmonyOS 5.0.1 Release SDK及以上
-* 设备类型：华为手机（包括双折叠和阔折叠）
+* 设备类型：华为手机（包括双折叠和阔折叠）、平板
 * 系统版本：HarmonyOS 5.0.1(13)及以上
 
 ## 快速入门

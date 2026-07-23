@@ -1,14 +1,6 @@
 {
   "routerMap": [
     {
-      "name": "HomeView",
-      "pageSourceFile": "src/main/ets/pages/HomeView.ets",
-      "buildFunction": "HomeBuilder",
-      "data": {
-        "description": "this is HomeView"
-      }
-    },
-    {
       "name": "Attractions",
       "pageSourceFile": "src/main/ets/pages/Attractions.ets",
       "buildFunction": "AttractionsBuilder",
@@ -22,6 +14,14 @@
       "buildFunction": "AttractionDetailBuilder",
       "data": {
         "description": "this is AttractionDetail"
+      }
+    },
+    {
+      "name": "AttractionImage",
+      "pageSourceFile": "src/main/ets/pages/AttractionImage.ets",
+      "buildFunction": "AttractionImageBuilder",
+      "data": {
+        "description": "this is AttractionImage"
       }
     },
     {

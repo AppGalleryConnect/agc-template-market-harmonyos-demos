@@ -1,4 +1,4 @@
-import { PopViewUtils, RouterMap, RouterUtils } from 'lib_common';
+import { GlobalContext, PopViewUtils, RouterMap, RouterUtils } from 'lib_common';
 import { Constants } from '../constants/Constants';
 import { LoginRouterParams, LoginSheetParams } from '../constants/Types';
 
@@ -48,7 +48,8 @@ export class LoginSheetUtils {
       dragBar: true,
       scrollSizeMode: ScrollSizeMode.CONTINUOUS,
       onHeightDidChange: (height: number) => {
-        LoginSheetUtils.sheetParams.height = px2vp(height);
+        LoginSheetUtils.sheetParams.height =
+          GlobalContext.getUIContext().px2vp(height);
       },
       onTypeDidChange: (type: SheetType) => {
         LoginSheetUtils.sheetParams.sheetType = type;

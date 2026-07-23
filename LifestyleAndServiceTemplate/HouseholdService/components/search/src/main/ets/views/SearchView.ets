@@ -1,4 +1,5 @@
 import { mediaquery } from '@kit.ArkUI';
+import { UtilLog } from '@hw-agconnect/util-log';
 import { Constants } from '../common/Constant';
 import { GridRowColSetting } from '../common/GridRowColSetting';
 import { PopViewUtils } from '../common/PopViewUtils';
@@ -31,6 +32,8 @@ export struct SearchView {
   @Param showGuessLike: boolean = true;
   @Param showHotSearch: boolean = true;
   @Param isShallowWindow: boolean = false;
+  @Param windowTopPadding: number = 40;
+  @Param windowBottomPadding: number = 28;
   @Param tabBarScroller: Scroller = new Scroller();
   @Param searchResultScroller: Scroller = new Scroller();
   @Param controller: SearchViewController = new SearchViewController();
@@ -100,6 +103,8 @@ export struct SearchView {
       showGuessLike: this.showGuessLike,
       showHotSearch: this.showHotSearch,
       isShallowWindow: this.isShallowWindow,
+      windowTopPadding: this.windowTopPadding,
+      windowBottomPadding: this.windowBottomPadding,
       tabBarScroller: this.tabBarScroller,
       scroller: this.searchResultScroller,
       controller: this.controller,
@@ -170,7 +175,7 @@ export struct SearchView {
           mask: false,
           autoCancel: false,
           onStateChange: (event) => {
-            console.log('onStateChange========' + event.isVisible);
+            UtilLog.info('onStateChange========' + event.isVisible);
           },
           onWillDismiss: () => {
             this.vm.closePop();

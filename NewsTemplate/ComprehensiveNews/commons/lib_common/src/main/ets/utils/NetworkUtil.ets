@@ -85,19 +85,19 @@ export class NetworkUtil {
       readTimeout: 3000,
       connectTimeout: 3000,
     };
-    httpRequest.request(
-      'https://www-file.huawei.com/admin/asset/v1/pro/view/2644ff4ada00431f91c7d31209cf5f9b.jpg',
-      options,
-      (err: BusinessError) => {
-        if (err) {
-          const noNetworkErrors = [2300005, 2300006, 2300007]
-          if (noNetworkErrors.includes(err.code)) {
-            this.networkModel.isNetworkAvailable = false
-          }
-        } else {
+
+    try {
+      httpRequest.request('https://www-file.huawei.com/admin/asset/v1/pro/view/2644ff4ada00431f91c7d31209cf5f9b.jpg',
+        options, () => {
           this.networkModel.isNetworkAvailable = true
-        }
-      })
+        })
+    } catch (err) {
+      const noNetworkErrors = [2300005, 2300006, 2300007]
+      if (noNetworkErrors.includes(err.code)) {
+        this.networkModel.isNetworkAvailable = false
+      }
+      Logger.error(TAG, 'httpRequest fail, error: ' + JSON.stringify(err));
+    }
   }
 
   netQualityListener() {

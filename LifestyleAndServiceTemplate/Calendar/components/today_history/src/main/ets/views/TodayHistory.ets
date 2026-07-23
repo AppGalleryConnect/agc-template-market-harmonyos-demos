@@ -1,12 +1,13 @@
 import { BaseCell, getDataFromJSON } from 'base_apis';
 import { TodayHistoryCard } from '../components/TodayHistoryCard';
-import { TodayHistoryData, TodayHistorySize } from '../model/Model';
+import { HistoryParams, TodayHistoryData } from '../model/Model';
 import { ThemeVM } from '../viewModel/ThemeController';
 
 @ComponentV2
 export struct TodayHistory {
   @Param selectDate: Date = new Date()
   @Local todayHistoryList: TodayHistoryData[] = []
+  @Local todayDaysList: TodayHistoryData[] = []
   @Param routerModule: NavPathStack = new NavPathStack()
   @Local themeVM: ThemeVM = ThemeVM.instance;
   /*
@@ -23,9 +24,32 @@ export struct TodayHistory {
     this.themeVM.setTheme(this.selectColor, this.titleColor)
   }
 
+  @Monitor('selectDate')
+  historyListChange() {
+    this.todayHistoryList = this.getRawfileJson('Today_History_Data.json');
+    this.todayDaysList = this.getRawfileJson('Today_Day_Data.json');
+  }
+
+  getRawfileJson(json: string) {
+    const allHistory =
+      getDataFromJSON<TodayHistoryData>(this.getUIContext().getHostContext()!, json);
+    const month = this.selectDate.getMonth() + 1;
+    const day = this.selectDate.getDate();
+    const targetDay = `${month}/${day}`;
+    return allHistory.filter(item => item.day === targetDay);
+  }
+
+  goToHistoryMore() {
+    let params: HistoryParams = {
+      todayHistoryList: this.todayHistoryList,
+      selectDate: this.selectDate,
+      todayDayList: this.todayDaysList,
+    }
+    this.routerModule.pushPathByName('HistoryMore', params)
+  }
+
   aboutToAppear(): void {
-    this.todayHistoryList =
-      getDataFromJSON<TodayHistoryData>(this.getUIContext().getHostContext()!, 'Today_History_Data.json');
+    this.historyListChange();
     this.themeVM.setTheme(this.selectColor, this.titleColor)
   }
 
@@ -37,7 +61,7 @@ export struct TodayHistory {
         .fontSize($r('sys.float.Body_M'))
         .fontWeight(FontWeight.Regular)
         .onClick(() => {
-          this.routerModule.pushPathByName('HistoryMore', this.todayHistoryList)
+          this.goToHistoryMore()
         })
       Image($r('app.media.chevron_right')).width(12).height(24)
     }
@@ -46,7 +70,10 @@ export struct TodayHistory {
   @Builder
   todayHistory() {
     TodayHistoryCard({
-      todayHistoryList: this.todayHistoryList.reverse().slice(0, 4),
+      todayHistoryList: this.todayHistoryList,
+      onCellEvent: () => {
+        this.goToHistoryMore()
+      },
     })
       .margin({ top: 20 })
   }

@@ -7,6 +7,8 @@ import {
   BreakPoint,
   BreakPointType,
   BreakPointValue,
+  FontModel,
+  fp2pxUtil,
   NavDestinationModifier
 } from '@agctemplate/widgets'
 import { VideoSeries } from '../component/VideoSeries';
@@ -24,11 +26,16 @@ export struct WatchRecordsPage {
   @Local isDeleting: boolean = false
   @Local selectCount: number = 0
   @Local selectedIds: string[] = []
-  @Local deletePromptMsg: string | Resource = '此条'
+  @Local deletePromptMsg: string | Resource = '此条';
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
   @Local currentBreakpoint: BreakPoint = AppStorageV2.connect(BreakPoint, AppStorageKeys.CURRENT_BREAK_POINT,
     () => new BreakPoint(BreakPointValue.SM))!;
-  @Local trackSize: number =
-    new BreakPointType<number>({ sm: 104, md: 164, lg: 211 }).getValue(this.currentBreakpoint.value)!
+  @Local trackSize: string | number =
+    new BreakPointType<string | number>({
+      sm: 104,
+      md: 164,
+      lg: 211
+    }).getValue(this.currentBreakpoint.value)!
   deleteDialogController: CustomDialogController = new CustomDialogController({
     builder: AlertDialog({
       content: getString('app.string.delete_watched_prompt', this.deletePromptMsg.toString()),
@@ -197,20 +204,28 @@ export struct WatchRecordsPage {
   @Builder
   title() {
     Row() {
-      Image(getMedia('app.media.black_back'))
-        .width(40)
-        .aspectRatio(1)
-        .margin({ right: 8 })
-        .onClick(() => {
-          appRouter.back()
-        })
+      Button({ type: ButtonType.Circle }) {
+        SymbolGlyph($r('sys.symbol.chevron_backward'))
+          .fontSize(fp2pxUtil(24))
+          .fontColor([$r('sys.color.icon_primary')])
+      }
+      .accessibilityText('返回')
+      .width(40)
+      .height(40)
+      .backgroundColor($r('sys.color.comp_background_tertiary'))
+      .margin({ right: 8 })
+      .onClick(() => {
+        appRouter.back()
+      })
+
       Text(getString('app.string.my_record'))
-        .fontSize(20)
+        .fontSize(fp2pxUtil(20))
         .fontWeight(FontWeight.Bold)
         .height(27)
 
       Blank()
       Button(this.isDeleting ? '取消' : '编辑')
+        .fontSize(fp2pxUtil(16))
         .margin({ left: 8 })
         .height(40)
         .borderRadius(20)
@@ -234,12 +249,12 @@ export struct WatchRecordsPage {
     if (this.isDeleting) {
       Row() {
         Column() {
-          Image(getMedia('app.media.ic_public_delete_all'))
-            .width(22)
-            .height(22)
+          SymbolGlyph($r('sys.symbol.eraser_line'))
+            .fontSize(fp2pxUtil(22))
+            .fontColor([$r('sys.color.icon_primary')])
           Text('一键清空')
             .height(14)
-            .fontSize(13)
+            .fontSize(fp2pxUtil(13))
             .margin({ top: 5.36 })
         }
         .width('50%')
@@ -249,12 +264,12 @@ export struct WatchRecordsPage {
         })
 
         Column() {
-          Image(getMedia('app.media.ic_public_delete'))
-            .width(22)
-            .height(22)
+          SymbolGlyph($r('sys.symbol.trash'))
+            .fontSize(fp2pxUtil(22))
+            .fontColor([$r('sys.color.icon_primary')])
           Text('删除')
             .height(14)
-            .fontSize(13)
+            .fontSize(fp2pxUtil(13))
             .margin({ top: 5.36 })
         }
         .width('50%')

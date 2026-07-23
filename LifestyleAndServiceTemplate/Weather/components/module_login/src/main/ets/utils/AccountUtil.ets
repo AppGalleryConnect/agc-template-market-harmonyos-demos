@@ -24,22 +24,26 @@ const TAG = '[AccountUtil]';
 
 @ObservedV2
 export class AccountUtil {
+  static uiContext: UIContext
+
   // 华为收货地址
   public static chooseAddress() {
     try {
-      shippingAddress.chooseAddress(getContext()).then((data: shippingAddress.AddressInfo) => {
-        const userName: string = data.userName;
-        const mobileNumber: string = data.mobileNumber;
-        const countryCode: string = data.countryCode;
-        const provinceName: string = data.provinceName;
-        const cityName: string = data.cityName;
-        const districtName: string = data.districtName;
-        const streetName: string = data.streetName;
-        const detailedAddress: string = data.detailedAddress;
-        // 开发者处理获取的收货地址信息
-      }).catch((error: BusinessError) => {
-        AccountUtil._dealAllError(error);
-      })
+      shippingAddress.chooseAddress(AccountUtil.uiContext.getHostContext())
+        .then((data: shippingAddress.AddressInfo) => {
+          const userName: string = data.userName;
+          const mobileNumber: string = data.mobileNumber;
+          const countryCode: string = data.countryCode;
+          const provinceName: string = data.provinceName;
+          const cityName: string = data.cityName;
+          const districtName: string = data.districtName;
+          const streetName: string = data.streetName;
+          const detailedAddress: string = data.detailedAddress;
+          // 开发者处理获取的收货地址信息
+        })
+        .catch((error: BusinessError) => {
+          AccountUtil._dealAllError(error);
+        })
     } catch (error) {
       AccountUtil._dealAllError(error);
     }

@@ -18,10 +18,6 @@ export struct ScheduleDetails {
   @Local scheduleInfo: UserEventItem = new UserEventItem()
   context: UIContext = this.getUIContext()
 
-  aboutToAppear(): void {
-    this.scheduleInfo = this.calendarEventVM.getPageInfo()?.getParamByName('ScheduleDetails')[0] as UserEventItem
-    this.calendarEventVM.setEventInfo(this.scheduleInfo)
-  }
 
   @Builder
   sheetCustomBuilder() {
@@ -84,6 +80,7 @@ export struct ScheduleDetails {
                   detents: ['98%', '100%'],
                   backgroundColor: $r('sys.color.background_secondary'),
                   showClose: false,
+                  keyboardAvoidMode:SheetKeyboardAvoidMode.TRANSLATE_AND_SCROLL,
                   customContent: () => {
                     this.CalendarScheduleEdit()
                   },
@@ -99,6 +96,11 @@ export struct ScheduleDetails {
       }
       .layoutWeight(1)
     }
+    .onReady((ctx) => {
+      this.calendarEventVM.pageInfo = ctx.pathStack
+      this.scheduleInfo = ctx.pathStack?.getParamByName('ScheduleDetails')[0] as UserEventItem
+      this.calendarEventVM.setEventInfo(this.scheduleInfo)
+    })
     .backgroundColor('#F1F3F5')
     .hideTitleBar(true)
   }

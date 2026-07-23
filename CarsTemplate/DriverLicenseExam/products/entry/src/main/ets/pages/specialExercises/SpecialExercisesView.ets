@@ -83,7 +83,7 @@ struct SpecialExercisesView {
           .width(12)
       }
     }
-    .width(94)
+    .width('100%')
     .height(40)
     .backgroundColor($r('sys.color.comp_background_secondary'))
     .borderRadius(8)
@@ -201,9 +201,11 @@ struct SpecialExercisesView {
               .fontColor($r('sys.color.font_primary'))
               .fontWeight(FontWeight.Medium)
               .maxFontScale(1)
-            Flex({ wrap: FlexWrap.Wrap }) {
+            Grid() {
               ForEach(CLASSIFY_DATA, (item: CLASSIFY_BY_TYPE) => {
-                this.classifyQuestion(item.name, item.quantity, item.type)
+                GridItem() {
+                  this.classifyQuestion(item.name, item.quantity, item.type)
+                }
               }, (item: CLASSIFY_BY_TYPE) => {
                 try {
                   return JSON.stringify(item.name)
@@ -212,6 +214,8 @@ struct SpecialExercisesView {
                 }
               })
             }
+            .columnsTemplate(this.vm.isLargeDevice ? '1fr '.repeat(5) : '1fr '.repeat(3))
+            .columnsGap(6)
           }
           .width(CommonConstants.FULL_WIDTH)
           .alignItems(HorizontalAlign.Start)
@@ -223,9 +227,11 @@ struct SpecialExercisesView {
               .fontColor($r('sys.color.font_primary'))
               .fontWeight(FontWeight.Medium)
               .maxFontScale(1)
-            Flex({ wrap: FlexWrap.Wrap }) {
+            Grid() {
               ForEach(DATA_BY_QUESTION_TYPE, (item: CLASSIFY_BY_TYPE) => {
-                this.classifyQuestion(item.name, item.quantity, item.type)
+                GridItem() {
+                  this.classifyQuestion(item.name, item.quantity, item.type)
+                }
               }, (item: CLASSIFY_BY_TYPE) => {
                 try {
                   return JSON.stringify(item.name)
@@ -234,6 +240,8 @@ struct SpecialExercisesView {
                 }
               })
             }
+            .columnsTemplate('1fr '.repeat(2))
+            .columnsGap(6)
           }
           .width(CommonConstants.FULL_WIDTH)
           .alignItems(HorizontalAlign.Start)

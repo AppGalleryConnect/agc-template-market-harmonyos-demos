@@ -1,38 +1,105 @@
+import { hdsMaterial } from '@kit.UIDesignKit';
+import { AppStorageV2, display, window } from '@kit.ArkUI';
+import { ConfigurationConstant } from '@kit.AbilityKit';
+import { HdsTabs, HdsTabsController } from '@hms.hds.hdsBaseComponent';
 import { Tab, TabHeaderInfo } from '../components/tabs/TabItem';
 import { TabInfoRegister } from '../../../../../Index';
+import { initMainPageContent } from '../model/InitContent';
 import {
   AiBarHeight,
   AppStorageKeys,
   BreakPoint,
-  BreakPointType,
   BreakPointValue,
-  StatusBarHeight,
+  ColorMode,
+  FontModel,
+  MinorsMode,
+  MinorsProtectionUtils,
+  StatusBarHeight
 } from '@agctemplate/widgets';
 import { appRouter, Logger, WindowManager } from '@agctemplate/utils';
-import { AppStorageV2, window } from '@kit.ArkUI';
+import { NetWorkModel, NetworkUtil } from 'video_swiper';
 
 export interface TabInfo {
   tabHeaderInfo: TabHeaderInfo;
   tabContentBuilder: WrappedBuilder<[number]>;
 }
+
 const TAG = 'MainTabPage'
+
 @ComponentV2
 export struct MainTabPage {
+  @Local minorsMode: MinorsMode =
+    AppStorageV2.connect(MinorsMode, 'isMinorsMode', () => new MinorsMode(MinorsProtectionUtils.getMinorsMode()))!
   @Local currentBreakpoint: BreakPoint = AppStorageV2.connect(BreakPoint, AppStorageKeys.CURRENT_BREAK_POINT,
     () => new BreakPoint(BreakPointValue.SM))!;
   @Local aiBarHeight: AiBarHeight = AppStorageV2.connect(AiBarHeight, AppStorageKeys.AI_BAR_HEIGHT,
     () => new AiBarHeight())!;
   @Local statusBarHeight: StatusBarHeight = AppStorageV2.connect(StatusBarHeight, AppStorageKeys.STATUS_BAR_HEIGHT,
     () => new StatusBarHeight())!;
+  @Local fontModel: FontModel = AppStorageV2.connect(FontModel, () => new FontModel())!;
   @Provider('curTabIndex') currentIndex: number = 0;
   @Provider('tabState') tabState: boolean = true;
-  @Local isDarkEnable: boolean = true; // 默认主页为深色tab
+  @Local isDarkEnable: boolean = !this.minorsMode.isMinorsMode ? true : false; // 默认主页为深色tab
   @Provider('tabShown') tabShown: boolean = true;
-  private controller: TabsController = new TabsController();
+  private controller: HdsTabsController = new HdsTabsController();
   private isFirstTimeIn: boolean = true; // 优化首次进入无弹跳效果
+  @Local netStatus: NetWorkModel =
+    AppStorageV2.connect(NetWorkModel, 'netStatus', () => new NetWorkModel())!
+  private netWorkUtil: NetworkUtil = new NetworkUtil()
+  @Local currentColorMode: ColorMode = AppStorageV2.connect(ColorMode, 'colorMode', () => new ColorMode('跟随系统'))!
+  @Local isLandScape: boolean = display.getDefaultDisplaySync().orientation === display.Orientation.LANDSCAPE ||
+    display.getDefaultDisplaySync().orientation === display.Orientation.LANDSCAPE_INVERTED
+  callback: Callback<number> = (data: number) => {
+    if (display.getDefaultDisplaySync().orientation === display.Orientation.LANDSCAPE ||
+      display.getDefaultDisplaySync().orientation === display.Orientation.LANDSCAPE_INVERTED) {
+      this.isLandScape = true
+    } else {
+      this.isLandScape = false
+    }
+  };
+
+  @Monitor('minorsMode.isMinorsMode')
+  onModeChange() {
+    initMainPageContent()
+  }
+
+  @Monitor('currentColorMode.colorMode')
+  onColorModeChange() {
+    const actualColorMode = ColorMode.getColorModeByName(this.currentColorMode.modeName);
+    this.isDarkEnable = this.currentIndex === 0 && !this.minorsMode.isMinorsMode ? true :
+      actualColorMode === ConfigurationConstant.ColorMode.COLOR_MODE_DARK ? true : false;
+
+    WindowManager.setWindowSystemBarProperties({
+      statusBarContentColor: this.currentIndex === 0 && !this.minorsMode.isMinorsMode ? '#e6ffffff' :
+        this.currentColorMode.colorMode === ConfigurationConstant.ColorMode.COLOR_MODE_DARK ? '#e6ffffff' :
+          '#e6000000'
+    });
+
+    this.getUIContext()?.getHostContext()?.getApplicationContext()
+      .setColorMode(this.isDarkEnable ? ConfigurationConstant.ColorMode.COLOR_MODE_DARK : actualColorMode);
+  }
 
   aboutToAppear(): void {
-    WindowManager.setWindowSystemBarProperties({ statusBarContentColor: '#e6ffffff' })
+    WindowManager.setWindowSystemBarProperties({
+      statusBarContentColor: !this.minorsMode.isMinorsMode ? '#e6ffffff' : '#e6000000'
+    });
+    this.getUIContext()?.getHostContext()?.getApplicationContext()
+      .setColorMode(!this.minorsMode.isMinorsMode ? ConfigurationConstant.ColorMode.COLOR_MODE_DARK :
+        this.currentColorMode.colorMode);
+    this.netWorkUtil.onNetSceneChange();
+    this.netWorkUtil.onNetworkChange();
+    try {
+      display.on('change', this.callback);
+    } catch (e) {
+    }
+  }
+
+  aboutToDisappear(): void {
+    this.netWorkUtil.unregister()
+    try {
+      display.off('change', this.callback);
+    } catch (e) {
+    }
   }
 
   @Builder
@@ -47,12 +114,8 @@ export struct MainTabPage {
 
   build() {
     NavDestination() {
-      Tabs({
-        barPosition: new BreakPointType<BarPosition>({
-          sm: BarPosition.End,
-          md: BarPosition.End,
-          lg: BarPosition.Start
-        }).getValue(this.currentBreakpoint.value),
+      HdsTabs({
+        barPosition: BarPosition.End,
         controller: this.controller,
         index: this.currentIndex!!
       }) {
@@ -61,41 +124,31 @@ export struct MainTabPage {
             tabInfo.tabContentBuilder.builder(index)
           }
           .tabBar(this.TabBuilder(new TabHeaderInfo(tabInfo.tabHeaderInfo.name, tabInfo.tabHeaderInfo.showSearch,
-            tabInfo.tabHeaderInfo.iconOn, tabInfo.tabHeaderInfo.iconOff, tabInfo.tabHeaderInfo.iconDarkOff, index)))
+            tabInfo.tabHeaderInfo.icon, index)))
         }, (tabInfo: TabInfo, index: number) => {
           return index + '_' + JSON.stringify(tabInfo.tabHeaderInfo.name);
         })
       }
-      .flexShrink(1)
-      .flexGrow(1)
-      .vertical(new BreakPointType<boolean>({ sm: false, md: false, lg: true }).getValue(this.currentBreakpoint.value))
-      .barWidth(this.tabState ? new BreakPointType<number | string>({
-        sm: '100%',
-        md: '100%',
-        lg: 96
-      }).getValue(this.currentBreakpoint.value) : 0)
-      .barHeight(this.tabState ? new BreakPointType<number | string>({
-        sm: 48,
-        md: 48,
-        lg: 400
-      }).getValue(this.currentBreakpoint.value) : 0)
+      .scrollable(false)
+      .barOverlap(true)
+      .barHeight(this.tabState ? 56 : 0)
+      .barFloatingStyle({
+        barWidth: { smallWidth: 328, mediumWidth: 360, largeWidth: 360 },
+        barBottomMargin: 28, // 距离屏幕底部的边距
+        adaptToHandedness: true,
+        systemMaterialEffect: {
+          materialType: hdsMaterial.MaterialType.ADAPTIVE, // 启用沉浸光感材质
+          materialLevel: hdsMaterial.MaterialLevel.ADAPTIVE // 悬浮页签自定义沉浸光感材质效果
+        }
+      })
       .onTabBarClick((index: number) => {
         this.isFirstTimeIn = false;
         this.currentIndex = index;
-        WindowManager.setWindowSystemBarProperties({
-          statusBarContentColor: this.currentIndex === 0 ? '#e6ffffff' : '#e6000000'
-        })
-        this.isDarkEnable = this.currentIndex === 0 ? true : false
+        this.onColorModeChange();
       })
-      .scrollable(false)
-      .animationDuration(0)
-      .backgroundColor(this.isDarkEnable ? $r('sys.color.black') :
-      $r('sys.color.ohos_id_background_secondary'))
-      .padding({
-        top: 0,
-        bottom: this.currentBreakpoint.value === BreakPointValue.LG ? 0 : `${this.getUIContext().px2vp(this.aiBarHeight.value)}vp`
-      })
-    }.onBackPressed(() => {
+    }
+    .hideTitleBar(true)
+    .onBackPressed(() => {
       appRouter.back(true)
       try {
         window.getLastWindow(this.getUIContext().getHostContext(), (err: BusinessError, win) => {
@@ -118,12 +171,12 @@ export struct MainTabPage {
         console.error(`Failed to obtain the top window. Cause code: ${exception.code}, message: ${exception.message}`);
       }
       return true
-    }).hideTitleBar(true)
-    .onWillHide(()=>{
+    })
+    .onWillHide(() => {
       Logger.info(TAG, 'onWillHide')
       this.tabShown = false
     })
-    .onWillShow(()=>{
+    .onWillShow(() => {
       Logger.info(TAG, 'onWillShow')
       this.tabShown = true;
     })

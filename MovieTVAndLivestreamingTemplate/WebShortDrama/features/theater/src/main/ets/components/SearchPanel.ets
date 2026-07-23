@@ -25,7 +25,7 @@ export struct SearchPanel {
           Column() {
             SymbolGlyph($r('sys.symbol.magnifyingglass'))
               .fontSize(16)
-              .fontColor([getColor('app.color.normal_font_color')])
+              .fontColor([$r('sys.color.icon_secondary')])
               .margin({
                 left: 12, right: this.isInput ? 0 : 8
               })
@@ -40,7 +40,7 @@ export struct SearchPanel {
                 .margin({
                   right: 28
                 })
-                .fontColor(getColor('app.color.normal_font_color'))
+                .fontColor($r('sys.color.font_secondary'))
             }
           } else {
             Column() {
@@ -56,8 +56,8 @@ export struct SearchPanel {
                 })
                 .maxLines(1)
                 .maxLength(15)
-                .placeholderColor(getString('app.color.normal_font_color'))
-                .backgroundColor(getColor('app.color.transparent_background_color'))
+                .placeholderColor($r('sys.color.font_secondary'))
+                .backgroundColor('transparent')
                 .defaultFocus(true)
                 .onChange((value: string) => {
                   this.inputValueChangedEvent?.(value)
@@ -76,7 +76,7 @@ export struct SearchPanel {
           if (this.searchText) {
             Text('󰁖')
               .textAlign(TextAlign.Center)
-              .fontColor($r('sys.color.mask_secondary'))
+              .fontColor($r('sys.color.icon_secondary'))
               .width(16)
               .height(16)
               .offset({ x: -60 })
@@ -91,7 +91,7 @@ export struct SearchPanel {
         })
         .width('100%')
         .borderRadius(24)
-        .backgroundColor(getColor('app.color.component_background_color'))
+        .backgroundColor($r('sys.color.comp_background_tertiary'))
         .onClick(() => {
           if(!this.isInput) {
             appRouter.push({

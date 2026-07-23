@@ -123,6 +123,7 @@ onContentChange: (value: string) => void = () => {}
 ## 示例代码
 
 ```ts
+import { hilog } from '@kit.PerformanceAnalysisKit';
 import { ArticlePost } from 'module_articlepost'
 
 @Entry
@@ -134,10 +135,10 @@ struct Index {
         fontSizeRatio: 1,
         darkMode:false,
         onTitleChange: (value: string) => {
-          console.log('标题输入'+ value)
+          hilog.info(0x0000, '[ArticlePost]', '标题输入'+ value)
         },
         onContentChange: (value: string) => {
-          console.log('富文本输入'+ value)
+          hilog.info(0x0000, '[ArticlePost]', '富文本输入'+ value)
         },
       })
     }

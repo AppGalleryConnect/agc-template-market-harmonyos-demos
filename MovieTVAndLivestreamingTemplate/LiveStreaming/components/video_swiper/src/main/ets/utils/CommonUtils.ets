@@ -40,7 +40,11 @@ export async function playVideo(avPlayer: media.AVPlayer | undefined, curIndex: 
   if (avPlayer.state === AVPlayerState.PREPARED || avPlayer.state === AVPlayerState.PAUSED ||
     avPlayer?.state === AVPlayerState.COMPLETED) {
     hilog.debug(0x0000, TAG,  `playVideo. state:${avPlayer.state}, curIndex: ${curIndex}, index: ${index}.`);
-    await avPlayer.play();
+    try {
+      await avPlayer.play();
+    } catch (e) {
+      hilog.error(0x0000, TAG,  `playVideo failed! error: ${e}`);
+    }
   }
 }
 
@@ -50,7 +54,11 @@ export async function pauseVideo(avPlayer: media.AVPlayer | undefined, curIndex:
     return;
   }
   hilog.debug(0x0000, TAG,  `pauseVideo. state:${avPlayer.state}, curIndex: ${curIndex}, index: ${index}.`);
-  await avPlayer.pause();
+  try {
+    await avPlayer.pause();
+  } catch (e) {
+    hilog.error(0x0000, TAG,  `pauseVideo failed! error: ${e}`);
+  }
 }
 
 export async function stopVideo(avPlayer: media.AVPlayer | undefined, curIndex: number, index: number) {
@@ -61,7 +69,11 @@ export async function stopVideo(avPlayer: media.AVPlayer | undefined, curIndex: 
   if (avPlayer.state === AVPlayerState.PREPARED || avPlayer.state === AVPlayerState.PLAYING ||
     avPlayer.state === AVPlayerState.PAUSED || avPlayer?.state === AVPlayerState.COMPLETED) {
     hilog.debug(0x0000, TAG,  `stopVideo. state:${avPlayer.state}, curIndex: ${curIndex}, index: ${index}.`);
-    await avPlayer.stop();
+    try {
+      await avPlayer.stop();
+    } catch (e) {
+      hilog.error(0x0000, TAG,  `stopVideo failed! error: ${e}`);
+    }
   }
 }
 
@@ -75,5 +87,9 @@ export function releaseVideo(avPlayer: media.AVPlayer | undefined, curIndex: num
   avPlayer.off('seekDone');
   avPlayer.off('error');
   avPlayer.off('stateChange');
-  avPlayer.release();
+  try {
+    avPlayer.release();
+  } catch (e) {
+    hilog.error(0x0000, TAG,  `releaseVideo release failed! error: ${e}`);
+  }
 }

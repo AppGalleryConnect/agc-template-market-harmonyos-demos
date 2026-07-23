@@ -22,7 +22,13 @@ export class ExternalAbilityUtil {
         pushParams: "com.huawei.hmsapp.alliance"
       }
     }
-    return context?.startAbility(wantInfo)
+    try {
+      return context?.startAbility(wantInfo)
+    } catch (error) {
+      let err = error as BusinessError;
+      Logger.error(TAG, `startPermissionManager failed, errCode = ${err.code}, errMessage = ${err.message}.`);
+      return Promise.reject(err);
+    }
   }
 
   /**
@@ -37,7 +43,13 @@ export class ExternalAbilityUtil {
       uri: uri,
       type: mimeType
     }
-    return context?.startAbility(wantInfo)
+    try {
+      return context?.startAbility(wantInfo)
+    } catch (error) {
+      let err = error as BusinessError;
+      Logger.error(TAG, `startPreview failed, errCode = ${err.code}, errMessage = ${err.message}.`);
+      return Promise.reject(err);
+    }
   }
 
   /**
@@ -49,7 +61,13 @@ export class ExternalAbilityUtil {
       abilityName: "com.huawei.hmos.settings.MainAbility",
       uri: 'wifi_entry'
     }
-    return context?.startAbility(wantInfo);
+    try {
+      return context?.startAbility(wantInfo);
+    } catch (error) {
+      let err = error as BusinessError;
+      Logger.error(TAG, `startWifiManager failed, errCode = ${err.code}, errMessage = ${err.message}.`);
+      return Promise.reject(err);
+    }
   }
 
   /**
@@ -63,7 +81,13 @@ export class ExternalAbilityUtil {
       "entities": ["entity.system.browsable"],
       "uri": url
     }
-    return context?.startAbility(want);
+    try {
+      return context?.startAbility(want);
+    } catch (error) {
+      let err = error as BusinessError;
+      Logger.error(TAG, `startBrowser failed, errCode = ${err.code}, errMessage = ${err.message}.`);
+      return Promise.reject(err);
+    }
   }
 
 }
